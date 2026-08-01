@@ -235,15 +235,48 @@ feedback — check any new copy against it.
 
 | Tab | Holds |
 |---|---|
-| **Today** | The school day only: what class is now/next, the full schedule, upcoming tests, on the horizon, and an at-a-glance strip. No affirmation, no study plan. |
-| **Study** | The daily affirmation with its like/read buttons, "what to study today", subject tiles, the focus timer, the tutor, and unit generation. |
+| **Today** | The school day *only*: what class is now/next, the full schedule, upcoming tests, on the horizon. **No XP, level, streak or affirmation** — it is not a dashboard. |
+| **Study** | The daily affirmation with its like/read buttons, "what to study today", subject tiles, and three whole-card buttons: Timer, Tutor, New study set. |
 | **Growth** | The Growth Zone. |
-| **Stars** | XP, streak, badges. Still thin — the agreed next thing to build. |
-| **Settings** | Hers: personalize, per-subject colours, focus-timer default, and the door to the grown-up area. |
-| **Parent** (passcoded) | Progress and effort, tests and scores, weekly goals — *plus* Gist sync, the Anthropic API key, and backup/restore. Technical setup deliberately lives here, not in her Settings. |
+| **Stars** | All the gamification: level bar, streak/minutes/revisit strip, totals, badges. |
+| **Settings** | Hers: appearance, accent, per-subject colours, avatar, nickname, motto, focus-timer default, and the door to the grown-up area. |
+| **Parent** (passcoded) | Progress and effort, tests and scores, weekly goals, **what she is using** (tutor questions verbatim, timer/quiz/flashcard counts) — *plus* Gist sync, the Anthropic API key, and backup/restore. |
 
-Focus does **not** get its own tab; it is reached from Study. Today is
-deliberately kept focused on school rather than becoming a dashboard.
+Focus does **not** get its own tab; it is reached from Study.
+
+**The brand block in the header is the way home** (`go('today')`). There are no
+back buttons anywhere, so this is the only escape hatch — do not repurpose it.
+
+## Light mode
+
+`prefs.theme` is `auto` | `light` | `dark`. `applyTheme()` resolves `auto`
+against `prefers-color-scheme` and always writes an explicit
+`document.documentElement.dataset.theme`, so the CSS only ever handles two
+states. A `matchMedia` listener re-applies when the system flips and the
+preference is `auto`.
+
+**`--ac` vs `--ac-fg`.** `--ac` is the raw accent, used for *fills* (buttons,
+bars, borders) and is fine in both modes. `--ac-fg` is the accent as *text* —
+identical to `--ac` in dark, deepened to `color-mix(… 40%, #04302a)` in light,
+because raw aquamarine on white fails contrast. **Any new accent-coloured text
+must use `--ac-fg`.** All six accents were measured at ≥5.2:1 in light and ≥7.3:1
+in dark against their surface.
+
+Subject cards keep their saturated fills in both modes by design — they are the
+app's colour anchor, and the bottom scrim already guarantees the label contrast.
+
+## Tutor
+
+Ordered deliberately: **the ask box first**, then one or two techniques, then the
+plan, then past questions.
+
+- **The ask box works without an API key.** With a key Claude answers; without
+  one the question is still saved as an `ask` record so it reaches a person. That
+  half matters more than the AI half — it is how she flags being stuck.
+- Every question is stored and surfaced in the parent view verbatim.
+- `HABITS` entries each carry a `when(ctx)` returning *why it is relevant right
+  now* or `null`; `relevantHabits()` shows at most two. Never render the whole
+  list — a wall of eight tips is wallpaper.
 
 ## Parent view
 
