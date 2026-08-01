@@ -630,18 +630,24 @@ function el(tag,cls,text){ const n=document.createElement(tag);
   if(cls) n.className=cls; if(text!==undefined&&text!==null) n.textContent=String(text); return n; }
 function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('on');
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),2600); }
+/* `build(box, close)` may set `box._go` to take over the confirm button —
+   used by the forms (assessment editor, passcode) so they can validate first. */
 function showModal({title,message,confirmText='OK',cancelText=null,onConfirm=null,build=null}){
   const ov=el('div','modal-overlay'), box=el('div','modal-box');
   box.appendChild(el('h3',null,title));
   if(message) box.appendChild(el('p',null,message));
-  if(build) build(box, ()=>ov.remove());
+  const close = ()=>ov.remove();
+  if(build) build(box, close);
   const row=el('div','modal-buttons');
   if(cancelText){ const c=el('button','btn btn-secondary',cancelText);
-    c.addEventListener('click',()=>ov.remove()); row.appendChild(c); }
+    c.addEventListener('click',close); row.appendChild(c); }
   const ok=el('button','btn btn-primary',confirmText);
-  ok.addEventListener('click',()=>{ov.remove(); if(onConfirm) onConfirm();});
+  ok.addEventListener('click',()=>{
+    if(typeof box._go === 'function'){ box._go(); return; }   // form owns close()
+    close(); if(onConfirm) onConfirm();
+  });
   row.appendChild(ok); box.appendChild(row); ov.appendChild(box);
-  ov.addEventListener('click',e=>{ if(e.target===ov) ov.remove(); });
+  ov.addEventListener('click',e=>{ if(e.target===ov) close(); });
   document.body.appendChild(ov); return ov;
 }
 function celebrate(){
