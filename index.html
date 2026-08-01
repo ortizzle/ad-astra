@@ -1048,38 +1048,32 @@ SCREENS.study = function(root){
   });
   root.appendChild(g);
 
-  root.appendChild(divider('Focus session'));
-  const fc = el('div','card');
-  fc.appendChild(el('p',null,'A timer, a subject, and no distractions. Phone face down, one thing at a time.'));
-  const fb = el('button','btn btn-primary','🍅  Start a focus session');
-  fb.addEventListener('click',()=>go('focus',{})); fc.appendChild(fb);
-  const recent = focusLogs().slice(0,3);
-  if(recent.length){
-    recent.forEach(f=>{
-      const cl = CLASS_BY_ID[f.classId];
-      const r = el('div','row');
-      const k = el('span','k', cl?`${cl.icon} ${cl.name}`:'Focus');
-      k.appendChild(el('small',null,AZ.shortDate(f.date)));
-      r.appendChild(k); r.appendChild(el('span','v',f.minutes+' min'));
-      fc.appendChild(r);
-    });
-  }
-  root.appendChild(fc);
-
-  root.appendChild(divider('Tutor'));
-  const tc = el('div','card');
-  tc.appendChild(el('p',null,'Study advice built on what you have actually been doing, plus techniques that are known to work.'));
-  const tb = el('button','btn btn-secondary','🧭  Open the tutor');
-  tb.addEventListener('click',()=>go('tutor')); tc.appendChild(tb);
-  root.appendChild(tc);
-
-  root.appendChild(divider('Add material'));
-  const c = el('div','card');
-  c.appendChild(el('p',null,'Paste notes, a study guide, or a vocab list and turn it into flashcards and quiz questions.'));
-  const b = el('button','btn btn-secondary','✨  Generate a unit from notes');
-  b.addEventListener('click',()=>go('generate',{})); c.appendChild(b);
-  root.appendChild(c);
+  /* Whole-card buttons rather than a card with a button inside it. */
+  root.appendChild(divider('Tools'));
+  const totalFocus = stats().focusMin;
+  root.appendChild(cardButton('Timer',
+    totalFocus ? `Focused study in blocks. ${totalFocus} minutes so far.`
+               : 'Focused study in blocks, with breaks. Phone face down.',
+    ()=>go('focus',{})));
+  root.appendChild(cardButton('Tutor',
+    'Ask about anything you are stuck on, and get advice based on how your studying is actually going.',
+    ()=>go('tutor')));
+  root.appendChild(cardButton('New study set',
+    'Turn class notes into flashcards and quiz questions.',
+    ()=>go('generate',{})));
 };
+
+/* A card that is itself the button: title, one line, chevron. */
+function cardButton(title, desc, onClick){
+  const b = el('button','cardbtn');
+  const t = el('div','cb-txt');
+  t.appendChild(el('div','cb-t',title));
+  t.appendChild(el('div','cb-d',desc));
+  b.appendChild(t);
+  b.appendChild(el('div','cb-x','›'));
+  b.addEventListener('click',onClick);
+  return b;
+}
 
 /* ================= UNIT LIST ================= */
 SCREENS.unit = function(root){
