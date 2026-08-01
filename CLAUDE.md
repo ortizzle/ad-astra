@@ -40,14 +40,24 @@ has `id`, `type`, and `updatedAt`. This is what makes Gist sync safe.
 |---|---|
 | `unit` | Study content: `{classId, title, cards[], questions[]}` |
 | `log` | One completed study session: `{mode, classId, unitId, date, correct, total, seconds, xp, hints}` |
+| `focus` | One completed Pomodoro block: `{classId, minutes, date, xp}` |
 | `miss` | A Growth Zone entry — one missed question |
 | `cleared` | A Growth Zone item resolved on a retake |
+| `qstat` | Per-question tally `{qid, attempts, correct}` — powers strong/weak topics |
+| `mood` | An emotion check: `{when:'pre'|'post', logId, readiness, feeling}` |
+| `assess` | A test/quiz/project: `{classId, kind, title, date, score}` |
 | `badge` | An earned badge |
+| `prefs` | Her personalization (accent, avatar, nickname, motto, goals) — **one singleton record with `id:'prefs'`** |
 
 **XP, level, streak, and accuracy are never stored.** They are derived from `log`
-records by `stats()`. This is deliberate: derived values cannot drift between two
-devices, so there is no counter to reconcile during a merge. Do not add a stored
-`xp` field — recompute instead.
+and `focus` records by `stats()`. This is deliberate: derived values cannot drift
+between two devices, so there is no counter to reconcile during a merge. Do not
+add a stored `xp` field — recompute instead.
+
+`prefs` is a record rather than a localStorage key on purpose, so her theme and
+goals follow her to any device she signs the Gist into. Secrets (API key, Gist
+token, parent passcode hash) stay in localStorage and are deliberately **not**
+records — they must never enter the shared Gist.
 
 **Deletes are tombstones.** `softDelete(id)` writes `{deleted:true, updatedAt}`;
 it never removes the key. Without this, deleting a unit on one device and syncing
