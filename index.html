@@ -2185,8 +2185,29 @@ function editAssessment(existing){
 
 /* ================= STARS ================= */
 SCREENS.stars = function(root){
-  const s = stats();
+  const s = stats(), date = AZ.today();
   root.appendChild(headline('Star chart', `Level ${s.level} · ${s.xp.toLocaleString()} XP`));
+
+  const lvl = el('div','card');
+  const lr = el('div','row');
+  lr.appendChild(el('span','k',`Level ${s.level}`));
+  lr.appendChild(el('span','v',`${s.toNext} XP to go`));
+  lvl.appendChild(lr);
+  const bar = el('div','bar'), fi = el('i');
+  fi.style.width = (s.intoLevel/500*100)+'%'; bar.appendChild(fi); lvl.appendChild(bar);
+  const glance = el('div','glance');
+  [[s.streak, s.streak===1?'day streak':'day streak'],
+   [minutesInRange(AZ.weekStart(date), date), 'min this week'],
+   [all('miss').length, 'to revisit']
+  ].forEach(([val,lab])=>{
+    const b = el('div','gl');
+    b.appendChild(el('div','gv',String(val)));
+    b.appendChild(el('div','gk',lab));
+    glance.appendChild(b);
+  });
+  lvl.appendChild(glance);
+  root.appendChild(lvl);
+
   const c = el('div','card');
   [['Current streak', s.streak+' day'+(s.streak===1?'':'s')],
    ['Days studied', s.days], ['Study sessions', s.sessions],
