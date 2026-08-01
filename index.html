@@ -1002,6 +1002,24 @@ SCREENS.study = function(root){
   });
   root.appendChild(g);
 
+  root.appendChild(divider('Focus session'));
+  const fc = el('div','card');
+  fc.appendChild(el('p',null,'A timer, a subject, and no distractions. Phone face down, one thing at a time.'));
+  const fb = el('button','btn btn-primary','🍅  Start a focus session');
+  fb.addEventListener('click',()=>go('focus',{})); fc.appendChild(fb);
+  const recent = focusLogs().slice(0,3);
+  if(recent.length){
+    recent.forEach(f=>{
+      const cl = CLASS_BY_ID[f.classId];
+      const r = el('div','row');
+      const k = el('span','k', cl?`${cl.icon} ${cl.name}`:'Focus');
+      k.appendChild(el('small',null,AZ.shortDate(f.date)));
+      r.appendChild(k); r.appendChild(el('span','v',f.minutes+' min'));
+      fc.appendChild(r);
+    });
+  }
+  root.appendChild(fc);
+
   root.appendChild(divider('Tutor'));
   const tc = el('div','card');
   tc.appendChild(el('p',null,'Study advice built on what you have actually been doing, plus techniques that are known to work.'));
