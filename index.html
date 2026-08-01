@@ -841,9 +841,7 @@ function render(){
   const s = stats(), p = prefs();
   document.getElementById('chipXp').textContent = s.xp.toLocaleString()+' XP';
   document.getElementById('chipStreak').textContent = '🔥 '+s.streak;
-  const av = document.getElementById('avatar');
-  av.textContent = p.avatar;
-  av.title = 'Settings';
+  document.getElementById('avatar').textContent = p.avatar;
   document.getElementById('brandName').textContent = p.nickname || 'Ad Astra';
   document.getElementById('brandSub').textContent = `Level ${s.level} · ${STUDENT.grade}th grade`;
   const nav = document.getElementById('nav'); nav.textContent='';
