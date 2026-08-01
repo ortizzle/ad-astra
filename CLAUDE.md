@@ -144,6 +144,41 @@ facts — only her real rooms, times, and teachers.
 
 ---
 
+## Visual language
+
+Aquamarine is the *app's* colour (chrome, buttons, accents, and whatever she picks
+in Personalize). **Each subject owns its own colour and texture** so the app never
+reads as one flat wash of teal — that was direct feedback and it matters.
+
+`CLASSES` carries `color`, `g1`, `g2` per subject; `paint(node, cls)` adds
+`.subj .pat-<id>` and sets the CSS custom properties. Textures are pure CSS:
+graph paper (Algebra), ruled paper with a red margin (English), cell dots
+(Biology), orbit arcs (Physics), columns (History), a Greek key (Latin), curtain
+stripes (Theatre). Applied to subject tiles, flashcard faces, and the current
+period row.
+
+> ⚠️ **The pattern layers live in `background-image`, so any later rule using the
+> `background` shorthand silently wipes them.** This bit twice. `.face` and
+> `.face.back` are therefore written as `:not(.subj)`. If you add a component
+> that can be painted, use `background-color`, or scope the plain background with
+> `:not(.subj)`.
+
+`prototype.html` holds three alternative directions (Field Notes / Studio /
+Aurora) rendered as real UI for comparison. The shipped app currently uses
+**Studio**. It is a dev artifact — not cached by the service worker, not linked
+from the app.
+
+## Backups
+
+The in-app "Back up" button uses the **Web Share API** (`navigator.share` with a
+file), which on her Pixel opens the Android share sheet so Drive is one tap away.
+Desktop falls back to a plain download. There is deliberately **no Google OAuth**
+— writing to Drive directly would need a client ID and a backend, which breaks
+the no-backend rule for a once-a-week action.
+
+The Drive folder is **Ad Astra Backups**, inside her 8th Grade folder:
+`1mOLDFsQy__vR6m5R1D8SFUzIBCNqG7cI`. The Setup screen links straight to it.
+
 ## The psychology features — read before editing the copy
 
 Three features are deliberately grounded in research rather than vibes. The exact
