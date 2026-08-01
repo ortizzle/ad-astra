@@ -380,21 +380,36 @@ const Store = {
 };
 
 /* ---------- School data (from her Drive folder: .ics schedule + BASIS calendar) ---------- */
-const STUDENT = { name:'Sedona', grade:8, school:'BASIS Chandler' };
+/* Grade drives nothing sensitive. Name, school, teachers and the backup-folder
+   link are deliberately NOT in this file — this repo is public. They live in the
+   `roster` record, entered once in the grown-up settings and carried between
+   devices by the private Gist. The app is fully usable before any of it is set. */
+const STUDENT = { grade:8 };
+const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
+function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
+function setRoster(k,v){
+  const r = roster(); r[k]=v; r.id='roster'; r.type='roster'; put(r); syncSoon();
+}
+const teacherOf = id => (roster().teachers||{})[id] || '';
+/* "Room 122 · Curtis Canaday", or just "Room 122" until a teacher is filled in. */
+function whereLine(c){
+  const t = teacherOf(c.id);
+  return `Room ${c.room}${t ? ' · '+t : ''}`;
+}
 
 /* Each subject carries its own colour pair and pattern key. The pattern is a
    CSS texture (graph paper for maths, ruled paper for English, cell dots for
    Biology, orbit arcs for Physics, columns for History, a Greek key for Latin)
    so subjects are recognisable at a glance rather than all reading as teal. */
 const CLASSES = [
-  {id:'theatre', name:'Theatrical Design',     short:'Theatre',  teacher:'Taylor Nicole Finnell', room:'Theater', start:450, end:500, icon:'🎭', pal:'orchid'},
-  {id:'algeo',   name:'Algebra & Geometry II', short:'Alg/Geo',  teacher:'Michael Vedder',        room:'231',     start:505, end:555, icon:'📐', pal:'ocean'},
-  {id:'bio',     name:'Biology 8',             short:'Biology',  teacher:'TBA',                   room:'126',     start:560, end:610, icon:'🧬', pal:'jade'},
-  {id:'physics', name:'Physics 8',             short:'Physics',  teacher:'Curtis Canaday',        room:'122',     start:615, end:665, icon:'⚛️', pal:'ember'},
-  {id:'history', name:'History 8',             short:'History',  teacher:'Addison Guevara',       room:'213',     start:670, end:720, icon:'🏛️', pal:'gold'},
-  {id:'english', name:'English 8',             short:'English',  teacher:'Cassandra Collins',     room:'221',     start:725, end:775, icon:'📖', pal:'rose'},
-  {id:'lunch',   name:'Lunch',                 short:'Lunch',    teacher:'',                      room:'MPR2',    start:780, end:830, icon:'🥪', pal:'slate', break:true},
-  {id:'latin',   name:'Latin I',               short:'Latin',    teacher:'Felicia Jo Gass',       room:'127',     start:835, end:885, icon:'🏺', pal:'violet'}
+  {id:'theatre', name:'Theatrical Design',     short:'Theatre',  room:'Theater', start:450, end:500, icon:'🎭', pal:'orchid'},
+  {id:'algeo',   name:'Algebra & Geometry II', short:'Alg/Geo',  room:'231',     start:505, end:555, icon:'📐', pal:'ocean'},
+  {id:'bio',     name:'Biology 8',             short:'Biology',  room:'126',     start:560, end:610, icon:'🧬', pal:'jade'},
+  {id:'physics', name:'Physics 8',             short:'Physics',  room:'122',     start:615, end:665, icon:'⚛️', pal:'ember'},
+  {id:'history', name:'History 8',             short:'History',  room:'213',     start:670, end:720, icon:'🏛️', pal:'gold'},
+  {id:'english', name:'English 8',             short:'English',  room:'221',     start:725, end:775, icon:'📖', pal:'rose'},
+  {id:'lunch',   name:'Lunch',                 short:'Lunch',    room:'MPR2',    start:780, end:830, icon:'🥪', pal:'slate', break:true},
+  {id:'latin',   name:'Latin I',               short:'Latin',    room:'127',     start:835, end:885, icon:'🏺', pal:'violet'}
 ];
 
 /* Every option is a mid-tone → deep pair, so white text over the darkened
@@ -658,17 +673,19 @@ function buildOrientationUnit(){
       hint:'Think about the walk from the period before.',
       ex:{ main:`${c.name} meets in room ${c.room} at ${fmtTime(c.start)}.`,
            tip:'Room numbers stick faster if you picture the route between periods.' } });
-    if(c.teacher && c.teacher!=='TBA'){
-      qs.push({ id:`orient-teacher-${c.id}`, lv:1, q:`Who teaches ${c.name}?`,
-        opts: shuffle([c.teacher, ...shuffle(others.filter(x=>x.teacher&&x.teacher!=='TBA').map(x=>x.teacher)).slice(0,3)]),
-        ansValue:c.teacher, hint:'Picture the classroom door.',
-        ex:{ main:`${c.teacher} teaches ${c.name} in room ${c.room}.`,
+    const t = teacherOf(c.id);
+    if(t){
+      const otherT = others.map(x=>teacherOf(x.id)).filter(Boolean);
+      if(otherT.length>=3) qs.push({ id:`orient-teacher-${c.id}`, lv:1, q:`Who teaches ${c.name}?`,
+        opts: shuffle([t, ...shuffle(otherT).slice(0,3)]), ansValue:t,
+        hint:'Picture the classroom door.',
+        ex:{ main:`${t} teaches ${c.name} in room ${c.room}.`,
              tip:'Knowing names in week one makes asking for help much easier later.' } });
     }
   });
   qs.forEach(q=>{ q.ans = q.opts.indexOf(q.ansValue); delete q.ansValue; });
   const cards = STUDY_CLASSES.map((c,i)=>({ id:`orient-card-${c.id}`, term:c.name,
-    def:`${fmtTime(c.start)} – ${fmtTime(c.end)} · Room ${c.room}${c.teacher&&c.teacher!=='TBA'?` · ${c.teacher}`:''}`,
+    def:`${fmtTime(c.start)} – ${fmtTime(c.end)} · ${whereLine(c)}`,
     hint:`Period ${i+1} of your day.` }));
   return { id:'unit-orientation', classId:'__all__', title:'First Week: Rooms & Teachers',
     quarter:1, source:'Class schedule (Drive)', cards, questions:qs };
@@ -1008,7 +1025,7 @@ SCREENS.today = function(root){
     if(cur){
       st.appendChild(el('h3',null,`${cur.icon} ${cur.name}`));
       st.appendChild(el('p',null, cur.break ? `Until ${fmtTime(cur.end)}.`
-        : `Room ${cur.room}${cur.teacher&&cur.teacher!=='TBA'?` · ${cur.teacher}`:''} · until ${fmtTime(cur.end)}`));
+        : `${whereLine(cur)} · until ${fmtTime(cur.end)}`));
     } else if(next){
       st.appendChild(el('h3',null,'Before the bell'));
       st.appendChild(el('p',null,`Next: ${next.name} at ${fmtTime(next.start)}, room ${next.room}.`));
@@ -1060,7 +1077,7 @@ SCREENS.today = function(root){
     p.appendChild(paint(el('div','pchip',c.icon), c));
     const m = el('div','meta');
     m.appendChild(el('div','nm',c.name));
-    m.appendChild(el('div','dt', c.break?`Room ${c.room}`:`Room ${c.room}${c.teacher&&c.teacher!=='TBA'?' · '+c.teacher:''}`));
+    m.appendChild(el('div','dt', c.break?`Room ${c.room}`:whereLine(c)));
     p.appendChild(m);
     if(live) p.appendChild(el('span','tag-now','NOW'));
     else p.appendChild(el('div','tm',fmtTime(c.start)));
@@ -1190,7 +1207,7 @@ SCREENS.unit = function(root){
   if(!c) return go('study');
   const st = classStats(c.id), date = AZ.today();
   const head = el('div','card ac');
-  head.appendChild(el('div','eyebrow',`${fmtTime(c.start)} · Room ${c.room}${c.teacher&&c.teacher!=='TBA'?' · '+c.teacher:''}`));
+  head.appendChild(el('div','eyebrow',`${fmtTime(c.start)} · ${whereLine(c)}`));
   head.appendChild(el('h2',null,`${c.icon} ${c.name}`));
   head.appendChild(el('p',null, st.answered
     ? `${st.sessions} session${st.sessions>1?'s':''} · ${st.answered} questions · ${st.accuracy}% · ${st.minutes} min`
@@ -1909,7 +1926,7 @@ SCREENS.setup = function(root){
 
   const ver = el('div','hintline');
   ver.style.textAlign='center'; ver.style.marginTop='22px';
-  ver.textContent = `Ad Astra · v2 · ${STUDENT.school} SY 2026–27`;
+  ver.textContent = `Ad Astra · v2 · ${roster().school || 'SY 2026–27'}`;
   root.appendChild(ver);
 };
 
@@ -1947,7 +1964,9 @@ function openParentGate(){
 
 SCREENS.parent = function(root){
   const date = AZ.today(), s = stats();
-  root.appendChild(headline("Sedona's progress",`Week of ${AZ.shortDate(AZ.weekStart(date))} · ${STUDENT.school}, Quarter ${currentQuarter(date)?.n || '—'}`));
+  const who = roster().studentName;
+  root.appendChild(headline(who ? `${who}'s progress` : 'Progress',
+    `Week of ${AZ.shortDate(AZ.weekStart(date))}${roster().school?' · '+roster().school:''} · Quarter ${currentQuarter(date)?.n || '—'}`));
 
   /* Effort this week */
   const wkStart = AZ.weekStart(date);
@@ -2145,7 +2164,38 @@ SCREENS.parent = function(root){
   });
   root.appendChild(rc);
 
-  /* ---- Technical setup, kept out of her way ---- */
+  /* ---- Class details ----
+     Deliberately not in the source: this repo is public, and a child's name,
+     school and exact daily location should not be. Entered once here, then
+     carried to every device by the private Gist. */
+  root.appendChild(divider('Class details'));
+  const rc = el('div','card');
+  rc.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
+  const r = roster();
+  const nameIn = el('input'); nameIn.type='text'; nameIn.placeholder='First name'; nameIn.value=r.studentName;
+  nameIn.addEventListener('change',()=>{ setRoster('studentName', nameIn.value.trim()); toast('Saved'); render(); });
+  rc.appendChild(el('label',null,'Student')); rc.appendChild(nameIn);
+  const schoolIn = el('input'); schoolIn.type='text'; schoolIn.placeholder='School'; schoolIn.value=r.school;
+  schoolIn.addEventListener('change',()=>{ setRoster('school', schoolIn.value.trim()); toast('Saved'); render(); });
+  rc.appendChild(el('label',null,'School')); rc.appendChild(schoolIn);
+  const bkIn = el('input'); bkIn.type='url'; bkIn.placeholder='https://drive.google.com/drive/folders/…'; bkIn.value=r.backupUrl;
+  bkIn.addEventListener('change',()=>{ setRoster('backupUrl', bkIn.value.trim()); toast('Saved'); render(); });
+  rc.appendChild(el('label',null,'Backup folder link')); rc.appendChild(bkIn);
+  rc.appendChild(el('label',null,'Teachers'));
+  STUDY_CLASSES.forEach(c=>{
+    const row = el('div','row');
+    row.appendChild(el('span','k',`${c.icon} ${c.short}`));
+    const i = el('input'); i.type='text'; i.placeholder='—'; i.value = teacherOf(c.id);
+    i.style.width='58%'; i.style.minHeight='40px'; i.style.fontSize='14px';
+    i.addEventListener('change',()=>{
+      const t = {...roster().teachers}; const v = i.value.trim();
+      if(v) t[c.id]=v; else delete t[c.id];
+      setRoster('teachers', t); toast('Saved');
+    });
+    row.appendChild(i); rc.appendChild(row);
+  });
+  root.appendChild(rc);
+
   root.appendChild(divider('Shared sync'));
   const sc = el('div','card');
   sc.appendChild(el('p',null,'A private GitHub Gist keeps progress and study material identical on every device — her phone and yours.'));
@@ -2224,7 +2274,7 @@ SCREENS.parent = function(root){
   bc2.appendChild(el('div','hintline', (lb?`Last backup ${new Date(lb).toLocaleDateString()}. `:'No backup yet. ')
     + 'On a phone this opens the share sheet — choose Drive, then the Ad Astra Backups folder.'));
   const dl = el('a','hintline','Open the Ad Astra Backups folder in Drive →');
-  dl.href = 'https://drive.google.com/drive/folders/1mOLDFsQy__vR6m5R1D8SFUzIBCNqG7cI';
+  dl.href = roster().backupUrl || 'https://drive.google.com';
   dl.target = '_blank'; dl.rel = 'noopener';
   dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
   bc2.appendChild(dl);
