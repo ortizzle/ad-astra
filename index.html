@@ -158,6 +158,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* Schedule rows: a colour wash bleeding in from the left plus a painted icon
    chip. Enough character to read as "this is Physics" without eight saturated
    bars fighting each other. The current period still gets the full fill. */
+/* Bookends are not classes, so they keep the neutral slate wash their palette
+   gives them and sit quieter than the coloured subject rows around them. */
+.period.bookend .nm{font-weight:600;color:var(--muted)}
+.period.bookend.now .nm,.period.bookend.now .dt{color:#fff}
+.period.bookend .pchip{box-shadow:none;opacity:.92}
 .period.tinted{background-image:none;color:var(--text);
   background:linear-gradient(90deg,
     color-mix(in srgb, var(--c1) 30%, var(--surface)) 0%,
@@ -393,6 +398,7 @@ function setRoster(k,v){
 const teacherOf = id => (roster().teachers||{})[id] || '';
 /* "Room 122 · <teacher>", or just "Room 122" until a teacher is filled in. */
 function whereLine(c){
+  if(c.bookend) return c.note;
   const t = teacherOf(c.id);
   return `Room ${c.room}${t ? ' · '+t : ''}`;
 }
@@ -402,6 +408,9 @@ function whereLine(c){
    Biology, orbit arcs for Physics, columns for History, a Greek key for Latin)
    so subjects are recognisable at a glance rather than all reading as teal. */
 const CLASSES = [
+  /* Bookends, not classes: they carry `bookend` so they render quietly, stay out
+     of STUDY_CLASSES, and are not tappable through to study units. */
+  {id:'dropoff', name:'Drop-off',              short:'Drop-off', room:'',        start:420, end:435, icon:'🚗', pal:'slate', break:true, bookend:true, note:'By 7:15 AM'},
   {id:'theatre', name:'Theatrical Design',     short:'Theatre',  room:'Theater', start:450, end:500, icon:'🎭', pal:'orchid'},
   {id:'algeo',   name:'Algebra & Geometry II', short:'Alg/Geo',  room:'231',     start:505, end:555, icon:'📐', pal:'ocean'},
   {id:'bio',     name:'Biology 8',             short:'Biology',  room:'126',     start:560, end:610, icon:'🧬', pal:'jade'},
@@ -409,7 +418,8 @@ const CLASSES = [
   {id:'history', name:'History 8',             short:'History',  room:'213',     start:670, end:720, icon:'🏛️', pal:'gold'},
   {id:'english', name:'English 8',             short:'English',  room:'221',     start:725, end:775, icon:'📖', pal:'rose'},
   {id:'lunch',   name:'Lunch',                 short:'Lunch',    room:'MPR2',    start:780, end:830, icon:'🥪', pal:'slate', break:true},
-  {id:'latin',   name:'Latin I',               short:'Latin',    room:'127',     start:835, end:885, icon:'🏺', pal:'violet'}
+  {id:'latin',   name:'Latin I',               short:'Latin',    room:'127',     start:835, end:885, icon:'🏺', pal:'violet'},
+  {id:'pickup',  name:'Pick-up',               short:'Pick-up',  room:'',        start:885, end:900, icon:'🏡', pal:'slate', break:true, bookend:true, note:'2:45 PM'}
 ];
 
 /* Every option is a mid-tone → deep pair, so white text over the darkened
@@ -1024,11 +1034,13 @@ SCREENS.today = function(root){
     const cur = CLASSES.find(c=>now>=c.start&&now<c.end), next = CLASSES.find(c=>c.start>now);
     if(cur){
       st.appendChild(el('h3',null,`${cur.icon} ${cur.name}`));
-      st.appendChild(el('p',null, cur.break ? `Until ${fmtTime(cur.end)}.`
+      st.appendChild(el('p',null, cur.bookend ? cur.note : cur.break ? `Until ${fmtTime(cur.end)}.`
         : `${whereLine(cur)} · until ${fmtTime(cur.end)}`));
     } else if(next){
       st.appendChild(el('h3',null,'Before the bell'));
-      st.appendChild(el('p',null,`Next: ${next.name} at ${fmtTime(next.start)}, room ${next.room}.`));
+      st.appendChild(el('p',null, next.bookend
+        ? `Next: ${next.name} · ${next.note}`
+        : `Next: ${next.name} at ${fmtTime(next.start)}, room ${next.room}.`));
     } else {
       st.appendChild(el('h3',null,'School day is over'));
       st.appendChild(el('p',null,'Best window for studying — it is still fresh.'));
@@ -1071,13 +1083,13 @@ SCREENS.today = function(root){
   const now = AZ.nowMinutes();
   CLASSES.forEach(c=>{
     const live = schoolDay && now>=c.start && now<c.end;
-    const cls0 = 'period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'');
+    const cls0 = 'period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'')+(c.bookend?' bookend':'');
     /* Live period gets the full painted fill; the rest get a colour wash. */
     const p = live ? paint(el('div',cls0), c) : tint(el('div',cls0+' tinted'), c);
     p.appendChild(paint(el('div','pchip',c.icon), c));
     const m = el('div','meta');
     m.appendChild(el('div','nm',c.name));
-    m.appendChild(el('div','dt', c.break?`Room ${c.room}`:whereLine(c)));
+    m.appendChild(el('div','dt', c.bookend ? c.note : c.break ? `Room ${c.room}` : whereLine(c)));
     p.appendChild(m);
     if(live) p.appendChild(el('span','tag-now','NOW'));
     else p.appendChild(el('div','tm',fmtTime(c.start)));
