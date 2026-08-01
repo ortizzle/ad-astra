@@ -1929,12 +1929,127 @@ SCREENS.parent = function(root){
   });
   root.appendChild(rc);
 
+  /* ---- Technical setup, kept out of her way ---- */
+  root.appendChild(divider('Shared sync'));
+  const sc = el('div','card');
+  sc.appendChild(el('p',null,'A private GitHub Gist keeps progress and study material identical on every device — her phone and yours.'));
+  const gid = el('input'); gid.type='text'; gid.placeholder='Gist ID'; gid.value=Store.get('gist_id','');
+  const gtk = el('input'); gtk.type='password'; gtk.placeholder='GitHub token (gist scope)'; gtk.value=Store.get('gist_token','');
+  sc.appendChild(el('label',null,'Gist ID')); sc.appendChild(gid);
+  sc.appendChild(el('label',null,'GitHub token')); sc.appendChild(gtk);
+  sc.appendChild(el('div','hintline','Both stay in this browser only, never in the page source and never inside the Gist itself. A token with just the "gist" scope is enough.'));
+  const sv = el('button','btn btn-secondary','Save sync settings');
+  sv.addEventListener('click',()=>{ Store.set('gist_id',gid.value.trim()); Store.set('gist_token',gtk.value.trim());
+    toast('Saved'); render(); });
+  sc.appendChild(sv);
+  if(Sync.configured()){
+    const last = Store.get('last_sync',0);
+    sc.appendChild(el('div','hintline', last?`Last sync ${new Date(last).toLocaleString()}`:'Not synced yet.'));
+    const row = el('div','btn-row');
+    const up = el('button','btn btn-primary','↑ Push');
+    up.addEventListener('click',async()=>{ up.textContent='Syncing…';
+      try{ await Sync.save(); toast('Synced'); }catch(e){ toast('Sync failed'); } render(); });
+    const dn = el('button','btn btn-secondary','↓ Pull');
+    dn.addEventListener('click',async()=>{ dn.textContent='Loading…';
+      try{ await Sync.load(); toast('Up to date'); }catch(e){ toast('Pull failed'); } render(); });
+    row.appendChild(up); row.appendChild(dn); sc.appendChild(row);
+  }
+  root.appendChild(sc);
+
+  root.appendChild(divider('AI features'));
+  const ac2 = el('div','card');
+  ac2.appendChild(el('p',null,'An Anthropic API key powers the tutor and turns class notes into study units. Everything else in the app works without one.'));
+  const key = el('input'); key.type='password'; key.placeholder='sk-ant-…';
+  key.value = Store.get('anthropic_key','');
+  ac2.appendChild(el('label',null,'Anthropic API key')); ac2.appendChild(key);
+  ac2.appendChild(el('div','hintline','Stored in this browser only. Never in the page source, never synced.'));
+  const sk = el('button','btn btn-secondary','Save key');
+  sk.addEventListener('click',()=>{ Store.set('anthropic_key', key.value.trim()); toast('Saved'); });
+  ac2.appendChild(sk); root.appendChild(ac2);
+
+  /* Backup to Drive. A web page cannot write to Drive without a Google OAuth
+     client and a backend, which this app deliberately does not have — so hand
+     the file to Android's share sheet, where "Save to Drive" is one tap.
+     Desktop falls back to a normal download. */
+  root.appendChild(divider('Backup'));
+  const bc2 = el('div','card');
+  const brow = el('div','btn-row');
+  const ex = el('button','btn btn-primary','⬇ Back up');
+  ex.addEventListener('click', async ()=>{
+    const name = `ad-astra-${AZ.today()}.json`;
+    const json = JSON.stringify(DATA,null,2);
+    const f = new File([json], name, {type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[f]})){
+      try{
+        await navigator.share({files:[f], title:'Ad Astra backup',
+          text:'Save this to the Ad Astra Backups folder in Drive.'});
+        Store.set('last_backup',Date.now()); toast('Sent to share sheet'); render(); return;
+      }catch(err){ if(err && err.name==='AbortError') return; }
+    }
+    const blob = new Blob([json],{type:'application/json'});
+    const a = el('a'); a.href=URL.createObjectURL(blob); a.download=name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    Store.set('last_backup',Date.now()); toast('Downloaded'); render();
+  });
+  const fileIn = el('input'); fileIn.type='file'; fileIn.accept='.json'; fileIn.className='sr';
+  fileIn.addEventListener('change',e=>{
+    const f = e.target.files[0]; if(!f) return;
+    const rd = new FileReader();
+    rd.onload = ()=>{ try{ DATA = Sync.merge(DATA, migrate(JSON.parse(rd.result))); saveLocal();
+      applyTheme(); toast('Imported and merged'); render(); }catch(err){ toast('That file could not be read'); } };
+    rd.readAsText(f);
+  });
+  const im = el('button','btn btn-secondary','⬆ Restore');
+  im.addEventListener('click',()=>fileIn.click());
+  brow.appendChild(ex); brow.appendChild(im);
+  bc2.appendChild(brow); bc2.appendChild(fileIn);
+  const lb = Store.get('last_backup',0);
+  bc2.appendChild(el('div','hintline', (lb?`Last backup ${new Date(lb).toLocaleDateString()}. `:'No backup yet. ')
+    + 'On a phone this opens the share sheet — choose Drive, then the Ad Astra Backups folder.'));
+  const dl = el('a','hintline','Open the Ad Astra Backups folder in Drive →');
+  dl.href = 'https://drive.google.com/drive/folders/1mOLDFsQy__vR6m5R1D8SFUzIBCNqG7cI';
+  dl.target = '_blank'; dl.rel = 'noopener';
+  dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
+  bc2.appendChild(dl);
+  root.appendChild(bc2);
+
   const chg = el('button','btn btn-ghost','Change passcode');
   chg.addEventListener('click',()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); go('setup'); });
   root.appendChild(chg);
   const back = el('button','btn btn-ghost','← Done');
   back.addEventListener('click',()=>go('setup')); root.appendChild(back);
 };
+
+/* Subject colour picker — swatches show the real gradient so what she taps is
+   what she gets. */
+function pickSubjectColour(cls){
+  showModal({
+    title:`${cls.icon} ${cls.name}`,
+    message:'Pick a colour. The texture stays the same.',
+    confirmText:'Done',
+    build:(box)=>{
+      const grid = el('div','palgrid');
+      const current = palOf(cls).id;
+      SUBJECT_PALETTE.forEach(p=>{
+        const b = el('button','palsw'+(p.id===current?' on':''));
+        b.style.background = `linear-gradient(150deg,${p.g1},${p.g2})`;
+        b.title = p.nm;
+        b.addEventListener('click',()=>{
+          const map = {...(prefs().subjectColors||{})};
+          map[cls.id] = p.id;
+          setPref('subjectColors', map);
+          [...grid.children].forEach(x=>x.classList.remove('on'));
+          b.classList.add('on');
+          toast(p.nm);
+        });
+        grid.appendChild(b);
+      });
+      box.appendChild(grid);
+    },
+    onConfirm:()=>render()
+  });
+}
 
 function editAssessment(existing){
   showModal({
