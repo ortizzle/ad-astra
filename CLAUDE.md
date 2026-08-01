@@ -163,10 +163,20 @@ period row.
 > that can be painted, use `background-color`, or scope the plain background with
 > `:not(.subj)`.
 
-`prototype.html` holds three alternative directions (Field Notes / Studio /
-Aurora) rendered as real UI for comparison. The shipped app currently uses
-**Studio**. It is a dev artifact — not cached by the service worker, not linked
-from the app.
+**Sedona chose "Studio"** from `prototype.html` (which also holds Field Notes and
+Aurora, rendered as real UI). That decision is made — don't re-litigate it. The
+prototype file stays as a reference; it is a dev artifact, not cached by the
+service worker and not linked from the app.
+
+**She picks each subject's colour** in Settings → Subject colours, from the
+twelve options in `SUBJECT_PALETTE`. `CLASSES[].pal` is only the default;
+`palOf(cls)` resolves her override from `prefs().subjectColors` first. Never read
+a hardcoded colour off a class — go through `palOf()` or `classColor()`.
+
+Every palette entry is a mid-tone → deep pair, and `.subj::after` lays a
+**bottom scrim** under the text. That combination is what keeps labels readable
+on any hue. If you add a palette option, keep it in that tonal range and check
+white text over it — bold is fine, unreadable is not.
 
 ## Backups
 
