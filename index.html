@@ -36,8 +36,10 @@
   --ink:#f2f6f5; --deep:#ffffff; --surface:#ffffff; --raised:#e9f1ef;
   --line:#cbdedb; --line-soft:#dfebe8;
   --text:#0c2b29; --muted:#587672; --faint:#8aa4a0;
-  /* Raw aquamarine on white fails contrast, so text-weight accent is deepened. */
-  --ac-fg:color-mix(in srgb, var(--ac) 48%, #04302a);
+  /* Raw aquamarine on white fails contrast, so text-weight accent is deepened.
+     40% keeps the hue recognisable while clearing WCAG AA (4.5:1) for the
+     small-caps labels, which are 10.5px and therefore normal-size text. */
+  --ac-fg:color-mix(in srgb, var(--ac) 40%, #04302a);
   --warm:#a9701b; --bad:#c0374a; --good:#0d8a6d;
   --shadow:0 5px 16px rgba(12,43,41,.10);
   --veil:rgba(12,43,41,.45);
