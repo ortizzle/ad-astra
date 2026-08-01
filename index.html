@@ -257,6 +257,16 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .plan .mins{font-size:12px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
 .plan .why{font-size:13px;color:var(--muted);line-height:1.5}
 
+.cardbtn{width:100%;display:flex;align-items:center;gap:14px;text-align:left;
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);
+  padding:18px 20px;margin-bottom:11px;min-height:var(--tap);transition:transform .08s,border-color .15s}
+.cardbtn:active{transform:scale(.99)}
+.cardbtn:hover{border-color:var(--ac-25)}
+.cb-txt{flex:1;min-width:0}
+.cb-t{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--text)}
+.cb-d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.cb-x{font-size:26px;color:var(--faint);line-height:1;flex-shrink:0}
+
 .subrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);cursor:pointer}
 .subrow:last-of-type{border-bottom:none}
 .subchip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;
