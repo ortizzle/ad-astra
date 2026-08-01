@@ -1,13 +1,14 @@
 /* Ad Astra service worker.
    Bump CACHE_VERSION on every deploy — mobile Chrome caches aggressively and a
    stale shell is the #1 cause of "my fix isn't showing up". */
-const CACHE_VERSION = 'ad-astra-v2';
+const CACHE_VERSION = 'ad-astra-v3';
 const SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg'
 ];
+/* prototype.html is a design comparison page, deliberately not cached. */
 
 self.addEventListener('install', e => {
   e.waitUntil(
