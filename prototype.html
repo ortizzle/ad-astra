@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Astra — three directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0f14;color:#e8f0ee;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0 60px}
+.wrap{max-width:1300px;margin:0 auto;padding:26px 18px}
+h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;margin:0 0 6px}
+.sub{color:#7e948f;font-size:14px;margin-bottom:26px;max-width:820px;line-height:1.65}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:1080px){.cols{grid-template-columns:1fr}}
+.col > .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;margin-bottom:4px}
+.col > .name{font-family:'Fraunces',serif;font-size:24px;margin-bottom:5px}
+.col > .desc{font-size:13.5px;color:#7e948f;line-height:1.6;margin-bottom:14px;min-height:88px}
+.phone{border-radius:26px;overflow:hidden;border:1px solid #1e2b30}
+.pad{padding:16px}
+
+/* ---- shared structure ---- */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.who{display:flex;align-items:center;gap:9px}
+.av{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.nm{font-size:17px;font-weight:700}
+.lv{font-size:10px;opacity:.6}
+.xp{font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px}
+.sec{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin:16px 0 8px;opacity:.8}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.tile{border-radius:14px;padding:12px;min-height:82px;display:flex;flex-direction:column;
+  justify-content:space-between;position:relative;overflow:hidden}
+.tile .ic{font-size:19px;position:relative}
+.tile .tn{font-size:12.5px;font-weight:700;line-height:1.25;position:relative}
+.tile .tm{font-size:10px;opacity:.8;position:relative}
+.fc{border-radius:16px;padding:26px 16px;min-height:148px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.fc .t{font-size:20px;font-weight:700;position:relative;line-height:1.25}
+.fc .d{font-size:11.5px;margin-top:8px;opacity:.85;position:relative;line-height:1.55;max-width:88%}
+.fc .tag{position:absolute;top:10px;left:13px;font-size:8.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:800;opacity:.65}
+.per{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:11px;
+  margin-bottom:6px;font-size:12px;position:relative;overflow:hidden}
+.per .pn{font-weight:700;flex:1;position:relative}
+.per .pt{font-size:10px;opacity:.75;position:relative}
+/* the compact rows get a whisper of the pattern, not the full thing */
+.per{--pl:transparent}
+
+/* ---- subject patterns: pattern layers first, subject fill last ---- */
+.p-algeo{background-image:
+  linear-gradient(var(--pl) 1px,transparent 1px),
+  linear-gradient(90deg,var(--pl) 1px,transparent 1px),
+  var(--fill); background-size:15px 15px,15px 15px,cover}
+.p-english{background-image:
+  repeating-linear-gradient(180deg,transparent 0 16px,var(--pl) 16px 17px),
+  linear-gradient(90deg,transparent 21px,var(--pl2,var(--pl)) 21px 22px,transparent 22px),
+  var(--fill); background-size:auto,auto,cover}
+.p-bio{background-image:
+  radial-gradient(circle,var(--pl) 1.7px,transparent 2.1px),
+  var(--fill); background-size:17px 17px,cover}
+.p-physics{background-image:
+  repeating-radial-gradient(circle at 12% 118%,transparent 0 13px,var(--pl) 13px 14px),
+  var(--fill); background-size:auto,cover}
+.p-history{background-image:
+  repeating-linear-gradient(90deg,var(--pl) 0 2px,transparent 2px 15px),
+  var(--fill); background-size:auto,cover}
+.p-latin{background-image:
+  repeating-linear-gradient(45deg,var(--pl) 0 2px,transparent 2px 13px),
+  var(--fill); background-size:auto,cover}
+.p-theatre{background-image:
+  repeating-linear-gradient(90deg,var(--pl) 0 1px,transparent 1px 10px),
+  var(--fill); background-size:auto,cover}
+
+/* ============ 1 · FIELD NOTES ============ */
+.d1{background:#12100c}
+.d1 .av{background:#2a2419;border:1px solid #574a2e;color:#f0d9a0}
+.d1 .nm{color:#f4ead6;font-family:'Fraunces',serif}
+.d1 .lv{color:#8a7c60}
+.d1 .xp{background:#2a2419;color:#e8c46a;border:1px solid #574a2e}
+.d1 .sec{color:#8a7c60}
+.d1 .hero{background:#f4ead6;color:#2b2517;border-radius:16px;padding:16px;
+  background-image:repeating-linear-gradient(180deg,transparent 0 25px,#d9cbae 25px 26px);
+  box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.d1 .hero .hl{font-family:'Caveat',cursive;font-size:23px;line-height:1.35}
+.d1 .hero .hd{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a7350;font-weight:800;margin-bottom:6px}
+.d1 .tile,.d1 .fc{--fill:linear-gradient(#f4ead6,#f4ead6);color:#2b2517;box-shadow:0 5px 16px rgba(0,0,0,.4)}
+.d1 .fc .t{font-family:'Fraunces',serif}
+.d1 .per{background:#1d1a12;color:#e8dcc0;border:1px solid #2f2a1c}
+.d1 .per.now{background:#f4ead6;color:#2b2517;border-color:#f4ead6}
+.d1 .p-algeo{--pl:#b3c6d4} .d1 .p-english{--pl:#bdd0dc;--pl2:#e0a0a0}
+.d1 .p-bio{--pl:#a3c7b1} .d1 .p-physics{--pl:#c9b99c}
+.d1 .p-history{--pl:#c9b894} .d1 .p-latin{--pl:#c9b894}
+
+/* ============ 2 · STUDIO ============ */
+.d2{background:#070c12}
+.d2 .av{background:linear-gradient(140deg,#6fe3cd,#3aa8d8);color:#05202a}
+.d2 .nm{color:#eaf6f7;font-family:'Fraunces',serif}
+.d2 .lv{color:#6d8794}
+.d2 .xp{background:rgba(111,227,205,.14);color:#6fe3cd;border:1px solid rgba(111,227,205,.35)}
+.d2 .sec{color:#6fe3cd}
+.d2 .hero{border-radius:16px;padding:17px;color:#04202a;
+  background:linear-gradient(140deg,#7ff0d8,#54b6d6 68%,#6f96e8);
+  box-shadow:0 10px 30px rgba(84,182,214,.3)}
+.d2 .hero .hd{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.6;margin-bottom:6px}
+.d2 .hero .hl{font-family:'Fraunces',serif;font-size:19px;line-height:1.35;font-weight:600}
+.d2 .tile,.d2 .fc{color:#fff;box-shadow:0 7px 20px rgba(0,0,0,.5);--pl:rgba(255,255,255,.20)}
+.d2 .tile::after,.d2 .fc::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.24),transparent 55%)}
+.d2 .p-algeo{--fill:linear-gradient(150deg,#5aa6ec,#2c5fa8)}
+.d2 .p-bio{--fill:linear-gradient(150deg,#4fd6a8,#1c9070)}
+.d2 .p-physics{--fill:linear-gradient(150deg,#f5a95f,#cf5f2b)}
+.d2 .p-history{--fill:linear-gradient(150deg,#ecc55d,#b07d24)}
+.d2 .p-english{--fill:linear-gradient(150deg,#f28cb2,#b8447c);--pl2:rgba(255,255,255,.34)}
+.d2 .p-latin{--fill:linear-gradient(150deg,#b0a9f4,#655cc2)}
+.d2 .per{background:#0e1a22;border:1px solid #172a34;color:#cfe4e6}
+.d2 .per.now{background:linear-gradient(100deg,rgba(111,227,205,.24),#0e1a22);border-color:#6fe3cd}
+
+/* ============ 3 · AURORA ============ */
+.d3{background:#050d12;position:relative;font-family:'Space Grotesk',sans-serif}
+.d3::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(48% 26% at 12% 3%,rgba(111,227,205,.30),transparent 70%),
+             radial-gradient(44% 24% at 92% 18%,rgba(168,140,240,.26),transparent 70%),
+             radial-gradient(52% 30% at 40% 92%,rgba(240,160,190,.18),transparent 70%)}
+.d3 .pad{position:relative}
+.d3 .av{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+.d3 .nm{color:#f0f7f8;font-family:'Fraunces',serif}
+.d3 .lv{color:#7f96a1}
+.d3 .xp{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#9fe8d8}
+.d3 .sec{color:#9fe8d8}
+.d3 .hero{border-radius:18px;padding:17px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px);color:#f0f7f8}
+.d3 .hero .hd{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#9fe8d8;margin-bottom:6px}
+.d3 .hero .hl{font-family:'Fraunces',serif;font-size:19px;line-height:1.4}
+.d3 .tile,.d3 .fc{color:#eaf4f6;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);
+  --pl:rgba(255,255,255,.13);--fill:linear-gradient(rgba(255,255,255,.06),rgba(255,255,255,.06))}
+.d3 .fc .t{font-family:'Fraunces',serif}
+.d3 .glow{position:absolute;width:86px;height:86px;border-radius:50%;filter:blur(28px);
+  right:-16px;bottom:-24px;opacity:.9}
+.d3 .per{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);color:#dcecee}
+.d3 .per.now{background:rgba(111,227,205,.18);border-color:rgba(111,227,205,.5)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Ad Astra — three directions</h1>
+  <div class="sub">Same screen, same content, three visual languages. All three keep aquamarine as the app's own colour but give every subject its own identity and texture — graph paper for maths, ruled paper with a red margin for English, cell dots for Biology, orbit arcs for Physics, columns for History, a Greek key for Latin. Tell me which one and I'll build it out properly.</div>
+  <div class="cols" id="cols"></div>
+</div>
+
+<script>
+const SUBJECTS = [
+  {k:'algeo',   ic:'📐', nm:'Algebra & Geometry', meta:'8:25 · Rm 231', glow:'#4f9ee8'},
+  {k:'bio',     ic:'🧬', nm:'Biology 8',          meta:'9:20 · Rm 126', glow:'#4fd6a8'},
+  {k:'physics', ic:'⚛️', nm:'Physics 8',          meta:'10:15 · Rm 122',glow:'#f2a35e'},
+  {k:'history', ic:'🏛️', nm:'History 8',          meta:'11:10 · Rm 213',glow:'#e8c05a'},
+  {k:'english', ic:'📖', nm:'English 8',          meta:'12:05 · Rm 221',glow:'#ef86ad'},
+  {k:'latin',   ic:'🏺', nm:'Latin I',            meta:'1:55 · Rm 127', glow:'#a9a3f0'}
+];
+const DIRS = [
+  {cls:'d1', accent:'#e8c46a', label:'Direction 1', name:'Field Notes',
+   desc:'Cards are real paper. Graph paper, ruled sheets, parchment — warm and tactile against a dark desk, with handwriting for the morning line. The most distinctive of the three, and the least like every other app on her phone.'},
+  {cls:'d2', accent:'#6fe3cd', label:'Direction 2', name:'Studio',
+   desc:'Every subject owns a saturated colour with its pattern woven into it. Bright, high-contrast, unmistakably a place to get things done. The most energetic, and the easiest to tell apart at a glance.'},
+  {cls:'d3', accent:'#a9a3f0', label:'Direction 3', name:'Aurora',
+   desc:'Frosted glass over drifting colour, with subject colour arriving as a glow rather than a fill. Calm and premium. Closest to what is built today, just far less flat.'}
+];
+
+const cols = document.getElementById('cols');
+DIRS.forEach(d=>{
+  const col = document.createElement('div'); col.className='col';
+  col.insertAdjacentHTML('beforeend',
+    `<div class="label" style="color:${d.accent}">${d.label}</div>
+     <div class="name">${d.name}</div><div class="desc">${d.desc}</div>`);
+
+  const phone = document.createElement('div'); phone.className='phone '+d.cls;
+  const pad = document.createElement('div'); pad.className='pad';
+
+  pad.insertAdjacentHTML('beforeend',
+    `<div class="hdr">
+       <div class="who"><div class="av">✦</div>
+         <div><div class="nm">Ad Astra</div><div class="lv">Level 3 · 8th grade</div></div></div>
+       <div class="xp">1,070 XP</div>
+     </div>
+     <div class="hero">
+       <div class="hd">Monday, August 3</div>
+       <div class="hl">Confusion is not failure. It is the moment right before understanding.</div>
+     </div>
+     <div class="sec">Right now</div>
+     <div class="per now"><span>⚛️</span><span class="pn">Physics 8</span><span class="pt">until 11:05</span></div>
+     <div class="per"><span>🏛️</span><span class="pn">History 8</span><span class="pt">11:10</span></div>
+     <div class="sec">Your subjects</div>`);
+
+  const tiles = document.createElement('div'); tiles.className='tiles';
+  SUBJECTS.forEach(s=>{
+    const t = document.createElement('div');
+    t.className = `tile p-${s.k}`;
+    if(d.cls==='d3'){ const g=document.createElement('div'); g.className='glow';
+      g.style.background=s.glow; t.appendChild(g); }
+    t.insertAdjacentHTML('beforeend',
+      `<div class="ic">${s.ic}</div><div><div class="tn">${s.nm}</div><div class="tm">${s.meta}</div></div>`);
+    tiles.appendChild(t);
+  });
+  pad.appendChild(tiles);
+
+  pad.insertAdjacentHTML('beforeend',
+    `<div class="sec">Flashcard — Algebra</div>
+     <div class="fc p-algeo">
+       <div class="tag">Algebra &amp; Geometry II</div>
+       <div class="t">Slope-intercept form</div>
+       <div class="d">y = mx + b — m is the slope, b is where the line crosses the y-axis.</div>
+     </div>
+     <div class="sec">Flashcard — Latin</div>
+     <div class="fc p-latin">
+       <div class="tag">Latin I</div>
+       <div class="t">ad astra</div>
+       <div class="d">“to the stars” — from <em>per aspera ad astra</em>, through hardship to the stars.</div>
+     </div>`);
+
+  if(d.cls==='d3'){
+    [...pad.querySelectorAll('.fc')].forEach((fc,i)=>{
+      const g=document.createElement('div'); g.className='glow';
+      g.style.background = i===0 ? '#4f9ee8' : '#a9a3f0';
+      g.style.width='130px'; g.style.height='130px'; g.style.filter='blur(38px)';
+      fc.insertBefore(g, fc.firstChild);
+    });
+  }
+
+  phone.appendChild(pad); col.appendChild(phone); cols.appendChild(col);
+});
+</script>
+</body>
+</html>
