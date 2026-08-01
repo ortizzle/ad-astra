@@ -1904,7 +1904,7 @@ SCREENS.parent = function(root){
   /* Weekly goals */
   root.appendChild(divider('Weekly study goals'));
   const gc = el('div','card');
-  gc.appendChild(el('p',null,'Minutes per week per subject. These drive the recommendations on her Today screen.'));
+  gc.appendChild(el('p',null,'Minutes per week per subject. These drive the "what to study" recommendations on her Study tab.'));
   STUDY_CLASSES.forEach(c=>{
     const r = el('div','row');
     r.appendChild(el('span','k',`${c.icon} ${c.name}`));
