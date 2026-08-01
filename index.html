@@ -890,12 +890,12 @@ SCREENS.today = function(root){
      renders every day. On a non-school day it shows as her standing timetable
      rather than being hidden entirely. */
   const schoolDay = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay;
-  root.appendChild(divider(schoolDay ? "Today's schedule" : 'Her school day'));
+  root.appendChild(divider(schoolDay ? "Today's schedule" : 'Your school day'));
   if(!schoolDay){
     const n = el('div','card quiet');
     n.appendChild(el('p',null, date<CAL.firstDay
-      ? 'This is the timetable from the first day of school onward. Same order every weekday.'
-      : 'No classes today — this is her normal weekday timetable.'));
+      ? 'This is your timetable from the first day of school onward. Same order every weekday.'
+      : 'No classes today — this is your normal weekday timetable.'));
     root.appendChild(n);
   }
   const now = AZ.nowMinutes();
