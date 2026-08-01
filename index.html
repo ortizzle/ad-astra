@@ -1680,8 +1680,31 @@ SCREENS.setup = function(root){
   mo.value = p.motto;
   mo.addEventListener('change',()=>{ setPref('motto', mo.value.trim()); render(); toast('Saved'); });
   pc.appendChild(mo);
-  pc.appendChild(el('div','hintline','This shows up under your affirmation each morning.'));
+  pc.appendChild(el('div','hintline','This shows up under your line on the Study tab each day.'));
   root.appendChild(pc);
+
+  /* Per-subject colours */
+  root.appendChild(divider('Subject colours'));
+  const sub = el('div','card');
+  sub.appendChild(el('p',null,'Every subject gets its own colour and texture. Tap a subject to change it.'));
+  STUDY_CLASSES.forEach(c=>{
+    const cur = palOf(c);
+    const row = el('div','subrow');
+    const chip = paint(el('div','subchip'), c);
+    chip.appendChild(el('span',null,c.icon));
+    row.appendChild(chip);
+    const meta = el('div','submeta');
+    meta.appendChild(el('div','sn',c.name));
+    meta.appendChild(el('div','sc',cur.nm));
+    row.appendChild(meta);
+    row.addEventListener('click',()=>pickSubjectColour(c));
+    sub.appendChild(row);
+  });
+  const reset = el('button','btn btn-ghost btn-sm','Reset to defaults');
+  reset.style.width='100%'; reset.style.marginTop='12px';
+  reset.addEventListener('click',()=>{ setPref('subjectColors',{}); toast('Back to defaults'); render(); });
+  sub.appendChild(reset);
+  root.appendChild(sub);
 
   root.appendChild(divider('AI features'));
   const ac = el('div','card');
