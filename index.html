@@ -516,16 +516,56 @@ function affirmationFor(date){
 }
 
 /* ---------- Study-habit guidance (evidence-based; shown without an API key) ---------- */
+/* Shown one or two at a time, only when the situation calls for them — a wall of
+   eight tips is wallpaper. `when` returns the reason it is relevant right now,
+   or null. */
 const HABITS = [
-  {ic:'🔁',t:'Retrieval beats rereading',d:'Closing the book and trying to recall the answer builds far more durable memory than reading the notes again. That is exactly what the quiz mode is for — the effort of pulling it out of your head is the point.'},
-  {ic:'📆',t:'Spread it out',d:'Four 25-minute sessions across four days beats one 100-minute cram, by a lot. The forgetting that happens between sessions is what makes the next one stick.'},
-  {ic:'🔀',t:'Mix subjects in one sitting',d:'Studying Latin, then Biology, then back to Latin feels harder and works better than doing all of one. It forces your brain to choose the right method each time, which is what a test asks for.'},
-  {ic:'😴',t:'Sleep is part of studying',d:'Memory gets consolidated during sleep. An hour of study followed by a full night beats two hours followed by five hours of sleep.'},
-  {ic:'❓',t:'Explain it out loud',d:'If you can explain a concept to someone who does not know it, you understand it. If you get stuck halfway, you just found the gap — go straight there.'},
-  {ic:'📵',t:'One thing at a time',d:'Every interruption costs several minutes of re-focusing. A 25-minute block with the phone in another room is worth more than an hour with it face-up.'},
-  {ic:'🎯',t:'Study the hard parts',d:'It feels better to review what you already know. It only helps to review what you do not. The Growth Zone is deliberately a list of the uncomfortable ones.'},
-  {ic:'✍️',t:'Write the question, not just the answer',d:'Turning your notes into questions you could be asked is one of the highest-value 10 minutes you can spend before a test.'}
+  {id:'spacing', t:'Spread it out', d:'Four 25-minute sessions across four days beats one 100-minute cram, by a lot. The forgetting that happens in between is what makes the next session stick.',
+   when:c => c.nextAssess && c.nextAssess.days>=2 && c.nextAssess.days<=12
+     ? `${c.nextAssess.label} is ${c.nextAssess.days} days out — there is still time to space it` : null},
+  {id:'retrieval', t:'Retrieval beats rereading', d:'Closing the book and trying to recall the answer builds far more durable memory than reading the notes again. The effort of pulling it out of your head is the point.',
+   when:c => c.weak ? `${c.weak.name} is sitting at ${c.weak.acc}% — quizzing will move that faster than re-reading` : null},
+  {id:'hardparts', t:'Study the hard parts', d:'It feels better to review what you already know. It only helps to review what you do not. The Growth Zone is deliberately a list of the uncomfortable ones.',
+   when:c => c.growth>=5 ? `${c.growth} questions are waiting in your Growth Zone` : null},
+  {id:'focus', t:'One thing at a time', d:'Every interruption costs several minutes of re-focusing. A 25-minute block with the phone in another room is worth more than an hour with it face-up.',
+   when:c => c.focusCount===0 ? 'You have not tried the timer yet — it is the single easiest change' : null},
+  {id:'interleave', t:'Mix subjects in one sitting', d:'Latin, then Biology, then back to Latin feels harder and works better than doing all of one. It forces your brain to pick the right method each time, which is exactly what a test asks for.',
+   when:c => c.subjectsStudied>=3 ? 'You are juggling a few subjects — alternating them beats blocking them' : null},
+  {id:'sleep', t:'Sleep is part of studying', d:'Memory gets consolidated overnight. An hour of study followed by a full night beats two hours followed by five hours of sleep.',
+   when:c => c.nextAssess && c.nextAssess.days<=1 ? 'Something is due tomorrow — sleep will do more than another hour tonight' : null},
+  {id:'explain', t:'Explain it out loud', d:'If you can explain something to someone who does not know it, you understand it. If you get stuck halfway, you just found the gap — go straight there.',
+   when:c => c.answered>=40 ? 'You have covered a lot of ground — explaining it is how you find the soft spots' : null},
+  {id:'writeq', t:'Write the questions, not just the answers', d:'Turning your notes into questions you could be asked is one of the highest-value ten minutes before a test.',
+   when:c => c.nextAssess && c.nextAssess.days<=4 ? `${c.nextAssess.label} is close — write yourself questions rather than re-reading` : null}
 ];
+
+function tutorContext(date){
+  const s = stats();
+  let weak = null;
+  STUDY_CLASSES.forEach(c=>{
+    const st = classStats(c.id);
+    if(st.accuracy!==null && st.accuracy<70 && (!weak || st.accuracy<weak.acc))
+      weak = {name:c.name, acc:st.accuracy, id:c.id};
+  });
+  const nx = assessments().find(a=>a.date>=date && a.score==null);
+  return {
+    weak, growth: all('miss').length, answered: s.answered,
+    focusCount: focusLogs().length,
+    subjectsStudied: new Set(logs().map(l=>l.classId)).size,
+    nextAssess: nx ? {days:AZ.daysBetween(date,nx.date),
+      label:`${CLASS_BY_ID[nx.classId]?CLASS_BY_ID[nx.classId].short:''} ${(KINDS[nx.kind]||KINDS.test).nm.toLowerCase()}`.trim()} : null
+  };
+}
+function relevantHabits(date, limit=2){
+  const c = tutorContext(date);
+  const hits = [];
+  HABITS.forEach(h=>{ const why = h.when(c); if(why) hits.push({h, why}); });
+  if(!hits.length){
+    const h = HABITS.find(x=>x.id==='retrieval');
+    hits.push({h, why:'The most reliable way to study anything'});
+  }
+  return hits.slice(0, limit);
+}
 
 /* ---------- Content model ---------- */
 const SCHEMA_VERSION = 2;
