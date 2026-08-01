@@ -1,16 +1,21 @@
 # Claude Guide — Ad Astra
 
+> **This repo is public.** Names, schools, teachers and Drive folder IDs are
+> deliberately absent here — they live in the `roster` record (entered in the
+> grown-up settings, carried by the private Gist) and in Claude's private
+> project memory. Do not paste them back into any tracked file.
+
 ## What this is
 
-A school-year learning PWA for **Sedona (8th grade, BASIS Chandler, SY 2026–27)**.
+A school-year learning PWA for one **8th-grade** student, SY 2026–27.
 Successor to the Summer Science Lab, rebuilt from scratch around three things the
 old app didn't have: her **real class schedule and academic calendar**, a **shared
-data layer** so Chris sees the same content and progress from his own device, and
+data layer** so a parent sees the same content and progress from their own device, and
 an **automated content pipeline** so study material comes from Drive documents
 instead of being hand-written into the source.
 
-The same engine is intended to be forked for **River (4th grade, BASIS Chandler
-Primary South)** — see "Phase 2" below.
+The same engine is forked for a younger sibling in **Wayfinder** — see the
+sibling-app note below.
 
 ---
 
@@ -74,8 +79,8 @@ If you change a record's shape, bump `SCHEMA_VERSION` and add a step to
 ## Sync
 
 Progress *and* content flow through one private GitHub Gist. Both devices enter
-the same Gist ID and a token with only the `gist` scope, in Setup. Content Chris
-generates on his laptop appears on Sedona's phone; her progress appears on his.
+the same Gist ID and a token with only the `gist` scope. Content a parent generates
+on a laptop appears on the student's phone; her progress appears on theirs.
 
 The Gist ID and token live in `localStorage` only. **Never hardcode either into
 the HTML — this repo is public.** Same for the Anthropic API key.
@@ -87,10 +92,10 @@ design: offline-first, local always works.
 
 ## School data
 
-Both `CLASSES` and `CAL` come from files in Sedona's Drive folder (the
-`.ics` class schedule and the BASIS Chandler SY26-27 academic calendar PDF).
-Sedona's schedule is **identical Monday–Friday**, which is why `CLASSES` is a flat
-array. River's rotates by weekday — see Phase 2.
+`CLASSES` and `CAL` are derived from the school's published `.ics` timetable and
+academic-calendar PDF. **This** schedule is identical Monday–Friday, which is why
+`CLASSES` is a flat array; Wayfinder's rotates by weekday and is structured
+differently.
 
 `CAL.closed` holds no-school date ranges; `CAL.quarters` drives the quarter
 countdown; `CAL.milestones` drives "on the horizon" (Pre-Comp exams 12/15–12/16,
@@ -105,7 +110,7 @@ Never derive "today" from `toISOString()` — it rolls over at 5pm local.
 
 Three routes, in order of preference:
 
-1. **From Drive (best).** Pull the class materials from Sedona's Drive folder,
+1. **From Drive (best).** Pull the class materials from the student's Drive folder,
    write a `unit` record, and add it to the store. Anchor every card and question
    to the actual source — do not invent facts. This is the intended workflow once
    teachers start posting notes.
@@ -140,7 +145,7 @@ Three routes, in order of preference:
 schedule data at boot. It is regenerated on every load and should not be
 hand-edited. It exists so the app is useful before any class content arrives, and
 so the study engine is demonstrably working. It contains no invented academic
-facts — only her real rooms, times, and teachers.
+facts — only real rooms, times, and (once entered in `roster`) teachers.
 
 ---
 
@@ -163,7 +168,7 @@ period row.
 > that can be painted, use `background-color`, or scope the plain background with
 > `:not(.subj)`.
 
-**Sedona chose "Studio"** from `prototype.html` (which also holds Field Notes and
+**the student chose "Studio"** from `prototype.html` (which also holds Field Notes and
 Aurora, rendered as real UI). That decision is made — don't re-litigate it. The
 prototype file stays as a reference; it is a dev artifact, not cached by the
 service worker and not linked from the app.
@@ -187,7 +192,7 @@ Desktop falls back to a plain download. There is deliberately **no Google OAuth*
 the no-backend rule for a once-a-week action.
 
 The Drive folder is **Ad Astra Backups**, inside her 8th Grade folder:
-`1mOLDFsQy__vR6m5R1D8SFUzIBCNqG7cI`. The Setup screen links straight to it.
+`<in the private notes>`. The Setup screen links straight to it.
 
 ## The psychology features — read before editing the copy
 
@@ -220,15 +225,15 @@ that merely sound good.
 
 ## Voice
 
-Sedona is sharp and responds to wit and real stakes. Direct, never condescending,
+the student is sharp and responds to wit and real stakes. Direct, never condescending,
 never over-explaining, dry rather than bubbly. The Growth Zone is framed as
 information, not a verdict — that framing is load-bearing, don't soften it into
 praise.
 
 **Everything she sees is second person.** "Your school day", not "her school
-day"; "your subjects", not "Sedona's subjects". The app talks *to* her, not
+day"; "your subjects", not "the student's subjects". The app talks *to* her, not
 *about* her. Third person is correct in exactly two places: the parent view
-(Chris reading about her) and the model system prompts. This was explicit
+(the parent reading about her) and the model system prompts. This was explicit
 feedback — check any new copy against it.
 
 ## Screen layout — who owns what
@@ -291,7 +296,7 @@ per-device by design (it is not a record, so it does not sync).
 
 It shows effort (weekly minutes, 14-day chart, streak, focus time), accuracy by
 subject, strong vs shaky questions from `qstat`, mood and calibration trends, real
-test scores Chris enters, and weekly per-subject minute goals that feed the study
+test scores the parent enters, and weekly per-subject minute goals that feed the study
 plan. Deliberately understated in tone so it does not read as surveillance.
 
 ## Study plan
@@ -318,9 +323,9 @@ gives specific advice.
 
 ---
 
-## Phase 2 — River
+## Phase 2 — the student
 
-River is **4th grade at BASIS Chandler Primary South**, same first/last day
+the student is **4th grade at the primary school**, same first/last day
 (8/3/2026 – 5/21/2027) but a **different academic calendar PDF** and a schedule
 that **rotates by weekday**:
 
@@ -330,13 +335,13 @@ that **rotates by weekday**:
   (W), PE Martial Arts (Th), Engineering & Technology (F)
 - Rotating 11:05 and 12:55 slots vary similarly; Thursday has Study Hall
 
-That means `CLASSES` must become **keyed by weekday** for River. The cleanest fork
+That means `CLASSES` must become **keyed by weekday** for the student. The cleanest fork
 is: copy this repo, replace `STUDENT` / `CLASSES` / `CAL`, change the theme, and
 leave the record store, sync, badge engine, and study screens untouched.
 
 Her Drive folder also has a 4th-grade supply list and the CPS academic calendar.
 
-**Open question for Chris:** two separate apps (current plan) vs. one app with a
+**Open question for the parent:** two separate apps (current plan) vs. one app with a
 profile picker. Two apps means two themes and two home-screen icons — better for
 the kids. One app means one deploy and one Gist — better for maintenance.
 

@@ -348,7 +348,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 
 <script>
 /* ==========================================================================
-   AD ASTRA v2 — Sedona's learning lab
+   AD ASTRA — a single-student learning lab
    Single file, no build step. localStorage + optional private Gist sync.
    ========================================================================== */
 
@@ -379,7 +379,7 @@ const Store = {
   remove(k){ try{localStorage.removeItem(this.ns+k);}catch(e){} }
 };
 
-/* ---------- School data (from her Drive folder: .ics schedule + BASIS calendar) ---------- */
+/* ---------- School data (times/rooms only — see `roster` for anything identifying) ---------- */
 /* Grade drives nothing sensitive. Name, school, teachers and the backup-folder
    link are deliberately NOT in this file — this repo is public. They live in the
    `roster` record, entered once in the grown-up settings and carried between
@@ -391,7 +391,7 @@ function setRoster(k,v){
   const r = roster(); r[k]=v; r.id='roster'; r.type='roster'; put(r); syncSoon();
 }
 const teacherOf = id => (roster().teachers||{})[id] || '';
-/* "Room 122 · Curtis Canaday", or just "Room 122" until a teacher is filled in. */
+/* "Room 122 · <teacher>", or just "Room 122" until a teacher is filled in. */
 function whereLine(c){
   const t = teacherOf(c.id);
   return `Room ${c.room}${t ? ' · '+t : ''}`;
@@ -1802,7 +1802,9 @@ async function askTutor(question){
   const moodLine = moods.length
     ? `Recent pre-quiz readiness ratings (1-5): ${moods.map(m=>m.readiness).join(', ')}.` : '';
 
-  const system = `You are a study coach for Sedona, a sharp 8th grader at BASIS Chandler. You are talking directly to her.
+  const who = roster().studentName || 'the student';
+  const where = roster().school ? ` at ${roster().school}` : '';
+  const system = `You are a study coach for ${who}, a sharp ${STUDENT.grade}th grader${where}. You are talking directly to her.
 
 Ground every suggestion in her real data below. Be concrete: name the subject, the number of minutes, and what to actually do in that time. No generic advice like "make a schedule".
 
@@ -2169,19 +2171,19 @@ SCREENS.parent = function(root){
      school and exact daily location should not be. Entered once here, then
      carried to every device by the private Gist. */
   root.appendChild(divider('Class details'));
-  const rc = el('div','card');
-  rc.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
+  const rost = el('div','card');
+  rost.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
   const r = roster();
   const nameIn = el('input'); nameIn.type='text'; nameIn.placeholder='First name'; nameIn.value=r.studentName;
   nameIn.addEventListener('change',()=>{ setRoster('studentName', nameIn.value.trim()); toast('Saved'); render(); });
-  rc.appendChild(el('label',null,'Student')); rc.appendChild(nameIn);
+  rost.appendChild(el('label',null,'Student')); rost.appendChild(nameIn);
   const schoolIn = el('input'); schoolIn.type='text'; schoolIn.placeholder='School'; schoolIn.value=r.school;
   schoolIn.addEventListener('change',()=>{ setRoster('school', schoolIn.value.trim()); toast('Saved'); render(); });
-  rc.appendChild(el('label',null,'School')); rc.appendChild(schoolIn);
+  rost.appendChild(el('label',null,'School')); rost.appendChild(schoolIn);
   const bkIn = el('input'); bkIn.type='url'; bkIn.placeholder='https://drive.google.com/drive/folders/…'; bkIn.value=r.backupUrl;
   bkIn.addEventListener('change',()=>{ setRoster('backupUrl', bkIn.value.trim()); toast('Saved'); render(); });
-  rc.appendChild(el('label',null,'Backup folder link')); rc.appendChild(bkIn);
-  rc.appendChild(el('label',null,'Teachers'));
+  rost.appendChild(el('label',null,'Backup folder link')); rost.appendChild(bkIn);
+  rost.appendChild(el('label',null,'Teachers'));
   STUDY_CLASSES.forEach(c=>{
     const row = el('div','row');
     row.appendChild(el('span','k',`${c.icon} ${c.short}`));
@@ -2192,9 +2194,9 @@ SCREENS.parent = function(root){
       if(v) t[c.id]=v; else delete t[c.id];
       setRoster('teachers', t); toast('Saved');
     });
-    row.appendChild(i); rc.appendChild(row);
+    row.appendChild(i); rost.appendChild(row);
   });
-  root.appendChild(rc);
+  root.appendChild(rost);
 
   root.appendChild(divider('Shared sync'));
   const sc = el('div','card');
@@ -2433,7 +2435,7 @@ async function generateUnit(classId, notes){
   if(!key) throw new Error('NO_KEY');
   const cls = CLASS_BY_ID[classId];
   const system = [
-    `You build study material for Sedona, a sharp 8th grader at BASIS Chandler taking ${cls?cls.name:'this class'}.`,
+    `You build study material for a sharp ${STUDENT.grade}th grader taking ${cls?cls.name:'this class'}.`,
     `Write 15-25 flashcards and 18-24 quiz questions (6-8 each at level 1 recall, level 2 application, level 3 analysis).`,
     `Every question has exactly 4 options and one correct answer.`,
     `Anchor everything to the supplied notes. Do not invent facts they do not support.`,

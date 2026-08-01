@@ -1,10 +1,14 @@
 # Ad Astra
 
-Sedona's 8th grade learning lab — BASIS Chandler, SY 2026–27.
+A single-file study companion for one secondary-school student: a live class
+schedule, flashcards, quizzes, a Growth Zone for missed questions, a focus timer,
+a tutor, and XP/streaks/badges.
 
-A single-file PWA: her real schedule and academic calendar, flashcards, quizzes,
-a Growth Zone for missed questions, XP/streaks/badges, and optional GitHub Gist
-sync so progress and study content are shared between her phone and Chris's
-laptop.
+No build step, no backend. Progress and study content sync between devices
+through a private GitHub Gist you supply.
 
-See `CLAUDE.md` for architecture, the data model, and how to add study content.
+The student's name, school and teachers are **not** in this repository — they are
+entered once in the grown-up settings and travel with the private Gist. Clone it,
+add your own, and it is yours.
+
+See `CLAUDE.md` for architecture and the data model.
