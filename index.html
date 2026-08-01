@@ -610,6 +610,7 @@ function stats(){
   const days = new Set();
   L.forEach(l=>{ xp+=l.xp||0; correct+=l.correct||0; answered+=l.total||0; seconds+=l.seconds||0; days.add(l.date); });
   F.forEach(f=>{ xp+=f.xp||0; seconds+=(f.minutes||0)*60; days.add(f.date); });
+  all('affirm').forEach(a=>{ xp += a.xp||0; });   // reading the morning line counts
   return { xp, level:Math.floor(xp/500)+1, intoLevel:xp%500, toNext:500-(xp%500),
     correct, answered, seconds, accuracy: answered?Math.round(correct/answered*100):0,
     days:days.size, streak:streakFrom(days), sessions:L.length,
