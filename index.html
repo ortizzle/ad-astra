@@ -1998,6 +1998,35 @@ SCREENS.parent = function(root){
   });
   root.appendChild(gc);
 
+  /* What she's actually reaching for — so features that go unused can be fixed
+     or dropped rather than guessed about. */
+  root.appendChild(divider('What she is using'));
+  const use = el('div','card');
+  const asks = all('ask').sort((a,b)=>b.at-a.at);
+  const fl = focusLogs();
+  [['Tutor questions asked', asks.length],
+   ['Focus sessions', fl.length],
+   ['Focus minutes', s.focusMin],
+   ['Flashcard sessions', logs().filter(l=>l.mode==='cards').length],
+   ['Quizzes taken', logs().filter(l=>l.mode==='quiz').length],
+   ['Morning lines read', all('affirm').filter(a=>a.read).length]
+  ].forEach(([k,v])=>{ const r=el('div','row');
+    r.appendChild(el('span','k',k)); r.appendChild(el('span','v plain',String(v))); use.appendChild(r); });
+  root.appendChild(use);
+
+  if(asks.length){
+    const qc = el('div','card');
+    qc.appendChild(el('div','eyebrow','What she asked for help with'));
+    asks.slice(0,8).forEach(a=>{
+      const d = el('div','miss');
+      d.style.borderLeftColor = 'var(--ac)';
+      d.appendChild(el('div','q', a.q));
+      d.appendChild(el('div','n', `${AZ.shortDate(a.date)} · ${a.answered?'answered in-app':'saved for a person'}`));
+      qc.appendChild(d);
+    });
+    root.appendChild(qc);
+  }
+
   /* Recent sessions */
   root.appendChild(divider('Recent sessions'));
   const rc = el('div','card');
