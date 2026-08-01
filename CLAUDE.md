@@ -144,11 +144,62 @@ facts — only her real rooms, times, and teachers.
 
 ---
 
+## The psychology features — read before editing the copy
+
+Three features are deliberately grounded in research rather than vibes. The exact
+wording matters; do not "warm them up" into generic encouragement.
+
+**Morning affirmations** (`AFFIRMATIONS`). Built on four findings: growth mindset
+(Dweck — praise process and strategy, *never* fixed traits; "you're so smart"
+measurably reduces persistence after failure), self-affirmation theory (Cohen &
+Sherman — briefly connecting to your own values before an evaluative situation
+buffers stress), self-compassion (Neff — permission to struggle predicts more
+persistence than self-criticism), and self-determination theory (Deci & Ryan —
+autonomy language beats pressure language). Rules that follow from that: no trait
+praise, no "you'll ace it", no toxic positivity, no exclamation marks. Pools are
+tagged `general` / `test` / `recover` and picked by context — a test within two
+days, or recent accuracy under 65%. The pick is **deterministic by date** so it
+does not reshuffle on every render.
+
+**Emotion check** (`SCREENS.checkin`, `SCREENS.postmood`). Two taps before every
+quiz, one after. The readiness rating is not decoration — it is compared to her
+actual score in `calibrationPairs()`, which tells her whether her gut feeling
+about being prepared is accurate. That gap ("you felt more ready than this turned
+out") is the metacognitive payload of the whole feature. A low mood rating
+surfaces a supportive note with an explicit permission to stop; keep that.
+
+**Study-habit guidance** (`HABITS`, and the tutor system prompt). Retrieval
+practice, spaced practice, interleaving, sleep, self-explanation. These are the
+techniques with the strongest evidence base — do not swap them for study tips
+that merely sound good.
+
 ## Voice
 
 Sedona is sharp and responds to wit and real stakes. Direct, never condescending,
-never over-explaining. The Growth Zone is framed as information, not a verdict —
-that framing is load-bearing, don't soften it into praise.
+never over-explaining, dry rather than bubbly. The Growth Zone is framed as
+information, not a verdict — that framing is load-bearing, don't soften it into
+praise.
+
+## Parent view
+
+Behind a passcode in You → Grown-ups. The passcode is a SHA-256 hash in
+localStorage, set on first open — there is no default. **This deters a curious
+12-year-old; it is not real security and should not be described as such.** It is
+per-device by design (it is not a record, so it does not sync).
+
+It shows effort (weekly minutes, 14-day chart, streak, focus time), accuracy by
+subject, strong vs shaky questions from `qstat`, mood and calibration trends, real
+test scores Chris enters, and weekly per-subject minute goals that feed the study
+plan. Deliberately understated in tone so it does not read as surveillance.
+
+## Study plan
+
+`studyPlan(date)` is rule-based and always works without an API key. It scores
+each subject on: days until the next unscored assessment, Growth Zone count,
+accuracy under 70%, days since last studied, and progress against the weekly goal.
+Top three surface on Today with a concrete minute recommendation. The AI tutor is
+a layer *on top* of this, not a replacement — if the key is missing the app still
+gives specific advice.
 
 ---
 
