@@ -1961,7 +1961,40 @@ function openParentGate(){
         else { toast('Not quite'); i.value=''; }
       };
       i.addEventListener('keydown',e=>{ if(e.key==='Enter') box._go(); });
+      /* Without this the only reset lives *inside* the area the passcode guards,
+         so forgetting it locks you out for good. */
+      const forgot = el('button','btn btn-ghost btn-sm','Forgot passcode?');
+      forgot.style.width='100%'; forgot.style.marginTop='12px';
+      forgot.addEventListener('click',()=>{ close(); resetPasscode(); });
+      box.appendChild(forgot);
     }});
+}
+
+/* Resetting is gated on the Gist ID where sync is set up — a parent has it in
+   their setup notes, a curious kid does not. With no sync configured there is
+   nothing to check against, so it falls back to a plain confirmation. */
+function resetPasscode(){
+  const gid = Store.get('gist_id','');
+  if(gid){
+    showModal({ title:'Reset passcode',
+      message:'Enter the Gist ID from your setup notes. Nothing is deleted — you just get to pick a new passcode.',
+      confirmText:'Reset', cancelText:'Cancel',
+      build:(box,close)=>{
+        const i = el('input'); i.type='text'; i.placeholder='Gist ID'; i.autocapitalize='none';
+        box.appendChild(i); setTimeout(()=>i.focus(),50);
+        box._go = ()=>{
+          if(i.value.trim() === gid){
+            Store.remove('parent_hash'); close(); toast('Passcode cleared'); openParentGate();
+          } else { toast('That does not match'); i.value=''; }
+        };
+        i.addEventListener('keydown',e=>{ if(e.key==='Enter') box._go(); });
+      }});
+  } else {
+    showModal({ title:'Reset passcode',
+      message:'This clears the passcode so you can set a new one.\n\nNo progress, study sets or settings are deleted.',
+      confirmText:'Reset it', cancelText:'Cancel',
+      onConfirm:()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); openParentGate(); }});
+  }
 }
 
 SCREENS.parent = function(root){
