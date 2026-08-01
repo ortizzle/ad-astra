@@ -813,22 +813,10 @@ SCREENS.today = function(root){
   const date = AZ.today(), closed = closedToday(date), wd = AZ.weekday(date);
   const weekend = wd===0||wd===6, q = currentQuarter(date), s = stats();
 
-  /* Affirmation — the first thing she sees each morning. */
-  const aff = el('div','card ac');
-  aff.appendChild(el('div','eyebrow', AZ.pretty(date)));
-  const at = el('p','lede', affirmationFor(date));
-  at.style.fontFamily="'Fraunces',serif"; at.style.fontSize='20px';
-  at.style.lineHeight='1.35'; at.style.marginTop='8px';
-  aff.appendChild(at);
-  if(prefs().motto){
-    const m = el('p',null,'“'+prefs().motto+'”');
-    m.style.fontStyle='italic'; m.style.marginTop='12px'; m.style.fontSize='13.5px';
-    aff.appendChild(m);
-  }
-  root.appendChild(aff);
-
-  /* Where she is right now */
-  const st = el('div','card');
+  /* Today stays about the school day: where you are, what is coming, what is
+     on the horizon. The morning line lives on Study. */
+  const st = el('div','card ac');
+  st.appendChild(el('div','eyebrow', AZ.pretty(date)));
   if(date < CAL.firstDay){
     const d = AZ.daysBetween(date, CAL.firstDay);
     st.appendChild(el('h3',null, d===1?'School starts tomorrow':`${d} days until school starts`));
