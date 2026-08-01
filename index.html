@@ -1579,36 +1579,30 @@ SCREENS.setup = function(root){
 function openParentGate(){
   const stored = Store.get('parent_hash','');
   if(!stored){
-    showModal({ title:'Set a passcode', message:'Pick a passcode for the grown-up view. Only you need to know it.',
+    showModal({ title:'Set a passcode',
+      message:'Pick a passcode for the grown-up view. Only you need to know it.',
       confirmText:'Set', cancelText:'Cancel',
       build:(box,close)=>{
         const i = el('input'); i.type='password'; i.placeholder='Passcode'; i.autocomplete='new-password';
-        box.appendChild(i); box._input = i;
-        setTimeout(()=>i.focus(),50);
-        box.querySelector; // no-op
-        box._go = async ()=>{ if(i.value.length<4){ toast('At least 4 characters'); return; }
-          Store.set('parent_hash', await sha256(i.value)); close(); toast('Passcode set'); go('parent'); };
+        box.appendChild(i); setTimeout(()=>i.focus(),50);
+        box._go = async ()=>{
+          if(i.value.length<4){ toast('At least 4 characters'); return; }
+          Store.set('parent_hash', await sha256(i.value)); close(); toast('Passcode set'); go('parent');
+        };
         i.addEventListener('keydown',e=>{ if(e.key==='Enter') box._go(); });
-      },
-      onConfirm:null });
-    // wire the confirm button to the async setter
-    const ov = document.querySelector('.modal-overlay:last-of-type');
-    const box = ov.querySelector('.modal-box');
-    const ok = box.querySelector('.modal-buttons .btn-primary');
-    ok.addEventListener('click',()=>box._go());
+      }});
     return;
   }
-  showModal({ title:'Passcode', message:null, confirmText:'Open', cancelText:'Cancel',
+  showModal({ title:'Passcode', confirmText:'Open', cancelText:'Cancel',
     build:(box,close)=>{
       const i = el('input'); i.type='password'; i.placeholder='Passcode'; i.autocomplete='current-password';
       box.appendChild(i); setTimeout(()=>i.focus(),50);
-      box._go = async ()=>{ if(await sha256(i.value) === Store.get('parent_hash','')){ close(); go('parent'); }
-        else { toast('Not quite'); i.value=''; } };
+      box._go = async ()=>{
+        if(await sha256(i.value) === Store.get('parent_hash','')){ close(); go('parent'); }
+        else { toast('Not quite'); i.value=''; }
+      };
       i.addEventListener('keydown',e=>{ if(e.key==='Enter') box._go(); });
     }});
-  const ov = document.querySelector('.modal-overlay:last-of-type');
-  const ok = ov.querySelector('.modal-buttons .btn-primary');
-  ok.addEventListener('click',()=>ov.querySelector('.modal-box')._go());
 }
 
 SCREENS.parent = function(root){
