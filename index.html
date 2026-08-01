@@ -99,12 +99,16 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .tile .ct{font-size:11.5px;color:var(--faint)}
 
 /* ---- subject identity: texture layers painted over the subject's own colour ---- */
-.subj{--pl:rgba(255,255,255,.20);--fill:linear-gradient(150deg,var(--c1),var(--c2));
+.subj{--pl:rgba(255,255,255,.15);--fill:linear-gradient(150deg,var(--c1),var(--c2));
   color:#fff;position:relative;overflow:hidden;border-color:transparent}
+/* Bottom scrim keeps label text legible over any hue she picks; the soft top
+   highlight is what stops the fill reading as flat. Text sits above both. */
 .subj::after{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(160deg,rgba(255,255,255,.22),transparent 55%)}
+  background:linear-gradient(160deg,rgba(255,255,255,.16),transparent 45%),
+             linear-gradient(to top,rgba(0,0,0,.42),transparent 62%)}
 .subj > *{position:relative;z-index:1}
-.subj .ct,.subj .dt,.subj .tm{color:rgba(255,255,255,.82)}
+.subj .ct,.subj .dt,.subj .tm{color:rgba(255,255,255,.88)}
+.subj .nm,.subj .term,.subj .def{text-shadow:0 1px 3px rgba(0,0,0,.3)}
 .pat-algeo{background-image:
   linear-gradient(var(--pl) 1px,transparent 1px),
   linear-gradient(90deg,var(--pl) 1px,transparent 1px),
@@ -320,22 +324,50 @@ const STUDENT = { name:'Sedona', grade:8, school:'BASIS Chandler' };
    Biology, orbit arcs for Physics, columns for History, a Greek key for Latin)
    so subjects are recognisable at a glance rather than all reading as teal. */
 const CLASSES = [
-  {id:'theatre', name:'Theatrical Design',     short:'Theatre',  teacher:'Taylor Nicole Finnell', room:'Theater', start:450, end:500, icon:'🎭', color:'#c58ae8', g1:'#c58ae8', g2:'#7d4fb0'},
-  {id:'algeo',   name:'Algebra & Geometry II', short:'Alg/Geo',  teacher:'Michael Vedder',        room:'231',     start:505, end:555, icon:'📐', color:'#5aa6ec', g1:'#5aa6ec', g2:'#2c5fa8'},
-  {id:'bio',     name:'Biology 8',             short:'Biology',  teacher:'TBA',                   room:'126',     start:560, end:610, icon:'🧬', color:'#4fd6a8', g1:'#4fd6a8', g2:'#1c9070'},
-  {id:'physics', name:'Physics 8',             short:'Physics',  teacher:'Curtis Canaday',        room:'122',     start:615, end:665, icon:'⚛️', color:'#f5a95f', g1:'#f5a95f', g2:'#cf5f2b'},
-  {id:'history', name:'History 8',             short:'History',  teacher:'Addison Guevara',       room:'213',     start:670, end:720, icon:'🏛️', color:'#ecc55d', g1:'#ecc55d', g2:'#b07d24'},
-  {id:'english', name:'English 8',             short:'English',  teacher:'Cassandra Collins',     room:'221',     start:725, end:775, icon:'📖', color:'#f28cb2', g1:'#f28cb2', g2:'#b8447c'},
-  {id:'lunch',   name:'Lunch',                 short:'Lunch',    teacher:'',                      room:'MPR2',    start:780, end:830, icon:'🥪', color:'#7f959e', g1:'#7f959e', g2:'#41525a', break:true},
-  {id:'latin',   name:'Latin I',               short:'Latin',    teacher:'Felicia Jo Gass',       room:'127',     start:835, end:885, icon:'🏺', color:'#b0a9f4', g1:'#b0a9f4', g2:'#655cc2'}
+  {id:'theatre', name:'Theatrical Design',     short:'Theatre',  teacher:'Taylor Nicole Finnell', room:'Theater', start:450, end:500, icon:'🎭', pal:'orchid'},
+  {id:'algeo',   name:'Algebra & Geometry II', short:'Alg/Geo',  teacher:'Michael Vedder',        room:'231',     start:505, end:555, icon:'📐', pal:'ocean'},
+  {id:'bio',     name:'Biology 8',             short:'Biology',  teacher:'TBA',                   room:'126',     start:560, end:610, icon:'🧬', pal:'jade'},
+  {id:'physics', name:'Physics 8',             short:'Physics',  teacher:'Curtis Canaday',        room:'122',     start:615, end:665, icon:'⚛️', pal:'ember'},
+  {id:'history', name:'History 8',             short:'History',  teacher:'Addison Guevara',       room:'213',     start:670, end:720, icon:'🏛️', pal:'gold'},
+  {id:'english', name:'English 8',             short:'English',  teacher:'Cassandra Collins',     room:'221',     start:725, end:775, icon:'📖', pal:'rose'},
+  {id:'lunch',   name:'Lunch',                 short:'Lunch',    teacher:'',                      room:'MPR2',    start:780, end:830, icon:'🥪', pal:'slate', break:true},
+  {id:'latin',   name:'Latin I',               short:'Latin',    teacher:'Felicia Jo Gass',       room:'127',     start:835, end:885, icon:'🏺', pal:'violet'}
 ];
+
+/* Every option is a mid-tone → deep pair, so white text over the darkened
+   bottom scrim stays readable no matter which one she picks. Bold is fine;
+   unreadable is not. */
+const SUBJECT_PALETTE = [
+  {id:'ocean',  nm:'Ocean',  g1:'#5aa6ec', g2:'#2456a0'},
+  {id:'jade',   nm:'Jade',   g1:'#45cfa0', g2:'#12876a'},
+  {id:'teal',   nm:'Teal',   g1:'#4fd2d2', g2:'#128086'},
+  {id:'lime',   nm:'Lime',   g1:'#a8d45c', g2:'#5f8a1e'},
+  {id:'gold',   nm:'Gold',   g1:'#e8bd50', g2:'#a5701c'},
+  {id:'ember',  nm:'Ember',  g1:'#f09551', g2:'#c04f1e'},
+  {id:'coral',  nm:'Coral',  g1:'#f5836f', g2:'#c03a34'},
+  {id:'rose',   nm:'Rose',   g1:'#ef7fa8', g2:'#ad3a70'},
+  {id:'plum',   nm:'Plum',   g1:'#d183b0', g2:'#8a3a6b'},
+  {id:'orchid', nm:'Orchid', g1:'#c07de8', g2:'#7434a8'},
+  {id:'violet', nm:'Violet', g1:'#a89cf2', g2:'#5b51b8'},
+  {id:'slate',  nm:'Slate',  g1:'#8fa8bc', g2:'#465c72'}
+];
+const PAL_BY_ID = Object.fromEntries(SUBJECT_PALETTE.map(p=>[p.id,p]));
+
+/* Her per-subject colour choice wins over the default. */
+function palOf(cls){
+  const chosen = (prefs().subjectColors||{})[cls.id];
+  return PAL_BY_ID[chosen] || PAL_BY_ID[cls.pal] || SUBJECT_PALETTE[0];
+}
+const classColor = cls => palOf(cls).g1;
+
 /* Paint a subject's colour + texture onto any element. */
 function paint(node, cls){
   if(!cls) return node;
+  const p = palOf(cls);
   node.classList.add('subj','pat-'+cls.id);
-  node.style.setProperty('--c1', cls.g1);
-  node.style.setProperty('--c2', cls.g2);
-  node.style.setProperty('--pc', cls.color);
+  node.style.setProperty('--c1', p.g1);
+  node.style.setProperty('--c2', p.g2);
+  node.style.setProperty('--pc', p.g1);
   return node;
 }
 const CLASS_BY_ID = Object.fromEntries(CLASSES.map(c=>[c.id,c]));
@@ -852,7 +884,7 @@ SCREENS.today = function(root){
     root.appendChild(divider('What to study'));
     plan.forEach(p=>{
       const c = CLASS_BY_ID[p.classId];
-      const d = el('div','plan'); d.style.setProperty('--pc',c.color);
+      const d = el('div','plan'); d.style.setProperty('--pc',classColor(c));
       const hd = el('div','hd');
       hd.appendChild(el('span','nm',`${c.icon} ${c.name}`));
       hd.appendChild(el('span','mins',`${p.minutes} min`));
@@ -1456,7 +1488,7 @@ SCREENS.tutor = function(root){
     root.appendChild(divider('If you have 30 minutes today'));
     plan.forEach(p=>{
       const c = CLASS_BY_ID[p.classId];
-      const d = el('div','plan'); d.style.setProperty('--pc',c.color);
+      const d = el('div','plan'); d.style.setProperty('--pc',classColor(c));
       const hd = el('div','hd');
       hd.appendChild(el('span','nm',`${c.icon} ${c.name}`));
       hd.appendChild(el('span','mins',`${p.minutes} min`));
