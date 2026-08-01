@@ -940,29 +940,7 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
-  /* Level bar + at-a-glance numbers */
-  const lvl = el('div','card');
-  const lr = el('div','row');
-  lr.appendChild(el('span','k',`Level ${s.level}`));
-  lr.appendChild(el('span','v',`${s.toNext} XP to go`));
-  lvl.appendChild(lr);
-  const bar = el('div','bar'), fi = el('i');
-  fi.style.width = (s.intoLevel/500*100)+'%'; bar.appendChild(fi); lvl.appendChild(bar);
-  const glance = el('div','glance');
-  const wkMin = minutesInRange(AZ.weekStart(date), date);
-  const gz = all('miss').length;
-  [['🔥', s.streak, s.streak===1?'day streak':'day streak'],
-   ['⏱️', wkMin, 'min this week'],
-   ['🌱', gz, gz===1?'to revisit':'to revisit']
-  ].forEach(([ic,val,lab])=>{
-    const b = el('div','gl');
-    b.appendChild(el('div','gi',ic));
-    b.appendChild(el('div','gv',String(val)));
-    b.appendChild(el('div','gk',lab));
-    glance.appendChild(b);
-  });
-  lvl.appendChild(glance);
-  root.appendChild(lvl);
+  /* Level, streak and XP live on Stars — Today is the school day, not a dashboard. */
 
   /* Upcoming assessments */
   const up = upcomingAssessments(date, 21);
