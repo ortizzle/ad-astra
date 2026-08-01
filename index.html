@@ -1706,90 +1706,22 @@ SCREENS.setup = function(root){
   sub.appendChild(reset);
   root.appendChild(sub);
 
-  root.appendChild(divider('AI features'));
-  const ac = el('div','card');
-  ac.appendChild(el('p',null,'An Anthropic API key powers the tutor and turns notes into study units. Everything else works without one.'));
-  const key = el('input'); key.type='password'; key.placeholder='sk-ant-…';
-  key.value = Store.get('anthropic_key','');
-  ac.appendChild(el('label',null,'Anthropic API key')); ac.appendChild(key);
-  ac.appendChild(el('div','hintline','Stored in this browser only. Never in the page source, never synced.'));
-  const sk = el('button','btn btn-secondary','Save key');
-  sk.addEventListener('click',()=>{ Store.set('anthropic_key', key.value.trim()); toast('Saved'); });
-  ac.appendChild(sk); root.appendChild(ac);
-
-  root.appendChild(divider('Sync & backup'));
-  const sc = el('div','card');
-  sc.appendChild(el('p',null,'A private GitHub Gist keeps progress and study material the same on every device.'));
-  const gid = el('input'); gid.type='text'; gid.placeholder='Gist ID'; gid.value=Store.get('gist_id','');
-  const gtk = el('input'); gtk.type='password'; gtk.placeholder='GitHub token (gist scope)'; gtk.value=Store.get('gist_token','');
-  sc.appendChild(el('label',null,'Gist ID')); sc.appendChild(gid);
-  sc.appendChild(el('label',null,'GitHub token')); sc.appendChild(gtk);
-  const sv = el('button','btn btn-secondary','Save sync settings');
-  sv.addEventListener('click',()=>{ Store.set('gist_id',gid.value.trim()); Store.set('gist_token',gtk.value.trim());
-    toast('Saved'); render(); });
-  sc.appendChild(sv);
-  if(Sync.configured()){
-    const last = Store.get('last_sync',0);
-    sc.appendChild(el('div','hintline', last?`Last sync ${new Date(last).toLocaleString()}`:'Not synced yet.'));
-    const row = el('div','btn-row');
-    const up = el('button','btn btn-primary','↑ Push');
-    up.addEventListener('click',async()=>{ up.textContent='Syncing…';
-      try{ await Sync.save(); toast('Synced'); }catch(e){ toast('Sync failed'); } render(); });
-    const dn = el('button','btn btn-secondary','↓ Pull');
-    dn.addEventListener('click',async()=>{ dn.textContent='Loading…';
-      try{ await Sync.load(); toast('Up to date'); }catch(e){ toast('Pull failed'); } render(); });
-    row.appendChild(up); row.appendChild(dn); sc.appendChild(row);
-  }
-  /* Backup to Drive. A web page cannot write to Drive without a Google OAuth
-     client and a backend, which this app deliberately does not have — so we hand
-     the file to Android's share sheet instead, where "Save to Drive" is one tap
-     and she can pick the Ad Astra Backups folder. Desktop falls back to a normal
-     download. */
-  const brow = el('div','btn-row');
-  const ex = el('button','btn btn-ghost','⬇ Back up');
-  ex.addEventListener('click', async ()=>{
-    const name = `ad-astra-${AZ.today()}.json`;
-    const json = JSON.stringify(DATA,null,2);
-    const file = new File([json], name, {type:'application/json'});
-    if(navigator.canShare && navigator.canShare({files:[file]})){
-      try{
-        await navigator.share({files:[file], title:'Ad Astra backup',
-          text:'Save this to the Ad Astra Backups folder in Drive.'});
-        Store.set('last_backup',Date.now()); toast('Sent to share sheet'); render(); return;
-      }catch(err){ if(err && err.name==='AbortError') return; }
-    }
-    const blob = new Blob([json],{type:'application/json'});
-    const a = el('a'); a.href=URL.createObjectURL(blob); a.download=name;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-    Store.set('last_backup',Date.now()); toast('Downloaded'); render();
+  root.appendChild(divider('Focus timer'));
+  const foc = el('div','card');
+  foc.appendChild(el('p',null,'How long a focus block runs by default.'));
+  const frow = el('div','btn-row');
+  [15,25,50].forEach(m=>{
+    const b = el('button','btn '+(p.pomodoro===m?'btn-primary':'btn-secondary'), m+' min');
+    b.addEventListener('click',()=>{ setPref('pomodoro',m); render(); });
+    frow.appendChild(b);
   });
-  const file = el('input'); file.type='file'; file.accept='.json'; file.className='sr';
-  file.addEventListener('change',e=>{
-    const f = e.target.files[0]; if(!f) return;
-    const rd = new FileReader();
-    rd.onload = ()=>{ try{ DATA = Sync.merge(DATA, migrate(JSON.parse(rd.result))); saveLocal();
-      applyTheme(); toast('Imported and merged'); render(); }catch(err){ toast('That file could not be read'); } };
-    rd.readAsText(f);
-  });
-  const im = el('button','btn btn-ghost','⬆ Import');
-  im.addEventListener('click',()=>file.click());
-  brow.appendChild(ex); brow.appendChild(im);
-  sc.appendChild(brow); sc.appendChild(file);
-  const lb = Store.get('last_backup',0);
-  sc.appendChild(el('div','hintline', (lb?`Last backup ${new Date(lb).toLocaleDateString()}. `:'No backup yet. ')
-    + 'On her phone, "Back up" opens the share sheet — choose Drive, then the Ad Astra Backups folder.'));
-  const dl = el('a','hintline','Open the Ad Astra Backups folder in Drive →');
-  dl.href = 'https://drive.google.com/drive/folders/1mOLDFsQy__vR6m5R1D8SFUzIBCNqG7cI';
-  dl.target = '_blank'; dl.rel = 'noopener';
-  dl.style.color = 'var(--ac)'; dl.style.display = 'inline-block'; dl.style.marginTop = '8px';
-  sc.appendChild(dl);
-  root.appendChild(sc);
+  foc.appendChild(frow); root.appendChild(foc);
 
-  /* Parent view — deliberately understated so it does not read as surveillance. */
+  /* Everything technical — keys, sync, backups — lives behind the passcode with
+     the rest of the grown-up tools. */
   root.appendChild(divider('Grown-ups'));
   const gc = el('div','card quiet');
-  gc.appendChild(el('p',null,'A summary of study effort and results, for a parent or tutor.'));
+  gc.appendChild(el('p',null,'Progress summary, tests and goals, sync and backups. For a parent or tutor.'));
   const gb = el('button','btn btn-ghost','Open');
   gb.addEventListener('click',openParentGate); gc.appendChild(gb);
   root.appendChild(gc);
