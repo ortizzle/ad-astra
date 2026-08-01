@@ -155,13 +155,23 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   repeating-linear-gradient(90deg,var(--pl) 0 1px,transparent 1px 11px),
   var(--fill); background-size:auto,cover}
 .pat-lunch{background-image:var(--fill);background-size:cover}
-/* compact schedule rows: subject colour as an edge, texture only when it is "now" */
-.period.subj{background-image:none;background:var(--surface);color:var(--text);
-  border:1px solid var(--line-soft);border-left:3px solid var(--pc)}
-.period.subj::after{display:none}
+/* Schedule rows: a colour wash bleeding in from the left plus a painted icon
+   chip. Enough character to read as "this is Physics" without eight saturated
+   bars fighting each other. The current period still gets the full fill. */
+.period.tinted{background-image:none;color:var(--text);
+  background:linear-gradient(90deg,
+    color-mix(in srgb, var(--c1) 30%, var(--surface)) 0%,
+    color-mix(in srgb, var(--c1) 10%, var(--surface)) 38%,
+    var(--surface) 78%);
+  border:1px solid var(--line-soft);border-left:3px solid var(--c1)}
+.pchip{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.22)}
+/* the emoji is this element's own text, so the scrim would paint over it */
+.pchip::after{display:none}
 .period.subj.now{background-image:var(--fill);border-color:transparent;color:#fff}
 .period.subj.now::after{display:block}
-.period.subj.now .dt{color:rgba(255,255,255,.85)}
+.period.subj.now .dt,.period.subj.now .tm{color:rgba(255,255,255,.88)}
+.period.subj.now .pchip{background:rgba(255,255,255,.2);box-shadow:none}
 
 .bar{height:8px;background:var(--deep);border:1px solid var(--line-soft);border-radius:999px;overflow:hidden}
 .bar > i{display:block;height:100%;background:var(--ac);border-radius:999px;transition:width .55s cubic-bezier(.2,.8,.2,1)}
@@ -413,6 +423,16 @@ function palOf(cls){
 }
 const classColor = cls => palOf(cls).g1;
 
+/* Just the colour variables, without the texture — for elements that want a
+   wash rather than a full painted fill. */
+function tint(node, cls){
+  if(!cls) return node;
+  const p = palOf(cls);
+  node.style.setProperty('--c1', p.g1);
+  node.style.setProperty('--c2', p.g2);
+  return node;
+}
+
 /* Paint a subject's colour + texture onto any element. */
 function paint(node, cls){
   if(!cls) return node;
@@ -560,6 +580,61 @@ function tutorContext(date){
       label:`${CLASS_BY_ID[nx.classId]?CLASS_BY_ID[nx.classId].short:''} ${(KINDS[nx.kind]||KINDS.test).nm.toLowerCase()}`.trim()} : null
   };
 }
+/* An immediate answer with no API key. Not pretending to be the model — it
+   reads her actual numbers and points at the technique that fits what she
+   described. The AI replaces this the moment a key exists. */
+function localAnswer(q, date){
+  const c = tutorContext(date), s = stats(), low = q.toLowerCase();
+  const named = STUDY_CLASSES.find(x =>
+    low.includes(x.short.toLowerCase()) || low.includes(x.name.toLowerCase().split(' ')[0]));
+  const bits = [];
+
+  if(named){
+    const st = classStats(named.id);
+    const gz = all('miss').filter(m=>m.classId===named.id).length;
+    bits.push(st.accuracy===null
+      ? `You have not quizzed ${named.name} yet, so there is no accuracy to go on — that is the first thing to fix.`
+      : `${named.name} is sitting at ${st.accuracy}% across ${st.answered} questions${gz?`, with ${gz} in your Growth Zone`:''}.`);
+  }
+
+  let tip;
+  if(/forget|blank|memor|remember|vocab|recall/.test(low)){
+    tip = HABITS.find(h=>h.id==='retrieval');
+    bits.push('Blanking under pressure is usually a retrieval problem, not a knowing problem. Re-reading notes feels productive and mostly is not — quizzing yourself is what builds the path you need in the moment.');
+  } else if(/time|schedule|split|plan|when|how long|organi/.test(low)){
+    const plan = studyPlan(date);
+    tip = HABITS.find(h=>h.id==='spacing');
+    bits.push(plan.length
+      ? `Right now the app would put your time into ${plan.slice(0,2).map(p=>`${CLASS_BY_ID[p.classId].short} (${p.minutes} min)`).join(' and ')}.`
+      : 'Nothing is urgent yet, so short and regular beats long and rare.');
+  } else if(/focus|distract|procrastin|concentrat|start|motivat/.test(low)){
+    tip = HABITS.find(h=>h.id==='focus');
+    bits.push('Starting is usually the hard part, not continuing. Set the timer to 15 rather than 25 — a block you will actually begin beats a longer one you keep putting off.');
+  } else if(/test|quiz|exam|nervous|anxious|scared|stress/.test(low)){
+    tip = HABITS.find(h=>h.id==='writeq');
+    const pairs = calibrationPairs();
+    if(pairs.length>=3){
+      const mean = Math.round(pairs.reduce((a,p)=>a+(p.actual-p.predicted),0)/pairs.length);
+      if(mean > 10) bits.push('Worth knowing: you have been scoring higher than you predict beforehand. Your nerves are not a good read on how prepared you are.');
+      else if(mean < -10) bits.push('Worth knowing: you have been scoring lower than you predict beforehand — reviewing is feeling like knowing. Quiz yourself instead of re-reading.');
+    }
+  } else if(/understand|confus|hard|stuck|lost|difficult|make sense/.test(low)){
+    tip = HABITS.find(h=>h.id==='explain');
+    bits.push('Try saying it out loud as if you were teaching it. The exact sentence where you stall is the thing you actually need to look up — that is much faster than re-reading the whole chapter.');
+  } else {
+    tip = relevantHabits(date,1)[0].h;
+    if(c.growth) bits.push(`You have ${c.growth} question${c.growth>1?'':''} waiting in your Growth Zone — that is the highest-value place to spend ten minutes.`);
+  }
+
+  if(c.nextAssess && c.nextAssess.days<=7)
+    bits.push(`Your ${c.nextAssess.label} is ${c.nextAssess.days===0?'today':c.nextAssess.days===1?'tomorrow':`${c.nextAssess.days} days away`}.`);
+  if(!bits.length && s.answered)
+    bits.push(`You are at ${s.accuracy}% overall across ${s.answered} questions.`);
+
+  bits.push(`${tip.t} — ${tip.d}`);
+  return bits.join('\n\n');
+}
+
 function relevantHabits(date, limit=2){
   const c = tutorContext(date);
   const hits = [];
@@ -979,8 +1054,10 @@ SCREENS.today = function(root){
   const now = AZ.nowMinutes();
   CLASSES.forEach(c=>{
     const live = schoolDay && now>=c.start && now<c.end;
-    const p = paint(el('div','period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'')), c);
-    p.appendChild(el('span','ic',c.icon));
+    const cls0 = 'period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'');
+    /* Live period gets the full painted fill; the rest get a colour wash. */
+    const p = live ? paint(el('div',cls0), c) : tint(el('div',cls0+' tinted'), c);
+    p.appendChild(paint(el('div','pchip',c.icon), c));
     const m = el('div','meta');
     m.appendChild(el('div','nm',c.name));
     m.appendChild(el('div','dt', c.break?`Room ${c.room}`:`Room ${c.room}${c.teacher&&c.teacher!=='TBA'?' · '+c.teacher:''}`));
@@ -1604,43 +1681,46 @@ SCREENS.tutor = function(root){
      so it reaches a person — that is arguably the more important half. */
   const ask = el('div','card ac');
   ask.appendChild(el('h2',null,'What are you stuck on?'));
-  ask.appendChild(el('p',null, hasKey
-    ? 'Ask anything about a subject or about how to study. Answers use your real accuracy, streak and upcoming tests.'
-    : 'Write down what is giving you trouble. It gets saved so whoever helps you can pick it up — no AI needed.'));
+  ask.appendChild(el('p',null,'Ask about a subject or about how to study. You get an answer straight away, and the question is saved so a person can pick it up too.'));
   const ta = el('textarea');
   ta.placeholder = 'e.g. "I keep blanking on Latin vocab in tests" or "how should I split this week?"';
   ta.style.minHeight = '92px';
   ask.appendChild(ta);
   const out = el('div');
-  const b = el('button','btn btn-primary', hasKey ? 'Ask' : 'Save this');
+  const b = el('button','btn btn-primary','Ask');
   b.addEventListener('click', async ()=>{
     const q = ta.value.trim();
     if(q.length < 5){ toast('Write a bit more first'); return; }
-    b.disabled = true; out.textContent = '';
-    if(!hasKey){
-      put({id:uid('ask'), type:'ask', q, answered:false, date, at:Date.now()});
-      syncSoon(); ta.value=''; b.disabled=false;
-      toast('Saved'); render(); return;
+    b.disabled = true; b.textContent = hasKey ? 'Thinking…' : 'Working…'; out.textContent = '';
+
+    /* Always answer. Claude when a key is set, the app's own reading of her
+       numbers when not — and the question is recorded either way. */
+    let answer, source = 'app', note = null;
+    if(hasKey){
+      try{ answer = await askTutor(q); source = 'ai'; }
+      catch(e){
+        answer = localAnswer(q, date);
+        note = e.message==='BAD_KEY'
+          ? 'That API key was rejected, so this is the app answering.'
+          : 'Could not reach Claude just now, so this is the app answering.';
+      }
+    } else {
+      answer = localAnswer(q, date);
     }
-    b.textContent = 'Thinking…';
-    try{
-      const answer = await askTutor(q);
-      put({id:uid('ask'), type:'ask', q, a:answer, answered:true, date, at:Date.now()});
-      syncSoon();
-      const card = el('div','card');
-      answer.split('\n\n').forEach(par=>{ if(par.trim()) card.appendChild(el('p',null,par.trim())); });
-      out.appendChild(card);
-      ta.value = '';
-    }catch(e){
-      put({id:uid('ask'), type:'ask', q, answered:false, date, at:Date.now()});
-      showModal({title:'Could not reach the tutor',
-        message:(e.message==='BAD_KEY' ? 'That API key was rejected. '
-               : e.message==='NO_KEY' ? '' : e.message+' ')
-               + 'Your question was saved either way.'});
-    }
+    put({id:uid('ask'), type:'ask', q, a:answer, source, answered:true, date, at:Date.now()});
+    syncSoon();
+
+    const card = el('div','card');
+    if(note) card.appendChild(el('div','whyline', note));
+    answer.split('\n\n').forEach(par=>{ if(par.trim()) card.appendChild(el('p',null,par.trim())); });
+    if(source==='app') card.appendChild(el('div','hintline','Saved — someone can follow this up with you.'));
+    out.appendChild(card);
+    ta.value = '';
     b.disabled = false; b.textContent = 'Ask';
   });
-  ask.appendChild(b); ask.appendChild(out);
+  ask.appendChild(b);
+  if(!hasKey) ask.appendChild(el('div','hintline','Answers get sharper once an Anthropic API key is added in the grown-up settings.'));
+  ask.appendChild(out);
   root.appendChild(ask);
 
   /* One or two techniques, chosen for the situation. */
@@ -2035,7 +2115,13 @@ SCREENS.parent = function(root){
       const d = el('div','miss');
       d.style.borderLeftColor = 'var(--ac)';
       d.appendChild(el('div','q', a.q));
-      d.appendChild(el('div','n', `${AZ.shortDate(a.date)} · ${a.answered?'answered in-app':'saved for a person'}`));
+      d.appendChild(el('div','n', `${AZ.shortDate(a.date)} · answered by ${a.source==='ai'?'Claude':'the app'}`));
+      if(a.a){
+        const show = el('button','btn btn-ghost btn-sm','Show what she was told');
+        show.style.marginTop='8px';
+        show.addEventListener('click',()=>showModal({title:'Answer', message:a.a}));
+        d.appendChild(show);
+      }
       qc.appendChild(d);
     });
     root.appendChild(qc);

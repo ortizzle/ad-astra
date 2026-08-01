@@ -270,10 +270,14 @@ app's colour anchor, and the bottom scrim already guarantees the label contrast.
 Ordered deliberately: **the ask box first**, then one or two techniques, then the
 plan, then past questions.
 
-- **The ask box works without an API key.** With a key Claude answers; without
-  one the question is still saved as an `ask` record so it reaches a person. That
-  half matters more than the AI half — it is how she flags being stuck.
-- Every question is stored and surfaced in the parent view verbatim.
+- **She always gets an answer immediately.** With a key, Claude answers. Without
+  one — or if the call fails — `localAnswer()` replies by reading her actual
+  numbers and matching the question against keyword groups (forgetting, time,
+  focus, tests, understanding), then names the technique that fits. It is not
+  pretending to be the model, and the UI says which answered.
+- **Every question is recorded either way**, with the answer and a `source` of
+  `ai` or `app`, and surfaced verbatim in the parent view. Flagging that she is
+  stuck is the point; the AI is an upgrade to the reply, not a precondition.
 - `HABITS` entries each carry a `when(ctx)` returning *why it is relevant right
   now* or `null`; `relevantHabits()` shows at most two. Never render the whole
   list — a wall of eight tips is wallpaper.
