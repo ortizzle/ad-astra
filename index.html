@@ -868,23 +868,6 @@ SCREENS.today = function(root){
   lvl.appendChild(glance);
   root.appendChild(lvl);
 
-  /* Study plan */
-  const plan = studyPlan(date);
-  if(plan.length){
-    root.appendChild(divider('What to study'));
-    plan.forEach(p=>{
-      const c = CLASS_BY_ID[p.classId];
-      const d = el('div','plan'); d.style.setProperty('--pc',classColor(c));
-      const hd = el('div','hd');
-      hd.appendChild(el('span','nm',`${c.icon} ${c.name}`));
-      hd.appendChild(el('span','mins',`${p.minutes} min`));
-      d.appendChild(hd);
-      d.appendChild(el('div','why', p.why));
-      d.addEventListener('click',()=>go('unit',{classId:p.classId}));
-      root.appendChild(d);
-    });
-  }
-
   /* Upcoming assessments */
   const up = upcomingAssessments(date, 21);
   if(up.length){
