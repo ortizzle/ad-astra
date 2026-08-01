@@ -225,6 +225,26 @@ never over-explaining, dry rather than bubbly. The Growth Zone is framed as
 information, not a verdict — that framing is load-bearing, don't soften it into
 praise.
 
+**Everything she sees is second person.** "Your school day", not "her school
+day"; "your subjects", not "Sedona's subjects". The app talks *to* her, not
+*about* her. Third person is correct in exactly two places: the parent view
+(Chris reading about her) and the model system prompts. This was explicit
+feedback — check any new copy against it.
+
+## Screen layout — who owns what
+
+| Tab | Holds |
+|---|---|
+| **Today** | The school day only: what class is now/next, the full schedule, upcoming tests, on the horizon, and an at-a-glance strip. No affirmation, no study plan. |
+| **Study** | The daily affirmation with its like/read buttons, "what to study today", subject tiles, the focus timer, the tutor, and unit generation. |
+| **Growth** | The Growth Zone. |
+| **Stars** | XP, streak, badges. Still thin — the agreed next thing to build. |
+| **Settings** | Hers: personalize, per-subject colours, focus-timer default, and the door to the grown-up area. |
+| **Parent** (passcoded) | Progress and effort, tests and scores, weekly goals — *plus* Gist sync, the Anthropic API key, and backup/restore. Technical setup deliberately lives here, not in her Settings. |
+
+Focus does **not** get its own tab; it is reached from Study. Today is
+deliberately kept focused on school rather than becoming a dashboard.
+
 ## Parent view
 
 Behind a passcode in You → Grown-ups. The passcode is a SHA-256 hash in
