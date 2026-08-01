@@ -2255,7 +2255,10 @@ SCREENS.generate = function(root){
 /* ---------- Boot ---------- */
 loadLocal();
 applyTheme();
-document.getElementById('avatar').addEventListener('click',()=>go('setup'));
+/* The brand is the way home — there are no back buttons anywhere. */
+const brandEl = document.getElementById('brand');
+brandEl.addEventListener('click',()=>go('today'));
+brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go('today'); } });
 render();
 if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
