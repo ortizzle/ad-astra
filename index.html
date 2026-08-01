@@ -1735,6 +1735,16 @@ SCREENS.setup = function(root){
   root.appendChild(divider('Personalize'));
   const pc = el('div','card');
 
+  pc.appendChild(el('label',null,'Appearance'));
+  const trow = el('div','btn-row');
+  [['auto','Auto'],['light','Light'],['dark','Dark']].forEach(([id,nm])=>{
+    const b = el('button','btn '+((p.theme||'auto')===id?'btn-primary':'btn-secondary'), nm);
+    b.addEventListener('click',()=>{ setPref('theme',id); render(); });
+    trow.appendChild(b);
+  });
+  pc.appendChild(trow);
+  pc.appendChild(el('div','hintline','Auto follows your phone.'));
+
   pc.appendChild(el('label',null,'Accent colour'));
   const sw = el('div','swatches');
   ACCENTS.forEach(a=>{
