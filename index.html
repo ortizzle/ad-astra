@@ -775,13 +775,14 @@ async function sha256(str){
 }
 
 /* ---------- Navigation ---------- */
-/* Five tabs; settings live behind the avatar in the header so Stars keeps a slot. */
+/* Focus lives inside Study rather than owning a tab, which leaves room for
+   Settings to stay visible. */
 const NAV = [
   {id:'today', ic:'🌅',nm:'Today'},
   {id:'study', ic:'📚',nm:'Study'},
-  {id:'focus', ic:'🍅',nm:'Focus'},
   {id:'growth',ic:'🌱',nm:'Growth'},
-  {id:'stars', ic:'✦', nm:'Stars'}
+  {id:'stars', ic:'✦', nm:'Stars'},
+  {id:'setup', ic:'⚙️',nm:'Settings'}
 ];
 let view='today', ctx={};
 function go(v,c={}){ view=v; ctx=c; render(); window.scrollTo(0,0); }
