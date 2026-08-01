@@ -1646,8 +1646,8 @@ SCREENS.tutor = function(root){
   root.appendChild(divider(tips.length>1 ? 'Worth trying now' : 'Worth trying'));
   tips.forEach(({h,why})=>{
     const c = el('div','card');
-    c.appendChild(el('div','eyebrow', why));
     c.appendChild(el('h3',null,h.t));
+    c.appendChild(el('div','whyline', why));
     c.appendChild(el('p',null,h.d));
     root.appendChild(c);
   });
