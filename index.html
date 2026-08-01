@@ -1616,11 +1616,65 @@ SCREENS.growth = function(root){
 /* ================= TUTOR ================= */
 SCREENS.tutor = function(root){
   const date = AZ.today();
-  root.appendChild(headline('Tutor','Advice built on what you have actually been doing — plus a few techniques that reliably work.'));
+  const hasKey = !!Store.get('anthropic_key','');
+
+  /* Asking comes first. Without a key this still records what she is stuck on
+     so it reaches a person — that is arguably the more important half. */
+  const ask = el('div','card ac');
+  ask.appendChild(el('h2',null,'What are you stuck on?'));
+  ask.appendChild(el('p',null, hasKey
+    ? 'Ask anything about a subject or about how to study. Answers use your real accuracy, streak and upcoming tests.'
+    : 'Write down what is giving you trouble. It gets saved so whoever helps you can pick it up — no AI needed.'));
+  const ta = el('textarea');
+  ta.placeholder = 'e.g. "I keep blanking on Latin vocab in tests" or "how should I split this week?"';
+  ta.style.minHeight = '92px';
+  ask.appendChild(ta);
+  const out = el('div');
+  const b = el('button','btn btn-primary', hasKey ? 'Ask' : 'Save this');
+  b.addEventListener('click', async ()=>{
+    const q = ta.value.trim();
+    if(q.length < 5){ toast('Write a bit more first'); return; }
+    b.disabled = true; out.textContent = '';
+    if(!hasKey){
+      put({id:uid('ask'), type:'ask', q, answered:false, date, at:Date.now()});
+      syncSoon(); ta.value=''; b.disabled=false;
+      toast('Saved'); render(); return;
+    }
+    b.textContent = 'Thinking…';
+    try{
+      const answer = await askTutor(q);
+      put({id:uid('ask'), type:'ask', q, a:answer, answered:true, date, at:Date.now()});
+      syncSoon();
+      const card = el('div','card');
+      answer.split('\n\n').forEach(par=>{ if(par.trim()) card.appendChild(el('p',null,par.trim())); });
+      out.appendChild(card);
+      ta.value = '';
+    }catch(e){
+      put({id:uid('ask'), type:'ask', q, answered:false, date, at:Date.now()});
+      showModal({title:'Could not reach the tutor',
+        message:(e.message==='BAD_KEY' ? 'That API key was rejected. '
+               : e.message==='NO_KEY' ? '' : e.message+' ')
+               + 'Your question was saved either way.'});
+    }
+    b.disabled = false; b.textContent = 'Ask';
+  });
+  ask.appendChild(b); ask.appendChild(out);
+  root.appendChild(ask);
+
+  /* One or two techniques, chosen for the situation. */
+  const tips = relevantHabits(date);
+  root.appendChild(divider(tips.length>1 ? 'Worth trying now' : 'Worth trying'));
+  tips.forEach(({h,why})=>{
+    const c = el('div','card');
+    c.appendChild(el('div','eyebrow', why));
+    c.appendChild(el('h3',null,h.t));
+    c.appendChild(el('p',null,h.d));
+    root.appendChild(c);
+  });
 
   const plan = studyPlan(date);
   if(plan.length){
-    root.appendChild(divider('If you have 30 minutes today'));
+    root.appendChild(divider('Where the time is best spent'));
     plan.forEach(p=>{
       const c = CLASS_BY_ID[p.classId];
       const d = el('div','plan'); d.style.setProperty('--pc',classColor(c));
@@ -1632,51 +1686,24 @@ SCREENS.tutor = function(root){
       d.addEventListener('click',()=>go('unit',{classId:p.classId}));
       root.appendChild(d);
     });
-  } else {
-    const c = el('div','card');
-    c.appendChild(el('p',null,'Nothing urgent right now. Once class material and test dates are in, this fills up with specific recommendations.'));
-    root.appendChild(c);
   }
 
-  /* AI advice — optional, grounded in her real numbers */
-  root.appendChild(divider('Ask the tutor'));
-  const ask = el('div','card');
-  if(!Store.get('anthropic_key','')){
-    ask.appendChild(el('p',null,'Add an Anthropic API key in the You tab and the tutor can answer questions about how to study, using your actual accuracy, streak, and upcoming tests as context.'));
-  } else {
-    ask.appendChild(el('label',null,'What do you want help with?'));
-    const ta = el('textarea');
-    ta.placeholder = 'e.g. "I keep blanking on Latin vocab during tests" or "how should I split my time this week?"';
-    ta.style.minHeight = '96px';
-    ask.appendChild(ta);
-    const out = el('div');
-    const b = el('button','btn btn-primary','Ask');
-    b.addEventListener('click', async ()=>{
-      if(ta.value.trim().length < 5){ toast('Ask something first'); return; }
-      b.disabled = true; b.textContent = 'Thinking…'; out.textContent = '';
-      try{
-        const answer = await askTutor(ta.value.trim());
-        const card = el('div','card ac');
-        answer.split('\n\n').forEach(par=>{ if(par.trim()) card.appendChild(el('p',null,par.trim())); });
-        out.appendChild(card);
-      }catch(e){
-        showModal({title:'Could not reach the tutor',
-          message: e.message==='NO_KEY' ? 'Add an API key in the You tab first.'
-                 : e.message==='BAD_KEY' ? 'That API key was rejected.' : e.message});
+  const asked = all('ask').sort((a,b)=>b.at-a.at);
+  if(asked.length){
+    root.appendChild(divider('You asked before'));
+    asked.slice(0,4).forEach(a=>{
+      const c = el('div','card');
+      c.appendChild(el('div','eyebrow', AZ.shortDate(a.date)));
+      c.appendChild(el('p','lede', a.q));
+      if(a.a){
+        const more = el('button','btn btn-ghost btn-sm','Show the answer');
+        more.style.marginTop='10px';
+        more.addEventListener('click',()=>showModal({title:'Tutor', message:a.a}));
+        c.appendChild(more);
       }
-      b.disabled = false; b.textContent = 'Ask';
+      root.appendChild(c);
     });
-    ask.appendChild(b); ask.appendChild(out);
   }
-  root.appendChild(ask);
-
-  root.appendChild(divider('Techniques that work'));
-  HABITS.forEach(h=>{
-    const c = el('div','card');
-    c.appendChild(el('h3',null,`${h.ic}  ${h.t}`));
-    c.appendChild(el('p',null,h.d));
-    root.appendChild(c);
-  });
 };
 
 async function askTutor(question){
