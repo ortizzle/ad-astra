@@ -1,55 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <radialGradient id="sky" cx="50%" cy="14%" r="100%">
-      <stop offset="0%"   stop-color="#0f5c56"/>
-      <stop offset="45%"  stop-color="#0a2f33"/>
+    <radialGradient id="sky" cx="52%" cy="16%" r="98%">
+      <stop offset="0%"   stop-color="#12645c"/>
+      <stop offset="45%"  stop-color="#0a3036"/>
       <stop offset="100%" stop-color="#04141a"/>
     </radialGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#6fe3cd" stop-opacity=".5"/>
+    <!-- both blooms fade to nothing, so no hard ellipse edge shows -->
+    <radialGradient id="bloomA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#6fe3cd" stop-opacity=".42"/>
       <stop offset="100%" stop-color="#6fe3cd" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="aqua" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#a8f5e4"/>
-      <stop offset="50%"  stop-color="#6fe3cd"/>
-      <stop offset="100%" stop-color="#34a898"/>
+    <radialGradient id="bloomB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#2f9d92" stop-opacity=".30"/>
+      <stop offset="100%" stop-color="#2f9d92" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="aqua" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%"   stop-color="#b6f7e8"/>
+      <stop offset="48%"  stop-color="#6fe3cd"/>
+      <stop offset="100%" stop-color="#2f9d92"/>
     </linearGradient>
   </defs>
 
   <rect width="512" height="512" rx="112" fill="url(#sky)"/>
 
-  <!-- aurora bloom -->
-  <ellipse cx="320" cy="140" rx="190" ry="150" fill="url(#glow)"/>
-  <ellipse cx="150" cy="370" rx="150" ry="125" fill="#34a898" opacity=".14"/>
+  <!-- soft aurora, no visible edges -->
+  <ellipse cx="322" cy="150" rx="215" ry="180" fill="url(#bloomA)"/>
+  <ellipse cx="150" cy="392" rx="200" ry="170" fill="url(#bloomB)"/>
 
   <!-- background stars -->
   <g fill="#eafaf6">
-    <circle cx="96"  cy="112" r="3"   opacity=".7"/>
-    <circle cx="410" cy="96"  r="2.5" opacity=".55"/>
-    <circle cx="146" cy="396" r="2.5" opacity=".5"/>
-    <circle cx="432" cy="352" r="3"   opacity=".45"/>
-    <circle cx="318" cy="436" r="2"   opacity=".5"/>
-    <circle cx="72"  cy="250" r="2"   opacity=".42"/>
-    <circle cx="456" cy="214" r="2"   opacity=".42"/>
-    <circle cx="214" cy="82"  r="2"   opacity=".38"/>
+    <circle cx="104" cy="120" r="2.8" opacity=".62"/>
+    <circle cx="402" cy="104" r="2.4" opacity=".5"/>
+    <circle cx="440" cy="330" r="2.6" opacity=".44"/>
+    <circle cx="120" cy="300" r="2.2" opacity=".4"/>
+    <circle cx="300" cy="432" r="2.2" opacity=".46"/>
+    <circle cx="196" cy="86"  r="2"   opacity=".36"/>
+    <circle cx="418" cy="212" r="2"   opacity=".38"/>
   </g>
 
-  <!-- constellation: the "ad astra" line rising to the lead star -->
-  <g stroke="url(#aqua)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".6">
-    <path d="M150 372 L214 268 L300 300"/>
-    <path d="M214 268 L268 196"/>
+  <!-- constellation climbing toward the lead star: "ad astra" -->
+  <g stroke="url(#aqua)" stroke-width="4" stroke-linecap="round" fill="none" opacity=".62">
+    <path d="M148 366 L212 292 L292 316"/>
+    <path d="M212 292 L246 214"/>
   </g>
   <g fill="url(#aqua)">
-    <circle cx="150" cy="372" r="8"/>
-    <circle cx="214" cy="268" r="11"/>
-    <circle cx="300" cy="300" r="8"/>
-    <circle cx="268" cy="196" r="6.5"/>
+    <circle cx="148" cy="366" r="8"/>
+    <circle cx="212" cy="292" r="11"/>
+    <circle cx="292" cy="316" r="8"/>
+    <circle cx="246" cy="214" r="6"/>
   </g>
 
-  <!-- lead star -->
-  <path fill="url(#aqua)" d="M330 150
-    C338 208 368 238 426 246
-    C368 254 338 284 330 342
-    C322 284 292 254 234 246
-    C292 238 322 208 330 150 Z"/>
+  <!-- lead star, kept inside the maskable safe zone -->
+  <path fill="url(#aqua)" d="M312 158
+    C319 210 345 236 397 243
+    C345 250 319 276 312 328
+    C305 276 279 250 227 243
+    C279 236 305 210 312 158 Z"/>
 </svg>
