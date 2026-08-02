@@ -307,6 +307,56 @@ out**, so a draft is invisible everywhere on the student side. A unit with no
   review screen. Generating from her side shows a plain explanation of why it is
   held — the framing is "catching what the model got wrong", never "checking on you".
 
+### The source contract — what a unit owes the family
+
+Every unit built from class material follows one framework, encoded in
+`UNIT_SCHEMA` and the system prompt, not left to the model's discretion.
+
+**The original is never altered.** Nothing is written back to Drive — the app has
+no write path there and should not gain one. A unit is written *alongside* the
+source and cites it by name (`u.srcName`, entered on the generate screen and
+rendered by `citeLine()`). With no name it says the name is unknown rather than
+inventing one.
+
+**Every block declares its origin.** `from:'source'` means the substance is the
+teacher's; `from:'added'` means it is our framing, advice or pacing. This is not
+a tone convention — it is a schema field, rendered as a badge by `provTag()`:
+
+| | `source` | `added` |
+|---|---|---|
+| Label | From class material | Study suggestion |
+| Covers | facts, definitions, formulas, stated objectives, cards and questions traceable to the material | why-it-matters, study advice, time estimates, memory hooks, inferred objectives |
+
+**Unmarked defaults to `added`, and this direction matters.** `generateUnit()`
+coerces any missing or unrecognised flag to `'added'`. Defaulting the other way
+would let a dropped field quietly borrow the school's authority, which is the
+one failure the whole scheme exists to prevent. The prompt says the same thing:
+*if you are unsure which a block is, it is "added"*.
+
+**The blocks**, all required by the schema so a partial unit fails loudly rather
+than silently shipping half a briefing:
+
+- `summary` — what the material covers, in her language, naming the source. This
+  block stands in for the teacher, so the prompt forbids editorialising in it.
+- `why` — why it is worth knowing. Effectively always `added`.
+- `objectives[]` — 3–5 "after this you should be able to…", each flagged
+  individually: `source` when the material states it, `added` when inferred.
+- `parentNote` — one paragraph for a parent who was not in the room, including
+  the thing most likely to trip her up. Shown in the review queue and reachable
+  later from the parent portal.
+- `nextUp` — one line to her plus `minutes`, an honest estimate. The prompt
+  explicitly forbids rounding to a comfortable number.
+
+`SCREENS.brief` renders this for her; `SCREENS.reviewunit` renders the same plus
+the parent note, with a legend explaining what green means. Units created before
+this shipped have none of these fields and degrade to just the cards and quiz —
+every render site guards, and no migration backfills them, because marking old
+content `source` would be a lie.
+
+**Badge fills are opaque on purpose.** A badge lands on plain cards, accent-washed
+cards and review rows; a translucent tint dropped the 10px label under 4.5:1 on
+the lighter ones. Measured across all accents in both themes: worst case 4.54:1.
+
 ### Photo capture
 
 `shotPicker()` gives two inputs: one with `capture="environment"` (straight to

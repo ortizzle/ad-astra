@@ -279,6 +279,22 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   flex-shrink:0;text-align:right}
 .evt.quiet{background:var(--surface);border-color:var(--line);border-left-color:var(--muted)}
 .evt.quiet .tm{color:var(--muted)}
+.prov{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;padding:2px 7px;border-radius:7px;vertical-align:middle;white-space:nowrap}
+/* Opaque fills, not tints over whatever happens to be behind: a badge lands on
+   plain cards, accent-washed cards and review rows, and a translucent fill made
+   the 10px label drop under 4.5:1 on the lighter ones. */
+.prov.src{background:color-mix(in srgb, var(--good) 6%, var(--surface));color:var(--good);
+  border:1px solid color-mix(in srgb, var(--good) 45%, var(--surface))}
+.prov.add{background:color-mix(in srgb, var(--muted) 5%, var(--surface));color:var(--muted);
+  border:1px solid color-mix(in srgb, var(--muted) 38%, var(--surface))}
+.cite{font-size:12px;color:var(--muted);margin:10px 0;line-height:1.5;
+  padding-left:10px;border-left:2px solid var(--line)}
+.cite + p{margin-top:12px}
+.objs{list-style:none;padding:0;margin:8px 0 0}
+.objs li{position:relative;padding:5px 0 5px 20px;font-size:14px;line-height:1.5}
+.objs li:before{content:'→';position:absolute;left:0;color:var(--ac-fg);font-weight:700}
+.objs li .prov{margin-left:6px}
 .hintline{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
 .swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .sw{width:44px;height:44px;border-radius:14px;border:2px solid transparent;position:relative}
@@ -1441,8 +1457,16 @@ SCREENS.unit = function(root){
       const bits = el('div');
       bits.appendChild(el('span','pill',`${u.cards.length} cards`));
       bits.appendChild(el('span','pill',`${u.questions.length} questions`));
+      if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
       if(u.source) bits.appendChild(el('span','pill',u.source));
       card.appendChild(bits);
+      if(u.srcName) card.appendChild(el('div','cite',`From ${u.srcName}`));
+      if(u.summary && u.summary.text){
+        const ov = el('button','btn btn-ghost','📖  What this covers');
+        ov.style.marginTop='10px';
+        ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
+        card.appendChild(ov);
+      }
       const row = el('div','btn-row');
       const f = el('button','btn btn-secondary','🃏  Flashcards');
       f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:c.id}));
@@ -1467,6 +1491,81 @@ SCREENS.unit = function(root){
   gen.addEventListener('click',()=>go('generate',{classId:c.id})); root.appendChild(gen);
   const back = el('button','btn btn-ghost','← All subjects');
   back.addEventListener('click',()=>go('study')); root.appendChild(back);
+};
+
+/* ================= UNIT BRIEFING ================= */
+/* What the material covers, why it matters, and what she should be able to do —
+   read before the flashcards rather than instead of them. */
+SCREENS.brief = function(root){
+  const u = DATA.records[ctx.unitId];
+  if(!u || u.deleted) return go('study');
+  const c = CLASS_BY_ID[u.classId];
+
+  const head = el('div','card ac');
+  if(c) head.appendChild(el('div','eyebrow', `${c.icon} ${c.name}`));
+  head.appendChild(el('h2',null,u.title));
+  head.appendChild(el('div','cite', citeLine(u)));
+  root.appendChild(head);
+
+  if(u.summary && u.summary.text){
+    root.appendChild(divider('What this covers'));
+    const w = el('div','card');
+    w.appendChild(provBlock(u.summary));
+    root.appendChild(w);
+  }
+
+  if(u.why && u.why.text){
+    root.appendChild(divider('Why it is worth knowing'));
+    const w = el('div','card');
+    w.appendChild(provBlock(u.why));
+    root.appendChild(w);
+  }
+
+  if(ctx.fromParent && u.parentNote && u.parentNote.text){
+    root.appendChild(divider('For you'));
+    const pn = el('div','card');
+    pn.appendChild(provBlock(u.parentNote));
+    root.appendChild(pn);
+  }
+
+  if(u.objectives && u.objectives.length){
+    root.appendChild(divider('After this you should be able to'));
+    const w = el('div','card');
+    const ul = el('ul','objs');
+    u.objectives.forEach(o=>{
+      const li = el('li',null,o.text);
+      li.appendChild(provTag(o.from));
+      ul.appendChild(li);
+    });
+    w.appendChild(ul);
+    root.appendChild(w);
+  }
+
+  root.appendChild(divider("Here's what's next"));
+  const nx = el('div','card ac');
+  if(u.nextUp && u.nextUp.text){
+    nx.appendChild(el('p','lede',u.nextUp.text));
+    const mins = u.nextUp.minutes;
+    if(mins) nx.appendChild(el('div','hintline',
+      `About ${mins} minute${mins===1?'':'s'} for the cards and the quiz together.`));
+    const line = el('div'); line.style.marginTop='8px';
+    line.appendChild(provTag(u.nextUp.from));
+    nx.appendChild(line);
+  } else {
+    nx.appendChild(el('p',null,'Start with the flashcards, then take the quiz while it is fresh.'));
+  }
+  const row = el('div','btn-row');
+  const f = el('button','btn btn-secondary','🃏  Flashcards');
+  f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:u.classId}));
+  const q = el('button','btn btn-primary','Quiz');
+  q.addEventListener('click',()=>launchQuiz(u.id,u.classId,false));
+  row.appendChild(f); row.appendChild(q);
+  nx.appendChild(row);
+  root.appendChild(nx);
+
+  const back = el('button','btn btn-ghost','← Back');
+  back.addEventListener('click',()=>go(ctx.fromParent?'parent':'unit',{classId:u.classId}));
+  root.appendChild(back);
 };
 
 /* ================= FLASHCARDS ================= */
@@ -2508,6 +2607,19 @@ SCREENS.parent = function(root){
   mat.appendChild(el('p',null, approved
     ? `${approved} unit${approved===1?'':'s'} approved and in her app${pending.length?`, ${pending.length} waiting on you`:''}.`
     : 'No units approved yet. Generate one from class notes and read it here before it reaches her.'));
+  const withNotes = units().filter(x=>x.parentNote && x.parentNote.text)
+    .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)).slice(0,3);
+  if(withNotes.length){
+    mat.appendChild(el('div','hintline','Most recent, in case you did not read them at approval:'));
+    withNotes.forEach(x=>{
+      const c2 = CLASS_BY_ID[x.classId];
+      const b = el('button','btn btn-ghost', `${c2?c2.icon+'  ':''}${x.title}`);
+      b.style.marginTop='6px';
+      b.addEventListener('click',()=>go('brief',{unitId:x.id, classId:x.classId, fromParent:true}));
+      mat.appendChild(b);
+    });
+  }
+
   const mrow = el('div','btn-row');
   const mg = el('button','btn btn-secondary','✨  Generate a unit');
   mg.addEventListener('click',()=>go('generate',{fromParent:true}));
@@ -2838,6 +2950,33 @@ SCREENS.stars = function(root){
   root.appendChild(g);
 };
 
+/* ---------- Provenance ----------
+   Every generated block says where it came from, and we render that rather than
+   trusting tone to convey it. "From class material" carries the school's
+   authority; "Study suggestion" carries only ours. */
+const PROV_LABEL = { source:'From class material', added:'Study suggestion' };
+function provTag(from){
+  const src = from === 'source';
+  const t = el('span','prov '+(src?'src':'add'), PROV_LABEL[src?'source':'added']);
+  t.title = src ? 'The substance of this comes from the teacher\'s material.'
+                : 'This is the app\'s own framing or advice, not the teacher\'s.';
+  return t;
+}
+/* A block is {text, from}. Older units predate this and have neither. */
+function provBlock(block, opts){
+  if(!block || !block.text) return null;
+  const w = el('div');
+  const p = el('p', (opts&&opts.cls)||null, block.text);
+  w.appendChild(p);
+  const line = el('div'); line.style.marginTop='6px';
+  line.appendChild(provTag(block.from));
+  w.appendChild(line);
+  return w;
+}
+const citeLine = u => u.srcName
+  ? `Built from ${u.srcName}. The original is untouched — this is written alongside it.`
+  : 'Built from the class material provided. The original is untouched.';
+
 /* ---------- Photo capture ---------- */
 /* Photographing the whiteboard or a worksheet is how the material actually
    arrives — nobody is going to retype a page of notes on a phone. */
@@ -2935,8 +3074,43 @@ SCREENS.reviewunit = function(root){
   const ti = el('input'); ti.type='text'; ti.value = u.title;
   ti.addEventListener('change',()=>{ u.title = ti.value.trim() || u.title; });
   head.appendChild(ti);
+  head.appendChild(el('div','cite', citeLine(u)));
   head.appendChild(el('p',null,'Read it through. Tap ✕ on anything wrong or off-topic — it is dropped when you approve. Nothing here is visible to her yet.'));
+  head.appendChild(el('div','hintline','Green means the substance came from the teacher\'s material — those are the claims worth checking against the file. Grey is the app\'s own framing.'));
   root.appendChild(head);
+
+  if(u.parentNote && u.parentNote.text){
+    root.appendChild(divider('For you'));
+    const pn = el('div','card');
+    pn.appendChild(provBlock(u.parentNote));
+    root.appendChild(pn);
+  }
+
+  const shown = [['summary','What this covers'],['why','Why it is worth knowing']];
+  shown.forEach(([k,label])=>{
+    if(!u[k] || !u[k].text) return;
+    root.appendChild(divider(label));
+    const w = el('div','card');
+    w.appendChild(provBlock(u[k]));
+    root.appendChild(w);
+  });
+
+  if(u.objectives && u.objectives.length){
+    root.appendChild(divider('After this she should be able to'));
+    const w = el('div','card');
+    const ul = el('ul','objs');
+    u.objectives.forEach(o=>{ const li=el('li',null,o.text); li.appendChild(provTag(o.from)); ul.appendChild(li); });
+    w.appendChild(ul);
+    root.appendChild(w);
+  }
+
+  if(u.nextUp && u.nextUp.text){
+    root.appendChild(divider("What she is told to do next"));
+    const w = el('div','card');
+    w.appendChild(provBlock(u.nextUp));
+    if(u.nextUp.minutes) w.appendChild(el('div','hintline',`Estimated at ${u.nextUp.minutes} minutes.`));
+    root.appendChild(w);
+  }
 
   const counts = el('div','hintline');
   const recount = () => { counts.textContent =
@@ -2951,6 +3125,7 @@ SCREENS.reviewunit = function(root){
       d.appendChild(el('div','q',card.term));
       d.appendChild(el('div','o flat',card.def));
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
+      if(card.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(card.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutC.has(card.id)?'↩':'✕');
       x.setAttribute('aria-label', cutC.has(card.id)?'Keep this card':'Drop this card');
       x.addEventListener('click',()=>{ cutC.has(card.id)?cutC.delete(card.id):cutC.add(card.id); render(); });
@@ -2968,6 +3143,7 @@ SCREENS.reviewunit = function(root){
       d.appendChild(el('div','q',q.q));
       q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
       if(q.ex && q.ex.main) d.appendChild(el('div','why',q.ex.main));
+      if(q.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(q.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutQ.has(q.id)?'↩':'✕');
       x.setAttribute('aria-label', cutQ.has(q.id)?'Keep this question':'Drop this question');
       x.addEventListener('click',()=>{ cutQ.has(q.id)?cutQ.delete(q.id):cutQ.add(q.id); render(); });
@@ -3005,37 +3181,76 @@ SCREENS.reviewunit = function(root){
 };
 
 /* ================= GENERATE ================= */
+/* The unit is the contract between the teacher's material and everything the
+   app says about it. Two rules shape this schema:
+
+   1. The original is never altered. We read the source, cite it by name, and
+      write something new alongside it — nothing is written back to Drive.
+   2. Every block declares where it came from. `from:'source'` means the
+      substance is the teacher's; `from:'added'` means it is our framing, advice
+      or pacing. That flag is rendered, not decorative — a family can see at a
+      glance which sentences carry the school's authority and which carry ours.
+      Anything the model is unsure of must be marked 'added'. */
+const PROV = {type:'string', enum:['source','added']};
+const BLOCK = extra => ({type:'object', properties:{text:{type:'string'}, from:PROV, ...(extra||{})},
+  required:['text','from'], additionalProperties:false});
+
 const UNIT_SCHEMA = {
   type:'object',
   properties:{
     title:{type:'string'},
+    /* What the teacher's material actually says, in her language. */
+    summary:BLOCK(),
+    /* Why it is worth knowing. Almost always ours. */
+    why:BLOCK(),
+    /* "After this you should be able to…" — from the material when it states
+       objectives, inferred when it does not. Each carries its own flag. */
+    objectives:{type:'array', items:BLOCK()},
+    /* One paragraph for a parent: what was covered, what to watch for. */
+    parentNote:BLOCK(),
+    /* One short line for her, plus an honest estimate in minutes. */
+    nextUp:BLOCK({minutes:{type:'integer'}}),
     cards:{type:'array',items:{type:'object',
-      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'}},
-      required:['term','def','hint'],additionalProperties:false}},
+      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'},from:PROV},
+      required:['term','def','hint','from'],additionalProperties:false}},
     questions:{type:'array',items:{type:'object',
       properties:{ lv:{type:'integer',enum:[1,2,3]}, q:{type:'string'},
         opts:{type:'array',items:{type:'string'}}, ans:{type:'integer',enum:[0,1,2,3]},
-        hint:{type:'string'},
+        hint:{type:'string'}, from:PROV,
         ex:{type:'object',properties:{main:{type:'string'},tip:{type:'string'},mnemonic:{type:'string'}},
             required:['main','tip'],additionalProperties:false}},
-      required:['lv','q','opts','ans','hint','ex'],additionalProperties:false}}
+      required:['lv','q','opts','ans','hint','ex','from'],additionalProperties:false}}
   },
-  required:['title','cards','questions'], additionalProperties:false
+  required:['title','summary','why','objectives','parentNote','nextUp','cards','questions'],
+  additionalProperties:false
 };
-async function generateUnit(classId, notes, shots){
+
+async function generateUnit(classId, notes, shots, srcName){
   const key = Store.get('anthropic_key','');
   if(!key) throw new Error('NO_KEY');
   shots = shots || [];
   const cls = CLASS_BY_ID[classId];
   const system = [
-    `You build study material for a sharp ${STUDENT.grade}th grader taking ${cls?cls.name:'this class'}.`,
-    `Write 15-25 flashcards and 18-24 quiz questions (6-8 each at level 1 recall, level 2 application, level 3 analysis).`,
-    `Every question has exactly 4 options and one correct answer.`,
-    `Anchor everything to the supplied notes. Do not invent facts they do not support.`,
-    `Tone: direct and a little dry. Never condescending. She can handle why something is actually interesting.`,
-    `Card hints are memory hooks or mnemonics, never restatements of the definition.`,
-    `Explanations say why the right answer is right, not just what it is.`,
-    shots.length ? `Some or all of the material arrives as photos — a whiteboard, a worksheet, a textbook page, handwritten notes. Read them carefully, including handwriting and diagrams. If a photo is too blurry or cropped to read, work from what you can read and leave the rest out rather than guessing.` : ''
+    `You are the study engine for a sharp ${cls?cls.name:'school'} student — write for a capable 8th grader.`,
+
+    `THE ORIGINAL IS NEVER ALTERED. You are reading the teacher's material and writing something new alongside it. Cite it by name in your summary. Never present your own words as if the teacher wrote them.`,
+
+    `Every block carries a "from" flag and it must be honest, because it is shown to the family:`,
+    `· from:"source" — the substance is the teacher's. Facts, definitions, formulas, worked methods, and any objective the material itself states. Cards and questions count as "source" when what they test is traceable to the material.`,
+    `· from:"added" — this is yours. Motivation, study advice, pacing, time estimates, memory hooks, and any objective or example you inferred rather than read. If you are unsure which a block is, it is "added". Never inflate "source".`,
+
+    `summary — what the material actually covers, in plain 8th grader language, naming the source. Do not editorialise here; this block stands in for the teacher.`,
+    `why — why this is worth knowing, tied to something real. This is yours, so mark it "added".`,
+    `objectives — 3 to 5 "after this you should be able to…" statements, each starting with a verb. Mark an objective "source" only if the material states it; mark it "added" if you inferred it from the content.`,
+    `parentNote — one paragraph for a parent who did not attend the class: what was covered, and the one thing most likely to trip her up. Plain, specific, no praise language.`,
+    `nextUp — one short line to her about what to do first, with an honest estimate in minutes for the flashcards and quiz together. Do not round to a comfortable number; if it is 23 minutes, say 23.`,
+
+    `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer.`,
+    `Anchor everything to the supplied material. Do not invent facts it does not support. If the material is thin, write fewer cards rather than padding with things it never said.`,
+    `Tone: direct and a little dry. Never condescending, never exclamation marks, never "great job". Card hints are memory hooks or mnemonics, never restatements of the definition. Explanations say why the right answer is right, not just what it is.`,
+
+    shots.length ? `Some or all of the material arrives as photos — a whiteboard, a worksheet, a textbook page, handwritten notes. Read them carefully, including handwriting and diagrams. If a photo is too blurry or cropped to read, work from what you can read and leave the rest out rather than guessing.` : '',
+    srcName ? `The source is titled "${srcName}". Cite it by that name.` : `The source has no filename. Refer to it as the class material rather than inventing a title.`
   ].filter(Boolean).join(' ');
   const res = await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
@@ -3045,9 +3260,9 @@ async function generateUnit(classId, notes, shots){
       output_config:{ effort:'medium', format:{type:'json_schema',schema:UNIT_SCHEMA} },
       messages:[{role:'user',content:[
         ...shots.map(s=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:s.data}})),
-        {type:'text', text: notes
+        {type:'text', text: (srcName ? `Source file: ${srcName}\n\n` : '') + (notes
           ? `Class notes / study material:\n\n${notes}`
-          : `The material is in the attached photo${shots.length>1?'s':''}. Build the unit from what they show.`}
+          : `The material is in the attached photo${shots.length>1?'s':''}. Build the unit from what they show.`)}
       ]}] })
   });
   if(!res.ok){ const t = await res.text();
@@ -3058,11 +3273,17 @@ async function generateUnit(classId, notes, shots){
   parsed.questions = (parsed.questions||[]).filter(q=>Array.isArray(q.opts)&&q.opts.length===4&&q.ans>=0&&q.ans<4&&q.q);
   parsed.cards = (parsed.cards||[]).filter(c=>c.term&&c.def);
   if(!parsed.questions.length && !parsed.cards.length) throw new Error('Nothing usable came back. Try more detailed notes.');
-  parsed.cards.forEach((c,i)=>c.id=`c${i}`);
-  parsed.questions.forEach((q,i)=>q.id=`q${i}`);
+  /* Unmarked means ours. Defaulting the other way would let a dropped flag
+     quietly borrow the teacher's authority, which is the one failure this
+     whole scheme exists to prevent. */
+  const own = b => (b && b.from === 'source') ? 'source' : 'added';
+  parsed.cards.forEach((c,i)=>{ c.id=`c${i}`; c.from = own(c); });
+  parsed.questions.forEach((q,i)=>{ q.id=`q${i}`; q.from = own(q); });
+  ['summary','why','parentNote','nextUp'].forEach(k=>{ if(parsed[k]) parsed[k].from = own(parsed[k]); });
+  parsed.objectives = (parsed.objectives||[]).filter(o=>o&&o.text).map(o=>({...o, from:own(o)}));
   return parsed;
 }
-let shotTray = [], genForm = {notes:'', classId:null};
+let shotTray = [], genForm = {notes:'', classId:null, srcName:''};
 SCREENS.generate = function(root){
   root.appendChild(headline('Generate a unit',
     'Photograph the whiteboard or a worksheet, paste notes, or both. Everything is read before it saves.'));
@@ -3074,6 +3295,14 @@ SCREENS.generate = function(root){
     if(cl.id===genForm.classId) o.selected=true; sel.appendChild(o); });
   sel.addEventListener('change',()=>{ genForm.classId = sel.value; });
   c.appendChild(sel);
+  c.appendChild(el('label',null,'Source'));
+  const src = el('input'); src.type='text';
+  src.placeholder = 'File or handout name, e.g. "Unit 3 Study Guide.pdf"';
+  src.value = genForm.srcName || '';
+  src.addEventListener('input',()=>{ genForm.srcName = src.value; });
+  c.appendChild(src);
+  c.appendChild(el('div','hintline','Cited on everything built from it. Leave blank and it says so rather than inventing a name.'));
+
   c.appendChild(el('label',null,'Photos of the material'));
   c.appendChild(shotPicker(async shot=>{
     if(shotTray.length >= MAX_SHOTS){ toast(`${MAX_SHOTS} photos is the limit`); return; }
@@ -3114,12 +3343,14 @@ SCREENS.generate = function(root){
     if(!shotTray.length && notes.length < 80){ toast('Add a photo or paste a bit more material'); return; }
     gob.disabled = true; gob.textContent = 'Reading… this can take a minute';
     try{
-      const u = await generateUnit(sel.value, notes, shotTray);
+      const u = await generateUnit(sel.value, notes, shotTray, (genForm.srcName||'').trim());
       const rec = put({ id:uid('unit'), type:'unit', classId:sel.value, title:u.title||'Untitled unit',
+        summary:u.summary, why:u.why, objectives:u.objectives,
+        parentNote:u.parentNote, nextUp:u.nextUp, srcName:(genForm.srcName||'').trim() || null,
         quarter: currentQuarter(AZ.today())?.n || null,
         source: shotTray.length ? (shotTray.length===1?'Photo':`${shotTray.length} photos`) + (notes?' + notes':'') : 'Pasted notes',
         status:'draft', cards:u.cards, questions:u.questions });
-      shotTray = []; genForm = {notes:'', classId:null};
+      shotTray = []; genForm = {notes:'', classId:null, srcName:''};
       syncSoon();
       /* Straight into review when a grown-up made it; otherwise it waits. */
       if(ctx.fromParent){
@@ -3143,7 +3374,7 @@ SCREENS.generate = function(root){
   });
   c.appendChild(gob); root.appendChild(c);
   const back = el('button','btn btn-ghost','← Back');
-  back.addEventListener('click',()=>{ shotTray = []; genForm = {notes:'', classId:null};
+  back.addEventListener('click',()=>{ shotTray = []; genForm = {notes:'', classId:null, srcName:''};
     go(ctx.fromParent?'parent':(ctx.classId?'unit':'study'),{classId:ctx.classId}); });
   root.appendChild(back);
 };
