@@ -100,7 +100,10 @@ button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:
 nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in srgb, var(--ink) 92%, transparent);backdrop-filter:blur(16px);border-top:1px solid var(--line-soft);padding-bottom:env(safe-area-inset-bottom)}
 .nav-inner{max-width:660px;margin:0 auto;display:flex}
 .nav-btn{flex:1;min-height:var(--tap);padding:10px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--faint);font-size:10px;font-weight:600;letter-spacing:.03em}
-.nav-btn .ic{font-size:18px;line-height:1}
+.nav-btn .ic{font-size:18px;line-height:1;position:relative}
+.nav-btn .ic .dot{position:absolute;top:-2px;right:-7px;min-width:15px;height:15px;padding:0 4px;
+  border-radius:8px;background:var(--ac);color:color-mix(in srgb, var(--ac) 22%, #000);font-size:9.5px;font-weight:800;
+  line-height:15px;text-align:center}
 .nav-btn.on{color:var(--ac-fg)}
 
 .period{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:8px;border-left:3px solid var(--pc,var(--line))}
@@ -265,6 +268,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .pill.warm{background:color-mix(in srgb,var(--warm) 12%,transparent);border-color:var(--warm);color:var(--warm)}
 
 .miss{padding:14px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--bad);margin-bottom:9px}
+.miss.settling{border-left-color:var(--warm)}
+.miss.nearly{border-left-color:var(--good)}
+.miss .box{display:flex;align-items:center;gap:5px;margin-top:9px}
+.miss .box i{width:16px;height:4px;border-radius:2px;background:var(--line);display:block}
+.miss .box i.on{background:var(--ac)}
+.miss .box em{font-style:normal;font-size:11.5px;color:var(--faint);margin-left:4px}
 .miss .q{font-size:14.5px;font-weight:600;margin-bottom:5px}
 .miss .a{font-size:13px;color:var(--good)}
 .miss .n{font-size:12.5px;color:var(--faint);margin-top:5px;line-height:1.5}
@@ -377,6 +386,8 @@ const AZ = {
     return new Date(y,m-1,d).toLocaleDateString('en-US',{month:'short',day:'numeric'}); },
   daysBetween(a,b){ return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/86400000); },
   shift(ds,n){ const [y,m,d]=ds.split('-').map(Number); return this.dateKey(new Date(y,m-1,d+n)); },
+  short(ds){ const [y,m,dd]=ds.split('-').map(Number);
+    return new Date(y,m-1,dd).toLocaleDateString('en-US',{month:'short',day:'numeric'}); },
   weekStart(ds){ return this.shift(ds, -AZ.weekday(ds)); }   // Sunday
 };
 
@@ -676,7 +687,7 @@ function relevantHabits(date, limit=2){
 }
 
 /* ---------- Content model ---------- */
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
 
 function buildOrientationUnit(){
   const qs = [];
@@ -711,6 +722,12 @@ let DATA = { v:SCHEMA_VERSION, records:{} };
 function migrate(d){
   if(!d.v) d.v = 1;
   if(d.v < 2){ d.v = 2; }   // v2 added: prefs, assess, mood, focus, qstat records
+  if(d.v < 3){                // v3 put misses on a spaced-repetition ladder
+    Object.values(d.records||{}).forEach(r=>{
+      if(r && r.type==='miss' && r.box === undefined){ r.box = 0; r.due = AZ.today(); }
+    });
+    d.v = 3;
+  }
   d.v = SCHEMA_VERSION;
   return d;
 }
@@ -852,6 +869,35 @@ function recentAccuracy(days){
   if(!L.length) return null;
   const c = L.reduce((s,l)=>s+l.correct,0), t = L.reduce((s,l)=>s+l.total,0);
   return t ? Math.round(c/t*100) : null;
+}
+
+/* ---------- Spaced repetition ----------
+   Missed questions ride a Leitner ladder. Each correct recall pushes the box up
+   and the next sighting further out; a slip drops it back to the start. Only a
+   question that survives the whole ladder counts as learned and leaves the
+   Growth Zone — which is the difference between a list of mistakes and a system
+   that actually clears them. */
+const BOX_GAPS = [1, 2, 4, 8, 21];      // days until the next sighting
+const LAST_BOX = BOX_GAPS.length - 1;
+
+function scheduleMiss(m, gotItRight){
+  const box = gotItRight ? Math.min(LAST_BOX, (m.box ?? -1) + 1) : 0;
+  return { ...m, box, due: AZ.shift(AZ.today(), BOX_GAPS[box]), lastSeen: AZ.today() };
+}
+const dueMisses = (date = AZ.today()) =>
+  all('miss').filter(m => !m.due || m.due <= date)
+             .sort((a,b) => (a.box ?? 0) - (b.box ?? 0));
+
+/* A miss can only be re-asked if it kept its options. Older ones fall back to
+   the unit they came from. */
+function missAsQuestion(m){
+  /* The id is rewritten to the miss id: a review round gathers questions from
+     many units, whose own ids restart at 1 and would otherwise collide. */
+  if(Array.isArray(m.opts) && m.opts.length === 4 && m.ans != null)
+    return { id:m.id, lv:1, q:m.q, opts:m.opts, ans:m.ans, hint:'', ex:{ main:m.why||'' }, _missId:m.id };
+  const u = DATA.records[m.unitId];
+  const q = u && !u.deleted && u.questions && u.questions.find(x => x.id === m.qid);
+  return q ? { ...q, id:m.id, _missId:m.id } : null;
 }
 
 /* ---------- Assessments ---------- */
@@ -1007,7 +1053,13 @@ function render(){
   const nav = document.getElementById('nav'); nav.textContent='';
   NAV.forEach(n=>{
     const b = el('button','nav-btn'+(view===n.id?' on':''));
-    b.appendChild(el('span','ic',n.ic)); b.appendChild(el('span',null,n.nm));
+    const ic = el('span','ic',n.ic);
+    /* A count on Growth is the whole nudge — she never has to remember to check. */
+    if(n.id==='growth'){
+      const n2 = dueMisses().length;
+      if(n2) ic.appendChild(el('span','dot', n2>9 ? '9+' : String(n2)));
+    }
+    b.appendChild(ic); b.appendChild(el('span',null,n.nm));
     b.addEventListener('click',()=>go(n.id)); nav.appendChild(b);
   });
   const main = document.getElementById('screen'); main.textContent='';
@@ -1072,7 +1124,7 @@ SCREENS.today = function(root){
     root.appendChild(ac);
   }
 
-  /* Schedule — this is what Chris and Kat check to know where she is, so it
+  /* Schedule — the grown-ups check this to know where she is, so it
      renders every day. On a non-school day it shows as her standing timetable
      rather than being hidden entirely. */
   const schoolDay = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay;
@@ -1156,6 +1208,16 @@ SCREENS.study = function(root){
   aff.appendChild(acts);
   if(seen && seen.xp) aff.appendChild(el('div','hintline',`+${seen.xp} XP today`));
   root.appendChild(aff);
+
+  /* Anything due comes before new material — that is the point of the schedule. */
+  const dueNow = dueMisses();
+  if(dueNow.length){
+    root.appendChild(divider('Before anything new'));
+    root.appendChild(cardButton(
+      dueNow.length===1 ? '1 question is back' : dueNow.length+' questions are back',
+      'You missed these before. Getting them right now is what makes them stick.',
+      ()=>go('growth')));
+  }
 
   /* What to study — moved here from Today */
   const plan = studyPlan(date);
@@ -1298,7 +1360,7 @@ SCREENS.unit = function(root){
 /* ================= FLASHCARDS ================= */
 let cardState = {start:0};
 SCREENS.cards = function(root){
-  const u = DATA.records[ctx.unitId];
+  const u = unitFor(ctx.unitId);
   if(!u || !u.cards.length) return go('unit',{classId:ctx.classId});
   if(!cardState.start || cardState.unitId!==u.id)
     cardState = {unitId:u.id,i:0,flipped:false,start:Date.now(),seen:new Set(),order:shuffle(u.cards.map((_,i)=>i))};
@@ -1399,15 +1461,22 @@ function startQuestionTimer(u){
 function timeUp(u){
   const q = u.questions[quizState.order[quizState.i]];
   quizState.answered = -1;                       // -1 = ran out of time
+  if(!quizState.seen.includes(q.id)) quizState.seen.push(q.id);
   quizState.missed.push(q.id);
-  put({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId, qid:q.id,
-        q:q.q, right:q.opts[q.ans], chose:'(ran out of time)', why:q.ex?.main||'', on:AZ.today() });
+  const src = u.id==='__review__' ? DATA.records[q._missId] : null;
+  if(src){ put({ ...src, chose:'(ran out of time)' }); }
+  else {
+    const was = DATA.records['miss_'+u.id+'_'+q.id];
+    put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
+          qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose:'(ran out of time)',
+          why:q.ex?.main||'', on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+  }
   if(navigator.vibrate) navigator.vibrate(60);
   render();
 }
 
 SCREENS.checkin = function(root){
-  const u = DATA.records[ctx.unitId];
+  const u = unitFor(ctx.unitId);
   if(!u) return go('study');
   const state = ctx._state || (ctx._state = {readiness:null,feeling:null});
 
@@ -1455,15 +1524,27 @@ SCREENS.checkin = function(root){
 
 /* ================= QUIZ ================= */
 let quizState = null;
+let reviewUnit = null;
+
+/* Builds a one-off unit from everything due, newest-struggle first. Kept out of
+   DATA.records on purpose — it is a view, not saved content. */
+function buildReviewUnit(){
+  const qs = dueMisses().map(missAsQuestion).filter(Boolean);
+  if(!qs.length) return null;
+  reviewUnit = { id:'__review__', classId:'__all__', title:'Review', cards:[], questions:qs.slice(0,20) };
+  return reviewUnit;
+}
+const unitFor = id => id==='__review__' ? reviewUnit : DATA.records[id];
+
 SCREENS.quiz = function(root){
-  const u = DATA.records[ctx.unitId];
+  const u = unitFor(ctx.unitId);
   if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
   /* Also restart when the mode changes, so switching between the normal quiz
      and Beat the clock never resumes the other one's half-finished run. */
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
     quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
       order:shuffle(u.questions.map((_,i)=>i)),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
-      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0};
+      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[]};
     if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
   const q = u.questions[quizState.order[quizState.i]];
 
@@ -1526,7 +1607,8 @@ SCREENS.quiz = function(root){
     root.appendChild(n);
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
-  quit.addEventListener('click',()=>{stopQuestionTimer();quizState=null;go('unit',{classId:ctx.classId});});
+  const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
+  quit.addEventListener('click',()=>{stopQuestionTimer();quizState=null;go(back[0],back[1]);});
   root.appendChild(quit);
 };
 function answer(u,q,idx){
@@ -1541,17 +1623,33 @@ function answer(u,q,idx){
     }
   }
   quizState.answered = idx;
+  if(!quizState.seen.includes(q.id)) quizState.seen.push(q.id);
   const right = idx===q.ans;
   if(right) quizState.correct++;
+  /* Review questions are on loan from other units — credit the tally to where
+     the question actually lives, or the parent view attributes it to nothing. */
+  const src = u.id==='__review__' ? DATA.records[q._missId] : null;
+  const unitId  = src ? src.unitId  : u.id;
+  const classId = src ? src.classId : ctx.classId;
+  const qid     = src ? src.qid     : q.id;
+
   /* Per-question tally powers the strong/weak topic breakdown in the parent view. */
-  const key = 'qstat_'+u.id+'_'+q.id;
+  const key = 'qstat_'+unitId+'_'+qid;
   const prev = DATA.records[key];
-  put({ id:key, type:'qstat', unitId:u.id, classId:ctx.classId, qid:q.id, q:q.q,
+  put({ id:key, type:'qstat', unitId, classId, qid, q:q.q,
         attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0) });
   if(!right){
     quizState.missed.push(q.id);
-    put({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId, qid:q.id,
-          q:q.q, right:q.opts[q.ans], chose:q.opts[idx], why:q.ex?.main||'', on:AZ.today() });
+    const chose = idx===-1 ? '(ran out of time)' : q.opts[idx];
+    if(src){
+      /* Demotion is finishQuiz's job; here we just record what she picked this time. */
+      put({ ...src, chose });
+    } else {
+      const was = DATA.records['miss_'+u.id+'_'+q.id];
+      put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
+            qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose,
+            why:q.ex?.main||'', on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+    }
   }
   render();
 }
@@ -1571,11 +1669,32 @@ function finishQuiz(u){
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
     unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
 
-  /* Growth Zone items answered right this round clear themselves. */
-  all('miss').forEach(m=>{
-    if(m.unitId===u.id && !quizState.missed.includes(m.qid)){
-      put({id:'cleared_'+m.qid,type:'cleared',qid:m.qid,on:AZ.today()}); softDelete(m.id);
-    }
+  const askedThisRound = new Set(quizState.seen);
+  if(u.id==='__review__'){
+    /* Review rounds judge each question by the miss it came from, since they are
+       gathered from many different units. */
+    u.questions.forEach(q=>{
+      if(!askedThisRound.has(q.id)) return;
+      const m = DATA.records[q._missId];
+      if(!m || m.deleted) return;
+      const right = !quizState.missed.includes(q.id);
+      const next = scheduleMiss(m, right);
+      if(right && next.box >= LAST_BOX){
+        put({id:'cleared_'+m.id,type:'cleared',unitId:m.unitId,qid:m.qid,q:m.q,on:AZ.today()});
+        softDelete(m.id);
+      } else put(next);
+    });
+  }
+  /* Getting one right moves it up the ladder rather than clearing it outright —
+     it only leaves once it has survived every interval. */
+  if(u.id!=='__review__') all('miss').forEach(m=>{
+    if(m.unitId!==u.id || quizState.missed.includes(m.qid)) return;
+    if(!askedThisRound.has(m.qid)) return;          // only judge what she actually saw
+    const next = scheduleMiss(m, true);
+    if(next.box >= LAST_BOX){
+      put({id:'cleared_'+m.id,type:'cleared',unitId:m.unitId,qid:m.qid,q:m.q,on:AZ.today()});
+      softDelete(m.id);
+    } else put(next);
   });
   checkBadges(); syncSoon();
   if(pct>=80) celebrate();
@@ -1594,14 +1713,19 @@ function finishQuiz(u){
     : `${quizState.correct}/${total}. This one needs another pass — that is information, not a verdict.\n\n+${xp} XP`)
     + (speed?`\n\nSpeed bonus +${speed} XP${fastest!==null?` · fastest answer ${fastest.toFixed(1)}s`:''}.`:'')
     + (hintsUsed?`\n\n${hintsUsed} hint${hintsUsed>1?'s':''} used (−${hintsUsed*5} XP).`:'')
-    + calib + (missed?`\n\n${missed} question${missed>1?'s':''} went to your Growth Zone.`:'');
+    + calib + (missed
+        ? (u.id==='__review__'
+            ? `\n\n${missed} still needs another look — ${missed>1?'they go':'it goes'} back to the start of the ladder.`
+            : `\n\n${missed} question${missed>1?'s':''} went to your Growth Zone.`)
+        : (u.id==='__review__' ? '\n\nEvery one of those moved further out. That is the list shrinking.' : ''));
 
   quizState = null; ctx._state = null; ctx._pre = null;
   const clsId = ctx.classId;
+  const wasReview = u.id==='__review__';
   showModal({ title:`${pct}%`, message:msg,
     confirmText:'How did that feel?', cancelText:null,
-    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed}) });
-  go('unit',{classId:clsId});
+    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed, back: wasReview?'growth':null}) });
+  go(wasReview ? 'growth' : 'unit', {classId:clsId});
 }
 
 SCREENS.postmood = function(root){
@@ -1616,13 +1740,13 @@ SCREENS.postmood = function(root){
             feeling:o.v, date:AZ.today(), at:Date.now() });
       checkBadges(); syncSoon();
       toast('Noted — thanks');
-      go(ctx.missed ? 'growth' : 'unit', {classId:ctx.classId});
+      go(ctx.back || (ctx.missed ? 'growth' : 'unit'), {classId:ctx.classId});
     });
     s.appendChild(b);
   });
   c.appendChild(s); root.appendChild(c);
   const skip = el('button','btn btn-ghost','Skip');
-  skip.addEventListener('click',()=>go(ctx.missed?'growth':'unit',{classId:ctx.classId}));
+  skip.addEventListener('click',()=>go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId}));
   root.appendChild(skip);
 };
 
@@ -1747,28 +1871,74 @@ function endFocus(completed){
 
 /* ================= GROWTH ZONE ================= */
 SCREENS.growth = function(root){
-  root.appendChild(headline('Growth Zone','Every question you missed, with the reason. Nothing here is a grade — it is a list of things worth one more look.'));
-  const ms = all('miss').sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  root.appendChild(headline('Growth Zone','Every question you missed comes back — a day later, then two, then four, then eight, then three weeks. Survive all five and it has stopped being a weak spot.'));
+  const ms = all('miss');
   if(!ms.length){
     const e = el('div','empty');
     e.appendChild(el('span','ic','🌱'));
-    e.appendChild(el('p',null,'Nothing here. Missed questions land here automatically and clear themselves when you get them right on a retake.'));
-    root.appendChild(e); return;
+    e.appendChild(el('p',null,'Nothing here. Missed questions land here automatically and work their way out as you get them right.'));
+    root.appendChild(e);
+    const cl = all('cleared');
+    if(cl.length){
+      const w = el('div','card');
+      w.appendChild(el('h2',null, cl.length+' learned for good'));
+      w.appendChild(el('p',null,'Questions that came back five times over three weeks and you got every one.'));
+      root.appendChild(w);
+    }
+    return;
   }
-  const by = {};
-  ms.forEach(m=>{ (by[m.classId] = by[m.classId]||[]).push(m); });
-  Object.entries(by).forEach(([cid,list])=>{
-    const c = CLASS_BY_ID[cid];
-    root.appendChild(divider(c?`${c.icon} ${c.name}`:'Other'));
-    list.forEach(m=>{
-      const d = el('div','miss');
-      d.appendChild(el('div','q',m.q));
-      d.appendChild(el('div','a','✓ '+m.right));
-      if(m.chose) d.appendChild(el('div','n','You chose: '+m.chose));
-      if(m.why) d.appendChild(el('div','n',m.why));
-      root.appendChild(d);
+
+  const due = dueMisses();
+  if(due.length){
+    const c = el('div','card ac');
+    c.appendChild(el('h2',null, due.length===1 ? '1 question is back' : due.length+' questions are back'));
+    c.appendChild(el('p',null,'These are the ones due today. Get one right and it goes quiet for longer; miss it and it starts over.'));
+    const b = el('button','btn btn-primary', due.length>20 ? 'Review 20 of them' : 'Start review');
+    b.addEventListener('click',()=>{
+      if(!buildReviewUnit()){ toast('Nothing due right now'); return; }
+      /* Deliberately skips the readiness check-in: that question is about one
+         unit, and this runs most days. Friction here would kill the habit. */
+      go('quiz',{unitId:'__review__', classId:'__all__'});
     });
-  });
+    c.appendChild(b);
+    root.appendChild(c);
+  }
+
+  const cleared = all('cleared').length;
+  if(cleared){
+    const w = el('div','card');
+    w.appendChild(el('h2',null, cleared+' learned for good'));
+    w.appendChild(el('p',null,'Each of these came back five times over three weeks and you got every one. They have left this list.'));
+    root.appendChild(w);
+  }
+
+  const dueIds = new Set(due.map(m=>m.id));
+  const render = (list, header) => {
+    if(!list.length) return;
+    const by = {};
+    list.forEach(m=>{ (by[m.classId] = by[m.classId]||[]).push(m); });
+    root.appendChild(divider(header));
+    Object.entries(by).forEach(([cid,items])=>{
+      const c = CLASS_BY_ID[cid];
+      if(c) root.appendChild(el('div','hintline', c.icon+' '+c.name));
+      items.forEach(m=>{
+        const box = m.box ?? -1;
+        const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
+        d.appendChild(el('div','q',m.q));
+        d.appendChild(el('div','a','✓ '+m.right));
+        if(m.chose) d.appendChild(el('div','n','You chose: '+m.chose));
+        if(m.why) d.appendChild(el('div','n',m.why));
+        const bar = el('div','box');
+        for(let i=0;i<BOX_GAPS.length;i++){ const p=el('i'); if(i<=box) p.classList.add('on'); bar.appendChild(p); }
+        bar.appendChild(el('em',null, dueIds.has(m.id) ? 'due now'
+          : box<0 ? 'not seen again yet' : 'back '+AZ.short(m.due)));
+        d.appendChild(bar);
+        root.appendChild(d);
+      });
+    });
+  };
+  render(due, 'Due today');
+  render(ms.filter(m=>!dueIds.has(m.id)).sort((a,b)=>(a.due||'').localeCompare(b.due||'')), 'Settling in');
 };
 
 /* ================= TUTOR ================= */

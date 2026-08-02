@@ -46,8 +46,8 @@ has `id`, `type`, and `updatedAt`. This is what makes Gist sync safe.
 | `unit` | Study content: `{classId, title, cards[], questions[]}` |
 | `log` | One completed study session: `{mode, classId, unitId, date, correct, total, seconds, xp, hints}` |
 | `focus` | One completed Pomodoro block: `{classId, minutes, date, xp}` |
-| `miss` | A Growth Zone entry — one missed question |
-| `cleared` | A Growth Zone item resolved on a retake |
+| `miss` | A Growth Zone entry — one missed question, plus its `box`/`due` on the review ladder |
+| `cleared` | A question that survived all five review intervals |
 | `qstat` | Per-question tally `{qid, attempts, correct}` — powers strong/weak topics |
 | `mood` | An emotion check: `{when:'pre'|'post', logId, readiness, feeling}` |
 | `assess` | A test/quiz/project: `{classId, kind, title, date, score}` |
@@ -242,12 +242,43 @@ feedback — check any new copy against it.
 |---|---|
 | **Today** | The school day *only*: what class is now/next, the full schedule, upcoming tests, on the horizon. **No XP, level, streak or affirmation** — it is not a dashboard. |
 | **Study** | The daily affirmation with its like/read buttons, "what to study today", subject tiles, and three whole-card buttons: Timer, Tutor, New study set. |
-| **Growth** | The Growth Zone. |
+| **Growth** | The Growth Zone: what is due for review today, and everything still settling. Carries a count badge in the nav when anything is due. |
 | **Stars** | All the gamification: level bar, streak/minutes/revisit strip, totals, badges. |
 | **Settings** | Hers: appearance, accent, per-subject colours, avatar, nickname, motto, focus-timer default, and the door to the grown-up area. |
 | **Parent** (passcoded) | Progress and effort, tests and scores, weekly goals, **what she is using** (tutor questions verbatim, timer/quiz/flashcard counts) — *plus* Gist sync, the Anthropic API key, and backup/restore. |
 
 Focus does **not** get its own tab; it is reached from Study.
+
+### Spaced repetition — the miss ladder
+
+A missed question does not clear the moment she gets it right once. Each `miss`
+carries a `box` (0–4) and a `due` date, stepped by `scheduleMiss()` along
+`BOX_GAPS = [1, 2, 4, 8, 21]` days:
+
+- **Miss it** → `box` resets to 0, back tomorrow. No partial credit for a near miss.
+- **Get it right** → `box` moves up one, the gap widens.
+- **Right at box 4** → a `cleared` record is written and the `miss` is tombstoned.
+  It has survived every interval out to three weeks; that is the bar for "learned".
+
+`dueMisses()` returns everything due today, easiest-forgotten first (lowest box).
+`buildReviewUnit()` assembles those into a synthetic unit with `id:'__review__'`,
+which the quiz screen loads through `unitFor()` instead of `DATA.records`.
+
+Three things about the review unit are load-bearing:
+
+- It is **never put into `DATA.records`** — it is a view, not content, and syncing
+  it would mean syncing a snapshot of a moment.
+- `missAsQuestion()` **rewrites each question's `id` to the miss id.** Questions
+  are numbered per unit and restart at 1, so a mixed-subject round would collide.
+- `answer()` credits the `qstat` tally to the question's **original** unit and
+  class via `q._missId`, or the parent view would attribute the work to nothing.
+
+The review round deliberately **skips the readiness check-in**. That question is
+about one unit, and this runs most days — friction there would kill the habit.
+
+Existing misses from before this shipped are stamped `box:0, due:today` by the
+v3 migration, and `dueMisses()` also treats a missing `due` as due, so nothing
+gets stranded.
 
 **The brand block in the header is the way home** (`go('today')`). There are no
 back buttons anywhere, so this is the only escape hatch — do not repurpose it.
@@ -349,7 +380,7 @@ the kids. One app means one deploy and one Gist — better for maintenance.
 
 ## Deploy
 
-Not yet deployed. Repo lives under the `ortizzle` GitHub account; deploy is a
-`git push` to the Pages branch via `gh`. After deploying, bump `CACHE_VERSION` in
-`sw.js` and remember mobile Chrome caches hard — hard-refresh or append `?v=N`
-when verifying.
+Live on GitHub Pages under the `ortizzle` account; deploy is a `git push` to the
+Pages branch via `gh`. **Bump `CACHE_VERSION` in `sw.js` on every deploy** —
+mobile Chrome caches hard, and a stale service worker will serve the old app
+indefinitely. Hard-refresh or append `?v=N` when verifying.
