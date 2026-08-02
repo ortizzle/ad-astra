@@ -268,6 +268,17 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   background:rgba(0,0,0,.62);color:#fff;font-size:13px;line-height:1;border:none}
 .shot .n{position:absolute;bottom:0;left:0;right:0;padding:3px 6px;font-size:10px;font-weight:700;
   background:rgba(0,0,0,.55);color:#fff}
+.evt{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:9px;border-radius:15px;
+  background:color-mix(in srgb, var(--ac) 10%, var(--surface));border:1px solid var(--ac);
+  border-left-width:3px}
+.evt .pchip{flex-shrink:0}
+.evt .meta{flex:1;min-width:0}
+.evt .nm{font-size:14.5px;font-weight:700}
+.evt .dt{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
+.evt .tm{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ac-fg);text-transform:uppercase;
+  flex-shrink:0;text-align:right}
+.evt.quiet{background:var(--surface);border-color:var(--line);border-left-color:var(--muted)}
+.evt.quiet .tm{color:var(--muted)}
 .hintline{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
 .swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .sw{width:44px;height:44px;border-radius:14px;border:2px solid transparent;position:relative}
@@ -520,21 +531,58 @@ const CAL = {
     ['2027-03-15','2027-03-19','Spring Break'],['2027-03-26','2027-03-26','March Break'],
     ['2027-05-31','2027-05-31','Memorial Day']
   ],
+  /* ---------- School events ----------
+     Dated items lifted from the school newsletter — see ../wayfinder for a
+     populated example. Empty until the upper school publishes its first one.
+     These live in code rather than the record store on purpose: a deploy
+     updates every device at once and nobody has to type anything. Per-class
+     tests stay as `assess` records — those are hers, not the school's. */
+  events:[
+    /* From the grades 6-8 testing calendar. Newsletter items land here too once
+       the upper school publishes one. */
+    {start:'2026-12-07', name:'Pre-Comp review begins', icon:'📚', kind:'note',
+     note:'Eight days out. Spreading it over them beats one long night.'},
+    {start:'2026-12-15', end:'2026-12-16', name:'Pre-Comp Exams', icon:'✍️', kind:'exam',
+     note:'The dry run for Comps — same shape, lower stakes.'},
+    {start:'2027-05-03', name:'Comp review begins', icon:'📚', kind:'note',
+     note:'Eight days out. Start with whatever your Growth Zone still has in it.'},
+    {start:'2027-05-11', end:'2027-05-13', name:'Comp Exams', icon:'🎓', kind:'exam',
+     note:'The big ones. Three days, everything from the year.'}
+  ]
+,
   milestones:[
     {date:'2026-08-03',name:'First day of school',icon:'🚀'},
     {date:'2026-10-02',name:'End of Quarter 1',icon:'📊'},
-    {date:'2026-12-07',name:'Pre-Comp review begins',icon:'📚'},
-    {date:'2026-12-15',name:'Pre-Comp Exams',icon:'✍️'},
     {date:'2026-12-18',name:'End of Quarter 2',icon:'📊'},
     {date:'2027-03-12',name:'End of Quarter 3',icon:'📊'},
-    {date:'2027-05-03',name:'Comp review begins',icon:'📚'},
-    {date:'2027-05-11',name:'Comp Exams',icon:'🎓'},
     {date:'2027-05-14',name:'End of Quarter 4',icon:'📊'},
     {date:'2027-05-17',name:'Project Week',icon:'🛠️'},
     {date:'2027-05-21',name:'Last day of school',icon:'🎉'}
   ]
 };
 const closedToday = ds => (CAL.closed.find(([a,b])=>ds>=a&&ds<=b)||[])[2] || null;
+
+/* An event with no `end` runs for one day. */
+const evEnd = e => e.end || e.start;
+const eventsOn = ds => (CAL.events||[]).filter(e => ds>=e.start && ds<=evEnd(e));
+const earlyReleaseOn = ds => eventsOn(ds).find(e=>e.early) || null;
+/* In-progress events stay in the list until their last day, so a two-day exam
+   does not vanish from "Coming up" halfway through. */
+function upcomingEvents(from, withinDays){
+  const to = AZ.shift(from, withinDays);
+  return (CAL.events||[]).filter(e => evEnd(e) >= from && e.start <= to)
+    .sort((a,b)=> a.start.localeCompare(b.start) || a.name.localeCompare(b.name));
+}
+/* "3 days" / "Today" / "Day 2 of 4" — one label for both shapes. */
+function whenLabel(from, e){
+  const multi = evEnd(e) !== e.start;
+  if(from >= e.start){
+    if(!multi) return 'Today';
+    return `Day ${AZ.daysBetween(e.start, from)+1} of ${AZ.daysBetween(e.start, evEnd(e))+1}`;
+  }
+  const d = AZ.daysBetween(from, e.start);
+  return d===1 ? 'Tomorrow' : `${d} days`;
+}
 const currentQuarter = ds => CAL.quarters.find(q=>ds>=q.start&&ds<=q.end) || null;
 const nextMilestone  = ds => CAL.milestones.find(m=>m.date>=ds) || null;
 function fmtTime(m){ const h=Math.floor(m/60),mm=m%60,ap=h>=12?'PM':'AM',hh=h%12===0?12:h%12;
@@ -1130,20 +1178,33 @@ SCREENS.today = function(root){
 
   /* Level, streak and XP live on Stars — Today is the school day, not a dashboard. */
 
-  /* Upcoming assessments */
-  const up = upcomingAssessments(date, 21);
+  /* Coming up — school events and her own tests in one list, ordered by date.
+     A Mini-Comp and a Friday maths quiz are the same kind of thing to plan
+     around, so splitting them into two lists would only hide one of them. */
+  const upA = upcomingAssessments(date, 21).map(a=>{
+    const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
+    return { on:a.date, icon:k.ic, name:a.title, sub:`${c?c.name:''} · ${AZ.shortDate(a.date)}`,
+             when: (dd=>dd===0?'Today':dd===1?'Tomorrow':`${dd} days`)(AZ.daysBetween(date,a.date)),
+             soon: AZ.daysBetween(date,a.date)<=2 };
+  });
+  const upE = upcomingEvents(date, 21).map(e=>{
+    const span = evEnd(e)===e.start ? AZ.shortDate(e.start)
+      : `${AZ.shortDate(e.start)} – ${AZ.shortDate(evEnd(e))}`;
+    return { on:e.start, icon:e.icon, name:e.name, sub: e.note ? `${span} · ${e.note}` : span,
+             when: whenLabel(date, e), soon: date>=e.start || AZ.daysBetween(date,e.start)<=2,
+             quiet: e.kind==='early' || e.kind==='note' };
+  });
+  const up = [...upA, ...upE].sort((a,b)=>a.on.localeCompare(b.on));
   if(up.length){
     root.appendChild(divider('Coming up'));
     const ac = el('div','card');
-    up.slice(0,5).forEach(a=>{
-      const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
-      const d = AZ.daysBetween(date, a.date);
+    up.slice(0,6).forEach(u=>{
       const r = el('div','row');
-      const kk = el('span','k',`${k.ic} ${a.title}`);
-      kk.appendChild(el('small',null, `${c?c.name:''} · ${AZ.shortDate(a.date)}`));
+      const kk = el('span','k',`${u.icon} ${u.name}`);
+      kk.appendChild(el('small',null,u.sub));
       r.appendChild(kk);
-      const v = el('span','v'+(d<=2?'':' plain'), d===0?'Today':d===1?'Tomorrow':`${d} days`);
-      r.appendChild(v); ac.appendChild(r);
+      r.appendChild(el('span','v'+(u.soon && !u.quiet ? '' : ' plain'), u.when));
+      ac.appendChild(r);
     });
     root.appendChild(ac);
   }
@@ -1160,6 +1221,22 @@ SCREENS.today = function(root){
       : 'No classes today — this is your normal weekday timetable.'));
     root.appendChild(n);
   }
+  /* Events for today, pinned above the periods. They are not an extra period,
+     so they are painted differently rather than slotted into the timetable. */
+  eventsOn(date).forEach(e=>{
+    const row = el('div','evt'+(e.kind==='early'||e.kind==='note' ? ' quiet' : ''));
+    row.appendChild(el('div','pchip',e.icon));
+    const m = el('div','meta');
+    m.appendChild(el('div','nm',e.name));
+    const bits = [];
+    if(evEnd(e)!==e.start) bits.push(whenLabel(date, e));
+    if(e.note) bits.push(e.note);
+    if(bits.length) m.appendChild(el('div','dt', bits.join(' · ')));
+    row.appendChild(m);
+    row.appendChild(el('div','tm', e.kind==='early' ? 'Early' : e.kind==='exam' ? 'Exam' : 'Today'));
+    root.appendChild(row);
+  });
+
   const now = AZ.nowMinutes();
   CLASSES.forEach(c=>{
     const live = schoolDay && now>=c.start && now<c.end;
@@ -1169,7 +1246,13 @@ SCREENS.today = function(root){
     p.appendChild(paint(el('div','pchip',c.icon), c));
     const m = el('div','meta');
     m.appendChild(el('div','nm',c.name));
-    m.appendChild(el('div','dt', c.bookend ? c.note : c.break ? `Room ${c.room}` : whereLine(c)));
+    const er = schoolDay && earlyReleaseOn(date);
+    /* Never show the usual pick-up time on an early-release day — that row is
+       what a parent plans around. Until the school states the time, say so. */
+    const note = (c.id==='pickup' && er)
+      ? (er.dismiss || 'Early release — time not published')
+      : (c.bookend ? c.note : c.break ? `Room ${c.room}` : whereLine(c));
+    m.appendChild(el('div','dt', note));
     p.appendChild(m);
     if(live) p.appendChild(el('span','tag-now','NOW'));
     else p.appendChild(el('div','tm',fmtTime(c.start)));

@@ -249,6 +249,48 @@ feedback — check any new copy against it.
 
 Focus does **not** get its own tab; it is reached from Study.
 
+### School events — the newsletter layer
+
+`CAL.events` holds dated items lifted from the school newsletter. They live in
+**code, not the record store**, on purpose: they are identical on every device,
+so one deploy updates all four phones and nobody types anything. Per-class tests
+stay as `assess` records — those are hers, and only she and a parent know them.
+
+```js
+{start:'2026-12-15', end:'2026-12-16', name:'Pre-Comp Exams', icon:'✍️',
+ kind:'exam', note:'The dry run for Comps — same shape, lower stakes.'}
+```
+
+`end` is optional (a one-day event). Helpers: `eventsOn(date)`,
+`upcomingEvents(from, days)`, `earlyReleaseOn(date)`, `whenLabel(from, ev)`.
+
+Three render sites:
+- **Pinned above the day's periods** on the Today schedule — styled `.evt`, not
+  as a tenth period, because it is not one.
+- **"Coming up"**, merged with her own assessments and sorted by date. A
+  Mini-Comp and a Friday maths quiz are the same thing to plan around, so
+  splitting them into two lists would only hide one.
+- **Pick-up row**, when `early:true` — see below.
+
+**`kind` sets the tone, not just the icon.** `exam` gets the study nudge;
+`benchmark` says explicitly that there is nothing to revise for, because a
+diagnostic that reads like an exam gets crammed for, which is the wrong response;
+`celebration` and `community` are things to look forward to; `note` and `early`
+render quiet.
+
+**Early release is a correctness issue, not decoration.** The pick-up row is what
+a parent plans around, so on an `early:true` day it must never show the usual
+time. It falls back to the event's `dismiss` string, or says the time is not
+published — the school lists the days but not the times.
+
+**In-progress events stay listed** until their last day (`evEnd(e) >= from`), so
+a two-day exam does not vanish from "Coming up" halfway through, and shows
+"Day 1 of 2".
+
+`milestones` is now only structural — quarter boundaries, first and last day.
+Anything dated and actionable belongs in `events`. Keep them disjoint or the same
+item renders twice, once in each list.
+
 ### Content review — nothing reaches her unread
 
 Generated units are written with `status:'draft'` and **`units()` filters drafts
