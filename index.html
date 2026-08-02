@@ -1504,7 +1504,7 @@ SCREENS.brief = function(root){
   const head = el('div','card ac');
   if(c) head.appendChild(el('div','eyebrow', `${c.icon} ${c.name}`));
   head.appendChild(el('h2',null,u.title));
-  head.appendChild(el('div','cite', citeLine(u)));
+  const cit = citeEl(u); if(cit) head.appendChild(cit);
   root.appendChild(head);
 
   if(u.summary && u.summary.text){
@@ -2958,8 +2958,7 @@ const PROV_LABEL = { source:'From class material', added:'Study suggestion' };
 function provTag(from){
   const src = from === 'source';
   const t = el('span','prov '+(src?'src':'add'), PROV_LABEL[src?'source':'added']);
-  t.title = src ? 'The substance of this comes from the teacher\'s material.'
-                : 'This is the app\'s own framing or advice, not the teacher\'s.';
+  t.title = src ? 'Comes from the class material.' : 'The app\'s own suggestion.';
   return t;
 }
 /* A block is {text, from}. Older units predate this and have neither. */
@@ -2973,9 +2972,9 @@ function provBlock(block, opts){
   w.appendChild(line);
   return w;
 }
-const citeLine = u => u.srcName
-  ? `Built from ${u.srcName}. The original is untouched — this is written alongside it.`
-  : 'Built from the class material provided. The original is untouched.';
+/* Just the source. That the original was left alone is an engineering
+   guarantee, not something a student or parent needs told every time. */
+function citeEl(u){ return u.srcName ? el('div','cite', 'From '+u.srcName) : null; }
 
 /* ---------- Photo capture ---------- */
 /* Photographing the whiteboard or a worksheet is how the material actually
@@ -3074,9 +3073,11 @@ SCREENS.reviewunit = function(root){
   const ti = el('input'); ti.type='text'; ti.value = u.title;
   ti.addEventListener('change',()=>{ u.title = ti.value.trim() || u.title; });
   head.appendChild(ti);
-  head.appendChild(el('div','cite', citeLine(u)));
+  const cit = citeEl(u); if(cit) head.appendChild(cit);
   head.appendChild(el('p',null,'Read it through. Tap ✕ on anything wrong or off-topic — it is dropped when you approve. Nothing here is visible to her yet.'));
-  head.appendChild(el('div','hintline','Green means the substance came from the teacher\'s material — those are the claims worth checking against the file. Grey is the app\'s own framing.'));
+  /* Units built before provenance existed have nothing to explain. */
+  const hasProv = (u.cards||[]).some(x=>x.from) || (u.questions||[]).some(x=>x.from) || !!u.summary;
+  if(hasProv) head.appendChild(el('div','hintline','Green marks what came from the material — those are the claims worth checking.'));
   root.appendChild(head);
 
   if(u.parentNote && u.parentNote.text){

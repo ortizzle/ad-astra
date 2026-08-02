@@ -313,10 +313,13 @@ Every unit built from class material follows one framework, encoded in
 `UNIT_SCHEMA` and the system prompt, not left to the model's discretion.
 
 **The original is never altered.** Nothing is written back to Drive — the app has
-no write path there and should not gain one. A unit is written *alongside* the
-source and cites it by name (`u.srcName`, entered on the generate screen and
-rendered by `citeLine()`). With no name it says the name is unknown rather than
-inventing one.
+no write path there and should not gain one. This is an engineering guarantee and
+stays out of the UI: a student reading a recap does not need telling that a file
+was left alone. Say it here, not on screen.
+
+What the screen does show is the source, by name — `u.srcName`, entered on the
+generate screen and rendered by `citeEl()` as a plain "From <file>". With no name
+the line is omitted entirely rather than filled with a placeholder sentence.
 
 **Every block declares its origin.** `from:'source'` means the substance is the
 teacher's; `from:'added'` means it is our framing, advice or pacing. This is not
