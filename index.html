@@ -181,6 +181,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .bar{height:8px;background:var(--deep);border:1px solid var(--line-soft);border-radius:999px;overflow:hidden}
 .bar > i{display:block;height:100%;background:var(--ac);border-radius:999px;transition:width .55s cubic-bezier(.2,.8,.2,1)}
 .bar.warm > i{background:var(--warm)}
+/* countdown for timed quizzes — turns urgent in the last five seconds */
+.qtimer-track{height:6px;background:var(--deep);border-radius:999px;overflow:hidden;margin-top:8px}
+.qtimer-track > i{display:block;height:100%;background:var(--good);border-radius:999px;transition:width .12s linear}
+.qtimer-track > i.low{background:var(--bad)}
 
 .flip{perspective:1500px;margin:14px 0}
 .flip-in{position:relative;width:100%;min-height:290px;transition:transform .55s cubic-bezier(.3,.9,.3,1);transform-style:preserve-3d;cursor:pointer}
@@ -1273,9 +1277,13 @@ SCREENS.unit = function(root){
       const row = el('div','btn-row');
       const f = el('button','btn btn-secondary','🃏  Flashcards');
       f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:c.id}));
-      const qb = el('button','btn btn-primary','⚡  Quiz');
-      qb.addEventListener('click',()=>launchQuiz(u.id,c.id));
+      const qb = el('button','btn btn-primary','Quiz');
+      qb.addEventListener('click',()=>launchQuiz(u.id,c.id,false));
       row.appendChild(f); row.appendChild(qb); card.appendChild(row);
+      const tb = el('button','btn btn-secondary','⏱  Beat the clock');
+      tb.style.marginTop='8px';
+      tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
+      card.appendChild(tb);
       root.appendChild(card);
     });
   }
@@ -1365,7 +1373,38 @@ const FEELING = [
   {v:1,e:'😩',l:'Rough'},{v:2,e:'😔',l:'Meh'},{v:3,e:'😌',l:'OK'},
   {v:4,e:'😊',l:'Good'},{v:5,e:'🤩',l:'Great'}
 ];
-function launchQuiz(unitId, classId){ go('checkin',{unitId,classId}); }
+function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:!!timed}); }
+
+/* Timed mode. Each question gets a countdown; answering faster is worth more,
+   and running out of time simply moves on. The deadline is an absolute
+   timestamp so a re-render never resets the clock. */
+const QUIZ_LIMIT = 20000;
+let quizTimer = null;
+function stopQuestionTimer(){ clearInterval(quizTimer); quizTimer = null; }
+function startQuestionTimer(u){
+  stopQuestionTimer();
+  if(!quizState || !quizState.timed) return;
+  quizState.deadline = Date.now() + QUIZ_LIMIT;
+  quizTimer = setInterval(()=>{
+    if(!quizState || quizState.answered !== null){ stopQuestionTimer(); return; }
+    const left = quizState.deadline - Date.now();
+    const bar = document.getElementById('qtimer');
+    if(bar){
+      bar.style.width = Math.max(0, left/QUIZ_LIMIT*100)+'%';
+      bar.className = left < 5000 ? 'low' : '';
+    }
+    if(left <= 0){ stopQuestionTimer(); timeUp(u); }
+  }, 100);
+}
+function timeUp(u){
+  const q = u.questions[quizState.order[quizState.i]];
+  quizState.answered = -1;                       // -1 = ran out of time
+  quizState.missed.push(q.id);
+  put({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId, qid:q.id,
+        q:q.q, right:q.opts[q.ans], chose:'(ran out of time)', why:q.ex?.main||'', on:AZ.today() });
+  if(navigator.vibrate) navigator.vibrate(60);
+  render();
+}
 
 SCREENS.checkin = function(root){
   const u = DATA.records[ctx.unitId];
@@ -1406,11 +1445,11 @@ SCREENS.checkin = function(root){
   start.disabled = state.readiness===null || state.feeling===null;
   start.addEventListener('click',()=>{
     ctx._pre = {readiness:state.readiness, feeling:state.feeling};
-    go('quiz',{unitId:ctx.unitId, classId:ctx.classId, pre:ctx._pre});
+    go('quiz',{unitId:ctx.unitId, classId:ctx.classId, pre:ctx._pre, timed:ctx.timed});
   });
   root.appendChild(start);
   const skip = el('button','btn btn-ghost','Skip and just quiz');
-  skip.addEventListener('click',()=>go('quiz',{unitId:ctx.unitId,classId:ctx.classId}));
+  skip.addEventListener('click',()=>go('quiz',{unitId:ctx.unitId,classId:ctx.classId,timed:ctx.timed}));
   root.appendChild(skip);
 };
 
@@ -1419,9 +1458,13 @@ let quizState = null;
 SCREENS.quiz = function(root){
   const u = DATA.records[ctx.unitId];
   if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
-  if(!quizState || quizState.unitId!==u.id)
+  /* Also restart when the mode changes, so switching between the normal quiz
+     and Beat the clock never resumes the other one's half-finished run. */
+  if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
     quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
-      order:shuffle(u.questions.map((_,i)=>i)),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null};
+      order:shuffle(u.questions.map((_,i)=>i)),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
+      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0};
+    if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
   const q = u.questions[quizState.order[quizState.i]];
 
   const head = el('div','card');
@@ -1432,6 +1475,14 @@ SCREENS.quiz = function(root){
   head.appendChild(r);
   const bar = el('div','bar'), fi = el('i');
   fi.style.width = (quizState.i/u.questions.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
+  if(quizState.timed){
+    const t = el('div','qtimer-track'), ti = el('i');
+    ti.id = 'qtimer';
+    const left = quizState.answered===null ? Math.max(0, quizState.deadline - Date.now()) : 0;
+    ti.style.width = (left/QUIZ_LIMIT*100)+'%';
+    if(left < 5000 && quizState.answered===null) ti.className='low';
+    t.appendChild(ti); head.appendChild(t);
+  }
   root.appendChild(head);
 
   const qc = el('div','card ac'); qc.appendChild(el('h3',null,q.q)); root.appendChild(qc);
@@ -1449,33 +1500,46 @@ SCREENS.quiz = function(root){
   });
 
   if(quizState.answered===null){
-    if(q.hint && !quizState.hintUsed){
+    if(q.hint && !quizState.hintUsed && !quizState.timed){
       const h = el('button','btn btn-ghost','💡  Give me a hint (−5 XP)');
       h.addEventListener('click',()=>{quizState.hintUsed=true;quizState.hints++;render();});
       root.appendChild(h);
-    } else if(q.hint){
+    } else if(q.hint && !quizState.timed){
       const h = el('div','card'); h.appendChild(el('p',null,'💡 '+q.hint)); root.appendChild(h);
     }
   } else {
     const right = quizState.answered===q.ans;
     const ex = el('div','explain '+(right?'ok':'no'));
-    ex.appendChild(el('div','lbl', right?'Correct':'Not quite'));
+    ex.appendChild(el('div','lbl', right?'Correct'
+      : quizState.answered===-1 ? 'Out of time' : 'Not quite'));
     ex.appendChild(el('p',null, q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
     root.appendChild(ex);
     const n = el('button','btn btn-primary', quizState.i===u.questions.length-1?'See results →':'Next question →');
     n.addEventListener('click',()=>{
-      if(quizState.i<u.questions.length-1){quizState.i++;quizState.answered=null;quizState.hintUsed=false;render();}
-      else finishQuiz(u);
+      if(quizState.i<u.questions.length-1){
+        quizState.i++; quizState.answered=null; quizState.hintUsed=false;
+        render(); startQuestionTimer(u);
+      } else finishQuiz(u);
     });
     root.appendChild(n);
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
-  quit.addEventListener('click',()=>{quizState=null;go('unit',{classId:ctx.classId});});
+  quit.addEventListener('click',()=>{stopQuestionTimer();quizState=null;go('unit',{classId:ctx.classId});});
   root.appendChild(quit);
 };
 function answer(u,q,idx){
+  /* Kahoot-style: the faster it lands, the bigger the bonus. */
+  if(quizState.timed){
+    const used = QUIZ_LIMIT - Math.max(0, quizState.deadline - Date.now());
+    stopQuestionTimer();
+    if(idx===q.ans){
+      quizState.speedBonus += Math.round(10 * Math.max(0, 1 - used/QUIZ_LIMIT));
+      const secs = used/1000;
+      if(quizState.fastest===null || secs<quizState.fastest) quizState.fastest = secs;
+    }
+  }
   quizState.answered = idx;
   const right = idx===q.ans;
   if(right) quizState.correct++;
@@ -1495,10 +1559,15 @@ function finishQuiz(u){
   const total = u.questions.length, pct = Math.round(quizState.correct/total*100);
   const secs = Math.round((Date.now()-quizState.start)/1000);
   const bonus = pct===100?50 : pct>=80?25 : 0;
-  const xp = Math.max(0, quizState.correct*10 + bonus - quizState.hints*5);
+  const speed = quizState.timed ? quizState.speedBonus : 0;
+  const fastest = quizState.fastest;
+  const wasTimed = quizState.timed;
+  stopQuestionTimer();
+  const xp = Math.max(0, quizState.correct*10 + bonus + speed - quizState.hints*5);
   const hintsUsed = quizState.hints, pre = quizState.pre;
   const log = put({ id:uid('log'), type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
-    date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp, hints:hintsUsed });
+    date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp,
+    hints:hintsUsed, timed:wasTimed, speedBonus:speed });
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
     unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
 
@@ -1523,6 +1592,7 @@ function finishQuiz(u){
     : pct>=80 ? `${quizState.correct}/${total} — strong.\n\n+${xp} XP`
     : pct>=60 ? `${quizState.correct}/${total}. Solid base, a few gaps.\n\n+${xp} XP`
     : `${quizState.correct}/${total}. This one needs another pass — that is information, not a verdict.\n\n+${xp} XP`)
+    + (speed?`\n\nSpeed bonus +${speed} XP${fastest!==null?` · fastest answer ${fastest.toFixed(1)}s`:''}.`:'')
     + (hintsUsed?`\n\n${hintsUsed} hint${hintsUsed>1?'s':''} used (−${hintsUsed*5} XP).`:'')
     + calib + (missed?`\n\n${missed} question${missed>1?'s':''} went to your Growth Zone.`:'');
 
