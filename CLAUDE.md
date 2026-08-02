@@ -333,6 +333,17 @@ in dark against their surface.
 Subject cards keep their saturated fills in both modes by design — they are the
 app's colour anchor, and the bottom scrim already guarantees the label contrast.
 
+**`--faint`, `--good`, `--warm` are read, not decoration.** They carry hints,
+explanations, correct answers and warnings at 12–13px, so they are held to the
+same 4.5:1 bar as body text against **both** the card (`#fff` in light) and the
+page (`--ink`). The light values were deepened on 2026-08-02 for exactly this
+reason — `--faint` was at 2.66:1. If you lighten any of them for aesthetics,
+re-measure both surfaces first.
+
+One trap when measuring: Chrome reports accent-tinted backgrounds as
+`color(srgb … / 0.08)`, which naive contrast probes parse as opaque and report
+wildly wrong ratios. Measure against the opaque surface underneath instead.
+
 ## Tutor
 
 Ordered deliberately: **the ask box first**, then one or two techniques, then the
