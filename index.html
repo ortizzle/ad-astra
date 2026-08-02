@@ -248,6 +248,24 @@ label{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:upperca
 input,textarea,select{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:13px;color:var(--text);padding:13px 14px;font-family:inherit;font-size:16px;min-height:var(--tap)}
 textarea{min-height:140px;resize:vertical;line-height:1.55}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
+.rev{padding:14px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:9px}
+.rev.cut{opacity:.42}
+.rev .q{font-size:14.5px;font-weight:600;margin-bottom:8px;padding-right:34px}
+.rev .o{font-size:13px;color:var(--muted);padding:3px 0 3px 18px;position:relative;line-height:1.45}
+.rev .o.flat{padding-left:0}
+.rev .o.yes{color:var(--good);font-weight:600}
+.rev .o.yes:before{content:'✓';position:absolute;left:0}
+.rev .why{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
+.rev .cut-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:9px;
+  background:var(--raised);border:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1}
+.rev{position:relative}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-top:10px}
+.shot{position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot button{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:8px;
+  background:rgba(0,0,0,.62);color:#fff;font-size:13px;line-height:1;border:none}
+.shot .n{position:absolute;bottom:0;left:0;right:0;padding:3px 6px;font-size:10px;font-weight:700;
+  background:rgba(0,0,0,.55);color:#fff}
 .hintline{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
 .swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .sw{width:44px;height:44px;border-radius:14px;border:2px solid transparent;position:relative}
@@ -744,7 +762,11 @@ function put(rec){ rec.updatedAt = Date.now(); DATA.records[rec.id] = rec; saveL
 function softDelete(id){ const r = DATA.records[id]; if(!r) return;
   DATA.records[id] = { id, type:r.type, deleted:true, updatedAt:Date.now() }; saveLocal(); }
 const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type===t);
-const units = cid => !cid ? all('unit') : all('unit').filter(u=>u.classId===cid||u.classId==='__all__');
+/* Student-facing everywhere. A unit without a status predates the review gate
+   and is treated as already approved. */
+const units = cid => all('unit')
+  .filter(u => u.status !== 'draft')
+  .filter(u => !cid || u.classId===cid || u.classId==='__all__');
 
 /* ---------- Preferences (synced, so her theme follows her to any device) ---------- */
 const ACCENTS = [
@@ -1349,6 +1371,11 @@ SCREENS.unit = function(root){
       root.appendChild(card);
     });
   }
+  const waiting = drafts().filter(u=>u.classId===c.id).length;
+  if(waiting) root.appendChild(el('div','hintline',
+    waiting===1 ? 'One unit is waiting for a grown-up to check it.'
+                : `${waiting} units are waiting for a grown-up to check them.`));
+
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
   const gen = el('button','btn btn-ghost','✨  Generate a unit for '+c.short);
@@ -2255,6 +2282,18 @@ SCREENS.parent = function(root){
   root.appendChild(headline(who ? `${who}'s progress` : 'Progress',
     `Week of ${AZ.shortDate(AZ.weekStart(date))}${roster().school?' · '+roster().school:''} · Quarter ${currentQuarter(date)?.n || '—'}`));
 
+  /* Anything waiting on you comes first — it is the only thing here that blocks her. */
+  const pending = drafts();
+  if(pending.length){
+    const rv = el('div','card ac');
+    rv.appendChild(el('h2',null, pending.length===1 ? '1 unit is waiting for you' : pending.length+' units are waiting for you'));
+    rv.appendChild(el('p',null,'Generated material stays out of her app until you have read it.'));
+    const rb = el('button','btn btn-primary','Read them');
+    rb.addEventListener('click',()=>go('review'));
+    rv.appendChild(rb);
+    root.appendChild(rv);
+  }
+
   /* Effort this week */
   const wkStart = AZ.weekStart(date);
   const wkMin = minutesInRange(wkStart, date);
@@ -2376,6 +2415,23 @@ SCREENS.parent = function(root){
   root.appendChild(asc);
   const add = el('button','btn btn-primary','＋  Add a test or quiz');
   add.addEventListener('click',()=>editAssessment(null)); root.appendChild(add);
+
+  /* Content */
+  root.appendChild(divider('Study material'));
+  const mat = el('div','card');
+  const approved = units().length;
+  mat.appendChild(el('p',null, approved
+    ? `${approved} unit${approved===1?'':'s'} approved and in her app${pending.length?`, ${pending.length} waiting on you`:''}.`
+    : 'No units approved yet. Generate one from class notes and read it here before it reaches her.'));
+  const mrow = el('div','btn-row');
+  const mg = el('button','btn btn-secondary','✨  Generate a unit');
+  mg.addEventListener('click',()=>go('generate',{fromParent:true}));
+  mrow.appendChild(mg);
+  const mr = el('button','btn btn-primary', pending.length ? `Review (${pending.length})` : 'Review queue');
+  mr.addEventListener('click',()=>go('review'));
+  mrow.appendChild(mr);
+  mat.appendChild(mrow);
+  root.appendChild(mat);
 
   /* Weekly goals */
   root.appendChild(divider('Weekly study goals'));
@@ -2697,6 +2753,172 @@ SCREENS.stars = function(root){
   root.appendChild(g);
 };
 
+/* ---------- Photo capture ---------- */
+/* Photographing the whiteboard or a worksheet is how the material actually
+   arrives — nobody is going to retype a page of notes on a phone. */
+const MAX_SHOTS = 6, SHOT_EDGE = 1400;
+
+function readShot(file){
+  return new Promise((resolve,reject)=>{
+    if(!file.type.startsWith('image/')) return reject(new Error('That file is not an image.'));
+    const fr = new FileReader();
+    fr.onerror = ()=>reject(new Error('Could not read that photo.'));
+    fr.onload = ()=>{
+      const img = new Image();
+      img.onerror = ()=>reject(new Error('Could not open that photo.'));
+      img.onload = ()=>{
+        /* Downscaled before it ever leaves the phone: a 12MP photo is mostly
+           wasted tokens, and the text stays legible well under 1400px. */
+        const scale = Math.min(1, SHOT_EDGE/Math.max(img.width,img.height));
+        const w = Math.round(img.width*scale), h = Math.round(img.height*scale);
+        const cv = document.createElement('canvas'); cv.width=w; cv.height=h;
+        cv.getContext('2d').drawImage(img,0,0,w,h);
+        const url = cv.toDataURL('image/jpeg',0.82);
+        resolve({ url, data:url.split(',')[1], w, h, kb:Math.round(url.length*0.75/1024) });
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+function shotPicker(onAdd){
+  const wrap = el('div');
+  const mk = (label, capture) => {
+    const inp = el('input'); inp.type='file'; inp.accept='image/*'; inp.multiple=true;
+    if(capture) inp.capture='environment';
+    inp.style.display='none';
+    const b = el('button','btn btn-secondary',label);
+    b.addEventListener('click',()=>inp.click());
+    inp.addEventListener('change', async ()=>{
+      const files = [...inp.files];
+      inp.value = '';
+      for(const f of files){
+        try{ await onAdd(await readShot(f)); }
+        catch(e){ toast(e.message); }
+      }
+    });
+    wrap.appendChild(b); wrap.appendChild(inp);
+    return b;
+  };
+  const row = el('div','btn-row');
+  wrap.appendChild(row);
+  const a = mk('📷  Take a photo', true);
+  const b = mk('🖼  Choose photos', false);
+  row.appendChild(a); row.appendChild(b);
+  return wrap;
+}
+
+/* ================= CONTENT REVIEW ================= */
+/* Anything generated lands as a draft. It reaches her only once a grown-up has
+   read it — the model is good, but it is not the one who knows her class. */
+const drafts = () => all('unit').filter(u=>u.status==='draft')
+                     .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+
+SCREENS.review = function(root){
+  root.appendChild(headline('Waiting for review','Generated units stay here until you have read them. Nothing on this page has reached her yet.'));
+  const ds = drafts();
+  if(!ds.length){
+    const e = el('div','empty');
+    e.appendChild(el('span','ic','📭'));
+    e.appendChild(el('p',null,'Nothing waiting. New units land here the moment they are generated.'));
+    root.appendChild(e);
+  } else {
+    ds.forEach(u=>{
+      const c = CLASS_BY_ID[u.classId];
+      const n = (k,w) => `${k} ${w}${k===1?'':'s'}`;
+      root.appendChild(cardButton(u.title,
+        `${c?c.name+' · ':''}${n(u.cards.length,'card')} · ${n(u.questions.length,'question')}${u.source?' · '+u.source:''}`,
+        ()=>go('reviewunit',{unitId:u.id})));
+    });
+  }
+  const back = el('button','btn btn-ghost','← Back to the grown-up view');
+  back.addEventListener('click',()=>go('parent'));
+  root.appendChild(back);
+};
+
+SCREENS.reviewunit = function(root){
+  const u = DATA.records[ctx.unitId];
+  if(!u || u.deleted) return go('review');
+  const c = CLASS_BY_ID[u.classId];
+  /* Cuts are held here, not written, so backing out changes nothing. */
+  const cutC = ctx._cutC = ctx._cutC || new Set();
+  const cutQ = ctx._cutQ = ctx._cutQ || new Set();
+
+  const head = el('div','card ac');
+  head.appendChild(el('div','eyebrow', (c?c.name:'Unit') + ' · draft'));
+  const ti = el('input'); ti.type='text'; ti.value = u.title;
+  ti.addEventListener('change',()=>{ u.title = ti.value.trim() || u.title; });
+  head.appendChild(ti);
+  head.appendChild(el('p',null,'Read it through. Tap ✕ on anything wrong or off-topic — it is dropped when you approve. Nothing here is visible to her yet.'));
+  root.appendChild(head);
+
+  const counts = el('div','hintline');
+  const recount = () => { counts.textContent =
+    `${u.cards.length-cutC.size} of ${u.cards.length} cards · ${u.questions.length-cutQ.size} of ${u.questions.length} questions kept`; };
+  recount();
+  root.appendChild(counts);
+
+  if(u.cards.length){
+    root.appendChild(divider('Flashcards'));
+    u.cards.forEach(card=>{
+      const d = el('div','rev'+(cutC.has(card.id)?' cut':''));
+      d.appendChild(el('div','q',card.term));
+      d.appendChild(el('div','o flat',card.def));
+      if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
+      const x = el('button','cut-btn', cutC.has(card.id)?'↩':'✕');
+      x.setAttribute('aria-label', cutC.has(card.id)?'Keep this card':'Drop this card');
+      x.addEventListener('click',()=>{ cutC.has(card.id)?cutC.delete(card.id):cutC.add(card.id); render(); });
+      d.appendChild(x);
+      root.appendChild(d);
+    });
+  }
+
+  if(u.questions.length){
+    root.appendChild(divider('Quiz questions'));
+    const LV = {1:'Recall',2:'Apply',3:'Analyse'};
+    u.questions.forEach(q=>{
+      const d = el('div','rev'+(cutQ.has(q.id)?' cut':''));
+      d.appendChild(el('div','eyebrow', LV[q.lv]||('Level '+q.lv)));
+      d.appendChild(el('div','q',q.q));
+      q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
+      if(q.ex && q.ex.main) d.appendChild(el('div','why',q.ex.main));
+      const x = el('button','cut-btn', cutQ.has(q.id)?'↩':'✕');
+      x.setAttribute('aria-label', cutQ.has(q.id)?'Keep this question':'Drop this question');
+      x.addEventListener('click',()=>{ cutQ.has(q.id)?cutQ.delete(q.id):cutQ.add(q.id); render(); });
+      d.appendChild(x);
+      root.appendChild(d);
+    });
+  }
+
+  const ok = el('button','btn btn-primary','Approve — send it to her');
+  ok.addEventListener('click',()=>{
+    const cards = u.cards.filter(x=>!cutC.has(x.id));
+    const qs = u.questions.filter(x=>!cutQ.has(x.id));
+    if(!cards.length && !qs.length){ toast('Nothing left to approve'); return; }
+    put({...u, cards, questions:qs, title:ti.value.trim()||u.title,
+         status:'approved', approvedOn:AZ.today()});
+    syncSoon();
+    const dropped = cutC.size + cutQ.size;
+    toast(dropped ? `Approved — ${dropped} dropped` : 'Approved');
+    ctx._cutC = ctx._cutQ = null;
+    go('review');
+  });
+  root.appendChild(ok);
+
+  const del = el('button','btn btn-ghost','Discard this unit');
+  del.addEventListener('click',()=>showModal({ title:'Discard it?',
+    message:`"${u.title}" is deleted for good. She never saw it, so nothing is lost on her side.`,
+    confirmText:'Discard', cancelText:'Keep it',
+    onConfirm:()=>{ softDelete(u.id); syncSoon(); toast('Discarded');
+      ctx._cutC = ctx._cutQ = null; go('review'); } }));
+  root.appendChild(del);
+
+  const back = el('button','btn btn-ghost','← Back, decide later');
+  back.addEventListener('click',()=>{ ctx._cutC = ctx._cutQ = null; go('review'); });
+  root.appendChild(back);
+};
+
 /* ================= GENERATE ================= */
 const UNIT_SCHEMA = {
   type:'object',
@@ -2715,9 +2937,10 @@ const UNIT_SCHEMA = {
   },
   required:['title','cards','questions'], additionalProperties:false
 };
-async function generateUnit(classId, notes){
+async function generateUnit(classId, notes, shots){
   const key = Store.get('anthropic_key','');
   if(!key) throw new Error('NO_KEY');
+  shots = shots || [];
   const cls = CLASS_BY_ID[classId];
   const system = [
     `You build study material for a sharp ${STUDENT.grade}th grader taking ${cls?cls.name:'this class'}.`,
@@ -2726,15 +2949,21 @@ async function generateUnit(classId, notes){
     `Anchor everything to the supplied notes. Do not invent facts they do not support.`,
     `Tone: direct and a little dry. Never condescending. She can handle why something is actually interesting.`,
     `Card hints are memory hooks or mnemonics, never restatements of the definition.`,
-    `Explanations say why the right answer is right, not just what it is.`
-  ].join(' ');
+    `Explanations say why the right answer is right, not just what it is.`,
+    shots.length ? `Some or all of the material arrives as photos — a whiteboard, a worksheet, a textbook page, handwritten notes. Read them carefully, including handwriting and diagrams. If a photo is too blurry or cropped to read, work from what you can read and leave the rest out rather than guessing.` : ''
+  ].filter(Boolean).join(' ');
   const res = await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':key,
       'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
     body: JSON.stringify({ model:'claude-opus-5', max_tokens:16000, system,
       output_config:{ effort:'medium', format:{type:'json_schema',schema:UNIT_SCHEMA} },
-      messages:[{role:'user',content:`Class notes / study material:\n\n${notes}`}] })
+      messages:[{role:'user',content:[
+        ...shots.map(s=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:s.data}})),
+        {type:'text', text: notes
+          ? `Class notes / study material:\n\n${notes}`
+          : `The material is in the attached photo${shots.length>1?'s':''}. Build the unit from what they show.`}
+      ]}] })
   });
   if(!res.ok){ const t = await res.text();
     throw new Error(res.status===401?'BAD_KEY':`API error ${res.status}: ${t.slice(0,180)}`); }
@@ -2748,33 +2977,78 @@ async function generateUnit(classId, notes){
   parsed.questions.forEach((q,i)=>q.id=`q${i}`);
   return parsed;
 }
+let shotTray = [], genForm = {notes:'', classId:null};
 SCREENS.generate = function(root){
-  root.appendChild(headline('Generate a unit','Paste notes, a study guide, a vocab list, or a chapter summary. You see everything before it saves.'));
+  root.appendChild(headline('Generate a unit',
+    'Photograph the whiteboard or a worksheet, paste notes, or both. Everything is read before it saves.'));
   const c = el('div','card');
   c.appendChild(el('label',null,'Subject'));
   const sel = el('select');
+  if(!genForm.classId) genForm.classId = ctx.classId || STUDY_CLASSES[0].id;
   STUDY_CLASSES.forEach(cl=>{ const o=el('option',null,cl.name); o.value=cl.id;
-    if(cl.id===ctx.classId) o.selected=true; sel.appendChild(o); });
+    if(cl.id===genForm.classId) o.selected=true; sel.appendChild(o); });
+  sel.addEventListener('change',()=>{ genForm.classId = sel.value; });
   c.appendChild(sel);
-  c.appendChild(el('label',null,'Class notes'));
+  c.appendChild(el('label',null,'Photos of the material'));
+  c.appendChild(shotPicker(async shot=>{
+    if(shotTray.length >= MAX_SHOTS){ toast(`${MAX_SHOTS} photos is the limit`); return; }
+    shotTray.push(shot); render();
+  }));
+  if(shotTray.length){
+    const grid = el('div','shots');
+    shotTray.forEach((s,i)=>{
+      const fig = el('div','shot');
+      const im = el('img'); im.src = s.url; im.alt = `Photo ${i+1}`;
+      fig.appendChild(im);
+      fig.appendChild(el('div','n', s.kb+' KB'));
+      const x = el('button',null,'✕');
+      x.setAttribute('aria-label','Remove this photo');
+      x.addEventListener('click',()=>{ shotTray.splice(i,1); render(); });
+      fig.appendChild(x);
+      grid.appendChild(fig);
+    });
+    c.appendChild(grid);
+    c.appendChild(el('div','hintline',
+      `${shotTray.length} of ${MAX_SHOTS} photos. They are shrunk on this device before sending, and never stored — only the unit they produce is saved.`));
+  } else {
+    c.appendChild(el('div','hintline','Straight-on beats angled, and one page per photo reads far better than a whole desk.'));
+  }
+
+  c.appendChild(el('label',null,'Class notes'+(shotTray.length?' (optional)':'')));
   const ta = el('textarea');
-  ta.placeholder = 'Paste the material here — notes, slide text, a vocab list, a study guide…';
+  ta.placeholder = shotTray.length
+    ? 'Anything the photos do not show — the topic, what the test covers…'
+    : 'Paste the material here — notes, slide text, a vocab list, a study guide…';
+  ta.value = genForm.notes;
+  ta.addEventListener('input',()=>{ genForm.notes = ta.value; });
   c.appendChild(ta);
-  c.appendChild(el('div','hintline','More detail means better questions. Everything is grounded in what you paste.'));
+  c.appendChild(el('div','hintline','More detail means better questions. Everything is grounded in what you give it.'));
   const gob = el('button','btn btn-primary','✨  Generate');
   gob.addEventListener('click', async ()=>{
-    if(ta.value.trim().length < 80){ toast('Paste a bit more material first'); return; }
-    gob.disabled = true; gob.textContent = 'Thinking… this can take a minute';
+    const notes = ta.value.trim();
+    if(!shotTray.length && notes.length < 80){ toast('Add a photo or paste a bit more material'); return; }
+    gob.disabled = true; gob.textContent = 'Reading… this can take a minute';
     try{
-      const u = await generateUnit(sel.value, ta.value.trim());
+      const u = await generateUnit(sel.value, notes, shotTray);
       const rec = put({ id:uid('unit'), type:'unit', classId:sel.value, title:u.title||'Untitled unit',
-        quarter: currentQuarter(AZ.today())?.n || null, source:'Pasted notes',
-        cards:u.cards, questions:u.questions });
-      syncSoon(); celebrate();
-      showModal({ title:'Unit ready',
-        message:`"${rec.title}"\n\n${rec.cards.length} flashcards · ${rec.questions.length} quiz questions`,
-        confirmText:'Open it', onConfirm:()=>go('unit',{classId:sel.value}) });
-      go('unit',{classId:sel.value});
+        quarter: currentQuarter(AZ.today())?.n || null,
+        source: shotTray.length ? (shotTray.length===1?'Photo':`${shotTray.length} photos`) + (notes?' + notes':'') : 'Pasted notes',
+        status:'draft', cards:u.cards, questions:u.questions });
+      shotTray = []; genForm = {notes:'', classId:null};
+      syncSoon();
+      /* Straight into review when a grown-up made it; otherwise it waits. */
+      if(ctx.fromParent){
+        showModal({ title:'Ready to read',
+          message:`"${rec.title}"\n\n${rec.cards.length} flashcard${rec.cards.length===1?'':'s'} · ${rec.questions.length} quiz question${rec.questions.length===1?'':'s'}.\n\nCheck it over before it reaches her.`,
+          confirmText:'Read it now', onConfirm:()=>go('reviewunit',{unitId:rec.id}) });
+        go('reviewunit',{unitId:rec.id});
+      } else {
+        celebrate();
+        showModal({ title:'Sent for a check',
+          message:`"${rec.title}" — ${rec.cards.length} flashcard${rec.cards.length===1?'':'s'} and ${rec.questions.length} question${rec.questions.length===1?'':'s'}.\n\nA grown-up reads it before it lands in your subjects. That is not about trusting you; it is about catching anything the model got wrong.`,
+          confirmText:'Got it', onConfirm:()=>go('unit',{classId:sel.value}) });
+        go('unit',{classId:sel.value});
+      }
     }catch(e){
       gob.disabled=false; gob.textContent='✨  Generate';
       showModal({ title:'Could not generate',
@@ -2784,7 +3058,8 @@ SCREENS.generate = function(root){
   });
   c.appendChild(gob); root.appendChild(c);
   const back = el('button','btn btn-ghost','← Back');
-  back.addEventListener('click',()=>go(ctx.classId?'unit':'study',{classId:ctx.classId}));
+  back.addEventListener('click',()=>{ shotTray = []; genForm = {notes:'', classId:null};
+    go(ctx.fromParent?'parent':(ctx.classId?'unit':'study'),{classId:ctx.classId}); });
   root.appendChild(back);
 };
 

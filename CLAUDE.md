@@ -43,7 +43,7 @@ has `id`, `type`, and `updatedAt`. This is what makes Gist sync safe.
 
 | `type` | What it is |
 |---|---|
-| `unit` | Study content: `{classId, title, cards[], questions[]}` |
+| `unit` | Study content: `{classId, title, cards[], questions[], status}`. `status:'draft'` means it is waiting for a grown-up and is hidden from her; absent or `'approved'` means live. |
 | `log` | One completed study session: `{mode, classId, unitId, date, correct, total, seconds, xp, hints}` |
 | `focus` | One completed Pomodoro block: `{classId, minutes, date, xp}` |
 | `miss` | A Growth Zone entry — one missed question, plus its `box`/`due` on the review ladder |
@@ -248,6 +248,38 @@ feedback — check any new copy against it.
 | **Parent** (passcoded) | Progress and effort, tests and scores, weekly goals, **what she is using** (tutor questions verbatim, timer/quiz/flashcard counts) — *plus* Gist sync, the Anthropic API key, and backup/restore. |
 
 Focus does **not** get its own tab; it is reached from Study.
+
+### Content review — nothing reaches her unread
+
+Generated units are written with `status:'draft'` and **`units()` filters drafts
+out**, so a draft is invisible everywhere on the student side. A unit with no
+`status` predates this gate and counts as approved.
+
+- `drafts()` — the queue. Surfaced at the top of the parent view and as a count
+  on the Study Material card.
+- `SCREENS.review` — the queue list. `SCREENS.reviewunit` — every card and
+  question in full, with the correct answer marked.
+- Cuts are held in `ctx._cutC` / `ctx._cutQ` and only written on **Approve**, so
+  backing out of a half-reviewed unit changes nothing.
+- Generating from inside the parent area (`ctx.fromParent`) goes straight to the
+  review screen. Generating from her side shows a plain explanation of why it is
+  held — the framing is "catching what the model got wrong", never "checking on you".
+
+### Photo capture
+
+`shotPicker()` gives two inputs: one with `capture="environment"` (straight to
+the camera) and one without (the gallery). `readShot()` downscales to
+**1400px on the long edge at JPEG q0.82** on the device before anything is sent —
+a phone photo is otherwise mostly wasted tokens, and text stays legible well
+below that. Up to `MAX_SHOTS` (6) per unit.
+
+Photos go to Claude as `image` content blocks ahead of the text block, and are
+**never stored** — `shotTray` is memory-only and cleared on success or on leaving
+the screen. Only the unit they produce is saved, so nothing photographed ever
+reaches the Gist.
+
+Because adding a photo re-renders the screen, the form lives in `genForm`
+(subject + notes) outside the render. Do not move it back inline.
 
 ### Spaced repetition — the miss ladder
 
