@@ -548,22 +548,30 @@ const CAL = {
     ['2027-05-31','2027-05-31','Memorial Day']
   ],
   /* ---------- School events ----------
-     Dated items lifted from the school newsletter — see ../wayfinder for a
-     populated example. Empty until the upper school publishes its first one.
-     These live in code rather than the record store on purpose: a deploy
-     updates every device at once and nobody has to type anything. Per-class
-     tests stay as `assess` records — those are hers, not the school's. */
+     Dated items from the published academic calendar and the school newsletter.
+     They live in code rather than the record store on purpose: a deploy updates
+     every device at once and nobody has to type anything. Per-class tests stay
+     as `assess` records — those are hers, not the school's.
+
+     Exam dates here are the **grades 6-8** ones. The same calendar lists a
+     different Comp window for grades 9-12 (5/3-5/14) and AP exams; do not copy
+     those across when she moves up without re-reading the calendar. */
   events:[
-    /* From the grades 6-8 testing calendar. Newsletter items land here too once
-       the upper school publishes one. */
-    {start:'2026-12-07', name:'Pre-Comp review begins', icon:'📚', kind:'note',
-     note:'Eight days out. Spreading it over them beats one long night.'},
+    {start:'2026-09-03', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
+    {start:'2026-12-07', end:'2026-12-14', name:'Pre-Comp review', icon:'📚', kind:'note',
+     note:'The school sets aside eight days for this. Spreading it over them beats one long night.'},
     {start:'2026-12-15', end:'2026-12-16', name:'Pre-Comp Exams', icon:'✍️', kind:'exam',
      note:'The dry run for Comps — same shape, lower stakes.'},
-    {start:'2027-05-03', name:'Comp review begins', icon:'📚', kind:'note',
-     note:'Eight days out. Start with whatever your Growth Zone still has in it.'},
+    {start:'2026-12-18', name:'Early release — last day before Winter Break', icon:'🕑', kind:'early', early:true,
+     note:'No Late Bird.'},
+    {start:'2027-02-03', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
+    {start:'2027-04-16', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
+    {start:'2027-05-03', end:'2027-05-10', name:'Comp review', icon:'📚', kind:'note',
+     note:'Eight days. Start with whatever your Growth Zone still has in it.'},
     {start:'2027-05-11', end:'2027-05-13', name:'Comp Exams', icon:'🎓', kind:'exam',
-     note:'The big ones. Three days, everything from the year.'}
+     note:'The big ones. Three days, everything from the year.'},
+    {start:'2027-05-17', end:'2027-05-21', name:'Project Week', icon:'🛠️', kind:'early', early:true,
+     note:'Early release all week. The last day has no Late Bird.'}
   ]
 ,
   milestones:[
@@ -572,7 +580,6 @@ const CAL = {
     {date:'2026-12-18',name:'End of Quarter 2',icon:'📊'},
     {date:'2027-03-12',name:'End of Quarter 3',icon:'📊'},
     {date:'2027-05-14',name:'End of Quarter 4',icon:'📊'},
-    {date:'2027-05-17',name:'Project Week',icon:'🛠️'},
     {date:'2027-05-21',name:'Last day of school',icon:'🎉'}
   ]
 };
