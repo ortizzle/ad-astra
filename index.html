@@ -86,6 +86,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .chip{background:var(--surface);border:1px solid var(--line-soft);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;white-space:nowrap}
 .chip.ac{border-color:var(--ac-25);color:var(--ac-fg);background:var(--ac-8)}
 
+.sandbox-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-bottom:12px;padding:10px 14px;border:1.5px dashed var(--warm);border-radius:14px;
+  color:var(--warm);font-size:13px;font-weight:600}
+.sandbox-banner .btn{width:auto;min-height:36px;padding:7px 12px;font-size:13px;flex-shrink:0}
+
 .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px;margin-bottom:14px}
 .card.ac{border-color:var(--ac-25);background:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
 .card.quiet{background:transparent;border-style:dashed}
@@ -482,7 +487,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v22 · bold cards & subject colors';
+const APP_VERSION = 'v23 · sandbox & fresh start';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -846,11 +851,25 @@ function loadLocal(){
   DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
   saveLocal();
 }
-const saveLocal = () => Store.set('data', DATA);
+/* Sandbox: a per-device switch (localStorage, never a record, never syncs) so a
+   grown-up can try quizzes, the tutor and the timer without touching real data.
+   While it is on, nothing is written to localStorage or the Gist — every write
+   lives in memory only and is discarded on exit or reload. */
+const sandboxOn = () => Store.get('sandbox', false);
+function setSandbox(on){
+  Store.set('sandbox', !!on);
+  if(on){ toast('Sandbox on — nothing will be saved'); }
+  else { loadLocal(); applyTheme(); toast('Sandbox off — test activity discarded'); }
+  render();
+}
+const saveLocal = () => { if(sandboxOn()) return; Store.set('data', DATA); };
 function put(rec){ rec.updatedAt = Date.now(); DATA.records[rec.id] = rec; saveLocal(); return rec; }
 function softDelete(id){ const r = DATA.records[id]; if(!r) return;
   DATA.records[id] = { id, type:r.type, deleted:true, updatedAt:Date.now() }; saveLocal(); }
 const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type===t);
+/* Everything that counts as "progress" — what Fresh start clears. Content
+   (units), assessments, prefs and roster are deliberately not on this list. */
+const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm'];
 /* Student-facing everywhere. A unit without a status predates the review gate
    and is treated as already approved. */
 const units = cid => all('unit')
@@ -917,6 +936,7 @@ const Sync = {
     return out;
   },
   async save(){
+    if(sandboxOn()) throw new Error('SANDBOX');
     if(!this.configured()) throw new Error('NO_SYNC');
     let merged = DATA;
     try{ merged = this.merge(DATA, await this.pullRemote()); }catch(e){}
@@ -927,13 +947,13 @@ const Sync = {
     DATA = merged; saveLocal(); Store.set('last_sync', Date.now()); return merged;
   },
   async load(){
-    if(!this.configured()) return DATA;
+    if(sandboxOn() || !this.configured()) return DATA;
     try{ DATA = this.merge(DATA, await this.pullRemote()); saveLocal(); Store.set('last_sync',Date.now()); }catch(e){}
     return DATA;
   }
 };
 let syncTimer=null;
-function syncSoon(){ if(!Sync.configured()) return;
+function syncSoon(){ if(sandboxOn() || !Sync.configured()) return;
   clearTimeout(syncTimer); syncTimer=setTimeout(()=>Sync.save().catch(()=>{}),2500); }
 
 /* ---------- Derived stats (never stored — cannot drift between devices) ---------- */
@@ -1308,6 +1328,16 @@ function render(){
     b.addEventListener('click',()=>go(n.id)); nav.appendChild(b);
   });
   const main = document.getElementById('screen'); main.textContent='';
+  /* The sandbox banner rides on every screen — if nothing is being saved,
+     nobody should have to remember that. */
+  if(sandboxOn()){
+    const sb = el('div','sandbox-banner');
+    sb.appendChild(el('span',null,'🧪 Sandbox — nothing is saved or synced'));
+    const off = el('button','btn btn-ghost','Turn off');
+    off.addEventListener('click',()=>setSandbox(false));
+    sb.appendChild(off);
+    main.appendChild(sb);
+  }
   /* Subject screens wear their subject's colour: buttons, bars, eyebrows all
      pick up the class palette while she studies that class. */
   const subjCls = CLASS_BY_ID[ctx.classId] || CLASS_BY_ID[DATA.records[ctx.unitId]?.classId];
@@ -2970,10 +3000,14 @@ SCREENS.parent = function(root){
     sc.appendChild(el('div','hintline', last?`Last sync ${new Date(last).toLocaleString()}`:'Not synced yet.'));
     const row = el('div','btn-row');
     const up = el('button','btn btn-primary','↑ Push');
-    up.addEventListener('click',async()=>{ up.textContent='Syncing…';
+    up.addEventListener('click',async()=>{
+      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
+      up.textContent='Syncing…';
       try{ await Sync.save(); toast('Synced'); }catch(e){ toast('Sync failed'); } render(); });
     const dn = el('button','btn btn-secondary','↓ Pull');
-    dn.addEventListener('click',async()=>{ dn.textContent='Loading…';
+    dn.addEventListener('click',async()=>{
+      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
+      dn.textContent='Loading…';
       try{ await Sync.load(); toast('Up to date'); }catch(e){ toast('Pull failed'); } render(); });
     row.appendChild(up); row.appendChild(dn); sc.appendChild(row);
   }
@@ -2999,6 +3033,7 @@ SCREENS.parent = function(root){
   const brow = el('div','btn-row');
   const ex = el('button','btn btn-primary','⬇ Back up');
   ex.addEventListener('click', async ()=>{
+    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
     const name = `ad-astra-${AZ.today()}.json`;
     const json = JSON.stringify(DATA,null,2);
     const f = new File([json], name, {type:'application/json'});
@@ -3024,7 +3059,7 @@ SCREENS.parent = function(root){
     rd.readAsText(f);
   });
   const im = el('button','btn btn-secondary','⬆ Restore');
-  im.addEventListener('click',()=>fileIn.click());
+  im.addEventListener('click',()=>{ if(sandboxOn()){ toast('Turn sandbox off first'); return; } fileIn.click(); });
   brow.appendChild(ex); brow.appendChild(im);
   bc2.appendChild(brow); bc2.appendChild(fileIn);
   const lb = Store.get('last_backup',0);
@@ -3036,6 +3071,41 @@ SCREENS.parent = function(root){
   dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
   bc2.appendChild(dl);
   root.appendChild(bc2);
+
+  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
+     progress records only (content, tests, goals and personalization stay). */
+  root.appendChild(divider('Testing & reset'));
+  const tst = el('div','card');
+  tst.appendChild(el('p',null,'Sandbox lets you try quizzes, the tutor and the timer without touching her real data. While it is on, nothing is saved or synced on this device, and everything done in it is discarded when it goes off.'));
+  const sbBtn = el('button','btn btn-secondary', sandboxOn() ? 'Turn sandbox off' : 'Turn sandbox on');
+  sbBtn.addEventListener('click',()=>setSandbox(!sandboxOn()));
+  tst.appendChild(sbBtn);
+  tst.appendChild(el('div','hintline','Per device — it only affects the phone or browser it is switched on in.'));
+  root.appendChild(tst);
+
+  const fr = el('div','card');
+  fr.appendChild(el('p',null,'Fresh start clears all progress — sessions, XP, streak, the Growth Zone, question history, check-ins, tutor questions and badges — on every synced device. Study units, tests, goals, class details and personalization stay.'));
+  const frBtn = el('button','btn btn-secondary','Fresh start');
+  frBtn.addEventListener('click',()=>{
+    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
+    const doomed = Object.values(DATA.records).filter(r=>r && !r.deleted && PROGRESS_TYPES.includes(r.type));
+    if(!doomed.length){ toast('Nothing to clear'); return; }
+    showModal({
+      title:'Fresh start',
+      message:`This clears ${doomed.length} progress record${doomed.length===1?'':'s'} everywhere the app syncs. Study material and settings stay. There is no undo — back up first if in doubt.`,
+      confirmText:'Clear progress', cancelText:'Cancel',
+      onConfirm: async ()=>{
+        doomed.forEach(r=>softDelete(r.id));
+        if(Sync.configured()){
+          try{ await Sync.save(); toast('Cleared and synced'); }
+          catch(e){ toast('Cleared here — sync failed, push again later'); }
+        } else toast('Cleared');
+        render();
+      }
+    });
+  });
+  fr.appendChild(frBtn);
+  root.appendChild(fr);
 
   const chg = el('button','btn btn-ghost','Change passcode');
   chg.addEventListener('click',()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); go('setup'); });

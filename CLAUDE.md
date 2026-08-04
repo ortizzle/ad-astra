@@ -508,6 +508,23 @@ subject, strong vs shaky questions from `qstat`, mood and calibration trends, re
 test scores the parent enters, and weekly per-subject minute goals that feed the study
 plan. Deliberately understated in tone so it does not read as surveillance.
 
+### Sandbox & Fresh start (v23, in BOTH apps)
+
+Two grown-up escape hatches at the bottom of the parent view, added after a
+parent's test sessions polluted real stats:
+
+- **Sandbox** — a per-device localStorage flag (`sandbox` — never a record, so it
+  never syncs). While on, `saveLocal()` is a no-op and `Sync.save`/`Sync.load`/
+  `syncSoon` are blocked, so every write lives in memory only. Turning it off
+  (or reloading) reloads clean data from localStorage and discards everything
+  done in it. A dashed `--warm` banner rides on every screen while it is on, and
+  Push / Pull / Back up / Restore refuse with a toast rather than act on
+  discardable in-memory data.
+- **Fresh start** — tombstones every record whose type is in `PROGRESS_TYPES`
+  (`log, focus, miss, cleared, qstat, mood, ask, badge, affirm`) and pushes, so
+  the wipe reaches every synced device and cannot be resurrected by a stale one.
+  Units, assessments, prefs and roster are deliberately untouched.
+
 ## Study plan
 
 `studyPlan(date)` is rule-based and always works without an API key. It scores
