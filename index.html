@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ac:#6fe3cd;                     /* personalized accent — set from prefs */
@@ -196,18 +196,21 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    so a graph or a long bulleted definition never gets clipped. */
 .flip-in{position:relative;width:100%;min-height:290px;display:grid;transition:transform .55s cubic-bezier(.3,.9,.3,1);transform-style:preserve-3d;cursor:pointer}
 .flip.on .flip-in{transform:rotateY(180deg)}
-.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);overflow:hidden}
+/* Left-aligned like a ruled page — centered text reads as a poster, not
+   study material. The watermark and tap-cue stay centered underneath. */
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px 44px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;text-align:left;border:1px solid var(--line);overflow:hidden}
 /* :not(.subj) so a subject-painted card keeps its own texture — a plain
    `background` shorthand here would wipe the pattern layers. */
 .face:not(.subj){background:var(--surface)}
 .face.back{transform:rotateY(180deg)}
 .face.back:not(.subj){background:linear-gradient(165deg,var(--ac-14),var(--deep));border-color:var(--ac-25)}
-.face .wm{position:absolute;font-size:130px;opacity:.045;pointer-events:none;user-select:none}
-.face .term{font-family:'Fraunces',serif;font-size:29px;line-height:1.2;position:relative}
-.face .def{font-size:16px;line-height:1.6;position:relative}
-.face .eq{font-family:ui-monospace,Menlo,monospace;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:10px;padding:9px 13px;margin-top:12px;font-size:14.5px;position:relative}
+.face .wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:130px;opacity:.045;pointer-events:none;user-select:none}
+.face .term{font-family:'Fraunces',serif;font-size:27px;line-height:1.25;position:relative}
+.face .def{font-size:16px;line-height:1.65;position:relative}
+/* Formulas set like a textbook: serif italics, not code. */
+.face .eq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:17.5px;letter-spacing:.02em;position:relative}
 .face .hint{margin-top:14px;font-size:13px;color:var(--ac-fg);position:relative}
-.face .tap{position:absolute;bottom:15px;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
+.face .tap{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
 .face.subj .eq{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.28)}
@@ -234,6 +237,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .graph-wrap svg{display:block;width:100%;height:auto}
 .face .graph-wrap{max-width:225px;margin:10px auto 22px;padding:5px 5px 2px}
 .rev .graph-wrap{margin:8px 0 6px}
+.back-chip{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;margin-bottom:10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--muted)}
 .explain .lbl:first-child{margin-top:0}
 .explain p{font-size:14px;color:var(--text);margin:4px 0 0}
 
@@ -1262,7 +1266,25 @@ const NAV = [
   {id:'setup', ic:'⚙️',nm:'Settings'}
 ];
 let view='today', ctx={};
-function go(v,c={}){ view=v; ctx=c; render(); window.scrollTo(0,0); }
+/* Back-stack navigation: tab roots clear it, everything else pushes, and
+   render() shows a ← chip whenever there is somewhere to go back to. The
+   mood check-in never lands on the stack — backing into it would re-ask. */
+const ROOT_SCREENS = new Set(['today','study','growth','stars','setup']);
+const SKIP_HIST = new Set(['checkin','postmood']);
+let HIST = [];
+function go(v,c={},opts={}){
+  if(ROOT_SCREENS.has(v)) HIST = [];
+  else if(!opts.back && view && view!==v && !SKIP_HIST.has(view)){
+    HIST.push([view,ctx]);
+    if(HIST.length>24) HIST.shift();
+  }
+  view=v; ctx=c; render(); window.scrollTo(0,0);
+}
+function goBack(){
+  const prev = HIST.pop();
+  if(prev){ view=prev[0]; ctx=prev[1]; render(); window.scrollTo(0,0); }
+  else go('today');
+}
 
 const SCREENS = {};
 function render(){
@@ -1285,6 +1307,11 @@ function render(){
     b.addEventListener('click',()=>go(n.id)); nav.appendChild(b);
   });
   const main = document.getElementById('screen'); main.textContent='';
+  if(HIST.length && !ROOT_SCREENS.has(view)){
+    const bb = el('button','back-chip','←  Back');
+    bb.addEventListener('click',()=>{ if(view==='quiz') stopQuestionTimer(); goBack(); });
+    main.appendChild(bb);
+  }
   (SCREENS[view] || SCREENS.today)(main);
 }
 
@@ -1590,7 +1617,7 @@ SCREENS.unit = function(root){
       card.appendChild(el('h3',null,u.title));
       const bits = el('div');
       bits.appendChild(el('span','pill',`${u.cards.length} cards`));
-      bits.appendChild(el('span','pill',`${u.questions.length} questions`));
+      bits.appendChild(el('span','pill',`${u.questions.length} questions · rounds of ${Math.min(QUIZ_ROUND,u.questions.length)}`));
       if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
       if(u.source) bits.appendChild(el('span','pill',u.source));
       card.appendChild(bits);
@@ -1784,26 +1811,59 @@ const FEELING = [
 ];
 function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:!!timed}); }
 
+/* Quizzes run in short rounds — a few questions feels attainable in the car
+   on the way to school; the next round picks up whatever is least practised,
+   so repeated rounds still cycle the whole unit. */
+const QUIZ_ROUND = 5;
+function pickRound(u){
+  if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
+  const att = q => (DATA.records['qstat_'+u.id+'_'+q.id]?.attempts)||0;
+  const idx = u.questions.map((q,i)=>({i, a:att(q), r:Math.random()}));
+  idx.sort((x,y)=> x.a-y.a || x.r-y.r);
+  return shuffle(idx.slice(0, Math.min(QUIZ_ROUND, idx.length)).map(x=>x.i));
+}
+
 /* Timed mode. Each question gets a countdown; answering faster is worth more,
    and running out of time simply moves on. The deadline is an absolute
-   timestamp so a re-render never resets the clock. */
-const QUIZ_LIMIT = 20000;
+   timestamp so a re-render never resets the clock.
+   The countdown calibrates to HER: regular (untimed) quizzes measure how long
+   she actually takes per answer, and Beat the clock uses that average —
+   clamped to 8–40s, 20s until there is data. */
+function quizLimit(){
+  let ms=0, n=0;
+  logs().forEach(l=>{ if(l.mode==='quiz' && !l.timed && l.ansSeconds && l.ansCount){ ms += l.ansSeconds*1000; n += l.ansCount; } });
+  if(!n) return 20000;
+  return Math.round(Math.min(40000, Math.max(8000, ms/n)));
+}
 let quizTimer = null;
 function stopQuestionTimer(){ clearInterval(quizTimer); quizTimer = null; }
 function startQuestionTimer(u){
   stopQuestionTimer();
   if(!quizState || !quizState.timed) return;
-  quizState.deadline = Date.now() + QUIZ_LIMIT;
+  quizState.deadline = Date.now() + quizState.limit;
   quizTimer = setInterval(()=>{
     if(!quizState || quizState.answered !== null){ stopQuestionTimer(); return; }
     const left = quizState.deadline - Date.now();
     const bar = document.getElementById('qtimer');
     if(bar){
-      bar.style.width = Math.max(0, left/QUIZ_LIMIT*100)+'%';
+      bar.style.width = Math.max(0, left/quizState.limit*100)+'%';
       bar.className = left < 5000 ? 'low' : '';
     }
     if(left <= 0){ stopQuestionTimer(); timeUp(u); }
   }, 100);
+}
+
+/* Varied, honest encouragement — the label on every answer, not a flat
+   'Correct'. Picked deterministically so re-renders don't reshuffle it. */
+const CHEER_RIGHT = ['Nailed it','That one is yours now','Clean','Exactly right','Yes — that is the one','Locked in','Sharp','You saw straight through that one','Textbook','Called it'];
+const CHEER_WRONG = ['Not this one — the why is below','Close. Read the why and it sticks','Good swing — here is the why','Not yet. This is what learning feels like','A miss here beats a miss on the test','Worth the stumble — this one will come back'];
+function cheerLabel(right, timedOut){
+  if(timedOut) return 'Out of time';
+  if(right){
+    if(quizState.runStreak>=3) return `${quizState.runStreak} in a row — on a roll`;
+    return CHEER_RIGHT[(quizState.correct*7+quizState.i)%CHEER_RIGHT.length];
+  }
+  return CHEER_WRONG[(quizState.missed.length*5+quizState.i)%CHEER_WRONG.length];
 }
 function timeUp(u){
   const q = u.questions[quizState.order[quizState.i]];
@@ -1890,24 +1950,25 @@ SCREENS.quiz = function(root){
      and Beat the clock never resumes the other one's half-finished run. */
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
     quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
-      order:shuffle(u.questions.map((_,i)=>i)),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
-      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[]};
+      order:pickRound(u),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
+      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[],
+      limit:quizLimit(), runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0};
     if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
   const q = u.questions[quizState.order[quizState.i]];
 
   const head = el('div','card');
   head.appendChild(el('div','eyebrow',`${u.title} · Level ${q.lv||1}`));
   const r = el('div','row');
-  r.appendChild(el('span','k',`Question ${quizState.i+1} of ${u.questions.length}`));
+  r.appendChild(el('span','k',`Question ${quizState.i+1} of ${quizState.order.length}`));
   r.appendChild(el('span','v',`${quizState.correct} correct`));
   head.appendChild(r);
   const bar = el('div','bar'), fi = el('i');
-  fi.style.width = (quizState.i/u.questions.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
+  fi.style.width = (quizState.i/quizState.order.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
   if(quizState.timed){
     const t = el('div','qtimer-track'), ti = el('i');
     ti.id = 'qtimer';
     const left = quizState.answered===null ? Math.max(0, quizState.deadline - Date.now()) : 0;
-    ti.style.width = (left/QUIZ_LIMIT*100)+'%';
+    ti.style.width = (left/quizState.limit*100)+'%';
     if(left < 5000 && quizState.answered===null) ti.className='low';
     t.appendChild(ti); head.appendChild(t);
   }
@@ -1940,16 +2001,16 @@ SCREENS.quiz = function(root){
   } else {
     const right = quizState.answered===q.ans;
     const ex = el('div','explain '+(right?'ok':'no'));
-    ex.appendChild(el('div','lbl', right?'Correct'
-      : quizState.answered===-1 ? 'Out of time' : 'Not quite'));
+    ex.appendChild(el('div','lbl', cheerLabel(right, quizState.answered===-1)));
     ex.appendChild(el('p',null, q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
     root.appendChild(ex);
-    const n = el('button','btn btn-primary', quizState.i===u.questions.length-1?'See results →':'Next question →');
+    const n = el('button','btn btn-primary', quizState.i===quizState.order.length-1?'See results →':'Next question →');
     n.addEventListener('click',()=>{
-      if(quizState.i<u.questions.length-1){
+      if(quizState.i<quizState.order.length-1){
         quizState.i++; quizState.answered=null; quizState.hintUsed=false;
+        quizState.qShownAt = Date.now();
         render(); startQuestionTimer(u);
       } else finishQuiz(u);
     });
@@ -1963,17 +2024,23 @@ SCREENS.quiz = function(root){
 function answer(u,q,idx){
   /* Kahoot-style: the faster it lands, the bigger the bonus. */
   if(quizState.timed){
-    const used = QUIZ_LIMIT - Math.max(0, quizState.deadline - Date.now());
+    const used = quizState.limit - Math.max(0, quizState.deadline - Date.now());
     stopQuestionTimer();
     if(idx===q.ans){
-      quizState.speedBonus += Math.round(10 * Math.max(0, 1 - used/QUIZ_LIMIT));
+      quizState.speedBonus += Math.round(10 * Math.max(0, 1 - used/quizState.limit));
       const secs = used/1000;
       if(quizState.fastest===null || secs<quizState.fastest) quizState.fastest = secs;
     }
+  } else {
+    /* Untimed rounds measure her real pace — this average becomes Beat the
+       clock's countdown. Walk-aways (>2 min on one question) don't count. */
+    const d = Date.now() - (quizState.qShownAt || Date.now());
+    if(d > 0 && d < 120000){ quizState.ansMs += d; quizState.ansN++; }
   }
   quizState.answered = idx;
   if(!quizState.seen.includes(q.id)) quizState.seen.push(q.id);
   const right = idx===q.ans;
+  quizState.runStreak = right ? (quizState.runStreak||0)+1 : 0;
   if(right) quizState.correct++;
   /* Review questions are on loan from other units — credit the tally to where
      the question actually lives, or the parent view attributes it to nothing. */
@@ -2003,7 +2070,7 @@ function answer(u,q,idx){
   render();
 }
 function finishQuiz(u){
-  const total = u.questions.length, pct = Math.round(quizState.correct/total*100);
+  const total = quizState.order.length, pct = Math.round(quizState.correct/total*100);
   const secs = Math.round((Date.now()-quizState.start)/1000);
   const bonus = pct===100?50 : pct>=80?25 : 0;
   const speed = quizState.timed ? quizState.speedBonus : 0;
@@ -2014,7 +2081,8 @@ function finishQuiz(u){
   const hintsUsed = quizState.hints, pre = quizState.pre;
   const log = put({ id:uid('log'), type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
     date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp,
-    hints:hintsUsed, timed:wasTimed, speedBonus:speed });
+    hints:hintsUsed, timed:wasTimed, speedBonus:speed,
+    ansSeconds:Math.round((quizState.ansMs||0)/1000), ansCount:quizState.ansN||0 });
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
     unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
 
