@@ -67,6 +67,13 @@ body::before{
 #app{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 18px 128px}
 h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.015em;margin:0;line-height:1.15}
 .eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac-fg);font-weight:700;opacity:.85}
+/* Subject screens borrow the subject's colour as their accent — the derived
+   tints are re-mixed here so a JS override of --ac on #screen cascades. */
+#screen{--ac-8:color-mix(in srgb, var(--ac) 8%, transparent);
+  --ac-14:color-mix(in srgb, var(--ac) 14%, transparent);
+  --ac-25:color-mix(in srgb, var(--ac) 25%, transparent)}
+:root[data-theme="dark"] #screen{--ac-fg:var(--ac)}
+:root[data-theme="light"] #screen{--ac-fg:color-mix(in srgb, var(--ac) 40%, #04302a)}
 
 header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}
@@ -94,8 +101,11 @@ button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:
 .btn-primary{background:var(--ac);color:#04141a}
 .btn-secondary{background:var(--raised);color:var(--text);border:1px solid var(--line)}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
-.btn-row{display:flex;gap:10px;margin-top:4px}
+.btn-row{display:flex;gap:12px;margin-top:8px}
 .btn-row .btn{width:auto;flex:1}
+/* Breathing room between stacked buttons — thumbs need margins. */
+.btn+.btn,.btn-row+.btn,.btn+.btn-row{margin-top:10px}
+.btn-row .btn+.btn{margin-top:0}
 .btn-sm{min-height:40px;padding:8px 14px;font-size:13px;width:auto;border-radius:11px}
 .btn[disabled]{opacity:.5;pointer-events:none}
 
@@ -205,8 +215,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .face.back{transform:rotateY(180deg)}
 .face.back:not(.subj){background:linear-gradient(165deg,var(--ac-14),var(--deep));border-color:var(--ac-25)}
 .face .wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:130px;opacity:.045;pointer-events:none;user-select:none}
-.face .term{font-family:'Fraunces',serif;font-size:27px;line-height:1.25;position:relative}
+.face .term{font-family:'Fraunces',serif;font-size:27px;line-height:1.25;position:relative;text-align:center}
 .face .def{font-size:16px;line-height:1.65;position:relative}
+/* The straightforward answer leads each definition in bold. */
+.def b,.explain p b,.o b{font-weight:800}
 /* Formulas set like a textbook: serif italics, not code. */
 .face .eq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:17.5px;letter-spacing:.02em;position:relative}
 .face .hint{margin-top:14px;font-size:13px;color:var(--ac-fg);position:relative}
@@ -218,7 +230,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.65)}
 .face.back .wm{display:none}
 
-.opt{width:100%;text-align:left;min-height:var(--tap);padding:14px 16px;margin-bottom:9px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+.opt{width:100%;text-align:left;min-height:var(--tap);padding:14px 16px;margin-bottom:12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
 .opt.right .ltr{background:var(--good);color:#04141a;border-color:var(--good)}
@@ -468,6 +480,9 @@ const Store = {
    `roster` record, entered once in the grown-up settings and carried between
    devices by the private Gist. The app is fully usable before any of it is set. */
 const STUDENT = { grade:8 };
+/* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
+   as 'vNN · one-to-three words on what shipped'. */
+const APP_VERSION = 'v22 · bold cards & subject colors';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -803,34 +818,7 @@ function relevantHabits(date, limit=2){
 }
 
 /* ---------- Content model ---------- */
-const SCHEMA_VERSION = 3;
-
-function buildOrientationUnit(){
-  const qs = [];
-  STUDY_CLASSES.forEach(c=>{
-    const others = STUDY_CLASSES.filter(x=>x.id!==c.id);
-    qs.push({ id:`orient-room-${c.id}`, lv:1, q:`Which room is ${c.name} in?`,
-      opts: shuffle([c.room, ...shuffle(others.map(x=>x.room)).slice(0,3)]), ansValue:c.room,
-      hint:'Think about the walk from the period before.',
-      ex:{ main:`${c.name} meets in room ${c.room} at ${fmtTime(c.start)}.`,
-           tip:'Room numbers stick faster if you picture the route between periods.' } });
-    const t = teacherOf(c.id);
-    if(t){
-      const otherT = others.map(x=>teacherOf(x.id)).filter(Boolean);
-      if(otherT.length>=3) qs.push({ id:`orient-teacher-${c.id}`, lv:1, q:`Who teaches ${c.name}?`,
-        opts: shuffle([t, ...shuffle(otherT).slice(0,3)]), ansValue:t,
-        hint:'Picture the classroom door.',
-        ex:{ main:`${t} teaches ${c.name} in room ${c.room}.`,
-             tip:'Knowing names in week one makes asking for help much easier later.' } });
-    }
-  });
-  qs.forEach(q=>{ q.ans = q.opts.indexOf(q.ansValue); delete q.ansValue; });
-  const cards = STUDY_CLASSES.map((c,i)=>({ id:`orient-card-${c.id}`, term:c.name,
-    def:`${fmtTime(c.start)} – ${fmtTime(c.end)} · ${whereLine(c)}`,
-    hint:`Period ${i+1} of your day.` }));
-  return { id:'unit-orientation', classId:'__all__', title:'First Week: Rooms & Teachers',
-    quarter:1, source:'Class schedule (Drive)', cards, questions:qs };
-}
+const SCHEMA_VERSION = 4;
 
 /* ---------- Record store (sync-safe: id + updatedAt, tombstones) ---------- */
 let DATA = { v:SCHEMA_VERSION, records:{} };
@@ -844,15 +832,18 @@ function migrate(d){
     });
     d.v = 3;
   }
+  if(d.v < 4){                // v4 retired the built-in First Week orientation unit
+    const o = d.records && d.records['unit-orientation'];
+    if(o && !o.deleted) d.records['unit-orientation'] =
+      { id:'unit-orientation', type:'unit', deleted:true, updatedAt:Date.now() };
+    d.v = 4;
+  }
   d.v = SCHEMA_VERSION;
   return d;
 }
 function loadLocal(){
   const d = Store.get('data', null);
   DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
-  const o = buildOrientationUnit();
-  const ex = DATA.records[o.id];
-  if(!ex || !ex.deleted) DATA.records[o.id] = {...o, type:'unit', updatedAt: ex?.updatedAt || Date.now()};
   saveLocal();
 }
 const saveLocal = () => Store.set('data', DATA);
@@ -1037,7 +1028,7 @@ function studyPlan(date){
     const nextA = assessments().find(a=>a.classId===c.id && a.date>=date && !a.score);
     const daysOut = nextA ? AZ.daysBetween(date, nextA.date) : null;
     const sinceStudied = st.lastOn ? AZ.daysBetween(st.lastOn, date) : null;
-    const hasUnits = units(c.id).some(u=>u.id!=='unit-orientation');
+    const hasUnits = units(c.id).length > 0;
 
     let score = 0; const reasons = [];
     if(daysOut !== null && daysOut <= 14){
@@ -1247,6 +1238,16 @@ function graphNode(g){
   if(!svg) return null;
   const w=el('div','graph-wrap'); w.appendChild(svg); return w;
 }
+/* **bold** in definitions and explanations — built with elements, never
+   innerHTML, so content stays inert text. */
+function richify(node, text){
+  String(text ?? '').split(/\*\*(.+?)\*\*/g).forEach((part, i)=>{
+    if(!part) return;
+    if(i % 2) node.appendChild(el('b', null, part));
+    else node.appendChild(document.createTextNode(part));
+  });
+  return node;
+}
 function divider(text){ const d=el('div','divider'); d.appendChild(el('span',null,text)); return d; }
 function headline(title,sub){ const d=el('div','card ac');
   d.appendChild(el('h2',null,title)); if(sub) d.appendChild(el('p',null,sub)); return d; }
@@ -1307,6 +1308,11 @@ function render(){
     b.addEventListener('click',()=>go(n.id)); nav.appendChild(b);
   });
   const main = document.getElementById('screen'); main.textContent='';
+  /* Subject screens wear their subject's colour: buttons, bars, eyebrows all
+     pick up the class palette while she studies that class. */
+  const subjCls = CLASS_BY_ID[ctx.classId] || CLASS_BY_ID[DATA.records[ctx.unitId]?.classId];
+  if(subjCls && !ROOT_SCREENS.has(view)) main.style.setProperty('--ac', palOf(subjCls).g1);
+  else main.style.removeProperty('--ac');
   if(HIST.length && !ROOT_SCREENS.has(view)){
     const bb = el('button','back-chip','←  Back');
     bb.addEventListener('click',()=>{ if(view==='quiz') stopQuestionTimer(); goBack(); });
@@ -1471,13 +1477,17 @@ SCREENS.study = function(root){
     aff.appendChild(m);
   }
   const acts = el('div','affirm-acts');
+  /* Toggles, not one-way switches — a tap that didn't land can be taken back.
+     The day's XP stays as long as EITHER action is on; undoing both takes it
+     back too (no farming by re-tapping: it is the same one award). */
   const mark = (field, xp) => {
     const prev = DATA.records['affirm_'+date] || {id:'affirm_'+date, type:'affirm', date, xp:0};
-    if(prev[field]) return;                      // never double-award
-    prev[field] = true;
-    if(!prev.xp && xp){ prev.xp = xp; }          // XP is for the day, not per button
+    const turningOn = !prev[field];
+    prev[field] = turningOn;
+    const anyOn = prev.liked || prev.read;
+    prev.xp = anyOn ? (prev.xp || xp) : 0;
     put(prev); checkBadges(); syncSoon();
-    if(xp && !seen) toast(`+${xp} XP`);
+    if(turningOn && xp && !seen) toast(`+${xp} XP`);
     render();
   };
   const heart = el('button','act'+(seen&&seen.liked?' on':''));
@@ -1758,7 +1768,7 @@ SCREENS.cards = function(root){
   const fg = graphNode(card.graph); if(fg) front.appendChild(fg);
   front.appendChild(el('div','tap','Tap to reveal'));
   const back = paint(el('div','face back'), cls);
-  back.appendChild(el('div','def',card.def));
+  back.appendChild(richify(el('div','def'), card.def));
   const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
@@ -2002,7 +2012,7 @@ SCREENS.quiz = function(root){
     const right = quizState.answered===q.ans;
     const ex = el('div','explain '+(right?'ok':'no'));
     ex.appendChild(el('div','lbl', cheerLabel(right, quizState.answered===-1)));
-    ex.appendChild(el('p',null, q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
+    ex.appendChild(richify(el('p'), q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
     root.appendChild(ex);
@@ -2598,7 +2608,7 @@ SCREENS.setup = function(root){
 
   const ver = el('div','hintline');
   ver.style.textAlign='center'; ver.style.marginTop='22px';
-  ver.textContent = `Ad Astra · v2 · ${roster().school || 'SY 2026–27'}`;
+  ver.textContent = `Ad Astra ${APP_VERSION} · ${roster().school || 'SY 2026–27'}`;
   root.appendChild(ver);
 };
 
@@ -3332,7 +3342,7 @@ SCREENS.reviewunit = function(root){
       const d = el('div','rev'+(cutC.has(card.id)?' cut':''));
       d.appendChild(el('div','q',card.term));
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
-      d.appendChild(el('div','o flat',card.def));
+      d.appendChild(richify(el('div','o flat'), card.def));
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
       if(card.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(card.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutC.has(card.id)?'↩':'✕');
@@ -3352,7 +3362,7 @@ SCREENS.reviewunit = function(root){
       d.appendChild(el('div','q',q.q));
       const qg2 = graphNode(q.graph); if(qg2) d.appendChild(qg2);
       q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
-      if(q.ex && q.ex.main) d.appendChild(el('div','why',q.ex.main));
+      if(q.ex && q.ex.main) d.appendChild(richify(el('div','why'), q.ex.main));
       if(q.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(q.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutQ.has(q.id)?'↩':'✕');
       x.setAttribute('aria-label', cutQ.has(q.id)?'Keep this question':'Drop this question');
@@ -3471,7 +3481,8 @@ async function generateUnit(classId, notes, shots, srcName){
 
     `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer.`,
     `Every card and question must STAND ALONE: never reference "the worksheet", "the handout", or a numbered problem from the material — restate whatever context the question needs inside the question itself.`,
-    `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists in the app.`,
+    `Card definitions LEAD with the straightforward answer wrapped in **bold** — one short sentence that could stand alone as the study answer — then at most two or three supporting bullet lines. A card is a study aid, not an essay; the bold line is what she should retain.`,
+    `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists, and **bold** renders as bold.`,
     `If the subject is mathematical and a question is about reading a graph, attach a "graph" object and refer to it as "the graph shown". Window w is [xmin,xmax,ymin,ymax]; series are typed line (y=mx+b), parabola or abs in vertex form (a, h, k), or pts (straight segments through the listed points, for piecewise shapes); pts on the graph object marks labelled dots. Double-check that the plotted function actually has the features the question claims.`,
     `Anchor everything to the supplied material. Do not invent facts it does not support. If the material is thin, write fewer cards rather than padding with things it never said.`,
     `Tone: direct and a little dry. Never condescending, never exclamation marks, never "great job". Card hints are memory hooks or mnemonics, never restatements of the definition. Explanations say why the right answer is right, not just what it is.`,

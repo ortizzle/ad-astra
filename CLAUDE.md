@@ -132,20 +132,45 @@ Three routes, in order of preference:
 ```
 
 - 15–30 cards; 18–24 questions (6–8 each at level 1 recall / 2 apply / 3 analyze).
+  Quizzes run in **rounds of 5** (`QUIZ_ROUND`), least-practised questions first —
+  don't tune question counts around "one sitting"; rounds handle that.
 - `opts` must be exactly 4 with no duplicates, and `ans` must index into it.
   `generateUnit()` filters malformed questions before storing — keep that guard.
 - `hint` on a card is a memory hook, never a restatement of the definition.
 - `ex.main` explains *why* the answer is right, not just what it is.
-- `classId:'__all__'` makes a unit appear under every class (the orientation unit
-  uses this).
+- `classId:'__all__'` makes a unit appear under every class.
 
-### The orientation unit
+### Content rules (Chris-approved, 2026-08 — apply to EVERY unit, both apps)
 
-`buildOrientationUnit()` generates "First Week: Rooms & Teachers" from the
-schedule data at boot. It is regenerated on every load and should not be
-hand-edited. It exists so the app is useful before any class content arrives, and
-so the study engine is demonstrably working. It contains no invented academic
-facts — only real rooms, times, and (once entered in `roster`) teachers.
+- **Standalone always.** Never reference "the worksheet", "your practice sheet",
+  or a numbered problem from the source material. A question restates all the
+  context it needs. Fresh scenarios beat reworded worksheet problems — the sheets
+  are her homework; this app is *extra*.
+- **Bold answer first.** A card `def` LEADS with the straightforward answer
+  wrapped in `**bold**` (one short sentence that works alone as the study
+  answer), then at most 2–3 supporting `\n• ` bullet lines. `richify()` renders
+  the bold; never use innerHTML for content.
+- **Bullets are real.** Multi-item definitions/explanations use `\n• ` lines —
+  the CSS preserves newlines.
+- **Graphs where graphs teach.** Attach a `graph` spec (see `renderGraph()`:
+  window `w`, typed `series` — line / vertex-form parabola / abs / pts — plus
+  marked `pts`, `xl`/`yl` labels) to any card or question about reading a graph,
+  and say "the graph shown". Verify the plotted function actually has the
+  features the text claims. Math/physics units should use them liberally.
+- **Formulas go in `eq`** fields — they render in textbook serif italics.
+- **Verify provided answers.** When source material includes answer keys, re-derive
+  every answer independently and flag misprints to Chris (they happen — the
+  Lesson 1-1 vocab key had two).
+- **Video-based material:** transcripts are usually unfetchable; build from the
+  sheets and say so in `parentNote` — never invent video specifics.
+- **Encouragement, not scorekeeping.** Answer feedback comes from `CHEER_RIGHT` /
+  `CHEER_WRONG` — varied, warm, growth-mindset, no exclamation-mark cheerleading.
+- Every unit ships as `status:'draft'` for the review queue. No exceptions.
+
+### Retired: the orientation unit
+
+"First Week: Rooms & Teachers" was removed in v22 (schema v4 tombstones
+`unit-orientation` on migrate). Don't reintroduce boot-generated units.
 
 ---
 
@@ -154,6 +179,21 @@ facts — only real rooms, times, and (once entered in `roster`) teachers.
 Aquamarine is the *app's* colour (chrome, buttons, accents, and whatever she picks
 in Personalize). **Each subject owns its own colour and texture** so the app never
 reads as one flat wash of teal — that was direct feedback and it matters.
+
+Since v22 this goes further: **any screen with a subject context (unit, cards,
+quiz, focus, brief) overrides `--ac` on `#screen`** with the class palette's
+`g1`, so buttons, progress bars, and eyebrows all wear the subject's colour while
+she studies it. The derived tints (`--ac-8/14/25`, `--ac-fg`) are re-mixed on
+`#screen` in CSS — if you add a new derived accent var, re-mix it there too or
+subject screens won't pick it up.
+
+Layout: flashcard **terms are centered, definitions left-aligned** (ruled-page
+read); stacked buttons keep ≥10px between them (`.btn+.btn` rule) — don't crowd
+tap targets to save vertical space.
+
+**Versioning:** `APP_VERSION` in index.html ('vNN · one-to-three words') is shown
+at the bottom of Settings and MUST be bumped together with `sw.js`
+`CACHE_VERSION` on every deploy — same number, matching summary.
 
 `CLASSES` carries `color`, `g1`, `g2` per subject; `paint(node, cls)` adds
 `.subj .pat-<id>` and sets the CSS custom properties. Textures are pure CSS:
