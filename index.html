@@ -192,9 +192,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .qtimer-track > i.low{background:var(--bad)}
 
 .flip{perspective:1500px;margin:14px 0}
-.flip-in{position:relative;width:100%;min-height:290px;transition:transform .55s cubic-bezier(.3,.9,.3,1);transform-style:preserve-3d;cursor:pointer}
+/* Grid-stacked faces (not absolute): the card grows to fit its tallest face,
+   so a graph or a long bulleted definition never gets clipped. */
+.flip-in{position:relative;width:100%;min-height:290px;display:grid;transition:transform .55s cubic-bezier(.3,.9,.3,1);transform-style:preserve-3d;cursor:pointer}
 .flip.on .flip-in{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);overflow:hidden}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);overflow:hidden}
 /* :not(.subj) so a subject-painted card keeps its own texture — a plain
    `background` shorthand here would wipe the pattern layers. */
 .face:not(.subj){background:var(--surface)}
@@ -222,6 +224,16 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .explain{border-radius:15px;padding:16px;margin-top:12px;border:1px solid var(--line);background:var(--deep)}
 .explain.ok{border-color:var(--good)} .explain.no{border-color:var(--bad)}
 .explain .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-fg);font-weight:700;margin-top:12px}
+/* Bulleted lists inside content: definitions, questions, and explanations
+   preserve their newlines, so "•" lines written in the material render as
+   actual lists instead of collapsing into a paragraph. */
+.def,.card.ac h3,.explain p,.rev .q,.rev .why,.rev .o,.miss .q,.face .def{white-space:pre-line}
+/* Graphs attached to cards/questions. Deliberately paper-coloured in BOTH
+   themes — it reads as a printed worksheet, which is the point. */
+.graph-wrap{background:#fffdf4;border:1px solid #e0d9c3;border-radius:12px;margin:12px auto 2px;padding:7px 7px 3px;max-width:330px;width:100%;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.graph-wrap svg{display:block;width:100%;height:auto}
+.face .graph-wrap{max-width:225px;margin:10px auto 22px;padding:5px 5px 2px}
+.rev .graph-wrap{margin:8px 0 6px}
 .explain .lbl:first-child{margin-top:0}
 .explain p{font-size:14px;color:var(--text);margin:4px 0 0}
 
@@ -998,7 +1010,7 @@ function missAsQuestion(m){
   /* The id is rewritten to the miss id: a review round gathers questions from
      many units, whose own ids restart at 1 and would otherwise collide. */
   if(Array.isArray(m.opts) && m.opts.length === 4 && m.ans != null)
-    return { id:m.id, lv:1, q:m.q, opts:m.opts, ans:m.ans, hint:'', ex:{ main:m.why||'' }, _missId:m.id };
+    return { id:m.id, lv:1, q:m.q, opts:m.opts, ans:m.ans, hint:'', ex:{ main:m.why||'' }, graph:m.graph||null, _missId:m.id };
   const u = DATA.records[m.unitId];
   const q = u && !u.deleted && u.questions && u.questions.find(x => x.id === m.qid);
   return q ? { ...q, id:m.id, _missId:m.id } : null;
@@ -1125,6 +1137,112 @@ function celebrate(){
 function shuffle(a){ const b=a.slice();
   for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
 const uid = p => p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8);
+/* ---------- Graphs ----------
+   A card or question can carry a `graph` spec and it renders as worksheet-
+   style graph paper. No expressions are ever evaluated — series are typed
+   (line y=mx+b, parabola/abs in vertex form a·(x−h)²+k, or explicit pts)
+   and sampled here in code.
+   Spec: { w:[xmin,xmax,ymin,ymax], gx?,gy? (grid steps), xl?,yl? (axis
+   labels), series:[{type,'m','b','a','h','k',dom?,pts?}], pts:[{x,y,label?}] } */
+const GRAPH_INK='#3f4d63', GRAPH_GRID='#dbe4ee', GRAPH_CURVES=['#d81b60','#1565c0'];
+function niceStep(span){
+  const raw=span/8, p=Math.pow(10,Math.floor(Math.log10(raw)));
+  for(const m of [1,2,2.5,5,10]) if(raw<=m*p) return m*p;
+  return 10*p;
+}
+function seriesSamples(ser,x0,x1){
+  if(ser.type==='pts') return (ser.pts||[]).slice();
+  const a=ser.a??1,h=ser.h??0,k=ser.k??0,m=ser.m??1,b=ser.b??0;
+  const lo=ser.dom?Math.max(ser.dom[0],x0):x0, hi=ser.dom?Math.min(ser.dom[1],x1):x1;
+  if(hi<=lo) return [];
+  if(ser.type==='line'){
+    /* Sampled, not two endpoints: an endpoint outside the y-window would be
+       dropped by clipping and take the whole segment with it. */
+    const out=[]; for(let i=0;i<=60;i++){ const x=lo+(hi-lo)*i/60; out.push([x,m*x+b]); }
+    return out;
+  }
+  if(ser.type==='abs'){
+    /* Sampled like the parabola (same clipping reason), with the exact vertex
+       spliced in so the V's corner stays sharp. */
+    const f=x=>a*Math.abs(x-h)+k, out=[];
+    for(let i=0;i<=60;i++){ const x=lo+(hi-lo)*i/60;
+      if(h>lo&&h<hi&&out.length&&out[out.length-1][0]<h&&x>h) out.push([h,k]);
+      out.push([x,f(x)]); }
+    return out;
+  }
+  const f=x=>a*(x-h)*(x-h)+k, out=[];
+  for(let i=0;i<=60;i++){ const x=lo+(hi-lo)*i/60; out.push([x,f(x)]); }
+  return out;
+}
+function renderGraph(g){
+  try{
+    const [x0,x1,y0,y1]=g.w;
+    if(!(x1>x0&&y1>y0)) return null;
+    const W=300,H=210,P=26;
+    const sx=x=>P+(x-x0)/(x1-x0)*(W-2*P), sy=y=>H-P-(y-y0)/(y1-y0)*(H-2*P);
+    const NS='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    svg.setAttribute('role','img');
+    const add=(tag,attrs)=>{ const n=document.createElementNS(NS,tag);
+      for(const [k2,v] of Object.entries(attrs)) n.setAttribute(k2,v); svg.appendChild(n); return n; };
+    const txt=(x,y,t,anchor='middle',size=8.5,weight=400)=>{
+      const n=add('text',{x,y,'text-anchor':anchor,'font-size':size,fill:GRAPH_INK,
+        'font-family':'Inter,system-ui,sans-serif','font-weight':weight}); n.textContent=t; return n; };
+    const gx=g.gx||niceStep(x1-x0), gy=g.gy||niceStep(y1-y0);
+    const fmt=v=>{ const r=Math.round(v*100)/100; return Object.is(r,-0)?0:r; };
+    /* grid */
+    for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx)
+      add('line',{x1:sx(x),y1:sy(y0),x2:sx(x),y2:sy(y1),stroke:GRAPH_GRID,'stroke-width':1});
+    for(let y=Math.ceil(y0/gy-1e-9)*gy; y<=y1+1e-9; y+=gy)
+      add('line',{x1:sx(x0),y1:sy(y),x2:sx(x1),y2:sy(y),stroke:GRAPH_GRID,'stroke-width':1});
+    /* axes with arrowheads; drawn on the window edge when 0 is off-screen */
+    const ax=y0<=0&&y1>=0?sy(0):sy(y0), ay=x0<=0&&x1>=0?sx(0):sx(x0);
+    add('line',{x1:P-6,y1:ax,x2:W-P+6,y2:ax,stroke:GRAPH_INK,'stroke-width':1.4});
+    add('line',{x1:ay,y1:H-P+6,x2:ay,y2:P-6,stroke:GRAPH_INK,'stroke-width':1.4});
+    add('path',{d:`M ${W-P+6} ${ax} l -5 -3 v 6 z`,fill:GRAPH_INK});
+    add('path',{d:`M ${ay} ${P-6} l -3 5 h 6 z`,fill:GRAPH_INK});
+    /* numbers along the axes (0 once, at the origin corner) */
+    for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx){
+      if(Math.abs(x)<gx/2&&x0<=0) continue;
+      txt(sx(x),ax+11,fmt(x));
+    }
+    for(let y=Math.ceil(y0/gy-1e-9)*gy; y<=y1+1e-9; y+=gy){
+      if(Math.abs(y)<gy/2&&y0<=0) continue;
+      txt(ay-4,sy(y)+3,fmt(y),'end');
+    }
+    if(x0<=0&&y0<=0) txt(ay-4,ax+11,'0','end');
+    /* series, clipped to the window (a segment breaks where it leaves it) */
+    (g.series||[]).forEach((ser,si)=>{
+      const col=GRAPH_CURVES[si%GRAPH_CURVES.length];
+      let seg=[];
+      const flush=()=>{ if(seg.length>1)
+        add('polyline',{points:seg.map(([px,py])=>`${sx(px)},${sy(py)}`).join(' '),
+          fill:'none',stroke:col,'stroke-width':2.4,'stroke-linejoin':'round','stroke-linecap':'round'});
+        seg=[]; };
+      for(const [px,py] of seriesSamples(ser,x0,x1)){
+        if(py>=y0-1e-9&&py<=y1+1e-9&&px>=x0-1e-9&&px<=x1+1e-9) seg.push([px,py]); else flush();
+      }
+      flush();
+    });
+    /* marked points */
+    (g.pts||[]).forEach(p=>{
+      add('circle',{cx:sx(p.x),cy:sy(p.y),r:3.4,fill:GRAPH_CURVES[0],stroke:'#fffdf4','stroke-width':1.4});
+      if(p.label) txt(sx(p.x)+6,sy(p.y)-6,p.label,'start',8.5,700);
+    });
+    /* axis titles */
+    if(g.xl) txt(W/2,H-3,g.xl,'middle',9.5,600);
+    if(g.yl){ const n=txt(9,H/2,g.yl,'middle',9.5,600);
+      n.setAttribute('transform',`rotate(-90 9 ${H/2})`); }
+    return svg;
+  }catch(e){ return null; }
+}
+function graphNode(g){
+  if(!g) return null;
+  const svg=renderGraph(g);
+  if(!svg) return null;
+  const w=el('div','graph-wrap'); w.appendChild(svg); return w;
+}
 function divider(text){ const d=el('div','divider'); d.appendChild(el('span',null,text)); return d; }
 function headline(title,sub){ const d=el('div','card ac');
   d.appendChild(el('h2',null,title)); if(sub) d.appendChild(el('p',null,sub)); return d; }
@@ -1610,9 +1728,11 @@ SCREENS.cards = function(root){
   front.appendChild(el('div','wm', cls?cls.icon:'✦'));
   if(cls) front.appendChild(el('div','subjtag', cls.name));
   front.appendChild(el('div','term',card.term));
+  const fg = graphNode(card.graph); if(fg) front.appendChild(fg);
   front.appendChild(el('div','tap','Tap to reveal'));
   const back = paint(el('div','face back'), cls);
   back.appendChild(el('div','def',card.def));
+  const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
   back.appendChild(el('div','tap','Tap to flip back'));
@@ -1696,7 +1816,7 @@ function timeUp(u){
     const was = DATA.records['miss_'+u.id+'_'+q.id];
     put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
           qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose:'(ran out of time)',
-          why:q.ex?.main||'', on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+          why:q.ex?.main||'', graph:q.graph||null, on:(was&&!was.deleted?was.on:AZ.today()) }, false));
   }
   if(navigator.vibrate) navigator.vibrate(60);
   render();
@@ -1793,7 +1913,9 @@ SCREENS.quiz = function(root){
   }
   root.appendChild(head);
 
-  const qc = el('div','card ac'); qc.appendChild(el('h3',null,q.q)); root.appendChild(qc);
+  const qc = el('div','card ac'); qc.appendChild(el('h3',null,q.q));
+  const qg = graphNode(q.graph); if(qg) qc.appendChild(qg);
+  root.appendChild(qc);
 
   q.opts.forEach((text,idx)=>{
     const b = el('button','opt');
@@ -1875,7 +1997,7 @@ function answer(u,q,idx){
       const was = DATA.records['miss_'+u.id+'_'+q.id];
       put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
             qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose,
-            why:q.ex?.main||'', on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+            why:q.ex?.main||'', graph:q.graph||null, on:(was&&!was.deleted?was.on:AZ.today()) }, false));
     }
   }
   render();
@@ -2152,6 +2274,7 @@ SCREENS.growth = function(root){
         const box = m.box ?? -1;
         const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
         d.appendChild(el('div','q',m.q));
+        const mg = graphNode(m.graph); if(mg) d.appendChild(mg);
         d.appendChild(el('div','a','✓ '+m.right));
         if(m.chose) d.appendChild(el('div','n','You chose: '+m.chose));
         if(m.why) d.appendChild(el('div','n',m.why));
@@ -3140,6 +3263,7 @@ SCREENS.reviewunit = function(root){
     u.cards.forEach(card=>{
       const d = el('div','rev'+(cutC.has(card.id)?' cut':''));
       d.appendChild(el('div','q',card.term));
+      const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(el('div','o flat',card.def));
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
       if(card.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(card.from)); d.appendChild(t); }
@@ -3158,6 +3282,7 @@ SCREENS.reviewunit = function(root){
       const d = el('div','rev'+(cutQ.has(q.id)?' cut':''));
       d.appendChild(el('div','eyebrow', LV[q.lv]||('Level '+q.lv)));
       d.appendChild(el('div','q',q.q));
+      const qg2 = graphNode(q.graph); if(qg2) d.appendChild(qg2);
       q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
       if(q.ex && q.ex.main) d.appendChild(el('div','why',q.ex.main));
       if(q.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(q.from)); d.appendChild(t); }
@@ -3211,6 +3336,20 @@ SCREENS.reviewunit = function(root){
 const PROV = {type:'string', enum:['source','added']};
 const BLOCK = extra => ({type:'object', properties:{text:{type:'string'}, from:PROV, ...(extra||{})},
   required:['text','from'], additionalProperties:false});
+/* Optional plotted graph on a card or question — see renderGraph(). */
+const GRAPH = {type:'object', properties:{
+  w:{type:'array',items:{type:'number'},minItems:4,maxItems:4},
+  gx:{type:'number'}, gy:{type:'number'}, xl:{type:'string'}, yl:{type:'string'},
+  series:{type:'array',items:{type:'object',properties:{
+    type:{type:'string',enum:['line','parabola','abs','pts']},
+    m:{type:'number'}, b:{type:'number'}, a:{type:'number'}, h:{type:'number'}, k:{type:'number'},
+    dom:{type:'array',items:{type:'number'},minItems:2,maxItems:2},
+    pts:{type:'array',items:{type:'array',items:{type:'number'},minItems:2,maxItems:2}}
+  },required:['type'],additionalProperties:false}},
+  pts:{type:'array',items:{type:'object',properties:{
+    x:{type:'number'}, y:{type:'number'}, label:{type:'string'}
+  },required:['x','y'],additionalProperties:false}}
+},required:['w','series'],additionalProperties:false};
 
 const UNIT_SCHEMA = {
   type:'object',
@@ -3228,12 +3367,12 @@ const UNIT_SCHEMA = {
     /* One short line for her, plus an honest estimate in minutes. */
     nextUp:BLOCK({minutes:{type:'integer'}}),
     cards:{type:'array',items:{type:'object',
-      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'},from:PROV},
+      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'},graph:GRAPH,from:PROV},
       required:['term','def','hint','from'],additionalProperties:false}},
     questions:{type:'array',items:{type:'object',
       properties:{ lv:{type:'integer',enum:[1,2,3]}, q:{type:'string'},
         opts:{type:'array',items:{type:'string'}}, ans:{type:'integer',enum:[0,1,2,3]},
-        hint:{type:'string'}, from:PROV,
+        hint:{type:'string'}, graph:GRAPH, from:PROV,
         ex:{type:'object',properties:{main:{type:'string'},tip:{type:'string'},mnemonic:{type:'string'}},
             required:['main','tip'],additionalProperties:false}},
       required:['lv','q','opts','ans','hint','ex','from'],additionalProperties:false}}
@@ -3263,6 +3402,9 @@ async function generateUnit(classId, notes, shots, srcName){
     `nextUp — one short line to her about what to do first, with an honest estimate in minutes for the flashcards and quiz together. Do not round to a comfortable number; if it is 23 minutes, say 23.`,
 
     `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer.`,
+    `Every card and question must STAND ALONE: never reference "the worksheet", "the handout", or a numbered problem from the material — restate whatever context the question needs inside the question itself.`,
+    `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists in the app.`,
+    `If the subject is mathematical and a question is about reading a graph, attach a "graph" object and refer to it as "the graph shown". Window w is [xmin,xmax,ymin,ymax]; series are typed line (y=mx+b), parabola or abs in vertex form (a, h, k), or pts (straight segments through the listed points, for piecewise shapes); pts on the graph object marks labelled dots. Double-check that the plotted function actually has the features the question claims.`,
     `Anchor everything to the supplied material. Do not invent facts it does not support. If the material is thin, write fewer cards rather than padding with things it never said.`,
     `Tone: direct and a little dry. Never condescending, never exclamation marks, never "great job". Card hints are memory hooks or mnemonics, never restatements of the definition. Explanations say why the right answer is right, not just what it is.`,
 
