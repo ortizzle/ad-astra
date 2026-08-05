@@ -534,7 +534,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v29 · the sky map';
+const APP_VERSION = 'v30 · sky starts sunday';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -1343,7 +1343,11 @@ function studyDates(){
   all('focus').forEach(f=>{ if(f.date) s.add(f.date); });
   return s;
 }
-const skyWeek0 = () => AZ.weekStart(CAL.firstDay);
+/* The map starts with the first FULL school week (Chris, 2026-08): school
+   opened mid-week, and a half week should not sit at the front of the sky
+   as a permanently dim constellation. */
+const SKY_OFFSET_WEEKS = 1;
+const skyWeek0 = () => AZ.shift(AZ.weekStart(CAL.firstDay), 7*SKY_OFFSET_WEEKS);
 const skyNow = date => Math.max(0, Math.round(AZ.daysBetween(skyWeek0(), AZ.weekStart(date))/7));
 function skyWeek(i, set){
   set = set || studyDates();
@@ -3169,7 +3173,7 @@ SCREENS.parent = function(root){
    ['Total time logged', s.seconds>=3600?`${Math.floor(s.seconds/3600)}h ${Math.round(s.seconds%3600/60)}m`:`${Math.round(s.seconds/60)}m`],
    ['Focus-timer minutes', s.focusMin],
    ['Overall accuracy', s.answered?s.accuracy+'%':'—'],
-   ['Constellations complete', `${skyDone(date)} of ${skyNow(date)+1} weeks`]
+   ['Constellations complete', date < skyWeek0() ? '—' : `${skyDone(date)} of ${skyNow(date)+1} weeks`]
   ].forEach(([k,v])=>{ const r=el('div','row');
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); eff.appendChild(r); });
   root.appendChild(eff);
@@ -3654,14 +3658,17 @@ SCREENS.stars = function(root){
 
   /* The week as a constellation. Stars light for showing up, never for
      scores, and a short week simply stays dim — nothing breaks. */
+  const preSky = date < skyWeek0();
   const wk = skyWeek(skyNow(date));
   const skc = el('div','card ac sky-card');
-  skc.appendChild(el('div','eyebrow','This week’s constellation'));
+  skc.appendChild(el('div','eyebrow', preSky ? 'First constellation' : 'This week’s constellation'));
   skc.appendChild(el('h3',null,wk.c.nm));
   skc.appendChild(skyChartEl(wk,false));
-  skc.appendChild(el('p',null, wk.done
-    ? `Complete — ${wk.c.nm} joins your sky map.`
-    : `${wk.litCount} of 7 lit · ${SKY_GOAL} completes it`));
+  skc.appendChild(el('p',null, preSky
+    ? `Your sky map begins ${AZ.shortDate(skyWeek0())}. ${wk.c.nm} is first.`
+    : wk.done
+      ? `Complete — ${wk.c.nm} joins your sky map.`
+      : `${wk.litCount} of 7 lit · ${SKY_GOAL} completes it`));
   skc.addEventListener('click',()=>go('skymap'));
   root.appendChild(skc);
 
@@ -3729,8 +3736,9 @@ SCREENS.skymap = function(root){
   const weeks = [];
   for(let i=0;i<=n;i++) weeks.push(skyWeek(i,set));
   const done = weeks.filter(w=>w.done).length;
-  root.appendChild(headline('Sky map',
-    `${done} constellation${done===1?'':'s'} complete · week ${n+1} of the year`));
+  root.appendChild(headline('Sky map', date < skyWeek0()
+    ? `Begins ${AZ.shortDate(skyWeek0())}`
+    : `${done} constellation${done===1?'':'s'} complete · week ${n+1} of the year`));
   const grid = el('div','skygrid');
   weeks.forEach(w=>{
     const c = el('div','card'+(w.done||w.i===n?'':' quiet'));
