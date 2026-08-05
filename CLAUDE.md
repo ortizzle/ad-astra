@@ -238,6 +238,32 @@ Every palette entry is a mid-tone → deep pair, and `.subj::after` lays a
 on any hue. If you add a palette option, keep it in that tonal range and check
 white text over it — bold is fine, unreadable is not.
 
+### Personalization (v27, both apps)
+
+Everything here lives on `prefs` (synced, no new record types) and is **free
+and flat** — nothing unlockable, ever. Cosmetics must never become rewards;
+that would turn identity into a grind economy, the exact mechanic these apps
+refuse. All of it holds the existing contrast bar.
+
+- **Skies** (`prefs.sky`, `SKIES`, `[data-sky=…]` CSS): alternate canvas
+  washes. Only `--wash-1/2` change — `--ink` and every text colour stay put,
+  so the contrast measurements hold under every sky. Sky rosters are identity
+  and differ per app.
+- **Celebration styles** (`prefs.fx`, `FX_STYLES`, `celebrate()`): confetti,
+  stars, petals, bubbles, quiet glow. Same triggers, same rules; "quiet"
+  exists because confetti can turn cringe overnight at 13 and opting down
+  should cost nothing.
+- **Subject icons** (`prefs.subjectIcons`, `ICON_CHOICES`): picked in the
+  subject-colour modal. `applyTheme()` writes the override onto the class
+  objects themselves (`baseIcon` keeps the default recoverable), so every
+  render site picks it up without knowing the feature exists.
+- **Badge pins** (`prefs.pins`): up to three EARNED badges featured at the
+  top of Stars. Curation of display only — no new mechanics.
+- **Companion extras**: pool lines may carry `{name}` — rendered with the
+  roster first name, dropped from the pool when no name is set. `prefs.mline`
+  is one line of hers that joins the idle rotation; her words, so the
+  curation rules (which bind only our copy) do not apply to it.
+
 ## Backups
 
 The in-app "Back up" button uses the **Web Share API** (`navigator.share` with a

@@ -48,6 +48,16 @@
   --wash-1:color-mix(in srgb, var(--ac) 22%, transparent);
   --wash-2:rgba(242,196,138,.20);
 }
+/* Skies — her pick of canvas washes (Settings → Personalize). Only the wash
+   colours change; the canvas (--ink) and every text colour stay put, so the
+   contrast measurements hold under every sky. */
+:root[data-sky="nebula"]{--wash-1:rgba(178,110,235,.13);--wash-2:rgba(90,120,236,.10)}
+:root[data-theme="light"][data-sky="nebula"]{--wash-1:rgba(147,84,201,.16);--wash-2:rgba(90,120,236,.14)}
+:root[data-sky="tide"]{--wash-1:rgba(90,166,236,.13);--wash-2:rgba(111,227,205,.09)}
+:root[data-theme="light"][data-sky="tide"]{--wash-1:rgba(59,130,200,.16);--wash-2:rgba(11,123,98,.12)}
+:root[data-sky="graphite"]{--wash-1:rgba(255,255,255,.035);--wash-2:transparent}
+:root[data-theme="light"][data-sky="graphite"]{--wash-1:rgba(12,43,41,.05);--wash-2:transparent}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
 body{
@@ -436,6 +446,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom));z-index:1100;background:var(--raised);border:1px solid var(--ac-25);color:var(--text);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .25s;max-width:88vw;text-align:center}
 #toast.on{opacity:1}
 .confetti{position:fixed;pointer-events:none;z-index:900;width:8px;height:8px;border-radius:2px;animation:fall 1.5s ease-out forwards}
+.confetti.glyph{background:none;width:auto;height:auto;font-size:15px;line-height:1}
+.glow{position:fixed;inset:0;z-index:900;pointer-events:none;
+  background:radial-gradient(60% 45% at 50% 70%, var(--ac-25), transparent 70%);
+  animation:glowfade 1.4s ease-out forwards}
+@keyframes glowfade{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.badges.pinned .bdg{transform:scale(1.06)}
 @keyframes fall{to{transform:translateY(-150px) rotate(220deg);opacity:0}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
@@ -505,7 +521,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v26 · walk me through it';
+const APP_VERSION = 'v27 · make it yours';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -903,8 +919,31 @@ const ACCENTS = [
   {id:'coral',  nm:'Coral',      c:'#ff9f8f'},
   {id:'amber',  nm:'Amber',      c:'#f2c46a'}
 ];
-const AVATARS = ['✦','🌊','🐚','🦋','🌱','🎧','📚','🔭','🪐','🌙','🐢','🎨'];
+const AVATARS = ['✦','🌊','🐚','🦋','🌱','🎧','📚','🔭','🪐','🌙','🐢','🎨',
+                 '🐉','🌌','⚡','🎬','🎻','🖋️'];
+/* Skies: which set of canvas washes the app wears. CSS owns the colours
+   (see [data-sky=…]); this list only names the choices. */
+const SKIES = [
+  {id:'constellation', nm:'Constellation'},
+  {id:'nebula',        nm:'Nebula'},
+  {id:'tide',          nm:'Tide'},
+  {id:'graphite',      nm:'Graphite'}
+];
+/* Celebration styles. Same triggers, same rules — only the look changes.
+   "Quiet" exists because confetti can turn cringe overnight at this age;
+   opting down should cost nothing. */
+const FX_STYLES = [
+  {id:'confetti', ic:'🎊', nm:'Confetti'},
+  {id:'stars',    ic:'✦',  nm:'Stars'},
+  {id:'petals',   ic:'🌸', nm:'Petals'},
+  {id:'bubbles',  ic:'○',  nm:'Bubbles'},
+  {id:'quiet',    ic:'◐',  nm:'Quiet glow'}
+];
+/* Curated per-subject icon choices — enough personality to feel hers, few
+   enough that the schedule stays scannable. */
+const ICON_CHOICES = ['🎭','📐','📏','🧮','🧬','🔬','⚛️','🚀','🏛️','📜','🌍','📖','📚','✒️','🏺','⚖️','🎨','🔭'];
 const DEFAULT_PREFS = { accent:'aqua', avatar:'✦', nickname:'', motto:'', companion:null,
+  sky:'constellation', fx:'confetti', subjectIcons:{}, pins:[], mline:'',
   pomodoro:25, brk:5, goals:{}, subjectColors:{}, theme:'auto' };
 
 function prefs(){ return { ...DEFAULT_PREFS, ...(DATA.records['prefs']||{}) }; }
@@ -922,6 +961,12 @@ function applyTheme(){
   const mode = p.theme || 'auto';
   const resolved = mode==='auto' ? (prefersLight() ? 'light' : 'dark') : mode;
   document.documentElement.dataset.theme = resolved;
+  document.documentElement.dataset.sky = SKIES.some(s=>s.id===p.sky) ? p.sky : 'constellation';
+  /* Her subject icons ride the class objects so every render site — schedule,
+     tiles, plan, parent view — picks them up without knowing the feature
+     exists. baseIcon keeps the default recoverable. */
+  CLASSES.forEach(c=>{ if(c.baseIcon===undefined) c.baseIcon=c.icon;
+    c.icon = (p.subjectIcons||{})[c.id] || c.baseIcon; });
   const m = document.querySelector('meta[name=theme-color]');
   if(m) m.setAttribute('content', resolved==='light' ? '#f2f6f5' : '#04141a');
 }
@@ -983,27 +1028,34 @@ const COMPANION_VOICES = {
       'You walked in prepared and it showed. Dreadfully unsporting of you. Keep doing it.',
       'Clean round. Note the strategy that did it and hoard it like treasure.',
       'The material never stood a chance. That is what starting early does — ask any castle.',
-      'I have watched centuries of cramming end in tears. Spacing it out, like you just did, is the only magic that ever worked.'
+      'I have watched centuries of cramming end in tears. Spacing it out, like you just did, is the only magic that ever worked.',
+      'As you were, {name}. Whatever that routine is, it is working.'
     ],
     steady:[
       'The ones that got away are logged. They always come back around — and next time you will be waiting.',
       'A dragon does not sulk over a scratch. The misses are scheduled; consider the rematch booked.',
       'You found the gaps in the armor. Excellent. Now we know exactly where to aim.',
       'The treasure was never in the easy questions. This round drew you a map.',
-      'Those misses are on my list now. Nothing on my list survives three weeks.'
+      'Those misses are on my list now. Nothing on my list survives three weeks.',
+      'Chin up, {name}. The list is short and I am exceptionally patient.'
     ],
     idle:[
       'Nothing due. I would tell you to relax, but ten minutes of practice does grow the hoard.',
       'The board is clear. Being ahead is quieter than the legends suggest.',
       'Nothing is chasing you today, which for a dragon is almost boring. Enjoy it — you earned the quiet.',
-      'All quiet. An empty Growth Zone is its own kind of treasure.'
+      'All quiet. An empty Growth Zone is its own kind of treasure.',
+      'The hoard is safe, {name}. Nothing is due.'
     ]
   }
 };
 function companionPool(kind, comp){
   const v = comp && COMPANION_VOICES[comp.id];
-  if(v && v[kind]) return v[kind];
-  return { cheer:COMPANION_CHEER, steady:COMPANION_STEADY, idle:COMPANION_IDLE }[kind];
+  const raw = (v && v[kind]) || { cheer:COMPANION_CHEER, steady:COMPANION_STEADY, idle:COMPANION_IDLE }[kind];
+  /* {name} lines exist only when a first name is in the roster; without one
+     they drop out of the pool rather than render a blank. */
+  const name = (roster().studentName||'').trim().split(' ')[0];
+  return raw.filter(l => name || !l.includes('{name}'))
+            .map(l => l.split('{name}').join(name));
 }
 function companionOf(){
   const c = prefs().companion;
@@ -1250,15 +1302,24 @@ function showModal({title,message,confirmText='OK',cancelText=null,onConfirm=nul
   document.body.appendChild(ov); return ov;
 }
 function celebrate(){
+  const fx = prefs().fx || 'confetti';
+  if(navigator.vibrate) navigator.vibrate(fx==='quiet' ? 12 : 18);
+  if(fx==='quiet'){
+    const gl = el('div','glow');
+    document.body.appendChild(gl); setTimeout(()=>gl.remove(),1400);
+    return;
+  }
   const ac = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim();
+  const glyphs = { stars:['✦','✧','★','✶'], petals:['❀','✿','🌸','❀'], bubbles:['○','◦','○','∘'] }[fx];
   const cols=[ac,'#f2c48a','#ffffff',ac];
   for(let i=0;i<26;i++){
-    const c=el('div','confetti');
+    const c=el('div','confetti'+(glyphs?' glyph':''));
     c.style.left=Math.random()*100+'vw'; c.style.top=(58+Math.random()*28)+'vh';
-    c.style.background=cols[i%cols.length]; c.style.animationDelay=(Math.random()*.4)+'s';
+    if(glyphs){ c.textContent=glyphs[i%glyphs.length]; c.style.color=cols[i%cols.length]; }
+    else c.style.background=cols[i%cols.length];
+    c.style.animationDelay=(Math.random()*.4)+'s';
     document.body.appendChild(c); setTimeout(()=>c.remove(),2000);
   }
-  if(navigator.vibrate) navigator.vibrate(18);
 }
 function shuffle(a){ const b=a.slice();
   for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
@@ -1663,7 +1724,11 @@ SCREENS.study = function(root){
     } else {
       const seed = date.split('-').reduce((a,b)=>a+ +b, 0);
       const idle = companionPool('idle', comp);
-      line = idle[seed % idle.length];
+      /* Her own line (Settings) joins the idle rotation — her words, her voice,
+         so the curation rules do not apply to it. */
+      const mine = (prefs().mline||'').trim();
+      const pool = mine ? idle.concat(mine) : idle;
+      line = pool[seed % pool.length];
     }
     const perch = companionSays(line, comp);
     if(dest){ perch.classList.add('tap'); perch.addEventListener('click',dest); }
@@ -2739,6 +2804,18 @@ SCREENS.setup = function(root){
   });
   pc.appendChild(sw);
 
+  pc.appendChild(el('label',null,'Sky'));
+  const skyRow = el('div','btn-row');
+  skyRow.style.flexWrap='wrap';
+  SKIES.forEach(s2=>{
+    const b = el('button','btn '+(((p.sky||'constellation')===s2.id)?'btn-primary':'btn-secondary'), s2.nm);
+    b.style.flex='1 1 40%';
+    b.addEventListener('click',()=>{ setPref('sky',s2.id); render(); toast(s2.nm); });
+    skyRow.appendChild(b);
+  });
+  pc.appendChild(skyRow);
+  pc.appendChild(el('div','hintline','The colour weather behind everything. Text and cards stay exactly as readable.'));
+
   pc.appendChild(el('label',null,'Your mark'));
   const ep = el('div','emoji-pick');
   AVATARS.forEach(a=>{
@@ -2773,7 +2850,25 @@ SCREENS.setup = function(root){
     cn.addEventListener('change',()=>{ setPref('companion',{...prefs().companion, nm:cn.value.trim()}); render(); });
     pc.appendChild(cn);
     pc.appendChild(el('div','hintline','They keep you company on Study and turn up when you finish a quiz.'));
+
+    pc.appendChild(el('label',null,'A line of yours for them to say'));
+    const ml = el('input'); ml.type='text'; ml.maxLength=90;
+    ml.placeholder='Optional — your words, said back to you now and then';
+    ml.value = p.mline || '';
+    ml.addEventListener('change',()=>{ setPref('mline', ml.value.trim()); render(); toast('Saved'); });
+    pc.appendChild(ml);
   }
+
+  pc.appendChild(el('label',null,'Celebration style'));
+  const fxRow = el('div','emoji-pick');
+  FX_STYLES.forEach(f=>{
+    const b = el('button',(p.fx||'confetti')===f.id?'on':'', f.ic);
+    b.setAttribute('aria-label',f.nm); b.title=f.nm;
+    b.addEventListener('click',()=>{ setPref('fx',f.id); render(); toast(f.nm); celebrate(); });
+    fxRow.appendChild(b);
+  });
+  pc.appendChild(fxRow);
+  pc.appendChild(el('div','hintline','How a finished quiz celebrates. Tap one to preview it.'));
 
   pc.appendChild(el('label',null,'What should this app call itself?'));
   const nn = el('input'); nn.type='text'; nn.maxLength=22;
@@ -3336,6 +3431,25 @@ function pickSubjectColour(cls){
         grid.appendChild(b);
       });
       box.appendChild(grid);
+
+      /* Icon choice rides the same modal. First option is the default;
+         picking it clears the override rather than storing a copy. */
+      box.appendChild(el('label',null,'Icon'));
+      const base = cls.baseIcon || cls.icon;
+      const ig = el('div','emoji-pick');
+      [base, ...ICON_CHOICES.filter(e=>e!==base)].forEach(e=>{
+        const b = el('button', e===cls.icon?'on':'', e);
+        b.addEventListener('click',()=>{
+          const map = {...(prefs().subjectIcons||{})};
+          if(e===base) delete map[cls.id]; else map[cls.id]=e;
+          setPref('subjectIcons', map);
+          [...ig.children].forEach(x=>x.classList.remove('on'));
+          b.classList.add('on');
+          toast(e+'  saved');
+        });
+        ig.appendChild(b);
+      });
+      box.appendChild(ig);
     },
     onConfirm:()=>render()
   });
@@ -3422,17 +3536,53 @@ SCREENS.stars = function(root){
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); c.appendChild(r); });
   root.appendChild(c);
 
+  /* Pinned badges: up to three earned ones she chooses to feature. Autonomy
+     over how achievements display — no new mechanics, just curation. */
+  const have = earned();
+  const pins = (prefs().pins||[]).filter(id=>have.has(id));
+  if(pins.length){
+    root.appendChild(divider('Pinned'));
+    const pg = el('div','badges pinned');
+    pins.forEach(id=>{
+      const b = BADGES.find(x=>x.id===id); if(!b) return;
+      const d = el('div','bdg got');
+      d.appendChild(el('span','ic',b.ic)); d.appendChild(el('span','nm',b.nm));
+      d.addEventListener('click',()=>badgeModal(b, have));
+      pg.appendChild(d);
+    });
+    root.appendChild(pg);
+  }
+
   root.appendChild(divider('Badges'));
-  const have = earned(), g = el('div','badges');
+  const g = el('div','badges');
   BADGES.forEach(b=>{
     const d = el('div','bdg'+(have.has(b.id)?' got':''));
     d.appendChild(el('span','ic',b.ic)); d.appendChild(el('span','nm',b.nm));
-    d.addEventListener('click',()=>showModal({title:`${b.ic} ${b.nm}`,
-      message:b.desc+(have.has(b.id)?'\n\nEarned ✓':'\n\nNot yet.')}));
+    d.addEventListener('click',()=>badgeModal(b, have));
     g.appendChild(d);
   });
   root.appendChild(g);
 };
+
+function badgeModal(b, have){
+  const got = have.has(b.id);
+  showModal({
+    title:`${b.ic} ${b.nm}`,
+    message: b.desc + (got?'\n\nEarned ✓':'\n\nNot yet.'),
+    build: got ? (box, close)=>{
+      const pins = prefs().pins||[];
+      const on = pins.includes(b.id);
+      const pb = el('button','btn btn-secondary', on?'Unpin from the top':'Pin to the top');
+      pb.style.marginTop='10px';
+      pb.addEventListener('click',()=>{
+        if(!on && pins.length>=3){ toast('Three pins is the limit — unpin one first'); return; }
+        setPref('pins', on ? pins.filter(x=>x!==b.id) : pins.concat(b.id));
+        close(); render(); toast(on?'Unpinned':'Pinned');
+      });
+      box.appendChild(pb);
+    } : null
+  });
+}
 
 /* ---------- Provenance ----------
    Every generated block says where it came from, and we render that rather than
