@@ -127,9 +127,24 @@ Three routes, in order of preference:
   id, type:'unit', classId:'bio', title:'Unit 3: Cell Division',
   quarter:2, source:'Bio notes 10/14 (Drive)',
   cards:[ {id, term, def, hint, eq?} ],
-  questions:[ {id, lv:1|2|3, q, opts:[4], ans:0-3, hint, ex:{main, tip, mnemonic?}} ]
+  questions:[ {id, lv:1|2|3, q, opts:[4], ans:0-3, hint, steps:[…],
+               ex:{main, tip, mnemonic?}} ]
 }
 ```
+
+**`steps` (v26, both apps): every question carries 3–6 strings that walk from
+the question to the answer, one concrete move each, last step states the
+answer.** After a wrong answer the quiz offers "Walk me through it" and reveals
+them one per tap — free, because it is remediation, not part of the hint
+economy, and only after answering so it teaches rather than leaks. Misses copy
+`steps` onto the miss record so review-ladder rounds keep the walkthrough.
+`UNIT_SCHEMA` requires it on generated units; hand-written units should include
+it too.
+
+Mergeable content files live in `content/` — each is a `{v, records}` JSON that
+a parent imports via Restore (it goes through `Sync.merge`, so it adds records
+without touching anything else). Units shipped this way are `status:'draft'`
+like everything else, so they land in the review queue, not in her app.
 
 - 15–30 cards; 18–24 questions (6–8 each at level 1 recall / 2 apply / 3 analyze).
   Quizzes run in **rounds of 5** (`QUIZ_ROUND`), least-practised questions first —
@@ -278,6 +293,12 @@ from the model. Deliberate rules, do not relax: never interrupts (Study perch
 and quiz-results modal only), never sad or disappointed (under-80% gets the
 `COMPANION_STEADY` pool — calm, dry, forward-looking), process praise only,
 no care-and-feeding mechanics, no stored counters, owns no records.
+
+**Species voices** (`COMPANION_VOICES`, v26): a species listed there overrides
+the default pools; everyone else falls back. The dragon's voice is hers —
+witty, dry, a shade dark, always landing on reassurance. Dark humor about the
+QUESTIONS is fine; gloom about HER never is. Same hard rules as the defaults:
+no exclamation marks, no trait praise, never sad.
 
 ## Voice
 
