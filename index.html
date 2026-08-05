@@ -452,6 +452,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   animation:glowfade 1.4s ease-out forwards}
 @keyframes glowfade{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
 .badges.pinned .bdg{transform:scale(1.06)}
+.trustrow{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:12px;cursor:pointer}
+.trustrow input{width:18px;height:18px;margin-top:1px;accent-color:var(--ac)}
 @keyframes fall{to{transform:translateY(-150px) rotate(220deg);opacity:0}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
@@ -521,7 +523,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v27 · make it yours';
+const APP_VERSION = 'v28 · trusted device';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -2939,6 +2941,10 @@ SCREENS.setup = function(root){
    curious 12-year-old; it is not real security and is not claimed to be. */
 function openParentGate(){
   const stored = Store.get('parent_hash','');
+  /* A trusted device skips the gate. Per-device localStorage, never a record —
+     same threat model as the passcode itself: it deters a curious kid on HER
+     device; a parent's own phone gains nothing from asking every time. */
+  if(stored && Store.get('parent_trust',false)){ go('parent'); return; }
   if(!stored){
     showModal({ title:'Set a passcode',
       message:'Pick a passcode for the grown-up view. Only you need to know it.',
@@ -2958,8 +2964,16 @@ function openParentGate(){
     build:(box,close)=>{
       const i = el('input'); i.type='password'; i.placeholder='Passcode'; i.autocomplete='current-password';
       box.appendChild(i); setTimeout(()=>i.focus(),50);
+      const remRow = el('label','trustrow');
+      const cb = el('input'); cb.type='checkbox';
+      remRow.appendChild(cb);
+      remRow.appendChild(el('span',null,'Stop asking on this device (for your own phone, not hers)'));
+      box.appendChild(remRow);
       box._go = async ()=>{
-        if(await sha256(i.value) === Store.get('parent_hash','')){ close(); go('parent'); }
+        if(await sha256(i.value) === Store.get('parent_hash','')){
+          if(cb.checked) Store.set('parent_trust', true);
+          close(); go('parent');
+        }
         else { toast('Not quite'); i.value=''; }
       };
       i.addEventListener('keydown',e=>{ if(e.key==='Enter') box._go(); });
@@ -3399,6 +3413,11 @@ SCREENS.parent = function(root){
   fr.appendChild(frBtn);
   root.appendChild(fr);
 
+  if(Store.get('parent_trust',false)){
+    const tr = el('button','btn btn-ghost','Require the passcode again on this device');
+    tr.addEventListener('click',()=>{ Store.remove('parent_trust'); toast('This device will ask again'); render(); });
+    root.appendChild(tr);
+  }
   const chg = el('button','btn btn-ghost','Change passcode');
   chg.addEventListener('click',()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); go('setup'); });
   root.appendChild(chg);
