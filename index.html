@@ -91,6 +91,19 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   color:var(--warm);font-size:13px;font-weight:600}
 .sandbox-banner .btn{width:auto;min-height:36px;padding:7px 12px;font-size:13px;flex-shrink:0}
 
+.perch{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px}
+.perch.tap{cursor:pointer}
+.perch .pet{font-size:36px;line-height:1;flex-shrink:0;animation:pet-bob 3.4s ease-in-out infinite}
+@keyframes pet-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.perch .pet{animation:none}}
+.bubble{position:relative;flex:1;background:var(--surface);border:1px solid var(--line-soft);
+  border-radius:14px;padding:10px 13px;font-size:13.5px;line-height:1.45;color:var(--text)}
+.bubble::before{content:'';position:absolute;left:-5px;bottom:14px;width:9px;height:9px;
+  background:var(--surface);border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  transform:rotate(45deg)}
+.bubble .who{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ac-fg);margin-bottom:3px}
+.modal-box .perch{margin:14px 0 0;text-align:left}
+
 .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px;margin-bottom:14px}
 .card.ac{border-color:var(--ac-25);background:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
 .card.quiet{background:transparent;border-style:dashed}
@@ -487,7 +500,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v23 · sandbox & fresh start';
+const APP_VERSION = 'v24 · a companion, by request';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -886,7 +899,7 @@ const ACCENTS = [
   {id:'amber',  nm:'Amber',      c:'#f2c46a'}
 ];
 const AVATARS = ['✦','🌊','🐚','🦋','🌱','🎧','📚','🔭','🪐','🌙','🐢','🎨'];
-const DEFAULT_PREFS = { accent:'aqua', avatar:'✦', nickname:'', motto:'',
+const DEFAULT_PREFS = { accent:'aqua', avatar:'✦', nickname:'', motto:'', companion:null,
   pomodoro:25, brk:5, goals:{}, subjectColors:{}, theme:'auto' };
 
 function prefs(){ return { ...DEFAULT_PREFS, ...(DATA.records['prefs']||{}) }; }
@@ -909,6 +922,65 @@ function applyTheme(){
 }
 window.matchMedia('(prefers-color-scheme: light)')
   .addEventListener('change',()=>{ if((prefs().theme||'auto')==='auto'){ applyTheme(); render(); } });
+
+/* ---------- The companion ----------
+   Started as Wayfinder-only; she asked for one herself (2026-08), which was
+   the agreed bar for it landing here. Different roster and drier copy than
+   Wayfinder's — this is identity, not engine, so the two are NOT parity items.
+   It is a messenger, not a second voice: everything it says comes from these
+   curated pools or from studyPlan()/dueMisses(), under the same tone rules as
+   the affirmations. Deliberate rules — do not relax them:
+   - Never interrupts. Study perch and quiz results only; never mid-question,
+     never over the timer.
+   - Never sad or disappointed. A rough quiz gets the same steady creature;
+     anything else re-moralizes the Growth Zone.
+   - Process praise only, never traits. Same Dweck grounding as everything else.
+   - No model-generated dialogue, no care-and-feeding, no stored counters. */
+const COMPANIONS = [
+  {id:'cat',     e:'🐈‍⬛', nm:'Cat'},
+  {id:'fox',     e:'🦊', nm:'Fox'},
+  {id:'owl',     e:'🦉', nm:'Owl'},
+  {id:'wolf',    e:'🐺', nm:'Wolf'},
+  {id:'octopus', e:'🐙', nm:'Octopus'},
+  {id:'shark',   e:'🦈', nm:'Shark'},
+  {id:'turtle',  e:'🐢', nm:'Turtle'},
+  {id:'dolphin', e:'🐬', nm:'Dolphin'}
+];
+const COMPANION_CHEER = [   // quiz finished at 80%+
+  'You did the unglamorous part — showing up before it was urgent. That is the entire secret, and almost nobody believes it.',
+  'Clean round. Note what you did this week, because it worked.',
+  'That looked easy because of the reps behind it. Easy is earned.',
+  'The material did not get easier. You got faster. There is a difference, and it is the good one.',
+  'Whatever strategy that was, keep it. Evidence beats vibes.'
+];
+const COMPANION_STEADY = [  // under 80% — dry, forward-looking, never sad
+  'The misses are logged and scheduled. Future-you gets them with better odds.',
+  'You just found out exactly what to study next. Most people pay for that information with a real test.',
+  'An easy round would have told you nothing. This one drew you a map.',
+  'The score is a snapshot, not a forecast. The Growth Zone does the forecasting.',
+  'That was the expensive kind of practice — the kind that actually changes something.'
+];
+const COMPANION_IDLE = [    // nothing due, nothing planned
+  'Nothing due, nothing on fire. Whatever you touch today is pure surplus.',
+  'All quiet. Ten minutes now is cheaper than forty later — your call.',
+  'Nothing is chasing you. Worth remembering how you got here.',
+  'Clear board. Pick a subject on vibes; the plan has no complaints.'
+];
+function companionOf(){
+  const c = prefs().companion;
+  if(!c || !c.sp) return null;
+  const s = COMPANIONS.find(x=>x.id===c.sp);
+  return s ? { ...s, name:(c.nm || s.nm) } : null;
+}
+function companionSays(text, comp){
+  const wrap = el('div','perch');
+  wrap.appendChild(el('div','pet', comp.e));
+  const b = el('div','bubble');
+  b.appendChild(el('div','who', comp.name));
+  b.appendChild(el('div',null, text));
+  wrap.appendChild(b);
+  return wrap;
+}
 
 /* ---------- Sync ---------- */
 const Sync = {
@@ -1532,6 +1604,31 @@ SCREENS.study = function(root){
   aff.appendChild(acts);
   if(seen && seen.xp) aff.appendChild(el('div','hintline',`+${seen.xp} XP today`));
   root.appendChild(aff);
+
+  /* The companion's perch: one line for the day, deterministic so it does not
+     reshuffle on every render. It fronts what the screen already knows —
+     due reviews first, then the top of the study plan, else a quiet line. */
+  const comp = companionOf();
+  if(comp){
+    const dueN = dueMisses().length;
+    const topPlan = studyPlan(date)[0];
+    let line, dest = null;
+    if(dueN){
+      line = dueN===1 ? 'One question cycled back today. Clearing it now is what stops it coming back.'
+        : `${dueN} questions cycled back today. Clearing them now is what stops them coming back.`;
+      dest = ()=>go('growth');
+    } else if(topPlan){
+      const pc2 = CLASS_BY_ID[topPlan.classId];
+      line = `${pc2.name} could use ${topPlan.minutes} minutes today — ${topPlan.why}.`;
+      dest = ()=>go('unit',{classId:topPlan.classId});
+    } else {
+      const seed = date.split('-').reduce((a,b)=>a+ +b, 0);
+      line = COMPANION_IDLE[seed % COMPANION_IDLE.length];
+    }
+    const perch = companionSays(line, comp);
+    if(dest){ perch.classList.add('tap'); perch.addEventListener('click',dest); }
+    root.appendChild(perch);
+  }
 
   /* Anything due comes before new material — that is the point of the schedule. */
   const dueNow = dueMisses();
@@ -2181,6 +2278,14 @@ function finishQuiz(u){
   const wasReview = u.id==='__review__';
   showModal({ title:`${pct}%`, message:msg,
     confirmText:'How did that feel?', cancelText:null,
+    /* The companion turns up when a quiz ends — a natural seam, never an
+       interruption. Same steady creature whatever the score. */
+    build:(box)=>{
+      const comp = companionOf();
+      if(!comp) return;
+      const pool = pct>=80 ? COMPANION_CHEER : COMPANION_STEADY;
+      box.appendChild(companionSays(pool[logs().length % pool.length], comp));
+    },
     onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed, back: wasReview?'growth':null}) });
   go(wasReview ? 'growth' : 'unit', {classId:clsId});
 }
@@ -2577,6 +2682,33 @@ SCREENS.setup = function(root){
     ep.appendChild(b);
   });
   pc.appendChild(ep);
+
+  /* The companion is hers to pick and hers to name — same autonomy logic as
+     the avatar. "—" is a real choice: no creature, no perch, nothing missing. */
+  pc.appendChild(el('label',null,'Study companion'));
+  const cp = el('div','emoji-pick');
+  const hasComp = p.companion && p.companion.sp;
+  const noneB = el('button', !hasComp?'on':'', '—');
+  noneB.setAttribute('aria-label','No companion');
+  noneB.addEventListener('click',()=>{ setPref('companion',null); render(); });
+  cp.appendChild(noneB);
+  COMPANIONS.forEach(c=>{
+    const b = el('button', hasComp && p.companion.sp===c.id?'on':'', c.e);
+    b.setAttribute('aria-label',c.nm);
+    b.addEventListener('click',()=>{ setPref('companion',{sp:c.id, nm:hasComp?(p.companion.nm||''):''}); render(); });
+    cp.appendChild(b);
+  });
+  pc.appendChild(cp);
+  if(hasComp){
+    pc.appendChild(el('label',null,'Their name'));
+    const cn = el('input'); cn.type='text'; cn.maxLength=16;
+    const spec = COMPANIONS.find(x=>x.id===p.companion.sp);
+    cn.placeholder = spec ? spec.nm : 'Name';
+    cn.value = p.companion.nm || '';
+    cn.addEventListener('change',()=>{ setPref('companion',{...prefs().companion, nm:cn.value.trim()}); render(); });
+    pc.appendChild(cn);
+    pc.appendChild(el('div','hintline','They keep you company on Study and turn up when you finish a quiz.'));
+  }
 
   pc.appendChild(el('label',null,'What should this app call itself?'));
   const nn = el('input'); nn.type='text'; nn.maxLength=22;

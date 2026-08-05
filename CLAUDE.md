@@ -263,6 +263,22 @@ practice, spaced practice, interleaving, sleep, self-explanation. These are the
 techniques with the strongest evidence base — do not swap them for study tips
 that merely sound good.
 
+## The companion
+
+A creature she picks and names in Settings (`prefs.companion = {sp, nm}`,
+synced; `null`/"—" = off, the default). Landed here **at her request**
+(2026-08) — it began as Wayfinder-only and the agreed bar for porting it was
+her asking. The two apps' companions share rules but **not** roster or copy
+(this one is night-sky and ocean, the lines are drier) — identity, not
+engine, so do not sync them as parity.
+
+It is a **messenger, not a second voice**: every line comes from the curated
+`COMPANION_*` pools or is assembled from `studyPlan()`/`dueMisses()`, never
+from the model. Deliberate rules, do not relax: never interrupts (Study perch
+and quiz-results modal only), never sad or disappointed (under-80% gets the
+`COMPANION_STEADY` pool — calm, dry, forward-looking), process praise only,
+no care-and-feeding mechanics, no stored counters, owns no records.
+
 ## Voice
 
 the student is sharp and responds to wit and real stakes. Direct, never condescending,
