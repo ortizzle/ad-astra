@@ -459,6 +459,24 @@ this shipped have none of these fields and degrade to just the cards and quiz �
 every render site guards, and no migration backfills them, because marking old
 content `source` would be a lie.
 
+### The Sky Map (v29, both apps)
+
+The Stars tab's star chart, made literal: each school week is a named
+constellation of seven stars, one per day, lit by any day with a `log` or
+`focus` record. `SKY_GOAL` (5) of 7 completes the week and it joins the sky
+map (`SCREENS.skymap`). Rules that are the point, not the decoration:
+
+- **Nothing breaks.** A short week stays dim and the next starts fresh — no
+  streak-style loss, no negative copy anywhere on the map.
+- **Everything is derived** from existing records (`studyDates()` →
+  `skyWeek(i)`), so it backfills instantly, syncs for free, and stores no
+  counters. Do not add a stored "constellation" record.
+- **Stars light for showing up, never for scores**, and they are never
+  currency — no redemption, in-app or implied.
+- Rosters are identity: this app uses the real sky (`CONSTELLATIONS`, one
+  honest line of astronomy each); Wayfinder invents playful ones. Keep the
+  lore accurate here and keep the rosters divergent.
+
 **Badge fills are opaque on purpose.** A badge lands on plain cards, accent-washed
 cards and review rows; a translucent tint dropped the 10px label under 4.5:1 on
 the lighter ones. Measured across all accents in both themes: worst case 4.54:1.

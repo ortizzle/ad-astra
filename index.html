@@ -454,6 +454,17 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .badges.pinned .bdg{transform:scale(1.06)}
 .trustrow{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:12px;cursor:pointer}
 .trustrow input{width:18px;height:18px;margin-top:1px;accent-color:var(--ac)}
+
+.sky-card{cursor:pointer}
+.skysvg{width:100%;height:auto;display:block;margin:6px 0 2px}
+.skysvg polyline{stroke:var(--line);stroke-width:1}
+.skysvg circle.lit{fill:var(--ac);filter:drop-shadow(0 0 3px var(--ac))}
+.skysvg circle.dim{fill:none;stroke:var(--faint);stroke-width:1;opacity:.6}
+.skysvg text{font-size:5px;fill:var(--faint);letter-spacing:.04em}
+.skygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.skygrid .card{margin-bottom:0;padding:14px}
+.skymini-name{font-size:12.5px;font-weight:600;margin-top:4px}
+.skymini-week{font-size:10.5px;color:var(--faint)}
 @keyframes fall{to{transform:translateY(-150px) rotate(220deg);opacity:0}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
@@ -523,7 +534,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v28 · trusted device';
+const APP_VERSION = 'v29 · the sky map';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -1259,6 +1270,122 @@ const BADGES = [
   {id:'tuned',   ic:'🎚️',nm:'Well Calibrated',desc:'Predict your score within 10% five times', check:()=>calibrationHits()>=5},
   {id:'days20',  ic:'📊',nm:'Twenty Days',  desc:'Study on 20 different days', check:s=>s.days>=20}
 ];
+/* ---------- The Sky Map ----------
+   A star chart in the literal sense. Each school week is a named
+   constellation of seven stars; a star lights on any day with real study
+   (a log or focus record — showing up, never the score). SKY_GOAL of 7
+   completes the week and the constellation joins the sky map. Deliberate
+   rules: nothing breaks — a short week just stays dim and the next one
+   starts fresh (no streak-style loss); everything is DERIVED from logs, no
+   stored counters; and stars are never currency — no redemption, ever. */
+const SKY_GOAL = 5;
+const SKY_SHAPES = [
+  [[8,40],[22,26],[38,34],[52,18],[66,30],[80,22],[92,38]],
+  [[10,20],[24,32],[40,28],[50,44],[64,40],[78,26],[90,34]],
+  [[12,46],[20,28],[34,20],[50,26],[64,18],[78,30],[88,46]],
+  [[10,30],[26,22],[42,30],[56,22],[70,30],[82,42],[92,26]],
+  [[14,22],[26,40],[40,46],[54,38],[66,24],[80,36],[90,20]],
+  [[8,34],[24,44],[38,36],[52,46],[68,38],[80,46],[92,30]],
+  [[12,26],[28,18],[44,24],[58,34],[70,46],[84,40],[94,28]],
+  [[10,42],[22,30],[36,40],[50,30],[64,40],[78,30],[90,42]]
+];
+/* Real constellations, one honest line of sky-lore each. Identity: Wayfinder
+   invents playful ones instead — do not converge the rosters. */
+const CONSTELLATIONS = [
+  {nm:'Lyra', lore:'The harp. Its star Vega was the pole star 12,000 years ago, and will be again.'},
+  {nm:'Cygnus', lore:'The swan, flying south along the band of the Milky Way.'},
+  {nm:'Aquila', lore:'The eagle. Its star Altair spins so fast it bulges at the equator.'},
+  {nm:'Cassiopeia', lore:'The queen on her throne — the bright W that circles the pole and never sets.'},
+  {nm:'Perseus', lore:'Home of Algol, the “demon star,” which dims every three days as its companion crosses it.'},
+  {nm:'Andromeda', lore:'Points the way to the Andromeda galaxy — the farthest thing you can see with bare eyes.'},
+  {nm:'Pegasus', lore:'The winged horse. Its Great Square is autumn’s landmark.'},
+  {nm:'Orion', lore:'The hunter. The three belt stars point down to Sirius, the brightest star in the night.'},
+  {nm:'Taurus', lore:'The bull, carrying the Pleiades cluster on its shoulder.'},
+  {nm:'Gemini', lore:'The twins Castor and Pollux — one bright star for each head.'},
+  {nm:'Ursa Major', lore:'The great bear. The Big Dipper is only its hindquarters and tail.'},
+  {nm:'Ursa Minor', lore:'The little bear, with Polaris, the North Star, at the tip of its tail.'},
+  {nm:'Draco', lore:'The dragon, coiled between the two bears.'},
+  {nm:'Cepheus', lore:'The king. Its star Delta Cephei calibrates the distances to other galaxies.'},
+  {nm:'Boötes', lore:'The herdsman, anchored by orange Arcturus — bright enough to spot at dusk.'},
+  {nm:'Corona Borealis', lore:'The northern crown, a near-perfect semicircle of stars.'},
+  {nm:'Hercules', lore:'Carries M13, a globular cluster of several hundred thousand stars.'},
+  {nm:'Ophiuchus', lore:'The serpent-bearer. The sun passes through it every December, uncredited.'},
+  {nm:'Scorpius', lore:'The scorpion, with red Antares for a heart — the name means “rival of Mars.”'},
+  {nm:'Sagittarius', lore:'The archer. Aim past its teapot of stars and you are looking at the center of the galaxy.'},
+  {nm:'Capricornus', lore:'The sea-goat, one of the oldest constellations anyone ever recorded.'},
+  {nm:'Aquarius', lore:'The water-bearer, pouring a stream of faint stars toward the southern fish.'},
+  {nm:'Pisces', lore:'Two fish tied by a cord, holding the point where the sun crosses the equator each March.'},
+  {nm:'Aries', lore:'The ram of the golden fleece.'},
+  {nm:'Cancer', lore:'The crab — faint, but holding the Beehive cluster at its middle.'},
+  {nm:'Leo', lore:'The lion. Its sickle of stars is spring’s question mark, written backwards.'},
+  {nm:'Virgo', lore:'Behind its stars sits a cluster of two thousand galaxies, all bound together.'},
+  {nm:'Libra', lore:'The scales — its star names still mean “the claws,” borrowed from the scorpion next door.'},
+  {nm:'Canis Major', lore:'The big dog, led on its leash by Sirius.'},
+  {nm:'Canis Minor', lore:'The small dog: mostly one star, Procyon — “before the dog” — rising just ahead of Sirius.'},
+  {nm:'Lepus', lore:'The hare, crouched safely under Orion’s feet.'},
+  {nm:'Auriga', lore:'The charioteer, with bright Capella — which turns out to be two pairs of stars.'},
+  {nm:'Delphinus', lore:'The dolphin — small, distinct, and easy to find on a dark night.'},
+  {nm:'Cetus', lore:'The sea monster, home of Mira, “the wonderful,” a star that fades away and returns.'},
+  {nm:'Eridanus', lore:'The river, winding from Orion’s foot deep into the southern sky.'},
+  {nm:'Hydra', lore:'The water snake — the largest constellation in the entire sky.'},
+  {nm:'Corvus', lore:'The crow, perched on the water snake’s back.'},
+  {nm:'Crater', lore:'The cup, resting beside the crow.'},
+  {nm:'Centaurus', lore:'Holds Alpha Centauri, the nearest star system to our own.'},
+  {nm:'Crux', lore:'The Southern Cross — the smallest constellation, on five national flags.'},
+  {nm:'Lupus', lore:'The wolf, standing between the centaur and the scorpion.'},
+  {nm:'Columba', lore:'The dove, sent out ahead of the ship to find land.'},
+  {nm:'Phoenix', lore:'The firebird of the southern sky.'},
+  {nm:'Corona Australis', lore:'The southern crown, a small arc beneath the archer.'}
+];
+function studyDates(){
+  const s = new Set();
+  all('log').forEach(l=>{ if(l.date) s.add(l.date); });
+  all('focus').forEach(f=>{ if(f.date) s.add(f.date); });
+  return s;
+}
+const skyWeek0 = () => AZ.weekStart(CAL.firstDay);
+const skyNow = date => Math.max(0, Math.round(AZ.daysBetween(skyWeek0(), AZ.weekStart(date))/7));
+function skyWeek(i, set){
+  set = set || studyDates();
+  const start = AZ.shift(skyWeek0(), i*7);
+  const days = Array.from({length:7},(_,d)=>AZ.shift(start,d));
+  const lit = days.map(d=>set.has(d));
+  const litCount = lit.filter(Boolean).length;
+  return { i, start, days, lit, litCount, done:litCount>=SKY_GOAL,
+           c: CONSTELLATIONS[i % CONSTELLATIONS.length] };
+}
+function skyDone(date){
+  const set = studyDates(); let c = 0;
+  for(let i=0;i<=skyNow(date);i++) if(skyWeek(i,set).done) c++;
+  return c;
+}
+function skyChartEl(w, mini){
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 100 60');
+  svg.setAttribute('class','skysvg'+(mini?' mini':''));
+  const pts = SKY_SHAPES[w.i % SKY_SHAPES.length];
+  const line = document.createElementNS(NS,'polyline');
+  line.setAttribute('points', pts.map(p=>p.join(',')).join(' '));
+  line.setAttribute('fill','none');
+  svg.appendChild(line);
+  pts.forEach((p,d)=>{
+    const c = document.createElementNS(NS,'circle');
+    c.setAttribute('cx',p[0]); c.setAttribute('cy',p[1]);
+    c.setAttribute('r', mini?2.6:3.4);
+    c.setAttribute('class', w.lit[d]?'lit':'dim');
+    svg.appendChild(c);
+    if(!mini){
+      const t = document.createElementNS(NS,'text');
+      t.setAttribute('x',p[0]); t.setAttribute('y',p[1]+9);
+      t.setAttribute('text-anchor','middle');
+      t.textContent = 'SMTWTFS'[d];
+      svg.appendChild(t);
+    }
+  });
+  return svg;
+}
+
 const earned = () => new Set(all('badge').map(b=>b.badgeId));
 function checkBadges(){
   const s = stats(), have = earned(), fresh = [];
@@ -3041,7 +3168,8 @@ SCREENS.parent = function(root){
    ['Current streak', s.streak+' day'+(s.streak===1?'':'s')],
    ['Total time logged', s.seconds>=3600?`${Math.floor(s.seconds/3600)}h ${Math.round(s.seconds%3600/60)}m`:`${Math.round(s.seconds/60)}m`],
    ['Focus-timer minutes', s.focusMin],
-   ['Overall accuracy', s.answered?s.accuracy+'%':'—']
+   ['Overall accuracy', s.answered?s.accuracy+'%':'—'],
+   ['Constellations complete', `${skyDone(date)} of ${skyNow(date)+1} weeks`]
   ].forEach(([k,v])=>{ const r=el('div','row');
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); eff.appendChild(r); });
   root.appendChild(eff);
@@ -3524,6 +3652,19 @@ SCREENS.stars = function(root){
   const s = stats(), date = AZ.today();
   root.appendChild(headline('Star chart', `Level ${s.level} · ${s.xp.toLocaleString()} XP`));
 
+  /* The week as a constellation. Stars light for showing up, never for
+     scores, and a short week simply stays dim — nothing breaks. */
+  const wk = skyWeek(skyNow(date));
+  const skc = el('div','card ac sky-card');
+  skc.appendChild(el('div','eyebrow','This week’s constellation'));
+  skc.appendChild(el('h3',null,wk.c.nm));
+  skc.appendChild(skyChartEl(wk,false));
+  skc.appendChild(el('p',null, wk.done
+    ? `Complete — ${wk.c.nm} joins your sky map.`
+    : `${wk.litCount} of 7 lit · ${SKY_GOAL} completes it`));
+  skc.addEventListener('click',()=>go('skymap'));
+  root.appendChild(skc);
+
   const lvl = el('div','card');
   const lr = el('div','row');
   lr.appendChild(el('span','k',`Level ${s.level}`));
@@ -3581,6 +3722,31 @@ SCREENS.stars = function(root){
     g.appendChild(d);
   });
   root.appendChild(g);
+};
+
+SCREENS.skymap = function(root){
+  const date = AZ.today(), n = skyNow(date), set = studyDates();
+  const weeks = [];
+  for(let i=0;i<=n;i++) weeks.push(skyWeek(i,set));
+  const done = weeks.filter(w=>w.done).length;
+  root.appendChild(headline('Sky map',
+    `${done} constellation${done===1?'':'s'} complete · week ${n+1} of the year`));
+  const grid = el('div','skygrid');
+  weeks.forEach(w=>{
+    const c = el('div','card'+(w.done||w.i===n?'':' quiet'));
+    const mini = skyChartEl(w,true);
+    if(!w.done && w.i!==n) mini.style.opacity=.45;
+    c.appendChild(mini);
+    c.appendChild(el('div','skymini-name', (w.done||w.i===n) ? w.c.nm : '·'));
+    c.appendChild(el('div','skymini-week', 'Week of '+AZ.shortDate(w.start)));
+    if(w.done || w.i===n){
+      c.style.cursor='pointer';
+      c.addEventListener('click',()=>showModal({ title:w.c.nm,
+        message:`${w.c.lore}\n\nWeek of ${AZ.shortDate(w.start)} · ${w.litCount} of 7 stars lit${w.done?' · complete':''}.`}));
+    }
+    grid.appendChild(c);
+  });
+  root.appendChild(grid);
 };
 
 function badgeModal(b, have){
