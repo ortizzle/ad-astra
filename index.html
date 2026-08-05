@@ -500,7 +500,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v24 · a companion, by request';
+const APP_VERSION = 'v25 · enter the dragon';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -937,6 +937,7 @@ window.matchMedia('(prefers-color-scheme: light)')
    - Process praise only, never traits. Same Dweck grounding as everything else.
    - No model-generated dialogue, no care-and-feeding, no stored counters. */
 const COMPANIONS = [
+  {id:'dragon',  e:'🐉', nm:'Dragon'},
   {id:'cat',     e:'🐈‍⬛', nm:'Cat'},
   {id:'fox',     e:'🦊', nm:'Fox'},
   {id:'owl',     e:'🦉', nm:'Owl'},
