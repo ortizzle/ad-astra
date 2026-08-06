@@ -465,6 +465,15 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .skygrid .card{margin-bottom:0;padding:14px}
 .skymini-name{font-size:12.5px;font-weight:600;margin-top:4px}
 .skymini-week{font-size:10.5px;color:var(--faint)}
+
+.calc-screen{font-size:24px;font-weight:600;text-align:right;padding:12px 14px;min-height:54px;
+  background:var(--raised);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;
+  word-break:break-all;font-variant-numeric:tabular-nums}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.calc-grid button{min-height:46px;border-radius:12px;background:var(--surface);
+  border:1px solid var(--line);font-size:18px;font-weight:600}
+.calc-grid button.op{background:var(--ac-14);color:var(--ac-fg);border-color:var(--ac-25)}
+.calc-grid button.eq{grid-column:span 2;background:var(--ac);color:#04141a;border:none}
 @keyframes fall{to{transform:translateY(-150px) rotate(220deg);opacity:0}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
@@ -534,7 +543,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v30 · sky starts sunday';
+const APP_VERSION = 'v31 · calculator';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -1454,6 +1463,83 @@ function celebrate(){
     document.body.appendChild(c); setTimeout(()=>c.remove(),2000);
   }
 }
+/* ---------- Calculator ----------
+   A small scientific-lite calculator for the maths and science subjects.
+   NEVER eval() — the expression is parsed by hand (recursive descent), so
+   only digits and the listed operators can ever run. It stores nothing. */
+const CALC_CLASSES = new Set(['algeo','physics','bio']);
+function calcEval(s){
+  let i = 0;
+  const eat = c=>{ if(s[i]===c){ i++; return true; } return false; };
+  function number(){
+    let j = i;
+    while(j<s.length && /[0-9.]/.test(s[j])) j++;
+    if(j===i) return null;
+    const v = parseFloat(s.slice(i,j));
+    if(isNaN(v)) return null;
+    i = j; return v;
+  }
+  function primary(){
+    if(eat('(')){ const v = expr(); if(v===null || !eat(')')) return null; return v; }
+    if(eat('π')) return Math.PI;
+    return number();
+  }
+  function unary(){
+    if(eat('−')||eat('-')){ const v = unary(); return v===null ? null : -v; }
+    if(eat('√')){ const v = unary(); return (v===null || v<0) ? null : Math.sqrt(v); }
+    return primary();
+  }
+  function power(){
+    const b = unary(); if(b===null) return null;
+    if(eat('^')){ const e = power(); return e===null ? null : Math.pow(b,e); }
+    return b;
+  }
+  function term(){
+    let v = power(); if(v===null) return null;
+    for(;;){
+      if(eat('×')){ const r = power(); if(r===null) return null; v*=r; }
+      else if(eat('÷')){ const r = power(); if(r===null) return null; v/=r; }
+      else return v;
+    }
+  }
+  function expr(){
+    let v = term(); if(v===null) return null;
+    for(;;){
+      if(eat('+')){ const r = term(); if(r===null) return null; v+=r; }
+      else if(eat('−')||eat('-')){ const r = term(); if(r===null) return null; v-=r; }
+      else return v;
+    }
+  }
+  const v = expr();
+  return (v!==null && i===s.length && isFinite(v)) ? v : null;
+}
+const calcFmt = v => String(Math.round(v*1e10)/1e10);
+function openCalc(){
+  showModal({ title:'Calculator', confirmText:'Done',
+    build:(box)=>{
+      let cur = '';
+      const scr = el('div','calc-screen','0');
+      const upd = ()=>{ scr.textContent = cur || '0'; };
+      box.appendChild(scr);
+      const grid = el('div','calc-grid');
+      const KEYS = ['7','8','9','÷','4','5','6','×','1','2','3','−','0','.','(',')','π','√','^','+','C','⌫','='];
+      KEYS.forEach(k=>{
+        const b = el('button', '÷×−+^√π()'.includes(k) ? 'op' : k==='=' ? 'eq' : '', k);
+        b.addEventListener('click',()=>{
+          if(k==='C'){ cur=''; upd(); }
+          else if(k==='⌫'){ cur=cur.slice(0,-1); upd(); }
+          else if(k==='='){
+            const v = calcEval(cur);
+            if(v===null){ scr.textContent = 'Check the expression'; }
+            else { cur = calcFmt(v); upd(); }
+          }
+          else { cur += k; upd(); }
+        });
+        grid.appendChild(b);
+      });
+      box.appendChild(grid);
+    }});
+}
 function shuffle(a){ const b=a.slice();
   for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
 const uid = p => p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8);
@@ -2021,6 +2107,10 @@ SCREENS.unit = function(root){
     waiting===1 ? 'One unit is waiting for a grown-up to check it.'
                 : `${waiting} units are waiting for a grown-up to check them.`));
 
+  if(CALC_CLASSES.has(c.id)){
+    const cb = el('button','btn btn-secondary','🧮  Calculator');
+    cb.addEventListener('click',openCalc); root.appendChild(cb);
+  }
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
   const gen = el('button','btn btn-ghost','✨  Generate a unit for '+c.short);
@@ -2414,6 +2504,13 @@ SCREENS.quiz = function(root){
       } else finishQuiz(u);
     });
     root.appendChild(n);
+  }
+  /* Maths and science quizzes get a calculator — the questions test concepts,
+     not arithmetic stamina, and real tests in these subjects allow one. */
+  if(CALC_CLASSES.has(ctx.classId)){
+    const calcBtn = el('button','btn btn-ghost','🧮  Calculator');
+    calcBtn.addEventListener('click',openCalc);
+    root.appendChild(calcBtn);
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
   const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
