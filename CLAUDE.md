@@ -141,10 +141,14 @@ economy, and only after answering so it teaches rather than leaks. Misses copy
 `UNIT_SCHEMA` requires it on generated units; hand-written units should include
 it too.
 
-Mergeable content files live in `content/` — each is a `{v, records}` JSON that
-a parent imports via Restore (it goes through `Sync.merge`, so it adds records
-without touching anything else). Units shipped this way are `status:'draft'`
-like everything else, so they land in the review queue, not in her app.
+Mergeable content files live in `content/` — each is a `{v, records}` JSON.
+List every shipped file in `CONTENT_LIBRARY`; the parent view's "Check the
+library" button fetches them from the app's own origin (no account, no
+backend), merges through `Sync.merge`, and reports what arrived. Tombstones
+beat library copies, so a discarded unit never resurrects — to re-ship one
+deliberately, bump its `updatedAt` past the discard. Restore still works for
+the same files as a manual fallback. Units shipped either way are
+`status:'draft'`, so they land in the review queue, not in her app.
 
 **Reading-companion additions (v32, both apps):** questions may carry
 `passage` (a short quoted excerpt, under ~40 words and quoted exactly,

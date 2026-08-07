@@ -547,7 +547,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v32 · reading companion';
+const APP_VERSION = 'v33 · the library';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -1141,6 +1141,40 @@ const Sync = {
     return DATA;
   }
 };
+const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json'];
+
+/* ---------- The unit library ----------
+   Unit files I publish ship inside the app itself (content/ on the same
+   GitHub Pages origin), so fetching them needs no account, no backend and
+   no file juggling. Merging goes through Sync.merge, so a discarded unit's
+   tombstone always beats the library copy — nothing resurrects — and new
+   units arrive as drafts for the review queue, never straight to her. */
+async function fetchLibrary(btn){
+  if(sandboxOn()){ toast('Sandbox is on — nothing is saved'); return; }
+  const label = btn.textContent; btn.disabled = true; btn.textContent = 'Checking…';
+  let added = 0, reachable = false;
+  for(const path of CONTENT_LIBRARY){
+    try{
+      const res = await fetch(path, {cache:'no-store'});
+      if(!res.ok) continue;
+      reachable = true;
+      const inc = migrate(await res.json());
+      const fresh = Object.keys(inc.records||{}).filter(id=>{
+        const cur = DATA.records[id];
+        return !cur || (!!cur.deleted && (inc.records[id].updatedAt||0) > (cur.updatedAt||0));
+      });
+      DATA = Sync.merge(DATA, inc);
+      fresh.forEach(id=>{ const r = DATA.records[id]; if(r && !r.deleted) added++; });
+    }catch(e){}
+  }
+  saveLocal(); syncSoon();
+  btn.disabled = false; btn.textContent = label;
+  toast(!reachable ? 'Could not reach the library — try again online'
+    : added ? `${added} new unit${added===1?'':'s'} waiting in the review queue`
+    : 'Library already in sync — nothing new');
+  render();
+}
+
 let syncTimer=null;
 function syncSoon(){ if(sandboxOn() || !Sync.configured()) return;
   clearTimeout(syncTimer); syncTimer=setTimeout(()=>Sync.save().catch(()=>{}),2500); }
@@ -3472,6 +3506,11 @@ SCREENS.parent = function(root){
   mr.addEventListener('click',()=>go('review'));
   mrow.appendChild(mr);
   mat.appendChild(mrow);
+  const libBtn = el('button','btn btn-ghost','📥  Check the library for new units');
+  libBtn.style.marginTop='8px';
+  libBtn.addEventListener('click',()=>fetchLibrary(libBtn));
+  mat.appendChild(libBtn);
+  mat.appendChild(el('div','hintline','Pulls any new study units published with the app. They land in this review queue, never straight to her.'));
   root.appendChild(mat);
 
   /* Weekly goals */
