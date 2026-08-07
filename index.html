@@ -264,6 +264,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .face.back .wm{display:none}
 
 .opt{width:100%;text-align:left;min-height:var(--tap);padding:14px 16px;margin-bottom:12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+.passage{font-family:'Fraunces',Georgia,serif;font-style:italic;background:var(--raised);
+  border-left:3px solid var(--ac-25);border-radius:0 12px 12px 0;padding:12px 16px;margin-top:12px;
+  font-size:15.5px;line-height:1.65;white-space:pre-line;position:relative}
+.opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
 .opt.right .ltr{background:var(--good);color:#04141a;border-color:var(--good)}
@@ -543,7 +547,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v31 · calculator';
+const APP_VERSION = 'v32 · reading companion';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -1210,7 +1214,7 @@ function missAsQuestion(m){
   /* The id is rewritten to the miss id: a review round gathers questions from
      many units, whose own ids restart at 1 and would otherwise collide. */
   if(Array.isArray(m.opts) && m.opts.length === 4 && m.ans != null)
-    return { id:m.id, lv:1, q:m.q, opts:m.opts, ans:m.ans, hint:'', ex:{ main:m.why||'' }, graph:m.graph||null, steps:m.steps||null, _missId:m.id };
+    return { id:m.id, lv:1, q:m.q, opts:m.opts, ans:m.ans, hint:'', ex:{ main:m.why||'' }, graph:m.graph||null, steps:m.steps||null, kind:m.kind||null, passage:m.passage||null, _missId:m.id };
   const u = DATA.records[m.unitId];
   const q = u && !u.deleted && u.questions && u.questions.find(x => x.id === m.qid);
   return q ? { ...q, id:m.id, _missId:m.id } : null;
@@ -2095,10 +2099,14 @@ SCREENS.unit = function(root){
       const qb = el('button','btn btn-primary','Quiz');
       qb.addEventListener('click',()=>launchQuiz(u.id,c.id,false));
       row.appendChild(f); row.appendChild(qb); card.appendChild(row);
-      const tb = el('button','btn btn-secondary','⏱  Beat the clock');
-      tb.style.marginTop='8px';
-      tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
-      card.appendChild(tb);
+      if(!u.book){
+        /* Book-companion units never race a clock — speed-reading a novel
+           quiz teaches exactly the wrong thing. */
+        const tb = el('button','btn btn-secondary','⏱  Beat the clock');
+        tb.style.marginTop='8px';
+        tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
+        card.appendChild(tb);
+      }
       root.appendChild(card);
     });
   }
@@ -2340,7 +2348,8 @@ function timeUp(u){
   else {
     const was = DATA.records['miss_'+u.id+'_'+q.id];
     put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
-          qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose:'(ran out of time)',
+          qid:q.id, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+          right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]), chose:'(ran out of time)',
           why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
           on:(was&&!was.deleted?was.on:AZ.today()) }, false));
   }
@@ -2441,10 +2450,50 @@ SCREENS.quiz = function(root){
   root.appendChild(head);
 
   const qc = el('div','card ac'); qc.appendChild(el('h3',null,q.q));
+  if(q.passage) qc.appendChild(el('div','passage', q.passage));
   const qg = graphNode(q.graph); if(qg) qc.appendChild(qg);
   root.appendChild(qc);
 
-  q.opts.forEach((text,idx)=>{
+  if(q.kind==='order'){
+    /* Put-it-in-order: she taps the events into sequence. The shuffled
+       arrangement is pinned on quizState so re-renders never rescramble it
+       mid-thought, and it is never dealt pre-solved. */
+    if(quizState.orderFor !== q.id){
+      let arr = shuffle(q.opts.map((_,k)=>k));
+      if(arr.every((v,k)=>v===k)) arr = arr.slice().reverse();
+      quizState.orderArr = arr; quizState.orderPick = []; quizState.orderFor = q.id;
+    }
+    if(quizState.answered!==null){
+      /* Reveal: the true sequence, marking where her picks matched. */
+      q.opts.forEach((text,k)=>{
+        const b = el('button','opt '+((quizState.orderPick||[])[k]===k?'right':'wrong'));
+        b.disabled = true;
+        b.appendChild(el('span','ltr',String(k+1)));
+        b.appendChild(el('span',null,text));
+        root.appendChild(b);
+      });
+    } else {
+      quizState.orderArr.forEach(orig=>{
+        const at = quizState.orderPick.indexOf(orig);
+        const b = el('button','opt'+(at>=0?' picked':''));
+        b.appendChild(el('span','ltr', at>=0 ? String(at+1) : '·'));
+        b.appendChild(el('span',null,q.opts[orig]));
+        b.addEventListener('click',()=>{
+          if(at>=0) quizState.orderPick.splice(at,1);
+          else if(quizState.orderPick.length<q.opts.length) quizState.orderPick.push(orig);
+          render();
+        });
+        root.appendChild(b);
+      });
+      if(quizState.orderPick.length===q.opts.length){
+        const lock = el('button','btn btn-primary','Lock it in');
+        lock.addEventListener('click',()=>answerOrder(u,q));
+        root.appendChild(lock);
+      } else {
+        root.appendChild(el('div','hintline','Tap the events in the order they happened.'));
+      }
+    }
+  } else q.opts.forEach((text,idx)=>{
     const b = el('button','opt');
     b.appendChild(el('span','ltr',String.fromCharCode(65+idx)));
     b.appendChild(el('span',null,text));
@@ -2465,7 +2514,7 @@ SCREENS.quiz = function(root){
       const h = el('div','card'); h.appendChild(el('p',null,'💡 '+q.hint)); root.appendChild(h);
     }
   } else {
-    const right = quizState.answered===q.ans;
+    const right = quizState.answered===q.ans && quizState.answered!==-2;
     const ex = el('div','explain '+(right?'ok':'no'));
     ex.appendChild(el('div','lbl', cheerLabel(right, quizState.answered===-1)));
     ex.appendChild(richify(el('p'), q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
@@ -2552,19 +2601,32 @@ function answer(u,q,idx){
         attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0) });
   if(!right){
     quizState.missed.push(q.id);
-    const chose = idx===-1 ? '(ran out of time)' : q.opts[idx];
+    const chose = idx===-1 ? '(ran out of time)'
+      : idx===-2 ? (quizState.orderPick||[]).map(k=>q.opts[k]).join(' → ')
+      : q.opts[idx];
     if(src){
       /* Demotion is finishQuiz's job; here we just record what she picked this time. */
       put({ ...src, chose });
     } else {
       const was = DATA.records['miss_'+u.id+'_'+q.id];
       put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
-            qid:q.id, q:q.q, opts:q.opts, ans:q.ans, right:q.opts[q.ans], chose,
+            qid:q.id, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+            right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]), chose,
             why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
             on:(was&&!was.deleted?was.on:AZ.today()) }, false));
     }
   }
   render();
+}
+/* Order questions grade the whole sequence — exact order counts, anything else
+   routes to the Growth Zone like any other miss. Routed through answer() so
+   qstats, misses, pace measurement and speed bonuses all work identically;
+   -2 is the "sequence wrong" sentinel (-1 stays "out of time"). */
+function answerOrder(u,q){
+  if(!quizState || quizState.answered!==null) return;
+  const seq = quizState.orderPick||[];
+  const right = seq.length===q.opts.length && seq.every((v,k)=>v===k);
+  answer(u, q, right ? q.ans : -2);
 }
 function finishQuiz(u){
   const total = quizState.order.length, pct = Math.round(quizState.correct/total*100);
@@ -4067,8 +4129,12 @@ SCREENS.reviewunit = function(root){
       const d = el('div','rev'+(cutQ.has(q.id)?' cut':''));
       d.appendChild(el('div','eyebrow', LV[q.lv]||('Level '+q.lv)));
       d.appendChild(el('div','q',q.q));
+      if(q.passage) d.appendChild(el('div','passage', q.passage));
       const qg2 = graphNode(q.graph); if(qg2) d.appendChild(qg2);
-      q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
+      if(q.kind==='order'){
+        d.appendChild(el('div','hintline','Put-in-order — listed here in the correct sequence; she sees them shuffled.'));
+        q.opts.forEach((o,i)=>d.appendChild(el('div','o yes', (i+1)+'. '+o)));
+      } else q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
       if(q.ex && q.ex.main) d.appendChild(richify(el('div','why'), q.ex.main));
       if(q.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(q.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutQ.has(q.id)?'↩':'✕');
@@ -4158,6 +4224,7 @@ const UNIT_SCHEMA = {
       properties:{ lv:{type:'integer',enum:[1,2,3]}, q:{type:'string'},
         opts:{type:'array',items:{type:'string'}}, ans:{type:'integer',enum:[0,1,2,3]},
         hint:{type:'string'}, graph:GRAPH, from:PROV,
+        kind:{type:'string',enum:['mc','order']}, passage:{type:'string'},
         steps:{type:'array',items:{type:'string'}},
         ex:{type:'object',properties:{main:{type:'string'},tip:{type:'string'},mnemonic:{type:'string'}},
             required:['main','tip'],additionalProperties:false}},
@@ -4193,6 +4260,7 @@ async function generateUnit(classId, notes, shots, srcName){
     `Card definitions LEAD with the straightforward answer wrapped in **bold** — one short sentence that could stand alone as the study answer — then at most two or three supporting bullet lines. A card is a study aid, not an essay; the bold line is what she should retain.`,
     `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists, and **bold** renders as bold.`,
     `If the subject is mathematical and a question is about reading a graph, attach a "graph" object and refer to it as "the graph shown". Window w is [xmin,xmax,ymin,ymax]; series are typed line (y=mx+b), parabola or abs in vertex form (a, h, k), or pts (straight segments through the listed points, for piecewise shapes); pts on the graph object marks labelled dots. Double-check that the plotted function actually has the features the question claims.`,
+    `For literature or other reading material: when a question analyses specific lines, quote a SHORT excerpt (under 40 words) in a "passage" field — she sees it styled as a quotation above the choices. For chronology, set kind:"order": opts must then list exactly 4 events in their CORRECT order (she sees them shuffled and taps them into sequence; still include ans:0).`,
     `Anchor everything to the supplied material. Do not invent facts it does not support. If the material is thin, write fewer cards rather than padding with things it never said.`,
     `Tone: direct and a little dry. Never condescending, never exclamation marks, never "great job". Card hints are memory hooks or mnemonics, never restatements of the definition. Explanations say why the right answer is right, not just what it is.`,
 

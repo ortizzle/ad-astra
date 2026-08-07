@@ -1,0 +1,524 @@
+{
+  "v": 4,
+  "records": {
+    "unit-tkam1": {
+      "id": "unit-tkam1",
+      "type": "unit",
+      "updatedAt": 1786060800000,
+      "classId": "english",
+      "quarter": 1,
+      "status": "draft",
+      "book": true,
+      "title": "To Kill a Mockingbird · Ch. 1–8: Maycomb and the Radley Place",
+      "srcName": "To Kill a Mockingbird, chapters 1–8",
+      "source": "To Kill a Mockingbird (Harper Lee), reading companion 1 of 4",
+      "summary": {
+        "text": "Chapters 1–8 of To Kill a Mockingbird: Scout, Jem and summer-visitor Dill in Depression-era Maycomb, Alabama — Scout's rough start at school, the legend of Boo Radley, the dares and games around the Radley place, the gifts in the knothole and its cementing, and the night of Miss Maudie's fire.",
+        "from": "source"
+      },
+      "why": {
+        "text": "These chapters plant everything the rest of the novel pays off: how Maycomb thinks, how rumors work, and the gap between what people say about Boo Radley and what he actually does. Read these eight chapters closely and the trial chapters will hit twice as hard.",
+        "from": "added"
+      },
+      "objectives": [
+        {
+          "text": "Track what the children BELIEVE about Boo Radley versus what actually HAPPENS in these chapters.",
+          "from": "added"
+        },
+        {
+          "text": "Explain Atticus's climb-into-his-skin advice and spot the scenes that test it.",
+          "from": "source"
+        },
+        {
+          "text": "Read the Cunninghams and the Depression setting off small details — entailment, paying in stovewood, a refused quarter.",
+          "from": "source"
+        },
+        {
+          "text": "Put the major events of chapters 1–8 in order and say what each one changes.",
+          "from": "added"
+        }
+      ],
+      "parentNote": {
+        "text": "First of four reading-companion units, covering only chapters 1–8 — nothing here spoils past the fire at Miss Maudie's. It leans on the new question types: quoted-passage questions for close reading, put-in-order questions for chronology, and one spot-the-false-statement question, which doubles as practice for the NOT-true test items she missed on the diagnostic. Two ungraded ponder cards are written to be askable at dinner — the Boo evidence list especially. The thing most likely to trip her up: keeping legend and fact separate, which is precisely the skill the novel is quietly teaching. Beat-the-clock is disabled on book units on purpose.",
+        "from": "added"
+      },
+      "nextUp": {
+        "text": "Finish chapter 8 first, then run the cards and a quiz round. The ponder cards are worth an honest minute each.",
+        "minutes": 22,
+        "from": "added"
+      },
+      "cards": [
+        {
+          "id": "c0",
+          "term": "Scout (Jean Louise Finch)",
+          "def": "**The narrator — about six when it starts, telling it years later.**\n• Could read before school ever tried to teach her, and got in trouble for it.\n• Quick fists, quicker questions — the book trusts her eyes more than her judgments.",
+          "hint": "Watch the gap between what young Scout sees and what grown Scout, narrating, understands.",
+          "from": "source"
+        },
+        {
+          "id": "c1",
+          "term": "Jem Finch",
+          "def": "**Scout's older brother — four years ahead and starting to change.**\n• Takes the Radley-house dare in chapter 1; loses his pants on the porch raid in chapter 6.\n• Cries when the knothole is cemented — a kid's grief with a grown-up reason behind it.",
+          "hint": "Jem's silences say more than his dares.",
+          "from": "source"
+        },
+        {
+          "id": "c2",
+          "term": "Atticus Finch",
+          "def": "**Their father, a lawyer — teaches by explanation, not punishment.**\n• The empathy rule: you never really understand someone until you climb into his skin and walk around in it.\n• Ends the Boo games with one line: stop tormenting that man.",
+          "hint": "Atticus never raises his voice in these chapters. Notice what he does instead.",
+          "from": "source"
+        },
+        {
+          "id": "c3",
+          "term": "Dill (Charles Baker Harris)",
+          "def": "**The summer friend from Meridian — small, dramatic, endlessly inventive.**\n• The Boo Radley obsession is his idea first: the dares, the play-acting, the plans to make Boo come out.\n• Talks big about a father he plainly doesn't really have around.",
+          "hint": "Dill supplies imagination; Maycomb supplies the legend.",
+          "from": "source"
+        },
+        {
+          "id": "c4",
+          "term": "Boo (Arthur) Radley",
+          "def": "**A man nobody has seen in years — the town filled the silence with a monster story.**\n• The legend: six-and-a-half feet tall, eats raw squirrels, stalks at night.\n• The record so far: gifts in a knothole, mended pants, a blanket in the cold.",
+          "hint": "Keep two columns: what is SAID about Boo, what is DONE by Boo.",
+          "from": "source"
+        },
+        {
+          "id": "c5",
+          "term": "Calpurnia",
+          "def": "**The Finches' cook — and the household's second parent.**\n• Scolds Scout, not Walter, over the syrup: a guest is a guest, whatever he does to his dinner.\n• Atticus treats her word as law, which tells you where she stands in the family.",
+          "hint": "Calpurnia's discipline is always about respect for someone else.",
+          "from": "source"
+        },
+        {
+          "id": "c6",
+          "term": "Miss Maudie Atkinson",
+          "def": "**The neighbor who talks to the children like people.**\n• Azaleas, cake, and the sharpest tongue on the street.\n• When her house burns down in chapter 8, she shrugs: she wanted a smaller house and a bigger garden anyway.",
+          "hint": "Miss Maudie is the book's test for how to lose things without losing yourself.",
+          "from": "source"
+        },
+        {
+          "id": "c7",
+          "term": "Maycomb in the Depression",
+          "def": "**A tired old town where there is nowhere to go and nothing to buy — and no money to buy it with.**\n• Scout nods at a president's line: nothing to fear but fear itself.\n• Farm families like the Cunninghams live on trade, not cash.",
+          "hint": "The Depression isn't backdrop — it explains half the choices people make.",
+          "from": "source"
+        },
+        {
+          "id": "c8",
+          "term": "The knothole",
+          "def": "**A hole in the Radley oak that becomes a mailbox.**\n• Gum, Indian-head pennies, twine, a spelling medal, a watch — and two soap figures carved as Scout and Jem.\n• Nathan Radley cements it and blames a sick tree; Atticus says the tree looks healthy.",
+          "hint": "The soap carvings are the tell: the giver has been watching, fondly.",
+          "from": "source"
+        },
+        {
+          "id": "c9",
+          "term": "The empathy lesson (theme)",
+          "def": "**Climb into his skin and walk around in it — the book's engine, stated in chapter 3.**\n• First test: Miss Caroline, the new teacher Scout wants to hate.\n• Running test: Boo, whom everyone judges and no one knows.",
+          "hint": "Every chapter quietly asks: whose skin has Scout not tried on yet?",
+          "from": "source"
+        },
+        {
+          "id": "c10",
+          "term": "Legend vs. evidence (motif)",
+          "def": "**The town tells one Boo story; the events tell another.**\n• Legend: monster, prowler, phantom.\n• Evidence so far: gifts, mended pants, a blanket placed on cold shoulders — all quiet, all unasked-for.",
+          "hint": "This gap is the novel in miniature. Keep score.",
+          "from": "source"
+        },
+        {
+          "id": "c11",
+          "term": "malevolent",
+          "def": "**Wishing harm; showing ill will.**\n• Chapter 1 calls Boo a “malevolent phantom” — the town's word, not the evidence's.",
+          "hint": "Mal- = bad (malfunction, malice).",
+          "from": "source"
+        },
+        {
+          "id": "c12",
+          "term": "entailment",
+          "def": "**A legal knot that ties up land so the family can't freely sell or borrow against it.**\n• Why Mr. Cunningham is land-rich, cash-poor — and pays Atticus in stovewood and hickory nuts.",
+          "hint": "Entailed land = frozen wealth. You can farm it, not spend it.",
+          "from": "source"
+        },
+        {
+          "id": "c13",
+          "term": "compromise",
+          "def": "**An agreement where each side gives something up.**\n• Atticus's deal in chapter 3: keep going to school, and we keep reading together every night — school's rules and Scout's reading both survive.",
+          "hint": "Atticus's compromises always cost him something too — that is why they work.",
+          "from": "source"
+        },
+        {
+          "id": "c14",
+          "term": "predilection",
+          "def": "**A preference; a habitual liking for something.**\n• Chapter 1 uses it wryly about the Radleys' unusual predilection: keeping to themselves.",
+          "hint": "Pre- = before: a leaning you bring to things in advance.",
+          "from": "source"
+        },
+        {
+          "id": "c15",
+          "term": "Ponder: the Boo ledger",
+          "def": "**Before you read on — list everything Boo has actually DONE in chapters 1–8.**\n• Now put the list next to the legend.\n• Worth saying out loud at dinner: why does a whole town prefer the scary version?",
+          "hint": "There is no wrong answer here. That is the point.",
+          "from": "added"
+        },
+        {
+          "id": "c16",
+          "term": "Ponder: the cemented knothole",
+          "def": "**Nathan Radley sealed the tree with cement and called it sick.**\n• Prediction, before chapter 9: if that hole was a voice, how does its owner speak now — or does he?\n• Check back when you finish the book. The answer is better than the guess.",
+          "hint": "Write your prediction somewhere. Future-you will want to compare.",
+          "from": "added"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q0",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "passage": "“You never really understand a person until you consider things from his point of view … until you climb into his skin and walk around in it.”",
+          "q": "Atticus says this after Scout's disastrous first day of school. What is he actually asking her to do about Miss Caroline?",
+          "opts": [
+            "Report her to the school board for banning reading",
+            "Imagine the day from Miss Caroline's side — a newcomer who got Maycomb's rules wrong all day too",
+            "Ignore her and keep reading in secret",
+            "Prove her wrong by reading even more at school"
+          ],
+          "ans": 1,
+          "hint": "Whose day was ALSO terrible in that classroom?",
+          "steps": [
+            "Recall Miss Caroline's day: new in town, humiliated over the Cunningham quarter, alarmed by a cootie, corrected by a six-year-old who reads.",
+            "Atticus's advice is a method, not a verdict: stand where she stood before judging her.",
+            "From her side, the class's unwritten Maycomb rules were invisible — her mistakes were ignorance, not malice.",
+            "So the ask is empathy: hold your grudge until you have walked her day in her shoes."
+          ],
+          "ex": {
+            "main": "**Imagine the day from her side.** Atticus never says Miss Caroline was right — he says understanding comes before judgment. It is the novel's thesis, handed over in chapter 3.",
+            "tip": "When a quoted passage is a famous line, the question is almost never 'what does it say' — it is 'what does it ask someone to DO'."
+          }
+        },
+        {
+          "id": "q1",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "passage": "“Boo was about six-and-a-half feet tall, judging from his tracks; he dined on raw squirrels and any cats he could catch …”",
+          "q": "Who gives this description, and what does the novel want you to notice about it?",
+          "opts": [
+            "Jem — and every detail is invented; legend has completely replaced fact",
+            "Atticus — warning the children away from a dangerous man",
+            "Miss Maudie — teasing the children with a tall tale she made up",
+            "The adult narrator — reporting confirmed facts about Arthur Radley"
+          ],
+          "ans": 0,
+          "hint": "'Judging from his tracks' — has the speaker ever actually seen him?",
+          "steps": [
+            "Place the line: chapter 1, the children trading Radley lore at the start of summer.",
+            "Check the evidence inside it: height guessed from tracks, diet from rumor — nobody has seen any of this.",
+            "That is Jem performing the legend for Dill, each retelling taller than the last.",
+            "The novel is showing you how a myth grows: confident details, zero witnesses."
+          ],
+          "ex": {
+            "main": "**Jem — and it is pure legend.** The tell is 'judging from his tracks': it admits, mid-sentence, that no one has ever seen the man being described.",
+            "tip": "When a description is vivid but sourceless, ask who benefits from telling it. Here: a boy impressing his audience."
+          }
+        },
+        {
+          "id": "q2",
+          "lv": 2,
+          "from": "source",
+          "kind": "order",
+          "ans": 0,
+          "q": "Put these chapter 1–7 events in the order they happen.",
+          "opts": [
+            "Dill arrives for the summer and the Radley games begin",
+            "Scout's first day of school goes wrong for everyone",
+            "The first small gifts appear in the knothole",
+            "Nathan Radley fills the knothole with cement"
+          ],
+          "hint": "Summer, then school, then the tree starts giving — then stops.",
+          "steps": [
+            "Chapter 1 is summer: Dill arrives, the dares and Boo games start.",
+            "Chapter 2 is the calendar's next beat: school starts, and Scout's first day goes sideways.",
+            "Chapters 4–7: walking home from school, Scout finds gum, then pennies — the knothole becomes a mailbox.",
+            "Chapter 7 ends it: Nathan Radley cements the hole. Games, school, gifts, cement — that is the arc."
+          ],
+          "ex": {
+            "main": "**Dill and the games → first day of school → knothole gifts → cement.** The gifts can only start after school does — Scout finds them walking home — and the cement is the door slamming shut on all of it.",
+            "tip": "Anchor order questions to the calendar the book gives you: summer first, school after. Most sequences hang off it."
+          }
+        },
+        {
+          "id": "q3",
+          "lv": 3,
+          "from": "source",
+          "kind": "order",
+          "ans": 0,
+          "q": "The Radley Place keeps answering the children. Put these in order.",
+          "opts": [
+            "Jem slaps the Radley house on a dare",
+            "The porch raid — a shotgun blast, and Jem's pants left on the fence",
+            "Jem finds the pants mended, folded, waiting for him",
+            "During the fire, someone drapes a blanket over Scout's shoulders"
+          ],
+          "hint": "Dare, raid, repair, rescue.",
+          "steps": [
+            "The dare is chapter 1 — the first, smallest trespass: touch the house and run.",
+            "Chapter 6 escalates: the night raid on the porch, Nathan Radley's shotgun, pants abandoned in the fence wire.",
+            "Later that same chapter, Jem goes back — and finds them crudely sewn and folded. Someone expected him.",
+            "Chapter 8, Miss Maudie's fire: Scout, freezing in the street, ends up with a blanket she never saw arrive. Each event is quieter and kinder than the last."
+          ],
+          "ex": {
+            "main": "**Dare → raid and shotgun → mended pants → blanket.** Read as a sequence, it is a one-way conversation: the children escalate, and Boo answers every escalation with care.",
+            "tip": "When a book repeats a location, line up everything that happens there in order — the pattern is usually the author's point."
+          }
+        },
+        {
+          "id": "q4",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "Three of these really happen in chapters 1–8. Which one is the lie?",
+          "opts": [
+            "Small treasures keep appearing in the oak's knothole",
+            "Someone mends and folds Jem's abandoned pants",
+            "Scout is wrapped in a blanket during the fire without noticing",
+            "Boo Radley chases the children off his porch with a kitchen knife"
+          ],
+          "ans": 3,
+          "hint": "Check each against what is shown on the page, not what Maycomb says.",
+          "steps": [
+            "Test each statement against scenes you can point to: the knothole gifts run through chapters 4–7 — true.",
+            "The mended pants close chapter 6 — true, and Jem can barely talk about it.",
+            "The blanket is chapter 8, placed while everyone watched the fire — true.",
+            "Boo with a knife? That is the LEGEND — scissors-in-the-leg lore from years back, retold secondhand. On the page, Boo never threatens anyone. The lie is the one the town would believe fastest."
+          ],
+          "ex": {
+            "main": "**The knife chase never happens.** Every real Boo event in these chapters is an act of care; the only violence attached to him is rumor. That reversal is the whole setup of the novel.",
+            "tip": "Spot-the-lie questions reward receipts: if you cannot name the scene where it happened, suspect it."
+          }
+        },
+        {
+          "id": "q5",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "q": "Walter Cunningham won't take Miss Caroline's quarter for lunch. Why?",
+          "opts": [
+            "He already ate before school",
+            "He is afraid of the other children",
+            "Cunninghams never take what they cannot pay back",
+            "He plans to go home for lunch"
+          ],
+          "ans": 2,
+          "hint": "Scout tries to explain it: 'He's a Cunningham.'",
+          "steps": [
+            "Scout tells Miss Caroline 'he's a Cunningham' as if that explains everything — in Maycomb, it does.",
+            "The Cunninghams are poor but square: they take nothing they can't repay, and a quarter is a debt.",
+            "So the refusal is dignity, not rudeness — which the newcomer teacher has no way to read."
+          ],
+          "ex": {
+            "main": "**Cunninghams never take what they can't pay back.** The quarter is charity, charity is debt, and debt is the one thing the family refuses to carry.",
+            "tip": "Poverty in this book comes in kinds — the Cunninghams' code is the measuring stick the novel will use later."
+          }
+        },
+        {
+          "id": "q6",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "Mr. Cunningham pays Atticus for legal work with stovewood, hickory nuts and turnip greens. What does this arrangement show?",
+          "opts": [
+            "Atticus undercharges because the work was easy",
+            "Entailed land leaves the Cunninghams honest but cash-poor — so they pay in what they have",
+            "Atticus prefers goods to money",
+            "The Cunninghams are trying to avoid paying full price"
+          ],
+          "ans": 1,
+          "hint": "The word from chapter 2 is 'entailment'.",
+          "steps": [
+            "The Cunningham problem is entailment: their land is legally tied up, so it can't be sold or borrowed against.",
+            "Farm goods are the only currency they actually have.",
+            "Atticus accepts the goods without comment and tells the children why — payment is payment when it is all a man has.",
+            "The arrangement shows both codes at once: Cunningham dignity and Atticus's respect for it."
+          ],
+          "ex": {
+            "main": "**Entailment leaves them land-rich and cash-poor, so they pay in goods.** Atticus treating stovewood as full payment is the same lesson as the refused quarter, seen from the other side.",
+            "tip": "When a book invents a payment scene, it is telling you about both parties — watch what the receiver does."
+          }
+        },
+        {
+          "id": "q7",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "Walter pours syrup all over his lunch, Scout objects loudly — and Calpurnia scolds SCOUT, not Walter. What is Calpurnia's rule?",
+          "opts": [
+            "Anyone who sets foot in the house as a guest gets treated with respect, full stop",
+            "Never waste syrup during a Depression",
+            "Children should be silent at the table",
+            "Company manners only apply to grown-ups"
+          ],
+          "ans": 0,
+          "hint": "Who embarrassed whom?",
+          "steps": [
+            "Walter's syrup is odd but harmless; Scout's mockery is what actually wounds someone at the table.",
+            "Calpurnia pulls Scout to the kitchen: he is 'yo' comp'ny' — your guest — and a guest is not to be shamed.",
+            "The rule is not about food. It is that hospitality outranks Scout's opinion of anyone's manners."
+          ],
+          "ex": {
+            "main": "**Guests get respect, whatever they do to their dinner.** Calpurnia's fury is aimed at the humiliation, not the syrup — the same dignity rule the Cunninghams live by, enforced at the Finch table.",
+            "tip": "In scenes with a 'wrong' character, check who the adult corrects. That points at the real offense."
+          }
+        },
+        {
+          "id": "q8",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "Atticus catches the children play-acting Boo's life story and tells them to stop tormenting that man. What is the real conflict in that scene?",
+          "opts": [
+            "Whether the game is historically accurate",
+            "The children's entertainment versus a real, living man's dignity",
+            "Whether games are allowed in the front yard",
+            "Whether Dill is a bad influence"
+          ],
+          "ans": 1,
+          "hint": "'That man' — Atticus uses three words the children never use about Boo.",
+          "steps": [
+            "To the children, Boo is a character — material for a summer drama.",
+            "Atticus's phrase 'that man' reclassifies him: not a legend, a neighbor who can likely hear them.",
+            "The conflict is the book's empathy rule applied at home: fun that requires someone else's humiliation isn't harmless.",
+            "Notice the children don't fully stop — the lesson lands slowly, which is honest."
+          ],
+          "ex": {
+            "main": "**Entertainment versus a man's dignity.** The game only works if Boo isn't real to them; Atticus's one line insists that he is. It is the skin-walking lesson without the metaphor.",
+            "tip": "When an adult renames something in a scene — game to torment, phantom to man — the renaming IS the point."
+          }
+        },
+        {
+          "id": "q9",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "Among the knothole gifts are two soap figures — carved as a boy and a girl who look like Jem and Scout. What do the carvings tell you about the giver?",
+          "opts": [
+            "The giver is a professional artist",
+            "The giver wants to be paid for the gifts",
+            "The giver is mocking them",
+            "The giver watches the children closely and means them nothing but good"
+          ],
+          "ans": 3,
+          "hint": "What would you have to DO, over months, to carve someone from memory?",
+          "steps": [
+            "Carving likenesses requires long, careful watching — the giver knows these children well.",
+            "Every gift before this was generic treasure; the soap dolls are personal, made not found.",
+            "Watching plus giving, with no demand for credit, adds up to quiet affection — the exact opposite of the legend's stalker.",
+            "The children feel the shift too: this is when the knothole stops being luck and becomes a relationship."
+          ],
+          "ex": {
+            "main": "**He watches closely and means well.** The soap figures are the knothole's thesis statement: attention plus kindness, from someone the town calls a monster.",
+            "tip": "Handmade gifts in fiction are always evidence. Ask what making them required."
+          }
+        },
+        {
+          "id": "q10",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "When Nathan Radley cements the knothole, he says the tree is dying. Jem checks with Atticus, who says it looks healthy — and that night Jem cries. Why?",
+          "opts": [
+            "He wanted the tree to be sick so the cement made sense",
+            "He realizes Nathan lied — and deliberately cut off Boo's only way of speaking to them",
+            "He is afraid Nathan will shoot at them again",
+            "He wanted to keep the pocket watch for himself"
+          ],
+          "ans": 1,
+          "hint": "Add up what Jem now knows that Scout doesn't quite yet.",
+          "steps": [
+            "Jem has quietly assembled the truth: the gifts, the mended pants — the knothole was Boo, reaching out.",
+            "Atticus's 'tree looks healthy' proves Nathan's excuse false: the cement was a choice, not tree care.",
+            "So Jem understands what really happened: a lonely man's one channel to the world was walled shut by his own family, with a lie on top.",
+            "The tears are grief on Boo's behalf — the first time a child in this book cries for him instead of about him."
+          ],
+          "ex": {
+            "main": "**Jem sees the lie and what it cost Boo.** The cement scene is where Jem stops being a kid about the Radleys; he cries because he understands, and can't say so out loud.",
+            "tip": "When a character cries 'for no reason', the reason is usually the thing they figured out one page earlier."
+          }
+        },
+        {
+          "id": "q11",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "q": "The morning after her house burns down, Miss Maudie is nearly cheerful. What does she say?",
+          "opts": [
+            "She'll sue whoever started the fire",
+            "She is leaving Maycomb for good",
+            "She always wanted a smaller house and more room for her garden",
+            "She blames the children for the fire"
+          ],
+          "ans": 2,
+          "hint": "Think azaleas.",
+          "steps": [
+            "Find her line the next morning: she hated that big old house anyway, and now there's room for more flowers.",
+            "It is not denial — she watched it burn with the rest of the street.",
+            "It is chosen resilience: she decides what the loss will mean, and picks the garden."
+          ],
+          "ex": {
+            "main": "**Smaller house, bigger garden.** Miss Maudie models the book's quietest kind of courage: losing things without letting the loss run her life.",
+            "tip": "Characters' reactions to disaster are character sheets. One morning-after line tells you more than a chapter of description."
+          }
+        },
+        {
+          "id": "q12",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "The blanket in chapter 8 is the strongest evidence yet against the Boo legend. What makes it stronger than the gifts or the mended pants?",
+          "opts": [
+            "It was the most expensive item so far",
+            "It happened in public — placed gently, unseen, during a crisis, with no possibility of getting credit",
+            "Atticus saw who did it and said so",
+            "It proves Boo can leave his house"
+          ],
+          "ans": 1,
+          "hint": "What did the act cost, and what could it earn? Compare that math to a monster's.",
+          "steps": [
+            "Reconstruct the scene: the whole street watching the fire, Scout freezing at the Radley gate, everyone's back turned.",
+            "Someone crossed from the house of the legend, in the open, to warm a child — and slipped away before being seen.",
+            "The gifts could be dismissed as odd; the pants as self-protective. The blanket has no angle: pure care, at real risk, for zero credit.",
+            "Even Jem understands instantly — which is why he spills the whole knothole story to Atticus on the spot."
+          ],
+          "ex": {
+            "main": "**Gentle, unseen, mid-crisis, credit impossible.** Kindness with no audience is the one thing legend can't explain — which is exactly why Harper Lee saves it for the fire.",
+            "tip": "Rank evidence in fiction the way a lawyer would: what did the act cost, and what could it gain? Selfless-at-cost outranks everything."
+          }
+        },
+        {
+          "id": "q13",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "passage": "“… the Radley Place was inhabited by an unknown entity the mere description of whom was enough to make us behave for days on end; a malevolent phantom …”",
+          "q": "In this line, 'malevolent' means:",
+          "opts": [
+            "Invisible",
+            "Ancient",
+            "Wishing harm; full of ill will",
+            "Silent"
+          ],
+          "ans": 2,
+          "hint": "Mal- as in malfunction, malice.",
+          "steps": [
+            "Break the word: mal- (bad) + volent (wishing, as in benevolent's opposite).",
+            "So malevolent = wishing harm.",
+            "Then catch the irony the book is planting: the 'malevolent phantom' spends chapters 1–8 giving gifts and blankets. The word belongs to the town, not the man."
+          ],
+          "ex": {
+            "main": "**Wishing harm.** Benevolent's evil twin. The chapter applies it to Boo in the same book that will spend 300 pages proving it wrong.",
+            "tip": "Vocabulary in novels is rarely neutral — check whether the story agrees with the word it just used."
+          }
+        }
+      ]
+    }
+  }
+}

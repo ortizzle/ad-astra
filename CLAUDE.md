@@ -146,6 +146,18 @@ a parent imports via Restore (it goes through `Sync.merge`, so it adds records
 without touching anything else). Units shipped this way are `status:'draft'`
 like everything else, so they land in the review queue, not in her app.
 
+**Reading-companion additions (v32, both apps):** questions may carry
+`passage` (a short quoted excerpt, under ~40 words and quoted exactly,
+rendered as a styled quotation) and `kind:'order'` (put-in-order: `opts`
+lists exactly 4 events in the CORRECT sequence with `ans:0`; she sees them
+shuffled and taps them into order; inside `answer()`, −2 is the
+wrong-sequence sentinel and −1 stays out-of-time). Misses carry `kind` and
+`passage`, so review-ladder rounds re-ask faithfully. Book units set
+`book:true`, which hides Beat the clock — a literature quiz is not a race.
+Book units are split by chapter range, spoiler-bounded, and released through
+the draft queue as she reads; ungraded "ponder" cards are a content
+convention, not a mechanic.
+
 - 15–30 cards; 18–24 questions (6–8 each at level 1 recall / 2 apply / 3 analyze).
   Quizzes run in **rounds of 5** (`QUIZ_ROUND`), least-practised questions first —
   don't tune question counts around "one sitting"; rounds handle that.
