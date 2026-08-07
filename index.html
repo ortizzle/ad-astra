@@ -547,7 +547,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v33 · the library';
+const APP_VERSION = 'v34 · the bridge';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -3742,6 +3742,13 @@ SCREENS.parent = function(root){
   });
   fr.appendChild(frBtn);
   root.appendChild(fr);
+
+  /* Parent-side bridge to the sister app — the girls' sides stay unlinked
+     on purpose (identity, and no reason to wander). Grown-up areas only. */
+  const sib = el('a','btn btn-ghost','🧭  Wayfinder’s grown-up tools →');
+  sib.href = 'https://ortizzle.github.io/wayfinder/'; sib.target = '_blank'; sib.rel = 'noopener';
+  sib.style.textDecoration = 'none';
+  root.appendChild(sib);
 
   if(Store.get('parent_trust',false)){
     const tr = el('button','btn btn-ghost','Require the passcode again on this device');
