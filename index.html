@@ -283,6 +283,35 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
     100% calc(100% - 10px),96% calc(100% - 4px),90% calc(100% - 11px),83% calc(100% - 3px),76% calc(100% - 9px),69% calc(100% - 4px),62% calc(100% - 12px),55% calc(100% - 5px),48% calc(100% - 10px),41% calc(100% - 3px),34% calc(100% - 8px),27% calc(100% - 12px),20% calc(100% - 4px),14% calc(100% - 10px),8% calc(100% - 3px),3% calc(100% - 9px),0 calc(100% - 6px))}
 /* On the light canvas the cream scrap needs a warmer, stronger shadow to separate. */
 [data-theme="light"] .passage{filter:drop-shadow(0 2px 3px rgba(74,55,25,.35))}
+
+/* ---- The Bookshelf ---- */
+/* Spines are painted via paint() (.subj + texture + scrim), then each series
+   overrides --c1/--c2 with its own SUBJECT_PALETTE pair so the books differ.
+   Only palette pairs go on spines — they are the measured white-label-safe set.
+   No `background` shorthand here: the texture lives in background-image. */
+.shelf{display:flex;align-items:flex-end;gap:12px;padding:0 8px;flex-wrap:wrap}
+.spine{position:relative;width:54px;height:150px;border:0;border-radius:5px 9px 9px 5px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0;
+  box-shadow:inset -7px 0 10px rgba(0,0,0,.30), inset 2px 0 0 rgba(255,255,255,.16), 0 3px 6px rgba(0,0,0,.30)}
+.spine .snm{writing-mode:vertical-rl;font-family:'Fraunces',Georgia,serif;font-size:12.5px;
+  font-weight:600;color:#fff;letter-spacing:.02em;max-height:80%;overflow:hidden;
+  line-height:1.35;position:relative;z-index:2;
+  text-shadow:0 1px 3px rgba(0,0,0,.55)}
+.spine .sct{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:9.5px;
+  font-weight:800;color:rgba(255,255,255,.9);z-index:2;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.spine .ribbon{position:absolute;top:0;right:7px;width:10px;height:32px;z-index:3;
+  background-color:var(--ac);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 7px),0 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.shelfboard{height:10px;border-radius:3px;margin:-2px 4px 16px;background-color:var(--raised);
+  border:1px solid var(--line);box-shadow:0 4px 7px rgba(0,0,0,.22)}
+/* The table of contents inside a book: one row per lesson, one expanded card. */
+.tocrow{width:100%;display:flex;align-items:center;gap:12px;min-height:var(--tap);
+  padding:12px 14px;border:1px solid var(--line);border-radius:14px;
+  background-color:var(--surface);margin-bottom:9px;text-align:left;font-size:14.5px}
+.tocrow .st{width:22px;text-align:center;flex-shrink:0;color:var(--muted)}
+.tocrow .st.done{color:var(--good);font-weight:800}
+.tocrow .tl{flex:1;line-height:1.35}
+.tocrow .mt{font-size:11.5px;color:var(--faint);flex-shrink:0}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
@@ -563,7 +592,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v35 · torn pages';
+const APP_VERSION = 'v36 · the bookshelf';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -951,6 +980,57 @@ const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','bad
 const units = cid => all('unit')
   .filter(u => u.status !== 'draft')
   .filter(u => !cid || u.classId===cid || u.classId==='__all__');
+
+/* ---------- The Bookshelf ----------
+   Units that belong to a series shelve together as book spines on the subject
+   screen. Membership is derived from the title convention 'Series · Part'
+   (explicit u.series overrides), so existing content shelves itself without
+   re-shipping. Every state here is DERIVED — done from qstat coverage, the
+   bookmark from the latest log — no new records, no stored counters, and
+   nothing is ever gated: the shelf shows state, it never locks a lesson. */
+function seriesOf(u){
+  if(u.series) return u.series;
+  const i = (u.title||'').indexOf(' · ');
+  return i > 0 ? u.title.slice(0, i).trim() : null;
+}
+function lessonLabel(u){
+  const i = (u.title||'').indexOf(' · ');
+  return i > 0 ? u.title.slice(i + 3).trim() : u.title;
+}
+/* A lesson is "done" when every question has been attempted at least once —
+   coverage, not score. Scores stay the Growth Zone's business. */
+function unitAttempted(u){
+  return u.questions.filter(q => ((DATA.records['qstat_'+u.id+'_'+q.id]||{}).attempts||0) > 0).length;
+}
+function unitDone(u){ return u.questions.length > 0 && unitAttempted(u) === u.questions.length; }
+function unitLastStudied(u){
+  let t = 0;
+  all('log').forEach(l => { if(l.unitId === u.id && (l.updatedAt||0) > t) t = l.updatedAt; });
+  return t;
+}
+function hashStr(s){ let h = 0; for(let i = 0; i < s.length; i++) h = (h*31 + s.charCodeAt(i)) >>> 0; return h; }
+function shelvesFor(classId){
+  const groups = new Map(), loose = [];
+  units(classId).forEach(u => {
+    const s = seriesOf(u);
+    if(s){ if(!groups.has(s)) groups.set(s, []); groups.get(s).push(u); }
+    else loose.push(u);
+  });
+  const shelves = [...groups.entries()].map(([name, us]) => {
+    us.sort((a,b) => a.title.localeCompare(b.title, undefined, {numeric:true}));
+    const last = us.reduce((m,u) => Math.max(m, unitLastStudied(u)), 0);
+    /* The bookmark holds her page: the most recently studied unfinished
+       lesson; untouched series open at lesson one; a finished book keeps
+       the bookmark on its final lesson. */
+    const open = us.filter(u => !unitDone(u));
+    let mark = open[0] || us[us.length-1];
+    open.forEach(u => { if(unitLastStudied(u) > unitLastStudied(mark)) mark = u; });
+    return { name, units: us, last, mark };
+  });
+  /* Most recent book first — the shelf itself answers "what was I reading?" */
+  shelves.sort((a,b) => b.last - a.last || a.name.localeCompare(b.name));
+  return { shelves, loose };
+}
 
 /* ---------- Preferences (synced, so her theme follows her to any device) ---------- */
 const ACCENTS = [
@@ -2126,39 +2206,21 @@ SCREENS.unit = function(root){
     e.appendChild(el('p',null,'No units yet for this class. Generate one from notes, or drop the material in the Drive folder and ask Claude to build it.'));
     root.appendChild(e);
   } else {
-    root.appendChild(divider('Units'));
-    list.forEach(u=>{
-      const card = el('div','card');
-      card.appendChild(el('h3',null,u.title));
-      const bits = el('div');
-      bits.appendChild(el('span','pill',`${u.cards.length} cards`));
-      bits.appendChild(el('span','pill',`${u.questions.length} questions · rounds of ${Math.min(QUIZ_ROUND,u.questions.length)}`));
-      if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
-      if(u.source) bits.appendChild(el('span','pill',u.source));
-      card.appendChild(bits);
-      if(u.srcName) card.appendChild(el('div','cite',`From ${u.srcName}`));
-      if(u.summary && u.summary.text){
-        const ov = el('button','btn btn-ghost','📖  What this covers');
-        ov.style.marginTop='10px';
-        ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
-        card.appendChild(ov);
-      }
-      const row = el('div','btn-row');
-      const f = el('button','btn btn-secondary','🃏  Flashcards');
-      f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:c.id}));
-      const qb = el('button','btn btn-primary','Quiz');
-      qb.addEventListener('click',()=>launchQuiz(u.id,c.id,false));
-      row.appendChild(f); row.appendChild(qb); card.appendChild(row);
-      if(!u.book){
-        /* Book-companion units never race a clock — speed-reading a novel
-           quiz teaches exactly the wrong thing. */
-        const tb = el('button','btn btn-secondary','⏱  Beat the clock');
-        tb.style.marginTop='8px';
-        tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
-        card.appendChild(tb);
-      }
-      root.appendChild(card);
-    });
+    const grouped = shelvesFor(c.id);
+    if(grouped.shelves.length){
+      root.appendChild(divider('Your bookshelf'));
+      /* The ribbon marks the book she is in the middle of: the most recently
+         touched shelf that still has unfinished lessons. */
+      const cur = grouped.shelves.find(s => s.last > 0 && s.units.some(u=>!unitDone(u)));
+      const sh = el('div','shelf');
+      grouped.shelves.forEach(s => sh.appendChild(spineEl(s, c, s === cur)));
+      root.appendChild(sh);
+      root.appendChild(el('div','shelfboard'));
+    }
+    if(grouped.loose.length){
+      root.appendChild(divider(grouped.shelves.length ? 'More units' : 'Units'));
+      grouped.loose.forEach(u => root.appendChild(unitCard(u, c)));
+    }
   }
   const waiting = drafts().filter(u=>u.classId===c.id).length;
   if(waiting) root.appendChild(el('div','hintline',
@@ -2175,6 +2237,104 @@ SCREENS.unit = function(root){
   gen.addEventListener('click',()=>go('generate',{classId:c.id})); root.appendChild(gen);
   const back = el('button','btn btn-ghost','← All subjects');
   back.addEventListener('click',()=>go('study')); root.appendChild(back);
+};
+
+/* One unit's full card — title, pills, briefing link, study buttons. Shared by
+   the subject screen (loose units) and the shelf screen (the open lesson). */
+function unitCard(u, c, label){
+  const card = el('div','card');
+  card.appendChild(el('h3',null, label || u.title));
+  const bits = el('div');
+  bits.appendChild(el('span','pill',`${u.cards.length} cards`));
+  bits.appendChild(el('span','pill',`${u.questions.length} questions · rounds of ${Math.min(QUIZ_ROUND,u.questions.length)}`));
+  if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
+  if(u.source) bits.appendChild(el('span','pill',u.source));
+  card.appendChild(bits);
+  if(u.srcName) card.appendChild(el('div','cite',`From ${u.srcName}`));
+  if(u.summary && u.summary.text){
+    const ov = el('button','btn btn-ghost','📖  What this covers');
+    ov.style.marginTop='10px';
+    ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
+    card.appendChild(ov);
+  }
+  const row = el('div','btn-row');
+  const f = el('button','btn btn-secondary','🃏  Flashcards');
+  f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:c.id}));
+  const qb = el('button','btn btn-primary','Quiz');
+  qb.addEventListener('click',()=>launchQuiz(u.id,c.id,false));
+  row.appendChild(f); row.appendChild(qb); card.appendChild(row);
+  if(!u.book){
+    /* Book-companion units never race a clock — speed-reading a novel
+       quiz teaches exactly the wrong thing. */
+    const tb = el('button','btn btn-secondary','⏱  Beat the clock');
+    tb.style.marginTop='8px';
+    tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
+    card.appendChild(tb);
+  }
+  return card;
+}
+
+/* A book spine on the shelf. Painted with the subject's texture, then coloured
+   by a stable hash of the series name so every book owns its own palette pair. */
+function spineEl(s, c, current){
+  const t = paint(el('button','spine'), c);
+  const pal = SUBJECT_PALETTE[hashStr(s.name) % SUBJECT_PALETTE.length];
+  t.style.setProperty('--c1', pal.g1);
+  t.style.setProperty('--c2', pal.g2);
+  t.style.setProperty('--pc', pal.g1);
+  /* Books on a real shelf aren't all the same height. */
+  t.style.height = (142 + (hashStr(s.name+'#') % 3) * 9) + 'px';
+  if(current) t.appendChild(el('span','ribbon'));
+  t.appendChild(el('span','snm', s.name));
+  const done = s.units.filter(unitDone).length;
+  t.appendChild(el('span','sct', `${done}/${s.units.length}`));
+  t.setAttribute('aria-label', `${s.name} — ${done} of ${s.units.length} lessons finished`);
+  t.addEventListener('click', ()=>go('shelf',{classId:c.id, series:s.name}));
+  return t;
+}
+
+/* ================= A BOOK OFF THE SHELF ================= */
+/* The series' table of contents: one row per lesson, the bookmarked lesson
+   open as a full card. Rows show coverage, never scores — and nothing is
+   locked; any row opens with a tap. */
+SCREENS.shelf = function(root){
+  const c = CLASS_BY_ID[ctx.classId];
+  const grouped = c ? shelvesFor(c.id) : null;
+  const s = grouped && grouped.shelves.find(x => x.name === ctx.series);
+  if(!s) return go(c ? 'unit' : 'study', c ? {classId:c.id} : undefined);
+  const done = s.units.filter(unitDone).length;
+
+  const head = el('div','card ac');
+  head.appendChild(el('div','eyebrow', `${c.icon} ${c.name}`));
+  head.appendChild(el('h2',null, `📖 ${s.name}`));
+  head.appendChild(el('p',null,
+    done === s.units.length
+      ? `All ${s.units.length} lesson${s.units.length>1?'s':''} finished. Anything you reopen from here is pure review.`
+      : `${done} of ${s.units.length} lesson${s.units.length>1?'s':''} finished · your bookmark is on “${lessonLabel(s.mark)}”.`));
+  root.appendChild(head);
+
+  root.appendChild(divider('Contents'));
+  const openId = ctx.open || s.mark.id;
+  s.units.forEach(u => {
+    if(u.id === openId){
+      root.appendChild(unitCard(u, c, lessonLabel(u)));
+      return;
+    }
+    const isDone = unitDone(u), att = unitAttempted(u);
+    const r = el('button','tocrow');
+    const st = el('span','st' + (isDone ? ' done' : ''));
+    st.textContent = isDone ? '✓' : (u.id === s.mark.id ? '🔖' : '○');
+    r.appendChild(st);
+    r.appendChild(el('span','tl', lessonLabel(u)));
+    r.appendChild(el('span','mt', isDone ? 'finished'
+      : att ? `${att}/${u.questions.length} seen` : `${u.questions.length} questions`));
+    r.addEventListener('click', ()=>{ ctx.open = u.id; render(); });
+    root.appendChild(r);
+  });
+
+  const back = el('button','btn btn-ghost','← ' + c.name);
+  back.addEventListener('click',()=>go('unit',{classId:c.id}));
+  root.appendChild(back);
 };
 
 /* ================= UNIT BRIEFING ================= */

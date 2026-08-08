@@ -493,6 +493,32 @@ map (`SCREENS.skymap`). Rules that are the point, not the decoration:
   honest line of astronomy each); Wayfinder invents playful ones. Keep the
   lore accurate here and keep the rosters divergent.
 
+### The Bookshelf (v36 / Wayfinder v31, both apps)
+
+Units that belong to a series render on the subject screen as **book spines on
+a shelf** (`shelvesFor()`, `spineEl()`, `SCREENS.shelf`); standalone units stay
+as ordinary cards below. Rules that are the point:
+
+- **Membership is derived from the title convention `'Series · Part'`**
+  (`seriesOf()`; an explicit `u.series` field overrides). Content shelves
+  itself — no re-shipping, no migration. Keep the ` · ` separator in series
+  unit titles; a title without it stays a loose card deliberately.
+- **All state is derived, nothing stored**: a lesson is *done* when every
+  question has ≥1 attempt (`unitDone()` via `qstat` coverage — coverage, not
+  score); the ribbon marks the most recently touched shelf with unfinished
+  lessons; the 🔖 bookmark inside holds the most recently studied unfinished
+  lesson. No new record types, no counters.
+- **Nothing is ever gated.** The shelf shows state; every lesson opens with a
+  tap regardless of order or completion. Do not add locked-until-done.
+- Spines are painted with the subject texture via `paint()`, then coloured by
+  a stable hash of the series name from `SUBJECT_PALETTE` — the measured
+  white-label-safe pairs — so every book differs but contrast holds. Spine
+  heights vary by hash on purpose. No `background` shorthand on spines (the
+  texture trap).
+- `SCREENS.shelf` is the book's table of contents: one row per lesson, the
+  bookmarked (or tapped) lesson expanded as the full `unitCard()`. Rows show
+  coverage ("7/15 seen"), never accuracy.
+
 **Badge fills are opaque on purpose.** A badge lands on plain cards, accent-washed
 cards and review rows; a translucent tint dropped the 10px label under 4.5:1 on
 the lighter ones. Measured across all accents in both themes: worst case 4.54:1.
