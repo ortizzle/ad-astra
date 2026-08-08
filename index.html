@@ -320,6 +320,57 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sayb{position:absolute;top:10px;right:12px;z-index:3;min-width:44px;min-height:44px;
   background-color:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.3);border-radius:12px;
   font-size:17px;display:flex;align-items:center;justify-content:center}
+/* ---- The visual pass ---- */
+/* Living sky: a slow twinkle and the occasional shooting star. Ambient only —
+   dark mode, and never under prefers-reduced-motion. */
+#app{position:relative;z-index:1}
+.skyfx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+[data-theme="light"] .skyfx{display:none}
+.skyfx .tw{position:absolute;top:0;left:0;width:2px;height:2px;border-radius:50%;background:#fff;
+  box-shadow:44px 130px 0 #fff, 140px 310px 0 #fff, 330px 90px 0 #fff, 255px 520px 0 #fff,
+    64px 660px 0 #fff, 355px 430px 0 #fff, 200px 180px 0 #fff, 20px 400px 0 #fff;
+  opacity:.28;animation:tw 4.8s ease-in-out infinite}
+.skyfx .t2{transform:translate(105px,55px) scale(.8);animation-duration:6.4s;animation-delay:1.4s}
+@keyframes tw{0%,100%{opacity:.1}50%{opacity:.45}}
+.skyfx .aur{position:absolute;top:-12%;left:-25%;right:-25%;height:42%;filter:blur(46px);opacity:.14;
+  background:linear-gradient(100deg,#19e3b1,#2b6cd4 55%,#19e3b1);
+  animation:aur 19s ease-in-out infinite alternate}
+@keyframes aur{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+@media (prefers-reduced-motion: reduce){.skyfx{display:none}}
+/* Motion with meaning: lists compose in, presses compress, bars glide. */
+@media (prefers-reduced-motion: no-preference){
+  #screen>*{animation:rise .22s cubic-bezier(.2,.7,.3,1) both}
+  #screen>*:nth-child(2){animation-delay:.03s}
+  #screen>*:nth-child(3){animation-delay:.06s}
+  #screen>*:nth-child(4){animation-delay:.09s}
+  #screen>*:nth-child(n+5){animation-delay:.12s}
+  .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active{transform:scale(.98)}
+  .bar i{transition:width .5s cubic-bezier(.2,.7,.3,1)}
+}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}}
+/* Hero moments: the thread card leads, modal titles get the display face. */
+.cardbtn.hero{border-left:4px solid var(--ac);background-image:linear-gradient(120deg,var(--ac-8),transparent 60%)}
+.cardbtn.hero .cb-t{font-size:22px}
+.modal-box h3{font-family:'Fraunces',Georgia,serif;font-size:28px;letter-spacing:-.02em}
+/* The quiz round as a constellation — gold for right, dim-but-lit for a miss. */
+.qstars{display:flex;gap:9px;margin-top:11px;font-size:13px;line-height:1}
+.qstars .qs{color:var(--line);transition:color .3s}
+.qstars .qs.now{color:var(--ac)}
+.qstars .qs.lit{color:#f2ca63}
+.qstars .qs.dim{color:var(--muted)}
+/* Subject crest: a two-ring badge around the subject mark, slow orbit. */
+.crestrow{display:flex;align-items:center;gap:12px;margin-top:4px}
+.crestrow h2{margin:0}
+.crest{position:relative;width:52px;height:52px;flex-shrink:0;display:flex;
+  align-items:center;justify-content:center;font-size:23px}
+.crest::before{content:'';position:absolute;inset:5px;border-radius:50%;border:2px solid var(--c1);opacity:.9}
+.crest::after{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px dashed var(--c2);opacity:.55}
+@media (prefers-reduced-motion: no-preference){.crest::after{animation:orbit 60s linear infinite}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+/* Section labels get a quiet star. */
+.divider span::before{content:'✦';margin-right:7px;opacity:.5;font-size:8px;vertical-align:1px}
+/* Illustrated empty states. */
+.empty .scene{margin-bottom:6px}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
@@ -537,6 +588,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 </head>
 <body>
 
+<!-- The living sky: ambient, dark-mode-only, gone entirely under reduced motion. -->
+<div class="skyfx" aria-hidden="true"><i class="tw"></i><i class="aur"></i></div>
+
 <div id="app">
   <header>
     <div class="brand" id="brand" role="button" tabindex="0" aria-label="Home">
@@ -600,7 +654,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v39 · the works';
+const APP_VERSION = 'v40 · alive';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -630,9 +684,11 @@ function sibSummary(d){
   const dr  = rec.filter(r=>r.type==='unit' && r.status==='draft').length;
   const nx  = rec.filter(r=>r.type==='assess' && r.date>=today)
                  .sort((a,b)=>a.date<b.date?-1:1)[0];
+  const dset = new Set();
+  rec.forEach(r=>{ if((r.type==='log'||r.type==='focus') && r.date>=wk) dset.add(r.date); });
   const name = ((d.records||{}).roster||{}).studentName || '';
   return { name: name.split(' ')[0], wkMin, acc: t7 ? Math.round(c7/t7*100) : null,
-           due, dr, next: nx ? nx.title+' · '+AZ.shortDate(nx.date) : null };
+           due, dr, days: dset.size, next: nx ? nx.title+' · '+AZ.shortDate(nx.date) : null };
 }
 
 function setRoster(k,v){
@@ -2196,7 +2252,9 @@ SCREENS.study = function(root){
   const th = threadTarget(date);
   if(th){
     root.appendChild(divider('Pick up the thread'));
-    root.appendChild(cardButton(th.title, th.sub, th.go));
+    const hero = cardButton(th.title, th.sub, th.go);
+    hero.classList.add('hero');
+    root.appendChild(hero);
   }
 
   /* What to study — moved here from Today */
@@ -2245,9 +2303,30 @@ SCREENS.study = function(root){
   root.appendChild(cardButton('New study set',
     'Turn class notes into flashcards and quiz questions.',
     ()=>go('generate',{})));
+  root.appendChild(cardButton('Reading log',
+    'Any book counts — log the minutes, grow the shelf.',
+    ()=>go('reading')));
 };
 
 /* A card that is itself the button: title, one line, chevron. */
+/* A tiny telescope-under-stars scene for empty states. Static trusted markup
+   only — nothing interpolated. */
+function emptyScene(){
+  const d = el('div','scene');
+  d.style.color = 'var(--ac-fg)';
+  d.innerHTML = '<svg viewBox="0 0 120 74" width="150" height="92" aria-hidden="true">'
+    +'<circle cx="18" cy="14" r="1.4" fill="currentColor" opacity=".5"/>'
+    +'<circle cx="98" cy="12" r="1.7" fill="currentColor" opacity=".7"/>'
+    +'<circle cx="72" cy="24" r="1.1" fill="currentColor" opacity=".4"/>'
+    +'<circle cx="40" cy="8" r="1" fill="currentColor" opacity=".45"/>'
+    +'<circle cx="88" cy="18" r="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".8"/>'
+    +'<path d="M30 60 L62 30" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>'
+    +'<path d="M58 26 L71 39" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>'
+    +'<path d="M32 60 L24 72 M32 60 L42 72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>'
+    +'</svg>';
+  return d;
+}
+
 function cardButton(title, desc, onClick){
   const b = el('button','cardbtn');
   const t = el('div','cb-txt');
@@ -2266,7 +2345,12 @@ SCREENS.unit = function(root){
   const st = classStats(c.id), date = AZ.today();
   const head = el('div','card ac');
   head.appendChild(el('div','eyebrow',`${fmtTime(c.start)} · ${whereLine(c)}`));
-  head.appendChild(el('h2',null,`${c.icon} ${c.name}`));
+  const hrow = el('div','crestrow');
+  const cr = el('span','crest');
+  cr.style.setProperty('--c1', palOf(c).g1); cr.style.setProperty('--c2', palOf(c).g2);
+  cr.appendChild(el('span',null,c.icon));
+  hrow.appendChild(cr); hrow.appendChild(el('h2',null,c.name));
+  head.appendChild(hrow);
   head.appendChild(el('p',null, st.answered
     ? `${st.sessions} session${st.sessions>1?'s':''} · ${st.answered} questions · ${st.accuracy}% · ${st.minutes} min`
     : 'No study sessions logged yet.'));
@@ -2303,7 +2387,7 @@ SCREENS.unit = function(root){
   const list = units(c.id);
   if(!list.length){
     const e = el('div','empty');
-    e.appendChild(el('span','ic','📄'));
+    e.appendChild(emptyScene());
     e.appendChild(el('p',null,'No units yet for this class. Generate one from notes, or drop the material in the Drive folder and ask Claude to build it.'));
     root.appendChild(e);
   } else {
@@ -2593,6 +2677,84 @@ function finishCards(u){
   go('unit',{classId:ctx.classId});
 }
 
+/* ================= READING LOG ================= */
+/* The simplest possible reading tracker: a book title and minutes, stored as
+   ordinary log records (mode:'read'; finishing a book is mode:'readfin', one
+   per title). XP, streaks, sky-map stars and weekly minutes all follow for
+   free, and Fresh start clears it like any other progress. Deliberately NO
+   prize economy on her side — the shelf and honest XP are the whole loop;
+   real-world celebrations live in the parent view, as the parent's surprise. */
+SCREENS.reading = function(root){
+  root.appendChild(headline('Reading log','Any book, anywhere — school books, library finds, rereads. Minutes count the moment you log them.'));
+  const c = el('div','card ac');
+  const t = el('input'); t.type='text'; t.placeholder='Book title';
+  t.value = ctx._rt || '';
+  t.addEventListener('input',()=>{ ctx._rt = t.value; });
+  const m = el('input'); m.type='number'; m.min='1'; m.max='600'; m.inputMode='numeric';
+  m.placeholder='Minutes read'; m.value = ctx._rm || '';
+  m.addEventListener('input',()=>{ ctx._rm = m.value; });
+  c.appendChild(el('label',null,'Book')); c.appendChild(t);
+  c.appendChild(el('label',null,'Minutes')); c.appendChild(m);
+  const b = el('button','btn btn-primary','Log this reading');
+  b.addEventListener('click',()=>{
+    const title = (ctx._rt||'').trim();
+    const mins = Math.max(0, Math.min(600, parseInt(ctx._rm,10)||0));
+    if(!title || !mins){ toast('Book and minutes first'); return; }
+    put({ id:uid('log'), type:'log', mode:'read', classId:'english', unitId:null,
+          book:title, date:AZ.today(), at:Date.now(), correct:0, total:0,
+          seconds:mins*60, minutes:mins, xp:mins });
+    ctx._rm = '';
+    checkBadges(); syncSoon(); toast(`+${mins} XP`); render();
+  });
+  c.appendChild(b); root.appendChild(c);
+
+  const rlogs = logs().filter(l=>l.mode==='read' && l.book);
+  const fins  = new Set(logs().filter(l=>l.mode==='readfin' && l.book).map(l=>l.book.trim()));
+  const byBook = new Map();
+  rlogs.forEach(l=>{
+    const k2 = l.book.trim();
+    const e2 = byBook.get(k2) || {mins:0,last:0};
+    e2.mins += l.minutes || Math.round((l.seconds||0)/60);
+    e2.last = Math.max(e2.last, l.at||l.updatedAt||0);
+    byBook.set(k2, e2);
+  });
+  if(byBook.size){
+    root.appendChild(divider('Your reading shelf'));
+    const sh2 = el('div','shelf');
+    [...byBook.entries()].sort((a,b)=>b[1].last-a[1].last).forEach(([title,inf])=>{
+      const sp2 = el('button','spine');
+      const pal2 = SUBJECT_PALETTE[hashStr(title) % SUBJECT_PALETTE.length];
+      const rgb2 = [1,3,5].map(i2=>Math.round(parseInt(pal2.g2.slice(i2,i2+2),16)*0.85));
+      sp2.style.backgroundColor = `rgb(${rgb2.join(',')})`;
+      sp2.style.height = (142 + (hashStr(title+'#') % 3) * 9) + 'px';
+      if(fins.has(title)) sp2.classList.add('gilt');
+      sp2.appendChild(el('span','snm', title));
+      sp2.appendChild(el('span','sct', inf.mins+'m'));
+      sp2.addEventListener('click',()=>{
+        const done3 = fins.has(title);
+        showModal({ title, message:`${inf.mins} minutes so far.${done3?'\n\nFinished. Gilt looks good on it.':''}`,
+          confirmText: done3 ? 'Close' : 'Finished this book  (+50 XP)',
+          cancelText: done3 ? null : 'Not yet',
+          onConfirm:()=>{
+            if(done3) return;
+            put({ id:uid('log'), type:'log', mode:'readfin', classId:'english', unitId:null,
+                  book:title, date:AZ.today(), at:Date.now(), correct:0, total:0,
+                  seconds:0, xp:50 });
+            checkBadges(); syncSoon(); celebrate(); toast('+50 XP — finished'); render();
+          }});
+      });
+      sh2.appendChild(sp2);
+    });
+    root.appendChild(sh2);
+    root.appendChild(el('div','shelfboard'));
+    const totM = rlogs.reduce((n,l)=>n+(l.minutes||Math.round((l.seconds||0)/60)),0);
+    root.appendChild(el('div','hintline',`📚 ${fins.size} book${fins.size===1?'':'s'} finished · ${totM} minutes read · every minute is XP.`));
+  }
+  const back = el('button','btn btn-ghost','← Study');
+  back.addEventListener('click',()=>go('study'));
+  root.appendChild(back);
+};
+
 /* ================= EMOTION CHECK ================= */
 /* Asked before every quiz. Two taps. The readiness rating is compared to her
    actual score afterwards, which is a calibration signal — it teaches her
@@ -2785,8 +2947,15 @@ SCREENS.quiz = function(root){
   r.appendChild(el('span','k',`Question ${quizState.i+1} of ${quizState.order.length}`));
   r.appendChild(el('span','v',`${quizState.correct} correct`));
   head.appendChild(r);
-  const bar = el('div','bar'), fi = el('i');
-  fi.style.width = (quizState.i/quizState.order.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
+  /* One star per question in the round — gold when right, dim-but-lit on a
+     miss (showing up still counts; Sky Map rules). */
+  const qs2 = el('div','qstars');
+  quizState.order.forEach((oi,k)=>{
+    const done2 = k < quizState.i || (k===quizState.i && quizState.answered!==null);
+    const missd = quizState.missed.includes(u.questions[oi].id);
+    qs2.appendChild(el('span','qs'+(done2 ? (missd?' dim':' lit') : (k===quizState.i?' now':'')),'✦'));
+  });
+  head.appendChild(qs2);
   if(quizState.timed){
     const t = el('div','qtimer-track'), ti = el('i');
     ti.id = 'qtimer';
@@ -4119,11 +4288,21 @@ SCREENS.parent = function(root){
      ['Accuracy, last 7 days', m2.acc===null ? '—' : m2.acc+'%'],
      ['Growth Zone due', m2.due],
      ['Drafts waiting', m2.dr],
+     ['Active days this week', m2.days],
      ['Next test', m2.next || '—']].forEach(([k,v])=>{
       const r2 = el('div','row');
       r2.appendChild(el('span','k',k)); r2.appendChild(el('span','v',String(v)));
       mc.appendChild(r2);
     });
+    /* Family week: when BOTH girls have shown up most days, nudge the
+       celebration — here, parent-side only. Her screens never show a prize;
+       the treat lands as a surprise, which is the whole trick. */
+    const wkDays = new Set();
+    logs().forEach(l=>{ if(l.date>=AZ.weekStart(AZ.today())) wkDays.add(l.date); });
+    focusLogs().forEach(f=>{ if(f.date>=AZ.weekStart(AZ.today())) wkDays.add(f.date); });
+    if(wkDays.size>=5 && (m2.days||0)>=5){
+      mc.appendChild(el('div','hintline','🎉 Both girls showed up 5+ days this week — celebration territory. A Starbucks run, a Target card, or a bookstore hour lands best as a surprise, not a payout.'));
+    }
   }
   const mcb = el('button','btn btn-secondary', ctx._mc ? 'Check again' : 'Check in');
   mcb.addEventListener('click', async ()=>{

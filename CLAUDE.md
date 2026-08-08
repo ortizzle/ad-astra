@@ -559,6 +559,27 @@ as ordinary cards below. Rules that are the point:
   token) and summarizes week minutes, 7-day accuracy, Growth Zone due, drafts
   and the next test. Never merged, never written back — keep it that way.
 
+### The visual pass + reading log (v40 / Wayfinder v35, both apps)
+
+- **Living sky** (`.skyfx`): ambient twinkle plus a rare shooting star
+  (Wayfinder) or aurora shimmer (Ad Astra). Dark mode only, hidden under
+  `prefers-reduced-motion`, sits behind `#app` (z-index 0 vs 1).
+- **Motion**: screens compose in with a 30ms stagger, presses compress 2%,
+  bars glide. All inside a `no-preference` media query.
+- **Hero moments**: thread card gets `.hero`; modal titles render in Fraunces.
+- **Quiz constellation** (`.qstars`): the round bar is now one ✦ per question —
+  gold right, dim-but-lit miss (showing up counts; Sky Map rules).
+- **Crest rings** on subject headers; **✦ divider motif**; **illustrated empty
+  states** (`emptyScene()`, static markup only).
+- **Reading log** (`SCREENS.reading`): title + minutes stored as ordinary log
+  records — `mode:'read'` (xp = minutes) and `mode:'readfin'` (+50, once per
+  title). XP, streak, sky map and weekly minutes derive for free; Fresh start
+  clears it. Books render as spines coloured by title hash; finished = gilt.
+  **No prize economy on the student side, ever** — real-world celebrations live
+  in Mission Control's family-week line (both girls ≥5 active days), parent
+  view only, framed as a surprise, never a payout. Do not surface rewards to
+  the girls.
+
 **Badge fills are opaque on purpose.** A badge lands on plain cards, accent-washed
 cards and review rows; a translucent tint dropped the 10px label under 4.5:1 on
 the lighter ones. Measured across all accents in both themes: worst case 4.54:1.
