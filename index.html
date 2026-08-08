@@ -690,7 +690,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v51 · three doors';
+const APP_VERSION = 'v52 · the thespians';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -725,6 +725,7 @@ const CLUBS = [
   {id:'bug',       day:'Tuesday', nm:'Bug Club', cost:100, time:'3:45–4:50', freq:'weekly'},
   {id:'msscioly',  day:'Tuesday', nm:'MS Science Olympiad', cost:225, time:'3:45–4:45', freq:'weekly'},
   {id:'reptile',   day:'Tuesday', nm:'Reptile Club', cost:150, time:'4:00–5:00', freq:'6 weeks only'},
+  {id:'jrthespian',day:'Tuesday', nm:'International Junior Thespian Society', cost:150, flag:'invite only · grades 6–8'},
   {id:'chinese',   day:'Tuesday', nm:'National Chinese Honor Society', cost:50, flag:'invite only'},
   {id:'mathcounts',day:'Tuesday', nm:'MathCounts', cost:300, flag:'invite only'},
   {id:'trim',      day:'Tuesday', nm:'Tri-M (music honor society)', cost:75, flag:'invite only'},
