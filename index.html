@@ -662,7 +662,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v42 · two taps';
+const APP_VERSION = 'v43 · a clearer telescope';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2323,16 +2323,15 @@ SCREENS.study = function(root){
 function emptyScene(){
   const d = el('div','scene');
   d.style.color = 'var(--ac-fg)';
-  d.innerHTML = '<svg viewBox="0 0 120 74" width="150" height="92" aria-hidden="true">'
+  d.innerHTML = '<svg viewBox="0 0 120 24" width="150" height="30" aria-hidden="true">'
     +'<circle cx="18" cy="14" r="1.4" fill="currentColor" opacity=".5"/>'
-    +'<circle cx="98" cy="12" r="1.7" fill="currentColor" opacity=".7"/>'
-    +'<circle cx="72" cy="24" r="1.1" fill="currentColor" opacity=".4"/>'
-    +'<circle cx="40" cy="8" r="1" fill="currentColor" opacity=".45"/>'
-    +'<circle cx="88" cy="18" r="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".8"/>'
-    +'<path d="M30 60 L62 30" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>'
-    +'<path d="M58 26 L71 39" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>'
-    +'<path d="M32 60 L24 72 M32 60 L42 72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>'
+    +'<circle cx="98" cy="10" r="1.7" fill="currentColor" opacity=".7"/>'
+    +'<circle cx="72" cy="18" r="1.1" fill="currentColor" opacity=".4"/>'
+    +'<circle cx="44" cy="6" r="1" fill="currentColor" opacity=".45"/>'
     +'</svg>';
+  const em = el('div',null,'🔭');
+  em.style.fontSize = '46px'; em.style.lineHeight = '1.1';
+  d.appendChild(em);
   return d;
 }
 
