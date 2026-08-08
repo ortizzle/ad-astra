@@ -369,6 +369,9 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 @keyframes orbit{to{transform:rotate(360deg)}}
 /* Section labels get a quiet star. */
 .divider span::before{content:'✦';margin-right:7px;opacity:.5;font-size:8px;vertical-align:1px}
+/* An input followed by a button needs air — same 10px-plus rule as stacked
+   buttons. Covers the reading form, Mission Control, and any future form. */
+.card input+.btn,.card select+.btn,.card textarea+.btn,.card .row+.btn{margin-top:14px}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
@@ -654,7 +657,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v40 · alive';
+const APP_VERSION = 'v41 · room to breathe';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
