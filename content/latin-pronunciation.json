@@ -1,0 +1,760 @@
+{
+ "v": 4,
+ "records": {
+  "unit-latin-pron": {
+   "id": "unit-latin-pron",
+   "type": "unit",
+   "updatedAt": 1786210121543,
+   "classId": "latin",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Latin I · Pronunciation & Greetings",
+   "srcName": "Class Notes - Latin Pronunciation (Drive)",
+   "source": "Latin I pronunciation guide (Drive folder)",
+   "summary": {
+    "text": "The pronunciation guide from class: the 21-letter Latin alphabet, the five vowels, the four letters that behave differently from English (C, G, R, V), the consonant I, and the five diphthongs — plus the greetings and practice phrases the guide asks you to say out loud.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Latin is a language you will mostly read, which makes it very easy to build a private, wrong pronunciation in your head during the first month and then keep it all year. The rules are small and there are almost no exceptions, so an hour now settles it. Every card has a speaker button and a written respelling, so you can check the sound and the syllable at the same time.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Say the five Latin vowels and the five diphthongs with one consistent sound each",
+     "from": "source"
+    },
+    {
+     "text": "Apply the four special consonant rules — C and G always hard, R trilled, V saying w",
+     "from": "source"
+    },
+    {
+     "text": "Spot when I is a consonant rather than a vowel",
+     "from": "source"
+    },
+    {
+     "text": "Greet and farewell one person or a group, and ask and answer how are you",
+     "from": "source"
+    },
+    {
+     "text": "Place the stress in an unfamiliar Latin word using the penultimate rule",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the pronunciation guide in her Latin I folder. Three things worth knowing. First, the guide teaches letter sounds but says nothing about STRESS — which syllable to lean on — so I added the standard rule (two syllables: stress the first; three or more: stress the second-to-last if it is long or ends in a consonant, otherwise the one before). That card and the stress questions are flagged as added, not as the teacher's. Second, I left the macrons (the little bars over long vowels) off the Latin, because her handout does not use them and I did not want her app disagreeing with her worksheet; the respelling under each word carries the same information. Third, the app's speaker button uses the phone's built-in voice, which handles the vowels and consonants well but cannot roll an r — the R card says so plainly rather than letting her learn a flat r. One correction to flag: the guide's ice-cream joke prints 'pro glace lactis'; glace is not a Latin word and the usual form is 'pro glacie lactis'. I left that phrase out rather than teach either version over her teacher.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do the cards out loud with the speaker button, not silently — this is the one unit where reading it in your head defeats the point. Then the quiz.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "How to read these",
+     "def": "**The small line under each Latin word is how to say it, with the stressed syllable in CAPS.**\n• ah = father, ay = late, ee = feet, oh = Ohio, oo = boot.\n• w = the Latin v, k = the Latin c, and gh = a hard g — written that way before e and i so it never softens into a j.\n• The speaker button says it aloud. The voice cannot roll an r; that one you get from your teacher.",
+     "sp": "ah. ay. ee. oh. oo.",
+     "hint": "The respelling is a crutch you throw away. Read the Latin, check yourself against the line.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "Where the stress goes",
+     "def": "**Two syllables: stress the first, always. Three or more: stress the second-to-last if it is heavy, otherwise the one before it.**\n• Heavy means the syllable has a long vowel or ends in a consonant.\n• Salve is two syllables, so SAHL-way.\n• Salvete is three and -ve- is long, so sahl-WAY-tay.\n• Vescere is three and -ce- is short and open, so the stress jumps back to WES-keh-ray.",
+     "hint": "Latin never stresses the last syllable of a word longer than one syllable.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "A E I O U",
+     "def": "**Five vowels, one sound each — they never drift the way English vowels do.**\n• A = ah, as in father\n• E = ay, as in late\n• I = ee, as in feet\n• O = oh, as in Ohio\n• U = oo, as in boot",
+     "sp": "ah, ay, ee, oh, oo",
+     "hint": "English spells one vowel five ways. Latin says one vowel one way. You got the better deal.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "The Latin alphabet",
+     "def": "**Twenty-one letters: A B C D E F G H I L M N O P Q R S T V U X.**\n• No J, K, W, Y or Z among them.\n• The jobs of J and W are done by I and V instead.\n• Any letter not called out as special sounds the same as it does in English.",
+     "hint": "The missing letters are the ones English picked up later.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "C — vacca",
+     "def": "**C is always a hard k, as in cat — never the soft s-sound English gives it before e and i.**\n• vacca (dirty cow) is WAHK-kah, not vassa.\n• There are no exceptions, so there is nothing to memorise past the rule.",
+     "sp": "WAHK-kah",
+     "hint": "Every C is the C in cat.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "G — ago",
+     "def": "**G is always hard, as in go — never the soft g of gem.**\n• ago (I do) is AH-goh.\n• In these respellings a hard g before e or i is written gh, as in ghost, so your eye does not soften it.",
+     "sp": "AH-goh",
+     "hint": "Same deal as C: one sound, no exceptions.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "V — vale",
+     "def": "**V says w, as in water.**\n• vale (goodbye) is WAH-lay.\n• This is the rule English speakers break most often, and it changes whole phrases: veni, vidi, vici opens with a w.",
+     "sp": "WAH-lay",
+     "hint": "Roman V is our W. The letter kept the shape and lost the sound.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "R — gratias",
+     "def": "**R is trilled — rolled off the tongue, the way it is in Spanish.**\n• gratias (thanks) is GRAH-tee-ahs, with the r rolled.\n• This is the one sound on these cards the app cannot demonstrate: a browser voice has no trill. Listen to your teacher for this one and use the button for the rest.",
+     "sp": "GRAH-tee-ahs",
+     "hint": "The only card here where the speaker button is lying to you, and now you know it.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "I as a consonant — Iulius",
+     "def": "**When I comes before another vowel AND starts the word, it says y, as in yes.**\n• Iulius is YOO-lee-oos — which is how Julius Caesar got a J in English.\n• Everywhere else, I is just the vowel ee.",
+     "sp": "YOO-lee-oos",
+     "hint": "Both conditions, or it is a vowel: before a vowel, and at the front of the word.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "ae and oe",
+     "def": "**Two letters, one sound. ae = eye as in aisle; oe = oy as in boy.**\n• quaeso (please) is KWIGH-soh.\n• foeda (foul) is FOY-dah.\n• A diphthong counts as one sound, so it never splits into two syllables.",
+     "sp": "KWIGH-soh. FOY-dah.",
+     "hint": "ae is the sound in aisle, not the sound in ate.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "ei, au and eu",
+     "def": "**ei = ey as in grey; au = ow as in now; eu = eh-oo, run together.**\n• audire (to hear) is ow-DEE-ray.\n• eu has no clean English match — say eh and oo quickly enough that they become one sound.",
+     "sp": "ow-DEE-ray",
+     "hint": "au is the ow of now, never the aw of awe.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Salve!",
+     "def": "**Hello — said to one person.**\n• The everyday greeting, and the one your teacher will open with.",
+     "sp": "SAHL-way",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Salvete!",
+     "def": "**Hello — said to two or more people.**\n• Same greeting, plural ending. Latin marks how many people you are talking to, and English does not.",
+     "sp": "sahl-WAY-tay",
+     "hint": "The extra -te is the extra people.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Vale!",
+     "def": "**Goodbye — said to one person.**\n• Two syllables, so the stress lands on the first: WAH-lay, not wah-LAY.",
+     "sp": "WAH-lay",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Valete!",
+     "def": "**Goodbye — said to two or more people.**\n• Same -te ending that turns salve into salvete.",
+     "sp": "wah-LAY-tay",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Quaeso",
+     "def": "**Please — literally I beg or I ask for.**\n• Starts with the ae diphthong, so it opens KWIGH-, rhyming with sky.",
+     "sp": "KWIGH-soh",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Gratias tibi ago!",
+     "def": "**Thank you — literally I give thanks to you.**\n• gratias = thanks, tibi = to you, ago = I give.\n• The r in gratias is rolled.",
+     "sp": "GRAH-tee-ahs TEE-bee AH-goh",
+     "hint": "Three words, three jobs: the thanks, the person, the giving.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Quid agis?",
+     "def": "**How are you? — asked of one person.**\n• Literally what are you doing.\n• The g is hard, so it is AH-ghees, never ah-jis.",
+     "sp": "kwid AH-ghees",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "Quid agitis?",
+     "def": "**How are you? — asked of two or more.**\n• Same question, plural. Compare salve / salvete.",
+     "sp": "kwid AH-ghi-tees",
+     "from": "source"
+    },
+    {
+     "id": "c19",
+     "term": "Valeo / Non valeo",
+     "def": "**I am good / I am not good.**\n• The answer to quid agis.\n• Same root as vale — it is all about being well.",
+     "sp": "WAH-lay-oh. nohn WAH-lay-oh.",
+     "hint": "vale, valeo, valete: one family, all of it about doing well.",
+     "from": "source"
+    },
+    {
+     "id": "c20",
+     "term": "Mihi nomen est",
+     "def": "**My name is.**\n• Literally to me the name is — Latin says it sideways.",
+     "sp": "MEE-hee NOH-men est",
+     "from": "source"
+    },
+    {
+     "id": "c21",
+     "term": "Tibi nomen est",
+     "def": "**Your name is.**\n• Same shape as mihi nomen est, with tibi (to you) swapped in — the same tibi from gratias tibi ago.",
+     "sp": "TEE-bee NOH-men est",
+     "from": "source"
+    },
+    {
+     "id": "c22",
+     "term": "Vescere bracis meis",
+     "def": "**Eat my shorts.**\n• Every trap in one phrase: the v says w, both c-sounds are hard k, and vescere stresses its first syllable.",
+     "sp": "WES-keh-ray BRAH-kees MAY-ees",
+     "hint": "If you can say this one cleanly you can say most of the list.",
+     "from": "source"
+    },
+    {
+     "id": "c23",
+     "term": "Magister Mundi sum!",
+     "def": "**I am the master of the universe.**\n• magister stresses -gis- because that syllable ends in a consonant, which makes it heavy.",
+     "sp": "mah-GHIS-ter MOON-dee soom",
+     "from": "source"
+    },
+    {
+     "id": "c24",
+     "term": "Noli habere bovis, vir",
+     "def": "**Do not have a cow, man.**\n• Two w-sounds hiding in plain sight: bovis is BOH-wees and vir is weer.",
+     "sp": "NOH-lee hah-BAY-ray BOH-wees weer",
+     "from": "source"
+    },
+    {
+     "id": "c25",
+     "term": "Sit vis vobiscum",
+     "def": "**May the force be with you.**\n• vis is wees and vobiscum is woh-BEES-koom — the stress sits on -bis- because it is long and closed.",
+     "sp": "sit wees woh-BEES-koom",
+     "hint": "Star Wars, in the language of the Republic that actually fell.",
+     "from": "source"
+    },
+    {
+     "id": "c26",
+     "term": "Semper ubi sub ubi",
+     "def": "**Always wear underwear — except it does not mean that at all.**\n• Word for word it is always where under where, which is nonsense in Latin.\n• The joke is a pun on the English homophones, so it only lands for someone who speaks both.",
+     "sp": "SEM-per OO-bee soob OO-bee",
+     "hint": "A joke that survives translation in exactly one direction.",
+     "from": "source"
+    },
+    {
+     "id": "c27",
+     "term": "Utinam barbari spatium proprium tuum invadant!",
+     "def": "**May barbarians invade your personal space.**\n• Long, but every word follows the stress rule you already know.\n• invadant stresses -va- because the a there is long.",
+     "sp": "OO-tee-nahm bar-BAH-ree SPAH-tee-oom PROH-pree-oom TOO-oom in-WAH-dant",
+     "from": "source"
+    },
+    {
+     "id": "c28",
+     "term": "Te audire non possum. Musa sapientum fixa est in aure.",
+     "def": "**I cannot hear you. I have a banana in my ear.**\n• musa sapientum is the old botanical name for the banana, so the Latin is genuinely correct.\n• aure (ear) ends on the au diphthong: OW-ray.",
+     "sp": "tay ow-DEE-ray nohn POS-soom. MOO-sah sah-pee-EN-toom FEEK-sah est in OW-ray.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In Latin, the letter V is pronounced how?",
+     "opts": [
+      "Like the w in water",
+      "Like the v in very",
+      "Like the f in fun",
+      "It is silent"
+     ],
+     "ans": 0,
+     "hint": "The Romans had no separate letter W — V did that job.",
+     "steps": [
+      "Latin has 21 letters and W is not one of them.",
+      "The w sound still existed, so some letter had to carry it.",
+      "That letter is V. So vale is WAH-lay and vacca is WAHK-kah."
+     ],
+     "ex": {
+      "main": "**Like the w in water.** V keeps its Roman shape in English but lost its Roman sound; every v you read in Latin says w.",
+      "tip": "Say veni, vidi, vici with three w-sounds. That is the version Caesar said."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Latin C is pronounced how?",
+     "opts": [
+      "Always a hard k, as in cat",
+      "Soft, as in city, before e and i",
+      "Like ch in church before e and i",
+      "Silent before another consonant"
+     ],
+     "ans": 0,
+     "hint": "Ask yourself whether Latin has any exceptions here. It does not.",
+     "steps": [
+      "English softens c before e and i: city, cent, cinema.",
+      "Latin does not do this. C has exactly one sound.",
+      "That sound is k, so vacca is WAHK-kah and Cicero is KEE-keh-roh."
+     ],
+     "ex": {
+      "main": "**Always a hard k.** One letter, one sound — which means there is no list of exceptions to learn.",
+      "tip": "When you meet a new Latin word, read every c as k on the first pass."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The Latin vowel I sounds like which English vowel?",
+     "opts": [
+      "The ee in feet",
+      "The eye in ice",
+      "The i in sit",
+      "The ay in late"
+     ],
+     "ans": 0,
+     "hint": "Latin vowels each have one sound, and it is usually the \"continental\" one.",
+     "steps": [
+      "The five Latin vowels are ah, ay, ee, oh, oo.",
+      "Working through them in order: A is ah, E is ay, and I is next.",
+      "I is ee, as in feet. So tibi is TEE-bee."
+     ],
+     "ex": {
+      "main": "**The ee in feet.** English gives i several sounds; Latin gives it exactly one.",
+      "tip": "The vowel that trips people up is E — it is ay, not ee. I is the one that is ee."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which phrase means \"Thank you\"?",
+     "opts": [
+      "Gratias tibi ago",
+      "Quid agis",
+      "Mihi nomen est",
+      "Valete"
+     ],
+     "ans": 0,
+     "hint": "One of these has a word that survived into English as gratitude.",
+     "steps": [
+      "gratias is the ancestor of grateful and gratitude.",
+      "tibi means to you, and ago here means I give.",
+      "Together: I give thanks to you — GRAH-tee-ahs TEE-bee AH-goh."
+     ],
+     "ex": {
+      "main": "**Gratias tibi ago.** Literally \"I give thanks to you.\" The others are how are you, my name is, and goodbye to a group.",
+      "tip": "Spanish gracias and Italian grazie come from this same word."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The diphthong \"ae\" sounds like which English word?",
+     "opts": [
+      "aisle",
+      "ate",
+      "father",
+      "boy"
+     ],
+     "ans": 0,
+     "hint": "A diphthong is two letters making one sound. This one rhymes with sky.",
+     "steps": [
+      "ae is a diphthong, so the a and e make a single sound rather than two syllables.",
+      "That sound is the one in aisle — written \"igh\" in these respellings.",
+      "So quaeso is KWIGH-soh, rhyming with why."
+     ],
+     "ex": {
+      "main": "**aisle.** The trap is reading ae as the ay in ate, which is the sound of Latin E on its own, not of the pair.",
+      "tip": "The other diphthong to keep straight is oe, which is the oy in boy."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "\"Salve!\" is used to greet how many people?",
+     "opts": [
+      "One person",
+      "Two or more",
+      "Only a teacher",
+      "Only in writing"
+     ],
+     "ans": 0,
+     "hint": "There is a second version of this greeting with an extra ending.",
+     "steps": [
+      "Latin marks how many people you are addressing; English does not.",
+      "salve is the singular — one person.",
+      "For a group you add -te: salvete."
+     ],
+     "ex": {
+      "main": "**One person.** Say salve to your teacher, salvete to the class.",
+      "tip": "The same -te turns vale into valete. Learn the pair once and you get both."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"goodbye\" said to one person.",
+     "opts": [
+      "vale"
+     ],
+     "ans": 0,
+     "hint": "Two syllables, and it is the singular form — no extra ending.",
+     "steps": [
+      "Goodbye to a group is valete.",
+      "Strip the plural -te ending off and you have the singular.",
+      "That is vale, said WAH-lay."
+     ],
+     "ex": {
+      "main": "**vale.** Said WAH-lay — stress the first syllable, and the v says w.",
+      "tip": "valete is the one with the extra people in it."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "You read \"Vale!\" aloud. Which is right?",
+     "opts": [
+      "WAH-lay",
+      "vah-LAY",
+      "VAY-lee",
+      "wah-LEE"
+     ],
+     "ans": 0,
+     "hint": "Two rules collide here: what V says, and where a two-syllable word takes its stress.",
+     "steps": [
+      "V says w, so the word starts with a w-sound. That rules out anything beginning vah- or VAY-.",
+      "A is ah and E is ay, giving wah-lay.",
+      "The word has two syllables, and two-syllable words always stress the first.",
+      "So: WAH-lay."
+     ],
+     "ex": {
+      "main": "**WAH-lay.** Most English speakers get the vowels right and then stress the wrong syllable, landing on wah-LAY.",
+      "tip": "Any two-syllable Latin word is stressed on the first syllable. No exceptions to check."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "How is \"vacca\" said?",
+     "opts": [
+      "WAHK-kah",
+      "VAK-suh",
+      "VAH-chah",
+      "WAH-say"
+     ],
+     "ans": 0,
+     "hint": "Two c-sounds, and neither of them softens.",
+     "steps": [
+      "V says w, so it opens with a w.",
+      "A is ah, so the first syllable is wahk-.",
+      "Both c letters are hard k — Latin c never softens — giving -kah.",
+      "Two syllables, so stress the first: WAHK-kah."
+     ],
+     "ex": {
+      "main": "**WAHK-kah.** The distractors each apply an English habit: softening the c to s, or to ch, or reading v as v.",
+      "tip": "When a Latin word doubles a consonant, you hold it a beat longer — wahk-kah, not wah-kah."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In \"Quid agis?\", the g sounds like the g in which word?",
+     "opts": [
+      "go",
+      "gem",
+      "beige",
+      "hope"
+     ],
+     "ans": 0,
+     "hint": "English softens g before e and i. Latin does not.",
+     "steps": [
+      "In English, g before e or i often goes soft: gem, giant, ginger.",
+      "Latin g is always hard, exactly as in go.",
+      "agis has g before i, but the rule still holds — it stays hard.",
+      "So it is AH-ghees, spelled with gh here so your eye does not soften it."
+     ],
+     "ex": {
+      "main": "**go.** This is the same one-sound-per-letter deal you get with c: hard everywhere, no exceptions.",
+      "tip": "C and G behave identically in Latin. Learn one and you have both."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Someone walks up to your whole group and says \"Salvete!\" What did they just do?",
+     "opts": [
+      "Greeted all of you",
+      "Greeted one of you",
+      "Said goodbye to all of you",
+      "Asked your names"
+     ],
+     "ans": 0,
+     "hint": "The -te ending is doing the work.",
+     "steps": [
+      "salve greets one person.",
+      "The -te ending makes a greeting plural.",
+      "salvete is therefore hello to two or more — the whole group."
+     ],
+     "ex": {
+      "main": "**Greeted all of you.** valete is the goodbye version of the same ending; salvete is still hello.",
+      "tip": "If you are ever unsure, listen for the -te. It means \"all of you\"."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "\"Iulius\" begins with I before another vowel, at the start of the word. What is its first sound?",
+     "opts": [
+      "y, as in yes",
+      "ee, as in feet",
+      "j, as in jam",
+      "eye, as in ice"
+     ],
+     "ans": 0,
+     "hint": "The rule has two conditions and this word meets both.",
+     "steps": [
+      "I is normally the vowel ee.",
+      "But when I comes before another vowel AND starts the word, it turns into a consonant.",
+      "That consonant sound is y, as in yes.",
+      "So Iulius is YOO-lee-oos — which is how English ended up spelling it Julius."
+     ],
+     "ex": {
+      "main": "**y, as in yes.** Both conditions have to hold: before a vowel, and at the front of the word. Miss either one and I is just ee.",
+      "tip": "Latin had no letter J. English invented one later for exactly this sound."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which phrase asks \"How are you?\" of more than one person?",
+     "opts": [
+      "Quid agitis?",
+      "Quid agis?",
+      "Quid nomen est?",
+      "Valetis?"
+     ],
+     "ans": 0,
+     "hint": "Look for the plural ending you already know from salvete.",
+     "steps": [
+      "quid agis asks one person how they are doing.",
+      "The plural of a Latin verb like this carries -tis.",
+      "quid agitis is therefore the same question aimed at a group."
+     ],
+     "ex": {
+      "main": "**Quid agitis?** Said kwid AH-ghi-tees — stress jumps back to the first syllable because -gi- is short.",
+      "tip": "Singular and plural travel in pairs here: salve/salvete, vale/valete, agis/agitis."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"please\".",
+     "opts": [
+      "quaeso"
+     ],
+     "ans": 0,
+     "hint": "It opens with qu and contains the ae diphthong.",
+     "steps": [
+      "The word is said KWIGH-soh.",
+      "The opening kw sound is spelled qu, as in English.",
+      "The igh sound is the ae diphthong, so it is spelled ae, not i.",
+      "That gives quaeso."
+     ],
+     "ex": {
+      "main": "**quaeso.** Literally \"I beg\" or \"I ask for\" — stronger than the English please, which is why it is worth knowing.",
+      "tip": "ae is the commonest Latin diphthong. When you hear the sound in aisle, reach for ae."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "\"Semper ubi sub ubi\" is presented as \"always wear underwear\", but word for word it means \"always where under where\". Why is that funny only to an English speaker?",
+     "opts": [
+      "The Latin is nonsense, and the joke lives entirely in English homophones",
+      "Because ubi is the Latin word for underwear",
+      "Because Latin has no word for underwear",
+      "Because the word order is grammatically wrong"
+     ],
+     "ans": 0,
+     "hint": "Ask what the Latin actually says, then ask why anyone laughs.",
+     "steps": [
+      "Word for word, the Latin means always where under where — which means nothing at all.",
+      "It is only funny because \"where\" and \"wear\" sound alike, and \"under where\" sounds like \"underwear\".",
+      "Those pairs are identical in English and completely unrelated in Latin.",
+      "So the joke is built out of English sounds wearing Latin clothes."
+     ],
+     "ex": {
+      "main": "**The Latin is nonsense, and the joke lives entirely in English homophones.** Translate it into any other language and nothing survives.",
+      "tip": "This is worth spotting generally: a pun rides on sound, so it almost never crosses languages."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why does \"salvete\" stress its middle syllable while \"vescere\" stresses its first?",
+     "opts": [
+      "The second-to-last syllable is long in salvete and short in vescere",
+      "Because salvete is a greeting and vescere is a command",
+      "Because Latin alternates stress word by word",
+      "Because longer words always shift the stress backwards"
+     ],
+     "ans": 0,
+     "hint": "Both are three syllables, so the difference has to be inside the second-to-last one.",
+     "steps": [
+      "Both words have three syllables: sal-ve-te and ves-ce-re.",
+      "The rule: stress the second-to-last syllable if it is heavy, otherwise the one before it.",
+      "In salvete the -ve- has a long vowel, so it is heavy and takes the stress: sahl-WAY-tay.",
+      "In vescere the -ce- is short and open, so it is light and the stress jumps back: WES-keh-ray."
+     ],
+     "ex": {
+      "main": "**The second-to-last syllable is long in salvete and short in vescere.** Same rule both times — it just delivers different answers.",
+      "tip": "You cannot always tell length from the spelling alone. When a word is new, listen for it and mark it."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "English says \"Caesar\" with a soft s-sound at the front. Applying the Latin rules, how did the Romans say it?",
+     "opts": [
+      "KIGH-sar",
+      "SEE-zer",
+      "CHAY-zar",
+      "SAY-zar"
+     ],
+     "ans": 0,
+     "hint": "Two rules apply, one for the C and one for the ae.",
+     "steps": [
+      "C is always hard, so the word opens with a k.",
+      "ae is the diphthong in aisle, giving kigh-.",
+      "Put them together: KIGH-sar.",
+      "That is also why German Kaiser and Russian tsar both descend from this name — they preserve the hard opening English lost."
+     ],
+     "ex": {
+      "main": "**KIGH-sar.** The English pronunciation is a later drift; Kaiser is much closer to the original.",
+      "tip": "A famous name is a good test of a sound rule, because you already know what the wrong version sounds like."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In \"Vescere bracis meis\" (Eat my shorts), which sound is an English reader most likely to get wrong?",
+     "opts": [
+      "The v in vescere, which says w",
+      "The b in bracis",
+      "The m in meis",
+      "The final s in meis"
+     ],
+     "ans": 0,
+     "hint": "Three of these letters behave the same in both languages. One does not.",
+     "steps": [
+      "B, M and S sound the same in Latin and English, so none of them is a trap.",
+      "V is the letter whose sound changed: in Latin it says w.",
+      "So the phrase opens WES-keh-ray, not VES-ker-ee."
+     ],
+     "ex": {
+      "main": "**The v in vescere, which says w.** The c is a second trap, but v is the one people miss first, because English keeps the letter and changed the sound.",
+      "tip": "When you meet a new Latin phrase, scan it for v and c before you read it aloud."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "You meet \"magister\" and need to place the stress. Which reasoning gets it right?",
+     "opts": [
+      "The second-to-last syllable -gis- ends in a consonant, so it is heavy and takes the stress",
+      "It has three syllables, so the first one is stressed",
+      "The last syllable is stressed, as in French",
+      "The first syllable -ma- is long, so it is stressed"
+     ],
+     "ans": 0,
+     "hint": "Heavy means long vowel OR ending in a consonant. Check the second-to-last syllable against both halves.",
+     "steps": [
+      "Split it: ma-gis-ter. Three syllables.",
+      "The rule looks at the second-to-last syllable first — that is -gis-.",
+      "A syllable is heavy if it has a long vowel or ends in a consonant. -gis- ends in s, so it is heavy.",
+      "Heavy means it takes the stress: mah-GHIS-ter."
+     ],
+     "ex": {
+      "main": "**-gis- ends in a consonant, so it is heavy and takes the stress.** The \"ends in a consonant\" half of the rule is the half people forget.",
+      "tip": "Always split the word into syllables before applying the rule. Guessing from the look of it fails on words like this."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In \"Te audire non possum\", the au of audire makes which sound?",
+     "opts": [
+      "The ow in now",
+      "The aw in awe",
+      "The ai in aid",
+      "The ough in ought"
+     ],
+     "ans": 0,
+     "hint": "au is a diphthong, so the two letters make one sound.",
+     "steps": [
+      "au is one of the five diphthongs: ae, oe, ei, au, eu.",
+      "Its sound is the ow of now.",
+      "So audire is ow-DEE-ray, and aure at the end of the banana line is OW-ray."
+     ],
+     "ex": {
+      "main": "**The ow in now.** The common slip is the aw of awe, which is an English habit rather than a Latin sound.",
+      "tip": "The five diphthongs are worth a single pass of memorising — they cover most mispronunciations."
+     }
+    }
+   ]
+  }
+ }
+}

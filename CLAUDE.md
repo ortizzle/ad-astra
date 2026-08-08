@@ -514,6 +514,29 @@ They are **reference, not answers**: they restate facts the class hands out on
 paper anyway, so the skill under test (method, setup) is untouched. Don't put
 worked examples or solution steps in a sheet.
 
+### Spoken-as cards (v58 / Wayfinder v48, both apps)
+
+A card may carry **`sp`** — a hand-checked respelling of its term. Where it is
+present the 🔊 button speaks `sp` instead of `term`, and the respelling also
+renders under the term as `.saidas`. Built for Latin, but it earns its keep on
+anything where reading a word is not the same as saying it.
+
+- **Shown as well as spoken, always.** A recording alone is a black box she
+  cannot check; the printed line is what lets her compare the voice to the page
+  and catch it being wrong. Never add `sp` without letting it render.
+- **Lowercased on the way to the voice.** CAPS mark stress for the eye, but
+  Android TTS reads an all-caps run as an acronym and spells "OO" out loud.
+- **`.saidas` carries its own dark plate on a painted face.** The `::after`
+  scrim only guards the bottom of the card; the respelling sits mid-face, where
+  it measured 2.45:1 over the lighter palettes. With the plate: 6.92:1 worst
+  case across all twelve, both themes.
+- **Hand-authored only.** `sp` is not in `UNIT_SCHEMA` and the model must not
+  invent one — a confidently wrong pronunciation is worse than none. Write it,
+  verify it, then ship it.
+- **Say what the voice cannot do.** The browser voice has no trill, so the
+  Latin R card says so outright rather than teaching her a flat r. If a sound
+  is beyond the synthesiser, the content admits it.
+
 ### The Today strip (v51 / Wayfinder v43, both apps)
 
 Three tiles under the day header, each a live number that is really a **door**:

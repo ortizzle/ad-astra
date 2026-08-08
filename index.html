@@ -261,6 +261,18 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .face.back:not(.subj){background:linear-gradient(165deg,var(--ac-14),var(--deep));border-color:var(--ac-25)}
 .face .wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:130px;opacity:.045;pointer-events:none;user-select:none}
 .face .term{font-family:'Fraunces',serif;font-size:27px;line-height:1.25;position:relative;text-align:center}
+/* The respelling under a term. Deliberately NOT the serif the term wears —
+   it is a pronunciation aid, not more of the language, and the change of face
+   is what says so. Read at 13px, so it holds the 4.5:1 bar on both surfaces. */
+.face .saidas{align-self:center;max-width:100%;margin-top:10px;font-size:13px;line-height:1.4;
+  text-align:center;letter-spacing:.03em;color:var(--faint);position:relative}
+/* On a painted face the fill is a gradient, and the ::after scrim only guards
+   the BOTTOM of the card — the respelling sits mid-face, where it measured as
+   low as 2.45:1 over the lighter palettes. So it carries its own plate, the
+   same move .eq already makes. background-color, never the shorthand: a
+   shorthand here would wipe the pattern layers. */
+.face.subj .saidas{color:#fff;background-color:rgba(0,0,0,.42);
+  border-radius:9px;padding:5px 11px}
 .face .def{font-size:16px;line-height:1.65;position:relative}
 /* The straightforward answer leads each definition in bold. */
 .def b,.explain p b,.o b{font-weight:800}
@@ -690,7 +702,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v57 · generation works';
+const APP_VERSION = 'v58 · hear the Latin';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1519,7 +1531,7 @@ const Sync = {
     return DATA;
   }
 };
-const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/physics-conversions.json', 'content/sg-test1.json'];
+const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/physics-conversions.json', 'content/sg-test1.json', 'content/latin-pronunciation.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same
@@ -2922,7 +2934,24 @@ SCREENS.cards = function(root){
   front.appendChild(el('div','wm', cls?cls.icon:'✦'));
   if(cls) front.appendChild(el('div','subjtag', cls.name));
   front.appendChild(el('div','term',card.term));
+  /* A hand-checked respelling, for material where reading it is not the same
+     as saying it. Shown as well as spoken — she can check the voice against
+     the page, which a black-box recording would never let her do. */
+  if(card.sp) front.appendChild(el('div','saidas',card.sp));
   const fg = graphNode(card.graph); if(fg) front.appendChild(fg);
+  /* Hear it said — vocabulary she has only ever read is vocabulary she can't
+     use out loud. Browser speech, offline, tap-only. stopPropagation so the
+     button never flips the card. */
+  if('speechSynthesis' in window){
+    const sp = el('button','sayb','🔊');
+    sp.setAttribute('aria-label','Hear it said');
+    /* Lowercased on the way to the voice: the CAPS in a respelling mark stress
+       for the eye, but Android TTS reads an all-caps run as an acronym and
+       spells "OO" out loud. The page keeps the caps; the speaker doesn't. */
+    sp.addEventListener('click',e=>{ e.stopPropagation();
+      say(card.sp ? card.sp.toLowerCase() : card.term); });
+    front.appendChild(sp);
+  }
   front.appendChild(el('div','tap','Tap to reveal'));
   const back = paint(el('div','face back'), cls);
   back.appendChild(defEl(card.def));
@@ -5426,6 +5455,19 @@ const UNIT_SCHEMA = {
   additionalProperties:false
 };
 
+/* fetch() rejects with a TypeError — "Failed to fetch" — when the request never
+   reached a server at all: a dropped connection part-way through an upload,
+   which a phone carrying six photos on school wifi manages regularly. That is
+   worth one quiet retry. An HTTP error is NOT retried: the server answered, and
+   a 400 answers the same way twice. */
+async function postRetried(url, opts){
+  try{ return await fetch(url, opts); }
+  catch(e){
+    await new Promise(r => setTimeout(r, 1500));
+    try{ return await fetch(url, opts); }
+    catch(e2){ throw new Error('NO_NET'); }
+  }
+}
 async function generateUnit(classId, notes, shots, srcName){
   const key = Store.get('anthropic_key','');
   if(!key) throw new Error('NO_KEY');
@@ -5459,7 +5501,7 @@ async function generateUnit(classId, notes, shots, srcName){
     shots.length ? `Some or all of the material arrives as photos — a whiteboard, a worksheet, a textbook page, handwritten notes. Read them carefully, including handwriting and diagrams. If a photo is too blurry or cropped to read, work from what you can read and leave the rest out rather than guessing.` : '',
     srcName ? `The source is titled "${srcName}". Cite it by that name.` : `The source has no filename. Refer to it as the class material rather than inventing a title.`
   ].filter(Boolean).join(' ');
-  const res = await fetch('https://api.anthropic.com/v1/messages',{
+  const res = await postRetried('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':key,
       'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
@@ -5582,7 +5624,9 @@ SCREENS.generate = function(root){
       gob.disabled=false; gob.textContent='✨  Generate';
       showModal({ title:'Could not generate',
         message: e.message==='NO_KEY' ? 'Add an Anthropic API key in the You tab first. Everything else works without one.'
-               : e.message==='BAD_KEY' ? 'That API key was rejected.' : e.message });
+               : e.message==='BAD_KEY' ? 'That API key was rejected.'
+               : e.message==='NO_NET' ? 'Could not reach the server, twice. This is the connection, not the key — nothing was charged and nothing was lost. Your notes and photos are still here, so try again once you have a steadier signal.'
+               : e.message });
     }
   });
   c.appendChild(gob); root.appendChild(c);
