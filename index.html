@@ -377,6 +377,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .chipbtn{min-height:44px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);
   background-color:var(--raised);font-size:13.5px;line-height:1.2}
 .chipbtn.on{border-color:var(--ac);background-color:var(--ac-8)}
+/* Formula sheet rows inside the modal. */
+.frow{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+.frow .fn{font-size:12px;color:var(--faint)}
+.frow .eq{margin-top:0}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
@@ -662,7 +666,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v44 · dimensional analysis';
+const APP_VERSION = 'v45 · the formula sheet';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1772,6 +1776,58 @@ function celebrate(){
    NEVER eval() — the expression is parsed by hand (recursive descent), so
    only digits and the listed operators can ever run. It stores nothing. */
 const CALC_CLASSES = new Set(['algeo','physics','bio']);
+/* The class formula sheet, transcribed from the teacher's own reference
+   (BASIS math dept sheet in Drive) — a study TOOL like the calculator,
+   available on the subject screen and inside quizzes. Reference only:
+   it never answers a question, it answers "what was that formula again". */
+const FORMULA_CLASSES = new Set(['algeo']);
+const FORMULAS = [
+  {h:'2-D shapes', rows:[
+    ['Circumference','C = 2πr'],
+    ['Area of a circle','A = πr²'],
+    ['Perimeter of a polygon','P = sum of all sides'],
+    ['Parallelogram · rhombus · rectangle · square','A = bh'],
+    ['Triangle','A = ½bh'],
+    ['Trapezoid','A = ½(b₁ + b₂)h']]},
+  {h:'3-D solids', rows:[
+    ['Right solid, surface area','S.A. = 2A_B + L.S.A.'],
+    ['Right solid, lateral surface','L.S.A. = P_B · h'],
+    ['Right or oblique solid, volume','V = A_B · h'],
+    ['Cone, surface area','S.A. = πr² + πrl'],
+    ['Cone, volume','V = ⅓πr²h'],
+    ['Pyramid, surface area','S.A. = A_B + sum of side areas'],
+    ['Pyramid, volume','V = ⅓A_B · h'],
+    ['Sphere, surface area','S.A. = 4πr²'],
+    ['Sphere, volume','V = 4⁄3 πr³']]},
+  {h:'Exponent rules', rows:[
+    ['Product rule','xᵃ · xᵇ = xᵃ⁺ᵇ'],
+    ['Quotient rule','xᵃ ÷ xᵇ = xᵃ⁻ᵇ'],
+    ['Power rule','(xᵃ)ᵇ = xᵃᵇ'],
+    ['Negative exponent','x⁻ᵃ = 1 ⁄ xᵃ'],
+    ['Zero exponent','x⁰ = 1'],
+    ['Identity exponent','x¹ = x']]},
+  {h:'Field properties', rows:[
+    ['Identity','x + 0 = x  ·  x · 1 = x'],
+    ['Inverse','x + (−x) = 0  ·  x · (1⁄x) = 1'],
+    ['Associative','a + (b+c) = (a+b) + c'],
+    ['Commutative','a + b = b + a  ·  ab = ba'],
+    ['Distributive','a(b + c) = ab + ac']]}
+];
+function openFormulas(){
+  showModal({ title:'Formula sheet', confirmText:'Close', cancelText:null,
+    build:(box)=>{
+      box.appendChild(el('p',null,'The class reference sheet, as issued. Tap nothing — just find the one you need.'));
+      FORMULAS.forEach(sec=>{
+        box.appendChild(el('div','eyebrow',sec.h));
+        sec.rows.forEach(([nm,eq])=>{
+          const r = el('div','frow');
+          r.appendChild(el('span','fn',nm));
+          r.appendChild(el('span','eq',eq));
+          box.appendChild(r);
+        });
+      });
+    }});
+}
 function calcEval(s){
   let i = 0;
   const eat = c=>{ if(s[i]===c){ i++; return true; } return false; };
@@ -2435,6 +2491,10 @@ SCREENS.unit = function(root){
   if(CALC_CLASSES.has(c.id)){
     const cb = el('button','btn btn-secondary','🧮  Calculator');
     cb.addEventListener('click',openCalc); root.appendChild(cb);
+  }
+  if(FORMULA_CLASSES.has(c.id)){
+    const fsb = el('button','btn btn-secondary','📐  Formula sheet');
+    fsb.addEventListener('click',openFormulas); root.appendChild(fsb);
   }
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
@@ -3146,6 +3206,11 @@ SCREENS.quiz = function(root){
     const calcBtn = el('button','btn btn-ghost','🧮  Calculator');
     calcBtn.addEventListener('click',openCalc);
     root.appendChild(calcBtn);
+  }
+  if(FORMULA_CLASSES.has(ctx.classId)){
+    const fBtn = el('button','btn btn-ghost','📐  Formula sheet');
+    fBtn.addEventListener('click',openFormulas);
+    root.appendChild(fBtn);
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
   const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
