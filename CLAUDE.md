@@ -150,6 +150,13 @@ deliberately, bump its `updatedAt` past the discard. Restore still works for
 the same files as a manual fallback. Units shipped either way are
 `status:'draft'`, so they land in the review queue, not in her app.
 
+**Stamp `updatedAt` in the PAST — hours back, minimum.** A future-stamped
+record wins every merge against real edits until the clock catches up, so the
+parent's approvals silently revert to draft. This bit on 2026-08-08 (two files
+shipped ~18h ahead). `migrate()` now clamps any record more than an hour in
+the future on every ingest, so gists self-heal — but the clamp is a backstop,
+not permission.
+
 **Reading-companion additions (v32, both apps):** questions may carry
 `passage` (a short quoted excerpt, under ~40 words and quoted exactly,
 rendered as a styled quotation) and `kind:'order'` (put-in-order: `opts`
@@ -510,11 +517,11 @@ as ordinary cards below. Rules that are the point:
   lesson. No new record types, no counters.
 - **Nothing is ever gated.** The shelf shows state; every lesson opens with a
   tap regardless of order or completion. Do not add locked-until-done.
-- Spines are painted with the subject texture via `paint()`, then coloured by
-  a stable hash of the series name from `SUBJECT_PALETTE` — the measured
-  white-label-safe pairs — so every book differs but contrast holds. Spine
-  heights vary by hash on purpose. No `background` shorthand on spines (the
-  texture trap).
+- Spines are a **solid colour** — the series' `SUBJECT_PALETTE` deep (`g2`)
+  darkened 15% in `spineEl()`, picked by a stable hash of the series name.
+  White labels measure ≥5.3:1 across all twelve. Subject texture on spines
+  was tried and rejected as visual noise (Chris, 2026-08) — don't reapply
+  `paint()` to them.
 - `SCREENS.shelf` is the book's table of contents: one row per lesson, the
   bookmarked (or tapped) lesson expanded as the full `unitCard()`. Rows show
   coverage ("7/15 seen"), never accuracy.

@@ -285,13 +285,14 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 [data-theme="light"] .passage{filter:drop-shadow(0 2px 3px rgba(74,55,25,.35))}
 
 /* ---- The Bookshelf ---- */
-/* Spines are painted via paint() (.subj + texture + scrim), then each series
-   overrides --c1/--c2 with its own SUBJECT_PALETTE pair so the books differ.
-   Only palette pairs go on spines — they are the measured white-label-safe set.
-   No `background` shorthand here: the texture lives in background-image. */
+/* Spines are a SOLID colour — each series' SUBJECT_PALETTE deep (g2) darkened
+   15% in spineEl(), which puts white labels at ≥5.3:1 across all twelve
+   (texture was tried and read as noise at spine size — Chris, 2026-08).
+   Depth comes from the inset shading, not from any pattern. */
 .shelf{display:flex;align-items:flex-end;gap:12px;padding:0 8px;flex-wrap:wrap}
 .spine{position:relative;width:54px;height:150px;border:0;border-radius:5px 9px 9px 5px;
   display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0;
+  background-color:var(--raised);
   box-shadow:inset -7px 0 10px rgba(0,0,0,.30), inset 2px 0 0 rgba(255,255,255,.16), 0 3px 6px rgba(0,0,0,.30)}
 .spine .snm{writing-mode:vertical-rl;font-family:'Fraunces',Georgia,serif;font-size:12.5px;
   font-weight:600;color:#fff;letter-spacing:.02em;max-height:80%;overflow:hidden;
@@ -592,7 +593,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v36 · the bookshelf';
+const APP_VERSION = 'v37 · solid spines';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -948,6 +949,17 @@ function migrate(d){
       { id:'unit-orientation', type:'unit', deleted:true, updatedAt:Date.now() };
     d.v = 4;
   }
+  /* Always-run sanitizer, not a versioned step: a record stamped in the future
+     wins every merge against real edits until the clock catches up, so a
+     poisoned stamp (bad content file, wrong device clock) silently reverts
+     approvals. This bit on 2026-08-08 — two library files shipped ~18h ahead
+     and un-approved themselves on every sync. Runs on every ingest (boot,
+     gist pull, library fetch), so poisoned copies heal on the next pass;
+     one hour of tolerance covers honest clock skew. */
+  const horizon = Date.now() + 3600000;
+  Object.values(d.records||{}).forEach(r=>{
+    if(r && (r.updatedAt||0) > horizon) r.updatedAt = Date.now();
+  });
   d.v = SCHEMA_VERSION;
   return d;
 }
@@ -2274,14 +2286,14 @@ function unitCard(u, c, label){
   return card;
 }
 
-/* A book spine on the shelf. Painted with the subject's texture, then coloured
-   by a stable hash of the series name so every book owns its own palette pair. */
+/* A book spine on the shelf: a solid colour picked by a stable hash of the
+   series name — the palette deep, darkened 15% so white labels always clear
+   4.5:1 (worst case 5.37:1, measured). Deliberately no subject texture. */
 function spineEl(s, c, current){
-  const t = paint(el('button','spine'), c);
+  const t = el('button','spine');
   const pal = SUBJECT_PALETTE[hashStr(s.name) % SUBJECT_PALETTE.length];
-  t.style.setProperty('--c1', pal.g1);
-  t.style.setProperty('--c2', pal.g2);
-  t.style.setProperty('--pc', pal.g1);
+  const rgb = [1,3,5].map(i => Math.round(parseInt(pal.g2.slice(i,i+2),16) * 0.85));
+  t.style.backgroundColor = `rgb(${rgb.join(',')})`;
   /* Books on a real shelf aren't all the same height. */
   t.style.height = (142 + (hashStr(s.name+'#') % 3) * 9) + 'px';
   if(current) t.appendChild(el('span','ribbon'));
