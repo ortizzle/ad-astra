@@ -115,8 +115,8 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 /* The companion arrives, it doesn't just appear: a gentle rise plus one
    brighter pulse of the glow to say "new line". Reduced motion gets stillness. */
 @media (prefers-reduced-motion: no-preference){
-  .perch{animation:perch-in .45s cubic-bezier(.2,.7,.3,1) both}
-  .bubble{animation:bubble-hello 2.2s ease-out .25s 1}
+  #screen.enter .perch{animation:perch-in .45s cubic-bezier(.2,.7,.3,1) both}
+  #screen.enter .bubble{animation:bubble-hello 2.2s ease-out .25s 1}
 }
 @keyframes perch-in{from{opacity:0;transform:translateY(9px) scale(.97)}}
 @keyframes bubble-hello{0%{box-shadow:0 0 24px -2px var(--ac)}100%{box-shadow:0 0 14px -5px var(--ac)}}
@@ -351,11 +351,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 @media (prefers-reduced-motion: reduce){.skyfx{display:none}}
 /* Motion with meaning: lists compose in, presses compress, bars glide. */
 @media (prefers-reduced-motion: no-preference){
-  #screen>*{animation:rise .22s cubic-bezier(.2,.7,.3,1) both}
-  #screen>*:nth-child(2){animation-delay:.03s}
-  #screen>*:nth-child(3){animation-delay:.06s}
-  #screen>*:nth-child(4){animation-delay:.09s}
-  #screen>*:nth-child(n+5){animation-delay:.12s}
+  #screen.enter>*{animation:rise .22s cubic-bezier(.2,.7,.3,1) both}
+  #screen.enter>*:nth-child(2){animation-delay:.03s}
+  #screen.enter>*:nth-child(3){animation-delay:.06s}
+  #screen.enter>*:nth-child(4){animation-delay:.09s}
+  #screen.enter>*:nth-child(n+5){animation-delay:.12s}
   .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active{transform:scale(.98)}
   .bar i{transition:width .5s cubic-bezier(.2,.7,.3,1)}
 }
@@ -690,7 +690,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v54 · the conversion sheet';
+const APP_VERSION = 'v55 · a steady timer';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2196,15 +2196,19 @@ function go(v,c={},opts={}){
     HIST.push([view,ctx]);
     if(HIST.length>24) HIST.shift();
   }
-  view=v; ctx=c; render(); window.scrollTo(0,0);
+  view=v; ctx=c; animateIn = true; render(); window.scrollTo(0,0);
 }
 function goBack(){
   const prev = HIST.pop();
-  if(prev){ view=prev[0]; ctx=prev[1]; render(); window.scrollTo(0,0); }
+  if(prev){ view=prev[0]; ctx=prev[1]; animateIn = true; render(); window.scrollTo(0,0); }
   else go('today');
 }
 
 const SCREENS = {};
+/* Screens compose in when she NAVIGATES to them. Tick-driven re-renders (the
+   focus timer every second, Today every minute) must not replay the entrance,
+   or the screen strobes. Set by go()/goBack(), consumed by render(). */
+let animateIn = true;
 function render(){
   const s = stats(), p = prefs();
   document.getElementById('chipXp').textContent = s.xp.toLocaleString()+' XP';
@@ -2224,7 +2228,9 @@ function render(){
     b.appendChild(ic); b.appendChild(el('span',null,n.nm));
     b.addEventListener('click',()=>go(n.id)); nav.appendChild(b);
   });
-  const main = document.getElementById('screen'); main.textContent='';
+  const main = document.getElementById('screen');
+  main.classList.toggle('enter', animateIn);
+  animateIn = false; main.textContent='';
   /* The sandbox banner rides on every screen — if nothing is being saved,
      nobody should have to remember that. */
   if(sandboxOn()){
