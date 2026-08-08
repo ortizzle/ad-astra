@@ -662,7 +662,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v43 · a clearer telescope';
+const APP_VERSION = 'v44 · dimensional analysis';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -670,7 +670,9 @@ function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }
    Accepting writes an ordinary assess record; dismissing tombstones the same
    id, so a handled suggestion stays handled on every device. Past dates never
    show. Edit this list from each week's newsletter and redeploy. */
-const SUGGESTED_ASSESS = [];
+const SUGGESTED_ASSESS = [
+  {id:'sg-phys-2026-08-10', classId:'physics', kind:'quiz', title:'Physics quiz · Unit conversions', date:'2026-08-10'}
+];
 
 /* Mission Control reads the sibling app's gist, read-only — never merged,
    never written back. The gist id is per-device; the token is the one
@@ -1405,7 +1407,7 @@ const Sync = {
     return DATA;
   }
 };
-const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json'];
+const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/physics-conversions.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same

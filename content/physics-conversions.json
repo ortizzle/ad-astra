@@ -1,0 +1,540 @@
+{
+  "v": 4,
+  "records": {
+    "unit-phys-conv": {
+      "id": "unit-phys-conv",
+      "type": "unit",
+      "updatedAt": 1786210000000,
+      "classId": "physics",
+      "quarter": 1,
+      "status": "draft",
+      "title": "Kinematics 1 · Unit Conversions",
+      "srcName": "HW03 Unit Conversion + Unusual Conversion Factors (Drive)",
+      "source": "Physics 8, Kinematics 1 (Drive folder)",
+      "summary": {
+        "text": "Unit conversions the way physicists actually do them: the factor-label method (multiply by fractions equal to 1 until the units you don't want cancel). Covers the class conversion table — stones, rods, chains, furlongs, leagues, acres, knots — plus the cross conversions like mi/hr to m/s where BOTH top and bottom units change.",
+        "from": "source"
+      },
+      "why": {
+        "text": "Every kinematics problem this year starts by getting the units right — a speed in furlongs per fortnight is useless until it is meters per second. The factor-label method is one procedure that solves every conversion, no matter how weird the units. Master the setup and the arithmetic is just multiplication.",
+        "from": "added"
+      },
+      "objectives": [
+        {
+          "text": "Set up any conversion as a chain of unit fractions, cancelling units diagonally until only the target unit survives.",
+          "from": "added"
+        },
+        {
+          "text": "Use the class conversion table: stone, rod, chain, furlong, league, acre, knot, and the metric bridges (1 in = 2.54 cm, 1 kg = 2.2 lb).",
+          "from": "source"
+        },
+        {
+          "text": "Do cross conversions where numerator AND denominator both change — mi/hr to m/s, leagues/min to km/hr.",
+          "from": "source"
+        },
+        {
+          "text": "Handle squared and cubed units: converting ft² or (acre)(ft) means the factor gets squared or applied per dimension.",
+          "from": "source"
+        }
+      ],
+      "parentNote": {
+        "text": "Built for Monday's quiz from the two Kinematics 1 documents in Drive: the Unusual Conversion Factors table (all factors below are that sheet's, verbatim) and the HW03 problem types (imperial one-step chains, then cross conversions). Every problem here is FRESH — HW03 stays her homework, per the house rules — but the shapes match: same table, same skills, similar magnitudes. Every answer was re-derived independently; the walkthroughs teach the factor-label setup one cancellation at a time, which is what 'show your work to earn credit' means on her homework. The trap to watch: squared units (an acre is 43560 ft², so ft²→chains² needs the 66-ft factor used twice).",
+        "from": "added"
+      },
+      "nextUp": {
+        "text": "Cards once, then quiz rounds until the setups feel automatic. The calculator is right there in the quiz — the method is the skill, not the arithmetic.",
+        "minutes": 25,
+        "from": "added"
+      },
+      "cards": [
+        {
+          "id": "c0",
+          "term": "The factor-label method",
+          "def": "**Multiply by conversion fractions equal to 1, arranged so unwanted units cancel diagonally.**\n• Each fraction is a true equation written as a fraction: 5280 ft / 1 mi is just the number 1 wearing units.\n• Put the unit you want to KILL on the opposite side of the fraction from where it currently is.\n• When only the target unit survives, multiply the numbers.",
+          "hint": "You are never changing the amount — only multiplying by 1, over and over.",
+          "from": "source"
+        },
+        {
+          "id": "c1",
+          "term": "Why show the work",
+          "def": "**The setup IS the physics — the arithmetic is just the last step.**\n• A written chain of fractions proves the units cancel; an answer alone proves nothing.\n• The homework says it plainly: no work, no credit.",
+          "hint": "Write the fractions first. The calculator finishes; it never starts.",
+          "from": "source"
+        },
+        {
+          "id": "c2",
+          "term": "Time factors",
+          "def": "**86 400 sec = 1 day; 3600 sec = 1 hr; 60 sec = 1 min.**\n• 86 400 is on the class sheet — it is 24 × 3600, worth checking once so you trust it forever.",
+          "eq": "86 400 sec = 1 day",
+          "hint": "A day is about 10⁵ seconds — a handy sanity check.",
+          "from": "source"
+        },
+        {
+          "id": "c3",
+          "term": "Length: the mile family",
+          "def": "**5280 ft = 1 mile, and the odd ones are all defined in feet:**\n• 1 rod = 16.5 ft\n• 1 chain = 66 ft (four rods)\n• 1 furlong = 660 ft (ten chains)\n• 1 league = 18 228 ft",
+          "eq": "5280 ft = 1 mi",
+          "hint": "Rod → chain → furlong: each is a neat multiple of the last (×4, ×10).",
+          "from": "source"
+        },
+        {
+          "id": "c4",
+          "term": "The metric bridge for length",
+          "def": "**1 in = 2.54 cm — the exact door between imperial and metric.**\n• Any length cross-over can route through it: ft → in → cm → m.\n• Memorize this one; everything else can be rebuilt from it.",
+          "eq": "1 in = 2.54 cm",
+          "hint": "2.54 is exact by definition — not a rounded number.",
+          "from": "source"
+        },
+        {
+          "id": "c5",
+          "term": "Mass and weight factors",
+          "def": "**1 kg = 2.2 lb and 1 stone = 14 lb.**\n• Stones are a British body-weight unit — 72 lb is a little over 5 stones.\n• kg ↔ lb is the metric bridge for mass on the class sheet.",
+          "eq": "1 kg = 2.2 lb · 1 stone = 14 lb",
+          "hint": "Stone: think 14 — two weeks of pounds.",
+          "from": "source"
+        },
+        {
+          "id": "c6",
+          "term": "Area: the acre",
+          "def": "**1 acre = 43 560 ft² — an AREA, so any conversion out of acres deals in squared lengths.**\n• Acres → chains²: divide by 66² ft² per chain², and 43 560 / 4356 = exactly 10 chains².\n• An (acre)(ft) is a VOLUME: area × depth, used for water.",
+          "eq": "1 acre = 43 560 ft²",
+          "hint": "43 560 = 66² × 10 — the acre is secretly ten square chains.",
+          "from": "source"
+        },
+        {
+          "id": "c7",
+          "term": "Volume factors",
+          "def": "**1 gallon = 128 ounces = 3.785 liters.**\n• Two doors out of gallons: one imperial (ounces), one metric (liters).",
+          "eq": "1 gal = 128 oz = 3.785 L",
+          "hint": "A 2-liter soda bottle is about half a gallon — sanity check.",
+          "from": "source"
+        },
+        {
+          "id": "c8",
+          "term": "Speed: the knot",
+          "def": "**1 knot = 1.15 mi/hr — a speed unit, so it converts in one step to other speeds.**\n• Ships and planes use knots; the factor is already a ratio, no chain needed for mi/hr.",
+          "eq": "1 knot = 1.15 mi/hr",
+          "hint": "Knots are slightly fast miles per hour.",
+          "from": "source"
+        },
+        {
+          "id": "c9",
+          "term": "Cross conversions",
+          "def": "**When the unit is a fraction (mi/hr), convert top and bottom separately in one chain.**\n• mi/hr → m/s: kill miles with feet, feet with inches, inches with cm, cm with m — then kill hours with seconds.\n• The classic result: 60 mi/hr ≈ 26.8 m/s.",
+          "hint": "One chain, two jobs: numerator units and denominator units each get cancelled.",
+          "from": "source"
+        },
+        {
+          "id": "c10",
+          "term": "Squared and cubed units",
+          "def": "**A squared unit needs the conversion factor squared.**\n• ft² → chains²: divide by 66 twice, not once.\n• in³ ← ft³: multiply by 12 three times (1728).\n• This is the most-missed move on conversion quizzes.",
+          "hint": "The little ² means the factor goes in twice. No exceptions.",
+          "from": "added"
+        },
+        {
+          "id": "c11",
+          "term": "Sanity-checking an answer",
+          "def": "**Before trusting the number, ask: should it be bigger or smaller?**\n• Feet → miles: miles are huge, so the number must SHRINK.\n• Hours → seconds: seconds are tiny, so the number must GROW.\n• If the direction is wrong, the fraction was upside down.",
+          "hint": "Bigger unit, smaller number. Smaller unit, bigger number. Always.",
+          "from": "added"
+        },
+        {
+          "id": "c12",
+          "term": "Ponder: why do furlongs exist?",
+          "def": "**Every 'unusual' unit was somebody's ordinary.**\n• A furlong is one plow-furrow long; an acre is what an ox team plowed in a day; a chain was a literal surveyor's chain.\n• Units are frozen history — and the factor-label method eats them all the same way.",
+          "hint": "The method doesn't care how weird the unit is. That is the whole point of the method.",
+          "from": "added"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q0",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "q": "Set up: convert 9240 ft to miles. Which fraction do you multiply by?",
+          "opts": [
+            "5280 ft / 1 mi",
+            "1 mi / 5280 ft",
+            "1 ft / 5280 mi",
+            "5280 mi / 1 ft"
+          ],
+          "ans": 1,
+          "hint": "Feet must cancel — so feet goes on the bottom.",
+          "steps": [
+            "You start with feet on top, so the fraction needs feet on the BOTTOM to cancel it.",
+            "The true equation is 5280 ft = 1 mi; written with feet down, that is 1 mi / 5280 ft.",
+            "9240 ft × (1 mi / 5280 ft) = 1.75 mi. Feet cancel, miles survive — that is the whole method."
+          ],
+          "ex": {
+            "main": "**1 mi / 5280 ft.** The unit you are killing goes on the opposite side of the fraction. Everything else in this unit is this move, repeated.",
+            "tip": "Write the units first and cancel them like factors — only then touch the numbers."
+          }
+        },
+        {
+          "id": "q1",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "A trail is 4620 ft long. How many chains is that?",
+          "opts": [
+            "70 chains",
+            "66 chains",
+            "305 chains",
+            "7 chains"
+          ],
+          "ans": 0,
+          "hint": "1 chain = 66 ft, and feet must shrink.",
+          "steps": [
+            "Set up so feet cancel: 4620 ft × (1 chain / 66 ft).",
+            "4620 / 66 = 70.",
+            "Sanity check: chains are bigger than feet, so the number should shrink — 4620 → 70. It did. Answer: 70 chains."
+          ],
+          "ex": {
+            "main": "**70 chains.** 4620 ÷ 66 = 70 exactly — the sheet's factors are chosen to divide cleanly more often than you'd expect.",
+            "tip": "When a division comes out perfectly even, that is usually the sheet telling you the setup was right."
+          }
+        },
+        {
+          "id": "q2",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "A hiker weighs 98 lb. In stones, that is:",
+          "opts": [
+            "1372 stones",
+            "44.5 stones",
+            "7 stones",
+            "9.8 stones"
+          ],
+          "ans": 2,
+          "hint": "1 stone = 14 lb. Should the number get bigger or smaller?",
+          "steps": [
+            "Stones are bigger than pounds, so the count must shrink — that rules out 1372 immediately.",
+            "Set up: 98 lb × (1 stone / 14 lb).",
+            "98 / 14 = 7. Answer: 7 stones."
+          ],
+          "ex": {
+            "main": "**7 stones.** The wrong answers are all setup errors: 1372 is multiplying instead of dividing, 44.5 uses 2.2, 9.8 just moves the decimal.",
+            "tip": "Each wrong option on a conversion quiz is usually one specific mistake. Learn to name them and you can't be fooled."
+          }
+        },
+        {
+          "id": "q3",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "43 200 seconds is how many hours?",
+          "opts": [
+            "720 hr",
+            "1.2 hr",
+            "0.5 hr",
+            "12 hr"
+          ],
+          "ans": 3,
+          "hint": "3600 seconds per hour — or notice it is exactly half of 86 400.",
+          "steps": [
+            "Route: seconds → hours needs 3600 sec = 1 hr.",
+            "43 200 × (1 hr / 3600 sec) = 12 hr.",
+            "Shortcut check: the class sheet says 86 400 sec = 1 day; 43 200 is half of that — half a day — 12 hours. Two routes, same answer."
+          ],
+          "ex": {
+            "main": "**12 hours.** When two different factor routes give the same answer, you KNOW it is right — that is the built-in error check of the method.",
+            "tip": "The 86 400 factor is a day; half-days and quarter-days make fast mental checks."
+          }
+        },
+        {
+          "id": "q4",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "A fence is 24 rods long. In feet:",
+          "opts": [
+            "396 ft",
+            "1.45 ft",
+            "240 ft",
+            "39.6 ft"
+          ],
+          "ans": 0,
+          "hint": "1 rod = 16.5 ft, and feet are smaller — the number grows.",
+          "steps": [
+            "Feet are smaller than rods, so the number must GROW: 24 → something bigger. That kills 1.45.",
+            "Set up: 24 rods × (16.5 ft / 1 rod).",
+            "24 × 16.5 = 396. Answer: 396 ft."
+          ],
+          "ex": {
+            "main": "**396 ft.** 24 × 16.5: do it as 24 × 16 + 24 × 0.5 = 384 + 12 = 396 — splitting the multiplication beats reaching for the calculator.",
+            "tip": "×16.5 = ×16 + ×half. Ugly factors usually split into friendly pieces."
+          }
+        },
+        {
+          "id": "q5",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "A racetrack is 8 furlongs. How many feet is the full track?",
+          "opts": [
+            "82.5 ft",
+            "660 ft",
+            "5280 ft",
+            "52 800 ft"
+          ],
+          "ans": 2,
+          "hint": "1 furlong = 660 ft. Eight of them is a familiar number.",
+          "steps": [
+            "Set up: 8 furlongs × (660 ft / 1 furlong).",
+            "8 × 660 = 5280 ft.",
+            "Recognize it: 5280 ft is exactly one mile — 8 furlongs IS the mile, which is why horse races are measured in furlongs."
+          ],
+          "ex": {
+            "main": "**5280 ft — exactly a mile.** The old units interlock: 4 rods to the chain, 10 chains to the furlong, 8 furlongs to the mile.",
+            "tip": "Spotting that an answer equals a famous constant (5280!) is the strongest possible confirmation."
+          }
+        },
+        {
+          "id": "q6",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "Convert 30 mi/hr to m/s (use 1 mi = 5280 ft, 1 ft = 12 in, 1 in = 2.54 cm). Closest answer:",
+          "opts": [
+            "13.4 m/s",
+            "48.3 m/s",
+            "8.3 m/s",
+            "1.34 m/s"
+          ],
+          "ans": 0,
+          "hint": "Half of the classic 60 mi/hr ≈ 26.8 m/s.",
+          "steps": [
+            "Chain the numerator: 30 mi × 5280 ft/mi × 12 in/ft × 2.54 cm/in = 4 828 032 cm = 48 280.32 m.",
+            "Chain the denominator: 1 hr = 3600 s.",
+            "Divide: 48 280.32 m / 3600 s ≈ 13.4 m/s.",
+            "Sanity check: 60 mi/hr ≈ 26.8 m/s is the classic conversion, and 30 is half of 60 — so 13.4 is exactly right."
+          ],
+          "ex": {
+            "main": "**≈13.4 m/s.** One long chain: miles→feet→inches→cm→m on top, hours→seconds on the bottom. Every factor is on the class sheet or is a factor you already own.",
+            "tip": "Memorize 60 mi/hr ≈ 27 m/s as an anchor — then scale: half the mph, half the m/s."
+          }
+        },
+        {
+          "id": "q7",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "A ship logs 20 knots. Using 1 knot = 1.15 mi/hr, its speed in mi/hr is:",
+          "opts": [
+            "17.4 mi/hr",
+            "23 mi/hr",
+            "21.15 mi/hr",
+            "2.3 mi/hr"
+          ],
+          "ans": 1,
+          "hint": "Knots are already a speed — one factor does it.",
+          "steps": [
+            "The knot factor is already a ratio of speeds, so no chain is needed: 20 knots × (1.15 mi/hr / 1 knot).",
+            "20 × 1.15 = 23.",
+            "Check direction: knots are slightly faster than mi/hr, so the number should grow a little. 20 → 23. Answer: 23 mi/hr."
+          ],
+          "ex": {
+            "main": "**23 mi/hr.** The trap answer is 17.4 — that is dividing by 1.15, flipping the factor upside down. Direction-check before you commit.",
+            "tip": "17.4 vs 23: the sanity check ('knots are faster') settles it without redoing any arithmetic."
+          }
+        },
+        {
+          "id": "q8",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "How many square chains is HALF an acre? (1 acre = 43 560 ft², 1 chain = 66 ft)",
+          "opts": [
+            "330 chains²",
+            "0.5 chains²",
+            "10 chains²",
+            "5 chains²"
+          ],
+          "ans": 3,
+          "hint": "First find chains² in a full acre — the 66 gets used twice.",
+          "steps": [
+            "A chain² is 66 ft × 66 ft = 4356 ft² — the factor is SQUARED because the unit is squared.",
+            "Full acre: 43 560 ft² × (1 chain² / 4356 ft²) = 10 chains².",
+            "Half an acre: 10 / 2 = 5 chains²."
+          ],
+          "ex": {
+            "main": "**5 chains².** The acre is exactly 10 square chains — old surveyors designed it that way. The whole problem hinges on squaring the 66.",
+            "tip": "See a ² on the unit? The conversion factor goes in twice. This is the most-missed move on every conversions quiz."
+          }
+        },
+        {
+          "id": "q9",
+          "lv": 3,
+          "from": "source",
+          "kind": "mc",
+          "q": "A pond holds 2 (acre)(ft) of water — 2 acres of surface, 1 foot deep. What kind of quantity is an (acre)(ft)?",
+          "opts": [
+            "A length, because feet are in it",
+            "An area, because acres are in it",
+            "A volume — area × depth",
+            "A speed — area per time"
+          ],
+          "ans": 2,
+          "hint": "Multiply the dimensions: ft² × ft = ?",
+          "steps": [
+            "An acre is an area (ft²); a foot is a length (ft).",
+            "Area × length = ft² × ft = ft³ — three lengths multiplied, which is a volume.",
+            "That is why water districts measure reservoirs in acre-feet: surface area times depth. Converting it to in³ means converting ft³ with the 12 used three times."
+          ],
+          "ex": {
+            "main": "**A volume.** Units multiply like numbers: ft² × ft = ft³. Reading the dimension off the units works for any combination you will ever meet.",
+            "tip": "When a unit looks weird, multiply out its dimensions — the ² and ³ tell you what kind of thing it measures."
+          }
+        },
+        {
+          "id": "q10",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "q": "Which of these fractions is NOT equal to 1?",
+          "opts": [
+            "5280 ft / 1 mi",
+            "14 lb / 1 stone",
+            "1 gal / 3.785 L",
+            "60 sec / 1 hr"
+          ],
+          "ans": 3,
+          "hint": "Each fraction is only 'a 1' if top and bottom are truly equal.",
+          "steps": [
+            "The method only works because each fraction equals 1 — top and bottom must be the same amount in different clothes.",
+            "5280 ft is a mile ✓, 14 lb is a stone ✓, a gallon is 3.785 L ✓.",
+            "60 sec is a MINUTE, not an hour — that fraction equals 1/60, and multiplying by it silently shrinks the answer. Wrong factor, wrong everything."
+          ],
+          "ex": {
+            "main": "**60 sec / 1 hr.** One false factor poisons the whole chain — which is why writing the equalities down beats trusting memory.",
+            "tip": "The most common conversion error isn't arithmetic — it is a factor that was never true."
+          }
+        },
+        {
+          "id": "q11",
+          "lv": 2,
+          "from": "source",
+          "kind": "mc",
+          "q": "17.6 lb is how many kilograms? (1 kg = 2.2 lb)",
+          "opts": [
+            "38.7 kg",
+            "8 kg",
+            "1.25 kg",
+            "80 kg"
+          ],
+          "ans": 1,
+          "hint": "Kilograms are heavier than pounds — fewer of them.",
+          "steps": [
+            "Direction: kg is the bigger unit, so the number must shrink — 38.7 and 80 are out instantly.",
+            "Set up: 17.6 lb × (1 kg / 2.2 lb).",
+            "17.6 / 2.2 = 8. Answer: 8 kg."
+          ],
+          "ex": {
+            "main": "**8 kg.** Two answers died on the sanity check before any arithmetic happened. That is the check doing its job.",
+            "tip": "Eliminate by direction first; divide second. Half the options usually never deserve arithmetic."
+          }
+        },
+        {
+          "id": "q12",
+          "lv": 1,
+          "from": "source",
+          "kind": "order",
+          "ans": 0,
+          "q": "Put the factor-label steps for '3 furlongs → inches' in working order.",
+          "opts": [
+            "Write what you have: 3 furlongs",
+            "Multiply by 660 ft / 1 furlong to reach feet",
+            "Multiply by 12 in / 1 ft to reach inches",
+            "Multiply the numbers: 3 × 660 × 12 = 23 760 in"
+          ],
+          "hint": "Have → hop to feet → hop to inches → then arithmetic, last.",
+          "steps": [
+            "Always start by writing the given quantity with its unit: 3 furlongs.",
+            "First hop: furlongs die when 660 ft / 1 furlong puts furlongs on the bottom.",
+            "Second hop: feet die under 12 in / 1 ft, leaving only inches.",
+            "Numbers come LAST: 3 × 660 × 12 = 23 760 inches. Setup first, arithmetic once."
+          ],
+          "ex": {
+            "main": "**Have → factor → factor → multiply.** The chain is planned entirely in units before a single number is computed — that is what full credit looks like.",
+            "tip": "If you touch the calculator before the units cancel on paper, you are doing it in the wrong order."
+          }
+        },
+        {
+          "id": "q13",
+          "lv": 3,
+          "from": "added",
+          "kind": "mc",
+          "q": "Convert 2 leagues/min to km/hr (1 league = 18 228 ft, 1 ft = 12 in, 1 in = 2.54 cm). Closest answer:",
+          "opts": [
+            "11.1 km/hr",
+            "185 km/hr",
+            "667 km/hr",
+            "66.7 km/hr"
+          ],
+          "ans": 2,
+          "hint": "Leagues are enormous and minutes are short — expect a huge speed.",
+          "steps": [
+            "Numerator: 2 leagues × 18 228 ft × 12 in/ft × 2.54 cm/in = 1 111 178 cm ≈ 11.11 km.",
+            "Denominator: 1 min = 1/60 hr, so per-minute becomes per-hour by MULTIPLYING by 60.",
+            "11.11 km/min × 60 min/hr ≈ 667 km/hr.",
+            "Sanity: a league is ~3.5 miles; 2 per minute is 7 miles a minute — 420 mi/hr territory — so hundreds of km/hr is the right ballpark."
+          ],
+          "ex": {
+            "main": "**≈667 km/hr.** The tempting error is dividing by 60 instead of multiplying — but something per MINUTE happens 60 times per HOUR, so per-hour numbers grow.",
+            "tip": "Per-minute → per-hour always multiplies by 60. If your speed shrank, the time factor went in upside down."
+          }
+        },
+        {
+          "id": "q14",
+          "lv": 1,
+          "from": "source",
+          "kind": "mc",
+          "q": "A recipe needs 64 ounces of stock. In gallons, that is:",
+          "opts": [
+            "0.5 gal",
+            "2 gal",
+            "8192 gal",
+            "1.7 gal"
+          ],
+          "ans": 0,
+          "hint": "1 gallon = 128 ounces.",
+          "steps": [
+            "Set up so ounces cancel: 64 oz × (1 gal / 128 oz).",
+            "64 / 128 = 0.5.",
+            "Direction check: gallons are much bigger than ounces, so a small number is expected. Answer: half a gallon."
+          ],
+          "ex": {
+            "main": "**0.5 gallons.** 8192 is the upside-down setup (×128) — it fails the sniff test instantly, because 64 ounces is obviously not thousands of gallons.",
+            "tip": "Absurd magnitudes are gifts: any answer that offends common sense was an inverted fraction."
+          }
+        },
+        {
+          "id": "q15",
+          "lv": 2,
+          "from": "added",
+          "kind": "mc",
+          "q": "Your chain gives an answer in cm but the quiz asks for meters. What is the LAST fraction in the chain?",
+          "opts": [
+            "100 cm / 1 m",
+            "1 cm / 100 m",
+            "1 m / 100 cm",
+            "2.54 cm / 1 in"
+          ],
+          "ans": 2,
+          "hint": "Centimeters must die — where do they sit in the fraction?",
+          "steps": [
+            "The surviving unit is cm; to kill it, cm goes on the bottom of the final factor.",
+            "The true equality is 100 cm = 1 m, written cm-down: 1 m / 100 cm.",
+            "Result: the number shrinks by 100 and the unit flips to meters — done."
+          ],
+          "ex": {
+            "main": "**1 m / 100 cm.** Same rule as every other step: the doomed unit rides the bottom. Metric steps are just powers of ten, which is why the chain usually ends metric.",
+            "tip": "Finish chains in metric when you can — the last hops become decimal shifts instead of long division."
+          }
+        }
+      ]
+    }
+  }
+}
