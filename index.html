@@ -106,8 +106,20 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .perch .pet{font-size:36px;line-height:1;flex-shrink:0;animation:pet-bob 3.4s ease-in-out infinite}
 @keyframes pet-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.perch .pet{animation:none}}
-.bubble{position:relative;flex:1;background:var(--surface);border:1px solid var(--line-soft);
-  border-radius:14px;padding:10px 13px;font-size:13.5px;line-height:1.45;color:var(--text)}
+.bubble{position:relative;flex:1;background-color:var(--surface);
+  background-image:linear-gradient(120deg,var(--ac-14),transparent 72%);
+  border:1px solid var(--ac-25);box-shadow:0 0 14px -5px var(--ac);
+  border-radius:16px 16px 16px 5px;padding:11px 14px;
+  font-family:'Fraunces',Georgia,serif;font-style:italic;
+  font-size:14.5px;line-height:1.5;color:var(--text)}
+/* The companion arrives, it doesn't just appear: a gentle rise plus one
+   brighter pulse of the glow to say "new line". Reduced motion gets stillness. */
+@media (prefers-reduced-motion: no-preference){
+  .perch{animation:perch-in .45s cubic-bezier(.2,.7,.3,1) both}
+  .bubble{animation:bubble-hello 2.2s ease-out .25s 1}
+}
+@keyframes perch-in{from{opacity:0;transform:translateY(9px) scale(.97)}}
+@keyframes bubble-hello{0%{box-shadow:0 0 24px -2px var(--ac)}100%{box-shadow:0 0 14px -5px var(--ac)}}
 .bubble::before{content:'';position:absolute;left:-5px;bottom:14px;width:9px;height:9px;
   background:var(--surface);border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
   transform:rotate(45deg)}
@@ -669,7 +681,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v49 · know it or loop it';
+const APP_VERSION = 'v50 · a friendlier voice';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4169,6 +4181,30 @@ SCREENS.parent = function(root){
     root.appendChild(rv);
   }
 
+  /* The daily-use strip: new lessons in, and the sandbox switch — both also
+     live in their old homes below, but these are the two he reaches for. */
+  const lc2 = el('div','card ac');
+  lc2.appendChild(el('div','eyebrow','New lessons'));
+  lc2.appendChild(el('p',null, pending.length
+    ? (pending.length===1 ? '1 unit is waiting for your review.' : pending.length+' units are waiting for your review.')
+    : 'Nothing waiting — check the library for anything newly published.'));
+  const lr2 = el('div','btn-row');
+  const lb2 = el('button','btn btn-primary','📥  Check the library');
+  lb2.addEventListener('click',()=>fetchLibrary(lb2));
+  const rq2 = el('button','btn btn-secondary','Review queue');
+  rq2.addEventListener('click',()=>go('review'));
+  lr2.appendChild(lb2); lr2.appendChild(rq2); lc2.appendChild(lr2);
+  root.appendChild(lc2);
+  const sbq = el('div','card');
+  const sqr = el('div','row');
+  const sqk = el('span','k','🧪 Sandbox');
+  sqk.appendChild(el('small',null, sandboxOn() ? 'ON — nothing is being saved or synced' : 'Off — her real data is live'));
+  sqr.appendChild(sqk);
+  const sqb = el('button','btn btn-sm '+(sandboxOn()?'btn-primary':'btn-secondary'), sandboxOn() ? 'Turn off' : 'Turn on');
+  sqb.addEventListener('click',()=>{ setSandbox(!sandboxOn()); render(); });
+  sqr.appendChild(sqb); sbq.appendChild(sqr);
+  root.appendChild(sbq);
+
   /* Effort this week */
   const wkStart = AZ.weekStart(date);
   const wkMin = minutesInRange(wkStart, date);
@@ -4435,6 +4471,89 @@ SCREENS.parent = function(root){
      Deliberately not in the source: this repo is public, and a child's name,
      school and exact daily location should not be. Entered once here, then
      carried to every device by the private Gist. */
+  /* ---- Mission Control: a read-only glance at the sibling app ----
+     Fetches the other gist and summarizes it in place. Never merged, never
+     written back; the gist id is per-device, the token is the one in Setup. */
+  /* Her club stars — a wishlist with the price tag and days attached. */
+  const starred = CLUBS.filter(c=>clubPicks()[c.id]);
+  if(starred.length){
+    root.appendChild(divider('Club interest'));
+    const cc = el('div','card');
+    cc.appendChild(el('p',null,'Starred by her in the fall catalog — a wishlist, not a registration. Blackbaud sign-ups close Friday 8/14; the $50/yr family extracurricular fee applies once.'));
+    starred.forEach(c=>{
+      const r = el('div','row');
+      const kk = el('span','k',c.nm + (c.flag ? ' ('+c.flag+')' : ''));
+      kk.appendChild(el('small',null, c.day + (c.time ? ' · '+c.time : '') + (c.freq ? ' · '+c.freq : '')));
+      r.appendChild(kk);
+      r.appendChild(el('span','v', c.cost ? '$'+c.cost : 'free'));
+      cc.appendChild(r);
+    });
+    const r3 = el('div','row');
+    r3.appendChild(el('span','k','Total if all approved'));
+    r3.appendChild(el('span','v','$'+starred.reduce((n,c)=>n+c.cost,0)));
+    cc.appendChild(r3);
+    root.appendChild(cc);
+  }
+
+  root.appendChild(divider('Mission Control'));
+  const mc = el('div','card');
+  mc.appendChild(el('div','eyebrow','The other app · '+SIB_NAME));
+  const sibIn = el('input'); sibIn.type='text'; sibIn.placeholder=SIB_NAME+' gist ID';
+  sibIn.value = Store.get('sib_gist','');
+  sibIn.addEventListener('change',()=>Store.set('sib_gist', sibIn.value.trim()));
+  mc.appendChild(sibIn);
+  if(ctx._mc){
+    const m2 = ctx._mc;
+    [[ (m2.name?m2.name+"'s time":'Study time')+' this week', m2.wkMin+' min'],
+     ['Accuracy, last 7 days', m2.acc===null ? '—' : m2.acc+'%'],
+     ['Growth Zone due', m2.due],
+     ['Drafts waiting', m2.dr],
+     ['Active days this week', m2.days],
+     ['Next test', m2.next || '—']].forEach(([k,v])=>{
+      const r2 = el('div','row');
+      r2.appendChild(el('span','k',k)); r2.appendChild(el('span','v',String(v)));
+      mc.appendChild(r2);
+    });
+    /* Family week: when BOTH girls have shown up most days, nudge the
+       celebration — here, parent-side only. Her screens never show a prize;
+       the treat lands as a surprise, which is the whole trick. */
+    const wkDays = new Set();
+    logs().forEach(l=>{ if(l.date>=AZ.weekStart(AZ.today())) wkDays.add(l.date); });
+    focusLogs().forEach(f=>{ if(f.date>=AZ.weekStart(AZ.today())) wkDays.add(f.date); });
+    if(wkDays.size>=5 && (m2.days||0)>=5){
+      mc.appendChild(el('div','hintline','🎉 Both girls showed up 5+ days this week — celebration territory. A Starbucks run, a Target card, or a bookstore hour lands best as a surprise, not a payout.'));
+    }
+  }
+  const mcb = el('button','btn btn-secondary', ctx._mc ? 'Check again' : 'Check in');
+  mcb.addEventListener('click', async ()=>{
+    const gid = sibIn.value.trim(); Store.set('sib_gist', gid);
+    if(!gid){ toast('Enter the '+SIB_NAME+' gist ID first'); return; }
+    if(!Sync.token){ toast('Add the gist token in Setup first'); return; }
+    mcb.disabled = true; mcb.textContent = 'Checking…';
+    try{
+      const res = await fetch('https://api.github.com/gists/'+gid,
+        {headers:{'Authorization':'Bearer '+Sync.token,'Accept':'application/vnd.github+json'}});
+      if(!res.ok) throw new Error(res.status);
+      const g = await res.json(); const f = g.files[SIB_FILE];
+      if(!f) throw new Error('missing '+SIB_FILE);
+      const text = f.truncated ? await (await fetch(f.raw_url)).text() : f.content;
+      ctx._mc = sibSummary(JSON.parse(text || '{"records":{}}'));
+    }catch(e){ ctx._mc = null; toast('Could not read the '+SIB_NAME+' gist'); }
+    render();
+  });
+  mc.appendChild(mcb);
+  root.appendChild(mc);
+
+
+  /* Everything below is setup, not daily use — collapsed so the daily
+     things stay within thumb's reach. */
+  root.appendChild(divider('Setup & maintenance'));
+  const mtb = el('button','btn btn-secondary', ctx._more
+    ? 'Hide the setup tools'
+    : 'Show the setup tools — class details, sync, AI key, backup, sandbox & resets');
+  mtb.addEventListener('click',()=>{ ctx._more = !ctx._more; render(); });
+  root.appendChild(mtb);
+  if(ctx._more){
   root.appendChild(divider('Class details'));
   const rost = el('div','card');
   rost.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
@@ -4554,79 +4673,6 @@ SCREENS.parent = function(root){
 
   /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
      progress records only (content, tests, goals and personalization stay). */
-  /* ---- Mission Control: a read-only glance at the sibling app ----
-     Fetches the other gist and summarizes it in place. Never merged, never
-     written back; the gist id is per-device, the token is the one in Setup. */
-  /* Her club stars — a wishlist with the price tag and days attached. */
-  const starred = CLUBS.filter(c=>clubPicks()[c.id]);
-  if(starred.length){
-    root.appendChild(divider('Club interest'));
-    const cc = el('div','card');
-    cc.appendChild(el('p',null,'Starred by her in the fall catalog — a wishlist, not a registration. Blackbaud sign-ups close Friday 8/14; the $50/yr family extracurricular fee applies once.'));
-    starred.forEach(c=>{
-      const r = el('div','row');
-      const kk = el('span','k',c.nm + (c.flag ? ' ('+c.flag+')' : ''));
-      kk.appendChild(el('small',null, c.day + (c.time ? ' · '+c.time : '') + (c.freq ? ' · '+c.freq : '')));
-      r.appendChild(kk);
-      r.appendChild(el('span','v', c.cost ? '$'+c.cost : 'free'));
-      cc.appendChild(r);
-    });
-    const r3 = el('div','row');
-    r3.appendChild(el('span','k','Total if all approved'));
-    r3.appendChild(el('span','v','$'+starred.reduce((n,c)=>n+c.cost,0)));
-    cc.appendChild(r3);
-    root.appendChild(cc);
-  }
-
-  root.appendChild(divider('Mission Control'));
-  const mc = el('div','card');
-  mc.appendChild(el('div','eyebrow','The other app · '+SIB_NAME));
-  const sibIn = el('input'); sibIn.type='text'; sibIn.placeholder=SIB_NAME+' gist ID';
-  sibIn.value = Store.get('sib_gist','');
-  sibIn.addEventListener('change',()=>Store.set('sib_gist', sibIn.value.trim()));
-  mc.appendChild(sibIn);
-  if(ctx._mc){
-    const m2 = ctx._mc;
-    [[ (m2.name?m2.name+"'s time":'Study time')+' this week', m2.wkMin+' min'],
-     ['Accuracy, last 7 days', m2.acc===null ? '—' : m2.acc+'%'],
-     ['Growth Zone due', m2.due],
-     ['Drafts waiting', m2.dr],
-     ['Active days this week', m2.days],
-     ['Next test', m2.next || '—']].forEach(([k,v])=>{
-      const r2 = el('div','row');
-      r2.appendChild(el('span','k',k)); r2.appendChild(el('span','v',String(v)));
-      mc.appendChild(r2);
-    });
-    /* Family week: when BOTH girls have shown up most days, nudge the
-       celebration — here, parent-side only. Her screens never show a prize;
-       the treat lands as a surprise, which is the whole trick. */
-    const wkDays = new Set();
-    logs().forEach(l=>{ if(l.date>=AZ.weekStart(AZ.today())) wkDays.add(l.date); });
-    focusLogs().forEach(f=>{ if(f.date>=AZ.weekStart(AZ.today())) wkDays.add(f.date); });
-    if(wkDays.size>=5 && (m2.days||0)>=5){
-      mc.appendChild(el('div','hintline','🎉 Both girls showed up 5+ days this week — celebration territory. A Starbucks run, a Target card, or a bookstore hour lands best as a surprise, not a payout.'));
-    }
-  }
-  const mcb = el('button','btn btn-secondary', ctx._mc ? 'Check again' : 'Check in');
-  mcb.addEventListener('click', async ()=>{
-    const gid = sibIn.value.trim(); Store.set('sib_gist', gid);
-    if(!gid){ toast('Enter the '+SIB_NAME+' gist ID first'); return; }
-    if(!Sync.token){ toast('Add the gist token in Setup first'); return; }
-    mcb.disabled = true; mcb.textContent = 'Checking…';
-    try{
-      const res = await fetch('https://api.github.com/gists/'+gid,
-        {headers:{'Authorization':'Bearer '+Sync.token,'Accept':'application/vnd.github+json'}});
-      if(!res.ok) throw new Error(res.status);
-      const g = await res.json(); const f = g.files[SIB_FILE];
-      if(!f) throw new Error('missing '+SIB_FILE);
-      const text = f.truncated ? await (await fetch(f.raw_url)).text() : f.content;
-      ctx._mc = sibSummary(JSON.parse(text || '{"records":{}}'));
-    }catch(e){ ctx._mc = null; toast('Could not read the '+SIB_NAME+' gist'); }
-    render();
-  });
-  mc.appendChild(mcb);
-  root.appendChild(mc);
-
   /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
      progress records only (content, tests, goals and personalization stay). */
   root.appendChild(divider('Testing & reset'));
@@ -4679,6 +4725,7 @@ SCREENS.parent = function(root){
   root.appendChild(chg);
   const back = el('button','btn btn-ghost','← Done');
   back.addEventListener('click',()=>go('setup')); root.appendChild(back);
+  }
 };
 
 /* Subject colour picker — swatches show the real gradient so what she taps is
