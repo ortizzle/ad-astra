@@ -690,7 +690,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v56 · a bell that rings';
+const APP_VERSION = 'v57 · generation works';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5374,7 +5374,12 @@ SCREENS.reviewunit = function(root){
 const PROV = {type:'string', enum:['source','added']};
 const BLOCK = extra => ({type:'object', properties:{text:{type:'string'}, from:PROV, ...(extra||{})},
   required:['text','from'], additionalProperties:false});
-/* Optional plotted graph on a card or question — see renderGraph(). */
+/* The plotted-graph shape, for HAND-AUTHORED units — see renderGraph().
+   Deliberately NOT part of UNIT_SCHEMA: its ~28 optional properties blew the
+   structured-output cap on optional parameters, which failed every generation
+   request. Graphs also want a human checking that the plotted curve really has
+   the features the question claims, which is exactly what generation cannot
+   verify. Content files keep full graph support. */
 const GRAPH = {type:'object', properties:{
   w:{type:'array',items:{type:'number'}},
   gx:{type:'number'}, gy:{type:'number'}, xl:{type:'string'}, yl:{type:'string'},
@@ -5405,12 +5410,12 @@ const UNIT_SCHEMA = {
     /* One short line for her, plus an honest estimate in minutes. */
     nextUp:BLOCK({minutes:{type:'integer'}}),
     cards:{type:'array',items:{type:'object',
-      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'},graph:GRAPH,from:PROV},
+      properties:{term:{type:'string'},def:{type:'string'},hint:{type:'string'},eq:{type:'string'},from:PROV},
       required:['term','def','hint','from'],additionalProperties:false}},
     questions:{type:'array',items:{type:'object',
       properties:{ lv:{type:'integer',enum:[1,2,3]}, q:{type:'string'},
         opts:{type:'array',items:{type:'string'}}, ans:{type:'integer',enum:[0,1,2,3]},
-        hint:{type:'string'}, graph:GRAPH, from:PROV,
+        hint:{type:'string'}, from:PROV,
         kind:{type:'string',enum:['mc','order']}, passage:{type:'string'},
         steps:{type:'array',items:{type:'string'}},
         ex:{type:'object',properties:{main:{type:'string'},tip:{type:'string'},mnemonic:{type:'string'}},
@@ -5446,7 +5451,7 @@ async function generateUnit(classId, notes, shots, srcName){
     `Every question carries "steps": 3-6 short strings that walk from the question to the answer, revealed one at a time after a wrong answer. Each step is ONE concrete move — read off a value, set up an equation, apply one rule, compute one result — written so she could do it herself on paper. The last step states the answer. No step may skip work ("simplify" alone is not a step; show what it becomes).`,
     `Card definitions LEAD with the straightforward answer wrapped in **bold** — one short sentence that could stand alone as the study answer — then at most two or three supporting bullet lines. A card is a study aid, not an essay; the bold line is what she should retain.`,
     `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists, and **bold** renders as bold.`,
-    `If the subject is mathematical and a question is about reading a graph, attach a "graph" object and refer to it as "the graph shown". Window w is [xmin,xmax,ymin,ymax]; series are typed line (y=mx+b), parabola or abs in vertex form (a, h, k), or pts (straight segments through the listed points, for piecewise shapes); pts on the graph object marks labelled dots. Double-check that the plotted function actually has the features the question claims.`,
+    `Do not describe or reference a diagram, figure or plotted graph — this format cannot render one you invent. Ask about relationships in words instead, or use the eq field for a formula.`,
     `For literature or other reading material: when a question analyses specific lines, quote a SHORT excerpt (under 40 words) in a "passage" field — she sees it styled as a quotation above the choices. For chronology, set kind:"order": opts must then list exactly 4 events in their CORRECT order (she sees them shuffled and taps them into sequence; still include ans:0).`,
     `Anchor everything to the supplied material. Do not invent facts it does not support. If the material is thin, write fewer cards rather than padding with things it never said.`,
     `Tone: direct and a little dry. Never condescending, never exclamation marks, never "great job". Card hints are memory hooks or mnemonics, never restatements of the definition. Explanations say why the right answer is right, not just what it is.`,
