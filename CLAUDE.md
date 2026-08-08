@@ -366,7 +366,7 @@ feedback — check any new copy against it.
 
 | Tab | Holds |
 |---|---|
-| **Today** | The school day *only*: what class is now/next, the full schedule, upcoming tests, on the horizon. **No XP, level, streak or affirmation** — it is not a dashboard. |
+| **Today** | The school day: what class is now/next, the full schedule, upcoming tests, on the horizon — plus the three-tile strip (see below). Still **not a dashboard**: no affirmation, no streak, and the strip's numbers exist to be tapped, not admired. |
 | **Study** | The daily affirmation with its like/read buttons, "what to study today", subject tiles, and three whole-card buttons: Timer, Tutor, New study set. |
 | **Growth** | The Growth Zone: what is due for review today, and everything still settling. Carries a count badge in the nav when anything is due. |
 | **Stars** | All the gamification: level bar, streak/minutes/revisit strip, totals, badges. |
@@ -499,6 +499,23 @@ map (`SCREENS.skymap`). Rules that are the point, not the decoration:
 - Rosters are identity: this app uses the real sky (`CONSTELLATIONS`, one
   honest line of astronomy each); Wayfinder invents playful ones. Keep the
   lore accurate here and keep the rosters divergent.
+
+### The Today strip (v51 / Wayfinder v43, both apps)
+
+Three tiles under the day header, each a live number that is really a **door**:
+Growth (count due → Growth Zone; when nothing is due, the study plan's top
+subject and its minutes → that subject), Reading (minutes this calendar month
+→ the reading log), Level (level + XP → Stars).
+
+This bends the old "Today is not a dashboard" rule deliberately, and the
+distinction is load-bearing: **stats as navigation, not as scorekeeping.**
+Every tile must lead somewhere she can act. If a tile is ever added that only
+displays a number, it belongs on Stars instead. The affirmation and streak
+stay off Today.
+
+Events in "Coming up" may carry `classId` (Mini-Comps do) or `screen` (the
+club registration does); either makes the row tappable. Tests are tappable via
+their own `classId`.
 
 ### The Bookshelf (v36 / Wayfinder v31, both apps)
 

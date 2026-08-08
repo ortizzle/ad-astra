@@ -395,6 +395,15 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .frow .eq{margin-top:0}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
+/* The Today strip: three numbers that are doors, not a scoreboard. */
+.statstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 2px}
+.stat{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;
+  min-height:var(--tap);padding:12px 11px;border-radius:16px;
+  border:1px solid var(--line);background-color:var(--surface)}
+.stat .n{font-family:'Fraunces',Georgia,serif;font-size:23px;line-height:1.1;color:var(--ac-fg)}
+.stat .l{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--faint)}
+.stat .s{font-size:11px;color:var(--muted);margin-top:2px}
+.stat.hot{border-color:var(--ac);background-image:linear-gradient(140deg,var(--ac-14),transparent 70%)}
 /* Flashcard definitions: one idea per line, with air between ideas. */
 .def .defline{margin-top:10px}
 .def .defline:first-child{margin-top:0;margin-bottom:3px}
@@ -681,7 +690,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v50 · a friendlier voice';
+const APP_VERSION = 'v51 · three doors';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2209,7 +2218,34 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
-  /* Level, streak and XP live on Stars — Today is the school day, not a dashboard. */
+  /* The strip: three live numbers that are really DOORS. Today still is not a
+     dashboard — nothing here is scorekeeping for its own sake. Each tile
+     answers "what should I do now" and goes straight there. */
+  const dueNow2 = dueMisses().length;
+  const plan2 = studyPlan(date);
+  const mRead = logs().filter(l=>l.mode==='read' && l.date.slice(0,7)===date.slice(0,7))
+    .reduce((n,l)=>n + (l.minutes || Math.round((l.seconds||0)/60)), 0);
+  const strip = el('div','statstrip');
+  const statTile = (num, label, sub, onTap, hot)=>{
+    const b = el('button','stat'+(hot?' hot':''));
+    b.appendChild(el('span','n', String(num)));
+    b.appendChild(el('span','l', label));
+    b.appendChild(el('span','s', sub));
+    b.addEventListener('click', onTap);
+    strip.appendChild(b);
+  };
+  if(dueNow2){
+    statTile(dueNow2, 'to review', 'Growth Zone ›', ()=>go('growth'), true);
+  } else if(plan2.length){
+    const pc3 = CLASS_BY_ID[plan2[0].classId];
+    statTile(plan2[0].minutes+'m', 'suggested', pc3.short+' ›', ()=>go('unit',{classId:plan2[0].classId}));
+  } else {
+    statTile('✓', 'all clear', 'Growth Zone ›', ()=>go('growth'));
+  }
+  statTile(mRead >= 90 ? (mRead/60).toFixed(1)+'h' : (mRead ? mRead+'m' : '—'),
+    'read this month', 'Reading log ›', ()=>go('reading'));
+  statTile(stats().level, 'level', stats().xp.toLocaleString()+' XP ›', ()=>go('stars'));
+  root.appendChild(strip);
 
   /* Coming up — school events and her own tests in one list, ordered by date.
      A Mini-Comp and a Friday maths quiz are the same kind of thing to plan
