@@ -593,7 +593,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v37 · solid spines';
+const APP_VERSION = 'v38 · club season';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
@@ -706,6 +706,8 @@ const CAL = {
      note:'Grades 6 and up. Season runs to late October, practices Tuesdays and Thursdays. Needs a physical and a waiver.'},
     {start:'2026-08-05', end:'2026-08-07', name:'Back 2 School brownies', icon:'🍫', kind:'community',
      note:'$1 at lunch in MPR1, cash only. Proceeds go to girls\' education abroad.'},
+    {start:'2026-08-10', end:'2026-08-14', name:'Fall club registration', icon:'📝', kind:'note',
+     note:'Sign-ups open in Blackbaud through Friday. Clubs begin the week of 8/17 — the catalog is in the family Drive.'},
     {start:'2026-08-10', end:'2026-08-11', name:'JH girls volleyball tryouts', icon:'🏐', kind:'note',
      note:'Grades 6–8, after school in the gym, 4:00–6:00. Physical and waiver due before tryouts.'},
     {start:'2026-09-03', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
