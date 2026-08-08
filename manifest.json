@@ -15,5 +15,10 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    { "name": "Continue studying", "url": "./index.html#thread" },
+    { "name": "Growth Zone", "url": "./index.html#growth" },
+    { "name": "Focus timer", "url": "./index.html#focus" }
   ]
 }

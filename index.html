@@ -313,6 +313,13 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .tocrow .st.done{color:var(--good);font-weight:800}
 .tocrow .tl{flex:1;line-height:1.35}
 .tocrow .mt{font-size:11.5px;color:var(--faint);flex-shrink:0}
+/* A finished book's spine title turns gilt — measured ≥4.5:1 on every
+   darkened spine colour. State, never a reward. */
+.spine.gilt .snm,.spine.gilt .sct{color:#f8e7b4}
+/* Hear-it button on flashcard faces — never flips the card. */
+.sayb{position:absolute;top:10px;right:12px;z-index:3;min-width:44px;min-height:44px;
+  background-color:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.3);border-radius:12px;
+  font-size:17px;display:flex;align-items:center;justify-content:center}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
@@ -593,9 +600,41 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v38 · club season';
+const APP_VERSION = 'v39 · the works';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
+
+/* Tests the newsletter announces, offered in the parent view as one-tap adds.
+   Accepting writes an ordinary assess record; dismissing tombstones the same
+   id, so a handled suggestion stays handled on every device. Past dates never
+   show. Edit this list from each week's newsletter and redeploy. */
+const SUGGESTED_ASSESS = [];
+
+/* Mission Control reads the sibling app's gist, read-only — never merged,
+   never written back. The gist id is per-device; the token is the one
+   already in Setup. */
+const SIB_NAME = 'Wayfinder';
+const SIB_FILE = 'wayfinder-data.json';
+function sibSummary(d){
+  const rec = Object.values(d.records||{}).filter(r=>r && !r.deleted);
+  const today = AZ.today(), wk = AZ.weekStart(today), d7 = AZ.shift(today,-6);
+  let wkMin = 0, c7 = 0, t7 = 0;
+  rec.forEach(r=>{
+    if(r.type==='log'){
+      if(r.date>=wk) wkMin += Math.round((r.seconds||0)/60);
+      if(r.date>=d7){ c7 += r.correct||0; t7 += r.total||0; }
+    }
+    if(r.type==='focus' && r.date>=wk) wkMin += r.minutes||0;
+  });
+  const due = rec.filter(r=>r.type==='miss' && (!r.due || r.due<=today)).length;
+  const dr  = rec.filter(r=>r.type==='unit' && r.status==='draft').length;
+  const nx  = rec.filter(r=>r.type==='assess' && r.date>=today)
+                 .sort((a,b)=>a.date<b.date?-1:1)[0];
+  const name = ((d.records||{}).roster||{}).studentName || '';
+  return { name: name.split(' ')[0], wkMin, acc: t7 ? Math.round(c7/t7*100) : null,
+           due, dr, next: nx ? nx.title+' · '+AZ.shortDate(nx.date) : null };
+}
+
 function setRoster(k,v){
   const r = roster(); r[k]=v; r.id='roster'; r.type='roster'; put(r); syncSoon();
 }
@@ -1046,6 +1085,36 @@ function shelvesFor(classId){
   return { shelves, loose };
 }
 
+/* Pick up the thread — the one tap that resumes wherever she left off.
+   Due reviews always win (that is the point of the schedule); then the most
+   recently touched unfinished lesson; then the top of the study plan. */
+function threadTarget(date){
+  const due = dueMisses();
+  if(due.length) return {
+    title: due.length===1 ? '1 question is back' : due.length+' questions are back',
+    sub:'You missed these before. Getting them right now is what makes them stick.',
+    go:()=>go('growth') };
+  let best = null, bt = 0;
+  units().forEach(u=>{
+    if(u.classId==='__all__' || !u.questions.length || unitDone(u)) return;
+    const t = unitLastStudied(u);
+    if(t > bt){ bt = t; best = u; }
+  });
+  if(best){
+    const left = best.questions.length - unitAttempted(best);
+    return { title:'Continue: '+best.title,
+      sub: left>0 ? `${left} question${left===1?'':'s'} left in this lesson.` : 'One more pass locks it in.',
+      go:()=>launchQuiz(best.id, best.classId, false) };
+  }
+  const p = studyPlan(date || AZ.today())[0];
+  if(p){
+    const c = CLASS_BY_ID[p.classId];
+    return { title:'Start: '+c.name, sub:`${p.minutes} minutes — ${p.why}.`,
+      go:()=>go('unit',{classId:p.classId}) };
+  }
+  return null;
+}
+
 /* ---------- Preferences (synced, so her theme follows her to any device) ---------- */
 const ACCENTS = [
   {id:'aqua',   nm:'Aquamarine', c:'#6fe3cd'},
@@ -1063,8 +1132,28 @@ const SKIES = [
   {id:'constellation', nm:'Constellation'},
   {id:'nebula',        nm:'Nebula'},
   {id:'tide',          nm:'Tide'},
-  {id:'graphite',      nm:'Graphite'}
+  {id:'graphite',      nm:'Graphite'},
+  {id:'seasonal',      nm:'Seasonal'}
 ];
+/* 'Seasonal' resolves to one of the real skies by the Arizona calendar, so it
+   is wash-only like every sky and all the contrast measurements hold. */
+function seasonalSky(){
+  const m = +AZ.today().slice(5,7);
+  return m>=3 && m<=5 ? 'nebula'            // spring colour
+       : m>=6 && m<=9 ? 'tide'              // monsoon and deep summer
+       : m>=10 && m<=11 ? 'constellation'   // clear autumn nights
+       : 'graphite';                        // deep winter
+}
+/* Read a word or term aloud with the browser's built-in speech — offline,
+   free, nothing sent anywhere. One at a time; a new tap cancels the last. */
+function say(text){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
 /* Celebration styles. Same triggers, same rules — only the look changes.
    "Quiet" exists because confetti can turn cringe overnight at this age;
    opting down should cost nothing. */
@@ -1097,7 +1186,8 @@ function applyTheme(){
   const mode = p.theme || 'auto';
   const resolved = mode==='auto' ? (prefersLight() ? 'light' : 'dark') : mode;
   document.documentElement.dataset.theme = resolved;
-  document.documentElement.dataset.sky = SKIES.some(s=>s.id===p.sky) ? p.sky : 'constellation';
+  const skyPref = p.sky==='seasonal' ? seasonalSky() : p.sky;
+  document.documentElement.dataset.sky = SKIES.some(s=>s.id===skyPref && s.id!=='seasonal') ? skyPref : 'constellation';
   /* Her subject icons ride the class objects so every render site — schedule,
      tiles, plan, parent view — picks them up without knowing the feature
      exists. baseIcon keeps the default recoverable. */
@@ -2102,14 +2192,11 @@ SCREENS.study = function(root){
     root.appendChild(perch);
   }
 
-  /* Anything due comes before new material — that is the point of the schedule. */
-  const dueNow = dueMisses();
-  if(dueNow.length){
-    root.appendChild(divider('Before anything new'));
-    root.appendChild(cardButton(
-      dueNow.length===1 ? '1 question is back' : dueNow.length+' questions are back',
-      'You missed these before. Getting them right now is what makes them stick.',
-      ()=>go('growth')));
+  /* One tap back into the work — due reviews first, else her open lesson. */
+  const th = threadTarget(date);
+  if(th){
+    root.appendChild(divider('Pick up the thread'));
+    root.appendChild(cardButton(th.title, th.sub, th.go));
   }
 
   /* What to study — moved here from Today */
@@ -2241,6 +2328,16 @@ SCREENS.unit = function(root){
     waiting===1 ? 'One unit is waiting for a grown-up to check it.'
                 : `${waiting} units are waiting for a grown-up to check them.`));
 
+  /* Interleaving: one round drawn from everything in this subject. Only
+     offered once there are two units to mix — and it skips the check-in,
+     like review, because it is meant to be a frequent habit. */
+  if(units(c.id).filter(u2=>u2.questions.length).length >= 2){
+    const shb = el('button','btn btn-secondary','🔀  Shuffle round — a mix of everything');
+    shb.addEventListener('click',()=>{
+      if(buildShuffleUnit(c.id)) go('quiz',{unitId:'__shuffle__', classId:c.id});
+    });
+    root.appendChild(shb);
+  }
   if(CALC_CLASSES.has(c.id)){
     const cb = el('button','btn btn-secondary','🧮  Calculator');
     cb.addEventListener('click',openCalc); root.appendChild(cb);
@@ -2301,6 +2398,8 @@ function spineEl(s, c, current){
   if(current) t.appendChild(el('span','ribbon'));
   t.appendChild(el('span','snm', s.name));
   const done = s.units.filter(unitDone).length;
+  /* A finished book gets a gilt title — quiet state, not currency. */
+  if(done === s.units.length) t.classList.add('gilt');
   t.appendChild(el('span','sct', `${done}/${s.units.length}`));
   t.setAttribute('aria-label', `${s.name} — ${done} of ${s.units.length} lessons finished`);
   t.addEventListener('click', ()=>go('shelf',{classId:c.id, series:s.name}));
@@ -2512,12 +2611,34 @@ function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:
    on the way to school; the next round picks up whatever is least practised,
    so repeated rounds still cycle the whole unit. */
 const QUIZ_ROUND = 5;
-function pickRound(u){
+function pickRound(u, timed){
   if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
-  const att = q => (DATA.records['qstat_'+u.id+'_'+q.id]?.attempts)||0;
-  const idx = u.questions.map((q,i)=>({i, a:att(q), r:Math.random()}));
+  /* Shuffle-round questions look attempts up on their ORIGINAL unit, so
+     least-practised stays honest across the whole subject. */
+  const att = q => (DATA.records['qstat_'+(q._srcUnit||u.id)+'_'+(q._srcQid||q.id)]?.attempts)||0;
+  const idx = u.questions.map((q,i)=>({i, q, a:att(q), r:Math.random()}))
+    /* Typing against a countdown tests typing, not spelling. */
+    .filter(x => !timed || x.q.kind!=='spell');
   idx.sort((x,y)=> x.a-y.a || x.r-y.r);
   return shuffle(idx.slice(0, Math.min(QUIZ_ROUND, idx.length)).map(x=>x.i));
+}
+
+/* A shuffle round mixes the least-practised questions from ACROSS a subject's
+   units — interleaving, the technique the tutor preaches but single-unit
+   rounds can't deliver. Synthetic like the review unit: never stored, never
+   synced. Question ids are namespaced (unit~q) so a mixed round can't collide;
+   _src* carries each question's real identity so qstats, misses and the
+   review ladder all land on the unit it came from. book:true keeps it off
+   any clock. */
+let shuffleUnit = null;
+function buildShuffleUnit(classId){
+  const qs = [];
+  units(classId).forEach(un => un.questions.forEach(q => qs.push({
+    ...q, id: un.id+'~'+q.id,
+    _srcUnit: un.id, _srcClass: un.classId==='__all__' ? classId : un.classId, _srcQid: q.id })));
+  if(!qs.length) return null;
+  shuffleUnit = { id:'__shuffle__', classId, title:'Shuffle round', book:true, cards:[], questions:qs };
+  return shuffleUnit;
 }
 
 /* Timed mode. Each question gets a countdown; answering faster is worth more,
@@ -2570,9 +2691,12 @@ function timeUp(u){
   const src = u.id==='__review__' ? DATA.records[q._missId] : null;
   if(src){ put({ ...src, chose:'(ran out of time)' }); }
   else {
-    const was = DATA.records['miss_'+u.id+'_'+q.id];
-    put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
-          qid:q.id, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+    const unitId  = q._srcUnit  || u.id;
+    const classId = q._srcClass || ctx.classId;
+    const qid     = q._srcQid   || q.id;
+    const was = DATA.records['miss_'+unitId+'_'+qid];
+    put(scheduleMiss({ id:'miss_'+unitId+'_'+qid, type:'miss', unitId, classId,
+          qid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
           right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]), chose:'(ran out of time)',
           why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
           on:(was&&!was.deleted?was.on:AZ.today()) }, false));
@@ -2640,7 +2764,7 @@ function buildReviewUnit(){
   reviewUnit = { id:'__review__', classId:'__all__', title:'Review', cards:[], questions:qs.slice(0,20) };
   return reviewUnit;
 }
-const unitFor = id => id==='__review__' ? reviewUnit : DATA.records[id];
+const unitFor = id => id==='__review__' ? reviewUnit : id==='__shuffle__' ? shuffleUnit : DATA.records[id];
 
 SCREENS.quiz = function(root){
   const u = unitFor(ctx.unitId);
@@ -2649,7 +2773,7 @@ SCREENS.quiz = function(root){
      and Beat the clock never resumes the other one's half-finished run. */
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
     quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
-      order:pickRound(u),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
+      order:pickRound(u, !!ctx.timed),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
       timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[],
       limit:quizLimit(), runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0};
     if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
@@ -2716,6 +2840,41 @@ SCREENS.quiz = function(root){
       } else {
         root.appendChild(el('div','hintline','Tap the events in the order they happened.'));
       }
+    }
+  } else if(q.kind==='spell'){
+    /* Type-the-word: multiple choice can't test spelling. Her typing lives on
+       quizState, so a hint re-render never eats it. -3 is the wrong-spelling
+       sentinel (-1 stays out-of-time, -2 wrong-sequence). Spell questions
+       carry the word as opts[ans]. */
+    const word = q.opts && q.opts[q.ans] !== undefined ? q.opts[q.ans] : (q.word||'');
+    if(quizState.spellFor !== q.id){ quizState.spellFor = q.id; quizState.spellVal = ''; }
+    if(quizState.answered!==null){
+      const rightSp = quizState.answered===q.ans;
+      const sw = el('div','card');
+      sw.appendChild(el('div','eyebrow', rightSp ? 'Spelled right' : 'The word'));
+      sw.appendChild(el('h3',null, word));
+      if(!rightSp && (quizState.spellVal||'').trim())
+        sw.appendChild(el('p',null,'You typed: '+quizState.spellVal.trim()));
+      root.appendChild(sw);
+    } else {
+      const sc2 = el('div','card');
+      const inp = el('input');
+      inp.type='text'; inp.autocomplete='off'; inp.spellcheck=false;
+      inp.setAttribute('autocapitalize','off'); inp.setAttribute('autocorrect','off');
+      inp.placeholder='Type the word';
+      inp.value = quizState.spellVal || '';
+      inp.addEventListener('input',()=>{ quizState.spellVal = inp.value; });
+      const lockSpell = ()=>{
+        const typed = (quizState.spellVal||'').trim().toLowerCase();
+        if(!typed) return;
+        answer(u, q, typed===word.toLowerCase() ? q.ans : -3);
+      };
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') lockSpell(); });
+      sc2.appendChild(inp); root.appendChild(sc2);
+      const lock = el('button','btn btn-primary','Check my spelling');
+      lock.addEventListener('click',lockSpell);
+      root.appendChild(lock);
+      setTimeout(()=>{ const n2 = sc2.querySelector('input'); if(n2) n2.focus(); }, 50);
     }
   } else q.opts.forEach((text,idx)=>{
     const b = el('button','opt');
@@ -2811,12 +2970,13 @@ function answer(u,q,idx){
   const right = idx===q.ans;
   quizState.runStreak = right ? (quizState.runStreak||0)+1 : 0;
   if(right) quizState.correct++;
-  /* Review questions are on loan from other units — credit the tally to where
-     the question actually lives, or the parent view attributes it to nothing. */
+  /* Review and shuffle questions are on loan from other units — credit the
+     tally to where the question actually lives, or the parent view attributes
+     it to nothing. */
   const src = u.id==='__review__' ? DATA.records[q._missId] : null;
-  const unitId  = src ? src.unitId  : u.id;
-  const classId = src ? src.classId : ctx.classId;
-  const qid     = src ? src.qid     : q.id;
+  const unitId  = src ? src.unitId  : (q._srcUnit  || u.id);
+  const classId = src ? src.classId : (q._srcClass || ctx.classId);
+  const qid     = src ? src.qid     : (q._srcQid   || q.id);
 
   /* Per-question tally powers the strong/weak topic breakdown in the parent view. */
   const key = 'qstat_'+unitId+'_'+qid;
@@ -2827,14 +2987,17 @@ function answer(u,q,idx){
     quizState.missed.push(q.id);
     const chose = idx===-1 ? '(ran out of time)'
       : idx===-2 ? (quizState.orderPick||[]).map(k=>q.opts[k]).join(' → ')
+      : idx===-3 ? ((quizState.spellVal||'').trim() || '(blank)')
       : q.opts[idx];
     if(src){
       /* Demotion is finishQuiz's job; here we just record what she picked this time. */
       put({ ...src, chose });
     } else {
-      const was = DATA.records['miss_'+u.id+'_'+q.id];
-      put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id, classId:ctx.classId,
-            qid:q.id, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+      /* Keyed to the ORIGINAL unit, so a shuffle-round miss re-asks and
+         promotes exactly like a miss from the unit's own quiz. */
+      const was = DATA.records['miss_'+unitId+'_'+qid];
+      put(scheduleMiss({ id:'miss_'+unitId+'_'+qid, type:'miss', unitId, classId,
+            qid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
             right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]), chose,
             why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
             on:(was&&!was.deleted?was.on:AZ.today()) }, false));
@@ -2886,16 +3049,26 @@ function finishQuiz(u){
     });
   }
   /* Getting one right moves it up the ladder rather than clearing it outright —
-     it only leaves once it has survived every interval. */
-  if(u.id!=='__review__') all('miss').forEach(m=>{
-    if(m.unitId!==u.id || quizState.missed.includes(m.qid)) return;
-    if(!askedThisRound.has(m.qid)) return;          // only judge what she actually saw
-    const next = scheduleMiss(m, true);
-    if(next.box >= LAST_BOX){
-      put({id:'cleared_'+m.id,type:'cleared',unitId:m.unitId,qid:m.qid,q:m.q,on:AZ.today()});
-      softDelete(m.id);
-    } else put(next);
-  });
+     it only leaves once it has survived every interval. Judged by the
+     question's ORIGINAL unit+qid so shuffle rounds promote and demote the
+     same misses a unit's own quiz would. */
+  if(u.id!=='__review__'){
+    const askedPairs = new Set(), missedPairs = new Set();
+    u.questions.forEach(q=>{
+      const pair = (q._srcUnit||u.id)+'::'+(q._srcQid||q.id);
+      if(askedThisRound.has(q.id)) askedPairs.add(pair);
+      if(quizState.missed.includes(q.id)) missedPairs.add(pair);
+    });
+    all('miss').forEach(m=>{
+      const pair = m.unitId+'::'+m.qid;
+      if(!askedPairs.has(pair) || missedPairs.has(pair)) return;   // only judge what she actually saw
+      const next = scheduleMiss(m, true);
+      if(next.box >= LAST_BOX){
+        put({id:'cleared_'+m.id,type:'cleared',unitId:m.unitId,qid:m.qid,q:m.q,on:AZ.today()});
+        softDelete(m.id);
+      } else put(next);
+    });
+  }
   checkBadges(); syncSoon();
   if(pct>=80) celebrate();
 
@@ -3665,6 +3838,36 @@ SCREENS.parent = function(root){
     r.appendChild(v); asc.appendChild(r);
   });
   root.appendChild(asc);
+  /* One-tap adds from the newsletter — accepting writes a normal assess
+     record; dismissing tombstones the same id so it stays handled everywhere. */
+  const sugs = SUGGESTED_ASSESS.filter(sg => sg.date >= date && !DATA.records['assess_'+sg.id]);
+  if(sugs.length){
+    const sgc = el('div','card');
+    sgc.appendChild(el('div','eyebrow','From the newsletter'));
+    sugs.forEach(sg=>{
+      const c2 = CLASS_BY_ID[sg.classId];
+      const rr = el('div','row');
+      const kk = el('span','k',`${c2?c2.icon+' ':''}${sg.title}`);
+      kk.appendChild(el('small',null,AZ.shortDate(sg.date)));
+      rr.appendChild(kk);
+      const act = el('span');
+      const ab = el('button','btn btn-sm btn-secondary','Add');
+      ab.addEventListener('click',()=>{
+        put({ id:'assess_'+sg.id, type:'assess', classId:sg.classId, kind:sg.kind,
+              title:sg.title, date:sg.date, score:null });
+        syncSoon(); toast('Added to tests'); render();
+      });
+      const xb = el('button','btn btn-sm btn-ghost','✕');
+      xb.setAttribute('aria-label','Dismiss suggestion');
+      xb.addEventListener('click',()=>{
+        put({ id:'assess_'+sg.id, type:'assess', deleted:true });
+        syncSoon(); render();
+      });
+      act.appendChild(ab); act.appendChild(xb);
+      rr.appendChild(act); sgc.appendChild(rr);
+    });
+    root.appendChild(sgc);
+  }
   const add = el('button','btn btn-primary','＋  Add a test or quiz');
   add.addEventListener('click',()=>editAssessment(null)); root.appendChild(add);
 
@@ -3897,6 +4100,50 @@ SCREENS.parent = function(root){
   dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
   bc2.appendChild(dl);
   root.appendChild(bc2);
+
+  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
+     progress records only (content, tests, goals and personalization stay). */
+  /* ---- Mission Control: a read-only glance at the sibling app ----
+     Fetches the other gist and summarizes it in place. Never merged, never
+     written back; the gist id is per-device, the token is the one in Setup. */
+  root.appendChild(divider('Mission Control'));
+  const mc = el('div','card');
+  mc.appendChild(el('div','eyebrow','The other app · '+SIB_NAME));
+  const sibIn = el('input'); sibIn.type='text'; sibIn.placeholder=SIB_NAME+' gist ID';
+  sibIn.value = Store.get('sib_gist','');
+  sibIn.addEventListener('change',()=>Store.set('sib_gist', sibIn.value.trim()));
+  mc.appendChild(sibIn);
+  if(ctx._mc){
+    const m2 = ctx._mc;
+    [[ (m2.name?m2.name+"'s time":'Study time')+' this week', m2.wkMin+' min'],
+     ['Accuracy, last 7 days', m2.acc===null ? '—' : m2.acc+'%'],
+     ['Growth Zone due', m2.due],
+     ['Drafts waiting', m2.dr],
+     ['Next test', m2.next || '—']].forEach(([k,v])=>{
+      const r2 = el('div','row');
+      r2.appendChild(el('span','k',k)); r2.appendChild(el('span','v',String(v)));
+      mc.appendChild(r2);
+    });
+  }
+  const mcb = el('button','btn btn-secondary', ctx._mc ? 'Check again' : 'Check in');
+  mcb.addEventListener('click', async ()=>{
+    const gid = sibIn.value.trim(); Store.set('sib_gist', gid);
+    if(!gid){ toast('Enter the '+SIB_NAME+' gist ID first'); return; }
+    if(!Sync.token){ toast('Add the gist token in Setup first'); return; }
+    mcb.disabled = true; mcb.textContent = 'Checking…';
+    try{
+      const res = await fetch('https://api.github.com/gists/'+gid,
+        {headers:{'Authorization':'Bearer '+Sync.token,'Accept':'application/vnd.github+json'}});
+      if(!res.ok) throw new Error(res.status);
+      const g = await res.json(); const f = g.files[SIB_FILE];
+      if(!f) throw new Error('missing '+SIB_FILE);
+      const text = f.truncated ? await (await fetch(f.raw_url)).text() : f.content;
+      ctx._mc = sibSummary(JSON.parse(text || '{"records":{}}'));
+    }catch(e){ ctx._mc = null; toast('Could not read the '+SIB_NAME+' gist'); }
+    render();
+  });
+  mc.appendChild(mcb);
+  root.appendChild(mc);
 
   /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
      progress records only (content, tests, goals and personalization stay). */
@@ -4638,6 +4885,15 @@ const brandEl = document.getElementById('brand');
 brandEl.addEventListener('click',()=>go('today'));
 brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go('today'); } });
 render();
+/* Home-screen shortcuts (manifest.json) land here with a hash; consume it so
+   a plain reload doesn't repeat the jump. */
+const bootHash = location.hash.replace('#','');
+if(bootHash){
+  history.replaceState(null, '', location.pathname);
+  if(bootHash==='growth') go('growth');
+  else if(bootHash==='focus') go('focus',{});
+  else if(bootHash==='thread'){ const t = threadTarget(AZ.today()); if(t) t.go(); }
+}
 if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 setInterval(()=>{ if(view==='today') render(); }, 60000);

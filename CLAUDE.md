@@ -526,6 +526,39 @@ as ordinary cards below. Rules that are the point:
   bookmarked (or tapped) lesson expanded as the full `unitCard()`. Rows show
   coverage ("7/15 seen"), never accuracy.
 
+### The batch of nine (v39 / Wayfinder v34, both apps)
+
+- **Pick up the thread** (`threadTarget()`): the one-tap resume card at the top
+  of Study — due reviews always win, else the most recently touched unfinished
+  lesson (straight into a quiz), else the top of the study plan.
+- **Home-screen shortcuts**: `manifest.json` `shortcuts` land with a hash
+  (`#thread`/`#growth`/`#focus`) consumed once at boot.
+- **Suggested tests** (`SUGGESTED_ASSESS`): newsletter-announced tests offered
+  in the parent view as one-tap adds. Accepting writes a normal `assess` with
+  id `assess_<sug id>`; dismissing tombstones the same id. The suggestion list
+  lives in code; the records stay the family's.
+- **Shuffle rounds** (`buildShuffleUnit()`, `__shuffle__`): one round of the
+  least-practised questions across ALL of a subject's units — interleaving.
+  Synthetic like `__review__`, never stored. Question ids are namespaced
+  (`unit~q`); `_srcUnit/_srcClass/_srcQid` carry the real identity so qstats,
+  misses and ladder promotion land on the original unit. Launches without the
+  check-in (habit loop, like review) and is always untimed (`book:true`).
+- **Read-aloud** (`say()`): browser SpeechSynthesis on flashcard terms —
+  offline, tap-only, never automatic.
+- **`kind:'spell'`** questions: type-the-word; the word is `opts[ans]`
+  (usually `opts:[word], ans:0` — the 4-option rule is an MC rule). −3 is the
+  wrong-spelling sentinel. Excluded from timed rounds. Hand-written content
+  only; `generateUnit()`'s 4-option guard drops them from AI output by design.
+- **Seasonal sky**: a sky-picker option that resolves to one of the app's real
+  skies by the Arizona month (`seasonalSky()`), so it stays wash-only and every
+  contrast measurement holds. Mappings are per-app identity.
+- **Gilt spines**: a finished book's spine title turns `#f8e7b4`. State, never
+  currency.
+- **Mission Control**: a parent-view card that fetches the sibling app's gist
+  read-only (`SIB_FILE`, per-device `sib_gist` in localStorage, the Setup
+  token) and summarizes week minutes, 7-day accuracy, Growth Zone due, drafts
+  and the next test. Never merged, never written back — keep it that way.
+
 **Badge fills are opaque on purpose.** A badge lands on plain cards, accent-washed
 cards and review rows; a translucent tint dropped the 10px label under 4.5:1 on
 the lighter ones. Measured across all accents in both themes: worst case 4.54:1.
