@@ -383,6 +383,9 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .frow .eq{margin-top:0}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
+/* Flashcard definitions: one idea per line, with air between ideas. */
+.def .defline{margin-top:10px}
+.def .defline:first-child{margin-top:0;margin-bottom:3px}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
@@ -666,7 +669,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v48 · student hours';
+const APP_VERSION = 'v49 · know it or loop it';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2761,21 +2764,33 @@ SCREENS.brief = function(root){
 
 /* ================= FLASHCARDS ================= */
 let cardState = {start:0};
+/* Card definitions render line by line, so the lead answer and each further
+   meaning sit visibly apart instead of stacking into one block. */
+function defEl(text){
+  const d = el('div','def');
+  String(text||'').split('\n').forEach(line=>{
+    if(!line.trim()) return;
+    d.appendChild(richify(el('div','defline'), line));
+  });
+  return d;
+}
+
 SCREENS.cards = function(root){
   const u = unitFor(ctx.unitId);
   if(!u || !u.cards.length) return go('unit',{classId:ctx.classId});
   if(!cardState.start || cardState.unitId!==u.id)
-    cardState = {unitId:u.id,i:0,flipped:false,start:Date.now(),seen:new Set(),order:shuffle(u.cards.map((_,i)=>i))};
+    cardState = {unitId:u.id,i:0,flipped:false,start:Date.now(),seen:new Set(),
+      order:shuffle(u.cards.map((_,i)=>i)), missed:[], round:1};
   const card = u.cards[cardState.order[cardState.i]], cls = CLASS_BY_ID[ctx.classId];
 
   const head = el('div','card');
   head.appendChild(el('div','eyebrow',u.title));
   const r = el('div','row');
-  r.appendChild(el('span','k',`Card ${cardState.i+1} of ${u.cards.length}`));
+  r.appendChild(el('span','k',`Card ${cardState.i+1} of ${cardState.order.length}${cardState.round>1?` · round ${cardState.round}`:''}`));
   const seenLabel = el('span','v',`${cardState.seen.size} reviewed`);
   r.appendChild(seenLabel); head.appendChild(r);
   const bar = el('div','bar'), fi = el('i');
-  fi.style.width = (cardState.i/u.cards.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
+  fi.style.width = (cardState.i/cardState.order.length*100)+'%'; bar.appendChild(fi); head.appendChild(bar);
   root.appendChild(head);
 
   /* The card wears its subject: graph paper for maths, ruled paper for English,
@@ -2788,27 +2803,59 @@ SCREENS.cards = function(root){
   const fg = graphNode(card.graph); if(fg) front.appendChild(fg);
   front.appendChild(el('div','tap','Tap to reveal'));
   const back = paint(el('div','face back'), cls);
-  back.appendChild(richify(el('div','def'), card.def));
+  back.appendChild(defEl(card.def));
   const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
   back.appendChild(el('div','tap','Tap to flip back'));
   inner.appendChild(front); inner.appendChild(back); flip.appendChild(inner);
   // Toggle in place — a full render would rebuild the node and kill the transition.
+  let syncRows = ()=>{};
   flip.addEventListener('click',()=>{
-    cardState.flipped=!cardState.flipped; cardState.seen.add(cardState.i);
+    cardState.flipped=!cardState.flipped; cardState.seen.add(cardState.order[cardState.i]);
     flip.classList.toggle('on',cardState.flipped);
     seenLabel.textContent = `${cardState.seen.size} reviewed`;
+    syncRows();
   });
   root.appendChild(flip);
 
-  const row = el('div','btn-row');
+  /* Self-check: after seeing the answer she judges herself — ✓ moves on,
+     "not yet" queues the card for another round. The deck only finishes when
+     every card has earned its check. Session-only; no records, no scores. */
+  const advance = (knewIt)=>{
+    const idx = cardState.order[cardState.i];
+    cardState.seen.add(idx);
+    if(!knewIt) cardState.missed.push(idx);
+    cardState.flipped = false;
+    if(cardState.i < cardState.order.length-1){ cardState.i++; render(); }
+    else if(cardState.missed.length){
+      toast(cardState.missed.length===1 ? '1 card coming back around' : cardState.missed.length+' cards coming back around');
+      cardState.order = shuffle(cardState.missed); cardState.missed = []; cardState.i = 0; cardState.round++;
+      render();
+    } else finishCards(u);
+  };
+  const rowNav = el('div','btn-row');
   const prev = el('button','btn btn-secondary','← Back');
   prev.addEventListener('click',()=>{ if(cardState.i>0){cardState.i--;cardState.flipped=false;render();} });
-  const next = el('button','btn btn-primary', cardState.i===u.cards.length-1?'Finish ✓':'Next →');
-  next.addEventListener('click',()=>{ cardState.seen.add(cardState.i);
-    if(cardState.i<u.cards.length-1){cardState.i++;cardState.flipped=false;render();} else finishCards(u); });
-  row.appendChild(prev); row.appendChild(next); root.appendChild(row);
+  const flipBtn = el('button','btn btn-primary','Flip it →');
+  flipBtn.addEventListener('click',()=>{
+    cardState.flipped = true; cardState.seen.add(cardState.order[cardState.i]);
+    flip.classList.add('on');
+    seenLabel.textContent = `${cardState.seen.size} reviewed`;
+    syncRows();
+  });
+  rowNav.appendChild(prev); rowNav.appendChild(flipBtn); root.appendChild(rowNav);
+  const rowKnow = el('div','btn-row');
+  const missB = el('button','btn btn-secondary','↻  Not yet');
+  missB.addEventListener('click',()=>advance(false));
+  const gotB = el('button','btn btn-primary','✓  Knew it');
+  gotB.addEventListener('click',()=>advance(true));
+  rowKnow.appendChild(missB); rowKnow.appendChild(gotB); root.appendChild(rowKnow);
+  syncRows = ()=>{
+    rowNav.style.display  = cardState.flipped ? 'none' : '';
+    rowKnow.style.display = cardState.flipped ? '' : 'none';
+  };
+  syncRows();
   const quit = el('button','btn btn-ghost','Exit');
   quit.addEventListener('click',()=>{cardState.start=0;go('unit',{classId:ctx.classId});});
   root.appendChild(quit);
