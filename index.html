@@ -666,7 +666,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v47 · doors everywhere';
+const APP_VERSION = 'v48 · student hours';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -721,6 +721,19 @@ const CLUBS = [
   {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', cost:0, flag:'invite only'}
 ];
 const clubPicks = () => (DATA.records['clubpicks']||{}).picks || {};
+
+/* Student hours, from her own planner (Aug 2026) — times only, teacher names
+   stay in roster. days uses AZ weekday numbers (0 = Sunday). Bio's slot is
+   marked tentative until the teacher confirms. When the planner changes,
+   edit here and redeploy. */
+const STUDENT_HOURS = [
+  {ids:['algeo'],   days:[2], label:'Tuesdays',             times:'3:45–4:45 pm'},
+  {ids:['bio'],     days:[2,4], label:'Tuesdays & Thursdays', times:'3:40–4:10 pm', tbd:true},
+  {ids:['physics'], days:[4], label:'Thursdays',            times:'2:55–4:45 pm'},
+  {ids:['english'], days:[2], label:'Tuesdays',             times:'3:45–4:15 pm'},
+  {ids:['latin'],   days:[2], label:'Tuesdays',             times:'3:45–4:30 pm'}
+];
+const hoursFor = id => STUDENT_HOURS.find(h=>h.ids.includes(id));
 
 const SIB_NAME = 'Wayfinder';
 const SIB_FILE = 'wayfinder-data.json';
@@ -2221,6 +2234,22 @@ SCREENS.today = function(root){
     root.appendChild(ac);
   }
 
+  /* Student hours for today — where extra help is on offer, per her planner. */
+  const shrs = STUDENT_HOURS.filter(h=>h.days.includes(AZ.weekday(date)));
+  if(shrs.length){
+    const hc = el('div','card quiet');
+    hc.appendChild(el('div','eyebrow','Student hours today'));
+    shrs.forEach(h=>{
+      const names = h.ids.map(id=>CLASS_BY_ID[id]?.short||id).join(' & ');
+      const r = el('div','row');
+      const kk = el('span','k','🕖 '+names);
+      kk.appendChild(el('small',null, h.times + (h.tbd ? ' · to be confirmed' : '')));
+      r.appendChild(kk);
+      hc.appendChild(r);
+    });
+    root.appendChild(hc);
+  }
+
   /* Schedule — the grown-ups check this to know where she is, so it
      renders every day. On a non-school day it shows as her standing timetable
      rather than being hidden entirely. */
@@ -2468,6 +2497,9 @@ SCREENS.unit = function(root){
   head.appendChild(el('p',null, st.answered
     ? `${st.sessions} session${st.sessions>1?'s':''} · ${st.answered} questions · ${st.accuracy}% · ${st.minutes} min`
     : 'No study sessions logged yet.'));
+  const hrs = hoursFor(c.id);
+  if(hrs) head.appendChild(el('div','hintline',
+    `🕖 Student hours: ${hrs.label} ${hrs.times}${hrs.tbd?' (to be confirmed)':''} — extra help from your teacher, open to anyone.`));
   root.appendChild(head);
 
   const goal = prefs().goals[c.id];
