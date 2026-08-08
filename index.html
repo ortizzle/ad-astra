@@ -264,9 +264,25 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .face.back .wm{display:none}
 
 .opt{width:100%;text-align:left;min-height:var(--tap);padding:14px 16px;margin-bottom:12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
-.passage{font-family:'Fraunces',Georgia,serif;font-style:italic;background:var(--raised);
-  border-left:3px solid var(--ac-25);border-radius:0 12px 12px 0;padding:12px 16px;margin-top:12px;
-  font-size:15.5px;line-height:1.65;white-space:pre-line;position:relative}
+/* Passage excerpts render as a scrap torn out of the book: cream paper in BOTH
+   themes (a physical object doesn't change colour in the dark), fixed dark-brown
+   ink (#3a3022 on the deepest cream ≈ 9:1), Fraunces upright like a printed page.
+   The torn top/bottom edges are a clip-path with px-offset points so the tear
+   depth stays constant however tall the excerpt runs; drop-shadow (not
+   box-shadow) so the shadow follows the jagged clip. */
+.passage{font-family:'Fraunces',Georgia,serif;position:relative;color:#3a3022;
+  background:
+    radial-gradient(ellipse at 15% 8%,rgba(133,101,55,.10),transparent 55%),
+    radial-gradient(ellipse at 88% 94%,rgba(133,101,55,.13),transparent 50%),
+    linear-gradient(173deg,#f8f1df 0%,#f2e8cf 60%,#ecdfc0 100%);
+  padding:20px 20px 22px;margin:14px 3px 8px;
+  font-size:15.5px;line-height:1.7;white-space:pre-line;
+  transform:rotate(-.5deg);
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.28));
+  clip-path:polygon(0 12px,3% 5px,7% 10px,12% 2px,18% 9px,24% 4px,31% 11px,38% 3px,45% 8px,52% 2px,59% 10px,66% 5px,73% 12px,80% 4px,86% 9px,92% 3px,97% 8px,100% 5px,
+    100% calc(100% - 10px),96% calc(100% - 4px),90% calc(100% - 11px),83% calc(100% - 3px),76% calc(100% - 9px),69% calc(100% - 4px),62% calc(100% - 12px),55% calc(100% - 5px),48% calc(100% - 10px),41% calc(100% - 3px),34% calc(100% - 8px),27% calc(100% - 12px),20% calc(100% - 4px),14% calc(100% - 10px),8% calc(100% - 3px),3% calc(100% - 9px),0 calc(100% - 6px))}
+/* On the light canvas the cream scrap needs a warmer, stronger shadow to separate. */
+[data-theme="light"] .passage{filter:drop-shadow(0 2px 3px rgba(74,55,25,.35))}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
 .opt .ltr{width:24px;height:24px;flex-shrink:0;border-radius:8px;background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--muted)}
 .opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
@@ -547,7 +563,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v34 · the bridge';
+const APP_VERSION = 'v35 · torn pages';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 function setRoster(k,v){
