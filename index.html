@@ -372,6 +372,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* An input followed by a button needs air — same 10px-plus rule as stacked
    buttons. Covers the reading form, Mission Control, and any future form. */
 .card input+.btn,.card select+.btn,.card textarea+.btn,.card .row+.btn{margin-top:14px}
+/* Quick-log chips: one tap for the usual book and the usual minutes. */
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
+.chipbtn{min-height:44px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);
+  background-color:var(--raised);font-size:13.5px;line-height:1.2}
+.chipbtn.on{border-color:var(--ac);background-color:var(--ac-8)}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
 .opt.picked{border-color:var(--ac);background:var(--ac-8)}
@@ -657,7 +662,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v41 · room to breathe';
+const APP_VERSION = 'v42 · two taps';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2295,6 +2300,10 @@ SCREENS.study = function(root){
 
   /* Whole-card buttons rather than a card with a button inside it. */
   root.appendChild(divider('Tools'));
+  /* Reading first — it is the nightly one. */
+  root.appendChild(cardButton('Reading log',
+    'Any book counts — log the minutes, grow the shelf.',
+    ()=>go('reading')));
   const totalFocus = stats().focusMin;
   root.appendChild(cardButton('Timer',
     totalFocus ? `Focused study in blocks. ${totalFocus} minutes so far.`
@@ -2306,9 +2315,6 @@ SCREENS.study = function(root){
   root.appendChild(cardButton('New study set',
     'Turn class notes into flashcards and quiz questions.',
     ()=>go('generate',{})));
-  root.appendChild(cardButton('Reading log',
-    'Any book counts — log the minutes, grow the shelf.',
-    ()=>go('reading')));
 };
 
 /* A card that is itself the button: title, one line, chevron. */
@@ -2696,8 +2702,32 @@ SCREENS.reading = function(root){
   const m = el('input'); m.type='number'; m.min='1'; m.max='600'; m.inputMode='numeric';
   m.placeholder='Minutes read'; m.value = ctx._rm || '';
   m.addEventListener('input',()=>{ ctx._rm = m.value; });
-  c.appendChild(el('label',null,'Book')); c.appendChild(t);
-  c.appendChild(el('label',null,'Minutes')); c.appendChild(m);
+  c.appendChild(el('label',null,'Book'));
+  /* Most nights it is the same book — recent titles are one tap. */
+  const recent = [];
+  logs().filter(l=>l.mode==='read' && l.book).forEach(l=>{
+    const k3 = l.book.trim();
+    if(!recent.includes(k3)) recent.push(k3);
+  });
+  if(recent.length){
+    const cr2 = el('div','chiprow');
+    recent.slice(0,4).forEach(bk=>{
+      const ch = el('button','chipbtn'+((ctx._rt||'').trim()===bk?' on':''), bk);
+      ch.addEventListener('click',()=>{ ctx._rt = bk; render(); });
+      cr2.appendChild(ch);
+    });
+    c.appendChild(cr2);
+  }
+  c.appendChild(t);
+  c.appendChild(el('label',null,'Minutes'));
+  const mr = el('div','chiprow');
+  [10,15,20,30].forEach(mm=>{
+    const ch = el('button','chipbtn'+(String(ctx._rm)===String(mm)?' on':''), mm+' min');
+    ch.addEventListener('click',()=>{ ctx._rm = String(mm); render(); });
+    mr.appendChild(ch);
+  });
+  c.appendChild(mr);
+  c.appendChild(m);
   const b = el('button','btn btn-primary','Log this reading');
   b.addEventListener('click',()=>{
     const title = (ctx._rt||'').trim();
@@ -5074,6 +5104,7 @@ if(bootHash){
   history.replaceState(null, '', location.pathname);
   if(bootHash==='growth') go('growth');
   else if(bootHash==='focus') go('focus',{});
+  else if(bootHash==='reading') go('reading');
   else if(bootHash==='thread'){ const t = threadTarget(AZ.today()); if(t) t.go(); }
 }
 if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });

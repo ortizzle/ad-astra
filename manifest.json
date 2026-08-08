@@ -17,8 +17,21 @@
     }
   ],
   "shortcuts": [
-    { "name": "Continue studying", "url": "./index.html#thread" },
-    { "name": "Growth Zone", "url": "./index.html#growth" },
-    { "name": "Focus timer", "url": "./index.html#focus" }
+    {
+      "name": "Log reading",
+      "url": "./index.html#reading"
+    },
+    {
+      "name": "Continue studying",
+      "url": "./index.html#thread"
+    },
+    {
+      "name": "Growth Zone",
+      "url": "./index.html#growth"
+    },
+    {
+      "name": "Focus timer",
+      "url": "./index.html#focus"
+    }
   ]
 }
