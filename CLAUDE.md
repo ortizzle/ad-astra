@@ -500,6 +500,20 @@ map (`SCREENS.skymap`). Rules that are the point, not the decoration:
   honest line of astronomy each); Wayfinder invents playful ones. Keep the
   lore accurate here and keep the rosters divergent.
 
+### Reference sheets (v54 / Wayfinder v44, both apps)
+
+`SHEETS` maps a `classId` to the teacher's own reference sheet, transcribed —
+`{nm, ic, note, sections:[{h, rows:[[label, value]]}]}`. Any subject listed
+gets a button on its subject screen AND inside its quizzes, alongside the
+calculator (`openSheet(classId)`). This app carries two: the math department's
+formula sheet (`algeo`) and the Kinematics Unusual Conversion Factors table
+(`physics`). Wayfinder ships the same engine with an empty registry until a
+teacher issues River one.
+
+They are **reference, not answers**: they restate facts the class hands out on
+paper anyway, so the skill under test (method, setup) is untouched. Don't put
+worked examples or solution steps in a sheet.
+
 ### The Today strip (v51 / Wayfinder v43, both apps)
 
 Three tiles under the day header, each a live number that is really a **door**:

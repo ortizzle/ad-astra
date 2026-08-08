@@ -690,7 +690,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v53 · read before you star';
+const APP_VERSION = 'v54 · the conversion sheet';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1888,44 +1888,82 @@ const CALC_CLASSES = new Set(['algeo','physics','bio']);
    (BASIS math dept sheet in Drive) — a study TOOL like the calculator,
    available on the subject screen and inside quizzes. Reference only:
    it never answers a question, it answers "what was that formula again". */
-const FORMULA_CLASSES = new Set(['algeo']);
-const FORMULAS = [
-  {h:'2-D shapes', rows:[
-    ['Circumference','C = 2πr'],
-    ['Area of a circle','A = πr²'],
-    ['Perimeter of a polygon','P = sum of all sides'],
-    ['Parallelogram · rhombus · rectangle · square','A = bh'],
-    ['Triangle','A = ½bh'],
-    ['Trapezoid','A = ½(b₁ + b₂)h']]},
-  {h:'3-D solids', rows:[
-    ['Right solid, surface area','S.A. = 2A_B + L.S.A.'],
-    ['Right solid, lateral surface','L.S.A. = P_B · h'],
-    ['Right or oblique solid, volume','V = A_B · h'],
-    ['Cone, surface area','S.A. = πr² + πrl'],
-    ['Cone, volume','V = ⅓πr²h'],
-    ['Pyramid, surface area','S.A. = A_B + sum of side areas'],
-    ['Pyramid, volume','V = ⅓A_B · h'],
-    ['Sphere, surface area','S.A. = 4πr²'],
-    ['Sphere, volume','V = 4⁄3 πr³']]},
-  {h:'Exponent rules', rows:[
-    ['Product rule','xᵃ · xᵇ = xᵃ⁺ᵇ'],
-    ['Quotient rule','xᵃ ÷ xᵇ = xᵃ⁻ᵇ'],
-    ['Power rule','(xᵃ)ᵇ = xᵃᵇ'],
-    ['Negative exponent','x⁻ᵃ = 1 ⁄ xᵃ'],
-    ['Zero exponent','x⁰ = 1'],
-    ['Identity exponent','x¹ = x']]},
-  {h:'Field properties', rows:[
-    ['Identity','x + 0 = x  ·  x · 1 = x'],
-    ['Inverse','x + (−x) = 0  ·  x · (1⁄x) = 1'],
-    ['Associative','a + (b+c) = (a+b) + c'],
-    ['Commutative','a + b = b + a  ·  ab = ba'],
-    ['Distributive','a(b + c) = ab + ac']]}
-];
-function openFormulas(){
-  showModal({ title:'Formula sheet', confirmText:'Close', cancelText:null,
+/* Reference sheets — one per subject, each a study TOOL like the calculator:
+   openable from the subject screen and from inside a quiz. These are the
+   teacher's own sheets, transcribed; they answer "what was that fact again",
+   never the question itself. Add a subject here and both buttons appear. */
+const SHEETS = {
+  algeo: { nm:'Formula sheet', ic:'📐',
+    note:'The class reference sheet, as issued. Find the one you need.',
+    sections:[
+      {h:'2-D shapes', rows:[
+        ['Circumference','C = 2πr'],
+        ['Area of a circle','A = πr²'],
+        ['Perimeter of a polygon','P = sum of all sides'],
+        ['Parallelogram · rhombus · rectangle · square','A = bh'],
+        ['Triangle','A = ½bh'],
+        ['Trapezoid','A = ½(b₁ + b₂)h']]},
+      {h:'3-D solids', rows:[
+        ['Right solid, surface area','S.A. = 2A_B + L.S.A.'],
+        ['Right solid, lateral surface','L.S.A. = P_B · h'],
+        ['Right or oblique solid, volume','V = A_B · h'],
+        ['Cone, surface area','S.A. = πr² + πrl'],
+        ['Cone, volume','V = ⅓πr²h'],
+        ['Pyramid, surface area','S.A. = A_B + sum of side areas'],
+        ['Pyramid, volume','V = ⅓A_B · h'],
+        ['Sphere, surface area','S.A. = 4πr²'],
+        ['Sphere, volume','V = 4⁄3 πr³']]},
+      {h:'Exponent rules', rows:[
+        ['Product rule','xᵃ · xᵇ = xᵃ⁺ᵇ'],
+        ['Quotient rule','xᵃ ÷ xᵇ = xᵃ⁻ᵇ'],
+        ['Power rule','(xᵃ)ᵇ = xᵃᵇ'],
+        ['Negative exponent','x⁻ᵃ = 1 ⁄ xᵃ'],
+        ['Zero exponent','x⁰ = 1'],
+        ['Identity exponent','x¹ = x']]},
+      {h:'Field properties', rows:[
+        ['Identity','x + 0 = x  ·  x · 1 = x'],
+        ['Inverse','x + (−x) = 0  ·  x · (1⁄x) = 1'],
+        ['Associative','a + (b+c) = (a+b) + c'],
+        ['Commutative','a + b = b + a  ·  ab = ba'],
+        ['Distributive','a(b + c) = ab + ac']]}
+    ]},
+  physics: { nm:'Conversion factors', ic:'🔀',
+    note:'The class Unusual Conversion Factors sheet, as issued. Nobody memorizes 18 228 — that is what the sheet is for. The method is yours; the numbers live here.',
+    sections:[
+      {h:'Time', rows:[
+        ['Day','86 400 sec = 1 day'],
+        ['Hour','3600 sec = 1 hr'],
+        ['Minute','60 sec = 1 min']]},
+      {h:'Length', rows:[
+        ['Mile','5280 ft = 1 mile'],
+        ['Rod','1 rod = 16.5 ft'],
+        ['Chain','1 chain = 66 ft'],
+        ['Furlong','1 furlong = 660 ft'],
+        ['League','1 league = 18 228 ft'],
+        ['Inch to metric','1 in = 2.54 cm']]},
+      {h:'Mass', rows:[
+        ['Kilogram','1 kg = 2.2 lb'],
+        ['Stone','1 stone = 14 lb']]},
+      {h:'Area and volume', rows:[
+        ['Acre','1 acre = 43 560 ft²'],
+        ['Gallon (imperial)','1 gallon = 128 ounces'],
+        ['Gallon (metric)','1 gallon = 3.785 liter']]},
+      {h:'Speed', rows:[
+        ['Knot','1 knot = 1.15 mi/hr']]},
+      {h:'Abbreviations', rows:[
+        ['Metric','meter (m) · kilometer (km) · liter (l)'],
+        ['Imperial','foot/feet (ft) · miles (mi)'],
+        ['Time','second (sec) · hour (hr)'],
+        ['Nautical','knot (kn/kt) · league (nl)']]}
+    ]}
+};
+function openSheet(classId){
+  const sh = SHEETS[classId];
+  if(!sh) return;
+  showModal({ title: sh.nm, confirmText:'Close', cancelText:null,
     build:(box)=>{
-      box.appendChild(el('p',null,'The class reference sheet, as issued. Tap nothing — just find the one you need.'));
-      FORMULAS.forEach(sec=>{
+      box.appendChild(el('p',null, sh.note));
+      sh.sections.forEach(sec=>{
         box.appendChild(el('div','eyebrow',sec.h));
         sec.rows.forEach(([nm,eq])=>{
           const r = el('div','frow');
@@ -2653,9 +2691,9 @@ SCREENS.unit = function(root){
     const cb = el('button','btn btn-secondary','🧮  Calculator');
     cb.addEventListener('click',openCalc); root.appendChild(cb);
   }
-  if(FORMULA_CLASSES.has(c.id)){
-    const fsb = el('button','btn btn-secondary','📐  Formula sheet');
-    fsb.addEventListener('click',openFormulas); root.appendChild(fsb);
+  if(SHEETS[c.id]){
+    const fsb = el('button','btn btn-secondary', SHEETS[c.id].ic+'  '+SHEETS[c.id].nm);
+    fsb.addEventListener('click',()=>openSheet(c.id)); root.appendChild(fsb);
   }
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
@@ -3499,9 +3537,9 @@ SCREENS.quiz = function(root){
     calcBtn.addEventListener('click',openCalc);
     root.appendChild(calcBtn);
   }
-  if(FORMULA_CLASSES.has(ctx.classId)){
-    const fBtn = el('button','btn btn-ghost','📐  Formula sheet');
-    fBtn.addEventListener('click',openFormulas);
+  if(SHEETS[ctx.classId]){
+    const fBtn = el('button','btn btn-ghost', SHEETS[ctx.classId].ic+'  '+SHEETS[ctx.classId].nm);
+    fBtn.addEventListener('click',()=>openSheet(ctx.classId));
     root.appendChild(fBtn);
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
