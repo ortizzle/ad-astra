@@ -1,0 +1,426 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u1p3": {
+   "id": "unit-hist-u1p3",
+   "type": "unit",
+   "updatedAt": 1786231680099,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 1 · 3 The Southern Colonies and Forced Labour",
+   "srcName": "History 8, Unit 1 Key Terms",
+   "source": "History 8, Unit 1 key-terms list (Drive folder)",
+   "summary": {
+    "text": "The third group of Unit 1 key terms: the southern colonies and the labour systems they were built on. Covers Maryland, the Carolinas, Georgia, rice, indigo, the Atlantic slave trade, chattel slavery, forced labour systems, racial hierarchy, Bacon's Rebellion, and the economic goals that tie them together.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the hardest part of Unit 1 and the part most likely to appear as an essay. The chain runs from crop to labour demand to legal racial categories, and being able to state that chain — with the 1676 turning point in it — is worth more than any single definition.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Match each southern colony to its founding purpose and its cash crop",
+     "from": "source"
+    },
+    {
+     "text": "Define chattel slavery by its three structural features",
+     "from": "source"
+    },
+    {
+     "text": "Explain how Bacon's Rebellion reshaped racial hierarchy in Virginia",
+     "from": "source"
+    },
+    {
+     "text": "Explain how colonial law constructed race as a legal category",
+     "from": "source"
+    },
+    {
+     "text": "Use mercantilism to explain the indigo bounty and other imperial steering",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Same caveat as the rest of this series: the source is a blank worksheet she is meant to complete from her textbook, so I would keep it in the draft queue until she has done it, then release it as revision. This part is the heaviest in the series and I have not softened it — the Atlantic slave trade figures, the legal construction of race, and the aftermath of Bacon's Rebellion are all stated plainly, because the material is what it is and she is old enough for it. Two things I would flag as genuinely interesting rather than just examinable: that South Carolina planters sought enslaved West Africans specifically for rice-growing expertise they themselves lacked, and that Georgia abandoned its own ban on slavery within twenty years. One question asks her to correct the claim that racism caused slavery; the answer says the causation ran substantially the other way, and I have kept the word 'substantially' because historians do debate the balance and an absolute claim would be overreach.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "This is the heaviest part of Unit 1. Take the cards in two sittings rather than one.",
+    "minutes": 26,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Maryland",
+     "def": "**Founded 1632 as a refuge for English Catholics, under Lord Baltimore.**\n• Passed the Maryland Toleration Act (1649), an early law protecting Christian worship.\n• Grew tobacco, like Virginia, with the same labour pattern.\n• Why it matters: a proprietary colony founded on religion but economically identical to its neighbour.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The Carolinas",
+     "def": "**Founded 1663 as one proprietary colony, split into North and South in 1729.**\n• South Carolina built its wealth on rice and indigo; North Carolina stayed smaller and grew tobacco.\n• Many early settlers came from Barbados and brought the plantation slavery model with them.\n• Why it matters: South Carolina had a Black majority for much of the colonial period.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Georgia",
+     "def": "**Founded 1732, the last of the thirteen colonies, by James Oglethorpe.**\n• Intended as a debtors' refuge and as a military buffer against Spanish Florida.\n• Originally banned slavery and large landholdings; both bans were lifted by 1751.\n• Why it matters: the reversal shows how strong the economic pull of the plantation model was.",
+     "hint": "Founded on a principle, and the principle lost to the profit within twenty years.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Rice",
+     "def": "**The cash crop that made South Carolina wealthy.**\n• Grown in flooded coastal fields, which is brutal and highly skilled work.\n• Planters deliberately sought enslaved people from rice-growing regions of West Africa for their expertise.\n• Why it matters: it shows enslaved people brought knowledge, not just labour — a fact older accounts often erased.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Indigo",
+     "def": "**A plant yielding a deep blue dye, South Carolina's second major cash crop.**\n• Grew on land unsuitable for rice, so the two crops complemented each other.\n• Britain paid a bounty for it, because the alternative was buying from rivals.\n• Why it matters: a clear example of mercantilism steering what a colony planted.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Atlantic Slave Trade",
+     "def": "**The forced transport of roughly 12 million Africans across the Atlantic between the 1500s and 1800s.**\n• About 10.7 million survived the Middle Passage.\n• Most were taken to the Caribbean and Brazil; a smaller share came to North America.\n• Why it matters: it is the largest forced migration in recorded history and the foundation of the plantation economy.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Chattel Slavery",
+     "def": "**A system treating enslaved people as property that could be bought, sold and inherited.**\n• Lifelong, inherited through the mother, and defined by race in colonial law.\n• Chattel means a movable possession — the word itself states the legal fiction.\n• Why it matters: these features made it different in kind, not just degree, from earlier forms of servitude.",
+     "hint": "Three features to name every time: lifelong, inherited, racial.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Forced Labor Systems",
+     "def": "**The range of ways colonies compelled work: indenture, debt bondage, and chattel slavery.**\n• They differ in whether the labour ends, whether it passes to children, and whether race defines it.\n• Why it matters: grouping them shows the colonies always coerced labour, and the question was only what form it took.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Racial Hierarchy",
+     "def": "**A ranking of people by race, written into colonial law over the 1600s.**\n• Virginia laws from 1662 onward made slavery inherited through the mother and tied it explicitly to African descent.\n• Why it matters: race as a legal category was constructed by these laws — it did not exist first and cause them.",
+     "hint": "The laws came first and built the category. That order is the point.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Bacon's Rebellion",
+     "def": "**A 1676 uprising in Virginia led by Nathaniel Bacon against Governor Berkeley.**\n• Frontier settlers, including poor whites and some Black participants, demanded land and attacks on Indigenous nations.\n• They burned Jamestown before the rebellion collapsed.\n• Why it matters: it frightened the elite into hardening racial divisions, to stop poor whites and Black workers uniting again.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Economic Goals (southern colonies)",
+     "def": "**Wealth from export crops, which meant land and labour above all else.**\n• Tobacco in Virginia and Maryland; rice and indigo in South Carolina.\n• Why it matters: the southern colonies were organised around export, which shaped their politics and society too.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which two cash crops made South Carolina wealthy?",
+     "opts": [
+      "Rice and indigo",
+      "Tobacco and cotton",
+      "Sugar and coffee",
+      "Wheat and corn"
+     ],
+     "ans": 0,
+     "hint": "One is a food grown in flooded fields, the other yields a blue dye.",
+     "steps": [
+      "Tobacco was the crop of Virginia and Maryland, further north.",
+      "Cotton became dominant later, after the colonial period.",
+      "South Carolina grew rice in flooded coastal fields and indigo on drier ground."
+     ],
+     "ex": {
+      "main": "**Rice and indigo.** They suited different land, so planters could grow both on one estate.",
+      "tip": "Match crops to colonies: tobacco north, rice and indigo in South Carolina."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does chattel mean in \"chattel slavery\"?",
+     "opts": [
+      "A movable piece of property",
+      "A written contract",
+      "A term of years",
+      "A religious duty"
+     ],
+     "ans": 0,
+     "hint": "The word is a legal term about ownership.",
+     "steps": [
+      "Chattel is an old legal word for a movable possession, like livestock or furniture.",
+      "Calling a person chattel was a legal claim that they could be owned, bought and sold.",
+      "That is what separates it from a contract, which is an agreement between two people."
+     ],
+     "ex": {
+      "main": "**A movable piece of property.** The word states the legal fiction the whole system rested on.",
+      "tip": "Chattel, lifelong, inherited, racial. Those four words define the system."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was Bacon's Rebellion?",
+     "opts": [
+      "A 1676 uprising of Virginia frontier settlers against the colonial governor",
+      "A slave revolt in South Carolina",
+      "A war between Maryland and Virginia",
+      "A protest against British taxes"
+     ],
+     "ans": 0,
+     "hint": "It happened in Virginia in 1676 and Jamestown was burned.",
+     "steps": [
+      "Nathaniel Bacon led frontier settlers against Governor Berkeley in 1676.",
+      "They wanted land and wanted attacks on Indigenous nations that the governor would not authorise.",
+      "They burned Jamestown before the rebellion collapsed after Bacon died.",
+      "It was long before the tax disputes of the 1760s, so that option is out by a century."
+     ],
+     "ex": {
+      "main": "**A 1676 uprising of frontier settlers against the governor.** Its consequences mattered more than the rebellion itself.",
+      "tip": "Remember the date: 1676. It sits a full century before the Revolution and is not connected to it."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why was Georgia originally founded?",
+     "opts": [
+      "As a refuge for debtors and a military buffer against Spanish Florida",
+      "As a Catholic refuge",
+      "To grow rice for the Crown",
+      "As a Puritan settlement"
+     ],
+     "ans": 0,
+     "hint": "Two reasons, one charitable and one military.",
+     "steps": [
+      "James Oglethorpe founded Georgia in 1732, the last of the thirteen.",
+      "One purpose was charitable: a fresh start for people imprisoned for debt.",
+      "The other was strategic: a buffer between the wealthy Carolinas and Spanish Florida.",
+      "Maryland was the Catholic refuge, and the Puritan colonies were in New England."
+     ],
+     "ex": {
+      "main": "**A debtors' refuge and a military buffer.** It also banned slavery at first — and reversed that by 1751.",
+      "tip": "Georgia is the colony where an early principle was abandoned for profit. That reversal is very testable."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did South Carolina planters specifically seek enslaved people from rice-growing regions of West Africa?",
+     "opts": [
+      "Those people already had expertise in growing rice, which the planters lacked",
+      "Because they were cheaper",
+      "Because the voyage was shorter",
+      "Because English law required it"
+     ],
+     "ans": 0,
+     "hint": "What did the planters not know how to do?",
+     "steps": [
+      "Growing rice in flooded coastal fields is highly skilled work — irrigation, timing, water control.",
+      "English planters had no tradition of it and did not know how.",
+      "West African societies along the Rice Coast had grown rice this way for generations.",
+      "Planters targeted people from those regions deliberately, for knowledge they themselves did not have."
+     ],
+     "ex": {
+      "main": "**They already had the expertise.** Enslaved people brought skill and knowledge, not only labour — older accounts erased this and it is now well documented.",
+      "tip": "This fact reframes the whole crop. South Carolina's wealth rested on African agricultural science."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "How did Bacon's Rebellion affect the development of racial hierarchy in Virginia?",
+     "opts": [
+      "It frightened elites into hardening racial divisions to prevent poor whites and Black workers uniting",
+      "It ended slavery in Virginia",
+      "It gave enslaved people legal rights",
+      "It had no lasting effect"
+     ],
+     "ans": 0,
+     "hint": "Who rebelled together, and what would the elite most want to prevent happening again?",
+     "steps": [
+      "Bacon's force included poor white settlers, indentured servants, and some Black participants.",
+      "That alliance across race was what most alarmed the planter elite.",
+      "After the rebellion, Virginia law drew sharper lines: more rights and privileges for poor whites, harsher restrictions tied to African descent.",
+      "The aim was to make common cause between the two groups less likely."
+     ],
+     "ex": {
+      "main": "**It hardened racial divisions to prevent a repeat alliance.** The rebellion failed, and reshaped Virginia anyway.",
+      "tip": "Historians treat 1676 as a turning point in how race was written into law. Expect that framing on the test."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Georgia banned slavery at its founding but allowed it by 1751. What does this best show?",
+     "opts": [
+      "The economic pull of the plantation model overcame the colony's founding principles",
+      "That the ban had never been enforced",
+      "That Georgia was conquered by South Carolina",
+      "That the Crown ordered the change"
+     ],
+     "ans": 0,
+     "hint": "What were Georgia's neighbours doing, and how were they doing financially?",
+     "steps": [
+      "Georgia was founded with bans on slavery and on large landholdings, deliberately.",
+      "Next door, South Carolina was growing enormously wealthy on rice worked by enslaved people.",
+      "Georgia settlers pressed for the same system, arguing they could not compete without it.",
+      "The bans were lifted, which shows the economic pull outweighed the founding principle."
+     ],
+     "ex": {
+      "main": "**Economics overcame principle.** A founding ideal that costs money is a fragile thing, and Georgia is the clean example.",
+      "tip": "When a colony reverses a founding rule, ask what its neighbours were earning. The answer is usually there."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What distinguishes chattel slavery from indentured servitude?",
+     "opts": [
+      "It was lifelong, inherited by children, and defined by race in law",
+      "It involved harder physical work",
+      "It applied only to men",
+      "It lasted exactly twenty years"
+     ],
+     "ans": 0,
+     "hint": "Name the structural differences, not the conditions.",
+     "steps": [
+      "Both were unfree labour in brutal conditions, so severity alone does not separate them.",
+      "An indenture had a fixed term and the servant became free at the end of it.",
+      "Chattel slavery had no end, passed to the children of enslaved mothers, and was tied to African descent in colonial law.",
+      "Lifelong, inherited and racial — three differences, all structural."
+     ],
+     "ex": {
+      "main": "**Lifelong, inherited and racial.** These are differences in kind, not degree.",
+      "tip": "If you can only remember one thing here, remember those three words in that order."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A student writes that \"racism caused slavery in the colonies.\" What is the strongest historical correction?",
+     "opts": [
+      "The relationship ran substantially the other way: colonial law built racial categories to justify and secure an existing labour system",
+      "Racism did not exist at all in the colonies",
+      "Slavery was not really about labour",
+      "The statement needs no correction"
+     ],
+     "ans": 0,
+     "hint": "Look at the order of events: when were the racial laws written relative to the labour system?",
+     "steps": [
+      "Early Virginia used both African and European unfree labour, and the legal lines between them were initially blurry.",
+      "The plantation economy created an enormous demand for permanent labour.",
+      "From 1662 onward Virginia passed laws making slavery inherited through the mother and tying it explicitly to African descent.",
+      "So the sharp racial categories were built by law, largely after and in service of the labour system — not simply the pre-existing cause of it."
+     ],
+     "ex": {
+      "main": "**The relationship ran substantially the other way.** Colonial law constructed race as a legal category to secure the labour supply.",
+      "tip": "Historians debate the balance of causes here, so a good answer says \"substantially\" rather than claiming it was purely one direction."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which best explains why South Carolina had a Black majority for much of the colonial period, while Virginia did not?",
+     "opts": [
+      "Rice cultivation demanded a far larger workforce per acre than tobacco did",
+      "Virginia had banned slavery",
+      "South Carolina was much larger in area",
+      "Virginia relied entirely on indentured servants throughout"
+     ],
+     "ans": 0,
+     "hint": "Compare what the two crops require in labour.",
+     "steps": [
+      "Both colonies used enslaved labour, so a ban is not the explanation.",
+      "Tobacco is labour-intensive, but rice grown in flooded fields is far more so — building and maintaining irrigation as well as planting and harvesting.",
+      "Many early South Carolina settlers also came from Barbados and brought a fully developed plantation slavery system with them.",
+      "The result was a much larger enslaved population relative to the free one, producing a Black majority."
+     ],
+     "ex": {
+      "main": "**Rice demanded a far larger workforce per acre.** The crop drove the demographics.",
+      "tip": "Crop, then labour demand, then population make-up. That chain explains most differences between colonies."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Britain paid a bounty for indigo grown in South Carolina. Which idea does that best illustrate?",
+     "opts": [
+      "Mercantilism — Britain wanted to buy dye from its own colony rather than from rivals",
+      "Free trade",
+      "Religious toleration",
+      "Self-governance"
+     ],
+     "ans": 0,
+     "hint": "Why would a government pay extra to have something grown in its own colony?",
+     "steps": [
+      "A bounty is a payment to encourage production of a particular good.",
+      "Britain needed blue dye and was otherwise buying it from rival nations.",
+      "Under mercantilism, money paid to a rival is a national loss; money paid to your own colony stays in the system.",
+      "So the bounty steered South Carolina toward indigo for imperial reasons, which is mercantilism in action."
+     ],
+     "ex": {
+      "main": "**Mercantilism.** The bounty shows the parent country actively steering what its colony planted.",
+      "tip": "Mercantilism keeps reappearing across Unit 1. Whenever trade is being directed rather than left alone, name it."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why do historians group indenture, debt bondage and chattel slavery together as \"forced labour systems\" while insisting they are not equivalent?",
+     "opts": [
+      "All three compel work, but they differ in whether the labour ends, passes to children, and is defined by race",
+      "Because they all began in the same year",
+      "Because they were all legally identical",
+      "Because all three were voluntary"
+     ],
+     "ans": 0,
+     "hint": "What does the grouping capture, and what would it hide if you stopped there?",
+     "steps": [
+      "Grouping them captures something real: colonial economies consistently relied on labour that was not freely given.",
+      "That framing lets you ask why coercion kept being the answer to labour demand.",
+      "But the three differ on whether the labour has an end, whether it passes to children, and whether race defines who is subject to it.",
+      "So the group is useful for the pattern and misleading if it flattens those differences."
+     ],
+     "ex": {
+      "main": "**All three compel work, but they differ on term, heredity and race.** A category can be useful and still need its distinctions kept.",
+      "tip": "Good historical writing does both at once: name the pattern, then name what the pattern hides."
+     }
+    }
+   ]
+  }
+ }
+}

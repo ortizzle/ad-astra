@@ -1,0 +1,491 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u1p4": {
+   "id": "unit-hist-u1p4",
+   "type": "unit",
+   "updatedAt": 1786231680101,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 1 · 4 New England",
+   "srcName": "History 8, Unit 1 Key Terms",
+   "source": "History 8, Unit 1 key-terms list (Drive folder)",
+   "summary": {
+    "text": "The fourth group of Unit 1 key terms: the Puritan and Separatist colonies of New England. Covers religious reform, the Anglican Church, persecution, separatism, Plymouth, Massachusetts Bay, John Winthrop, the city upon a hill, theocracy, covenant theology, the Puritan work ethic, blue laws, dissenters, Roger Williams, Anne Hutchinson, Rhode Island, Connecticut, New Hampshire, the Salem witch trials, Magna Carta, self-governance and representation.",
+    "from": "source"
+   },
+   "why": {
+    "text": "New England is where the ideas that later become American political arguments first get tested — self-government, representation, and what a community may demand of an individual's beliefs. It is also the part of Unit 1 where the tidy story most needs complicating.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Distinguish Separatists from Puritans, and Plymouth from Massachusetts Bay",
+     "from": "source"
+    },
+    {
+     "text": "Explain covenant theology and why it made belief a public matter",
+     "from": "source"
+    },
+    {
+     "text": "Trace how dissent produced Rhode Island and Connecticut",
+     "from": "source"
+    },
+    {
+     "text": "Give three examples of early colonial self-governance",
+     "from": "source"
+    },
+    {
+     "text": "Explain the role of spectral evidence in the Salem trials",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Same caveat as the rest of this series: the source is a blank worksheet she is meant to complete from her textbook, so I would keep it in the draft queue until she has done it, then release it as revision. This is the largest part of the series, because the worksheet's New England section is the longest. Two framings worth knowing about. First, on the Puritans and religious freedom: the unit does not call them hypocrites, it makes the distinction between freedom FOR their practice and freedom OF religion, and then uses Rhode Island — founded in the same decade, a few days away — to show that toleration was a live option rather than an idea nobody had yet had. Second, on Salem, the unit puts the weight on spectral evidence rather than on hysteria, because that is where current scholarship puts it and it also carries a transferable lesson about standards of proof.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Longest part of the series. Split the cards over two sittings, then quiz.",
+    "minutes": 30,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Religious Reform",
+     "def": "**Movements to change the practices and structure of the church, following the Protestant Reformation.**\n• In England this produced groups who thought the national church had not gone far enough.\n• Why it matters: nearly every New England colony begins as a disagreement about how far reform should go.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Anglican Church",
+     "def": "**The Church of England, the official state church, headed by the monarch.**\n• Membership was expected; refusing it was both a religious and a political act.\n• Why it matters: this is the institution the Puritans and Separatists were reacting against.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Persecution",
+     "def": "**Punishment or harassment for religious belief, including fines, imprisonment and worse.**\n• Separatists faced it in England, which is why many left.\n• Why it matters: it explains the motive for migration — and makes the later intolerance of those same groups worth noticing.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Separatism",
+     "def": "**The belief that true churches must separate from the Church of England entirely.**\n• The Plymouth colonists were Separatists — the group later called the Pilgrims.\n• Puritans, by contrast, wanted to purify the church from within rather than leave it.\n• Why it matters: Separatist and Puritan are not synonyms, and the difference is exactly this.",
+     "hint": "Separatists left. Puritans stayed and tried to clean house. Two colonies, two answers.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Plymouth",
+     "def": "**Colony founded in 1620 by Separatists arriving on the Mayflower.**\n• They signed the Mayflower Compact, agreeing to govern themselves by majority decision.\n• Why it matters: the Compact is an early example of a government formed by agreement among the governed.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Massachusetts Bay",
+     "def": "**Colony founded in 1630 by Puritans, far larger and wealthier than Plymouth.**\n• Led by John Winthrop, who governed for much of its early history.\n• Why it matters: it dominated New England, and its intolerance produced Rhode Island and Connecticut.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "John Winthrop",
+     "def": "**First governor of Massachusetts Bay, who set out its purpose in a 1630 sermon.**\n• Argued the colony must be a model community that the world would watch.\n• Why it matters: he supplies both the founding vision and the enforcement that drove dissenters out.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "\"City Upon a Hill\"",
+     "def": "**Winthrop's image for the colony: a community so visible that its failures would be seen by all.**\n• Taken from the Sermon on the Mount.\n• Often quoted later as pure aspiration, but Winthrop meant it as a warning about being watched.",
+     "hint": "Usually quoted as a boast. It was originally closer to a caution.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Theocracy",
+     "def": "**Government in which religious leaders hold political authority, or law follows religious doctrine.**\n• Massachusetts Bay restricted voting to male church members.\n• Why it matters: people who fled religious control built a colony that exercised it.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Covenant Theology",
+     "def": "**The belief that a community is bound to God, and to each other, by a binding agreement.**\n• If the community broke the covenant, all of it would suffer, not just the individual.\n• Why it matters: it explains why private belief was treated as public business — one person's error endangered everyone.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Puritan Work Ethic",
+     "def": "**The belief that hard work and thrift are religious duties and signs of a disciplined life.**\n• Idleness was treated as a moral failing rather than a private choice.\n• Why it matters: it shaped New England's economy and left a lasting mark on American attitudes to work.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Blue Laws",
+     "def": "**Laws regulating personal conduct on religious grounds, especially restricting activity on Sundays.**\n• Covered work, travel, trade and entertainment.\n• Why it matters: a concrete example of religious doctrine written into enforceable law.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Dissenters and religious dissent",
+     "def": "**Dissenters are people who disagreed publicly with the established religious order; religious dissent is the disagreement itself.**\n• In Massachusetts Bay, voicing it could mean banishment.\n• Why it matters: religious dissent did not simply lose the argument — the dissenters left and founded new colonies.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Roger Williams",
+     "def": "**Banished from Massachusetts Bay in 1636; founded Providence and then Rhode Island.**\n• Argued for separation of church and state, and that land should be purchased from Indigenous nations, not seized.\n• Why it matters: Rhode Island became the first colony with genuine religious liberty.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Anne Hutchinson",
+     "def": "**Banished from Massachusetts Bay in 1638 for holding religious meetings and challenging the clergy.**\n• Taught that grace mattered more than outward obedience, and that she received direct revelation.\n• Her trial turned partly on her being a woman teaching men.\n• Why it matters: the clearest case of the colony punishing dissent, with gender openly part of it.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Rhode Island",
+     "def": "**Founded by Roger Williams as a refuge for dissenters, chartered 1644.**\n• Separated church from government and admitted people other colonies expelled.\n• Why it matters: it proves toleration was a live option at the time, not an idea nobody had yet had.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Connecticut",
+     "def": "**Founded 1636 by Thomas Hooker and others leaving Massachusetts Bay.**\n• Its Fundamental Orders (1639) set out a government based on the consent of the governed.\n• Why it matters: another colony created by disagreement, and an early written frame of government.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "New Hampshire",
+     "def": "**Settled in the 1620s and 30s, separated from Massachusetts as a royal colony in 1679.**\n• Economy built on fishing, timber and shipbuilding rather than farming.\n• Why it matters: shows New England's economy was maritime, not plantation-based.",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "Salem Witch Trials",
+     "def": "**A 1692 panic in Massachusetts in which 20 people were executed and around 150 accused.**\n• Driven by local disputes, fear after frontier war, and courts accepting spectral evidence.\n• Why it matters: it shows what happens when a community treats private belief as public danger and lowers its standard of proof.",
+     "from": "source"
+    },
+    {
+     "id": "c19",
+     "term": "Magna Carta",
+     "def": "**A 1215 English charter limiting the king's power and establishing rights under law.**\n• Established that even a monarch is bound by law.\n• Why it matters: colonists claimed its protections as their inheritance as Englishmen.",
+     "from": "source"
+    },
+    {
+     "id": "c20",
+     "term": "Self-Governance",
+     "def": "**Communities making their own laws rather than receiving them from a distant authority.**\n• The Mayflower Compact, the House of Burgesses and the Fundamental Orders are all examples.\n• Why it matters: distance from England made local decision-making practical long before it became a demand.",
+     "from": "source"
+    },
+    {
+     "id": "c21",
+     "term": "Representation",
+     "def": "**Being governed by people chosen to act on your behalf.**\n• Colonial assemblies were elected, though by a narrow slice of the population.\n• Why it matters: the expectation of representation is what later makes taxation without it intolerable.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the difference between Separatists and Puritans?",
+     "opts": [
+      "Separatists left the Church of England; Puritans wanted to purify it from within",
+      "They are two names for the same group",
+      "Separatists were Catholic; Puritans were Protestant",
+      "Puritans left England; Separatists stayed"
+     ],
+     "ans": 0,
+     "hint": "Both wanted change. The difference is whether they thought the church could be fixed.",
+     "steps": [
+      "Both groups thought the Church of England was insufficiently reformed.",
+      "Separatists concluded it was beyond saving and formed their own churches — they founded Plymouth.",
+      "Puritans believed it could be purified from the inside — they founded Massachusetts Bay.",
+      "Both were Protestant, and both had members who left England."
+     ],
+     "ex": {
+      "main": "**Separatists left; Puritans wanted to purify from within.** Two colonies, two answers to the same question.",
+      "tip": "Plymouth 1620 Separatist, Massachusetts Bay 1630 Puritan. Learn them as a pair."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Who founded Rhode Island, and why?",
+     "opts": [
+      "Roger Williams, after being banished for arguing for separation of church and state",
+      "John Winthrop, as a model Puritan colony",
+      "Anne Hutchinson, as a refuge for women",
+      "Thomas Hooker, over a land dispute"
+     ],
+     "ans": 0,
+     "hint": "He was banished from Massachusetts Bay in 1636.",
+     "steps": [
+      "Roger Williams argued that government should not enforce religion, and that Indigenous land should be bought rather than seized.",
+      "Massachusetts Bay banished him for it in 1636.",
+      "He founded Providence, which grew into Rhode Island, as a place for dissenters.",
+      "Anne Hutchinson was also banished and went there, but Williams founded it."
+     ],
+     "ex": {
+      "main": "**Roger Williams, after banishment.** Rhode Island exists because Massachusetts Bay would not tolerate him.",
+      "tip": "Several New England colonies were founded by people thrown out of another one. That is the pattern."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was the Magna Carta?",
+     "opts": [
+      "A 1215 English charter establishing that the king is bound by law",
+      "The founding document of Massachusetts Bay",
+      "A treaty with the Powhatan Confederacy",
+      "A law regulating Sunday activity"
+     ],
+     "ans": 0,
+     "hint": "It is English, and far older than any colony.",
+     "steps": [
+      "Magna Carta was agreed in England in 1215, four centuries before the colonies.",
+      "It limited the king's power and established rights that even a monarch could not override.",
+      "Colonists later claimed those protections as their inheritance as Englishmen."
+     ],
+     "ex": {
+      "main": "**A 1215 charter establishing that the king is bound by law.** Colonists used it as an argument, not just a memory.",
+      "tip": "The Sunday laws are Blue Laws. Do not mix the two up — one is English and medieval, the other colonial."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What were the Salem Witch Trials?",
+     "opts": [
+      "A 1692 panic in Massachusetts in which 20 people were executed",
+      "A trial of Anne Hutchinson",
+      "A dispute over land in Connecticut",
+      "A rebellion against the governor of Virginia"
+     ],
+     "ans": 0,
+     "hint": "The year is 1692 and the place is Massachusetts.",
+     "steps": [
+      "In 1692, accusations of witchcraft spread through Salem and nearby towns.",
+      "Around 150 people were accused and 20 were executed.",
+      "The courts accepted spectral evidence — testimony about dreams and visions — which made accusations nearly impossible to disprove."
+     ],
+     "ex": {
+      "main": "**A 1692 panic in which 20 people were executed.** The evidence standard is the part historians focus on.",
+      "tip": "Bacon's Rebellion 1676 in Virginia, Salem 1692 in Massachusetts. Two different colonies, sixteen years apart."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did people who had fled religious persecution create a colony that punished dissenters?",
+     "opts": [
+      "They sought freedom to practise their own faith, not freedom of religion in general",
+      "They forgot their own experience",
+      "They were ordered to by the king",
+      "They did not actually punish dissenters"
+     ],
+     "ans": 0,
+     "hint": "What exactly were the Puritans seeking freedom to do?",
+     "steps": [
+      "The Puritans wanted a community ordered according to their own beliefs.",
+      "They were not arguing that all beliefs should be permitted — that idea was Roger Williams's, and it got him banished.",
+      "Under covenant theology, one person's error endangered the whole community, so dissent was a public danger.",
+      "So freedom FOR their practice, not freedom OF religion generally."
+     ],
+     "ex": {
+      "main": "**They sought freedom for their own faith, not freedom of religion.** The distinction is small in words and enormous in consequence.",
+      "tip": "This is a favourite exam question. The answer is a distinction, not an accusation of hypocrisy."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "How does covenant theology explain why Massachusetts Bay treated private belief as public business?",
+     "opts": [
+      "If the community was bound to God as a whole, one person's error endangered everyone",
+      "Because belief was easy to monitor",
+      "Because the king required reports on belief",
+      "Because private belief was not actually regulated"
+     ],
+     "ans": 0,
+     "hint": "If the agreement is with the whole community rather than each individual, who suffers when it is broken?",
+     "steps": [
+      "Covenant theology held that the community as a whole had entered an agreement with God.",
+      "The consequences of breaking it would fall on the community, not only on the individual who erred.",
+      "That makes your neighbour's belief your problem in a direct, practical way.",
+      "So policing belief was not nosiness — within that framework it was self-defence."
+     ],
+     "ex": {
+      "main": "**One person's error endangered everyone.** Once you accept the premise, the enforcement follows logically.",
+      "tip": "Understanding a belief system from inside is different from agreeing with it, and it is what the question is asking for."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What do the Mayflower Compact, the Fundamental Orders of Connecticut and the House of Burgesses have in common?",
+     "opts": [
+      "All are early examples of colonists governing themselves rather than receiving law from England",
+      "All were written by John Winthrop",
+      "All established official churches",
+      "All were signed in 1620"
+     ],
+     "ans": 0,
+     "hint": "Three different colonies, three documents. What is the shared idea?",
+     "steps": [
+      "The Mayflower Compact (1620) was an agreement among the Plymouth colonists to govern by majority decision.",
+      "The House of Burgesses (1619) was Virginia's elected assembly.",
+      "The Fundamental Orders (1639) framed a Connecticut government resting on the consent of the governed.",
+      "Different colonies, different years, same idea: colonists making their own law."
+     ],
+     "ex": {
+      "main": "**All are early examples of self-governance.** Distance from England made local decision-making practical long before it became a demand.",
+      "tip": "Being able to name three examples of early self-governance is worth more than knowing one in detail."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is Anne Hutchinson's trial significant beyond the religious dispute itself?",
+     "opts": [
+      "Her being a woman teaching men was openly part of the case against her",
+      "She was the only person ever banished",
+      "She was tried for witchcraft",
+      "She founded Rhode Island"
+     ],
+     "ans": 0,
+     "hint": "What did the court object to besides the content of her teaching?",
+     "steps": [
+      "Hutchinson held religious meetings in her home and challenged the clergy's authority.",
+      "The doctrinal disagreement was real, about grace versus outward obedience.",
+      "But the proceedings also objected explicitly to a woman teaching and instructing men.",
+      "So the case shows gender operating alongside doctrine, stated openly rather than implied."
+     ],
+     "ex": {
+      "main": "**Her being a woman teaching men was openly part of the case.** The record states it, which is why historians cite it.",
+      "tip": "She went to Rhode Island after banishment but Roger Williams founded it. Do not merge the two."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Rhode Island practised religious toleration while Massachusetts Bay banished dissenters. Why does that comparison matter for judging Massachusetts?",
+     "opts": [
+      "It shows toleration was a live option at the time, not an idea nobody had yet conceived",
+      "It shows Rhode Island was larger",
+      "It proves Massachusetts was legally required to tolerate dissent",
+      "It shows toleration was impossible in the 1600s"
+     ],
+     "ans": 0,
+     "hint": "A common defence is \"they were people of their time\". What does Rhode Island do to that defence?",
+     "steps": [
+      "One defence of Massachusetts Bay is that nobody in the 1600s believed in religious toleration.",
+      "Rhode Island, founded in the same decade and a few days' travel away, did.",
+      "So the idea existed, was articulated by Roger Williams, and was put into practice nearby.",
+      "That means Massachusetts made a choice among options available to it, rather than simply lacking the concept."
+     ],
+     "ex": {
+      "main": "**Toleration was a live option at the time.** A contemporary who did otherwise is the strongest evidence against \"everyone thought that way\".",
+      "tip": "Whenever a source says \"it was just the times\", look for a contemporary who disagreed. There usually is one."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Historians point to spectral evidence as central to the Salem trials. Why does that detail matter so much?",
+     "opts": [
+      "Accepting testimony about dreams and visions made accusations effectively impossible to disprove",
+      "It shows the judges were uneducated",
+      "It proves the accused were guilty",
+      "It shows the trials were brief"
+     ],
+     "ans": 0,
+     "hint": "How would you defend yourself against a claim about what someone saw in a vision?",
+     "steps": [
+      "Spectral evidence meant a witness could testify that the accused's spirit had tormented them.",
+      "Only the accuser could see the spirit, so no one else could confirm or contradict it.",
+      "An accused person could not produce an alibi for something invisible happening elsewhere.",
+      "Once that standard was accepted, an accusation was nearly unanswerable — which is how the panic spread so far."
+     ],
+     "ex": {
+      "main": "**It made accusations impossible to disprove.** The panic is best explained by the rules of evidence, not by mass hysteria alone.",
+      "tip": "When the courts stopped accepting spectral evidence in late 1692, the trials collapsed almost immediately. That is the strongest support for this reading."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "How did the Puritan work ethic and covenant theology reinforce each other?",
+     "opts": [
+      "If the community stood or fell together, individual idleness became everyone's concern",
+      "They contradicted each other",
+      "Both required separation from England",
+      "Neither had any effect on daily life"
+     ],
+     "ans": 0,
+     "hint": "Under covenant theology, whose business is your neighbour's behaviour?",
+     "steps": [
+      "Covenant theology bound the whole community to God together.",
+      "The Puritan work ethic treated hard work and thrift as religious duties.",
+      "Combine them and one person's idleness is not a private matter — it is a risk to the community's standing.",
+      "So the two beliefs supported each other, and both pushed toward the community regulating individual behaviour."
+     ],
+     "ex": {
+      "main": "**Individual idleness became everyone's concern.** The two beliefs together explain how tightly New England towns governed daily life.",
+      "tip": "Look for how beliefs interact rather than treating each as a separate fact. That is what a level 3 question rewards."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Several New England colonies were founded by people expelled from Massachusetts Bay. What does that pattern suggest?",
+     "opts": [
+      "Strict enforcement of orthodoxy kept producing new colonies founded by those it drove out",
+      "Massachusetts Bay was too small to hold everyone",
+      "The colonies were planned in advance by the Crown",
+      "Dissenters were rarely serious about their beliefs"
+     ],
+     "ans": 0,
+     "hint": "Rhode Island and Connecticut both began this way. What was the mechanism?",
+     "steps": [
+      "Roger Williams was banished and founded Providence, which became Rhode Island.",
+      "Thomas Hooker and his followers left over disagreements and founded Connecticut.",
+      "Anne Hutchinson was banished and went to Rhode Island.",
+      "So the colony's intolerance did not eliminate dissent — it exported it, and each expulsion seeded a new settlement."
+     ],
+     "ex": {
+      "main": "**Enforcement kept producing new colonies founded by those it drove out.** New England's map is partly a record of Massachusetts Bay's arguments.",
+      "tip": "A good essay point: suppression relocated dissent rather than ending it, and the result was a more varied region, not a more uniform one."
+     }
+    }
+   ]
+  }
+ }
+}

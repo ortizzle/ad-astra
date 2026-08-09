@@ -1,0 +1,442 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u1p1": {
+   "id": "unit-hist-u1p1",
+   "type": "unit",
+   "updatedAt": 1786231342984,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 1 · 1 Exploration, Exchange and Empire",
+   "srcName": "History 8, Unit 1 Key Terms",
+   "source": "History 8, Unit 1 key-terms list (Drive folder)",
+   "summary": {
+    "text": "The first group of Unit 1 key terms: why Europeans went looking for a sea route to Asia, what made the voyages possible, and what followed from contact. Covers the Renaissance, navigation technology, trade routes to Asia, national competition, Christian missionaries, the Columbian Exchange, the Great Dying, Triangular Trade, mercantilism, economic goals, cash crops, plantations and labour demands.",
+    "from": "source"
+   },
+   "why": {
+    "text": "These terms are the causes; almost everything else in Unit 1 is an effect. Once you can explain why Europeans sailed and what mercantilism expected of a colony, the specific colonies stop being a list to memorise and start being a set of answers to the same few questions.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain why Europeans sought a sea route to Asia and what made the voyages possible",
+     "from": "source"
+    },
+    {
+     "text": "Describe the Columbian Exchange in both directions, including disease",
+     "from": "source"
+    },
+    {
+     "text": "Name the three legs of the Triangular Trade in order",
+     "from": "source"
+    },
+    {
+     "text": "Explain mercantilism and what it expected colonies to do",
+     "from": "source"
+    },
+    {
+     "text": "Trace the chain from cash crops to plantation scale to labour demand",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "The Unit 1 key-terms list in her Drive folder is a blank worksheet — the assignment is for her to write each definition from her textbook and notes. That means this unit, if approved too early, would hand her the homework. I would keep all five parts of this series as drafts until she has finished the worksheet, then release them as revision for the test. That is exactly what the draft queue is for, and it is your call rather than mine. On content: I have kept the Great Dying honest rather than softened, because it is the central fact of the period and the test will treat it that way. Nothing from the worksheet header — her name, the score box — appears anywhere in the unit.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards for the causes first. The rest of Unit 1 makes far more sense once these are solid.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Renaissance",
+     "def": "**A rebirth of learning, art and curiosity in Europe from roughly the 1300s to the 1600s.**\n• Rediscovering Greek and Roman knowledge pushed Europeans to question old assumptions.\n• Why it matters: that habit of questioning fed directly into exploring, mapping and claiming.",
+     "hint": "Renaissance literally means rebirth. What was reborn was the willingness to ask.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Technology (of exploration)",
+     "def": "**The tools that made long ocean voyages survivable: the magnetic compass, the astrolabe, better maps and the caravel.**\n• The caravel could sail against the wind, which earlier ships largely could not.\n• Why it matters: exploration was not just ambition — it needed equipment that only then existed.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Trade Routes to Asia",
+     "def": "**The land routes carrying silk, spices and porcelain from Asia to Europe.**\n• They were long, taxed at every stage, and controlled by middlemen, which made Asian goods very expensive.\n• Why it matters: finding a SEA route to Asia was the original goal — reaching the Americas was an accident of pursuing it.",
+     "hint": "Nobody set out to find America. They set out to get around the middlemen.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "National Competition",
+     "def": "**European kingdoms racing each other for territory, wealth and prestige.**\n• Portugal, Spain, England, France and the Netherlands were rivals, not partners.\n• Why it matters: rivalry sped everything up. A claim mattered partly because it denied the claim to someone else.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Christian Missionaries",
+     "def": "**People sent to convert Indigenous populations to Christianity.**\n• Conversion was given as a justification for conquest and colonisation, alongside wealth.\n• Why it matters: religion was both a genuine motive and a public reason that made empire easier to defend.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Columbian Exchange",
+     "def": "**The transfer of plants, animals, people and diseases between the Americas and Europe, Africa and Asia after 1492.**\n• To the Americas: horses, cattle, pigs, wheat, sugar — and smallpox and measles.\n• From the Americas: maize, potatoes, tomatoes, cacao, tobacco.\n• Why it matters: it reshaped diets and populations on every continent involved.",
+     "hint": "Named for Columbus, but it went both directions and continued for centuries.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The Great Dying",
+     "def": "**The catastrophic collapse of Indigenous populations after contact, mostly from European diseases.**\n• Estimates commonly run to the loss of most of the pre-contact population within a century.\n• Indigenous peoples had no prior exposure and therefore no immunity.\n• Why it matters: it is the central fact of early colonisation — much of the land Europeans called empty had been emptied.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Triangular Trade",
+     "def": "**The three-legged Atlantic trade network linking Europe, Africa and the Americas.**\n• Europe to Africa: manufactured goods, guns, textiles.\n• Africa to the Americas: enslaved people, on the Middle Passage.\n• Americas to Europe: sugar, tobacco, cotton and other cash crops.",
+     "hint": "Three legs, and the human cargo is the middle one. That leg is the Middle Passage.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Mercantilism",
+     "def": "**The theory that a nation grows rich by exporting more than it imports and hoarding gold and silver.**\n• Colonies existed to supply raw materials cheaply and to buy finished goods back.\n• Why it matters: it explains what colonies were FOR, in the eyes of the country that founded them.",
+     "hint": "Colonies were not meant to prosper independently. That was the point, and later the problem.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Economic Goals",
+     "def": "**What European powers wanted from colonies: raw materials, new markets, and wealth flowing home.**\n• Gold and silver first, then cash crops when precious metals proved scarce in the north.\n• Why it matters: the economic goal shaped which colonies grew which crops, and how they got labour.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Cash Crops",
+     "def": "**Crops grown to sell for profit rather than to feed the people growing them.**\n• Tobacco, rice, indigo and sugar were the major Atlantic cash crops.\n• Why it matters: cash crops demand large amounts of land and labour, which drove both land seizure and slavery.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Plantations",
+     "def": "**Large farms growing a single cash crop, worked by a large forced labour force.**\n• The scale is the point: a plantation is not a big family farm, it is an export operation.\n• Why it matters: the plantation model is what made chattel slavery economically central to the southern colonies.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Labor Demands",
+     "def": "**The colonies' constant need for workers, which grew as plantations grew.**\n• Answered first by indentured servants, then increasingly by enslaved Africans.\n• Why it matters: the shift from one answer to the other is the story of Unit 1's second half.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was the original goal of European voyages of exploration?",
+     "opts": [
+      "To find a sea route to Asia",
+      "To discover the Americas",
+      "To escape religious persecution",
+      "To map the Pacific Ocean"
+     ],
+     "ans": 0,
+     "hint": "Think about what Europeans wanted that they could not easily get.",
+     "steps": [
+      "Asian silk, spices and porcelain reached Europe by long overland routes.",
+      "Every middleman along the way added a cost, making those goods very expensive.",
+      "A sea route would cut the middlemen out entirely, so that was the goal.",
+      "Reaching the Americas happened while pursuing it, not instead of it."
+     ],
+     "ex": {
+      "main": "**To find a sea route to Asia.** The Americas were in the way of the actual plan.",
+      "tip": "Columbus died still believing he had reached Asia. That tells you what he was aiming at."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was the Columbian Exchange?",
+     "opts": [
+      "The transfer of plants, animals, people and diseases between the Americas and the rest of the world",
+      "A treaty dividing land between Spain and Portugal",
+      "The trade of gold for enslaved people",
+      "The exchange of ambassadors between European courts"
+     ],
+     "ans": 0,
+     "hint": "The word exchange is doing the work. What moved, and in which directions?",
+     "steps": [
+      "After 1492, contact between the Americas and Europe, Africa and Asia became permanent.",
+      "Living things moved both ways: crops, livestock, people, and disease.",
+      "Maize and potatoes went east; horses, wheat and smallpox came west.",
+      "So it is the transfer of plants, animals, people and diseases in both directions."
+     ],
+     "ex": {
+      "main": "**The transfer of plants, animals, people and diseases both ways.** Both directions matters — this was not a one-way delivery.",
+      "tip": "The potato reshaped European diets as thoroughly as the horse reshaped life on the Great Plains."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is mercantilism?",
+     "opts": [
+      "The theory that a nation grows rich by exporting more than it imports",
+      "The belief that trade should be completely free of rules",
+      "A system of religious tolerance in the colonies",
+      "The practice of trading only with nearby nations"
+     ],
+     "ans": 0,
+     "hint": "It is a theory about where national wealth comes from.",
+     "steps": [
+      "Mercantilism treats wealth as a fixed pile of gold and silver to be competed over.",
+      "A nation gets richer by selling more abroad than it buys, so bullion flows in.",
+      "Colonies fit this by supplying cheap raw materials and buying finished goods back.",
+      "So it is the theory that a nation grows rich by exporting more than it imports."
+     ],
+     "ex": {
+      "main": "**Exporting more than importing.** It is the opposite of free trade, and it defines what colonies were for.",
+      "tip": "Every colonial restriction that later angered the colonists follows from this theory."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What were the three legs of the Triangular Trade?",
+     "opts": [
+      "Goods to Africa, enslaved people to the Americas, cash crops to Europe",
+      "Gold to Europe, guns to Asia, spices to Africa",
+      "Settlers to the Americas, crops to Africa, gold to Europe",
+      "Enslaved people to Europe, sugar to Africa, cloth to the Americas"
+     ],
+     "ans": 0,
+     "hint": "Start in Europe and follow the ships around the triangle.",
+     "steps": [
+      "From Europe to Africa went manufactured goods: guns, textiles, iron.",
+      "From Africa to the Americas went enslaved people — the Middle Passage.",
+      "From the Americas back to Europe went sugar, tobacco and other cash crops.",
+      "That completes the triangle."
+     ],
+     "ex": {
+      "main": "**Goods to Africa, enslaved people to the Americas, cash crops to Europe.** The middle leg is called the Middle Passage for its place in this route.",
+      "tip": "Naming the legs in order is a common exam question. Learn them as a loop, starting in Europe."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did European exploration accelerate in the 1400s rather than centuries earlier?",
+     "opts": [
+      "New technology like the caravel, compass and astrolabe made long ocean voyages survivable",
+      "Europeans only then learned the Earth was round",
+      "Asia stopped trading with Europe entirely",
+      "The population of Europe suddenly doubled"
+     ],
+     "ans": 0,
+     "hint": "Desire alone does not get a ship across an ocean.",
+     "steps": [
+      "Europeans had wanted Asian goods for centuries, so desire was not the new ingredient.",
+      "Educated Europeans had known the Earth was round since antiquity, so that is not it either.",
+      "What changed was equipment: the compass for direction, the astrolabe for latitude, better maps, and the caravel, which could sail against the wind.",
+      "Those made a long ocean voyage survivable rather than suicidal."
+     ],
+     "ex": {
+      "main": "**New technology made long ocean voyages survivable.** The motive was old; the means were new.",
+      "tip": "When a question asks why something happened THEN, look for what had just changed."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did the Great Dying make European colonisation easier?",
+     "opts": [
+      "Disease had already devastated Indigenous populations before most settlers arrived",
+      "Because it killed European rivals as well",
+      "Because it made the soil more fertile",
+      "It did not — it made colonisation harder"
+     ],
+     "ans": 0,
+     "hint": "Think about the order of events: when did the diseases arrive relative to most settlers?",
+     "steps": [
+      "European diseases spread ahead of settlement, often faster than Europeans themselves travelled.",
+      "Indigenous peoples had no prior exposure and therefore no immunity, and losses were catastrophic.",
+      "Settlers arriving later encountered greatly reduced populations and abandoned fields.",
+      "Land that looked empty to them had in fact been emptied, which made claiming it far easier."
+     ],
+     "ex": {
+      "main": "**Disease had already devastated Indigenous populations before most settlers arrived.** The \"empty wilderness\" was recently emptied.",
+      "tip": "This is the single most important fact for understanding early colonisation. Expect it on the test."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A colony is required to sell its tobacco only to its parent country and to buy manufactured goods only from it. Which idea does this reflect?",
+     "opts": [
+      "Mercantilism",
+      "Pluralism",
+      "Separatism",
+      "Self-governance"
+     ],
+     "ans": 0,
+     "hint": "Which theory says colonies exist to enrich the parent country?",
+     "steps": [
+      "Pluralism is about a mix of peoples, and separatism is a religious position — neither is economic.",
+      "Self-governance is about who makes decisions, not about trade.",
+      "Mercantilism holds that colonies exist to supply raw materials cheaply and to buy finished goods back.",
+      "Forcing a colony to sell only to and buy only from the parent country is exactly that."
+     ],
+     "ex": {
+      "main": "**Mercantilism.** These rules are not incidental — they are the whole point of holding a colony.",
+      "tip": "Ask who benefits. If the answer is the parent country, you are almost certainly looking at mercantilism."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did cash crops increase the demand for forced labour?",
+     "opts": [
+      "They need large areas of land and constant intensive work to be profitable",
+      "They cannot be grown by families",
+      "They require special skills only enslaved people had",
+      "They grow only in winter, when free workers were unavailable"
+     ],
+     "ans": 0,
+     "hint": "Think about the scale a crop must reach before it is worth shipping across an ocean.",
+     "steps": [
+      "A cash crop is grown to sell, not to eat, so profit depends on volume.",
+      "Volume means large acreage, and tobacco, rice and sugar all need heavy, continuous labour.",
+      "That much labour cost more than planters were willing to pay free workers.",
+      "So demand for cheap forced labour rose alongside the size of the plantations."
+     ],
+     "ex": {
+      "main": "**They need large areas of land and constant intensive work.** The economics of the crop drove the labour system, not the other way round.",
+      "tip": "Follow the chain: cash crop, then scale, then labour demand, then forced labour. It is the spine of Unit 1."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Historians say Europeans \"discovered\" the Americas. Why do most historians now avoid that word?",
+     "opts": [
+      "Millions of people already lived there, so it was new only to Europeans",
+      "Because Columbus was not the first European to arrive",
+      "Because the word is too old-fashioned",
+      "Because the Americas were already mapped in Europe"
+     ],
+     "ans": 0,
+     "hint": "Discovery implies nobody knew the place existed. Was that true?",
+     "steps": [
+      "The Americas were home to millions of people in hundreds of societies before 1492.",
+      "Those people knew the land intimately — it was not undiscovered to them.",
+      "\"Discovery\" quietly takes the European point of view as the only one that counts.",
+      "Historians prefer contact or encounter, which describe what happened without deciding whose knowledge mattered."
+     ],
+     "ex": {
+      "main": "**Millions already lived there, so it was new only to Europeans.** Word choice carries a point of view, which is why historians argue about it.",
+      "tip": "Watch for words that assume an answer. Discovery, settlement and frontier all do this quietly."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which best explains the connection between the Renaissance and European exploration?",
+     "opts": [
+      "A renewed willingness to question old knowledge encouraged new ventures and new techniques",
+      "The Renaissance produced the ships used to cross the Atlantic",
+      "Renaissance artists drew the first maps of America",
+      "There is no meaningful connection"
+     ],
+     "ans": 0,
+     "hint": "The Renaissance was a change in thinking. What does a change in thinking make possible?",
+     "steps": [
+      "The Renaissance rediscovered classical learning and, more importantly, the habit of questioning received wisdom.",
+      "That habit spread into navigation, astronomy, mapmaking and shipbuilding.",
+      "It did not directly build ships or draw American maps, since those came later and from sailors.",
+      "What it supplied was the intellectual climate: a readiness to test what had always been assumed."
+     ],
+     "ex": {
+      "main": "**A renewed willingness to question old knowledge.** The link is a change in thinking, not a specific invention.",
+      "tip": "Be careful of options that overstate a connection. \"Produced the ships\" is too strong and that is what makes it wrong."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A textbook says the Columbian Exchange \"enriched the diets of the world.\" What does this framing leave out?",
+     "opts": [
+      "The diseases that travelled the same routes and killed millions",
+      "The names of the crops involved",
+      "That the exchange lasted several centuries",
+      "That Columbus made four voyages"
+     ],
+     "ans": 0,
+     "hint": "The exchange carried more than food. What else moved along exactly the same routes?",
+     "steps": [
+      "It is true that maize and potatoes transformed diets in Europe, Africa and Asia.",
+      "But the same contact carried smallpox, measles and influenza to populations with no immunity.",
+      "Those diseases caused the Great Dying, the largest population collapse in recorded history.",
+      "A framing that mentions only the food leaves out the deadliest part of the same exchange."
+     ],
+     "ex": {
+      "main": "**The diseases that travelled the same routes.** The exchange was genuinely both, and a summary that gives only one half is misleading.",
+      "tip": "When a source sounds cheerful about something historically enormous, ask what it is not mentioning."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did national competition between European powers speed up colonisation?",
+     "opts": [
+      "A claim was valuable partly because it denied the same land to a rival",
+      "Because the powers pooled their resources",
+      "Because they shared maps freely",
+      "Because they agreed to divide the Americas equally"
+     ],
+     "ans": 0,
+     "hint": "If your rival gains something you did not take, what have you lost?",
+     "steps": [
+      "Portugal, Spain, England, France and the Netherlands were rivals, not partners.",
+      "Under mercantilism wealth was treated as a fixed quantity, so a rival gaining meant you losing.",
+      "That made speed matter: unclaimed land would not stay unclaimed.",
+      "So a claim was worth making partly to prevent someone else from making it."
+     ],
+     "ex": {
+      "main": "**A claim denied the same land to a rival.** Rivalry turned exploration into a race, and races produce haste.",
+      "tip": "Mercantilism and national competition reinforce each other. Explaining one usually means mentioning the other."
+     }
+    }
+   ]
+  }
+ }
+}

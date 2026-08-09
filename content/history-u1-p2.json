@@ -1,0 +1,432 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u1p2": {
+   "id": "unit-hist-u1p2",
+   "type": "unit",
+   "updatedAt": 1786231342987,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 1 · 2 Native Nations and the First English Colonies",
+   "srcName": "History 8, Unit 1 Key Terms",
+   "source": "History 8, Unit 1 key-terms list (Drive folder)",
+   "summary": {
+    "text": "The second group of Unit 1 key terms: the peoples already living in eastern North America, and England's first attempts to settle among them. Covers the Eastern Woodlands, the Mississippian culture, Cahokia, the Iroquois, the Algonquins, the Powhatan Confederacy, Roanoke, Jamestown, Virginia, tobacco, the headright system and indentured servitude.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is where the causes from part one meet actual places and people. It also corrects the biggest misconception about the period — that Europeans arrived in an empty land — and sets up the labour question that the rest of Unit 1 turns on.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Describe the major Indigenous nations and cultures of eastern North America before contact",
+     "from": "source"
+    },
+    {
+     "text": "Use Cahokia as evidence about the scale of pre-contact societies",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Roanoke failed and Jamestown survived",
+     "from": "source"
+    },
+    {
+     "text": "Explain the headright system and who it actually benefited",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish indentured servitude from chattel slavery on term, heredity and race",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Part two of the key-terms series, and the same caveat applies: the source is a blank worksheet she is meant to complete herself, so I would hold these as drafts until she has. Two content notes. First, I have used Haudenosaunee alongside Iroquois, since her textbook may use either and she should recognise both. Second, the last question is deliberately the hardest in the unit — it asks her to connect tobacco, headrights and the shift to chattel slavery into a single causal chain. That chain is very likely to appear as an essay prompt, and being able to state it in four sentences is worth more than any individual definition here.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "The last question in the quiz is the one worth practising until you can say it without notes.",
+    "minutes": 24,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Eastern Woodlands",
+     "def": "**The forested culture region running from the Atlantic coast west to the Mississippi.**\n• Peoples there farmed maize, beans and squash, hunted, and lived in settled villages.\n• Why it matters: this is the region the English colonies were planted in, so these are the nations they met first.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Mississippian",
+     "def": "**A mound-building culture that flourished along the Mississippi River from about 800 to 1600 CE.**\n• Built large earthen mounds, farmed maize intensively, and traded across long distances.\n• Why it matters: it is direct evidence of large, organised, city-building societies long before Europeans arrived.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Cahokia",
+     "def": "**The largest Mississippian city, near present-day St. Louis, at its height around 1100 CE.**\n• Home to perhaps 10,000 to 20,000 people — larger than London at the same date.\n• Why it matters: it disproves the idea that North America held only small scattered groups.",
+     "hint": "Bigger than London in 1100. That single comparison is worth remembering.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Iroquois",
+     "def": "**A confederacy of nations in what is now New York, also called the Haudenosaunee.**\n• Five nations, later six, joined under the Great Law of Peace.\n• Governed by a council with formal rules for decision-making.\n• Why it matters: an organised, durable political alliance that European powers had to negotiate with, not simply push aside.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Algonquins",
+     "def": "**A broad group of peoples speaking related Algonquian languages across the Northeast.**\n• Not one nation but many, spread from Canada down the Atlantic coast.\n• Often rivals of the Iroquois.\n• Why it matters: colonists exploited existing rivalries, allying with one group against another.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Powhatan Confederacy",
+     "def": "**An alliance of about thirty Algonquian-speaking groups in coastal Virginia.**\n• Led by Wahunsenacawh, known to the English as Powhatan.\n• Why it matters: this is the power Jamestown was planted inside, and early survival depended on trade with them.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Roanoke",
+     "def": "**An English colony founded off North Carolina in 1585 and again in 1587, found abandoned in 1590.**\n• The word CROATOAN was carved on a post; the fate of the colonists is still unsettled.\n• Why it matters: it shows how badly early attempts could fail, and how little margin these colonies had.",
+     "hint": "The Lost Colony. The lesson the English took from it was about supply, not mystery.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Jamestown",
+     "def": "**The first permanent English settlement in North America, founded in Virginia in 1607.**\n• Nearly failed: the Starving Time of 1609–10 killed most of the colonists.\n• Survived because of tobacco, which finally gave it something profitable to sell.\n• Why it matters: permanent is the key word — everything English in North America follows from it holding on.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Virginia",
+     "def": "**The colony built around Jamestown, England's first successful North American venture.**\n• Began as a company venture seeking profit, became a royal colony in 1624.\n• Its House of Burgesses (1619) was the first representative assembly in English America.\n• Why it matters: tobacco, the headright system and representative government all start here.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Tobacco",
+     "def": "**The cash crop that made Virginia profitable, after John Rolfe introduced a sweeter variety in 1612.**\n• Exhausts the soil quickly, so planters constantly wanted more land.\n• Why it matters: it created both the demand for land, pressing on Indigenous nations, and the demand for labour.",
+     "hint": "One crop explains Virginia's survival, its land hunger and its labour system.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Headright System",
+     "def": "**A grant of about 50 acres to anyone who paid their own passage, or another person's, to Virginia.**\n• Someone paying for several people's passage collected land for each one.\n• Why it matters: it rewarded the already wealthy with more land, concentrating property in few hands.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Indentured Servitude",
+     "def": "**A contract to work without wages for a set term, usually four to seven years, in exchange for passage.**\n• Servants were freed at the end of the term, sometimes with land or tools.\n• Conditions were brutal and many died before the term ended.\n• Why it matters: it was the colonies' first answer to labour demand, before slavery became dominant.",
+     "hint": "Temporary and contractual. That is what separates it from slavery, and the difference is the whole point.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was Cahokia?",
+     "opts": [
+      "The largest Mississippian city, near present-day St. Louis",
+      "The first English colony in Virginia",
+      "An Iroquois council meeting",
+      "A Spanish mission in Florida"
+     ],
+     "ans": 0,
+     "hint": "It is a city, and it predates European arrival by centuries.",
+     "steps": [
+      "Cahokia was a Mississippian settlement built around large earthen mounds.",
+      "It sat near where St. Louis is today, and peaked around 1100 CE.",
+      "At its height it held perhaps 10,000 to 20,000 people — larger than London at the time."
+     ],
+     "ex": {
+      "main": "**The largest Mississippian city.** It is the standard evidence against the idea of a thinly populated continent.",
+      "tip": "The comparison to London is worth memorising. It is the fastest way to make the point."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was Jamestown?",
+     "opts": [
+      "The first permanent English settlement in North America, founded 1607",
+      "The first Spanish settlement in North America",
+      "An Indigenous city on the Mississippi",
+      "The capital of the Powhatan Confederacy"
+     ],
+     "ans": 0,
+     "hint": "The key word is permanent, and the year is 1607.",
+     "steps": [
+      "English attempts before it, including Roanoke, had failed.",
+      "Jamestown was founded in Virginia in 1607 and very nearly failed too.",
+      "It held on, which makes it the first permanent English settlement in North America."
+     ],
+     "ex": {
+      "main": "**The first permanent English settlement, 1607.** Permanent is what distinguishes it from Roanoke.",
+      "tip": "Two dates worth knowing cold: Roanoke 1587 and abandoned, Jamestown 1607 and permanent."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What was indentured servitude?",
+     "opts": [
+      "Working without wages for a set term in exchange for passage to the colonies",
+      "Lifelong, inherited, unpaid labour",
+      "A land grant for paying someone's passage",
+      "A tax paid by colonists to England"
+     ],
+     "ans": 0,
+     "hint": "The key features are a contract and an end date.",
+     "steps": [
+      "An indentured servant signed a contract before travelling.",
+      "In exchange for passage they worked without wages, usually for four to seven years.",
+      "At the end of the term they were free, sometimes with land or tools.",
+      "The land grant described in another option is the headright system, which is separate."
+     ],
+     "ex": {
+      "main": "**Working without wages for a set term in exchange for passage.** It ends, and that is what separates it from slavery.",
+      "tip": "Indentured servitude and chattel slavery get confused constantly. The differences are term, heritability and race."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which crop made Virginia profitable?",
+     "opts": [
+      "Tobacco",
+      "Rice",
+      "Indigo",
+      "Sugar"
+     ],
+     "ans": 0,
+     "hint": "John Rolfe introduced a sweeter variety of it in 1612.",
+     "steps": [
+      "Jamestown spent its early years searching for gold and finding none.",
+      "In 1612 John Rolfe introduced a sweeter variety of tobacco that sold well in England.",
+      "Rice and indigo became important further south, in the Carolinas, not in Virginia."
+     ],
+     "ex": {
+      "main": "**Tobacco.** It gave Virginia something to sell, and everything else about the colony followed from it.",
+      "tip": "Match the crop to the colony: tobacco with Virginia and Maryland, rice and indigo with the Carolinas."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did the headright system concentrate land in the hands of the wealthy?",
+     "opts": [
+      "Anyone who paid several people's passage collected the land grant for each one",
+      "Because only the wealthy were allowed to apply",
+      "Because it granted land only to nobles",
+      "Because it required a fee larger than most could afford"
+     ],
+     "ans": 0,
+     "hint": "Who could afford to pay for many passages at once?",
+     "steps": [
+      "The headright granted about 50 acres per person whose passage was paid.",
+      "Crucially, it was paid to whoever paid the fare, not to the person who travelled.",
+      "A wealthy planter could pay for twenty servants and collect twenty headrights.",
+      "A poor migrant paying their own way collected one. So the system multiplied existing wealth."
+     ],
+     "ex": {
+      "main": "**Paying several passages collected a grant for each one.** The rule was open to all, and the outcome was still deeply unequal.",
+      "tip": "A rule can be formally equal and still produce concentration. Watch for who is positioned to use it."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did tobacco increase pressure on Indigenous land in Virginia?",
+     "opts": [
+      "It exhausts the soil quickly, so planters constantly needed new fields",
+      "It can only be grown near rivers",
+      "It requires very cold weather",
+      "It grows only on land already cleared by Indigenous farmers"
+     ],
+     "ans": 0,
+     "hint": "What happens to a field after a few years of growing tobacco?",
+     "steps": [
+      "Tobacco draws nutrients out of the soil unusually fast.",
+      "After a few harvests a field yields poorly and is left behind.",
+      "So a planter needs a steady supply of fresh land just to keep production level.",
+      "That constant hunger for new fields pushed settlement outward onto Indigenous land."
+     ],
+     "ex": {
+      "main": "**It exhausts the soil, so planters constantly needed new fields.** The crop itself generated the land pressure.",
+      "tip": "Land hunger and labour hunger both trace back to tobacco. Connecting them is what a level 3 question will want."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did colonists often ally with one Indigenous nation against another?",
+     "opts": [
+      "Existing rivalries, such as between Iroquois and Algonquian peoples, could be turned to their advantage",
+      "Because all Indigenous nations were allied with each other",
+      "Because colonists could not tell the nations apart",
+      "Because Indigenous nations refused to trade otherwise"
+     ],
+     "ans": 0,
+     "hint": "Were Indigenous nations a single bloc, or many separate powers?",
+     "steps": [
+      "Indigenous North America held many distinct nations with their own interests and histories.",
+      "Some were long-standing rivals — Iroquois and Algonquian peoples among them.",
+      "Colonists were far outnumbered early on and could not simply impose their will.",
+      "Allying with one side of an existing rivalry gave them leverage they could not have had alone."
+     ],
+     "ex": {
+      "main": "**Existing rivalries could be turned to their advantage.** Treating Indigenous nations as one group is a mistake the question is testing.",
+      "tip": "Whenever a source says \"the Indians\", ask which nation. The differences usually matter to the outcome."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the Powhatan Confederacy tell you about the situation Jamestown was founded in?",
+     "opts": [
+      "The English settled inside the territory of an organised regional power",
+      "The land around Jamestown was uninhabited",
+      "The English were the strongest force in the region from the start",
+      "The Powhatan had no central leadership"
+     ],
+     "ans": 0,
+     "hint": "Roughly thirty groups under one leader. What does that add up to?",
+     "steps": [
+      "The Powhatan Confederacy united about thirty Algonquian-speaking groups under Wahunsenacawh.",
+      "That is an organised regional power with thousands of people, not a scattering of villages.",
+      "Jamestown was a small, struggling settlement planted inside that territory.",
+      "Early survival depended on trading with the Powhatan, which is the opposite of English dominance."
+     ],
+     "ex": {
+      "main": "**The English settled inside the territory of an organised regional power.** Early Jamestown survived at Powhatan sufferance, not in spite of them.",
+      "tip": "Ask who held the power at each moment. In 1607 it was not the English, and that changes how you read the events."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why is Cahokia important evidence in the argument about pre-contact North America?",
+     "opts": [
+      "It shows large, organised, city-building societies existed long before Europeans arrived",
+      "It proves Europeans reached America earlier than thought",
+      "It was built by Europeans",
+      "It shows Indigenous peoples did not farm"
+     ],
+     "ans": 0,
+     "hint": "What claim about pre-contact America does a city of 20,000 make impossible?",
+     "steps": [
+      "A common older claim was that North America held only small, scattered, non-agricultural groups.",
+      "Cahokia was a planned city with enormous earthworks, supported by intensive maize farming.",
+      "At its height it may have held 10,000 to 20,000 people, larger than London at the same date.",
+      "A society that builds and feeds a city that size cannot be described as small or scattered."
+     ],
+     "ex": {
+      "main": "**It shows large, organised, city-building societies existed long before contact.** One site is enough to disprove a claim stated that broadly.",
+      "tip": "A single strong counter-example defeats a sweeping generalisation. That is a useful move in an essay."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Roanoke failed and Jamestown survived. Which difference best explains it?",
+     "opts": [
+      "Jamestown eventually found a profitable export in tobacco, which brought continued investment and supply",
+      "Jamestown had a better climate",
+      "Roanoke had no contact with Indigenous peoples",
+      "Jamestown was founded by the Crown rather than a company"
+     ],
+     "ans": 0,
+     "hint": "What does a struggling colony need from home to keep going?",
+     "steps": [
+      "Both colonies were badly supplied and both nearly died — Jamestown lost most of its people in the Starving Time.",
+      "The difference is what happened next: from 1612 tobacco gave Jamestown something England wanted to buy.",
+      "A profitable export brought investment, ships and new settlers, which is what a colony needs to survive.",
+      "Roanoke never found one and its supply line failed entirely. Jamestown was a company venture too, so the last option is simply wrong."
+     ],
+     "ex": {
+      "main": "**Tobacco gave Jamestown a profitable export.** Survival was economic, not a matter of climate or luck.",
+      "tip": "When comparing two similar attempts with different outcomes, look for the one variable that actually differed."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A student writes that indentured servitude and chattel slavery were \"basically the same thing.\" What is the strongest correction?",
+     "opts": [
+      "Indenture was temporary and contractual; chattel slavery was lifelong, inherited and racial",
+      "They were the same, so no correction is needed",
+      "Indentured servants were paid wages",
+      "Chattel slavery ended after seven years"
+     ],
+     "ans": 0,
+     "hint": "Name the differences precisely rather than just disagreeing.",
+     "steps": [
+      "Both involved unfree labour in harsh conditions, which is why the comparison gets made at all.",
+      "But an indenture had a fixed term, usually four to seven years, after which the servant was free.",
+      "Chattel slavery had no term, was inherited by children, and was defined by race in law.",
+      "Temporary versus lifelong, contractual versus inherited, and open versus racial are three separate differences."
+     ],
+     "ex": {
+      "main": "**Temporary and contractual versus lifelong, inherited and racial.** Naming all three differences is what makes the correction strong.",
+      "tip": "When correcting a claim, give the specific differences. \"That is wrong\" earns nothing on an exam."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "How did the shift from indentured servitude to chattel slavery connect to the headright system and tobacco?",
+     "opts": [
+      "Tobacco demanded ever more land and labour; headrights rewarded importing people; when servants survived to claim land and freedom, planters turned to a permanent labour force",
+      "The headright system was abolished, forcing planters to buy enslaved people",
+      "Tobacco stopped growing well, so planters needed more skilled workers",
+      "There is no connection between them"
+     ],
+     "ans": 0,
+     "hint": "Follow the chain: what does tobacco need, what do headrights reward, and what happens when an indenture ends?",
+     "steps": [
+      "Tobacco exhausts soil, so planters needed constant new land, and it is labour-intensive, so they needed constant workers.",
+      "The headright system rewarded importing people by granting land for each passage paid.",
+      "But an indenture ends — surviving servants became free, wanted land of their own, and stopped being a labour supply.",
+      "A labour force that was lifelong and inherited solved that problem permanently, from the planters' point of view."
+     ],
+     "ex": {
+      "main": "**All three connect: the crop drove the demand, headrights shaped who profited, and the end of indentures made a permanent labour force attractive.** This chain is the heart of Unit 1.",
+      "tip": "This is the essay question hiding in this unit. Be able to say it in four sentences without notes."
+     }
+    }
+   ]
+  }
+ }
+}

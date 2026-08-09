@@ -1,0 +1,468 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u1p5": {
+   "id": "unit-hist-u1p5",
+   "type": "unit",
+   "updatedAt": 1786231680102,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 1 · 5 The Middle Colonies",
+   "srcName": "History 8, Unit 1 Key Terms",
+   "source": "History 8, Unit 1 key-terms list (Drive folder)",
+   "summary": {
+    "text": "The last group of Unit 1 key terms: the middle colonies and what made them different. Covers New Netherlands, New Amsterdam, New York, New Jersey, Delaware, Pennsylvania, William Penn, the Quakers, pacifism, the Holy Experiment, religious tolerance, pluralism, diversity, immigrants, Catholics and Protestants, fertile soil and cash crops, port cities and trade networks, and land availability and economic opportunity.",
+    "from": "source"
+   },
+   "why": {
+    "text": "The middle colonies are the answer to anyone who thinks the colonial period only had two settings. Grain instead of plantation crops, migrants from half of Europe, and a founder who paid for land rather than taking it — the region is the standing counter-example to the tidy story.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain how New Netherlands became New York and what stayed the same",
+     "from": "source"
+    },
+    {
+     "text": "Describe Pennsylvania's founding principles and William Penn's dealings with the Lenape",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish pluralism from religious tolerance",
+     "from": "source"
+    },
+    {
+     "text": "Explain why grain farming produced a different labour system from rice or tobacco",
+     "from": "added"
+    },
+    {
+     "text": "Compare all three colonial regions on crop, labour and migration",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Same caveat as the rest of this series: the source is a blank worksheet she is meant to complete from her textbook, so I would keep it in the draft queue until she has done it, then release it as revision. Last part of the series. The strongest thread here is comparison: this unit is where she can put the three regions side by side, and the final question asks exactly that. Two honesty notes built into the content. First, colonial religious tolerance was real and it was partial — it usually protected Protestants and often excluded Catholics — and the unit says both rather than either. Second, on William Penn: his fair dealing with the Lenape is used to show that seizure elsewhere was a choice rather than an inevitability, but the explanation also notes that his successors abandoned that standard, so she does not come away with a simply heroic version.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "The last quiz question compares all three regions. That comparison is the most likely essay prompt in Unit 1.",
+    "minutes": 26,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "New Netherlands",
+     "def": "**The Dutch colony along the Hudson, founded in the 1620s and taken by England in 1664.**\n• Run by the Dutch West India Company as a trading venture rather than a settlement project.\n• Why it matters: its diversity and commercial character carried straight into English New York.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "New Amsterdam",
+     "def": "**The Dutch settlement at the mouth of the Hudson, renamed New York in 1664.**\n• Already strikingly mixed — many languages were spoken there under Dutch rule.\n• Why it matters: New York's diversity predates English control; the English inherited it.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "New York",
+     "def": "**Formerly New Netherlands, taken by England in 1664 and granted to the Duke of York.**\n• The Dutch population, their language and their churches largely stayed.\n• Why it matters: a colony that changed hands without changing its people.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "New Jersey",
+     "def": "**Split off from New York in 1664, granted to two proprietors.**\n• Advertised religious freedom and easy land terms to attract settlers.\n• Why it matters: a clear case of toleration used deliberately as a recruiting tool.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Delaware",
+     "def": "**Originally Swedish, then Dutch, then English; governed with Pennsylvania until 1704.**\n• Its position on the bay made it valuable for trade.\n• Why it matters: three European claimants in one small colony shows how contested the region was.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Pennsylvania",
+     "def": "**Founded 1681 by William Penn as a Quaker colony.**\n• Guaranteed religious freedom, an elected assembly, and fair dealing with Indigenous nations.\n• Philadelphia grew into the largest city in the colonies.\n• Why it matters: the most deliberately designed colony, and the most successful at attracting settlers.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "William Penn",
+     "def": "**English Quaker who founded Pennsylvania on a land grant settling a royal debt.**\n• Negotiated and paid for land from the Lenape rather than seizing it.\n• Wrote a frame of government guaranteeing religious liberty and trial by jury.\n• Why it matters: he shows the colonial pattern was a choice, since he made a different one and prospered.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Quakers",
+     "def": "**The Society of Friends, who believe every person carries an inner light and needs no clergy.**\n• Rejected oaths, refused deference to social rank, and admitted women as preachers.\n• Persecuted in England and in Massachusetts, where several were executed.\n• Why it matters: their beliefs about equality shaped Pennsylvania's laws directly.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Pacifism",
+     "def": "**The refusal to take part in war or violence, a core Quaker commitment.**\n• Pennsylvania kept no militia for many years.\n• Why it matters: it supported peaceful relations with the Lenape and later caused real difficulty when frontier war came.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Holy Experiment",
+     "def": "**Penn's name for Pennsylvania: a test of whether a society could run on tolerance and fair dealing.**\n• Experiment is the operative word — he expected to be judged on the result.\n• Why it matters: it worked well enough that Pennsylvania grew faster than colonies built on coercion.",
+     "hint": "He called it an experiment, which means he thought it might fail. It largely did not.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Religious Tolerance",
+     "def": "**Permitting the practice of faiths other than the official one.**\n• Pennsylvania, Rhode Island, New Jersey and Maryland all extended it in some form.\n• Almost always limited — usually to Christians, and often not to Catholics.\n• Why it matters: it was real and it was partial, and saying only one of those is inaccurate.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Pluralism",
+     "def": "**A society containing many distinct religious and ethnic groups living alongside one another.**\n• The middle colonies held Dutch, German, Swedish, Scots-Irish and English settlers.\n• Why it matters: pluralism describes the fact; tolerance describes the policy that permits it.",
+     "hint": "Pluralism is the situation. Tolerance is the rule that allows it. Do not swap them.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Diversity",
+     "def": "**The mix of peoples, languages and faiths that made the middle colonies distinct.**\n• New York and Pennsylvania were the most varied places in English America.\n• Why it matters: it produced a different social order from either the plantation South or Puritan New England.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Immigrants",
+     "def": "**People arriving from Europe, drawn by land, work and religious freedom.**\n• Germans and Scots-Irish came in large numbers to Pennsylvania.\n• Why it matters: the middle colonies grew mainly by attracting migrants rather than by natural increase.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Catholics and Protestants",
+     "def": "**The two branches of Western Christianity whose conflict shaped colonial policy.**\n• Maryland was founded as a Catholic refuge in a Protestant empire.\n• Toleration laws frequently protected Protestants while excluding Catholics.\n• Why it matters: the limits of colonial toleration usually fall exactly along this line.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Fertile Soil and Cash Crops (middle colonies)",
+     "def": "**Rich farmland producing wheat and other grain for export.**\n• The middle colonies were called the breadbasket colonies.\n• Grain needs far less labour per acre than rice or tobacco.\n• Why it matters: this is why slavery, though present, never became the region's economic foundation.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Port Cities and Trade Networks",
+     "def": "**Philadelphia and New York, both major Atlantic ports.**\n• Handled grain exports, imports, shipbuilding and finance.\n• Why it matters: port cities concentrate people, money and news, which made these the political centres later.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Land Availability and Economic Opportunity",
+     "def": "**Plentiful land on easy terms, which is what drew most migrants.**\n• A family could realistically expect to own a farm — impossible for most in Europe.\n• Why it matters: opportunity, more than religion, explains the scale of middle colony migration.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Who founded Pennsylvania, and on what principle?",
+     "opts": [
+      "William Penn, as a Quaker colony guaranteeing religious freedom",
+      "John Winthrop, as a Puritan community",
+      "Lord Baltimore, as a Catholic refuge",
+      "James Oglethorpe, as a debtors' refuge"
+     ],
+     "ans": 0,
+     "hint": "The founder was a Quaker and called it a Holy Experiment.",
+     "steps": [
+      "William Penn received the land in 1681 in settlement of a royal debt owed to his father.",
+      "He was a Quaker, and built the colony on Quaker principles.",
+      "Its frame of government guaranteed religious liberty and an elected assembly.",
+      "Winthrop founded Massachusetts Bay, Baltimore founded Maryland, and Oglethorpe founded Georgia."
+     ],
+     "ex": {
+      "main": "**William Penn, as a Quaker colony guaranteeing religious freedom.** He called it his Holy Experiment.",
+      "tip": "Four founders worth knowing cold: Winthrop, Williams, Penn and Oglethorpe."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What happened to New Netherlands in 1664?",
+     "opts": [
+      "England took it and renamed it New York",
+      "It was destroyed by fire",
+      "It became independent",
+      "It was sold to Sweden"
+     ],
+     "ans": 0,
+     "hint": "It changed hands, and the new name is a large city today.",
+     "steps": [
+      "New Netherlands was a Dutch colony on the Hudson, run as a trading venture.",
+      "In 1664 England took control of it.",
+      "New Amsterdam was renamed New York, after the Duke of York.",
+      "The Dutch population largely stayed, keeping their language and churches."
+     ],
+     "ex": {
+      "main": "**England took it and renamed it New York.** The people mostly stayed, which is why the colony kept its Dutch character.",
+      "tip": "A colony changing flags is not the same as its population changing. New York is the clearest example."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why were the middle colonies called the breadbasket colonies?",
+     "opts": [
+      "They grew and exported large amounts of wheat and other grain",
+      "They baked bread for the whole empire",
+      "They had the most bakeries",
+      "They imported all their food"
+     ],
+     "ans": 0,
+     "hint": "Think about what a breadbasket holds and where bread comes from.",
+     "steps": [
+      "The middle colonies had rich, fertile soil suited to grain.",
+      "They grew wheat and other grains well beyond what they needed themselves.",
+      "The surplus was exported, feeding other colonies and Europe.",
+      "That role earned them the nickname breadbasket colonies."
+     ],
+     "ex": {
+      "main": "**They grew and exported large amounts of grain.** Grain, not tobacco or rice, is what made this region different.",
+      "tip": "Match region to crop: tobacco Chesapeake, rice and indigo the deep South, grain the middle colonies."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is pacifism?",
+     "opts": [
+      "The refusal to take part in war or violence",
+      "A form of self-government",
+      "A type of cash crop",
+      "A tax on imported goods"
+     ],
+     "ans": 0,
+     "hint": "It is a Quaker commitment and it shaped Pennsylvania.",
+     "steps": [
+      "Pacifism is a principled refusal to take part in war or violence.",
+      "It is a core Quaker commitment, so it shaped Pennsylvania from the start.",
+      "The colony kept no militia for many years as a result."
+     ],
+     "ex": {
+      "main": "**The refusal to take part in war or violence.** It supported peaceful relations with the Lenape and caused real trouble when frontier war came.",
+      "tip": "A principle with genuine costs is more interesting than one without. Pennsylvania paid this one."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did slavery never become the economic foundation of the middle colonies, though it existed there?",
+     "opts": [
+      "Grain farming needs far less labour per acre than rice or tobacco",
+      "Slavery was illegal in every middle colony",
+      "The climate was too cold for any farming",
+      "There were no ports to import enslaved people"
+     ],
+     "ans": 0,
+     "hint": "Compare the labour a wheat field needs with what a rice field needs.",
+     "steps": [
+      "Slavery did exist in the middle colonies, so illegality is not the answer.",
+      "The region's main crop was grain, and grain needs far less labour per acre than rice or tobacco.",
+      "A family farm with occasional hired help could work a viable wheat farm.",
+      "Without the enormous labour demand of a plantation crop, the economics that made slavery central further south never took hold."
+     ],
+     "ex": {
+      "main": "**Grain needs far less labour per acre.** The crop determined the labour system, here as everywhere in Unit 1.",
+      "tip": "Notice this is the same causal chain as the southern colonies, running the other way."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "How did Quaker beliefs shape Pennsylvania's laws?",
+     "opts": [
+      "Belief in an inner light in every person supported religious liberty and fair dealing",
+      "They required an official state church",
+      "They banned all trade",
+      "They restricted voting to clergy"
+     ],
+     "ans": 0,
+     "hint": "If every person carries an inner light, what follows about how you must treat them?",
+     "steps": [
+      "Quakers hold that every person carries an inner light and needs no clergy to reach God.",
+      "That implies no one's conscience should be overruled, which supports religious liberty.",
+      "It also implies a basic equality, which shaped Penn's insistence on fair dealing with the Lenape and on trial by jury.",
+      "Quakers rejected an official clergy entirely, so an official state church is the opposite of their position."
+     ],
+     "ex": {
+      "main": "**Belief in an inner light supported religious liberty and fair dealing.** The theology and the law line up directly.",
+      "tip": "Compare with covenant theology in New England: both are beliefs that produced laws, pointing in opposite directions."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the difference between pluralism and religious tolerance?",
+     "opts": [
+      "Pluralism describes many groups living together; tolerance is the policy that permits it",
+      "They mean the same thing",
+      "Pluralism is a law; tolerance is a belief",
+      "Pluralism applies only to Christians"
+     ],
+     "ans": 0,
+     "hint": "One is a description of a situation. The other is a rule.",
+     "steps": [
+      "Pluralism describes a fact: many distinct religious and ethnic groups living alongside each other.",
+      "Tolerance describes a policy: permitting the practice of faiths other than the official one.",
+      "A place can be plural without being tolerant, if the groups are there but restricted.",
+      "So one is the situation and the other is the rule that allows it."
+     ],
+     "ex": {
+      "main": "**Pluralism is the situation; tolerance is the policy.** Keeping them apart is what makes the distinction worth having.",
+      "tip": "Exam questions love pairs of terms that sound similar. Practise stating the difference in one sentence."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why did New Jersey and Pennsylvania advertise religious freedom?",
+     "opts": [
+      "To attract settlers, since colonies competed for migrants",
+      "Because the king required it",
+      "Because they had no churches",
+      "Because their founders were not religious"
+     ],
+     "ans": 0,
+     "hint": "What does a new colony need most, and who was it competing with?",
+     "steps": [
+      "A new colony needs people, and every colony was competing for the same migrants.",
+      "Religious freedom and easy land terms were what those migrants most wanted.",
+      "Advertising both was a recruitment strategy as well as a principle.",
+      "Penn was deeply religious, so an absence of belief is certainly not the reason."
+     ],
+     "ex": {
+      "main": "**To attract settlers.** The principle was genuine AND it was good marketing — both can be true at once.",
+      "tip": "Do not assume a motive must be either sincere or strategic. In the middle colonies it was regularly both."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "William Penn paid the Lenape for land while other colonies seized it. Why does that matter for how we judge the period?",
+     "opts": [
+      "It shows that seizure was a choice rather than the only option available at the time",
+      "It proves Penn was not really a colonist",
+      "It shows the Lenape were not harmed at all",
+      "It means Pennsylvania acquired no land"
+     ],
+     "ans": 0,
+     "hint": "What does one contemporary doing otherwise do to the claim that everyone behaved that way?",
+     "steps": [
+      "A common defence of colonial land seizure is that it was simply how things were done then.",
+      "Penn, in the same period, negotiated and paid for land instead.",
+      "So an alternative existed, was known, and was practised successfully by a colony that prospered.",
+      "That makes seizure a choice among available options, not an inevitability of the era."
+     ],
+     "ex": {
+      "main": "**It shows seizure was a choice.** This is the same reasoning as Rhode Island versus Massachusetts — a contemporary counter-example.",
+      "tip": "Penn's successors did not keep his standards, and the Walking Purchase of 1737 is the usual example. Fair dealing did not outlast him."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Colonial toleration laws often protected Protestants while excluding Catholics. What does that tell you about the limits of colonial toleration?",
+     "opts": [
+      "It was real but partial, usually bounded by which Christians were considered acceptable",
+      "It did not exist at all",
+      "It applied equally to everyone",
+      "It applied only to Catholics"
+     ],
+     "ans": 0,
+     "hint": "Look at where the line was drawn rather than whether a line existed.",
+     "steps": [
+      "Several colonies did extend genuine toleration, and dissenters really were safer in Rhode Island or Pennsylvania.",
+      "But the protections usually covered Christians, and frequently excluded Catholics.",
+      "Even Maryland, founded as a Catholic refuge, later restricted Catholic worship.",
+      "So toleration was real and it was bounded — saying only one of those misdescribes it."
+     ],
+     "ex": {
+      "main": "**Real but partial.** The line usually fell between Protestant and Catholic, and finding the line is how you measure the policy.",
+      "tip": "When you meet the word toleration, ask immediately: toleration of whom, and who is left out?"
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why did the middle colonies develop a different social order from both New England and the southern colonies?",
+     "opts": [
+      "Grain farming, diverse migration and port cities produced a mixed commercial society rather than a plantation or a religious one",
+      "They were founded much later",
+      "They had no farming at all",
+      "They were governed directly from England"
+     ],
+     "ans": 0,
+     "hint": "Consider all three: what they grew, who came, and where they traded.",
+     "steps": [
+      "The southern colonies were organised around plantation cash crops and enslaved labour.",
+      "New England was organised around tight religious communities on modest farms.",
+      "The middle colonies grew grain, which needs less labour, and attracted Dutch, German, Swedish and Scots-Irish migrants.",
+      "Add major ports at Philadelphia and New York and you get a mixed, commercial, plural society unlike either neighbour."
+     ],
+     "ex": {
+      "main": "**Grain, diverse migration and ports produced a mixed commercial society.** Three causes together, not one.",
+      "tip": "Compare the three regions on crop, labour and who migrated. That table answers most comparison questions in Unit 1."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Pennsylvania's pacifism supported good relations with the Lenape but later caused difficulty. Why?",
+     "opts": [
+      "A colony committed to non-violence struggled to respond when frontier conflict arrived",
+      "Because pacifists cannot farm",
+      "Because the Lenape demanded a militia",
+      "Because England banned pacifism"
+     ],
+     "ans": 0,
+     "hint": "What does a colony without a militia do when it is attacked?",
+     "steps": [
+      "Quaker pacifism meant Pennsylvania kept no militia for many years.",
+      "While relations with the Lenape stayed peaceful, that cost nothing and arguably helped.",
+      "When frontier violence came, especially as settlers pushed west, the colony had no military structure and no agreed way to build one.",
+      "Quaker legislators faced a choice between their principle and defending settlers, which split the colony's politics badly."
+     ],
+     "ex": {
+      "main": "**A colony committed to non-violence struggled when conflict arrived.** The principle worked until it was tested, which is when principles usually get tested.",
+      "tip": "This eventually pushed many Quakers out of Pennsylvania politics. A conviction can be admirable and still be hard to govern with."
+     }
+    }
+   ]
+  }
+ }
+}
