@@ -727,7 +727,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v70 · the whole catalog';
+const APP_VERSION = 'v71 · crochet corrected';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -809,7 +809,9 @@ const CLUBS = [
    desc:'Fundraising to support women\u2019s education in developing nations — bake sales, restaurant fundraisers and school dances.'},
   {id:'hsafp',     day:'Friday', nm:'HS Alliance for Future Physicians', gr:'8th–12th', cost:75, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
    desc:'For students aiming at medicine: hands-on activities and resources built to give aspiring physicians a head start.'},
-  {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', gr:'8th–12th', cost:0, flag:'invite only'}
+  {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', gr:'8th–12th', cost:0, flag:'invite only'},
+  {id:'crochet',   day:'Friday', nm:'Crochet Club', gr:'6th–12th', cost:175, time:'3:45–5:00', freq:'weekly', first:'Aug 21',
+   desc:'A creative, relaxing space to learn crochet — chain stitch through amigurumi stuffed animals. All materials provided; bring your curiosity.'}
 ];
 /* The rest of the catalog — clubs whose grade range does not include 8th.
    Listed so the app and the catalog PDF reconcile at a glance: if a club is
@@ -839,7 +841,6 @@ const CLUBS_CLOSED = [
   {day:'Thursday',  nm:'Physics Olympiad', gr:'9th–12th'},
   {day:'Thursday',  nm:'Upper School Science Bowl', gr:'9th–12th'},
   {day:'Thu & Fri', nm:'Dance Club', gr:'9th–12th'},
-  {day:'Friday',    nm:'Crochet Club', gr:'9th–12th'},
   {day:'Friday',    nm:'MindTech', gr:'9th–12th'},
   {day:'Friday',    nm:'Baking for Better', gr:'9th–12th'}
 ];
@@ -3321,7 +3322,7 @@ SCREENS.clubs = function(root){
     cc.appendChild(r);
   });
   root.appendChild(cc);
-  root.appendChild(el('div','hintline','These are the catalog’s own grade ranges. If one looks wrong against the PDF, tell Mom or Dad — the app updates in one deploy.'));
+  root.appendChild(el('div','hintline','These grade ranges were pulled from the catalog and one has already needed a correction — double-check against the actual catalog before registering, and tell Mom or Dad if another looks off.'));
   const back = el('button','btn btn-ghost','← Today');
   back.addEventListener('click',()=>go('today'));
   root.appendChild(back);
