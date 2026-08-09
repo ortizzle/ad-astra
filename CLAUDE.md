@@ -266,8 +266,13 @@ exercises use the format; the engine travels to both apps.
 
 Sedona's vocabulary lessons ship as `Wordly Wise Book 9 · Lesson N`, so they
 shelve as one book. 15 cards (every card carries hand-checked `sp`) and 18
-questions each, 3–4 of them analogies. Lesson 2's PDF extracts as empty text
-and is **not** built — do not guess a word list from the lesson numbering.
+questions each, 3–4 of them analogies. All seven lessons are built.
+
+**Lesson 2's PDF is a pure scan with no text layer** — every text extraction
+(Drive's included) returns empty on it. It was read by rendering the pages to
+images with `pypdfium2` and reading those. If a source file comes back empty,
+render it rather than assuming the file is broken; and never guess a word list
+from the lesson numbering.
 
 ### Per-unit sitting size (v69 / Wayfinder v57, both apps)
 

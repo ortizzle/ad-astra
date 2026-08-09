@@ -1,0 +1,601 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-02": {
+   "id": "unit-ww9-02",
+   "type": "unit",
+   "updatedAt": 1786305223003,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 2",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 2 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 2 of Wordly Wise 3000 Book 9: fifteen words covering certainty and reasoning (incontrovertible, inexplicable, deduce), speed and delay (alacrity, laggard), abundance and extremity (ubiquitous, array, zenith, torrid), and burden and disorder (encumber, fraught, haphazard), plus ingenious, sustenance and traverse.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Three of these — deduce, incontrovertible, inexplicable — are the vocabulary of how confident a claim is. They are the words you need to say precisely how much evidence you actually have.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 2 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Choose the right sense of array, torrid and zenith from context",
+     "from": "source"
+    },
+    {
+     "text": "Deduce only what the given facts actually support",
+     "from": "added"
+    },
+    {
+     "text": "Separate look-alike words such as ingenious and ingenuous",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 2 scan. This one was rebuilt after the original PDF turned out to be a pure image with no text layer — every automatic extraction returned empty, so it was read by rendering the pages. Two traps worth checking with her: haphazard contains “hazard” but means disordered, not dangerous; and ingenious (clever) is one letter from ingenuous (innocent). Both get their own question.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first — incontrovertible and ubiquitous are worth hearing out loud. Then the quiz.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "alacrity",
+     "sp": "uh-LAK-ruh-tee",
+     "def": "**Promptness in responding; eagerness.** (noun)\n• The seller accepted my dad's first offer with such alacrity that he wished he had offered less.\n• At the beginning of recess, the children ran to the playground with alacrity.",
+     "hint": "Alacrity is speed WITH willingness. Doing something fast but grudgingly is not alacrity.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "array",
+     "sp": "uh-RAY",
+     "def": "**A large group of people or things; an orderly arrangement or display.** (noun)\n• The ship's cabin contained an array of charts and maps.\n• As a verb: to place in order (the band was arrayed at the entrance), or to dress up (the guests had arrayed themselves in elaborate attire).",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "deduce",
+     "sp": "dih-DOOS",
+     "def": "**To draw a conclusion from given facts.** (verb)\n• That you are carrying an umbrella leads me to deduce that you expect rain.\n• Deducing needs evidence — a guess with nothing behind it is not a deduction.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "encumber",
+     "sp": "en-KUM-bur",
+     "def": "**To weigh down or burden; to impede the action of.** (verb)\n• I stumbled through the door, encumbered by my two heavy suitcases.\n• encumbrance (n): credit-card debt was an encumbrance to the couple saving for a house.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "fraught",
+     "sp": "frawt",
+     "def": "**Full of or accompanied by** (usually followed by *with*). (adjective)\n• We abandoned our idea of travelling up the Amazon when we learned the trip would be fraught with danger.\n• Almost always followed by something unwelcome — fraught with danger, with difficulty, with risk.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "haphazard",
+     "sp": "hap-HAZ-urd",
+     "def": "**Marked by lack of plan, order, or direction.** (adjective)\n• He described in humorous detail his haphazard travels around Europe.\n• Hap is an old word for chance — haphazard things happen by chance rather than design.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "incontrovertible",
+     "sp": "in-kahn-truh-VUR-tuh-bul",
+     "def": "**Impossible to dispute; unquestionable.** (adjective)\n• His statement that carbon-dioxide levels in the atmosphere are increasing is incontrovertible.\n• Take it apart: in- (not) + controvert (to argue against) — it cannot be argued against.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "inexplicable",
+     "sp": "in-eks-PLIK-uh-bul",
+     "def": "**Hard to explain or impossible to understand.** (adjective)\n• The disappearance of ships and planes in the Bermuda Triangle is inexplicable to me.\n• Inexplicable means no explanation is available — not that the thing did not happen.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "ingenious",
+     "sp": "in-JEEN-yus",
+     "def": "**Marked by imagination, resourcefulness, or cleverness.** (adjective)\n• Disposing of garbage by converting it into energy is an ingenious idea.\n• ingenuity (n, in-juh-NOO-uh-tee): the child's ingenuity was immediately apparent to her teachers.",
+     "hint": "Ingenious means clever. Ingenuous — one letter different — means innocent and open. Not the same word.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "laggard",
+     "sp": "LAG-urd",
+     "def": "**One who falls behind others because of moving slowly or loitering; a straggler.** (noun)\n• The laggards crossed the finish line long after the winner had broken the tape.\n• Also an adjective: we have been laggard in getting the roof repaired.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "sustenance",
+     "sp": "SUS-tuh-nuns",
+     "def": "**Something that provides nourishment; food needed to live.** (noun)\n• Roots and berries provided sustenance for the sailors stranded on the island.\n• Sustain is inside it — sustenance is what keeps you going.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "torrid",
+     "sp": "TOR-id",
+     "def": "**Intensely hot and dry.** (adjective)\n• It was impossible to walk barefoot on the torrid desert sand.\n• Second meaning: burning with passion — the old letter was filled with torrid declarations of undying love.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "traverse",
+     "sp": "truh-VURS",
+     "def": "**To pass over, across, or through.** (verb)\n• Route 66, which traverses the United States from Chicago to Los Angeles, was called \"The Mother Road\".\n• It implies crossing the whole span, not merely entering.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "ubiquitous",
+     "sp": "yoo-BIK-wuh-tus",
+     "def": "**Appearing to be present in large numbers or in many different places.** (adjective)\n• Tourists with cameras are ubiquitous in Europe every summer.\n• It is hyperbole by design — nothing is literally everywhere at once.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "zenith",
+     "sp": "ZEE-nith",
+     "def": "**The highest point; the peak.** (noun)\n• Winning the Nobel prize is, for some writers, the zenith of their career.\n• Second meaning: the point in the sky directly above the observer — the comet lay midway between the horizon and the zenith.",
+     "hint": "Its opposite is nadir, the lowest point. Astronomy gave us both.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Someone who responds with alacrity responds:",
+     "opts": [
+      "Promptly and willingly",
+      "Slowly and reluctantly",
+      "Angrily but quickly",
+      "Only after being asked twice"
+     ],
+     "ans": 0,
+     "hint": "It is speed with willingness in it.",
+     "steps": [
+      "Alacrity means promptness in responding, and also eagerness.",
+      "Children running to the playground with alacrity are quick BECAUSE they are eager.",
+      "Speed alone is not alacrity — the willingness is half the definition."
+     ],
+     "ex": {
+      "main": "**Promptly and willingly.** Both halves matter: doing something fast but grudgingly is not alacrity.",
+      "tip": "When a definition lists two elements, an option satisfying only one is usually the trap."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To deduce something is to:",
+     "opts": [
+      "Draw a conclusion from given facts",
+      "Guess without any evidence",
+      "Repeat what someone else concluded",
+      "Refuse to reach a conclusion"
+     ],
+     "ans": 0,
+     "hint": "Evidence has to come first.",
+     "steps": [
+      "Deduce means to draw a conclusion from given facts.",
+      "Seeing an umbrella and concluding you expect rain is a deduction — the umbrella is the fact.",
+      "A guess with nothing behind it is exactly what deduction is not."
+     ],
+     "ex": {
+      "main": "**Draw a conclusion from given facts.** The facts are required; without them it is a guess.",
+      "tip": "Deduce, infer and assume differ by how much evidence they need. Deduction needs the most."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Haphazard arrangements are:",
+     "opts": [
+      "Without plan, order, or direction",
+      "Carefully planned in advance",
+      "Dangerous to be near",
+      "Extremely expensive"
+     ],
+     "ans": 0,
+     "hint": "Hap is an old word for chance.",
+     "steps": [
+      "Haphazard means marked by lack of plan, order or direction.",
+      "Haphazard travels around Europe are travels with no itinerary.",
+      "The \"hazard\" inside the word tempts people toward \"dangerous\" — but the meaning is about disorder."
+     ],
+     "ex": {
+      "main": "**Without plan, order, or direction.** Note it does NOT mean dangerous, despite how it looks.",
+      "tip": "A word that LOOKS like another word is a favourite trap. Haphazard contains hazard and means nothing like it."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An incontrovertible fact is one that:",
+     "opts": [
+      "Cannot be disputed",
+      "Has not yet been tested",
+      "Is widely misunderstood",
+      "Was discovered recently"
+     ],
+     "ans": 0,
+     "hint": "Take the word apart: in + controvert.",
+     "steps": [
+      "Incontrovertible means impossible to dispute; unquestionable.",
+      "In- means not, and controvert means to argue against.",
+      "So an incontrovertible fact is one there is no arguing with."
+     ],
+     "ex": {
+      "main": "**Cannot be disputed.** The word is built from its own definition: not-arguable-against.",
+      "tip": "Long words are often easier than short ones — they are built from parts you can take apart."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Sustenance is:",
+     "opts": [
+      "Nourishment; the food needed to live",
+      "A steady rate of speed",
+      "A formal complaint",
+      "The highest point reached"
+     ],
+     "ans": 0,
+     "hint": "Sustain is hiding inside it.",
+     "steps": [
+      "Sustenance is something that provides nourishment; the food needed to live.",
+      "Roots and berries providing sustenance for stranded sailors is the book's example.",
+      "The word shares its root with sustain — sustenance is what sustains you."
+     ],
+     "ex": {
+      "main": "**Nourishment; the food needed to live.** What sustains you is your sustenance.",
+      "tip": "Spotting a familiar verb inside an unfamiliar noun usually hands you the meaning free."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A laggard is someone who:",
+     "opts": [
+      "Falls behind others by moving slowly",
+      "Leads a group confidently",
+      "Explains things clearly",
+      "Gives generously to others"
+     ],
+     "ans": 0,
+     "hint": "Think of the last runners across the line.",
+     "steps": [
+      "A laggard is one who falls behind others because of moving slowly or loitering; a straggler.",
+      "Laggards crossing the finish line long after the winner is the book's example.",
+      "It can also be an adjective: we have been laggard in getting the roof repaired."
+     ],
+     "ex": {
+      "main": "**Falls behind by moving slowly.** Lag is inside it, doing all the work.",
+      "tip": "Nouns for kinds of people — laggard, ingrate, proponent, despot — are worth grouping. Tests like them."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Something ubiquitous is:",
+     "opts": [
+      "Seemingly present everywhere",
+      "Extremely rare",
+      "Impossible to explain",
+      "Hot and dry"
+     ],
+     "ans": 0,
+     "hint": "Think of tourists with cameras in Europe in July.",
+     "steps": [
+      "Ubiquitous means appearing to be present in large numbers or in many different places.",
+      "Tourists with cameras being ubiquitous in Europe every summer is the book's example.",
+      "Rarity is its opposite; the other options define inexplicable and torrid."
+     ],
+     "ex": {
+      "main": "**Seemingly present everywhere.** Note \"appearing to be\" — the word is deliberate exaggeration.",
+      "tip": "Ubiquitous is almost always hyperbole. Nothing is literally in all places at once."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A report says the expedition was \"fraught with difficulty.\" This means the expedition was:",
+     "opts": [
+      "Full of difficulty throughout",
+      "Cancelled because of difficulty",
+      "Surprisingly free of difficulty",
+      "Difficult only at the start"
+     ],
+     "ans": 0,
+     "hint": "Fraught means full of, and takes \"with\".",
+     "steps": [
+      "Fraught means full of or accompanied by, usually followed by with.",
+      "Fraught with difficulty means difficulty ran through the whole thing.",
+      "The word says the difficulty was present, not that it stopped anything."
+     ],
+     "ex": {
+      "main": "**Full of difficulty throughout.** Fraught describes the character of the thing, not its outcome.",
+      "tip": "Fraught is nearly always followed by something unwelcome — danger, risk, tension. That pattern is part of the word."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses array in its \"orderly arrangement\" sense?",
+     "opts": [
+      "An impressive array of instruments covered the surgeon’s tray",
+      "The array of the problem confused everyone",
+      "She arrayed the news to her colleagues",
+      "They array in the mountains every winter"
+     ],
+     "ans": 0,
+     "hint": "One sense is a large group, another an orderly display.",
+     "steps": [
+      "Array means a large group, or an orderly arrangement or display.",
+      "Instruments laid out on a surgeon's tray are arranged deliberately — the orderly sense.",
+      "The other three are not English uses of the word at all."
+     ],
+     "ex": {
+      "main": "**Instruments arranged on the tray.** The orderly sense implies deliberate arrangement, not just quantity.",
+      "tip": "When a word has a noun and a verb form with several senses each, test whether the sentence is even grammatical first."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A scientist calls a result \"inexplicable.\" She means it:",
+     "opts": [
+      "Cannot currently be explained",
+      "Did not really happen",
+      "Was predicted in advance",
+      "Was caused by an error"
+     ],
+     "ans": 0,
+     "hint": "Inexplicable is about explanation, not existence.",
+     "steps": [
+      "Inexplicable means hard to explain or impossible to understand.",
+      "Calling a result inexplicable accepts that it happened and says no explanation is available.",
+      "Saying it did not happen or was an error would be different claims entirely."
+     ],
+     "ex": {
+      "main": "**Cannot currently be explained.** Inexplicable concedes the fact and denies the explanation — that distinction is the point.",
+      "tip": "Scientists are careful here: \"unexplained\" and \"false\" are very different verdicts, and the word chosen tells you which is meant."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Debt described as an \"encumbrance\" on a young couple is:",
+     "opts": [
+      "A burden weighing them down",
+      "A benefit helping them save",
+      "A legal document they signed",
+      "A short-term loan"
+     ],
+     "ans": 0,
+     "hint": "Encumber means to weigh down.",
+     "steps": [
+      "To encumber is to weigh down or burden, and also to impede action.",
+      "Credit-card debt as an encumbrance to a couple saving for a house is the book's own example.",
+      "The word is about the weight it puts on them, not about paperwork."
+     ],
+     "ex": {
+      "main": "**A burden weighing them down.** Encumbrance names the load, and often what that load prevents.",
+      "tip": "Encumber carries both senses at once: it weighs you down AND it slows what you were trying to do."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "TORRID : HOT",
+     "opts": [
+      "ubiquitous : common",
+      "haphazard : orderly",
+      "zenith : peak",
+      "deduce : conclusion"
+     ],
+     "ans": 0,
+     "hint": "How hot is torrid?",
+     "steps": [
+      "Torrid means INTENSELY hot — the first word is the extreme version of the second.",
+      "So the relationship is degree, running from ordinary up to extreme.",
+      "Ubiquitous is the extreme of common — not just frequent but seemingly everywhere. Match.",
+      "Haphazard and orderly are opposites, zenith and peak are synonyms, and deducing produces a conclusion."
+     ],
+     "ex": {
+      "main": "**Both pairs are DEGREE: the first word is the intense form of the second.** Torrid is hot turned up; ubiquitous is common turned up.",
+      "tip": "Degree pairs are easy to confuse with synonyms. Ask whether one word is genuinely STRONGER, not merely similar."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "HAPHAZARD : PLAN",
+     "opts": [
+      "inexplicable : explanation",
+      "torrid : hot",
+      "traverse : cross",
+      "laggard : race"
+     ],
+     "ans": 0,
+     "hint": "What is a haphazard arrangement missing?",
+     "steps": [
+      "Haphazard means marked by a LACK of plan — the adjective names what is absent.",
+      "So the pattern is: adjective : the thing it lacks.",
+      "Inexplicable means lacking an explanation. Match.",
+      "Torrid intensifies hot, traverse and cross are synonyms, and a laggard might be found in a race but does not lack one."
+     ],
+     "ex": {
+      "main": "**Both pairs are ADJECTIVE : WHAT IT LACKS.** Haphazard has no plan; inexplicable has no explanation.",
+      "tip": "You have met this relationship in five lessons now. Once named, it is the easiest one to spot."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "LAGGARD : STRAGGLER",
+     "opts": [
+      "zenith : peak",
+      "encumber : free",
+      "haphazard : disorder",
+      "alacrity : delay"
+     ],
+     "ans": 0,
+     "hint": "The book defines one of these words using the other.",
+     "steps": [
+      "A laggard IS a straggler — the book gives the second word as the definition of the first.",
+      "So the relationship is: synonyms.",
+      "A zenith is a peak — same meaning. Match.",
+      "Encumber and free are opposites, haphazard produces disorder rather than meaning it, and alacrity is the opposite of delay."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** A laggard is a straggler; a zenith is a peak.",
+      "tip": "When a definition uses another word outright, that word is a synonym — and a likely analogy answer."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "ALACRITY : RELUCTANCE",
+     "opts": [
+      "incontrovertible : debatable",
+      "sustenance : nourishment",
+      "torrid : heat",
+      "deduce : facts"
+     ],
+     "ans": 0,
+     "hint": "Alacrity is eagerness. What is its opposite?",
+     "steps": [
+      "Alacrity means promptness and eagerness; reluctance is unwillingness. Opposites.",
+      "So the relationship is antonyms.",
+      "Incontrovertible means impossible to dispute; debatable means open to dispute. Opposites. Match.",
+      "Sustenance IS nourishment (synonym), torrid describes heat, and deducing uses facts."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Alacrity versus reluctance is willingness reversed; incontrovertible versus debatable is certainty reversed.",
+      "tip": "Check the wrong options for synonyms hiding in plain sight — sustenance : nourishment is the near-miss here."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A reviewer writes that a novel’s plot is \"ingenious but fraught with coincidence.\" What is the mixed verdict?",
+     "opts": [
+      "The plot is cleverly constructed yet leans heavily on coincidence",
+      "The plot is confusing and also boring",
+      "The plot is simple but emotionally powerful",
+      "The plot was written by more than one author"
+     ],
+     "ans": 0,
+     "hint": "One word praises, the other criticizes. Sort out which is which.",
+     "steps": [
+      "Ingenious means marked by imagination, resourcefulness or cleverness — clear praise.",
+      "Fraught with means full of, and coincidence in a plot is usually a flaw.",
+      "The \"but\" signals the two halves pull opposite ways.",
+      "So: clever construction, undermined by relying on things happening to line up."
+     ],
+     "ex": {
+      "main": "**Clever construction, leaning too hard on coincidence.** The sentence gives with one hand and takes with the other.",
+      "tip": "Reviews often run praise and criticism through a single \"but\". Read both halves before deciding the verdict."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "From \"the streets were empty at midday and the shopfronts shuttered,\" what can you legitimately DEDUCE?",
+     "opts": [
+      "Something unusual kept people indoors, though not what it was",
+      "The town has been abandoned permanently",
+      "A holiday was being observed that day",
+      "The shopkeepers were on strike"
+     ],
+     "ans": 0,
+     "hint": "Deduction stays inside what the facts support.",
+     "steps": [
+      "To deduce is to draw a conclusion FROM GIVEN FACTS — the conclusion cannot outrun the evidence.",
+      "The given facts are empty streets and shuttered shops at midday.",
+      "Those support the general conclusion that something kept people in.",
+      "Permanent abandonment, a holiday and a strike are all possible explanations, but each adds detail the facts do not supply."
+     ],
+     "ex": {
+      "main": "**Something unusual kept people indoors — without saying what.** The other options are guesses dressed as deductions.",
+      "tip": "The commonest reasoning error is deducing more than the evidence carries. Ask: does every word of my conclusion come from the facts?"
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which Lesson 2 word pair is most likely to be confused, and why?",
+     "opts": [
+      "ingenious and ingenuous — one means clever, the other means innocent and open",
+      "zenith and peak — they mean the same thing",
+      "torrid and hot — one is just a stronger version of the other",
+      "array and arrangement — they overlap almost completely"
+     ],
+     "ans": 0,
+     "hint": "Look for a pair that differs by one letter but not by degree.",
+     "steps": [
+      "The question asks which pair is easy to CONFUSE — meaning they look alike but mean different things.",
+      "Ingenious (clever, resourceful) and ingenuous (innocent, unguarded) differ by a single letter and are unrelated in meaning.",
+      "The other pairs are genuine synonyms or degrees of each other, so mixing them up costs little."
+     ],
+     "ex": {
+      "main": "**Ingenious and ingenuous.** One letter apart, completely different meanings — which is exactly what makes it a test favourite.",
+      "tip": "Build a short list of look-alike pairs as you meet them: ingenious/ingenuous, censure/censor, fateful/fatal."
+     }
+    }
+   ]
+  }
+ }
+}
