@@ -708,7 +708,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v65 · the learning pass';
+const APP_VERSION = 'v66 · in her own words';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1223,7 +1223,7 @@ function softDelete(id){ const r = DATA.records[id]; if(!r) return;
 const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type===t);
 /* Everything that counts as "progress" — what Fresh start clears. Content
    (units), assessments, prefs and roster are deliberately not on this list. */
-const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck'];
+const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck','teach'];
 /* Student-facing everywhere. A unit without a status predates the review gate
    and is treated as already approved. */
 const units = cid => all('unit')
@@ -1365,7 +1365,7 @@ const FX_STYLES = [
 const ICON_CHOICES = ['🎭','📐','📏','🧮','🧬','🔬','⚛️','🚀','🏛️','📜','🌍','📖','📚','✒️','🏺','⚖️','🎨','🔭'];
 const DEFAULT_PREFS = { accent:'aqua', avatar:'✦', nickname:'', motto:'', companion:null,
   sky:'constellation', fx:'confetti', subjectIcons:{}, pins:[], mline:'',
-  pomodoro:25, brk:5, goals:{}, subjectColors:{}, theme:'auto', chime:true };
+  pomodoro:25, brk:5, goals:{}, subjectColors:{}, theme:'auto', intent:null, chime:true };
 
 function prefs(){ return { ...DEFAULT_PREFS, ...(DATA.records['prefs']||{}) }; }
 function setPref(k,v){
@@ -2551,6 +2551,37 @@ SCREENS.study = function(root){
   aff.appendChild(acts);
   if(seen && seen.xp) aff.appendChild(el('div','hintline',`+${seen.xp} XP today`));
   root.appendChild(aff);
+
+  /* One small aim, hers. Set whenever, gone next Monday. Tracked by nothing
+     except her own tap on Done — no penalty, no streak, appears nowhere else
+     she sees. Self-set proximal goals beat assigned ones for commitment;
+     the moment this gains a consequence it stops working, so it must not. */
+  const wk = AZ.weekStart(date);
+  const aim = prefs().intent;
+  if(aim && aim.week === wk){
+    const ac2 = el('div','card');
+    ac2.appendChild(el('div','eyebrow','Your aim this week'));
+    const ar2 = el('div','row');
+    ar2.appendChild(el('span','k', aim.text));
+    const adb = el('button','btn btn-sm '+(aim.done?'btn-primary':'btn-secondary'), aim.done?'✓ Done':'Done?');
+    adb.addEventListener('click',()=>{ setPref('intent',{...aim, done:!aim.done}); render(); });
+    ar2.appendChild(adb); ac2.appendChild(ar2);
+    root.appendChild(ac2);
+  } else {
+    const aib = el('button','btn btn-ghost','◦  Set a small aim for this week');
+    aib.addEventListener('click',()=>{
+      showModal({ title:'One small aim',
+        message:'Pick something you can actually finish — two quiz rounds, or clearing your review list twice. Yours, no one else\'s.',
+        confirmText:'Set it', cancelText:'Not now',
+        build:(box)=>{ const inp = el('input'); inp.type='text'; inp.id='intent-in';
+          inp.placeholder='e.g. Clear the Growth Zone twice'; inp.maxLength = 80; box.appendChild(inp); },
+        onConfirm:()=>{ const v = document.getElementById('intent-in');
+          const t = (v && v.value.trim()) || '';
+          if(!t){ toast('Needs a few words first'); return; }
+          setPref('intent',{text:t, week:wk, done:false}); toast('Yours for the week'); } });
+    });
+    root.appendChild(aib);
+  }
 
   /* The companion's perch: one line for the day, deterministic so it does not
      reshuffle on every render. It fronts what the screen already knows —
@@ -3963,6 +3994,21 @@ function finishQuiz(u){
 }
 
 SCREENS.postmood = function(root){
+  /* Teach it back. After a strong round (80%+ of at least 4 questions) she can
+     explain the trickiest idea in her own words — the protégé effect, made
+     one optional textarea. Saved verbatim for the parent view, never graded,
+     never required, no XP attached: explaining is its own payoff and pricing
+     it would cheapen it. Keyed to the log id so it can only be written once. */
+  const tbLog = DATA.records[ctx.logId];
+  const tbOK = tbLog && tbLog.mode==='quiz' && tbLog.total>=4 &&
+               (tbLog.correct/tbLog.total)>=0.8 && !DATA.records['teach_'+ctx.logId];
+  const saveTB = ()=>{
+    const t = (ctx._tb||'').trim();
+    if(!tbOK || !t) return;
+    put({ id:'teach_'+ctx.logId, type:'teach', classId:ctx.classId, unitId:tbLog.unitId,
+          logId:ctx.logId, date:AZ.today(), at:Date.now(), text:t.slice(0,500) });
+    ctx._tb = '';
+  };
   root.appendChild(headline('How did that feel?','One tap. This is the part that tells you whether studying is actually working for you.'));
   const c = el('div','card');
   const s = el('div','scale');
@@ -3973,14 +4019,25 @@ SCREENS.postmood = function(root){
       put({ id:uid('mood'), type:'mood', when:'post', logId:ctx.logId, classId:ctx.classId,
             feeling:o.v, date:AZ.today(), at:Date.now() });
       checkBadges(); syncSoon();
-      toast('Noted — thanks');
+      saveTB(); toast('Noted — thanks');
       go(ctx.back || (ctx.missed ? 'growth' : 'unit'), {classId:ctx.classId});
     });
     s.appendChild(b);
   });
   c.appendChild(s); root.appendChild(c);
+  if(tbOK){
+    const tb = el('div','card');
+    tb.appendChild(el('div','eyebrow','Teach it back'));
+    tb.appendChild(el('p',null,'Strong round. Explain the trickiest idea from it as if you were teaching it — a sentence or two is plenty.'));
+    const ta = el('textarea'); ta.rows = 3; ta.placeholder = 'The trickiest idea was…';
+    ta.value = ctx._tb || '';
+    ta.addEventListener('input',()=>{ ctx._tb = ta.value; });
+    tb.appendChild(ta);
+    tb.appendChild(el('div','hintline','Optional. It saves with your check-in — a grown-up can read it, and nothing grades it.'));
+    root.appendChild(tb);
+  }
   const skip = el('button','btn btn-ghost','Skip');
-  skip.addEventListener('click',()=>go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId}));
+  skip.addEventListener('click',()=>{ saveTB(); go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId}); });
   root.appendChild(skip);
 };
 
@@ -4646,6 +4703,55 @@ SCREENS.parent = function(root){
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); eff.appendChild(r); });
   root.appendChild(eff);
 
+  /* Activity, this week against last — what KIND of work, not only how much.
+     Understated on purpose: patterns a parent can act on, not a feed. */
+  root.appendChild(divider('Activity, last 7 days'));
+  const actA = AZ.shift(date,-6), actB7 = AZ.shift(date,-7), actB14 = AZ.shift(date,-13);
+  const actL = logs(), actF = focusLogs();
+  const winStats = (a,b)=>{
+    const inW = r => r.date>=a && r.date<=b;
+    const dset = new Set();
+    actL.forEach(l=>{ if(inW(l)) dset.add(l.date); });
+    actF.forEach(f=>{ if(inW(f)) dset.add(f.date); });
+    return { quiz: actL.filter(l=>inW(l)&&l.mode==='quiz').length,
+             cards: actL.filter(l=>inW(l)&&l.mode==='cards').length,
+             focus: actF.filter(f=>inW(f)).reduce((n,f)=>n+(f.minutes||0),0),
+             read: actL.filter(l=>inW(l)&&l.mode==='read').reduce((n,l)=>n+(l.minutes||Math.round((l.seconds||0)/60)),0),
+             days: dset.size, min: minutesInRange(a,b) };
+  };
+  const actCur = winStats(actA,date), actPrev = winStats(actB14,actB7);
+  const actWas = (n,p)=> (n||p) ? ` (was ${p})` : '';
+  const actCard = el('div','card');
+  [['Active days', `${actCur.days} of 7${actWas(actCur.days,actPrev.days)}`],
+   ['Minutes', `${actCur.min}${actWas(actCur.min,actPrev.min)}`],
+   ['Quiz rounds', `${actCur.quiz}${actWas(actCur.quiz,actPrev.quiz)}`],
+   ['Flashcard runs', `${actCur.cards}${actWas(actCur.cards,actPrev.cards)}`],
+   ['Focus minutes', `${actCur.focus}${actWas(actCur.focus,actPrev.focus)}`],
+   ['Reading minutes', `${actCur.read}${actWas(actCur.read,actPrev.read)}`]
+  ].forEach(([k,v])=>{ const r=el('div','row');
+    r.appendChild(el('span','k',k)); r.appendChild(el('span','v',v)); actCard.appendChild(r); });
+  const aimP = prefs().intent;
+  if(aimP && aimP.week === AZ.weekStart(date)){
+    const r = el('div','row');
+    r.appendChild(el('span','k','Her own aim this week'));
+    r.appendChild(el('span','v', aimP.text + (aimP.done ? ' · marked done by her' : '')));
+    actCard.appendChild(r);
+  }
+  root.appendChild(actCard);
+  const actBySub = {};
+  actL.forEach(l=>{ if(l.date>=actA && l.classId) actBySub[l.classId]=(actBySub[l.classId]||0)+(l.seconds||0)/60; });
+  actF.forEach(f=>{ if(f.date>=actA && f.classId) actBySub[f.classId]=(actBySub[f.classId]||0)+(f.minutes||0); });
+  const actSubs = Object.entries(actBySub).map(([id,m])=>({id, m:Math.round(m)}))
+    .filter(x=>x.m>0).sort((x,y)=>y.m-x.m).slice(0,6);
+  if(actSubs.length){
+    const sc4 = el('div','card');
+    sc4.appendChild(el('div','eyebrow','Where the week went'));
+    actSubs.forEach(x=>{ const c4 = CLASS_BY_ID[x.id]; const r=el('div','row');
+      r.appendChild(el('span','k',(c4 ? c4.icon+' '+c4.name : x.id)));
+      r.appendChild(el('span','v',x.m+' min')); sc4.appendChild(r); });
+    root.appendChild(sc4);
+  }
+
   /* 14-day effort chart */
   root.appendChild(divider('Effort, last 14 days'));
   const chart = el('div','card');
@@ -4901,6 +5007,25 @@ SCREENS.parent = function(root){
 
   /* What she's actually reaching for — so features that go unused can be fixed
      or dropped rather than guessed about. */
+  {
+    /* Teach-backs, verbatim. Reading how she explains a thing tells a parent
+       more than any percentage — and it is HER writing, so it is quoted,
+       never scored, never corrected here. */
+    const tch = all('teach').sort((a,b)=>(b.at||0)-(a.at||0));
+    if(tch.length){
+      root.appendChild(divider('In her own words'));
+      const tcc = el('div','card');
+      tcc.appendChild(el('p',null,'After a strong quiz she can explain the trickiest idea back in her own words. Quoted exactly.'));
+      tch.slice(0,5).forEach(t=>{
+        const c5 = CLASS_BY_ID[t.classId];
+        const d = el('div','miss');
+        d.appendChild(el('div','q','“'+t.text+'”'));
+        d.appendChild(el('div','n',`${c5?c5.name+' · ':''}${AZ.shortDate(t.date)}`));
+        tcc.appendChild(d);
+      });
+      root.appendChild(tcc);
+    }
+  }
   root.appendChild(divider('What she is using'));
   const use = el('div','card');
   const asks = all('ask').sort((a,b)=>b.at-a.at);

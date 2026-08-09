@@ -300,6 +300,33 @@ If a teacher's own assignment shows a distinctive question style, that is worth
 capturing here the same way. The transferable thing is the *shape of the
 thinking*, and it costs nothing to match it.
 
+### Teach it back, the weekly aim, and the activity view (v66 / Wayfinder v54, both apps)
+
+Three additions from the educator review, approved by Chris 2026-08-09.
+
+**Teach it back** (`teach` records, postmood screen). After a quiz of 80%+ on
+4+ questions, the check-in screen offers one optional textarea: explain the
+trickiest idea in your own words. Saved verbatim (keyed `teach_<logId>` so a
+log can only ever produce one), surfaced in the parent view under "In her own
+words", quoted exactly. Rules that are the point: never required, never
+graded, and deliberately **no XP** — explaining is its own payoff and pricing
+it would cheapen it (the app says so in its own copy). In `PROGRESS_TYPES`.
+
+**The weekly aim** (`prefs.intent = {text, week, done}`). One small self-set
+goal, entered on Study, keyed to `AZ.weekStart()` so it dissolves every
+Monday. Tracked by nothing except her own tap on Done. It appears in exactly
+two places: her Study tab, and one quiet line in the parent activity card
+("marked done by her"). Self-set proximal goals beat assigned ones for
+commitment — and the moment this gains a consequence it stops working, so it
+must never gain one.
+
+**Activity, last 7 days** (parent view). This week against last, per mode:
+active days, minutes, quiz rounds, flashcard runs, focus minutes, reading
+minutes — each with "(was N)" — plus "Where the week went" (top subjects by
+minutes). All derived from existing `log`/`focus` records at render time;
+nothing new is stored. Time-of-day patterns were considered and deliberately
+left out: that is surveillance flavour, not actionable signal.
+
 ### Retired: the orientation unit
 
 "First Week: Rooms & Teachers" was removed in v22 (schema v4 tombstones
