@@ -727,7 +727,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v71 · crochet corrected';
+const APP_VERSION = 'v72 · catalog reconciled';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -803,15 +803,13 @@ const CLUBS = [
    desc:'Every game without a screen: card games, board games, Dungeons & Dragons, and whatever you bring from home.'},
   {id:'acs',       day:'Friday', nm:'American Cancer Society', gr:'8th–12th', cost:50, time:'3:45–4:30', freq:'monthly', first:'Aug 21',
    desc:'Volunteer with friends around cancer research and advocacy — publish infographics, discuss research, and organize events for patients and survivors.'},
-  {id:'biochem',   day:'Friday', nm:'Biochemistry Olympiad', gr:'7th–12th', cost:50, time:'3:45–4:45', freq:'weekly', first:'Aug 21', flag:'tryout',
-   desc:'Biology and Chemistry Olympiad prep with real molecular biology technique — PCR, gel electrophoresis, DNA sequencing and CRISPR.'},
-  {id:'girlrising',day:'Friday', nm:'Girl Rising', gr:'6th–12th', cost:100, time:'7:00–7:30 am', freq:'bi-weekly', first:'Aug 21',
-   desc:'Fundraising to support women\u2019s education in developing nations — bake sales, restaurant fundraisers and school dances.'},
-  {id:'hsafp',     day:'Friday', nm:'HS Alliance for Future Physicians', gr:'8th–12th', cost:75, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
-   desc:'For students aiming at medicine: hands-on activities and resources built to give aspiring physicians a head start.'},
-  {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', gr:'8th–12th', cost:0, flag:'invite only'},
-  {id:'crochet',   day:'Friday', nm:'Crochet Club', gr:'6th–12th', cost:175, time:'3:45–5:00', freq:'weekly', first:'Aug 21',
-   desc:'A creative, relaxing space to learn crochet — chain stitch through amigurumi stuffed animals. All materials provided; bring your curiosity.'}
+  {id:'girlrising',day:'Friday', nm:'Girl Rising', gr:'8th–12th', cost:75, time:'7:00–7:30 am', freq:'bi-weekly', first:'Aug 21',
+   desc:'Fundraising to support women’s education in developing nations — bake sales, restaurant fundraisers and school dances.'},
+  {id:'crochet',   day:'Friday', nm:'Crochet Club', gr:'6th–12th', cost:100, time:'3:45–5:00', freq:'weekly', first:'Aug 21',
+   desc:'A creative, relaxing space to learn crochet — chain stitch through amigurumi stuffed animals. All materials provided; bring your curiosity.'},
+  {id:'baking',    day:'Friday', nm:'Baking for Better', gr:'7th–12th', cost:50, time:'3:55–4:40', freq:'bi-weekly', first:'Aug 28',
+   desc:'A student-led club spreading kindness through baking — treats made to support local charities, school events and community causes.'},
+  {id:'mindtech',  day:'Friday', nm:'MindTech', gr:'8th–12th', cost:0}
 ];
 /* The rest of the catalog — clubs whose grade range does not include 8th.
    Listed so the app and the catalog PDF reconcile at a glance: if a club is
@@ -841,8 +839,9 @@ const CLUBS_CLOSED = [
   {day:'Thursday',  nm:'Physics Olympiad', gr:'9th–12th'},
   {day:'Thursday',  nm:'Upper School Science Bowl', gr:'9th–12th'},
   {day:'Thu & Fri', nm:'Dance Club', gr:'9th–12th'},
-  {day:'Friday',    nm:'MindTech', gr:'9th–12th'},
-  {day:'Friday',    nm:'Baking for Better', gr:'9th–12th'}
+  {day:'Friday',    nm:'Biochemistry Olympiad!', gr:'9th–12th'},
+  {day:'Friday',    nm:'HS Alliance for Future Physicians', gr:'9th–12th'},
+  {day:'Friday',    nm:'Varsity Speech & Debate', gr:'9th–12th'}
 ];
 const clubPicks = () => (DATA.records['clubpicks']||{}).picks || {};
 
