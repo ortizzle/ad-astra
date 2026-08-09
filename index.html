@@ -727,7 +727,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v68 · three doors, drawn';
+const APP_VERSION = 'v69 · units size their sittings';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2903,7 +2903,7 @@ function unitCard(u, c, label){
   card.appendChild(el('h3',null, label || u.title));
   const bits = el('div');
   bits.appendChild(el('span','pill',`${u.cards.length} cards`));
-  bits.appendChild(el('span','pill',`${u.questions.length} questions · rounds of ${Math.min(QUIZ_ROUND,u.questions.length)}`));
+  bits.appendChild(el('span','pill',`${u.questions.length} questions · ${(u.round||QUIZ_ROUND)>=u.questions.length?'one sitting':'rounds of '+Math.min(u.round||QUIZ_ROUND,u.questions.length)}`));
   if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
   if(u.source) bits.appendChild(el('span','pill',u.source));
   card.appendChild(bits);
@@ -3535,7 +3535,10 @@ function pickRound(u, timed){
     /* Typing against a countdown tests typing, not spelling. */
     .filter(x => !timed || x.q.kind!=='spell');
   idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
-  return shuffle(idx.slice(0, Math.min(QUIZ_ROUND, idx.length)).map(x=>x.i));
+  /* A unit may set its own sitting size (u.round) — a lesson-a-day maths
+     quiz serves all ~10 in one go; a topic review serves 12. Content-side
+     knob, engine default unchanged. */
+  return shuffle(idx.slice(0, Math.min(u.round||QUIZ_ROUND, idx.length)).map(x=>x.i));
 }
 
 /* A shuffle round mixes the least-practised questions from ACROSS a subject's

@@ -238,6 +238,16 @@ The underlying cycle is unchanged and is working as designed: with 20 questions
 and rounds of 5, rounds 1–4 cover the unit with no repeats and round 5 wraps.
 Repetition after a full pass is correct; repeating a laddered question was not.
 
+### Per-unit sitting size (v69 / Wayfinder v57, both apps)
+
+A unit may carry **`round`** — how many questions `pickRound()` serves per
+sitting (default `QUIZ_ROUND` = 5). The unit pill reads "one sitting" when
+`round >= questions.length`. Built for River's math program (a lesson-a-day
+unit serves all ~10 questions in one quiz; a topic review holds a 24-question
+pool served 12 at a time), but it is engine, so both apps carry it. Content
+knob only — selection order (least-practised, Growth-Zone-last, recency) is
+untouched. This app ships the engine with no `round` content yet.
+
 ### The learning pass (v65 / Wayfinder v53, both apps)
 
 A code-review-plus-educator sweep. Four engine changes, all rules-compliant:
