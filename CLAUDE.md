@@ -205,6 +205,35 @@ convention, not a mechanic.
   `CHEER_WRONG` — varied, warm, growth-mindset, no exclamation-mark cheerleading.
 - Every unit ships as `status:'draft'` for the review queue. No exceptions.
 
+### How questions should make her think (v63, both apps)
+
+Derived from her actual Physics lab, which Chris supplied **as style context
+rather than as material to build** — the point was to calibrate the questions,
+not to make a unit out of it. That lab asks: predict forward from your
+expression, solve backwards for the other variable, state the *physical
+significance* of a slope, say how you knew, reason counterfactually ("if the
+car were faster…"), and rank several slopes with ties allowed.
+
+Those moves are now in the generation system prompt in both apps, and
+hand-written units should use them too:
+
+- **Interpret, don't just compute.** What does the slope/intercept/rate *mean*
+  here, not only what does it equal.
+- **Both directions.** If one question predicts an output from an input,
+  another solves backwards for the input.
+- **Counterfactual.** Change one variable, ask what follows and why.
+- **Rank, don't just pick.** Use `kind:'order'` for a strict ranking. It
+  **cannot express a tie**, so a genuine tie must be asked as multiple choice
+  over candidate rankings.
+- **Make her say how she knew.** Prefer options that state a *reason* over
+  options that state only an answer.
+- **Carry the units.** A rate per second asked about in minutes — the
+  conversion is part of the work, not friction to smooth away.
+
+If a teacher's own assignment shows a distinctive question style, that is worth
+capturing here the same way. The transferable thing is the *shape of the
+thinking*, and it costs nothing to match it.
+
 ### Retired: the orientation unit
 
 "First Week: Rooms & Teachers" was removed in v22 (schema v4 tombstones
@@ -536,6 +565,36 @@ anything where reading a word is not the same as saying it.
 - **Say what the voice cannot do.** The browser voice has no trill, so the
   Latin R card says so outright rather than teaching her a flat r. If a sound
   is beyond the synthesiser, the content admits it.
+
+### Rubric self-check (v63 / Wayfinder v51, both apps)
+
+A `SHEETS` entry may carry a structured **`rubric`** — `{total, rows:[{k, nm,
+max, bands:[{nm, lo, hi, d}]}]}`. Where one is present the sheet modal is
+**rendered from it**, so the rubric she reads and the rubric she rates herself
+against cannot drift apart, and the subject screen gains a second button:
+*Check my work against it* (`SCREENS.selfcheck`).
+
+She rates her own draft band by band, sees a predicted range (sum of the band
+lows to the sum of the band highs — the rubric's own arithmetic, not ours), and
+saves a `selfcheck` record. A grown-up adds the real score later; the parent
+view lists prediction against actual and reports whether she reads her own work
+accurately, over-rates it, or is harder on herself than the marker.
+
+Rules that are the point, not the decoration:
+
+- **The app never evaluates her writing.** It has no opinion about her essay and
+  must not acquire one. She does the judging; the rubric is the only authority.
+  This is what keeps the feature on the right side of doing her homework.
+- **"What would move this up" quotes the next band verbatim**, in the teacher's
+  words. It never proposes sentences — that would be writing the essay for her.
+- **No model call, no API key, offline.** Nothing is sent anywhere.
+- **It is the readiness check, applied to essays.** Same metacognitive payload
+  as `calibrationPairs()`: the gap between predicted and actual is the product,
+  not either number alone. Keep the copy pointed at the gap.
+- `selfcheck` is in `PROGRESS_TYPES`, so Fresh start clears it.
+
+Wayfinder ships the whole engine with an empty `SHEETS`, so the button appears
+only once a teacher issues River a rubric.
 
 ### The Today strip (v51 / Wayfinder v43, both apps)
 

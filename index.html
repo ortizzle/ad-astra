@@ -702,7 +702,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v62 · DBQ rubric';
+const APP_VERSION = 'v63 · check it yourself';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1217,7 +1217,7 @@ function softDelete(id){ const r = DATA.records[id]; if(!r) return;
 const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type===t);
 /* Everything that counts as "progress" — what Fresh start clears. Content
    (units), assessments, prefs and roster are deliberately not on this list. */
-const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm'];
+const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck'];
 /* Student-facing everywhere. A unit without a status predates the review gate
    and is treated as already approved. */
 const units = cid => all('unit')
@@ -1915,23 +1915,28 @@ const SHEETS = {
      paragraph — that would be doing the essay, not supporting it. */
   history: { nm:'DBQ essay rubric', ic:'📝',
     note:'The 3-paragraph DBQ rubric, as issued. 20 points total, 5 per row. Read it BEFORE you draft and again before you hand it in.',
+    /* Structured so the self-check can walk it. The displayed sheet is
+       RENDERED from this, so the rubric she reads and the rubric she rates
+       herself against can never drift apart. */
+    rubric:{ total:20, rows:[
+      {k:'intro', nm:'Paragraph 1 · Introduction & thesis', max:5, bands:[
+        {nm:'Proficient', lo:4, hi:5, d:'Clear historical background and context. A strong, clear thesis sentence that directly answers the prompt.'},
+        {nm:'Developing', lo:2, hi:3, d:'Background is vague or minimal. The thesis restates the prompt without making an argument.'},
+        {nm:'Beginning',  lo:0, hi:1, d:'No introduction or background. Thesis missing or completely unclear.'}]},
+      {k:'evidence', nm:'Paragraph 2 · Evidence & analysis', max:5, bands:[
+        {nm:'Proficient', lo:4, hi:5, d:'Accurately uses and cites at least 3 documents. Explains how the evidence supports the thesis. Includes outside historical knowledge not found in the documents.'},
+        {nm:'Developing', lo:2, hi:3, d:'Uses only 1–2 documents, or quotes them without explaining the connection. Leans on summary rather than analysis. Little outside evidence.'},
+        {nm:'Beginning',  lo:0, hi:1, d:'Does not use the documents, or misinterprets them completely. No analysis or historical fact.'}]},
+      {k:'conclusion', nm:'Paragraph 3 · Conclusion', max:5, bands:[
+        {nm:'Proficient', lo:4, hi:5, d:'Restates the thesis in different words. Summarises the supporting arguments smoothly.'},
+        {nm:'Developing', lo:2, hi:3, d:'Restates the thesis word for word. Summary is incomplete or weak.'},
+        {nm:'Beginning',  lo:0, hi:1, d:'No conclusion paragraph. Ends abruptly with no final thought.'}]},
+      {k:'mechanics', nm:'Mechanics & structure', max:5, bands:[
+        {nm:'Proficient', lo:4, hi:5, d:'Three distinct paragraphs. Few or no errors in spelling, grammar or capitalisation.'},
+        {nm:'Developing', lo:2, hi:3, d:'Transitions are awkward or unclear. Several errors make it slightly hard to read.'},
+        {nm:'Beginning',  lo:0, hi:1, d:'Not organised into distinct paragraphs. Frequent errors badly disrupt clarity.'}]}
+    ]},
     sections:[
-      {h:'Paragraph 1 · Introduction & thesis  (/5)', rows:[
-        ['Proficient (4–5)','Clear historical background and context. A strong, clear thesis sentence that directly answers the prompt.'],
-        ['Developing (2–3)','Background is vague or minimal. The thesis restates the prompt without making an argument.'],
-        ['Beginning (0–1)','No introduction or background. Thesis missing or completely unclear.']]},
-      {h:'Paragraph 2 · Evidence & analysis  (/5)', rows:[
-        ['Proficient (4–5)','Accurately uses and cites at least 3 documents. Explains how the evidence supports the thesis. Includes outside historical knowledge not found in the documents.'],
-        ['Developing (2–3)','Uses only 1–2 documents, or quotes them without explaining the connection. Leans on summary rather than analysis. Little outside evidence.'],
-        ['Beginning (0–1)','Does not use the documents, or misinterprets them completely. No analysis or historical fact.']]},
-      {h:'Paragraph 3 · Conclusion  (/5)', rows:[
-        ['Proficient (4–5)','Restates the thesis in different words. Summarises the supporting arguments smoothly.'],
-        ['Developing (2–3)','Restates the thesis word for word. Summary is incomplete or weak.'],
-        ['Beginning (0–1)','No conclusion paragraph. Ends abruptly with no final thought.']]},
-      {h:'Mechanics & structure  (/5)', rows:[
-        ['Proficient (4–5)','Three distinct paragraphs. Few or no errors in spelling, grammar or capitalisation.'],
-        ['Developing (2–3)','Transitions are awkward or unclear. Several errors make it slightly hard to read.'],
-        ['Beginning (0–1)','Not organised into distinct paragraphs. Frequent errors badly disrupt clarity.']]},
       {h:'The three that decide the grade', rows:[
         ['Cite at least 3 documents','Two is Developing however well written. Count them before you hand it in.'],
         ['Add outside knowledge','Proficient on Paragraph 2 requires something true that is NOT in the documents.'],
@@ -2007,7 +2012,18 @@ function openSheet(classId){
   showModal({ title: sh.nm, confirmText:'Close', cancelText:null,
     build:(box)=>{
       box.appendChild(el('p',null, sh.note));
-      sh.sections.forEach(sec=>{
+      /* A rubric renders as criterion → bands, from the same data the
+         self-check walks. Extra sections follow underneath. */
+      if(sh.rubric) sh.rubric.rows.forEach(row=>{
+        box.appendChild(el('div','eyebrow', row.nm + '  (/' + row.max + ')'));
+        row.bands.forEach(b=>{
+          const r = el('div','frow');
+          r.appendChild(el('span','fn', b.nm + ' (' + b.lo + '–' + b.hi + ')'));
+          r.appendChild(el('span','eq', b.d));
+          box.appendChild(r);
+        });
+      });
+      (sh.sections||[]).forEach(sec=>{
         box.appendChild(el('div','eyebrow',sec.h));
         sec.rows.forEach(([nm,eq])=>{
           const r = el('div','frow');
@@ -2744,6 +2760,12 @@ SCREENS.unit = function(root){
   if(SHEETS[c.id]){
     const fsb = el('button','btn btn-secondary', SHEETS[c.id].ic+'  '+SHEETS[c.id].nm);
     fsb.addEventListener('click',()=>openSheet(c.id)); root.appendChild(fsb);
+    /* A rubric can be walked, not just read. */
+    if(SHEETS[c.id].rubric){
+      const scb = el('button','btn btn-secondary','✓  Check my work against it');
+      scb.addEventListener('click',()=>go('selfcheck',{classId:c.id}));
+      root.appendChild(scb);
+    }
   }
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
@@ -3151,6 +3173,122 @@ SCREENS.clubs = function(root){
    free, and Fresh start clears it like any other progress. Deliberately NO
    prize economy on her side — the shelf and honest XP are the whole loop;
    real-world celebrations live in the parent view, as the parent's surprise. */
+/* ---------- Rubric self-check ----------
+   She rates her OWN draft against each rubric row before handing it in, then
+   the real score goes in beside her prediction. The app never evaluates her
+   writing — that is the whole design. What it does is show her the gap between
+   how she judged the work and how it was judged, which is the same
+   metacognitive move as the readiness check before a quiz, applied to essays.
+
+   Deliberate rules:
+   · No model call, no API key, works offline. The rubric is the only authority.
+   · "What would move this up" quotes the NEXT band in the teacher's own words.
+     It never suggests sentences — that would be writing her essay for her.
+   · Nothing is scored or graded by the app. lo/hi come straight off the rubric. */
+const selfChecks = () => all('selfcheck').sort((a,b)=>(a.date<b.date?1:-1));
+function scRange(rec, rub){
+  let lo = 0, hi = 0;
+  rub.rows.forEach(row=>{
+    const b = row.bands[rec.picks[row.k]];
+    if(b){ lo += b.lo; hi += b.hi; }
+  });
+  return {lo, hi};
+}
+SCREENS.selfcheck = function(root){
+  const cls = CLASS_BY_ID[ctx.classId], sh = SHEETS[ctx.classId];
+  if(!sh || !sh.rubric) return go('today');
+  const rub = sh.rubric;
+  if(!ctx._sc || ctx._scFor !== ctx.classId){ ctx._sc = {}; ctx._scFor = ctx.classId; ctx._scT = ''; }
+
+  root.appendChild(headline('Check it yourself',
+    'Read your draft against each row and pick the band you honestly think it earns. Nothing here is sent anywhere, and nothing marks your work but you.'));
+
+  const tc = el('div','card ac');
+  tc.appendChild(el('label',null,'Which piece of work?'));
+  const t = el('input'); t.type='text'; t.placeholder='e.g. Unit 1 DBQ essay';
+  t.value = ctx._scT || '';
+  t.addEventListener('input',()=>{ ctx._scT = t.value; });
+  tc.appendChild(t);
+  root.appendChild(tc);
+
+  rub.rows.forEach(row=>{
+    const c = el('div','card');
+    c.appendChild(el('div','eyebrow', row.nm + '  (/' + row.max + ')'));
+    const picked = ctx._sc[row.k];
+    const br = el('div','btn-row');
+    row.bands.forEach((b,i)=>{
+      const bt = el('button','btn btn-sm '+(picked===i?'btn-primary':'btn-secondary'), b.nm);
+      bt.addEventListener('click',()=>{ ctx._sc[row.k] = i; render(); });
+      br.appendChild(bt);
+    });
+    c.appendChild(br);
+    if(picked != null){
+      c.appendChild(el('p','lede', row.bands[picked].d));
+      /* The payload: what the next band up asks for, in the rubric's words. */
+      if(picked > 0){
+        const up = row.bands[picked-1];
+        const n = el('div','hintline');
+        n.textContent = 'To reach ' + up.nm + ': ' + up.d;
+        c.appendChild(n);
+      } else {
+        c.appendChild(el('div','hintline','Top band. Check it against the wording once more before you commit.'));
+      }
+    }
+    root.appendChild(c);
+  });
+
+  const done = rub.rows.filter(r=>ctx._sc[r.k] != null).length;
+  const sum = el('div','card ac');
+  if(done < rub.rows.length){
+    sum.appendChild(el('p',null, done + ' of ' + rub.rows.length + ' rows rated.'));
+  } else {
+    const {lo,hi} = scRange({picks:ctx._sc}, rub);
+    sum.appendChild(el('div','eyebrow','Your prediction'));
+    sum.appendChild(el('p','lede', (lo===hi?lo:lo+'–'+hi) + ' out of ' + rub.total));
+    sum.appendChild(el('div','hintline','This is your judgement, not a grade. When the real score comes back, a grown-up puts it in beside this so you can see how close you were.'));
+  }
+  root.appendChild(sum);
+
+  const save = el('button','btn btn-primary','Save my check');
+  save.disabled = done < rub.rows.length;
+  save.addEventListener('click',()=>{
+    const title = (ctx._scT||'').trim();
+    if(!title){ toast('Give it a name first'); return; }
+    const {lo,hi} = scRange({picks:ctx._sc}, rub);
+    put({ id:uid('selfcheck'), type:'selfcheck', classId:ctx.classId, title,
+          date:AZ.today(), picks:{...ctx._sc}, lo, hi, actual:null });
+    ctx._sc = null; ctx._scT = ''; syncSoon();
+    showModal({ title:'Saved', confirmText:'Got it',
+      message:'Your prediction is '+(lo===hi?lo:lo+'–'+hi)+' out of '+rub.total+
+              '.\n\nWhen the marked work comes back, add the real score in the grown-up view. The gap between the two is the useful part — it tells you whether you can see your own work the way a marker does.' });
+    go('unit',{classId:ctx.classId});
+  });
+  root.appendChild(save);
+  const back = el('button','btn btn-ghost','← Back');
+  back.addEventListener('click',()=>go('unit',{classId:ctx.classId}));
+  root.appendChild(back);
+};
+function editSelfCheck(rec){
+  const sh = SHEETS[rec.classId], rub = sh && sh.rubric;
+  showModal({ title:rec.title, confirmText:'Save', cancelText:'Close',
+    build:(box)=>{
+      box.appendChild(el('p',null,'Her prediction: '+(rec.lo===rec.hi?rec.lo:rec.lo+'–'+rec.hi)+
+        ' out of '+(rub?rub.total:'?')+'.'));
+      box.appendChild(el('label',null,'Actual score awarded'));
+      const inp = el('input'); inp.type='number'; inp.min='0'; inp.inputMode='numeric';
+      if(rub) inp.max = String(rub.total);
+      inp.value = rec.actual==null ? '' : rec.actual;
+      inp.id = 'sc-actual';
+      box.appendChild(inp);
+      box.appendChild(el('div','hintline','Leave blank until the marked work comes back.'));
+    },
+    onConfirm:()=>{
+      const v = document.getElementById('sc-actual');
+      const n = v && v.value.trim()==='' ? null : Number(v.value);
+      put({ ...rec, actual: (n==null || isNaN(n)) ? null : n });
+      syncSoon(); render();
+    }});
+}
 SCREENS.reading = function(root){
   root.appendChild(headline('Reading log','Any book, anywhere — school books, library finds, rereads. Minutes count the moment you log them.'));
   const c = el('div','card ac');
@@ -4595,6 +4733,38 @@ SCREENS.parent = function(root){
   const add = el('button','btn btn-primary','＋  Add a test or quiz');
   add.addEventListener('click',()=>editAssessment(null)); root.appendChild(add);
 
+  /* Self-checks: her own rubric judgement, and the real score beside it. The
+     gap is the point — it says whether she can see her work as a marker does,
+     which is worth more than either number alone. */
+  const scs = selfChecks();
+  if(scs.length){
+    root.appendChild(divider('Her own rubric checks'));
+    const scc = el('div','card');
+    const scored = scs.filter(x=>x.actual!=null && SHEETS[x.classId] && SHEETS[x.classId].rubric);
+    if(scored.length >= 2){
+      let over = 0, under = 0, spot = 0;
+      scored.forEach(x=>{ if(x.actual > x.hi) under++; else if(x.actual < x.lo) over++; else spot++; });
+      const line = spot >= scored.length - spot
+        ? 'Her predictions land inside her own predicted band '+spot+' time'+(spot===1?'':'s')+' out of '+scored.length+'. She reads her own work accurately.'
+        : over > under
+          ? 'She has predicted higher than the mark came back '+over+' time'+(over===1?'':'s')+'. Worth asking which row she is over-rating.'
+          : 'She has predicted lower than the mark came back '+under+' time'+(under===1?'':'s')+'. She is harder on herself than the marker is.';
+      scc.appendChild(el('p','lede', line));
+    }
+    scs.slice(0,10).forEach(x=>{
+      const c3 = CLASS_BY_ID[x.classId];
+      const r = el('div','row');
+      const kk = el('span','k', x.title);
+      const pred = x.lo===x.hi ? String(x.lo) : x.lo+'–'+x.hi;
+      kk.appendChild(el('small',null,(c3?c3.name+' · ':'')+AZ.shortDate(x.date)+' · predicted '+pred));
+      r.appendChild(kk);
+      const v = el('button','btn btn-ghost btn-sm', x.actual!=null ? 'Actual '+x.actual : 'Add score');
+      v.addEventListener('click',()=>editSelfCheck(x));
+      r.appendChild(v); scc.appendChild(r);
+    });
+    root.appendChild(scc);
+  }
+
   /* Content */
   root.appendChild(divider('Study material'));
   const mat = el('div','card');
@@ -5524,6 +5694,13 @@ async function generateUnit(classId, notes, shots, srcName){
     `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer.`,
     `Every card and question must STAND ALONE: never reference "the worksheet", "the handout", or a numbered problem from the material — restate whatever context the question needs inside the question itself.`,
     `Every question carries "steps": 3-6 short strings that walk from the question to the answer, revealed one at a time after a wrong answer. Each step is ONE concrete move — read off a value, set up an equation, apply one rule, compute one result — written so she could do it herself on paper. The last step states the answer. No step may skip work ("simplify" alone is not a step; show what it becomes).`,
+    `HOW THE QUESTIONS SHOULD MAKE HER THINK. Her teachers ask for reasoning, not recall, and the quiz should rehearse the same moves. Across a unit, include several of these deliberately:`,
+    `· Interpret, do not just compute. Ask what a slope, intercept, rate or constant MEANS in the situation — "what is the physical significance of the slope here" — not only what it equals.`,
+    `· Run the relationship BOTH directions. If a question predicts an output from an input, another should solve backwards for the input that produces a given output.`,
+    `· Counterfactual. "If the car were moving faster, what happens to the slope, and why." Change one variable and ask what follows.`,
+    `· Rank, do not just pick. Ordering several quantities from greatest to least tests comparative understanding that a single value never does. Use kind:"order" when the ranking is strict; if a genuine tie exists, ask it as multiple choice over candidate rankings, because kind:"order" cannot express a tie.`,
+    `· Make her say how she knew. Prefer options that state a REASON over options that state only an answer, so the right choice is the right reasoning.`,
+    `· Carry the units. Where a rate is per second, ask a question posed in minutes. The conversion is part of the work and should not be smoothed away.`,
     `Card definitions LEAD with the straightforward answer wrapped in **bold** — one short sentence that could stand alone as the study answer — then at most two or three supporting bullet lines. A card is a study aid, not an essay; the bold line is what she should retain.`,
     `When a definition or explanation lists several things, format the list as bullet lines: a newline then "• " before each item. Lists render as lists, and **bold** renders as bold.`,
     `Do not describe or reference a diagram, figure or plotted graph — this format cannot render one you invent. Ask about relationships in words instead, or use the eq field for a formula.`,
