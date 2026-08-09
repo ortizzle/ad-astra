@@ -340,6 +340,25 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* A finished book's spine title turns gilt — measured ≥4.5:1 on every
    darkened spine colour. State, never a reward. */
 .spine.gilt .snm,.spine.gilt .sct{color:#f8e7b4}
+/* Mode tiles — the three doors into a unit, drawn rather than labelled: a
+   fanned stack for flashcards, a marked sheet for the quiz, a stopwatch at
+   full sprint for Beat the clock. background-color only (the background
+   shorthand wipes pattern layers elsewhere); tinted through the --ac vars so
+   every subject colours its own set. */
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mrow.three{grid-template-columns:repeat(3,1fr)}
+.mtile{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:96px;
+  padding:12px 6px 11px;border:1.5px solid var(--ac-25);border-radius:14px;
+  background-color:var(--ac-8);font-weight:700;font-size:12.5px;cursor:pointer}
+.mtile svg{width:54px;height:40px;color:var(--ac-fg);overflow:visible}
+.mtile small{font-weight:500;font-size:10px;color:var(--faint);letter-spacing:.04em}
+@media (prefers-reduced-motion:no-preference){
+  .mtile{transition:transform .12s ease}
+  .mtile:active{transform:scale(.96)}
+  /* The stopwatch runs — one sweeping hand is the whole joke. */
+  .mtile .mhand{transform-origin:39px 26px;animation:mtick 2.2s linear infinite}
+  @keyframes mtick{to{transform:rotate(360deg)}}
+}
 /* Hear-it button on flashcard faces — never flips the card. */
 .sayb{position:absolute;top:10px;right:12px;z-index:3;min-width:44px;min-height:44px;
   background-color:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.3);border-radius:12px;
@@ -708,7 +727,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v67 · updates say so';
+const APP_VERSION = 'v68 · three doors, drawn';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2830,6 +2849,55 @@ SCREENS.unit = function(root){
 
 /* One unit's full card — title, pills, briefing link, study buttons. Shared by
    the subject screen (loose units) and the shelf screen (the open lesson). */
+/* ---------- Mode tiles ----------
+   Inline SVG so the drawings ship inside the single file and inherit the
+   subject accent via currentColor. createElementNS is the house-approved
+   path for SVG (renderGraph set the precedent). */
+function modeSVG(kind){
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 64 48'); svg.setAttribute('aria-hidden','true');
+  const add = (tag, attrs, cls)=>{ const n = document.createElementNS(NS, tag);
+    for(const [k,v] of Object.entries(attrs)) n.setAttribute(k, v);
+    if(cls) n.setAttribute('class', cls); svg.appendChild(n); return n; };
+  const S = {fill:'none', stroke:'currentColor', 'stroke-width':'2.4',
+             'stroke-linecap':'round', 'stroke-linejoin':'round'};
+  if(kind === 'cards'){
+    add('rect',{...S, x:8,  y:10, width:24, height:32, rx:4, opacity:.4,  transform:'rotate(-10 20 26)'});
+    add('rect',{...S, x:17, y:8,  width:24, height:32, rx:4, opacity:.65, transform:'rotate(-2 29 24)'});
+    add('rect',{...S, x:27, y:7,  width:24, height:32, rx:4, fill:'var(--ac-8)', transform:'rotate(7 39 23)'});
+    add('path',{...S, 'stroke-width':'2', transform:'rotate(7 39 23)',
+      d:'M39 17l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4-2.9-2.8 4-.6z'});
+  } else if(kind === 'quiz'){
+    add('rect',{...S, x:14, y:4, width:36, height:40, rx:5});
+    add('circle',{...S, 'stroke-width':'2', cx:22, cy:14, r:3.2});
+    add('line',{...S, 'stroke-width':'2', x1:30, y1:14, x2:44, y2:14, opacity:.45});
+    add('circle',{...S, 'stroke-width':'2', cx:22, cy:24, r:3.2, fill:'currentColor'});
+    add('path',{fill:'none', stroke:'var(--surface)', 'stroke-width':'1.6',
+      'stroke-linecap':'round', 'stroke-linejoin':'round', d:'M20.7 24l1 1.1 1.8-2.2'});
+    add('line',{...S, 'stroke-width':'2', x1:30, y1:24, x2:44, y2:24});
+    add('circle',{...S, 'stroke-width':'2', cx:22, cy:34, r:3.2});
+    add('line',{...S, 'stroke-width':'2', x1:30, y1:34, x2:44, y2:34, opacity:.45});
+  } else {
+    add('line',{...S, x1:4, y1:16, x2:16, y2:16, opacity:.35});
+    add('line',{...S, x1:1, y1:24, x2:14, y2:24, opacity:.6});
+    add('line',{...S, x1:6, y1:32, x2:18, y2:32, opacity:.35});
+    add('line',{...S, x1:35, y1:5, x2:43, y2:5});
+    add('line',{...S, x1:39, y1:5, x2:39, y2:9});
+    add('circle',{...S, cx:39, cy:26, r:15});
+    add('line',{...S, 'stroke-width':'2.2', x1:39, y1:26, x2:39, y2:16}, 'mhand');
+    add('line',{...S, 'stroke-width':'2.2', x1:39, y1:26, x2:46, y2:30});
+  }
+  return svg;
+}
+function modeTile(kind, label, sub, fn){
+  const b = el('button','mtile');
+  b.appendChild(modeSVG(kind));
+  b.appendChild(el('span', null, label));
+  if(sub) b.appendChild(el('small', null, sub));
+  b.addEventListener('click', fn);
+  return b;
+}
 function unitCard(u, c, label){
   const card = el('div','card');
   card.appendChild(el('h3',null, label || u.title));
@@ -2846,20 +2914,15 @@ function unitCard(u, c, label){
     ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
     card.appendChild(ov);
   }
-  const row = el('div','btn-row');
-  const f = el('button','btn btn-secondary','🃏  Flashcards');
-  f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:c.id}));
-  const qb = el('button','btn btn-primary','Quiz');
-  qb.addEventListener('click',()=>launchQuiz(u.id,c.id,false));
-  row.appendChild(f); row.appendChild(qb); card.appendChild(row);
+  const row = el('div','mrow'+(!u.book?' three':''));
+  row.appendChild(modeTile('cards','Flashcards','flip & check',()=>go('cards',{unitId:u.id,classId:c.id})));
+  row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,c.id,false)));
   if(!u.book){
     /* Book-companion units never race a clock — speed-reading a novel
        quiz teaches exactly the wrong thing. */
-    const tb = el('button','btn btn-secondary','⏱  Beat the clock');
-    tb.style.marginTop='8px';
-    tb.addEventListener('click',()=>launchQuiz(u.id,c.id,true));
-    card.appendChild(tb);
+    row.appendChild(modeTile('clock','Beat the clock','race your pace',()=>launchQuiz(u.id,c.id,true)));
   }
+  card.appendChild(row);
   return card;
 }
 
@@ -2989,12 +3052,9 @@ SCREENS.brief = function(root){
   } else {
     nx.appendChild(el('p',null,'Start with the flashcards, then take the quiz while it is fresh.'));
   }
-  const row = el('div','btn-row');
-  const f = el('button','btn btn-secondary','🃏  Flashcards');
-  f.addEventListener('click',()=>go('cards',{unitId:u.id,classId:u.classId}));
-  const q = el('button','btn btn-primary','Quiz');
-  q.addEventListener('click',()=>launchQuiz(u.id,u.classId,false));
-  row.appendChild(f); row.appendChild(q);
+  const row = el('div','mrow');
+  row.appendChild(modeTile('cards','Flashcards','flip & check',()=>go('cards',{unitId:u.id,classId:u.classId})));
+  row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,u.classId,false)));
   nx.appendChild(row);
   root.appendChild(nx);
 

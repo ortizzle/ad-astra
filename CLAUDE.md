@@ -742,6 +742,18 @@ as ordinary cards below. Rules that are the point:
   bookmarked (or tapped) lesson expanded as the full `unitCard()`. Rows show
   coverage ("7/15 seen"), never accuracy.
 
+### Mode tiles (v68 / Wayfinder v56, both apps)
+
+The three doors into a unit — Flashcards, Quiz, Beat the clock — are drawn
+rather than labelled: a fanned card stack, a marked answer sheet, and a
+stopwatch whose hand actually sweeps (`.mhand`, `no-preference` only). Inline
+SVG via `createElementNS` (`modeSVG`/`modeTile`), coloured through
+`currentColor` = `--ac-fg`, so every subject tints its own set. Two rules:
+`background-color` only (shorthand wipes pattern layers), and **text colour is
+inherited, never `var(--ink)`** — `--ink` is the page canvas in these apps,
+and painting text with it renders invisible labels in light mode (caught by
+screenshot, 2026-08-09). Book units still get no clock tile.
+
 ### The batch of nine (v39 / Wayfinder v34, both apps)
 
 - **Pick up the thread** (`threadTarget()`): the one-tap resume card at the top
