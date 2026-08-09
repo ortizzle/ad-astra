@@ -702,7 +702,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v61 · History Unit 1';
+const APP_VERSION = 'v62 · DBQ rubric';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1909,6 +1909,34 @@ const CALC_CLASSES = new Set(['algeo','physics','bio']);
    teacher's own sheets, transcribed; they answer "what was that fact again",
    never the question itself. Add a subject here and both buttons appear. */
 const SHEETS = {
+  /* The DBQ rubric, transcribed as issued. A rubric is reference in the purest
+     sense: it is the standard she is being measured against, and she is meant
+     to have it while she writes. Nothing here is a worked example or a model
+     paragraph — that would be doing the essay, not supporting it. */
+  history: { nm:'DBQ essay rubric', ic:'📝',
+    note:'The 3-paragraph DBQ rubric, as issued. 20 points total, 5 per row. Read it BEFORE you draft and again before you hand it in.',
+    sections:[
+      {h:'Paragraph 1 · Introduction & thesis  (/5)', rows:[
+        ['Proficient (4–5)','Clear historical background and context. A strong, clear thesis sentence that directly answers the prompt.'],
+        ['Developing (2–3)','Background is vague or minimal. The thesis restates the prompt without making an argument.'],
+        ['Beginning (0–1)','No introduction or background. Thesis missing or completely unclear.']]},
+      {h:'Paragraph 2 · Evidence & analysis  (/5)', rows:[
+        ['Proficient (4–5)','Accurately uses and cites at least 3 documents. Explains how the evidence supports the thesis. Includes outside historical knowledge not found in the documents.'],
+        ['Developing (2–3)','Uses only 1–2 documents, or quotes them without explaining the connection. Leans on summary rather than analysis. Little outside evidence.'],
+        ['Beginning (0–1)','Does not use the documents, or misinterprets them completely. No analysis or historical fact.']]},
+      {h:'Paragraph 3 · Conclusion  (/5)', rows:[
+        ['Proficient (4–5)','Restates the thesis in different words. Summarises the supporting arguments smoothly.'],
+        ['Developing (2–3)','Restates the thesis word for word. Summary is incomplete or weak.'],
+        ['Beginning (0–1)','No conclusion paragraph. Ends abruptly with no final thought.']]},
+      {h:'Mechanics & structure  (/5)', rows:[
+        ['Proficient (4–5)','Three distinct paragraphs. Few or no errors in spelling, grammar or capitalisation.'],
+        ['Developing (2–3)','Transitions are awkward or unclear. Several errors make it slightly hard to read.'],
+        ['Beginning (0–1)','Not organised into distinct paragraphs. Frequent errors badly disrupt clarity.']]},
+      {h:'The three that decide the grade', rows:[
+        ['Cite at least 3 documents','Two is Developing however well written. Count them before you hand it in.'],
+        ['Add outside knowledge','Proficient on Paragraph 2 requires something true that is NOT in the documents.'],
+        ['Reword the thesis in the conclusion','Same argument, different sentence. Copying it back drops you a band.']]}
+    ] },
   algeo: { nm:'Formula sheet', ic:'📐',
     note:'The class reference sheet, as issued. Find the one you need.',
     sections:[
