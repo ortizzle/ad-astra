@@ -702,7 +702,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v58 · hear the Latin';
+const APP_VERSION = 'v59 · grown-ups first';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4136,6 +4136,16 @@ SCREENS.setup = function(root){
   const p = prefs();
   root.appendChild(headline('You','Make it yours. Nothing here leaves this device unless you turn on sync.'));
 
+  /* The grown-up door sits FIRST — it is opened daily (drafts to approve,
+     sandbox, her stats) and was buried under the whole personalize section.
+     It stays a quiet card so her own settings still read as hers. */
+  root.appendChild(divider('Grown-ups'));
+  const gc = el('div','card quiet');
+  gc.appendChild(el('p',null,'Progress summary, tests and goals, sync and backups. For a parent or tutor.'));
+  const gb = el('button','btn btn-ghost','Open');
+  gb.addEventListener('click',openParentGate); gc.appendChild(gb);
+  root.appendChild(gc);
+
   root.appendChild(divider('Personalize'));
   const pc = el('div','card');
 
@@ -4274,15 +4284,6 @@ SCREENS.setup = function(root){
     frow.appendChild(b);
   });
   foc.appendChild(frow); root.appendChild(foc);
-
-  /* Everything technical — keys, sync, backups — lives behind the passcode with
-     the rest of the grown-up tools. */
-  root.appendChild(divider('Grown-ups'));
-  const gc = el('div','card quiet');
-  gc.appendChild(el('p',null,'Progress summary, tests and goals, sync and backups. For a parent or tutor.'));
-  const gb = el('button','btn btn-ghost','Open');
-  gb.addEventListener('click',openParentGate); gc.appendChild(gb);
-  root.appendChild(gc);
 
   const ver = el('div','hintline');
   ver.style.textAlign='center'; ver.style.marginTop='22px';
