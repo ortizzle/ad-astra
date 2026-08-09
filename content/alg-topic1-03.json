@@ -1,0 +1,636 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-0103": {
+   "id": "unit-alg-0103",
+   "type": "unit",
+   "updatedAt": 1786228828911,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 1 · 1-3 Piecewise-Defined Functions",
+   "srcName": "enVision Algebra 2, Lesson 1-3 Piecewise-Defined Functions (Drive)",
+   "source": "Algebra & Geometry II, Topic 1 (Drive folder)",
+   "summary": {
+    "text": "Lesson 1-3 from the enVision Algebra 2 student edition: functions that use different rules on different intervals of their domain. Covers reading and evaluating a piecewise rule, graphing one with the right open and closed circles, writing the rule from a graph, rewriting an absolute value function as a piecewise function, step functions including the greatest integer function, and rate of change on a single piece.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the first lesson where a function stops being one formula. Almost every real pricing structure you meet — overtime pay, data plans, parking, postage — is piecewise, and the notation is how you write down a rule that changes at a threshold.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Evaluate a piecewise-defined function by first identifying the correct interval",
+     "from": "source"
+    },
+    {
+     "text": "Graph a piecewise function with correct open and closed endpoints",
+     "from": "source"
+    },
+    {
+     "text": "Write the rule that defines a function shown on a graph",
+     "from": "source"
+    },
+    {
+     "text": "Rewrite an absolute value function as a piecewise-defined function",
+     "from": "source"
+    },
+    {
+     "text": "Recognise a step function, including the greatest integer function",
+     "from": "source"
+    },
+    {
+     "text": "Check intervals for gaps and overlaps, since an overlap breaks the function",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the 1-3 material in Drive. One honest caveat: that file is a Schoology print-out and the automatic text extraction came through partially — the concept summary, the full practice set and the assessment questions all read cleanly, but several worked examples were garbled. I built from what extracted reliably plus the standard treatment of this topic, and every rule here is confirmed by the concept summary and the exercises. If the original PDF gets re-uploaded more cleanly I will re-check it. The two ideas most likely to trip her: an overlap in the intervals breaks the function outright (not just the graph), and the greatest integer function rounds DOWN, which for negatives means away from zero. Fresh scenarios throughout.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the cards on open and closed circles — nearly every mistake in this lesson traces back to a boundary.",
+    "minutes": 24,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Piecewise-defined function",
+     "def": "**A function with different rules on different intervals of its domain.**\n• Each piece carries its own rule AND its own interval, written beside it.\n• To evaluate it, first find which interval the input falls in, then use that piece only.",
+     "hint": "One function, several rules. The interval tells you which rule is on duty.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Reading a piecewise rule",
+     "def": "**Check the interval first, then apply the matching rule.**\n• For f(x) = 7 on −5 ≤ x ≤ −2 and 5 − x on −2 < x < 3, the input x = 0 lands in the second interval.\n• So f(0) = 5 − 0 = 5. The first rule never gets used.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Open and closed circles",
+     "def": "**A closed circle means the endpoint is included; an open circle means it is not.**\n• They match the brackets: ≤ gives a closed circle, < gives an open one.\n• At a break between pieces, exactly one of the two ends may be closed — otherwise the graph would fail the definition of a function.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Why both ends cannot be closed",
+     "def": "**One input can have only one output, so two closed circles stacked at the same x would break the function.**\n• If one piece ends at x ≤ 4 and the next begins at x > 4, then x = 4 belongs to the first piece alone.\n• That piece gets the closed circle; the next gets the open one.",
+     "hint": "Two solid dots above the same x means two outputs, which no function is allowed.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Step function",
+     "def": "**A piecewise function whose every piece is a constant, so the graph is a series of flat segments.**\n• Each segment is horizontal, and the graph jumps between them.\n• Parking rates, postage and data tiers are all step functions in real life.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Greatest integer function",
+     "def": "**f(x) = ⌊x⌋ returns the greatest integer less than or equal to x.**\n• ⌊3.2⌋ = 3 and ⌊0.975⌋ = 0.\n• Its graph is a staircase, so it is a step function.\n• Careful with negatives: ⌊−1.4⌋ = −2, because −2 is the greatest integer that is still not above −1.4.",
+     "eq": "f(x) = ⌊x⌋",
+     "hint": "It rounds DOWN, always — which for a negative number means further from zero.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Absolute value as a piecewise function",
+     "def": "**|x| is really two linear rules: x when x ≥ 0, and −x when x < 0.**\n• Absolute value strips the sign, and the two cases are how it does it.\n• Every absolute value function can be rewritten this way — split at the point where the inside equals 0.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Rewriting |ax + b| as a piecewise",
+     "def": "**Split where the inside equals zero, then drop the bars on one side and negate on the other.**\n• For |3x + 1|: set 3x + 1 = 0, so the split is at x = −1/3.\n• When 3x + 1 ≥ 0 the value is 3x + 1; when 3x + 1 < 0 it is −(3x + 1).",
+     "hint": "Find where the inside changes sign. That single x is the whole answer to \"where do I split it?\"",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Writing a rule from a piecewise graph",
+     "def": "**Take one piece at a time: find its interval, then find its equation as if it were the only thing on the page.**\n• Read the interval off the x-axis, watching the open and closed circles.\n• For a straight piece, get the slope from two points on it, then use a point to find the intercept.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Rate of change on one piece",
+     "def": "**If the whole interval sits inside a single piece, use only that piece's rule.**\n• Check first that the interval does not cross a break — if it does, the pieces must be handled separately.\n• For a linear piece, the rate of change is just its slope.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Increasing, decreasing or constant",
+     "def": "**Judge each piece separately — a piecewise function can do all three.**\n• A piece with positive slope increases, negative slope decreases, and a constant piece is neither.\n• Report these as intervals of x, exactly as in Lesson 1-1.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Domain and range of a piecewise function",
+     "def": "**The domain is all the intervals joined together; the range is every output any piece produces.**\n• Watch for gaps: if no piece covers 3 < x < 5, those inputs are outside the domain.\n• The range often has gaps too, especially for a step function.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What makes a function piecewise-defined?",
+     "opts": [
+      "It uses different rules on different intervals of its domain",
+      "It has more than one variable",
+      "Its graph is always made of straight lines",
+      "It has no y-intercept"
+     ],
+     "ans": 0,
+     "hint": "The name says it: the function is defined in pieces.",
+     "steps": [
+      "An ordinary function uses one rule for every input.",
+      "A piecewise-defined function splits the domain into intervals.",
+      "Each interval gets its own rule, so which rule you use depends on where the input falls."
+     ],
+     "ex": {
+      "main": "**It uses different rules on different intervals of its domain.** The pieces are intervals of x, each with its own equation.",
+      "tip": "Real life is full of these — postage, tax brackets, overtime pay. The rule changes at a threshold."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "On a piecewise graph, what does an open circle at an endpoint mean?",
+     "opts": [
+      "That endpoint value is not included in that piece",
+      "The function is undefined everywhere nearby",
+      "The graph continues forever in that direction",
+      "The function has a maximum there"
+     ],
+     "ans": 0,
+     "hint": "Open circles pair up with one of the two inequality signs.",
+     "steps": [
+      "Open and closed circles record whether an endpoint belongs to a piece.",
+      "A closed circle means included, and matches ≤ or ≥.",
+      "An open circle means excluded, and matches < or >."
+     ],
+     "ex": {
+      "main": "**That endpoint is not included in that piece.** The circles are the graph's version of round versus square brackets.",
+      "tip": "Open circle, round bracket, strict inequality — all three say the same thing."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is a step function?",
+     "opts": [
+      "A piecewise function whose pieces are all constants",
+      "Any function with a vertical asymptote",
+      "A function that increases by exactly 1 each time",
+      "A function drawn with dashed lines"
+     ],
+     "ans": 0,
+     "hint": "What does the graph look like if every piece is a flat line?",
+     "steps": [
+      "In a step function each piece is a constant value.",
+      "A constant rule graphs as a horizontal segment.",
+      "A run of horizontal segments at different heights looks like a staircase, which is where the name comes from."
+     ],
+     "ex": {
+      "main": "**A piecewise function whose pieces are all constants.** Parking garage rates are the standard example.",
+      "tip": "The steps do not have to be evenly spaced or the same height. Only flat."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Write |x| as a piecewise-defined function.",
+     "opts": [
+      "x when x ≥ 0, and −x when x < 0",
+      "x when x > 0, and x when x < 0",
+      "−x when x ≥ 0, and x when x < 0",
+      "x² when x ≥ 0, and −x² when x < 0"
+     ],
+     "ans": 0,
+     "hint": "Absolute value removes the sign. What do you do to a negative number to make it positive?",
+     "steps": [
+      "Absolute value returns the distance from zero, which is never negative.",
+      "If x is already 0 or positive, it is its own distance from zero, so |x| = x.",
+      "If x is negative, negating it makes it positive, so |x| = −x.",
+      "So |x| is x when x ≥ 0 and −x when x < 0."
+     ],
+     "ex": {
+      "main": "**x when x ≥ 0, and −x when x < 0.** The −x piece looks like it should be negative, but x is already negative there, so −x comes out positive.",
+      "tip": "Test it: x = −6 uses the second rule, giving −(−6) = 6. Correct."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is ⌊4.9⌋, the greatest integer less than or equal to 4.9?",
+     "opts": [
+      "4",
+      "5",
+      "4.9",
+      "0"
+     ],
+     "ans": 0,
+     "hint": "It rounds down, not to nearest.",
+     "steps": [
+      "The greatest integer function returns the largest integer that does not exceed the input.",
+      "The integers not above 4.9 are 4, 3, 2, and so on.",
+      "The greatest of those is 4. So ⌊4.9⌋ = 4."
+     ],
+     "ex": {
+      "main": "**4.** It always rounds DOWN, so 4.9 does not become 5 the way ordinary rounding would.",
+      "tip": "Negatives are the interesting case: ⌊−4.9⌋ = −5, because −5 is the greatest integer not above −4.9."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A piecewise function is defined as f(x) = 2x for 0 ≤ x < 5 and f(x) = 10 for x ≥ 5. What is f(3)?",
+     "opts": [
+      "6",
+      "10",
+      "3",
+      "5"
+     ],
+     "ans": 0,
+     "hint": "Which interval does 3 fall into?",
+     "steps": [
+      "Check the intervals: 3 is between 0 and 5, so it satisfies 0 ≤ x < 5.",
+      "That means the first rule applies: f(x) = 2x.",
+      "Substitute: f(3) = 2(3) = 6. The second rule is irrelevant here."
+     ],
+     "ex": {
+      "main": "**6.** Find the interval first, then apply only that piece. Reaching for the wrong rule is the usual error.",
+      "tip": "Always locate the input on the number line before touching any arithmetic."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "How does a piecewise-defined function differ from a step function?",
+     "opts": [
+      "A step function is a piecewise function whose pieces are all constant",
+      "They are the same thing",
+      "A step function has only two pieces",
+      "A piecewise function must be continuous"
+     ],
+     "ans": 0,
+     "hint": "One of these is a special case of the other.",
+     "steps": [
+      "A piecewise function allows any rule on each interval — linear, quadratic, constant, anything.",
+      "A step function restricts every piece to a constant.",
+      "So every step function is piecewise, but a piecewise function with a slanted piece is not a step function."
+     ],
+     "ex": {
+      "main": "**A step function is a piecewise function whose pieces are all constant.** Special case, not a separate idea.",
+      "tip": "When one term is a special case of another, say which way round. It is often exactly what the question is testing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A parking garage charges $5 per hour or part of an hour, up to a $24 daily maximum. What kind of function is the cost, and why?",
+     "opts": [
+      "A step function, because the price holds constant across each hour and then jumps",
+      "A linear function, because it increases at a steady rate",
+      "A quadratic function, because of the daily cap",
+      "An absolute value function"
+     ],
+     "ans": 0,
+     "hint": "\"Or part of an hour\" is doing the work. What does the cost do at 61 minutes versus 70 minutes?",
+     "steps": [
+      "Charging by the hour \"or part of an hour\" means any time within the same hour costs the same.",
+      "So the cost stays flat across each hour and then jumps at the boundary.",
+      "Flat pieces with jumps between them is exactly a step function.",
+      "The $24 cap adds one final constant piece, which is still flat."
+     ],
+     "ex": {
+      "main": "**A step function.** Rounding up to the next whole unit always produces steps, never a slope.",
+      "tip": "Postage, data plans and parking are the three standard step-function stories. Look for \"per, or part of\"."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "f(x) = 3x + 1 for x < 2 and f(x) = 9 − x for x ≥ 2. Is f(2) defined, and what is it?",
+     "opts": [
+      "Yes, f(2) = 7",
+      "Yes, f(2) = 7 and also 5, so it is not a function",
+      "No, f(2) is undefined",
+      "Yes, f(2) = 5"
+     ],
+     "ans": 0,
+     "hint": "Which piece actually claims x = 2? Look at the inequality signs.",
+     "steps": [
+      "The first piece covers x < 2, which does NOT include 2.",
+      "The second piece covers x ≥ 2, which does include 2.",
+      "So exactly one rule applies at x = 2, and it is the second: f(2) = 9 − 2 = 7.",
+      "Only one piece claiming the boundary is what keeps this a function."
+     ],
+     "ex": {
+      "main": "**f(2) = 7.** The two inequality signs are deliberately different so that exactly one piece owns the boundary.",
+      "tip": "If both pieces used ≤ and ≥, x = 2 would get two outputs and the relation would not be a function at all."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "For f(x) = −2x + 4 on 0 ≤ x < 8, what is the rate of change over the interval [2, 7]?",
+     "opts": [
+      "−2",
+      "2",
+      "−10",
+      "4"
+     ],
+     "ans": 0,
+     "hint": "Check the interval sits inside one piece, then remember what the rate of change of a line is.",
+     "steps": [
+      "Both 2 and 7 lie inside 0 ≤ x < 8, so the whole interval sits within this single piece.",
+      "That piece is linear: f(x) = −2x + 4.",
+      "The average rate of change of a linear function is just its slope.",
+      "The slope is −2, so the rate of change over [2, 7] is −2, and the function is decreasing there."
+     ],
+     "ex": {
+      "main": "**−2.** When an interval lies inside one linear piece, the rate of change is that piece's slope — no arithmetic needed.",
+      "tip": "Check first that the interval does not cross a break. If it does, you cannot use a single slope."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Rewrite g(x) = |x − 6| as a piecewise-defined function.",
+     "opts": [
+      "x − 6 when x ≥ 6, and 6 − x when x < 6",
+      "x − 6 when x ≥ 0, and 6 − x when x < 0",
+      "x + 6 when x ≥ 6, and −x − 6 when x < 6",
+      "x − 6 when x ≥ 6, and x − 6 when x < 6"
+     ],
+     "ans": 0,
+     "hint": "Split where the expression inside the bars equals zero.",
+     "steps": [
+      "Set the inside to zero: x − 6 = 0, so the split is at x = 6.",
+      "When x ≥ 6 the inside is 0 or positive, so the bars do nothing: g(x) = x − 6.",
+      "When x < 6 the inside is negative, so the bars negate it: g(x) = −(x − 6) = 6 − x.",
+      "So g is x − 6 on x ≥ 6 and 6 − x on x < 6."
+     ],
+     "ex": {
+      "main": "**x − 6 when x ≥ 6, and 6 − x when x < 6.** The split is at 6, not at 0 — the inside is what has to change sign.",
+      "tip": "Check with a number below the split: g(2) should be 4, and 6 − 2 = 4. Correct."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A worker earns $14 per hour for the first 40 hours in a week and 1.5 times that for each extra hour. What is the weekly pay for 46 hours?",
+     "opts": [
+      "$686",
+      "$560",
+      "$644",
+      "$966"
+     ],
+     "ans": 0,
+     "hint": "Split the 46 hours at the 40-hour boundary and pay each part at its own rate.",
+     "steps": [
+      "The first 40 hours pay the base rate: 40 × 14 = $560.",
+      "The overtime rate is 1.5 × 14 = $21 per hour.",
+      "Hours beyond 40: 46 − 40 = 6 overtime hours.",
+      "Overtime pay: 6 × 21 = $126.",
+      "Total: 560 + 126 = $686."
+     ],
+     "ex": {
+      "main": "**$686.** Paying all 46 hours at one rate is the trap — the whole point of a piecewise model is that the rule changes at 40.",
+      "tip": "Writing it as a function: P(h) = 14h for h ≤ 40, and 560 + 21(h − 40) for h > 40."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A step function is defined as f(x) = 3 for 0 ≤ x < 4, f(x) = 6 for 4 ≤ x < 9, and f(x) = 11 for 9 ≤ x < 12. What is its range?",
+     "opts": [
+      "{3, 6, 11}",
+      "[3, 11]",
+      "[0, 12)",
+      "{0, 4, 9, 12}"
+     ],
+     "ans": 0,
+     "hint": "The range is the set of outputs. How many different values does this function ever return?",
+     "steps": [
+      "The range is every output the function produces.",
+      "Each piece is constant, so the only outputs are 3, 6 and 11.",
+      "Nothing between them is ever produced — the function jumps straight from 3 to 6.",
+      "So the range is the set {3, 6, 11}, not the interval [3, 11]."
+     ],
+     "ex": {
+      "main": "**{3, 6, 11}.** A step function's range is a handful of separate values, so it is written as a set, not an interval.",
+      "tip": "[0, 12) is the domain here. Mixing up which is which is the commonest slip on these."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which x-values is f(x) = −3x + 4 for −2 < x < 3 and 2x + 1 for 4 < x < 9 defined for?",
+     "opts": [
+      "(−2, 3) and (4, 9), with a gap between 3 and 4",
+      "(−2, 9), the whole stretch",
+      "All real numbers",
+      "(−2, 3] and [4, 9)"
+     ],
+     "ans": 0,
+     "hint": "List what each piece covers, then check whether anything is left out.",
+     "steps": [
+      "The first piece covers −2 < x < 3.",
+      "The second covers 4 < x < 9.",
+      "Nothing covers 3 ≤ x ≤ 4, so those inputs have no rule at all.",
+      "The domain is therefore (−2, 3) together with (4, 9), with a genuine gap in the middle."
+     ],
+     "ex": {
+      "main": "**(−2, 3) and (4, 9), with a gap.** A piecewise function does not have to cover every real number, and often does not.",
+      "tip": "Never assume the domain is continuous. Read the intervals and check for holes between them."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student writes a piecewise rule with 2x + 5 on −2 < x ≤ 4 and −4x − 7 on 4 ≤ x ≤ 9, and says there is an open circle at x = 4 on both pieces. What is wrong?",
+     "opts": [
+      "Both pieces use a closed inequality at 4, so both circles are closed — and that makes it not a function",
+      "Both circles should be open, so the student is right",
+      "The first piece should have an open circle and the second a closed one",
+      "Nothing is wrong"
+     ],
+     "ans": 0,
+     "hint": "Look at the inequality signs at x = 4 in each piece, not at the student's claim.",
+     "steps": [
+      "The first piece ends at x ≤ 4, and ≤ means 4 IS included — a closed circle.",
+      "The second piece starts at 4 ≤ x, which also includes 4 — another closed circle.",
+      "So the student has both circles backwards: they are closed, not open.",
+      "Worse, with 4 in both pieces the input 4 has two outputs (13 and −23), so this relation is not a function at all."
+     ],
+     "ex": {
+      "main": "**Both are closed, which breaks the function.** One of the two inequalities must be strict for x = 4 to have a single output.",
+      "tip": "Whenever two pieces meet, check that exactly one of them claims the boundary. It is a correctness check, not a formatting one."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can a piecewise-defined function be increasing, constant and decreasing all at once, when an ordinary linear function cannot?",
+     "opts": [
+      "Because each piece has its own rule, so each interval can behave differently",
+      "Because piecewise functions are not really functions",
+      "Because the domain has gaps in it",
+      "Because absolute value is involved"
+     ],
+     "ans": 0,
+     "hint": "What does a single linear rule force to be true everywhere?",
+     "steps": [
+      "A linear function has one slope, and that slope is the same for every input.",
+      "One slope means one behaviour: always rising, always falling, or always flat.",
+      "A piecewise function assigns a different rule to each interval, and each rule brings its own slope.",
+      "So one interval can rise while another falls, with no contradiction — they are governed by different rules."
+     ],
+     "ex": {
+      "main": "**Because each piece has its own rule.** Behaviour is reported per interval, which is why Lesson 1-1 insisted these answers be x-intervals.",
+      "tip": "This is why \"is the function increasing?\" is an incomplete question for a piecewise function. Increasing WHERE?"
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A relation is defined by y = 7x − 4 for x < 2 and y = −x + 5 for x ≥ −2. Is it a function?",
+     "opts": [
+      "No — the intervals overlap on −2 ≤ x < 2, so those inputs get two outputs",
+      "Yes, because each piece is linear",
+      "Yes, because the pieces meet at a single point",
+      "No, because the domain has a gap"
+     ],
+     "ans": 0,
+     "hint": "Sketch the two intervals on a number line and look for overlap, not for gaps.",
+     "steps": [
+      "The first piece covers everything below 2. The second covers everything from −2 upward.",
+      "Between −2 and 2, BOTH conditions hold — that stretch is covered twice.",
+      "Take x = 0: the first rule gives −4, the second gives 5.",
+      "One input with two different outputs means this is not a function."
+     ],
+     "ex": {
+      "main": "**No — the intervals overlap.** With piecewise rules the danger is overlap as much as gaps: a gap shrinks the domain, an overlap destroys the function.",
+      "tip": "Draw the intervals on a number line before anything else. Gaps and overlaps both show up instantly."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two phone plans: A costs $25 for 4 GB then $20 per extra GB; B costs $40 for 5 GB then $25 per extra GB. What does a 6 GB user pay under each?",
+     "opts": [
+      "$65 under both — they tie at 6 GB",
+      "$65 under A and $55 under B",
+      "$45 under A and $65 under B",
+      "$85 under A and $65 under B"
+     ],
+     "ans": 0,
+     "hint": "Work each plan out separately. Watch how many GB actually count as \"extra\" in each one.",
+     "steps": [
+      "Plan A: the $25 base covers the first 4 GB, so the extra is 6 − 4 = 2 GB.",
+      "Those 2 GB cost 2 × 20 = $40, so plan A totals 25 + 40 = $65.",
+      "Plan B: the $40 base covers the first 5 GB, so the extra is 6 − 5 = 1 GB.",
+      "That 1 GB costs $25, so plan B totals 40 + 25 = $65.",
+      "Both come to $65 — at exactly 6 GB the two plans tie."
+     ],
+     "ex": {
+      "main": "**$65 under both.** The plan with the higher base fee includes more data, and at 6 GB those two differences cancel exactly.",
+      "tip": "Below 6 GB plan A wins and above it plan B does. Finding where two piecewise models cross is the useful skill here."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does ⌊−2.3⌋ equal, and why does it surprise people?",
+     "opts": [
+      "−3, because it rounds down and down means more negative",
+      "−2, because it rounds toward zero",
+      "−2.3, because integers are unchanged",
+      "2, because absolute value is taken first"
+     ],
+     "ans": 0,
+     "hint": "Greatest integer LESS THAN OR EQUAL TO. Which integers qualify, and which is the greatest of them?",
+     "steps": [
+      "The function returns the greatest integer that is not above the input.",
+      "The integers not above −2.3 are −3, −4, −5, and so on. Note that −2 is ABOVE −2.3, so it does not qualify.",
+      "The greatest of the qualifying integers is −3.",
+      "So ⌊−2.3⌋ = −3. It surprises people because \"rounding down\" feels like it should mean \"toward zero\"."
+     ],
+     "ex": {
+      "main": "**−3.** Down means down the number line, which for a negative input is further from zero, not nearer.",
+      "tip": "Test any greatest-integer rule on a negative number. That is where a wrong understanding shows up."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A piecewise function's pieces are 4x on 0 ≤ x < 3 and 12 on x ≥ 3. Is the graph connected at x = 3?",
+     "opts": [
+      "Yes — the first piece approaches 12 as x nears 3, and the second piece equals 12 there",
+      "No, there is a jump at x = 3",
+      "No, because x = 3 is not in the domain",
+      "It cannot be determined without a graph"
+     ],
+     "ans": 0,
+     "hint": "Work out what the first piece is heading toward at x = 3, then compare with what the second piece gives.",
+     "steps": [
+      "The first piece is 4x, so as x approaches 3 the value approaches 4(3) = 12.",
+      "The second piece takes over at x = 3 and gives 12 exactly.",
+      "The two values agree at the boundary, so there is no jump — the graph joins up.",
+      "The circle at the end of the first piece is open and the second piece's is closed, but they sit at the same height, so no gap is visible."
+     ],
+     "ex": {
+      "main": "**Yes, it connects.** A break in the RULE does not have to mean a break in the GRAPH — the pieces can meet at the same value.",
+      "tip": "To test any boundary: evaluate what each piece heads toward there. Equal means connected, different means a jump."
+     }
+    }
+   ]
+  }
+ }
+}

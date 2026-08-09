@@ -1,0 +1,651 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-0104": {
+   "id": "unit-alg-0104",
+   "type": "unit",
+   "updatedAt": 1786228947747,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 1 · 1-4 Arithmetic Sequences and Series",
+   "srcName": "enVision Algebra 2, Lesson 1-4 Arithmetic Sequences and Series (Drive)",
+   "source": "Algebra & Geometry II, Topic 1 (Drive folder)",
+   "summary": {
+    "text": "Lesson 1-4 from the enVision Algebra 2 student edition: arithmetic sequences and the sums of their terms. Covers the common difference, recursive and explicit definitions and translating between them, solving problems with a sequence, the formula for the sum of a finite arithmetic series and where it comes from, sigma notation, and finding how many terms a series has.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A sequence is just a function whose inputs are 1, 2, 3, so everything from the first three lessons still applies — this is where that pays off. The explicit formula is what lets you jump straight to the 100th term, and the sum formula turns adding fifty numbers into one multiplication.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Decide whether a sequence is arithmetic and find its common difference",
+     "from": "source"
+    },
+    {
+     "text": "Write both recursive and explicit definitions, and convert between them",
+     "from": "source"
+    },
+    {
+     "text": "Use the explicit formula to find any term, or to find d from two known terms",
+     "from": "source"
+    },
+    {
+     "text": "Find the sum of a finite arithmetic series",
+     "from": "source"
+    },
+    {
+     "text": "Read and evaluate a sum written in sigma notation",
+     "from": "source"
+    },
+    {
+     "text": "Find the number of terms when a series is given up to its last value",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the 1-4 student edition. No answer keys had been uploaded for this lesson when I built it (1-1, 1-2 and 1-3 all have them), so every answer here is derived independently and checked by a second method where one exists — the log-stack answer, for instance, is verified against the n(n+1)/2 result. If the keys appear later I will re-check against them. The two reliable stumbling blocks are both off-by-one errors: (n − 1) rather than n in the explicit formula, and counting terms inclusively when a series runs from a named start to a named end (June to December is 7 months, not 6). Both get their own card and a question.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "The formulas are short but the off-by-one errors are relentless. Check every answer at n = 1 before moving on.",
+    "minutes": 26,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Sequence",
+     "def": "**A function whose domain is the natural numbers — an ordered list of terms.**\n• The input is the term NUMBER; the output is the term itself.\n• Writing it as a function is what lets you use everything you already know about functions on it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Arithmetic sequence",
+     "def": "**A sequence with a constant difference between consecutive terms.**\n• 3, 8, 13, 18, 23 adds 5 every time, so it is arithmetic.\n• 1, 4, 9, 16 is not — the gaps are 3, 5, 7, which are not constant.",
+     "hint": "Subtract each term from the next. If you get the same number every time, it is arithmetic.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Common difference",
+     "def": "**The constant amount added to get from one term to the next, written d.**\n• Find it by subtracting any term from the one after it.\n• d can be negative, which just means the sequence is going down. 97, 86, 75 has d = −11.",
+     "eq": "d = aₙ − aₙ₋₁",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Recursive definition",
+     "def": "**Defines each term using the previous one, plus a stated starting value.**\n• aₙ = aₙ₋₁ + d for n > 1, together with a₁.\n• The starting value is not optional — without it there is nothing to build from.",
+     "eq": "aₙ = aₙ₋₁ + d,  n > 1",
+     "hint": "Recursive means \"in terms of itself\". You must be told where to start.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Explicit definition",
+     "def": "**Gives any term directly from its term number, with no need for the previous term.**\n• aₙ = a₁ + d(n − 1).\n• Use this when you want the 100th term and have no interest in the 99 before it.",
+     "eq": "aₙ = a₁ + d(n − 1)",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Why the explicit formula has (n − 1)",
+     "def": "**Because the first term has had NO common differences added yet.**\n• The 1st term has 0 differences added, the 2nd has 1, the 3rd has 2.\n• So term n has (n − 1) of them — always one fewer than the term number.",
+     "hint": "Off by one, every time, and for a reason: you start AT the first term, you do not step to it.",
+     "from": "added"
+    },
+    {
+     "id": "c6",
+     "term": "Recursive to explicit",
+     "def": "**Read a₁ and d off the recursive rule and drop them into aₙ = a₁ + d(n − 1).**\n• Given a₁ = 3 and aₙ = aₙ₋₁ + 0.5, the explicit form is aₙ = 3 + 0.5(n − 1).\n• Nothing is computed — the two definitions carry the same two numbers.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Explicit to recursive",
+     "def": "**The number multiplying (n − 1) is d, and substituting n = 1 gives a₁.**\n• For aₙ = 16 − 3(n − 1): d = −3, and a₁ = 16 − 3(0) = 16.\n• So the recursive form is a₁ = 16, aₙ = aₙ₋₁ − 3 for n > 1.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Two forms of the same explicit rule",
+     "def": "**aₙ = a₁ + d(n − 1) can always be expanded into the form aₙ = dn + c.**\n• For −1, 6, 13: a₁ = −1 and d = 7, so aₙ = −1 + 7(n − 1).\n• Expanding: −1 + 7n − 7 = 7n − 8. Both are correct and give identical terms.\n• If two people disagree about the formula, test both on n = 1 and n = 2 rather than arguing.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Series",
+     "def": "**The SUM of the terms of a sequence.**\n• A sequence is the list; a series is what you get when you add the list up.\n• A finite series adds a fixed number of terms.",
+     "hint": "Sequence, list. Series, sum. Both start with s, which is exactly why they get confused.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Sum of a finite arithmetic series",
+     "def": "**Multiply the number of terms by the average of the first and last, which is what the formula does.**\n• Sₙ = n(a₁ + aₙ) / 2.\n• You need three things: n, the first term and the LAST term. If the last term is missing, find it first.",
+     "eq": "Sₙ = n(a₁ + aₙ) / 2",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Where the sum formula comes from",
+     "def": "**Write the series forwards, write it backwards underneath, and add the two.**\n• Every column then sums to a₁ + aₙ, and there are n columns.\n• That double-counts the series, so 2Sₙ = n(a₁ + aₙ) and you halve it.\n• Worth knowing because it means you can rebuild the formula if you forget it.",
+     "from": "added"
+    },
+    {
+     "id": "c12",
+     "term": "Sigma notation",
+     "def": "**A compact way to write a sum: the index counts from the bottom number to the top one.**\n• The expression to the right of Σ is the rule for each term.\n• Σ from i = 1 to 12 of (7i − 5) means add up 7i − 5 for i = 1, 2, 3, … , 12.",
+     "eq": "∑ᵢ₌₁ⁿ aᵢ",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Finding n from the last term",
+     "def": "**When a series is written out to its final value, solve aₙ = a₁ + d(n − 1) for n.**\n• For 2 + 9 + 16 + … + 79: a₁ = 2, d = 7, aₙ = 79.\n• 79 = 2 + 7(n − 1) gives 77 = 7(n − 1), so n − 1 = 11 and n = 12.\n• You cannot use the sum formula until you know how many terms there are.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What makes a sequence arithmetic?",
+     "opts": [
+      "There is a constant difference between consecutive terms",
+      "There is a constant ratio between consecutive terms",
+      "Every term is a whole number",
+      "The terms always increase"
+     ],
+     "ans": 0,
+     "hint": "Test it by subtracting neighbours, not dividing them.",
+     "steps": [
+      "Subtract each term from the one after it.",
+      "If every one of those differences is the same number, the sequence is arithmetic.",
+      "A constant RATIO would make it geometric instead, which is a different kind of sequence."
+     ],
+     "ex": {
+      "main": "**A constant difference between consecutive terms.** That constant is d, the common difference.",
+      "tip": "Arithmetic goes with adding. A sequence built by multiplying is geometric."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the common difference of 40, 33, 26, 19, …?",
+     "opts": [
+      "−7",
+      "7",
+      "−13",
+      "33"
+     ],
+     "ans": 0,
+     "hint": "Subtract a term from the one that follows it, keeping the order right.",
+     "steps": [
+      "Take the second term minus the first: 33 − 40 = −7.",
+      "Check with the next pair: 26 − 33 = −7. Same.",
+      "So d = −7. The sequence is decreasing, which is what a negative d means."
+     ],
+     "ex": {
+      "main": "**−7.** The sign matters — dropping it would send every later term the wrong way.",
+      "tip": "Always subtract in the order \"later minus earlier\". Reversing it flips the sign."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does a recursive definition of a sequence need in order to work?",
+     "opts": [
+      "A starting value",
+      "The last term",
+      "The sum of all the terms",
+      "At least ten terms"
+     ],
+     "ans": 0,
+     "hint": "A recursive rule tells you how to get the next term from the previous one. What is missing at the very beginning?",
+     "steps": [
+      "A recursive rule says how to get each term from the one before it.",
+      "At the first term there is no previous term to use.",
+      "So the definition must state a₁ outright, or the chain never gets started."
+     ],
+     "ex": {
+      "main": "**A starting value.** The book lists leaving it out as the common error, and it makes the definition genuinely useless.",
+      "tip": "Recursion always needs a base case. That is true here and in every other place recursion shows up."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the difference between a sequence and a series?",
+     "opts": [
+      "A sequence is the list of terms; a series is their sum",
+      "A sequence is finite; a series is infinite",
+      "A sequence uses addition; a series uses multiplication",
+      "They are two words for the same thing"
+     ],
+     "ans": 0,
+     "hint": "One of them is a single number at the end.",
+     "steps": [
+      "A sequence is an ordered list: 1, 4, 7, 10, 13.",
+      "A series is what you get by adding that list: 1 + 4 + 7 + 10 + 13.",
+      "The sequence has five terms; the series has one value, 35."
+     ],
+     "ex": {
+      "main": "**A sequence is the list; a series is the sum.** The two words look alike and mean genuinely different things.",
+      "tip": "If the answer is a list, it is a sequence. If the answer is one number, it is a series."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which formula gives the sum of a finite arithmetic series?",
+     "opts": [
+      "Sₙ = n(a₁ + aₙ) / 2",
+      "Sₙ = a₁ + d(n − 1)",
+      "Sₙ = n · d",
+      "Sₙ = (a₁ + aₙ) / n"
+     ],
+     "ans": 0,
+     "hint": "The sum needs the number of terms, the first term and the last term.",
+     "steps": [
+      "aₙ = a₁ + d(n − 1) gives a single term, not a sum, so that one is out.",
+      "The sum formula multiplies the number of terms by the average of the first and last.",
+      "The average of the first and last is (a₁ + aₙ) / 2.",
+      "So Sₙ = n(a₁ + aₙ) / 2."
+     ],
+     "ex": {
+      "main": "**Sₙ = n(a₁ + aₙ) / 2.** Read it as \"how many terms, times the average term\".",
+      "tip": "That reading makes it memorable: for an arithmetic sequence, the average of the first and last IS the average of the whole list."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the explicit formula aₙ = a₁ + d(n − 1), why is it (n − 1) and not n?",
+     "opts": [
+      "The first term has had no common differences added to it yet",
+      "Because sequences start counting at zero",
+      "To make the formula work for negative d",
+      "It is a convention with no reason"
+     ],
+     "ans": 0,
+     "hint": "Count how many times you add d to get from the 1st term to the 3rd.",
+     "steps": [
+      "To reach the 1st term you add d zero times — you are already there.",
+      "To reach the 2nd you add d once; to reach the 3rd, twice.",
+      "So reaching the nth term takes (n − 1) additions, always one fewer than the term number.",
+      "That is exactly what (n − 1) counts."
+     ],
+     "ex": {
+      "main": "**The first term has had no common differences added yet.** The off-by-one is doing real work, not decoration.",
+      "tip": "Check any sequence formula at n = 1. If it does not return a₁, something is wrong."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Is 2, 4, 8, 16, 32 an arithmetic sequence?",
+     "opts": [
+      "No — the differences are 2, 4, 8, 16, which are not constant",
+      "Yes, with d = 2",
+      "Yes, with d = 4",
+      "Yes, because every term is even"
+     ],
+     "ans": 0,
+     "hint": "Work out all the differences before deciding, not just the first one.",
+     "steps": [
+      "Differences: 4 − 2 = 2, then 8 − 4 = 4, then 16 − 8 = 8, then 32 − 16 = 16.",
+      "Those differences are 2, 4, 8, 16 — not the same number each time.",
+      "So the sequence is not arithmetic. It is geometric, since each term is double the previous."
+     ],
+     "ex": {
+      "main": "**No.** The first difference being 2 is a trap; you have to check them all before calling a sequence arithmetic.",
+      "tip": "Always compute at least three differences. One pair proves nothing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Write the explicit definition for the sequence 11, 18, 25, 32, …",
+     "opts": [
+      "aₙ = 11 + 7(n − 1)",
+      "aₙ = 7 + 11(n − 1)",
+      "aₙ = 11 + 7n",
+      "aₙ = 11n + 7"
+     ],
+     "ans": 0,
+     "hint": "Identify a₁ and d, then substitute into aₙ = a₁ + d(n − 1).",
+     "steps": [
+      "The first term is a₁ = 11.",
+      "The common difference is 18 − 11 = 7, and 25 − 18 = 7 confirms it.",
+      "Substitute into aₙ = a₁ + d(n − 1): aₙ = 11 + 7(n − 1).",
+      "Check at n = 1: 11 + 7(0) = 11. Correct."
+     ],
+     "ex": {
+      "main": "**aₙ = 11 + 7(n − 1).** Testing n = 1 immediately rules out aₙ = 11 + 7n, which would give 18.",
+      "tip": "You could also expand it to aₙ = 7n + 4. Both are right; check them at n = 1 and n = 2 to be sure."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Given aₙ = 9 + 4(n − 1), what is the recursive definition?",
+     "opts": [
+      "a₁ = 9, and aₙ = aₙ₋₁ + 4 for n > 1",
+      "a₁ = 4, and aₙ = aₙ₋₁ + 9 for n > 1",
+      "a₁ = 13, and aₙ = aₙ₋₁ + 4 for n > 1",
+      "a₁ = 9, and aₙ = aₙ₋₁ + 9 for n > 1"
+     ],
+     "ans": 0,
+     "hint": "The number multiplying (n − 1) is d. Substitute n = 1 to get the first term.",
+     "steps": [
+      "The coefficient of (n − 1) is 4, so d = 4.",
+      "Substitute n = 1: a₁ = 9 + 4(1 − 1) = 9 + 0 = 9.",
+      "A recursive definition needs both the start and the step.",
+      "So: a₁ = 9, and aₙ = aₙ₋₁ + 4 for n > 1."
+     ],
+     "ex": {
+      "main": "**a₁ = 9, aₙ = aₙ₋₁ + 4.** The two forms hold the same two facts; only the packaging changes.",
+      "tip": "Answer 13 comes from mistakenly computing 9 + 4(1). Always substitute into (n − 1), not n."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An auditorium has 20 seats in the first row and 32 seats in the fifth row, increasing arithmetically. How many seats are in the tenth row?",
+     "opts": [
+      "47",
+      "44",
+      "50",
+      "42"
+     ],
+     "ans": 0,
+     "hint": "Use the two known rows to find d first, then apply the explicit formula to row 10.",
+     "steps": [
+      "Use aₙ = a₁ + d(n − 1) with a₁ = 20, n = 5 and a₅ = 32.",
+      "32 = 20 + d(5 − 1), so 32 = 20 + 4d.",
+      "Then 12 = 4d, giving d = 3.",
+      "Now row 10: a₁₀ = 20 + 3(10 − 1) = 20 + 27 = 47."
+     ],
+     "ex": {
+      "main": "**47 seats.** Two known terms are always enough to pin down d, and then any term is one substitution away.",
+      "tip": "Note 5 − 1 = 4, not 5. The off-by-one is where this question is won or lost."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the sum of the arithmetic series with 12 terms, a₁ = 5 and a₁₂ = 60?",
+     "opts": [
+      "390",
+      "780",
+      "325",
+      "360"
+     ],
+     "ans": 0,
+     "hint": "You have all three pieces the sum formula needs. Substitute carefully.",
+     "steps": [
+      "Use Sₙ = n(a₁ + aₙ) / 2.",
+      "Substitute: S₁₂ = 12(5 + 60) / 2.",
+      "Inside the bracket: 5 + 60 = 65.",
+      "So S₁₂ = 12 × 65 / 2 = 780 / 2 = 390."
+     ],
+     "ex": {
+      "main": "**390.** Forgetting to halve gives 780, which is the most common wrong answer here.",
+      "tip": "Sanity-check it: the average term is 32.5, and 12 × 32.5 = 390. Consistent."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Find the sum: 4 + 9 + 14 + 19 + 24 + 29 + 34.",
+     "opts": [
+      "133",
+      "126",
+      "140",
+      "119"
+     ],
+     "ans": 0,
+     "hint": "Count the terms, then use the first and last with the sum formula.",
+     "steps": [
+      "Count the terms: 4, 9, 14, 19, 24, 29, 34 — that is n = 7.",
+      "First term a₁ = 4, last term a₇ = 34.",
+      "S₇ = 7(4 + 34) / 2 = 7 × 38 / 2.",
+      "7 × 38 = 266, and 266 / 2 = 133."
+     ],
+     "ex": {
+      "main": "**133.** With only seven terms you could add them directly — and doing so is a good way to check the formula.",
+      "tip": "Adding them straight: 4+9=13, +14=27, +19=46, +24=70, +29=99, +34=133. Matches."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the sum of the series written in sigma notation as Σ from i = 1 to 8 of (3i + 2)?",
+     "opts": [
+      "124",
+      "116",
+      "132",
+      "108"
+     ],
+     "ans": 0,
+     "hint": "Find the first and last terms by substituting i = 1 and i = 8, then use the sum formula.",
+     "steps": [
+      "At i = 1: 3(1) + 2 = 5. So a₁ = 5.",
+      "At i = 8: 3(8) + 2 = 26. So a₈ = 26.",
+      "There are n = 8 terms, counting from i = 1 to 8.",
+      "S₈ = 8(5 + 26) / 2 = 8 × 31 / 2 = 248 / 2 = 124."
+     ],
+     "ex": {
+      "main": "**124.** Sigma notation is only a compact way of writing the series — find the ends and the ordinary formula applies.",
+      "tip": "You never have to expand a sigma sum term by term. First term, last term, how many. That is all it needs."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "How many terms are in the series 6 + 13 + 20 + … + 90?",
+     "opts": [
+      "13",
+      "12",
+      "14",
+      "11"
+     ],
+     "ans": 0,
+     "hint": "Use the explicit formula with the last term known and solve for n.",
+     "steps": [
+      "First term a₁ = 6, and d = 13 − 6 = 7.",
+      "The last term is 90, so 90 = 6 + 7(n − 1).",
+      "Subtract 6: 84 = 7(n − 1).",
+      "Divide by 7: 12 = n − 1, so n = 13."
+     ],
+     "ex": {
+      "main": "**13 terms.** Stopping at n − 1 = 12 and answering 12 is the standard slip — remember to add the 1 back.",
+      "tip": "Check it: a₁₃ = 6 + 7(12) = 6 + 84 = 90. Correct."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two students write formulas for −1, 6, 13, 20, …. One writes aₙ = −1 + 7(n − 1); the other writes aₙ = 7n − 8. Who is right?",
+     "opts": [
+      "Both — expanding the first gives the second",
+      "Only the first",
+      "Only the second",
+      "Neither"
+     ],
+     "ans": 0,
+     "hint": "Expand the first formula and compare, then test both at n = 1.",
+     "steps": [
+      "Expand the first: −1 + 7(n − 1) = −1 + 7n − 7 = 7n − 8.",
+      "That is exactly the second formula, so they are the same rule written differently.",
+      "Test both at n = 1: the first gives −1 + 0 = −1; the second gives 7 − 8 = −1. Both correct.",
+      "Test at n = 3: first gives −1 + 14 = 13; second gives 21 − 8 = 13. Both correct again."
+     ],
+     "ex": {
+      "main": "**Both.** aₙ = a₁ + d(n − 1) always expands into the form dn + c, and neither version is more correct.",
+      "tip": "When two formulas look different, expand one or test both on a couple of terms. Do not argue from appearance."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A stack of logs has 12 logs on the bottom row and one fewer in each row above, ending with 1 log at the top. How many logs are in the stack?",
+     "opts": [
+      "78",
+      "66",
+      "72",
+      "84"
+     ],
+     "ans": 0,
+     "hint": "This is a series. Identify n, a₁ and aₙ before reaching for the formula.",
+     "steps": [
+      "The rows hold 12, 11, 10, … down to 1, so this is arithmetic with d = −1.",
+      "There are 12 rows, so n = 12, with a₁ = 12 and a₁₂ = 1.",
+      "S₁₂ = 12(12 + 1) / 2.",
+      "12 × 13 = 156, and 156 / 2 = 78 logs."
+     ],
+     "ex": {
+      "main": "**78 logs.** Whether you count from the top or the bottom does not matter — the first and last terms just swap places, and their sum is unchanged.",
+      "tip": "This is the classic 1 + 2 + … + n sum, which always comes to n(n + 1) / 2. Here 12 × 13 / 2 = 78."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A saver deposits $30 in June and increases each monthly deposit by $4, finishing in December. How much has been saved in total?",
+     "opts": [
+      "$294",
+      "$258",
+      "$330",
+      "$210"
+     ],
+     "ans": 0,
+     "hint": "Count the months carefully first — that is where this one is usually lost.",
+     "steps": [
+      "June to December inclusive is 7 months: June, July, August, September, October, November, December.",
+      "So n = 7, with a₁ = 30 and d = 4.",
+      "The last deposit is a₇ = 30 + 4(7 − 1) = 30 + 24 = $54.",
+      "S₇ = 7(30 + 54) / 2 = 7 × 84 / 2 = 588 / 2 = $294."
+     ],
+     "ex": {
+      "main": "**$294.** Counting the months inclusively is the real difficulty — 7 months, not 6, because June itself counts.",
+      "tip": "Whenever a problem names a start and end point, count them out. December minus June is 6, but the answer is 7."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does writing an arithmetic series forwards and backwards, then adding, give the sum formula?",
+     "opts": [
+      "Every column then adds to a₁ + aₙ, and there are n columns, giving twice the sum",
+      "Because addition is commutative, so the order does not matter",
+      "Because the middle term is always the average",
+      "Because the common difference cancels out of every term"
+     ],
+     "ans": 0,
+     "hint": "Line up 1 + 4 + 7 + 10 + 13 above 13 + 10 + 7 + 4 + 1 and add each column.",
+     "steps": [
+      "Write the series forwards and again backwards, lined up in columns.",
+      "In each column, moving right in one row adds d while moving right in the other subtracts d, so every column has the same total.",
+      "That total is the first plus the last: a₁ + aₙ. With n columns, the two rows together come to n(a₁ + aₙ).",
+      "But the two rows are the series counted twice, so 2Sₙ = n(a₁ + aₙ), and Sₙ = n(a₁ + aₙ) / 2."
+     ],
+     "ex": {
+      "main": "**Every column adds to a₁ + aₙ, and there are n of them.** Knowing this means you can rebuild the formula if it slips your mind in an exam.",
+      "tip": "Commutativity is why you are allowed to reverse the order, but it is the constant column sum that produces the formula."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A colony has 175 bees in week 1 and grows arithmetically to 259 by week 4. In which week does it first exceed 1,015 bees?",
+     "opts": [
+      "Week 31",
+      "Week 30",
+      "Week 32",
+      "Week 29"
+     ],
+     "ans": 0,
+     "hint": "Find d from the two known weeks, then solve for the n that reaches 1,015.",
+     "steps": [
+      "From week 1 to week 4 is 3 steps: 259 = 175 + d(4 − 1), so 84 = 3d and d = 28.",
+      "Set aₙ = 1,015: 1,015 = 175 + 28(n − 1).",
+      "Subtract 175: 840 = 28(n − 1).",
+      "Divide by 28: 30 = n − 1, so n = 31 — the colony reaches exactly 1,015 in week 31."
+     ],
+     "ex": {
+      "main": "**Week 31.** The population hits 1,015 exactly then, so that is the first week it is not below the limit.",
+      "tip": "Check: a₃₁ = 175 + 28(30) = 175 + 840 = 1,015. Exact, which is why the wording matters."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student claims 0, 1, 3, 6, 10, … is arithmetic with a next term of 15. What is right and what is wrong?",
+     "opts": [
+      "The next term is 15, but the sequence is not arithmetic — the differences grow",
+      "The sequence is arithmetic, but the next term is 14",
+      "Both claims are correct",
+      "Both claims are wrong"
+     ],
+     "ans": 0,
+     "hint": "Check the differences, then check whether the pattern still predicts a next term.",
+     "steps": [
+      "Differences: 1 − 0 = 1, 3 − 1 = 2, 6 − 3 = 3, 10 − 6 = 4.",
+      "Those are 1, 2, 3, 4 — increasing, not constant, so the sequence is NOT arithmetic.",
+      "But the pattern is still clear: the next difference is 5, giving 10 + 5 = 15.",
+      "So the predicted term is right and the classification is wrong."
+     ],
+     "ex": {
+      "main": "**The next term is 15, but the sequence is not arithmetic.** These are the triangular numbers; their differences are arithmetic, the sequence itself is not.",
+      "tip": "A predictable pattern is not the same as an arithmetic one. Arithmetic demands a CONSTANT difference."
+     }
+    }
+   ]
+  }
+ }
+}

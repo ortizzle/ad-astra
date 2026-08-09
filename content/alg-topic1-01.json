@@ -1,0 +1,683 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-0101": {
+   "id": "unit-alg-0101",
+   "type": "unit",
+   "updatedAt": 1786228559139,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 1 · 1-1 Key Features of Functions",
+   "srcName": "enVision Algebra 2, Lesson 1-1 Key Features of Functions (Drive)",
+   "source": "Algebra & Geometry II, Topic 1 (Drive folder)",
+   "summary": {
+    "text": "Lesson 1-1 from the enVision Algebra 2 student edition: reading the key features of linear, quadratic and absolute value functions off an equation or a graph — domain and range in both set-builder and interval notation, x- and y-intercepts, zeros, the intervals where a function is positive or negative, where it increases or decreases, maximums and minimums, and average rate of change over an interval.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Everything after this lesson assumes you can describe a graph precisely and quickly. Topic 1 keeps reusing this vocabulary, and Test 1 will expect the notation to be exact — a round bracket where a square one belongs is a wrong answer even when you understood the graph perfectly.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Write a domain and range in both set-builder and interval notation",
+     "from": "source"
+    },
+    {
+     "text": "Find x- and y-intercepts from an equation, and connect the x-intercepts to the zeros",
+     "from": "source"
+    },
+    {
+     "text": "Identify the intervals where a function is positive, negative, increasing or decreasing",
+     "from": "source"
+    },
+    {
+     "text": "Calculate and interpret an average rate of change over an interval",
+     "from": "source"
+    },
+    {
+     "text": "Keep \"positive\" and \"increasing\" apart, since the book flags that confusion explicitly",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the 1-1 student edition. Two things to watch. First, the notation is where marks get lost: parenthesis versus square bracket, and infinity always taking a parenthesis. Several questions test only that. Second, the lesson's own listed common error — confusing a positive function value with a positive rate of change — has a card and two questions of its own, because a graph can be below the axis and climbing at the same time and that genuinely trips people. Every scenario here is fresh rather than lifted from her exercises; the book's problems stay her homework. All arithmetic re-derived independently.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first — this lesson is mostly vocabulary, and the quiz assumes you have the words. Then quiz rounds.",
+    "minutes": 23,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Domain",
+     "def": "**The set of every input a function is allowed to take.**\n• On a graph, read it left to right along the x-axis.\n• A real-world domain is usually narrower than the algebra allows — time cannot be negative.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Range",
+     "def": "**The set of every output a function actually produces.**\n• On a graph, read it bottom to top along the y-axis.\n• Ask what the function CAN reach, not what it happens to hit at the points you plotted.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Set-builder notation",
+     "def": "**A description of a set: a variable, a bar, then the rule the variable obeys.**\n• {y | y is an integer and y ≥ 10} reads \"all y such that y is an integer at least 10\".\n• The bar means \"such that\".",
+     "eq": "{y | y ≥ 10}",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Interval notation",
+     "def": "**A continuous set written as its two endpoints, low to high.**\n• (−5, 0] is every number greater than −5 and up to and including 0.\n• Always low endpoint first, then high.",
+     "eq": "(−5, 0]",
+     "hint": "Two numbers and two brackets carry everything set-builder needs a sentence for.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Parenthesis or square bracket?",
+     "def": "**Square bracket means the endpoint is included; parenthesis means it is not.**\n• [−3, ∞) includes −3 itself.\n• (−∞, 7) stops just short of 7 and never reaches it.\n• Infinity always takes a parenthesis — you can never arrive at it.",
+     "hint": "Square corner = the door is open, come in. Round = stop at the doorway.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Zero of a function",
+     "def": "**An input that makes the output 0.**\n• Same numbers as the x-intercepts — a zero is where the graph crosses the x-axis.\n• Find them by setting the whole function equal to 0 and solving.",
+     "hint": "Zero of the FUNCTION means the output is zero, not the input.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "x-intercept",
+     "def": "**The x-coordinate where the graph crosses the x-axis.**\n• Find it by setting y = 0 and solving for x.\n• A graph can have several, or none at all.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "y-intercept",
+     "def": "**The y-coordinate where the graph crosses the y-axis.**\n• Find it by substituting x = 0.\n• A function has at most one — two would mean one input with two outputs.",
+     "hint": "One input, one output. That is why there is never more than one y-intercept.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Where a function is positive",
+     "def": "**The x-intervals where the graph sits ABOVE the x-axis.**\n• Positive means the output is greater than 0, so you read it off the y-values.\n• At an x-intercept the function is neither positive nor negative, so those points are excluded — the intervals use parentheses.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Where a function is negative",
+     "def": "**The x-intervals where the graph sits BELOW the x-axis.**\n• Answer with x-intervals even though the test is about y-values. That swap is the usual slip.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Increasing and decreasing",
+     "def": "**Increasing means the graph rises as you read left to right; decreasing means it falls.**\n• Always judged left to right, as x grows.\n• Reported as x-intervals, never y-intervals.",
+     "hint": "Trace it like a sentence: left to right. Uphill is increasing.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Positive vs increasing",
+     "def": "**Positive is about WHERE the graph is; increasing is about WHICH WAY it is going.**\n• A function can be negative and increasing at once — climbing, but still below the axis.\n• The book flags this as the common error, and it is.",
+     "hint": "Below the axis and climbing: negative, increasing. Both true, no contradiction.",
+     "from": "added"
+    },
+    {
+     "id": "c12",
+     "term": "Maximum and minimum",
+     "def": "**The maximum is the greatest output a function reaches; the minimum is the least.**\n• A relative maximum is the highest point over some interval, not necessarily the whole graph.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Average rate of change",
+     "def": "**The change in output divided by the change in input, over an interval [a, b].**\n• It is exactly the slope of the straight line joining the two endpoints.\n• It says nothing about what happened in between — a rate of 0 does not mean nothing moved.",
+     "eq": "(f(b) − f(a)) / (b − a)",
+     "hint": "It is a slope. If you can find slope between two points, you can already do this.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "The four parent functions",
+     "def": "**Linear y = x, constant y = 1, quadratic y = x², absolute value y = |x|.**\n• All four have domain (−∞, ∞).\n• y = x² and y = |x| both have range [0, ∞), both decrease on (−∞, 0) and increase on (0, ∞).\n• y = 1 has range {y | y = 1} and no x-intercept at all.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Reading range off a parabola",
+     "def": "**Find the vertex first — for a parabola opening upward it is the minimum, and the range starts there.**\n• y = x² − 3 has its vertex at (0, −3), so the range is [−3, ∞).\n• Square bracket, because the vertex value is actually reached.",
+     "graph": {
+      "w": [
+       -4,
+       4,
+       -4,
+       6
+      ],
+      "series": [
+       {
+        "type": "parabola",
+        "a": 1,
+        "h": 0,
+        "k": -3
+       }
+      ],
+      "pts": [
+       {
+        "x": 0,
+        "y": -3,
+        "label": "(0, −3)"
+       }
+      ],
+      "xl": "x",
+      "yl": "y"
+     },
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the domain of a function describe?",
+     "opts": [
+      "Every input the function is allowed to take",
+      "Every output the function produces",
+      "Where the graph crosses the x-axis",
+      "The interval where the graph is rising"
+     ],
+     "ans": 0,
+     "hint": "Inputs go in, outputs come out. Which one is the domain?",
+     "steps": [
+      "A function takes an input and returns an output.",
+      "The domain is the collection of allowed inputs.",
+      "The outputs form the range. So the domain is every input the function can take."
+     ],
+     "ex": {
+      "main": "**Every input the function is allowed to take.** Read it along the x-axis, left to right.",
+      "tip": "Domain and x both come earlier in the alphabet. Range and y come later."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In interval notation, what does a square bracket mean?",
+     "opts": [
+      "The endpoint is included in the set",
+      "The endpoint is not included",
+      "The interval continues forever",
+      "The interval is empty"
+     ],
+     "ans": 0,
+     "hint": "One bracket says \"come in\", the other says \"stop just short\".",
+     "steps": [
+      "Interval notation marks each endpoint as included or excluded.",
+      "A parenthesis excludes the endpoint.",
+      "A square bracket includes it. So [−3, ∞) contains −3 itself."
+     ],
+     "ex": {
+      "main": "**The endpoint is included.** Which is why infinity never gets one — you cannot include a number you never reach.",
+      "tip": "Read [−3, ∞) aloud as \"from −3, and −3 counts, upward forever\"."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is a zero of a function?",
+     "opts": [
+      "An input that makes the output 0",
+      "An output of 0 for every input",
+      "The y-intercept",
+      "The value of the function at x = 0"
+     ],
+     "ans": 0,
+     "hint": "The name describes what the OUTPUT does, not the input.",
+     "steps": [
+      "A zero is a value of x you feed in.",
+      "Feeding it in makes the function return 0.",
+      "That is the same as the graph touching the x-axis, so the zeros are the x-intercepts."
+     ],
+     "ex": {
+      "main": "**An input that makes the output 0.** Zeros and x-intercepts are the same numbers under two names.",
+      "tip": "The value at x = 0 is the y-intercept — the opposite question."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph of a function lies below the x-axis for every x between −2 and 5. On that interval, the function is:",
+     "opts": [
+      "negative",
+      "positive",
+      "decreasing",
+      "increasing"
+     ],
+     "ans": 0,
+     "hint": "Below the axis means the y-values are what?",
+     "steps": [
+      "Below the x-axis means every output there is less than 0.",
+      "An output less than 0 is a negative value.",
+      "So the function is negative on (−2, 5). Whether it rises or falls there is a separate question."
+     ],
+     "ex": {
+      "main": "**Negative.** Positive and negative describe where the graph SITS. Increasing and decreasing describe which way it MOVES.",
+      "tip": "A graph can be negative and increasing at the same time — below the axis, climbing."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the y-intercept of a function found by doing?",
+     "opts": [
+      "Substituting x = 0",
+      "Substituting y = 0",
+      "Solving f(x) = 1",
+      "Finding the vertex"
+     ],
+     "ans": 0,
+     "hint": "The y-axis is the vertical line where x is zero.",
+     "steps": [
+      "Every point on the y-axis has x-coordinate 0.",
+      "So the graph meets the y-axis when x = 0.",
+      "Substitute x = 0 and the value you get out is the y-intercept."
+     ],
+     "ex": {
+      "main": "**Substituting x = 0.** Setting y = 0 instead gives you the x-intercepts, which is the other half of the pair.",
+      "tip": "x-intercept: set y = 0. y-intercept: set x = 0. They cross over, and that is the trap."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The average rate of change of f over [a, b] is the same as which of these?",
+     "opts": [
+      "The slope of the line joining (a, f(a)) and (b, f(b))",
+      "The maximum value of f on [a, b]",
+      "The length of the interval, b − a",
+      "The y-intercept of f"
+     ],
+     "ans": 0,
+     "hint": "Change in output over change in input — where have you seen that fraction before?",
+     "steps": [
+      "Average rate of change is (f(b) − f(a)) divided by (b − a).",
+      "The numerator is a change in y and the denominator is a change in x.",
+      "Rise over run is slope. So it is the slope of the segment joining the two endpoints."
+     ],
+     "ex": {
+      "main": "**The slope of the line joining the two endpoints.** Nothing new to memorise here — it is slope with a longer name.",
+      "tip": "Draw the straight line between the endpoints. Its steepness IS the answer."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Write the set {x | x is a real number} in interval notation.",
+     "opts": [
+      "(−∞, ∞)",
+      "[−∞, ∞]",
+      "(0, ∞)",
+      "[0, ∞)"
+     ],
+     "ans": 0,
+     "hint": "All real numbers stretch forever in both directions. And what bracket does infinity always take?",
+     "steps": [
+      "Every real number is allowed, so the set runs from negative infinity to positive infinity.",
+      "Infinity is never included, because it is not a number you can reach.",
+      "So both ends take parentheses: (−∞, ∞)."
+     ],
+     "ex": {
+      "main": "**(−∞, ∞).** Square brackets on infinity is the single most common notation slip in this lesson.",
+      "tip": "Infinity always gets a round bracket. No exceptions."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the range of y = x² + 4?",
+     "opts": [
+      "[4, ∞)",
+      "(−∞, ∞)",
+      "(4, ∞)",
+      "[0, ∞)"
+     ],
+     "ans": 0,
+     "hint": "Find the lowest point first. Can x² ever be negative?",
+     "steps": [
+      "x² is never negative — the smallest it can be is 0, at x = 0.",
+      "So the smallest value of x² + 4 is 0 + 4 = 4.",
+      "The function reaches 4 exactly, and grows without bound above it.",
+      "So the range is [4, ∞), with a square bracket because 4 is actually attained."
+     ],
+     "ex": {
+      "main": "**[4, ∞).** The vertex sits at (0, 4), and for an upward parabola the vertex value is the minimum.",
+      "tip": "For any y = x² + k, the range is [k, ∞). Find the vertex and you have the answer."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A water tank holds 600 L and drains at 15 L per minute until empty. What is the domain of the function giving the volume left after x minutes?",
+     "opts": [
+      "[0, 40]",
+      "[0, 600]",
+      "(−∞, ∞)",
+      "[0, 15]"
+     ],
+     "ans": 0,
+     "hint": "The domain is time here. When does the story start, and when does it stop making sense?",
+     "steps": [
+      "x is time in minutes, and time cannot be negative, so x ≥ 0.",
+      "The tank empties when 15x reaches 600, that is x = 600 ÷ 15 = 40 minutes.",
+      "After 40 minutes the story is over — there is nothing left to drain.",
+      "So the domain is [0, 40], both endpoints included."
+     ],
+     "ex": {
+      "main": "**[0, 40].** The algebra would happily accept any x; the situation is what closes the interval at both ends.",
+      "tip": "The range here would be [0, 600] — the volumes, not the times. Do not mix the two up."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What are the x-intercepts of y = |x| − 5?",
+     "opts": [
+      "−5 and 5",
+      "5 only",
+      "−5 only",
+      "There are none"
+     ],
+     "ans": 0,
+     "hint": "Set the output to 0 and remember that absolute value has two ways to get there.",
+     "steps": [
+      "Set y = 0: 0 = |x| − 5.",
+      "Add 5 to both sides: |x| = 5.",
+      "Absolute value 5 means x is 5 units from zero, in either direction.",
+      "So x = 5 or x = −5. Both are x-intercepts."
+     ],
+     "ex": {
+      "main": "**−5 and 5.** Forgetting the negative solution is the standard mistake with absolute value.",
+      "tip": "|x| = c always gives two answers when c is positive, one when c is 0, and none when c is negative."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "For what interval is f(x) = x² − 16 negative?",
+     "opts": [
+      "(−4, 4)",
+      "(−∞, −4) and (4, ∞)",
+      "(−16, 16)",
+      "(0, 16)"
+     ],
+     "ans": 0,
+     "hint": "Find the zeros first, then ask whether the parabola dips below the axis between them or outside them.",
+     "steps": [
+      "Find the zeros: x² − 16 = 0 gives x² = 16, so x = −4 and x = 4.",
+      "The parabola opens upward, so it dips below the x-axis BETWEEN its two zeros.",
+      "Test a point inside, say x = 0: 0 − 16 = −16, which is negative. Confirmed.",
+      "So the function is negative on (−4, 4), with parentheses because it is zero, not negative, at the endpoints."
+     ],
+     "ex": {
+      "main": "**(−4, 4).** Outside that interval it is positive. Testing one point in the middle is the fastest way to be sure.",
+      "tip": "Endpoints are always excluded here: at a zero the function is neither positive nor negative."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "For what values of x is g(x) = 5 − |x| increasing?",
+     "opts": [
+      "(−∞, 0)",
+      "(0, ∞)",
+      "(−∞, ∞)",
+      "(−5, 5)"
+     ],
+     "ans": 0,
+     "hint": "The minus sign in front of the absolute value flips the usual V. Sketch it before you answer.",
+     "steps": [
+      "g(x) = 5 − |x| is an upside-down V with its peak at (0, 5).",
+      "Reading left to right, the graph climbs up to the peak.",
+      "It reaches the peak at x = 0 and falls after that.",
+      "So it is increasing on (−∞, 0) and decreasing on (0, ∞)."
+     ],
+     "ex": {
+      "main": "**(−∞, 0).** The peak is a maximum, so the graph rises before it and falls after — the reverse of a plain V.",
+      "tip": "Sketch the vertex first. Everything about increasing and decreasing follows from which way it opens."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A phone plan costs $30 for the first 5 GB and then $10 per extra GB. What is the average rate of change of cost over the interval [0, 5] GB?",
+     "opts": [
+      "0 dollars per GB",
+      "6 dollars per GB",
+      "10 dollars per GB",
+      "30 dollars per GB"
+     ],
+     "ans": 0,
+     "hint": "Work out the cost at each end of the interval first, then subtract.",
+     "steps": [
+      "At 0 GB the cost is $30 — the plan charges that up front.",
+      "At 5 GB the cost is still $30, because the first 5 GB are included.",
+      "Change in cost is 30 − 30 = 0; change in data is 5 − 0 = 5.",
+      "Average rate of change is 0 ÷ 5 = 0 dollars per GB."
+     ],
+     "ex": {
+      "main": "**0 dollars per GB.** A rate of change of zero means the output did not move across that interval — the cost is flat there.",
+      "tip": "A zero rate of change is real information: it says \"nothing changed\", not \"nothing happened\"."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the average rate of change of f(x) = x² over the interval [1, 4]?",
+     "opts": [
+      "5",
+      "3",
+      "15",
+      "9"
+     ],
+     "ans": 0,
+     "hint": "Compute f at both endpoints, then divide the difference by the width of the interval.",
+     "steps": [
+      "f(1) = 1² = 1.",
+      "f(4) = 4² = 16.",
+      "Change in output: 16 − 1 = 15. Change in input: 4 − 1 = 3.",
+      "Average rate of change = 15 ÷ 3 = 5."
+     ],
+     "ex": {
+      "main": "**5.** Note it is not the slope at any single point — it is the slope of the line joining (1, 1) to (4, 16).",
+      "tip": "A curve has a different steepness everywhere. Average rate of change smooths that into one number."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student says the function graphed below the x-axis on (−3, 1) and rising throughout that interval is \"both negative and increasing, which is impossible\". What is wrong with that claim?",
+     "opts": [
+      "Nothing is impossible — negative describes position, increasing describes direction",
+      "A negative function can never increase",
+      "The student mixed up domain and range",
+      "The intervals should have been written with square brackets"
+     ],
+     "ans": 0,
+     "hint": "Ask what each word is actually measuring.",
+     "steps": [
+      "\"Negative\" is a claim about the y-values: they are below zero.",
+      "\"Increasing\" is a claim about direction: as x grows, y grows.",
+      "A graph can sit below the axis and still climb toward it — think of −8, then −5, then −2.",
+      "Both statements are true at once, so there is no contradiction."
+     ],
+     "ex": {
+      "main": "**Nothing is impossible.** Negative is about WHERE, increasing is about WHICH WAY. The book flags exactly this as the common error.",
+      "tip": "A value can rise for a long time before it turns positive. A bank balance climbing out of overdraft is the same idea."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The average rate of change of a hiker's elevation over [0, 3] hours is 0 ft/h. Which conclusion is justified?",
+     "opts": [
+      "They finished at the same elevation they started, whatever happened in between",
+      "They did not move at all during the three hours",
+      "They walked on flat ground the entire time",
+      "They descended for the whole three hours"
+     ],
+     "ans": 0,
+     "hint": "The formula only looks at two points. What can it possibly know about the middle?",
+     "steps": [
+      "Average rate of change uses only the endpoint values: (f(3) − f(0)) ÷ 3.",
+      "For the result to be 0, the numerator must be 0, so f(3) = f(0).",
+      "That means the start and end elevations match.",
+      "The formula never inspects the middle, so a climb followed by an equal descent gives exactly the same answer as standing still."
+     ],
+     "ex": {
+      "main": "**They finished at the same elevation they started.** Everything else claims to know about the interior, which this measurement cannot see.",
+      "tip": "Whenever a rate of change is 0, ask \"same endpoints, or genuinely nothing happening?\" The formula cannot tell you."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which key features would let you tell the graph of y = x² apart from the graph of y = |x| if you could not see them?",
+     "opts": [
+      "Neither domain, range, nor intervals of increase — those are identical for both",
+      "The range, which differs",
+      "The domain, which differs",
+      "The intervals where each is increasing, which differ"
+     ],
+     "ans": 0,
+     "hint": "Check the concept summary column by column before picking.",
+     "steps": [
+      "Both have domain (−∞, ∞).",
+      "Both have range [0, ∞).",
+      "Both decrease on (−∞, 0) and increase on (0, ∞), and both have their only intercept at the origin.",
+      "So every key feature in the summary matches — the shape between the points is what differs, and no single key feature captures it."
+     ],
+     "ex": {
+      "main": "**None of those features separate them.** Key features are a summary, not a fingerprint. Two genuinely different functions can share all of them.",
+      "tip": "This is why you sketch. A list of features narrows the possibilities; it rarely pins down one curve."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A function has domain [0, 12], is increasing on (0, 5), decreasing on (5, 12), and has a maximum of 40. What must be true?",
+     "opts": [
+      "f(5) = 40",
+      "f(12) = 40",
+      "f(0) = 40",
+      "The range is [0, 40]"
+     ],
+     "ans": 0,
+     "hint": "Where does a graph that climbs and then falls reach its highest point?",
+     "steps": [
+      "The function rises up to x = 5 and falls after it.",
+      "So the highest value it ever reaches is at the turning point, x = 5.",
+      "The maximum is given as 40, so f(5) = 40.",
+      "The range cannot be pinned down: nothing here says the lowest value is 0."
+     ],
+     "ex": {
+      "main": "**f(5) = 40.** The turn from increasing to decreasing is where the maximum lives — that is what a maximum means.",
+      "tip": "You cannot name the range without knowing the endpoint values. Not every question has enough information."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why are the endpoints excluded when you report the intervals where a function is positive?",
+     "opts": [
+      "At an x-intercept the function equals 0, which is neither positive nor negative",
+      "Because interval notation always uses parentheses",
+      "Because the function is undefined there",
+      "Because the endpoints belong to the range instead"
+     ],
+     "ans": 0,
+     "hint": "What is the actual output value at an x-intercept?",
+     "steps": [
+      "The endpoints of a positive interval are the x-intercepts.",
+      "At an x-intercept the output is exactly 0.",
+      "Zero is not greater than 0, so the function is not positive there. It is not less than 0 either, so it is not negative.",
+      "Since it is neither, those points are left out of both intervals — hence parentheses."
+     ],
+     "ex": {
+      "main": "**At an x-intercept the function equals 0, which is neither positive nor negative.** The exclusion is a fact about the value, not a notation habit.",
+      "tip": "Interval notation uses square brackets freely elsewhere — for domain and range especially. Here the maths forbids them."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph of y = −0.5x + 6 is positive on (−∞, 12) and negative on (12, ∞). What happens at x = 12?",
+     "opts": [
+      "The function equals 0 — it is the x-intercept, and it is neither positive nor negative",
+      "The function is undefined",
+      "The function reaches its maximum",
+      "The graph changes from increasing to decreasing"
+     ],
+     "ans": 0,
+     "hint": "Substitute 12 and see what comes out.",
+     "steps": [
+      "Substitute x = 12: −0.5(12) + 6 = −6 + 6 = 0.",
+      "So the graph passes through (12, 0), which is the x-intercept.",
+      "At that single point the output is 0, so it is neither positive nor negative.",
+      "The line keeps decreasing straight through it — the boundary is about sign, not direction."
+     ],
+     "ex": {
+      "main": "**It equals 0 — the x-intercept.** A linear function never changes between increasing and decreasing; its slope is the same everywhere.",
+      "tip": "The sign of a function and the direction of a function change at different places, for different reasons."
+     }
+    }
+   ]
+  }
+ }
+}
