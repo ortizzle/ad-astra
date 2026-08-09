@@ -270,6 +270,16 @@ whose text matches the positional/"of the above" pattern — belt and braces.
 never propagates: an approval re-stamps the record newer, and merge keeps the
 newer copy. Bumping re-drafts the unit on synced devices (approval is part of
 the record), so the grown-up re-approves once — say so when you do it.
+Since v67/Wayfinder v55, `fetchLibrary()` tags such re-drafts `wasApproved`,
+the queue labels them "update to a unit you approved", the toast counts them
+separately from genuinely new units, and approving clears the flag. The gate
+itself is deliberate and stays: a fix is new content, and nothing reaches her
+unread — the marker only makes the second read cheap.
+
+**Spoken-as coverage:** every Wordly Wise unit now carries `sp` on all cards —
+Lessons 2–5 from the book's own pronunciation guides, Lesson 1 hand-authored
+(its source is a photo transcription with no guides). Future vocab units
+should ship with `sp` from day one.
 
 ### How questions should make her think (v63, both apps)
 

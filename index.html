@@ -708,7 +708,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v66 · in her own words';
+const APP_VERSION = 'v67 · updates say so';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1553,6 +1553,12 @@ async function fetchLibrary(btn){
   if(sandboxOn()){ toast('Sandbox is on — nothing is saved'); return; }
   const label = btn.textContent; btn.disabled = true; btn.textContent = 'Checking…';
   let added = 0, reachable = false;
+  /* A fixed unit ships as a fresh draft, and merge replaces the approved copy
+     wholesale — approval lives on the record. Remember what was approved going
+     in, so the queue can say "this is an update, not a stranger" and the toast
+     can count them honestly. */
+  const wasApproved = new Set(Object.values(DATA.records)
+    .filter(r=>r && r.type==='unit' && !r.deleted && r.status!=='draft').map(r=>r.id));
   for(const path of CONTENT_LIBRARY){
     try{
       const res = await fetch(path, {cache:'no-store'});
@@ -1567,10 +1573,20 @@ async function fetchLibrary(btn){
       fresh.forEach(id=>{ const r = DATA.records[id]; if(r && !r.deleted) added++; });
     }catch(e){}
   }
+  let refreshed = 0;
+  Object.values(DATA.records).forEach(r=>{
+    if(r && r.type==='unit' && !r.deleted && r.status==='draft'
+       && wasApproved.has(r.id) && !r.wasApproved){
+      r.wasApproved = true; r.updatedAt = Date.now(); refreshed++;
+    }
+  });
   saveLocal(); syncSoon();
   btn.disabled = false; btn.textContent = label;
   toast(!reachable ? 'Could not reach the library — try again online'
-    : added ? `${added} new unit${added===1?'':'s'} waiting in the review queue`
+    : (added || refreshed)
+      ? [added ? `${added} new unit${added===1?'':'s'}` : '',
+         refreshed ? `${refreshed} update${refreshed===1?'':'s'} to units you had approved` : '']
+          .filter(Boolean).join(' and ') + ' — in the review queue'
     : 'Library already in sync — nothing new');
   render();
 }
@@ -5659,7 +5675,7 @@ SCREENS.review = function(root){
       const c = CLASS_BY_ID[u.classId];
       const n = (k,w) => `${k} ${w}${k===1?'':'s'}`;
       root.appendChild(cardButton(u.title,
-        `${c?c.name+' · ':''}${n(u.cards.length,'card')} · ${n(u.questions.length,'question')}${u.source?' · '+u.source:''}`,
+        `${u.wasApproved?'🔁 Update to a unit you approved — the content changed, so it gets one more read. · ':''}${c?c.name+' · ':''}${n(u.cards.length,'card')} · ${n(u.questions.length,'question')}${u.source?' · '+u.source:''}`,
         ()=>go('reviewunit',{unitId:u.id})));
     });
   }
@@ -5772,8 +5788,10 @@ SCREENS.reviewunit = function(root){
     const cards = u.cards.filter(x=>!cutC.has(x.id));
     const qs = u.questions.filter(x=>!cutQ.has(x.id));
     if(!cards.length && !qs.length){ toast('Nothing left to approve'); return; }
-    put({...u, cards, questions:qs, title:ti.value.trim()||u.title,
-         status:'approved', approvedOn:AZ.today()});
+    const rec = {...u, cards, questions:qs, title:ti.value.trim()||u.title,
+         status:'approved', approvedOn:AZ.today()};
+    delete rec.wasApproved;
+    put(rec);
     syncSoon();
     const dropped = cutC.size + cutQ.size;
     toast(dropped ? `Approved — ${dropped} dropped` : 'Approved');
