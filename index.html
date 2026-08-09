@@ -727,7 +727,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v69 · units size their sittings';
+const APP_VERSION = 'v70 · the whole catalog';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -747,69 +747,101 @@ const SUGGESTED_ASSESS = [
    Starring writes the 'clubpicks' singleton record (synced), which is a
    WISHLIST for the grown-ups, never a registration — Blackbaud does that. */
 const CLUBS = [
-  {id:'humane',    day:'Monday', nm:'Arizona Humane Society', cost:100, time:'3:40–4:40', freq:'bi-weekly', first:'Aug 17',
+  {id:'humane',    day:'Monday', nm:'Arizona Humane Society', gr:'6th–12th', cost:100, time:'3:40–4:40', freq:'bi-weekly', first:'Aug 17',
    desc:'Helping dogs, cats, rabbits and more. Learn about therapy dogs, collect donations for the shelter, and volunteer with the animals there.'},
-  {id:'asl',       day:'Monday', nm:'ASL Club', cost:65, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
+  {id:'asl',       day:'Monday', nm:'ASL Club', gr:'5th–12th', cost:65, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
    desc:'American Sign Language and Deaf culture — learn basic signs and connect with the local Arizona Deaf community.'},
-  {id:'bc2m',      day:'Monday', nm:'Bring Change 2 Mind', cost:75, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
+  {id:'bc2m',      day:'Monday', nm:'Bring Change 2 Mind', gr:'8th–12th', cost:75, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
    desc:'A national nonprofit working to reduce the stigma around mental health. Members start conversations and run campus events and presentations.'},
-  {id:'fashion',   day:'Monday', nm:'Fashion Club', cost:200, time:'3:40–4:40', freq:'bi-weekly', first:'Aug 17',
+  {id:'fashion',   day:'Monday', nm:'Fashion Club', gr:'8th–12th', cost:200, time:'3:40–4:40', freq:'bi-weekly', first:'Aug 17',
    desc:'A creative space for makeup, sewing, crocheting, knitting, embroidery and other hands-on crafts — learn a new skill or show off your own style.'},
-  {id:'finance',   day:'Monday', nm:'Finance Club', cost:35, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
+  {id:'finance',   day:'Monday', nm:'Finance Club', gr:'8th–12th', cost:35, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
    desc:'Personal finance, investing strategies and economic trends, with the chance to compete in national and international competitions.'},
-  {id:'japan',     day:'Monday', nm:'Japan Club', cost:50, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
+  {id:'japan',     day:'Monday', nm:'Japan Club', gr:'8th–12th', cost:50, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
    desc:'Explore Japanese language, traditions and customs through games, activities and cultural experiences.'},
-  {id:'mocktrial', day:'Monday', nm:'Mock Trial', cost:200, time:'3:45–4:30', freq:'weekly', first:'Aug 17',
+  {id:'mocktrial', day:'Monday', nm:'Mock Trial', gr:'8th–12th', cost:200, time:'3:45–4:30', freq:'weekly', first:'Aug 17',
    desc:'Act as real lawyers and witnesses in a fictional court case, then try it in front of real judges at Regionals in downtown Phoenix courtrooms.'},
-  {id:'route',     day:'Monday', nm:'Route to Success (women in STEM)', cost:85, time:'3:45–4:30', freq:'weekly', first:'Aug 17',
+  {id:'route',     day:'Monday', nm:'Route to Success (women in STEM)', gr:'7th–12th', cost:85, time:'3:45–4:30', freq:'weekly', first:'Aug 17',
    desc:'Closing the gender gap in STEM — open to all genders, grades 7–12. Members organize fundraising events that encourage girls into STEM fields.'},
-  {id:'glee',      day:'Tuesday', nm:'Glee Club', cost:75, time:'3:45–5:00', freq:'weekly', first:'Aug',
+  {id:'glee',      day:'Tuesday', nm:'Glee Club', gr:'8th–12th', cost:75, time:'3:45–5:00', freq:'weekly', first:'Aug',
    desc:'Sing popular songs and perform for a range of audiences. No experience needed — learn to harmonize, build vocal range, get comfortable on stage.'},
-  {id:'jrthespian',day:'Tuesday', nm:'International Junior Thespian Society', cost:150, flag:'invite only · grades 6–8',
+  {id:'jrthespian',day:'Tuesday', nm:'International Junior Thespian Society', gr:'6th–8th', cost:150, flag:'invite only · grades 6–8',
    desc:'The middle-school branch of the international theatre honor society. Membership comes by invitation through ParentSquare.'},
-  {id:'medethics', day:'Tuesday', nm:'Med-Ethics', cost:75, time:'3:45–4:30', freq:'weekly', first:'Aug 18',
+  {id:'medethics', day:'Tuesday', nm:'Med-Ethics', gr:'8th–12th', cost:75, time:'3:45–4:30', freq:'weekly', first:'Aug 18',
    desc:'Guest speakers, the High School Ethics Bowl, and medical ethics discussions. Snacks every week, per the catalog.'},
-  {id:'acapent',   day:'Tuesday', nm:'Academic Pentathlon', cost:275, time:'3:45–5:15', freq:'weekly', first:'Aug 18',
+  {id:'acapent',   day:'Tuesday', nm:'Academic Pentathlon', gr:'6th–8th', cost:275, time:'3:45–5:15', freq:'weekly', first:'Aug 18',
    desc:'Prepares for a five-event competition across science, social science, fine arts, math and literature. This year\u2019s novel is Percy Jackson: The Lightning Thief.'},
-  {id:'service',   day:'Tuesday', nm:'Bobcat Service Club (+UNICEF)', cost:75, time:'3:45–4:30', freq:'bi-weekly', first:'Sept 1',
+  {id:'service',   day:'Tuesday', nm:'Bobcat Service Club (+UNICEF)', gr:'7th–12th', cost:75, time:'3:45–4:30', freq:'bi-weekly', first:'Sept 1',
    desc:'Student-led volunteering and fundraising — donation drives, community cleanups, food banks, museums and UNICEF work. Enough hours earns a Service Certificate.'},
-  {id:'bug',       day:'Tuesday', nm:'Bug Club', cost:100, time:'3:45–4:50', freq:'weekly', first:'Aug 18',
+  {id:'bug',       day:'Tuesday', nm:'Bug Club', gr:'5th–12th', cost:100, time:'3:45–4:50', freq:'weekly', first:'Aug 18',
    desc:'Entomology taught by an entomologist: gather specimens locally, learn anatomy and ecology, and prepare specimens for the collection.'},
-  {id:'msscioly',  day:'Tuesday', nm:'MS Science Olympiad', cost:225, time:'3:45–4:45', freq:'weekly', first:'Aug 25',
+  {id:'msscioly',  day:'Tuesday', nm:'MS Science Olympiad', gr:'6th–8th', cost:225, time:'3:45–4:45', freq:'weekly', first:'Aug 25',
    desc:'Division B Science Olympiad prep through event-specific study, hands-on engineering and lab practice across biology, chemistry, physics and earth science.'},
-  {id:'reptile',   day:'Tuesday', nm:'Reptile Club', cost:150, time:'4:00–5:00', freq:'6 weeks only (8/6–9/10)', first:'Aug 18',
+  {id:'reptile',   day:'Tuesday', nm:'Reptile Club', gr:'5th–8th', cost:150, time:'4:00–5:00', freq:'6 weeks only (8/6–9/10)', first:'Aug 18',
    desc:'Six weeks of hands-on time with live tortoises, turtles, snakes, lizards and crocodilians, run by the Phoenix Herpetological Society.'},
-  {id:'chinese',   day:'Tuesday', nm:'National Chinese Honor Society', cost:50, flag:'invite only'},
-  {id:'mathcounts',day:'Tuesday', nm:'MathCounts', cost:300, flag:'invite only · grades 5–8'},
-  {id:'trim',      day:'Tuesday', nm:'Tri-M (music honor society)', cost:75, flag:'invite only'},
-  {id:'drumline',  day:'Tuesday & Wednesday', nm:'Drumline', cost:150, time:'7:00–7:30 am', freq:'weekly', first:'Aug 18', flag:'tryout · auditions Aug 11–12',
+  {id:'chinese',   day:'Tuesday', nm:'National Chinese Honor Society', gr:'8th–12th', cost:50, flag:'invite only'},
+  {id:'mathcounts',day:'Tuesday', nm:'MathCounts', gr:'5th–8th', cost:300, flag:'invite only · grades 5–8'},
+  {id:'trim',      day:'Tuesday', nm:'Tri-M (music honor society)', gr:'7th–12th', cost:75, flag:'invite only'},
+  {id:'drumline',  day:'Tuesday & Wednesday', nm:'Drumline', gr:'7th–12th', cost:150, time:'7:00–7:30 am', freq:'weekly', first:'Aug 18', flag:'tryout · auditions Aug 11–12',
    desc:'One of the school\u2019s most energetic performing ensembles. Auditions are Aug 11–12, 6:45–7:25 am, and you must sign up for a time in advance on the band room door.'},
-  {id:'njhs',      day:'Wednesday', nm:'National Junior Honor Society', cost:50, flag:'invite only · grades 7–9'},
-  {id:'scifair',   day:'Thursday', nm:'7th & 8th Grade Science Fair', cost:60, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 20',
+  {id:'njhs',      day:'Wednesday', nm:'National Junior Honor Society', gr:'7th–9th', cost:50, flag:'invite only · grades 7–9'},
+  {id:'scifair',   day:'Thursday', nm:'7th & 8th Grade Science Fair', gr:'7th–8th', cost:60, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 20',
    desc:'The official club for the school science fair: design and run your own science or engineering project. The top three are sponsored for the state fair (AzSEF).'},
-  {id:'anatomy',   day:'Thursday', nm:'Anatomy Club', cost:150, time:'3:45–4:45', freq:'bi-weekly', first:'Aug 27',
+  {id:'anatomy',   day:'Thursday', nm:'Anatomy Club', gr:'8th–12th', cost:150, time:'3:45–4:45', freq:'bi-weekly', first:'Aug 27',
    desc:'Human anatomy, histology and embryology through hands-on work and guest speakers. Prepares for the National Anatomy Competition; may include dissections and cadaver lab.'},
-  {id:'press',     day:'Thursday', nm:'Bobcat Press & Studio', cost:90, time:'3:45–4:45', freq:'weekly', first:'Aug 20',
+  {id:'press',     day:'Thursday', nm:'Bobcat Press & Studio', gr:'8th–12th', cost:90, time:'3:45–4:45', freq:'weekly', first:'Aug 20',
    desc:'The student media club — write for the school newspaper, create original stories, and try journalism, interviewing and other writing styles.'},
-  {id:'jcl',       day:'Thursday', nm:'Junior Classical League (Latin)', cost:80, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
+  {id:'jcl',       day:'Thursday', nm:'Junior Classical League (Latin)', gr:'8th–12th', cost:80, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
    desc:'For Latin students: mythology trivia, classical crafts and inter-school competitions.'},
-  {id:'mena',      day:'Thursday', nm:'MENA Appreciation Club', cost:30, time:'3:45–4:30', freq:'monthly',
+  {id:'mena',      day:'Thursday', nm:'MENA Appreciation Club', gr:'5th–12th', cost:30, time:'3:45–4:30', freq:'monthly',
    desc:'Celebrating Middle Eastern and North African cultures through events, games, discussions and service projects, including the Asian Night Market.'},
-  {id:'msscibowl', day:'Thursday', nm:'MS Science Bowl', cost:225, time:'3:45–4:50', freq:'weekly', first:'Aug 27', flag:'tryout · 7th–8th spots guaranteed',
+  {id:'msscibowl', day:'Thursday', nm:'MS Science Bowl', gr:'7th–8th', cost:225, time:'3:45–4:50', freq:'weekly', first:'Aug 27', flag:'tryout · 7th–8th spots guaranteed',
    desc:'The official Science Bowl team. Tryouts are posted in ParentSquare; everyone accepted joins a team for state, with spots guaranteed for 7th and 8th graders.'},
-  {id:'redcross',  day:'Thursday', nm:'Red Cross', cost:100, time:'7:00–7:25 am', freq:'bi-weekly', first:'Aug 20',
+  {id:'redcross',  day:'Thursday', nm:'Red Cross', gr:'8th–12th', cost:100, time:'7:00–7:25 am', freq:'bi-weekly', first:'Aug 20',
    desc:'The largest club at school — 130+ members, grades 8–12. Entirely student-led: blood drives, Pat\u2019s Run, Project C.U.R.E., and members starting their own initiatives.'},
-  {id:'tabletop',  day:'Thursday', nm:'Tabletop Game Club', cost:50, time:'3:40–4:50', freq:'weekly · starts January', first:'Jan 7',
+  {id:'tabletop',  day:'Thursday', nm:'Tabletop Game Club', gr:'5th–12th', cost:50, time:'3:40–4:50', freq:'weekly · starts January', first:'Jan 7',
    desc:'Every game without a screen: card games, board games, Dungeons & Dragons, and whatever you bring from home.'},
-  {id:'acs',       day:'Friday', nm:'American Cancer Society', cost:50, time:'3:45–4:30', freq:'monthly', first:'Aug 21',
+  {id:'acs',       day:'Friday', nm:'American Cancer Society', gr:'8th–12th', cost:50, time:'3:45–4:30', freq:'monthly', first:'Aug 21',
    desc:'Volunteer with friends around cancer research and advocacy — publish infographics, discuss research, and organize events for patients and survivors.'},
-  {id:'biochem',   day:'Friday', nm:'Biochemistry Olympiad', cost:50, time:'3:45–4:45', freq:'weekly', first:'Aug 21', flag:'tryout',
+  {id:'biochem',   day:'Friday', nm:'Biochemistry Olympiad', gr:'7th–12th', cost:50, time:'3:45–4:45', freq:'weekly', first:'Aug 21', flag:'tryout',
    desc:'Biology and Chemistry Olympiad prep with real molecular biology technique — PCR, gel electrophoresis, DNA sequencing and CRISPR.'},
-  {id:'girlrising',day:'Friday', nm:'Girl Rising', cost:100, time:'7:00–7:30 am', freq:'bi-weekly', first:'Aug 21',
+  {id:'girlrising',day:'Friday', nm:'Girl Rising', gr:'6th–12th', cost:100, time:'7:00–7:30 am', freq:'bi-weekly', first:'Aug 21',
    desc:'Fundraising to support women\u2019s education in developing nations — bake sales, restaurant fundraisers and school dances.'},
-  {id:'hsafp',     day:'Friday', nm:'HS Alliance for Future Physicians', cost:75, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
+  {id:'hsafp',     day:'Friday', nm:'HS Alliance for Future Physicians', gr:'8th–12th', cost:75, time:'3:45–4:45', freq:'monthly', first:'Aug 27',
    desc:'For students aiming at medicine: hands-on activities and resources built to give aspiring physicians a head start.'},
-  {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', cost:0, flag:'invite only'}
+  {id:'varsity',   day:'Friday', nm:'Varsity Speech & Debate', gr:'8th–12th', cost:0, flag:'invite only'}
+];
+/* The rest of the catalog — clubs whose grade range does not include 8th.
+   Listed so the app and the catalog PDF reconcile at a glance: if a club is
+   not in CLUBS above, it is here with the range that excludes it, never
+   silently dropped. Same source: the catalog PDF's grade table. */
+const CLUBS_CLOSED = [
+  {day:'Monday',    nm:'AIA Competitive Chess', gr:'9th–12th'},
+  {day:'Monday',    nm:'Bobcat Ambassador Council', gr:'9th–12th'},
+  {day:'Monday',    nm:'Battle of the Books', gr:'5th–6th'},
+  {day:'Monday',    nm:'Economics Club (AP Econ required)', gr:'10th–12th'},
+  {day:'Mon & Wed', nm:'Code Ninjas', gr:'5th–7th'},
+  {day:'Tuesday',   nm:'Chess Emporium', gr:'5th–7th'},
+  {day:'Tuesday',   nm:'CyberPatriot Club', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'Fantasy Football Club', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'Health & Her', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'International Thespian Society', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'Mu Alpha Theta', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'Novice Speech & Debate', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'American Civics Society', gr:'9th–12th'},
+  {day:'Tuesday',   nm:'HS Science Olympiad', gr:'9th–12th'},
+  {day:'Wednesday', nm:'5th & 6th Grade Science Fair', gr:'5th–6th'},
+  {day:'Wednesday', nm:'National Honor Society', gr:'10th–12th'},
+  {day:'Wednesday', nm:'Neuroscience Club', gr:'9th–12th'},
+  {day:'Wednesday', nm:'NSTEM Honor Society', gr:'9th–12th'},
+  {day:'Thursday',  nm:'High School Science Fair', gr:'9th–12th'},
+  {day:'Thursday',  nm:'Model UN', gr:'9th–12th'},
+  {day:'Thursday',  nm:'Physics Olympiad', gr:'9th–12th'},
+  {day:'Thursday',  nm:'Upper School Science Bowl', gr:'9th–12th'},
+  {day:'Thu & Fri', nm:'Dance Club', gr:'9th–12th'},
+  {day:'Friday',    nm:'Crochet Club', gr:'9th–12th'},
+  {day:'Friday',    nm:'MindTech', gr:'9th–12th'},
+  {day:'Friday',    nm:'Baking for Better', gr:'9th–12th'}
 ];
 const clubPicks = () => (DATA.records['clubpicks']||{}).picks || {};
 
@@ -3207,6 +3239,7 @@ function clubDetails(c){
     build:(box)=>{
       const rows = [
         ['When', c.day + (c.time ? ' · '+c.time : '')],
+        ['Grades', c.gr || 'See the catalog'],
         ['How often', c.freq || '—'],
         ['First meeting', c.first || 'See the catalog'],
         ['Cost', c.cost ? '$'+c.cost : 'Free']
@@ -3274,6 +3307,21 @@ SCREENS.clubs = function(root){
     });
   });
   root.appendChild(el('div','hintline','Invite-only and tryout clubs are marked — starring one still tells your parents you want in, and Drumline auditions are 8/11–12 at 6:45 am.'));
+  /* The reconciliation list: every other club in the catalog, with the grade
+     range that rules it out. Nothing tappable — it exists so you can hold the
+     catalog next to this screen and account for every single row. */
+  root.appendChild(divider('In the catalog, not open to 8th'));
+  const cc = el('div','card');
+  CLUBS_CLOSED.forEach(c=>{
+    const r = el('div','row');
+    const kk = el('span','k',c.nm);
+    kk.appendChild(el('small',null,c.day));
+    r.appendChild(kk);
+    r.appendChild(el('span','v',c.gr));
+    cc.appendChild(r);
+  });
+  root.appendChild(cc);
+  root.appendChild(el('div','hintline','These are the catalog’s own grade ranges. If one looks wrong against the PDF, tell Mom or Dad — the app updates in one deploy.'));
   const back = el('button','btn btn-ghost','← Today');
   back.addEventListener('click',()=>go('today'));
   root.appendChild(back);
