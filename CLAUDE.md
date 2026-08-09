@@ -238,6 +238,39 @@ The underlying cycle is unchanged and is working as designed: with 20 questions
 and rounds of 5, rounds 1–4 cover the unit with no repeats and round 5 wraps.
 Repetition after a full pass is correct; repeating a laddered question was not.
 
+### The learning pass (v65 / Wayfinder v53, both apps)
+
+A code-review-plus-educator sweep. Four engine changes, all rules-compliant:
+
+- **`AZ.shift()` timezone fix.** It built a LOCAL-midnight `Date` and formatted
+  it in Arizona time — identical on a Phoenix phone, one day short on any
+  device east of Arizona, which silently compressed every review-ladder
+  interval. Now pure calendar arithmetic (`Date.UTC` in, ISO slice out).
+  Verified across month end, year end, leap day and negative shifts.
+- **Recency-aware `pickRound()`.** `qstat.updatedAt` is stamped on every answer,
+  so it doubles as last-seen for free. Among equal attempt counts the question
+  met longest ago comes back first — spaced retrieval for material she got
+  RIGHT, not only for misses (successive relearning, not just error repair).
+- **"See it again tomorrow"** (`🌱`, quiz explain block, correct answers only).
+  A right answer she is not sure of is hidden shakiness no tally can see. One
+  tap writes an ordinary box-0 miss — her call, no XP change, no penalty.
+  Hidden in review rounds and when the question is already laddered. This is
+  self-flagged fragile knowledge: metacognition plus autonomy, and it must
+  never gain a cost or a guilt mechanic.
+- **"Depth of understanding"** (parent view). Accuracy split by question level
+  (recall / apply / analyze), rendered only with ≥4 attempts on ≥2 levels, with
+  one interpretive line when the spread is ≥15 points. Levels are looked up
+  from the unit at render time — nothing new is stored.
+
+Plus the pipeline now enforces the shuffle invariant: the generation prompt
+forbids positional references outright, and `generateUnit()` drops any question
+whose text matches the positional/"of the above" pattern — belt and braces.
+
+**Editing a shipped content file requires bumping its `updatedAt`** or the fix
+never propagates: an approval re-stamps the record newer, and merge keeps the
+newer copy. Bumping re-drafts the unit on synced devices (approval is part of
+the record), so the grown-up re-approves once — say so when you do it.
+
 ### How questions should make her think (v63, both apps)
 
 Derived from her actual Physics lab, which Chris supplied **as style context

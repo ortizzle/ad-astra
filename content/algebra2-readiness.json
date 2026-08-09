@@ -1,305 +1,821 @@
 {
-  "v": 4,
-  "records": {
-    "unit-a2r1": {
-      "id": "unit-a2r1",
-      "type": "unit",
-      "updatedAt": 1785888000000,
-      "classId": "algeo",
-      "quarter": 1,
-      "status": "draft",
-      "title": "Algebra 1 Tune-Up: The Readiness Rebuild",
-      "srcName": "Algebra 2 Readiness Assessment (Aug 2026)",
-      "source": "Algebra 2 Readiness Assessment, taken in class Aug 2026",
-      "summary": { "text": "The Algebra 2 Readiness Assessment sampled the Algebra 1 skills the new course assumes: rational and irrational numbers, inequalities from graphs, arithmetic sequences (explicit and recursive), absolute value functions, box plots, building linear functions from situations, systems of equations, what makes a relation a function, average rate of change, solving linear equations, factoring quadratics, compound interest, trend lines and correlation, slope in context, and polynomial multiplication.", "from": "source" },
-      "why": { "text": "Algebra 2 moves fast and treats all of this as automatic. Every skill here is one the assessment actually tested — tightening the handful that wobbled now means the new material lands on solid ground instead of on top of small leaks.", "from": "added" },
-      "objectives": [
-        { "text": "Compute an average rate of change and attach the right units — a rate like ft/s, never just a total like ft.", "from": "added" },
-        { "text": "Translate 'is 6 greater than' sentences into equations with the larger quantity alone on one side.", "from": "added" },
-        { "text": "Set up compound interest with the right n: divide the rate by n and multiply the years by n.", "from": "added" },
-        { "text": "Multiply conjugate pairs first and carry every sign when expanding polynomials.", "from": "added" },
-        { "text": "Slow down on dashed-vs-solid boundary lines and 'which is NOT true' stems before committing to an answer.", "from": "added" }
-      ],
-      "parentNote": { "text": "Scored against my own worked answers, she landed roughly 10 of 17 on the photographed pages. The misses cluster in two groups. Concept gaps: average rate of change (took the total change, −64 ft, instead of the per-second rate, −32 ft/s), compound interest (compounded annually instead of quarterly), decreasing linear models (sign on the slope), translating 'x is 6 greater than y' (wrote the relationship backwards), and polynomial products (difference of squares slipped mid-multiplication). Precision reads: a dashed boundary line answered as if solid, and a 'which is NOT true' item answered with a true statement. Two cautions: her factoring on item 11 got the right answer with shaky grouping work, and item 15's printed options were genuinely muddy — the best-matching option inverts the slope's units, so I would not weight that miss heavily. This unit re-tests every topic with fresh scenarios, weighted toward the misses, and every question carries a step-by-step walkthrough she can open after a wrong answer.", "from": "added" },
-      "nextUp": { "text": "Start with the cards on rate of change and compound interest, then run one quiz round.", "minutes": 26, "from": "added" },
-      "cards": [
-        { "id": "c0", "term": "Rational number", "def": "**A number that can be written as a fraction of two integers.**\n• Square roots of perfect squares count: √(81/25) = 9/5.\n• Terminating and repeating decimals count too.", "hint": "RATIO-nal — it makes a ratio.", "from": "source" },
-        { "id": "c1", "term": "Irrational number", "def": "**A number that cannot be written as an integer fraction — its decimal never ends or repeats.**\n• √13 and π are the classics.\n• Rational ± irrational stays irrational: √13 − 3/13 is irrational.", "hint": "The square root of a non-perfect square is the usual suspect.", "from": "source" },
-        { "id": "c2", "term": "Dashed vs solid boundary line", "def": "**Dashed means strict (< or >); solid means the line is included (≤ or ≥).**\n• Shade above for y > mx + b, below for y < mx + b.\n• Check the line style FIRST — it decides strict vs inclusive on its own.", "hint": "Dashed = do not touch.", "from": "source" },
-        { "id": "c3", "term": "Arithmetic sequence", "def": "**Adds the same amount each step — the common difference d.**\n• 1200, 2300, 3400, … has d = 1100.\n• If the gaps are not identical, it is not arithmetic.", "hint": "Arithmetic adds.", "eq": "aₙ = a₁ + (n − 1)d", "from": "source" },
-        { "id": "c4", "term": "Geometric sequence", "def": "**Multiplies by the same amount each step — the common ratio r.**\n• 1000, 2000, 4000, 8000, … has r = 2.\n• Doubling mileage is geometric; steady weekly driving is arithmetic.", "hint": "Geometric grows by ×.", "from": "source" },
-        { "id": "c5", "term": "Vertex of y = a|x − h| + k", "def": "**The corner of the V sits at (h, k).**\n• In distance-from-a-point stories, the vertex is the moment distance hits 0.\n• h hides inside the bars with its sign flipped: |x − 20| peaks-out at x = 20.", "hint": "The V lands where the inside equals zero.", "eq": "y = a|x − h| + k", "from": "source" },
-        { "id": "c6", "term": "Five-number summary (box plot)", "def": "**Min, Q1, median, Q3, max — the box spans Q1 to Q3 with a line at the median.**\n• Order the data first, always.\n• With 8 values, the median is the mean of the 4th and 5th.", "hint": "Half the data in the box, a quarter in each whisker.", "from": "source" },
-        { "id": "c7", "term": "Profit function", "def": "**Profit = revenue − cost, subtracting the ENTIRE cost expression.**\n• P(x) = (income) − (expenses), with the minus applied to the whole parenthesis.\n• Dropping the parentheses flips the sign of part of the cost.", "hint": "Earnings keep the minus for the whole cost, not just its first term.", "from": "source" },
-        { "id": "c8", "term": "\"x is 6 greater than y\"", "def": "**x = y + 6 — the bigger quantity stands alone; the smaller one gets the + 6.**\n• Test it: if y = 10, x should be 16. x = y + 6 gives 16. ✓\n• Writing x + 6 = y makes y the bigger one — backwards.", "hint": "Add to the smaller side to catch it up.", "from": "added" },
-        { "id": "c9", "term": "Function (vertical line test for points)", "def": "**Each input x pairs with exactly one output.**\n• (8, 4) and (8, 5) in the same relation break it.\n• A repeated OUTPUT is fine: (1, 3) and (2, 3) can coexist.", "hint": "Scan the x-list for repeats; ignore the y-list.", "from": "source" },
-        { "id": "c10", "term": "Average rate of change", "def": "**[f(b) − f(a)] ÷ (b − a) — the change divided by how long it took.**\n• It carries per-time units: ft/s, dollars per year.\n• The total change (no dividing) is a different number with different units.", "hint": "Slope between two points, even on a curve.", "eq": "(f(b) − f(a)) / (b − a)", "from": "source" },
-        { "id": "c11", "term": "Compound interest", "def": "**A = P(1 + r/n)^(nt), where n is compoundings per year.**\n• Quarterly → n = 4: divide the rate by 4 AND multiply the years by 4.\n• Monthly → n = 12. Annually → n = 1.", "hint": "Compounding changes BOTH numbers: rate down, exponent up.", "eq": "A = P(1 + r/n)^(nt)", "from": "source" },
-        { "id": "c12", "term": "Decreasing linear model", "def": "**A quantity used up at a steady rate has a NEGATIVE slope: f(x) = start − (rate)·x.**\n• 50 hours needed, 6 done each week → f(x) = 50 − 6x, i.e. −6x + 50.\n• Test with x = 1: the total should shrink.", "hint": "Countdowns slope down.", "from": "source" },
-        { "id": "c13", "term": "Correlation vs causation", "def": "**Correlation: two things move together. Causation: one makes the other happen.**\n• A trend line can only ever show correlation.\n• A hidden third factor often drives both.", "hint": "Ice cream sales and sunburns rise together; the sun causes both.", "from": "source" },
-        { "id": "c14", "term": "Slope in context", "def": "**Slope = y-units per ONE x-unit, read straight off the axes.**\n• y minutes vs x pages, slope 1.5 → 1.5 minutes per page.\n• Flipping it (pages per minute) is the reciprocal — a different number.", "hint": "Say it as 'per one more x' and the units write themselves.", "from": "source" },
-        { "id": "c15", "term": "Difference of squares", "def": "**(a − b)(a + b) = a² − b² — the middle terms cancel.**\n• (x − 3)(x + 3) = x² − 9. Nothing else survives.\n• Spot conjugate pairs before multiplying anything else.", "hint": "Same terms, opposite signs → the middle always cancels.", "eq": "(a − b)(a + b) = a² − b²", "from": "source" },
-        { "id": "c16", "term": "Explicit vs recursive formulas", "def": "**Explicit jumps straight to term n; recursive builds each term from the previous one.**\n• Recursive is useless without a starting value a₁.\n• Check an explicit formula by plugging in n = 1 — it must return the first term.", "hint": "Recursive = recipe that needs yesterday's result.", "from": "source" },
-        { "id": "c17", "term": "\"Which is NOT true\" questions", "def": "**Mark every option true or false, then pick the false one.**\n• The trap is stopping at the first statement that IS true.\n• Write T/F next to each choice; the answer is the odd one out.", "hint": "NOT questions flip the goal — hunt for the lie.", "from": "added" }
-      ],
-      "questions": [
-        { "id": "q0", "lv": 1, "from": "source",
-          "q": "A graph shows the DASHED line y = −x + 2, with the region above the line shaded. Which inequality does the graph represent?",
-          "opts": ["y ≥ −x + 2", "y > −x + 2", "y ≤ −x + 2", "y < −x + 2"], "ans": 1,
-          "hint": "Dashed = strict. Shaded above = greater.",
-          "steps": [
-            "Check the line style first. Dashed means the line itself is NOT included, so the symbol must be strict: < or >.",
-            "Check the shading. Above the line means y-values LARGER than the line's, so the symbol opens toward y: y > …",
-            "Combine: y > −x + 2. A solid line would have made it y ≥ −x + 2 instead."
-          ],
-          "ex": { "main": "**y > −x + 2.** The dashed line eliminates ≥ and ≤ immediately; shading above eliminates <.", "tip": "Decide dashed-vs-solid before you even look at the shading — it cuts the choices in half on its own." } },
-        { "id": "q1", "lv": 2, "from": "source",
-          "q": "The graph shown has a SOLID line with the region below it shaded. Which inequality does it represent?",
-          "graph": { "w": [-4, 4, -6, 6], "series": [ { "type": "line", "m": 2, "b": -1 } ], "pts": [ { "x": 0, "y": -1, "label": "(0, −1)" } ], "xl": "x", "yl": "y" },
-          "opts": ["y < 2x − 1", "y ≤ 2x − 1", "y > 2x − 1", "y ≥ 2x − 1"], "ans": 1,
-          "hint": "Read slope and intercept off the graph, then let solid/shading pick the symbol.",
-          "steps": [
-            "Read the line: it crosses y at (0, −1) and rises 2 for each 1 right, so the boundary is y = 2x − 1.",
-            "The line is SOLID, so points on the line count: the symbol is ≤ or ≥.",
-            "The shading is BELOW the line — y-values smaller than the line's — so the symbol is ≤.",
-            "Answer: y ≤ 2x − 1."
-          ],
-          "ex": { "main": "**y ≤ 2x − 1.** Solid line → inclusive symbol; shaded below → less than.", "tip": "Test a point in the shaded region — (0, −5) here: −5 ≤ 2(0) − 1 is true, confirming ≤." } },
-        { "id": "q2", "lv": 3, "from": "source",
-          "q": "A rectangle has a perimeter of 64 ft. The length x is 8 ft longer than the width y. Which system — and which dimensions — are correct?",
-          "opts": ["2x + 2y = 64; x + 8 = y; x = 20 ft, y = 12 ft", "x + y = 64; x = y + 8; x = 36 ft, y = 28 ft", "2x + 2y = 64; x = y + 8; x = 20 ft, y = 12 ft", "2x + 2y = 64; x = y + 8; x = 12 ft, y = 20 ft"], "ans": 2,
-          "hint": "Which one is bigger? That one equals the other plus 8.",
-          "steps": [
-            "Perimeter of a rectangle: 2x + 2y = 64. (x + y = 64 would be only half the way around.)",
-            "'The length x is 8 ft longer than the width y' — x is the BIGGER one, so x = y + 8. Writing x + 8 = y would make the width bigger, which contradicts the sentence.",
-            "Substitute: 2(y + 8) + 2y = 64 → 4y + 16 = 64.",
-            "4y = 48, so y = 12. Then x = 12 + 8 = 20.",
-            "Check both sentences: 2(20) + 2(12) = 64 ✓ and 20 is 8 more than 12 ✓. So x = 20 ft, y = 12 ft."
-          ],
-          "ex": { "main": "**2x + 2y = 64 with x = y + 8, giving x = 20 ft and y = 12 ft.** The direction of x = y + 8 is the whole question — the larger quantity stands alone.", "tip": "Plug each option's dimensions back into BOTH sentences of the problem; the wrong ones always fail the 'greater than' sentence." } },
-        { "id": "q3", "lv": 1, "from": "source",
-          "q": "Marisol is 5 years older than her brother Theo. If m is Marisol's age and t is Theo's age, which equation is true?",
-          "opts": ["m = t + 5", "t = m + 5", "m + t = 5", "m = 5t"], "ans": 0,
-          "hint": "Marisol is the older one — her age stands alone.",
-          "steps": [
-            "Identify the bigger quantity: Marisol is older, so m is the larger value.",
-            "The smaller one needs the boost: Theo's age plus 5 catches up to Marisol's. So m = t + 5.",
-            "Sanity check with numbers: if Theo is 10, Marisol is 15, and m = t + 5 gives 15. ✓"
-          ],
-          "ex": { "main": "**m = t + 5.** 'Older by 5' means you add 5 to the YOUNGER age to get the older one.", "tip": "Always test word-equations with easy numbers — a ten-second check catches the backwards version every time." } },
-        { "id": "q4", "lv": 2, "from": "source",
-          "q": "The function h(t) = −16t² + 144 models the height in feet of a ball dropped from 144 ft, t seconds after release. What is the average rate of change of h over the interval 0 ≤ t ≤ 3?",
-          "graph": { "w": [0, 4, 0, 160], "series": [ { "type": "parabola", "a": -16, "h": 0, "k": 144 } ], "pts": [ { "x": 0, "y": 144, "label": "(0, 144)" }, { "x": 3, "y": 0, "label": "(3, 0)" } ], "xl": "seconds", "yl": "feet" },
-          "opts": ["−144 ft", "48 ft/s", "−48 ft/s", "−16 ft/s"], "ans": 2,
-          "hint": "Rate = change in height ÷ change in time. Divide.",
-          "steps": [
-            "Find the height at each end of the interval: h(0) = 144.",
-            "h(3) = −16(3²) + 144 = −144 + 144 = 0. The ball reaches the ground at t = 3.",
-            "Average rate of change = (h(3) − h(0)) ÷ (3 − 0) = (0 − 144) ÷ 3 = −48.",
-            "Attach units and sign: −48 ft/s — negative because height is decreasing. −144 ft is the TOTAL change, not a rate."
-          ],
-          "ex": { "main": "**−48 ft/s.** The ball loses 144 feet of height over 3 seconds; dividing gives 48 feet lost per second, and falling makes it negative.", "tip": "If your answer has no 'per second' in it, you found a total, not a rate — go back and divide." } },
-        { "id": "q5", "lv": 3, "from": "source",
-          "q": "A ball is dropped and f(t) = −16t² + 100 gives its height in feet after t seconds, so it falls from 100 ft at t = 0 to 36 ft at t = 2. Which statement about the interval 0 < t < 2 is true?",
-          "opts": ["The average rate of change is −64 ft/s.", "The average rate of change is −32 ft/s — on average the ball loses 32 ft of height each second.", "The average rate of change is 64 ft, the distance fallen.", "The average rate of change is −16 ft/s, matching the coefficient of t²."], "ans": 1,
-          "hint": "−64 is the change. The RATE still needs a division.",
-          "steps": [
-            "Total change in height: 36 − 100 = −64 ft. That is a change, measured in feet.",
-            "A rate divides by the time it took: −64 ft ÷ 2 s = −32 ft/s.",
-            "Check the units in each option: 'ft' alone can never be a rate of change, and the −16 coefficient is not a rate either — it belongs to t², not to elapsed time.",
-            "So: the average rate of change is −32 ft/s."
-          ],
-          "ex": { "main": "**−32 ft/s.** The ball drops 64 feet in 2 seconds; per second, that is 32 feet down. The −64 option is the classic trap — it skips the division.", "tip": "Rate questions are units questions in disguise. Say the units out loud; 'feet per second' forces the divide." } },
-        { "id": "q6", "lv": 2, "from": "source",
-          "q": "$3,000 is invested at 4% interest, compounded quarterly. Which expression gives the account value after 5 years?",
-          "opts": ["3000(1.04)⁵", "3000(1.01)⁵", "3000(1.01)²⁰", "3000(1.04)²⁰"], "ans": 2,
-          "hint": "Quarterly = 4 times a year. Both numbers change.",
-          "steps": [
-            "Quarterly compounding means n = 4 periods per year.",
-            "Rate per period: r/n = 0.04 ÷ 4 = 0.01, so each quarter multiplies by 1.01.",
-            "Number of periods: n·t = 4 × 5 = 20 quarters.",
-            "Assemble A = P(1 + r/n)^(nt): 3000(1.01)²⁰. Using 1.04 with exponent 5 is annual compounding — a different, smaller answer."
-          ],
-          "ex": { "main": "**3000(1.01)²⁰.** Compounding quarterly splits the 4% into four 1% steps and quadruples how many steps happen.", "tip": "n changes two things at once: divide the rate by n AND multiply the exponent by n. If you only changed one, it is wrong." } },
-        { "id": "q7", "lv": 2, "from": "source",
-          "q": "$2,000 is invested at 6% interest, compounded monthly. To the nearest cent, what is the account worth after 2 years?",
-          "opts": ["$2,123.36", "$2,240.00", "$2,254.32", "$2,247.20"], "ans": 2,
-          "hint": "Monthly: n = 12. The exponent should be 24.",
-          "steps": [
-            "Monthly compounding: n = 12, so the rate per month is 0.06 ÷ 12 = 0.005.",
-            "Number of months in 2 years: 12 × 2 = 24.",
-            "A = 2000(1.005)²⁴.",
-            "(1.005)²⁴ ≈ 1.12716, so A ≈ 2000 × 1.12716 = $2,254.32.",
-            "Compare the traps: $2,247.20 is annual compounding (1.06²), $2,240.00 is simple interest, $2,123.36 uses only 12 months."
-          ],
-          "ex": { "main": "**$2,254.32.** Twenty-four little 0.5% steps beat two big 6% steps — that gap IS what 'compounded monthly' means.", "tip": "On a diagnostic, the annual-compounding value is almost always sitting among the options as bait. Compute the exponent first: n × t." } },
-        { "id": "q8", "lv": 1, "from": "source",
-          "q": "A 480-page book. Priya reads 32 pages every day. Which function gives the number of pages she still has left after x days?",
-          "opts": ["f(x) = 32x + 480", "f(x) = −32x + 480", "f(x) = 480x − 32", "f(x) = 32x − 480"], "ans": 1,
-          "hint": "Pages LEFT shrinks each day. What sign does the slope need?",
-          "steps": [
-            "Start value: before reading, 480 pages remain — so the constant term is +480.",
-            "Each day REMOVES 32 pages from the pile, so the rate is −32 per day: −32x.",
-            "f(x) = −32x + 480. Test x = 1: 448 left. Shrinking ✓."
-          ],
-          "ex": { "main": "**f(x) = −32x + 480.** Anything being used up has a negative slope; the starting amount rides along as the constant.", "tip": "Plug in x = 1 and ask: did it go the direction the story says? A one-second test kills the sign-flip options." } },
-        { "id": "q9", "lv": 1, "from": "source",
-          "q": "A phone battery starts the day at 100% and drains 8 percentage points every hour of screen time. Which function models the battery level after h hours?",
-          "opts": ["b(h) = 8h + 100", "b(h) = 100h − 8", "b(h) = −100h + 8", "b(h) = −8h + 100"], "ans": 3,
-          "hint": "Draining means down. Which number is the start, which is the rate?",
-          "steps": [
-            "The start (h = 0) is 100%, so the constant term must be 100.",
-            "Draining 8 per hour is a rate of −8: the h-term is −8h.",
-            "b(h) = −8h + 100. Check h = 2: 84%. Falling ✓."
-          ],
-          "ex": { "main": "**b(h) = −8h + 100.** Start value stands alone; the per-hour loss takes the minus sign and the variable.", "tip": "In linear models the constant is always 'where you started' and the coefficient is always 'what one unit of x does'." } },
-        { "id": "q10", "lv": 1, "from": "source",
-          "q": "What is the product (x − 7)(x + 7)?",
-          "opts": ["x² + 49", "x² − 14x + 49", "x² − 49", "x² − 14x − 49"], "ans": 2,
-          "hint": "Same terms, opposite signs. What happens to the middle?",
-          "steps": [
-            "Multiply the Firsts: x · x = x².",
-            "Outer and Inner: x·7 = +7x and −7·x = −7x — they cancel to zero.",
-            "Lasts: −7 · 7 = −49.",
-            "Result: x² − 49. This is the difference-of-squares pattern (a − b)(a + b) = a² − b²."
-          ],
-          "ex": { "main": "**x² − 49.** Conjugate pairs always drop their middle terms — only the two squares survive, with a minus between them.", "tip": "x² − 14x + 49 is (x − 7)² — a different problem. Squaring keeps the middle; conjugates kill it." } },
-        { "id": "q11", "lv": 2, "from": "source",
-          "q": "Find the product. (x − 2)(x + 2)(3x − 1)",
-          "opts": ["3x³ + 11x² − 12x + 4", "3x³ − x² − 12x + 4", "3x³ − x² + 12x − 4", "3x³ − 4"], "ans": 1,
-          "hint": "Two of those factors are conjugates. Multiply them first.",
-          "steps": [
-            "Spot the conjugate pair and take it first: (x − 2)(x + 2) = x² − 4. The middle terms cancel.",
-            "Now distribute (x² − 4)(3x − 1), term by term: x²·3x = 3x³ and x²·(−1) = −x².",
-            "Then −4·3x = −12x and −4·(−1) = +4.",
-            "Collect: 3x³ − x² − 12x + 4. Nothing combines further."
-          ],
-          "ex": { "main": "**3x³ − x² − 12x + 4.** Pairing the conjugates first turns a three-factor slog into one clean two-term distribution.", "tip": "Order of multiplication is yours to choose — always start with the pair that simplifies. Conjugates are a gift; open them first." } },
-        { "id": "q12", "lv": 2, "from": "source",
-          "q": "Find the product. (2x + 5)(x² − 3x + 4)",
-          "opts": ["2x³ − x² − 7x + 20", "2x³ + x² − 7x + 20", "2x³ − x² + 7x − 20", "2x³ − 11x² − 7x + 20"], "ans": 0,
-          "hint": "Distribute 2x across all three terms, then 5 across all three. Six little products.",
-          "steps": [
-            "2x times each term: 2x·x² = 2x³, 2x·(−3x) = −6x², 2x·4 = +8x.",
-            "5 times each term: 5·x² = +5x², 5·(−3x) = −15x, 5·4 = +20.",
-            "Combine the x² terms: −6x² + 5x² = −x².",
-            "Combine the x terms: 8x − 15x = −7x.",
-            "Result: 2x³ − x² − 7x + 20."
-          ],
-          "ex": { "main": "**2x³ − x² − 7x + 20.** Two-term times three-term means exactly six products; write all six down before combining and the signs cannot hide.", "tip": "Count your products before simplifying: (2 terms)(3 terms) must produce 6. Fewer means one escaped." } },
-        { "id": "q13", "lv": 2, "from": "source",
-          "q": "A table records hours practiced and free throws made for eight players; the players with more practice hours consistently made more free throws. Which statement is NOT true?",
-          "opts": ["The data show a positive correlation.", "A trend line drawn through the data would have a positive slope.", "The data show a negative correlation.", "More practice hours are associated with more free throws made."], "ans": 2,
-          "hint": "Mark each statement T or F first. Then pick the F.",
-          "steps": [
-            "Go option by option and mark true or false — do not stop early.",
-            "'Positive correlation' — the quantities rise together, so TRUE.",
-            "'Positive slope trend line' — same fact restated, TRUE. 'Associated' — TRUE again.",
-            "'Negative correlation' would mean more practice, FEWER free throws — the opposite of the table. FALSE, so it is the answer."
-          ],
-          "ex": { "main": "**'The data show a negative correlation' is the false one.** Rising together is positive correlation; negative would mean one falls as the other rises.", "tip": "On NOT-true questions, a true statement is a wrong answer. Write T/F beside every option — it makes the flip impossible to forget." } },
-        { "id": "q14", "lv": 3, "from": "source",
-          "q": "In a neighborhood survey, homes with more smoke detectors also tended to have more fire extinguishers. Which conclusion does the data actually justify?",
-          "opts": ["Buying smoke detectors causes people to buy fire extinguishers.", "The two quantities are positively correlated, but the data alone cannot prove one causes the other.", "There is no relationship between the two quantities.", "A trend line through the data would have a negative slope."], "ans": 1,
-          "hint": "Moving together is one claim. 'One causes the other' is a much bigger claim.",
-          "steps": [
-            "Describe what the data shows: the two counts rise together — a positive correlation.",
-            "Ask what would be needed to claim causation: an experiment or mechanism, not just co-occurrence.",
-            "Notice the likely hidden driver: safety-minded households buy BOTH. A third factor can create the whole pattern.",
-            "So the defensible conclusion is correlation only — positively correlated, causation unproven."
-          ],
-          "ex": { "main": "**Positively correlated, causation unproven.** A survey can show togetherness; it cannot show pushing. A common cause (safety-mindedness) explains this pattern with neither item causing the other.", "tip": "When an option says 'causes', look for the invisible third factor first. If you can name one, the causation claim dies." } },
-        { "id": "q15", "lv": 2, "from": "source",
-          "q": "A rideshare fare is y = 2.4x + 1.2, where y is the cost in dollars and x is the miles driven. What does the 2.4 represent?",
-          "opts": ["The starting fare before any miles are driven", "The number of miles you get per dollar", "The total cost of a typical trip", "The cost per mile — each extra mile adds $2.40"], "ans": 3,
-          "hint": "Slope is what ONE more x does to y.",
-          "steps": [
-            "Identify the slope: in y = mx + b form, 2.4 is m.",
-            "Slope means: when x goes up by 1, y goes up by 2.4.",
-            "Attach the units from the story: x is miles, y is dollars — so 2.4 is dollars per mile.",
-            "The 1.2 is the y-intercept: the $1.20 starting fare at zero miles."
-          ],
-          "ex": { "main": "**Cost per mile.** Each additional mile adds $2.40 to the fare; the $1.20 flat fee is the intercept's job, not the slope's.", "tip": "Slope units are always y-units per x-unit — build the phrase from the axes before reading the options." } },
-        { "id": "q16", "lv": 2, "from": "source",
-          "q": "Marco's reading time follows y = 1.8x + 0.5, where y is minutes and x is the number of pages. What does the slope 1.8 mean?",
-          "opts": ["Marco reads 1.8 pages every minute", "A reading assignment takes 1.8 minutes in total", "Marco takes about 1.8 minutes to read each page", "Marco starts each assignment 0.5 pages behind"], "ans": 2,
-          "hint": "y is minutes. x is pages. Slope is y per x — in that order.",
-          "steps": [
-            "Slope = change in y per one-unit change in x.",
-            "Substitute the story's units: minutes per page. So 1.8 means 1.8 minutes for each page.",
-            "'1.8 pages per minute' flips the fraction — that would be the reciprocal, about 0.56 pages per minute. Different number, different claim.",
-            "The 0.5 is minutes of setup time at x = 0, not pages."
-          ],
-          "ex": { "main": "**About 1.8 minutes per page.** The slope's units come out y-over-x — minutes over pages — and flipping them silently changes the answer.", "tip": "This exact flip — 'minutes per page' vs 'pages per minute' — is a favorite trap. Write the fraction with units before choosing." } },
-        { "id": "q17", "lv": 1, "from": "source",
-          "q": "Which expression is NOT equivalent to a rational number?",
-          "opts": ["7.121212… (the 12 repeats forever)", "√(36/25) + 2/5", "√20 ÷ 5", "√81 × 2/3"], "ans": 2,
-          "hint": "Is 20 a perfect square?",
-          "steps": [
-            "Evaluate each root: √(36/25) = 6/5, so option B is 6/5 + 2/5 = 8/5 — rational.",
-            "√81 = 9, so 9 × 2/3 = 6 — rational. A repeating decimal like 7.121212… is always rational (it equals 705/99).",
-            "√20 is the problem: 20 is not a perfect square, so √20 = 2√5, which is irrational.",
-            "Dividing an irrational number by 5 keeps it irrational — so √20 ÷ 5 is the one that is NOT rational."
-          ],
-          "ex": { "main": "**√20 ÷ 5.** Every other option collapses to a plain fraction; √20 refuses because 20 is not a perfect square, and no amount of dividing by 5 fixes that.", "tip": "Check whether the number under each root is a perfect square first — that one test settles most rational/irrational questions." } },
-        { "id": "q18", "lv": 2, "from": "source",
-          "q": "The data set 12, 15, 9, 20, 14, 25, 11, 18 shows the points scored by a player in eight games. Which five-number summary is correct?",
-          "opts": ["min 9, Q1 11.5, median 14.5, Q3 19, max 25", "min 9, Q1 11, median 14.5, Q3 20, max 25", "min 9, Q1 11.5, median 14, Q3 19, max 25", "min 9, Q1 12, median 15, Q3 18, max 25"], "ans": 0,
-          "hint": "Order the list first. With 8 values, every quartile is an average of two neighbors.",
-          "steps": [
-            "Order the data: 9, 11, 12, 14, 15, 18, 20, 25.",
-            "Median: with 8 values, average the 4th and 5th: (14 + 15) ÷ 2 = 14.5.",
-            "Lower half is 9, 11, 12, 14 → Q1 = (11 + 12) ÷ 2 = 11.5.",
-            "Upper half is 15, 18, 20, 25 → Q3 = (18 + 20) ÷ 2 = 19.",
-            "Min 9, max 25. Summary: 9, 11.5, 14.5, 19, 25."
-          ],
-          "ex": { "main": "**9, 11.5, 14.5, 19, 25.** With an even count nothing lands exactly on a data point — every quartile is a midpoint of two neighbors.", "tip": "If your quartiles for an even-sized set are all whole data values, you probably skipped the averaging." } },
-        { "id": "q19", "lv": 2, "from": "source",
-          "q": "A climbing gym charges $30 for the first visit and $9 for each visit after that. Which pair of explicit and recursive formulas gives aₙ, the cost of the nth visit's running total?",
-          "opts": ["Explicit: aₙ = 30 + 9n; Recursive: aₙ = aₙ₋₁ + 9, a₁ = 30", "Explicit: aₙ = 21 + 9n; Recursive: aₙ = aₙ₋₁ + 9, a₁ = 30", "Explicit: aₙ = 30 − 9n; Recursive: aₙ = aₙ₋₁ − 9, a₁ = 30", "Explicit: aₙ = 21 + 9n; Recursive: aₙ = aₙ₋₁ + 30, a₁ = 9"], "ans": 1,
-          "hint": "Test each explicit formula at n = 1. It must give exactly 30.",
-          "steps": [
-            "The first term is a₁ = 30, and each later visit adds d = 9 — that is the whole recursive story: aₙ = aₙ₋₁ + 9 with a₁ = 30.",
-            "Build the explicit form: aₙ = a₁ + (n − 1)d = 30 + 9(n − 1).",
-            "Simplify: 30 + 9n − 9 = 21 + 9n.",
-            "Verify at n = 1: 21 + 9 = 30 ✓, and n = 2 gives 39 ✓. The option starting 30 + 9n gives 39 at n = 1 — off by one visit."
-          ],
-          "ex": { "main": "**Explicit aₙ = 21 + 9n with recursive aₙ = aₙ₋₁ + 9, a₁ = 30.** The (n − 1) in the explicit formula is what keeps the first term honest.", "tip": "The n = 1 test is instant and merciless — run it on every explicit option before anything else." } },
-        { "id": "q20", "lv": 1, "from": "source",
-          "q": "Which relation is a function?",
-          "opts": ["(2, 1), (2, 5), (3, 4), (4, 2)", "(0, 1), (1, 2), (1, 3), (2, 4)", "(5, 2), (6, 3), (5, 7), (8, 1)", "(1, 3), (2, 3), (3, 3), (4, 3)"], "ans": 3,
-          "hint": "Scan the x-values only. Repeats there are the problem.",
-          "steps": [
-            "A function allows each input x exactly one output — so scan each option's x-list for repeats.",
-            "Option A repeats x = 2 with different outputs (1 and 5) — not a function. Option B repeats x = 1; option C repeats x = 5.",
-            "Option D uses x = 1, 2, 3, 4 — all different inputs. The repeated OUTPUT 3 is perfectly fine: many inputs may share one output.",
-            "So (1, 3), (2, 3), (3, 3), (4, 3) is the function."
-          ],
-          "ex": { "main": "**(1, 3), (2, 3), (3, 3), (4, 3).** Every input appears once. A constant output is still a function — the rule only polices the inputs.", "tip": "Repeated y-values are a decoy; only repeated x-values with different partners break a function." } },
-        { "id": "q21", "lv": 2, "from": "source",
-          "q": "A bakery sells a cake for $18.00 plus $2.50 per extra layer. Making the cake costs the bakery $7.00 plus $1.10 per extra layer. Which function models the bakery's profit on a cake with x extra layers?",
-          "opts": ["P(x) = (18 + 2.50x) + (7 + 1.10x)", "P(x) = (18 − 2.50x) + (7 + 1.10x)", "P(x) = (18 + 2.50x) − (7 − 1.10x)", "P(x) = (18 + 2.50x) − (7 + 1.10x)"], "ans": 3,
-          "hint": "Profit = money in − money out, and 'money out' is the WHOLE cost expression.",
-          "steps": [
-            "Money in (revenue): the price, 18 + 2.50x.",
-            "Money out (cost): 7 + 1.10x.",
-            "Profit subtracts the entire cost: P(x) = (18 + 2.50x) − (7 + 1.10x). The parentheses matter — the minus must hit both the 7 AND the 1.10x.",
-            "Simplified, P(x) = 11 + 1.40x: about $11 base profit plus $1.40 per layer. Positive and growing — sanity check passes."
-          ],
-          "ex": { "main": "**P(x) = (18 + 2.50x) − (7 + 1.10x).** Adding the cost (option A) or flipping a sign inside it are the standard traps; the minus applies to the whole parenthesis.", "tip": "After choosing, simplify and read it as a story: $11 plus $1.40 per layer. If the simplified version sounds absurd, the setup was wrong." } },
-        { "id": "q22", "lv": 3, "from": "source",
-          "q": "A cyclist's distance in miles from a rest stop is d(x) = 3|x − 15|, where x is minutes into the ride. The graph shown is a V. Which statement is true?",
-          "graph": { "w": [0, 30, 0, 50], "series": [ { "type": "abs", "a": 3, "h": 15, "k": 0 } ], "pts": [ { "x": 15, "y": 0, "label": "(15, 0)" } ], "xl": "minutes", "yl": "miles" },
-          "opts": ["The vertex at (15, 0) means the cyclist is AT the rest stop 15 minutes into the ride.", "The y-intercept gives the time the cyclist passes the rest stop.", "The x-intercept gives the cyclist's distance at 0 minutes.", "The function is decreasing over the interval 15 < x < 30."], "ans": 0,
-          "hint": "Where does the inside of the absolute value equal zero — and what does distance 0 mean here?",
-          "steps": [
-            "Find the vertex: |x − 15| bottoms out where x − 15 = 0, at x = 15, giving d = 0.",
-            "Translate: distance from the rest stop is ZERO at 15 minutes — the cyclist is exactly at the stop then.",
-            "Check the shape: before 15 the distance is falling (riding toward the stop); after 15 it is rising (riding away). So 'decreasing for 15 < x < 30' is backwards.",
-            "The y-intercept d(0) = 3|−15| = 45 is the STARTING distance (45 miles), not a time — which also kills the intercept options."
-          ],
-          "ex": { "main": "**The vertex (15, 0) is the moment at the rest stop.** In distance-from-a-point stories, the vertex of the V is always the arrival: distance zero, direction about to flip.", "tip": "Intercepts swap roles depending on the axes: the y-intercept is a starting VALUE, the x-intercept a special TIME. Read the axis labels before the options." } }
-      ]
+ "v": 4,
+ "records": {
+  "unit-a2r1": {
+   "id": "unit-a2r1",
+   "type": "unit",
+   "updatedAt": 1786284243705,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Algebra 1 Tune-Up: The Readiness Rebuild",
+   "srcName": "Algebra 2 Readiness Assessment (Aug 2026)",
+   "source": "Algebra 2 Readiness Assessment, taken in class Aug 2026",
+   "summary": {
+    "text": "The Algebra 2 Readiness Assessment sampled the Algebra 1 skills the new course assumes: rational and irrational numbers, inequalities from graphs, arithmetic sequences (explicit and recursive), absolute value functions, box plots, building linear functions from situations, systems of equations, what makes a relation a function, average rate of change, solving linear equations, factoring quadratics, compound interest, trend lines and correlation, slope in context, and polynomial multiplication.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Algebra 2 moves fast and treats all of this as automatic. Every skill here is one the assessment actually tested — tightening the handful that wobbled now means the new material lands on solid ground instead of on top of small leaks.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Compute an average rate of change and attach the right units — a rate like ft/s, never just a total like ft.",
+     "from": "added"
+    },
+    {
+     "text": "Translate 'is 6 greater than' sentences into equations with the larger quantity alone on one side.",
+     "from": "added"
+    },
+    {
+     "text": "Set up compound interest with the right n: divide the rate by n and multiply the years by n.",
+     "from": "added"
+    },
+    {
+     "text": "Multiply conjugate pairs first and carry every sign when expanding polynomials.",
+     "from": "added"
+    },
+    {
+     "text": "Slow down on dashed-vs-solid boundary lines and 'which is NOT true' stems before committing to an answer.",
+     "from": "added"
     }
+   ],
+   "parentNote": {
+    "text": "Scored against my own worked answers, she landed roughly 10 of 17 on the photographed pages. The misses cluster in two groups. Concept gaps: average rate of change (took the total change, −64 ft, instead of the per-second rate, −32 ft/s), compound interest (compounded annually instead of quarterly), decreasing linear models (sign on the slope), translating 'x is 6 greater than y' (wrote the relationship backwards), and polynomial products (difference of squares slipped mid-multiplication). Precision reads: a dashed boundary line answered as if solid, and a 'which is NOT true' item answered with a true statement. Two cautions: her factoring on item 11 got the right answer with shaky grouping work, and item 15's printed options were genuinely muddy — the best-matching option inverts the slope's units, so I would not weight that miss heavily. This unit re-tests every topic with fresh scenarios, weighted toward the misses, and every question carries a step-by-step walkthrough she can open after a wrong answer.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the cards on rate of change and compound interest, then run one quiz round.",
+    "minutes": 26,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Rational number",
+     "def": "**A number that can be written as a fraction of two integers.**\n• Square roots of perfect squares count: √(81/25) = 9/5.\n• Terminating and repeating decimals count too.",
+     "hint": "RATIO-nal — it makes a ratio.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Irrational number",
+     "def": "**A number that cannot be written as an integer fraction — its decimal never ends or repeats.**\n• √13 and π are the classics.\n• Rational ± irrational stays irrational: √13 − 3/13 is irrational.",
+     "hint": "The square root of a non-perfect square is the usual suspect.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Dashed vs solid boundary line",
+     "def": "**Dashed means strict (< or >); solid means the line is included (≤ or ≥).**\n• Shade above for y > mx + b, below for y < mx + b.\n• Check the line style FIRST — it decides strict vs inclusive on its own.",
+     "hint": "Dashed = do not touch.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Arithmetic sequence",
+     "def": "**Adds the same amount each step — the common difference d.**\n• 1200, 2300, 3400, … has d = 1100.\n• If the gaps are not identical, it is not arithmetic.",
+     "hint": "Arithmetic adds.",
+     "eq": "aₙ = a₁ + (n − 1)d",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Geometric sequence",
+     "def": "**Multiplies by the same amount each step — the common ratio r.**\n• 1000, 2000, 4000, 8000, … has r = 2.\n• Doubling mileage is geometric; steady weekly driving is arithmetic.",
+     "hint": "Geometric grows by ×.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Vertex of y = a|x − h| + k",
+     "def": "**The corner of the V sits at (h, k).**\n• In distance-from-a-point stories, the vertex is the moment distance hits 0.\n• h hides inside the bars with its sign flipped: |x − 20| peaks-out at x = 20.",
+     "hint": "The V lands where the inside equals zero.",
+     "eq": "y = a|x − h| + k",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Five-number summary (box plot)",
+     "def": "**Min, Q1, median, Q3, max — the box spans Q1 to Q3 with a line at the median.**\n• Order the data first, always.\n• With 8 values, the median is the mean of the 4th and 5th.",
+     "hint": "Half the data in the box, a quarter in each whisker.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Profit function",
+     "def": "**Profit = revenue − cost, subtracting the ENTIRE cost expression.**\n• P(x) = (income) − (expenses), with the minus applied to the whole parenthesis.\n• Dropping the parentheses flips the sign of part of the cost.",
+     "hint": "Earnings keep the minus for the whole cost, not just its first term.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "\"x is 6 greater than y\"",
+     "def": "**x = y + 6 — the bigger quantity stands alone; the smaller one gets the + 6.**\n• Test it: if y = 10, x should be 16. x = y + 6 gives 16. ✓\n• Writing x + 6 = y makes y the bigger one — backwards.",
+     "hint": "Add to the smaller side to catch it up.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Function (vertical line test for points)",
+     "def": "**Each input x pairs with exactly one output.**\n• (8, 4) and (8, 5) in the same relation break it.\n• A repeated OUTPUT is fine: (1, 3) and (2, 3) can coexist.",
+     "hint": "Scan the x-list for repeats; ignore the y-list.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Average rate of change",
+     "def": "**[f(b) − f(a)] ÷ (b − a) — the change divided by how long it took.**\n• It carries per-time units: ft/s, dollars per year.\n• The total change (no dividing) is a different number with different units.",
+     "hint": "Slope between two points, even on a curve.",
+     "eq": "(f(b) − f(a)) / (b − a)",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Compound interest",
+     "def": "**A = P(1 + r/n)^(nt), where n is compoundings per year.**\n• Quarterly → n = 4: divide the rate by 4 AND multiply the years by 4.\n• Monthly → n = 12. Annually → n = 1.",
+     "hint": "Compounding changes BOTH numbers: rate down, exponent up.",
+     "eq": "A = P(1 + r/n)^(nt)",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Decreasing linear model",
+     "def": "**A quantity used up at a steady rate has a NEGATIVE slope: f(x) = start − (rate)·x.**\n• 50 hours needed, 6 done each week → f(x) = 50 − 6x, i.e. −6x + 50.\n• Test with x = 1: the total should shrink.",
+     "hint": "Countdowns slope down.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Correlation vs causation",
+     "def": "**Correlation: two things move together. Causation: one makes the other happen.**\n• A trend line can only ever show correlation.\n• A hidden third factor often drives both.",
+     "hint": "Ice cream sales and sunburns rise together; the sun causes both.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Slope in context",
+     "def": "**Slope = y-units per ONE x-unit, read straight off the axes.**\n• y minutes vs x pages, slope 1.5 → 1.5 minutes per page.\n• Flipping it (pages per minute) is the reciprocal — a different number.",
+     "hint": "Say it as 'per one more x' and the units write themselves.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Difference of squares",
+     "def": "**(a − b)(a + b) = a² − b² — the middle terms cancel.**\n• (x − 3)(x + 3) = x² − 9. Nothing else survives.\n• Spot conjugate pairs before multiplying anything else.",
+     "hint": "Same terms, opposite signs → the middle always cancels.",
+     "eq": "(a − b)(a + b) = a² − b²",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Explicit vs recursive formulas",
+     "def": "**Explicit jumps straight to term n; recursive builds each term from the previous one.**\n• Recursive is useless without a starting value a₁.\n• Check an explicit formula by plugging in n = 1 — it must return the first term.",
+     "hint": "Recursive = recipe that needs yesterday's result.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "\"Which is NOT true\" questions",
+     "def": "**Mark every option true or false, then pick the false one.**\n• The trap is stopping at the first statement that IS true.\n• Write T/F next to each choice; the answer is the odd one out.",
+     "hint": "NOT questions flip the goal — hunt for the lie.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "q": "A graph shows the DASHED line y = −x + 2, with the region above the line shaded. Which inequality does the graph represent?",
+     "opts": [
+      "y ≥ −x + 2",
+      "y > −x + 2",
+      "y ≤ −x + 2",
+      "y < −x + 2"
+     ],
+     "ans": 1,
+     "hint": "Dashed = strict. Shaded above = greater.",
+     "steps": [
+      "Check the line style first. Dashed means the line itself is NOT included, so the symbol must be strict: < or >.",
+      "Check the shading. Above the line means y-values LARGER than the line's, so the symbol opens toward y: y > …",
+      "Combine: y > −x + 2. A solid line would have made it y ≥ −x + 2 instead."
+     ],
+     "ex": {
+      "main": "**y > −x + 2.** The dashed line eliminates ≥ and ≤ immediately; shading above eliminates <.",
+      "tip": "Decide dashed-vs-solid before you even look at the shading — it cuts the choices in half on its own."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "q": "The graph shown has a SOLID line with the region below it shaded. Which inequality does it represent?",
+     "graph": {
+      "w": [
+       -4,
+       4,
+       -6,
+       6
+      ],
+      "series": [
+       {
+        "type": "line",
+        "m": 2,
+        "b": -1
+       }
+      ],
+      "pts": [
+       {
+        "x": 0,
+        "y": -1,
+        "label": "(0, −1)"
+       }
+      ],
+      "xl": "x",
+      "yl": "y"
+     },
+     "opts": [
+      "y < 2x − 1",
+      "y ≤ 2x − 1",
+      "y > 2x − 1",
+      "y ≥ 2x − 1"
+     ],
+     "ans": 1,
+     "hint": "Read slope and intercept off the graph, then let solid/shading pick the symbol.",
+     "steps": [
+      "Read the line: it crosses y at (0, −1) and rises 2 for each 1 right, so the boundary is y = 2x − 1.",
+      "The line is SOLID, so points on the line count: the symbol is ≤ or ≥.",
+      "The shading is BELOW the line — y-values smaller than the line's — so the symbol is ≤.",
+      "Answer: y ≤ 2x − 1."
+     ],
+     "ex": {
+      "main": "**y ≤ 2x − 1.** Solid line → inclusive symbol; shaded below → less than.",
+      "tip": "Test a point in the shaded region — (0, −5) here: −5 ≤ 2(0) − 1 is true, confirming ≤."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 3,
+     "from": "source",
+     "q": "A rectangle has a perimeter of 64 ft. The length x is 8 ft longer than the width y. Which system — and which dimensions — are correct?",
+     "opts": [
+      "2x + 2y = 64; x + 8 = y; x = 20 ft, y = 12 ft",
+      "x + y = 64; x = y + 8; x = 36 ft, y = 28 ft",
+      "2x + 2y = 64; x = y + 8; x = 20 ft, y = 12 ft",
+      "2x + 2y = 64; x = y + 8; x = 12 ft, y = 20 ft"
+     ],
+     "ans": 2,
+     "hint": "Which one is bigger? That one equals the other plus 8.",
+     "steps": [
+      "Perimeter of a rectangle: 2x + 2y = 64. (x + y = 64 would be only half the way around.)",
+      "'The length x is 8 ft longer than the width y' — x is the BIGGER one, so x = y + 8. Writing x + 8 = y would make the width bigger, which contradicts the sentence.",
+      "Substitute: 2(y + 8) + 2y = 64 → 4y + 16 = 64.",
+      "4y = 48, so y = 12. Then x = 12 + 8 = 20.",
+      "Check both sentences: 2(20) + 2(12) = 64 ✓ and 20 is 8 more than 12 ✓. So x = 20 ft, y = 12 ft."
+     ],
+     "ex": {
+      "main": "**2x + 2y = 64 with x = y + 8, giving x = 20 ft and y = 12 ft.** The direction of x = y + 8 is the whole question — the larger quantity stands alone.",
+      "tip": "Plug each option's dimensions back into BOTH sentences of the problem; the wrong ones always fail the 'greater than' sentence."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "q": "Marisol is 5 years older than her brother Theo. If m is Marisol's age and t is Theo's age, which equation is true?",
+     "opts": [
+      "m = t + 5",
+      "t = m + 5",
+      "m + t = 5",
+      "m = 5t"
+     ],
+     "ans": 0,
+     "hint": "Marisol is the older one — her age stands alone.",
+     "steps": [
+      "Identify the bigger quantity: Marisol is older, so m is the larger value.",
+      "The smaller one needs the boost: Theo's age plus 5 catches up to Marisol's. So m = t + 5.",
+      "Sanity check with numbers: if Theo is 10, Marisol is 15, and m = t + 5 gives 15. ✓"
+     ],
+     "ex": {
+      "main": "**m = t + 5.** 'Older by 5' means you add 5 to the YOUNGER age to get the older one.",
+      "tip": "Always test word-equations with easy numbers — a ten-second check catches the backwards version every time."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "q": "The function h(t) = −16t² + 144 models the height in feet of a ball dropped from 144 ft, t seconds after release. What is the average rate of change of h over the interval 0 ≤ t ≤ 3?",
+     "graph": {
+      "w": [
+       0,
+       4,
+       0,
+       160
+      ],
+      "series": [
+       {
+        "type": "parabola",
+        "a": -16,
+        "h": 0,
+        "k": 144
+       }
+      ],
+      "pts": [
+       {
+        "x": 0,
+        "y": 144,
+        "label": "(0, 144)"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "(3, 0)"
+       }
+      ],
+      "xl": "seconds",
+      "yl": "feet"
+     },
+     "opts": [
+      "−144 ft",
+      "48 ft/s",
+      "−48 ft/s",
+      "−16 ft/s"
+     ],
+     "ans": 2,
+     "hint": "Rate = change in height ÷ change in time. Divide.",
+     "steps": [
+      "Find the height at each end of the interval: h(0) = 144.",
+      "h(3) = −16(3²) + 144 = −144 + 144 = 0. The ball reaches the ground at t = 3.",
+      "Average rate of change = (h(3) − h(0)) ÷ (3 − 0) = (0 − 144) ÷ 3 = −48.",
+      "Attach units and sign: −48 ft/s — negative because height is decreasing. −144 ft is the TOTAL change, not a rate."
+     ],
+     "ex": {
+      "main": "**−48 ft/s.** The ball loses 144 feet of height over 3 seconds; dividing gives 48 feet lost per second, and falling makes it negative.",
+      "tip": "If your answer has no 'per second' in it, you found a total, not a rate — go back and divide."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "source",
+     "q": "A ball is dropped and f(t) = −16t² + 100 gives its height in feet after t seconds, so it falls from 100 ft at t = 0 to 36 ft at t = 2. Which statement about the interval 0 < t < 2 is true?",
+     "opts": [
+      "The average rate of change is −64 ft/s.",
+      "The average rate of change is −32 ft/s — on average the ball loses 32 ft of height each second.",
+      "The average rate of change is 64 ft, the distance fallen.",
+      "The average rate of change is −16 ft/s, matching the coefficient of t²."
+     ],
+     "ans": 1,
+     "hint": "−64 is the change. The RATE still needs a division.",
+     "steps": [
+      "Total change in height: 36 − 100 = −64 ft. That is a change, measured in feet.",
+      "A rate divides by the time it took: −64 ft ÷ 2 s = −32 ft/s.",
+      "Check the units in each option: 'ft' alone can never be a rate of change, and the −16 coefficient is not a rate either — it belongs to t², not to elapsed time.",
+      "So: the average rate of change is −32 ft/s."
+     ],
+     "ex": {
+      "main": "**−32 ft/s.** The ball drops 64 feet in 2 seconds; per second, that is 32 feet down. The −64 option is the classic trap — it skips the division.",
+      "tip": "Rate questions are units questions in disguise. Say the units out loud; 'feet per second' forces the divide."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "q": "$3,000 is invested at 4% interest, compounded quarterly. Which expression gives the account value after 5 years?",
+     "opts": [
+      "3000(1.04)⁵",
+      "3000(1.01)⁵",
+      "3000(1.01)²⁰",
+      "3000(1.04)²⁰"
+     ],
+     "ans": 2,
+     "hint": "Quarterly = 4 times a year. Both numbers change.",
+     "steps": [
+      "Quarterly compounding means n = 4 periods per year.",
+      "Rate per period: r/n = 0.04 ÷ 4 = 0.01, so each quarter multiplies by 1.01.",
+      "Number of periods: n·t = 4 × 5 = 20 quarters.",
+      "Assemble A = P(1 + r/n)^(nt): 3000(1.01)²⁰. Using 1.04 with exponent 5 is annual compounding — a different, smaller answer."
+     ],
+     "ex": {
+      "main": "**3000(1.01)²⁰.** Compounding quarterly splits the 4% into four 1% steps and quadruples how many steps happen.",
+      "tip": "n changes two things at once: divide the rate by n AND multiply the exponent by n. If you only changed one, it is wrong."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "q": "$2,000 is invested at 6% interest, compounded monthly. To the nearest cent, what is the account worth after 2 years?",
+     "opts": [
+      "$2,123.36",
+      "$2,240.00",
+      "$2,254.32",
+      "$2,247.20"
+     ],
+     "ans": 2,
+     "hint": "Monthly: n = 12. The exponent should be 24.",
+     "steps": [
+      "Monthly compounding: n = 12, so the rate per month is 0.06 ÷ 12 = 0.005.",
+      "Number of months in 2 years: 12 × 2 = 24.",
+      "A = 2000(1.005)²⁴.",
+      "(1.005)²⁴ ≈ 1.12716, so A ≈ 2000 × 1.12716 = $2,254.32.",
+      "Compare the traps: $2,247.20 is annual compounding (1.06²), $2,240.00 is simple interest, $2,123.36 uses only 12 months."
+     ],
+     "ex": {
+      "main": "**$2,254.32.** Twenty-four little 0.5% steps beat two big 6% steps — that gap IS what 'compounded monthly' means.",
+      "tip": "On a diagnostic, the annual-compounding value is almost always sitting among the options as bait. Compute the exponent first: n × t."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "q": "A 480-page book. Priya reads 32 pages every day. Which function gives the number of pages she still has left after x days?",
+     "opts": [
+      "f(x) = 32x + 480",
+      "f(x) = −32x + 480",
+      "f(x) = 480x − 32",
+      "f(x) = 32x − 480"
+     ],
+     "ans": 1,
+     "hint": "Pages LEFT shrinks each day. What sign does the slope need?",
+     "steps": [
+      "Start value: before reading, 480 pages remain — so the constant term is +480.",
+      "Each day REMOVES 32 pages from the pile, so the rate is −32 per day: −32x.",
+      "f(x) = −32x + 480. Test x = 1: 448 left. Shrinking ✓."
+     ],
+     "ex": {
+      "main": "**f(x) = −32x + 480.** Anything being used up has a negative slope; the starting amount rides along as the constant.",
+      "tip": "Plug in x = 1 and ask: did it go the direction the story says? A one-second test kills the sign-flip options."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "q": "A phone battery starts the day at 100% and drains 8 percentage points every hour of screen time. Which function models the battery level after h hours?",
+     "opts": [
+      "b(h) = 8h + 100",
+      "b(h) = 100h − 8",
+      "b(h) = −100h + 8",
+      "b(h) = −8h + 100"
+     ],
+     "ans": 3,
+     "hint": "Draining means down. Which number is the start, which is the rate?",
+     "steps": [
+      "The start (h = 0) is 100%, so the constant term must be 100.",
+      "Draining 8 per hour is a rate of −8: the h-term is −8h.",
+      "b(h) = −8h + 100. Check h = 2: 84%. Falling ✓."
+     ],
+     "ex": {
+      "main": "**b(h) = −8h + 100.** Start value stands alone; the per-hour loss takes the minus sign and the variable.",
+      "tip": "In linear models the constant is always 'where you started' and the coefficient is always 'what one unit of x does'."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 1,
+     "from": "source",
+     "q": "What is the product (x − 7)(x + 7)?",
+     "opts": [
+      "x² + 49",
+      "x² − 14x + 49",
+      "x² − 49",
+      "x² − 14x − 49"
+     ],
+     "ans": 2,
+     "hint": "Same terms, opposite signs. What happens to the middle?",
+     "steps": [
+      "Multiply the Firsts: x · x = x².",
+      "Outer and Inner: x·7 = +7x and −7·x = −7x — they cancel to zero.",
+      "Lasts: −7 · 7 = −49.",
+      "Result: x² − 49. This is the difference-of-squares pattern (a − b)(a + b) = a² − b²."
+     ],
+     "ex": {
+      "main": "**x² − 49.** Conjugate pairs always drop their middle terms — only the two squares survive, with a minus between them.",
+      "tip": "x² − 14x + 49 is (x − 7)² — a different problem. Squaring keeps the middle; conjugates kill it."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "q": "Find the product. (x − 2)(x + 2)(3x − 1)",
+     "opts": [
+      "3x³ + 11x² − 12x + 4",
+      "3x³ − x² − 12x + 4",
+      "3x³ − x² + 12x − 4",
+      "3x³ − 4"
+     ],
+     "ans": 1,
+     "hint": "Two of those factors are conjugates. Multiply them first.",
+     "steps": [
+      "Spot the conjugate pair and take it first: (x − 2)(x + 2) = x² − 4. The middle terms cancel.",
+      "Now distribute (x² − 4)(3x − 1), term by term: x²·3x = 3x³ and x²·(−1) = −x².",
+      "Then −4·3x = −12x and −4·(−1) = +4.",
+      "Collect: 3x³ − x² − 12x + 4. Nothing combines further."
+     ],
+     "ex": {
+      "main": "**3x³ − x² − 12x + 4.** Pairing the conjugates first turns a three-factor slog into one clean two-term distribution.",
+      "tip": "Order of multiplication is yours to choose — always start with the pair that simplifies. Conjugates are a gift; open them first."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "q": "Find the product. (2x + 5)(x² − 3x + 4)",
+     "opts": [
+      "2x³ − x² − 7x + 20",
+      "2x³ + x² − 7x + 20",
+      "2x³ − x² + 7x − 20",
+      "2x³ − 11x² − 7x + 20"
+     ],
+     "ans": 0,
+     "hint": "Distribute 2x across all three terms, then 5 across all three. Six little products.",
+     "steps": [
+      "2x times each term: 2x·x² = 2x³, 2x·(−3x) = −6x², 2x·4 = +8x.",
+      "5 times each term: 5·x² = +5x², 5·(−3x) = −15x, 5·4 = +20.",
+      "Combine the x² terms: −6x² + 5x² = −x².",
+      "Combine the x terms: 8x − 15x = −7x.",
+      "Result: 2x³ − x² − 7x + 20."
+     ],
+     "ex": {
+      "main": "**2x³ − x² − 7x + 20.** Two-term times three-term means exactly six products; write all six down before combining and the signs cannot hide.",
+      "tip": "Count your products before simplifying: (2 terms)(3 terms) must produce 6. Fewer means one escaped."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "q": "A table records hours practiced and free throws made for eight players; the players with more practice hours consistently made more free throws. Which statement is NOT true?",
+     "opts": [
+      "The data show a positive correlation.",
+      "A trend line drawn through the data would have a positive slope.",
+      "The data show a negative correlation.",
+      "More practice hours are associated with more free throws made."
+     ],
+     "ans": 2,
+     "hint": "Mark each statement T or F first. Then pick the F.",
+     "steps": [
+      "Go option by option and mark true or false — do not stop early.",
+      "'Positive correlation' — the quantities rise together, so TRUE.",
+      "'Positive slope trend line' — same fact restated, TRUE. 'Associated' — TRUE again.",
+      "'Negative correlation' would mean more practice, FEWER free throws — the opposite of the table. FALSE, so it is the answer."
+     ],
+     "ex": {
+      "main": "**'The data show a negative correlation' is the false one.** Rising together is positive correlation; negative would mean one falls as the other rises.",
+      "tip": "On NOT-true questions, a true statement is a wrong answer. Write T/F beside every option — it makes the flip impossible to forget."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "q": "In a neighborhood survey, homes with more smoke detectors also tended to have more fire extinguishers. Which conclusion does the data actually justify?",
+     "opts": [
+      "Buying smoke detectors causes people to buy fire extinguishers.",
+      "The two quantities are positively correlated, but the data alone cannot prove one causes the other.",
+      "There is no relationship between the two quantities.",
+      "A trend line through the data would have a negative slope."
+     ],
+     "ans": 1,
+     "hint": "Moving together is one claim. 'One causes the other' is a much bigger claim.",
+     "steps": [
+      "Describe what the data shows: the two counts rise together — a positive correlation.",
+      "Ask what would be needed to claim causation: an experiment or mechanism, not just co-occurrence.",
+      "Notice the likely hidden driver: safety-minded households buy BOTH. A third factor can create the whole pattern.",
+      "So the defensible conclusion is correlation only — positively correlated, causation unproven."
+     ],
+     "ex": {
+      "main": "**Positively correlated, causation unproven.** A survey can show togetherness; it cannot show pushing. A common cause (safety-mindedness) explains this pattern with neither item causing the other.",
+      "tip": "When an option says 'causes', look for the invisible third factor first. If you can name one, the causation claim dies."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "q": "A rideshare fare is y = 2.4x + 1.2, where y is the cost in dollars and x is the miles driven. What does the 2.4 represent?",
+     "opts": [
+      "The starting fare before any miles are driven",
+      "The number of miles you get per dollar",
+      "The total cost of a typical trip",
+      "The cost per mile — each extra mile adds $2.40"
+     ],
+     "ans": 3,
+     "hint": "Slope is what ONE more x does to y.",
+     "steps": [
+      "Identify the slope: in y = mx + b form, 2.4 is m.",
+      "Slope means: when x goes up by 1, y goes up by 2.4.",
+      "Attach the units from the story: x is miles, y is dollars — so 2.4 is dollars per mile.",
+      "The 1.2 is the y-intercept: the $1.20 starting fare at zero miles."
+     ],
+     "ex": {
+      "main": "**Cost per mile.** Each additional mile adds $2.40 to the fare; the $1.20 flat fee is the intercept's job, not the slope's.",
+      "tip": "Slope units are always y-units per x-unit — build the phrase from the axes before reading the options."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "q": "Marco's reading time follows y = 1.8x + 0.5, where y is minutes and x is the number of pages. What does the slope 1.8 mean?",
+     "opts": [
+      "Marco reads 1.8 pages every minute",
+      "A reading assignment takes 1.8 minutes in total",
+      "Marco takes about 1.8 minutes to read each page",
+      "Marco starts each assignment 0.5 pages behind"
+     ],
+     "ans": 2,
+     "hint": "y is minutes. x is pages. Slope is y per x — in that order.",
+     "steps": [
+      "Slope = change in y per one-unit change in x.",
+      "Substitute the story's units: minutes per page. So 1.8 means 1.8 minutes for each page.",
+      "'1.8 pages per minute' flips the fraction — that would be the reciprocal, about 0.56 pages per minute. Different number, different claim.",
+      "The 0.5 is minutes of setup time at x = 0, not pages."
+     ],
+     "ex": {
+      "main": "**About 1.8 minutes per page.** The slope's units come out y-over-x — minutes over pages — and flipping them silently changes the answer.",
+      "tip": "This exact flip — 'minutes per page' vs 'pages per minute' — is a favorite trap. Write the fraction with units before choosing."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 1,
+     "from": "source",
+     "q": "Which expression is NOT equivalent to a rational number?",
+     "opts": [
+      "7.121212… (the 12 repeats forever)",
+      "√(36/25) + 2/5",
+      "√20 ÷ 5",
+      "√81 × 2/3"
+     ],
+     "ans": 2,
+     "hint": "Is 20 a perfect square?",
+     "steps": [
+      "Evaluate each root: √(36/25) = 6/5, so √(36/25) + 2/5 is 6/5 + 2/5 = 8/5 — rational.",
+      "√81 = 9, so 9 × 2/3 = 6 — rational. A repeating decimal like 7.121212… is always rational (it equals 705/99).",
+      "√20 is the problem: 20 is not a perfect square, so √20 = 2√5, which is irrational.",
+      "Dividing an irrational number by 5 keeps it irrational — so √20 ÷ 5 is the one that is NOT rational."
+     ],
+     "ex": {
+      "main": "**√20 ÷ 5.** Every other option collapses to a plain fraction; √20 refuses because 20 is not a perfect square, and no amount of dividing by 5 fixes that.",
+      "tip": "Check whether the number under each root is a perfect square first — that one test settles most rational/irrational questions."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "q": "The data set 12, 15, 9, 20, 14, 25, 11, 18 shows the points scored by a player in eight games. Which five-number summary is correct?",
+     "opts": [
+      "min 9, Q1 11.5, median 14.5, Q3 19, max 25",
+      "min 9, Q1 11, median 14.5, Q3 20, max 25",
+      "min 9, Q1 11.5, median 14, Q3 19, max 25",
+      "min 9, Q1 12, median 15, Q3 18, max 25"
+     ],
+     "ans": 0,
+     "hint": "Order the list first. With 8 values, every quartile is an average of two neighbors.",
+     "steps": [
+      "Order the data: 9, 11, 12, 14, 15, 18, 20, 25.",
+      "Median: with 8 values, average the 4th and 5th: (14 + 15) ÷ 2 = 14.5.",
+      "Lower half is 9, 11, 12, 14 → Q1 = (11 + 12) ÷ 2 = 11.5.",
+      "Upper half is 15, 18, 20, 25 → Q3 = (18 + 20) ÷ 2 = 19.",
+      "Min 9, max 25. Summary: 9, 11.5, 14.5, 19, 25."
+     ],
+     "ex": {
+      "main": "**9, 11.5, 14.5, 19, 25.** With an even count nothing lands exactly on a data point — every quartile is a midpoint of two neighbors.",
+      "tip": "If your quartiles for an even-sized set are all whole data values, you probably skipped the averaging."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "source",
+     "q": "A climbing gym charges $30 for the first visit and $9 for each visit after that. Which pair of explicit and recursive formulas gives aₙ, the cost of the nth visit's running total?",
+     "opts": [
+      "Explicit: aₙ = 30 + 9n; Recursive: aₙ = aₙ₋₁ + 9, a₁ = 30",
+      "Explicit: aₙ = 21 + 9n; Recursive: aₙ = aₙ₋₁ + 9, a₁ = 30",
+      "Explicit: aₙ = 30 − 9n; Recursive: aₙ = aₙ₋₁ − 9, a₁ = 30",
+      "Explicit: aₙ = 21 + 9n; Recursive: aₙ = aₙ₋₁ + 30, a₁ = 9"
+     ],
+     "ans": 1,
+     "hint": "Test each explicit formula at n = 1. It must give exactly 30.",
+     "steps": [
+      "The first term is a₁ = 30, and each later visit adds d = 9 — that is the whole recursive story: aₙ = aₙ₋₁ + 9 with a₁ = 30.",
+      "Build the explicit form: aₙ = a₁ + (n − 1)d = 30 + 9(n − 1).",
+      "Simplify: 30 + 9n − 9 = 21 + 9n.",
+      "Verify at n = 1: 21 + 9 = 30 ✓, and n = 2 gives 39 ✓. The option starting 30 + 9n gives 39 at n = 1 — off by one visit."
+     ],
+     "ex": {
+      "main": "**Explicit aₙ = 21 + 9n with recursive aₙ = aₙ₋₁ + 9, a₁ = 30.** The (n − 1) in the explicit formula is what keeps the first term honest.",
+      "tip": "The n = 1 test is instant and merciless — run it on every explicit option before anything else."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 1,
+     "from": "source",
+     "q": "Which relation is a function?",
+     "opts": [
+      "(2, 1), (2, 5), (3, 4), (4, 2)",
+      "(0, 1), (1, 2), (1, 3), (2, 4)",
+      "(5, 2), (6, 3), (5, 7), (8, 1)",
+      "(1, 3), (2, 3), (3, 3), (4, 3)"
+     ],
+     "ans": 3,
+     "hint": "Scan the x-values only. Repeats there are the problem.",
+     "steps": [
+      "A function allows each input x exactly one output — so scan each option's x-list for repeats.",
+      "The list starting (2, 1), (2, 5) repeats x = 2 with different outputs (1 and 5) — not a function. The one with (1, 2), (1, 3) repeats x = 1, and the one with (5, 2), (5, 7) repeats x = 5.",
+      "(1, 3), (2, 3), (3, 3), (4, 3) uses x = 1, 2, 3, 4 — all different inputs. The repeated OUTPUT 3 is perfectly fine: many inputs may share one output.",
+      "So (1, 3), (2, 3), (3, 3), (4, 3) is the function."
+     ],
+     "ex": {
+      "main": "**(1, 3), (2, 3), (3, 3), (4, 3).** Every input appears once. A constant output is still a function — the rule only polices the inputs.",
+      "tip": "Repeated y-values are a decoy; only repeated x-values with different partners break a function."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 2,
+     "from": "source",
+     "q": "A bakery sells a cake for $18.00 plus $2.50 per extra layer. Making the cake costs the bakery $7.00 plus $1.10 per extra layer. Which function models the bakery's profit on a cake with x extra layers?",
+     "opts": [
+      "P(x) = (18 + 2.50x) + (7 + 1.10x)",
+      "P(x) = (18 − 2.50x) + (7 + 1.10x)",
+      "P(x) = (18 + 2.50x) − (7 − 1.10x)",
+      "P(x) = (18 + 2.50x) − (7 + 1.10x)"
+     ],
+     "ans": 3,
+     "hint": "Profit = money in − money out, and 'money out' is the WHOLE cost expression.",
+     "steps": [
+      "Money in (revenue): the price, 18 + 2.50x.",
+      "Money out (cost): 7 + 1.10x.",
+      "Profit subtracts the entire cost: P(x) = (18 + 2.50x) − (7 + 1.10x). The parentheses matter — the minus must hit both the 7 AND the 1.10x.",
+      "Simplified, P(x) = 11 + 1.40x: about $11 base profit plus $1.40 per layer. Positive and growing — sanity check passes."
+     ],
+     "ex": {
+      "main": "**P(x) = (18 + 2.50x) − (7 + 1.10x).** Adding the cost instead of subtracting it, or flipping a sign inside it, are the standard traps; the minus applies to the whole parenthesis.",
+      "tip": "After choosing, simplify and read it as a story: $11 plus $1.40 per layer. If the simplified version sounds absurd, the setup was wrong."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 3,
+     "from": "source",
+     "q": "A cyclist's distance in miles from a rest stop is d(x) = 3|x − 15|, where x is minutes into the ride. The graph shown is a V. Which statement is true?",
+     "graph": {
+      "w": [
+       0,
+       30,
+       0,
+       50
+      ],
+      "series": [
+       {
+        "type": "abs",
+        "a": 3,
+        "h": 15,
+        "k": 0
+       }
+      ],
+      "pts": [
+       {
+        "x": 15,
+        "y": 0,
+        "label": "(15, 0)"
+       }
+      ],
+      "xl": "minutes",
+      "yl": "miles"
+     },
+     "opts": [
+      "The vertex at (15, 0) means the cyclist is AT the rest stop 15 minutes into the ride.",
+      "The y-intercept gives the time the cyclist passes the rest stop.",
+      "The x-intercept gives the cyclist's distance at 0 minutes.",
+      "The function is decreasing over the interval 15 < x < 30."
+     ],
+     "ans": 0,
+     "hint": "Where does the inside of the absolute value equal zero — and what does distance 0 mean here?",
+     "steps": [
+      "Find the vertex: |x − 15| bottoms out where x − 15 = 0, at x = 15, giving d = 0.",
+      "Translate: distance from the rest stop is ZERO at 15 minutes — the cyclist is exactly at the stop then.",
+      "Check the shape: before 15 the distance is falling (riding toward the stop); after 15 it is rising (riding away). So 'decreasing for 15 < x < 30' is backwards.",
+      "The y-intercept d(0) = 3|−15| = 45 is the STARTING distance (45 miles), not a time — which also kills the intercept options."
+     ],
+     "ex": {
+      "main": "**The vertex (15, 0) is the moment at the rest stop.** In distance-from-a-point stories, the vertex of the V is always the arrival: distance zero, direction about to flip.",
+      "tip": "Intercepts swap roles depending on the axes: the y-intercept is a starting VALUE, the x-intercept a special TIME. Read the axis labels before the options."
+     }
+    }
+   ]
   }
+ }
 }

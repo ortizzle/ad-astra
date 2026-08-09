@@ -680,7 +680,13 @@ const AZ = {
   shortDate(ds){ const [y,m,d]=ds.split('-').map(Number);
     return new Date(y,m-1,d).toLocaleDateString('en-US',{month:'short',day:'numeric'}); },
   daysBetween(a,b){ return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/86400000); },
-  shift(ds,n){ const [y,m,d]=ds.split('-').map(Number); return this.dateKey(new Date(y,m-1,d+n)); },
+  /* Pure calendar arithmetic. The old version built a LOCAL-midnight Date and
+     then formatted it in Arizona time — identical on a Phoenix phone, but one
+     day short on any device east of Arizona (travel, or a tester in UTC),
+     which quietly compressed every review-ladder interval. Date.UTC in,
+     ISO slice out: no timezone touches either side. */
+  shift(ds,n){ const [y,m,d]=ds.split('-').map(Number);
+    return new Date(Date.UTC(y,m-1,d+n)).toISOString().slice(0,10); },
   short(ds){ const [y,m,dd]=ds.split('-').map(Number);
     return new Date(y,m-1,dd).toLocaleDateString('en-US',{month:'short',day:'numeric'}); },
   weekStart(ds){ return this.shift(ds, -AZ.weekday(ds)); }   // Sunday
@@ -702,7 +708,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v64 · fresher questions';
+const APP_VERSION = 'v65 · the learning pass';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3408,16 +3414,20 @@ function pickRound(u, timed){
      least-practised stays honest across the whole subject. */
   const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
   const att = q => (DATA.records['qstat_'+key(q)]?.attempts)||0;
+  /* qstat.updatedAt is stamped on every answer, so it doubles as last-seen
+     for free. Among equal attempt counts, the question she met longest ago
+     comes back first — spacing for material she got RIGHT, not only misses. */
+  const seen = q => (DATA.records['qstat_'+key(q)]?.updatedAt)||0;
   /* A question she has missed is already ON the review ladder, which has
      scheduled when it comes back. Letting it compete for an ordinary quiz slot
      asks it twice and crowds out questions she has not seen — so it sorts last
      rather than by attempts. Not excluded: a short unit, or one where she has
      missed everything, still needs questions to serve. */
   const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
-  const idx = u.questions.map((q,i)=>({i, q, a:att(q), g:owed(q), r:Math.random()}))
+  const idx = u.questions.map((q,i)=>({i, q, a:att(q), g:owed(q), t:seen(q), r:Math.random()}))
     /* Typing against a countdown tests typing, not spelling. */
     .filter(x => !timed || x.q.kind!=='spell');
-  idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.r-y.r);
+  idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
   return shuffle(idx.slice(0, Math.min(QUIZ_ROUND, idx.length)).map(x=>x.i));
 }
 
@@ -3693,7 +3703,7 @@ SCREENS.quiz = function(root){
       quizState.optFor = q.id;
       quizState.optArr = shuffle(q.opts.map((_,k)=>k));
     }
-    (quizState.optArr||q.opts.map((_,k)=>k)).forEach((orig,pos)=>{
+    quizState.optArr.forEach((orig,pos)=>{
       const b = el('button','opt');
       b.appendChild(el('span','ltr',String.fromCharCode(65+pos)));
       b.appendChild(el('span',null,q.opts[orig]));
@@ -3722,6 +3732,26 @@ SCREENS.quiz = function(root){
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
     root.appendChild(ex);
+    /* A right answer she is not sure of is hidden shakiness no tally can see —
+       so she can put it on the ladder herself. Her call entirely: no XP change,
+       no penalty, an ordinary Growth Zone entry due tomorrow. Hidden in review
+       rounds (the ladder already owns those) and when it is already laddered. */
+    if(right && u.id!=='__review__'){
+      const aUnit = q._srcUnit || u.id, aClass = q._srcClass || ctx.classId, aQid = q._srcQid || q.id;
+      const live = DATA.records['miss_'+aUnit+'_'+aQid];
+      if(!live || live.deleted){
+        const ag = el('button','btn btn-ghost','🌱  Right, but shaky? See it again tomorrow');
+        ag.addEventListener('click',()=>{
+          put(scheduleMiss({ id:'miss_'+aUnit+'_'+aQid, type:'miss', unitId:aUnit, classId:aClass,
+            qid:aQid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+            right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]),
+            chose:'(you chose to see it again)',
+            why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null, on:AZ.today() }, false));
+          syncSoon(); toast('Back tomorrow. Knowing what is shaky is half the work.'); render();
+        });
+        root.appendChild(ag);
+      }
+    }
     /* Wrong answer + a question that carries steps → offer the full worked
        path, one step per tap. After the answer, so it teaches rather than
        leaks; free, because it is remediation, not a hint economy. */
@@ -4655,6 +4685,34 @@ SCREENS.parent = function(root){
   });
   if(!anySub) sub.appendChild(el('p',null,'No subject activity yet.'));
   root.appendChild(sub);
+
+  /* How she thinks, not just what she knows: accuracy split by question
+     level. A drop from recall to analyze means the facts are in but the
+     connections are not, which is exactly what shuffle rounds and the level 3
+     questions exist to work. Only rendered once there is enough signal. */
+  const lvAgg = {1:{a:0,c:0},2:{a:0,c:0},3:{a:0,c:0}};
+  all('qstat').forEach(t=>{
+    const uu = DATA.records[t.unitId];
+    const qq = uu && !uu.deleted && (uu.questions||[]).find(x=>x.id===t.qid);
+    if(qq && lvAgg[qq.lv]){ lvAgg[qq.lv].a += t.attempts; lvAgg[qq.lv].c += t.correct; }
+  });
+  const lvRows = [1,2,3].filter(l=>lvAgg[l].a >= 4);
+  if(lvRows.length >= 2){
+    const lvNames = {1:'Recall',2:'Apply',3:'Analyze'};
+    const pct = l => Math.round(lvAgg[l].c/lvAgg[l].a*100);
+    root.appendChild(divider('Depth of understanding'));
+    const dc = el('div','card');
+    dc.appendChild(el('p','lede', lvRows.map(l=>`${lvNames[l]} ${pct(l)}%`).join(' · ')));
+    const worst = lvRows.reduce((m,l)=>pct(l)<pct(m)?l:m, lvRows[0]);
+    const best  = lvRows.reduce((m,l)=>pct(l)>=pct(m)?l:m, lvRows[0]);
+    if(pct(best)-pct(worst) >= 15){
+      dc.appendChild(el('div','hintline',
+        worst===1 ? 'Recall is the soft layer — the definitions themselves need another pass of cards before the harder questions can hold.'
+      : worst===2 ? 'Application is the dip — the material is known but stumbles in use. The step-by-step walkthroughs after misses are built for exactly this.'
+      : 'Analysis is where accuracy drops — the facts are in; connecting them is the work. Shuffle rounds and the level 3 questions are the tool.'));
+    }
+    root.appendChild(dc);
+  }
 
   /* Strong vs weak topics */
   const qs = all('qstat').filter(q=>q.attempts>=2);
@@ -5711,7 +5769,7 @@ async function generateUnit(classId, notes, shots, srcName){
     `parentNote — one paragraph for a parent who did not attend the class: what was covered, and the one thing most likely to trip her up. Plain, specific, no praise language.`,
     `nextUp — one short line to her about what to do first, with an honest estimate in minutes for the flashcards and quiz together. Do not round to a comfortable number; if it is 23 minutes, say 23.`,
 
-    `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer.`,
+    `Then the study material: 15-25 flashcards and 18-24 quiz questions, 6-8 each at level 1 recall, level 2 application, level 3 analysis. Every question has exactly 4 options and one correct answer. Options are SHOWN IN A SHUFFLED ORDER, so never refer to a choice by position or letter — no "all of the above", no "none of the above", no "option B" in steps or explanations. Quote the choice's own text instead.`,
     `Every card and question must STAND ALONE: never reference "the worksheet", "the handout", or a numbered problem from the material — restate whatever context the question needs inside the question itself.`,
     `Every question carries "steps": 3-6 short strings that walk from the question to the answer, revealed one at a time after a wrong answer. Each step is ONE concrete move — read off a value, set up an equation, apply one rule, compute one result — written so she could do it herself on paper. The last step states the answer. No step may skip work ("simplify" alone is not a step; show what it becomes).`,
     `HOW THE QUESTIONS SHOULD MAKE HER THINK. Her teachers ask for reasoning, not recall, and the quiz should rehearse the same moves. Across a unit, include several of these deliberately:`,
@@ -5750,6 +5808,13 @@ async function generateUnit(classId, notes, shots, srcName){
   if(data.stop_reason==='refusal') throw new Error('The model declined this content.');
   const parsed = JSON.parse(data.content.filter(b=>b.type==='text').map(b=>b.text).join(''));
   parsed.questions = (parsed.questions||[]).filter(q=>Array.isArray(q.opts)&&q.opts.length===4&&q.ans>=0&&q.ans<4&&q.q);
+  /* Options render shuffled, so a question that names a choice by position is
+     wrong the moment it ships. Belt to the prompt's braces: drop them here. */
+  const posRef = /\b(all|none) of the above\b|\boptions? [a-d1-4]\b|\b(first|second|third|last) (option|choice)\b/i;
+  parsed.questions = parsed.questions.filter(q=>{
+    const blob = [q.q, q.hint, q.ex?.main, q.ex?.tip, ...(q.steps||[]), ...(q.opts||[])].join(' ');
+    return !posRef.test(blob);
+  });
   /* The output schema cannot express "exactly 4 numbers" (the API only allows
      minItems 0 or 1), so window shape is validated here instead — a malformed
      graph is dropped rather than shipped. */
