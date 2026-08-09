@@ -1,0 +1,601 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-05": {
+   "id": "unit-ww9-05",
+   "type": "unit",
+   "updatedAt": 1786304527376,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 5",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 5 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 5 of Wordly Wise 3000 Book 9: fifteen words about judgement and character (sagacious, cynical, callow, indolent, voracious), power and hardship (despot, impoverish, impediment, strife), and time and belief (contemporary, secular, wane, speculate, venerate, enunciate).",
+    "from": "source"
+   },
+   "why": {
+    "text": "Half this list is about how people judge each other — sagacious, cynical, callow, venerate. Which word a writer picks tells you whose side they are on, often more clearly than anything they argue.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 5 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Use contemporary correctly as a noun, not only as “modern”",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish degree, type-to-category and “lacks” relationships in analogies",
+     "from": "added"
+    },
+    {
+     "text": "Recognize when near-synonyms carry opposite sympathies",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 5 word list. Contemporary is the trap worth checking: as a noun it means someone living at the same time as another person, with no implication of being modern — two questions target that directly. One analogy (VENERATE : RESPECT) deliberately has no perfect answer and asks her to pick the closest structure after eliminating; that is a real standardized-test skill and the explanation says so plainly.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Sagacious and voracious sound alike and mean nothing alike — check both.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "callow",
+     "sp": "KAL-oh",
+     "def": "**Young and inexperienced; immature.** (adjective)\n• The student was too callow to know he was being fooled.\n• It originally described an unfledged bird — no feathers yet.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "contemporary",
+     "sp": "kun-TEM-puh-rer-ee",
+     "def": "**A person living during the same period as another.** (noun)\n• Calamity Jane and Annie Oakley were contemporaries.\n• As an adjective: existing at the same time — the fuel-cost rise was contemporary with the demand for alternatives.",
+     "hint": "It does NOT only mean modern. Two ancient Romans can be contemporaries.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "cynical",
+     "sp": "SIN-ih-kul",
+     "def": "**Doubtful of the sincerity of others’ motives; skeptical.** (adjective)\n• People become cynical about those who make promises and do not keep them.\n• cynic (n): the attorney has heard many lies and still has not become a cynic.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "despot",
+     "sp": "DES-put",
+     "def": "**A ruler with absolute power or tyrannical control.** (noun)\n• Divided government makes rule by a despot less likely.\n• despotic (adj): the Declaration of Independence asserts a right to overthrow a despotic ruler.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "enunciate",
+     "sp": "ih-NUN-see-ayt",
+     "def": "**To pronounce clearly.** (verb)\n• In speech class we learn to enunciate our words.\n• Second meaning: to state or announce — she enunciated her objectives for the coming year.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "impediment",
+     "sp": "im-PED-uh-munt",
+     "def": "**Anything that gets in the way; an obstacle.** (noun)\n• After the hurricane, fallen trees were impediments to traffic.\n• Ped- means foot — an impediment is literally something your feet catch on.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "impoverish",
+     "sp": "im-PAH-vuh-rish",
+     "def": "**To make poor.** (verb)\n• Uncontrolled spending can impoverish a person.\n• Second meaning: to take away — continual overfarming impoverishes the soil.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "indolent",
+     "sp": "IN-duh-lunt",
+     "def": "**Indulging in ease; avoiding exertion; lazy.** (adjective)\n• Being in the torrid heat of the tropical sun makes one feel indolent.\n• indolence (n): his failure cannot be blamed on indolence.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "sagacious",
+     "sp": "suh-GAY-shus",
+     "def": "**Showing sound judgement; wise.** (adjective)\n• My grandmother’s sagacious advice has guided me for years.\n• sagacity (n): she questioned the sagacity of my plan to climb the mountain.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "secular",
+     "sp": "SEK-yuh-lur",
+     "def": "**Worldly; not connected with a church or religion.** (adjective)\n• The choir included a few secular songs in the memorial service.\n• The near-twin of temporal from Lesson 4 — both mean “of this world”.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "speculate",
+     "sp": "SPEK-yuh-layt",
+     "def": "**To think about or make guesses.** (verb)\n• As we waited, we speculated about whether he would show up.\n• Second meaning: to engage in a risky business venture — she lost money speculating in stocks.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "strife",
+     "sp": "stryf",
+     "def": "**Conflict or struggle.** (noun)\n• The strife between the two families has gone on for years.\n• Bigger and longer-running than an argument.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "venerate",
+     "sp": "VEN-uh-rayt",
+     "def": "**To show great respect for.** (verb)\n• Asian cultures venerate their ancestors long after they have died.\n• Veneration is respect with reverence in it — stronger than admiration.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "voracious",
+     "sp": "vuh-RAY-shus",
+     "def": "**Ravenous; desiring and eating a large amount of food.** (adjective)\n• We came back from our hike with voracious appetites.\n• Second meaning: greatly eager — Danyal has been a voracious reader since childhood.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "wane",
+     "sp": "wayn",
+     "def": "**To get smaller, dimmer, or weaker; to near an end.** (verb)\n• When interest in sitcoms waned, the networks switched to reality shows.\n• The moon wanes after it is full — that is where the word lives most naturally.",
+     "hint": "Wane shrinks, wax grows. The moon does both.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A callow person is:",
+     "opts": [
+      "Young and inexperienced",
+      "Wise beyond their years",
+      "Physically strong",
+      "Extremely wealthy"
+     ],
+     "ans": 0,
+     "hint": "It originally described a bird with no feathers yet.",
+     "steps": [
+      "Callow means young and inexperienced; immature.",
+      "A student too callow to know he was being fooled lacks the experience to spot it.",
+      "Wisdom is close to its opposite."
+     ],
+     "ex": {
+      "main": "**Young and inexperienced.** The image behind it is an unfledged bird, not yet able to fly.",
+      "tip": "Callow is almost always slightly critical — it implies the inexperience is showing."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To venerate someone is to:",
+     "opts": [
+      "Show them great respect",
+      "Suspect their motives",
+      "Make them poor",
+      "Pronounce their name clearly"
+     ],
+     "ans": 0,
+     "hint": "It is respect with reverence in it.",
+     "steps": [
+      "Venerate means to show great respect for.",
+      "Venerating ancestors long after their deaths is respect approaching reverence.",
+      "The wrong options define cynical, impoverish and enunciate."
+     ],
+     "ex": {
+      "main": "**Show them great respect.** Veneration goes beyond admiration toward reverence.",
+      "tip": "Three of the four options are also Lesson 5 words. Ruling them out by definition is faster than weighing feel."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does it mean when interest in something wanes?",
+     "opts": [
+      "It weakens and nears an end",
+      "It grows rapidly",
+      "It stays exactly the same",
+      "It becomes controversial"
+     ],
+     "ans": 0,
+     "hint": "Think of the moon after it is full.",
+     "steps": [
+      "Wane means to get smaller, dimmer or weaker; to near an end.",
+      "Interest in sitcoms waning is why networks switched to reality shows.",
+      "Growing is wax, its opposite."
+     ],
+     "ex": {
+      "main": "**It weakens and nears an end.** Wane and wax are the pair — one shrinks, one grows.",
+      "tip": "Waxing and waning are worth memorising together; tests like opposites that travel as a set."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An impediment is:",
+     "opts": [
+      "An obstacle that gets in the way",
+      "A wise piece of advice",
+      "A period of conflict",
+      "A ruler with absolute power"
+     ],
+     "ans": 0,
+     "hint": "Ped- means foot.",
+     "steps": [
+      "An impediment is anything that gets in the way.",
+      "Fallen trees after a hurricane were impediments to traffic.",
+      "The root ped- (foot) gives the picture: something your feet catch on."
+     ],
+     "ex": {
+      "main": "**An obstacle.** Impediment shares its root with pedestrian and pedal — all about feet.",
+      "tip": "Root-spotting is the cheapest vocabulary tool there is. Ped-, sed-, and tract- each unlock a dozen words."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A despot is a ruler who:",
+     "opts": [
+      "Holds absolute or tyrannical power",
+      "Is elected for a fixed term",
+      "Rules jointly with a council",
+      "Has only ceremonial duties"
+     ],
+     "ans": 0,
+     "hint": "Divided government makes this kind of rule less likely.",
+     "steps": [
+      "A despot is a ruler with absolute power or tyrannical control over a group of people.",
+      "Divided government makes despotism less likely because power is shared.",
+      "Elections, councils and ceremonial roles all limit power — the opposite of despotism."
+     ],
+     "ex": {
+      "main": "**Absolute or tyrannical power.** The Declaration of Independence claims a right to overthrow a despotic ruler.",
+      "tip": "Words about power are worth sorting by how much is held and how it is checked."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses indolent correctly?",
+     "opts": [
+      "The heat made everyone indolent, and nothing got done all afternoon",
+      "She was so indolent that she finished three projects before noon",
+      "The indolent storm damaged several roofs",
+      "He gave an indolent and detailed account of the meeting"
+     ],
+     "ans": 0,
+     "hint": "It means avoiding exertion.",
+     "steps": [
+      "Indolent means indulging in ease, avoiding exertion, lazy.",
+      "Heat making everyone indolent so nothing gets done matches exactly.",
+      "Finishing three projects contradicts it, and storms and accounts cannot be lazy."
+     ],
+     "ex": {
+      "main": "**The heat made everyone lazy.** Indolence is chosen ease, not exhaustion.",
+      "tip": "When an option contradicts the definition in the same sentence, it is usually the deliberate trap."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A columnist writes: \"I have grown cynical about campaign promises.\" She means she now:",
+     "opts": [
+      "Doubts the sincerity behind them",
+      "Believes them more readily than before",
+      "Finds them difficult to understand",
+      "Thinks they are illegal"
+     ],
+     "ans": 0,
+     "hint": "Cynicism is about motives, not comprehension.",
+     "steps": [
+      "Cynical means doubtful of the sincerity of others' motives.",
+      "Growing cynical about promises means suspecting the people making them do not mean them.",
+      "It is a judgement about sincerity — not about clarity or legality."
+     ],
+     "ex": {
+      "main": "**She doubts the sincerity behind them.** Cynicism targets motive, which is why it is hard to argue someone out of.",
+      "tip": "Cynical and skeptical are close but not identical: skeptics doubt the claim, cynics doubt the person."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A biologist says overfarming has \"impoverished\" the soil. She means the soil has:",
+     "opts": [
+      "Been stripped of what made it rich",
+      "Become financially worthless",
+      "Been contaminated with chemicals",
+      "Grown harder to plough"
+     ],
+     "ans": 0,
+     "hint": "Impoverish has a sense beyond money.",
+     "steps": [
+      "Impoverish means to make poor — and its second sense is simply to take away.",
+      "Applied to soil, it means the nutrients that made it fertile have been removed.",
+      "The word is about depletion, not money, poison or texture."
+     ],
+     "ex": {
+      "main": "**Stripped of what made it rich.** The money sense is the common one; the depletion sense is the one science uses.",
+      "tip": "When a familiar word appears in an unfamiliar field, look for its literal core — here, \"made poor\" becomes \"depleted\"."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which use of contemporary matches the book’s NOUN definition?",
+     "opts": [
+      "Mozart and Haydn were contemporaries who admired each other’s work",
+      "The gallery specialises in contemporary art from the last decade",
+      "She prefers contemporary furniture to antiques",
+      "The building has a contemporary glass façade"
+     ],
+     "ans": 0,
+     "hint": "The noun means a person living at the same time as another.",
+     "steps": [
+      "As a noun, a contemporary is a person living during the same period as another.",
+      "Mozart and Haydn living and working at the same time makes them contemporaries.",
+      "The other three use the adjective to mean modern — a real meaning, but not the noun asked for."
+     ],
+     "ex": {
+      "main": "**Mozart and Haydn were contemporaries.** The noun says nothing about being modern — two people in 1780 were contemporaries.",
+      "tip": "This is the single most common error with this word. \"Contemporary\" as a noun is about sharing a time with someone, not with us."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "VORACIOUS : HUNGRY",
+     "opts": [
+      "sagacious : wise",
+      "callow : experienced",
+      "despot : ruler",
+      "wane : weaken"
+     ],
+     "ans": 0,
+     "hint": "How hungry is voracious?",
+     "steps": [
+      "Voracious means ravenously hungry — the first word is the extreme version of the second.",
+      "So the relationship is degree, running from ordinary up to intense.",
+      "Sagacious means deeply wise — the same jump beyond ordinary wisdom. Match.",
+      "Callow and experienced are opposites, a despot is a type of ruler, and wane and weaken are simply synonyms."
+     ],
+     "ex": {
+      "main": "**Both pairs are DEGREE: the first word is the intense form of the second.** Voracious is hunger turned up; sagacious is wisdom turned up.",
+      "tip": "Degree, synonym and type-to-category all look similar at a glance. The test is whether one word is STRONGER, the SAME, or a KIND OF the other."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "DESPOT : RULER",
+     "opts": [
+      "cynic : skeptic",
+      "venerate : despise",
+      "strife : conflict",
+      "wane : grow"
+     ],
+     "ans": 0,
+     "hint": "Is every ruler a despot, or every despot a ruler?",
+     "steps": [
+      "A despot is a specific KIND of ruler — one with absolute power.",
+      "So the relationship is: specific type to general category.",
+      "A cynic is a specific kind of skeptic — one who doubts motives. Match.",
+      "Venerate and despise are opposites, strife and conflict are synonyms, and wane is the opposite of grow."
+     ],
+     "ex": {
+      "main": "**Both pairs are TYPE TO CATEGORY.** Every despot is a ruler and every cynic is a skeptic, but not the reverse.",
+      "tip": "Use the one-way test: \"every A is a B, but not every B is an A.\" If it only works one way, it is type-to-category."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "CALLOW : EXPERIENCE",
+     "opts": [
+      "indolent : energy",
+      "secular : worldly",
+      "speculate : guess",
+      "impediment : obstacle"
+     ],
+     "ans": 0,
+     "hint": "What does a callow person not yet have?",
+     "steps": [
+      "Callow means young and inexperienced — the adjective names what is MISSING.",
+      "So the pattern is: adjective : the quality it lacks.",
+      "Indolent means lacking energy — avoiding exertion. Match.",
+      "Secular means worldly (synonym), speculate means to guess (synonym), and an impediment IS an obstacle (synonym)."
+     ],
+     "ex": {
+      "main": "**Both pairs are ADJECTIVE : WHAT IT LACKS.** The callow lack experience; the indolent lack energy.",
+      "tip": "Three of the four options here are plain synonyms. When most options share one relationship, the odd one out is often the answer."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "VENERATE : RESPECT",
+     "opts": [
+      "impoverish : wealth",
+      "enunciate : pronounce",
+      "strife : peace",
+      "callow : young"
+     ],
+     "ans": 0,
+     "hint": "Does venerating add respect or remove it?",
+     "steps": [
+      "To venerate is to show GREAT respect — the verb intensifies and delivers the noun.",
+      "Look for a pair where the verb acts strongly ON the noun in the same direction.",
+      "To impoverish is to strip away wealth — the verb acts on the noun, but by removing it.",
+      "Weigh the options: enunciate and pronounce are synonyms, strife and peace are opposites, and callow simply means young.",
+      "Only impoverish shows a verb operating directly on the quantity of a noun, which is the closest structural match."
+     ],
+     "ex": {
+      "main": "**Both pairs are VERB ACTING ON A QUANTITY: venerate raises respect, impoverish lowers wealth.** The direction differs; the structure is what the analogy tests.",
+      "tip": "Not every analogy has a perfect answer — sometimes you pick the CLOSEST structure. Rule out the plain synonyms and opposites first."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A historian writes that a leader \"was venerated by his contemporaries but is viewed cynically today.\" What does this sentence claim?",
+     "opts": [
+      "People of his own era revered him; later observers doubt his motives",
+      "He was disliked in his lifetime and admired afterwards",
+      "He was equally admired in both periods",
+      "His contemporaries never wrote about him"
+     ],
+     "ans": 0,
+     "hint": "Sort out who is speaking in each half.",
+     "steps": [
+      "Venerated means shown great respect; his contemporaries are the people living at the same time as him.",
+      "So the first half says the people of his own era revered him.",
+      "Cynically means doubting sincerity of motive, and \"today\" moves us to the present.",
+      "So reputations reversed: reverence then, suspicion now."
+     ],
+     "ex": {
+      "main": "**Revered in his own time, doubted now.** The whole sentence turns on knowing that contemporaries means people of HIS era, not ours.",
+      "tip": "Reputation-over-time sentences are common in history writing. Track WHO is judging in each clause before deciding what changed."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which two Lesson 5 words could describe the same person from opposite viewpoints?",
+     "opts": [
+      "sagacious and cynical — one credits sound judgement, the other suspicion of motives",
+      "despot and tyrant — both mean the same thing",
+      "strife and conflict — both mean the same thing",
+      "wane and diminish — both mean the same thing"
+     ],
+     "ans": 0,
+     "hint": "Only one of these pairs disagrees with itself.",
+     "steps": [
+      "The question asks for words that describe one person from OPPOSING viewpoints.",
+      "A person who assumes others have bad motives can be called sagacious (they read people well) or cynical (they assume the worst).",
+      "The other three pairs are synonyms — they agree, so they cannot express opposite views."
+     ],
+     "ex": {
+      "main": "**Sagacious and cynical.** The same caution looks like wisdom to an ally and sourness to a critic.",
+      "tip": "Choosing between near-neighbours like these is how writers signal their sympathies while appearing to just describe."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To enunciate is to:",
+     "opts": [
+      "Pronounce clearly",
+      "Speak very loudly",
+      "Repeat something twice",
+      "Whisper deliberately"
+     ],
+     "ans": 0,
+     "hint": "Speech class is where you practise it.",
+     "steps": [
+      "Enunciate means to pronounce clearly.",
+      "Learning to enunciate in speech class is about clarity, not volume.",
+      "Its second sense — to state or announce — is also about making something clear."
+     ],
+     "ex": {
+      "main": "**Pronounce clearly.** Enunciation is about crispness of sound, not loudness.",
+      "tip": "Clear and loud are different qualities. A whisper can be well enunciated."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A financial page reports that an investor \"speculated\" in currency markets. This means she:",
+     "opts": [
+      "Took a risky position hoping for profit",
+      "Studied the markets without investing",
+      "Reported irregularities to regulators",
+      "Withdrew all her money"
+     ],
+     "ans": 0,
+     "hint": "Speculate has an everyday sense and a financial one.",
+     "steps": [
+      "Speculate means to think about or make guesses — and in business, to engage in a risky venture.",
+      "On a financial page, the business sense is the live one.",
+      "The book's own example is losing money speculating in the stock market.",
+      "So she took a risky position, not merely observed."
+     ],
+     "ex": {
+      "main": "**Took a risky position hoping for profit.** The financial sense keeps the guesswork of the everyday sense and adds money to it.",
+      "tip": "When a word appears in a specialist context, check whether that field has claimed a narrower sense of it."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses secular in a way that contrasts it correctly with religion?",
+     "opts": [
+      "The school teaches ethics from a secular perspective, without reference to any faith",
+      "The secular ceremony was held inside the cathedral by a bishop",
+      "She has a secular interest in ancient languages",
+      "The secular weather kept everyone indoors"
+     ],
+     "ans": 0,
+     "hint": "Secular means worldly, not connected with religion.",
+     "steps": [
+      "Secular means worldly; not connected with a church or religion.",
+      "Teaching ethics without reference to any faith is exactly a secular approach.",
+      "A ceremony run by a bishop in a cathedral is the opposite of secular, and interests and weather cannot be secular at all."
+     ],
+     "ex": {
+      "main": "**Ethics taught without reference to faith.** Secular is defined by the absence of religious grounding.",
+      "tip": "Secular pairs with temporal from Lesson 4 — both mean \"of this world\" and both are defined against the spiritual."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,603 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-01": {
+   "id": "unit-ww9-01",
+   "type": "unit",
+   "updatedAt": 1786303653498,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 1",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 1 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 1 of Wordly Wise 3000 Book 9: fifteen words covering praise and criticism (extol, detract, bewail), freedom and hardship (emancipate, destitute, vagabond), and description (flamboyant, intermittent, insuperable, visage), plus maxim, impetus, obligatory, plumb and wheedle.",
+    "from": "source"
+   },
+   "why": {
+    "text": "These are the words that show up in argument and analysis — extol, detract and bewail are how writers signal which side they are on without saying so outright. Learning them is partly vocabulary and partly learning to catch a writer’s thumb on the scale.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 1 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish words that carry a built-in judgement from neutral ones",
+     "from": "added"
+    },
+    {
+     "text": "Name the relationship inside a word-pair analogy and apply it",
+     "from": "added"
+    },
+    {
+     "text": "Recognize how loaded verbs shape a reader’s view of the same facts",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 1 word list. New this unit: ANALOGY questions in the standardized-test format (EXTOL : PRAISE :: ?), which the book itself uses. The skill being trained is naming the relationship — degree, antonym, type-to-category — before looking at the options, and every explanation names it explicitly rather than just giving the answer. Pronunciations on the cards are hand-checked, so the speaker button is reliable.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first — tap 🔊 on any word you are unsure how to say. Then the quiz.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "bewail",
+     "sp": "bih-WAYL",
+     "def": "**To express deep regret or sorrow over.** (verb)\n• Football fans bewailed the replacement of real grass with AstroTurf.\n• Stronger than 'regret' — bewailing is regret said out loud.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "destitute",
+     "sp": "DES-tuh-toot",
+     "def": "**Without resources or possessions, especially the necessities of life.** (adjective)\n• Second meaning: lacking or devoid of — staring at the blank page, I was destitute of ideas.\n• destitution (n): the state of having nothing.",
+     "hint": "Think \"destroyed finances\" — destitute is poverty at its most complete.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "detract",
+     "sp": "dih-TRAKT",
+     "def": "**To take away, especially from the value, beauty, or importance of.** (verb)\n• The family's loud music detracts from the peace of the beach.\n• detractor (n): someone who criticizes, taking away from a plan's standing.",
+     "hint": "de- (away) + tract (pull). It PULLS AWAY from something good.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "emancipate",
+     "sp": "ih-MAN-suh-payt",
+     "def": "**To set free from slavery; to liberate.** (verb)\n• Lincoln's 1863 Emancipation Proclamation declared enslaved people in the Confederacy free.\n• Used loosely too: some teenagers feel emancipated the day they get a driver's licence.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "extol",
+     "sp": "ek-STOHL",
+     "def": "**To praise highly.** (verb)\n• The scout leader extolled the virtues of truth and honour.\n• Not ordinary praise — extolling is praise turned all the way up.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "flamboyant",
+     "sp": "flam-BOY-unt",
+     "def": "**Excessively showy; unrestrained.** (adjective)\n• My conservative aunt thought the boldly patterned necktie too flamboyant for the reception.\n• flamboyance (n): the quality of being showy.",
+     "hint": "From the French for \"flaming\" — it draws the eye like a flame.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "impetus",
+     "sp": "IM-puh-tus",
+     "def": "**A driving force; anything that causes an action.** (noun)\n• Her hope of an athletic scholarship was the impetus for years of training.\n• Second meaning: the increased activity that force produces.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "insuperable",
+     "sp": "in-SOO-pur-uh-bul",
+     "def": "**Incapable of being overcome or defeated.** (adjective)\n• During my senior year, passing Physics seemed an insuperable obstacle to graduation.\n• Note the built-in 'super' — nothing gets OVER it.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "intermittent",
+     "sp": "in-tur-MIT-nt",
+     "def": "**Not continuous; happening at intervals.** (adjective)\n• Showers were intermittent all day, although the forecast had promised sunshine.\n• Stop, start, stop, start — that pattern is the whole word.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "maxim",
+     "sp": "MAK-sim",
+     "def": "**A general truth or rule of conduct; a short saying.** (noun)\n• Remember the maxim \"Actions speak louder than words.\"\n• A maxim is advice compressed to a sentence you can carry around.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "obligatory",
+     "sp": "uh-BLIG-uh-tor-ee",
+     "def": "**Required or demanded.** (adjective)\n• Physical education is obligatory unless you have a medical excuse.\n• Same root as obligation — it is the opposite of optional.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "plumb",
+     "sp": "plum",
+     "def": "**To understand something by examining it closely; to solve.** (verb)\n• Also: to measure the depth of water, or to reach the deepest part — a vessel built to plumb the oceans.\n• As an adjective it means straight up and down: the bricklayer checks the wall is plumb.",
+     "hint": "A plumb line is a weight on a string dropped to find depth. Every meaning is about going straight DOWN into something.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "vagabond",
+     "sp": "VAG-uh-bond",
+     "def": "**A person who wanders from place to place.** (noun)\n• He spent a few years as a vagabond before settling in a city.\n• Also an adjective: the vagabond life of travelling musicians.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "visage",
+     "sp": "VIZ-ij",
+     "def": "**A face, especially one that expresses feelings.** (noun)\n• The smiling visage of a young girl looked out from the portrait.\n• Not any face — a visage is a face that is telling you something.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "wheedle",
+     "sp": "WHEE-dul",
+     "def": "**To coax by using sly persuasion or insincere praise.** (verb)\n• He tried to wheedle his father into letting him go out on a school night.\n• Second meaning: to GAIN something that way — she wheedled the test questions out of a friend.",
+     "hint": "Flattery with an agenda attached.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses insuperable correctly?",
+     "opts": [
+      "The lead seemed insuperable until the other team scored three goals in four minutes",
+      "The insuperable rain fell steadily all afternoon",
+      "She gave an insuperable speech that moved the audience to tears",
+      "His insuperable manner made everyone at the party uncomfortable"
+     ],
+     "ans": 0,
+     "hint": "Insuperable describes something that cannot be got past.",
+     "steps": [
+      "Insuperable means incapable of being overcome or defeated.",
+      "A lead that \"seemed insuperable\" is one nobody could catch — and the sentence then subverts it.",
+      "Rain, speeches and manners can be heavy, moving or rude, but none of those is about being unbeatable."
+     ],
+     "ex": {
+      "main": "**A lead nobody can overcome.** Insuperable attaches to obstacles and advantages, not to weather or personality.",
+      "tip": "When a word contains a familiar chunk, use it: SUPER means over. Nothing gets over an insuperable barrier."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A maxim is best described as:",
+     "opts": [
+      "A short saying that states a general truth or rule of conduct",
+      "A driving force behind an action",
+      "A person who moves from town to town",
+      "An expression of deep sorrow"
+     ],
+     "ans": 0,
+     "hint": "Think of a proverb printed on a poster.",
+     "steps": [
+      "A maxim is a compact statement of a general truth.",
+      "\"Actions speak louder than words\" is a maxim: short, general, and offered as guidance.",
+      "The other options define impetus, vagabond and bewail."
+     ],
+     "ex": {
+      "main": "**A short saying carrying a general truth.** Its brevity is the point — a maxim is meant to be remembered whole.",
+      "tip": "Three of these options are also Lesson 1 words. Eliminating by definition beats guessing by feel."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does it mean to extol something?",
+     "opts": [
+      "To praise it highly",
+      "To take away from its value",
+      "To require it of everyone",
+      "To examine it closely for meaning"
+     ],
+     "ans": 0,
+     "hint": "It is praise, but not mild praise.",
+     "steps": [
+      "Extol means to praise highly.",
+      "The scout leader extolling truth and honour is not mentioning them — he is elevating them.",
+      "The wrong options belong to detract, obligatory and plumb."
+     ],
+     "ex": {
+      "main": "**To praise highly.** Ordinary praise is \"praise\"; extol reserves itself for the version turned up loud.",
+      "tip": "Extol and detract sit at opposite ends of the same scale. Learning them as a pair costs half the effort."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which situation is intermittent?",
+     "opts": [
+      "A porch light that flickers on and off through the evening",
+      "A porch light that stays on all night",
+      "A porch light that has burned out completely",
+      "A porch light that is brighter than the neighbours’"
+     ],
+     "ans": 0,
+     "hint": "Not continuous — happening at intervals.",
+     "steps": [
+      "Intermittent means happening at intervals rather than continuously.",
+      "A light flickering on and off is the definition rendered as a picture.",
+      "Staying on is continuous, burning out is neither, and brightness is a different quality entirely."
+     ],
+     "ex": {
+      "main": "**The flickering light.** Intermittent is about the PATTERN over time, not the strength of the thing.",
+      "tip": "If a word describes how something behaves over time, test each option by playing it forward in your head."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A person described as destitute is:",
+     "opts": [
+      "Lacking the basic necessities of life",
+      "Wandering from place to place",
+      "Excessively showy in dress",
+      "Required to attend"
+     ],
+     "ans": 0,
+     "hint": "It is about having nothing, not going nowhere.",
+     "steps": [
+      "Destitute means without resources or possessions, especially necessities.",
+      "The word is about what someone LACKS, not where they are or how they look.",
+      "The wrong options define vagabond, flamboyant and obligatory."
+     ],
+     "ex": {
+      "main": "**Lacking life’s necessities.** Destitution is the noun — the state the potato famine forced on Irish families.",
+      "tip": "Destitute and vagabond both suggest hardship and get confused. One is about poverty; the other about movement."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To plumb a mystery is to:",
+     "opts": [
+      "Understand it by examining it closely",
+      "Announce it publicly",
+      "Make it seem less important",
+      "Set it aside for later"
+     ],
+     "ans": 0,
+     "hint": "Think about a weight dropped to find the bottom.",
+     "steps": [
+      "Plumb literally means to measure the depth of water.",
+      "Figuratively it means to reach the deepest part of something — to plumb the human soul.",
+      "Applied to a mystery it means examining it closely enough to reach the bottom of it."
+     ],
+     "ex": {
+      "main": "**To understand it by examining it closely.** Every sense of plumb runs the same direction: straight down to the bottom.",
+      "tip": "A word with a literal and a figurative sense usually keeps the same shape in both. Find the shape, keep the word."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Wheedling involves:",
+     "opts": [
+      "Sly persuasion or insincere flattery",
+      "Direct and forceful demands",
+      "Silent disapproval",
+      "Careful measurement"
+     ],
+     "ans": 0,
+     "hint": "What kind of persuasion has an agenda hidden in it?",
+     "steps": [
+      "To wheedle is to coax using sly persuasion or insincere praise.",
+      "The insincerity is essential — wheedling is flattery pointed at a goal.",
+      "Forceful demands are the opposite approach; the other options are unrelated."
+     ],
+     "ex": {
+      "main": "**Sly persuasion or insincere flattery.** If the praise is genuine, it is not wheedling.",
+      "tip": "Watch for words where the SPEAKER’S MOTIVE is baked into the definition. That is usually what a test question targets."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A city council member argues that a proposed glass tower \"detracts from the historic character of the square.\" She means the tower would:",
+     "opts": [
+      "Diminish something valuable that is already there",
+      "Physically block the road through the square",
+      "Cost more than the city can afford",
+      "Require approval from the state government"
+     ],
+     "ans": 0,
+     "hint": "Detract is about value, not money or logistics.",
+     "steps": [
+      "Detract means to take away from the value, beauty or importance of something.",
+      "The square already HAS historic character; the tower would reduce it.",
+      "Cost and permits might be real objections, but they are not what this word claims."
+     ],
+     "ex": {
+      "main": "**It would diminish something valuable already present.** Detract always needs an existing quality to subtract from.",
+      "tip": "Precision matters in arguments: \"detracts from\" is a claim about value, and answering it requires defending value."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses impetus correctly?",
+     "opts": [
+      "A near miss on the highway was the impetus for her defensive-driving course",
+      "The impetus of the lake made it impossible to swim across",
+      "He spoke with such impetus that no one dared interrupt",
+      "The museum’s impetus dated to the eighteenth century"
+     ],
+     "ans": 0,
+     "hint": "An impetus makes something HAPPEN.",
+     "steps": [
+      "An impetus is a driving force — the thing that sets an action going.",
+      "A near miss causing someone to sign up for a course is exactly that: cause, then action.",
+      "The other sentences reach for depth, forcefulness and age, none of which impetus means."
+     ],
+     "ex": {
+      "main": "**The near miss drove her to act.** An impetus is upstream of a decision; you should be able to point at what it caused.",
+      "tip": "Test an impetus sentence by asking \"what action resulted?\" If nothing followed, the word is being misused."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A reviewer writes that an actor’s performance was \"flamboyant to the point of distraction.\" The reviewer is saying the performance was:",
+     "opts": [
+      "So showy that it pulled attention away from the play",
+      "So quiet that the audience struggled to hear",
+      "Technically skilled but emotionally cold",
+      "Faithful to the playwright’s original intent"
+     ],
+     "ans": 0,
+     "hint": "Flamboyant carries a built-in \"too much\".",
+     "steps": [
+      "Flamboyant means excessively showy or unrestrained.",
+      "\"To the point of distraction\" tells you the showiness cost something.",
+      "What it cost was the audience’s attention to the play itself."
+     ],
+     "ex": {
+      "main": "**Showy enough to steal focus from the play.** Flamboyant already leans critical; the phrase that follows confirms it.",
+      "tip": "Some words carry a verdict inside them. Flamboyant is rarely neutral — notice which way a word tilts before you use it."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Attendance at the assembly is obligatory. This means students:",
+     "opts": [
+      "Are required to attend",
+      "Are encouraged but not required to attend",
+      "May attend only with a signed permission form",
+      "Will be rewarded for attending"
+     ],
+     "ans": 0,
+     "hint": "Same root as obligation.",
+     "steps": [
+      "Obligatory means required or demanded.",
+      "It removes the choice — that is the whole force of the word.",
+      "Encouragement, permission and reward all leave the decision with the student; obligatory does not."
+     ],
+     "ex": {
+      "main": "**They are required to attend.** Obligatory is the flat opposite of optional, with no middle ground.",
+      "tip": "Look for the root you already know. Obligation lives inside obligatory and gives the meaning away."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "EXTOL : PRAISE",
+     "opts": [
+      "bewail : regret",
+      "detract : add",
+      "visage : face",
+      "vagabond : travel"
+     ],
+     "ans": 0,
+     "hint": "How is extolling different from ordinary praising? Same difference, same direction.",
+     "steps": [
+      "First work out the stem’s relationship: to extol is to praise INTENSELY.",
+      "So the pattern is: first word = an extreme form of the second.",
+      "Test each pair. To bewail is to regret intensely — a match.",
+      "Detract and add are opposites; visage and face are near-synonyms; a vagabond is a person, not a stronger form of travel."
+     ],
+     "ex": {
+      "main": "**Both pairs are DEGREE: the first word is the intense version of the second.** Extol is praise turned up; bewail is regret turned up.",
+      "tip": "Always name the relationship in a sentence before looking at the options. \"X is an extreme form of Y\" is a sentence you can test."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "MAXIM : SAYING",
+     "opts": [
+      "vagabond : wanderer",
+      "extol : criticize",
+      "flamboyant : showiness",
+      "impetus : movement"
+     ],
+     "ans": 0,
+     "hint": "Is a maxim a KIND of saying, or the opposite of one?",
+     "steps": [
+      "A maxim is a particular type of saying — one stating a general truth.",
+      "So the relationship is: specific type to its general category.",
+      "A vagabond is a specific type of wanderer. Match.",
+      "Extol and criticize are opposites, flamboyant names a quality rather than a category, and impetus causes movement."
+     ],
+     "ex": {
+      "main": "**Both pairs are TYPE TO CATEGORY: the first is a specific kind of the second.** Every maxim is a saying; every vagabond is a wanderer.",
+      "tip": "The type-to-category test: can you say \"every A is a B, but not every B is an A\"? If yes, that is the relationship."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "FLAMBOYANT : RESTRAINED",
+     "opts": [
+      "obligatory : optional",
+      "maxim : proverb",
+      "extol : praise",
+      "vagabond : road"
+     ],
+     "ans": 0,
+     "hint": "These two describe opposite ends of the same quality.",
+     "steps": [
+      "Flamboyant means unrestrained showiness, so the stem pair is opposites.",
+      "The relationship is: first word means the reverse of the second.",
+      "Obligatory (required) and optional (free choice) are exact opposites. Match.",
+      "Maxim and proverb are synonyms, extol intensifies praise, and a road is where a vagabond travels."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Flamboyant and restrained sit at opposite ends of showiness; obligatory and optional at opposite ends of choice.",
+      "tip": "When a stem looks like opposites, check that the WRONG options are not opposites too. Here only one pair reverses."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "DETRACT : VALUE",
+     "opts": [
+      "emancipate : bondage",
+      "plumb : depth",
+      "bewail : sorrow",
+      "wheedle : flattery"
+     ],
+     "ans": 0,
+     "hint": "What does detracting DO to value? Look for a pair doing the same thing.",
+     "steps": [
+      "To detract is to take value AWAY — the verb removes the noun.",
+      "So the pattern is: the verb eliminates the thing named.",
+      "To emancipate is to remove bondage. Match.",
+      "Plumb measures depth, bewail expresses sorrow, and wheedling uses flattery — measuring, expressing and using are not removing."
+     ],
+     "ex": {
+      "main": "**Both pairs are VERB REMOVES NOUN.** Detracting takes away value; emancipating takes away bondage.",
+      "tip": "Verb-and-noun pairs hide several different relationships — removes, measures, expresses, uses. Say which one out loud before choosing."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A biographer writes: \"His detractors bewailed the appointment; his admirers extolled it.\" What does this sentence establish about the appointment?",
+     "opts": [
+      "It divided opinion sharply, with strong feeling on both sides",
+      "It was universally unpopular",
+      "It was met mostly with indifference",
+      "It was reversed shortly after being announced"
+     ],
+     "ans": 0,
+     "hint": "Three Lesson 1 words are doing the work. Sort them by who is speaking.",
+     "steps": [
+      "Detractors are critics; they bewailed — expressed deep sorrow over — the appointment.",
+      "Admirers extolled it — praised it highly.",
+      "Both verbs are intense, and they point in opposite directions.",
+      "So the appointment split opinion, and neither side was lukewarm."
+     ],
+     "ex": {
+      "main": "**Sharply divided opinion, strongly felt on both sides.** The intensity of BOTH verbs is what rules out indifference.",
+      "tip": "When a sentence pairs two loaded verbs against each other, the structure itself is the answer — read the shape, not just the words."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two students describe the same classmate. One says she \"wheedled\" an extension from the teacher; the other says she \"explained her situation and received\" one. What does the word choice reveal?",
+     "opts": [
+      "The first speaker sees the request as manipulative; the second sees it as honest",
+      "The first speaker thinks the extension was denied",
+      "The two are describing different classmates",
+      "The first speaker believes the teacher acted unfairly"
+     ],
+     "ans": 0,
+     "hint": "Wheedle carries a judgement about the asker’s sincerity.",
+     "steps": [
+      "Both sentences describe the same outcome: she asked, she got the extension.",
+      "But wheedle means to coax with SLY or INSINCERE persuasion.",
+      "Choosing that verb accuses her of manipulating the teacher; \"explained her situation\" grants her honesty.",
+      "The facts are identical, so the difference lives entirely in the speakers’ judgement of her."
+     ],
+     "ex": {
+      "main": "**The first speaker judges the request manipulative; the second judges it honest.** Same event, opposite verdicts — carried by one verb.",
+      "tip": "Loaded verbs smuggle opinions into sentences that look factual. Spotting them is most of what close reading is."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pair of Lesson 1 words could describe the SAME obstacle from opposite attitudes?",
+     "opts": [
+      "insuperable and surmountable — one says it cannot be beaten, the other that it can",
+      "obligatory and required — both say the same thing",
+      "maxim and adage — both mean a short saying",
+      "visage and face — both name the same thing"
+     ],
+     "ans": 0,
+     "hint": "Which of these pairs actually disagrees?",
+     "steps": [
+      "The question asks for words describing one obstacle from OPPOSITE attitudes.",
+      "Insuperable claims the obstacle cannot be overcome; surmountable claims it can.",
+      "The other pairs are synonyms — they agree rather than disagree, so they cannot express opposite attitudes."
+     ],
+     "ex": {
+      "main": "**Insuperable and surmountable.** Calling the same obstacle insuperable or surmountable is a claim about the person facing it, not just the obstacle.",
+      "tip": "Whether an obstacle is \"insuperable\" is often an argument in disguise. Notice when a description is really a prediction."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,602 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-03": {
+   "id": "unit-ww9-03",
+   "type": "unit",
+   "updatedAt": 1786304222745,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 3",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 3 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 3 of Wordly Wise 3000 Book 9: fifteen words about speech and persuasion (allude, exhort, disseminate), power and loss (subjugate, lament, trauma, implicate), and manner (pensive, stilted, pomp, wanton, feckless), plus consecrate, dote and monetary.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This set is unusually loaded — most of these words carry a judgement inside them. Learning them is learning to notice when a sentence that looks factual is quietly taking a side.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 3 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Choose the right sense of a word with several meanings, using context",
+     "from": "source"
+    },
+    {
+     "text": "Name an analogy’s relationship before choosing an answer",
+     "from": "added"
+    },
+    {
+     "text": "Tell words carrying a fixed verdict from words that borrow one",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 3 word list. The analogy questions include the INJURY : TRAUMA example from the book itself — trauma is one of this lesson's words. Wanton is the one to watch: it has three genuinely different senses (immoral, excessive, playful) and the book teaches all three, so a question about it is really asking her to read context first.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first, then the quiz. On the analogies, say the relationship out loud before you look at the options.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "allude",
+     "sp": "uh-LOOD",
+     "def": "**To refer to something indirectly** (used with *to*). (verb)\n• \"I made a mistake that night,\" she said, alluding to losing her temper.\n• allusion (n): the indirect reference itself.",
+     "hint": "Alluding is pointing without naming — if you say it outright, it is not an allusion.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "consecrate",
+     "sp": "KAHN-suh-krayt",
+     "def": "**To set apart as holy; to dedicate to a cause.** (verb)\n• Hagia Sophia was consecrated as a church in 537.\n• Mother Teresa consecrated her life to helping Calcutta's poor.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "disseminate",
+     "sp": "dih-SEM-uh-nayt",
+     "def": "**To scatter or spread widely.** (verb)\n• The wind disseminated the spores from the milkweed pods.\n• dissemination (n): spreading information about flu cases prevents an outbreak.",
+     "hint": "Semen is Latin for seed — disseminating is sowing seed across a whole field.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "dote",
+     "sp": "doht",
+     "def": "**To show excessive fondness for** (used with *on* or *upon*). (verb)\n• She dotes on her grandson and indulges his every whim.\n• The excess is the point — doting is fondness past the sensible line.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "exhort",
+     "sp": "eg-ZORT",
+     "def": "**To urge strongly; to warn or appeal.** (verb)\n• The quarterback's teammate exhorted him to ignore the boos of the crowd.\n• exhortation (n): the pool rules contain an exhortation against diving in the shallow end.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "feckless",
+     "sp": "FEK-lus",
+     "def": "**Careless or irresponsible.** (adjective)\n• Bao's feckless ways left him devoid of cash.\n• Feck is an old word for effect — a feckless person has no effect on anything.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "implicate",
+     "sp": "IM-pluh-kayt",
+     "def": "**To show to be involved with something, especially something dishonest or illegal.** (verb)\n• The defence attorney insisted her client could not be implicated in the theft.\n• Being implicated is not being convicted — it means the evidence points your way.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "lament",
+     "sp": "luh-MENT",
+     "def": "**To feel or express grief.** (verb)\n• Mourners lined the streets to lament the death of Diana, Princess of Wales.\n• lamentation (n): an expression of grief in the form of a poem or song.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "monetary",
+     "sp": "MAH-nuh-ter-ee",
+     "def": "**Of or relating to money or currency.** (adjective)\n• The basic monetary unit of Mexico is the peso.\n• Reach for it when the subject is money as a SYSTEM, not just a price.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "pensive",
+     "sp": "PEN-siv",
+     "def": "**Deep in thought; dreamily thoughtful.** (adjective)\n• Lying on my back, I grew pensive as I watched the drifting summer clouds.\n• Pensive thought drifts — it is not the same as concentrating.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "pomp",
+     "sp": "pahmp",
+     "def": "**A showy or dignified display.** (noun)\n• Graduations are usually marked by pomp and ceremony.\n• Pomp can be admiring or mocking depending on who is describing it.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "stilted",
+     "sp": "STIL-tud",
+     "def": "**Artificially stiff or formal in manner.** (adjective)\n• His stilted conversation reflected his unease.\n• Think of walking on stilts: upright, careful, and obviously not natural.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "subjugate",
+     "sp": "SUB-juh-gayt",
+     "def": "**To bring under control; to conquer.** (verb)\n• In the late eighteenth century, Russia subjugated Georgia and absorbed it into its empire.\n• subjugation (n): the subjugation of the working class has driven revolutions worldwide.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "trauma",
+     "sp": "TRAW-muh",
+     "def": "**A severe bodily injury.** (noun)\n• Second meaning: emotional shock — survivors experienced trauma for years after the tornado.\n• traumatic (adj): watching the devastation on television had a traumatic effect on me.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "wanton",
+     "sp": "WAHN-tn",
+     "def": "**Ignoring what is right.** (adjective)\n• The company showed a wanton disregard for employees' health by leaving the asbestos.\n• Also: excessive and unrestrained (wanton eating of sweets), or simply playful (wanton shouts of children).",
+     "hint": "Three shades, from cruel to merely playful. The context picks which one.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To allude to something is to:",
+     "opts": [
+      "Refer to it indirectly",
+      "State it plainly and completely",
+      "Spread it widely to many people",
+      "Set it apart as holy"
+     ],
+     "ans": 0,
+     "hint": "The word points at something without naming it.",
+     "steps": [
+      "Allude means to refer to something in an indirect way.",
+      "Saying \"I made a mistake that night\" ALLUDES to losing your temper without describing it.",
+      "Stating it plainly is the opposite move; the other options define disseminate and consecrate."
+     ],
+     "ex": {
+      "main": "**To refer to it indirectly.** The indirectness is the whole word — name the thing and you have stopped alluding.",
+      "tip": "An allusion asks the listener to supply the missing half. That is why writers use them and why tests ask about them."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which best describes feckless behaviour?",
+     "opts": [
+      "Careless and irresponsible",
+      "Stiff and overly formal",
+      "Deeply thoughtful",
+      "Excessively showy"
+     ],
+     "ans": 0,
+     "hint": "It leaves nothing accomplished.",
+     "steps": [
+      "Feckless means careless or irresponsible.",
+      "Bao's feckless ways leaving him without cash shows carelessness producing consequences.",
+      "The wrong options define stilted, pensive and flamboyant."
+     ],
+     "ex": {
+      "main": "**Careless and irresponsible.** Feck is an old word for effect — the feckless produce none.",
+      "tip": "Old roots hiding in modern words are worth learning once: they unlock the word permanently."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To subjugate a people is to:",
+     "opts": [
+      "Bring them under control by conquest",
+      "Set them free",
+      "Spread information among them",
+      "Grieve for them"
+     ],
+     "ans": 0,
+     "hint": "Look at the \"sub\" — it means under.",
+     "steps": [
+      "Subjugate means to bring under control; to conquer.",
+      "Russia subjugating Georgia meant conquering it and absorbing it into the empire.",
+      "Setting free is emancipate — the exact reverse."
+     ],
+     "ex": {
+      "main": "**Bring them under control by conquest.** Sub- means under; subjugation puts a people under a yoke.",
+      "tip": "Subjugate and emancipate are opposites and both appear on tests. Learn them facing each other."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A pensive expression suggests someone is:",
+     "opts": [
+      "Deep in thought",
+      "Extremely angry",
+      "Physically unwell",
+      "Pretending to listen"
+     ],
+     "ans": 0,
+     "hint": "It is a quiet, inward look.",
+     "steps": [
+      "Pensive means deep in thought, in a dreamy rather than intense way.",
+      "Watching clouds drift and growing pensive is the word in its natural habitat.",
+      "None of the other options involves thinking at all."
+     ],
+     "ex": {
+      "main": "**Deep in thought.** Pensive thought wanders; it is reflection rather than concentration.",
+      "tip": "Two words can both mean \"thinking\" and still not swap: pensive drifts, focused drills."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses monetary correctly?",
+     "opts": [
+      "The reward was monetary rather than a trophy or a certificate",
+      "She gave a monetary glance at the clock",
+      "The monetary hike took us four hours",
+      "He has a monetary interest in old films"
+     ],
+     "ans": 0,
+     "hint": "Monetary means relating to money.",
+     "steps": [
+      "Monetary means of or relating to money or currency.",
+      "A reward that is money rather than a trophy is exactly a monetary reward.",
+      "Glances, hikes and interests in films have nothing to do with currency."
+     ],
+     "ex": {
+      "main": "**The reward was money rather than an object.** Monetary attaches to systems, values and rewards — not to moods or motions.",
+      "tip": "When only one option can literally involve money, the definition alone settles the question."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does it mean to disseminate information?",
+     "opts": [
+      "To spread it widely",
+      "To keep it secret",
+      "To prove it false",
+      "To record it permanently"
+     ],
+     "ans": 0,
+     "hint": "Think of seeds scattered by the wind.",
+     "steps": [
+      "Disseminate means to scatter or spread widely.",
+      "The wind disseminating milkweed spores is the literal picture behind the word.",
+      "Applied to information it means spreading it broadly — the opposite of keeping it secret."
+     ],
+     "ex": {
+      "main": "**To spread it widely.** Dissemination of flu information is how an outbreak gets prevented.",
+      "tip": "A word with a physical origin usually keeps that motion when it turns abstract. Picture the seeds."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A newspaper reports that a witness \"implicated\" a company executive. This means the witness:",
+     "opts": [
+      "Gave evidence suggesting the executive was involved in wrongdoing",
+      "Proved the executive guilty beyond doubt",
+      "Defended the executive against the accusations",
+      "Refused to name the executive"
+     ],
+     "ans": 0,
+     "hint": "Implicate points; it does not convict.",
+     "steps": [
+      "To implicate is to show someone to be involved in something dishonest or illegal.",
+      "It means the evidence points toward that person.",
+      "It stops well short of proof — which is why newspapers use it rather than \"proved guilty\"."
+     ],
+     "ex": {
+      "main": "**Evidence suggesting involvement — not proof of guilt.** That gap is exactly why the word is useful to careful reporters.",
+      "tip": "Legal vocabulary is precise about certainty. Implicated, charged, and convicted are three very different claims."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A critic writes that the dialogue in a play was \"stilted throughout.\" The critic means the dialogue:",
+     "opts": [
+      "Sounded artificially stiff and formal rather than natural",
+      "Was too fast for the audience to follow",
+      "Contained too many references to other plays",
+      "Was improvised rather than scripted"
+     ],
+     "ans": 0,
+     "hint": "Would real people talk that way?",
+     "steps": [
+      "Stilted means artificially stiff or formal in manner.",
+      "Applied to dialogue it means the lines do not sound like speech.",
+      "Speed, allusions and improvisation are all different complaints."
+     ],
+     "ex": {
+      "main": "**Artificially stiff, not how people actually speak.** Stilted is always a criticism — nobody aims for it.",
+      "tip": "For words that are always negative, the question is usually not \"what does it mean\" but \"what is being criticized\"."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses wanton in its \"ignoring what is right\" sense?",
+     "opts": [
+      "The report described the wanton destruction of protected forest",
+      "The children ran across the field with wanton delight",
+      "She avoided wanton snacking between meals",
+      "The wanton stream wound slowly through the valley"
+     ],
+     "ans": 0,
+     "hint": "Wanton has three shades. Which sentence carries moral weight?",
+     "steps": [
+      "Wanton can mean ignoring what is right, excessive, or simply playful.",
+      "Destruction of PROTECTED forest carries moral weight — someone ignored what was right.",
+      "The children's delight is the playful sense; snacking is the excessive sense; a stream cannot be any of them."
+     ],
+     "ex": {
+      "main": "**The destruction of protected forest.** Only that sentence involves a wrong being ignored.",
+      "tip": "When a word has several senses, decide which one the SENTENCE needs before deciding whether it fits."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "INJURY : TRAUMA",
+     "opts": [
+      "fondness : adoration",
+      "consecrate : profane",
+      "pensive : thoughtful",
+      "monetary : money"
+     ],
+     "ans": 0,
+     "hint": "A trauma is not just any injury. How much more is it?",
+     "steps": [
+      "Work out the stem: a trauma is a SEVERE injury — the second word is the intense version of the first.",
+      "So the pattern is degree, running from ordinary up to extreme.",
+      "Adoration is intense fondness — same direction, same jump. Match.",
+      "Consecrate and profane are opposites, pensive and thoughtful are near-synonyms, and monetary is simply the adjective of money."
+     ],
+     "ex": {
+      "main": "**Both pairs are DEGREE: the second word is the extreme form of the first.** Injury to trauma is the same jump as fondness to adoration.",
+      "tip": "Degree pairs have a direction. Check that your answer runs the SAME way — mild to intense, not intense to mild."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "DISSEMINATE : SCATTER",
+     "opts": [
+      "exhort : urge",
+      "subjugate : liberate",
+      "trauma : injury",
+      "pomp : ceremony"
+     ],
+     "ans": 0,
+     "hint": "These two words mean nearly the same thing.",
+     "steps": [
+      "To disseminate is to scatter or spread widely — the two words are near-synonyms.",
+      "So the relationship is simply: same meaning.",
+      "To exhort is to urge strongly. Same meaning. Match.",
+      "Subjugate and liberate are opposites, trauma intensifies injury, and pomp is a kind of ceremonial display."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Disseminate and scatter overlap; so do exhort and urge.",
+      "tip": "Synonym stems are the easiest to spot and the easiest to over-trust — always confirm no option is a BETTER synonym."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "WANTON : RESTRAINT",
+     "opts": [
+      "feckless : responsibility",
+      "monetary : money",
+      "consecrate : dedicate",
+      "lament : grief"
+     ],
+     "ans": 0,
+     "hint": "What quality is a wanton person missing?",
+     "steps": [
+      "In its \"excessive\" sense, wanton means lacking restraint — the adjective names what is ABSENT.",
+      "So the pattern is: adjective : the quality it lacks.",
+      "Feckless means lacking responsibility. Same pattern. Match.",
+      "Monetary relates to money, consecrate and dedicate are synonyms, and lament expresses grief — relating, matching and expressing are not lacking."
+     ],
+     "ex": {
+      "main": "**Both pairs are ADJECTIVE : THE QUALITY IT LACKS.** Wanton behaviour has no restraint; feckless behaviour has no responsibility.",
+      "tip": "A \"lacks\" relationship is easy to miss because it looks like an ordinary pairing. Ask whether the second word is present or absent."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "LAMENT : GRIEF",
+     "opts": [
+      "celebrate : joy",
+      "subjugate : freedom",
+      "pensive : quiet",
+      "dote : neglect"
+     ],
+     "ans": 0,
+     "hint": "What is a person doing to grief when they lament?",
+     "steps": [
+      "To lament is to EXPRESS grief — the verb puts the emotion outward.",
+      "So the pattern is: verb : the emotion it expresses.",
+      "To celebrate is to express joy. Match.",
+      "Subjugating removes freedom, pensive and quiet are both adjectives, and doting is the opposite of neglect."
+     ],
+     "ex": {
+      "main": "**Both pairs are VERB EXPRESSES EMOTION.** Lamenting puts grief outward; celebrating puts joy outward.",
+      "tip": "Verb-plus-emotion pairs split into expressing, causing and removing. Naming which one you have is the whole question."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A historian writes: \"The victors consecrated the ground where the defenders had been subjugated.\" What tension does this sentence create?",
+     "opts": [
+      "A place is being called holy precisely where people were conquered",
+      "The victors are admitting they lost the battle",
+      "The ground was too damaged to be used again",
+      "The defenders were the ones who performed the ceremony"
+     ],
+     "ans": 0,
+     "hint": "Look at what each verb means, then notice they land on the same ground.",
+     "steps": [
+      "Consecrate means to set apart as holy.",
+      "Subjugate means to bring under control by conquest.",
+      "The sentence puts both on the same spot: the victors sanctify the site of a conquest.",
+      "That is the tension — holiness claimed over a place defined by someone else's defeat."
+     ],
+     "ex": {
+      "main": "**Sacred ground declared on the site of a conquest.** The sentence does not say this is wrong; it lets the two words sit against each other and lets you notice.",
+      "tip": "Historians often build an argument by word choice alone. When two loaded verbs share a sentence, ask what their collision implies."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pairing shows the SAME word being used approvingly by one speaker and critically by another?",
+     "opts": [
+      "pomp — \"the pomp of the ceremony\" versus \"all that empty pomp\"",
+      "trauma — used the same way by everyone",
+      "feckless — always a criticism",
+      "monetary — always neutral"
+     ],
+     "ans": 0,
+     "hint": "Which word can swing either way depending on the speaker?",
+     "steps": [
+      "Pomp means a showy or dignified display — and dignity and showiness are judged differently by different people.",
+      "\"The pomp of the ceremony\" admires it; \"all that empty pomp\" dismisses it as hollow.",
+      "Feckless is always critical, monetary is neutral, and trauma is not a judgement at all."
+     ],
+     "ex": {
+      "main": "**Pomp swings with the speaker.** The word describes the display; the speaker supplies the verdict.",
+      "tip": "Some words carry a fixed verdict and some borrow one from context. Knowing which is which keeps you from misreading tone."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To consecrate a building is to:",
+     "opts": [
+      "Set it apart as holy",
+      "Tear it down for materials",
+      "Sell it to the highest bidder",
+      "Fill it with noisy activity"
+     ],
+     "ans": 0,
+     "hint": "It is a religious or dedicating act.",
+     "steps": [
+      "Consecrate means to set apart as holy, or to dedicate to a cause.",
+      "Hagia Sophia was consecrated as a church in 537 — set apart for sacred use.",
+      "None of the other options involves dedication of any kind."
+     ],
+     "ex": {
+      "main": "**Set it apart as holy.** The second sense extends it to causes: Mother Teresa consecrated her life to the poor.",
+      "tip": "A word with a sacred sense and a secular one usually keeps the same feeling in both: consecrating a life is still setting it apart."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A novelist writes that a father \"doted on\" his youngest child. The word choice suggests the father was:",
+     "opts": [
+      "Fond of the child past the point of good judgement",
+      "Openly disappointed in the child",
+      "Strict with the child but fair",
+      "Largely absent from the child’s life"
+     ],
+     "ans": 0,
+     "hint": "Dote is fondness with a word of warning built in.",
+     "steps": [
+      "Dote means to show EXCESSIVE fondness for someone.",
+      "The excess is part of the definition, not an accident of tone.",
+      "So describing a father as doting says he indulged the child beyond what was wise.",
+      "Disappointment, strictness and absence are all the opposite of doting."
+     ],
+     "ex": {
+      "main": "**Fond past the point of good judgement.** Doting is affection the writer is gently flagging as too much.",
+      "tip": "When a definition contains a word like \"excessive\", the criticism travels with the word wherever it goes."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A speaker \"alluded to\" a scandal; a second speaker \"exhorted\" the audience about it. What is the difference in what each did?",
+     "opts": [
+      "The first referred to it indirectly; the second urged the audience strongly",
+      "The first proved it happened; the second denied it",
+      "The first spoke privately; the second spoke publicly",
+      "The first grieved over it; the second celebrated it"
+     ],
+     "ans": 0,
+     "hint": "One word is about indirectness, the other about force.",
+     "steps": [
+      "To allude is to refer to something indirectly, without naming it outright.",
+      "To exhort is to urge strongly — an appeal aimed at getting the audience to act or believe.",
+      "So the first speaker gestured at the scandal; the second pressed the audience about it.",
+      "The difference is manner and force, not truth, privacy or emotion."
+     ],
+     "ex": {
+      "main": "**Indirect reference versus strong urging.** Allude is about how much is said; exhort is about how hard it is pushed.",
+      "tip": "Verbs of speaking are worth sorting on two axes: how direct the speaker is, and how hard they are pushing."
+     }
+    }
+   ]
+  }
+ }
+}

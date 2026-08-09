@@ -238,6 +238,37 @@ The underlying cycle is unchanged and is working as designed: with 20 questions
 and rounds of 5, rounds 1–4 cover the unit with no repeats and round 5 wraps.
 Repetition after a full pass is correct; repeating a laddered question was not.
 
+### Analogy questions (v73 / Wayfinder v58, both apps)
+
+`kind:'analogy'` renders a standardized-test analogy — the stem on its own
+plate (`analogyStem()`, `.analogy`), reading `WORD : WORD :: ? : ?`, above
+ordinary multiple choice. Built at Chris's request for Wordly Wise, whose own
+exercises use the format; the engine travels to both apps.
+
+- **`q` holds ONLY the stem pair**, uppercase, exactly two words around one
+  colon and nothing else. Options are lowercase `word : word` pairs.
+  `analogyStem()` falls back to plain text if the stem does not parse, so a
+  malformed stem degrades rather than rendering something misleading.
+- **Underneath it is plain MC**, so option shuffling, the miss ladder,
+  qstats and "see it again tomorrow" all work untouched. Nothing new is
+  stored.
+- **The relationship is the content, not the answer.** Every `ex.main` NAMES
+  it — degree, antonym, synonym, type-to-category, person-to-action, or
+  "lacks" — because naming it is the transferable skill. Wrong options must
+  each hold a DIFFERENT nameable relationship, never a near-miss of the
+  right one.
+- Not every analogy needs a perfect answer; one in Book 9 Lesson 5
+  deliberately requires eliminating to the closest structure, and says so.
+- In `UNIT_SCHEMA` and the generation prompt, so generated vocab units can
+  use it too — drafts still gate everything.
+
+### The Wordly Wise Book 9 shelf (v73)
+
+Sedona's vocabulary lessons ship as `Wordly Wise Book 9 · Lesson N`, so they
+shelve as one book. 15 cards (every card carries hand-checked `sp`) and 18
+questions each, 3–4 of them analogies. Lesson 2's PDF extracts as empty text
+and is **not** built — do not guess a word list from the lesson numbering.
+
 ### Per-unit sitting size (v69 / Wayfinder v57, both apps)
 
 A unit may carry **`round`** — how many questions `pickRound()` serves per

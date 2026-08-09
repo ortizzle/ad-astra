@@ -1,0 +1,598 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-06": {
+   "id": "unit-ww9-06",
+   "type": "unit",
+   "updatedAt": 1786304527378,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 6",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 6 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 6 of Wordly Wise 3000 Book 9: fifteen words about argument and persuasion (aver, concede, proponent, oratory, vociferous, dogma), evaluation (assess, deficient, rudimentary), and influence (ascendancy, propagate, embody, impart), plus apropos and sojourn.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the argument lesson. Aver, concede, proponent and dogma are the vocabulary of debate — and each one carries information about how confident, how reluctant or how open the speaker is.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 6 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Choose the right sense of embody, impart and propagate from context",
+     "from": "source"
+    },
+    {
+     "text": "Apply the “lacks” and “person-to-action” analogy relationships",
+     "from": "added"
+    },
+    {
+     "text": "Read verbs of admitting and asserting for the confidence they signal",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 6 word list, which the PDF also carries an exercise for (6A, Determining Precise Meaning) — several questions here echo that paraphrase-matching format. Dogma is the concept worth talking through: it describes how firmly a belief is HELD, not whether it is true, and that distinction is what makes the word useful.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Proponent is the exact opposite of Lesson 1’s detractor — worth pairing.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "apropos",
+     "sp": "ap-ruh-POH",
+     "def": "**Fitting the occasion; suitable or apt.** (adjective)\n• The governor’s red, white and blue blouse seemed quite apropos for her post-election celebration.\n• From the French à propos — “to the purpose”.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "ascendancy",
+     "sp": "uh-SEN-dun-see",
+     "def": "**Controlling influence; domination.** (noun)\n• The ascendancy of the United States as a world power coincided with the decline of the British Empire.\n• Ascend is inside it — ascendancy is power that has risen to the top.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "assess",
+     "sp": "uh-SES",
+     "def": "**To analyze and determine the nature, value, or importance of.** (verb)\n• After she assessed the storm damage, she proposed a plan.\n• assessment (n): my assessment of the refrigerator showed we needed groceries.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "aver",
+     "sp": "uh-VUR",
+     "def": "**To declare positively; to state as the truth.** (verb)\n• The lawyer averred that her client was innocent.\n• Averring is stronger than saying — it stakes the speaker’s credibility on it.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "concede",
+     "sp": "kun-SEED",
+     "def": "**To admit to be true, often reluctantly.** (verb)\n• Bungee jumpers concede that the sport can be dangerous.\n• Second meaning: to grant or let have — Marla conceded the chess game.",
+     "hint": "The reluctance is built in. You concede what you would rather not admit.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "deficient",
+     "sp": "dih-FISH-unt",
+     "def": "**Lacking.** (adjective)\n• A diet deficient in fruits and vegetables will not provide enough vitamins.\n• deficiency (n): students experienced a serious deficiency when arts education was cut.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "dogma",
+     "sp": "DOG-muh",
+     "def": "**An unproven principle or belief held to be true.** (noun)\n• The danger is that a vague theory can harden into dogma.\n• dogmatic (adj): overly positive and assertive about opinions, as if they were facts.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "embody",
+     "sp": "em-BAH-dee",
+     "def": "**To put an idea into a form that can be seen.** (verb)\n• The painting embodies the love of a parent for a child.\n• Second meaning: to make part of a system — the Bill of Rights embodies basic freedoms.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "impart",
+     "sp": "im-PART",
+     "def": "**To make known; to disclose.** (verb)\n• He imparted his views so humorously that we were unsure whether to take them seriously.\n• Second meaning: to bestow — the capers impart the right amount of sharpness to the sauce.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "oratory",
+     "sp": "OR-uh-tor-ee",
+     "def": "**The art of public speaking.** (noun)\n• Miriam’s inspired oratory earned her the highest grade in the public-speaking class.\n• orator (n): a public speaker. oratorical (adj): practising in the mirror sharpens oratorical skill.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "propagate",
+     "sp": "PRAH-puh-gayt",
+     "def": "**To reproduce, or to cause to reproduce.** (verb)\n• Begonias are easy plants to propagate.\n• Third meaning: to foster the spread of — he wrote articles to propagate his theory.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "proponent",
+     "sp": "pruh-POH-nunt",
+     "def": "**Someone who proposes or supports an idea; an advocate.** (noun)\n• The bill passed easily because its proponents were in the majority.\n• The exact opposite of a detractor, from Lesson 1.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "rudimentary",
+     "sp": "roo-duh-MEN-tuh-ree",
+     "def": "**Not yet fully developed; basic or elementary.** (adjective)\n• The rudimentary train system developed rapidly in the later nineteenth century.\n• Juan speaks four languages perfectly and has a rudimentary knowledge of several more.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "sojourn",
+     "sp": "SOH-jurn",
+     "def": "**A visit or temporary stay.** (noun)\n• Our summer sojourn with our cousins ended after six wonderful weeks in Puerto Rico.\n• Also a verb: we sojourn for a week at our grandparents’ cabin.",
+     "hint": "Jour is French for day — a sojourn is measured in days, never permanent.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "vociferous",
+     "sp": "voh-SIF-ur-us",
+     "def": "**Making one’s feelings known in a loud way.** (adjective)\n• The community’s vociferous opposition to the stadium led the governor to abandon the plan.\n• Voc- is voice, the same root as vocal and vocabulary.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Something apropos is:",
+     "opts": [
+      "Fitting for the occasion",
+      "Extremely expensive",
+      "Loudly expressed",
+      "Not yet fully developed"
+     ],
+     "ans": 0,
+     "hint": "From the French for \"to the purpose\".",
+     "steps": [
+      "Apropos means fitting the occasion; suitable or apt.",
+      "A red, white and blue blouse at a post-election party is apropos — it suits the moment.",
+      "The wrong options describe cost, volume and development."
+     ],
+     "ex": {
+      "main": "**Fitting for the occasion.** Apropos is about suitability to a moment, not quality in general.",
+      "tip": "French borrowings often keep their original shape and stress. Say it ap-ruh-POH, not \"a-PROP-os\"."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A proponent of a plan is someone who:",
+     "opts": [
+      "Supports and advocates for it",
+      "Opposes it publicly",
+      "Is undecided about it",
+      "Is paid to study it"
+     ],
+     "ans": 0,
+     "hint": "Think of the opposite of a detractor.",
+     "steps": [
+      "A proponent is someone who proposes or supports an idea; an advocate.",
+      "A bill passing because its proponents were in the majority means its supporters outnumbered its opponents.",
+      "Opposing is what an opponent or detractor does."
+     ],
+     "ex": {
+      "main": "**Supports and advocates for it.** Proponent and detractor (Lesson 1) are exact opposites — learn them facing each other.",
+      "tip": "When two lessons hand you a matched pair, link them. Pairs are cheaper to remember than singles."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Rudimentary knowledge is:",
+     "opts": [
+      "Basic and not fully developed",
+      "Complete and expert",
+      "Entirely incorrect",
+      "Kept secret from others"
+     ],
+     "ans": 0,
+     "hint": "Think of the first stage of something.",
+     "steps": [
+      "Rudimentary means not yet fully developed; basic or elementary.",
+      "Juan speaking four languages perfectly and having rudimentary knowledge of several more shows the contrast.",
+      "Rudimentary knowledge is real knowledge — just early-stage, not wrong."
+     ],
+     "ex": {
+      "main": "**Basic and not fully developed.** Note it does NOT mean incorrect, which is the trap option.",
+      "tip": "Incomplete and incorrect are different claims. Tests reliably offer the wrong one as a distractor."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To aver something is to:",
+     "opts": [
+      "Declare it positively as the truth",
+      "Doubt it openly",
+      "Ask about it politely",
+      "Repeat it without understanding"
+     ],
+     "ans": 0,
+     "hint": "It is a strong, confident statement.",
+     "steps": [
+      "Aver means to declare positively; to state as the truth.",
+      "A lawyer averring that her client is innocent is staking her credibility on the claim.",
+      "Doubting and asking are the opposite posture."
+     ],
+     "ex": {
+      "main": "**Declare it positively as the truth.** Averring is stronger than saying — the speaker is standing behind it.",
+      "tip": "Verbs of speaking vary by confidence: suggest, claim, assert, aver. Note where each sits on that scale."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Vociferous opposition is opposition that is:",
+     "opts": [
+      "Loudly expressed",
+      "Quietly held",
+      "Legally binding",
+      "Poorly informed"
+     ],
+     "ans": 0,
+     "hint": "Voc- is the root for voice.",
+     "steps": [
+      "Vociferous means making one's feelings known in a loud way.",
+      "A community's vociferous opposition made the governor abandon the stadium — they were heard.",
+      "The word says nothing about whether the opposition was right or well-informed."
+     ],
+     "ex": {
+      "main": "**Loudly expressed.** Vociferous describes volume, not validity.",
+      "tip": "The root voc- (voice) runs through vocal, vocabulary, advocate and vociferous."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sojourn is:",
+     "opts": [
+      "A temporary stay",
+      "A permanent move",
+      "A formal speech",
+      "A controlling influence"
+     ],
+     "ans": 0,
+     "hint": "Jour is French for day.",
+     "steps": [
+      "A sojourn is a visit or temporary stay.",
+      "A summer sojourn with cousins lasting six weeks is temporary by definition.",
+      "Permanence is exactly what the word rules out."
+     ],
+     "ex": {
+      "main": "**A temporary stay.** The French jour (day) inside it is the reminder — a sojourn is counted in days.",
+      "tip": "If a root you recognise contradicts an option, that option is out. Jour cannot mean permanent."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A scientist warns that \"a useful theory can harden into dogma.\" She is warning that the theory might:",
+     "opts": [
+      "Come to be treated as unquestionable fact",
+      "Be disproved by new evidence",
+      "Become too complicated to teach",
+      "Be forgotten by the next generation"
+     ],
+     "ans": 0,
+     "hint": "Dogma is belief held without proof.",
+     "steps": [
+      "Dogma is an unproven principle or belief held to be true.",
+      "\"Hardening into dogma\" means people stop treating it as a theory open to testing.",
+      "The danger is not that it is wrong — it is that it stops being questioned."
+     ],
+     "ex": {
+      "main": "**Treated as unquestionable fact.** The warning is about how a belief is HELD, not whether it is true.",
+      "tip": "Dogma is about the holder's attitude. A correct idea held dogmatically is still dogma."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A senator \"conceded that the programme had gone over budget.\" The word conceded tells you she:",
+     "opts": [
+      "Admitted it reluctantly",
+      "Announced it proudly",
+      "Denied it firmly",
+      "Learned it for the first time"
+     ],
+     "ans": 0,
+     "hint": "Reluctance is built into the word.",
+     "steps": [
+      "Concede means to admit to be true, often reluctantly.",
+      "The reluctance is part of the definition, not an inference.",
+      "So a senator conceding an overspend is admitting something she would rather not."
+     ],
+     "ex": {
+      "main": "**Admitted it reluctantly.** Reporters pick concede precisely because it signals the admission was pulled out.",
+      "tip": "Verbs of admitting carry different weights: revealed, admitted, conceded. Each implies a different amount of pressure."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses embody in the book’s FIRST sense — putting an idea into visible form?",
+     "opts": [
+      "The memorial embodies the grief of an entire generation",
+      "The contract embodies the terms both sides agreed",
+      "She embodied her notes into the final report",
+      "The committee embodied at noon on Tuesday"
+     ],
+     "ans": 0,
+     "hint": "One sense is about making an idea visible; the other is about incorporating into a system.",
+     "steps": [
+      "Embody's first sense is putting an idea into a form that can be seen.",
+      "A memorial makes an abstract grief physical and visible — that is the first sense exactly.",
+      "The contract example is the second sense (incorporating into a system), and the last two are not English usages."
+     ],
+     "ex": {
+      "main": "**The memorial embodies grief.** An abstract feeling is given a physical, visible form.",
+      "tip": "When a word has two senses, the test usually names which one it wants. Read the question stem carefully first."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "PROPONENT : SUPPORT",
+     "opts": [
+      "detractor : criticize",
+      "dogma : proof",
+      "sojourn : permanence",
+      "apropos : fitting"
+     ],
+     "ans": 0,
+     "hint": "What does a proponent do?",
+     "steps": [
+      "A proponent is someone who supports — the noun names a person by the action they perform.",
+      "So the pattern is: person : the action that defines them.",
+      "A detractor is someone who criticizes. Same pattern. Match.",
+      "Dogma lacks proof, a sojourn lacks permanence, and apropos simply means fitting."
+     ],
+     "ex": {
+      "main": "**Both pairs are PERSON : DEFINING ACTION.** A proponent supports; a detractor criticizes.",
+      "tip": "Person-to-action pairs are common and easy once named. Ask: \"what does this person DO, by definition?\""
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "DEFICIENT : LACKING",
+     "opts": [
+      "vociferous : loud",
+      "ascendancy : decline",
+      "rudimentary : complete",
+      "orator : speech"
+     ],
+     "ans": 0,
+     "hint": "How close are these two in meaning?",
+     "steps": [
+      "Deficient means lacking — the two words are synonyms.",
+      "So the relationship is simply: same meaning.",
+      "Vociferous means loud in expressing feeling. Same meaning. Match.",
+      "Ascendancy is the opposite of decline, rudimentary is the opposite of complete, and an orator delivers a speech."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Deficient and lacking overlap; so do vociferous and loud.",
+      "tip": "Two of the wrong options here are antonyms. When several options share one relationship, work out the stem first and ignore the noise."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "DOGMA : PROOF",
+     "opts": [
+      "rudimentary : development",
+      "proponent : support",
+      "assess : judgement",
+      "sojourn : visit"
+     ],
+     "ans": 0,
+     "hint": "What does dogma not have?",
+     "steps": [
+      "Dogma is an UNPROVEN belief held to be true — the noun names what is absent.",
+      "So the pattern is: noun : the thing it lacks.",
+      "Something rudimentary lacks full development. Match.",
+      "A proponent provides support, assessing produces judgement, and a sojourn IS a visit."
+     ],
+     "ex": {
+      "main": "**Both pairs are NOUN : WHAT IT LACKS.** Dogma has no proof; the rudimentary has no full development.",
+      "tip": "You have now seen “lacks” in four lessons with adjectives and nouns alike. The relationship travels; the part of speech does not matter."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A commentator writes: \"His oratory was superb, but his argument was rudimentary.\" What is the criticism?",
+     "opts": [
+      "He spoke beautifully but his reasoning was underdeveloped",
+      "He spoke badly but reasoned well",
+      "He spoke too quietly to be heard",
+      "He refused to state his position"
+     ],
+     "ans": 0,
+     "hint": "The two halves of the sentence are pulling in opposite directions.",
+     "steps": [
+      "Oratory is the art of public speaking, so \"superb oratory\" praises his delivery.",
+      "Rudimentary means basic and not fully developed, applied here to his argument.",
+      "The \"but\" sets them against each other: the performance was excellent, the thinking was not."
+     ],
+     "ex": {
+      "main": "**Beautiful delivery, underdeveloped reasoning.** The sentence separates HOW he spoke from WHAT he said — which is the whole point of having both words.",
+      "tip": "A \"but\" between two clauses is a signpost. The writer is telling you the two halves do not match."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence shows propagate in its \"foster the spread of\" sense rather than its biological sense?",
+     "opts": [
+      "He wrote several articles to propagate his theory about climate change",
+      "Begonias are easy plants to propagate from cuttings",
+      "The frogs that propagated in the fall had few offspring",
+      "The gardener propagated the roses successfully"
+     ],
+     "ans": 0,
+     "hint": "One of these spreads an idea; the others spread organisms.",
+     "steps": [
+      "Propagate means to reproduce or cause to reproduce, and also to foster the spread of something.",
+      "Articles written to spread a theory use the third sense — spreading an idea, not offspring.",
+      "Begonias, frogs and roses are all the biological sense."
+     ],
+     "ex": {
+      "main": "**Writing articles to spread a theory.** The same verb covers reproducing plants and spreading ideas — both are about multiplying and spreading.",
+      "tip": "When one word covers a literal and a figurative sense, find the shared motion. Here it is \"spreading widely\"."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Ascendancy means:",
+     "opts": [
+      "Controlling influence or domination",
+      "A steep physical climb",
+      "A formal apology",
+      "A temporary stay"
+     ],
+     "ans": 0,
+     "hint": "Ascend is sitting inside it.",
+     "steps": [
+      "Ascendancy means controlling influence; domination.",
+      "The ascendancy of the United States as a world power coinciding with Britain's decline is the book's example.",
+      "The climbing image is where the word comes from, but the meaning is about power, not physical height."
+     ],
+     "ex": {
+      "main": "**Controlling influence or domination.** Ascendancy is power that has risen to the top and holds it.",
+      "tip": "A word can keep the picture of its root while leaving the literal meaning behind."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A city \"assessed the damage\" after a flood. This means officials:",
+     "opts": [
+      "Analyzed it to determine its nature and extent",
+      "Repaired it immediately",
+      "Blamed someone for causing it",
+      "Reported it to the newspapers"
+     ],
+     "ans": 0,
+     "hint": "Assessing comes before acting.",
+     "steps": [
+      "Assess means to analyze and determine the nature, value or importance of something.",
+      "Assessing storm damage before proposing a plan is the book's example — evaluation comes first.",
+      "Repairing, blaming and reporting are all things that might FOLLOW an assessment."
+     ],
+     "ex": {
+      "main": "**Analyzed it to determine its nature and extent.** Assessment is the measuring step, not the fixing step.",
+      "tip": "Sequence words matter in reports: assess, then plan, then act. Mixing up the stage changes the claim."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A chef says the herbs \"impart a subtle flavour.\" Impart here means to:",
+     "opts": [
+      "Give or bestow",
+      "Disclose a secret",
+      "Remove entirely",
+      "Measure precisely"
+     ],
+     "ans": 0,
+     "hint": "Impart has two senses. Which fits herbs and flavour?",
+     "steps": [
+      "Impart means to make known or disclose, and also to bestow.",
+      "Herbs cannot disclose anything — they GIVE flavour to a dish.",
+      "The book's own example is capers imparting sharpness to a sauce."
+     ],
+     "ex": {
+      "main": "**Give or bestow.** The disclosure sense needs a speaker; the bestowing sense works for ingredients.",
+      "tip": "For two-sense words, ask whether the subject can perform the action. Herbs cannot reveal secrets."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A critic writes that a politician is \"dogmatic about policies she once held tentatively.\" What has changed?",
+     "opts": [
+      "She now asserts as certain what she previously treated as open to question",
+      "She has abandoned the policies entirely",
+      "She has become better informed about them",
+      "She now keeps her views private"
+     ],
+     "ans": 0,
+     "hint": "Dogmatic describes how firmly a belief is held.",
+     "steps": [
+      "Dogmatic means overly positive and assertive about opinions, as if they were facts.",
+      "Holding something tentatively means treating it as provisional, open to revision.",
+      "So the change is in CERTAINTY, not in the content of the policies.",
+      "She has moved from provisional to unquestionable without the evidence necessarily changing."
+     ],
+     "ex": {
+      "main": "**She now asserts as certain what she once held provisionally.** The policies may be identical; the certainty is not.",
+      "tip": "A criticism can target how a belief is held rather than what it says. That is a subtler and often fairer attack."
+     }
+    }
+   ]
+  }
+ }
+}

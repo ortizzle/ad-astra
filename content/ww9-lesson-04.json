@@ -1,0 +1,600 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-04": {
+   "id": "unit-ww9-04",
+   "type": "unit",
+   "updatedAt": 1786304222747,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 4",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 4 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 4 of Wordly Wise 3000 Book 9: fifteen words covering manner and character (punctilious, wry, Spartan, sedentary), motion and disorder (meander, hubbub, contend), and everyday nouns (adage, camaraderie, paraphernalia), plus extraneous, odoriferous, recuperate, regale and temporal.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Several of these — wry, Spartan, odoriferous — are words writers reach for when they want to imply something without stating it. They are as much about tone as about meaning.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 4 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Pick the correct sense of a two-sense word from what follows the verb",
+     "from": "source"
+    },
+    {
+     "text": "Identify synonym, antonym and “lacks” relationships in analogies",
+     "from": "added"
+    },
+    {
+     "text": "Notice when a formally neutral word is carrying an implied judgement",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 4 word list. Contend is the one worth checking she has straight: it means both “struggle with” and “assert”, and the way to tell is what follows the verb. The analogies reuse the “lacks” relationship from Lesson 3 on purpose — naming the same relationship in a new place is what makes the skill transfer rather than stay a trick.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Tap 🔊 on camaraderie and paraphernalia — both are easier to say than to read.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "adage",
+     "sp": "AD-ij",
+     "def": "**An old saying that has come to be accepted as true; a proverb.** (noun)\n• Preparing to move again, we comforted ourselves with the adage \"A rolling stone gathers no moss.\"\n• Its age is part of the definition — a clever line you invent today is not an adage.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "camaraderie",
+     "sp": "kah-muh-RAH-duh-ree",
+     "def": "**Good will and warm feelings among friends.** (noun)\n• A spirit of camaraderie filled the room at the high-school reunion.\n• It describes the feeling in a GROUP, not between two people.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "contend",
+     "sp": "kun-TEND",
+     "def": "**To struggle with.** (verb)\n• Mail carriers sometimes have to contend with bothersome dogs.\n• Second meaning: to maintain or assert — opponents contend the risk is too great.",
+     "hint": "Two senses that feel unrelated but are not: both involve pushing against something.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "extraneous",
+     "sp": "ek-STRAY-nee-us",
+     "def": "**Not necessary; irrelevant.** (adjective)\n• When you revise your instructions, eliminate any extraneous details.\n• Extra hides inside it — extraneous material is surplus to the point.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "hubbub",
+     "sp": "HUB-ub",
+     "def": "**Noisy confusion; uproar.** (noun)\n• Fans thronged onto the field in a hubbub of excitement when their team won the pennant.\n• Both halves matter: it is noise AND disorder together.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "meander",
+     "sp": "mee-AN-dur",
+     "def": "**To follow a winding course.** (verb)\n• The Mississippi meanders from northern Minnesota to the Gulf of Mexico.\n• Second meaning: to wander aimlessly — shoppers meandered through the sidewalk sale.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "odoriferous",
+     "sp": "oh-dur-IF-ur-us",
+     "def": "**Having or giving off a smell.** (adjective)\n• Odoriferous fumes spewed from the truck's exhaust.\n• Strictly it is neutral, though it usually turns up describing bad smells.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "paraphernalia",
+     "sp": "per-uh-fur-NAIL-yuh",
+     "def": "**Personal belongings; equipment associated with a particular activity.** (noun)\n• We accumulated so much paraphernalia that the closets could not hold it all.\n• We keep our riding paraphernalia in the barn.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "punctilious",
+     "sp": "punk-TIL-ee-us",
+     "def": "**Careful of and attentive to details, especially ones relating to good manners.** (adjective)\n• A punctilious host tries to leave nothing to chance when preparing for guests.\n• Related to punctual — both come from a root meaning point.",
+     "hint": "Punctilious people care about the small points, especially social ones.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "recuperate",
+     "sp": "rih-KOO-pur-ayt",
+     "def": "**To regain health or strength.** (verb)\n• Her doctor expects Amanda to recuperate quickly.\n• It names the PROCESS of getting better, not the moment of being well.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "regale",
+     "sp": "rih-GAYL",
+     "def": "**To entertain or delight.** (verb)\n• Dishi regaled his friends with his funny stories.\n• Usually followed by *with* — you regale someone WITH something.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "sedentary",
+     "sp": "SED-n-ter-ee",
+     "def": "**Doing or requiring a lot of sitting.** (adjective)\n• Operating a computer is sedentary work.\n• It describes the activity or the person, never the furniture.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Spartan",
+     "sp": "SPAR-tn",
+     "def": "**Marked by simplicity and lack of luxury.** (adjective)\n• The sergeant described the Spartan way of life to the new recruits.\n• From ancient Sparta, whose citizens were famous for austerity — which is why it keeps its capital letter.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "temporal",
+     "sp": "TEM-pur-ul",
+     "def": "**Relating to the everyday world as opposed to the spiritual or eternal.** (adjective)\n• Medieval kings were the temporal rulers of their states but accepted the Pope's authority in religious matters.\n• Worldly, in other words — the affairs of this life.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "wry",
+     "sp": "ry",
+     "def": "**Turned or bent to one side in distaste or humour; amusing in a quiet, sharp way.** (adjective)\n• He gave a wry smile as he admitted believing such a far-fetched tale.\n• Wry humour is dry and slightly twisted — it never announces itself.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An adage is:",
+     "opts": [
+      "An old saying accepted as true",
+      "A noisy, confused crowd",
+      "A piece of equipment for an activity",
+      "A period of rest after illness"
+     ],
+     "ans": 0,
+     "hint": "Think of a proverb your grandparents might quote.",
+     "steps": [
+      "An adage is an old saying that has come to be accepted as true.",
+      "\"A rolling stone gathers no moss\" is the book's own example.",
+      "The wrong options define hubbub, paraphernalia and recuperation."
+     ],
+     "ex": {
+      "main": "**An old saying accepted as true.** Age is part of the definition — a new clever line is not yet an adage.",
+      "tip": "Adage, maxim and proverb overlap heavily. If a question offers more than one, look for what makes them differ."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which describes extraneous information?",
+     "opts": [
+      "Details that are unnecessary to the point",
+      "Details that are secret",
+      "Details that are false",
+      "Details that are difficult to understand"
+     ],
+     "ans": 0,
+     "hint": "Extra is hiding inside the word.",
+     "steps": [
+      "Extraneous means not necessary; irrelevant.",
+      "Revising instructions by eliminating extraneous details means cutting what does not serve the point.",
+      "Extraneous information can be perfectly true and perfectly clear — it is simply beside the point."
+     ],
+     "ex": {
+      "main": "**Unnecessary to the point.** Note that extraneous does NOT mean false — that is the trap.",
+      "tip": "Watch for options that sound similar but change the claim. Irrelevant and untrue are very different accusations."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Sedentary work is work that:",
+     "opts": [
+      "Involves a lot of sitting",
+      "Requires travelling constantly",
+      "Is done outdoors",
+      "Pays very little"
+     ],
+     "ans": 0,
+     "hint": "Think of what \"sedan\" and \"sediment\" have in common.",
+     "steps": [
+      "Sedentary means doing or requiring a lot of sitting.",
+      "Operating a computer is the book's example of sedentary work.",
+      "Travel, location and pay are unrelated to the word."
+     ],
+     "ex": {
+      "main": "**Work involving a lot of sitting.** The root is the Latin for sit — the same root under sediment, which settles.",
+      "tip": "Latin roots repay learning once: sed- (sit) shows up in sedentary, sediment, sedan and session."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To recuperate is to:",
+     "opts": [
+      "Regain health or strength",
+      "Retell a story from memory",
+      "Recover a lost object",
+      "Repeat an experiment"
+     ],
+     "ans": 0,
+     "hint": "It is about a body, not an object.",
+     "steps": [
+      "Recuperate means to regain health or strength.",
+      "A doctor expecting Amanda to recuperate quickly is talking about her recovery.",
+      "Recovering a lost object is a different word entirely, despite sounding close."
+     ],
+     "ex": {
+      "main": "**Regain health or strength.** Recuperate names the process of getting better, not the finished state.",
+      "tip": "Recuperate and recover overlap, but recuperate is specifically about health. The nearby option is the trap."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Camaraderie is best described as:",
+     "opts": [
+      "Warm good will among a group of friends",
+      "A long-standing rivalry",
+      "A formal agreement between parties",
+      "A quiet preference for solitude"
+     ],
+     "ans": 0,
+     "hint": "Comrade is sitting inside the word.",
+     "steps": [
+      "Camaraderie is good will and warm feelings among friends.",
+      "A reunion filled with a spirit of camaraderie is a room full of that feeling.",
+      "It is the opposite of rivalry and unrelated to formal agreements."
+     ],
+     "ex": {
+      "main": "**Warm good will among friends.** It describes the atmosphere of a GROUP rather than a single friendship.",
+      "tip": "Comrade hides inside camaraderie and gives you both the meaning and the spelling."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A Spartan room would be:",
+     "opts": [
+      "Simple and without luxury",
+      "Crowded with decorations",
+      "Very brightly lit",
+      "Filled with the smell of cooking"
+     ],
+     "ans": 0,
+     "hint": "Named after a famously tough ancient city.",
+     "steps": [
+      "Spartan means marked by simplicity and lack of luxury.",
+      "The word comes from ancient Sparta, whose citizens were known for austerity.",
+      "A Spartan room is bare by choice, which is why the word keeps its capital letter."
+     ],
+     "ex": {
+      "main": "**Simple and without luxury.** Sparta earned the adjective by living that way on purpose.",
+      "tip": "Words made from place names keep their capitals: Spartan, Herculean, Draconian. That is a spelling rule you can rely on."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A coach tells the team \"you will have to contend with rain and a heavy field.\" She means the team will have to:",
+     "opts": [
+      "Struggle against those conditions",
+      "Argue that the conditions are unfair",
+      "Wait until the conditions improve",
+      "Report the conditions to the referee"
+     ],
+     "ans": 0,
+     "hint": "Contend has two senses. Which fits this sentence?",
+     "steps": [
+      "Contend can mean to struggle with, or to maintain and assert.",
+      "Here the object is rain and a heavy field — conditions, not claims.",
+      "You cannot assert a rainy field; you can only struggle against it.",
+      "So the \"struggle with\" sense is the one the sentence needs."
+     ],
+     "ex": {
+      "main": "**Struggle against those conditions.** The object of the verb tells you which sense is live.",
+      "tip": "For two-sense words, look at what follows the verb. Contend WITH conditions is struggle; contend THAT something is true is assert."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses punctilious correctly?",
+     "opts": [
+      "He was punctilious about thank-you notes, writing each one the same evening",
+      "She was punctilious and arrived nearly an hour late",
+      "The punctilious storm knocked out power across the county",
+      "He gave a punctilious shrug and walked away"
+     ],
+     "ans": 0,
+     "hint": "It is about attention to small points, especially social ones.",
+     "steps": [
+      "Punctilious means careful of and attentive to details, especially details of good manners.",
+      "Writing every thank-you note the same evening is exactly that kind of care.",
+      "Arriving late contradicts the word, and storms and shrugs cannot be attentive to manners."
+     ],
+     "ex": {
+      "main": "**Writing every thank-you note promptly.** Punctilious is about social precision, not just general tidiness.",
+      "tip": "Punctilious and punctual are cousins but not twins: one is about manners, the other only about time."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A memoirist writes that her uncle \"regaled the table with stories until the candles burned down.\" This tells you the uncle:",
+     "opts": [
+      "Entertained everyone at length",
+      "Bored everyone until they left",
+      "Argued with the other guests",
+      "Ate more than anyone else"
+     ],
+     "ans": 0,
+     "hint": "Regale is a compliment.",
+     "steps": [
+      "Regale means to entertain or delight.",
+      "Regaling the table means his stories were enjoyed, not endured.",
+      "\"Until the candles burned down\" confirms it: people stayed."
+     ],
+     "ex": {
+      "main": "**Entertained everyone at length.** Regale carries approval — a boring speaker cannot regale anyone.",
+      "tip": "The detail after a verb often confirms its tone. Candles burning down means nobody left, which rules out boredom."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "SPARTAN : LUXURY",
+     "opts": [
+      "extraneous : necessity",
+      "adage : saying",
+      "regale : entertain",
+      "recuperate : illness"
+     ],
+     "ans": 0,
+     "hint": "What does a Spartan room not have?",
+     "steps": [
+      "Spartan means marked by a LACK of luxury — the adjective names what is absent.",
+      "So the pattern is: adjective : the thing it lacks.",
+      "Extraneous means lacking necessity — it is material that is not needed. Match.",
+      "An adage is a kind of saying, regale and entertain are synonyms, and recuperating follows an illness rather than lacking one."
+     ],
+     "ex": {
+      "main": "**Both pairs are ADJECTIVE : WHAT IT LACKS.** Spartan surroundings have no luxury; extraneous details have no necessity.",
+      "tip": "This is the same \"lacks\" relationship as WANTON : RESTRAINT. Once you can name a relationship, it starts appearing everywhere."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "MEANDER : WANDER",
+     "opts": [
+      "contend : struggle",
+      "sedentary : active",
+      "punctilious : detail",
+      "camaraderie : friends"
+     ],
+     "ans": 0,
+     "hint": "How close in meaning are these two?",
+     "steps": [
+      "To meander is to wander — following a winding course or drifting aimlessly.",
+      "So the relationship is: near-synonyms.",
+      "To contend (in one of its senses) is to struggle. Same meaning. Match.",
+      "Sedentary and active are opposites; punctilious people attend to detail; camaraderie exists among friends."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Meander and wander overlap almost completely; so do contend and struggle.",
+      "tip": "When a stem word has two senses, the analogy usually rides on one of them. Meander here is the aimless sense."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "PUNCTILIOUS : CARELESS",
+     "opts": [
+      "sedentary : active",
+      "meander : wander",
+      "adage : wisdom",
+      "wry : humour"
+     ],
+     "ans": 0,
+     "hint": "These two describe opposite attitudes to detail.",
+     "steps": [
+      "Punctilious means highly attentive to detail; careless means the reverse.",
+      "So the stem pair is opposites.",
+      "Sedentary (sitting) and active (moving) are likewise opposites. Match.",
+      "Meander and wander are synonyms, an adage contains wisdom, and wry describes a kind of humour."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Punctilious versus careless and sedentary versus active are both straight reversals.",
+      "tip": "Check every option for an opposite before settling. Here only one pair actually reverses; the others just feel related."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A travel writer describes a village as \"odoriferous, in the way of places where fish is the whole economy.\" What is the writer doing with that word?",
+     "opts": [
+      "Naming a strong smell without flatly calling it unpleasant",
+      "Praising the village for its cleanliness",
+      "Complaining that the village has no industry",
+      "Saying the village has no particular character"
+     ],
+     "ans": 0,
+     "hint": "Odoriferous is technically neutral. Why choose it here?",
+     "steps": [
+      "Odoriferous strictly means having or giving off a smell — neutral in the dictionary.",
+      "But it usually turns up describing bad smells, so readers hear the implication.",
+      "The clause about fish supplies the reason without the writer ever saying \"it stinks\".",
+      "That is the move: the neutral word carries the judgement, and the writer keeps clean hands."
+     ],
+     "ex": {
+      "main": "**Naming a smell while declining to insult the village outright.** The neutral word does the work an insulting word would have done.",
+      "tip": "Writers pick formally neutral words to imply things deniably. Noticing that gap is a real reading skill."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which Lesson 4 word would BEST replace the underlined phrase: \"She accepted the criticism with a *quietly amused, slightly twisted* smile\"?",
+     "opts": [
+      "wry",
+      "punctilious",
+      "sedentary",
+      "odoriferous"
+     ],
+     "ans": 0,
+     "hint": "One of these words means exactly that kind of smile.",
+     "steps": [
+      "The phrase describes amusement that is quiet and a little bent to one side.",
+      "Wry means precisely that: turned to one side in humour, amusing in a quiet, sharp way.",
+      "The other three describe attention to manners, sitting, and smell — none of them describes a smile."
+     ],
+     "ex": {
+      "main": "**Wry.** The whole phrase collapses into one word, which is what good vocabulary buys you.",
+      "tip": "When a test hands you a long descriptive phrase, one vocabulary word usually replaces it exactly. Find that word."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A hubbub is:",
+     "opts": [
+      "Noisy confusion or uproar",
+      "A quiet, orderly queue",
+      "A winding path through hills",
+      "A short saying accepted as true"
+     ],
+     "ans": 0,
+     "hint": "Two things at once: noise and disorder.",
+     "steps": [
+      "A hubbub is noisy confusion; uproar.",
+      "Fans thronging the field in a hubbub of excitement is noise and disorder together.",
+      "Quiet order is its opposite; the other options define meander and adage."
+     ],
+     "ex": {
+      "main": "**Noisy confusion or uproar.** Both halves are required — orderly noise is not a hubbub.",
+      "tip": "Some definitions bundle two conditions. Check that an example satisfies both before accepting it."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Temporal authority refers to power over:",
+     "opts": [
+      "Everyday, worldly matters",
+      "Religious and spiritual matters",
+      "Matters of scientific fact",
+      "Matters decided by a jury"
+     ],
+     "ans": 0,
+     "hint": "It is set against the spiritual.",
+     "steps": [
+      "Temporal means relating to the everyday world as opposed to the spiritual or eternal.",
+      "Medieval kings held temporal power while the Pope held religious authority.",
+      "The word exists precisely to draw that line, so the religious option is the reverse of the answer."
+     ],
+     "ex": {
+      "main": "**Everyday, worldly matters.** Temporal is defined by what it is NOT — the spiritual or eternal.",
+      "tip": "Words defined by contrast are best learned with their opposite attached: temporal versus spiritual, always as a pair."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A shop sells \"cycling paraphernalia.\" This means it sells:",
+     "opts": [
+      "The gear and equipment associated with cycling",
+      "Bicycles only, with no accessories",
+      "Books about the history of cycling",
+      "Memberships to a cycling club"
+     ],
+     "ans": 0,
+     "hint": "Paraphernalia is the stuff that goes WITH an activity.",
+     "steps": [
+      "Paraphernalia means personal belongings, or equipment associated with a particular activity.",
+      "Riding paraphernalia kept in a barn is the book's own example.",
+      "So cycling paraphernalia is the surrounding gear — helmets, pumps, lights — not the bicycles alone."
+     ],
+     "ex": {
+      "main": "**The gear and equipment that go with cycling.** Paraphernalia names the accompanying kit rather than the main object.",
+      "tip": "Paraphernalia is always plural in feel and slightly sprawling in meaning — it suggests a lot of assorted stuff."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A reviewer writes that a novel \"meanders for two hundred pages before finding its subject.\" The reviewer means the novel:",
+     "opts": [
+      "Wanders without clear direction for a long stretch",
+      "Moves too quickly to follow",
+      "Repeats the same scene several times",
+      "Is written in an old-fashioned style"
+     ],
+     "ans": 0,
+     "hint": "Which sense of meander fits a book rather than a river?",
+     "steps": [
+      "Meander means to follow a winding course, or to wander aimlessly.",
+      "Applied to a narrative, the aimless sense is the live one.",
+      "\"Before finding its subject\" confirms the criticism: for two hundred pages it had none.",
+      "That is wandering without direction, not speed, repetition or style."
+     ],
+     "ex": {
+      "main": "**Wanders without clear direction.** A meandering river is neutral; a meandering novel is a complaint.",
+      "tip": "The same word can be neutral about landscape and critical about writing. Ask what is being described before deciding tone."
+     }
+    }
+   ]
+  }
+ }
+}

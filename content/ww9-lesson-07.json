@@ -1,0 +1,600 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-07": {
+   "id": "unit-ww9-07",
+   "type": "unit",
+   "updatedAt": 1786304527379,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 7",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 7 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 7 of Wordly Wise 3000 Book 9: fifteen words about criticism and disapproval (belittle, censure, expostulate, ingrate), excess and luxury (exorbitant, sumptuous, voluble), decline and consequence (moribund, fateful), plus amorous, deem, divulge, injunction, motif and subsidize.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This lesson is full of near-miss traps — censure/censor, fateful/fatal — the exact pairs standardized tests build questions around. Getting them straight once is worth more than a dozen easier words.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 7 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish censure from censor and fateful from fatal",
+     "from": "added"
+    },
+    {
+     "text": "Choose between an everyday and a technical sense of the same word",
+     "from": "source"
+    },
+    {
+     "text": "Apply the “lacks” analogy relationship to people as well as things",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 7 word list. Two near-miss pairs are the real content here: censure (criticize) versus censor (suppress), and fateful (momentous) versus fatal (deadly). Both get their own question because both are standard test traps. The SUMPTUOUS : SPARTAN analogy reaches back to Lesson 4 on purpose — vocabulary that only works inside its own lesson has not really been learned.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Write censure and censor side by side once — that pair costs people marks.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "amorous",
+     "sp": "AM-ur-us",
+     "def": "**Expressing love or the state of being in love.** (adjective)\n• The couple exchanged amorous glances across the dinner table.\n• Amor is Latin for love — the same root under amiable and enamoured.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "belittle",
+     "sp": "bih-LIT-l",
+     "def": "**To present or speak of as unimportant or of little value.** (verb)\n• \"Why do you make your efforts seem bigger by belittling mine?\" she complained.\n• Literally to make little — the word says exactly what it does.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "censure",
+     "sp": "SEN-shur",
+     "def": "**To blame or find fault with.** (verb)\n• The judge censured the lawyer for failing to file the papers on time.\n• As a noun: severe criticism — divorce once carried far greater censure than it does today.",
+     "hint": "Censure is criticism; censor is suppression. One word apart, two different acts.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "deem",
+     "sp": "deem",
+     "def": "**To consider; to believe.** (verb)\n• The mayor deemed it prudent to call up emergency crews from neighbouring counties.\n• Deeming is judging — it always reports someone’s conclusion.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "divulge",
+     "sp": "duh-VULJ",
+     "def": "**To make known something secret; to reveal.** (verb)\n• Blackbeard divulged the location of the buried treasure to no one.\n• The secrecy is required — you cannot divulge something already public.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "exorbitant",
+     "sp": "eg-ZOR-bih-tunt",
+     "def": "**Exceeding normal bounds; more than seems reasonable.** (adjective)\n• Two hundred dollars seems an exorbitant price for a shirt.\n• Ex- plus orbit: it has gone outside the normal orbit.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "expostulate",
+     "sp": "ek-SPAHS-chuh-layt",
+     "def": "**To argue earnestly in an attempt to dissuade or show strong disapproval.** (verb)\n• My friends expostulated with me about waiting until the storm passed before walking to the park.\n• You expostulate WITH a person, trying to talk them out of something.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "fateful",
+     "sp": "FAYT-ful",
+     "def": "**Having great or significant consequences.** (adjective)\n• The article examines Truman’s fateful decision to drop the atomic bomb.\n• Not the same as fatal — a fateful choice is momentous, not necessarily deadly.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "ingrate",
+     "sp": "IN-grayt",
+     "def": "**An ungrateful person.** (noun)\n• I felt like an ingrate for forgetting to thank my mother for making the food for my party.\n• Grat- is the root of gratitude and grateful; in- cancels it.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "injunction",
+     "sp": "in-JUNK-shun",
+     "def": "**An order or command.** (noun)\n• My family heeded the injunction to evacuate the island.\n• Second meaning: a court order prohibiting someone from doing something.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "moribund",
+     "sp": "MOR-ih-bund",
+     "def": "**Close to death; in a dying state.** (adjective)\n• The company was moribund when it was taken over last year.\n• Mor- is death, as in mortal — used for institutions and ideas as often as for bodies.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "motif",
+     "sp": "moh-TEEF",
+     "def": "**A theme or idea developed or repeated in a work of art or literature.** (noun)\n• Throughout the novel, the author explores the motif of separation.\n• Second meaning: a repeated design — the nursery wallpaper had a rabbit motif.",
+     "hint": "A motif RECURS. One mention is not a motif.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "subsidize",
+     "sp": "SUB-suh-dyz",
+     "def": "**To support by giving financial aid.** (verb)\n• Crowdfunding has subsidized countless arts projects.\n• subsidy (n): a grant of money, often from a government, to a group or individual.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "sumptuous",
+     "sp": "SUMP-choo-us",
+     "def": "**Extravagantly splendid or costly; luxurious.** (adjective)\n• After the wedding we enjoyed a sumptuous meal in the hotel dining room.\n• The exact opposite of Spartan, from Lesson 4.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "voluble",
+     "sp": "VAHL-yuh-bul",
+     "def": "**Characterized by a ready flow of words; talkative.** (adjective)\n• The voluble host scarcely gave his guests a chance to speak.\n• It describes the flow of speech, not its quality.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To belittle someone’s work is to:",
+     "opts": [
+      "Speak of it as unimportant",
+      "Praise it highly",
+      "Copy it without credit",
+      "Pay for it generously"
+     ],
+     "ans": 0,
+     "hint": "The word says what it does.",
+     "steps": [
+      "Belittle means to present or speak of something as unimportant or of little value.",
+      "Making your own efforts look bigger by belittling someone else's is the book's example.",
+      "Praising highly is extol, from Lesson 1 — the exact opposite."
+     ],
+     "ex": {
+      "main": "**Speak of it as unimportant.** Belittle literally means to make little of something.",
+      "tip": "Belittle and extol are a matched pair across two lessons. Linking them costs nothing and buys both."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An exorbitant price is one that is:",
+     "opts": [
+      "Far beyond what seems reasonable",
+      "Slightly below average",
+      "Fixed by law",
+      "Paid in instalments"
+     ],
+     "ans": 0,
+     "hint": "Ex- plus orbit.",
+     "steps": [
+      "Exorbitant means exceeding normal bounds; more than seems reasonable.",
+      "Two hundred dollars for a shirt is the book's example of a price outside the normal range.",
+      "The word is a judgement about excess, not about how the price is set or paid."
+     ],
+     "ex": {
+      "main": "**Far beyond what seems reasonable.** It has left the normal orbit — that is the image inside the word.",
+      "tip": "Exorbitant always carries disapproval. Nobody calls their own prices exorbitant."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An ingrate is a person who is:",
+     "opts": [
+      "Ungrateful",
+      "Untruthful",
+      "Unwell",
+      "Unemployed"
+     ],
+     "ans": 0,
+     "hint": "The root is the same as in gratitude.",
+     "steps": [
+      "An ingrate is an ungrateful person.",
+      "Feeling like an ingrate for forgetting to thank your mother is the book's example.",
+      "The prefix in- cancels the grat- root that gives us grateful and gratitude."
+     ],
+     "ex": {
+      "main": "**Ungrateful.** Grat- means thanks; in- negates it.",
+      "tip": "Negating prefixes (in-, un-, dis-, a-) are worth spotting instantly. They flip a root you already know."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A moribund industry is one that is:",
+     "opts": [
+      "Close to dying out",
+      "Growing rapidly",
+      "Newly established",
+      "Heavily regulated"
+     ],
+     "ans": 0,
+     "hint": "Mor- means death.",
+     "steps": [
+      "Moribund means close to death; in a dying state.",
+      "A company described as moribund before a takeover was barely surviving.",
+      "The root mor- is the same one in mortal and mortality."
+     ],
+     "ex": {
+      "main": "**Close to dying out.** Moribund applies to institutions and ideas as readily as to living things.",
+      "tip": "Mor- (death) shows up in mortal, mortuary, moribund and mortify. One root, four words."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To divulge information is to:",
+     "opts": [
+      "Reveal something that was secret",
+      "Deny that it exists",
+      "Record it carefully",
+      "Question its accuracy"
+     ],
+     "ans": 0,
+     "hint": "The information must have been secret first.",
+     "steps": [
+      "Divulge means to make known something secret; to reveal.",
+      "Blackbeard divulging the treasure's location to no one means he revealed it to nobody.",
+      "The secrecy is a requirement — you cannot divulge public knowledge."
+     ],
+     "ex": {
+      "main": "**Reveal something that was secret.** If it was never secret, divulge is the wrong verb.",
+      "tip": "Some verbs carry preconditions. Divulge requires prior secrecy the way recuperate requires prior illness."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A voluble speaker is one who:",
+     "opts": [
+      "Talks readily and at length",
+      "Speaks rarely and briefly",
+      "Speaks with a strong accent",
+      "Refuses to answer questions"
+     ],
+     "ans": 0,
+     "hint": "It describes the flow, not the quality.",
+     "steps": [
+      "Voluble means characterized by a ready flow of words; talkative.",
+      "A voluble host scarcely letting guests speak is the book's example.",
+      "The word says nothing about whether the talk is good — only that there is a lot of it."
+     ],
+     "ex": {
+      "main": "**Talks readily and at length.** Voluble measures flow, not worth.",
+      "tip": "Notice which words judge quality and which only measure quantity. Voluble is quantity."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A judge \"censured\" an attorney. This means the judge:",
+     "opts": [
+      "Formally criticized the attorney",
+      "Removed the attorney from the case",
+      "Suppressed the attorney’s evidence",
+      "Praised the attorney’s conduct"
+     ],
+     "ans": 0,
+     "hint": "Careful — censure and censor are different words.",
+     "steps": [
+      "Censure means to blame or find fault with.",
+      "A judge censuring a lawyer for filing late is delivering formal criticism.",
+      "Suppressing material is CENSOR — a different word one letter away.",
+      "Censure is a rebuke, not a removal or a suppression."
+     ],
+     "ex": {
+      "main": "**Formally criticized the attorney.** Censure is criticism; censor is suppression. The pair is a favourite test trap.",
+      "tip": "Near-identical words with different meanings are worth writing side by side once: censure/censor, adapt/adopt, elicit/illicit."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A historian calls a decision \"fateful.\" She means it was:",
+     "opts": [
+      "Momentous, with far-reaching consequences",
+      "Certainly fatal to everyone involved",
+      "Made by chance rather than reason",
+      "Reversed almost immediately"
+     ],
+     "ans": 0,
+     "hint": "Fateful and fatal are not the same word.",
+     "steps": [
+      "Fateful means having great or significant consequences.",
+      "Truman's fateful decision was momentous — it shaped what followed.",
+      "Fatal means causing death; fateful means carrying great weight. A fateful decision can save lives."
+     ],
+     "ex": {
+      "main": "**Momentous, with far-reaching consequences.** Fateful is about magnitude of consequence, not about death.",
+      "tip": "Fateful/fatal is the same trap family as censure/censor. Sharing a root does not mean sharing a meaning."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses injunction in its LEGAL sense?",
+     "opts": [
+      "The court issued an injunction barring the company from cutting the trees",
+      "She heeded her grandmother’s injunction to write thank-you notes",
+      "The sign carried an injunction against feeding the ducks",
+      "His injunction to be careful went unheeded"
+     ],
+     "ans": 0,
+     "hint": "One sense is any command; the other is specifically a court order.",
+     "steps": [
+      "An injunction is an order or command; in law it is specifically a court order prohibiting something.",
+      "A court barring a company from cutting trees is precisely that legal sense.",
+      "Grandmothers, signs and friends can all issue commands, but none of those is a court order."
+     ],
+     "ex": {
+      "main": "**The court order barring tree-cutting.** The legal sense needs a court behind it.",
+      "tip": "A word can have an everyday sense and a technical one. When a question names the field, use that field's sense."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "BELITTLE : PRAISE",
+     "opts": [
+      "censure : commend",
+      "sumptuous : luxurious",
+      "divulge : reveal",
+      "ingrate : ungrateful"
+     ],
+     "ans": 0,
+     "hint": "These two verbs pull in opposite directions.",
+     "steps": [
+      "To belittle is to make something seem unimportant; to praise is to raise it up. Opposites.",
+      "So the pattern is: antonyms.",
+      "To censure is to find fault; to commend is to speak approvingly. Opposites. Match.",
+      "Sumptuous means luxurious, divulge means reveal, and an ingrate IS ungrateful — all three are synonym pairs."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Belittle and praise reverse each other, as do censure and commend.",
+      "tip": "When three options are synonyms and one is an antonym, work out the stem first — it usually points at the odd one."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "SUMPTUOUS : SPARTAN",
+     "opts": [
+      "exorbitant : cheap",
+      "voluble : talkative",
+      "moribund : dying",
+      "motif : theme"
+     ],
+     "ans": 0,
+     "hint": "Lesson 4 gave you one of these words. Are they alike or opposite?",
+     "steps": [
+      "Sumptuous means extravagantly luxurious; Spartan (Lesson 4) means plain and without luxury. Opposites.",
+      "So the relationship is antonyms.",
+      "Exorbitant means far more than reasonable; cheap means far less. Opposites. Match.",
+      "Voluble means talkative, moribund means dying, and a motif is a theme — three synonym pairs."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS on the same scale.** Sumptuous and Spartan measure luxury; exorbitant and cheap measure cost.",
+      "tip": "The strongest antonym pairs sit at opposite ends of ONE scale. Naming the scale confirms the pair."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "INGRATE : GRATITUDE",
+     "opts": [
+      "miser : generosity",
+      "orator : speech",
+      "proponent : support",
+      "motif : repetition"
+     ],
+     "ans": 0,
+     "hint": "What does an ingrate not have?",
+     "steps": [
+      "An ingrate is a person defined by LACKING gratitude.",
+      "So the pattern is: person : the quality they lack.",
+      "A miser is a person defined by lacking generosity. Match.",
+      "An orator delivers a speech, a proponent gives support, and a motif involves repetition — all three POSSESS or produce, rather than lack."
+     ],
+     "ex": {
+      "main": "**Both pairs are PERSON : THE QUALITY THEY LACK.** An ingrate has no gratitude; a miser has no generosity.",
+      "tip": "This is the “lacks” relationship again, now applied to people. The same handful of relationships covers most analogies you will meet."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A friend \"expostulated with\" you about a plan. What did the friend do?",
+     "opts": [
+      "Argued earnestly to talk you out of it",
+      "Agreed enthusiastically with it",
+      "Reported it to someone in authority",
+      "Explained it to you for the first time"
+     ],
+     "ans": 0,
+     "hint": "The phrase \"with you\" is doing work here.",
+     "steps": [
+      "Expostulate means to argue earnestly in an attempt to dissuade or show strong disapproval.",
+      "You expostulate WITH a person — the preposition marks the person being talked to.",
+      "The goal is dissuasion, so the friend was trying to change your mind, not agree or report."
+     ],
+     "ex": {
+      "main": "**Argued earnestly to talk you out of it.** Expostulating is disapproval delivered face to face, aimed at changing a decision.",
+      "tip": "Prepositions carry meaning: expostulate WITH a person ABOUT a plan. Learning the pattern prevents misuse."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a novel, \"the motif of separation\" appears in chapters 2, 9, and 21. Why is motif the right word rather than \"event\"?",
+     "opts": [
+      "A motif is an idea that recurs across a work, not a single occurrence",
+      "A motif must always be visual rather than thematic",
+      "A motif is only used for poetry, never novels",
+      "A motif means the same thing as the plot"
+     ],
+     "ans": 0,
+     "hint": "What does appearing three times establish?",
+     "steps": [
+      "A motif is a theme or idea that is developed or REPEATED in a work.",
+      "Appearing in three separate chapters is exactly that recurrence.",
+      "A single event in chapter 2 would just be an event; the return in 9 and 21 is what makes it a motif.",
+      "Motifs can be visual or thematic, and appear in every form of art."
+     ],
+     "ex": {
+      "main": "**A motif recurs; an event happens once.** The repetition is what earns the word.",
+      "tip": "Literary terms are precise. If a question asks why one term fits better, the answer is usually in the definition's fine print."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To deem something prudent is to:",
+     "opts": [
+      "Consider or judge it to be prudent",
+      "Prove it is prudent",
+      "Doubt that it is prudent",
+      "Require that it be prudent"
+     ],
+     "ans": 0,
+     "hint": "Deem reports a judgement.",
+     "steps": [
+      "Deem means to consider; to believe.",
+      "The mayor deeming it prudent to call up emergency crews reports her judgement, not a proof.",
+      "Deeming is always someone's conclusion, which is why it needs a person behind it."
+     ],
+     "ex": {
+      "main": "**Consider or judge it to be prudent.** Deem reports what someone concluded, not what was demonstrated.",
+      "tip": "Watch for verbs that attribute a judgement. They tell you a claim is someone's view, not established fact."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To subsidize a project is to:",
+     "opts": [
+      "Support it with financial aid",
+      "Cancel it for lack of funds",
+      "Criticize it publicly",
+      "Take control of it"
+     ],
+     "ans": 0,
+     "hint": "A subsidy is a grant of money.",
+     "steps": [
+      "Subsidize means to support by giving financial aid.",
+      "Crowdfunding subsidizing arts projects means money flowing in to keep them going.",
+      "subsidy (n) is the grant itself, often given by a government."
+     ],
+     "ex": {
+      "main": "**Support it with financial aid.** Subsidizing keeps something running that might not survive on its own.",
+      "tip": "Subsidize describes the direction of money. Nothing in the word says whether the support is deserved."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence uses amorous correctly?",
+     "opts": [
+      "The letters between them grew steadily more amorous over the summer",
+      "She gave the machine an amorous kick when it jammed",
+      "The amorous storm lasted three days",
+      "He made an amorous calculation of the total cost"
+     ],
+     "ans": 0,
+     "hint": "Amor is Latin for love.",
+     "steps": [
+      "Amorous means expressing love or being in love.",
+      "Letters growing more amorous over a summer is the word in its natural setting.",
+      "Kicks, storms and calculations cannot express love."
+     ],
+     "ex": {
+      "main": "**The letters grew more amorous.** Amorous attaches to expressions of love — glances, letters, tones.",
+      "tip": "The root amor also gives amiable, enamoured and amateur (originally, one who does it for love)."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A newspaper writes that a proposal met \"vociferous censure from a voluble opponent.\" Unpack what that says.",
+     "opts": [
+      "Loud criticism from someone who talks a great deal",
+      "Quiet criticism from someone who rarely speaks",
+      "Loud praise from someone who talks a great deal",
+      "Legal suppression by someone in authority"
+     ],
+     "ans": 0,
+     "hint": "Three Lesson 6 and 7 words are stacked here. Take them one at a time.",
+     "steps": [
+      "Vociferous (Lesson 6) means making feelings known loudly.",
+      "Censure means to blame or find fault — criticism, not praise.",
+      "Voluble means characterized by a ready flow of words: talkative.",
+      "Stacked together: loud criticism from a talkative opponent. Note it is censure, not censor — criticism, not suppression."
+     ],
+     "ex": {
+      "main": "**Loud criticism from a talkative opponent.** The censure/censor distinction is what rules out the suppression option.",
+      "tip": "Dense sentences are easier taken one word at a time. Translate each, then reassemble."
+     }
+    }
+   ]
+  }
+ }
+}
