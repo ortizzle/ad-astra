@@ -205,6 +205,39 @@ convention, not a mechanic.
   `CHEER_WRONG` — varied, warm, growth-mindset, no exclamation-mark cheerleading.
 - Every unit ships as `status:'draft'` for the review queue. No exceptions.
 
+### Quiz variety (v64 / Wayfinder v52, both apps)
+
+Two changes to how a round is chosen and shown, both from watching a real
+session (Chris, 2026-08): a question she had already missed — and which was
+therefore already sitting in the Growth Zone — came back around in an ordinary
+quiz a few rounds later.
+
+**Growth-Zone questions sort last in `pickRound()`.** A missed question is
+already ON the review ladder, which has scheduled when it returns. Letting it
+also compete for an ordinary quiz slot asks it twice and crowds out questions
+she has never seen. It sorts behind everything else (`x.g-y.g` before the
+attempts comparison) rather than being excluded, because a short unit — or one
+where she has missed everything — still needs questions to serve. Measured: a
+laddered question went from ~10/40 rounds to 0/40 while due, and back to 16/40
+once the ladder cleared it.
+
+**Multiple-choice options are shuffled per question.** They used to render in
+fixed order with a fixed `ans` index, so the answer could be learned by
+position, which is not knowing the answer. The permutation lives on
+`quizState.optArr`, keyed by `optFor` = question id, so revealing a hint
+(which re-renders) does not reshuffle the options underneath her mid-question.
+`answer()` still receives the **original** index, so `q.ans`, the miss record
+and every explanation downstream are untouched.
+
+> ⚠️ **Content must never refer to an option by position.** No "the first two
+> options", no "all of the above". Two existing questions did and were
+> rewritten. `kind:'order'` and `kind:'spell'` are unaffected — order already
+> shuffles its own display, and spell has one option.
+
+The underlying cycle is unchanged and is working as designed: with 20 questions
+and rounds of 5, rounds 1–4 cover the unit with no repeats and round 5 wraps.
+Repetition after a full pass is correct; repeating a laddered question was not.
+
 ### How questions should make her think (v63, both apps)
 
 Derived from her actual Physics lab, which Chris supplied **as style context

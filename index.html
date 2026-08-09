@@ -702,7 +702,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v63 · check it yourself';
+const APP_VERSION = 'v64 · fresher questions';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3406,11 +3406,18 @@ function pickRound(u, timed){
   if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
   /* Shuffle-round questions look attempts up on their ORIGINAL unit, so
      least-practised stays honest across the whole subject. */
-  const att = q => (DATA.records['qstat_'+(q._srcUnit||u.id)+'_'+(q._srcQid||q.id)]?.attempts)||0;
-  const idx = u.questions.map((q,i)=>({i, q, a:att(q), r:Math.random()}))
+  const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
+  const att = q => (DATA.records['qstat_'+key(q)]?.attempts)||0;
+  /* A question she has missed is already ON the review ladder, which has
+     scheduled when it comes back. Letting it compete for an ordinary quiz slot
+     asks it twice and crowds out questions she has not seen — so it sorts last
+     rather than by attempts. Not excluded: a short unit, or one where she has
+     missed everything, still needs questions to serve. */
+  const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
+  const idx = u.questions.map((q,i)=>({i, q, a:att(q), g:owed(q), r:Math.random()}))
     /* Typing against a countdown tests typing, not spelling. */
     .filter(x => !timed || x.q.kind!=='spell');
-  idx.sort((x,y)=> x.a-y.a || x.r-y.r);
+  idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.r-y.r);
   return shuffle(idx.slice(0, Math.min(QUIZ_ROUND, idx.length)).map(x=>x.i));
 }
 
@@ -3674,17 +3681,30 @@ SCREENS.quiz = function(root){
       root.appendChild(lock);
       setTimeout(()=>{ const n2 = sc2.querySelector('input'); if(n2) n2.focus(); }, 50);
     }
-  } else q.opts.forEach((text,idx)=>{
-    const b = el('button','opt');
-    b.appendChild(el('span','ltr',String.fromCharCode(65+idx)));
-    b.appendChild(el('span',null,text));
-    if(quizState.answered!==null){
-      b.disabled = true;
-      if(idx===q.ans) b.className='opt right';
-      else if(idx===quizState.answered) b.className='opt wrong';
-    } else b.addEventListener('click',()=>answer(u,q,idx));
-    root.appendChild(b);
-  });
+  } else {
+    /* Options are shown in a shuffled order, so the answer cannot be learned by
+       its POSITION — which is not knowing the answer. The permutation is stored
+       per question id, so revealing a hint (which re-renders) does not reshuffle
+       the options underneath her mid-question. answer() still receives the
+       ORIGINAL index, so q.ans, the miss record and every explanation downstream
+       are untouched.
+       Content must therefore never refer to an option by position. */
+    if(quizState.optFor !== q.id){
+      quizState.optFor = q.id;
+      quizState.optArr = shuffle(q.opts.map((_,k)=>k));
+    }
+    (quizState.optArr||q.opts.map((_,k)=>k)).forEach((orig,pos)=>{
+      const b = el('button','opt');
+      b.appendChild(el('span','ltr',String.fromCharCode(65+pos)));
+      b.appendChild(el('span',null,q.opts[orig]));
+      if(quizState.answered!==null){
+        b.disabled = true;
+        if(orig===q.ans) b.className='opt right';
+        else if(orig===quizState.answered) b.className='opt wrong';
+      } else b.addEventListener('click',()=>answer(u,q,orig));
+      root.appendChild(b);
+    });
+  }
 
   if(quizState.answered===null){
     if(q.hint && !quizState.hintUsed && !quizState.timed){
