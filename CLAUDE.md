@@ -362,6 +362,28 @@ If a teacher's own assignment shows a distinctive question style, that is worth
 capturing here the same way. The transferable thing is the *shape of the
 thinking*, and it costs nothing to match it.
 
+### The day (v76 / Wayfinder v59, both apps)
+
+`SCREENS.day` — the parent-side answer to "what did she actually do today",
+which the weekly aggregates never gave. Reached from a **Today** card at the
+top of the parent view; steps back through history a day at a time.
+
+- **`dayReport(date)`** derives everything from existing `log` and `focus`
+  records at render time — no new record types, no counters, backfills over
+  all history.
+- Shows the day's sessions **in order** (each labelled by `modeLabel()`:
+  Quiz, Beat the clock, Growth Zone review, Shuffle round, Flashcards,
+  Reading, Focus timer), each with its score where it has one, then the same
+  day **broken down by subject**, each subject expandable to its own
+  sessions.
+- **Quizzes carry a score; nothing else does.** A flashcard run has no
+  score and inventing one for visual symmetry would be a lie.
+- **No clock times, deliberately.** `at` orders the day's sessions and does
+  nothing else — when she studied is surveillance flavour, not actionable
+  signal (same call as the activity card).
+- Mission Control gained a **Today** line, so one parent screen shows both
+  girls' current day.
+
 ### Teach it back, the weekly aim, and the activity view (v66 / Wayfinder v54, both apps)
 
 Three additions from the educator review, approved by Chris 2026-08-09.
