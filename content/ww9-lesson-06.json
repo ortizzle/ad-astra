@@ -4,7 +4,7 @@
   "unit-ww9-06": {
    "id": "unit-ww9-06",
    "type": "unit",
-   "updatedAt": 1786304527378,
+   "updatedAt": 1786305606131,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -497,6 +497,31 @@
     },
     {
      "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "ASCENDANCY : DECLINE",
+     "opts": [
+      "vociferous : silent",
+      "assess : evaluate",
+      "dogma : belief",
+      "orator : oratory"
+     ],
+     "ans": 0,
+     "hint": "One of these is power rising, the other power falling.",
+     "steps": [
+      "Ascendancy is controlling influence risen to the top; decline is the fall away from it. Opposites.",
+      "So the relationship is antonyms.",
+      "Vociferous means loudly expressing feeling; silent is the absence of any. Opposites. Match.",
+      "Assess and evaluate are synonyms, dogma is a kind of belief, and an orator practises oratory."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Ascendancy versus decline reverses power; vociferous versus silent reverses volume.",
+      "tip": "The book's own sentence pairs them: American ascendancy coincided with British decline. Source sentences often hand you the relationship."
+     }
+    },
+    {
+     "id": "q15",
      "lv": 1,
      "from": "source",
      "kind": "mc",
@@ -520,7 +545,7 @@
      }
     },
     {
-     "id": "q15",
+     "id": "q16",
      "lv": 2,
      "from": "source",
      "kind": "mc",
@@ -544,7 +569,7 @@
      }
     },
     {
-     "id": "q16",
+     "id": "q17",
      "lv": 2,
      "from": "source",
      "kind": "mc",
@@ -568,7 +593,7 @@
      }
     },
     {
-     "id": "q17",
+     "id": "q18",
      "lv": 3,
      "from": "source",
      "kind": "mc",

@@ -257,8 +257,14 @@ exercises use the format; the engine travels to both apps.
   "lacks" — because naming it is the transferable skill. Wrong options must
   each hold a DIFFERENT nameable relationship, never a near-miss of the
   right one.
-- Not every analogy needs a perfect answer; one in Book 9 Lesson 5
-  deliberately requires eliminating to the closest structure, and says so.
+- **Every analogy must have one cleanly correct answer.** An item where the
+  best option is merely the closest structural match is a weak item — one
+  shipped in Book 9 Lesson 5 (VENERATE : RESPECT) and was replaced rather
+  than excused. Chris writes these rather than lifting the book's, so the
+  bar is higher than the book's, not equal to it.
+- **Four per vocabulary lesson, four different relationships**, with wrong
+  options drawn from relationships already named elsewhere in that lesson —
+  so eliminating requires naming rather than feel.
 - In `UNIT_SCHEMA` and the generation prompt, so generated vocab units can
   use it too — drafts still gate everything.
 

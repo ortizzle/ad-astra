@@ -4,7 +4,7 @@
   "unit-ww9-05": {
    "id": "unit-ww9-05",
    "type": "unit",
-   "updatedAt": 1786304527376,
+   "updatedAt": 1786305606129,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -38,7 +38,7 @@
     }
    ],
    "parentNote": {
-    "text": "Built from the Lesson 5 word list. Contemporary is the trap worth checking: as a noun it means someone living at the same time as another person, with no implication of being modern — two questions target that directly. One analogy (VENERATE : RESPECT) deliberately has no perfect answer and asks her to pick the closest structure after eliminating; that is a real standardized-test skill and the explanation says so plainly.",
+    "text": "Built from the Lesson 5 word list. Contemporary is the trap worth checking: as a noun it means someone living at the same time as another person, with no implication of being modern — two questions target that directly. The four analogies here use four different relationships (degree, type-to-category, lacks, antonym) and every wrong option holds a relationship she has already named, so eliminating requires naming rather than guessing.",
     "from": "added"
    },
    "nextUp": {
@@ -452,25 +452,24 @@
      "lv": 3,
      "from": "added",
      "kind": "analogy",
-     "q": "VENERATE : RESPECT",
+     "q": "WANE : GROW",
      "opts": [
-      "impoverish : wealth",
-      "enunciate : pronounce",
-      "strife : peace",
-      "callow : young"
+      "impoverish : enrich",
+      "sagacious : wise",
+      "despot : ruler",
+      "callow : experience"
      ],
      "ans": 0,
-     "hint": "Does venerating add respect or remove it?",
+     "hint": "Which way does each verb push?",
      "steps": [
-      "To venerate is to show GREAT respect — the verb intensifies and delivers the noun.",
-      "Look for a pair where the verb acts strongly ON the noun in the same direction.",
-      "To impoverish is to strip away wealth — the verb acts on the noun, but by removing it.",
-      "Weigh the options: enunciate and pronounce are synonyms, strife and peace are opposites, and callow simply means young.",
-      "Only impoverish shows a verb operating directly on the quantity of a noun, which is the closest structural match."
+      "To wane is to shrink or weaken; to grow is to increase. The verbs push opposite ways.",
+      "So the relationship is antonyms.",
+      "To impoverish is to make poor; to enrich is to make wealthy. Exact opposites. Match.",
+      "Sagacious and wise are synonyms, a despot is a kind of ruler, and callow names a lack of experience."
      ],
      "ex": {
-      "main": "**Both pairs are VERB ACTING ON A QUANTITY: venerate raises respect, impoverish lowers wealth.** The direction differs; the structure is what the analogy tests.",
-      "tip": "Not every analogy has a perfect answer — sometimes you pick the CLOSEST structure. Rule out the plain synonyms and opposites first."
+      "main": "**Both pairs are ANTONYMS.** Waning and growing reverse each other, as do impoverishing and enriching.",
+      "tip": "Every option here holds a relationship you have already named this lesson — degree aside, that is the whole toolkit: antonym, synonym, type-to-category, lacks."
      }
     },
     {

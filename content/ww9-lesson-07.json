@@ -4,7 +4,7 @@
   "unit-ww9-07": {
    "id": "unit-ww9-07",
    "type": "unit",
-   "updatedAt": 1786304527379,
+   "updatedAt": 1786305606133,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -499,6 +499,31 @@
     },
     {
      "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "MORIBUND : DYING",
+     "opts": [
+      "voluble : talkative",
+      "belittle : praise",
+      "ingrate : gratitude",
+      "censure : criticism"
+     ],
+     "ans": 0,
+     "hint": "How far apart are these two in meaning?",
+     "steps": [
+      "Moribund means close to death, in a dying state — the two words mean nearly the same thing.",
+      "So the relationship is synonyms.",
+      "Voluble means characterized by a ready flow of words: talkative. Same meaning. Match.",
+      "Belittle and praise are opposites, an ingrate lacks gratitude, and censure delivers criticism."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Moribund and dying overlap almost completely, as do voluble and talkative.",
+      "tip": "Three different relationships sit in the wrong options here. Naming the stem first is what stops you being pulled toward whichever pair simply feels related."
+     }
+    },
+    {
+     "id": "q15",
      "lv": 1,
      "from": "source",
      "kind": "mc",
@@ -522,7 +547,7 @@
      }
     },
     {
-     "id": "q15",
+     "id": "q16",
      "lv": 1,
      "from": "source",
      "kind": "mc",
@@ -546,7 +571,7 @@
      }
     },
     {
-     "id": "q16",
+     "id": "q17",
      "lv": 2,
      "from": "source",
      "kind": "mc",
@@ -570,7 +595,7 @@
      }
     },
     {
-     "id": "q17",
+     "id": "q18",
      "lv": 3,
      "from": "source",
      "kind": "mc",

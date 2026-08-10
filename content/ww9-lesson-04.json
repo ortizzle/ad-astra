@@ -4,7 +4,7 @@
   "unit-ww9-04": {
    "id": "unit-ww9-04",
    "type": "unit",
-   "updatedAt": 1786304222747,
+   "updatedAt": 1786305606097,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -499,6 +499,31 @@
     },
     {
      "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "HUBBUB : NOISE",
+     "opts": [
+      "adage : saying",
+      "meander : wander",
+      "recuperate : weaken",
+      "punctilious : detail"
+     ],
+     "ans": 0,
+     "hint": "Is every noise a hubbub, or every hubbub a noise?",
+     "steps": [
+      "A hubbub is a specific KIND of noise — noise with confusion in it.",
+      "So the relationship is specific type to general category.",
+      "An adage is a specific kind of saying — an old one accepted as true. Match.",
+      "Meander and wander are synonyms, recuperate is the opposite of weaken, and a punctilious person attends to detail."
+     ],
+     "ex": {
+      "main": "**Both pairs are TYPE TO CATEGORY.** Every hubbub is a noise and every adage is a saying, but not the reverse.",
+      "tip": "Run the one-way test: \"every A is a B, but not every B is an A.\" Adage and maxim both pass it against \"saying\"."
+     }
+    },
+    {
+     "id": "q15",
      "lv": 1,
      "from": "source",
      "kind": "mc",
@@ -522,7 +547,7 @@
      }
     },
     {
-     "id": "q15",
+     "id": "q16",
      "lv": 1,
      "from": "source",
      "kind": "mc",
@@ -546,7 +571,7 @@
      }
     },
     {
-     "id": "q16",
+     "id": "q17",
      "lv": 2,
      "from": "source",
      "kind": "mc",
@@ -570,7 +595,7 @@
      }
     },
     {
-     "id": "q17",
+     "id": "q18",
      "lv": 3,
      "from": "source",
      "kind": "mc",
