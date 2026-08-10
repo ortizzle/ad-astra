@@ -309,6 +309,16 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 [data-theme="light"] .passage{filter:drop-shadow(0 2px 3px rgba(74,55,25,.35))}
 
 /* Day stepper: two buttons side by side, each still a full tap target. */
+
+/* An item that is happening TODAY, sitting in a list that also holds future
+   ones. The accent rule and tint make it findable without reading; the word
+   "Today" is still written in the row, so the highlight only reinforces a
+   label that was already there — it is never the sole carrier of meaning.
+   Tint is --ac-8, the same 8% wash used elsewhere, so body text over it keeps
+   its measured contrast. */
+.row.now{background:var(--ac-8);border-left:3px solid var(--ac-fg);
+  padding-left:10px;border-radius:0 10px 10px 0;margin:2px 0}
+.row.now .k{font-weight:650}
 .navrow{display:flex;gap:10px;margin-top:8px}
 .navrow .btn{flex:1;margin:0}
 
@@ -772,7 +782,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v78 · the day, in depth';
+const APP_VERSION = 'v79 · today, marked';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1095,6 +1105,7 @@ function whenLabel(from, e){
   const multi = evEnd(e) !== e.start;
   if(from >= e.start){
     if(!multi) return 'Today';
+    if(from === e.start) return 'Starts today';
     return `Day ${AZ.daysBetween(e.start, from)+1} of ${AZ.daysBetween(e.start, evEnd(e))+1}`;
   }
   const d = AZ.daysBetween(from, e.start);
@@ -2617,13 +2628,15 @@ SCREENS.today = function(root){
     const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
     return { on:a.date, icon:k.ic, name:a.title, sub:`${c?c.name:''} · ${AZ.shortDate(a.date)}`,
              when: (dd=>dd===0?'Today':dd===1?'Tomorrow':`${dd} days`)(AZ.daysBetween(date,a.date)),
-             soon: AZ.daysBetween(date,a.date)<=2, classId:a.classId };
+             soon: AZ.daysBetween(date,a.date)<=2, classId:a.classId,
+             now: a.date === date };
   });
   const upE = upcomingEvents(date, 21).map(e=>{
     const span = evEnd(e)===e.start ? AZ.shortDate(e.start)
       : `${AZ.shortDate(e.start)} – ${AZ.shortDate(evEnd(e))}`;
     return { on:e.start, icon:e.icon, name:e.name, sub: e.note ? `${span} · ${e.note}` : span,
              when: whenLabel(date, e), soon: date>=e.start || AZ.daysBetween(date,e.start)<=2,
+             now: e.start === date,
              quiet: e.kind==='early' || e.kind==='note', screen: e.screen||null };
   });
   const up = [...upA, ...upE].sort((a,b)=>a.on.localeCompare(b.on));
@@ -2631,14 +2644,16 @@ SCREENS.today = function(root){
     root.appendChild(divider('Coming up'));
     const ac = el('div','card');
     up.slice(0,6).forEach(u=>{
-      const r = el('div','row');
+      /* Today gets the rule and the tint; everything else renders plain. */
+      const r = el('div','row'+(u.now ? ' now' : ''));
       const kk = el('span','k',`${u.icon} ${u.name}`);
       kk.appendChild(el('small',null,u.sub));
       r.appendChild(kk);
       /* Anything actionable is a door: a test opens its subject's shelf, an
          event with a screen opens that screen. */
       const clickable = u.screen || u.classId;
-      r.appendChild(el('span','v'+(u.soon && !u.quiet ? '' : ' plain'), clickable ? u.when+'  ›' : u.when));
+      r.appendChild(el('span','v'+((u.now || (u.soon && !u.quiet)) ? '' : ' plain'),
+        clickable ? u.when+'  ›' : u.when));
       if(clickable){
         r.style.cursor = 'pointer';
         r.addEventListener('click',()=> u.screen ? go(u.screen) : go('unit',{classId:u.classId}));

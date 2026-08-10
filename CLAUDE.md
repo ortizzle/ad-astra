@@ -667,6 +667,22 @@ published — the school lists the days but not the times.
 a two-day exam does not vanish from "Coming up" halfway through, and shows
 "Day 1 of 2".
 
+**Today gets marked (v79 / Wayfinder v62).** In "Coming up", a row whose item
+LANDS today wears `.row.now` — an `--ac-8` tint and a 3px `--ac-fg` rule.
+Deliberate boundaries:
+
+- **Only what lands today**: a test dated today, a one-day event today, or a
+  multi-day event on its FIRST day. An event already running ("Day 7 of 10")
+  stays plain — it is ongoing, not today's business, and if half the list
+  lights up the highlight stops meaning anything.
+- Day 1 of a multi-day event now reads **"Starts today"** rather than
+  "Day 1 of 5", so the highlighted row explains itself.
+- The tint and rule only ever REINFORCE a label the row already carries in
+  words. Colour is never the sole signal.
+- The rule uses `--ac-fg`, not `--ac`: raw accent measured 1.49:1 against the
+  tinted row on the light canvas — a hue, not a mark. `--ac-fg` gives 5.06:1
+  light and 8.07:1 dark.
+
 `milestones` is now only structural — quarter boundaries, first and last day.
 Anything dated and actionable belongs in `events`. Keep them disjoint or the same
 item renders twice, once in each list.
