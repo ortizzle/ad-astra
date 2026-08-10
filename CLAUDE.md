@@ -383,6 +383,23 @@ top of the parent view; steps back through history a day at a time.
   signal (same call as the activity card).
 - Mission Control gained a **Today** line, so one parent screen shows both
   girls' current day.
+
+**Redesigned as a dashboard (v78 / Wayfinder v61).** Four stat tiles
+(minutes, quizzes, accuracy with a meter, Growth due) → subjects with
+accuracy meters → every session → **inside a quiz session, every question
+with what she picked**. Each layer is one tap deeper.
+
+- Quiz logs now carry **`items`**: `{c, qt, ch, ca}` per question — right
+  flag, question text, what she chose, and the correct answer *only when she
+  got it wrong* (when right, the two are the same). Stored as short **text,
+  not option indexes**: options shuffle per question and a unit can be edited
+  later, so an index would quietly point at the wrong option months on.
+  Capped at `QUIZ_ITEM_MAX` (40) so one long round cannot bloat the gist.
+- Purely additive — logs written before this keep their scores, render fine,
+  and the screen says so rather than pretending the detail is missing.
+- **"Open the day" sits directly under the Sandbox row** at the top of the
+  grown-up area: it is the screen a parent opens most, so it does not belong
+  buried mid-page.
 - **Growth Zone due, per subject**, renders on the day screen — but only on
   TODAY. "Due" is a current state, not something that was true on a past
   date; showing it under an old day would be a plain lie.
@@ -406,6 +423,10 @@ at least one answer on `quizState.seen`.
 - `quizState.logged` makes a round loggable exactly once; `quizState` is
   cleared afterwards so returning starts a fresh round rather than resuming
   a logged one.
+- **The "Exit quiz" button had to be fixed too** (v78): it nulled `quizState`
+  before navigating, so the `go()` hook never saw the round and the most
+  common way of leaving was the one that still lost the work. It now logs
+  the partial round first, then clears.
 - Everything else in `finishQuiz` already judged only `askedThisRound`, so
   the miss ladder, qstats and badges settle correctly on a short round.
 - The day view labels it "Quiz · stopped early". That is parent-side

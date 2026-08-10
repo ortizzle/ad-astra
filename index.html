@@ -312,6 +312,28 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .navrow{display:flex;gap:10px;margin-top:8px}
 .navrow .btn{flex:1;margin:0}
 
+/* ---- The day dashboard ---- */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.tile{padding:14px 10px;text-align:center;margin:0}
+.tile .n{font-family:'Fraunces',Georgia,serif;font-size:27px;font-weight:700;
+  color:var(--ac-fg);line-height:1.05}
+.tile .l{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);margin-top:5px}
+.tile .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* Accuracy meter. Track is an accent tint, fill is the accent itself — both
+   decorative: every number it represents is also written out in text. */
+.meter{height:6px;border-radius:3px;background:var(--ac-14);overflow:hidden;margin-top:9px}
+.meter i{display:block;height:100%;background:var(--ac);border-radius:3px}
+/* One answered question: marker, the question, then what she picked. */
+.qline{display:flex;gap:9px;padding:9px 0;border-top:1px solid var(--line)}
+.qline:first-child{border-top:0}
+.qline .mk{flex:0 0 16px;font-weight:700;font-size:14px;line-height:1.5}
+.qline .mk.ok{color:var(--good)}
+.qline .mk.no{color:var(--warm)}
+.qline .tx{flex:1;font-size:13px;line-height:1.5}
+.qline .tx small{display:block;color:var(--faint);font-size:12px;margin-top:3px}
+.qline .tx small b{font-weight:600;color:var(--good)}
+
 /* ---- Analogies (kind:'analogy') ---- */
 /* The stem of a test-style analogy: A : B :: ? : ?. Rendered as its own
    plate rather than an ordinary question heading, because the shape IS the
@@ -750,7 +772,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v77 · short rounds count';
+const APP_VERSION = 'v78 · the day, in depth';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1717,7 +1739,7 @@ function dayReport(date){
       total:   l.mode==='quiz' ? (l.total||0)   : null,
       hints: l.hints||0,
       minutes: l.minutes!=null ? l.minutes : Math.round((l.seconds||0)/60),
-      at: l.at||0 });
+      items: l.items || null, at: l.at||0 });
   });
   focusLogs().forEach(f=>{
     if(f.date !== date) return;
@@ -3584,29 +3606,59 @@ function editSelfCheck(rec){
       syncSoon(); render();
     }});
 }
-/* The day, in full. Reached from the grown-up area; steps back through
-   history one day at a time so a missed evening can still be checked. */
+/* ---- The day, as a dashboard ----
+   Top-level numbers first, then subjects, then every session, and inside a
+   quiz session every question with what she picked. Each layer is one tap
+   deeper, so nothing is hidden and nothing is dumped on you at once.
+   Still no clock times — `at` orders the sessions and does nothing else. */
 SCREENS.day = function(root){
   const today = AZ.today();
   const date  = ctx.date || today;
   const rep   = dayReport(date);
   const isToday = date === today;
-  root.appendChild(headline(isToday ? 'Today' : AZ.pretty(date),
-    'Everything completed on this day, then the same day broken down by subject. Tap a subject to see its sessions.'));
+  const dueNow = isToday ? dueMisses() : [];
+  const dueBySub = {};
+  dueNow.forEach(m=>{ const k = m.classId || '__mixed__'; dueBySub[k] = (dueBySub[k]||0)+1; });
 
-  const nav = el('div','card');
-  nav.appendChild(el('div','eyebrow', AZ.pretty(date) + (isToday ? ' · today' : '')));
-  const navRow = el('div','navrow');
-  const back = el('button','btn btn-ghost','‹ Day before');
+  root.appendChild(headline(isToday ? 'Today' : AZ.pretty(date),
+    isToday ? 'Her day so far. Tap a subject or a session to open it — quizzes go all the way down to the questions.'
+            : 'Tap a subject or a session to open it — quizzes go all the way down to the questions.'));
+
+  /* Day stepper */
+  const nav = el('div','navrow');
+  const back = el('button','btn btn-ghost','‹  '+AZ.short(AZ.shift(date,-1)));
   back.addEventListener('click',()=>go('day',{date:AZ.shift(date,-1)}));
-  navRow.appendChild(back);
+  nav.appendChild(back);
   if(!isToday){
-    const fwd = el('button','btn btn-ghost','Day after ›');
+    const fwd = el('button','btn btn-ghost', AZ.short(AZ.shift(date,1))+'  ›');
     fwd.addEventListener('click',()=>go('day',{date:AZ.shift(date,1)}));
-    navRow.appendChild(fwd);
+    nav.appendChild(fwd);
+    const jump = el('button','btn btn-secondary','Today');
+    jump.addEventListener('click',()=>go('day',{date:today}));
+    nav.appendChild(jump);
   }
-  nav.appendChild(navRow);
   root.appendChild(nav);
+
+  /* ---- Top-level tiles ---- */
+  const tiles = el('div','tiles');
+  const tile = (n, label, sub)=>{
+    const t = el('div','card tile');
+    t.appendChild(el('div','n', String(n)));
+    t.appendChild(el('div','l', label));
+    if(sub) t.appendChild(el('div','s', sub));
+    return t;
+  };
+  tiles.appendChild(tile(rep.minutes, 'Minutes', rep.sessions.length+(rep.sessions.length===1?' session':' sessions')));
+  tiles.appendChild(tile(rep.quizzes, 'Quizzes', rep.asked ? rep.right+' of '+rep.asked+' right' : 'none yet'));
+  const accTile = tile(rep.acc===null ? '—' : rep.acc+'%', 'Accuracy',
+    rep.asked ? 'across '+rep.asked+' questions' : null);
+  if(rep.acc!==null){ const m = el('div','meter'); const i = el('i');
+    i.style.width = Math.max(2, rep.acc)+'%'; m.appendChild(i); accTile.appendChild(m); }
+  tiles.appendChild(accTile);
+  tiles.appendChild(isToday
+    ? tile(dueNow.length, 'Growth due', dueNow.length ? 'waiting for review' : 'all clear')
+    : tile(rep.subs.length, 'Subjects', 'touched this day'));
+  root.appendChild(tiles);
 
   if(!rep.sessions.length){
     const e = el('div','card');
@@ -3614,25 +3666,10 @@ SCREENS.day = function(root){
       ? 'Nothing recorded yet today. This fills in as she studies — it is not a to-do list, and a quiet day is just a quiet day.'
       : 'Nothing was recorded on this day.'));
     root.appendChild(e);
-  } else {
-    const sum = el('div','card ac');
-    [['Sessions', String(rep.sessions.length)],
-     ['Minutes', String(rep.minutes)],
-     ['Quizzes', String(rep.quizzes)],
-     ['Questions right', rep.asked ? rep.right+' of '+rep.asked : '—'],
-     ['Accuracy', rep.acc===null ? '—' : rep.acc+'%']
-    ].forEach(([k,v])=>{ const r=el('div','row');
-      r.appendChild(el('span','k',k)); r.appendChild(el('span','v',v)); sum.appendChild(r); });
-    root.appendChild(sum);
+  }
 
-    root.appendChild(divider('In order'));
-    const sc = el('div','card');
-    rep.sessions.forEach(s=>sc.appendChild(sessionRow(s, true)));
-    root.appendChild(sc);
-
-    const dueBySub = {};
-    if(isToday) dueMisses().forEach(m=>{ const k=m.classId||'__mixed__';
-      dueBySub[k] = (dueBySub[k]||0)+1; });
+  /* ---- By subject, each opening to its own sessions ---- */
+  if(rep.subs.length){
     root.appendChild(divider('By subject'));
     rep.subs.forEach(b=>{
       const open = ctx.openSub === b.id;
@@ -3644,30 +3681,83 @@ SCREENS.day = function(root){
       if(b.quizzes) meta.push(b.quizzes+(b.quizzes===1?' quiz':' quizzes'));
       if(b.asked)   meta.push(b.right+'/'+b.asked+' · '+Math.round(b.right/b.asked*100)+'%');
       if(b.minutes) meta.push(b.minutes+' min');
-      if(isToday && dueBySub[b.id]) meta.push(dueBySub[b.id]+' due');
+      if(dueBySub[b.id]) meta.push(dueBySub[b.id]+' due');
       tl.appendChild(el('div','mt', meta.join(' · ')));
       btn.appendChild(tl);
       btn.appendChild(el('span','mt', open ? '−' : '+'));
-      btn.addEventListener('click',()=>go('day',{date, openSub: open ? null : b.id}));
+      btn.addEventListener('click',()=>go('day',{date, openSub: open ? null : b.id, openSes: ctx.openSes}));
       card.appendChild(btn);
+      if(b.asked){
+        const m = el('div','meter'); const i = el('i');
+        i.style.width = Math.max(2, Math.round(b.right/b.asked*100))+'%';
+        m.appendChild(i); card.appendChild(m);
+      }
       if(open) b.sessions.forEach(s=>card.appendChild(sessionRow(s, false)));
       root.appendChild(card);
     });
   }
 
-  /* What is waiting in the Growth Zone right now, per subject. Shown only on
-     today: "due" is a CURRENT state, not something that was true on a past
-     date, and rendering it under an old day would be a plain lie. */
+  /* ---- Every session, in order, opening to its questions ---- */
+  if(rep.sessions.length){
+    root.appendChild(divider('Session by session'));
+    rep.sessions.forEach((s,idx)=>{
+      const key = 'ses'+idx;
+      const open = ctx.openSes === key;
+      const card = el('div','card');
+      const hasItems = s.items && s.items.length;
+      const btn = el('button','tocrow');
+      const tl = el('span','tl');
+      const sub = s.classId && CLASS_BY_ID[s.classId]
+        ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : null;
+      tl.appendChild(el('div',null, s.label + (sub ? ' · '+sub : '')));
+      const meta = [];
+      if(s.unit) meta.push(s.unit);
+      if(s.total>0) meta.push(s.correct+'/'+s.total+' · '+Math.round(s.correct/s.total*100)+'%');
+      if(s.minutes) meta.push(s.minutes+' min');
+      if(s.hints) meta.push(s.hints+(s.hints===1?' hint':' hints'));
+      tl.appendChild(el('div','mt', meta.join(' · ')));
+      btn.appendChild(tl);
+      btn.appendChild(el('span','mt', hasItems ? (open ? '−' : '+') : ''));
+      if(hasItems) btn.addEventListener('click',()=>go('day',{date, openSub: ctx.openSub, openSes: open ? null : key}));
+      else btn.disabled = true;
+      card.appendChild(btn);
+      if(open && hasItems){
+        const qs = el('div');
+        qs.style.marginTop = '6px';
+        s.items.forEach(it=>{
+          const line = el('div','qline');
+          line.appendChild(el('span','mk '+(it.c ? 'ok':'no'), it.c ? '✓' : '✗'));
+          const tx = el('span','tx', it.qt || '(question not recorded)');
+          const detail = el('small');
+          if(it.c){
+            detail.textContent = 'She answered: '+(it.ch || '—');
+          } else {
+            detail.textContent = 'She answered: '+(it.ch || '—')+'  ·  ';
+            const bb = el('b', null, 'Answer: '+(it.ca || '—'));
+            detail.appendChild(bb);
+          }
+          tx.appendChild(detail);
+          line.appendChild(tx);
+          qs.appendChild(line);
+        });
+        card.appendChild(qs);
+      } else if(open === false && !hasItems && s.total>0){
+        /* Quizzes taken before per-question detail shipped keep their score. */
+      }
+      root.appendChild(card);
+    });
+    if(rep.sessions.some(s=>s.total>0 && !(s.items && s.items.length)))
+      root.appendChild(el('div','hintline','Quizzes taken before this update kept their scores but not the individual questions. New ones open all the way down.'));
+  }
+
+  /* ---- Growth Zone, right now (today only) ---- */
   if(isToday){
-    const dueNow = dueMisses();
     root.appendChild(divider('Growth Zone due now'));
     const gc = el('div','card');
     if(!dueNow.length){
       gc.appendChild(el('p',null,'Nothing due. Everything she has missed is either cleared or still settling on the ladder.'));
     } else {
-      const byC = {};
-      dueNow.forEach(m=>{ const k = m.classId || '__mixed__'; byC[k] = (byC[k]||0)+1; });
-      Object.entries(byC).sort((x,y)=>y[1]-x[1]).forEach(([id,n])=>{
+      Object.entries(dueBySub).sort((x,y)=>y[1]-x[1]).forEach(([id,n])=>{
         const r = el('div','row');
         r.appendChild(el('span','k', subName(id)));
         r.appendChild(el('span','v', n + (n===1?' item':' items')));
@@ -3677,6 +3767,7 @@ SCREENS.day = function(root){
       tr.appendChild(el('span','k','Total due'));
       tr.appendChild(el('span','v', String(dueNow.length)));
       gc.appendChild(tr);
+      gc.appendChild(el('div','hintline','Due today, as of right now — not a record of this date.'));
     }
     root.appendChild(gc);
   }
@@ -3798,6 +3889,8 @@ function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:
    on the way to school; the next round picks up whatever is least practised,
    so repeated rounds still cycle the whole unit. */
 const QUIZ_ROUND = 5;
+/* Per-question detail is capped so one very long round cannot bloat the gist. */
+const QUIZ_ITEM_MAX = 40;
 function pickRound(u, timed){
   if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
   /* Shuffle-round questions look attempts up on their ORIGINAL unit, so
@@ -3975,7 +4068,7 @@ SCREENS.quiz = function(root){
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
     quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
       order:pickRound(u, !!ctx.timed),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
-      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[],
+      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[], items:[],
       limit:quizLimit(), runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0};
     if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
   const q = u.questions[quizState.order[quizState.i]];
@@ -4198,7 +4291,18 @@ SCREENS.quiz = function(root){
   }
   const quit = el('button','btn btn-ghost','Exit quiz');
   const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
-  quit.addEventListener('click',()=>{stopQuestionTimer();quizState=null;go(back[0],back[1]);});
+  /* Exit is the usual way she leaves a round, and it used to drop quizState
+     before navigating — which meant the go() hook never saw it and the work
+     was lost. Log what she answered first, then go. */
+  quit.addEventListener('click',()=>{
+    stopQuestionTimer();
+    if(quizState && !quizState.logged && (quizState.seen||[]).length){
+      const qu = unitFor(quizState.unitId);
+      if(qu) finishQuiz(qu, true);
+    }
+    quizState = null;
+    go(back[0],back[1]);
+  });
   root.appendChild(quit);
 };
 function answer(u,q,idx){
@@ -4222,6 +4326,21 @@ function answer(u,q,idx){
   const right = idx===q.ans;
   quizState.runStreak = right ? (quizState.runStreak||0)+1 : 0;
   if(right) quizState.correct++;
+  /* What she was asked and what she picked, for the day view's question-level
+     drill-down. Stored as short TEXT rather than option indexes: options are
+     shuffled per question and a unit can be edited later, so an index would
+     quietly point at the wrong option months from now. The correct answer is
+     only stored when she got it wrong — when she is right it is what she
+     picked. */
+  const cutTxt = (t,n)=>{ t = String(t==null?'':t); return t.length>n ? t.slice(0,n-1)+'…' : t; };
+  const choseTxt = idx===-1 ? '(ran out of time)'
+    : idx===-2 ? (quizState.orderPick||[]).map(k=>q.opts[k]).join(' → ')
+    : idx===-3 ? ((quizState.spellVal||'').trim() || '(blank)')
+    : (q.opts && q.opts[idx]!=null ? q.opts[idx] : '');
+  if(!quizState.items) quizState.items = [];
+  if(quizState.items.length < QUIZ_ITEM_MAX)
+    quizState.items.push({ c: right?1:0, qt: cutTxt(q.q,110), ch: cutTxt(choseTxt,70),
+      ca: right ? '' : cutTxt(q.opts && q.opts[q.ans]!=null ? q.opts[q.ans] : '', 70) });
   /* Review and shuffle questions are on loan from other units — credit the
      tally to where the question actually lives, or the parent view attributes
      it to nothing. */
@@ -4237,10 +4356,7 @@ function answer(u,q,idx){
         attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0) });
   if(!right){
     quizState.missed.push(q.id);
-    const chose = idx===-1 ? '(ran out of time)'
-      : idx===-2 ? (quizState.orderPick||[]).map(k=>q.opts[k]).join(' → ')
-      : idx===-3 ? ((quizState.spellVal||'').trim() || '(blank)')
-      : q.opts[idx];
+    const chose = choseTxt;
     if(src){
       /* Demotion is finishQuiz's job; here we just record what she picked this time. */
       put({ ...src, chose });
@@ -4294,6 +4410,7 @@ function finishQuiz(u, partial){
   const log = put({ id:uid('log'), type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
     date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp,
     hints:hintsUsed, timed:wasTimed, speedBonus:speed, partial:!!partial,
+    items:(quizState.items||[]).slice(0, QUIZ_ITEM_MAX),
     ansSeconds:Math.round((quizState.ansMs||0)/1000), ansCount:quizState.ansN||0 });
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
     unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
@@ -5071,6 +5188,11 @@ SCREENS.parent = function(root){
   const sqb = el('button','btn btn-sm '+(sandboxOn()?'btn-primary':'btn-secondary'), sandboxOn() ? 'Turn off' : 'Turn on');
   sqb.addEventListener('click',()=>{ setSandbox(!sandboxOn()); render(); });
   sqr.appendChild(sqb); sbq.appendChild(sqr);
+  /* The day is the screen a parent opens most, so it sits at the top of the
+     grown-up area rather than buried in the middle of it. */
+  const dayQuick = el('button','btn btn-primary','📅  Open the day');
+  dayQuick.addEventListener('click',()=>go('day',{date:AZ.today()}));
+  sbq.appendChild(dayQuick);
   root.appendChild(sbq);
 
   /* Effort this week */
