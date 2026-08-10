@@ -383,6 +383,33 @@ top of the parent view; steps back through history a day at a time.
   signal (same call as the activity card).
 - Mission Control gained a **Today** line, so one parent screen shows both
   girls' current day.
+- **Growth Zone due, per subject**, renders on the day screen — but only on
+  TODAY. "Due" is a current state, not something that was true on a past
+  date; showing it under an old day would be a plain lie.
+
+### Leaving a quiz part-way (v77 / Wayfinder v60, both apps)
+
+A round she abandons is logged as **the questions she actually answered** —
+never as the full round with the rest counted wrong. `finishQuiz(u, partial)`
+takes the flag; `go()` calls it when navigating away from the quiz view with
+at least one answer on `quizState.seen`.
+
+- **It never counted unanswered questions wrong** — before this, quitting
+  wrote no log at all. The bug was the other way round: her answers already
+  updated `qstat` and the Growth Zone as they happened, but with no `log` the
+  session left no minutes, no XP, no streak or sky-map day, and nothing in
+  the day view. Real work vanished.
+- `total` = `quizState.seen.length` on a partial round, so accuracy is over
+  what she answered.
+- **No completion or speed bonus** on a short round — per-question XP only.
+  Finishing is what those bonuses are for.
+- `quizState.logged` makes a round loggable exactly once; `quizState` is
+  cleared afterwards so returning starts a fresh round rather than resuming
+  a logged one.
+- Everything else in `finishQuiz` already judged only `askedThisRound`, so
+  the miss ladder, qstats and badges settle correctly on a short round.
+- The day view labels it "Quiz · stopped early". That is parent-side
+  information, not a mark against her — her own screens say nothing.
 
 ### Teach it back, the weekly aim, and the activity view (v66 / Wayfinder v54, both apps)
 

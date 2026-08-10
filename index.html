@@ -750,7 +750,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v76 · the day';
+const APP_VERSION = 'v77 · short rounds count';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1702,7 +1702,7 @@ function modeLabel(l){
   if(l.mode==='quiz'){
     if(l.unitId==='__review__')  return 'Growth Zone review';
     if(l.unitId==='__shuffle__') return 'Shuffle round';
-    return l.timed ? 'Beat the clock' : 'Quiz';
+    return (l.timed ? 'Beat the clock' : 'Quiz') + (l.partial ? ' · stopped early' : '');
   }
   return 'Session';
 }
@@ -2450,6 +2450,14 @@ const ROOT_SCREENS = new Set(['today','study','growth','stars','setup']);
 const SKIP_HIST = new Set(['checkin','postmood']);
 let HIST = [];
 function go(v,c={},opts={}){
+  /* Leaving a quiz part-way records the questions she answered. See
+     finishQuiz's note: this is the difference between a short session and a
+     session that never happened. */
+  if(view==='quiz' && v!=='quiz' && quizState && !quizState.logged
+     && (quizState.seen||[]).length){
+    const qLeft = unitFor(quizState.unitId);
+    if(qLeft) finishQuiz(qLeft, true);
+  }
   if(ROOT_SCREENS.has(v)) HIST = [];
   else if(!opts.back && view && view!==v && !SKIP_HIST.has(view)){
     HIST.push([view,ctx]);
@@ -3622,6 +3630,9 @@ SCREENS.day = function(root){
     rep.sessions.forEach(s=>sc.appendChild(sessionRow(s, true)));
     root.appendChild(sc);
 
+    const dueBySub = {};
+    if(isToday) dueMisses().forEach(m=>{ const k=m.classId||'__mixed__';
+      dueBySub[k] = (dueBySub[k]||0)+1; });
     root.appendChild(divider('By subject'));
     rep.subs.forEach(b=>{
       const open = ctx.openSub === b.id;
@@ -3633,6 +3644,7 @@ SCREENS.day = function(root){
       if(b.quizzes) meta.push(b.quizzes+(b.quizzes===1?' quiz':' quizzes'));
       if(b.asked)   meta.push(b.right+'/'+b.asked+' · '+Math.round(b.right/b.asked*100)+'%');
       if(b.minutes) meta.push(b.minutes+' min');
+      if(isToday && dueBySub[b.id]) meta.push(dueBySub[b.id]+' due');
       tl.appendChild(el('div','mt', meta.join(' · ')));
       btn.appendChild(tl);
       btn.appendChild(el('span','mt', open ? '−' : '+'));
@@ -3641,6 +3653,32 @@ SCREENS.day = function(root){
       if(open) b.sessions.forEach(s=>card.appendChild(sessionRow(s, false)));
       root.appendChild(card);
     });
+  }
+
+  /* What is waiting in the Growth Zone right now, per subject. Shown only on
+     today: "due" is a CURRENT state, not something that was true on a past
+     date, and rendering it under an old day would be a plain lie. */
+  if(isToday){
+    const dueNow = dueMisses();
+    root.appendChild(divider('Growth Zone due now'));
+    const gc = el('div','card');
+    if(!dueNow.length){
+      gc.appendChild(el('p',null,'Nothing due. Everything she has missed is either cleared or still settling on the ladder.'));
+    } else {
+      const byC = {};
+      dueNow.forEach(m=>{ const k = m.classId || '__mixed__'; byC[k] = (byC[k]||0)+1; });
+      Object.entries(byC).sort((x,y)=>y[1]-x[1]).forEach(([id,n])=>{
+        const r = el('div','row');
+        r.appendChild(el('span','k', subName(id)));
+        r.appendChild(el('span','v', n + (n===1?' item':' items')));
+        gc.appendChild(r);
+      });
+      const tr = el('div','row');
+      tr.appendChild(el('span','k','Total due'));
+      tr.appendChild(el('span','v', String(dueNow.length)));
+      gc.appendChild(tr);
+    }
+    root.appendChild(gc);
   }
 
   const back2 = el('button','btn btn-ghost','← Grown-ups');
@@ -4229,11 +4267,25 @@ function answerOrder(u,q){
   const right = seq.length===q.opts.length && seq.every((v,k)=>v===k);
   answer(u, q, right ? q.ans : -2);
 }
-function finishQuiz(u){
-  const total = quizState.order.length, pct = Math.round(quizState.correct/total*100);
+/* `partial` = she left the round part-way. Then the session is logged as the
+   questions she ACTUALLY ANSWERED — never as the full round with the rest
+   marked wrong. Leaving early is a shorter sitting, not a failed one.
+   Everything below already judges only `askedThisRound`, so the ladder, the
+   qstats and the badges all settle correctly on a short round; the only thing
+   that was missing was the log itself. Without it her answers still counted
+   toward qstats and the Growth Zone, but the session left no trace: no
+   minutes, no XP, no streak or sky-map day, and nothing in the day view. */
+function finishQuiz(u, partial){
+  if(quizState.logged) return;          // one log per round, ever
+  quizState.logged = true;
+  const total = partial ? quizState.seen.length : quizState.order.length;
+  if(!total){ quizState = null; return; }
+  const pct = Math.round(quizState.correct/total*100);
   const secs = Math.round((Date.now()-quizState.start)/1000);
-  const bonus = pct===100?50 : pct>=80?25 : 0;
-  const speed = quizState.timed ? quizState.speedBonus : 0;
+  /* The completion and speed bonuses are for finishing; a short round still
+     earns the per-question XP, just not the bonus on top. */
+  const bonus = partial ? 0 : (pct===100?50 : pct>=80?25 : 0);
+  const speed = (!partial && quizState.timed) ? quizState.speedBonus : 0;
   const fastest = quizState.fastest;
   const wasTimed = quizState.timed;
   stopQuestionTimer();
@@ -4241,7 +4293,7 @@ function finishQuiz(u){
   const hintsUsed = quizState.hints, pre = quizState.pre;
   const log = put({ id:uid('log'), type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
     date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp,
-    hints:hintsUsed, timed:wasTimed, speedBonus:speed,
+    hints:hintsUsed, timed:wasTimed, speedBonus:speed, partial:!!partial,
     ansSeconds:Math.round((quizState.ansMs||0)/1000), ansCount:quizState.ansN||0 });
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
     unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
@@ -4284,6 +4336,10 @@ function finishQuiz(u){
     });
   }
   checkBadges(); syncSoon();
+  /* She is already gone: settle the books and stop. No celebration, no
+     results screen, and quizState is cleared so coming back starts a fresh
+     round rather than resuming one that has been logged. */
+  if(partial){ quizState = null; return; }
   if(pct>=80) celebrate();
 
   const missed = quizState.missed.length;
