@@ -400,6 +400,14 @@ with what she picked**. Each layer is one tap deeper.
 - **"Open the day" sits directly under the Sandbox row** at the top of the
   grown-up area: it is the screen a parent opens most, so it does not belong
   buried mid-page.
+- **The emotion check, per session** (v80 / Wayfinder v63): each quiz's
+  readiness and before/after mood, matched to its session by `logId` rather
+  than by time, with a compact emoji chip on the session's meta line. The
+  card states the **calibration** outright — "Felt ready for 100% · scored
+  50%" plus one interpretive line — because the GAP is the whole point of
+  the readiness rating, not the number. A pre-quiz mood of 1–2 adds the same
+  gentle-check-in note the all-time card uses. Sessions with no check-in
+  (she skipped it, or it was flashcards) simply do not appear.
 - **Growth Zone due, per subject**, renders on the day screen — but only on
   TODAY. "Due" is a current state, not something that was true on a past
   date; showing it under an old day would be a plain lie.

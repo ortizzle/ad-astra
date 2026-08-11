@@ -782,7 +782,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v79 · today, marked';
+const APP_VERSION = 'v80 · how she felt';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1750,12 +1750,20 @@ function dayReport(date){
       total:   l.mode==='quiz' ? (l.total||0)   : null,
       hints: l.hints||0,
       minutes: l.minutes!=null ? l.minutes : Math.round((l.seconds||0)/60),
-      items: l.items || null, at: l.at||0 });
+      items: l.items || null, at: l.at||0, logId: l.id });
   });
   focusLogs().forEach(f=>{
     if(f.date !== date) return;
     sessions.push({ classId:f.classId||null, label:'Focus timer', unit:null,
       correct:null, total:null, hints:0, minutes:f.minutes||0, at:f.at||0 });
+  });
+  /* The emotion check belongs to the session it was taken for — two taps
+     before a quiz, one after — so it is matched by logId rather than by time. */
+  const dayMoods = all('mood').filter(m=>m.date===date);
+  sessions.forEach(x=>{
+    if(!x.logId) return;
+    x.pre  = dayMoods.find(m=>m.when==='pre'  && m.logId===x.logId) || null;
+    x.post = dayMoods.find(m=>m.when==='post' && m.logId===x.logId) || null;
   });
   sessions.sort((a,b)=>a.at-b.at);
   const quizzes = sessions.filter(s=>s.total>0);
@@ -1772,7 +1780,20 @@ function dayReport(date){
   return { date, sessions, quizzes: quizzes.length, right, asked,
     acc: asked ? Math.round(right/asked*100) : null,
     minutes: sessions.reduce((n,s)=>n+(s.minutes||0),0),
+    moods: dayMoods.sort((a,b)=>(a.at||0)-(b.at||0)),
+    checks: sessions.filter(x=>x.pre || x.post),
     subs: Object.values(bySub).sort((a,b)=>b.minutes-a.minutes) };
+}
+const readyOf = v => READY.find(o=>o.v===v) || null;
+const feelOf  = v => FEELING.find(o=>o.v===v) || null;
+/* A compact "😎 → 😊" for a session's before/after feeling, or just one of
+   them. Emoji alone is never the whole story, so every place this is used
+   also spells the words out nearby. */
+function moodChip(s){
+  const bits = [];
+  if(s.pre && feelOf(s.pre.feeling))  bits.push(feelOf(s.pre.feeling).e);
+  if(s.post && feelOf(s.post.feeling)) bits.push(feelOf(s.post.feeling).e);
+  return bits.join(' → ');
 }
 const subName = id => id==='__mixed__' ? 'Mixed / review'
   : (CLASS_BY_ID[id] ? (CLASS_BY_ID[id].icon+' '+CLASS_BY_ID[id].name) : id);
@@ -3730,6 +3751,7 @@ SCREENS.day = function(root){
       if(s.total>0) meta.push(s.correct+'/'+s.total+' · '+Math.round(s.correct/s.total*100)+'%');
       if(s.minutes) meta.push(s.minutes+' min');
       if(s.hints) meta.push(s.hints+(s.hints===1?' hint':' hints'));
+      const chip = moodChip(s); if(chip) meta.push(chip);
       tl.appendChild(el('div','mt', meta.join(' · ')));
       btn.appendChild(tl);
       btn.appendChild(el('span','mt', hasItems ? (open ? '−' : '+') : ''));
@@ -3763,6 +3785,57 @@ SCREENS.day = function(root){
     });
     if(rep.sessions.some(s=>s.total>0 && !(s.items && s.items.length)))
       root.appendChild(el('div','hintline','Quizzes taken before this update kept their scores but not the individual questions. New ones open all the way down.'));
+  }
+
+  /* ---- How she felt ----
+     Two taps before a quiz and one after. The point of the readiness rating
+     is not the number but the GAP between how ready she felt and how the
+     quiz went — that comparison is the whole reason the check-in exists, so
+     it is written out rather than left to be eyeballed. Tone stays flat and
+     factual: this is information for a parent, not a score she is failing. */
+  if(rep.checks.length){
+    root.appendChild(divider('How she felt'));
+    rep.checks.forEach(s=>{
+      const card = el('div','card');
+      const sub = s.classId && CLASS_BY_ID[s.classId]
+        ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : null;
+      card.appendChild(el('div','eyebrow', s.label + (sub ? ' · '+sub : '')));
+      if(s.pre && readyOf(s.pre.readiness)){
+        const r = el('div','row');
+        r.appendChild(el('span','k','Felt ready'));
+        r.appendChild(el('span','v plain', readyOf(s.pre.readiness).e+'  '+readyOf(s.pre.readiness).l));
+        card.appendChild(r);
+      }
+      if(s.pre && feelOf(s.pre.feeling)){
+        const r = el('div','row');
+        r.appendChild(el('span','k','Mood before'));
+        r.appendChild(el('span','v plain', feelOf(s.pre.feeling).e+'  '+feelOf(s.pre.feeling).l));
+        card.appendChild(r);
+      }
+      if(s.post && feelOf(s.post.feeling)){
+        const r = el('div','row');
+        r.appendChild(el('span','k','Mood after'));
+        r.appendChild(el('span','v plain', feelOf(s.post.feeling).e+'  '+feelOf(s.post.feeling).l));
+        card.appendChild(r);
+      }
+      /* The calibration line: predicted vs actual, and what the gap means. */
+      if(s.pre && s.pre.readiness && s.total>0){
+        const predicted = s.pre.readiness*20;
+        const actual = Math.round(s.correct/s.total*100);
+        const gap = actual - predicted;
+        const r = el('div','row');
+        r.appendChild(el('span','k','Felt ready for '+predicted+'%'));
+        r.appendChild(el('span','v', 'scored '+actual+'%'));
+        card.appendChild(r);
+        card.appendChild(el('div','hintline', Math.abs(gap)<=10
+          ? 'Her gut matched the result — that is the skill working.'
+          : gap > 10 ? 'She did better than she expected. Worth telling her; nerves undersell her.'
+                     : 'She felt more ready than it turned out. That gap is the useful part — revising had felt like knowing.'));
+      }
+      if(s.pre && s.pre.feeling <= 2)
+        card.appendChild(el('div','hintline','She logged a low mood before this one. Worth a gentle check-in, not a confrontation.'));
+      root.appendChild(card);
+    });
   }
 
   /* ---- Growth Zone, right now (today only) ---- */
