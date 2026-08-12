@@ -439,6 +439,22 @@ at least one answer on `quizState.seen`.
   the miss ladder, qstats and badges settle correctly on a short round.
 - The day view labels it "Quiz · stopped early". That is parent-side
   information, not a mark against her — her own screens say nothing.
+- **Closing or backgrounding the app mid-round (v83 / Wayfinder v65).** The
+  navigation hooks above only fire on in-app navigation or the Exit button.
+  On a phone the commonest way a quiz ends is none of those — she switches
+  apps, locks the screen, or the PWA is killed. `persistRound()` now runs on
+  `visibilitychange` (hidden) and `pagehide` and writes the round's log at
+  that moment. `put()` writes through to localStorage synchronously, which is
+  what makes it survive; sync happens on next launch.
+  - It deliberately does **not** settle the ladder or clear `quizState` — a
+    quick app-switch must not cost her the round she is in.
+  - `quizState.logId` keeps it to ONE record: coming back and finishing
+    updates that same log in place rather than adding a second.
+  - `quizState.settled` (not `logged`) now guards the ladder, so the two
+    concerns are separate: the log may be written many times, the ladder
+    exactly once.
+  - `beforeunload` is deliberately unused — mobile browsers fire it
+    unreliably.
 
 ### Teach it back, the weekly aim, and the activity view (v66 / Wayfinder v54, both apps)
 

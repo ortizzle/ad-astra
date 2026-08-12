@@ -782,7 +782,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v82 · new units';
+const APP_VERSION = 'v83 · closing counts';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2514,7 +2514,7 @@ function go(v,c={},opts={}){
   /* Leaving a quiz part-way records the questions she answered. See
      finishQuiz's note: this is the difference between a short session and a
      session that never happened. */
-  if(view==='quiz' && v!=='quiz' && quizState && !quizState.logged
+  if(view==='quiz' && v!=='quiz' && quizState && !quizState.settled
      && (quizState.seen||[]).length){
     const qLeft = unitFor(quizState.unitId);
     if(qLeft) finishQuiz(qLeft, true);
@@ -4391,7 +4391,7 @@ SCREENS.quiz = function(root){
      was lost. Log what she answered first, then go. */
   quit.addEventListener('click',()=>{
     stopQuestionTimer();
-    if(quizState && !quizState.logged && (quizState.seen||[]).length){
+    if(quizState && !quizState.settled && (quizState.seen||[]).length){
       const qu = unitFor(quizState.unitId);
       if(qu) finishQuiz(qu, true);
     }
@@ -4486,9 +4486,48 @@ function answerOrder(u,q){
    that was missing was the log itself. Without it her answers still counted
    toward qstats and the Growth Zone, but the session left no trace: no
    minutes, no XP, no streak or sky-map day, and nothing in the day view. */
+/* ---- Losing the app mid-round ----
+   A round she abandons by NAVIGATING is caught by go() and the Exit button.
+   A round she abandons by closing the app, switching to another app or
+   locking the phone was caught by nothing at all — and on a phone that is
+   the most common way a quiz ends. This writes (or updates) the round's log
+   at that moment.
+
+   Deliberately does NOT settle the miss ladder or clear quizState: a quick
+   app-switch must not cost her the round she is in the middle of. Her
+   answers already updated qstats and the Growth Zone as she made them, so
+   the only thing at risk was the session record, and that is what this
+   saves. If she comes back and finishes, finishQuiz updates this same log
+   in place — quizState.logId is what keeps it to one record. */
+function persistRound(){
+  if(!quizState || quizState.settled) return;
+  const seen = (quizState.seen || []).length;
+  if(!seen) return;                       // opened and never answered: nothing happened
+  const lid = quizState.logId || uid('log');
+  quizState.logId = lid;
+  /* put() writes through to localStorage synchronously, which matters here —
+     the page may be seconds from being killed. Sync is left for next launch. */
+  put({ id:lid, type:'log', mode:'quiz', classId:ctx.classId, unitId:quizState.unitId,
+        date:AZ.today(), at:quizState.start || Date.now(),
+        correct:quizState.correct, total:seen,
+        seconds:Math.round((Date.now() - quizState.start)/1000),
+        xp:Math.max(0, quizState.correct*10 - quizState.hints*5),
+        hints:quizState.hints, timed:!!quizState.timed, speedBonus:0, partial:true,
+        items:(quizState.items||[]).slice(0, QUIZ_ITEM_MAX),
+        ansSeconds:Math.round((quizState.ansMs||0)/1000), ansCount:quizState.ansN||0 });
+}
+/* visibilitychange covers switching apps and locking the phone — the cases a
+   PWA actually meets. pagehide covers a real close or reload. beforeunload is
+   deliberately not used: mobile browsers fire it unreliably. */
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) persistRound(); });
+window.addEventListener('pagehide', persistRound);
+
 function finishQuiz(u, partial){
-  if(quizState.logged) return;          // one log per round, ever
-  quizState.logged = true;
+  /* `settled` guards the LADDER, not the log. A round may already have written
+     a log (see persistRound, called when the app is backgrounded) — finishing
+     then UPDATES that same record rather than adding a second one. */
+  if(quizState.settled) return;
+  quizState.settled = true;
   const total = partial ? quizState.seen.length : quizState.order.length;
   if(!total){ quizState = null; return; }
   const pct = Math.round(quizState.correct/total*100);
@@ -4502,7 +4541,9 @@ function finishQuiz(u, partial){
   stopQuestionTimer();
   const xp = Math.max(0, quizState.correct*10 + bonus + speed - quizState.hints*5);
   const hintsUsed = quizState.hints, pre = quizState.pre;
-  const log = put({ id:uid('log'), type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
+  const lid = quizState.logId || uid('log');
+  quizState.logId = lid;
+  const log = put({ id:lid, type:'log', mode:'quiz', classId:ctx.classId, unitId:u.id,
     date:AZ.today(), at:Date.now(), correct:quizState.correct, total, seconds:secs, xp,
     hints:hintsUsed, timed:wasTimed, speedBonus:speed, partial:!!partial,
     items:(quizState.items||[]).slice(0, QUIZ_ITEM_MAX),
