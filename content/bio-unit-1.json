@@ -1,0 +1,588 @@
+{
+ "v": 4,
+ "records": {
+  "unit-bio-u1": {
+   "id": "unit-bio-u1",
+   "type": "unit",
+   "updatedAt": 1786529951607,
+   "classId": "bio",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Biology 8 · Unit 1: Experimental Design",
+   "srcName": "Biology 8, Unit 1 lecture slides (Drive)",
+   "source": "Biology 8 (Drive folder)",
+   "summary": {
+    "text": "Unit 1 of Biology 8, from the class lecture slides: how an experiment is designed and how its results are read. Covers qualitative and quantitative data, observation versus inference, IF–THEN hypotheses, the three kinds of variable, experimental and control groups, the placebo effect, sample size, repeatability and feasibility, then data tables and the rules for graphs.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This unit is the grammar of the whole subject — every lab and every data question for the rest of the year assumes it. It is also the part most easily lost marks on, because the vocabulary pairs (observation/inference, controlled variable/control group) look alike and mean different things.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Tell qualitative from quantitative data, and observation from inference",
+     "from": "source"
+    },
+    {
+     "text": "Write a hypothesis that links the independent to the dependent variable",
+     "from": "source"
+    },
+    {
+     "text": "Identify independent, dependent and controlled variables in a described experiment",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish a control group from a controlled variable, and explain why a placebo is used",
+     "from": "source"
+    },
+    {
+     "text": "Build and read a graph correctly, including why a y-axis must not be truncated",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Unit 1 lecture deck in the Biology 8 folder. Two vocabulary pairs cause almost all the lost marks here and each gets its own question: OBSERVATION versus INFERENCE (what you saw versus what you think it means), and CONTROLLED VARIABLE versus CONTROL GROUP (a condition held steady versus the subjects getting no treatment). The laundry-detergent scenario is the teacher's own from the slides, so it is likely to reappear on a quiz in some form. The graphing half — parts of a graph, line versus bar, never truncating the y-axis — is the part that shows up later in lab write-ups.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first — especially the two look-alike pairs. Then the quiz.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Qualitative data",
+     "def": "**Data describing characteristics that cannot easily be counted or measured.**\n• Colour, texture, smell — and how tired a person feels.\n• Not the lesser kind of data: it is simply the kind that words capture better than numbers.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Quantitative data",
+     "def": "**Data that is counted or measured, expressed as numbers.**\n• Temperature, weight, length, time, blood pressure.\n• A good study usually collects both — the number and the description answer different questions.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Observation",
+     "def": "**Something you determine directly with your senses or with a tool.**\n• \"The leaves are turning brown\" is an observation.\n• A thermometer reading counts too — the tool extends the senses, it does not replace the observing.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Inference",
+     "def": "**A logical interpretation of what you observed — a pattern you read into the data.**\n• Observation: my plants are not growing. Inference: they lack nutrients.\n• The great sorting error in this unit is calling an inference an observation.",
+     "hint": "Observation = what you SAW. Inference = what you THINK it means.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Hypothesis",
+     "def": "**A proposed explanation, written so it predicts the outcome of an experiment.**\n• Often in IF–THEN form: IF the independent variable changes, THEN the dependent variable changes.\n• A good hypothesis links what you will CHANGE to what you will MEASURE.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Independent variable",
+     "def": "**The one variable the scientist deliberately changes.**\n• Also called the manipulated variable — it is what is being tested.\n• Change only ONE per experiment, or you cannot tell which change caused the result.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Dependent variable",
+     "def": "**What is affected by the change, and what you observe and measure.**\n• Also called the measured variable — the data you collect.\n• Always define exactly HOW it is measured, with units.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Controlled variable",
+     "def": "**Anything deliberately kept the same so it cannot affect the outcome.**\n• Also called constants. Good experiments have many of them.\n• NOT the same thing as a control group — that trap is worth memorising now.",
+     "hint": "Controlled VARIABLE = a condition held steady. Control GROUP = the subjects getting no treatment.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Experimental group",
+     "def": "**The subjects that receive a changed level of the independent variable.**\n• Several experimental groups can test several degrees of the change.\n• Each group differs from the others only in that one variable.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Control group",
+     "def": "**The subjects exposed to the unmodified independent variable — usually none of it.**\n• It is the baseline the experimental groups are compared against.\n• Without it you cannot say whether the independent variable mattered at all.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Placebo",
+     "def": "**Something with no medicinal value given to a control group, which the patient believes is real.**\n• It controls for the mental effect of being treated at all.\n• If the medicine and the placebo perform the same, the medicine adds nothing.",
+     "hint": "The placebo controls the patient’s MIND, so the experiment can measure only the drug.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Sample size",
+     "def": "**How many individuals or repetitions the experiment uses.**\n• You can rarely test every possible subject, so you test a sample.\n• Bigger is more reliable but costs time and money — the answer is the largest FEASIBLE size.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Repeatability",
+     "def": "**Whether the experiment can be run again under the same conditions and give the same result.**\n• A result that appears once and never again is not yet science.\n• Repeating with different subjects is how a fluke gets caught.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Feasibility",
+     "def": "**Whether the proposed experiment can actually be carried out.**\n• Technical, economic, legal, operational and scheduling feasibility all count.\n• Heating an entire ocean to test coral is a fine idea and an impossible experiment.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Parts of a graph",
+     "def": "**Ten things every graph needs: neatness, appropriate size, title, both variables labelled, both scales, the right graph type, a legend, and the data.**\n• Title names the relationship: \"The Effect of Heat on Coral Survival\" — the effect of the IV on the DV.\n• Independent variable on the x-axis, dependent on the y-axis, units on both.",
+     "hint": "X is what you changed, Y is what you measured. The title says \"the effect of X on Y\".",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Never truncate the y-axis",
+     "def": "**The y-axis must start where the scale honestly begins, not at a value chosen to exaggerate the difference.**\n• Cutting the bottom off makes small differences look enormous.\n• It is the most common way an honest data set is used to tell a lie.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Line graph vs bar graph",
+     "def": "**A line graph shows change over time or continuous data; a bar graph compares distinct categories.**\n• Temperature of ice water every minute: line. Average height by country: bar.\n• Picking the wrong one hides the pattern the data actually holds.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Line of best fit",
+     "def": "**A single straight line drawn through scattered points to show the overall trend.**\n• It should not be forced to touch the first and last data points.\n• It represents the trend of ALL the data, not any individual point.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is qualitative data?",
+     "opts": [
+      "The texture of a leaf described as waxy",
+      "The mass of a leaf in grams",
+      "The length of a leaf in centimetres",
+      "The number of leaves on a branch"
+     ],
+     "ans": 0,
+     "hint": "Which one cannot be written as a number?",
+     "steps": [
+      "Qualitative data describes characteristics that cannot easily be counted or measured.",
+      "\"Waxy\" is a description, not a measurement.",
+      "Grams, centimetres and counts are all quantitative."
+     ],
+     "ex": {
+      "main": "**The waxy texture.** Qualitative data is captured in words; quantitative data in numbers with units.",
+      "tip": "Sort by asking \"could I write this with a number and a unit?\" If no, it is qualitative."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A scientist writes: \"The water reached 87 °C.\" This is:",
+     "opts": [
+      "An observation",
+      "An inference",
+      "A hypothesis",
+      "A conclusion"
+     ],
+     "ans": 0,
+     "hint": "Was this determined directly, or interpreted?",
+     "steps": [
+      "An observation is what you determine directly with your senses or a tool.",
+      "A thermometer reading is a direct determination using a tool.",
+      "It interprets nothing and predicts nothing, so it is not an inference or a hypothesis."
+     ],
+     "ex": {
+      "main": "**An observation.** Using an instrument still counts — the tool extends the senses.",
+      "tip": "Observation, inference and hypothesis are the three most confused terms in this unit. Learn them as a set."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which is the independent variable in an experiment testing how fertiliser amount affects tree growth?",
+     "opts": [
+      "The amount of fertiliser given",
+      "How quickly the trees grow",
+      "The species of tree",
+      "The amount of water given"
+     ],
+     "ans": 0,
+     "hint": "Which one does the scientist deliberately change?",
+     "steps": [
+      "The independent variable is the one the scientist deliberately changes.",
+      "The amount of fertiliser is what is being tested.",
+      "Growth is what gets measured (dependent); species and water are held constant (controlled)."
+     ],
+     "ex": {
+      "main": "**The amount of fertiliser.** It is the thing being manipulated, and there should be only one of it.",
+      "tip": "Slot every variable in a question into one of three boxes: changed, measured, or held steady."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A control group is:",
+     "opts": [
+      "The subjects that receive the unmodified independent variable",
+      "Any condition kept the same throughout the experiment",
+      "The group with the largest sample size",
+      "The group whose data is measured most carefully"
+     ],
+     "ans": 0,
+     "hint": "Careful — this is not the same as a controlled variable.",
+     "steps": [
+      "The control group receives the unmodified independent variable, usually none of it.",
+      "It is the baseline that experimental groups are compared against.",
+      "A condition kept the same is a controlled VARIABLE — a different idea with a similar name."
+     ],
+     "ex": {
+      "main": "**The subjects getting the unmodified variable.** Control GROUP is a set of subjects; controlled VARIABLE is a condition.",
+      "tip": "This pair is a guaranteed test question. Say the difference out loud until it is automatic."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does repeatability mean?",
+     "opts": [
+      "The experiment can be run again under the same conditions",
+      "The results agree with the hypothesis",
+      "The sample size is large enough",
+      "The experiment can actually be afforded"
+     ],
+     "ans": 0,
+     "hint": "It is about running it again, not about the result.",
+     "steps": [
+      "Repeatability is the ability to repeat the experiment under the same conditions.",
+      "Running four groups of mice through the same maze three more times tests repeatability.",
+      "Affordability is feasibility — a different requirement."
+     ],
+     "ex": {
+      "main": "**It can be run again under the same conditions.** A result nobody can reproduce is not yet a finding.",
+      "tip": "Repeatability and feasibility both sound like practicalities. One is about running it AGAIN, one about running it AT ALL."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which graph type suits temperature readings taken every minute as ice water warms?",
+     "opts": [
+      "A line graph — the data is continuous over time",
+      "A bar graph — the readings are separate categories",
+      "A pie chart — the readings sum to a whole",
+      "Either one shows it equally well"
+     ],
+     "ans": 0,
+     "hint": "Change over time, or distinct categories?",
+     "steps": [
+      "A line graph shows change over time or continuous data.",
+      "Temperature every minute as water warms is continuous change over time.",
+      "A bar graph compares distinct categories, like average height by country."
+     ],
+     "ex": {
+      "main": "**A line graph.** Continuous change over time is exactly what a line is for.",
+      "tip": "Ask whether the x-axis values flow into each other (line) or sit as separate labels (bar)."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Observation: the leaves are turning brown. Which statement is an INFERENCE from it?",
+     "opts": [
+      "The plant is not getting enough water",
+      "The leaves are brown at the edges",
+      "Three of the twelve leaves have changed",
+      "The leaves feel dry to the touch"
+     ],
+     "ans": 0,
+     "hint": "Which one goes beyond what the senses report?",
+     "steps": [
+      "An inference is a logical interpretation of what was observed.",
+      "\"Not getting enough water\" is not visible — it is a proposed reason for what is visible.",
+      "Brown edges, a count of three, and a dry feel are all direct observations."
+     ],
+     "ex": {
+      "main": "**The plant is not getting enough water.** That is an interpretation; everything else is a description.",
+      "tip": "Test each option by asking \"could I see, touch or measure this directly?\" If not, it is an inference."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An investigation divides people into five groups: walking, running, weights, sitting, and yoga, each for 30 minutes, measuring heart rate. Which is the control group?",
+     "opts": [
+      "The group that sat down for 30 minutes",
+      "The group that walked for 30 minutes",
+      "The group that did yoga for 30 minutes",
+      "There is no control group in this design"
+     ],
+     "ans": 0,
+     "hint": "Which group got none of the independent variable?",
+     "steps": [
+      "The independent variable is the type of exercise.",
+      "The control group receives the unmodified independent variable — here, no exercise at all.",
+      "Sitting for 30 minutes is the no-exercise condition.",
+      "It exists so the other groups have a baseline to be compared against."
+     ],
+     "ex": {
+      "main": "**The group that sat down.** Without it there is nothing to say the exercising groups differ FROM.",
+      "tip": "Find the independent variable first, then look for the group receiving none of it. That is the control group."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which hypothesis is written correctly for an experiment?",
+     "opts": [
+      "If plants are placed in a cool environment, then they will grow taller than plants in a hot environment",
+      "Plants grow better in cool places",
+      "Why do plants grow badly in the heat?",
+      "The plants in the cool room grew 4 cm taller"
+     ],
+     "ans": 0,
+     "hint": "A hypothesis links what is changed to what is measured, and predicts.",
+     "steps": [
+      "A good hypothesis links the condition being changed to what will be measured.",
+      "The IF–THEN form does this: IF environment is cool, THEN the plants grow taller.",
+      "\"Plants grow better in cool places\" states a belief without naming what is measured against what; \"Why do plants grow badly in the heat?\" is a question; and \"the plants grew 4 cm taller\" is a result, not a prediction."
+     ],
+     "ex": {
+      "main": "**The IF–THEN statement.** It names the independent variable, the dependent variable, and the predicted direction.",
+      "tip": "A hypothesis is testable and predictive. A question is not a hypothesis, and neither is a result."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a drug trial, why must the control group receive a placebo rather than nothing at all?",
+     "opts": [
+      "To control for the mental effect of believing you have been treated",
+      "To make the groups the same size",
+      "To reduce the cost of the trial",
+      "To make the experiment repeatable"
+     ],
+     "ans": 0,
+     "hint": "What changes in a patient simply because a doctor hands them something?",
+     "steps": [
+      "A placebo has no medicinal value but the patient believes it does.",
+      "Being given something by a doctor changes a patient's mental state, which can change how they feel.",
+      "Giving the control group a placebo holds that mental effect steady across both groups.",
+      "Whatever difference remains can then be attributed to the drug itself."
+     ],
+     "ex": {
+      "main": "**To control for the belief that you are being treated.** If the drug and placebo perform equally, the drug adds nothing.",
+      "tip": "A placebo is a controlled variable made out of psychology — it holds the patient's expectations steady."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student tests laundry detergents on chocolate stains. Which should be a controlled variable?",
+     "opts": [
+      "The amount of detergent used in each wash",
+      "The brand of detergent used",
+      "How clean the clothes end up",
+      "The number of different detergents tested"
+     ],
+     "ans": 0,
+     "hint": "Which one must stay identical so it cannot skew the result?",
+     "steps": [
+      "A controlled variable is deliberately kept the same.",
+      "The brand of detergent is the independent variable — it is what is being tested.",
+      "How clean the clothes get is the dependent variable — what is measured.",
+      "The AMOUNT of detergent must be identical, or a difference could be caused by dose rather than brand."
+     ],
+     "ex": {
+      "main": "**The amount of detergent.** Vary the brand, measure the cleanliness, hold the dose steady.",
+      "tip": "This is the teacher's own example from the lesson slides. Expect the same scenario on a quiz."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A researcher wants to test how warmer ocean water affects coral by heating the ocean. What is wrong with the plan?",
+     "opts": [
+      "It is not feasible — you cannot actually heat an ocean",
+      "It has no independent variable",
+      "It has no dependent variable",
+      "Its sample size is too small"
+     ],
+     "ans": 0,
+     "hint": "The idea is sound. Can the experiment actually be done?",
+     "steps": [
+      "Feasibility is whether the experiment can actually be carried out.",
+      "The variables are perfectly clear: temperature changed, coral health measured.",
+      "The barrier is technical and operational — heating an entire ocean is impossible.",
+      "The usual fix is to scale it down to tanks, where it becomes feasible."
+     ],
+     "ex": {
+      "main": "**It is not feasible.** A well-designed experiment that cannot be performed is still not an experiment.",
+      "tip": "Feasibility comes in flavours: technical, economic, legal, operational, scheduling. Name which one blocks the plan."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A graph shows two bars, one slightly taller. Its y-axis starts at 95 instead of 0, making the difference look dramatic. What is the problem?",
+     "opts": [
+      "The truncated y-axis exaggerates a small difference",
+      "A bar graph is the wrong type for this data",
+      "The graph is missing a line of best fit",
+      "The independent variable is on the wrong axis"
+     ],
+     "ans": 0,
+     "hint": "What does cutting off the bottom of the scale do to the picture?",
+     "steps": [
+      "The y-axis carries the dependent variable and should not be truncated.",
+      "Starting at 95 removes most of the scale, so a difference of a few units fills the whole graph.",
+      "The numbers may be perfectly accurate while the picture is misleading.",
+      "That is exactly why the rule exists: do not truncate the y-axis."
+     ],
+     "ex": {
+      "main": "**Truncating the y-axis exaggerates the difference.** Honest data, dishonest picture.",
+      "tip": "When a graph looks dramatic, check where the y-axis starts before believing the drama."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "An experiment gives four mouse groups these maze times: 33 s, 122 s, 118 s, 130 s. What should the researcher do FIRST?",
+     "opts": [
+      "Repeat the experiment with different mice to see whether 33 s holds up",
+      "Remove the 33 s result because it does not fit",
+      "Conclude that group 1 is faster and publish",
+      "Increase the y-axis scale so the difference looks smaller"
+     ],
+     "ans": 0,
+     "hint": "One result is wildly unlike the rest. What tests whether it is real?",
+     "steps": [
+      "Three groups cluster near 120 seconds and one is far away at 33.",
+      "An odd result might be a genuine finding or a fluke, and you cannot tell from one run.",
+      "Repeatability is what separates the two: run it again under the same conditions with different mice.",
+      "Deleting inconvenient data or publishing on one run would both be dishonest."
+     ],
+     "ex": {
+      "main": "**Repeat it.** Repeatability is how a fluke gets caught — and how a real effect gets confirmed.",
+      "tip": "Never delete a surprising data point. Test it instead; surprises are where discoveries hide."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can an experiment have only ONE independent variable at a time?",
+     "opts": [
+      "With two changing at once you cannot tell which one caused the result",
+      "Two variables would make the graph too complicated to draw",
+      "The control group can only be compared against one thing",
+      "Measuring two dependent variables is not allowed"
+     ],
+     "ans": 0,
+     "hint": "Imagine changing fertiliser AND water together, then seeing growth.",
+     "steps": [
+      "Change fertiliser and water at the same time, and the plants grow taller.",
+      "Was it the fertiliser? The water? Both together? The experiment cannot say.",
+      "Holding everything else constant is what lets you attribute the effect to the one thing you changed.",
+      "That attribution is the whole point of a controlled experiment."
+     ],
+     "ex": {
+      "main": "**Otherwise the cause is ambiguous.** One change in, one attributable effect out.",
+      "tip": "This single rule is why controlled variables matter so much — they protect the attribution."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student measures plant growth and records \"9, 8, 6, 6\" for one fertiliser and \"9 cm, 8 cm, 6 cm, 6 cm\" for another. What is the issue?",
+     "opts": [
+      "Units must be consistent — either in every cell or in the column heading",
+      "The two fertilisers cannot be compared at all",
+      "The numbers should have been graphed rather than tabled",
+      "The independent variable belongs in the right-hand column"
+     ],
+     "ans": 0,
+     "hint": "Both rows carry the same numbers. What differs?",
+     "steps": [
+      "A data table must handle units consistently.",
+      "Units may go in every cell OR once in the column heading — but the table must pick one.",
+      "Mixing the two, as here, is the error.",
+      "The independent variable also belongs on the LEFT, with the dependent variable in the columns that follow."
+     ],
+     "ex": {
+      "main": "**Inconsistent units.** Put \"(in cm)\" in the heading or \"cm\" in every cell — not one row each way.",
+      "tip": "Table conventions get marked on lab reports. Independent variable left, consistent units, dependent variable measured."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "You are testing detergents at home for a science fair project with one month available. What is the best feasible sample size?",
+     "opts": [
+      "About five loads — enough to see a pattern and still achievable",
+      "One load — anything more wastes time",
+      "Two loads — the minimum for a comparison",
+      "One thousand loads — the bigger the sample the better"
+     ],
+     "ans": 0,
+     "hint": "Bigger samples are more reliable. What limits them?",
+     "steps": [
+      "A larger sample gives a more reliable result, so more is better in principle.",
+      "But feasibility limits it: one month and a home washing machine.",
+      "A thousand loads is not achievable; one or two is too few to show a pattern.",
+      "Around five balances reliability against what can actually be done."
+     ],
+     "ex": {
+      "main": "**About five loads.** The right sample size is the largest one you can actually carry out.",
+      "tip": "Sample-size questions are really feasibility questions in disguise. Read the constraints in the stem."
+     }
+    }
+   ]
+  }
+ }
+}
