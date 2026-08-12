@@ -412,6 +412,44 @@ with what she picked**. Each layer is one tap deeper.
   TODAY. "Due" is a current state, not something that was true on a past
   date; showing it under an old day would be a plain lie.
 
+**One day, one list (v84 / Wayfinder v66).** A UX pass measured the screen
+rather than reading it: an ordinary evening rendered **18 cards over 3.7
+screens**, with `67%` printed six times and the same interpretive sentence
+printed twice, word for word. It had grown into three complete inventories of
+the same sessions — By subject, Session by session, How she felt — sorted three
+ways, leaving a parent to assemble the meaning. Now **7 cards over 2.0
+screens**, and no duplicated sentence.
+
+- **One spine.** Sessions live in a single card as rows, each opening to
+  *everything* about that session — its questions and its emotion check
+  together. "How she felt" is gone as a section; it was naming the quiz a
+  second time in order to exist.
+- **`ctx.dayView`** toggles that one list between `order` and `subject`
+  (chips, default `order`). Subject mode groups the SAME session objects under
+  `daySubjectHead()` — so the drill-down stays one tap from either view, and
+  `rep.sessions.indexOf(s)` keeps the open session open across the toggle.
+- **`daySignals(rep)` → "Worth a word"**, the layer that was missing: at most
+  **two** things a parent might actually raise, each linking to its session.
+  Ranked wellbeing-first (low mood → stopped early → big negative calibration
+  gap → weak subject → beat-her-own-expectation). The rules are the point and
+  do not relax: it describes a SESSION, never her; no verdict language; good
+  news is eligible; capped at two so it can never become a list of faults;
+  and when nothing stands out it SAYS so, because an ordinary evening is
+  information too.
+- **The interpretive line prints only when `|gap| > 15`.** Printing it under
+  every quiz is what turned it into wallpaper.
+- **Rows with nothing underneath are not buttons.** They used to render as
+  disabled buttons identical to live ones — half the boxes were inert. Dead
+  buttons went 2 → 0.
+- `.felt` lays `--ac-8` over the card, which is the tint trap: `--faint`
+  measured **4.30:1** there in dark and now uses `--muted` (worst case 4.69:1
+  across all accents, both themes). The probe that caught it had to be
+  hardened first — routing the accent through `prefs()` silently did nothing,
+  so it reported one ratio twelve times and called it a pass.
+- Incidental, found by the smoke test: `.back-chip` was `min-height:40px`
+  against the stated 44px minimum, on a control that appears on nearly every
+  screen.
+
 ### Leaving a quiz part-way (v77 / Wayfinder v60, both apps)
 
 A round she abandons is logged as **the questions she actually answered** —

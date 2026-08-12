@@ -343,6 +343,44 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .qline .tx{flex:1;font-size:13px;line-height:1.5}
 .qline .tx small{display:block;color:var(--faint);font-size:12px;margin-top:3px}
 .qline .tx small b{font-weight:600;color:var(--good)}
+/* ---- The day, as one list ----
+   This screen used to be three inventories of the same sessions sorted three
+   different ways, each in its own card: 18 cards and 3.7 screens of scroll for
+   an ordinary evening, with the same score printed six times. It is now one
+   spine — sessions in a single card, each opening to everything about it. */
+.daylist{padding:2px 14px}
+.sesblock{border-top:1px solid var(--line)}
+.sesblock:first-child{border-top:0}
+.sesrow{width:100%;display:flex;align-items:center;gap:11px;min-height:var(--tap);
+  padding:11px 0;background:none;border:0;text-align:left;color:inherit}
+.sesrow .tl{flex:1;min-width:0}
+.sesrow .nm{font-weight:600;font-size:14px;line-height:1.35}
+.sesrow .mt{font-size:11.5px;color:var(--faint);line-height:1.45;margin-top:2px}
+.sesrow .score{flex-shrink:0;text-align:right;line-height:1.25}
+.sesrow .score b{display:block;font-weight:700;font-size:14.5px}
+.sesrow .score i{display:block;font-style:normal;font-size:11px;color:var(--faint)}
+/* The affordance was a grey glyph the same colour as the meta text, so nothing
+   said the rows opened. Rows with nothing under them are no longer buttons at
+   all, rather than disabled ones that look identical to live ones. */
+.exp{flex:0 0 26px;height:26px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;color:var(--ac-fg)}
+.sesblock.open .exp{background-color:var(--ac-8);border-color:var(--ac)}
+.subhead{padding:13px 0 9px;border-top:1px solid var(--line)}
+.subhead:first-child{border-top:0}
+.subhead .k{font-weight:700}
+.felt{margin:0 0 10px;padding:10px 12px;border-radius:12px;background-color:var(--ac-8)}
+.felt .row:first-child{padding-top:0}
+.felt .hintline{color:var(--muted)}
+/* Worth a word: at most two, and each one opens the session it is about. */
+.sig{width:100%;display:flex;gap:10px;align-items:flex-start;text-align:left;
+  background:none;border:0;color:inherit;padding:9px 0;min-height:var(--tap)}
+.sig+.sig{border-top:1px solid var(--line)}
+.sig .bd{flex:1;min-width:0}
+.sig .bd b{display:block;font-weight:600;font-size:14px;line-height:1.45}
+.sig .bd small{display:block;color:var(--faint);font-size:12.5px;
+  line-height:1.5;margin-top:3px}
+.sig .go{flex:0 0 auto;color:var(--ac-fg);font-size:16px;font-weight:600}
 
 /* ---- Analogies (kind:'analogy') ---- */
 /* The stem of a test-style analogy: A : B :: ? : ?. Rendered as its own
@@ -512,7 +550,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .graph-wrap svg{display:block;width:100%;height:auto}
 .face .graph-wrap{max-width:225px;margin:10px auto 22px;padding:5px 5px 2px}
 .rev .graph-wrap{margin:8px 0 6px}
-.back-chip{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;margin-bottom:10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--muted)}
+.back-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;margin-bottom:10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--muted)}
 .explain .lbl:first-child{margin-top:0}
 .explain p{font-size:14px;color:var(--text);margin:4px 0 0}
 
@@ -782,7 +820,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v83 · closing counts';
+const APP_VERSION = 'v84 · one day, one list';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1757,7 +1795,8 @@ function dayReport(date){
       total:   l.mode==='quiz' ? (l.total||0)   : null,
       hints: l.hints||0,
       minutes: l.minutes!=null ? l.minutes : Math.round((l.seconds||0)/60),
-      items: l.items || null, at: l.at||0, logId: l.id });
+      items: l.items || null, at: l.at||0, logId: l.id,
+      partial: !!l.partial });
   });
   focusLogs().forEach(f=>{
     if(f.date !== date) return;
@@ -3654,49 +3693,212 @@ function editSelfCheck(rec){
    quiz session every question with what she picked. Each layer is one tap
    deeper, so nothing is hidden and nothing is dumped on you at once.
    Still no clock times — `at` orders the sessions and does nothing else. */
+/* ---- What is worth a word ----
+   The screen told the day three times and told the story none. This names, at
+   most twice, the thing a parent might actually want to raise — every signal
+   read from records the app already keeps.
+
+   Rules, and they are the point:
+   - It describes a SESSION, never her. No verdicts, no "problem" language.
+     Same register as the Growth Zone: information, not a judgement.
+   - Wellbeing outranks every score on the screen, so a low mood sorts first.
+   - Capped at two. A list of faults is exactly what this must not become.
+   - Good news is eligible too — beating her own expectation is worth saying.
+   - When nothing stands out it says so, because an ordinary evening is
+     information a parent wants as much as an unusual one. */
+function daySignals(rep){
+  const out = [];
+  const pct = s => Math.round(s.correct / s.total * 100);
+  const nm  = s => s.classId && CLASS_BY_ID[s.classId]
+    ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : 'that round';
+  rep.sessions.forEach((s, idx) => {
+    const key = 'ses' + idx;
+    if(s.pre && s.pre.feeling <= 2)
+      out.push({ rank:1, key, t:'She logged a low mood going into ' + nm(s) + '.',
+        d:'Worth a gentle check-in, not a confrontation.' });
+    if(s.partial && s.total > 0)
+      out.push({ rank:2, key, t:'She stopped the ' + nm(s) + ' round after ' + s.total +
+          (s.total === 1 ? ' question' : ' questions') + '.',
+        d:'Scored on what she answered — the rest were never counted against her.' });
+    if(s.pre && s.pre.readiness && s.total >= 4){
+      const predicted = s.pre.readiness * 20, gap = pct(s) - predicted;
+      if(gap <= -20) out.push({ rank:3, key, t:'Felt ready for ' + predicted + '% in ' + nm(s) + ', scored ' + pct(s) + '%.',
+        d:'That gap is the useful part — revising had felt like knowing.' });
+      else if(gap >= 20) out.push({ rank:5, key, t:'She undersold herself on ' + nm(s) + ' — expected ' + predicted +
+          '%, scored ' + pct(s) + '%.',
+        d:'Worth telling her. Her nerves read her lower than her work does.' });
+    }
+  });
+  rep.subs.forEach(b => {
+    if(b.asked >= 5 && b.right / b.asked < 0.6)
+      out.push({ rank:4, key:null, t:subName(b.id) + ' came out at ' + Math.round(b.right / b.asked * 100) + '% today.',
+        d:'Everything she missed is already on the review ladder for another go.' });
+  });
+  return out.sort((a,b) => a.rank - b.rank).slice(0, 2);
+}
+
+/* The emotion check, folded into the session it belongs to rather than living
+   in a section of its own where it had to name the quiz all over again. */
+function dayMoodBlock(s){
+  const box = el('div','felt');
+  const line = (k, v) => { const r = el('div','row');
+    r.appendChild(el('span','k',k)); r.appendChild(el('span','v plain',v)); box.appendChild(r); };
+  if(s.pre  && readyOf(s.pre.readiness)) line('Felt ready',  readyOf(s.pre.readiness).e + '  ' + readyOf(s.pre.readiness).l);
+  if(s.pre  && feelOf(s.pre.feeling))    line('Mood before', feelOf(s.pre.feeling).e + '  ' + feelOf(s.pre.feeling).l);
+  if(s.post && feelOf(s.post.feeling))   line('Mood after',  feelOf(s.post.feeling).e + '  ' + feelOf(s.post.feeling).l);
+  if(s.pre && s.pre.readiness && s.total > 0){
+    const predicted = s.pre.readiness * 20;
+    const actual = Math.round(s.correct / s.total * 100);
+    const r = el('div','row');
+    r.appendChild(el('span','k','Felt ready for ' + predicted + '%'));
+    r.appendChild(el('span','v','scored ' + actual + '%'));
+    box.appendChild(r);
+    /* Printed only when the gap is worth naming. The old screen printed the
+       same sentence under every quiz on the day — word for word, twice on one
+       screen — which is how an insight turns into wallpaper and stops being
+       read. Two numbers side by side say it well enough on their own. */
+    const gap = actual - predicted;
+    if(Math.abs(gap) > 15) box.appendChild(el('div','hintline', gap < 0
+      ? 'Revising had felt like knowing. That gap is the useful part, not the score.'
+      : 'She did better than she expected — worth telling her.'));
+  }
+  return box;
+}
+
+function dayQuestionList(s){
+  const qs = el('div');
+  s.items.forEach(it => {
+    const line = el('div','qline');
+    line.appendChild(el('span','mk ' + (it.c ? 'ok' : 'no'), it.c ? '✓' : '✗'));
+    const tx = el('span','tx', it.qt || '(question not recorded)');
+    const detail = el('small');
+    if(it.c){
+      detail.textContent = 'She answered: ' + (it.ch || '—');
+    } else {
+      detail.textContent = 'She answered: ' + (it.ch || '—') + '  ·  ';
+      detail.appendChild(el('b', null, 'Answer: ' + (it.ca || '—')));
+    }
+    tx.appendChild(detail);
+    line.appendChild(tx);
+    qs.appendChild(line);
+  });
+  return qs;
+}
+
+/* One session. Opens to its questions AND its check-in together, so the day is
+   one list read once instead of three lists cross-referenced. A session with
+   nothing underneath renders as a plain row, not a dead button. */
+function daySessionRow(s, idx, date){
+  const key   = 'ses' + idx;
+  const open  = ctx.openSes === key;
+  const hasQ  = !!(s.items && s.items.length);
+  const hasM  = !!(s.pre || s.post);
+  const oldQ  = !hasQ && s.total > 0;
+  const openable = hasQ || hasM || oldQ;
+  const wrap  = el('div','sesblock' + (open ? ' open' : ''));
+  const sub   = s.classId && CLASS_BY_ID[s.classId]
+    ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : null;
+  const head  = el(openable ? 'button' : 'div','sesrow');
+  const tl    = el('span','tl');
+  /* Subject first: it is what a parent scans for, and six rows that all begin
+     "Quiz ·" put the repeated word where the distinguishing one belongs. */
+  tl.appendChild(el('div','nm', (sub ? sub + ' · ' : '') + s.label));
+  const meta = [];
+  if(s.unit)    meta.push(s.unit);
+  if(s.minutes) meta.push(s.minutes + ' min');
+  if(s.hints)   meta.push(s.hints + (s.hints === 1 ? ' hint' : ' hints'));
+  const chip = moodChip(s); if(chip) meta.push(chip);
+  if(meta.length) tl.appendChild(el('div','mt', meta.join(' · ')));
+  head.appendChild(tl);
+  if(s.total > 0){
+    const sc = el('span','score');
+    sc.appendChild(el('b',null, s.correct + '/' + s.total));
+    sc.appendChild(el('i',null, Math.round(s.correct / s.total * 100) + '%'));
+    head.appendChild(sc);
+  }
+  if(openable){
+    head.appendChild(el('span','exp', open ? '−' : '+'));
+    head.addEventListener('click', () => go('day',
+      { date, dayView: ctx.dayView, openSes: open ? null : key }));
+  }
+  wrap.appendChild(head);
+  if(open){
+    if(hasM) wrap.appendChild(dayMoodBlock(s));
+    if(hasQ) wrap.appendChild(dayQuestionList(s));
+    else if(oldQ) wrap.appendChild(el('div','hintline',
+      'This round predates the app keeping individual questions, so only the score survived.'));
+  }
+  return wrap;
+}
+
+function daySubjectHead(b, dueN){
+  const h = el('div','subhead');
+  const top = el('div','row');
+  top.appendChild(el('span','k', subName(b.id)));
+  const bits = [];
+  if(b.asked)   bits.push(b.right + '/' + b.asked + ' · ' + Math.round(b.right / b.asked * 100) + '%');
+  if(b.minutes) bits.push(b.minutes + ' min');
+  if(dueN)      bits.push(dueN + ' due');
+  top.appendChild(el('span','v plain', bits.join('  ·  ')));
+  h.appendChild(top);
+  if(b.asked){
+    const m = el('div','meter'), i = el('i');
+    i.style.width = Math.max(2, Math.round(b.right / b.asked * 100)) + '%';
+    m.appendChild(i); h.appendChild(m);
+  }
+  return h;
+}
+
 SCREENS.day = function(root){
-  const today = AZ.today();
-  const date  = ctx.date || today;
-  const rep   = dayReport(date);
+  const today   = AZ.today();
+  const date    = ctx.date || today;
+  const rep     = dayReport(date);
   const isToday = date === today;
-  const dueNow = isToday ? dueMisses() : [];
+  const dueNow  = isToday ? dueMisses() : [];
   const dueBySub = {};
-  dueNow.forEach(m=>{ const k = m.classId || '__mixed__'; dueBySub[k] = (dueBySub[k]||0)+1; });
+  dueNow.forEach(m => { const k = m.classId || '__mixed__'; dueBySub[k] = (dueBySub[k] || 0) + 1; });
+  const view = ctx.dayView === 'subject' ? 'subject' : 'order';
 
   root.appendChild(headline(isToday ? 'Today' : AZ.pretty(date),
-    isToday ? 'Her day so far. Tap a subject or a session to open it — quizzes go all the way down to the questions.'
-            : 'Tap a subject or a session to open it — quizzes go all the way down to the questions.'));
+    rep.sessions.length
+      ? 'Tap any session to open it — quizzes go all the way down to the questions she answered.'
+      : 'Nothing to open on this day.'));
 
-  /* Day stepper */
+  /* Day stepper. Changing day clears the open session (it belongs to the day
+     it was on) but keeps the chosen grouping. */
   const nav = el('div','navrow');
-  const back = el('button','btn btn-ghost','‹  '+AZ.short(AZ.shift(date,-1)));
-  back.addEventListener('click',()=>go('day',{date:AZ.shift(date,-1)}));
+  const back = el('button','btn btn-ghost','‹  ' + AZ.short(AZ.shift(date,-1)));
+  back.addEventListener('click', () => go('day',{ date: AZ.shift(date,-1), dayView: view }));
   nav.appendChild(back);
   if(!isToday){
-    const fwd = el('button','btn btn-ghost', AZ.short(AZ.shift(date,1))+'  ›');
-    fwd.addEventListener('click',()=>go('day',{date:AZ.shift(date,1)}));
+    const fwd = el('button','btn btn-ghost', AZ.short(AZ.shift(date,1)) + '  ›');
+    fwd.addEventListener('click', () => go('day',{ date: AZ.shift(date,1), dayView: view }));
     nav.appendChild(fwd);
     const jump = el('button','btn btn-secondary','Today');
-    jump.addEventListener('click',()=>go('day',{date:today}));
+    jump.addEventListener('click', () => go('day',{ date: today, dayView: view }));
     nav.appendChild(jump);
   }
   root.appendChild(nav);
 
-  /* ---- Top-level tiles ---- */
+  /* ---- The four numbers, at a glance ---- */
   const tiles = el('div','tiles');
-  const tile = (n, label, sub)=>{
+  const tile = (n, label, sub) => {
     const t = el('div','card tile');
     t.appendChild(el('div','n', String(n)));
     t.appendChild(el('div','l', label));
     if(sub) t.appendChild(el('div','s', sub));
     return t;
   };
-  tiles.appendChild(tile(rep.minutes, 'Minutes', rep.sessions.length+(rep.sessions.length===1?' session':' sessions')));
-  tiles.appendChild(tile(rep.quizzes, 'Quizzes', rep.asked ? rep.right+' of '+rep.asked+' right' : 'none yet'));
-  const accTile = tile(rep.acc===null ? '—' : rep.acc+'%', 'Accuracy',
-    rep.asked ? 'across '+rep.asked+' questions' : null);
-  if(rep.acc!==null){ const m = el('div','meter'); const i = el('i');
-    i.style.width = Math.max(2, rep.acc)+'%'; m.appendChild(i); accTile.appendChild(m); }
+  tiles.appendChild(tile(rep.minutes, 'Minutes',
+    rep.sessions.length + (rep.sessions.length === 1 ? ' session' : ' sessions')));
+  tiles.appendChild(tile(rep.quizzes, 'Quizzes',
+    rep.asked ? rep.right + ' of ' + rep.asked + ' right' : 'none yet'));
+  const accTile = tile(rep.acc === null ? '—' : rep.acc + '%', 'Accuracy',
+    rep.asked ? 'across ' + rep.asked + ' questions' : null);
+  if(rep.acc !== null){
+    const m = el('div','meter'), i = el('i');
+    i.style.width = Math.max(2, rep.acc) + '%'; m.appendChild(i); accTile.appendChild(m);
+  }
   tiles.appendChild(accTile);
   tiles.appendChild(isToday
     ? tile(dueNow.length, 'Growth due', dueNow.length ? 'waiting for review' : 'all clear')
@@ -3709,166 +3911,75 @@ SCREENS.day = function(root){
       ? 'Nothing recorded yet today. This fills in as she studies — it is not a to-do list, and a quiet day is just a quiet day.'
       : 'Nothing was recorded on this day.'));
     root.appendChild(e);
-  }
+  } else {
+    /* ---- Worth a word ---- */
+    root.appendChild(divider('Worth a word'));
+    const wc = el('div','card ac');
+    const sig = daySignals(rep);
+    if(!sig.length){
+      wc.appendChild(el('p',null,
+        'Nothing stands out. She studied, and it went about the way she expected — which is its own kind of good day.'));
+    } else {
+      sig.forEach(g => {
+        const row = el(g.key ? 'button' : 'div','sig');
+        const bd = el('span','bd');
+        bd.appendChild(el('b',null,g.t));
+        bd.appendChild(el('small',null,g.d));
+        row.appendChild(bd);
+        if(g.key){
+          row.appendChild(el('span','go','›'));
+          row.addEventListener('click', () => go('day',
+            { date, dayView: view, openSes: g.key }));
+        }
+        wc.appendChild(row);
+      });
+    }
+    root.appendChild(wc);
 
-  /* ---- By subject, each opening to its own sessions ---- */
-  if(rep.subs.length){
-    root.appendChild(divider('By subject'));
-    rep.subs.forEach(b=>{
-      const open = ctx.openSub === b.id;
-      const card = el('div','card');
-      const btn = el('button','tocrow');
-      const tl = el('span','tl');
-      tl.appendChild(el('div',null, subName(b.id)));
-      const meta = [];
-      if(b.quizzes) meta.push(b.quizzes+(b.quizzes===1?' quiz':' quizzes'));
-      if(b.asked)   meta.push(b.right+'/'+b.asked+' · '+Math.round(b.right/b.asked*100)+'%');
-      if(b.minutes) meta.push(b.minutes+' min');
-      if(dueBySub[b.id]) meta.push(dueBySub[b.id]+' due');
-      tl.appendChild(el('div','mt', meta.join(' · ')));
-      btn.appendChild(tl);
-      btn.appendChild(el('span','mt', open ? '−' : '+'));
-      btn.addEventListener('click',()=>go('day',{date, openSub: open ? null : b.id, openSes: ctx.openSes}));
-      card.appendChild(btn);
-      if(b.asked){
-        const m = el('div','meter'); const i = el('i');
-        i.style.width = Math.max(2, Math.round(b.right/b.asked*100))+'%';
-        m.appendChild(i); card.appendChild(m);
-      }
-      if(open) b.sessions.forEach(s=>card.appendChild(sessionRow(s, false)));
-      root.appendChild(card);
+    /* ---- The day itself: ONE list, grouped two ways ---- */
+    root.appendChild(divider('The day'));
+    const chips = el('div','chiprow');
+    [['order','In order'],['subject','By subject']].forEach(([v,label]) => {
+      const c = el('button','chipbtn' + (view === v ? ' on' : ''), label);
+      c.addEventListener('click', () => go('day',
+        { date, dayView: v, openSes: ctx.openSes }));
+      chips.appendChild(c);
     });
+    root.appendChild(chips);
+
+    const list = el('div','card daylist');
+    if(view === 'order'){
+      rep.sessions.forEach((s,i) => list.appendChild(daySessionRow(s, i, date)));
+    } else {
+      rep.subs.forEach(b => {
+        list.appendChild(daySubjectHead(b, dueBySub[b.id]));
+        /* Same session objects as the flat list, so an open session survives
+           the toggle — the index is looked up rather than re-counted. */
+        b.sessions.forEach(s => list.appendChild(
+          daySessionRow(s, rep.sessions.indexOf(s), date)));
+      });
+    }
+    root.appendChild(list);
   }
 
-  /* ---- Every session, in order, opening to its questions ---- */
-  if(rep.sessions.length){
-    root.appendChild(divider('Session by session'));
-    rep.sessions.forEach((s,idx)=>{
-      const key = 'ses'+idx;
-      const open = ctx.openSes === key;
-      const card = el('div','card');
-      const hasItems = s.items && s.items.length;
-      const btn = el('button','tocrow');
-      const tl = el('span','tl');
-      const sub = s.classId && CLASS_BY_ID[s.classId]
-        ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : null;
-      tl.appendChild(el('div',null, s.label + (sub ? ' · '+sub : '')));
-      const meta = [];
-      if(s.unit) meta.push(s.unit);
-      if(s.total>0) meta.push(s.correct+'/'+s.total+' · '+Math.round(s.correct/s.total*100)+'%');
-      if(s.minutes) meta.push(s.minutes+' min');
-      if(s.hints) meta.push(s.hints+(s.hints===1?' hint':' hints'));
-      const chip = moodChip(s); if(chip) meta.push(chip);
-      tl.appendChild(el('div','mt', meta.join(' · ')));
-      btn.appendChild(tl);
-      btn.appendChild(el('span','mt', hasItems ? (open ? '−' : '+') : ''));
-      if(hasItems) btn.addEventListener('click',()=>go('day',{date, openSub: ctx.openSub, openSes: open ? null : key}));
-      else btn.disabled = true;
-      card.appendChild(btn);
-      if(open && hasItems){
-        const qs = el('div');
-        qs.style.marginTop = '6px';
-        s.items.forEach(it=>{
-          const line = el('div','qline');
-          line.appendChild(el('span','mk '+(it.c ? 'ok':'no'), it.c ? '✓' : '✗'));
-          const tx = el('span','tx', it.qt || '(question not recorded)');
-          const detail = el('small');
-          if(it.c){
-            detail.textContent = 'She answered: '+(it.ch || '—');
-          } else {
-            detail.textContent = 'She answered: '+(it.ch || '—')+'  ·  ';
-            const bb = el('b', null, 'Answer: '+(it.ca || '—'));
-            detail.appendChild(bb);
-          }
-          tx.appendChild(detail);
-          line.appendChild(tx);
-          qs.appendChild(line);
-        });
-        card.appendChild(qs);
-      } else if(open === false && !hasItems && s.total>0){
-        /* Quizzes taken before per-question detail shipped keep their score. */
-      }
-      root.appendChild(card);
-    });
-    if(rep.sessions.some(s=>s.total>0 && !(s.items && s.items.length)))
-      root.appendChild(el('div','hintline','Quizzes taken before this update kept their scores but not the individual questions. New ones open all the way down.'));
-  }
-
-  /* ---- How she felt ----
-     Two taps before a quiz and one after. The point of the readiness rating
-     is not the number but the GAP between how ready she felt and how the
-     quiz went — that comparison is the whole reason the check-in exists, so
-     it is written out rather than left to be eyeballed. Tone stays flat and
-     factual: this is information for a parent, not a score she is failing. */
-  if(rep.checks.length){
-    root.appendChild(divider('How she felt'));
-    rep.checks.forEach(s=>{
-      const card = el('div','card');
-      const sub = s.classId && CLASS_BY_ID[s.classId]
-        ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : null;
-      card.appendChild(el('div','eyebrow', s.label + (sub ? ' · '+sub : '')));
-      if(s.pre && readyOf(s.pre.readiness)){
-        const r = el('div','row');
-        r.appendChild(el('span','k','Felt ready'));
-        r.appendChild(el('span','v plain', readyOf(s.pre.readiness).e+'  '+readyOf(s.pre.readiness).l));
-        card.appendChild(r);
-      }
-      if(s.pre && feelOf(s.pre.feeling)){
-        const r = el('div','row');
-        r.appendChild(el('span','k','Mood before'));
-        r.appendChild(el('span','v plain', feelOf(s.pre.feeling).e+'  '+feelOf(s.pre.feeling).l));
-        card.appendChild(r);
-      }
-      if(s.post && feelOf(s.post.feeling)){
-        const r = el('div','row');
-        r.appendChild(el('span','k','Mood after'));
-        r.appendChild(el('span','v plain', feelOf(s.post.feeling).e+'  '+feelOf(s.post.feeling).l));
-        card.appendChild(r);
-      }
-      /* The calibration line: predicted vs actual, and what the gap means. */
-      if(s.pre && s.pre.readiness && s.total>0){
-        const predicted = s.pre.readiness*20;
-        const actual = Math.round(s.correct/s.total*100);
-        const gap = actual - predicted;
-        const r = el('div','row');
-        r.appendChild(el('span','k','Felt ready for '+predicted+'%'));
-        r.appendChild(el('span','v', 'scored '+actual+'%'));
-        card.appendChild(r);
-        card.appendChild(el('div','hintline', Math.abs(gap)<=10
-          ? 'Her gut matched the result — that is the skill working.'
-          : gap > 10 ? 'She did better than she expected. Worth telling her; nerves undersell her.'
-                     : 'She felt more ready than it turned out. That gap is the useful part — revising had felt like knowing.'));
-      }
-      if(s.pre && s.pre.feeling <= 2)
-        card.appendChild(el('div','hintline','She logged a low mood before this one. Worth a gentle check-in, not a confrontation.'));
-      root.appendChild(card);
-    });
-  }
-
-  /* ---- Growth Zone, right now (today only) ---- */
-  if(isToday){
+  /* ---- Growth Zone, right now (today only) ----
+     "Due" is a current state, not something that was true on a past date, so
+     showing it under an old day would be a plain lie. */
+  if(isToday && dueNow.length){
     root.appendChild(divider('Growth Zone due now'));
     const gc = el('div','card');
-    if(!dueNow.length){
-      gc.appendChild(el('p',null,'Nothing due. Everything she has missed is either cleared or still settling on the ladder.'));
-    } else {
-      Object.entries(dueBySub).sort((x,y)=>y[1]-x[1]).forEach(([id,n])=>{
-        const r = el('div','row');
-        r.appendChild(el('span','k', subName(id)));
-        r.appendChild(el('span','v', n + (n===1?' item':' items')));
-        gc.appendChild(r);
-      });
-      const tr = el('div','row');
-      tr.appendChild(el('span','k','Total due'));
-      tr.appendChild(el('span','v', String(dueNow.length)));
-      gc.appendChild(tr);
-      gc.appendChild(el('div','hintline','Due today, as of right now — not a record of this date.'));
-    }
+    Object.entries(dueBySub).sort((x,y) => y[1] - x[1]).forEach(([id,n]) => {
+      const r = el('div','row');
+      r.appendChild(el('span','k', subName(id)));
+      r.appendChild(el('span','v', n + (n === 1 ? ' item' : ' items')));
+      gc.appendChild(r);
+    });
+    gc.appendChild(el('div','hintline','Due today, as of right now — not a record of this date.'));
     root.appendChild(gc);
   }
 
   const back2 = el('button','btn btn-ghost','← Grown-ups');
-  back2.addEventListener('click',()=>go('parent'));
+  back2.addEventListener('click', () => go('parent'));
   root.appendChild(back2);
 };
 SCREENS.reading = function(root){
