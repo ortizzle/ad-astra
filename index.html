@@ -782,7 +782,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v80 · how she felt';
+const APP_VERSION = 'v81 · syllabus hours';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -909,9 +909,15 @@ const STUDENT_HOURS = [
   {ids:['bio'],     days:[2,4], label:'Tuesdays & Thursdays', times:'3:40–4:10 pm', tbd:true},
   {ids:['physics'], days:[4], label:'Thursdays',            times:'2:55–4:45 pm'},
   {ids:['english'], days:[2], label:'Tuesdays',             times:'3:45–4:15 pm'},
-  {ids:['latin'],   days:[2], label:'Tuesdays',             times:'3:45–4:30 pm'}
+  /* English 8 also holds a morning slot before school (syllabus, 2026-08). */
+  {ids:['english'], days:[3], label:'Wednesdays',           times:'7:45–8:15 am'},
+  {ids:['latin'],   days:[2], label:'Tuesdays',             times:'3:45–4:45 pm'}
 ];
-const hoursFor = id => STUDENT_HOURS.find(h=>h.ids.includes(id));
+/* A subject may hold more than one slot a week, so this returns ALL of them —
+   English 8 has a Tuesday afternoon and a Wednesday morning, and a .find()
+   silently hid the second one. */
+const hoursForAll = id => STUDENT_HOURS.filter(h=>h.ids.includes(id));
+const hoursFor = id => hoursForAll(id)[0];
 
 const SIB_NAME = 'Wayfinder';
 const SIB_FILE = 'wayfinder-data.json';
@@ -2978,9 +2984,9 @@ SCREENS.unit = function(root){
   head.appendChild(el('p',null, st.answered
     ? `${st.sessions} session${st.sessions>1?'s':''} · ${st.answered} questions · ${st.accuracy}% · ${st.minutes} min`
     : 'No study sessions logged yet.'));
-  const hrs = hoursFor(c.id);
-  if(hrs) head.appendChild(el('div','hintline',
-    `🕖 Student hours: ${hrs.label} ${hrs.times}${hrs.tbd?' (to be confirmed)':''} — extra help from your teacher, open to anyone.`));
+  const hrsAll = hoursForAll(c.id);
+  if(hrsAll.length) head.appendChild(el('div','hintline',
+    `🕖 Student hours: ${hrsAll.map(h=>`${h.label} ${h.times}${h.tbd?' (to be confirmed)':''}`).join(' · ')} — extra help from your teacher, open to anyone.`));
   root.appendChild(head);
 
   const goal = prefs().goals[c.id];
