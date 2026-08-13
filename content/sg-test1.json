@@ -4,12 +4,12 @@
   "unit-sgt1": {
    "id": "unit-sgt1",
    "type": "unit",
-   "updatedAt": 1786284278283,
+   "updatedAt": 1786574925050,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
    "book": true,
-   "title": "Test 1 Study Guide · The paper pass",
+   "title": "Topic 1 · Test 1 Study Guide",
    "srcName": "ExamView SG Test 1b (Drive)",
    "source": "Study Guide for Test 1, imported as issued",
    "summary": {
@@ -829,7 +829,8 @@
       "tip": "Absolute value and polynomial functions always have all-real domains. Range is where the thinking lives."
      }
     }
-   ]
+   ],
+   "order": 1
   }
  }
 }

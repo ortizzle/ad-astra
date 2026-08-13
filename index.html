@@ -826,7 +826,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v84 · one day, one list';
+const APP_VERSION = 'v85 · one topic, one shelf';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1433,7 +1433,15 @@ function shelvesFor(classId){
     else loose.push(u);
   });
   const shelves = [...groups.entries()].map(([name, us]) => {
-    us.sort((a,b) => a.title.localeCompare(b.title, undefined, {numeric:true}));
+    /* Order inside a book. Numbered lessons sort themselves by title, which is
+       what `numeric:true` is for (1-10 after 1-9). End-of-topic material does
+       NOT: alphabetically a Rescue Round would land before the Study Guide it
+       is a response to, and a Topic Review before both. So a unit may carry an
+       optional `order` — absent means 0, so every lesson keeps its title sort
+       and anything tagged falls in behind it, in the sequence the work is
+       actually done. Content-only knob; nothing derived changes. */
+    us.sort((a,b) => ((a.order||0) - (b.order||0))
+      || a.title.localeCompare(b.title, undefined, {numeric:true}));
     const last = us.reduce((m,u) => Math.max(m, unitLastStudied(u)), 0);
     /* The bookmark holds her page: the most recently studied unfinished
        lesson; untouched series open at lesson one; a finished book keeps

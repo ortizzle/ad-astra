@@ -268,6 +268,34 @@ exercises use the format; the engine travels to both apps.
 - In `UNIT_SCHEMA` and the generation prompt, so generated vocab units can
   use it too — drafts still gate everything.
 
+### The Algebra topic shelf (v85)
+
+**A topic is the book, and everything belonging to that topic is a part of
+it** — not just the homework lessons. Chris's call, 2026-08: Topic 1's four
+lessons are homework-derived, but the Test 1 Study Guide is Topic 1 material
+too and belongs on the same shelf, not on a shelf of its own.
+
+The convention, and it applies to every topic from here on:
+
+| Part | Title | `order` |
+|---|---|---|
+| Lesson | `Topic N · N-L Title` | *(none)* |
+| Class study guide | `Topic N · Test N Study Guide` | 1 |
+| Rescue Round (fresh variants on what she missed) | `Topic N · Test N Rescue Round` | 2 |
+| Topic Review | `Topic N · Topic Review` | 3 |
+
+- `unit-sgt1` was **retitled onto the Topic 1 shelf keeping its id**, so the
+  progress and Growth Zone misses already attached to it stayed attached.
+  Retitle, never re-mint, when moving a unit into a series — the same rule
+  Wayfinder's `unit-m11` established.
+- Editing a shipped content file means bumping its `updatedAt`, which
+  re-drafts the unit on synced devices, so the grown-up re-approves once. It
+  is tagged `wasApproved` and the queue labels it as an update, not new
+  content.
+- River's math shelves (Wayfinder) already follow the same shape and carry no
+  `order` — their Topic Reviews sort last on title alone. Leave them; adding
+  `order` would re-draft them for no visible gain.
+
 ### The Wordly Wise Book 9 shelf (v73)
 
 Sedona's vocabulary lessons ship as `Wordly Wise Book 9 · Lesson N`, so they
@@ -941,6 +969,14 @@ as ordinary cards below. Rules that are the point:
   lesson. No new record types, no counters.
 - **Nothing is ever gated.** The shelf shows state; every lesson opens with a
   tap regardless of order or completion. Do not add locked-until-done.
+- **A unit may carry `order`** (v85 / Wayfinder v67) — absent means 0, so
+  numbered lessons keep sorting by title (`numeric:true`, so 1-10 lands after
+  1-9) and anything tagged falls in behind them. It exists because
+  end-of-topic material does not alphabetise into the order the work is done:
+  a *Rescue Round* would sort ahead of the *Study Guide* it responds to, and a
+  *Topic Review* ahead of both. Content-only knob; every derived thing on the
+  shelf is untouched, and a book with no `order` anywhere sorts exactly as it
+  did before.
 - Spines are a **solid colour** — the series' `SUBJECT_PALETTE` deep (`g2`)
   darkened 15% in `spineEl()`, picked by a stable hash of the series name.
   White labels measure ≥5.3:1 across all twelve. Subject texture on spines
