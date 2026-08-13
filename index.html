@@ -453,6 +453,51 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .shelfboard{height:10px;border-radius:3px;margin:-2px 4px 16px;background-color:var(--raised);
   border:1px solid var(--line);box-shadow:0 4px 7px rgba(0,0,0,.22)}
 /* The table of contents inside a book: one row per lesson, one expanded card. */
+/* ---- The topic map ----
+   The shelf's contents, drawn as a path rather than a list. A topic is seven
+   lessons and a review — a finish line she can see — where an XP bar never
+   ends. Every state is still derived from qstat coverage; nothing new is
+   stored, and nothing is ever locked. */
+.tmap{position:relative;display:flex;flex-direction:column;gap:2px;
+  padding:4px 0 2px;margin-bottom:12px}
+/* A LEFT RAIL, not an alternating zigzag. The zigzag left roughly 165px a side
+   at 390px, and River's lesson titles ("2-2 Estimate Sums and Differences")
+   wrapped to four lines and collided with the spine. A single rail still reads
+   as a path and gives the title the whole width. */
+.tmap::before{content:'';position:absolute;left:23px;top:22px;bottom:22px;width:2px;
+  background:linear-gradient(to bottom,transparent,var(--line) 10%,
+  var(--line) 90%,transparent)}
+.stop{display:flex;align-items:center;gap:13px;
+  width:100%;padding:7px 4px;background:none;border:0;color:inherit;
+  font:inherit;text-align:left;min-height:var(--tap);border-radius:12px}
+.stop:focus-visible{outline:2px solid var(--ac-fg);outline-offset:2px}
+.stop .sbody{flex:1;min-width:0}
+.stop .pip{flex:0 0 40px;width:40px;height:40px;border-radius:50%;
+  border:2px solid var(--line);background-color:var(--deep);display:flex;
+  align-items:center;justify-content:center;font-size:13px;font-weight:700;
+  color:var(--faint);position:relative;z-index:1}
+.stop .pip.part{border-color:var(--ac-25);color:var(--ac-fg)}
+.stop .pip.done{border-color:#f2ca63;background-color:#f2ca63;color:#2a1c00}
+.stop.here .pip{box-shadow:0 0 0 4px var(--ac-8)}
+.stop.cap .pip{border-style:dashed}
+/* display:block matters — these are spans, and inline spans run the title and
+   its sub-label together on one line. */
+.stop .t{display:block;font-size:14px;font-weight:600;line-height:1.35}
+.stop.todo .t{color:var(--muted)}
+.stop .s{display:block;font-size:11.5px;color:var(--faint);margin-top:2px}
+.stop .cov{display:block;height:4px;border-radius:2px;background:var(--line-soft);
+  margin-top:6px;overflow:hidden;max-width:170px}
+.stop .cov i{display:block;height:100%;background:var(--ac);border-radius:2px}
+/* The crest marks a topic that is genuinely over — see capstoneOf(). */
+.tcrest{display:flex;align-items:center;gap:13px;padding:14px;border-radius:16px;
+  border:1px solid var(--line);background-color:var(--deep);margin-bottom:12px}
+.tcrest.won{border-color:#f2ca63;background-color:color-mix(in srgb,#f2ca63 10%,transparent)}
+.tcrest .sig{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:21px;
+  filter:grayscale(1) opacity(.6)}
+.tcrest.won .sig{border-color:#f2ca63;filter:none}
+.tcrest .ct{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600}
+.tcrest .cs{font-size:12.5px;color:var(--faint);margin-top:2px;line-height:1.45}
 .tocrow{width:100%;display:flex;align-items:center;gap:12px;min-height:var(--tap);
   padding:12px 14px;border:1px solid var(--line);border-radius:14px;
   background-color:var(--surface);margin-bottom:9px;text-align:left;font-size:14.5px}
@@ -519,6 +564,31 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .cardbtn.hero .cb-t{font-size:22px}
 .modal-box h3{font-family:'Fraunces',Georgia,serif;font-size:28px;letter-spacing:-.02em}
 /* The quiz round as a constellation — gold for right, dim-but-lit for a miss. */
+/* ---- The round bar ----
+   Every question is a star; answering lights it and draws the line to the one
+   before, so a finished round is a shape rather than a row of ticks. A missed
+   question still lights its star, just dimmer — nothing breaks and nothing is
+   taken away, the same rule the Sky Map runs on.
+
+   Deliberately UNNAMED. The Sky Map names constellations, and one there means
+   a week she showed up five days out of seven. A round happens several times a
+   day; giving those names too would spend the Sky Map's currency. */
+.qband{display:block;width:100%;height:62px;margin-top:9px;overflow:visible}
+.qband .seg{stroke:#f2ca63;stroke-width:1.6;fill:none;opacity:.75;stroke-linecap:round}
+.qband .seg.miss{stroke:var(--muted);opacity:.5}
+.qband .star{fill:var(--line);transition:fill .35s ease}
+.qband .star.lit{fill:#f2ca63}
+.qband .star.dim{fill:var(--muted)}
+.qband .star.now{fill:var(--ac)}
+.qband .halo{fill:#f2ca63;opacity:0}
+@media (prefers-reduced-motion: no-preference){
+  .qband .seg{stroke-dasharray:1;stroke-dashoffset:1;animation:qdraw .5s ease forwards}
+  .qband .star.lit,.qband .star.dim{animation:qpop .45s ease}
+  .qband .halo.on{animation:qhalo .7s ease forwards}
+}
+@keyframes qdraw{to{stroke-dashoffset:0}}
+@keyframes qpop{0%{transform:scale(.45)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes qhalo{0%{opacity:.45;r:3}100%{opacity:0;r:14}}
 .qstars{display:flex;gap:9px;margin-top:11px;font-size:13px;line-height:1}
 .qstars .qs{color:var(--line);transition:color .3s}
 .qstars .qs.now{color:var(--ac)}
@@ -850,7 +920,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v88 · the library wins';
+const APP_VERSION = 'v89 · the round, drawn';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1448,7 +1518,119 @@ function unitLastStudied(u){
   all('log').forEach(l => { if(l.unitId === u.id && (l.updatedAt||0) > t) t = l.updatedAt; });
   return t;
 }
+/* ---------- The round, drawn ----------
+   Star positions are derived from a stable hash of the unit id, so a unit
+   always draws the same shape and different units draw different ones — but
+   nothing is stored and nothing is collected. It is feedback, not a trophy. */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+function svgEl(tag, attrs){
+  const n = document.createElementNS(SVG_NS, tag);
+  for(const k in attrs) n.setAttribute(k, attrs[k]);
+  return n;
+}
+/* A four-point sparkle, the same mark the Sky Map uses for a lit day. */
+function sparkPath(cx, cy, r){
+  const i = r * 0.34;
+  return 'M' + cx + ' ' + (cy-r) + ' Q' + (cx+i) + ' ' + (cy-i) + ' ' + (cx+r) + ' ' + cy +
+         ' Q' + (cx+i) + ' ' + (cy+i) + ' ' + cx + ' ' + (cy+r) +
+         ' Q' + (cx-i) + ' ' + (cy+i) + ' ' + (cx-r) + ' ' + cy +
+         ' Q' + (cx-i) + ' ' + (cy-i) + ' ' + cx + ' ' + (cy-r) + ' Z';
+}
+/* Evenly spaced across, height wandering from the hash — enough variation to
+   read as a constellation, bounded so it never clips or crowds. */
+function roundPoints(seed, n, w, h){
+  let s = (hashStr(String(seed)) || 7) >>> 0;
+  const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  const padX = n > 1 ? Math.min(26, w / (n + 1)) : w / 2;
+  const span = n > 1 ? (w - padX * 2) / (n - 1) : 0;
+  const out = [];
+  for(let i = 0; i < n; i++){
+    const y = 12 + rnd() * (h - 24);
+    out.push([padX + span * i, Math.round(y * 10) / 10]);
+  }
+  return out;
+}
+function roundBand(u){
+  const n = quizState.order.length;
+  const W = 320, H = 54;
+  const band = svgEl('svg', {class:'qband', viewBox:'0 0 ' + W + ' ' + H,
+    'aria-hidden':'true'});
+  const pts = roundPoints(u.id + ':' + n, n, W, H);
+  const state = quizState.order.map((oi, k) => {
+    const seen = k < quizState.i || (k === quizState.i && quizState.answered !== null);
+    if(!seen) return null;
+    return quizState.missed.includes(u.questions[oi].id) ? 'dim' : 'lit';
+  });
+  /* Segments first so the stars sit on top of the line. */
+  for(let i = 1; i < n; i++){
+    if(state[i-1] === null || state[i] === null) continue;
+    band.appendChild(svgEl('line', {x1:pts[i-1][0], y1:pts[i-1][1],
+      x2:pts[i][0], y2:pts[i][1], pathLength:1,
+      class:'seg' + (state[i] === 'dim' ? ' miss' : '')}));
+  }
+  pts.forEach(([cx, cy], i) => {
+    if(state[i]) band.appendChild(svgEl('circle', {cx, cy, r:3, class:'halo on'}));
+    const cls = state[i] ? 'star ' + state[i]
+      : (i === quizState.i ? 'star now' : 'star');
+    const st = svgEl('path', {d: sparkPath(cx, cy, state[i] ? 6.5 : 4.2), class: cls});
+    st.style.transformOrigin = cx + 'px ' + cy + 'px';
+    band.appendChild(st);
+  });
+  return band;
+}
 function hashStr(s){ let h = 0; for(let i = 0; i < s.length; i++) h = (h*31 + s.charCodeAt(i)) >>> 0; return h; }
+/* A series with a capstone has a defined END — River's maths topics finish on
+   a Topic Review. Without one (a vocabulary book that gains a lesson a week)
+   there is no honest "finished", so no crest is offered rather than one that
+   could later un-earn itself. Content flag, never inferred from counts. */
+const capstoneOf = units => units.find(u => u.capstone) || null;
+/* Earned by finishing the capstone itself, so it can never be taken away by a
+   lesson shipped afterwards. Nothing breaks, ever. */
+function crestWon(units){
+  const cap = capstoneOf(units);
+  return !!cap && unitDone(cap);
+}
+function topicMap(units, mark, openId, onPick){
+  const wrap = el('div','tmap');
+  units.forEach(u => {
+    const total = (u.questions || []).length;
+    const att = unitAttempted(u);
+    const done = unitDone(u);
+    const cap = !!u.capstone;
+    const b = el('button','stop' + (done ? '' : att ? '' : ' todo')
+      + (u.id === openId ? ' here' : '') + (cap ? ' cap' : ''));
+    const body = el('span','sbody');
+    body.appendChild(el('span','t', lessonLabel(u)));
+    body.appendChild(el('span','s', done ? 'every question met'
+      : att ? att + ' of ' + total + ' met'
+      : (u.id === mark.id ? 'your bookmark' : 'not yet')));
+    if(att && !done){
+      const cov = el('span','cov'), fill = el('i');
+      fill.style.width = Math.max(6, Math.round(att / total * 100)) + '%';
+      cov.appendChild(fill); body.appendChild(cov);
+    }
+    const pip = el('span','pip' + (done ? ' done' : att ? ' part' : ''));
+    pip.textContent = cap ? '★' : (done ? '✦' : String(units.indexOf(u) + 1));
+    b.appendChild(pip); b.appendChild(body);
+    b.addEventListener('click', () => onPick(u.id));
+    wrap.appendChild(b);
+  });
+  return wrap;
+}
+function crestEl(series, units){
+  const cap = capstoneOf(units);
+  if(!cap) return null;
+  const won = crestWon(units);
+  const c = el('div','tcrest' + (won ? ' won' : ''));
+  c.appendChild(el('span','sig', '🌸'));
+  const t = el('div');
+  t.appendChild(el('div','ct', series + ' crest'));
+  t.appendChild(el('div','cs', won
+    ? 'Earned by finishing every question in the review.'
+    : 'Yours once the review is done.'));
+  c.appendChild(t);
+  return c;
+}
 function shelvesFor(classId){
   const groups = new Map(), loose = [];
   units(classId).forEach(u => {
@@ -3340,24 +3522,16 @@ SCREENS.shelf = function(root){
       : `${done} of ${s.units.length} lesson${s.units.length>1?'s':''} finished · your bookmark is on “${lessonLabel(s.mark)}”.`));
   root.appendChild(head);
 
-  root.appendChild(divider('Contents'));
+  root.appendChild(divider('The map'));
   const openId = ctx.open || s.mark.id;
-  s.units.forEach(u => {
-    if(u.id === openId){
-      root.appendChild(unitCard(u, c, lessonLabel(u)));
-      return;
-    }
-    const isDone = unitDone(u), att = unitAttempted(u);
-    const r = el('button','tocrow');
-    const st = el('span','st' + (isDone ? ' done' : ''));
-    st.textContent = isDone ? '✓' : (u.id === s.mark.id ? '🔖' : '○');
-    r.appendChild(st);
-    r.appendChild(el('span','tl', lessonLabel(u)));
-    r.appendChild(el('span','mt', isDone ? 'finished'
-      : att ? `${att}/${u.questions.length} seen` : `${u.questions.length} questions`));
-    r.addEventListener('click', ()=>{ ctx.open = u.id; render(); });
-    root.appendChild(r);
-  });
+  /* The map IS the contents — one spine, not a path above a duplicate list.
+     The lesson she taps opens below it rather than replacing a stop, so the
+     path stays whole while she reads. */
+  root.appendChild(topicMap(s.units, s.mark, openId, id => { ctx.open = id; render(); }));
+  const crest = crestEl(s.name, s.units);
+  if(crest) root.appendChild(crest);
+  const open = s.units.find(u => u.id === openId) || s.units[0];
+  if(open) root.appendChild(unitCard(open, c, lessonLabel(open)));
 
   const back = el('button','btn btn-ghost','← ' + c.name);
   back.addEventListener('click',()=>go('unit',{classId:c.id}));
@@ -4658,13 +4832,7 @@ SCREENS.quiz = function(root){
   head.appendChild(r);
   /* One star per question in the round — gold when right, dim-but-lit on a
      miss (showing up still counts; Sky Map rules). */
-  const qs2 = el('div','qstars');
-  quizState.order.forEach((oi,k)=>{
-    const done2 = k < quizState.i || (k===quizState.i && quizState.answered!==null);
-    const missd = quizState.missed.includes(u.questions[oi].id);
-    qs2.appendChild(el('span','qs'+(done2 ? (missd?' dim':' lit') : (k===quizState.i?' now':'')),'✦'));
-  });
-  head.appendChild(qs2);
+  head.appendChild(roundBand(u));
   if(quizState.timed){
     const t = el('div','qtimer-track'), ti = el('i');
     ti.id = 'qtimer';

@@ -296,6 +296,48 @@ The convention, and it applies to every topic from here on:
   `order` — their Topic Reviews sort last on title alone. Leave them; adding
   `order` would re-draft them for no visible gain.
 
+### The round, drawn (v89 / Wayfinder v71, both apps)
+
+River asked for something game-like in the quizzes; Chris wanted nothing too
+gamey. Two additions came out of a prototype she played first
+(`wayfinder/prototype.html`), and both sit on the intrinsic side of the line:
+they make effort legible, they never price it.
+
+**The round bar is a constellation.** `roundBand()` replaces the row of `✦`
+glyphs with an SVG band: every question is a star, answering lights it and
+draws the line to the one before, so a finished round is a shape. Positions
+come from `roundPoints()`, seeded by a stable hash of the unit id — a unit
+always draws the same shape and different units differ, but nothing is stored
+and nothing is collected.
+
+- **A missed question still lights its star**, just dimmer, and its segment
+  still draws. Nothing breaks and nothing is taken away — the Sky Map rule.
+- **Deliberately UNNAMED.** The Sky Map names constellations and one there
+  means a week she showed up five days of seven. A round happens several times
+  a day; naming those too would spend the Sky Map's currency.
+
+**The topic map** replaces the shelf's contents list — `topicMap()`, one stop
+per part on a left rail, coverage on each, the tapped lesson opening as a full
+`unitCard()` **below** the map so the path stays whole while she reads. One
+spine, not a path above a duplicate list.
+
+**The crest** (`crestEl()`, `.tcrest`) marks a topic that is genuinely over.
+
+- **`capstone:true` is a content flag, never inferred.** A series with a
+  capstone has a defined end — River's maths topics finish on a Topic Review.
+  A vocabulary book that gains a lesson a week has no honest "finished", so it
+  gets no crest rather than one that could later un-earn itself.
+- **Earned by finishing the capstone itself**, so a lesson shipped afterwards
+  can never take it back. Verified.
+- Not currency: it cannot be spent, traded or bought, and nothing is gated.
+
+Three bugs the screenshots caught, all mine: the map's alternating zigzag left
+~165px a side at 390px and River's lesson titles wrapped to four lines into the
+spine (now a left rail); `.t`/`.s` were spans and ran together on one line
+(now `display:block`); and **`.crest` was already the subject-header crest
+ring** defined later in the sheet, which forced the block to 52×52 — renamed to
+`.tcrest` rather than fought.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
