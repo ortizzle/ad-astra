@@ -4,7 +4,7 @@
   "unit-sgt1": {
    "id": "unit-sgt1",
    "type": "unit",
-   "updatedAt": 1786574925050,
+   "updatedAt": 1786578000000,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -131,6 +131,26 @@
      "ex": {
       "main": "**Positive on (12/5, ∞), negative on (−∞, 12/5).** The x-intercept 12/5 is the switch; a positive slope means negative-then-positive.",
       "tip": "Find the intercept first — sign questions are intercept questions wearing a hat."
+     },
+     "variant": {
+      "q": "g(x) = 4x − 18. On what intervals is g(x) positive? negative?",
+      "opts": [
+       "positive: (−∞, 9/2); negative: (9/2, ∞)",
+       "positive: (9/2, ∞); negative: (−∞, 9/2)",
+       "positive: (−9/2, ∞); negative: (−∞, −9/2)",
+       "positive: (−∞, −9/2); negative: (−9/2, ∞)"
+      ],
+      "ans": 1,
+      "hint": "Positive means the output is above zero. Solve 4x − 18 > 0.",
+      "steps": [
+       "Positive means g(x) > 0, so solve 4x − 18 > 0.",
+       "4x > 18, so x > 18/4 = 9/2.",
+       "A rising line sits below zero before its x-intercept and above after it: positive on (9/2, ∞), negative on (−∞, 9/2)."
+      ],
+      "ex": {
+       "main": "**Positive on (9/2, ∞), negative on (−∞, 9/2).** The x-intercept 9/2 is the switch, and a positive slope means negative first, then positive.",
+       "tip": "Find the x-intercept first — every sign question is an intercept question underneath."
+      }
      }
     },
     {
@@ -155,6 +175,26 @@
      "ex": {
       "main": "**E(n) = 10(40) + 15(n − 40).** The classic error is 15n — paying overtime rate on ALL hours. The paper answer is a piecewise function; this is its second piece.",
       "tip": "Piecewise wage problems: anchor the flat part first, then add the rate × extra hours."
+     },
+     "variant": {
+      "q": "Nina earns $12/h for the first 35 hours of a week and $18/h for every hour beyond 35. For n > 35 hours, her weekly earnings E(n) are:",
+      "opts": [
+       "E(n) = 18n",
+       "E(n) = 12(35) + 18(n − 35)",
+       "E(n) = 18(n − 35)",
+       "E(n) = 12n + 18n"
+      ],
+      "ans": 1,
+      "hint": "The first 35 hours still pay $12 each — the higher rate only applies past 35.",
+      "steps": [
+       "Split the week: the first 35 hours pay 12 × 35 = $420 no matter how long she works.",
+       "Only the hours beyond 35 — that is (n − 35) of them — pay $18.",
+       "Total: E(n) = 420 + 18(n − 35), which simplifies to 18n − 210."
+      ],
+      "ex": {
+       "main": "**E(n) = 12(35) + 18(n − 35).** The usual slip is 18n, which pays the overtime rate on every hour including the first 35.",
+       "tip": "Anchor the flat part first, then add rate × extra hours."
+      }
      }
     },
     {
@@ -179,6 +219,26 @@
      "ex": {
       "main": "**(x + 6)² − 5.** Horizontal moves lie (left = +6 inside); vertical moves are honest (down = −5 outside).",
       "tip": "Check with the vertex: it should land at (−6, −5). Plug in x = −6 and see the minimum."
+     },
+     "variant": {
+      "q": "f(x) = x². g(x) is f(x) translated RIGHT 3 and UP 7. The rule for g(x) is:",
+      "opts": [
+       "g(x) = (x + 3)² + 7",
+       "g(x) = (x − 7)² + 3",
+       "g(x) = (x − 3)² + 7",
+       "g(x) = (x + 7)² − 3"
+      ],
+      "ans": 2,
+      "hint": "Inside the parentheses works backwards; outside is honest.",
+      "steps": [
+       "Right 3 goes inside and flips sign: (x − 3)².",
+       "Up 7 goes outside and keeps its sign: + 7.",
+       "g(x) = (x − 3)² + 7, with its vertex at (3, 7)."
+      ],
+      "ex": {
+       "main": "**(x − 3)² + 7.** Horizontal moves lie — right 3 is −3 inside — while vertical moves say what they mean.",
+       "tip": "Check the vertex: (x − h)² + k has its vertex at (h, k)."
+      }
      }
     },
     {
@@ -203,6 +263,26 @@
      "ex": {
       "main": "**g(x) = 42x.** Both operations are multipliers on the outside: 7 × (−1) × (−6x) = 42x.",
       "tip": "Stack all the outside multipliers into one number before writing the answer."
+     },
+     "variant": {
+      "q": "f(x) = −5x. g(x) is f(x) vertically stretched by 4 AND reflected in the x-axis. The rule is:",
+      "opts": [
+       "g(x) = 20x",
+       "g(x) = −20x",
+       "g(x) = −45x",
+       "g(x) = 45x"
+      ],
+      "ans": 0,
+      "hint": "Two multiplications: ×4, then ×(−1).",
+      "steps": [
+       "Stretch by 4: multiply the rule by 4 → −20x.",
+       "Reflect in the x-axis: multiply by −1 → 20x.",
+       "g(x) = 20x — the original minus and the reflection cancel each other."
+      ],
+      "ex": {
+       "main": "**g(x) = 20x.** Both moves are outside multipliers: 4 × (−1) × (−5x) = 20x.",
+       "tip": "Collapse every outside multiplier into one number before writing the answer."
+      }
      }
     },
     {
@@ -227,6 +307,26 @@
      "ex": {
       "main": "**25/24.** Sanity check: 7/8 is almost 1, adding more must pass 1 — only 25/24 does.",
       "tip": "Estimate before computing; it eliminates half the options for free."
+     },
+     "variant": {
+      "q": "5/6 + 3/8 =",
+      "opts": [
+       "29/24",
+       "8/14",
+       "15/48",
+       "24/29"
+      ],
+      "ans": 0,
+      "hint": "Common denominator: 24.",
+      "steps": [
+       "The LCD of 6 and 8 is 24.",
+       "5/6 = 20/24 and 3/8 = 9/24.",
+       "20/24 + 9/24 = 29/24, which is 1 5/24 — just over 1, and that fits."
+      ],
+      "ex": {
+       "main": "**29/24.** Estimate first: 5/6 is nearly 1 and 3/8 is over a third, so the answer has to pass 1.",
+       "tip": "Adding fractions never means adding the denominators."
+      }
      }
     },
     {
@@ -251,6 +351,26 @@
      "ex": {
       "main": "**2 2/9.** Ninths were already on the table — 1/3 just needed the costume change.",
       "tip": "When one denominator divides the other, the LCD is the bigger one. No multiplying needed."
+     },
+     "variant": {
+      "q": "2 5/6 + 1/2 =",
+      "opts": [
+       "2 6/8",
+       "3 1/3",
+       "2 1/3",
+       "3 5/12"
+      ],
+      "ans": 1,
+      "hint": "1/2 is 3/6.",
+      "steps": [
+       "Convert to sixths: 2 5/6 + 3/6.",
+       "5/6 + 3/6 = 8/6 = 1 2/6 = 1 1/3.",
+       "2 + 1 1/3 = 3 1/3."
+      ],
+      "ex": {
+       "main": "**3 1/3.** The fraction parts overflowed past a whole, so the whole-number part went up by one.",
+       "tip": "When the fractions add past 1, carry the extra whole across."
+      }
      }
     },
     {
@@ -275,6 +395,26 @@
      "ex": {
       "main": "**2 1/12.** Since 1/3 > 1/4, no borrowing — the parts subtract cleanly.",
       "tip": "Check whether the first fraction is bigger before deciding to borrow."
+     },
+     "variant": {
+      "q": "9 1/2 − 4 1/5 =",
+      "opts": [
+       "5 3/10",
+       "5 1/3",
+       "13 7/10",
+       "4 3/10"
+      ],
+      "ans": 0,
+      "hint": "Whole parts and fraction parts separately — no borrowing needed here.",
+      "steps": [
+       "Wholes: 9 − 4 = 5.",
+       "Fractions: 1/2 − 1/5 = 5/10 − 2/10 = 3/10.",
+       "Together: 5 3/10."
+      ],
+      "ex": {
+       "main": "**5 3/10.** Since 1/2 is bigger than 1/5, nothing needs borrowing and the parts subtract cleanly.",
+       "tip": "Check whether the first fraction is larger before deciding to borrow."
+      }
      }
     },
     {
@@ -299,6 +439,26 @@
      "ex": {
       "main": "**1 1/24.** Multiplying by 1/6 of something slightly over 6 should give slightly over 1 — and it does.",
       "tip": "Never multiply a mixed number directly. Improper first, always."
+     },
+     "variant": {
+      "q": "1/4 · 3 3/5 =",
+      "opts": [
+       "3 3/20",
+       "9/10",
+       "12/15",
+       "1 4/9"
+      ],
+      "ans": 1,
+      "hint": "Mixed number → improper fraction first.",
+      "steps": [
+       "3 3/5 = 18/5.",
+       "(1/4)(18/5) = 18/20.",
+       "18/20 simplifies to 9/10."
+      ],
+      "ex": {
+       "main": "**9/10.** A quarter of something a bit under 4 should be a bit under 1, and 9/10 is.",
+       "tip": "Never multiply a mixed number directly — convert, multiply, then simplify."
+      }
      }
     },
     {
@@ -323,6 +483,26 @@
      "ex": {
       "main": "**Nonlinear — the rate changes.** On paper, question 9 wants exactly this sentence plus the three computations shown; the rubric gives full credit for work + conclusion.",
       "tip": "On show-your-work items, compute every listed interval, then say what the comparison MEANS in one sentence."
+     },
+     "variant": {
+      "q": "For f(x) = 6 − 2|x|, the average rate of change is +2 on [−3, 0] and −2 on [0, 5]. What does that tell you?",
+      "opts": [
+       "The function is linear, since a rate exists on both intervals",
+       "The function is nonlinear, because the rate of change is not constant",
+       "The function is increasing everywhere",
+       "The function has no rate of change at x = 0"
+      ],
+      "ans": 1,
+      "hint": "What would those two numbers look like for a straight line?",
+      "steps": [
+       "A linear function has the same average rate of change over every interval — one slope everywhere.",
+       "Here the two intervals give +2 and −2, which are different.",
+       "Different rates on different intervals means the graph is not a single line: f is nonlinear, a corner-shaped absolute-value graph."
+      ],
+      "ex": {
+       "main": "**Nonlinear — the rate changes.** Computing the rates is only half the work; saying what the comparison MEANS is the other half.",
+       "tip": "On show-your-work items, finish with one sentence interpreting the numbers."
+      }
      }
     },
     {
@@ -347,6 +527,26 @@
      "ex": {
       "main": "**y = (1/4)x.** Compression = fraction multiplier; the negative options sneak in a reflection nobody asked for.",
       "tip": "Only apply the transformations named. Extra sign flips are the top distractor trick."
+     },
+     "variant": {
+      "q": "Write the equation for this transformation of y = x: a vertical compression by a factor of 1/3.",
+      "opts": [
+       "y = 3x",
+       "y = −3x",
+       "y = (1/3)x",
+       "y = −(1/3)x"
+      ],
+      "ans": 2,
+      "hint": "Compression means a multiplier between 0 and 1 — and nothing here flips.",
+      "steps": [
+       "A vertical compression by 1/3 multiplies every output by 1/3.",
+       "No reflection is mentioned, so the sign stays positive.",
+       "y = (1/3)x."
+      ],
+      "ex": {
+       "main": "**y = (1/3)x.** Compression means a fractional multiplier; the negative versions smuggle in a reflection nobody asked for.",
+       "tip": "Apply only the transformations named — extra sign flips are the usual trap."
+      }
      }
     },
     {
@@ -371,6 +571,26 @@
      "ex": {
       "main": "**48, 18, −6, 42, 30.** One clean check: f(0) = −1 must become −6 — any option without −6 at x = 0 dies instantly.",
       "tip": "Pick the easiest row (usually x = 0) and eliminate options before computing the rest."
+     },
+     "variant": {
+      "q": "f(x) by table: f(−5) = 6, f(−1) = −2, f(0) = 4, f(3) = −7, f(8) = 5. For g(x) = 4·f(x), the g values at x = −5, −1, 0, 3, 8 are:",
+      "opts": [
+       "24, −8, 16, −28, 20",
+       "−24, 8, −16, 28, −20",
+       "−20, −4, 4, 12, 32",
+       "10, 2, 8, −3, 9"
+      ],
+      "ans": 0,
+      "hint": "Multiply each OUTPUT by 4; the x values never move.",
+      "steps": [
+       "g multiplies every output by 4: 6→24, −2→−8, 4→16, −7→−28, 5→20.",
+       "The x column is untouched — a vertical transformation never moves x.",
+       "Row for row: 24, −8, 16, −28, 20."
+      ],
+      "ex": {
+       "main": "**24, −8, 16, −28, 20.** One quick check kills most of the wrong sets: f(0) = 4 must become 16.",
+       "tip": "Pick the easiest row and eliminate before computing the rest."
+      }
      }
     },
     {
@@ -395,6 +615,26 @@
      "ex": {
       "main": "**Stretch by 3, down 4.** Compare coefficients for the stretch, compare constants for the shift — two separate reads.",
       "tip": "9 = 3 × 3: the stretch factor is new coefficient ÷ old coefficient."
+     },
+     "variant": {
+      "q": "f(x) = 2x², g(x) = 10x² + 3. What transformations turn f into g?",
+      "opts": [
+       "Stretched vertically by 5, translated up 3",
+       "Stretched vertically by 5, translated down 3",
+       "Stretched by 1/5, translated up 3",
+       "Stretched vertically by 8, translated up 3"
+      ],
+      "ans": 0,
+      "hint": "How do you get from 2x² to 10x²? And where did the +3 come from?",
+      "steps": [
+       "2x² becomes 10x² by multiplying by 5 — a vertical stretch by 5.",
+       "The + 3 on the end is a translation up 3.",
+       "Stretch by 5, then up 3."
+      ],
+      "ex": {
+       "main": "**Stretch by 5, up 3.** Compare coefficients for the stretch and constants for the shift — two separate reads of the same rule.",
+       "tip": "The stretch factor is the new coefficient divided by the old one, not their difference."
+      }
      }
     },
     {
@@ -419,6 +659,26 @@
      "ex": {
       "main": "**Left 5, down 9.** Reading transformations off a rule is #3's skill mirrored — both directions are on the test.",
       "tip": "The vertex (−h, k) of (x − h)² + k tells the whole story at a glance."
+     },
+     "variant": {
+      "q": "f(x) = x², g(x) = (x − 7)² + 4. The graph of g is the graph of f…",
+      "opts": [
+       "translated left 7 and up 4",
+       "translated right 4 and up 7",
+       "translated right 7 and up 4",
+       "translated left 4 and down 7"
+      ],
+      "ans": 2,
+      "hint": "Inside the parentheses works backwards.",
+      "steps": [
+       "(x − 7) inside means RIGHT 7 — inside flips the sign.",
+       "+ 4 outside means UP 4 — outside is honest.",
+       "Right 7, up 4; the vertex lands at (7, 4)."
+      ],
+      "ex": {
+       "main": "**Right 7, up 4.** Reading a transformation off a rule is the same skill as writing one, run backwards.",
+       "tip": "The vertex of (x − h)² + k is (h, k) — it tells the whole story at a glance."
+      }
      }
     },
     {
@@ -443,6 +703,26 @@
      "ex": {
       "main": "**x-intercepts ±7, y-intercept −49.** The trap options mix a correct half with a wrong half — solve both halves before looking at the letters.",
       "tip": "Half-right options are ExamView's favorite weapon. Compute fully first, then match."
+     },
+     "variant": {
+      "q": "What are the x- and y-intercepts of f(x) = x² − 36?",
+      "opts": [
+       "x: ±6; y: 36",
+       "x: ±18; y: −36",
+       "x: ±36; y: −36",
+       "x: ±6; y: −36"
+      ],
+      "ans": 3,
+      "hint": "Set y = 0 for one, x = 0 for the other.",
+      "steps": [
+       "x-intercepts: x² − 36 = 0 → x² = 36 → x = ±6.",
+       "y-intercept: f(0) = 0 − 36 = −36.",
+       "x: ±6, y: −36."
+      ],
+      "ex": {
+       "main": "**x-intercepts ±6, y-intercept −36.** The near-miss versions get one half right and one half wrong, so both halves have to be computed before matching.",
+       "tip": "Half-right options are the standard trap — solve fully, then look at the choices."
+      }
      }
     },
     {
@@ -467,6 +747,26 @@
      "ex": {
       "main": "**Increasing on (−∞, 0), decreasing on (0, ∞).** The −7 is a decoy — vertical shifts never change where a graph rises or falls.",
       "tip": "Increase/decrease questions ignore vertical shifts entirely. Cross them out."
+     },
+     "variant": {
+      "q": "For what values of x is y = |x| − 4 increasing? decreasing?",
+      "opts": [
+       "increasing: (−∞, 0); decreasing: (0, ∞)",
+       "increasing: (0, ∞); decreasing: (−∞, 0)",
+       "increasing: (−4, ∞); decreasing: never",
+       "increasing: never; decreasing: (−∞, −4)"
+      ],
+      "ans": 1,
+      "hint": "|x| is a right-way-up V. Where does a V go uphill?",
+      "steps": [
+       "|x| makes a V with its lowest point at x = 0; the − 4 only slides it down.",
+       "Left of the vertex the graph falls: decreasing on (−∞, 0).",
+       "Right of the vertex it climbs: increasing on (0, ∞)."
+      ],
+      "ex": {
+       "main": "**Increasing on (0, ∞), decreasing on (−∞, 0).** The − 4 is a decoy: a vertical shift never changes where a graph rises or falls.",
+       "tip": "A right-way-up V falls then rises; an upside-down one does the opposite."
+      }
      }
     },
     {
@@ -491,6 +791,26 @@
      "ex": {
       "main": "**5 less, down 5.** The number story and the picture story are the same fact in two languages.",
       "tip": "If your two halves disagree (less but up?), one of them is wrong — recheck."
+     },
+     "variant": {
+      "q": "How are y = x and y = x + 7 related?",
+      "opts": [
+       "Outputs 7 less; graph translated down 7",
+       "Outputs 7 more; graph translated up 7",
+       "Outputs 7 more; graph translated down 7",
+       "Outputs 7 less; graph translated up 7"
+      ],
+      "ans": 1,
+      "hint": "Adding 7 does what to every output?",
+      "steps": [
+       "Every output of x + 7 is exactly 7 more than x’s output.",
+       "Raising every output by 7 slides the whole graph UP 7.",
+       "More, and up — the two halves have to agree."
+      ],
+      "ex": {
+       "main": "**7 more, up 7.** The number story and the picture story are one fact told twice.",
+       "tip": "If your two halves disagree — more, but down? — one of them is wrong."
+      }
      }
     },
     {
@@ -515,6 +835,26 @@
      "ex": {
       "main": "**−x² − 3.** The distractor −x² + 3 forgets to flip the +3 — the reflection takes the whole function, constant included.",
       "tip": "Wrap the old rule in parentheses, then put the minus outside. Distribute. Done."
+     },
+     "variant": {
+      "q": "g(x) is the reflection of f(x) = x² − 5 in the x-axis. The rule for g is:",
+      "opts": [
+       "g(x) = −x² − 5",
+       "g(x) = x² + 5",
+       "g(x) = −x² + 5",
+       "g(x) = x² − 5"
+      ],
+      "ans": 2,
+      "hint": "Reflection negates the ENTIRE rule.",
+      "steps": [
+       "Reflecting in the x-axis means g(x) = −f(x).",
+       "−(x² − 5) = −x² + 5 — the minus distributes to both terms.",
+       "g(x) = −x² + 5."
+      ],
+      "ex": {
+       "main": "**−x² + 5.** The tempting wrong answer flips only the x² and leaves the −5 alone; the reflection takes the whole function, constant included.",
+       "tip": "Wrap the old rule in brackets, put the minus outside, then distribute."
+      }
      }
     },
     {
@@ -539,6 +879,26 @@
      "ex": {
       "main": "**−3x − 4.** Same rule as #17: everything flips. Two questions in a row means the test cares — expect it Monday.",
       "tip": "Repeated skills on a study guide are the teacher underlining what's on the test."
+     },
+     "variant": {
+      "q": "g(x) is the reflection of f(x) = −2x + 9 in the x-axis. The rule for g is:",
+      "opts": [
+       "g(x) = 2x − 9",
+       "g(x) = −2x − 9",
+       "g(x) = 2x + 9",
+       "g(x) = −2x + 9"
+      ],
+      "ans": 0,
+      "hint": "Same move as the last one, straight line this time.",
+      "steps": [
+       "g(x) = −f(x) = −(−2x + 9).",
+       "Distribute the minus: 2x − 9.",
+       "Both the slope and the intercept change sign."
+      ],
+      "ex": {
+       "main": "**2x − 9.** Every term flips, slope and intercept alike — and a double negative on the slope turns it positive.",
+       "tip": "Two reflection questions in a row on a guide means the test cares about it."
+      }
      }
     },
     {
@@ -563,6 +923,26 @@
      "ex": {
       "main": "**y = x − 1.** On paper this is a graph-matching question — find the line crossing y at −1. Here we test the equation behind the right picture.",
       "tip": "When answer choices are graphs, compute the new equation first, THEN find its picture."
+     },
+     "variant": {
+      "q": "y = x + 4 is translated down 6 units. The new equation is:",
+      "opts": [
+       "y = x + 10",
+       "y = x − 2",
+       "y = x − 6",
+       "y = x − 24"
+      ],
+      "ans": 1,
+      "hint": "Down 6 subtracts 6 from the whole right side.",
+      "steps": [
+       "Translate down 6: subtract 6 outside → y = (x + 4) − 6.",
+       "Simplify: y = x − 2.",
+       "The line still has slope 1, but now crosses the y-axis at −2."
+      ],
+      "ex": {
+       "main": "**y = x − 2.** Vertical shifts move the intercept and leave the slope alone.",
+       "tip": "Compute the new equation first; then, if the choices are graphs, find its picture."
+      }
      }
     },
     {
@@ -587,6 +967,26 @@
      "ex": {
       "main": "**3.6%.** Two places right, keep every digit. The 37% option is for point-sliders who go three places.",
       "tip": "0.0__ numbers always convert to single-digit percents. Feel the size before you answer."
+     },
+     "variant": {
+      "q": "Write 0.085 as a percent.",
+      "opts": [
+       "0.85%",
+       "85%",
+       "8.5%",
+       "8.6%"
+      ],
+      "ans": 2,
+      "hint": "Decimal → percent: slide the point two places right.",
+      "steps": [
+       "Percent means per hundred, so multiply by 100.",
+       "0.085 × 100 = 8.5.",
+       "8.5% — no rounding is involved, so 8.6% is a trap rather than an approximation."
+      ],
+      "ex": {
+       "main": "**8.5%.** Two places right, keeping every digit; going three places gives 85%, which is ten times too big.",
+       "tip": "Feel the size first: 0.0-something is always a single-digit percent."
+      }
      }
     },
     {
@@ -611,6 +1011,26 @@
      "ex": {
       "main": "**4 : 5.** Order is the whole game — 5 : 4 is the same numbers in the wrong seats, and it is sitting right there waiting.",
       "tip": "Underline which quantity the question puts FIRST before forming any ratio."
+     },
+     "variant": {
+      "q": "Theo had saved $48, then spent $12 on Friday. What is the ratio of his CURRENT savings to his PREVIOUS balance?",
+      "opts": [
+       "4 : 3",
+       "1 : 4",
+       "3 : 4",
+       "4 : 1"
+      ],
+      "ans": 2,
+      "hint": "Current first. What does he have now?",
+      "steps": [
+       "Current savings: 48 − 12 = $36. Previous balance: $48.",
+       "Ratio current : previous = 36 : 48.",
+       "Divide both by 12 → 3 : 4."
+      ],
+      "ex": {
+       "main": "**3 : 4.** Order decides it — the same two numbers reversed is a different, wrong answer sitting right there.",
+       "tip": "Underline which quantity the question names first before writing any ratio."
+      }
      }
     },
     {
@@ -635,6 +1055,26 @@
      "ex": {
       "main": "**≈6,747.** Reverse-percent problems DIVIDE by the rate. Multiplying gives 243 — absurd — and 12,820 is the ×10 decoy.",
       "tip": "'Is' = equals, 'of' = times. Translate the sentence, then solve for whichever letter is missing."
+     },
+     "variant": {
+      "q": "966 students ride the bus, which is 23% of the school. About how many students are in the school?",
+      "opts": [
+       "4,200 students",
+       "222 students",
+       "9,660 students",
+       "1,254 students"
+      ],
+      "ans": 0,
+      "hint": "The part and the percent are known; the WHOLE is missing.",
+      "steps": [
+       "Translate: 966 is 23% of x → 966 = 0.23x.",
+       "x = 966 / 0.23 = 4200.",
+       "Sanity check: 23% is a bit under a quarter, and 966 × 4 ≈ 3900, so the answer should sit near 4000."
+      ],
+      "ex": {
+       "main": "**4,200.** Reverse-percent problems DIVIDE by the rate; multiplying instead gives 222, which is smaller than the part itself and so impossible.",
+       "tip": "\"Is\" means equals and \"of\" means times — translate the sentence, then solve for the missing letter."
+      }
      }
     },
     {
@@ -659,6 +1099,26 @@
      "ex": {
       "main": "**50%.** Spotting that 190 is half of 380 answers it with zero arithmetic.",
       "tip": "Scan for halves, quarters and tenths before setting up any equation."
+     },
+     "variant": {
+      "q": "What percent of 250 is 200?",
+      "opts": [
+       "80%",
+       "125%",
+       "8%",
+       "50%"
+      ],
+      "ans": 0,
+      "hint": "200 is four-fifths of 250.",
+      "steps": [
+       "Set up: 200 = p × 250.",
+       "p = 200/250 = 0.8.",
+       "0.8 = 80%."
+      ],
+      "ex": {
+       "main": "**80%.** Spotting that 200 is four-fifths of 250 answers it with almost no arithmetic; 125% is the same division upside down.",
+       "tip": "Check which number is the whole — the one after \"of\" — before dividing."
+      }
      }
     },
     {
@@ -683,6 +1143,26 @@
      "ex": {
       "main": "**$2.27.** Each wrong option is a named error: wrong quantity, slid decimal. Read what the question actually asks for.",
       "tip": "Tax questions come in two flavors — the tax, or the total. Circle which one before multiplying."
+     },
+     "variant": {
+      "q": "Sales tax is 6%. The tax on a $43.50 purchase is:",
+      "opts": [
+       "$43.56",
+       "$2.61",
+       "$7.25",
+       "$26.10"
+      ],
+      "ans": 1,
+      "hint": "The question asks for the TAX alone, not the total.",
+      "steps": [
+       "Tax = 0.06 × 43.50.",
+       "0.06 × 43.50 = 2.61.",
+       "The tax is $2.61; the total would be $46.11, which is not what was asked."
+      ],
+      "ex": {
+       "main": "**$2.61.** Each wrong choice is a named mistake: adding instead of multiplying, sliding the decimal, or answering the question that was not asked.",
+       "tip": "Circle whether the question wants the tax or the total before you multiply."
+      }
      }
     },
     {
@@ -707,6 +1187,26 @@
      "ex": {
       "main": "**$15.** The batch shortcut and the proportion agree — two roads, one answer, full confidence.",
       "tip": "When the new amount is a clean multiple, count batches instead of cross-multiplying."
+     },
+     "variant": {
+      "q": "A farm stand charges $5 for 2 pounds of peaches. What do 14 pounds cost?",
+      "opts": [
+       "$28",
+       "$35",
+       "$70",
+       "$17"
+      ],
+      "ans": 1,
+      "hint": "14 pounds is seven 2-pound batches.",
+      "steps": [
+       "Set the proportion: 5/2 = x/14.",
+       "Cross-multiply: 2x = 70, so x = 35.",
+       "Or count batches: 14 lb is 7 batches of 2 lb, and 7 × $5 = $35."
+      ],
+      "ex": {
+       "main": "**$35.** The batch count and the proportion agree, which is two independent roads to the same answer.",
+       "tip": "When the new amount is a clean multiple, counting batches beats cross-multiplying."
+      }
      }
     },
     {
@@ -731,6 +1231,26 @@
      "ex": {
       "main": "**y = −(3/2)|x − 16| + 24.** Vertex from the peak, slope from rise-over-run, sign from the opening direction — three reads, no guessing.",
       "tip": "On the paper version, pull (h, k) off the graph's peak first; it eliminates most options alone."
+     },
+     "variant": {
+      "q": "A ride rises from height 0, peaks at 30 m at x = 12 s, and returns to 0 at x = 24 s, in straight lines. Its height equation is:",
+      "opts": [
+       "y = −(5/2)|x − 12| + 30",
+       "y = −(5/2)x + 30",
+       "y = −(2/5)|x − 30| + 12",
+       "y = (5/2)|x − 12| + 30"
+      ],
+      "ans": 0,
+      "hint": "Up then symmetrically down in straight lines is an absolute-value vertex form.",
+      "steps": [
+       "Up-then-down in straight lines is an upside-down V: y = a|x − h| + k with vertex (h, k) = (12, 30).",
+       "Slope: it climbs 30 m in 12 s, so 30/12 = 5/2, and the V opens downward, making a = −5/2.",
+       "y = −(5/2)|x − 12| + 30. Check x = 0: −30 + 30 = 0 ✓, and x = 24 gives 0 ✓."
+      ],
+      "ex": {
+       "main": "**y = −(5/2)|x − 12| + 30.** Vertex from the peak, slope from rise over run, sign from the opening direction — three reads, no guessing.",
+       "tip": "Pull the vertex off the peak first; it eliminates most of the choices on its own."
+      }
      }
     },
     {
@@ -755,6 +1275,26 @@
      "ex": {
       "main": "**f(x + 4).** Pure vocabulary — and the exact rule questions 3, 13 and 28 all lean on.",
       "tip": "One mnemonic carries four questions on this guide: inside lies, outside is honest."
+     },
+     "variant": {
+      "q": "A function f(x) is shifted RIGHT five units. The transformed function is:",
+      "opts": [
+       "f(x + 5)",
+       "f(x) + 5",
+       "f(x − 5)",
+       "f(x) − 5"
+      ],
+      "ans": 2,
+      "hint": "Left and right live inside the parentheses — and they lie.",
+      "steps": [
+       "Horizontal shifts go inside the parentheses.",
+       "Inside works backwards: RIGHT 5 is −5 inside.",
+       "f(x − 5)."
+      ],
+      "ex": {
+       "main": "**f(x − 5).** Pure vocabulary, and the same rule several other questions on this guide lean on.",
+       "tip": "One mnemonic carries four of these questions: inside lies, outside is honest."
+      }
      }
     },
     {
@@ -779,6 +1319,26 @@
      "ex": {
       "main": "**f(x − 2).** 'Later' means right, and right means minus inside — the double-backwards that catches everyone once. On paper, pick the graph slid right.",
       "tip": "Test one meaningful moment (takeoff) in the new rule; if it lands at the right time, the sign is right."
+     },
+     "variant": {
+      "q": "f(x) is a train’s distance from the station for a 9:00 departure. One day it leaves THREE HOURS EARLY. The new distance function is:",
+      "opts": [
+       "y = f(x + 3)",
+       "y = f(x − 3)",
+       "y = f(x) + 3",
+       "y = f(x) − 3"
+      ],
+      "ans": 0,
+      "hint": "Everything happens 3 hours sooner — the graph slides LEFT.",
+      "steps": [
+       "Leaving early slides the whole timeline left by 3.",
+       "A shift LEFT is plus inside: f(x + 3).",
+       "Check one moment: departure was at x = 0, and f((−3) + 3) = f(0), so it now departs at x = −3, three hours earlier. ✓"
+      ],
+      "ex": {
+       "main": "**f(x + 3).** \"Earlier\" means left, and left means plus inside — the double-backwards that catches everyone once.",
+       "tip": "Test one meaningful moment in the new rule; if it lands at the right time, the sign is right."
+      }
      }
     },
     {
@@ -803,6 +1363,26 @@
      "ex": {
       "main": "**Up from (0,4), down from (0,−4).** Reflections flip vertex sign and opening direction together — a graph where only one flipped is the trap.",
       "tip": "For graph-choice reflections, check the vertex pair first, the direction pair second."
+     },
+     "variant": {
+      "q": "f(x) = x² − 6, and g is its reflection across the x-axis. Which pair of facts identifies the correct graph?",
+      "opts": [
+       "f opens up from (0, −6); g opens down from (0, 6)",
+       "f opens down from (0, −6); g opens up from (0, 6)",
+       "f opens up from (0, 6); g opens down from (0, −6)",
+       "Both open up, from (0, −6) and (0, 6)"
+      ],
+      "ans": 0,
+      "hint": "Reflect the vertex and the direction — both flip.",
+      "steps": [
+       "f(x) = x² − 6 is an upward parabola with vertex (0, −6).",
+       "g(x) = −x² + 6 opens downward with vertex (0, 6).",
+       "The right picture shows two mirror parabolas separated by the x-axis."
+      ],
+      "ex": {
+       "main": "**Up from (0, −6), down from (0, 6).** A reflection flips the vertex sign and the opening direction together; a graph where only one flipped is the trap.",
+       "tip": "For reflection graph choices, check the vertex pair first and the direction pair second."
+      }
      }
     },
     {
@@ -827,10 +1407,31 @@
      "ex": {
       "main": "**Domain all reals; range y ≥ −2.** The −3 belongs to the VERTEX's x-position, not to the domain — that confusion is exactly what the choices restricting the domain to x ≥ −3 are selling.",
       "tip": "Absolute value and polynomial functions always have all-real domains. Range is where the thinking lives."
+     },
+     "variant": {
+      "q": "Domain and range of y = |x − 4| + 1, in both notations:",
+      "opts": [
+       "domain {x | x ≥ 4}, [4, ∞); range {y | y ≥ 1}, [1, ∞)",
+       "domain: all reals, (−∞, ∞); range: all reals, (−∞, ∞)",
+       "domain: all reals, (−∞, ∞); range {y | y ≥ 1}, [1, ∞)",
+       "domain {x | x ≥ 4}, [4, ∞); range: all reals, (−∞, ∞)"
+      ],
+      "ans": 2,
+      "hint": "You can put ANY x into an absolute value. The vertex caps the bottom of the range.",
+      "steps": [
+       "Domain: |x − 4| accepts every real number — nothing divides and nothing square-roots. The domain is all reals.",
+       "The V has its vertex at (4, 1) and opens upward from there.",
+       "Outputs start at 1 and climb: range {y | y ≥ 1}, or [1, ∞)."
+      ],
+      "ex": {
+       "main": "**Domain all reals; range y ≥ 1.** The 4 is the VERTEX’s x-position, not a restriction on the domain — which is exactly what the choices limiting x are selling.",
+       "tip": "Absolute-value and polynomial functions always have all-real domains; the range is where the thinking is."
+      }
      }
     }
    ],
-   "order": 1
+   "order": 1,
+   "guide": true
   }
  }
 }

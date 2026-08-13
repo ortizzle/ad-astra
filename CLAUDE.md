@@ -296,6 +296,56 @@ The convention, and it applies to every topic from here on:
   `order` — their Topic Reviews sort last on title alone. Leave them; adding
   `order` would re-draft them for no visible gain.
 
+### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
+
+A unit flagged **`guide:true`** mirrors a printout the class handed out, and
+gets two doors on its card instead of the usual mode tiles. Built for Sedona's
+Test 1 Study Guide (Chris, 2026-08); it is engine, so both apps carry it.
+
+**Door 1 — "I did it on paper."** `SCREENS.guideentry` is a grid of A/B/C/D,
+one row per question. Thirty taps instead of thirty quiz screens, because she
+has already done the thinking on paper. `gradeGuide()` then writes everything
+an ordinary round writes — qstats, misses, one `log` (tagged `paper:true`) —
+and hands off to `SCREENS.guidewalk`: what she got wrong, what she put, the
+right answer, and the `steps` revealed on demand.
+
+**Door 2 — "Work it here."** The ordinary quiz screen with `guideMode:'work'`:
+every question in the authored order, and her place saved after each answer.
+
+**The rescue round** (`__rescue__`, `buildRescueUnit()`): for each missed
+question that carries a hand-written **`variant`**, it asks the variant — same
+skill, fresh numbers. Synthetic like `__review__`; never stored, never synced.
+
+Rules that are the point:
+
+- **Option order is FIXED on a guide unit.** Everywhere else options shuffle so
+  the answer cannot be learned by position (v64). Here they must not: she is
+  entering the letter she wrote, and if the app's C is not the paper's C the
+  whole mode is a lie. Scoped to `u.guide`; the rescue round shuffles normally,
+  because that is practice, not transcription.
+- **A blank is a blank, never a wrong answer.** Skipping a question on paper is
+  not the same as missing it, and scoring it wrong would put a question she
+  never attempted onto the review ladder. The button says how many it will mark.
+- **The rescue round never moves the ladder, in either direction.** Answering a
+  fresh variant moments after reading the walkthrough is massed practice, not
+  spaced retrieval; promoting the box would credit a durability she has not
+  shown. `finishQuiz` excludes `__rescue__`, and `answer()` writes no new miss
+  for a `_rescue` question. Attempts still count, so the work is visible.
+- **`guidepass` is one record per unit** (`guide_<unitId>`), holding
+  `{answers:{qid:idx}, submitted}`. In `PROGRESS_TYPES`, so Fresh start clears
+  it. The deterministic id means it can never duplicate across devices.
+- **Variants are hand-authored and verified**, never generated — a confidently
+  wrong rescue question is worse than none. All 30 for Test 1 were re-derived
+  independently in the builder's assertions. `check_content.py` enforces that a
+  guide unit has a variant on every question, and that each variant is not a
+  copy of its original.
+
+Incidental, caught by screenshot: the walkthrough steps were first built out of
+`.row`/`.k`/`.v`, which is a label-and-value layout — `.row .v` is
+`white-space:nowrap`, so a sentence-long step ran off the side of the screen.
+They now use the same `.step` markup the quiz's own walkthrough uses, and
+`test_overflow.js` opens every walkthrough at once to keep it that way.
+
 ### The Wordly Wise Book 9 shelf (v73)
 
 Sedona's vocabulary lessons ship as `Wordly Wise Book 9 · Lesson N`, so they

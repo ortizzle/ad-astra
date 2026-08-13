@@ -154,6 +154,30 @@ button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:
 .btn+.btn,.btn-row+.btn,.btn+.btn-row{margin-top:10px}
 .btn-row .btn+.btn{margin-top:0}
 .btn-sm{min-height:var(--tap);padding:8px 14px;font-size:13px;width:auto;border-radius:11px}
+/* ---- Paper study guide ---- */
+.door{width:100%;display:flex;align-items:center;gap:13px;min-height:var(--tap);
+  padding:14px;margin-bottom:10px;border:1px solid var(--line);border-radius:16px;
+  background-color:var(--surface);text-align:left;color:inherit}
+.door .dn{font-size:22px;flex:0 0 auto}
+.door .db{flex:1;min-width:0}
+.door .db b{display:block;font-weight:600;font-size:15px}
+.door .db small{display:block;color:var(--faint);font-size:12.5px;
+  line-height:1.5;margin-top:3px}
+.grow{width:100%;display:flex;align-items:center;gap:8px;padding:7px 0;
+  border-top:1px solid var(--line)}
+.grow:first-child{border-top:0}
+.grow .gn{flex:0 0 26px;font-size:12.5px;color:var(--faint);text-align:right}
+.gopt{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gopt button{min-height:var(--tap);border-radius:11px;border:1px solid var(--line);
+  background-color:var(--surface);color:var(--muted);font-weight:700;font-size:14px}
+.gopt button.on{background-color:var(--ac);border-color:var(--ac);color:var(--ac-on,#12100a)}
+.gbar{position:sticky;bottom:0;padding:12px 0 4px;background:linear-gradient(
+  to top, var(--ink) 62%, transparent)}
+.wq{border-top:1px solid var(--line);padding:13px 0}
+.wq:first-child{border-top:0}
+.wq .qh{font-size:14px;line-height:1.5;font-weight:600}
+.wq .picked{font-size:12.5px;color:var(--faint);margin-top:5px;line-height:1.55}
+.wq .picked b{color:var(--good);font-weight:600}
 .btn[disabled]{opacity:.5;pointer-events:none}
 
 nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in srgb, var(--ink) 92%, transparent);backdrop-filter:blur(16px);border-top:1px solid var(--line-soft);padding-bottom:env(safe-area-inset-bottom)}
@@ -826,7 +850,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v86 · tap targets';
+const APP_VERSION = 'v87 · two doors';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1390,7 +1414,7 @@ function softDelete(id){ const r = DATA.records[id]; if(!r) return;
 const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type===t);
 /* Everything that counts as "progress" — what Fresh start clears. Content
    (units), assessments, prefs and roster are deliberately not on this list. */
-const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck','teach'];
+const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck','teach','guidepass'];
 /* Student-facing everywhere. A unit without a status predates the review gate
    and is treated as already approved. */
 const units = cid => all('unit')
@@ -3217,6 +3241,37 @@ function unitCard(u, c, label){
     ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
     card.appendChild(ov);
   }
+  /* A paper guide gets its own two doors instead of the usual mode tiles: the
+     modes are different enough in kind that an icon and two words would not
+     carry the difference. */
+  if(u.guide){
+    const ans = guidePass(u.id).answers || {};
+    const entered = Object.keys(ans).length;
+    const door = (ic, title, sub, fn) => {
+      const b = el('button','door');
+      b.appendChild(el('span','dn', ic));
+      const db = el('span','db');
+      db.appendChild(el('b',null,title));
+      db.appendChild(el('small',null,sub));
+      b.appendChild(db);
+      b.addEventListener('click', fn);
+      return b;
+    };
+    card.appendChild(door('📝','I did it on paper',
+      entered ? entered+' of '+u.questions.length+' answers entered — pick up where you left off'
+              : 'Enter the answers you wrote, and it marks them and walks you through the misses',
+      ()=>go('guideentry',{unitId:u.id, classId:c.id})));
+    card.appendChild(door('✍️','Work it here',
+      'Every question in order, the same letters as the printout. Your place is saved if you stop.',
+      ()=>go('quiz',{unitId:u.id, classId:c.id, guideMode:'work'})));
+    if(guidePass(u.id).submitted)
+      card.appendChild(door('🔁','See how it went',
+        'Your marked pass, the misses, and a second go at them',
+        ()=>go('guidewalk',{unitId:u.id, classId:c.id})));
+    card.appendChild(modeTile('cards','Flashcards','flip & check',
+      ()=>go('cards',{unitId:u.id, classId:c.id})));
+    return card;
+  }
   const row = el('div','mrow'+(!u.book?' three':''));
   row.appendChild(modeTile('cards','Flashcards','flip & check',()=>go('cards',{unitId:u.id,classId:c.id})));
   row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,c.id,false)));
@@ -4038,6 +4093,181 @@ SCREENS.day = function(root){
   back2.addEventListener('click', () => go('parent'));
   root.appendChild(back2);
 };
+/* ---- Door 1: she worked it on paper, and just needs it marked ----
+   A grid of A/B/C/D, one row per question. Thirty taps instead of thirty
+   quiz screens, because she has already done the thinking. Nothing is graded
+   until she says so, and a blank is a blank — not a wrong answer. Skipping a
+   question on paper is not the same as getting it wrong, and scoring it as
+   wrong would put a question she never attempted onto the review ladder. */
+SCREENS.guideentry = function(root){
+  const u = DATA.records[ctx.unitId];
+  if(!u || u.deleted) return go('today');
+  const pass = guidePass(u.id);
+  const ans = pass.answers || {};
+  const done = Object.keys(ans).length;
+  const total = u.questions.length;
+
+  root.appendChild(headline('Enter your answers',
+    'Put in what you actually wrote on the paper — not what you wish you wrote. The ones you missed are the whole point.'));
+
+  const card = el('div','card');
+  u.questions.forEach((q,i)=>{
+    const row = el('div','grow');
+    row.appendChild(el('span','gn', String(i+1)));
+    const box = el('div','gopt');
+    q.opts.forEach((_,k)=>{
+      const b = el('button','' + (ans[q.id]===k ? 'on' : ''),
+        String.fromCharCode(65+k));
+      b.addEventListener('click',()=>{
+        /* Tapping the same letter again clears it, so a mis-tap is fixable
+           without a separate clear control. */
+        const g = guidePass(u.id);
+        const next = { ...g.answers };
+        if(next[q.id] === k) delete next[q.id]; else next[q.id] = k;
+        put({ ...g, answers: next });
+        render();
+      });
+      box.appendChild(b);
+    });
+    row.appendChild(box);
+    card.appendChild(row);
+  });
+  root.appendChild(card);
+
+  const bar = el('div','gbar');
+  const go2 = el('button','btn btn-primary',
+    done ? 'Mark '+done+' of '+total : 'Enter at least one answer');
+  go2.disabled = !done;
+  go2.addEventListener('click',()=>{
+    if(!done) return;
+    gradeGuide(u);
+  });
+  bar.appendChild(go2);
+  if(done && done < total)
+    bar.appendChild(el('div','hintline',
+      (total-done)+' still blank. Blanks are left alone — they are not marked wrong.'));
+  root.appendChild(bar);
+
+  const back = el('button','btn btn-ghost','← Back');
+  back.addEventListener('click',()=>go('unit',{classId:u.classId}));
+  root.appendChild(back);
+};
+
+/* Marking the paper pass. Everything a normal quiz writes, written here too —
+   the tally, the misses, and one log — because the work was real; she did it
+   on paper. The only thing it does not do is ask the questions again. */
+function gradeGuide(u){
+  const ans = guidePass(u.id).answers || {};
+  const asked = u.questions.filter(q=>ans[q.id]!=null);
+  let right = 0;
+  const items = [];
+  asked.forEach(q=>{
+    const ok = ans[q.id]===q.ans;
+    if(ok) right++;
+    const key = 'qstat_'+u.id+'_'+q.id;
+    const prev = DATA.records[key];
+    put({ id:key, type:'qstat', unitId:u.id, classId:u.classId, qid:q.id, q:q.q,
+          attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(ok?1:0) });
+    if(items.length < QUIZ_ITEM_MAX)
+      items.push({ c: ok?1:0, qt:String(q.q).slice(0,110),
+        ch:String(q.opts[ans[q.id]]||'').slice(0,70),
+        ca: ok ? '' : String(q.opts[q.ans]||'').slice(0,70) });
+    if(!ok){
+      const was = DATA.records['miss_'+u.id+'_'+q.id];
+      put(scheduleMiss({ id:'miss_'+u.id+'_'+q.id, type:'miss', unitId:u.id,
+        classId:u.classId, qid:q.id, q:q.q, opts:q.opts, ans:q.ans,
+        kind:q.kind||null, right:q.opts[q.ans], chose:q.opts[ans[q.id]],
+        why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
+        on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+    }
+  });
+  put({ ...guidePass(u.id), submitted:true });
+  put({ id:uid('log'), type:'log', mode:'quiz', classId:u.classId, unitId:u.id,
+    date:AZ.today(), at:Date.now(), correct:right, total:asked.length,
+    seconds:0, xp:right*10, hints:0, timed:false, speedBonus:0,
+    partial: asked.length < u.questions.length, paper:true, items });
+  checkBadges(); syncSoon();
+  go('guidewalk',{unitId:u.id, classId:u.classId});
+}
+
+/* ---- What she got wrong, and why ----
+   The steps are already on every question for the quiz's "walk me through it".
+   Here they are the whole screen, because a study guide's value is entirely in
+   the questions that did not go well. */
+SCREENS.guidewalk = function(root){
+  const u = DATA.records[ctx.unitId];
+  if(!u || u.deleted) return go('today');
+  const ans = guidePass(u.id).answers || {};
+  const asked = u.questions.filter(q=>ans[q.id]!=null);
+  const wrong = guideWrong(u);
+  const pct = asked.length ? Math.round((asked.length-wrong.length)/asked.length*100) : 0;
+
+  root.appendChild(headline('Your paper pass',
+    (asked.length-wrong.length)+' of '+asked.length+' right · '+pct+'%'));
+
+  if(!wrong.length){
+    const e = el('div','card ac');
+    e.appendChild(el('p',null,'Every one you entered was right. Nothing to walk through — go in fresh on the test.'));
+    root.appendChild(e);
+  } else {
+    root.appendChild(divider(wrong.length===1 ? 'The one to look at' : 'The '+wrong.length+' to look at'));
+    const card = el('div','card');
+    wrong.forEach((q,i)=>{
+      const w = el('div','wq');
+      w.appendChild(el('div','qh', (i+1)+'.  '+q.q));
+      const pk = el('div','picked');
+      pk.textContent = 'You put: '+(q.opts[ans[q.id]]||'—')+'  ·  ';
+      pk.appendChild(el('b',null,'Answer: '+(q.opts[q.ans]||'—')));
+      w.appendChild(pk);
+      const steps = q.steps || [];
+      if(steps.length){
+        const open = (ctx.openW||[]).includes(q.id);
+        const t = el('button','btn btn-ghost btn-sm', open ? 'Hide the working' : 'Walk me through it');
+        t.addEventListener('click',()=>{
+          const cur = ctx.openW||[];
+          go('guidewalk',{unitId:u.id, classId:u.classId,
+            openW: open ? cur.filter(x=>x!==q.id) : cur.concat([q.id])});
+        });
+        w.appendChild(t);
+        if(open){
+          const ol = el('div');
+          ol.style.marginTop='8px';
+          /* The same .step markup the quiz's own walkthrough uses. It was
+             briefly built out of .row/.k/.v, which is a label-and-value
+             layout: .row .v is white-space:nowrap, so a sentence-long step
+             ran off the side of the screen instead of wrapping. */
+          steps.forEach((st,n)=>{
+            const r = el('div','step');
+            r.appendChild(el('span','n', String(n+1)));
+            r.appendChild(richify(el('p'), st));
+            ol.appendChild(r);
+          });
+          if(q.ex && q.ex.main) ol.appendChild(richify(el('div','hintline'), q.ex.main));
+          w.appendChild(ol);
+        }
+      }
+      card.appendChild(w);
+    });
+    root.appendChild(card);
+
+    if(rescueReady(u)){
+      const rc = el('div','card ac');
+      rc.appendChild(el('h3',null,'Try them again, different numbers'));
+      rc.appendChild(el('p',null,'Same skills, fresh questions. This one is practice — it does not change when the Growth Zone brings the originals back.'));
+      const b = el('button','btn btn-primary','Start the second pass');
+      b.addEventListener('click',()=>{
+        if(!buildRescueUnit(u.id)){ toast('Nothing to practise yet'); return; }
+        quizState = null;
+        go('quiz',{unitId:'__rescue__', classId:u.classId});
+      });
+      rc.appendChild(b);
+      root.appendChild(rc);
+    }
+  }
+  const back = el('button','btn btn-ghost','← Back to the unit');
+  back.addEventListener('click',()=>go('unit',{classId:u.classId}));
+  root.appendChild(back);
+};
 SCREENS.reading = function(root){
   root.appendChild(headline('Reading log','Any book, anywhere — school books, library finds, rereads. Minutes count the moment you log them.'));
   const c = el('div','card ac');
@@ -4145,6 +4375,67 @@ const FEELING = [
   {v:1,e:'😩',l:'Rough'},{v:2,e:'😔',l:'Meh'},{v:3,e:'😌',l:'OK'},
   {v:4,e:'😊',l:'Good'},{v:5,e:'🤩',l:'Great'}
 ];
+/* ---------- Paper study guides ----------
+   A unit flagged `guide:true` mirrors a printout the class handed out, and
+   that changes three things about how the engine may treat it.
+
+   1. OPTION ORDER IS FIXED. Everywhere else options shuffle per question so
+      the answer cannot be learned by position (v64). Here it must NOT: she is
+      entering the letter she wrote on paper, and if the app's C is not the
+      paper's C the whole mode is a lie. The exception is scoped to guide
+      units, and the rescue round that follows shuffles normally because that
+      is ordinary practice, not transcription.
+   2. QUESTIONS RUN IN THE AUTHORED ORDER, all of them — a guide is a
+      sequence, not a sampled round.
+   3. HER PLACE IS SAVED. Thirty questions is more than one sitting, so the
+      answers live in a record rather than in memory.
+
+   One `guidepass` record per unit, id derived from the unit id so it can
+   never duplicate across devices. */
+const guideId = unitId => 'guide_' + unitId;
+function guidePass(unitId){
+  const r = DATA.records[guideId(unitId)];
+  return (r && !r.deleted) ? r : { id:guideId(unitId), type:'guidepass',
+    unitId, answers:{}, submitted:false };
+}
+function guideSet(unitId, qid, idx){
+  const g = guidePass(unitId);
+  put({ ...g, answers:{ ...g.answers, [qid]: idx } });
+}
+const guideCount = unitId => Object.keys(guidePass(unitId).answers || {}).length;
+/* Which questions she got wrong on the paper pass — the input to both the
+   walkthrough and the rescue round. */
+function guideWrong(u){
+  const ans = guidePass(u.id).answers || {};
+  return (u.questions||[]).filter(q => ans[q.id] != null && ans[q.id] !== q.ans);
+}
+
+/* The rescue round: for every question she missed that carries a hand-written
+   `variant`, ask the variant instead — same skill, different numbers. Synthetic
+   like __review__ and __shuffle__: never stored, never synced.
+
+   It deliberately does NOT move the review ladder in either direction. Answering
+   a fresh variant moments after reading the walkthrough is massed practice, not
+   spaced retrieval; promoting the box on that would credit her with a durability
+   she has not demonstrated yet. The miss stays where it is and comes back
+   tomorrow as scheduled. Attempts still count, so the parent view sees the work. */
+let rescueUnit = null;
+function buildRescueUnit(unitId){
+  const u = DATA.records[unitId];
+  if(!u || u.deleted) return null;
+  const qs = [];
+  guideWrong(u).forEach(q=>{
+    if(!q.variant) return;
+    qs.push({ ...q.variant, id:'rv_'+q.id, lv:q.lv||2,
+      _srcUnit:unitId, _srcClass:u.classId, _srcQid:q.id, _rescue:true });
+  });
+  if(!qs.length) return null;
+  rescueUnit = { id:'__rescue__', classId:u.classId, book:true,
+    title:'Second pass · '+(u.title||'Study guide'), cards:[], questions:qs,
+    round:qs.length };
+  return rescueUnit;
+}
+const rescueReady = u => u && u.guide && guideWrong(u).some(q=>q.variant);
 function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:!!timed}); }
 
 /* Quizzes run in short rounds — a few questions feels attainable in the car
@@ -4155,6 +4446,13 @@ const QUIZ_ROUND = 5;
 const QUIZ_ITEM_MAX = 40;
 function pickRound(u, timed){
   if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
+  /* A paper guide is a sequence, not a sample: every question, in the order
+     it is printed, minus the ones she has already answered this pass. */
+  if(u.guide){
+    const done = guidePass(u.id).answers || {};
+    const left = u.questions.map((q,i)=>({q,i})).filter(x=>done[x.q.id]==null).map(x=>x.i);
+    return left.length ? left : u.questions.map((_,i)=>i);
+  }
   /* Shuffle-round questions look attempts up on their ORIGINAL unit, so
      least-practised stays honest across the whole subject. */
   const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
@@ -4320,7 +4618,9 @@ function buildReviewUnit(){
   reviewUnit = { id:'__review__', classId:'__all__', title:'Review', cards:[], questions:qs.slice(0,20) };
   return reviewUnit;
 }
-const unitFor = id => id==='__review__' ? reviewUnit : id==='__shuffle__' ? shuffleUnit : DATA.records[id];
+const unitFor = id => id==='__review__' ? reviewUnit
+  : id==='__shuffle__' ? shuffleUnit
+  : id==='__rescue__' ? rescueUnit : DATA.records[id];
 
 SCREENS.quiz = function(root){
   const u = unitFor(ctx.unitId);
@@ -4455,7 +4755,9 @@ SCREENS.quiz = function(root){
        Content must therefore never refer to an option by position. */
     if(quizState.optFor !== q.id){
       quizState.optFor = q.id;
-      quizState.optArr = shuffle(q.opts.map((_,k)=>k));
+      /* On a paper guide the letters must match the printout — see the
+         guide-unit note above. Everywhere else they shuffle. */
+      quizState.optArr = u.guide ? q.opts.map((_,k)=>k) : shuffle(q.opts.map((_,k)=>k));
     }
     quizState.optArr.forEach((orig,pos)=>{
       const b = el('button','opt');
@@ -4616,9 +4918,16 @@ function answer(u,q,idx){
   const prev = DATA.records[key];
   put({ id:key, type:'qstat', unitId, classId, qid, q:q.q,
         attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0) });
+  /* Working the guide in the app saves her place after every question, so
+     closing it mid-pass costs nothing. */
+  if(u.guide) guideSet(u.id, q.id, idx);
   if(!right){
     quizState.missed.push(q.id);
     const chose = choseTxt;
+    /* A rescue variant is practice on a question that is ALREADY on the
+       ladder. Writing a second miss would double-count it and reset a box she
+       has not been re-tested on. Attempts are recorded above either way. */
+    if(q._rescue){ render(); return; }
     if(src){
       /* Demotion is finishQuiz's job; here we just record what she picked this time. */
       put({ ...src, chose });
@@ -4738,7 +5047,9 @@ function finishQuiz(u, partial){
      it only leaves once it has survived every interval. Judged by the
      question's ORIGINAL unit+qid so shuffle rounds promote and demote the
      same misses a unit's own quiz would. */
-  if(u.id!=='__review__'){
+  /* __rescue__ is excluded on purpose: see buildRescueUnit. Massed practice
+     straight after a walkthrough is not evidence the interval was survived. */
+  if(u.id!=='__review__' && u.id!=='__rescue__'){
     const askedPairs = new Set(), missedPairs = new Set();
     u.questions.forEach(q=>{
       const pair = (q._srcUnit||u.id)+'::'+(q._srcQid||q.id);
