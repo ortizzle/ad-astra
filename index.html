@@ -337,6 +337,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .meter{height:6px;border-radius:3px;background:var(--ac-14);overflow:hidden;margin-top:9px}
 .meter i{display:block;height:100%;background:var(--ac);border-radius:3px}
 /* One answered question: marker, the question, then what she picked. */
+.qcap{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:12px;color:var(--faint)}
+.qtog{background:none;border:0;padding:11px 0;min-height:var(--tap);
+  color:var(--ac-fg);font-size:12.5px;font-weight:600;text-align:right}
 .qline{display:flex;gap:9px;padding:9px 0;border-top:1px solid var(--line)}
 .qline:first-child{border-top:0}
 .qline .mk{flex:0 0 16px;font-weight:700;font-size:14px;line-height:1.5}
@@ -3786,9 +3790,32 @@ function dayMoodBlock(s){
   return box;
 }
 
+/* Misses first, and by default misses ONLY. What a parent acts on is the
+   handful she got wrong; eighteen rows of confirmation buries them and turns
+   one open session into most of a screen. The right answers are still one tap
+   away, and the count is always stated so nothing is hidden silently. */
 function dayQuestionList(s){
   const qs = el('div');
-  s.items.forEach(it => {
+  const items  = s.items;
+  const misses = items.filter(it => !it.c);
+  const showAll = !!ctx.allQ;
+  const shown  = showAll ? items : misses;
+
+  const cap = el('div','qcap');
+  cap.appendChild(el('span', null, misses.length
+    ? misses.length + ' missed of ' + items.length
+    : 'All ' + items.length + ' right'));
+  if(misses.length < items.length){
+    const tog = el('button','qtog', showAll
+      ? (misses.length ? 'Misses only' : 'Hide')
+      : 'Show all ' + items.length);
+    tog.addEventListener('click', () => go('day',
+      { date: ctx.date, dayView: ctx.dayView, openSes: ctx.openSes, allQ: !showAll }));
+    cap.appendChild(tog);
+  }
+  qs.appendChild(cap);
+
+  shown.forEach(it => {
     const line = el('div','qline');
     line.appendChild(el('span','mk ' + (it.c ? 'ok' : 'no'), it.c ? '✓' : '✗'));
     const tx = el('span','tx', it.qt || '(question not recorded)');
@@ -3963,7 +3990,7 @@ SCREENS.day = function(root){
     [['order','In order'],['subject','By subject']].forEach(([v,label]) => {
       const c = el('button','chipbtn' + (view === v ? ' on' : ''), label);
       c.addEventListener('click', () => go('day',
-        { date, dayView: v, openSes: ctx.openSes }));
+        { date, dayView: v, openSes: ctx.openSes, allQ: ctx.allQ }));
       chips.appendChild(c);
     });
     root.appendChild(chips);

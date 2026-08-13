@@ -441,6 +441,14 @@ screens**, and no duplicated sentence.
 - **Rows with nothing underneath are not buttons.** They used to render as
   disabled buttons identical to live ones — half the boxes were inert. Dead
   buttons went 2 → 0.
+- **Misses first, and by default misses only** (`ctx.allQ`). An open
+  18-question quiz showed 18 rows; what a parent acts on is the handful she
+  got wrong, and the confirmations buried them. It now shows 6, captioned
+  "6 missed of 18" with "Show all 18" beside it. The count is ALWAYS stated,
+  so nothing is hidden silently, and a perfect round says "All 4 right"
+  rather than rendering four rows of agreement. `allQ` rides the
+  order/subject chips but is deliberately dropped when a DIFFERENT session is
+  opened, so every session starts at misses-first.
 - `.felt` lays `--ac-8` over the card, which is the tint trap: `--faint`
   measured **4.30:1** there in dark and now uses `--muted` (worst case 4.69:1
   across all accents, both themes). The probe that caught it had to be
