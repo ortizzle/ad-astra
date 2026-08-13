@@ -4,7 +4,7 @@
   "unit-sgt1": {
    "id": "unit-sgt1",
    "type": "unit",
-   "updatedAt": 1786578000000,
+   "updatedAt": 1786599209824,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -1431,7 +1431,8 @@
     }
    ],
    "order": 1,
-   "guide": true
+   "guide": true,
+   "libv": 1
   }
  }
 }

@@ -850,7 +850,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v87 · two doors';
+const APP_VERSION = 'v88 · the library wins';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1767,6 +1767,21 @@ async function fetchLibrary(btn){
       if(!res.ok) continue;
       reachable = true;
       const inc = migrate(await res.json());
+      /* A shipped unit may carry `libv`, a content version the author bumps
+         whenever the file changes. Timestamps alone are not enough here:
+         approving a unit re-stamps it to the moment of approval, so a fix
+         shipped even minutes earlier LOSES the merge and vanishes silently —
+         the toast then says "already in sync", which is not true. When the
+         incoming content version is newer, its stamp is lifted just past the
+         local copy so the ordinary merge does the right thing.
+         A discarded unit is skipped: tombstones still beat library copies,
+         and re-shipping one deliberately still means bumping updatedAt. */
+      Object.values(inc.records||{}).forEach(r=>{
+        if(!r || r.type!=='unit' || r.libv==null) return;
+        const cur = DATA.records[r.id];
+        if(cur && !cur.deleted && r.libv > (cur.libv||0))
+          r.updatedAt = Math.max(r.updatedAt||0, (cur.updatedAt||0) + 1);
+      });
       const fresh = Object.keys(inc.records||{}).filter(id=>{
         const cur = DATA.records[id];
         return !cur || (!!cur.deleted && (inc.records[id].updatedAt||0) > (cur.updatedAt||0));

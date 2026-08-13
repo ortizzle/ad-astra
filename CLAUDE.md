@@ -406,6 +406,31 @@ separately from genuinely new units, and approving clears the flag. The gate
 itself is deliberate and stays: a fix is new content, and nothing reaches her
 unread — the marker only makes the second read cheap.
 
+**`libv` — a content version, because timestamps alone were not enough
+(v88 / Wayfinder v70).** Bumping `updatedAt` is necessary but NOT sufficient:
+approving a unit re-stamps it to the moment of approval, so a fix shipped even
+minutes earlier LOSES the merge and vanishes. The toast then says "library
+already in sync", which is a lie — the file differs. This bit for real on
+2026-08-13: the Test 1 Study Guide's guide flag and 30 variants were shipped,
+Chris approved the previous version afterwards, and his approval silently ate
+the update.
+
+A shipped unit may now carry **`libv`**, an integer the author bumps whenever
+the file's content changes. In `fetchLibrary()`, an incoming unit whose `libv`
+beats the local copy's has its stamp lifted just past the local record, so the
+ordinary merge does the right thing regardless of when anything was approved.
+
+- **Bump `libv` on every edit to a shipped file**, alongside `updatedAt`. The
+  timestamp still matters for ordinary sync; `libv` is what makes a content fix
+  immune to the approval race.
+- **Tombstones still win.** A discarded unit is skipped outright, so a newer
+  `libv` cannot resurrect it; re-shipping one deliberately still means bumping
+  `updatedAt` past the discard. Both are covered by `test_tomb_lib.js`.
+- Stamp `updatedAt` at **just before now** — newer than anything already
+  written, never in the future. The older "hours back, minimum" advice was an
+  over-correction from the 18-hours-in-the-FUTURE incident; hours-back is
+  actively wrong when the grown-up approved an hour ago.
+
 **Spoken-as coverage:** every Wordly Wise unit now carries `sp` on all cards —
 Lessons 2–5 from the book's own pronunciation guides, Lesson 1 hand-authored
 (its source is a photo transcription with no guides). Future vocab units
