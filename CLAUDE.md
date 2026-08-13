@@ -486,6 +486,16 @@ screens**, and no duplicated sentence.
   against the stated 44px minimum, on a control that appears on nearly every
   screen.
 
+**Tap targets (v86 / Wayfinder v68).** A sweep of every screen in both apps —
+seeded and on a fresh install — found `.btn-sm` at `min-height:40px`, the last
+control class under the stated minimum. It carries *Show the answer* (tutor),
+*Reset to defaults* (setup), and in the parent view *Turn on*, *Add score*, the
+score button itself and *Show what she was told*. Now `var(--tap)`. Together
+with the `.back-chip` fix, **no button in either app renders under 44px on any
+screen.** The one remaining disabled button — *Start the quiz* on the check-in
+— is correct: it enables once both taps are made, which was verified rather
+than assumed.
+
 ### Leaving a quiz part-way (v77 / Wayfinder v60, both apps)
 
 A round she abandons is logged as **the questions she actually answered** —
