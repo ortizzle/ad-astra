@@ -1120,6 +1120,31 @@ subject, strong vs shaky questions from `qstat`, mood and calibration trends, re
 test scores the parent enters, and weekly per-subject minute goals that feed the study
 plan. Deliberately understated in tone so it does not read as surveillance.
 
+### Grades as points, not percentages (v84 / Wayfinder v66, both apps)
+
+An `assess` record now carries **`points`** and **`outOf`** alongside `score`.
+Teachers award points — 42 out of 50, not 84% — and making a parent do that
+division in their head to type one number threw away the form the grade
+actually arrived in. The rubric self-check was already out of `rub.total`;
+this brings test and quiz entry in line with it.
+
+- **`score` stays, and stays the derived percentage** (`assessPct()`), so
+  every existing reader — study plan, the horizon, the charts — is untouched
+  and needs no migration. Purely additive: a record written before this has
+  no `points`, and `assessLabel()` falls back to the percentage alone.
+- **`outOf` defaults to 100**, so a parent who only knows "84%" enters it
+  exactly as before.
+- **The percentage is NOT clamped at 100.** Extra credit is real, and
+  silently turning 52/50 into 100% would be the app editing the grade.
+- `assessLabel()` prints `42/50 · 84%`, but just `84%` when the total is the
+  default hundred — a fraction that says nothing the percentage doesn't is
+  noise.
+- The modal echoes the conversion live as you type, so it is visible rather
+  than taken on trust.
+- Fixed alongside: `studyPlan()` tested `!a.score` for "not marked yet", so a
+  test she scored **zero** on kept driving the plan as though it were still
+  upcoming. Now `a.score == null`.
+
 ### Sandbox & Fresh start (v23, in BOTH apps)
 
 Two grown-up escape hatches at the bottom of the parent view, added after a

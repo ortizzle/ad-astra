@@ -148,6 +148,8 @@ button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
 .btn-row{display:flex;gap:12px;margin-top:8px}
 .btn-row .btn{width:auto;flex:1}
+.inrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;margin-top:16px}
+.inrow label{margin-top:0}
 /* Breathing room between stacked buttons — thumbs need margins. */
 .btn+.btn,.btn-row+.btn,.btn+.btn-row{margin-top:10px}
 .btn-row .btn+.btn{margin-top:0}
@@ -1931,6 +1933,25 @@ function missAsQuestion(m){
 }
 
 /* ---------- Assessments ---------- */
+/* A grade as the teacher wrote it. `outOf` defaults to 100 so a record saved
+   before this — or a parent who only knows the percentage — behaves exactly as
+   it always did. Deliberately NOT clamped at 100: extra credit is real, and a
+   52-out-of-50 that silently became 100% would be the app editing the grade.
+   School rounding (5 up) is what Math.round already does for positives. */
+function assessPct(points, outOf){
+  if(points===null || points===undefined || String(points).trim()==='') return null;
+  const p = Number(points), t = Number(outOf) || 100;
+  if(isNaN(p) || t <= 0) return null;
+  return Math.round(p / t * 100);
+}
+/* "42/50 · 84%", or just "84%" when the total was the default hundred and the
+   fraction would say nothing the percentage does not. */
+function assessLabel(a){
+  if(a.score == null) return null;
+  return (a.points != null && a.outOf != null && a.outOf !== 100)
+    ? a.points + '/' + a.outOf + ' · ' + a.score + '%'
+    : a.score + '%';
+}
 function assessments(){ return all('assess').sort((a,b)=>a.date<b.date?-1:1); }
 function upcomingAssessments(from, withinDays){
   const to = AZ.shift(from, withinDays);
@@ -1944,7 +1965,7 @@ function studyPlan(date){
   STUDY_CLASSES.forEach(c=>{
     const st = classStats(c.id);
     const gz = all('miss').filter(m=>m.classId===c.id).length;
-    const nextA = assessments().find(a=>a.classId===c.id && a.date>=date && !a.score);
+    const nextA = assessments().find(a=>a.classId===c.id && a.date>=date && a.score==null);
     const daysOut = nextA ? AZ.daysBetween(date, nextA.date) : null;
     const sinceStudied = st.lastOn ? AZ.daysBetween(st.lastOn, date) : null;
     const hasUnits = units(c.id).length > 0;
@@ -5653,7 +5674,7 @@ SCREENS.parent = function(root){
     const kk = el('span','k',`${k.ic} ${a.title}`);
     kk.appendChild(el('small',null,`${c?c.name:''} · ${AZ.shortDate(a.date)}`));
     r.appendChild(kk);
-    const v = el('button','btn btn-ghost btn-sm', a.score!=null?a.score+'%':'Add score');
+    const v = el('button','btn btn-ghost btn-sm', assessLabel(a) || 'Add score');
     v.addEventListener('click',()=>editAssessment(a));
     r.appendChild(v); asc.appendChild(r);
   });
@@ -6187,16 +6208,49 @@ function editAssessment(existing){
       date.value = existing?.date || AZ.today();
       box.appendChild(el('label',null,'Date')); box.appendChild(date);
 
-      const score = el('input'); score.type='number'; score.min='0'; score.max='100';
-      score.inputMode='numeric'; score.placeholder='Leave blank until it comes back';
-      if(existing?.score!=null) score.value = existing.score;
-      box.appendChild(el('label',null,'Score (%)')); box.appendChild(score);
+      /* Teachers award points, not percentages — 42 out of 50, not 84%. Making
+         a parent do that division in their head to type one number lost the
+         information that made the grade legible in the first place. Both are
+         stored; `score` stays the derived percentage so every existing reader
+         (study plan, horizon, charts) is untouched and old records still work. */
+      const pts = el('input'); pts.type='number'; pts.min='0'; pts.step='any';
+      pts.inputMode='decimal'; pts.placeholder='—';
+      if(existing?.points!=null) pts.value = existing.points;
+      else if(existing?.score!=null) pts.value = existing.score;
+
+      const outOf = el('input'); outOf.type='number'; outOf.min='1'; outOf.step='any';
+      outOf.inputMode='decimal';
+      outOf.value = existing?.outOf != null ? existing.outOf : 100;
+
+      const grid = el('div','inrow');
+      const cA = el('div'); cA.appendChild(el('label',null,'Points earned')); cA.appendChild(pts);
+      const cB = el('div'); cB.appendChild(el('label',null,'Out of'));        cB.appendChild(outOf);
+      grid.appendChild(cA); grid.appendChild(cB);
+      box.appendChild(grid);
+
+      /* The percentage as it will be stored, updating as they type — so the
+         conversion is visible rather than taken on trust. */
+      const echo = el('div','hintline','');
+      const paint = ()=>{
+        const p = assessPct(pts.value, outOf.value);
+        echo.textContent = p==null
+          ? 'Leave the points blank until the marked work comes back.'
+          : pts.value + ' out of ' + (Number(outOf.value)||100) + '  ·  ' + p + '%'
+            + (p > 100 ? '  (over full marks — kept as awarded)' : '');
+      };
+      paint();
+      pts.addEventListener('input', paint);
+      outOf.addEventListener('input', paint);
+      box.appendChild(echo);
 
       box._go = ()=>{
         if(!title.value.trim()){ toast('Give it a name'); return; }
-        const sc = score.value===''?null:Math.max(0,Math.min(100,parseInt(score.value,10)));
+        const total = Math.max(1, Number(outOf.value) || 100);
+        const earned = pts.value.trim()==='' ? null : Math.max(0, Number(pts.value));
+        if(earned!=null && isNaN(earned)){ toast('Points must be a number'); return; }
         put({ id: existing?.id || uid('assess'), type:'assess', classId:cls.value, kind:kind.value,
-              title:title.value.trim(), date:date.value, score:sc });
+              title:title.value.trim(), date:date.value,
+              points:earned, outOf:total, score:assessPct(earned, total) });
         syncSoon(); close(); toast('Saved'); render();
       };
       if(existing){
