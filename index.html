@@ -131,6 +131,20 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .runway .rt{flex:1;font-size:13px;line-height:1.35}
 .runway .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
 .runway .rhours{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+/* Locked-in: one chip per subject, carrying that subject's colour. */
+.locked{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.lk{display:flex;align-items:baseline;gap:7px;min-height:var(--tap);padding:9px 14px;
+  border-radius:999px;border:1px solid var(--line);background:var(--deep);
+  color:var(--text);font:inherit;border-left:3px solid var(--pc,var(--ac))}
+.lk .ln{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600}
+.lk .lt{font-size:12.5px;color:var(--muted);font-weight:600}
+/* Trophies: earned, permanent, never currency. */
+.trophies{display:flex;flex-direction:column;gap:8px}
+.trophy{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:15px;
+  background:var(--surface);border:1px solid var(--line-soft)}
+.trophy .ti{font-size:21px;flex:0 0 auto}
+.trophy .tn{flex:1;font-size:13.5px;font-weight:600;line-height:1.3}
+.trophy .tk{font-size:11.5px;color:var(--faint);letter-spacing:.04em;flex:0 0 auto}
 .gz-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
 .gz-chip{min-height:var(--tap);padding:9px 14px;border-radius:999px;border:1px solid var(--line);
   background:var(--deep);color:var(--text);font:inherit;font-size:12.5px;font-weight:600}
@@ -990,7 +1004,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v94 · the runway';
+const APP_VERSION = 'v95 · stars, rebuilt';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -7207,9 +7221,75 @@ function editAssessment(existing){
 }
 
 /* ================= STARS ================= */
+/* ---- What she has actually learned ----
+   Stars used to count activity: days studied, sessions, questions answered,
+   focus minutes. Those only ever go up, cannot be acted on, and read the same
+   after a great month as after a mechanical one. These derive the things that
+   are genuinely EARNED — and, as ever, store nothing new. */
+
+/* A `cleared` record means a question she once missed came back five times
+   over three weeks and she got every one. It is the only signal in the app
+   that cannot be farmed by showing up, which is exactly why it leads. */
+function lockedIn(){
+  const by = {};
+  all('cleared').forEach(c => {
+    const u = DATA.records[c.unitId];
+    const cid = (u && !u.deleted && u.classId) || null;
+    if(!cid || cid === '__all__') return;
+    (by[cid] = by[cid] || []).push(c);
+  });
+  const rows = Object.entries(by)
+    .map(([cid, list]) => ({ cid, cls:CLASS_BY_ID[cid], n:list.length }))
+    .filter(r => r.cls)
+    .sort((a,b) => b.n - a.n);
+  return { total: rows.reduce((n,r) => n + r.n, 0), rows };
+}
+/* Trophies: a topic crest is won by finishing the capstone of a series, and a
+   finished book is her own tap on the reading log. Both are already earned
+   elsewhere in the app and were invisible on the tab that is supposed to hold
+   achievements. Nothing here is a new mechanic and nothing can be un-won. */
+function trophies(){
+  const out = [];
+  STUDY_CLASSES.forEach(c => {
+    /* shelvesFor returns {shelves, loose} — the books are the .shelves half. */
+    shelvesFor(c.id).shelves.forEach(sh => {
+      if(crestWon(sh.units)) out.push({ kind:'crest', nm:sh.name, cls:c, ic:c.icon });
+    });
+  });
+  const seen = new Set();
+  logs().filter(l => l.mode === 'readfin' && l.book).forEach(l => {
+    if(seen.has(l.book)) return;
+    seen.add(l.book);
+    out.push({ kind:'book', nm:l.book, ic:'📕' });
+  });
+  return out;
+}
+/* One honest line about MOVEMENT — a subject whose accuracy over the last
+   three weeks beats the three before it. Change, never a grade: it names the
+   direction and stops. Needs real volume on both sides so a couple of lucky
+   rounds cannot manufacture a trend. */
+function movement(date){
+  const midA = AZ.shift(date, -21), midB = AZ.shift(date, -42);
+  let best = null;
+  STUDY_CLASSES.forEach(c => {
+    const acc = (from, to) => {
+      const L = logs().filter(l => l.classId === c.id && l.total && l.date >= from && l.date < to);
+      const t = L.reduce((n,l) => n + l.total, 0);
+      return t >= 15 ? { pct: Math.round(L.reduce((n,l) => n + l.correct, 0) / t * 100), t } : null;
+    };
+    const now = acc(midA, AZ.shift(date, 1)), before = acc(midB, midA);
+    if(!now || !before) return;
+    const d = now.pct - before.pct;
+    if(d >= 8 && (!best || d > best.d)) best = { cls:c, d, now:now.pct };
+  });
+  return best;
+}
 SCREENS.stars = function(root){
   const s = stats(), date = AZ.today();
-  root.appendChild(headline('Star chart', `Level ${s.level} · ${s.xp.toLocaleString()} XP`));
+  /* The subtitle orients rather than counts: the header already wears the XP
+     pill and the level card carries the level, so repeating either here would
+     be the third printing of the same fact. */
+  root.appendChild(headline('Star chart', 'Everything you have earned, and everything you have learned for keeps.'));
 
   /* The week as a constellation. Stars light for showing up, never for
      scores, and a short week simply stays dim — nothing breaks. */
@@ -7227,6 +7307,11 @@ SCREENS.stars = function(root){
   skc.addEventListener('click',()=>go('skymap'));
   root.appendChild(skc);
 
+  /* The level bar keeps its place — it is the one counter that is genuinely
+     about her own progress rather than a tally of activity. The streak and
+     the Growth count are NOT repeated here: the header already wears the
+     streak and Growth wears its own nav badge, and printing either again is
+     the same fact twice on one screen. */
   const lvl = el('div','card');
   const lr = el('div','row');
   lr.appendChild(el('span','k',`Level ${s.level}`));
@@ -7234,29 +7319,58 @@ SCREENS.stars = function(root){
   lvl.appendChild(lr);
   const bar = el('div','bar'), fi = el('i');
   fi.style.width = (s.intoLevel/500*100)+'%'; bar.appendChild(fi); lvl.appendChild(bar);
-  const glance = el('div','glance');
-  [[s.streak, s.streak===1?'day streak':'day streak'],
-   [minutesInRange(AZ.weekStart(date), date), 'min this week'],
-   [all('miss').length, 'to revisit']
-  ].forEach(([val,lab])=>{
-    const b = el('div','gl');
-    b.appendChild(el('div','gv',String(val)));
-    b.appendChild(el('div','gk',lab));
-    glance.appendChild(b);
-  });
-  lvl.appendChild(glance);
   root.appendChild(lvl);
 
-  const c = el('div','card');
-  [['Current streak', s.streak+' day'+(s.streak===1?'':'s')],
-   ['Days studied', s.days], ['Study sessions', s.sessions],
-   ['Questions answered', s.answered],
-   ['Overall accuracy', s.answered?s.accuracy+'%':'—'],
-   ['Focus minutes', s.focusMin],
-   ['Growth Zone items', all('miss').length]
-  ].forEach(([k,v])=>{ const r=el('div','row');
-    r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); c.appendChild(r); });
-  root.appendChild(c);
+  /* What you have locked in. This replaces seven rows of counters that only
+     went up — days studied, sessions, questions answered, focus minutes —
+     with the one number that has a real bar behind it. */
+  const li = lockedIn();
+  const lc = el('div','card ac');
+  lc.appendChild(el('div','eyebrow','What you have locked in'));
+  if(li.total){
+    lc.appendChild(el('h3',null, li.total===1 ? '1 question, learned for good'
+      : `${li.total} questions, learned for good`));
+    lc.appendChild(el('p',null,'Each of these came back five times over three weeks — a day later, then two, four, eight, twenty-one — and you got every one. That is the bar, and you cleared it.'));
+    const gr = el('div','locked');
+    li.rows.forEach(r=>{
+      const b = el('button','lk');
+      b.style.setProperty('--pc', classColor(r.cls));
+      b.appendChild(el('span','ln', String(r.n)));
+      b.appendChild(el('span','lt', r.cls.short || r.cls.name));
+      b.addEventListener('click',()=>go('unit',{classId:r.cid}));
+      gr.appendChild(b);
+    });
+    lc.appendChild(gr);
+  } else {
+    lc.appendChild(el('h3',null,'Nothing here yet'));
+    lc.appendChild(el('p',null,'When a question you missed survives the whole review ladder — five sightings over three weeks — it lands here. This is the slow list, and it is the one worth watching.'));
+  }
+  root.appendChild(lc);
+
+  /* Movement, stated once and only when it is real. */
+  const mv = movement(date);
+  if(mv){
+    const mc = el('div','card');
+    mc.appendChild(el('div','eyebrow','Worth noticing'));
+    mc.appendChild(el('p',null, `Your ${mv.cls.name} answers are landing ${mv.d} points better than they were three weeks ago — ${mv.now}% over the last three weeks. Whatever you changed there is working.`));
+    root.appendChild(mc);
+  }
+
+  /* Trophies: crests already won on a shelf, books already finished in the
+     reading log. Both were earned somewhere else and shown nowhere. */
+  const tr = trophies();
+  if(tr.length){
+    root.appendChild(divider('Finished'));
+    const tg = el('div','trophies');
+    tr.forEach(t=>{
+      const d = el('div','trophy');
+      d.appendChild(el('span','ti', t.ic));
+      d.appendChild(el('span','tn', t.nm));
+      d.appendChild(el('span','tk', t.kind==='crest' ? 'topic crest' : 'book finished'));
+      tg.appendChild(d);
+    });
+    root.appendChild(tg);
+  }
 
   /* How well you call it. Every check-in asks how ready you feel; every quiz
      answers. This is the two side by side — the same gap the check-in names
@@ -7312,15 +7426,35 @@ SCREENS.stars = function(root){
     root.appendChild(pg);
   }
 
+  /* Earned badges first; the rest behind one tap. A grid where more than half
+     the tiles are greyed "not yet" is the nearest thing to a nag mechanic in
+     either app, and nothing here is a prize economy. Nothing is removed —
+     tapping shows the lot, and every badge keeps its own modal. */
   root.appendChild(divider('Badges'));
+  const gotList = BADGES.filter(b=>have.has(b.id));
+  const restList = BADGES.filter(b=>!have.has(b.id));
   const g = el('div','badges');
-  BADGES.forEach(b=>{
+  const tile = b => {
     const d = el('div','bdg'+(have.has(b.id)?' got':''));
     d.appendChild(el('span','ic',b.ic)); d.appendChild(el('span','nm',b.nm));
     d.addEventListener('click',()=>badgeModal(b, have));
-    g.appendChild(d);
-  });
+    return d;
+  };
+  gotList.forEach(b=>g.appendChild(tile(b)));
+  if(!gotList.length) g.appendChild(el('div','hintline','Badges arrive on their own as you go. Nothing to chase.'));
   root.appendChild(g);
+  if(restList.length){
+    if(ctx._allBadges){
+      const g2 = el('div','badges');
+      restList.forEach(b=>g2.appendChild(tile(b)));
+      root.appendChild(g2);
+    } else {
+      const more = el('button','btn btn-ghost btn-sm',
+        restList.length + ' more to find');
+      more.addEventListener('click',()=>{ ctx._allBadges = true; render(); });
+      root.appendChild(more);
+    }
+  }
 };
 
 SCREENS.skymap = function(root){

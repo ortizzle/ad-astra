@@ -558,6 +558,48 @@ runway card is present — two accent-washed cards stacked is two focal points,
 and a probe looking for `.card.ac` would otherwise find the wrong one (mine
 did).
 
+### Stars, rebuilt (v95 / Wayfinder v77, both apps)
+
+Stars counted **activity** and never said what she **knows**. Measured before:
+the streak was printed three times on one screen (header pill, glance tile,
+stats row), the level three times, the Growth count twice; and seven of its
+rows — Days studied, Study sessions, Questions answered, Focus minutes — were
+counters that only go up, cannot be acted on, and read identically after a
+great month and a mechanical one.
+
+**"What you have locked in" replaces all of it.** `lockedIn()` groups
+`cleared` records by subject. A `cleared` record means a question she once
+missed came back five times over three weeks and she got every one — the only
+signal in either app that **cannot be farmed by showing up**, which is why it
+now leads the tab. Each subject is a chip carrying that subject's colour and
+opening it. The empty state explains the bar rather than showing a zero.
+
+**Trophies come home.** `trophies()` collects topic crests already won on a
+shelf (`crestWon`) and books already finished in the reading log
+(`mode:'readfin'`). Both were earned elsewhere and appeared nowhere on the tab
+that is supposed to hold achievements. No new mechanic, nothing storable,
+nothing that can be un-won.
+
+**`movement(date)`** prints at most one line: a subject whose accuracy over
+the last three weeks beats the three before it by 8+ points, with 15+ answers
+on **both** sides so a couple of lucky rounds cannot manufacture a trend. It
+names the direction and stops — change, never a grade. Same rule as the
+calibration card.
+
+**Badges: earned first, the rest behind one tap.** A grid where more than half
+the tiles are greyed "not yet" is the nearest thing to a nag mechanic in
+either app, and neither runs a prize economy. Nothing is removed — the button
+says how many remain and shows them all.
+
+Net: **1.9 screens → 1.4**, and no number is printed twice. The sky map is
+untouched; it was already doing exactly this.
+
+Two traps, both mine, both caught by rendering rather than reading:
+`shelvesFor()` returns `{shelves, loose}` and I called `.forEach` on it — the
+whole tab threw. And two of my own assertions were wrong before the code was:
+`ctx.view` is not the current screen (the global `view` is), and an unscoped
+`/bad/i` "grade word" check matches **Bad**ges.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
