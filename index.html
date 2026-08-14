@@ -95,6 +95,22 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .hdr{display:flex;gap:6px;flex-shrink:0}
 .chip{background:var(--surface);border:1px solid var(--line-soft);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;white-space:nowrap}
 .chip.ac{border-color:var(--ac-25);color:var(--ac-fg);background:var(--ac-8)}
+.swbar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));
+  z-index:60;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 15px;
+  border-radius:16px;border:1px solid var(--line);background:var(--raised);
+  color:var(--text);font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.swbar span{flex:1}
+.swbar button{min-height:var(--tap);padding:8px 15px;border-radius:11px;border:0;
+  background:var(--ac);color:#04141a;font:inherit;font-size:13px;font-weight:700}
+.swbar button.x{background:none;color:var(--muted);font-weight:600;padding:8px 11px}
+.pickrow{display:flex;align-items:center;justify-content:space-between;width:100%;
+  min-height:var(--tap);padding:10px 13px;border-radius:12px;border:1px solid var(--line);
+  background:var(--deep);color:var(--text);font:inherit;margin-top:2px}
+.pickrow .cur{font-size:19px}
+.pickrow .pv{color:var(--ac-fg);font-size:12.5px;font-weight:600}
+.gz-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.gz-chip{min-height:var(--tap);padding:9px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--deep);color:var(--text);font:inherit;font-size:12.5px;font-weight:600}
 
 .sandbox-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;
   margin-bottom:12px;padding:10px 14px;border:1.5px dashed var(--warm);border-radius:14px;
@@ -706,6 +722,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .rev .o.yes{color:var(--good);font-weight:600}
 .rev .o.yes:before{content:'✓';position:absolute;left:0}
 .rev .why{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
+.rev-more{display:block;background:none;border:0;color:var(--ac-fg);font:inherit;
+  font-size:12.5px;font-weight:600;padding:9px 0 2px;min-height:var(--tap);text-align:left;width:100%}
 .rev .cut-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:9px;
   background:var(--raised);border:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1}
 .rev{position:relative}
@@ -939,7 +957,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v91 · the round, redrawn';
+const APP_VERSION = 'v92 · the batch of six';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1701,6 +1719,20 @@ function threadTarget(date){
     title: due.length===1 ? '1 question is back' : due.length+' questions are back',
     sub:'You missed these before. Getting them right now is what makes them stick.',
     go:()=>go('growth') };
+  /* A test within three days outranks picking up the newest lesson — mixed
+     practice for that subject is the honest use of the sitting. It never
+     outranks due reviews, which return above. */
+  const d0 = date || AZ.today();
+  const soon = studyPlan(d0).find(p=>p.ramp && p.assess && p.hasUnits && AZ.daysBetween(d0, p.assess.date) <= 3);
+  if(soon){
+    const c0 = CLASS_BY_ID[soon.classId];
+    const dd = AZ.daysBetween(d0, soon.assess.date);
+    const knm = KINDS[soon.assess.kind] ? KINDS[soon.assess.kind].nm.toLowerCase() : 'test';
+    return { title: (c0.short||c0.name)+' '+knm+' '+(dd===0?'today':dd===1?'tomorrow':'in '+dd+' days'),
+      sub:'One mixed round across every unit — picking the right skill is the tested skill.',
+      go:()=>{ if(buildShuffleUnit(soon.classId)) go('quiz',{unitId:'__shuffle__', classId:soon.classId});
+               else go('unit',{classId:soon.classId}); } };
+  }
   let best = null, bt = 0;
   units().forEach(u=>{
     if(u.classId==='__all__' || !u.questions.length || unitDone(u)) return;
@@ -1963,6 +1995,24 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
    no file juggling. Merging goes through Sync.merge, so a discarded unit's
    tombstone always beats the library copy — nothing resurrects — and new
    units arrive as drafts for the review queue, never straight to her. */
+/* What changed between the approved copy and the incoming one — computed at
+   the only moment both exist (fetchLibrary, below), stored on the draft, and
+   cleared with wasApproved when the grown-up approves. Ids for kept items,
+   display text for removed ones, since a removed item has no record to read. */
+function unitDelta(oldU, newU){
+  const sig = x => JSON.stringify([x.term,x.def,x.hint,x.eq,x.sp,x.graph,x.q,x.opts,x.ans,x.lv,x.kind,x.passage,x.steps,x.ex,x.variant,x.from]);
+  const diff = (a,b) => {
+    const A = new Map((a||[]).map(x=>[x.id,x])), B = new Map((b||[]).map(x=>[x.id,x]));
+    const out = {a:[], d:[], m:[]};
+    B.forEach((x,id)=>{ if(!A.has(id)) out.a.push(id); else if(sig(A.get(id))!==sig(x)) out.m.push(id); });
+    A.forEach((x,id)=>{ if(!B.has(id)) out.d.push(x.term||x.q||String(id)); });
+    return out;
+  };
+  const d = { c:diff(oldU.cards,newU.cards), q:diff(oldU.questions,newU.questions), meta:[] };
+  ['title','round','order','guide','capstone','book'].forEach(k=>{
+    if(JSON.stringify(oldU[k]??null)!==JSON.stringify(newU[k]??null)) d.meta.push(k); });
+  return (d.c.a.length||d.c.d.length||d.c.m.length||d.q.a.length||d.q.d.length||d.q.m.length||d.meta.length) ? d : null;
+}
 async function fetchLibrary(btn){
   if(sandboxOn()){ toast('Sandbox is on — nothing is saved'); return; }
   const label = btn.textContent; btn.disabled = true; btn.textContent = 'Checking…';
@@ -1993,6 +2043,14 @@ async function fetchLibrary(btn){
         const cur = DATA.records[r.id];
         if(cur && !cur.deleted && r.libv > (cur.libv||0))
           r.updatedAt = Math.max(r.updatedAt||0, (cur.updatedAt||0) + 1);
+      });
+      Object.values(inc.records||{}).forEach(r=>{
+        if(!r || r.type!=='unit' || r.deleted) return;
+        const cur = DATA.records[r.id];
+        if(!cur || cur.deleted || cur.type!=='unit' || cur.status==='draft') return;
+        if((r.updatedAt||0) <= (cur.updatedAt||0)) return;   // loses the merge anyway
+        const d = unitDelta(cur, r);
+        if(d) r.chg = d;
       });
       const fresh = Object.keys(inc.records||{}).filter(id=>{
         const cur = DATA.records[id];
@@ -2251,9 +2309,14 @@ function studyPlan(date){
       if(wk < goal){ score += Math.min(20,(goal-wk)/2); reasons.push(`${wk} of ${goal} min this week`); }
     }
     if(score <= 0) return;
+    /* Inside a week of a test, the RIGHT work changes shape: mixed practice
+       across all the subject's units (deciding which skill a question wants
+       is itself the tested skill), not rereading the newest lesson. The flag
+       needs 2+ units — interleaving one unit is just that unit. */
     out.push({ classId:c.id, score,
       minutes: score>=60?40 : score>=30?25 : 15,
       why: reasons.slice(0,2).join(' · '),
+      ramp: daysOut!==null && daysOut<=7 && units(c.id).length>1,
       hasUnits, assess:nextA });
   });
   return out.sort((a,b)=>b.score-a.score).slice(0,3);
@@ -3225,6 +3288,16 @@ SCREENS.study = function(root){
       d.appendChild(el('div','why', p.why));
       d.addEventListener('click',()=>go('unit',{classId:p.classId}));
       root.appendChild(d);
+      /* Test week: the plan offers the mixed round itself, not just the door
+         to the subject. Same rules as any shuffle round — untimed, no check-in. */
+      if(p.ramp){
+        const sh = el('button','btn btn-secondary','🔀  Mixed round — all ' + (c.short||c.name) + ' units');
+        sh.addEventListener('click',()=>{
+          if(buildShuffleUnit(p.classId)) go('quiz',{unitId:'__shuffle__', classId:p.classId});
+          else go('unit',{classId:p.classId});
+        });
+        root.appendChild(sh);
+      }
     });
   }
 
@@ -3813,6 +3886,7 @@ function clubDetails(c){
 
 SCREENS.clubs = function(root){
   root.appendChild(headline('Fall clubs','Every club open to your grade. Tap one to read what it actually is, then star it if you want in — your picks show up for Mom and Dad, who register you in Blackbaud by Friday.'));
+  root.appendChild(el('div','hintline','Unless marked, clubs meet right after school, about 3:45–4:30 — tap one for its exact time.'));
   const picks = clubPicks();
   const chosen = CLUBS.filter(c=>picks[c.id]);
   if(chosen.length){
@@ -3843,7 +3917,11 @@ SCREENS.clubs = function(root){
       b.appendChild(st);
       const tl = el('span','tl');
       tl.appendChild(el('div',null,c.nm));
-      const meta = [c.time, c.freq, c.flag].filter(Boolean).join(' · ');
+      /* Nearly every club runs in the same after-school block, so repeating
+         "3:45" down the whole list was noise — the audit counted the same
+         time printed 25 times. Rows keep what DIFFERS (morning clubs say so);
+         the detail modal still shows every time in full. */
+      const meta = [/am/.test(c.time||'') ? c.time+' (morning)' : null, c.freq, c.flag].filter(Boolean).join(' · ');
       if(meta) tl.appendChild(el('div','mt',meta));
       b.appendChild(tl);
       b.appendChild(el('span','mt', c.cost ? '$'+c.cost : 'free'));
@@ -4831,10 +4909,18 @@ let reviewUnit = null;
 
 /* Builds a one-off unit from everything due, newest-struggle first. Kept out of
    DATA.records on purpose — it is a view, not saved content. */
-function buildReviewUnit(){
-  const qs = dueMisses().map(missAsQuestion).filter(Boolean);
+/* `opt` narrows the round: {classId} reviews one subject, {guide:true} only
+   questions that came off a paper study guide. No filter = everything due,
+   exactly as before. The id stays __review__ so the ladder settles the same
+   way whichever door she came through. */
+function buildReviewUnit(opt){
+  opt = opt || {};
+  let due = dueMisses();
+  if(opt.classId) due = due.filter(m=>m.classId===opt.classId);
+  if(opt.guide) due = due.filter(m=>{ const u = DATA.records[m.unitId]; return u && !u.deleted && u.guide; });
+  const qs = due.map(missAsQuestion).filter(Boolean);
   if(!qs.length) return null;
-  reviewUnit = { id:'__review__', classId:'__all__', title:'Review', cards:[], questions:qs.slice(0,20) };
+  reviewUnit = { id:'__review__', classId:opt.classId||'__all__', title:opt.title||'Review', cards:[], questions:qs.slice(0,20) };
   return reviewUnit;
 }
 const unitFor = id => id==='__review__' ? reviewUnit
@@ -5566,10 +5652,22 @@ SCREENS.growth = function(root){
   }
 
   const due = dueMisses();
+  /* Nearest unscored test per subject — the honest tiebreak for where to
+     start when the list is long. Undefined when nothing is coming. */
+  const today = AZ.today();
+  const testIn = {};
+  assessments().forEach(a=>{
+    if(a.score!=null || a.date<today) return;
+    const d = AZ.daysBetween(today, a.date);
+    if(testIn[a.classId]===undefined || d < testIn[a.classId]) testIn[a.classId] = d;
+  });
+  const prio = cid => testIn[cid]!==undefined ? testIn[cid] : 9999;
+  const testTag = cid => testIn[cid]!==undefined && testIn[cid]<=14
+    ? (testIn[cid]===0 ? ' · test today' : testIn[cid]===1 ? ' · test tomorrow' : ` · test in ${testIn[cid]} days`) : '';
+
   if(due.length){
     const c = el('div','card ac');
     c.appendChild(el('h2',null, due.length===1 ? '1 question is back' : due.length+' questions are back'));
-    c.appendChild(el('p',null,'These are the ones due today. Get one right and it goes quiet for longer; miss it and it starts over.'));
     const b = el('button','btn btn-primary', due.length>20 ? 'Review 20 of them' : 'Start review');
     b.addEventListener('click',()=>{
       if(!buildReviewUnit()){ toast('Nothing due right now'); return; }
@@ -5578,26 +5676,49 @@ SCREENS.growth = function(root){
       go('quiz',{unitId:'__review__', classId:'__all__'});
     });
     c.appendChild(b);
-    root.appendChild(c);
-  }
+    c.appendChild(el('p',null,'Get one right and it goes quiet for longer; miss it and it starts over.'));
 
-  const cleared = all('cleared').length;
-  if(cleared){
-    const w = el('div','card');
-    w.appendChild(el('h2',null, cleared+' learned for good'));
-    w.appendChild(el('p',null,'Each of these came back five times over three weeks and you got every one. They have left this list.'));
-    root.appendChild(w);
+    /* One subject at a time. The chips appear once the list spans more than
+       one subject — with a long list, WHERE to start is the real decision,
+       and the nearest test is the honest way to rank it, so that chip leads. */
+    const by = {};
+    due.forEach(m=>{ (by[m.classId] = by[m.classId]||[]).push(m); });
+    const subj = Object.keys(by).sort((a,b)=> prio(a)-prio(b) || by[b].length-by[a].length);
+    const chips = el('div','gz-chips');
+    if(subj.length > 1) subj.forEach(cid=>{
+      const cl = CLASS_BY_ID[cid]; if(!cl) return;
+      const ch = el('button','gz-chip', `${cl.icon} ${cl.short||cl.name} · ${by[cid].length}${testTag(cid)}`);
+      ch.addEventListener('click',()=>{
+        if(!buildReviewUnit({classId:cid, title:(cl.short||cl.name)+' review'})){ toast('Nothing due right now'); return; }
+        go('quiz',{unitId:'__review__', classId:cid});
+      });
+      chips.appendChild(ch);
+    });
+    /* Paper-guide misses get their own door — test week is exactly when
+       "re-quiz me on the study guide" is the question being asked. */
+    const gDue = due.filter(m=>{ const gu = DATA.records[m.unitId]; return gu && !gu.deleted && gu.guide; });
+    if(gDue.length && gDue.length < due.length){
+      const ch = el('button','gz-chip', `📄 Study guide · ${gDue.length}`);
+      ch.addEventListener('click',()=>{
+        if(!buildReviewUnit({guide:true, title:'Study guide review'})){ toast('Nothing due right now'); return; }
+        go('quiz',{unitId:'__review__', classId:'__all__'});
+      });
+      chips.appendChild(ch);
+    }
+    if(chips.children.length) c.appendChild(chips);
+    root.appendChild(c);
   }
 
   const dueIds = new Set(due.map(m=>m.id));
   const render = (list, header) => {
     if(!list.length) return;
-    const by = {};
-    list.forEach(m=>{ (by[m.classId] = by[m.classId]||[]).push(m); });
+    const byG = {};
+    list.forEach(m=>{ (byG[m.classId] = byG[m.classId]||[]).push(m); });
     root.appendChild(divider(header));
-    Object.entries(by).forEach(([cid,items])=>{
+    Object.keys(byG).sort((a,b)=> prio(a)-prio(b) || byG[b].length-byG[a].length).forEach(cid=>{
+      const items = byG[cid];
       const c = CLASS_BY_ID[cid];
-      if(c) root.appendChild(el('div','hintline', c.icon+' '+c.name));
+      if(c) root.appendChild(el('div','hintline', c.icon+' '+c.name+testTag(cid)));
       items.forEach(m=>{
         const box = m.box ?? -1;
         const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
@@ -5617,6 +5738,14 @@ SCREENS.growth = function(root){
   };
   render(due, 'Due today');
   render(ms.filter(m=>!dueIds.has(m.id)).sort((a,b)=>(a.due||'').localeCompare(b.due||'')), 'Settling in');
+  /* State, not action — it reads fine below the work. */
+  const cleared = all('cleared').length;
+  if(cleared){
+    const w = el('div','card');
+    w.appendChild(el('h2',null, cleared+' learned for good'));
+    w.appendChild(el('p',null,'Each of these came back five times over three weeks and you got every one. They have left this list.'));
+    root.appendChild(w);
+  }
 };
 
 /* ================= TUTOR ================= */
@@ -5811,31 +5940,47 @@ SCREENS.setup = function(root){
   pc.appendChild(skyRow);
   pc.appendChild(el('div','hintline','The colour weather behind everything. Text and cards stay exactly as readable.'));
 
-  pc.appendChild(el('label',null,'Your mark'));
-  const ep = el('div','emoji-pick');
-  AVATARS.forEach(a=>{
-    const b = el('button', p.avatar===a?'on':'', a);
-    b.addEventListener('click',()=>{ setPref('avatar',a); render(); });
-    ep.appendChild(b);
+  /* The three big grids collapse to one-line rows showing the current pick.
+     Rendered all at once they came to 52 buttons on this screen (the audit's
+     count); each grid is still one tap away and the current choice is always
+     visible, so nothing was removed — only deferred. */
+  const pickRow = (label, current, key, build) => {
+    pc.appendChild(el('label',null,label));
+    if((ctx._pick||{})[key]){ build(); return; }
+    const row = el('button','pickrow');
+    row.appendChild(el('span','cur',current));
+    row.appendChild(el('span','pv','Change'));
+    row.addEventListener('click',()=>{ (ctx._pick = ctx._pick||{})[key] = true; render(); });
+    pc.appendChild(row);
+  };
+  pickRow('Your mark', p.avatar || AVATARS[0], 'avatar', ()=>{
+    const ep = el('div','emoji-pick');
+    AVATARS.forEach(a=>{
+      const b = el('button', p.avatar===a?'on':'', a);
+      b.addEventListener('click',()=>{ setPref('avatar',a); render(); });
+      ep.appendChild(b);
+    });
+    pc.appendChild(ep);
   });
-  pc.appendChild(ep);
 
   /* The companion is hers to pick and hers to name — same autonomy logic as
      the avatar. "—" is a real choice: no creature, no perch, nothing missing. */
-  pc.appendChild(el('label',null,'Study companion'));
-  const cp = el('div','emoji-pick');
   const hasComp = p.companion && p.companion.sp;
-  const noneB = el('button', !hasComp?'on':'', '—');
-  noneB.setAttribute('aria-label','No companion');
-  noneB.addEventListener('click',()=>{ setPref('companion',null); render(); });
-  cp.appendChild(noneB);
-  COMPANIONS.forEach(c=>{
-    const b = el('button', hasComp && p.companion.sp===c.id?'on':'', c.e);
-    b.setAttribute('aria-label',c.nm);
-    b.addEventListener('click',()=>{ setPref('companion',{sp:c.id, nm:hasComp?(p.companion.nm||''):''}); render(); });
-    cp.appendChild(b);
+  const compSpec = hasComp ? COMPANIONS.find(x=>x.id===p.companion.sp) : null;
+  pickRow('Study companion', compSpec ? compSpec.e : '—', 'companion', ()=>{
+    const cp = el('div','emoji-pick');
+    const noneB = el('button', !hasComp?'on':'', '—');
+    noneB.setAttribute('aria-label','No companion');
+    noneB.addEventListener('click',()=>{ setPref('companion',null); render(); });
+    cp.appendChild(noneB);
+    COMPANIONS.forEach(c=>{
+      const b = el('button', hasComp && p.companion.sp===c.id?'on':'', c.e);
+      b.setAttribute('aria-label',c.nm);
+      b.addEventListener('click',()=>{ setPref('companion',{sp:c.id, nm:hasComp?(p.companion.nm||''):''}); render(); });
+      cp.appendChild(b);
+    });
+    pc.appendChild(cp);
   });
-  pc.appendChild(cp);
   if(hasComp){
     pc.appendChild(el('label',null,'Their name'));
     const cn = el('input'); cn.type='text'; cn.maxLength=16;
@@ -5854,15 +5999,17 @@ SCREENS.setup = function(root){
     pc.appendChild(ml);
   }
 
-  pc.appendChild(el('label',null,'Celebration style'));
-  const fxRow = el('div','emoji-pick');
-  FX_STYLES.forEach(f=>{
-    const b = el('button',(p.fx||'confetti')===f.id?'on':'', f.ic);
-    b.setAttribute('aria-label',f.nm); b.title=f.nm;
-    b.addEventListener('click',()=>{ setPref('fx',f.id); render(); toast(f.nm); celebrate(); });
-    fxRow.appendChild(b);
+  const curFx = FX_STYLES.find(f=>f.id===(p.fx||'confetti'));
+  pickRow('Celebration style', curFx ? curFx.ic : '🎉', 'fx', ()=>{
+    const fxRow = el('div','emoji-pick');
+    FX_STYLES.forEach(f=>{
+      const b = el('button',(p.fx||'confetti')===f.id?'on':'', f.ic);
+      b.setAttribute('aria-label',f.nm); b.title=f.nm;
+      b.addEventListener('click',()=>{ setPref('fx',f.id); render(); toast(f.nm); celebrate(); });
+      fxRow.appendChild(b);
+    });
+    pc.appendChild(fxRow);
   });
-  pc.appendChild(fxRow);
   pc.appendChild(el('div','hintline','How a finished quiz celebrates. Tap one to preview it.'));
 
   pc.appendChild(el('label',null,'What should this app call itself?'));
@@ -6896,6 +7043,43 @@ SCREENS.stars = function(root){
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); c.appendChild(r); });
   root.appendChild(c);
 
+  /* How well you call it. Every check-in asks how ready you feel; every quiz
+     answers. This is the two side by side — the same gap the check-in names
+     one round at a time, seen as a pattern. Hers to read, not a verdict:
+     the direction of the gap is information about her gut, nothing else.
+     Needs 4+ pairs so one odd day cannot masquerade as a pattern. */
+  const pairs = calibrationPairs();
+  if(pairs.length >= 4){
+    const last = pairs.slice(-10);
+    const cal = el('div','card');
+    cal.appendChild(el('div','eyebrow','How well you call it'));
+    const W2 = 320, H2 = 96, PADX = 18, PADY = 12;
+    const sx = i => last.length>1 ? PADX + i*(W2-PADX*2)/(last.length-1) : W2/2;
+    const sy = v => H2-PADY - (Math.min(100,Math.max(0,v))/100)*(H2-PADY*2);
+    const svg = svgEl('svg',{viewBox:`0 0 ${W2} ${H2}`,'aria-hidden':'true'});
+    svg.style.display='block'; svg.style.width='100%'; svg.style.height='96px';
+    svg.style.margin='8px 0 2px'; svg.style.overflow='visible';
+    last.forEach((p2,i)=>{
+      const x = sx(i);
+      const ln = svgEl('line',{x1:x,y1:sy(p2.predicted),x2:x,y2:sy(p2.actual)});
+      ln.style.stroke='var(--line)'; ln.style.strokeWidth='1.6'; svg.appendChild(ln);
+      const pr = svgEl('circle',{cx:x,cy:sy(p2.predicted),r:3.6});
+      pr.style.fill='none'; pr.style.stroke='var(--muted)'; pr.style.strokeWidth='1.6';
+      svg.appendChild(pr);
+      const ac = svgEl('circle',{cx:x,cy:sy(p2.actual),r:4.2});
+      ac.style.fill='var(--ac)'; svg.appendChild(ac);
+    });
+    cal.appendChild(svg);
+    cal.appendChild(el('div','hintline','○ how ready you felt · ● how it went — your last '+last.length+' quizzes'));
+    const hits = last.filter(p2=>Math.abs(p2.predicted-p2.actual)<=10).length;
+    const gap = Math.round(last.reduce((s2,p2)=>s2+(p2.actual-p2.predicted),0)/last.length);
+    cal.appendChild(el('p',null,`Within 10 points on ${hits} of the last ${last.length}. `
+      + (gap > 5 ? `You usually do better than you predict — your gut undersells you by about ${gap} points.`
+       : gap < -5 ? `You usually feel readier than the round turns out — by about ${Math.abs(gap)} points. One more pass before saying "ready" is the move.`
+       : 'Your predictions land close to your scores. That is calibration, and it is a real skill.')));
+    root.appendChild(cal);
+  }
+
   /* Pinned badges: up to three earned ones she chooses to feature. Autonomy
      over how achievements display — no new mechanics, just curation. */
   const have = earned();
@@ -7087,6 +7271,12 @@ SCREENS.reviewunit = function(root){
   /* Cuts are held here, not written, so backing out changes nothing. */
   const cutC = ctx._cutC = ctx._cutC || new Set();
   const cutQ = ctx._cutQ = ctx._cutQ || new Set();
+  /* An update to a unit already approved shows ONLY the difference — the
+     change summary was computed when the library was fetched, the one moment
+     both copies existed. "Show the whole unit" falls back to the full read. */
+  const chg = (u.wasApproved && u.chg && !ctx._showAll) ? u.chg : null;
+  const chgC = chg ? new Set(chg.c.a.concat(chg.c.m)) : null;
+  const chgQ = chg ? new Set(chg.q.a.concat(chg.q.m)) : null;
 
   const head = el('div','card ac');
   head.appendChild(el('div','eyebrow', (c?c.name:'Unit') + ' · draft'));
@@ -7095,19 +7285,38 @@ SCREENS.reviewunit = function(root){
   head.appendChild(ti);
   const cit = citeEl(u); if(cit) head.appendChild(cit);
   head.appendChild(el('p',null,'Read it through. Tap ✕ on anything wrong or off-topic — it is dropped when you approve. Nothing here is visible to her yet.'));
+  if(chg){
+    const say = (n,w) => n ? n+' '+w+(n===1?'':'s') : '';
+    const bits = [
+      say(chg.q.m.length,'question')&&say(chg.q.m.length,'question')+' edited',
+      say(chg.q.a.length,'question')&&say(chg.q.a.length,'question')+' added',
+      say(chg.c.m.length,'card')&&say(chg.c.m.length,'card')+' edited',
+      say(chg.c.a.length,'card')&&say(chg.c.a.length,'card')+' added',
+      (chg.c.d.length+chg.q.d.length) ? (chg.c.d.length+chg.q.d.length)+' removed' : '',
+      chg.meta.length ? 'settings: '+chg.meta.join(', ') : ''
+    ].filter(Boolean);
+    const kept = (u.cards.length - chgC.size) + (u.questions.length - chgQ.size);
+    head.appendChild(el('p',null,'Since you approved it: '+bits.join(' · ')+'. '
+      + (kept ? kept+' item'+(kept===1?' is':'s are')+' exactly as you read '+(kept===1?'it':'them')+' — only the changes are shown below.' : '')));
+    const allB = el('button','btn btn-ghost btn-sm','Show the whole unit');
+    allB.addEventListener('click',()=>{ ctx._showAll = true; render(); });
+    head.appendChild(allB);
+  }
   /* Units built before provenance existed have nothing to explain. */
   const hasProv = (u.cards||[]).some(x=>x.from) || (u.questions||[]).some(x=>x.from) || !!u.summary;
   if(hasProv) head.appendChild(el('div','hintline','Green marks what came from the material — those are the claims worth checking.'));
   root.appendChild(head);
 
-  if(u.parentNote && u.parentNote.text){
+  /* In changes-only mode the unit-level blocks are exactly what she read
+     at approval time — repeating them would bury the diff they came to see. */
+  if(u.parentNote && u.parentNote.text && !chg){
     root.appendChild(divider('For you'));
     const pn = el('div','card');
     pn.appendChild(provBlock(u.parentNote));
     root.appendChild(pn);
   }
 
-  const shown = [['summary','What this covers'],['why','Why it is worth knowing']];
+  const shown = chg ? [] : [['summary','What this covers'],['why','Why it is worth knowing']];
   shown.forEach(([k,label])=>{
     if(!u[k] || !u[k].text) return;
     root.appendChild(divider(label));
@@ -7116,7 +7325,7 @@ SCREENS.reviewunit = function(root){
     root.appendChild(w);
   });
 
-  if(u.objectives && u.objectives.length){
+  if(u.objectives && u.objectives.length && !chg){
     root.appendChild(divider('After this she should be able to'));
     const w = el('div','card');
     const ul = el('ul','objs');
@@ -7125,7 +7334,7 @@ SCREENS.reviewunit = function(root){
     root.appendChild(w);
   }
 
-  if(u.nextUp && u.nextUp.text){
+  if(u.nextUp && u.nextUp.text && !chg){
     root.appendChild(divider("What she is told to do next"));
     const w = el('div','card');
     w.appendChild(provBlock(u.nextUp));
@@ -7139,10 +7348,12 @@ SCREENS.reviewunit = function(root){
   recount();
   root.appendChild(counts);
 
-  if(u.cards.length){
-    root.appendChild(divider('Flashcards'));
+  if(u.cards.length && (!chgC || chgC.size)){
+    root.appendChild(divider(chg ? 'Changed flashcards' : 'Flashcards'));
     u.cards.forEach(card=>{
+      if(chgC && !chgC.has(card.id)) return;
       const d = el('div','rev'+(cutC.has(card.id)?' cut':''));
+      if(chg) d.appendChild(el('div','eyebrow', chg.c.a.includes(card.id) ? 'New card' : 'Edited card'));
       d.appendChild(el('div','q',card.term));
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(richify(el('div','o flat'), card.def));
@@ -7156,22 +7367,41 @@ SCREENS.reviewunit = function(root){
     });
   }
 
-  if(u.questions.length){
-    root.appendChild(divider('Quiz questions'));
+  if(u.questions.length && (!chgQ || chgQ.size)){
+    root.appendChild(divider(chg ? 'Changed questions' : 'Quiz questions'));
     const LV = {1:'Recall',2:'Apply',3:'Analyse'};
+    /* Collapsed by default: the question and its answer are what a read-through
+       actually verifies. Distractors, the explanation and provenance open per
+       item — and changed items in an update open already expanded. */
+    const openQ = ctx._openRev = ctx._openRev || new Set();
     u.questions.forEach(q=>{
+      if(chgQ && !chgQ.has(q.id)) return;
+      const open = !!chgQ || openQ.has(q.id);
       const d = el('div','rev'+(cutQ.has(q.id)?' cut':''));
-      d.appendChild(el('div','eyebrow', LV[q.lv]||('Level '+q.lv)));
+      d.appendChild(el('div','eyebrow', (LV[q.lv]||('Level '+q.lv))
+        + (chg ? (chg.q.a.includes(q.id) ? ' · new' : ' · edited') : '')));
       if(q.kind==='analogy') d.appendChild(analogyStem(q.q));
       else d.appendChild(el('div','q',q.q));
       if(q.passage) d.appendChild(el('div','passage', q.passage));
       const qg2 = graphNode(q.graph); if(qg2) d.appendChild(qg2);
+      if(!open){
+        d.appendChild(el('div','o yes', '✓ ' + (q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans])));
+        const more = el('button','rev-more','Check the options ▸');
+        more.addEventListener('click',()=>{ openQ.add(q.id); render(); });
+        d.appendChild(more);
+      } else {
       if(q.kind==='order'){
         d.appendChild(el('div','hintline','Put-in-order — listed here in the correct sequence; she sees them shuffled.'));
         q.opts.forEach((o,i)=>d.appendChild(el('div','o yes', (i+1)+'. '+o)));
       } else q.opts.forEach((o,i)=>d.appendChild(el('div','o'+(i===q.ans?' yes':''), o)));
       if(q.ex && q.ex.main) d.appendChild(richify(el('div','why'), q.ex.main));
       if(q.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(q.from)); d.appendChild(t); }
+      if(!chgQ){
+        const less = el('button','rev-more','Fold it back ▴');
+        less.addEventListener('click',()=>{ openQ.delete(q.id); render(); });
+        d.appendChild(less);
+      }
+      }
       const x = el('button','cut-btn', cutQ.has(q.id)?'↩':'✕');
       x.setAttribute('aria-label', cutQ.has(q.id)?'Keep this question':'Drop this question');
       x.addEventListener('click',()=>{ cutQ.has(q.id)?cutQ.delete(q.id):cutQ.add(q.id); render(); });
@@ -7180,6 +7410,12 @@ SCREENS.reviewunit = function(root){
     });
   }
 
+  if(chg && (chg.c.d.length || chg.q.d.length)){
+    root.appendChild(divider('Removed in this update'));
+    const rm = el('div','card');
+    chg.c.d.concat(chg.q.d).forEach(t=>rm.appendChild(el('p',null,'— '+t)));
+    root.appendChild(rm);
+  }
   const ok = el('button','btn btn-primary','Approve — send it to her');
   ok.addEventListener('click',()=>{
     const cards = u.cards.filter(x=>!cutC.has(x.id));
@@ -7187,7 +7423,7 @@ SCREENS.reviewunit = function(root){
     if(!cards.length && !qs.length){ toast('Nothing left to approve'); return; }
     const rec = {...u, cards, questions:qs, title:ti.value.trim()||u.title,
          status:'approved', approvedOn:AZ.today()};
-    delete rec.wasApproved;
+    delete rec.wasApproved; delete rec.chg;
     put(rec);
     syncSoon();
     const dropped = cutC.size + cutQ.size;
@@ -7491,7 +7727,42 @@ if(bootHash){
   else if(bootHash==='thread'){ const t = threadTarget(AZ.today()); if(t) t.go(); }
 }
 if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
-if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+/* Mobile Chrome caches hard — that is why every deploy bumps CACHE_VERSION.
+   The worker already knows when a newer build is installed and waiting; this
+   just says so, once, in a bar she can act on or dismiss. Dismissing costs
+   nothing: the new version takes over on the next cold start anyway.
+   The reload fires ONLY after she taps Refresh (swAccepted) — an unguarded
+   controllerchange reload would yank a quiz out from under her mid-round. */
+let swAccepted = false;
+function offerUpdate(reg){
+  const w = reg.waiting;
+  if(!w || document.querySelector('.swbar')) return;
+  const bar = el('div','swbar');
+  bar.appendChild(el('span',null,'A new version is ready.'));
+  const b = el('button',null,'Refresh');
+  b.addEventListener('click',()=>{ swAccepted = true; b.textContent = '…'; w.postMessage('skip'); });
+  bar.appendChild(b);
+  const x = el('button','x','✕');
+  x.setAttribute('aria-label','Not now');
+  x.addEventListener('click',()=>bar.remove());
+  bar.appendChild(x);
+  document.body.appendChild(bar);
+}
+if('serviceWorker' in navigator) window.addEventListener('load', async ()=>{
+  try{
+    const reg = await navigator.serviceWorker.register('sw.js');
+    if(reg.waiting && navigator.serviceWorker.controller) offerUpdate(reg);
+    reg.addEventListener('updatefound', ()=>{
+      const nw = reg.installing;
+      if(nw) nw.addEventListener('statechange', ()=>{
+        if(nw.state==='installed' && navigator.serviceWorker.controller) offerUpdate(reg);
+      });
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', ()=>{
+      if(swAccepted){ swAccepted = false; location.reload(); }
+    });
+  }catch(e){}
+});
 setInterval(()=>{ if(view==='today') render(); }, 60000);
 </script>
 </body>

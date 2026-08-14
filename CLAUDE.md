@@ -373,6 +373,82 @@ spine (now a left rail); `.t`/`.s` were spans and ran together on one line
 ring** defined later in the sheet, which forced the block to 52×52 — renamed to
 `.tcrest` rather than fought.
 
+### The batch of six (v92 / Wayfinder v74)
+
+Six improvements shipped together; all engine except where marked.
+
+**Growth re-quiz + prioritization.** `buildReviewUnit(opt)` takes an optional
+filter — `{classId}` for one subject, `{guide:true}` for questions that came
+off a paper study guide. The Growth due card grows chips for both, but only
+when the due list spans more than one subject (a one-subject list needs no
+chooser), and the guide chip only when guide misses are a strict subset.
+Subjects are ranked by **days to the nearest unscored test** (then count);
+the same ranking orders the Due/Settling groups, whose headers say "· test in
+N days" inside 14. The id stays `__review__` whichever door she uses, so the
+ladder settles identically. "Learned for good" moved below the lists — state,
+not action. The start button sits directly under the count now (the audit
+measured 397px of preamble before the first action).
+
+**Re-approvals show only the difference.** `unitDelta(old, new)` runs inside
+`fetchLibrary()` — the ONE moment both copies exist — and its result rides the
+re-drafted record as `chg` (ids for kept items, display text for removed ones,
+since a removed item has no record left to read). `SCREENS.reviewunit` in chg
+mode renders just the changed/new items (expanded), a summary sentence, the
+removed list, and a "Show the whole unit" escape; the unit-level blocks
+(parent note, summary, objectives) are hidden because they are exactly what
+was already read. Approving deletes `chg` with `wasApproved`. In the ordinary
+full view, **question rows now collapse to question + correct answer** — the
+two things a read-through actually verifies — with options/explanation/
+provenance one tap away per item. Cards stay full; they are the substance.
+
+**The update bar.** The service workers **no longer `skipWaiting()` at
+install** — a new worker used to take over mid-session the moment it
+installed. It now waits; the page shows a dismissible "A new version is
+ready" bar (`.swbar`, `offerUpdate()`), and the takeover happens when she
+taps Refresh (a `'skip'` message → `skipWaiting()`) or on the next cold
+start. The `controllerchange` reload is guarded by `swAccepted`, so nothing
+ever yanks a mid-round quiz. Found while testing the swap: **a hung CDN fetch
+(fonts) blocks every `<script>` after the stylesheet — the app simply never
+finishes loading** on a captive-portal-style connection. The SW's CDN branch
+is now bounded: cache, else network for 4s, else `Response.error()` and the
+system font stack carries on. `tools/test_swflow.js` runs the whole flow for
+real, bumping sw.js on disk and restoring it.
+
+**The exam ramp.** A plan entry gains `ramp` when its subject has an unscored
+assessment within 7 days AND 2+ units — inside test week the right work
+changes *shape* (interleaved practice across all units; deciding which skill
+a question wants is itself the tested skill), not just minutes. Study renders
+a "Mixed round — all <subject> units" button under that plan card, and
+`threadTarget()` hands the thread to the mixed round inside 3 days — **but
+due reviews still outrank it**, always.
+
+**How well you call it (THIS APP ONLY, deliberately).** A Stars card built
+from `calibrationPairs()`: her last 10 readiness-vs-score pairs drawn as
+hollow (felt) and filled (went) dots, one sentence naming the average gap's
+direction. Rules that are the point: needs 4+ pairs so one odd day cannot
+masquerade as a pattern; the direction is information about her gut, never a
+verdict; second person throughout. Wayfinder keeps calibration parent-side —
+9 is young to be handed a self-model chart; revisit if she asks.
+
+**Audit fixes.** Clubs rows stop repeating the standard after-school time
+(the audit counted "3:45" printed 25 times) — rows keep what DIFFERS, morning
+clubs say so, the detail modal keeps everything. The Settings picker grids
+(avatar / companion / celebration) collapse to `.pickrow` rows showing the
+current choice — the screen rendered 52 buttons at once; nothing was removed,
+only deferred behind one tap.
+
+**tools/ is the pipeline's home now.** The Playwright harness (sweeps,
+feature tests, contrast probes, the SW flow test, `serve.js`) and the content
+builders + `check_content.py` live in each repo's `tools/`, not in session
+scratch space that dies with the container. Never cached — the SW shell is a
+fixed list. `tools/README.md` carries the hard-won probe rules (opaque-surface
+compositing, transitions-off before reading colours, assert-the-knob-turned,
+never wait on `load` across a SW swap).
+
+Two Wayfinder parity gaps found and fixed on the way: its Growth list and its
+review queue never rendered a miss's/question's `graph` (Ad Astra's did), and
+its review queue didn't `richify()` explanations.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
