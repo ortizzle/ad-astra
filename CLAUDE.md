@@ -331,6 +331,41 @@ spine, not a path above a duplicate list.
   can never take it back. Verified.
 - Not currency: it cannot be spent, traded or bought, and nothing is gated.
 
+**The round, redrawn (v91 / Wayfinder v73, both apps).** Two changes to the
+screen she uses most, prototyped in `wayfinder/prototype2.html` before either
+was built.
+
+- **One slim tool row, not four stacked buttons.** Hint, Calculator, Sheet and
+  Leave were four full-width `.btn-ghost`s under every question — measured at
+  ~250px of furniture between her and the next question, now **72px**
+  (`.tools`/`.tool`). They share the WIDTH, not the height: every tool still
+  renders at 48px, four of them at 83px wide on a 390px screen, nothing
+  clipped. The answers are now the only big targets on the screen.
+  - **The hint keeps its price on the button** — "Hint −5". She must never buy
+    one without being told what it costs.
+  - **The sheet reads just "Sheet"** in the row; "DBQ essay rubric" does not
+    fit a quarter of the width, and the subject screen still names it in full.
+- **The round ends on the shape it drew.** The results modal opened on
+  `${pct}%` in 28px Fraunces; it now opens on the finished constellation
+  (`roundBand(u,{state,tall:true})`, 104px) with the score as one quiet
+  `.tally` line — `4 of 5 · +65 XP · 2 sec`. **The fraction is said once**,
+  not in a headline and a message and a box; the percentage is not printed at
+  all (the parent view keeps it). The headline names COMPLETION, not the
+  score, so it reads the same at 40% as at 100% — Sky Map rules.
+  - `roundBand` gained an `opt.state`, so the band can be drawn from a state
+    array after `quizState` is gone; `roundState(u)` is the live read. Same
+    seed, so it is the shape she watched being drawn.
+  - **A missed question still lights its star**, dim, and its segment still
+    draws.
+
+Measured across accent × sky × theme after the change: worst `.tool` label
+**4.54:1** (Ad Astra) / 5.75:1 (Wayfinder), worst `.tally` 4.94 / 6.19 — all
+clear. One trap on the way: `.tool` transitions its `color`, so a probe reading
+`getComputedStyle` immediately after flipping the theme gets the INTERPOLATED
+value and reports a failure the app does not have (it claimed 3.11:1).
+`contrast_tools.js` now disables transitions first and asserts `--muted`
+actually tracked the theme.
+
 Three bugs the screenshots caught, all mine: the map's alternating zigzag left
 ~165px a side at 390px and River's lesson titles wrapped to four lines into the
 spine (now a left rail); `.t`/`.s` were spans and ran together on one line

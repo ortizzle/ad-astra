@@ -589,6 +589,25 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 @keyframes qdraw{to{stroke-dashoffset:0}}
 @keyframes qpop{0%{transform:scale(.45)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes qhalo{0%{opacity:.45;r:3}100%{opacity:0;r:14}}
+/* The round, finished: the same shape it drew, given room, at the top of the
+   results. The score is the quiet line underneath rather than a number in a box. */
+.qband.drawn{height:104px;margin:2px 0 10px}
+.tally{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:13px}
+.tally span{padding:7px 13px;border-radius:999px;border:1px solid var(--line-soft);
+  font-size:12.5px;color:var(--muted)}
+.tally b{color:var(--text);font-weight:700}
+/* The tools under a question — hint, calculator, sheet, leave — used to be four
+   stacked full-width buttons, roughly 250px of furniture between her and the
+   next question. One slim row instead, so the ANSWERS are the only big targets.
+   Still >=44px tall; only the width is shared. */
+.tools{display:flex;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.tool{flex:1 1 0;min-width:0;min-height:var(--tap);border-radius:13px;
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  font:inherit;font-size:11.5px;font-weight:600;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;padding:6px 4px;line-height:1.2;
+  text-align:center;transition:border-color .15s,color .15s}
+.tool .ti{font-size:16px;line-height:1}
+.tool small{font-size:11.5px;font-weight:600}
 .qstars{display:flex;gap:9px;margin-top:11px;font-size:13px;line-height:1}
 .qstars .qs{color:var(--line);transition:color .3s}
 .qstars .qs.now{color:var(--ac)}
@@ -920,7 +939,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v90 · lessons 1-5 and 1-6';
+const APP_VERSION = 'v91 · the round, redrawn';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1550,17 +1569,26 @@ function roundPoints(seed, n, w, h){
   }
   return out;
 }
-function roundBand(u){
-  const n = quizState.order.length;
-  const W = 320, H = 54;
-  const band = svgEl('svg', {class:'qband', viewBox:'0 0 ' + W + ' ' + H,
-    'aria-hidden':'true'});
-  const pts = roundPoints(u.id + ':' + n, n, W, H);
-  const state = quizState.order.map((oi, k) => {
+/* Mid-round: which stars are lit, which are dim, which are not reached yet. */
+function roundState(u){
+  return quizState.order.map((oi, k) => {
     const seen = k < quizState.i || (k === quizState.i && quizState.answered !== null);
     if(!seen) return null;
     return quizState.missed.includes(u.questions[oi].id) ? 'dim' : 'lit';
   });
+}
+/* `opt.state` draws a band from a state array instead of the live round — which
+   is how the results screen shows the finished shape after quizState is gone.
+   The seed is the unit id and the round length, so the shape is identical to
+   the one she just watched being drawn. */
+function roundBand(u, opt){
+  opt = opt || {};
+  const state = opt.state || roundState(u);
+  const n = state.length;
+  const W = 320, H = opt.tall ? 88 : 54;
+  const band = svgEl('svg', {class:'qband' + (opt.tall ? ' drawn' : ''),
+    viewBox:'0 0 ' + W + ' ' + H, 'aria-hidden':'true'});
+  const pts = roundPoints(u.id + ':' + n, n, W, H);
   /* Segments first so the stars sit on top of the line. */
   for(let i = 1; i < n; i++){
     if(state[i-1] === null || state[i] === null) continue;
@@ -1570,9 +1598,11 @@ function roundBand(u){
   }
   pts.forEach(([cx, cy], i) => {
     if(state[i]) band.appendChild(svgEl('circle', {cx, cy, r:3, class:'halo on'}));
+    /* No "you are here" star on a finished band — the round is over. */
     const cls = state[i] ? 'star ' + state[i]
-      : (i === quizState.i ? 'star now' : 'star');
-    const st = svgEl('path', {d: sparkPath(cx, cy, state[i] ? 6.5 : 4.2), class: cls});
+      : (!opt.state && i === quizState.i ? 'star now' : 'star');
+    const r = state[i] ? (opt.tall ? 8 : 6.5) : 4.2;
+    const st = svgEl('path', {d: sparkPath(cx, cy, r), class: cls});
     st.style.transformOrigin = cx + 'px ' + cy + 'px';
     band.appendChild(st);
   });
@@ -4956,11 +4986,9 @@ SCREENS.quiz = function(root){
   }
 
   if(quizState.answered===null){
-    if(q.hint && !quizState.hintUsed && !quizState.timed){
-      const h = el('button','btn btn-ghost','💡  Give me a hint (−5 XP)');
-      h.addEventListener('click',()=>{quizState.hintUsed=true;quizState.hints++;render();});
-      root.appendChild(h);
-    } else if(q.hint && !quizState.timed){
+    /* The hint button moved into the tool row at the foot of the screen; once
+       it is bought, the hint itself renders here where she is reading. */
+    if(q.hint && quizState.hintUsed && !quizState.timed){
       const h = el('div','card'); h.appendChild(el('p',null,'💡 '+q.hint)); root.appendChild(h);
     }
   } else {
@@ -5024,24 +5052,32 @@ SCREENS.quiz = function(root){
     });
     root.appendChild(n);
   }
+  /* One slim row of tools rather than four stacked full-width buttons, so the
+     answers stay the only big targets on the screen. Every tool still clears
+     44px; they share the width, not the height. */
+  const tools = el('div','tools');
+  const tool = (icon, label, fn) => {
+    const b = el('button','tool');
+    b.appendChild(el('span','ti',icon));
+    b.appendChild(el('small',null,label));
+    b.addEventListener('click',fn);
+    tools.appendChild(b);
+  };
+  /* The cost stays on the button — she should never buy a hint without being
+     told what it costs. */
+  if(q.hint && !quizState.hintUsed && !quizState.timed && quizState.answered===null)
+    tool('💡','Hint −5',()=>{quizState.hintUsed=true;quizState.hints++;render();});
   /* Maths and science quizzes get a calculator — the questions test concepts,
      not arithmetic stamina, and real tests in these subjects allow one. */
-  if(CALC_CLASSES.has(ctx.classId)){
-    const calcBtn = el('button','btn btn-ghost','🧮  Calculator');
-    calcBtn.addEventListener('click',openCalc);
-    root.appendChild(calcBtn);
-  }
-  if(SHEETS[ctx.classId]){
-    const fBtn = el('button','btn btn-ghost', SHEETS[ctx.classId].ic+'  '+SHEETS[ctx.classId].nm);
-    fBtn.addEventListener('click',()=>openSheet(ctx.classId));
-    root.appendChild(fBtn);
-  }
-  const quit = el('button','btn btn-ghost','Exit quiz');
+  if(CALC_CLASSES.has(ctx.classId)) tool('🧮','Calculator',openCalc);
+  /* Just "Sheet" in the row — a sheet's full name ("DBQ essay rubric") does not
+     fit a quarter of the width, and the subject screen still names it in full. */
+  if(SHEETS[ctx.classId]) tool(SHEETS[ctx.classId].ic, 'Sheet', ()=>openSheet(ctx.classId));
   const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
   /* Exit is the usual way she leaves a round, and it used to drop quizState
      before navigating — which meant the go() hook never saw it and the work
      was lost. Log what she answered first, then go. */
-  quit.addEventListener('click',()=>{
+  tool('✕','Leave',()=>{
     stopQuestionTimer();
     if(quizState && !quizState.settled && (quizState.seen||[]).length){
       const qu = unitFor(quizState.unitId);
@@ -5050,7 +5086,7 @@ SCREENS.quiz = function(root){
     quizState = null;
     go(back[0],back[1]);
   });
-  root.appendChild(quit);
+  root.appendChild(tools);
 };
 function answer(u,q,idx){
   /* Kahoot-style: the faster it lands, the bigger the bonus. */
@@ -5264,10 +5300,15 @@ function finishQuiz(u, partial){
       : gap > 10 ? '\n\nYou did better than you expected. Worth noticing: your nerves undersell you.'
       : '\n\nYou felt more ready than this turned out. That gap is the useful part — it means reviewing felt like knowing.';
   }
-  const msg = (pct===100 ? `Perfect. ${total}/${total}.\n\n+${xp} XP`
-    : pct>=80 ? `${quizState.correct}/${total} — strong.\n\n+${xp} XP`
-    : pct>=60 ? `${quizState.correct}/${total}. Solid base, a few gaps.\n\n+${xp} XP`
-    : `${quizState.correct}/${total}. This one needs another pass — that is information, not a verdict.\n\n+${xp} XP`)
+  /* The round ends on the shape it drew. The fraction and the XP move into one
+     quiet line under it — said once, not restated in a headline and a message
+     and a box. */
+  const shape = roundState(u);
+  const right = quizState.correct;
+  const msg = (pct===100 ? 'Every one, first pass.'
+    : pct>=80 ? 'A strong run.'
+    : pct>=60 ? 'A solid base, with gaps in it.'
+    : 'This one needs another pass. That is information, not a verdict.')
     + (speed?`\n\nSpeed bonus +${speed} XP${fastest!==null?` · fastest answer ${fastest.toFixed(1)}s`:''}.`:'')
     + (hintsUsed?`\n\n${hintsUsed} hint${hintsUsed>1?'s':''} used (−${hintsUsed*5} XP).`:'')
     + calib + (missed
@@ -5279,11 +5320,22 @@ function finishQuiz(u, partial){
   quizState = null; ctx._state = null; ctx._pre = null;
   const clsId = ctx.classId;
   const wasReview = u.id==='__review__';
-  showModal({ title:`${pct}%`, message:msg,
+  showModal({ title:"That's the whole round", message:msg,
     confirmText:'How did that feel?', cancelText:null,
-    /* The companion turns up when a quiz ends — a natural seam, never an
-       interruption. Same steady creature whatever the score. */
     build:(box)=>{
+      /* The finished shape goes ABOVE the title — it is what the round was,
+         and she watched it being drawn one star at a time. */
+      box.insertBefore(roundBand(u, {state:shape, tall:true}), box.firstChild);
+      const t = el('div','tally');
+      const chip = (n, rest) => { const s = el('span');
+        s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest));
+        t.appendChild(s); };
+      chip(right, ` of ${total}`);
+      chip('+'+xp, ' XP');
+      chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
+      box.appendChild(t);
+      /* The companion turns up when a quiz ends — a natural seam, never an
+         interruption. Same steady creature whatever the score. */
       const comp = companionOf();
       if(!comp) return;
       const pool = companionPool(pct>=80 ? 'cheer' : 'steady', comp);
