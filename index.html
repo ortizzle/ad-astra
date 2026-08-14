@@ -8,10 +8,20 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Self-hosted variable fonts (latin subsets, ~176KB total) under the same
+   family names as before, so every font-family rule below is untouched.
+   No CDN: the look can no longer be lost to a filtered or hanging network,
+   and the first paint stops waiting on a third party. */
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;
+  font-display:swap;src:url(fonts/fraunces.woff2) format('woff2-variations')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;
+  font-display:swap;src:url(fonts/fraunces-italic.woff2) format('woff2-variations')}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;
+  font-display:swap;src:url(fonts/jakarta.woff2) format('woff2-variations')}
+
 :root{
   --ac:#6fe3cd;                     /* personalized accent — set from prefs */
   --r:20px; --tap:48px;
@@ -33,20 +43,23 @@
   --wash-1:var(--ac-14); --wash-2:rgba(242,196,138,.07);
 }
 :root[data-theme="light"]{
-  --ink:#f2f6f5; --deep:#ffffff; --surface:#ffffff; --raised:#e9f1ef;
-  --line:#cbdedb; --line-soft:#dfebe8;
-  --text:#0c2b29; --muted:#587672; --faint:#57706d;
+  /* Sea-glass paper, not generic white — light mode carries the identity too.
+     The page is a tinted ground the white cards float on; the washes were
+     always accent-keyed, they just never had paper that let them read. */
+  --ink:#e7f0ed; --deep:#ffffff; --surface:#ffffff; --raised:#dcebe6;
+  --line:#bfd7d1; --line-soft:#d3e3de;
+  --text:#0c2b29; --muted:#42605d; --faint:#425c59;
   /* --faint carries hints and explanations — real reading, not decoration — so
      it is held above 4.5:1 against both the card (#fff) and the page. */
   /* Raw aquamarine on white fails contrast, so text-weight accent is deepened.
      40% keeps the hue recognisable while clearing WCAG AA (4.5:1) for the
      small-caps labels, which are 10.5px and therefore normal-size text. */
-  --ac-fg:color-mix(in srgb, var(--ac) 40%, #04302a);
-  --warm:#8f5c14; --bad:#c0374a; --good:#0b7b62;
+  --ac-fg:color-mix(in srgb, var(--ac) 32%, #04302a);
+  --warm:#754a0e; --bad:#b02c3f; --good:#07604b;
   --shadow:0 5px 16px rgba(12,43,41,.10);
   --veil:rgba(12,43,41,.45);
-  --wash-1:color-mix(in srgb, var(--ac) 22%, transparent);
-  --wash-2:rgba(242,196,138,.20);
+  --wash-1:color-mix(in srgb, var(--ac) 30%, transparent);
+  --wash-2:rgba(242,196,138,.26);
 }
 /* Skies — her pick of canvas washes (Settings → Personalize). Only the wash
    colours change; the canvas (--ink) and every text colour stay put, so the
@@ -91,7 +104,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .brand{cursor:pointer}
 .brand:active{transform:scale(.985)}
 .brand h1{font-size:24px}
-.brand .sub{font-size:11px;color:var(--faint);letter-spacing:.06em;margin-top:1px}
+.brand .sub{font-size:11.5px;color:var(--faint);letter-spacing:.06em;margin-top:1px}
 .hdr{display:flex;gap:6px;flex-shrink:0}
 .chip{background:var(--surface);border:1px solid var(--line-soft);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;white-space:nowrap}
 .chip.ac{border-color:var(--ac-25);color:var(--ac-fg);background:var(--ac-8)}
@@ -127,7 +140,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   border:1px solid var(--ac-25);box-shadow:0 0 14px -5px var(--ac);
   border-radius:16px 16px 16px 5px;padding:11px 14px;
   font-family:'Fraunces',Georgia,serif;font-style:italic;
-  font-size:14.5px;line-height:1.5;color:var(--text)}
+  font-size:14px;line-height:1.5;color:var(--text)}
 /* The companion arrives, it doesn't just appear: a gentle rise plus one
    brighter pulse of the glow to say "new line". Reduced motion gets stillness. */
 @media (prefers-reduced-motion: no-preference){
@@ -144,7 +157,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 
 .step{display:flex;gap:10px;align-items:flex-start;margin:9px 0}
 .step .n{flex:0 0 22px;height:22px;border-radius:50%;background:var(--ac-14);color:var(--ac-fg);
-  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .step p{margin:0;font-size:14px;line-height:1.5}
 
 .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px;margin-bottom:14px}
@@ -152,7 +165,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .card.quiet{background:transparent;border-style:dashed}
 .card h2{font-size:23px;margin-bottom:6px}
 .card h3{font-size:18px;margin-bottom:6px}
-.card p{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.card p{margin:0 0 10px;color:var(--muted);font-size:14px}
 .card p:last-child{margin-bottom:0}
 .card p.lede{color:var(--text);font-size:16px}
 
@@ -203,7 +216,17 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .nav-btn .ic .dot{position:absolute;top:-2px;right:-7px;min-width:15px;height:15px;padding:0 4px;
   border-radius:8px;background:var(--ac);color:color-mix(in srgb, var(--ac) 22%, #000);font-size:9.5px;font-weight:800;
   line-height:15px;text-align:center}
-.nav-btn.on{color:var(--ac-fg)}
+/* Active tab: a tinted pill as well as the colour — colour is never the
+   sole signal, and the nav was the one place it still was. */
+.nav-btn.on{color:var(--ac-fg);background:var(--ac-8);border-radius:14px}
+/* A right answer's feedback is tappable — say so quietly on press. */
+.explain.go-on{cursor:pointer}
+.explain.go-on:active{transform:scale(.99)}
+/* The live period's progress through itself. White on the painted fill —
+   the row's scrim already guarantees the surface. */
+.period .pleft{height:3px;border-radius:2px;background:rgba(255,255,255,.28);
+  margin-top:7px;overflow:hidden;max-width:160px}
+.period .pleft i{display:block;height:100%;background:rgba(255,255,255,.92);border-radius:2px}
 
 .period{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:8px;border-left:3px solid var(--pc,var(--line))}
 .period.now{border-color:var(--ac);background:linear-gradient(100deg,var(--ac-14),var(--surface));border-left-color:var(--ac)}
@@ -211,15 +234,15 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .period .ic{font-size:19px;width:24px;text-align:center;flex-shrink:0}
 .period .meta{flex:1;min-width:0}
 .period .nm{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.period .dt{font-size:12px;color:var(--faint)}
-.period .tm{font-size:12px;color:var(--muted);text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
-.tag-now{background:var(--ac);color:#04141a;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.09em}
+.period .dt{font-size:12.5px;color:var(--faint)}
+.period .tm{font-size:12.5px;color:var(--muted);text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+.tag-now{background:var(--ac);color:#04141a;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.09em}
 
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
 .tile{background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc,var(--ac));border-radius:16px;padding:15px;min-height:var(--tap);text-align:left;display:flex;flex-direction:column;gap:4px}
 .tile:active{transform:scale(.985)}
 .tile .ic{font-size:21px}
-.tile .nm{font-weight:600;font-size:14.5px;line-height:1.3}
+.tile .nm{font-weight:600;font-size:14px;line-height:1.3}
 .tile .ct{font-size:11.5px;color:var(--faint)}
 
 /* ---- subject identity: texture layers painted over the subject's own colour ---- */
@@ -325,7 +348,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
 .face.subj .eq{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.28)}
-.face .subjtag{position:absolute;top:14px;left:16px;font-size:9px;letter-spacing:.14em;
+.face .subjtag{position:absolute;top:14px;left:16px;font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.65)}
 .face.back .wm{display:none}
 
@@ -378,7 +401,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .meter i{display:block;height:100%;background:var(--ac);border-radius:3px}
 /* One answered question: marker, the question, then what she picked. */
 .qcap{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  font-size:12px;color:var(--faint)}
+  font-size:12.5px;color:var(--faint)}
 .qtog{background:none;border:0;padding:11px 0;min-height:var(--tap);
   color:var(--ac-fg);font-size:12.5px;font-weight:600;text-align:right}
 .qline{display:flex;gap:9px;padding:9px 0;border-top:1px solid var(--line)}
@@ -387,7 +410,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .qline .mk.ok{color:var(--good)}
 .qline .mk.no{color:var(--warm)}
 .qline .tx{flex:1;font-size:13px;line-height:1.5}
-.qline .tx small{display:block;color:var(--faint);font-size:12px;margin-top:3px}
+.qline .tx small{display:block;color:var(--faint);font-size:12.5px;margin-top:3px}
 .qline .tx small b{font-weight:600;color:var(--good)}
 /* ---- The day, as one list ----
    This screen used to be three inventories of the same sessions sorted three
@@ -403,8 +426,8 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sesrow .nm{font-weight:600;font-size:14px;line-height:1.35}
 .sesrow .mt{font-size:11.5px;color:var(--faint);line-height:1.45;margin-top:2px}
 .sesrow .score{flex-shrink:0;text-align:right;line-height:1.25}
-.sesrow .score b{display:block;font-weight:700;font-size:14.5px}
-.sesrow .score i{display:block;font-style:normal;font-size:11px;color:var(--faint)}
+.sesrow .score b{display:block;font-weight:700;font-size:14px}
+.sesrow .score i{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
 /* The affordance was a grey glyph the same colour as the meta text, so nothing
    said the rows opened. Rows with nothing under them are no longer buttons at
    all, rather than disabled ones that look identical to live ones. */
@@ -516,7 +539,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .tcrest .cs{font-size:12.5px;color:var(--faint);margin-top:2px;line-height:1.45}
 .tocrow{width:100%;display:flex;align-items:center;gap:12px;min-height:var(--tap);
   padding:12px 14px;border:1px solid var(--line);border-radius:14px;
-  background-color:var(--surface);margin-bottom:9px;text-align:left;font-size:14.5px}
+  background-color:var(--surface);margin-bottom:9px;text-align:left;font-size:14px}
 .tocrow .st{width:22px;text-align:center;flex-shrink:0;color:var(--muted)}
 .tocrow .st.done{color:var(--good);font-weight:800}
 .tocrow .tl{flex:1;line-height:1.35}
@@ -646,11 +669,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* Quick-log chips: one tap for the usual book and the usual minutes. */
 .chiprow{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
 .chipbtn{min-height:44px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);
-  background-color:var(--raised);font-size:13.5px;line-height:1.2}
+  background-color:var(--raised);font-size:13px;line-height:1.2}
 .chipbtn.on{border-color:var(--ac);background-color:var(--ac-8)}
 /* Formula sheet rows inside the modal. */
 .frow{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
-.frow .fn{font-size:12px;color:var(--faint)}
+.frow .fn{font-size:12.5px;color:var(--faint)}
 .frow .eq{margin-top:0}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
@@ -661,7 +684,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   border:1px solid var(--line);background-color:var(--surface)}
 .stat .n{font-family:'Fraunces',Georgia,serif;font-size:23px;line-height:1.1;color:var(--ac-fg)}
 .stat .l{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--faint)}
-.stat .s{font-size:11px;color:var(--muted);margin-top:2px}
+.stat .s{font-size:11.5px;color:var(--muted);margin-top:2px}
 .stat.hot{border-color:var(--ac);background-image:linear-gradient(140deg,var(--ac-14),transparent 70%)}
 /* Flashcard definitions: one idea per line, with air between ideas. */
 .def .defline{margin-top:10px}
@@ -685,7 +708,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .graph-wrap svg{display:block;width:100%;height:auto}
 .face .graph-wrap{max-width:225px;margin:10px auto 22px;padding:5px 5px 2px}
 .rev .graph-wrap{margin:8px 0 6px}
-.back-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;margin-bottom:10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--muted)}
+.back-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;margin-bottom:10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--muted)}
 .explain .lbl:first-child{margin-top:0}
 .explain p{font-size:14px;color:var(--text);margin:4px 0 0}
 
@@ -700,7 +723,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .ring svg{transform:rotate(-90deg)}
 .ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .ring .cd{font-family:'Fraunces',serif;font-size:52px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.ring .ph{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac-fg);font-weight:700}
+.ring .ph{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac-fg);font-weight:700}
 
 .empty{text-align:center;padding:40px 20px;color:var(--muted)}
 .empty .ic{font-size:40px;opacity:.35;display:block;margin-bottom:12px}
@@ -716,7 +739,7 @@ textarea{min-height:140px;resize:vertical;line-height:1.55}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .rev{padding:14px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:9px}
 .rev.cut{opacity:.42}
-.rev .q{font-size:14.5px;font-weight:600;margin-bottom:8px;padding-right:34px}
+.rev .q{font-size:14px;font-weight:600;margin-bottom:8px;padding-right:34px}
 .rev .o{font-size:13px;color:var(--muted);padding:3px 0 3px 18px;position:relative;line-height:1.45}
 .rev .o.flat{padding-left:0}
 .rev .o.yes{color:var(--good);font-weight:600}
@@ -739,9 +762,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   border-left-width:3px}
 .evt .pchip{flex-shrink:0}
 .evt .meta{flex:1;min-width:0}
-.evt .nm{font-size:14.5px;font-weight:700}
-.evt .dt{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
-.evt .tm{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ac-fg);text-transform:uppercase;
+.evt .nm{font-size:14px;font-weight:700}
+.evt .dt{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+.evt .tm{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--ac-fg);text-transform:uppercase;
   flex-shrink:0;text-align:right}
 .evt.quiet{background:var(--surface);border-color:var(--line);border-left-color:var(--muted)}
 .evt.quiet .tm{color:var(--muted)}
@@ -754,7 +777,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   border:1px solid color-mix(in srgb, var(--good) 45%, var(--surface))}
 .prov.add{background:color-mix(in srgb, var(--muted) 5%, var(--surface));color:var(--muted);
   border:1px solid color-mix(in srgb, var(--muted) 38%, var(--surface))}
-.cite{font-size:12px;color:var(--muted);margin:10px 0;line-height:1.5;
+.cite{font-size:12.5px;color:var(--muted);margin:10px 0;line-height:1.5;
   padding-left:10px;border-left:2px solid var(--line)}
 .cite + p{margin-top:12px}
 .objs{list-style:none;padding:0;margin:8px 0 0}
@@ -775,7 +798,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .bdg.got{opacity:1;border-color:var(--ac-25);background:var(--ac-8)}
 .bdg .ic{font-size:25px;display:block}
 .bdg .nm{font-size:10.5px;font-weight:600;margin-top:5px;line-height:1.25}
-.pill{display:inline-block;font-size:11px;padding:4px 10px;border-radius:999px;background:var(--raised);border:1px solid var(--line);color:var(--muted);margin:0 5px 5px 0}
+.pill{display:inline-block;font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--raised);border:1px solid var(--line);color:var(--muted);margin:0 5px 5px 0}
 .pill.ac{background:var(--ac-8);border-color:var(--ac-25);color:var(--ac-fg)}
 .pill.bad{background:color-mix(in srgb,var(--bad) 12%,transparent);border-color:var(--bad);color:var(--bad)}
 .pill.warm{background:color-mix(in srgb,var(--warm) 12%,transparent);border-color:var(--warm);color:var(--warm)}
@@ -787,7 +810,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .miss .box i{width:16px;height:4px;border-radius:2px;background:var(--line);display:block}
 .miss .box i.on{background:var(--ac)}
 .miss .box em{font-style:normal;font-size:11.5px;color:var(--faint);margin-left:4px}
-.miss .q{font-size:14.5px;font-weight:600;margin-bottom:5px}
+.miss .q{font-size:14px;font-weight:600;margin-bottom:5px}
 .miss .a{font-size:13px;color:var(--good)}
 .miss .n{font-size:12.5px;color:var(--faint);margin-top:5px;line-height:1.5}
 .divider{display:flex;align-items:center;gap:13px;margin:24px 0 14px;color:var(--ac-fg)}
@@ -797,7 +820,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .plan{padding:15px;border-radius:16px;background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc,var(--ac));margin-bottom:10px}
 .plan .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
 .plan .nm{font-weight:600;font-size:15px}
-.plan .mins{font-size:12px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
+.plan .mins{font-size:12.5px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
 .plan .why{font-size:13px;color:var(--muted);line-height:1.5}
 
 .whyline{font-size:13px;color:var(--ac-fg);font-weight:600;margin:2px 0 8px;line-height:1.45}
@@ -809,7 +832,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .cardbtn:hover{border-color:var(--ac-25)}
 .cb-txt{flex:1;min-width:0}
 .cb-t{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--text)}
-.cb-d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.cb-d{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
 .cb-x{font-size:26px;color:var(--faint);line-height:1;flex-shrink:0}
 
 .subrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);cursor:pointer}
@@ -817,8 +840,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .subchip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;
   justify-content:center;font-size:20px;flex-shrink:0}
 .submeta{flex:1;min-width:0}
-.submeta .sn{font-size:14.5px;font-weight:600}
-.submeta .sc{font-size:12px;color:var(--faint)}
+.submeta .sn{font-size:14px;font-weight:600}
+.submeta .sc{font-size:12.5px;color:var(--faint)}
 .palgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
 .palsw{height:52px;border-radius:13px;border:2px solid transparent}
 .palsw.on{border-color:var(--text);box-shadow:0 0 0 3px var(--ac-25)}
@@ -845,7 +868,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .modal-overlay{position:fixed;inset:0;background:var(--veil);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
 .modal-box{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;max-width:90vw;width:370px;max-height:82vh;overflow-y:auto}
 .modal-box h3{font-size:22px;margin-bottom:9px}
-.modal-box p{color:var(--muted);font-size:14.5px;white-space:pre-wrap;margin:0}
+.modal-box p{color:var(--muted);font-size:14px;white-space:pre-wrap;margin:0}
 .modal-buttons{display:flex;gap:10px;margin-top:22px}
 .modal-buttons .btn{flex:1}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom));z-index:1100;background:var(--raised);border:1px solid var(--ac-25);color:var(--text);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .25s;max-width:88vw;text-align:center}
@@ -957,7 +980,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v92 · the batch of six';
+const APP_VERSION = 'v93 · the polish pass';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3035,6 +3058,16 @@ SCREENS.today = function(root){
   statTile(stats().level, 'level', stats().xp.toLocaleString()+' XP ›', ()=>go('stars'));
   root.appendChild(strip);
 
+  /* The commonest intent of any open — carry on — used to cost a tab switch
+     and a scan. Same threadTarget as Study, same strip rule: a door, not a
+     scoreboard. Study keeps its copy; the two serve different moments. */
+  const th0 = threadTarget(date);
+  if(th0){
+    const heroT = cardButton(th0.title, th0.sub, th0.go);
+    heroT.classList.add('hero');
+    root.appendChild(heroT);
+  }
+
   /* Coming up — school events and her own tests in one list, ordered by date.
      A Mini-Comp and a Friday maths quiz are the same kind of thing to plan
      around, so splitting them into two lists would only hide one of them. */
@@ -3138,7 +3171,14 @@ SCREENS.today = function(root){
       : (c.bookend ? c.note : c.break ? `Room ${c.room}` : whereLine(c));
     m.appendChild(el('div','dt', note));
     p.appendChild(m);
-    if(live) p.appendChild(el('span','tag-now','NOW'));
+    if(live){
+      /* How far through the period — the one number a glance at NOW wants. */
+      const frac = Math.min(1, Math.max(0, (now - c.start) / (c.end - c.start)));
+      const pb = el('div','pleft'), fi = el('i');
+      fi.style.width = Math.round(frac*100)+'%';
+      pb.appendChild(fi); m.appendChild(pb);
+      p.appendChild(el('span','tag-now','NOW'));
+    }
     else p.appendChild(el('div','tm',fmtTime(c.start)));
     if(!c.break) p.addEventListener('click',()=>go('unit',{classId:c.id}));
     root.appendChild(p);
@@ -4893,10 +4933,23 @@ SCREENS.checkin = function(root){
 
   const start = el('button','btn btn-primary','Start the quiz →');
   start.disabled = state.readiness===null || state.feeling===null;
-  start.addEventListener('click',()=>{
+  const begin = ()=>{
     ctx._pre = {readiness:state.readiness, feeling:state.feeling};
     go('quiz',{unitId:ctx.unitId, classId:ctx.classId, pre:ctx._pre, timed:ctx.timed});
-  });
+  };
+  start.addEventListener('click',begin);
+  /* Both answered → begin on its own after a beat. The button confirmed
+     nothing the two taps had not already said. The pause leaves room to
+     re-tap a mis-hit — readiness feeds the calibration record, so a polluted
+     pair matters — and a LOW MOOD never auto-starts: the care note above,
+     and the real option to stop, must get their moment. */
+  clearTimeout(ctx._ciT);
+  if(state.readiness!==null && state.feeling!==null && state.feeling>2 && !ctx._ciDone){
+    ctx._ciDone = true;                     // one arming per visit — never re-fires
+    const myCtx = ctx;
+    start.textContent = 'Starting…';
+    ctx._ciT = setTimeout(()=>{ if(ctx===myCtx) begin(); }, 700);
+  }
   root.appendChild(start);
   const skip = el('button','btn btn-ghost','Skip and just quiz');
   skip.addEventListener('click',()=>go('quiz',{unitId:ctx.unitId,classId:ctx.classId,timed:ctx.timed}));
@@ -5081,6 +5134,13 @@ SCREENS.quiz = function(root){
     const right = quizState.answered===q.ans && quizState.answered!==-2;
     const ex = el('div','explain '+(right?'ok':'no'));
     ex.appendChild(el('div','lbl', cheerLabel(right, quizState.answered===-1)));
+    /* On a RIGHT answer the feedback card is also the way forward — the
+       biggest thing on the screen advances the round, exactly like Next.
+       Wrong answers keep the deliberate journey past the walkthrough. */
+    if(right && quizState.answered!==-2){
+      ex.classList.add('go-on');
+      ex.addEventListener('click',()=>{ const nb = document.getElementById('qnext'); if(nb) nb.click(); });
+    }
     ex.appendChild(richify(el('p'), q.ex?.main || `The answer is ${q.opts[q.ans]}.`));
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
@@ -5129,6 +5189,7 @@ SCREENS.quiz = function(root){
       }
     }
     const n = el('button','btn btn-primary', quizState.i===quizState.order.length-1?'See results →':'Next question →');
+    n.id = 'qnext';
     n.addEventListener('click',()=>{
       if(quizState.i<quizState.order.length-1){
         quizState.i++; quizState.answered=null; quizState.hintUsed=false; quizState.stepsShown=0;
@@ -6149,6 +6210,18 @@ SCREENS.parent = function(root){
   const who = roster().studentName;
   root.appendChild(headline(who ? `${who}'s progress` : 'Progress',
     `Week of ${AZ.shortDate(AZ.weekStart(date))}${roster().school?' · '+roster().school:''} · Quarter ${currentQuarter(date)?.n || '—'}`));
+
+  /* Sync failures are swallowed by design — offline-first is right for her,
+     but it means a dead token can go quiet for a week. One muted line. */
+  if(Sync.configured()){
+    const ls = Store.get('last_sync', 0);
+    const mins = ls ? Math.round((Date.now()-ls)/60000) : null;
+    root.appendChild(el('div','hintline', !ls ? 'Sync is on, but has not completed on this device yet.'
+      : mins < 2 ? 'Synced just now.'
+      : mins < 60 ? `Synced ${mins} min ago.`
+      : mins < 60*36 ? `Synced ${Math.round(mins/60)} h ago.`
+      : `Not synced since ${AZ.shortDate(new Date(ls).toISOString().slice(0,10))} — check the token in Setup.`));
+  }
 
   /* Anything waiting on you comes first — it is the only thing here that blocks her. */
   const pending = drafts();

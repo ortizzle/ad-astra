@@ -449,6 +449,61 @@ Two Wayfinder parity gaps found and fixed on the way: its Growth list and its
 review queue never rendered a miss's/question's `graph` (Ad Astra's did), and
 its review queue didn't `richify()` explanations.
 
+### The polish pass (v93 / Wayfinder v75, both apps)
+
+Friction and look-and-feel, shipped together after the batch of six.
+
+**The fonts live in the repo now** (`fonts/`, three woff2 latin subsets,
+~176KB). They register under the SAME family names as before, so no other
+CSS changed; they are in the SW SHELL and preloaded. The reason is not
+aesthetics: the whole typographic identity used to arrive from Google's CDN
+on every cold start, and on a captive-portal-style connection that meant
+system fonts (or, before the v92 timeout, an app that never finished
+loading). `tools/test_fonts.js` loads the app with EVERY non-localhost
+request aborted and asserts all three faces render.
+
+**Friction cuts, all measured behaviors (`tools/test_polish.js`):**
+- *Pick up the thread* renders on Today as well as Study — the commonest
+  intent of any open no longer costs a tab switch. Same `threadTarget()`,
+  strip rules (a door, not a scoreboard).
+- **A right answer's feedback card advances the round** (`.explain.go-on`
+  clicks the Next button). Wrong answers deliberately do NOT — the
+  explanation and walkthrough journey stays.
+- **The check-in starts itself** once both taps land — after a 700ms beat
+  (room to re-tap a mis-hit; readiness feeds calibration, so a polluted pair
+  matters), armed once per visit, and **never on a low mood** — the care
+  note and the real option to stop must get their moment. The button stays.
+- The parent view says when it last synced — sync failures are swallowed by
+  design (offline-first), which is right for her and wrong for a parent
+  whose token died quietly.
+- The live period row carries a progress line (`.pleft`) — how far through
+  the period, white on the painted fill.
+- The trusted-device gate skip already existed (a checkbox in the passcode
+  modal) — checked before building it twice.
+
+**Look and feel:**
+- **The nav's active tab wears a tinted pill**, not just a colour —
+  `.nav-btn.on` was the last place colour was the sole signal.
+- **Light mode carries the identity now.** The washes were always
+  accent-keyed; they sat on near-white paper. The paper itself is tinted per
+  app (sea-glass here, blossom-warmed in Wayfinder), raised/line tokens
+  follow, wash alphas up. Deeper paper needs deeper ink: `--muted`,
+  `--faint`, `--ac-fg` (mix 40%→32%), `--warm`, `--good` were all deepened,
+  and `tools/contrast_light.js` measures every reading token against the
+  page, the card, the raised surface AND the wash-tinted worst case, per
+  accent per sky — worst case after tuning 5.33:1 (here) / 5.49:1
+  (Wayfinder). The first cut measured 4.07 and was rejected by the probe.
+- **The type scale lost its half-point one-offs**: 9→9.5, 11→11.5, 12→12.5,
+  13.5→13, 14.5→14 (31 declarations per app). Micro sizes only round UP;
+  nothing a reader relies on shrank more than half a point. Overflow and
+  tool-clipping tests re-run after.
+
+**`wayfinder/prototype3.html` — borders → tonal hierarchy — is a PROPOSAL,
+not shipped.** The rule it argues: a border means "you can press this";
+static cards separate by tone and room instead. Do not apply it to either
+app without Chris and the girls choosing it from the prototype, and if it
+ships, it ships through the full accent × sky × theme sweep.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
