@@ -121,6 +121,16 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   background:var(--deep);color:var(--text);font:inherit;margin-top:2px}
 .pickrow .cur{font-size:19px}
 .pickrow .pv{color:var(--ac-fg);font-size:12.5px;font-weight:600}
+/* The runway card: what is necessary, then what is possible. */
+.runway .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
+  padding:10px 12px;margin-top:9px;border-radius:13px;border:1px solid var(--line);
+  background:var(--deep);color:var(--text);font:inherit;text-align:left}
+.runway .rw:disabled{opacity:1}
+.runway .rn{flex:0 0 auto;min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;
+  font-size:19px;font-weight:600;color:var(--ac-fg)}
+.runway .rt{flex:1;font-size:13px;line-height:1.35}
+.runway .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
+.runway .rhours{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
 .gz-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
 .gz-chip{min-height:var(--tap);padding:9px 14px;border-radius:999px;border:1px solid var(--line);
   background:var(--deep);color:var(--text);font:inherit;font-size:12.5px;font-weight:600}
@@ -980,7 +990,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v93 · the polish pass';
+const APP_VERSION = 'v94 · the runway';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1736,9 +1746,62 @@ function shelvesFor(classId){
 /* Pick up the thread — the one tap that resumes wherever she left off.
    Due reviews always win (that is the point of the schedule); then the most
    recently touched unfinished lesson; then the top of the study plan. */
-function threadTarget(date){
+/* `opt.skipDue` lets a caller that ALREADY shows the Growth door ask for the
+   next-best thread instead of being handed the same door twice. Every return
+   carries a `kind` so a caller can tell what it is being offered. */
+/* ---- The runway: what stands between her and the next test ----
+   Today's prime space used to hold generic counters. This makes it answer
+   two questions instead: what is NECESSARY (review still due, lessons still
+   open in that subject) and what is POSSIBLE (the next student-hours window,
+   and whether it is the last one before the test).
+
+   Deliberately driven by `assess` records only. School-wide events are not
+   subject-specific, so "what is still open in that subject" would be a lie;
+   and benchmark testing (Fast Bridge) explicitly has nothing to revise for —
+   turning it into a countdown is exactly the cramming response the calendar
+   layer refuses to provoke. */
+function hoursSlots(cid){
+  /* Wayfinder gates hours until the newsletter says they exist; Ad Astra's
+     run from day one and defines no gate, so the typeof check covers both. */
+  if(typeof HOURS_START !== 'undefined' && AZ.today() < HOURS_START) return [];
+  if(typeof STUDENT_HOURS === 'undefined') return [];
+  return STUDENT_HOURS.filter(h => h.ids.includes(cid));
+}
+/* The next help window between now and the test, and whether it is the only
+   one left. Today counts only while its afternoon slot is still ahead. */
+function nextHoursBefore(cid, from, until){
+  const slots = hoursSlots(cid);
+  if(!slots.length) return null;
+  const span = AZ.daysBetween(from, until);
+  if(span < 0) return null;
+  const hits = [];
+  for(let i = 0; i <= span; i++){
+    const ds = AZ.shift(from, i), wd = AZ.weekday(ds);
+    if(i === 0 && AZ.nowMinutes() >= 900) continue;      // today's window has passed
+    slots.forEach(h => {
+      if(!(h.days || [h.d]).includes(wd)) return;
+      hits.push({ date:ds, label:h.label, times:h.times, tbd:!!h.tbd, inDays:i });
+    });
+  }
+  if(!hits.length) return null;
+  return { ...hits[0], last: hits.length === 1 };
+}
+function runway(date){
+  const next = assessments().find(a => a.date >= date && a.score == null
+    && AZ.daysBetween(date, a.date) <= 14);
+  if(!next) return null;
+  const cid = next.classId, cls = CLASS_BY_ID[cid];
+  if(!cls) return null;
+  const open = units(cid).filter(u => u.questions.length && !unitDone(u));
+  return { a:next, days:AZ.daysBetween(date, next.date), cid, cls,
+    due: dueMisses().filter(m => m.classId === cid).length,
+    open, hours: nextHoursBefore(cid, date, next.date) };
+}
+function threadTarget(date, opt){
+  opt = opt || {};
   const due = dueMisses();
-  if(due.length) return {
+  if(due.length && !opt.skipDue) return {
+    kind:'due',
     title: due.length===1 ? '1 question is back' : due.length+' questions are back',
     sub:'You missed these before. Getting them right now is what makes them stick.',
     go:()=>go('growth') };
@@ -1751,7 +1814,8 @@ function threadTarget(date){
     const c0 = CLASS_BY_ID[soon.classId];
     const dd = AZ.daysBetween(d0, soon.assess.date);
     const knm = KINDS[soon.assess.kind] ? KINDS[soon.assess.kind].nm.toLowerCase() : 'test';
-    return { title: (c0.short||c0.name)+' '+knm+' '+(dd===0?'today':dd===1?'tomorrow':'in '+dd+' days'),
+    return { kind:'ramp', classId:soon.classId,
+      title: (c0.short||c0.name)+' '+knm+' '+(dd===0?'today':dd===1?'tomorrow':'in '+dd+' days'),
       sub:'One mixed round across every unit — picking the right skill is the tested skill.',
       go:()=>{ if(buildShuffleUnit(soon.classId)) go('quiz',{unitId:'__shuffle__', classId:soon.classId});
                else go('unit',{classId:soon.classId}); } };
@@ -1764,14 +1828,16 @@ function threadTarget(date){
   });
   if(best){
     const left = best.questions.length - unitAttempted(best);
-    return { title:'Continue: '+best.title,
+    return { kind:'lesson', unitId:best.id, classId:best.classId,
+      title:'Continue: '+best.title,
       sub: left>0 ? `${left} question${left===1?'':'s'} left in this lesson.` : 'One more pass locks it in.',
       go:()=>launchQuiz(best.id, best.classId, false) };
   }
   const p = studyPlan(date || AZ.today())[0];
   if(p){
     const c = CLASS_BY_ID[p.classId];
-    return { title:'Start: '+c.name, sub:`${p.minutes} minutes — ${p.why}.`,
+    return { kind:'plan', classId:p.classId,
+      title:'Start: '+c.name, sub:`${p.minutes} minutes — ${p.why}.`,
       go:()=>go('unit',{classId:p.classId}) };
   }
   return null;
@@ -2996,9 +3062,15 @@ SCREENS.today = function(root){
   const date = AZ.today(), closed = closedToday(date), wd = AZ.weekday(date);
   const weekend = wd===0||wd===6, q = currentQuarter(date), s = stats();
 
+  /* The runway is computed first: when a test is close it becomes the screen's
+     one focal point, and the school-day header goes quiet behind it rather
+     than competing with a second accent wash. */
+  const rw = runway(date);
+  let rwLesson = null;
+
   /* Today stays about the school day: where you are, what is coming, what is
      on the horizon. The morning line lives on Study. */
-  const st = el('div','card ac');
+  const st = el('div', rw ? 'card daycard' : 'card ac daycard');
   st.appendChild(el('div','eyebrow', AZ.pretty(date)));
   if(date < CAL.firstDay){
     const d = AZ.daysBetween(date, CAL.firstDay);
@@ -3012,16 +3084,27 @@ SCREENS.today = function(root){
     st.appendChild(el('p',null, q?`Quarter ${q.n} is in progress.`:'Weekend.'));
   } else {
     const now = AZ.nowMinutes();
-    const cur = CLASSES.find(c=>now>=c.start&&now<c.end), next = CLASSES.find(c=>c.start>now);
+    const dayList = CLASSES;
+    const cur = dayList.find(c=>now>=c.start&&now<c.end), next = dayList.find(c=>c.start>now);
     if(cur){
       st.appendChild(el('h3',null,`${cur.icon} ${cur.name}`));
       st.appendChild(el('p',null, cur.bookend ? cur.note : cur.break ? `Until ${fmtTime(cur.end)}.`
         : `${whereLine(cur)} · until ${fmtTime(cur.end)}`));
-    } else if(next){
+    } else if(next && next.start - now <= 45){
+      /* "Before the bell" only when the bell is actually about to go — this
+         used to fire at 4am and point at a drop-off three hours away, which
+         is accurate and useless. Passing periods still land here. */
       st.appendChild(el('h3',null,'Before the bell'));
       st.appendChild(el('p',null, next.bookend
         ? `Next: ${next.name} · ${next.note}`
         : `Next: ${next.name} at ${fmtTime(next.start)}, room ${next.room}.`));
+    } else if(next){
+      /* Early morning: the shape of the day is the useful thing, not a
+         countdown to a drop-off that is hours away. */
+      const real = dayList.filter(c => !c.break && !c.bookend);
+      const first = real[0] || next;
+      st.appendChild(el('h3',null, real.length ? `${real.length} classes today` : 'School today'));
+      st.appendChild(el('p',null, `First up: ${first.name} at ${fmtTime(first.start)}.`));
     } else {
       st.appendChild(el('h3',null,'School day is over'));
       st.appendChild(el('p',null,'Best window for studying — it is still fresh.'));
@@ -3036,6 +3119,53 @@ SCREENS.today = function(root){
   const plan2 = studyPlan(date);
   const mRead = logs().filter(l=>l.mode==='read' && l.date.slice(0,7)===date.slice(0,7))
     .reduce((n,l)=>n + (l.minutes || Math.round((l.seconds||0)/60)), 0);
+  /* The runway — see runway() above. Sits directly under the school day,
+     because before a test it is the most useful thing on the screen. */
+  if(rw){
+    const k = KINDS[rw.a.kind] || KINDS.test;
+    const c0 = el('div','card ac runway');
+    c0.appendChild(el('div','eyebrow', 'Before your ' + (rw.cls.short || rw.cls.name) + ' ' + k.nm.toLowerCase()));
+    c0.appendChild(el('h3',null, rw.days===0 ? 'It is today'
+      : rw.days===1 ? 'Tomorrow'
+      : AZ.pretty(rw.a.date).split(',')[0] + ' · in ' + rw.days + ' days'));
+    const line = (n, text, onTap) => {
+      const b = el('button','rw');
+      b.appendChild(el('span','rn', String(n)));
+      b.appendChild(el('span','rt', text));
+      if(onTap){ b.appendChild(el('span','rc','›')); b.addEventListener('click', onTap); }
+      else b.disabled = true;
+      c0.appendChild(b);
+    };
+    if(rw.due) line(rw.due, 'review question' + (rw.due===1?'':'s') + ' due in ' + rw.cls.name,
+      ()=>{ if(buildReviewUnit({classId:rw.cid, title:(rw.cls.short||rw.cls.name)+' review'}))
+              go('quiz',{unitId:'__review__', classId:rw.cid});
+            else go('growth'); });
+    if(rw.open.length){
+      /* Name ONE lesson, never a pile. "14 lessons still open" is the whole
+         book restated as a debt; what she can act on is the next one — the
+         lesson she was last in, or the first she has not started. The count
+         stays visible because it is true, but the words point somewhere. */
+      const touched = rw.open.filter(u => unitLastStudied(u) > 0)
+        .sort((a,b) => unitLastStudied(b) - unitLastStudied(a));
+      rwLesson = touched[0] || rw.open[0];
+      line(rw.open.length, rw.open.length===1
+        ? 'lesson still open · ' + rwLesson.title
+        : 'lessons open · pick up ' + rwLesson.title,
+        ()=> launchQuiz(rwLesson.id, rw.cid, false));
+    }
+    if(!rw.due && !rw.open.length)
+      c0.appendChild(el('p',null,'Every question in ' + rw.cls.name + ' is answered and nothing is due back. A mixed round is the useful kind of practice now.'));
+    /* What is POSSIBLE: the teacher's own door, and whether it is the last
+       one before the test. Stated, never nagged. */
+    if(rw.hours){
+      const when = rw.hours.inDays===0 ? 'today' : rw.hours.inDays===1 ? 'tomorrow' : rw.hours.label;
+      c0.appendChild(el('div','rhours', '🕐 Student hours ' + when + ', ' + rw.hours.times
+        + (rw.hours.tbd ? ' (confirm with your teacher)' : '')
+        + (rw.hours.last ? ' — the last one before it.' : '.')));
+    }
+    root.appendChild(c0);
+  }
+
   const strip = el('div','statstrip');
   const statTile = (num, label, sub, onTap, hot)=>{
     const b = el('button','stat'+(hot?' hot':''));
@@ -3045,7 +3175,12 @@ SCREENS.today = function(root){
     b.addEventListener('click', onTap);
     strip.appendChild(b);
   };
-  if(dueNow2){
+  /* The runway's review row is already the Growth door for the subject that
+     matters most; a tile repeating a second, larger review count beside it
+     reads as a contradiction rather than as extra information. When that row
+     is showing, this tile offers breadth instead — and Growth keeps its
+     count badge in the nav either way, so the door never disappears. */
+  if(dueNow2 && !(rw && rw.due)){
     statTile(dueNow2, 'to review', 'Growth Zone ›', ()=>go('growth'), true);
   } else if(plan2.length){
     const pc3 = CLASS_BY_ID[plan2[0].classId];
@@ -3058,11 +3193,18 @@ SCREENS.today = function(root){
   statTile(stats().level, 'level', stats().xp.toLocaleString()+' XP ›', ()=>go('stars'));
   root.appendChild(strip);
 
-  /* The commonest intent of any open — carry on — used to cost a tab switch
-     and a scan. Same threadTarget as Study, same strip rule: a door, not a
-     scoreboard. Study keeps its copy; the two serve different moments. */
-  const th0 = threadTarget(date);
-  if(th0){
+  /* Carry on, in one tap — but ONLY when it says something the screen does
+     not already say. The strip's first tile is the Growth door when reviews
+     are due and the study-plan door when they are not, and the runway card
+     above names the lesson to finish before a test; a hero repeating any of
+     those is the same fact printed twice. It earns its place for a specific
+     open lesson, or for the mixed round in test week. */
+  const th0 = threadTarget(date, {skipDue: dueNow2 > 0});
+  const dupe = !th0 || th0.kind === 'due'
+    || (th0.kind === 'plan' && !dueNow2 && plan2.length && th0.classId === plan2[0].classId)
+    || (th0.kind === 'lesson' && rwLesson && th0.unitId === rwLesson.id)
+    || (th0.kind === 'ramp' && rw && th0.classId === rw.cid);
+  if(!dupe){
     const heroT = cardButton(th0.title, th0.sub, th0.go);
     heroT.classList.add('hero');
     root.appendChild(heroT);

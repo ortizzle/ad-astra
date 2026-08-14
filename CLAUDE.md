@@ -504,6 +504,60 @@ static cards separate by tone and room instead. Do not apply it to either
 app without Chris and the girls choosing it from the prototype, and if it
 ships, it ships through the full accent × sky × theme sweep.
 
+### The runway (v94 / Wayfinder v76, both apps)
+
+Today's prime space held generic counters and, briefly, two copies of the same
+door. It now answers two questions instead — **what is necessary, and what is
+possible, before the next test.** `runway(date)` finds the next unscored
+`assess` within 14 days and gathers, for THAT subject: review still due,
+lessons still open, and the next student-hours window.
+
+```
+BEFORE YOUR MATH QUIZ
+Friday · in 3 days
+  12  review questions due in Accelerated Math      ›   → review round, that subject only
+  14  lessons open · pick up 1-2 Place Value…       ›   → straight into that lesson
+  🕐 Student hours Thursdays, 7:00–7:30 am — the last one before it.
+```
+
+Rules that are the point:
+
+- **`assess` records only.** School-wide events are not subject-specific, so
+  "what is still open in that subject" would be a lie — and benchmark testing
+  (Fast Bridge) explicitly has nothing to revise for, so turning it into a
+  countdown would provoke exactly the cramming the calendar layer refuses.
+- **Name ONE lesson, never a pile.** "14 lessons still open" is the whole book
+  restated as a debt. The count stays (it is true) but the words point at the
+  next actionable thing — the lesson she was last in, else the first unstarted.
+- **`nextHoursBefore()` says when it is the LAST window** before the test.
+  Stated, never nagged. Today only counts while its afternoon slot is still
+  ahead (`AZ.nowMinutes() < 900`). Gated by `HOURS_START` where the app defines
+  one — the `typeof` check covers Ad Astra, which has no gate.
+- **Nothing outstanding says so**, rather than rendering empty rows.
+
+**Two redundancies removed at the same time**, both introduced by the v93 hero:
+
+- `threadTarget(date, opt)` now returns a **`kind`** (`due`/`ramp`/`lesson`/
+  `plan`) plus `classId`/`unitId`, and takes `opt.skipDue` so a caller that
+  already shows the Growth door can ask for the next-best thread. Today renders
+  the hero only when it is not repeating the strip tile or the runway's lesson.
+  Measured before the fix: the strip said "10 · to review · Growth Zone" and
+  the hero directly beneath said "10 questions are back" — same number, same
+  destination; with nothing due it was "15m suggested · Theatre" above
+  "Start: Theatrical Design", same subject, same destination.
+- **The strip's Growth tile yields to the runway's review row** — two review
+  counts one screen apart read as a contradiction, not as extra information.
+  Growth keeps its nav count badge, so the door never disappears.
+
+**"Before the bell" only fires when a bell is within 45 minutes.** It used to
+fire at 4am pointing at a drop-off three hours away — accurate and useless.
+Outside that window the card gives the shape of the day ("7 classes today ·
+First up: Accelerated Math at 7:40 AM"). Live-class and after-school states are
+unchanged. The card is now `.daycard`, because it drops its accent wash when a
+runway card is present — two accent-washed cards stacked is two focal points,
+and a probe looking for `.card.ac` would otherwise find the wrong one (mine
+did).
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
