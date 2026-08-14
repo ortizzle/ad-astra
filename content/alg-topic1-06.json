@@ -1,0 +1,638 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-0106": {
+   "id": "unit-alg-0106",
+   "type": "unit",
+   "updatedAt": 1786678747536,
+   "libv": 1,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 1 · 1-6 Linear Systems",
+   "srcName": "enVision Algebra 2, Lesson 1-6 Linear Systems (Drive)",
+   "source": "Algebra & Geometry II, Topic 1 (Drive folder)",
+   "summary": {
+    "text": "Systems of linear equations and inequalities: the vocabulary (system, solution, inconsistent system), solving by substitution and elimination, the three possible outcomes, systems of linear inequalities as shaded regions, and extending the method to three variables.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Almost every real modelling problem has more than one condition at once — a budget and a time limit, a number of coins and their value. Systems are how those conditions get written down together, and the difference between one solution, none, and infinitely many is a genuinely useful thing to recognise on sight.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Solve a two-variable linear system by substitution or elimination and check the result.",
+     "from": "source"
+    },
+    {
+     "text": "Recognise from the algebra or the graph whether a system has one solution, none, or infinitely many.",
+     "from": "source"
+    },
+    {
+     "text": "Write a system of inequalities from real constraints and describe the solution region.",
+     "from": "source"
+    },
+    {
+     "text": "Solve a system of three equations in three variables by eliminating one variable first.",
+     "from": "source"
+    },
+    {
+     "text": "Choose between substitution and elimination by looking at the coefficients.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the enVision Lesson 1-6 textbook pages, with fresh questions so the practice sheets stay usable as homework. The recurring errors here are writing an ordered pair backwards and treating a proportional second equation as if it were new information — both have their own question. The word problems (coins, tiles, the saline mixture, the basketball scores) are the ones most likely to need a second pass; each has a full walkthrough.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "The vocabulary cards are quick, and worth doing first — several questions turn on knowing exactly what \"inconsistent\" means. Then take the quiz.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "System of linear equations",
+     "def": "**Two or more linear equations that share the same variables.**\n• The equations are considered together, not one at a time.\n• Braces are the usual notation for grouping them.",
+     "hint": "A system is a set of conditions that must all hold at once.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Solution of a system",
+     "def": "**Every ordered pair (or triple) that makes ALL the equations true at the same time.**\n• Satisfying one equation is not enough.\n• Graphically, it is where all the graphs meet.",
+     "hint": "All equations, simultaneously — that is the whole idea.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Three possible outcomes",
+     "def": "**One solution, no solution, or infinitely many.**\n• Lines crossing once: one solution.\n• Parallel lines: none — an inconsistent system.\n• The same line twice: infinitely many.",
+     "hint": "Two lines can cross, miss, or coincide. Nothing else.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Inconsistent system",
+     "def": "**A system with no solution at all.**\n• Solving produces a false statement such as 0 = 6.\n• Graphically the lines are parallel.",
+     "hint": "A contradiction with no variable left means no solution.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Substitution",
+     "def": "**Solve one equation for one variable, then put that expression into the other equation.**\n• Best when a variable already stands alone or has coefficient 1.\n• Leaves a single equation in a single variable.",
+     "hint": "Trade one variable away and the rest is ordinary algebra.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Elimination",
+     "def": "**Add or subtract multiples of the equations so one variable cancels.**\n• Multiplying an equation by a nonzero number does not change its solutions.\n• Neither does replacing one equation with the sum of the two.",
+     "hint": "Line up a variable with opposite coefficients and add.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "System of linear inequalities",
+     "def": "**Two or more inequalities in the same variables, solved together.**\n• The solution is a REGION of the plane, not a single point.\n• Any point in the shaded overlap satisfies all of them.",
+     "hint": "Equations give points. Inequalities give territory.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Testing a point to shade",
+     "def": "**Pick a point not on the boundary, substitute it, and shade the side that makes the inequality true.**\n• (0, 0) is the easiest test point when the boundary misses the origin.\n• Repeat for each inequality; the overlap is the answer.",
+     "hint": "One substitution tells you which side of the line to shade.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Constraints in a real problem",
+     "def": "**Each real-world limit becomes one inequality.**\n• At least $200 at $20 and $10 per hour: 20x + 10y ≥ 200.\n• At most 20 hours total: x + y ≤ 20.\n• At least 5 hours walking dogs: y ≥ 5.",
+     "hint": "\"At least\" is ≥. \"At most\" is ≤. Translate one phrase at a time.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Three-variable systems",
+     "def": "**Eliminate one variable to get a two-variable system, then solve that the usual way.**\n• Combine equations in pairs so the same variable disappears from each pair.\n• Back-substitute to recover the variable you removed.",
+     "hint": "Reduce three to two, solve two, then work backwards.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Back-substitution",
+     "def": "**Once you have one variable, put it back into the simplest equation to find the next.**\n• Work back through the chain until every variable is known.\n• The answer for three variables is an ordered triple.",
+     "hint": "Solve the easiest thing last-first, then walk back up.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Checking a solution",
+     "def": "**Substitute your answer into EVERY original equation, not just the one you used.**\n• A pair that satisfies only one equation is not a solution.\n• This is the single most common way a wrong answer survives.",
+     "hint": "One equation agreeing proves nothing. Check them all.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Non-negative constraints",
+     "def": "**x ≥ 0 and y ≥ 0 restrict the solution to the first quadrant.**\n• They usually appear because a quantity cannot be negative — hours, items, distances.\n• They are real constraints and must be graphed.",
+     "hint": "You cannot work −3 hours, so the model has to say so.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Why inequalities are graphed",
+     "def": "**A region is far easier to see than to describe, and the corners of that region are where the best answers usually sit.**\n• Overlapping shading shows every combination that works at once.\n• Listing them algebraically would be endless.",
+     "hint": "Some answers are easier to draw than to write.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the solution of a system of linear equations?",
+     "opts": [
+      "Any pair that satisfies at least one equation",
+      "Every pair that satisfies all the equations at the same time",
+      "The point where a line crosses the x-axis",
+      "The slopes of the two lines"
+     ],
+     "ans": 1,
+     "hint": "The word \"system\" means the equations are taken together.",
+     "steps": [
+      "A system is several equations sharing the same variables.",
+      "A solution has to make every one of them true simultaneously.",
+      "Graphically that is the point where all the graphs meet."
+     ],
+     "ex": {
+      "main": "**Every pair that satisfies all the equations at the same time.** Satisfying one and failing another is not a solution.",
+      "tip": "Always verify a candidate against every equation in the system."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve the system: x + 2y = 3 and x − 2y = 4.",
+     "opts": [
+      "(7/2, −1/4)",
+      "(7/2, 1/4)",
+      "(3, 4)",
+      "(−1/4, 7/2)"
+     ],
+     "ans": 0,
+     "hint": "Adding the two equations removes y immediately.",
+     "steps": [
+      "Add the equations: (x + 2y) + (x − 2y) = 3 + 4 gives 2x = 7, so x = 7/2.",
+      "Substitute into x + 2y = 3: 7/2 + 2y = 3, so 2y = −1/2 and y = −1/4.",
+      "The solution is (7/2, −1/4). Check in the second: 7/2 − 2(−1/4) = 7/2 + 1/2 = 4. ✓"
+     ],
+     "ex": {
+      "main": "**(7/2, −1/4).** Opposite coefficients on y make elimination by adding the fastest route here.",
+      "tip": "Scan for a variable whose coefficients are already opposites before doing any work."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solving a system produces the statement 0 = 6. What does that mean?",
+     "opts": [
+      "The system has no solution",
+      "The solution is (0, 6)",
+      "The system has infinitely many solutions",
+      "The solution is x = 6"
+     ],
+     "ans": 0,
+     "hint": "Is 0 = 6 ever true?",
+     "steps": [
+      "Every step so far kept the solutions unchanged.",
+      "The variables have all cancelled and what remains, 0 = 6, is false.",
+      "No values can make it true, so the system has no solution — it is inconsistent, and the lines are parallel."
+     ],
+     "ex": {
+      "main": "**The system has no solution.** A false numeric statement with no variables left is the signature of an inconsistent system.",
+      "tip": "If instead you land on something always true, like 0 = 0, there are infinitely many solutions."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve the system: 2x + 2y = 10 and x + 5y = 13.",
+     "opts": [
+      "(3, 2)",
+      "(2, 3)",
+      "(5, 0)",
+      "(8, 1)"
+     ],
+     "ans": 0,
+     "hint": "Divide the first equation by 2 to make substitution easy.",
+     "steps": [
+      "Divide the first by 2: x + y = 5, so x = 5 − y.",
+      "Substitute: (5 − y) + 5y = 13, giving 4y = 8 and y = 2.",
+      "Then x = 3. Check: 2(3) + 2(2) = 10 ✓ and 3 + 5(2) = 13 ✓"
+     ],
+     "ex": {
+      "main": "**(3, 2).** Simplifying an equation before substituting saves most of the arithmetic.",
+      "tip": "Divide out a common factor first — it makes every later step smaller."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a system of inequalities, what do the constraints x ≥ 0 and y ≥ 0 do?",
+     "opts": [
+      "They restrict the solution to the first quadrant",
+      "They make the system inconsistent",
+      "They shift the boundary lines up",
+      "They have no effect on the solution"
+     ],
+     "ans": 0,
+     "hint": "Where on the plane are both coordinates non-negative?",
+     "steps": [
+      "x ≥ 0 keeps the region on or right of the y-axis.",
+      "y ≥ 0 keeps it on or above the x-axis.",
+      "Together they confine the solution to the first quadrant, which is usually there because a quantity cannot be negative."
+     ],
+     "ex": {
+      "main": "**They restrict the solution to the first quadrant.** They are genuine constraints, not decoration — hours worked and items sold cannot be negative.",
+      "tip": "If a variable counts something real, expect a non-negativity constraint."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Shandra says (−1, 2) solves the system 2x + y = 3 and −x + 4y = −6. Is she right?",
+     "opts": [
+      "Yes, both equations check out",
+      "No — it fails both equations; the solution is (2, −1)",
+      "No — it satisfies the first but not the second",
+      "No — the system has no solution"
+     ],
+     "ans": 1,
+     "hint": "Substitute into the first equation before anything else.",
+     "steps": [
+      "Test the first: 2(−1) + 2 = 0, but the equation needs 3. It already fails.",
+      "Solve properly: y = 3 − 2x, so −x + 4(3 − 2x) = −6 gives −9x = −18 and x = 2.",
+      "Then y = 3 − 4 = −1, so the solution is (2, −1). Shandra reversed the coordinates."
+     ],
+     "ex": {
+      "main": "**No — the solution is (2, −1).** Writing an ordered pair backwards is one of the most common errors in this topic.",
+      "tip": "Order matters: (a, b) is not (b, a). Check with a substitution every time."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve: x = 2y − 5 and 3x − y = 5.",
+     "opts": [
+      "(3, 4)",
+      "(4, 3)",
+      "(1, 3)",
+      "(5, 5)"
+     ],
+     "ans": 0,
+     "hint": "The first equation already has x alone — substitute it.",
+     "steps": [
+      "Substitute x = 2y − 5 into 3x − y = 5: 3(2y − 5) − y = 5.",
+      "6y − 15 − y = 5, so 5y = 20 and y = 4.",
+      "Then x = 2(4) − 5 = 3. Check: 3(3) − 4 = 5 ✓"
+     ],
+     "ex": {
+      "main": "**(3, 4).** When a variable is already isolated, substitution is almost always the quickest method.",
+      "tip": "Pick your method by looking at the system, not by habit."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve: x − 3y = 1 and 2x − y = 7.",
+     "opts": [
+      "(4, 1)",
+      "(1, 4)",
+      "(2, 1/3)",
+      "(7, 2)"
+     ],
+     "ans": 0,
+     "hint": "Solve the first for x, then substitute.",
+     "steps": [
+      "From x − 3y = 1, x = 1 + 3y.",
+      "Substitute: 2(1 + 3y) − y = 7, so 2 + 5y = 7 and y = 1.",
+      "Then x = 1 + 3 = 4. Check: 2(4) − 1 = 7 ✓"
+     ],
+     "ex": {
+      "main": "**(4, 1).** A coefficient of 1 on x is an invitation to substitute.",
+      "tip": "Isolating a variable with coefficient 1 avoids fractions entirely."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A system contains 3x + 2y = 5 and 6x + 4y = 3. How many solutions does it have?",
+     "opts": [
+      "One",
+      "None",
+      "Infinitely many",
+      "Two"
+     ],
+     "ans": 1,
+     "hint": "Compare the two equations after doubling the first.",
+     "steps": [
+      "Double the first equation: 6x + 4y = 10.",
+      "The second says 6x + 4y = 3. The same expression cannot equal both 10 and 3.",
+      "The lines are parallel and the system is inconsistent, so there are no solutions."
+     ],
+     "ex": {
+      "main": "**None.** Matching left sides with different right sides is the algebraic picture of parallel lines.",
+      "tip": "Proportional coefficients with a non-matching constant always means parallel."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Charles has 8 coins, all dimes and quarters, worth $1.25. How many quarters does he have?",
+     "opts": [
+      "2 quarters",
+      "3 quarters",
+      "5 quarters",
+      "4 quarters"
+     ],
+     "ans": 1,
+     "hint": "Write one equation for the count and one for the value in cents.",
+     "steps": [
+      "Let d be dimes and q quarters: d + q = 8 and 10d + 25q = 125.",
+      "From the first, d = 8 − q. Substitute: 10(8 − q) + 25q = 125.",
+      "80 + 15q = 125, so 15q = 45 and q = 3 (with 5 dimes). Check: 5(10) + 3(25) = 125 ✓"
+     ],
+     "ex": {
+      "main": "**3 quarters.** Coin problems always give two equations: how many, and how much.",
+      "tip": "Work in cents to keep the value equation free of decimals."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A set of triangular and square tiles has 50 pieces and 170 sides in total. How many square tiles are there?",
+     "opts": [
+      "20 squares",
+      "30 squares",
+      "25 squares",
+      "40 squares"
+     ],
+     "ans": 0,
+     "hint": "Triangles contribute 3 sides each, squares 4.",
+     "steps": [
+      "Let t be triangles and s squares: t + s = 50 and 3t + 4s = 170.",
+      "From the first, t = 50 − s. Substitute: 3(50 − s) + 4s = 170.",
+      "150 + s = 170, so s = 20 squares (and 30 triangles). Check: 3(30) + 4(20) = 170 ✓"
+     ],
+     "ex": {
+      "main": "**20 squares.** The side count is what separates the two shapes; the piece count alone cannot.",
+      "tip": "When two things differ by one property, that property gives the second equation."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Malcolm earns $20/h mowing and $10/h walking dogs. He wants at least $200, can work at most 20 hours, and must walk dogs at least 5 hours. Which system models this?",
+     "opts": [
+      "20x + 10y ≤ 200, x + y ≥ 20, y ≤ 5",
+      "20x + 10y ≥ 200, x + y ≤ 20, y ≥ 5",
+      "20x + 10y ≥ 200, x + y ≥ 20, y ≥ 5",
+      "20x + 10y = 200, x + y = 20, y = 5"
+     ],
+     "ans": 1,
+     "hint": "\"At least\" points one way, \"at most\" the other.",
+     "steps": [
+      "Earnings of at least $200 at those rates: 20x + 10y ≥ 200.",
+      "A maximum of 20 hours in total: x + y ≤ 20.",
+      "A minimum of 5 hours with the dogs: y ≥ 5."
+     ],
+     "ex": {
+      "main": "**20x + 10y ≥ 200, x + y ≤ 20, y ≥ 5.** Each phrase in the problem becomes exactly one inequality, and the direction comes from the wording.",
+      "tip": "Underline \"at least\" and \"at most\" before writing anything."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Raul earns $75 per week plus $5 per membership. A new gym offers $50 per week plus $7.50 per membership. How many memberships make the new gym better?",
+     "opts": [
+      "more than 5",
+      "more than 10",
+      "more than 15",
+      "more than 25"
+     ],
+     "ans": 1,
+     "hint": "Set the new pay above the old pay and solve.",
+     "steps": [
+      "New pay: 50 + 7.5m. Old pay: 75 + 5m.",
+      "The new gym is better when 50 + 7.5m > 75 + 5m.",
+      "2.5m > 25, so m > 10. At exactly 10 memberships both pay $125."
+     ],
+     "ex": {
+      "main": "**More than 10.** The lower base pay is repaid by the higher rate, and 10 is the break-even point.",
+      "tip": "Break-even is where the two expressions are equal; the inequality picks the side."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve the three-variable system: 2x + y − z = −10, −x + 2y + z = 3, x + 2y + 3z = 13.",
+     "opts": [
+      "(−1, −2, 6)",
+      "(1, 2, 6)",
+      "(−1, 2, −6)",
+      "(−2, −1, 6)"
+     ],
+     "ans": 0,
+     "hint": "Adding the first two equations removes z straight away.",
+     "steps": [
+      "Add equations one and two: x + 3y = −7.",
+      "Multiply equation two by −3 and add to equation three to eliminate z as well, giving 4x − 4y = 4, so x = y + 1.",
+      "Substitute: (y + 1) + 3y = −7 gives y = −2 and x = −1. Back-substitute into the first: 2(−1) + (−2) − z = −10, so z = 6."
+     ],
+     "ex": {
+      "main": "**(−1, −2, 6).** Three variables become two by eliminating the same variable from two different pairs.",
+      "tip": "Choose the variable that is easiest to cancel, then be consistent about it."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Pilar scored 26 points. She made 2 more free throws (1 point) than 2-point baskets, and 4 times as many free throws as 3-point baskets. How many 3-pointers did she make?",
+     "opts": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "ans": 1,
+     "hint": "Let the 3-pointers be the unknown everything else is described by.",
+     "steps": [
+      "Let h be 3-pointers. Free throws f = 4h, and 2-point baskets t = f − 2 = 4h − 2.",
+      "Total points: f + 2t + 3h = 26, so 4h + 2(4h − 2) + 3h = 26.",
+      "4h + 8h − 4 + 3h = 26 gives 15h = 30, so h = 2. That is 8 free throws, 6 two-pointers and 2 three-pointers: 8 + 12 + 6 = 26 ✓"
+     ],
+     "ex": {
+      "main": "**2 three-pointers.** Naming the most-referenced quantity as the variable turns three unknowns into one.",
+      "tip": "Let the variable be whatever the other quantities are described in terms of."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Ramona needs 10 mL of a 30% saline solution, mixing a 50% and a 25% solution. How much of the 50% does she need?",
+     "opts": [
+      "2 mL",
+      "4 mL",
+      "5 mL",
+      "8 mL"
+     ],
+     "ans": 0,
+     "hint": "One equation for total volume, one for total salt.",
+     "steps": [
+      "Let x be mL of the 50% and y of the 25%: x + y = 10.",
+      "Salt content: 0.5x + 0.25y = 0.3(10) = 3.",
+      "Substitute y = 10 − x: 0.5x + 2.5 − 0.25x = 3, so 0.25x = 0.5 and x = 2 mL (with 8 mL of the 25%)."
+     ],
+     "ex": {
+      "main": "**2 mL of the 50% solution.** Mixture problems always pair a volume equation with a content equation.",
+      "tip": "The target concentration is closer to 25%, so most of the mixture must be the weaker one."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "For what value of a is (−1, 1) the solution of the system 3x + 5y = 2 and ax + 8y = 14?",
+     "opts": [
+      "a = −22",
+      "a = −6",
+      "a = 6",
+      "a = 22"
+     ],
+     "ans": 1,
+     "hint": "Substitute the known solution into the second equation.",
+     "steps": [
+      "First confirm the point fits equation one: 3(−1) + 5(1) = 2 ✓",
+      "Substitute into the second: a(−1) + 8(1) = 14.",
+      "−a + 8 = 14, so −a = 6 and a = −6."
+     ],
+     "ex": {
+      "main": "**a = −6.** A given solution turns an unknown coefficient into a one-step substitution.",
+      "tip": "Check the point against the complete equation first — it confirms you have the right point."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "One equation of a system with exactly one solution is 4x + 2y = 14. Which could be the second equation?",
+     "opts": [
+      "2x + y = 7",
+      "8x + 4y = 28",
+      "−3x + 10y = 1",
+      "6x + 3y = 21"
+     ],
+     "ans": 2,
+     "hint": "A second equation proportional to the first cannot give exactly one solution.",
+     "steps": [
+      "Exactly one solution means the two lines have different slopes.",
+      "2x + y = 7, 8x + 4y = 28 and 6x + 3y = 21 are all just 4x + 2y = 14 rescaled — each is the same line, giving infinitely many solutions.",
+      "−3x + 10y = 1 has a different slope, so it crosses the first line exactly once."
+     ],
+     "ex": {
+      "main": "**−3x + 10y = 1.** The others are all multiples of the given equation, which describes the same line rather than a second one.",
+      "tip": "Compare the ratio of coefficients: equal ratios mean the same line or a parallel one."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A system of inequalities describes a shaded region rather than a point. Why?",
+     "opts": [
+      "Because inequalities have no solutions",
+      "Because every point in the overlap satisfies all the inequalities at once",
+      "Because the boundary lines are always parallel",
+      "Because the region is only an estimate of the real answer"
+     ],
+     "ans": 1,
+     "hint": "How many pairs satisfy x + y ≤ 20 on its own?",
+     "steps": [
+      "An inequality is satisfied by every point on one side of its boundary, not just the boundary itself.",
+      "With several inequalities, the points satisfying all of them are where the shaded sides overlap.",
+      "That overlap is usually a whole region, and any point inside it is a genuine solution."
+     ],
+     "ex": {
+      "main": "**Because every point in the overlap satisfies all the inequalities at once.** Equations pin down points; inequalities allow territory.",
+      "tip": "The corners of the region are where the best answers usually sit in real problems."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Keisha designs a rectangular enclosure at most 125 m long, using at most 300 m of fencing, with the length at least double the width. Which system models it?",
+     "opts": [
+      "y ≤ 125, 2x + 2y ≤ 300, y ≥ 2x",
+      "y ≥ 125, 2x + 2y ≥ 300, y ≤ 2x",
+      "y ≤ 125, 2x + 2y ≤ 300, y ≤ 2x",
+      "y ≤ 125, x + y ≤ 300, y ≥ 2x"
+     ],
+     "ans": 0,
+     "hint": "Perimeter of a rectangle is 2x + 2y, and \"at least double\" points one way.",
+     "steps": [
+      "Length at most 125 m: y ≤ 125.",
+      "At most 300 m of fencing is a perimeter constraint: 2x + 2y ≤ 300.",
+      "The length is at least double the width: y ≥ 2x."
+     ],
+     "ex": {
+      "main": "**y ≤ 125, 2x + 2y ≤ 300, y ≥ 2x.** Fencing is a perimeter, so both pairs of sides count.",
+      "tip": "A fencing budget is almost always a perimeter, not a length."
+     }
+    }
+   ]
+  }
+ }
+}

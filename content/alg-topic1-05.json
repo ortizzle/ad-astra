@@ -1,0 +1,741 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-0105": {
+   "id": "unit-alg-0105",
+   "type": "unit",
+   "updatedAt": 1786678747536,
+   "libv": 1,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 1 · 1-5 Solving Equations and Inequalities by Graphing",
+   "srcName": "enVision Algebra 2, Lesson 1-5 Solving Equations and Inequalities by Graphing (Drive)",
+   "source": "Algebra & Geometry II, Topic 1 (Drive folder)",
+   "summary": {
+    "text": "Using graphs and tables to solve equations and inequalities: graph each side as its own function, read the x-values where they cross, and for an inequality read where the graph sits above or below zero. Also covers refining an estimate with a table and with graphing technology.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is where equations stop being pure symbol-pushing. A graph tells you how many solutions there are and roughly where before you do any algebra — and for equations that mix an absolute value with a line, or a parabola with a line, the picture is what stops you from finding one solution and missing the other.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Solve a linear, absolute-value or quadratic equation by graphing each side and reading the crossings.",
+     "from": "source"
+    },
+    {
+     "text": "Solve a one-variable inequality by graphing and reading where the function is above or below zero.",
+     "from": "source"
+    },
+    {
+     "text": "Refine an estimated solution using a table of values or graphing technology.",
+     "from": "source"
+    },
+    {
+     "text": "Model a head-start or catch-up situation as an inequality and interpret the solution.",
+     "from": "source"
+    },
+    {
+     "text": "Say why a system produced no solution, using both the algebra and the picture.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the enVision Lesson 1-5 textbook pages. The questions are fresh rather than copies of the practice sheets, so the sheets stay usable as homework. Two things trip most students here: reading the answer as the whole intersection point instead of the x-value, and on inequalities like x² − 4 > 0, looking for where x is positive rather than where the expression is. Both have their own card and their own question. Three questions carry graphs.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the flashcards, especially the two about the common traps, then take the quiz. The graph questions are the ones worth slowing down on.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Solving an equation by graphing",
+     "def": "**Graph each side as its own function and read the x-values where they cross.**\n• y = left side, y = right side.\n• Every intersection gives one solution.\n• The solution is the x-value, not the whole point.",
+     "hint": "Two expressions are equal exactly where their graphs meet.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Why the x-value, not the point",
+     "def": "**The point (5, 5) means x = 5 is the solution — the y-value is just what both sides equal there.**\n• Writing (5, 5) as the answer answers a different question.\n• Check by substituting the x back into the original equation.",
+     "hint": "The question asked what x is. The y is a by-product.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Solving an inequality by graphing",
+     "def": "**Move everything to one side, graph that function, and read where the graph is above or below zero.**\n• For f(x) > 0, find where the curve is above the x-axis.\n• The x-intercepts are where the answer switches.",
+     "hint": "The x-axis is the zero line. Above it is positive.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "The trap in x² − 4 > 0",
+     "def": "**You are looking for where y is greater than 0, not where x is.**\n• The intercepts are x = −2 and x = 2.\n• The curve is above the axis outside them: x < −2 or x > 2.",
+     "hint": "Read the height of the graph, not the position along the axis.",
+     "from": "source",
+     "eq": "x^2 - 4 > 0  \\Rightarrow  x < -2 \\text{ or } x > 2"
+    },
+    {
+     "id": "c4",
+     "term": "Two expressions compared",
+     "def": "**Where one graph sits above the other, that expression is the larger one.**\n• Their intersection is the switch-over point.\n• Below the crossing, the other one leads.",
+     "hint": "Higher on the page means bigger in value.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Head-start problems",
+     "def": "**The head start is a constant added to the slower traveller's distance, not to the faster one's.**\n• Car at 60 mph vs motorcycle at 40 mph with a 40-mile lead: 60x > 40x + 40.\n• The crossing is when the chaser draws level.",
+     "hint": "Whoever started ahead carries the extra distance in their expression.",
+     "from": "source",
+     "eq": "60x > 40x + 40  \\Rightarrow  x > 2"
+    },
+    {
+     "id": "c6",
+     "term": "When there is no solution",
+     "def": "**Parallel lines never meet, so the equation has no solution.**\n• Solving 3x − 5 = 2 + 3x algebraically gives −5 = 2, which is false.\n• Equal slopes and different intercepts is the graphical version of that contradiction.",
+     "hint": "A false statement with no x left in it means no solution.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Reading interval notation",
+     "def": "**A round bracket excludes the endpoint; a square bracket includes it.**\n• x > 2 is (2, ∞).\n• x ≥ 2 is [2, ∞).\n• Infinity always takes a round bracket, because you never reach it.",
+     "hint": "Strict inequality, round bracket. Or-equal-to, square bracket.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Refining with a table",
+     "def": "**When the crossing is not at a neat value, tabulate both sides and find where the difference is smallest.**\n• Narrow the interval a decimal place at a time.\n• The x whose two outputs are closest is the best estimate so far.",
+     "hint": "Squeeze the interval until the two columns nearly agree.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Using the intersect feature",
+     "def": "**Graphing technology reports the crossing to several decimals, but you still choose the rounding the question asks for.**\n• Enter each side as its own function.\n• A curve can cross a line twice — check for a second intersection.",
+     "hint": "The calculator finds one crossing at a time. Look for others.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Absolute value gives two crossings",
+     "def": "**A V-shaped graph usually meets a line twice, so expect two solutions.**\n• |x − 4| = ½x + 1 crosses at x = 2 and x = 10.\n• Finding only one usually means the other branch was missed.",
+     "hint": "A V has two arms. Check both.",
+     "from": "source",
+     "eq": "|x - 4| = \\tfrac{1}{2}x + 1  \\Rightarrow  x = 2 \\text{ or } x = 10"
+    },
+    {
+     "id": "c11",
+     "term": "Checking a graphical solution",
+     "def": "**Substitute the x back into the ORIGINAL equation and confirm both sides land on the same number.**\n• A graph read by eye is an estimate until it is checked.\n• This catches a misread scale immediately.",
+     "hint": "The graph suggests. The substitution confirms.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Between which whole numbers",
+     "def": "**If a graph crosses between two grid lines, the solution is between those two x-values.**\n• The signs of the difference flip across the crossing.\n• That bracket is the starting point for a table.",
+     "hint": "A sign change between two x-values traps a solution between them.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Why graph at all",
+     "def": "**Graphing shows how many solutions there are and roughly where, even when the algebra is hard or impossible.**\n• It also shows at a glance whether a system has none, one, or many.\n• Algebra then gives the exact values.",
+     "hint": "The graph tells you what to expect. The algebra pins it down.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To solve 2x + 1 = x + 5 by graphing, which two functions should you graph?",
+     "opts": [
+      "y = 2x + 1 and y = x + 5",
+      "y = 2x + 1 − x + 5",
+      "y = 3x + 6",
+      "y = x − 4 only"
+     ],
+     "ans": 0,
+     "hint": "Set y equal to each side of the equation separately.",
+     "steps": [
+      "Graphing solves an equation by comparing the two sides as separate functions.",
+      "Let y equal the left side: y = 2x + 1. Let y equal the right side: y = x + 5.",
+      "Where those two graphs cross, the two sides are equal, and that x is the solution."
+     ],
+     "ex": {
+      "main": "**y = 2x + 1 and y = x + 5.** Two sides, two functions, and the crossing is where they agree.",
+      "tip": "Combining the sides first is the algebraic method, not the graphical one."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graphs of y = −3x + 20 and y = 0.2x + 4 shown cross at (5, 5). What is the solution of −3x + 20 = 0.2x + 4?",
+     "opts": [
+      "x = 5",
+      "x = 5 and y = 5",
+      "y = 5",
+      "x = 0"
+     ],
+     "ans": 0,
+     "hint": "The question asks for x. The y-value is what both sides equal there.",
+     "steps": [
+      "The crossing point is (5, 5).",
+      "The solution of an equation in one variable is an x-value, so read the x-coordinate.",
+      "x = 5. Check: −3(5) + 20 = 5 and 0.2(5) + 4 = 5, so both sides agree."
+     ],
+     "ex": {
+      "main": "**x = 5.** The 5 in the y-position is simply the value both sides take there.",
+      "tip": "Solving for one variable means the answer is one number, not a point."
+     },
+     "graph": {
+      "w": [
+       -1,
+       7,
+       -2,
+       14
+      ],
+      "gx": 1,
+      "gy": 2,
+      "xl": "x",
+      "yl": "y",
+      "series": [
+       {
+        "type": "line",
+        "m": -3,
+        "b": 20
+       },
+       {
+        "type": "line",
+        "m": 0.2,
+        "b": 4
+       }
+      ],
+      "pts": [
+       {
+        "x": 5,
+        "y": 5,
+        "label": "(5, 5)"
+       }
+      ]
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph of y = x² − 4 shown crosses the x-axis at −2 and 2. Over which interval is x² − 4 greater than 0?",
+     "opts": [
+      "−2 < x < 2",
+      "x < −2 or x > 2",
+      "x > 0",
+      "all real numbers"
+     ],
+     "ans": 1,
+     "hint": "Greater than 0 means the curve is ABOVE the x-axis.",
+     "steps": [
+      "x² − 4 > 0 asks where the height of the graph is above zero.",
+      "The curve dips below the axis between its intercepts and rises above outside them.",
+      "So x² − 4 > 0 when x < −2 or x > 2."
+     ],
+     "ex": {
+      "main": "**x < −2 or x > 2.** The common slip is answering x > 0 — but the question is about the value of the expression, not the sign of x.",
+      "tip": "Ask \"is the graph above or below the axis here\", never \"is x positive here\"."
+     },
+     "graph": {
+      "w": [
+       -5,
+       5,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "xl": "x",
+      "yl": "y",
+      "series": [
+       {
+        "type": "parab",
+        "a": 1,
+        "h": 0,
+        "k": -4
+       }
+      ],
+      "pts": [
+       {
+        "x": -2,
+        "y": 0,
+        "label": "(−2, 0)"
+       },
+       {
+        "x": 2,
+        "y": 0,
+        "label": "(2, 0)"
+       }
+      ]
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve −x + 4 = 2 by graphing.",
+     "opts": [
+      "x = 2",
+      "x = −2",
+      "x = 6",
+      "x = 4"
+     ],
+     "ans": 0,
+     "hint": "Where does the line y = −x + 4 reach a height of 2?",
+     "steps": [
+      "Graph y = −x + 4 and the horizontal line y = 2.",
+      "They meet where −x + 4 = 2, that is where x = 2.",
+      "Check: −(2) + 4 = 2. ✓"
+     ],
+     "ex": {
+      "main": "**x = 2.** A constant on one side is a horizontal line, which makes the crossing easy to read.",
+      "tip": "An equation with a number on one side is always a horizontal-line problem."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which interval notation means x ≥ 3?",
+     "opts": [
+      "(3, ∞)",
+      "[3, ∞)",
+      "(−∞, 3]",
+      "[3, ∞]"
+     ],
+     "ans": 1,
+     "hint": "Or-equal-to includes the endpoint. Infinity never gets a square bracket.",
+     "steps": [
+      "x ≥ 3 includes 3 itself, so the 3 takes a square bracket.",
+      "The values run upward without end, so the right end is ∞ with a round bracket.",
+      "[3, ∞)."
+     ],
+     "ex": {
+      "main": "**[3, ∞).** Square bracket includes the endpoint; infinity is never included because it is not a number you reach.",
+      "tip": "A bracket next to ∞ is always round."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graphs of y = |x − 4| and y = ½x + 1 shown cross at (2, 2) and (10, 6). What are the solutions of |x − 4| = ½x + 1?",
+     "opts": [
+      "x = 2 only",
+      "x = 2 and x = 10",
+      "x = 2 and x = 6",
+      "x = 10 only"
+     ],
+     "ans": 1,
+     "hint": "A V-shaped graph usually meets a line on both arms.",
+     "steps": [
+      "The two graphs cross twice, at (2, 2) and at (10, 6).",
+      "Each crossing gives one solution, read from the x-coordinate.",
+      "x = 2 and x = 10. Check x = 10: |10 − 4| = 6 and ½(10) + 1 = 6. ✓"
+     ],
+     "ex": {
+      "main": "**x = 2 and x = 10.** Stopping at the first crossing is the usual way to lose half the answer.",
+      "tip": "Count the crossings before you write anything down."
+     },
+     "graph": {
+      "w": [
+       -2,
+       12,
+       -2,
+       10
+      ],
+      "gx": 2,
+      "gy": 2,
+      "xl": "x",
+      "yl": "y",
+      "series": [
+       {
+        "type": "abs",
+        "a": 1,
+        "h": 4,
+        "k": 0
+       },
+       {
+        "type": "line",
+        "m": 0.5,
+        "b": 1
+       }
+      ],
+      "pts": [
+       {
+        "x": 2,
+        "y": 2,
+        "label": "(2, 2)"
+       },
+       {
+        "x": 10,
+        "y": 6,
+        "label": "(10, 6)"
+       }
+      ]
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solving 3x − 5 = 2 + 3x algebraically gives −5 = 2. What does the graph look like?",
+     "opts": [
+      "Two parallel lines that never meet",
+      "Two lines crossing once",
+      "One line drawn twice",
+      "A line and a parabola"
+     ],
+     "ans": 0,
+     "hint": "What kind of statement is −5 = 2?",
+     "steps": [
+      "Subtracting 3x from both sides leaves −5 = 2, which is false for every x.",
+      "A false statement with no variable left means no value of x works.",
+      "Graphically, both sides have slope 3 but different intercepts: parallel lines that never meet."
+     ],
+     "ex": {
+      "main": "**Two parallel lines that never meet.** Equal slopes with different intercepts is the picture of \"no solution\".",
+      "tip": "If the variable vanishes and the leftover statement is false, there is no solution."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve −¼x + 6 = ½x + 3 by graphing.",
+     "opts": [
+      "x = 4",
+      "x = 12",
+      "x = −4",
+      "x = 2"
+     ],
+     "ans": 0,
+     "hint": "Set the two sides equal and gather the x terms.",
+     "steps": [
+      "Graph y = −¼x + 6 and y = ½x + 3 and look for the crossing.",
+      "Algebraically: 6 − 3 = ½x + ¼x, so 3 = ¾x.",
+      "x = 4. Check: −¼(4) + 6 = 5 and ½(4) + 3 = 5. ✓"
+     ],
+     "ex": {
+      "main": "**x = 4.** Both sides land on 5 there, which is exactly what the crossing point shows.",
+      "tip": "Confirm a graphical read with one substitution — it costs seconds."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve ¾x = 2x − 10 by graphing.",
+     "opts": [
+      "x = 8",
+      "x = 4",
+      "x = −8",
+      "x = 10"
+     ],
+     "ans": 0,
+     "hint": "Where is the steeper line finally as high as the shallower one?",
+     "steps": [
+      "Graph y = ¾x and y = 2x − 10.",
+      "Algebraically: 10 = 2x − ¾x = 1¼x, so x = 10 ÷ 1.25.",
+      "x = 8. Check: ¾(8) = 6 and 2(8) − 10 = 6. ✓"
+     ],
+     "ex": {
+      "main": "**x = 8.** Both sides equal 6 at that x, so the lines cross at (8, 6).",
+      "tip": "A fractional coefficient is easier to handle as a decimal when checking."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve the inequality x² + x − 6 < 0 by graphing.",
+     "opts": [
+      "x < −3 or x > 2",
+      "−3 < x < 2",
+      "x < 2",
+      "−2 < x < 3"
+     ],
+     "ans": 1,
+     "hint": "Less than 0 means the curve is BELOW the x-axis.",
+     "steps": [
+      "Factor to find where the graph meets the axis: x² + x − 6 = (x + 3)(x − 2), so the intercepts are −3 and 2.",
+      "An upward parabola dips below the axis between its intercepts.",
+      "So x² + x − 6 < 0 when −3 < x < 2."
+     ],
+     "ex": {
+      "main": "**−3 < x < 2.** Upward parabola, below the axis, means the inside interval.",
+      "tip": "Upward parabola: negative between the roots, positive outside them."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve x − 5 > −2x + 4 by graphing.",
+     "opts": [
+      "x > 3",
+      "x < 3",
+      "x > 9",
+      "x > −3"
+     ],
+     "ans": 0,
+     "hint": "Where does the rising line sit above the falling one?",
+     "steps": [
+      "Graph y = x − 5 and y = −2x + 4; they cross where x − 5 = −2x + 4.",
+      "3x = 9, so the crossing is at x = 3.",
+      "To the right of the crossing the rising line is on top, so x > 3."
+     ],
+     "ex": {
+      "main": "**x > 3.** Find the crossing first, then decide which side of it the inequality describes.",
+      "tip": "After finding the crossing, test one convenient x to pick the correct side."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car travelling 60 mph is 40 miles behind a motorcycle travelling 40 mph. Which inequality says the car is ahead?",
+     "opts": [
+      "60x > 40x + 40",
+      "60x + 40 > 40x",
+      "60x > 40x",
+      "40x > 60x + 40"
+     ],
+     "ans": 0,
+     "hint": "The head start belongs to whoever started in front.",
+     "steps": [
+      "Let x be the hours since the car set off. The car covers 60x miles.",
+      "The motorcycle started 40 miles ahead, so its distance from the car's start is 40x + 40.",
+      "The car is ahead when 60x > 40x + 40, which solves to x > 2."
+     ],
+     "ex": {
+      "main": "**60x > 40x + 40.** Adding the head start to the car is the classic slip — it belongs to the vehicle that was already in front.",
+      "tip": "Write both distances from the same starting line before comparing them."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Cindy is longboarding 6 miles ahead of Tamira at 2 mph. Tamira travels at 4 mph. After how long is Tamira ahead?",
+     "opts": [
+      "after 2 hours",
+      "after 3 hours",
+      "after 4 hours",
+      "after 12 hours"
+     ],
+     "ans": 1,
+     "hint": "Set Tamira's distance above Cindy's, remembering the 6-mile lead.",
+     "steps": [
+      "Let x be hours since Tamira started. Tamira covers 4x; Cindy is at 2x + 6.",
+      "Tamira leads when 4x > 2x + 6, so 2x > 6.",
+      "x > 3 — Tamira is ahead after 3 hours."
+     ],
+     "ex": {
+      "main": "**After 3 hours.** At exactly 3 hours they are level at 12 miles, and past that Tamira leads.",
+      "tip": "The gap closes at the difference of the speeds: 6 miles at 2 mph of closing is 3 hours."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A graph of f(x) shows f(0.6) = −1.04 and f(0.7) = −1.31, while g(0.6) = −1.4 and g(0.7) = −1.3. Between which values does f(x) = g(x)?",
+     "opts": [
+      "between 0.6 and 0.7",
+      "between 0 and 0.6",
+      "at exactly 0.65",
+      "there is no solution"
+     ],
+     "ans": 0,
+     "hint": "Look at which function is on top at each end.",
+     "steps": [
+      "At x = 0.6, f is −1.04 and g is −1.4, so f is above g.",
+      "At x = 0.7, f is −1.31 and g is −1.3, so g is now above f.",
+      "They swapped places, so the graphs crossed somewhere between 0.6 and 0.7."
+     ],
+     "ex": {
+      "main": "**Between 0.6 and 0.7.** A swap in which function is larger guarantees a crossing in between.",
+      "tip": "Tables find crossings by watching for the moment the ordering flips."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Ben says the solution of −x² + 9 > 0 is x < −3 or x > 3. What went wrong?",
+     "opts": [
+      "Nothing — Ben is correct",
+      "The parabola opens downward, so it is above the axis BETWEEN −3 and 3",
+      "The intercepts are at −9 and 9, not −3 and 3",
+      "The inequality has no solution"
+     ],
+     "ans": 1,
+     "hint": "Which way up does y = −x² + 9 open?",
+     "steps": [
+      "The intercepts are where −x² + 9 = 0, so x = ±3. Ben got those right.",
+      "The leading coefficient is negative, so the parabola opens DOWNWARD.",
+      "A downward parabola is above the axis between its intercepts, so the answer is −3 < x < 3. Ben gave the outside interval, which belongs to an upward parabola."
+     ],
+     "ex": {
+      "main": "**The parabola opens downward, so the solution is −3 < x < 3.** Ben applied the upward-parabola pattern without checking the sign in front of x².",
+      "tip": "Check the direction the curve opens before deciding inside or outside."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve −x² − 2x + 15 ≤ 0.",
+     "opts": [
+      "−5 ≤ x ≤ 3",
+      "x ≤ −5 or x ≥ 3",
+      "−3 ≤ x ≤ 5",
+      "x ≤ −3 or x ≥ 5"
+     ],
+     "ans": 1,
+     "hint": "Multiplying by −1 flips the inequality sign.",
+     "steps": [
+      "Multiply through by −1 and flip the sign: x² + 2x − 15 ≥ 0.",
+      "Factor: (x + 5)(x − 3) ≥ 0, so the intercepts are −5 and 3.",
+      "An upward parabola is at or above zero outside its roots: x ≤ −5 or x ≥ 3."
+     ],
+     "ex": {
+      "main": "**x ≤ −5 or x ≥ 3.** Forgetting to flip the sign when multiplying by a negative turns the answer inside out.",
+      "tip": "Multiplying or dividing an inequality by a negative always reverses it."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A graph shows the solution of −½x + 7/2 = −x + a is x = −1. What is a?",
+     "opts": [
+      "a = −3",
+      "a = 1",
+      "a = 3",
+      "a = 2"
+     ],
+     "ans": 2,
+     "hint": "Substitute x = −1 into both sides and solve for a.",
+     "steps": [
+      "If x = −1 is the solution, both sides are equal there.",
+      "Left side: −½(−1) + 7/2 = ½ + 7/2 = 4.",
+      "Right side: −(−1) + a = 1 + a. Setting 1 + a = 4 gives a = 3."
+     ],
+     "ex": {
+      "main": "**a = 3.** When the solution is given, the unknown constant is found by substituting rather than by graphing.",
+      "tip": "A known solution turns a graphing problem into a one-line substitution."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve x² − 3 = x + 3 by graphing.",
+     "opts": [
+      "x = −2 and x = 3",
+      "x = 3 only",
+      "x = −3 and x = 2",
+      "x = 2 and x = 6"
+     ],
+     "ans": 0,
+     "hint": "Bring everything to one side and factor.",
+     "steps": [
+      "Graph y = x² − 3 and y = x + 3 and look for the crossings.",
+      "Algebraically: x² − x − 6 = 0, which factors to (x − 3)(x + 2) = 0.",
+      "x = 3 or x = −2. Check x = −2: (−2)² − 3 = 1 and −2 + 3 = 1. ✓"
+     ],
+     "ex": {
+      "main": "**x = −2 and x = 3.** A parabola and a line usually cross twice, so two solutions is the expected shape of the answer.",
+      "tip": "The sign of each root is worth checking — swapping them is easy and costly."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Jack is running 2.45 miles ahead of Zhang. Jack runs 5.5 mph, Zhang 7.75 mph. When is Zhang ahead, to the nearest hundredth of an hour?",
+     "opts": [
+      "after 0.32 h",
+      "after 1.09 h",
+      "after 2.25 h",
+      "after 4.47 h"
+     ],
+     "ans": 1,
+     "hint": "Zhang leads when 7.75x > 5.5x + 2.45.",
+     "steps": [
+      "Let x be hours since Zhang started. Zhang covers 7.75x; Jack is at 5.5x + 2.45.",
+      "Zhang leads when 7.75x > 5.5x + 2.45, so 2.25x > 2.45.",
+      "x > 2.45 ÷ 2.25 = 1.0888…, which rounds to 1.09 hours."
+     ],
+     "ex": {
+      "main": "**After about 1.09 hours.** The closing speed is the difference, 2.25 mph, and it must eat a 2.45-mile lead.",
+      "tip": "Head-start problems always reduce to gap divided by closing speed."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why can graphing solve an equation that is difficult to solve algebraically?",
+     "opts": [
+      "It gives exact answers no algebra can reach",
+      "It shows how many solutions exist and roughly where, so they can then be refined",
+      "It converts every equation into a linear one",
+      "It only works when the solutions are whole numbers"
+     ],
+     "ans": 1,
+     "hint": "What does a picture tell you that a rearrangement does not?",
+     "steps": [
+      "A graph shows every place the two sides meet, so it reveals the NUMBER of solutions at a glance.",
+      "It also shows roughly where each one sits, which gives a starting interval.",
+      "Tables or technology then refine those estimates to whatever precision is asked for."
+     ],
+     "ex": {
+      "main": "**It shows how many solutions exist and roughly where.** Graphing is a locating tool; the precision comes afterwards from tables or technology.",
+      "tip": "Graph to find out what to look for, then refine."
+     }
+    }
+   ]
+  }
+ }
+}
