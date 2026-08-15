@@ -1008,7 +1008,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v97 · one rhythm';
+const APP_VERSION = 'v98 · the day off';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3327,8 +3327,18 @@ SCREENS.today = function(root){
     n.appendChild(el('p',null, date<CAL.firstDay
       ? 'This is your timetable from the first day of school onward. Same order every weekday.'
       : 'No classes today — this is your normal weekday timetable.'));
+    /* The timetable is identical every weekday, so on a day off it is a
+       hypothetical rather than news. One tap opens it; nothing is lost. */
+    if(!ctx._showTT){
+      const sh = el('button','btn btn-ghost btn-sm','Show the weekday timetable');
+      sh.addEventListener('click',()=>{ ctx._showTT = true; render(); });
+      n.appendChild(sh);
+    }
     root.appendChild(n);
   }
+  /* Events still show when the timetable is folded — an event on a day off
+     (a performance, a community evening) is the opposite of hypothetical. */
+  const foldTT = !schoolDay && !ctx._showTT;
   /* Events for today, pinned above the periods. They are not an extra period,
      so they are painted differently rather than slotted into the timetable. */
   eventsOn(date).forEach(e=>{
@@ -3346,7 +3356,7 @@ SCREENS.today = function(root){
   });
 
   const now = AZ.nowMinutes();
-  CLASSES.forEach(c=>{
+  (foldTT ? [] : CLASSES).forEach(c=>{
     const live = schoolDay && now>=c.start && now<c.end;
     const cls0 = 'period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'')+(c.bookend?' bookend':'');
     /* Live period gets the full painted fill; the rest get a colour wash. */

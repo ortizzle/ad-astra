@@ -633,11 +633,17 @@ Two things the same screenshot showed, both fixed:
 - **`.opt` had diverged**: 12px in this app, 9px in Wayfinder. The same element
   spaced two different ways. Both now use `--gap-row`.
 
-Not done, deliberately: on a non-school day this app still lists the full
-weekday timetable (eleven rows, ~870px of hypothetical). Folding it behind a
-tap changes what is on screen by default, which is Chris's call — and note
-Wayfinder does not have the problem, because its schedule rotates so it shows
-the NEXT school day's real line-up instead.
+**The timetable folds on a day off** (v98, THIS APP ONLY). The schedule is
+identical every weekday, so on a Saturday it was eleven rows of hypothetical —
+measured at 1703px, against 957px folded, so **746px** of the screen was a
+schedule that did not apply. It now sits behind "Show the weekday timetable";
+`ctx._showTT` opens it, nothing is removed, and a school day is never folded.
+**Events still render when it is folded** — a performance or a community
+evening on a day off is the opposite of hypothetical.
+
+Deliberately not ported: Wayfinder's schedule ROTATES, so on an off-day it
+already shows the next school day's real line-up rather than a generic
+timetable. That is news, and folding it would hide something true.
 
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
