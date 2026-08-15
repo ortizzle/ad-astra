@@ -1004,7 +1004,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v95 · stars, rebuilt';
+const APP_VERSION = 'v96 · hours that are still open';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1781,6 +1781,28 @@ function hoursSlots(cid){
   if(typeof STUDENT_HOURS === 'undefined') return [];
   return STUDENT_HOURS.filter(h => h.ids.includes(cid));
 }
+/* Which portions of a window like "7:00–7:30 am or 3:30–4:00 pm" are still
+   worth walking to. `beforeSchool` keeps only the morning slots — a window on
+   the day of the test can only help before the school day starts. `todayNow`
+   drops any slot whose start time has already gone by. Returns null when
+   nothing is left, so the caller can skip the day entirely. */
+function usableTimes(times, opt){
+  const parts = String(times).split(/\s+(?:or|and)\s+/i);
+  const keep = parts.filter(part => {
+    const isAm = /am\b/i.test(part);
+    if(opt.beforeSchool && !isAm) return false;
+    if(opt.todayNow != null){
+      const m = part.match(/(\d{1,2}):(\d{2})/);
+      if(m){
+        let h = +m[1];
+        if(!isAm && h < 12) h += 12;
+        if(h * 60 + (+m[2]) <= opt.todayNow) return false;
+      }
+    }
+    return true;
+  });
+  return keep.length ? keep.join(' or ') : null;
+}
 /* The next help window between now and the test, and whether it is the only
    one left. Today counts only while its afternoon slot is still ahead. */
 function nextHoursBefore(cid, from, until){
@@ -1791,10 +1813,14 @@ function nextHoursBefore(cid, from, until){
   const hits = [];
   for(let i = 0; i <= span; i++){
     const ds = AZ.shift(from, i), wd = AZ.weekday(ds);
-    if(i === 0 && AZ.nowMinutes() >= 900) continue;      // today's window has passed
     slots.forEach(h => {
       if(!(h.days || [h.d]).includes(wd)) return;
-      hits.push({ date:ds, label:h.label, times:h.times, tbd:!!h.tbd, inDays:i });
+      const t = usableTimes(h.times, {
+        beforeSchool: i === span,                    // the test is that same day
+        todayNow: i === 0 ? AZ.nowMinutes() : null   // and part of today is gone
+      });
+      if(!t) return;
+      hits.push({ date:ds, label:h.label, times:t, tbd:!!h.tbd, inDays:i, sameDay:i === span });
     });
   }
   if(!hits.length) return null;
@@ -3175,7 +3201,8 @@ SCREENS.today = function(root){
       const when = rw.hours.inDays===0 ? 'today' : rw.hours.inDays===1 ? 'tomorrow' : rw.hours.label;
       c0.appendChild(el('div','rhours', '🕐 Student hours ' + when + ', ' + rw.hours.times
         + (rw.hours.tbd ? ' (confirm with your teacher)' : '')
-        + (rw.hours.last ? ' — the last one before it.' : '.')));
+        + (rw.hours.sameDay ? ' — the morning of, and the last chance.'
+           : rw.hours.last ? ' — the last one before it.' : '.')));
     }
     root.appendChild(c0);
   }
