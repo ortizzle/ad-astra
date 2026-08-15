@@ -600,6 +600,45 @@ whole tab threw. And two of my own assertions were wrong before the code was:
 `ctx.view` is not the current screen (the global `view` is), and an unscoped
 `/bad/i` "grade word" check matches **Bad**ges.
 
+### Vertical rhythm (v97 / Wayfinder v79, both apps)
+
+Chris flagged Today as feeling tight. Measuring it found **seven** different
+gaps between sibling blocks, grown one feature at a time: 0, 2, 8, 9, 10, 12,
+14, 26. The 2px was the visible one — `.statstrip`'s margin was `14px 0 2px`,
+so the strip was glued to the hero card beneath it — and two pairs sat flush
+at 0px, including the badge grid against its own "N more to find" button.
+
+**Three tokens now, and every gap on every tab is one of them:**
+
+| token | value | between |
+|---|---|---|
+| `--gap-row` | 10px | rows of a list — periods, misses, plan rows, options, events |
+| `--gap` | 14px | sibling blocks — cards, card buttons, the strip |
+| `--gap-sec` | 26px | the air before a section divider |
+
+10px is not arbitrary: it is what the existing `.btn+.btn` rule already
+required ("don't crowd tap targets to save vertical space"), so the row scale
+settles on the documented floor rather than under it.
+
+`tools/test_rhythm.js` walks Today, Study, Growth and Stars and asserts the
+whole screen uses only that scale, so a future one-off gap fails a test rather
+than accumulating.
+
+Two things the same screenshot showed, both fixed:
+
+- **The weekday was printed twice on a weekend.** The eyebrow says "Saturday,
+  August 15" and the heading said "Saturday" again 40px below. It now says
+  **"No school today · Back on Monday"** — the thing a weekend actually wants
+  to know.
+- **`.opt` had diverged**: 12px in this app, 9px in Wayfinder. The same element
+  spaced two different ways. Both now use `--gap-row`.
+
+Not done, deliberately: on a non-school day this app still lists the full
+weekday timetable (eleven rows, ~870px of hypothetical). Folding it behind a
+tap changes what is on screen by default, which is Chris's call — and note
+Wayfinder does not have the problem, because its schedule rotates so it shows
+the NEXT school day's real line-up instead.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and
