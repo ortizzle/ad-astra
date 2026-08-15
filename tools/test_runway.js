@@ -99,6 +99,14 @@ const [PORT, CID] = process.argv.slice(2);
 
   /* ---- 5. "Before the bell" only when the bell is close ---- */
   const bell = await p.evaluate(()=>{
+    /* Pin to a SCHOOL DAY. This block is about the bell, and on a weekend the
+       card correctly says "No school today" — run it on a Saturday and three
+       assertions fail against an app that is behaving perfectly. */
+    const real = AZ.today;
+    let d = AZ.today();
+    for(let i = 0; i < 9 && (AZ.weekday(d) === 0 || AZ.weekday(d) === 6 || d < CAL.firstDay); i++)
+      d = AZ.shift(AZ.today(), i + 1);
+    AZ.today = () => d;
     /* target the school-day card explicitly — it drops its accent wash when
        the runway card is carrying the screen, so '.card.ac' is not it. */
     const read = m => { AZ.nowMinutes = ()=>m; go('today');
@@ -112,8 +120,10 @@ const [PORT, CID] = process.argv.slice(2);
     const live = list[Math.floor(list.length/2)];
     const mid = Math.floor((live.start + live.end)/2);
     const bell = list.find(c=>c.start > 6*60);
-    return { early: read(4*60+14), close: read(bell.start - 5),
-             during: read(mid), after: read(16*60), liveName: live.name };
+    const out = { early: read(4*60+14), close: read(bell.start - 5),
+                  during: read(mid), after: read(16*60), liveName: live.name, on: d };
+    AZ.today = real;
+    return out;
   });
   ck('4am no longer says "Before the bell"', !/Before the bell/.test(bell.early), bell.early);
   ck('4am says the shape of the day', /classes today|School today/.test(bell.early), bell.early);

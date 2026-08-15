@@ -645,6 +645,59 @@ Deliberately not ported: Wayfinder's schedule ROTATES, so on an off-day it
 already shows the next school day's real line-up rather than a generic
 timetable. That is news, and folding it would hide something true.
 
+### Signed up, and the club on the day (v99, THIS APP ONLY)
+
+Starring a club and being registered for it were the **same flag**, which is
+why Sedona's ASL Club came off the list when she tidied her wishlist — she had
+actually signed up for it. They are different facts and now have different
+states.
+
+`clubState(id)` reads the one `clubpicks` map that already existed and returns
+`'reg'` / `'want'` / `null`. **A stored `true` predates this and reads as
+`'want'`** — exactly what it meant when it was written, so nothing migrates.
+`setClubState()` writes it; the detail modal gains "✓ I am signed up for this"
+below the star, and the clubs screen splits into *You are signed up for* and
+*Starred — hoping to join*. The cost total stays on the starred block, where
+"if you got all of these" is the question being asked.
+
+**A registered club joins the day it meets**, as an `.evt.club` row after the
+last period. Rules that are the point:
+
+- **Only when the day, the time AND the cadence are all genuinely derivable.**
+  `weekly*` → every matching weekday from `first`; `bi-weekly` → every 14 days
+  from the first matching weekday (which is not always `first` itself);
+  **everything else is not placed**. Of 34 clubs, 6 list no time and 3 say
+  only "monthly" — a monthly club gives no week, and putting it on a guessed
+  one would be the app inventing her afternoon. The signed-up card SAYS how
+  many of hers are placed rather than leaving the omission to be noticed.
+- **Starred clubs never appear on a day.** A star is a wish; a schedule is a
+  claim about what is happening.
+- It takes the **quiet plate with an accent left rule** (`.evt.club`), not the
+  full accent wash a pinned school event gets — two accent-washed rows on one
+  day is two focal points — so the day reads as one of hers among the school's.
+- **Folded away with the timetable on a day off**, because a club does not meet
+  when there is no school.
+- `.st.reg` (green tick) and `.st.want` (accent star) replaced a single
+  `.st.done`; the glyph already separates them and the colour only reinforces.
+
+`tools/test_clubs.js` covers the states, the cadence arithmetic over a whole
+year, and that nothing vague is ever placed; `tools/contrast_clubs.js` sweeps
+the new surfaces across accent × sky × theme (288 samples, worst 6.44:1).
+
+**"On the horizon" said the same thing twice** (v99 / Wayfinder v80, both
+apps), caught in a screenshot of the club work. The card printed the next
+milestone and then "Quarter N ends" beneath it — and since every milestone in
+both calendars **is** a quarter boundary, those were the same fact and the
+same number on **242 of ~290 school days**. The quarter row now renders only
+when `ms.date !== q.end`.
+
+> The first version of `tools/test_horizon.js` passed against the unfixed app.
+> It regexed `/(\d+) days/` over the card's concatenated text, where "End of
+> Quarter 1" + "3 days" reads as "…Quarter 13 days" — so it compared "13 days"
+> against "3 days" and saw no duplicate. It reads the `.v` cells now. Reverting
+> the fix and watching the test fail is what exposed it; a green test on a bug
+> you can see in a screenshot means the test is wrong.
+
 ### Paper study guides — two doors (v87 / Wayfinder v69, both apps)
 
 A unit flagged **`guide:true`** mirrors a printout the class handed out, and

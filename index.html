@@ -569,7 +569,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   padding:12px 14px;border:1px solid var(--line);border-radius:14px;
   background-color:var(--surface);margin-bottom:var(--gap-row);text-align:left;font-size:14px}
 .tocrow .st{width:22px;text-align:center;flex-shrink:0;color:var(--muted)}
-.tocrow .st.done{color:var(--good);font-weight:800}
+/* Signed up is a fact (green tick); starred is a wish (accent star). The glyph
+   already tells them apart — the colour only reinforces it. */
+.tocrow .st.reg{color:var(--good);font-weight:800}
+.tocrow .st.want{color:var(--ac-fg);font-weight:800}
 .tocrow .tl{flex:1;line-height:1.35}
 .tocrow .mt{font-size:11.5px;color:var(--faint);flex-shrink:0}
 /* A finished book's spine title turns gilt — measured ≥4.5:1 on every
@@ -795,6 +798,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .evt .tm{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--ac-fg);text-transform:uppercase;
   flex-shrink:0;text-align:right}
 .evt.quiet{background:var(--surface);border-color:var(--line);border-left-color:var(--muted)}
+/* A club she signed up for is HERS, not the school's. It takes the quiet plate
+   so it never competes with a pinned school event — two accent-washed rows on
+   one day is two focal points — but keeps an accent rule on the left so the
+   day still reads as one of hers among the school's. */
+.evt.club{background:var(--surface);border-color:var(--line);border-left-color:var(--ac-fg)}
+.evt.club .tm{color:var(--muted)}
 .evt.quiet .tm{color:var(--muted)}
 .prov{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.05em;
   text-transform:uppercase;padding:2px 7px;border-radius:7px;vertical-align:middle;white-space:nowrap}
@@ -1008,7 +1017,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v98 · the day off';
+const APP_VERSION = 'v99 · signed up';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1125,6 +1134,55 @@ const CLUBS_CLOSED = [
   {day:'Friday',    nm:'Varsity Speech & Debate', gr:'9th–12th'}
 ];
 const clubPicks = () => (DATA.records['clubpicks']||{}).picks || {};
+/* Three states, stored in the one map that already existed. A value of `true`
+   predates registration and means "want" — exactly what it meant when it was
+   written, so nothing needs migrating. */
+const clubState = id => { const v = clubPicks()[id]; return v === 'reg' ? 'reg' : v ? 'want' : null; };
+function setClubState(id, st){
+  const p2 = {...clubPicks()};
+  if(st) p2[id] = st; else delete p2[id];
+  put({ id:'clubpicks', type:'clubpicks', picks:p2 });
+  syncSoon();
+}
+/* ---- Registered clubs on the calendar ----
+   A club joins the day it meets only when the day, the time AND the cadence
+   are all genuinely derivable. Anything vaguer stays off the schedule rather
+   than guessing at her week:
+     weekly*   -> every matching weekday from the first meeting onward
+     bi-weekly -> every fourteen days from that first meeting
+     otherwise -> not placed (monthly gives no week; "6 weeks only" gives no
+                  cadence; a club with no time cannot be put at a time)
+   `first` anchors everything, so a club without a parseable one is skipped. */
+const CLUB_DAYS = {sunday:0, monday:1, tuesday:2, wednesday:3, thursday:4, friday:5, saturday:6};
+const CLUB_MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,sept:8,oct:9,nov:10,dec:11};
+function clubFirstDate(c){
+  const m = String(c.first||'').match(/([A-Za-z]+)\s+(\d{1,2})/);
+  if(!m) return null;                                  // "Aug" with no date
+  const mo = CLUB_MONTHS[m[1].toLowerCase().slice(0,4)] ?? CLUB_MONTHS[m[1].toLowerCase().slice(0,3)];
+  if(mo == null) return null;
+  /* The school year straddles a new year: months before August belong to the
+     spring half of it. */
+  const y = mo >= 7 ? +CAL.firstDay.slice(0,4) : +CAL.lastDay.slice(0,4);
+  return `${y}-${String(mo+1).padStart(2,'0')}-${m[2].padStart(2,'0')}`;
+}
+const clubWeekdays = c => String(c.day||'').split(/\s*&\s*/)
+  .map(d => CLUB_DAYS[d.trim().toLowerCase()]).filter(d => d != null);
+function clubMeetsOn(c, date){
+  if(!c.time) return false;
+  const freq = String(c.freq||'').toLowerCase();
+  const weekly = freq.startsWith('weekly'), fort = freq.startsWith('bi-weekly');
+  if(!weekly && !fort) return false;
+  const first = clubFirstDate(c);
+  if(!first || date < first) return false;
+  if(!clubWeekdays(c).includes(AZ.weekday(date))) return false;
+  if(weekly) return true;
+  /* Fortnightly: count from the club's OWN first matching weekday, not from
+     `first` itself, which may fall on a different day than the club meets. */
+  let start = first;
+  for(let i = 0; i < 7 && !clubWeekdays(c).includes(AZ.weekday(start)); i++) start = AZ.shift(first, i+1);
+  return AZ.daysBetween(start, date) % 14 === 0;
+}
+const clubsOn = date => CLUBS.filter(c => clubState(c.id) === 'reg' && clubMeetsOn(c, date));
 
 /* Student hours, from her own planner (Aug 2026) — times only, teacher names
    stay in roster. days uses AZ weekday numbers (0 = Sunday). Bio's slot is
@@ -3385,6 +3443,23 @@ SCREENS.today = function(root){
     root.appendChild(p);
   });
 
+  /* Clubs she is SIGNED UP for that meet today — after the last bell, which
+     is where they actually sit in her day. Only registered ones: a star is a
+     wish and does not belong on a schedule. Folded away with the timetable on
+     a day off, because a club does not meet when there is no school. */
+  const todayClubs = foldTT ? [] : clubsOn(date);
+  todayClubs.forEach(c=>{
+    const row = el('div','evt club');
+    row.appendChild(el('div','pchip','🎟️'));
+    const m2 = el('div','meta');
+    m2.appendChild(el('div','nm',c.nm));
+    m2.appendChild(el('div','dt', 'After school' + (c.freq ? ' · '+c.freq : '')));
+    row.appendChild(m2);
+    row.appendChild(el('div','tm', c.time || 'After school'));
+    row.addEventListener('click',()=>clubDetails(c));
+    root.appendChild(row);
+  });
+
   const ms = nextMilestone(date);
   if(ms){
     root.appendChild(divider('On the horizon'));
@@ -3394,7 +3469,9 @@ SCREENS.today = function(root){
     const d = AZ.daysBetween(date, ms.date);
     r.appendChild(el('span','v', d===0?'Today':d===1?'Tomorrow':`${d} days`));
     c.appendChild(r);
-    if(q){ const r2=el('div','row');
+    /* Only when it is a DIFFERENT fact: when the next milestone is itself the
+       end of the quarter, this row restated it word for word, same number. */
+    if(q && ms.date !== q.end){ const r2=el('div','row');
       r2.appendChild(el('span','k',`Quarter ${q.n} ends`));
       r2.appendChild(el('span','v plain',`${AZ.daysBetween(date,q.end)} days`)); c.appendChild(r2); }
     root.appendChild(c);
@@ -4090,11 +4167,11 @@ function finishCards(u){
 /* Read before you commit: the catalog's own description plus when it meets,
    what it costs and any tryout/invite requirement — then star from inside. */
 function clubDetails(c){
-  const starred = !!clubPicks()[c.id];
+  const st0 = clubState(c.id);
   showModal({
     title: c.nm,
-    confirmText: starred ? 'Remove my star' : '★  Star this one',
-    cancelText: 'Close',
+    confirmText: st0 === 'want' ? 'Remove my star' : st0 === 'reg' ? 'Close' : '★  Star this one',
+    cancelText: st0 === 'reg' ? null : 'Close',
     build:(box)=>{
       const rows = [
         ['When', c.day + (c.time ? ' · '+c.time : '')],
@@ -4111,9 +4188,23 @@ function clubDetails(c){
       });
       box.appendChild(el('p',null, c.desc ||
         'The catalog lists this one without a description — ask about it in ParentSquare.'));
-      box.appendChild(el('div','hintline', starred
-        ? 'Starred. Mom and Dad can see this one on their side.'
-        : 'Starring is not signing up — it tells Mom and Dad you are interested.'));
+      box.appendChild(el('div','hintline', st0 === 'reg'
+        ? 'Signed up. This one is on your schedule on the days it meets.'
+        : st0 === 'want'
+          ? 'Starred. Mom and Dad can see this one on their side.'
+          : 'Starring is not signing up — it tells Mom and Dad you are interested.'));
+      /* Registration is a FACT about her week, where a star is a wish. Keeping
+         them apart is what stops a real commitment being cleared by tidying up
+         the wish list. */
+      const reg = el('button','btn btn-secondary',
+        st0 === 'reg' ? 'Not signed up after all' : '✓  I am signed up for this');
+      reg.addEventListener('click',()=>{
+        setClubState(c.id, st0 === 'reg' ? null : 'reg');
+        document.querySelectorAll('.modal-overlay').forEach(o=>o.remove());
+        toast(st0 === 'reg' ? 'Taken off your schedule' : 'Added to your schedule');
+        render();
+      });
+      box.appendChild(reg);
     },
     onConfirm:()=>{
       const rec = DATA.records['clubpicks'] || {id:'clubpicks', type:'clubpicks', picks:{}};
@@ -4126,13 +4217,35 @@ function clubDetails(c){
 }
 
 SCREENS.clubs = function(root){
-  root.appendChild(headline('Fall clubs','Every club open to your grade. Tap one to read what it actually is, then star it if you want in — your picks show up for Mom and Dad, who register you in Blackbaud by Friday.'));
+  root.appendChild(headline('Fall clubs','Every club open to your grade. Tap one to read what it actually is. Star the ones you want in — your picks show up for Mom and Dad, who register you in Blackbaud by Friday. Once you are actually signed up, mark it, and it joins your schedule on the days it meets.'));
   root.appendChild(el('div','hintline','Unless marked, clubs meet right after school, about 3:45–4:30 — tap one for its exact time.'));
   const picks = clubPicks();
-  const chosen = CLUBS.filter(c=>picks[c.id]);
+  /* Signed up and hoping to join are different facts and get different
+     blocks — the whole point of separating them. */
+  const joined = CLUBS.filter(c=>clubState(c.id)==='reg');
+  if(joined.length){
+    const jc = el('div','card ac');
+    jc.appendChild(el('div','eyebrow','You are signed up for'));
+    joined.forEach(c=>{
+      const r = el('div','row');
+      const kk = el('span','k',c.nm);
+      kk.appendChild(el('small',null, c.day + (c.time ? ' · '+c.time : '')
+        + (c.freq ? ' · '+c.freq : '')));
+      r.appendChild(kk);
+      r.appendChild(el('span','v', c.cost ? '$'+c.cost : 'free'));
+      jc.appendChild(r);
+    });
+    const placed = joined.filter(c=>c.time && /^(weekly|bi-weekly)/i.test(c.freq||'') && clubFirstDate(c));
+    jc.appendChild(el('div','hintline', placed.length
+      ? (placed.length===joined.length ? 'These show up on your schedule on the days they meet.'
+         : `${placed.length} of these show up on your schedule; the rest do not list a day, time or how often.`)
+      : 'These do not list a day, time and cadence, so they stay off your schedule.'));
+    root.appendChild(jc);
+  }
+  const chosen = CLUBS.filter(c=>clubState(c.id)==='want');
   if(chosen.length){
     const sc = el('div','card ac');
-    sc.appendChild(el('div','eyebrow','Your picks'));
+    sc.appendChild(el('div','eyebrow','Starred — hoping to join'));
     chosen.forEach(c=>{
       const r = el('div','row');
       const kk = el('span','k',c.nm);
@@ -4154,7 +4267,9 @@ SCREENS.clubs = function(root){
     root.appendChild(divider(day));
     list.forEach(c=>{
       const b = el('button','tocrow');
-      const st = el('span','st'+(picks[c.id]?' done':''), picks[c.id] ? '★' : '☆');
+      const cst = clubState(c.id);
+      const st = el('span','st'+(cst?' '+cst:''),
+        cst==='reg' ? '✓' : cst==='want' ? '★' : '☆');
       b.appendChild(st);
       const tl = el('span','tl');
       tl.appendChild(el('div',null,c.nm));
