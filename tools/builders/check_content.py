@@ -10,8 +10,28 @@ POSITIONAL = re.compile(
     r'|\b(all|none|both) of the above\b'
     r'|\boption [A-D]\b', re.I)
 
+# How much longer than its nearest rival an option may be before its length
+# gives it away. Shuffling (v64) killed "the answer is always first"; it cannot
+# touch "the answer is always the wordiest", which is just as learnable and
+# just as useless. Reported as a warning, not a problem: it is an authoring
+# smell across a lot of already-shipped content, not something the app rejects.
+LEN_SLACK = 0.10
+
+def length_tell(opts, ans):
+    """Percent by which the correct option outruns the longest wrong one, or 0."""
+    if not isinstance(ans, int) or not (0 <= ans < len(opts)) or len(opts) < 2:
+        return 0
+    lens = [len(str(o)) for o in opts]
+    correct = lens[ans]
+    rival = max(lens[:ans] + lens[ans + 1:])
+    if rival <= 0 or correct <= rival:
+        return 0
+    over = (correct - rival) / float(rival)
+    return int(round(over * 100)) if over > LEN_SLACK else 0
+
 def check(root, name):
     problems = []
+    warnings = []
     seen_ids = {}
     for f in sorted(glob.glob(os.path.join(root, 'content', '*.json'))):
         base = os.path.basename(f)
@@ -26,6 +46,7 @@ def check(root, name):
                 continue
             uid = u.get('id')
             P = lambda w, m: problems.append((base, uid, m)) if w else None
+            W = lambda w, m: warnings.append((base, uid, m)) if w else None
 
             if uid in seen_ids:
                 P(True, 'duplicate id, also in %s' % seen_ids[uid])
@@ -57,6 +78,9 @@ def check(root, name):
                     P(len(set(map(str, opts))) != len(opts), '%s: duplicate options' % tag)
                     P(not isinstance(ans, int) or not (0 <= ans < len(opts)),
                       '%s: ans %r out of range' % (tag, ans))
+                    over = length_tell(opts, ans)
+                    W(over, '%s: correct option %d%% longer than the next longest'
+                      % (tag, over))
                 if kind == 'order':
                     P(len(opts) != 4, '%s: order needs exactly 4 events' % tag)
                     P(ans != 0, '%s: order must have ans 0' % tag)
@@ -91,6 +115,9 @@ def check(root, name):
                       '%s: ans %r out of range' % (vt, v.get('ans')))
                     vs = v.get('steps') or []
                     P(not (3 <= len(vs) <= 6), '%s: %d steps' % (vt, len(vs)))
+                    vover = length_tell(vo, v.get('ans'))
+                    W(vover, '%s: correct option %d%% longer than the next longest'
+                      % (vt, vover))
                     P(not (v.get('ex') or {}).get('main'), '%s: no ex.main' % vt)
                     vb = ' '.join([str(v.get('q',''))] + [str(x) for x in vo] + [str(x) for x in vs]
                                   + [str((v.get('ex') or {}).get('main',''))])
@@ -115,14 +142,42 @@ def check(root, name):
             P(o is not None and not isinstance(o, int), 'order is %r' % o)
 
     problems = [x for x in problems if x[2]]
-    print('=== %s: %d files, %d units ===' % (name, len(glob.glob(os.path.join(root,'content','*.json'))), len(seen_ids)))
+    warns = [x for x in warnings if x[2]]
+    nfiles = len(glob.glob(os.path.join(root, 'content', '*.json')))
+    print('=== %s: %d files, %d units ===' % (name, nfiles, len(seen_ids)))
+    if not nfiles:
+        print('  NO CONTENT FOUND at %s — checking nothing' % root)
+        return 1
     if not problems:
         print('  clean')
     else:
         for base, uid, m in problems:
             print('  %-26s %-18s %s' % (base, uid, m))
+    if warns:
+        # Warnings do not fail the run: the length tell is spread across a lot
+        # of already-shipped content, and failing on it would just get muted.
+        print('  --- %d warning(s); worst first%s ---'
+              % (len(warns), '' if SHOW_ALL else ', pass --warnings for all'))
+        ranked = sorted(warns, key=lambda x: -(int(re.search(r'(\d+)%', x[2]).group(1))
+                                               if re.search(r'(\d+)%', x[2]) else 0))
+        for base, uid, m in (ranked if SHOW_ALL else ranked[:10]):
+            print('  %-26s %-18s %s' % (base, uid, m))
     return len(problems)
 
-n = check('/home/user/ad-astra', 'ad-astra')
-n += check('/home/user/wayfinder', 'wayfinder')
+SHOW_ALL = '--warnings' in sys.argv
+
+def locate(name):
+    """Prefer the checkout this script lives beside; fall back to the sandbox
+    path. Without this the hardcoded path simply finds nothing and the run
+    reports 'clean' — a checker that silently checks nothing is worse than
+    no checker."""
+    here = os.path.dirname(os.path.abspath(__file__))          # tools/builders
+    siblings = os.path.dirname(os.path.dirname(os.path.dirname(here)))
+    for cand in (os.path.join(siblings, name), '/home/user/' + name):
+        if os.path.isdir(os.path.join(cand, 'content')):
+            return cand
+    return os.path.join(siblings, name)
+
+n = check(locate('ad-astra'), 'ad-astra')
+n += check(locate('wayfinder'), 'wayfinder')
 sys.exit(1 if n else 0)

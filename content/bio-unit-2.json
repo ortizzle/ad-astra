@@ -1,0 +1,1024 @@
+{
+  "v": 4,
+  "records": {
+    "unit-bio-u2": {
+      "id": "unit-bio-u2",
+      "type": "unit",
+      "updatedAt": 1786903718697,
+      "libv": 1,
+      "classId": "bio",
+      "quarter": 1,
+      "status": "draft",
+      "title": "Biology 8 · Unit 2: Biomolecules",
+      "srcName": "Biology 8, Unit 2 biochemistry outline and the bio-molecules directed-watching sheet (Drive)",
+      "source": "Biology 8, Unit 2: Biomolecules — '09 Biochemistry outline' and '09 bonds water molecules video worksheet' (Drive)",
+      "summary": {
+        "text": "Unit 2 runs from bonds up to enzymes. First, why water behaves the way it does: oxygen holds the shared electrons more tightly, so the molecule is polar and water molecules hydrogen-bond to each other. Everything water is famous for — cohesion, adhesion, capillary action, surface tension, high heat capacity, high heat of vaporization, floating ice, dissolving almost anything charged — comes out of that one fact. Then carbon: four valence electrons, four bonds, backbones of any length. Then the four macromolecules — carbohydrates, lipids, nucleic acids, proteins — with their elements, monomers, polymers and jobs, joined by dehydration synthesis and taken apart by hydrolysis. It closes on enzymes: active site, substrate, activation energy, specificity, reuse, and denaturation.",
+        "from": "source"
+      },
+      "why": {
+        "text": "This is the unit the rest of Biology stands on. Cell membranes, DNA replication, digestion, photosynthesis, why a fever above about 40°C is dangerous — all of it is this chapter applied. Learn the water section properly and half of ecology and physiology stops needing to be memorized separately.",
+        "from": "added"
+      },
+      "objectives": [
+        {
+          "text": "Explain why water is polar and trace each of its properties back to hydrogen bonding.",
+          "from": "source"
+        },
+        {
+          "text": "State the elements, monomer, polymer and function for each of the four macromolecules.",
+          "from": "source"
+        },
+        {
+          "text": "Tell dehydration synthesis and hydrolysis apart by what happens to the water molecule.",
+          "from": "source"
+        },
+        {
+          "text": "Describe how an enzyme lowers activation energy, and what denaturation does to it.",
+          "from": "source"
+        },
+        {
+          "text": "Predict which substances dissolve in water, and read an enzyme's activity curve, from polarity and shape alone.",
+          "from": "added"
+        }
+      ],
+      "parentNote": {
+        "text": "Built from the Unit 2 outline and the three-video directed-watching sheet (Crash Course Water, Biomolecules, Enzymes). The videos themselves were not available, so everything here comes from the outline and the worksheet's own blanks — nothing was invented to fill a video gap. Two things worth knowing. First, the outline's lock-and-key analogy is written enzyme = key, substrate = lock; most textbooks assign those labels the other way round (enzyme = lock, substrate = key). The teacher's version makes the reusability point work, so the unit teaches the mechanism — specific fit, enzyme comes back out unchanged — without hanging anything on which object gets which name. If a quiz asks for the labels, hers are the ones to give. Second, the outline lists lock-and-key while the video sheet asks for induced fit; these are two models of the same event, and the unit says so rather than pretending only one exists. The thing most likely to trip her up is dehydration synthesis versus hydrolysis — the names sound like the opposite of what they do until you watch where the water goes.",
+        "from": "added"
+      },
+      "nextUp": {
+        "text": "Run the cards through the water section before touching the macromolecules — the rest gets easier once polarity is solid.",
+        "minutes": 26,
+        "from": "added"
+      },
+      "cards": [
+        {
+          "id": "c0",
+          "term": "Covalent bond",
+          "from": "source",
+          "def": "**A bond formed when two atoms share a pair of electrons.**\n• Holds the two hydrogens onto the oxygen inside a single water molecule.\n• Strong — it is what makes a molecule a molecule.",
+          "hint": "Co- = together. Co-valent = sharing the valence electrons."
+        },
+        {
+          "id": "c1",
+          "term": "Hydrogen bond",
+          "from": "source",
+          "def": "**A weak attraction between a slightly positive hydrogen on one molecule and a slightly negative atom on another molecule.**\n• Between two different molecules, not inside one.\n• Individually weak, but there are trillions of them, and together they run almost every property of water.",
+          "hint": "Covalent bonds build the molecule; hydrogen bonds stick molecules to each other."
+        },
+        {
+          "id": "c2",
+          "term": "Why water is polar",
+          "from": "source",
+          "def": "**Oxygen pulls the shared electrons closer to itself than hydrogen does, so the electrons spend more time at the oxygen end.**\n• That gives oxygen a partial negative charge (δ−) and the hydrogens a partial positive charge (δ+).\n• The sharing is unequal — that is the entire reason. Water behaves like a tiny weak magnet.",
+          "hint": "Oxygen is greedier for electrons. Every water property below follows from that one sentence.",
+          "eq": "H₂O — δ− at oxygen, δ+ at each hydrogen"
+        },
+        {
+          "id": "c3",
+          "term": "Cohesion",
+          "from": "source",
+          "def": "**The attraction between molecules of the same substance.**\n• Water sticking to water, via hydrogen bonds.\n• Produces water's high surface tension.",
+          "hint": "Co- again: together, with its own kind."
+        },
+        {
+          "id": "c4",
+          "term": "Adhesion",
+          "from": "source",
+          "def": "**The attraction between molecules of different substances.**\n• Water sticking to glass, to soil, to the inside of a plant's tubes.\n• Produces the curved meniscus you read from in a graduated cylinder.",
+          "hint": "Adhesive tape sticks to something else. Adhesion sticks to something else."
+        },
+        {
+          "id": "c5",
+          "term": "Capillary action",
+          "from": "source",
+          "def": "**Water climbing up a narrow tube against gravity.**\n• Needs both: adhesion pulls water up the wall, cohesion drags the rest of the column along behind it.\n• How water gets from a tree's roots to leaves 30 metres up.",
+          "hint": "Two forces, not one. Adhesion climbs, cohesion follows."
+        },
+        {
+          "id": "c6",
+          "term": "Surface tension",
+          "from": "source",
+          "def": "**The surface of water resists being broken.**\n• Molecules at the surface have no water above them, so they hydrogen-bond sideways and downwards more tightly.\n• Strong enough to hold up an insect that is denser than water.",
+          "hint": "It is cohesion, seen from the top."
+        },
+        {
+          "id": "c7",
+          "term": "High heat capacity",
+          "from": "source",
+          "def": "**Water absorbs a lot of heat before its own temperature goes up much.**\n• The energy goes into breaking hydrogen bonds first, not into speeding molecules up.\n• Oceans and lakes therefore act as a thermostat for the planet — and for the organisms in them.",
+          "hint": "Hard to heat, hard to cool. That stability is the biological point."
+        },
+        {
+          "id": "c8",
+          "term": "High heat of vaporization",
+          "from": "source",
+          "def": "**Water absorbs a lot of heat before it will turn into a gas.**\n• Escaping molecules have to break every hydrogen bond holding them, and they take that energy with them.\n• That is exactly why sweat cools you: the heat leaves attached to the water.",
+          "hint": "Evaporation is a heat robbery. The water leaves carrying your energy."
+        },
+        {
+          "id": "c9",
+          "term": "Ice floats",
+          "from": "source",
+          "def": "**Solid water is less dense than liquid water — almost uniquely among substances.**\n• Freezing locks the hydrogen bonds into an open lattice that holds molecules further apart than they sit as a liquid.\n• So lakes and oceans freeze from the top down and never solidify all the way through.",
+          "hint": "Almost everything else contracts when it freezes. Water spreads out."
+        },
+        {
+          "id": "c10",
+          "term": "Water as a solvent",
+          "from": "source",
+          "def": "**Water dissolves anything charged or partially charged.**\n• Dissolves ionic compounds (salt) and polar covalent compounds (sugar) — these are hydrophilic.\n• Will not dissolve non-polar substances like oil — these are hydrophobic.\n• Called the universal solvent, which slightly overstates it: the rule is polarity, not magic.",
+          "hint": "Like dissolves like. Polar water grabs polar things and ignores the rest."
+        },
+        {
+          "id": "c11",
+          "term": "Why carbon is the backbone",
+          "from": "source",
+          "def": "**Carbon has four valence electrons, so it can form four covalent bonds.**\n• It bonds readily to other carbons, so chains can be any length.\n• Chains can branch, close into rings, or carry double bonds — which is why organic molecules come in effectively infinite variety.",
+          "hint": "Four bonds is the sweet spot: enough to branch, not so many it locks up."
+        },
+        {
+          "id": "c12",
+          "term": "Monomer and polymer",
+          "from": "source",
+          "def": "**A monomer is a single building-block molecule; a polymer is many monomers covalently bonded into one large molecule.**\n• Mono- = one, poly- = many.\n• Every macromolecule in this unit is a polymer, except lipids.",
+          "hint": "Bead and necklace."
+        },
+        {
+          "id": "c13",
+          "term": "Dehydration synthesis",
+          "from": "source",
+          "def": "**Joins two monomers by removing a water molecule.**\n• Also called condensation. Enzymes do the removing.\n• Dehydration = losing water. Synthesis = building. Building costs you one water per bond.",
+          "hint": "You lose water and gain a bond."
+        },
+        {
+          "id": "c14",
+          "term": "Hydrolysis",
+          "from": "source",
+          "def": "**Breaks a monomer off a polymer by using a water molecule.**\n• Hydro = water, lysis = splitting. Water is the tool that does the splitting.\n• This is what digestion is, chemically.",
+          "hint": "Hydrolysis spends a water; dehydration synthesis produces one. Exact opposites."
+        },
+        {
+          "id": "c15",
+          "term": "Carbohydrates",
+          "from": "source",
+          "def": "**Sugars and polymers of sugars — the body's usable energy.**\n• Elements: C, H, O in a 1:2:1 ratio. Names usually end in -ose.\n• Monomer: monosaccharide (simple sugar). Polymer: polysaccharide.\n• Short-term energy: glucose. Long-term storage: starch in plants, glycogen in animals.\n• Structure: cellulose in plant cell walls, chitin in fungi and arthropod exoskeletons.",
+          "hint": "Four polysaccharides, two jobs: starch/glycogen store, cellulose/chitin build.",
+          "eq": "C₆H₁₂O₆   (C : H : O = 1 : 2 : 1)"
+        },
+        {
+          "id": "c16",
+          "term": "Lipids",
+          "from": "source",
+          "def": "**Non-polar, hydrophobic macromolecules — the densest energy store there is.**\n• Elements: mostly C and H (hydrocarbons).\n• No true monomer. Components include fatty acids, glycerol and phosphate.\n• Four types: triglycerides (long-term energy), phospholipids (membranes), steroids (hormones), waxes (waterproofing).",
+          "hint": "The odd one out — the only macromolecule with no real monomer."
+        },
+        {
+          "id": "c17",
+          "term": "Saturated vs unsaturated",
+          "from": "source",
+          "def": "**Saturated fatty acid chains have no double bonds between carbons; unsaturated chains have at least one.**\n• Saturated = every carbon is holding all the hydrogens it can. Full up.\n• A double bond puts a kink in the chain, which is why unsaturated fats do not pack tightly and stay liquid.",
+          "hint": "Saturated = saturated with hydrogen, no room left."
+        },
+        {
+          "id": "c18",
+          "term": "Phospholipids",
+          "from": "source",
+          "def": "**The main component of every cell membrane.**\n• A phosphate head that is polar and water-loving, and fatty acid tails that are non-polar and water-fearing.\n• Put them in water and they arrange themselves into a bilayer — tails tucked inwards, heads facing the water on both sides.",
+          "hint": "One molecule, two personalities. The membrane assembles itself because of that split."
+        },
+        {
+          "id": "c19",
+          "term": "Nucleic acids",
+          "from": "source",
+          "def": "**Store and transmit hereditary information, and carry the instructions for making proteins.**\n• Elements: C, H, O, N and P.\n• Monomer: a nucleotide — a 5-carbon sugar, a phosphate group, and a nitrogenous base.\n• A sugar-phosphate backbone holds the bases in order along the strand.",
+          "hint": "Phosphorus is the giveaway element — of the four macromolecules, only nucleic acids carry it."
+        },
+        {
+          "id": "c20",
+          "term": "DNA vs RNA",
+          "from": "source",
+          "def": "**DNA: deoxyribose sugar, bases A T C G, double-stranded.**\n• RNA: ribose sugar, bases A U C G, single-stranded.\n• The two differences to hold on to: the sugar, and U replacing T.",
+          "hint": "U for RNA — the letter that only ever shows up in the single-stranded one."
+        },
+        {
+          "id": "c21",
+          "term": "Proteins",
+          "from": "source",
+          "def": "**Polymers of amino acids — the molecule that does the most different jobs.**\n• Elements: C, H, O, N and S. Also called polypeptides.\n• Jobs: enzymes, transport, defence, communication, structure, movement.\n• They fold into 3-D shapes determined by their amino acid sequence, and the shape determines the function.",
+          "hint": "Sequence decides shape; shape decides job. Break the shape and you break the job."
+        },
+        {
+          "id": "c22",
+          "term": "Enzyme, substrate, active site",
+          "from": "source",
+          "def": "**An enzyme is a protein that speeds up a chemical reaction.**\n• The reactants it works on are called substrates.\n• The active site is the specific location where only a matching substrate can physically bind.\n• Each enzyme catalyses one type of substrate — but it is reusable, so it does it over and over.",
+          "hint": "Enzyme, substrate, active site: the worker, the material, the workbench."
+        },
+        {
+          "id": "c23",
+          "term": "Activation energy",
+          "from": "source",
+          "def": "**Enzymes speed reactions up by lowering the activation energy.**\n• Every biological reaction needs an energy input to get started.\n• The enzyme lowers that starting cost, so the reaction goes far faster at body temperature.\n• It does not change what the reaction produces — only how easily it begins.",
+          "hint": "The enzyme lowers the hurdle. It does not move the finish line."
+        },
+        {
+          "id": "c24",
+          "term": "Lock and key, and induced fit",
+          "from": "source",
+          "def": "**Two models of the same binding event — the fit is specific, and the enzyme survives it.**\n• Lock and key, as the Unit 2 outline puts it: the enzyme acts like a key, the substrate like a lock. One key opens that lock over and over, but only that type of lock.\n• Induced fit, from the video sheet: when the substrate binds, the active site changes shape slightly to grip it.\n• Both make the same two points — specificity, and reuse.",
+          "hint": "Which object is called the lock varies between books. What never varies: one enzyme, one substrate type, unlimited repeats."
+        },
+        {
+          "id": "c25",
+          "term": "Denaturation",
+          "from": "source",
+          "def": "**The unfolding of a protein, causing it to lose its shape — and therefore its function.**\n• Caused by changes in temperature, pH, or salt concentration.\n• Because shape determines function, an unfolded enzyme simply stops working.\n• A frying egg is this happening in front of you.",
+          "hint": "Nothing is broken chemically — it is just the wrong shape now. That is enough.",
+          "graph": {
+            "w": [
+              0,
+              60,
+              0,
+              110
+            ],
+            "gx": 10,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    10,
+                    10
+                  ],
+                  [
+                    20,
+                    28
+                  ],
+                  [
+                    30,
+                    62
+                  ],
+                  [
+                    35,
+                    88
+                  ],
+                  [
+                    37,
+                    100
+                  ],
+                  [
+                    40,
+                    92
+                  ],
+                  [
+                    43,
+                    60
+                  ],
+                  [
+                    46,
+                    25
+                  ],
+                  [
+                    48,
+                    8
+                  ],
+                  [
+                    50,
+                    0
+                  ],
+                  [
+                    60,
+                    0
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 37,
+                "y": 100,
+                "label": "optimum"
+              }
+            ],
+            "xl": "Temperature (°C)",
+            "yl": "Enzyme activity (%)"
+          }
+        },
+        {
+          "id": "c26",
+          "term": "How enzymes are named",
+          "from": "source",
+          "def": "**Take what it acts on, and end it in -ase.**\n• Lactase acts on lactose. Lipase acts on lipids. Protease acts on protein.\n• So an unfamiliar -ase name usually tells you its substrate for free.",
+          "hint": "-ose is a sugar, -ase is the enzyme that eats it."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q0",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "Inside a single molecule of H₂O, the hydrogen atoms are attached to the oxygen by which kind of bond?",
+          "opts": [
+            "Covalent bonds",
+            "Ionic bonds",
+            "Hydrogen bonds",
+            "Peptide bonds"
+          ],
+          "ans": 0,
+          "hint": "Hydrogen bonds happen between molecules, not inside one.",
+          "steps": [
+            "Ask where the bond sits: inside one molecule, or between two of them.",
+            "Inside a water molecule the oxygen and hydrogens share electrons, which is a covalent bond.",
+            "Hydrogen bonds are the weaker attractions holding separate water molecules to each other.",
+            "So the bond inside H₂O is covalent."
+          ],
+          "ex": {
+            "main": "**Covalent — the atoms share electrons.** Hydrogen bonds are the weak attractions between separate water molecules. Getting these two the right way round is the foundation of the whole water section.",
+            "tip": "Inside the molecule: covalent. Between molecules: hydrogen."
+          }
+        },
+        {
+          "id": "q1",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "What is the monomer of a carbohydrate?",
+          "opts": [
+            "An amino acid",
+            "A monosaccharide",
+            "A nucleotide",
+            "A glycerol molecule"
+          ],
+          "ans": 1,
+          "hint": "Mono- = one. One sugar.",
+          "steps": [
+            "A monomer is the single building block that polymers are made from.",
+            "Carbohydrates are sugars, so their building block is a single sugar.",
+            "A single sugar is a monosaccharide; many of them bonded together make a polysaccharide.",
+            "So the monomer is a monosaccharide."
+          ],
+          "ex": {
+            "main": "**A monosaccharide — a simple sugar.** Glucose is the example to have ready. Amino acids build proteins, nucleotides build nucleic acids, and glycerol is a lipid component, not a monomer.",
+            "tip": "Three monomers to know, plus lipids, which have none."
+          }
+        },
+        {
+          "id": "q2",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "Which set of elements makes up nucleic acids?",
+          "opts": [
+            "C, H and O only",
+            "C, H, O, N and S",
+            "C and H only",
+            "C, H, O, N and P"
+          ],
+          "ans": 3,
+          "hint": "One element here appears in no other macromolecule on this list.",
+          "steps": [
+            "Nucleic acids are built from nucleotides, and every nucleotide carries a phosphate group.",
+            "Phosphate means phosphorus, so P must be in the set.",
+            "Only one set includes P: C, H, O, N and P.",
+            "For contrast: proteins add S instead, carbohydrates are C, H, O, and lipids are mostly C and H."
+          ],
+          "ex": {
+            "main": "**C, H, O, N and P.** Phosphorus is the tell — it comes from the phosphate group in every nucleotide.",
+            "tip": "Learn the elements as four contrasts, not four separate lists. The differences are what get tested."
+          }
+        },
+        {
+          "id": "q3",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "Which set of bases belongs to DNA?",
+          "opts": [
+            "A, U, C, G",
+            "A, T, C, U",
+            "G, C, U, T",
+            "A, T, C, G"
+          ],
+          "ans": 3,
+          "hint": "One letter belongs to RNA and nothing else.",
+          "steps": [
+            "DNA and RNA share A, C and G; the fourth base is what separates them.",
+            "DNA uses thymine (T); RNA replaces it with uracil (U).",
+            "So a set containing U cannot be DNA.",
+            "The DNA set is A, T, C, G."
+          ],
+          "ex": {
+            "main": "**A, T, C, G.** RNA swaps thymine for uracil, giving A, U, C, G. If you see a U, you are looking at RNA.",
+            "tip": "Two differences worth memorising: DNA has deoxyribose and T; RNA has ribose and U."
+          }
+        },
+        {
+          "id": "q4",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "Enzyme names usually end in which suffix?",
+          "opts": [
+            "-ose",
+            "-ase",
+            "-ide",
+            "-yl"
+          ],
+          "ans": 1,
+          "hint": "Lactase, lipase, protease.",
+          "steps": [
+            "Recall a few enzyme names: lactase, lipase, protease, amylase.",
+            "Every one of them ends the same way, in -ase.",
+            "Note the near-miss: -ose marks a sugar, as in glucose and lactose.",
+            "So enzymes end in -ase."
+          ],
+          "ex": {
+            "main": "**-ase.** The front of the name is usually the substrate, so lipase acts on lipids and protease acts on protein. Meanwhile -ose means a sugar.",
+            "tip": "A free gift on tests: an unfamiliar -ase name still tells you what it works on."
+          }
+        },
+        {
+          "id": "q5",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "How do plants store sugar for the long term, and how do animals?",
+          "opts": [
+            "Glycogen in plants, starch in animals",
+            "Cellulose in plants, chitin in animals",
+            "Starch in plants, glycogen in animals",
+            "Glucose in both plants and animals"
+          ],
+          "ans": 2,
+          "hint": "Cellulose and chitin are the structural pair, not the storage pair.",
+          "steps": [
+            "Sort the four polysaccharides by job first: two store energy, two build structures.",
+            "Cellulose and chitin are structural, so they are not the answer to a storage question.",
+            "That leaves starch and glycogen: starch is the plant store, glycogen the animal store.",
+            "Glucose is the short-term monomer, not long-term storage."
+          ],
+          "ex": {
+            "main": "**Starch in plants, glycogen in animals.** All four are polysaccharides, but they split into two jobs: starch and glycogen store energy, cellulose and chitin build structures.",
+            "tip": "Sort by job, then by organism. Two questions instead of four facts."
+          }
+        },
+        {
+          "id": "q6",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "What does it mean to say a protein has been denatured?",
+          "opts": [
+            "It has been broken into individual amino acids",
+            "It has doubled in size and lost solubility",
+            "It has bonded permanently to its substrate",
+            "It has unfolded and lost its working shape"
+          ],
+          "ans": 3,
+          "hint": "Think about what a frying egg is doing.",
+          "steps": [
+            "Denaturation changes a protein's shape, not its chemical bonds between amino acids.",
+            "The chain is still intact — it has simply unfolded.",
+            "Since shape determines function, an unfolded protein stops working.",
+            "Breaking it into amino acids would be hydrolysis, which is a different process."
+          ],
+          "ex": {
+            "main": "**It unfolded and lost its shape.** Nothing was chemically cut apart — but shape determines function, so a protein in the wrong shape simply stops doing its job. Heat, pH and salt concentration all cause it.",
+            "tip": "Denatured is not the same as digested. One is a shape problem, the other is hydrolysis."
+          }
+        },
+        {
+          "id": "q7",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "A water strider stands on a pond without sinking, even though it is denser than water. Which property is holding it up?",
+          "opts": [
+            "Adhesion between its legs and the water",
+            "Water's high heat capacity at the surface",
+            "Surface tension, caused by cohesion",
+            "Water's low density in its solid form"
+          ],
+          "ans": 2,
+          "hint": "What is special about the molecules right at the surface?",
+          "steps": [
+            "The insect is denser than water, so buoyancy alone cannot be holding it up — something at the surface is.",
+            "Surface molecules have no water above them, so they hydrogen-bond harder sideways and downwards.",
+            "That creates a skin that resists being pierced: surface tension, which comes from cohesion.",
+            "Adhesion is water sticking to something else, and neither heat capacity nor ice density acts here."
+          ],
+          "ex": {
+            "main": "**Surface tension, which comes from cohesion.** The strider is held up by water gripping itself, not by water gripping the insect.",
+            "tip": "Cohesion is water-to-water; adhesion is water-to-something-else. Decide which one the scene needs."
+          }
+        },
+        {
+          "id": "q8",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Water climbs several centimetres up a very thin glass tube, against gravity. Which combination explains it?",
+          "opts": [
+            "Cohesion alone, molecule pulling molecule",
+            "Adhesion and cohesion working together",
+            "Adhesion alone, water gripping the glass",
+            "Surface tension pushing the column upward"
+          ],
+          "ans": 1,
+          "hint": "Two different forces, doing two different halves of the job.",
+          "steps": [
+            "Something has to pull the leading water upward: adhesion, sticking it to the glass wall.",
+            "Something else has to bring the rest of the column with it: cohesion, water holding onto water.",
+            "Remove either one and the column stops rising, so both are required.",
+            "This combination is capillary action — how trees move water from roots to leaves."
+          ],
+          "ex": {
+            "main": "**Both: adhesion climbs, cohesion follows.** Adhesion sticks water to the glass and pulls it up; cohesion means the molecules behind get towed along.",
+            "tip": "If a water question names one force, check whether the real answer needs two."
+          }
+        },
+        {
+          "id": "q9",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Salad dressing separates into a layer of oil above a layer of vinegar within minutes of shaking. Why will oil not dissolve in a water-based liquid?",
+          "opts": [
+            "Oil is non-polar, so water cannot grip it",
+            "Oil molecules are too large to fit between water",
+            "Oil is less dense, so it always rises to the top",
+            "Oil is hydrophilic and repels the vinegar"
+          ],
+          "ans": 0,
+          "hint": "What does water actually grab onto when it dissolves something?",
+          "steps": [
+            "Water dissolves things by attracting their charges with its own partial charges.",
+            "Oil is non-polar, so it carries no charge for water to attract.",
+            "With nothing to grip, the two never mix, regardless of how hard you shake.",
+            "Oil being less dense is true, but it explains which layer ends up on top, not why they separate at all."
+          ],
+          "ex": {
+            "main": "**Oil is non-polar — hydrophobic — so there is no charge for water to interact with.** Water dissolves ionic and polar covalent substances because its partial charges attract theirs; oil offers nothing to attract.",
+            "tip": "Watch for answers that are true statements but explain the wrong thing."
+          }
+        },
+        {
+          "id": "q10",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "You step out of a pool and immediately feel cold, even though the air is warm. Which property of water is doing this to you?",
+          "opts": [
+            "High heat capacity, which resists temperature change",
+            "Cohesion between the water molecules on your skin",
+            "High heat of vaporization, as the water evaporates",
+            "Water's low density in its solid form"
+          ],
+          "ans": 2,
+          "hint": "The water is leaving. What is it taking with it?",
+          "steps": [
+            "Water on your skin is evaporating — changing from liquid to gas.",
+            "To escape, each molecule must break every hydrogen bond holding it, which costs energy.",
+            "That energy is taken from your skin, so you lose heat and feel cold.",
+            "This is water's high heat of vaporization; sweating is the same mechanism run deliberately."
+          ],
+          "ex": {
+            "main": "**High heat of vaporization.** The escaping water absorbs energy from you to break its hydrogen bonds, and carries that heat away.",
+            "tip": "Heat capacity resists a temperature change. Heat of vaporization is the cost of becoming gas. Different questions."
+          }
+        },
+        {
+          "id": "q11",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Two glucose monomers are joined into a larger molecule, and a single molecule of water is released. What is this reaction called?",
+          "opts": [
+            "Hydrolysis of the bond",
+            "Dehydration synthesis",
+            "Protein denaturation",
+            "Capillary action"
+          ],
+          "ans": 1,
+          "hint": "Follow the water. Is it being produced or consumed?",
+          "steps": [
+            "Track the water: here it is released, not used up.",
+            "Losing water is dehydration; building a bigger molecule is synthesis.",
+            "So joining monomers while releasing water is dehydration synthesis.",
+            "Hydrolysis is the reverse — it spends a water molecule to break a bond."
+          ],
+          "ex": {
+            "main": "**Dehydration synthesis.** You give up one water molecule per bond you make.",
+            "tip": "Never memorise these two by name. Ask one question: is water coming out, or going in?"
+          }
+        },
+        {
+          "id": "q12",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Which macromolecule has a water-loving phosphate head and water-fearing fatty acid tails, and forms the bilayer of every cell membrane?",
+          "opts": [
+            "A phospholipid",
+            "A triglyceride",
+            "A polysaccharide",
+            "A steroid"
+          ],
+          "ans": 0,
+          "hint": "The name tells you both halves of the molecule.",
+          "steps": [
+            "The molecule described has two halves that behave oppositely towards water.",
+            "A phosphate head is polar and a fatty acid tail is non-polar — that is a phospholipid.",
+            "In water the tails hide inward and the heads face outward, forming a bilayer by themselves.",
+            "Triglycerides store energy, steroids signal, and polysaccharides are carbohydrates."
+          ],
+          "ex": {
+            "main": "**A phospholipid.** The split personality is the point: dropped into water, the membrane assembles itself with no help.",
+            "tip": "Membranes are not built so much as arranged. Polarity does the work."
+          }
+        },
+        {
+          "id": "q13",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "The enzyme lactase acts on which substrate?",
+          "opts": [
+            "Lactose",
+            "Starch",
+            "Protein",
+            "Lipids"
+          ],
+          "ans": 0,
+          "hint": "Change the ending and read it again.",
+          "steps": [
+            "Enzyme names are usually the substrate with -ase on the end.",
+            "Strip -ase from lactase and you get lact-, which points to lactose.",
+            "Lactose is the sugar in milk, so lactase digests milk sugar.",
+            "Starch, protein and lipids belong to amylase, protease and lipase."
+          ],
+          "ex": {
+            "main": "**Lactose, the sugar in milk.** People who are lactose intolerant do not make enough of this enzyme, so the sugar goes undigested.",
+            "tip": "Lipase → lipids. Protease → protein. The naming rule does real work for you."
+          }
+        },
+        {
+          "id": "q14",
+          "lv": 3,
+          "kind": "mc",
+          "from": "added",
+          "q": "The graph shown plots an enzyme's activity against temperature. Activity climbs gradually to a peak near 37°C, then collapses to zero within about ten degrees. Why is the fall so much steeper than the rise?",
+          "opts": [
+            "Above the optimum the enzyme is used up in its reactions",
+            "Heat denatures the enzyme; cold only slows collisions",
+            "Below the optimum the enzyme denatures and cannot recover",
+            "The substrate evaporates at temperatures above 40°C"
+          ],
+          "ans": 1,
+          "hint": "One side of the peak is a temporary slowdown. The other side is permanent damage.",
+          "steps": [
+            "Read the left side of the peak: activity is low but rising steadily as temperature climbs.",
+            "That side is limited by how often molecules collide — warm it up and full activity returns, so the enzyme is undamaged.",
+            "Read the right side: activity falls off a cliff within a few degrees.",
+            "There the protein unfolds — denatures — and since shape is function, the activity is gone for good. Two different mechanisms, so two different slopes."
+          ],
+          "ex": {
+            "main": "**Cold slows the enzyme down; heat destroys it.** Below the optimum, molecules simply collide less often. Above it, the protein unfolds permanently. That asymmetry is why the curve is not a symmetrical hill.",
+            "tip": "When a curve is lopsided, the two sides usually have two different mechanisms. Name both.",
+            "mnemonic": "Cold is a pause. Hot is a delete."
+          },
+          "graph": {
+            "w": [
+              0,
+              60,
+              0,
+              110
+            ],
+            "gx": 10,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    10,
+                    10
+                  ],
+                  [
+                    20,
+                    28
+                  ],
+                  [
+                    30,
+                    62
+                  ],
+                  [
+                    35,
+                    88
+                  ],
+                  [
+                    37,
+                    100
+                  ],
+                  [
+                    40,
+                    92
+                  ],
+                  [
+                    43,
+                    60
+                  ],
+                  [
+                    46,
+                    25
+                  ],
+                  [
+                    48,
+                    8
+                  ],
+                  [
+                    50,
+                    0
+                  ],
+                  [
+                    60,
+                    0
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 37,
+                "y": 100,
+                "label": "optimum"
+              }
+            ],
+            "xl": "Temperature (°C)",
+            "yl": "Enzyme activity (%)"
+          }
+        },
+        {
+          "id": "q15",
+          "lv": 3,
+          "kind": "order",
+          "from": "added",
+          "q": "Using the graph shown, put these four temperatures in order of the enzyme's activity, highest first.",
+          "opts": [
+            "37°C — at the optimum",
+            "30°C — approaching the optimum",
+            "10°C — cold and sluggish",
+            "50°C — past denaturation"
+          ],
+          "ans": 0,
+          "hint": "Read each temperature off the curve. Remember that past the peak the drop is total, not gradual.",
+          "steps": [
+            "Read 37°C first: it sits at the peak, so it is the highest.",
+            "Read 30°C: still climbing, around 60% — second.",
+            "Read 10°C: cold and slow, around 10% — but the enzyme is intact, so activity is low, not zero.",
+            "Read 50°C: the curve has hit the floor because the enzyme has denatured. Zero is lower than sluggish, so it comes last."
+          ],
+          "ex": {
+            "main": "**37 → 30 → 10 → 50.** The order that catches people is the last two: 10°C looks worse than 50°C because it is further from the optimum, but cold only slows an intact enzyme, while 50°C has destroyed it.",
+            "tip": "Distance from the optimum does not rank activity by itself — which side you are on matters more."
+          },
+          "graph": {
+            "w": [
+              0,
+              60,
+              0,
+              110
+            ],
+            "gx": 10,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    10,
+                    10
+                  ],
+                  [
+                    20,
+                    28
+                  ],
+                  [
+                    30,
+                    62
+                  ],
+                  [
+                    35,
+                    88
+                  ],
+                  [
+                    37,
+                    100
+                  ],
+                  [
+                    40,
+                    92
+                  ],
+                  [
+                    43,
+                    60
+                  ],
+                  [
+                    46,
+                    25
+                  ],
+                  [
+                    48,
+                    8
+                  ],
+                  [
+                    50,
+                    0
+                  ],
+                  [
+                    60,
+                    0
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 37,
+                "y": 100,
+                "label": "optimum"
+              }
+            ],
+            "xl": "Temperature (°C)",
+            "yl": "Enzyme activity (%)"
+          }
+        },
+        {
+          "id": "q16",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "A lake in a cold climate freezes over in winter, yet fish survive at the bottom all season. Which property makes that possible, and how?",
+          "opts": [
+            "Ice is denser than water, so it sinks to the lake bed",
+            "Water's high heat of vaporization stops evaporation",
+            "Ice is less dense, so it floats and insulates below",
+            "Cohesion prevents the lake from freezing at all"
+          ],
+          "ans": 2,
+          "hint": "Where does the ice end up, and what does that do for everything below it?",
+          "steps": [
+            "Freezing locks water's hydrogen bonds into an open lattice, holding molecules further apart than in the liquid.",
+            "Less tightly packed means less dense, so the ice floats rather than sinking.",
+            "The floating layer insulates the water underneath from the cold air.",
+            "Counterfactual: if ice sank, each new layer would expose more water and the lake would freeze solid from the bottom up."
+          ],
+          "ex": {
+            "main": "**Ice floats, and the layer it forms insulates the water underneath.** The interesting part of this property is what would happen if water behaved normally — the ecosystem would not survive a winter.",
+            "tip": "When a question asks 'how', give the mechanism and its consequence, not just the property's name."
+          }
+        },
+        {
+          "id": "q17",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "Why can a single enzyme not catalyse many different kinds of reaction?",
+          "opts": [
+            "Its active site fits only one shape of substrate",
+            "It runs out of energy after one type of reaction",
+            "It is consumed by the first reaction it catalyses",
+            "Each enzyme can only be used once per day"
+          ],
+          "ans": 0,
+          "hint": "The limit is physical, not a matter of energy or supply.",
+          "steps": [
+            "Look at where the reaction happens: the active site, a specific three-dimensional pocket.",
+            "A substrate can only react if it physically fits that pocket.",
+            "A differently shaped molecule cannot bind at all, so no reaction occurs — the limit is geometry.",
+            "Note what the limit is not: the enzyme is a catalyst, so it is neither consumed nor drained of energy."
+          ],
+          "ex": {
+            "main": "**The active site only fits one type of substrate.** Specificity is geometric. That is also why the enzyme is not used up: it releases the product and the same site is free again immediately.",
+            "tip": "Two facts that sound related but are separate: specificity comes from shape, reusability from being a catalyst."
+          }
+        },
+        {
+          "id": "q18",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "On a hot afternoon the sand at a beach is painful to walk on while the sea is still cool. Which property explains the difference, and why does it matter to living things?",
+          "opts": [
+            "High heat of vaporization — the sea evaporated its heat",
+            "Cohesion holds the water molecules still and cool",
+            "Water's low density in its solid form",
+            "High heat capacity — water absorbs heat with little warming"
+          ],
+          "ans": 3,
+          "hint": "Both surfaces got the same sunlight. Only one of them changed temperature much.",
+          "steps": [
+            "Both sand and sea received the same energy from the sun, so the difference is in how each responds.",
+            "In water, incoming energy first goes into breaking hydrogen bonds rather than speeding molecules up.",
+            "So water's temperature barely moves while the sand's climbs sharply — that is high heat capacity.",
+            "Biologically it matters because organisms in water, and the water inside your own cells, are buffered against swings that would denature proteins."
+          ],
+          "ex": {
+            "main": "**High heat capacity.** Energy goes into hydrogen bonds before it goes into temperature, so aquatic habitats stay thermally stable.",
+            "tip": "Tie every water property back to a consequence for an organism. That is the form these questions take."
+          }
+        },
+        {
+          "id": "q19",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "Carbon sits at the centre of every organic molecule. Which fact about carbon best explains that, and what does it make possible?",
+          "opts": [
+            "Carbon is the most abundant element on Earth by mass",
+            "Four valence electrons, so four covalent bonds",
+            "Carbon forms hydrogen bonds with other carbon atoms",
+            "Two valence electrons, so it links molecules in pairs"
+          ],
+          "ans": 1,
+          "hint": "Count the bonds, then ask what that many bonds lets you build.",
+          "steps": [
+            "Carbon has four valence electrons, so it can form four covalent bonds at once.",
+            "One bond continues a chain and the spare bonds hang other atoms off it.",
+            "Those spares also allow branches, rings and double bonds, so chains vary endlessly in shape.",
+            "That structural freedom is what gives life effectively infinite molecules to work with."
+          ],
+          "ex": {
+            "main": "**Four valence electrons, so four bonds.** Enough bonding freedom to branch, ring and double up — which is exactly what life needs.",
+            "tip": "The abundance answer is a trap: carbon is not especially abundant on Earth. Its bonding earns it the job."
+          }
+        },
+        {
+          "id": "q20",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "Starch you eat is broken down into individual glucose molecules in your digestive system. Which reaction is that, and what happens to a water molecule at each bond?",
+          "opts": [
+            "Dehydration synthesis — a water molecule is released",
+            "Denaturation — water unfolds the starch chains",
+            "Hydrolysis — a water molecule is used up",
+            "Hydrolysis — a water molecule is released at each bond"
+          ],
+          "ans": 2,
+          "hint": "Two of these name the same reaction. Only one of those gets the water right.",
+          "steps": [
+            "Breaking a polymer into monomers is hydrolysis, so narrow to the options naming it.",
+            "Read the name: hydro = water, lysis = splitting — water is the tool doing the splitting.",
+            "A tool that does the splitting gets used up in the process, not released.",
+            "So digestion of starch is hydrolysis, consuming one water molecule per bond broken."
+          ],
+          "ex": {
+            "main": "**Hydrolysis, and it spends a water molecule per bond.** Digestion is hydrolysis run at industrial scale, with a different enzyme for each kind of bond.",
+            "tip": "When two options share a name and differ on the mechanism, the mechanism is the actual question."
+          }
+        },
+        {
+          "id": "q21",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "A small amount of enzyme converts a very large amount of substrate over the course of an hour. What does this tell you about how enzymes work?",
+          "opts": [
+            "Each enzyme molecule splits in two after reacting",
+            "The enzyme is converted into product with the substrate",
+            "Enzymes multiply while they work through substrate",
+            "Enzymes are catalysts, so each one is reused endlessly"
+          ],
+          "ans": 3,
+          "hint": "If the enzyme were used up, what would the ratio of enzyme to substrate have to be?",
+          "steps": [
+            "If an enzyme were consumed, you would need roughly as much enzyme as substrate.",
+            "The observed ratio is tiny enzyme to enormous substrate, so it cannot be consumed.",
+            "That means each molecule binds, converts, releases the product and starts again.",
+            "Being unchanged by the reaction it speeds up is exactly what a catalyst is."
+          ],
+          "ex": {
+            "main": "**They are catalysts, so they come back out unchanged.** The active site is free again the moment the product leaves, which is why a trace of enzyme processes an enormous quantity of substrate.",
+            "tip": "A tiny catalyst doing enormous work is the signature of every catalysis question. Spot the ratio and you have the answer."
+          }
+        }
+      ]
+    }
+  }
+}
