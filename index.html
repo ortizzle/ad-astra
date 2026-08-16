@@ -189,7 +189,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .step p{margin:0;font-size:14px;line-height:1.5}
 
 .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px;margin-bottom:var(--gap)}
-.card.ac{border-color:var(--ac-25);background:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
+/* background-color, not the shorthand: the gradient's first stop is --ac-8, so
+   the shorthand left the card 8% transparent at its top-left and the starfield
+   showed through behind the eyebrow. Opaque base, same gradient, same look. */
+.card.ac{border-color:var(--ac-25);background-color:var(--surface);
+  background-image:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
 .card.quiet{background:transparent;border-style:dashed}
 .card h2{font-size:23px;margin-bottom:6px}
 .card h3{font-size:18px;margin-bottom:6px}
@@ -607,12 +611,30 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 #app{position:relative;z-index:1}
 .skyfx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 [data-theme="light"] .skyfx{display:none}
-.skyfx .tw{position:absolute;top:0;left:0;width:2px;height:2px;border-radius:50%;background:#fff;
-  box-shadow:44px 130px 0 #fff, 140px 310px 0 #fff, 330px 90px 0 #fff, 255px 520px 0 #fff,
-    64px 660px 0 #fff, 355px 430px 0 #fff, 200px 180px 0 #fff, 20px 400px 0 #fff;
-  opacity:.28;animation:tw 4.8s ease-in-out infinite}
+/* Each star is one box-shadow with a 2px blur, so it reads as a point of light
+   with a soft edge rather than a hard pixel. Three layers at different scales,
+   speeds and phases: the field shimmers instead of pulsing in unison, which is
+   what makes it read as sky. Sized and timed to be noticed at a glance — the
+   first pass was 2px dots fading between .1 and .45, which nobody ever saw. */
+.skyfx .tw{position:absolute;top:0;left:0;width:3px;height:3px;border-radius:50%;background:#fff;
+  box-shadow:
+    44px 130px 2px 0 #fff,  140px 310px 2px 0 #fff, 330px 90px 2px 0 #fff,  255px 520px 2px 0 #fff,
+    64px 660px 2px 0 #fff,  355px 430px 2px 0 #fff, 200px 180px 2px 0 #fff, 20px 400px 2px 0 #fff,
+    290px 250px 2px 0 #fff, 120px 580px 2px 0 #fff, 380px 620px 2px 0 #fff,  8px 240px 2px 0 #fff,
+    170px 470px 2px 0 #fff, 305px 700px 2px 0 #fff;
+  opacity:.6;animation:tw 4.4s ease-in-out infinite}
 .skyfx .t2{transform:translate(105px,55px) scale(.8);animation-duration:6.4s;animation-delay:1.4s}
-@keyframes tw{0%,100%{opacity:.1}50%{opacity:.45}}
+.skyfx .t3{transform:translate(212px,268px) scale(1.15);animation-duration:8.1s;animation-delay:2.9s}
+@keyframes tw{0%,100%{opacity:.3}50%{opacity:1}}
+/* Shooting stars. The head is the bright end of the gradient, so the streak
+   points the way it travels. Two of them on offset cycles — one every ~13s,
+   which is often enough to catch without becoming the thing you watch. */
+.skyfx .shoot{position:absolute;top:12%;left:-14%;width:130px;height:2.5px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35) 55%,#fff);
+  box-shadow:0 0 10px 2px rgba(255,255,255,.45);
+  transform:rotate(13deg);animation:shoot 26s linear infinite}
+.skyfx .s2{top:34%;width:104px;transform:rotate(19deg);animation-duration:26s;animation-delay:13s}
+@keyframes shoot{0%,92%{opacity:0;left:-14%;top:10%}93%{opacity:1}100%{opacity:0;left:114%;top:30%}}
 .skyfx .aur{position:absolute;top:-12%;left:-25%;right:-25%;height:42%;filter:blur(46px);opacity:.14;
   background:linear-gradient(100deg,#19e3b1,#2b6cd4 55%,#19e3b1);
   animation:aur 19s ease-in-out infinite alternate}
@@ -946,7 +968,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 <body>
 
 <!-- The living sky: ambient, dark-mode-only, gone entirely under reduced motion. -->
-<div class="skyfx" aria-hidden="true"><i class="tw"></i><i class="aur"></i></div>
+<div class="skyfx" aria-hidden="true"><i class="tw"></i><i class="tw t2"></i><i class="tw t3"></i><i class="shoot"></i><i class="shoot s2"></i><i class="aur"></i></div>
 
 <div id="app">
   <header>
@@ -1017,7 +1039,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v100 · biomolecules';
+const APP_VERSION = 'v101 · a sky you can see';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 

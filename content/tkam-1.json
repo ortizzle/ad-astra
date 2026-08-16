@@ -4,7 +4,7 @@
     "unit-tkam1": {
       "id": "unit-tkam1",
       "type": "unit",
-      "updatedAt": 1786060800000,
+      "updatedAt": 1786904582490,
       "classId": "english",
       "quarter": 1,
       "status": "draft",
@@ -178,11 +178,11 @@
           "q": "Atticus says this after Scout's disastrous first day of school. What is he actually asking her to do about Miss Caroline?",
           "opts": [
             "Report her to the school board for banning reading",
-            "Imagine the day from Miss Caroline's side — a newcomer who got Maycomb's rules wrong all day too",
-            "Ignore her and keep reading in secret",
-            "Prove her wrong by reading even more at school"
+            "Prove her wrong by reading even more at school",
+            "Imagine the day from Miss Caroline's own side",
+            "Ignore her and keep reading at home in secret"
           ],
-          "ans": 1,
+          "ans": 2,
           "hint": "Whose day was ALSO terrible in that classroom?",
           "steps": [
             "Recall Miss Caroline's day: new in town, humiliated over the Cunningham quarter, alarmed by a cootie, corrected by a six-year-old who reads.",
@@ -303,10 +303,10 @@
           "kind": "mc",
           "q": "Walter Cunningham won't take Miss Caroline's quarter for lunch. Why?",
           "opts": [
-            "He already ate before school",
-            "He is afraid of the other children",
-            "Cunninghams never take what they cannot pay back",
-            "He plans to go home for lunch"
+            "He already ate his lunch before school",
+            "He is afraid of the other children laughing at him",
+            "Cunninghams never take what they can't repay",
+            "He is planning to walk home for lunch"
           ],
           "ans": 2,
           "hint": "Scout tries to explain it: 'He's a Cunningham.'",
@@ -327,12 +327,12 @@
           "kind": "mc",
           "q": "Mr. Cunningham pays Atticus for legal work with stovewood, hickory nuts and turnip greens. What does this arrangement show?",
           "opts": [
-            "Atticus undercharges because the work was easy",
-            "Entailed land leaves the Cunninghams honest but cash-poor — so they pay in what they have",
-            "Atticus prefers goods to money",
-            "The Cunninghams are trying to avoid paying full price"
+            "Atticus undercharges because the work was simple and quick",
+            "The Cunninghams are avoiding paying the full price",
+            "Entailment leaves them cash-poor, so they pay in goods",
+            "Atticus would rather be paid in goods than money"
           ],
-          "ans": 1,
+          "ans": 2,
           "hint": "The word from chapter 2 is 'entailment'.",
           "steps": [
             "The Cunningham problem is entailment: their land is legally tied up, so it can't be sold or borrowed against.",
@@ -352,12 +352,12 @@
           "kind": "mc",
           "q": "Walter pours syrup all over his lunch, Scout objects loudly — and Calpurnia scolds SCOUT, not Walter. What is Calpurnia's rule?",
           "opts": [
-            "Anyone who sets foot in the house as a guest gets treated with respect, full stop",
             "Never waste syrup during a Depression",
-            "Children should be silent at the table",
-            "Company manners only apply to grown-ups"
+            "A guest is treated with respect, whatever he does",
+            "Children should stay silent at the dinner table",
+            "Company manners only apply to grown-up visitors"
           ],
-          "ans": 0,
+          "ans": 1,
           "hint": "Who embarrassed whom?",
           "steps": [
             "Walter's syrup is odd but harmless; Scout's mockery is what actually wounds someone at the table.",
@@ -377,9 +377,9 @@
           "q": "Atticus catches the children play-acting Boo's life story and tells them to stop tormenting that man. What is the real conflict in that scene?",
           "opts": [
             "Whether the game is historically accurate",
-            "The children's entertainment versus a real, living man's dignity",
+            "Their entertainment versus a living man's dignity",
             "Whether games are allowed in the front yard",
-            "Whether Dill is a bad influence"
+            "Whether Dill is a bad influence on Jem and Scout"
           ],
           "ans": 1,
           "hint": "'That man' — Atticus uses three words the children never use about Boo.",
@@ -401,12 +401,12 @@
           "kind": "mc",
           "q": "Among the knothole gifts are two soap figures — carved as a boy and a girl who look like Jem and Scout. What do the carvings tell you about the giver?",
           "opts": [
-            "The giver is a professional artist",
-            "The giver wants to be paid for the gifts",
-            "The giver is mocking them",
-            "The giver watches the children closely and means them nothing but good"
+            "The giver is a trained professional artist",
+            "The giver expects payment for the gifts",
+            "The giver watches them closely and means well",
+            "The giver is quietly mocking the two children"
           ],
-          "ans": 3,
+          "ans": 2,
           "hint": "What would you have to DO, over months, to carve someone from memory?",
           "steps": [
             "Carving likenesses requires long, careful watching — the giver knows these children well.",
@@ -427,7 +427,7 @@
           "q": "When Nathan Radley cements the knothole, he says the tree is dying. Jem checks with Atticus, who says it looks healthy — and that night Jem cries. Why?",
           "opts": [
             "He wanted the tree to be sick so the cement made sense",
-            "He realizes Nathan lied — and deliberately cut off Boo's only way of speaking to them",
+            "Nathan lied, and cut off Boo's only way of speaking",
             "He is afraid Nathan will shoot at them again",
             "He wanted to keep the pocket watch for himself"
           ],
@@ -452,11 +452,11 @@
           "q": "The morning after her house burns down, Miss Maudie is nearly cheerful. What does she say?",
           "opts": [
             "She'll sue whoever started the fire",
-            "She is leaving Maycomb for good",
-            "She always wanted a smaller house and more room for her garden",
-            "She blames the children for the fire"
+            "She wanted a smaller house and a bigger garden",
+            "She is leaving Maycomb for good this time",
+            "She blames the children for starting the fire"
           ],
-          "ans": 2,
+          "ans": 1,
           "hint": "Think azaleas.",
           "steps": [
             "Find her line the next morning: she hated that big old house anyway, and now there's room for more flowers.",
@@ -475,10 +475,10 @@
           "kind": "mc",
           "q": "The blanket in chapter 8 is the strongest evidence yet against the Boo legend. What makes it stronger than the gifts or the mended pants?",
           "opts": [
-            "It was the most expensive item so far",
-            "It happened in public — placed gently, unseen, during a crisis, with no possibility of getting credit",
-            "Atticus saw who did it and said so",
-            "It proves Boo can leave his house"
+            "It was the most expensive item Boo had given",
+            "Kindness in the open, unseen, with no credit",
+            "Atticus saw who did it and said so afterwards",
+            "It proves Boo is able to leave his own house"
           ],
           "ans": 1,
           "hint": "What did the act cost, and what could it earn? Compare that math to a monster's.",
@@ -501,10 +501,10 @@
           "passage": "“… the Radley Place was inhabited by an unknown entity the mere description of whom was enough to make us behave for days on end; a malevolent phantom …”",
           "q": "In this line, 'malevolent' means:",
           "opts": [
-            "Invisible",
-            "Ancient",
-            "Wishing harm; full of ill will",
-            "Silent"
+            "Impossible to see",
+            "Very old indeed",
+            "Wishing harm",
+            "Completely silent"
           ],
           "ans": 2,
           "hint": "Mal- as in malfunction, malice.",
@@ -518,7 +518,8 @@
             "tip": "Vocabulary in novels is rarely neutral — check whether the story agrees with the word it just used."
           }
         }
-      ]
+      ],
+      "libv": 1
     }
   }
 }
