@@ -4,8 +4,8 @@
     "unit-bio-u1b": {
       "id": "unit-bio-u1b",
       "type": "unit",
-      "updatedAt": 1786913027038,
-      "libv": 1,
+      "updatedAt": 1786913435243,
+      "libv": 2,
       "classId": "bio",
       "quarter": 1,
       "status": "draft",
@@ -460,24 +460,78 @@
           "lv": 2,
           "kind": "mc",
           "from": "source",
-          "q": "For that same bird data, which statistic best represents a typical day, and why?",
+          "q": "A week of bird counts runs 15, 16, 9, 87, 18, 14 and 9, giving a mean of 24, a median of 15 and a mode of 9. Which statistic best represents a typical day, and why?",
           "opts": [
             "The mean, because it uses every value",
             "The mode, because it is a real count",
             "The median, because the outlier barely moves it",
-            "The standard deviation, because it is the most precise"
+            "The standard deviation, because it is precise"
           ],
           "ans": 2,
           "hint": "Which one lands closest to what most of the days actually looked like?",
           "steps": [
-            "List what a typical day looked like: counts of 9 to 18.",
-            "The mean of 24 sits above six of the seven days, so it is not typical.",
-            "The median of 15 sits right among them.",
-            "The mode of 9 is the joint-lowest value, so it under-represents the week."
+            "Look at what a typical day was: six of the seven days fall between 9 and 18 birds.",
+            "The mean of 24 sits above six of those seven days, so it is not typical of any of them.",
+            "The median of 15 lands right among them.",
+            "The mode of 9 is the joint-lowest count, so it under-represents the week."
           ],
           "ex": {
             "main": "**The median.** It resists the outlier and lands where most days actually were. The mean is not wrong — it is just answering a different question.",
             "tip": "'Best represents' means closest to typical, not most precise."
+          },
+          "graph": {
+            "w": [
+              1,
+              7,
+              0,
+              95
+            ],
+            "gx": 1,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    2,
+                    16
+                  ],
+                  [
+                    3,
+                    9
+                  ],
+                  [
+                    4,
+                    87
+                  ],
+                  [
+                    5,
+                    18
+                  ],
+                  [
+                    6,
+                    14
+                  ],
+                  [
+                    7,
+                    9
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 4,
+                "y": 87,
+                "label": "Thursday"
+              }
+            ],
+            "xl": "Day of the week",
+            "yl": "Birds counted"
           }
         },
         {
@@ -639,7 +693,7 @@
           "lv": 2,
           "kind": "mc",
           "from": "source",
-          "q": "From the same graph, what happens to the two cell types as CO₂ rises above atmospheric level?",
+          "q": "In the graph shown, what happens to the two cell types as CO₂ rises above the atmospheric level of 0.04%?",
           "opts": [
             "Both grow faster",
             "Both slow down",

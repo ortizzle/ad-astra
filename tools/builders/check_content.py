@@ -10,6 +10,21 @@ POSITIONAL = re.compile(
     r'|\b(all|none|both) of the above\b'
     r'|\boption [A-D]\b', re.I)
 
+# A round serves 5 questions from the unit in shuffled order, so a stem that
+# OPENS by pointing at a neighbour ("The same student then writes…") can reach
+# her with that neighbour nowhere in sight. Chris caught this live: Science
+# Quiz 1 asked about "the same student" as question 4 of 5, and one of its
+# options mentioned a sidewalk that only existed in the question she never saw.
+# Matching only at the start of the stem keeps this precise — an innocent
+# mid-sentence "the same" ("the two 3s have the same value") is not a
+# back-reference and must not be flagged.
+BACKREF = re.compile(
+    r'^\s*(the same|that same|for (that|the) same|from the same'
+    r'|using the same|in the same|with the same)\b', re.I)
+
+# The mirror failure: pointing at an artefact that is not attached.
+SHOWN = re.compile(r'\b(graph|diagram|chart|table)\s+(shown|above|below)\b', re.I)
+
 # How much longer than its nearest rival an option may be before its length
 # gives it away. Shuffling (v64) killed "the answer is always first"; it cannot
 # touch "the answer is always the wordiest", which is just as learnable and
@@ -94,6 +109,16 @@ def check(root, name):
                                 + [str((q.get('ex') or {}).get('main', ''))])
                 m = POSITIONAL.search(blob)
                 P(bool(m), '%s: positional reference %r (options shuffle)' % (tag, m.group(0)) if m else '')
+
+                stem = str(q.get('q', ''))
+                b = BACKREF.match(stem)
+                P(bool(b), '%s: stem opens %r — leans on another question, which '
+                           'a shuffled round may not have served' % (tag, b.group(0).strip())
+                  if b else '')
+                # "the graph shown" is only meaningful if this question carries one
+                s = SHOWN.search(stem) or SHOWN.search(str((q.get('ex') or {}).get('main', '')))
+                P(bool(s) and not q.get('graph'),
+                  '%s: says %r but has no graph attached' % (tag, s.group(0)) if s else '')
                 steps = q.get('steps') or []
                 P(not steps, '%s: no steps (walkthrough)' % tag)
                 P(steps and not (3 <= len(steps) <= 6), '%s: %d steps, want 3-6' % (tag, len(steps)))

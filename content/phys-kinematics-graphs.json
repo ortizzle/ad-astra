@@ -4,8 +4,8 @@
     "unit-phys-graphs": {
       "id": "unit-phys-graphs",
       "type": "unit",
-      "updatedAt": 1786912754431,
-      "libv": 1,
+      "updatedAt": 1786913435244,
+      "libv": 2,
       "classId": "physics",
       "quarter": 1,
       "status": "draft",
@@ -501,7 +501,7 @@
           "lv": 2,
           "kind": "mc",
           "from": "source",
-          "q": "For the same 30-second trip in the graph shown, what is the average speed?",
+          "q": "An object moves out and then returns, as shown in the graph. What is its average speed for the whole 30-second trip?",
           "opts": [
             "0 m/s",
             "1.33 m/s",
@@ -669,7 +669,7 @@
           "lv": 2,
           "kind": "mc",
           "from": "source",
-          "q": "Using the same fit x = 0.8t + 2 (feet and seconds), how long does the car take to reach 30 ft?",
+          "q": "A constant-motion lab gives the fit x = 0.8t + 2, with x in feet and t in seconds. How long does the car take to reach 30 ft?",
           "opts": [
             "24 s",
             "40 s",
@@ -938,9 +938,9 @@
           "hint": "You already know the displacement from the area. Now divide.",
           "steps": [
             "Average velocity is total displacement divided by total time.",
-            "The area under this graph is 600 m, which is the displacement.",
-            "The total time is 40 s.",
-            "600 ÷ 40 = 15 m/s — less than the 20 m/s peak, because the object spent time speeding up and slowing down."
+            "Displacement is the area under the line: a triangle, a rectangle, then a triangle.",
+            "That is ½(10)(20) + (20)(20) + ½(10)(20) = 100 + 400 + 100 = 600 m.",
+            "Divide by the 40 s total: 600 ÷ 40 = 15 m/s, which sits below the 20 m/s cruising speed as it must."
           ],
           "ex": {
             "main": "**15 m/s.** Area gives 600 m, then divide by 40 s. It has to come out below the 20 m/s cruising speed, which is a useful check on the answer.",
