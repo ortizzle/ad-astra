@@ -1,0 +1,988 @@
+{
+  "v": 4,
+  "records": {
+    "unit-bio-u1b": {
+      "id": "unit-bio-u1b",
+      "type": "unit",
+      "updatedAt": 1786913027038,
+      "libv": 1,
+      "classId": "bio",
+      "quarter": 1,
+      "status": "draft",
+      "title": "Biology 8 · Unit 1 Part 2: Data Analysis and Graphing",
+      "srcName": "Experimental Design & Data Analysis unit slides and the graphing practice sheet (Drive)",
+      "source": "Biology 8, Unit 1 — 'G8 Experimental Design 2026-27' slides and '03 graphing practice with grid' (Drive)",
+      "summary": {
+        "text": "The second half of the Unit 1 slides, picking up where the variables section ends. How many levels an independent variable has, and why controlled variables are not the same thing as a control group. Accuracy against reliability — a measurement can be one without the other. Then the statistics: mean, median and mode, what an outlier does to each, why an outlier is never simply deleted, and what a standard deviation is telling you. Finally the graphing rules — independent variable on the x-axis, line graphs for continuous data and bar graphs for discrete, sensible scaling, honest titles, and how to read a value or calculate a rate off a finished graph.",
+        "from": "source"
+      },
+      "why": {
+        "text": "Designing the experiment is half the job; the other half is not fooling yourself with the results. One freak reading can drag a mean somewhere untrue, and the wrong graph can hide the pattern you collected the data to find. These are the moves that decide whether your conclusion is worth anything.",
+        "from": "added"
+      },
+      "objectives": [
+        {
+          "text": "Count the levels of an independent variable, and tell controlled variables from the control group.",
+          "from": "source"
+        },
+        {
+          "text": "Distinguish accuracy from reliability and say which a given result demonstrates.",
+          "from": "source"
+        },
+        {
+          "text": "Calculate mean, median and mode, and say which best represents a data set.",
+          "from": "source"
+        },
+        {
+          "text": "Identify an outlier, explain its effect on the mean, and say why it stays in the data.",
+          "from": "source"
+        },
+        {
+          "text": "Choose the right graph type, set the axes correctly, and read a value or a rate off a graph.",
+          "from": "source"
+        }
+      ],
+      "parentNote": {
+        "text": "This is Part 2 rather than an edit to the existing Unit 1 unit. The two files added to the Biology Unit 1 folder today are a much fuller slide deck than the one the first unit was built from, and roughly half of it is new ground — levels of a variable, accuracy versus reliability, mean/median/mode, outliers, standard deviation, and the graphing rules in detail. Folding it in would have pushed that unit past thirty cards and re-drafted a unit already approved; a companion unit adds the material without disturbing it, and nothing here contradicts what is already there. The graphs are drawn from the slides' own data sets — the bird-count week, the electric bills, and the CO₂ growth experiment from the graphing practice sheet — so the numbers are the teacher's, though the questions asked about them are fresh. I checked the deck's own statistics: mean 113.6, median 114.5 and the bimodal 101/116 for the electric bills are all correct, as are mean 24, median 15 and mode 9 for the bird week. The thing most likely to trip her up is that a controlled variable and a control group are different things with confusingly similar names — the slides flag it explicitly, and so does a card here.",
+        "from": "added"
+      },
+      "nextUp": {
+        "text": "Run the cards, then the quiz. The outlier questions are the ones worth slowing down on — they are where a wrong answer is still a plausible number.",
+        "minutes": 25,
+        "from": "added"
+      },
+      "cards": [
+        {
+          "id": "c0",
+          "term": "Levels of the independent variable",
+          "from": "source",
+          "def": "**How many different values of the independent variable you test.**\n• Testing ages 5, 10 and 15 is one variable with three levels.\n• Testing 5, 7, 9, 11, 13 and 15 is still one variable — now with six levels.\n• More levels means a finer picture of the pattern.",
+          "hint": "One variable, many levels. Changing the number of levels is not the same as adding a second variable."
+        },
+        {
+          "id": "c1",
+          "term": "Controlled variables are not the control group",
+          "from": "source",
+          "def": "**Controlled variables are the things kept the same; the control group is the group that gets no treatment.**\n• Controlled variables: same quiz, same room, same time of day.\n• Control group: the class that had no music playing at all.\n• The names are almost identical and the meanings are not. The slides flag this on purpose.",
+          "hint": "Controlled variables are conditions. A control group is a group of subjects."
+        },
+        {
+          "id": "c2",
+          "term": "The control group is a level too",
+          "from": "source",
+          "def": "**The untreated group counts as one level of the independent variable.**\n• Walking, running, weights, yoga and no exercise is five levels, not four.\n• It is the level that shows you what normal looks like.",
+          "hint": "Doing nothing is a treatment condition. Count it."
+        },
+        {
+          "id": "c3",
+          "term": "Accuracy",
+          "from": "source",
+          "def": "**How close a result is to the known, accepted value.**\n• The scale reads 3.5 kg and the object really is 3.5 kg — that is accurate.\n• Accuracy needs a true value to compare against.",
+          "hint": "Accurate = correct. It is about hitting the target."
+        },
+        {
+          "id": "c4",
+          "term": "Reliability",
+          "from": "source",
+          "def": "**How consistent a result is when the measurement is repeated.**\n• Weigh the object five times on five scales and get 3.5 kg every time — that is reliable.\n• Reliability needs repetition, not a true value.",
+          "hint": "Reliable = repeatable. It is about grouping tightly, wherever you hit."
+        },
+        {
+          "id": "c5",
+          "term": "Accurate and reliable are independent",
+          "from": "added",
+          "def": "**A measurement can be one without the other.**\n• Five scales all reading 4.0 kg for a 3.5 kg object: reliable, but not accurate.\n• Readings scattered around 3.5 kg that average out right: accurate on average, but not reliable.\n• A good experiment wants both.",
+          "hint": "Consistently wrong is still consistent. That is why reliability alone proves nothing."
+        },
+        {
+          "id": "c6",
+          "term": "Mean",
+          "from": "source",
+          "def": "**The average — add every value, then divide by how many there are.**\n• The most commonly used summary of a data set.\n• It uses every value, which is its strength and also its weakness.",
+          "hint": "Every number pulls on the mean, including the strange ones."
+        },
+        {
+          "id": "c7",
+          "term": "Median",
+          "from": "source",
+          "def": "**The middle value once the numbers are put in order.**\n• Odd count: the middle number. Even count: the average of the middle two.\n• You must sort the list first — this is the step people skip.",
+          "hint": "Median = middle. Sort before you look."
+        },
+        {
+          "id": "c8",
+          "term": "Mode",
+          "from": "source",
+          "def": "**The value that appears most often.**\n• A data set can have no mode at all, or more than one.\n• The electric-bill set has two: $101 and $116 both appear twice.",
+          "hint": "Mode = most. It is the only one of the three that must be a value actually in the list."
+        },
+        {
+          "id": "c9",
+          "term": "Outlier",
+          "from": "source",
+          "def": "**A data point that sits far away from all the others.**\n• 87 birds on Thursday when every other day is between 9 and 18.\n• It is a signal to investigate, not a mistake to assume.",
+          "hint": "An outlier is a question, not an error."
+        },
+        {
+          "id": "c10",
+          "term": "What an outlier does to each statistic",
+          "from": "source",
+          "def": "**It drags the mean and leaves the median almost untouched.**\n• Bird week: mean 24, median 15 — the mean is higher than six of the seven days.\n• The median only cares about position in the order, so one extreme value barely moves it.",
+          "hint": "When mean and median disagree sharply, suspect an outlier."
+        },
+        {
+          "id": "c11",
+          "term": "Never just delete an outlier",
+          "from": "source",
+          "def": "**An outlier may carry the most important information in the data set.**\n• The 87-bird Thursday is probably the migration arriving — the very thing being studied.\n• Removing it because it is inconvenient would delete the discovery.",
+          "hint": "Investigate it, explain it, keep it. Deleting data to tidy a graph is not science."
+        },
+        {
+          "id": "c12",
+          "term": "Standard deviation",
+          "from": "source",
+          "def": "**A number for how spread out the data is around the mean.**\n• Low standard deviation: values cluster tightly. High: they are scattered.\n• Two data sets can share a mean of 80 and have standard deviations of 3.4 and 17.2 — very different stories.",
+          "hint": "The mean says where the middle is; the standard deviation says how much to trust it."
+        },
+        {
+          "id": "c13",
+          "term": "Laying out a data table",
+          "from": "source",
+          "def": "**Independent variable on the left, dependent variable in the columns beside it.**\n• Units go in the column headings, not repeated in every cell.\n• Be consistent — pick one place for the units and stay there.",
+          "hint": "The table should read left to right in the same order as the experiment: what you changed, then what happened."
+        },
+        {
+          "id": "c14",
+          "term": "Which variable goes on which axis",
+          "from": "source",
+          "def": "**Independent variable on the x-axis, dependent variable on the y-axis.**\n• The thing you chose goes along the bottom; the thing you measured goes up the side.\n• Getting this backwards makes an otherwise perfect graph unreadable.",
+          "hint": "x is what you did, y is what happened."
+        },
+        {
+          "id": "c15",
+          "term": "Line graph or bar graph",
+          "from": "source",
+          "def": "**Line for continuous data, bar for discrete categories.**\n• The test: could there be a real value BETWEEN two of your x-values?\n• Speed each minute of one drive — yes, 3.5 minutes exists, so line graph.\n• Average speed of five separate drives — no, there is no drive 3.5, so bar graph.",
+          "hint": "Ask whether the space between two points means anything. If it does, join them."
+        },
+        {
+          "id": "c16",
+          "term": "Scaling a graph",
+          "from": "source",
+          "def": "**Every gridline must step up by the same amount.**\n• 0, 20, 40, 60 is a scale. 0, 20, 50, 60 is not.\n• Uneven spacing distorts the shape of the data, which is the one thing a graph exists to show honestly.",
+          "hint": "A constant step per line, chosen so the data fills most of the space."
+        },
+        {
+          "id": "c17",
+          "term": "A graph title that works",
+          "from": "source",
+          "def": "**Descriptive enough for someone who was not there to understand it.**\n• 'Time versus speed' is not enough.\n• 'Time in seconds required to complete a 100-piece puzzle, by grade' is.\n• Check above AND below the graph — titles are placed in both.",
+          "hint": "If the title could sit on twenty different graphs, it is too vague."
+        },
+        {
+          "id": "c18",
+          "term": "Reading a graph in the right order",
+          "from": "source",
+          "def": "**Title first, then the axes and their units, then the data.**\n• Almost everyone looks at the line first, and that is how units get missed.\n• Use a straight edge when estimating a value between gridlines.",
+          "hint": "Three steps before you read a single data point."
+        },
+        {
+          "id": "c19",
+          "term": "Getting a rate off a graph",
+          "from": "source",
+          "def": "**Change in the y-value divided by the change in the x-value.**\n• Heart rate goes from 98 to 121 bpm between minutes 2 and 4: a change of 23 bpm.\n• Over 2 minutes that is 11.5 bpm per minute.\n• The word 'per' is the instruction to divide.",
+          "hint": "Overall change and change per unit are two different questions. Read which one is being asked."
+        },
+        {
+          "id": "c20",
+          "term": "Line of best fit, again",
+          "from": "source",
+          "def": "**A trend line should not be forced through your first and last data points.**\n• It represents the whole set, not the two points that happen to sit at the ends.\n• On graph paper: ruler, pencil, no markers.",
+          "hint": "If your line hits the first and last points exactly, you drew a connector, not a fit."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q0",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "What is the median of this data set: 9, 9, 14, 15, 16, 18, 87?",
+          "opts": [
+            "24",
+            "15",
+            "9",
+            "87"
+          ],
+          "ans": 1,
+          "hint": "Seven values, already in order. Which position is the middle?",
+          "steps": [
+            "The list is already sorted from smallest to largest.",
+            "There are seven values, so the middle one is the fourth.",
+            "Counting in: 9, 9, 14, then 15 is the fourth value.",
+            "So the median is 15. The 24 is this set's mean and the 9 is its mode."
+          ],
+          "ex": {
+            "main": "**15.** With an odd count the median is simply the middle value once sorted. Here the mean is 24 and the mode is 9 — three different answers from the same seven numbers.",
+            "tip": "Sort first, every time. An unsorted list makes the median look like whatever sits in the middle of the page."
+          }
+        },
+        {
+          "id": "q1",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "A set of values has no number appearing more than once. What is its mode?",
+          "opts": [
+            "Zero",
+            "The mean instead",
+            "There is no mode",
+            "The smallest value"
+          ],
+          "ans": 2,
+          "hint": "Mode means most frequent. What if nothing repeats?",
+          "steps": [
+            "The mode is the value that occurs most often.",
+            "If every value appears exactly once, none occurs more often than another.",
+            "So the set simply has no mode — that is a valid outcome.",
+            "A mode of zero would mean the number 0 appeared most, which is a different claim."
+          ],
+          "ex": {
+            "main": "**There is no mode.** Not every data set has one, and some have several — the electric-bill set is bimodal at $101 and $116.",
+            "tip": "No mode is an answer. Do not force one by rounding values until something repeats."
+          }
+        },
+        {
+          "id": "q2",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "Which variable belongs on the x-axis of a graph?",
+          "opts": [
+            "The independent variable",
+            "The dependent variable",
+            "Whichever has larger numbers",
+            "The controlled variable"
+          ],
+          "ans": 0,
+          "hint": "Along the bottom goes the thing you chose to change.",
+          "steps": [
+            "The x-axis is the horizontal one, along the bottom.",
+            "By convention it carries the variable the experimenter set deliberately.",
+            "That is the independent variable.",
+            "The dependent variable — the thing measured — goes up the y-axis."
+          ],
+          "ex": {
+            "main": "**The independent variable.** x is what you did, y is what happened. Controlled variables do not go on either axis; they are held constant.",
+            "tip": "If a graph looks strange, check the axes before you doubt the data."
+          }
+        },
+        {
+          "id": "q3",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "A scale reads 3.5 kg five separate times for an object known to weigh 3.5 kg. This demonstrates:",
+          "opts": [
+            "Reliability only — the readings simply agree",
+            "Accuracy only — it matches the known value",
+            "Both accuracy and reliability at once",
+            "Neither, since one scale was used repeatedly"
+          ],
+          "ans": 2,
+          "hint": "Two different claims are being made here — check for each one separately.",
+          "steps": [
+            "Reliability is consistency across repeats: five identical readings, so yes.",
+            "Accuracy is closeness to the accepted value: 3.5 kg matches the known 3.5 kg, so yes.",
+            "Both conditions are satisfied at once.",
+            "Had it read 4.0 kg five times, it would be reliable but not accurate."
+          ],
+          "ex": {
+            "main": "**Both.** The readings agree with each other (reliable) and with the true value (accurate). Testing each separately is the habit worth building.",
+            "tip": "Consistently wrong is still consistent — which is why reliability alone never proves a result."
+          }
+        },
+        {
+          "id": "q4",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "An experiment tests plant growth under white, red, yellow, green, blue and purple light. How many levels does the independent variable have?",
+          "opts": [
+            "One",
+            "Two",
+            "Six",
+            "Thirty"
+          ],
+          "ans": 2,
+          "hint": "One variable is being changed. Count how many versions of it were tested.",
+          "steps": [
+            "The independent variable is the colour of the light — one variable.",
+            "Count the different values tested: white, red, yellow, green, blue, purple.",
+            "That is six different settings, so six levels.",
+            "It is still one variable, no matter how many levels it has."
+          ],
+          "ex": {
+            "main": "**Six.** One variable, six levels. Adding levels sharpens the picture; adding a second variable would ruin the experiment.",
+            "tip": "Levels answer 'how many versions', not 'how many variables'."
+          }
+        },
+        {
+          "id": "q5",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "What does a standard deviation tell you about a data set?",
+          "opts": [
+            "Which value occurs most often",
+            "How spread out the values are",
+            "The middle value in the set",
+            "How many values were collected"
+          ],
+          "ans": 1,
+          "hint": "It is a companion to the mean, not a replacement.",
+          "steps": [
+            "Standard deviation measures how far values sit from the mean on average.",
+            "A small one means the data clusters tightly around the mean.",
+            "A large one means the values are widely scattered.",
+            "The most common value is the mode and the middle one is the median — different questions."
+          ],
+          "ex": {
+            "main": "**How spread out the values are.** Two classes can both average 80 with deviations of 3.4 and 17.2 — same mean, completely different stories.",
+            "tip": "Always read a mean alongside its spread. A mean on its own hides how typical it really is."
+          }
+        },
+        {
+          "id": "q6",
+          "lv": 1,
+          "kind": "mc",
+          "from": "source",
+          "q": "A student measures average speed for five separate car journeys. Which graph should she use?",
+          "opts": [
+            "A line graph",
+            "A bar graph",
+            "A pie chart",
+            "A scatterplot with a best-fit line"
+          ],
+          "ans": 1,
+          "hint": "Is there such a thing as journey number 3.5?",
+          "steps": [
+            "Ask whether values exist between the x-values.",
+            "The journeys are separate events — there is no drive between the third and the fourth.",
+            "That makes the data discrete, so the categories should not be joined by a line.",
+            "Discrete categories are drawn as a bar graph."
+          ],
+          "ex": {
+            "main": "**A bar graph.** The journeys are separate categories, so the space between them means nothing. Speed measured each minute WITHIN one drive would be continuous, and that would be a line graph.",
+            "tip": "The in-between test decides it every time: does a value between these two x-values exist?"
+          }
+        },
+        {
+          "id": "q7",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "A week of bird counts is shown in the graph. The mean is 24 and the median is 15. Why are they so far apart?",
+          "opts": [
+            "The mean was calculated incorrectly here",
+            "There are too few days to take a mean from",
+            "Thursday's 87 is an outlier lifting the mean",
+            "The median only works on even-sized sets"
+          ],
+          "ans": 2,
+          "hint": "Which of the two statistics uses every value?",
+          "steps": [
+            "Six of the seven days sit between 9 and 18; Thursday is 87.",
+            "The mean adds every value, so one huge number lifts the whole total.",
+            "The median depends only on position in the sorted order, so an extreme value barely shifts it.",
+            "The result is a mean of 24 that is higher than six of the seven actual days."
+          ],
+          "ex": {
+            "main": "**Thursday's 87 is an outlier, and only the mean feels it.** When mean and median disagree sharply, an outlier is the first thing to look for.",
+            "tip": "A mean higher than most of the individual values is a red flag worth chasing."
+          },
+          "graph": {
+            "w": [
+              1,
+              7,
+              0,
+              95
+            ],
+            "gx": 1,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    1,
+                    15
+                  ],
+                  [
+                    2,
+                    16
+                  ],
+                  [
+                    3,
+                    9
+                  ],
+                  [
+                    4,
+                    87
+                  ],
+                  [
+                    5,
+                    18
+                  ],
+                  [
+                    6,
+                    14
+                  ],
+                  [
+                    7,
+                    9
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 4,
+                "y": 87,
+                "label": "Thursday"
+              }
+            ],
+            "xl": "Day of the week",
+            "yl": "Birds counted"
+          }
+        },
+        {
+          "id": "q8",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "For that same bird data, which statistic best represents a typical day, and why?",
+          "opts": [
+            "The mean, because it uses every value",
+            "The mode, because it is a real count",
+            "The median, because the outlier barely moves it",
+            "The standard deviation, because it is the most precise"
+          ],
+          "ans": 2,
+          "hint": "Which one lands closest to what most of the days actually looked like?",
+          "steps": [
+            "List what a typical day looked like: counts of 9 to 18.",
+            "The mean of 24 sits above six of the seven days, so it is not typical.",
+            "The median of 15 sits right among them.",
+            "The mode of 9 is the joint-lowest value, so it under-represents the week."
+          ],
+          "ex": {
+            "main": "**The median.** It resists the outlier and lands where most days actually were. The mean is not wrong — it is just answering a different question.",
+            "tip": "'Best represents' means closest to typical, not most precise."
+          }
+        },
+        {
+          "id": "q9",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Groups of students take a quiz with classical, jazz, country, rock, or no music. Which is a controlled variable rather than the control group?",
+          "opts": [
+            "The group with no music playing",
+            "The type of music each group heard",
+            "Every group taking the same quiz",
+            "The average score each group achieved"
+          ],
+          "ans": 2,
+          "hint": "Controlled variables are conditions held steady, not a group of people.",
+          "steps": [
+            "The independent variable is the type of music, and the dependent variable is the score.",
+            "The control group is the one receiving no treatment — the silent group.",
+            "A controlled variable is a condition kept identical for everyone, such as using the same quiz.",
+            "So the same quiz is a controlled variable; the silent group is the control group."
+          ],
+          "ex": {
+            "main": "**Every group taking the same quiz.** Controlled variables are conditions; a control group is a set of subjects. The slides flag this pair because the names are so easy to swap.",
+            "tip": "Ask 'is this a condition or a group of subjects?' — that settles it instantly."
+          }
+        },
+        {
+          "id": "q10",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "Five scales each read 4.0 kg for an object known to weigh 3.5 kg. What does this show?",
+          "opts": [
+            "Reliable but not accurate",
+            "Accurate but not reliable",
+            "Both accurate and reliable",
+            "Neither, since the readings agree"
+          ],
+          "ans": 0,
+          "hint": "Test the two properties one at a time.",
+          "steps": [
+            "Check reliability: all five readings agree with each other, so it is reliable.",
+            "Check accuracy: 4.0 kg does not match the accepted 3.5 kg, so it is not accurate.",
+            "The result is consistent and consistently wrong.",
+            "This usually points to a systematic problem, such as scales that all need recalibrating."
+          ],
+          "ex": {
+            "main": "**Reliable but not accurate.** Agreement between repeats says nothing about whether the value is right — which is exactly why both properties get separate names.",
+            "tip": "Repeating a measurement improves reliability. Only checking against a known value improves accuracy."
+          }
+        },
+        {
+          "id": "q11",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "In the graph shown, at roughly what CO₂ concentration do animal and plant cells grow at the same rate?",
+          "opts": [
+            "0.00%",
+            "0.04%",
+            "0.08%",
+            "0.11%"
+          ],
+          "ans": 1,
+          "hint": "Find where the two curves cross.",
+          "steps": [
+            "Two series are plotted: one falls as CO₂ rises, the other climbs.",
+            "Equal growth means the point where the two lines meet.",
+            "They cross at 0.04%, where both sit at 100%/day.",
+            "That value is the concentration of CO₂ in ordinary atmosphere — which is why both are normalised to 100 there."
+          ],
+          "ex": {
+            "main": "**0.04%, where both reach 100%/day.** That is atmospheric CO₂, the baseline both cell types are measured against — so the crossing point is built into the experiment's design.",
+            "tip": "On a two-series graph, the crossing point is almost always the question worth asking."
+          },
+          "graph": {
+            "w": [
+              0,
+              0.12,
+              0,
+              220
+            ],
+            "gx": 0.02,
+            "gy": 50,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    167
+                  ],
+                  [
+                    0.02,
+                    156
+                  ],
+                  [
+                    0.04,
+                    100
+                  ],
+                  [
+                    0.06,
+                    87
+                  ],
+                  [
+                    0.08,
+                    47
+                  ],
+                  [
+                    0.11,
+                    9
+                  ]
+                ]
+              },
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0.02,
+                    66
+                  ],
+                  [
+                    0.04,
+                    100
+                  ],
+                  [
+                    0.06,
+                    151
+                  ],
+                  [
+                    0.08,
+                    190
+                  ],
+                  [
+                    0.11,
+                    213
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 0.04,
+                "y": 100,
+                "label": "atmosphere"
+              }
+            ],
+            "xl": "CO₂ concentration (%)",
+            "yl": "Growth (% per day)"
+          }
+        },
+        {
+          "id": "q12",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "From the same graph, what happens to the two cell types as CO₂ rises above atmospheric level?",
+          "opts": [
+            "Both grow faster",
+            "Both slow down",
+            "Animal cells slow down while plant cells speed up",
+            "Animal cells speed up while plant cells slow down"
+          ],
+          "ans": 2,
+          "hint": "Follow each line to the right and note which way it goes.",
+          "steps": [
+            "Take the line that starts high on the left: it falls steadily, ending near 9%/day.",
+            "Take the line that starts at zero: it climbs steadily, ending above 200%/day.",
+            "Plants use CO₂ for photosynthesis, so the rising line is the plant cells.",
+            "So above 0.04%, animal growth falls and plant growth rises."
+          ],
+          "ex": {
+            "main": "**Animal cells slow, plant cells speed up.** Plants consume CO₂ and animals are poisoned by an excess of it, so the same change moves the two in opposite directions.",
+            "tip": "When two series cross, do not describe them as one trend. State what each does separately."
+          },
+          "graph": {
+            "w": [
+              0,
+              0.12,
+              0,
+              220
+            ],
+            "gx": 0.02,
+            "gy": 50,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    167
+                  ],
+                  [
+                    0.02,
+                    156
+                  ],
+                  [
+                    0.04,
+                    100
+                  ],
+                  [
+                    0.06,
+                    87
+                  ],
+                  [
+                    0.08,
+                    47
+                  ],
+                  [
+                    0.11,
+                    9
+                  ]
+                ]
+              },
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0.02,
+                    66
+                  ],
+                  [
+                    0.04,
+                    100
+                  ],
+                  [
+                    0.06,
+                    151
+                  ],
+                  [
+                    0.08,
+                    190
+                  ],
+                  [
+                    0.11,
+                    213
+                  ]
+                ]
+              }
+            ],
+            "xl": "CO₂ concentration (%)",
+            "yl": "Growth (% per day)"
+          }
+        },
+        {
+          "id": "q13",
+          "lv": 2,
+          "kind": "mc",
+          "from": "source",
+          "q": "A student measures the mass of mitochondria, nucleus and Golgi in three different cell types. Which graph suits this data?",
+          "opts": [
+            "A line graph, since the cells can be ordered",
+            "A bar graph, since the cell types are separate categories",
+            "A scatterplot with a line of best fit",
+            "A single line per organelle, joined across cell types"
+          ],
+          "ans": 1,
+          "hint": "Is there a cell type between a myocyte and an endocrine cell?",
+          "steps": [
+            "Apply the in-between test to the x-axis categories.",
+            "Myocyte, endocrine and epithelial are distinct cell types, not points on a scale.",
+            "There is no cell halfway between two of them, so the data is discrete.",
+            "Discrete categories are drawn as bars, grouped by organelle."
+          ],
+          "ex": {
+            "main": "**A bar graph.** The cell types are categories, so joining them with a line would imply a progression that does not exist. The CO₂ data is different — concentration is continuous, so that one gets a fitted line.",
+            "tip": "One sheet can need both graph types. Test each data set separately rather than picking one style for the page."
+          }
+        },
+        {
+          "id": "q14",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "A family's twelve electric bills have mean $113.60 and median $114.50. If August's bill had been $351 instead of $145, what happens to those two statistics?",
+          "opts": [
+            "Both statistics rise by roughly seventeen dollars",
+            "Mean rises to about $130.80; median unchanged",
+            "The median rises while the mean stays put",
+            "Neither moves, since only one value changed"
+          ],
+          "ans": 1,
+          "hint": "One statistic uses every value; the other only uses position.",
+          "steps": [
+            "The mean uses the total, so adding $206 to one bill adds $206 to the total.",
+            "$206 spread over twelve months raises the mean by about $17, to roughly $130.80.",
+            "The median depends only on the middle two values in the sorted list.",
+            "August was already the highest bill and stays the highest, so the middle of the order does not move and the median remains $114.50."
+          ],
+          "ex": {
+            "main": "**Mean up to about $130.80, median unchanged at $114.50.** One extreme value moves the mean and leaves the median where it was — the clearest demonstration of why both get reported.",
+            "tip": "Before calculating, ask whether the changed value crossed the middle of the order. If it did not, the median cannot move."
+          }
+        },
+        {
+          "id": "q15",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "A researcher finds one wildly high value in a week of data. What should be done with it?",
+          "opts": [
+            "Delete it, since it distorts the mean",
+            "Keep it and investigate what caused it",
+            "Replace it with the median of the other values",
+            "Repeat only that day until a normal value appears"
+          ],
+          "ans": 1,
+          "hint": "What might a strange reading actually be telling you?",
+          "steps": [
+            "An outlier can come from a measurement error or from something genuinely happening.",
+            "You cannot tell which without investigating the cause.",
+            "In the bird data, the spike is most likely the migration arriving — the very thing being studied.",
+            "Deleting or replacing it would erase the finding, so it stays in the data and gets explained."
+          ],
+          "ex": {
+            "main": "**Keep it and find out why.** Removing data because it is inconvenient is how a real discovery gets thrown away. Report it, explain it, and note its effect on the mean.",
+            "tip": "Repeating only the measurement you dislike, until it agrees with you, is the same error wearing a lab coat."
+          }
+        },
+        {
+          "id": "q16",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "The graph shows a student's heart rate each minute while exercising. Approximately how much did it change per minute between minutes 2 and 4?",
+          "opts": [
+            "23 bpm per minute",
+            "11.5 bpm per minute",
+            "121 bpm per minute",
+            "2 bpm per minute"
+          ],
+          "ans": 1,
+          "hint": "The word 'per' is an instruction to divide.",
+          "steps": [
+            "Read the two values: about 98 bpm at minute 2 and about 121 bpm at minute 4.",
+            "The overall change is 121 − 98 = 23 bpm.",
+            "That change happened over 4 − 2 = 2 minutes.",
+            "Per minute, that is 23 ÷ 2 = 11.5 bpm per minute. The 23 on its own answers a different question."
+          ],
+          "ex": {
+            "main": "**11.5 bpm per minute.** The total change is 23 bpm; dividing by the two minutes turns it into a rate. Both numbers are correct answers to different questions, so read which one was asked.",
+            "tip": "'Overall change' and 'change per minute' differ by one division. The wrong one is always on offer."
+          },
+          "graph": {
+            "w": [
+              0,
+              5,
+              0,
+              130
+            ],
+            "gx": 1,
+            "gy": 20,
+            "series": [
+              {
+                "type": "pts",
+                "pts": [
+                  [
+                    0,
+                    68
+                  ],
+                  [
+                    1,
+                    79
+                  ],
+                  [
+                    2,
+                    98
+                  ],
+                  [
+                    3,
+                    110
+                  ],
+                  [
+                    4,
+                    121
+                  ]
+                ]
+              }
+            ],
+            "pts": [
+              {
+                "x": 2,
+                "y": 98,
+                "label": "98"
+              },
+              {
+                "x": 4,
+                "y": 121,
+                "label": "121"
+              }
+            ],
+            "xl": "Time exercising (minutes)",
+            "yl": "Heart rate (bpm)"
+          }
+        },
+        {
+          "id": "q17",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "Two classes both average 80% on a quiz. Class A's standard deviation is 3.4 and Class B's is 17.2. What does that tell you?",
+          "opts": [
+            "Class A scored higher overall than Class B did",
+            "Class B simply has more students than Class A",
+            "Class A clusters near 80; Class B is spread wide",
+            "Class B's mean must have been miscalculated"
+          ],
+          "ans": 2,
+          "hint": "The means are identical, so the difference is not about the middle.",
+          "steps": [
+            "Both classes share a mean of 80, so neither scored higher on average.",
+            "Standard deviation describes spread around that mean, not its position.",
+            "A deviation of 3.4 means most scores sit within a few points of 80.",
+            "A deviation of 17.2 means scores range widely — some far above 80 and some far below."
+          ],
+          "ex": {
+            "main": "**Same average, very different classes.** In A almost everyone is near 80; in B the 80 is an average of high and low scores, and may describe nobody at all.",
+            "tip": "A mean without a spread can hide two opposite situations. Ask for both."
+          }
+        },
+        {
+          "id": "q18",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "A graph's y-axis runs 0, 20, 50, 60, 100. What is wrong with it, and why does it matter?",
+          "opts": [
+            "Uneven steps distort the shape of the data",
+            "It should start at zero, and it already does",
+            "There are too few gridlines to read values from",
+            "The axis needs category labels instead of numbers"
+          ],
+          "ans": 0,
+          "hint": "Measure the gap between each pair of labels.",
+          "steps": [
+            "Check the gaps: 20, then 30, then 10, then 40 — all different.",
+            "A graph's vertical distances are supposed to be proportional to the values.",
+            "With uneven steps, equal distances on the page represent unequal changes in the data.",
+            "So the line's shape misleads, which defeats the point of drawing it."
+          ],
+          "ex": {
+            "main": "**Uneven steps distort the shape.** A graph's job is to make the pattern visible honestly; inconsistent spacing makes rises look like plateaus and vice versa. This axis does start at zero — that part is fine.",
+            "tip": "Check the gaps between gridline labels before reading any graph, including ones in the news."
+          }
+        },
+        {
+          "id": "q19",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "An investigation compares walking, running, weights, yoga and no exercise. How many levels does the independent variable have, and which is the control?",
+          "opts": [
+            "Four levels; no-exercise is separate from the levels",
+            "Five levels; no-exercise is the control group",
+            "Five levels; there is no control group here",
+            "Four levels; running is the control group"
+          ],
+          "ans": 1,
+          "hint": "Does the untreated group count as a level?",
+          "steps": [
+            "The independent variable is the type of exercise.",
+            "List the conditions tested: walking, running, weights, yoga, and none — five in total.",
+            "The untreated condition counts as a level, so there are five.",
+            "That untreated group is the control, showing how heart rate varies without any exercise at all."
+          ],
+          "ex": {
+            "main": "**Five levels, with no-exercise as the control.** Doing nothing is a real condition being compared against, so it counts. Without it you would have nothing to measure the other four against.",
+            "tip": "Count the control group when counting levels. It is the level that defines normal."
+          }
+        },
+        {
+          "id": "q20",
+          "lv": 3,
+          "kind": "mc",
+          "from": "source",
+          "q": "Why should a line of best fit not be drawn through the first and last data points exactly?",
+          "opts": [
+            "Those two points are usually measured wrongly",
+            "A best-fit line must pass through the origin",
+            "Two points would then decide the entire line",
+            "A best-fit line should touch no data points"
+          ],
+          "ans": 2,
+          "hint": "What would the middle points contribute if the ends fixed the line?",
+          "steps": [
+            "A best-fit line is meant to represent every point in the data set.",
+            "Forcing it through the first and last points fixes the line using only those two.",
+            "Every measurement in between would then have no influence at all.",
+            "That is connecting endpoints rather than fitting, and it hands all the weight to two readings that carry the same random error as the rest."
+          ],
+          "ex": {
+            "main": "**Those two points would decide everything.** A fit is supposed to average out the scatter across all the data. It may happen to pass through some points — it just must not be forced to.",
+            "tip": "A trend line represents the set. If any single point can move it much, it is not a fit."
+          }
+        }
+      ]
+    }
+  }
+}
