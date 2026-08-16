@@ -1039,7 +1039,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v101 · a sky you can see';
+const APP_VERSION = 'v102 · said once';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6561,31 +6561,32 @@ SCREENS.parent = function(root){
       : `Not synced since ${AZ.shortDate(new Date(ls).toISOString().slice(0,10))} — check the token in Setup.`));
   }
 
-  /* Anything waiting on you comes first — it is the only thing here that blocks her. */
+  /* Anything waiting on you comes first — it is the only thing here that blocks her.
+     ONE card, not two. This was a "N units are waiting for you" card followed
+     immediately by a "New lessons" card repeating the same count and pointing at
+     the same screen: the same fact twice, on the view whose whole job is to say
+     what needs doing. The count and the gate lead when something is pending; the
+     library fetch stays reachable either way. */
   const pending = drafts();
+  const lc2 = el('div','card ac');
   if(pending.length){
-    const rv = el('div','card ac');
-    rv.appendChild(el('h2',null, pending.length===1 ? '1 unit is waiting for you' : pending.length+' units are waiting for you'));
-    rv.appendChild(el('p',null,'Generated material stays out of her app until you have read it.'));
+    lc2.appendChild(el('h2',null, pending.length===1
+      ? '1 unit is waiting for you' : pending.length+' units are waiting for you'));
+    lc2.appendChild(el('p',null,'Generated material stays out of her app until you have read it.'));
+  }else{
+    lc2.appendChild(el('div','eyebrow','New lessons'));
+    lc2.appendChild(el('p',null,'Nothing waiting — check the library for anything newly published.'));
+  }
+  const lr2 = el('div','btn-row');
+  if(pending.length){
     const rb = el('button','btn btn-primary','Read them');
     rb.addEventListener('click',()=>go('review'));
-    rv.appendChild(rb);
-    root.appendChild(rv);
+    lr2.appendChild(rb);
   }
-
-  /* The daily-use strip: new lessons in, and the sandbox switch — both also
-     live in their old homes below, but these are the two he reaches for. */
-  const lc2 = el('div','card ac');
-  lc2.appendChild(el('div','eyebrow','New lessons'));
-  lc2.appendChild(el('p',null, pending.length
-    ? (pending.length===1 ? '1 unit is waiting for your review.' : pending.length+' units are waiting for your review.')
-    : 'Nothing waiting — check the library for anything newly published.'));
-  const lr2 = el('div','btn-row');
-  const lb2 = el('button','btn btn-primary','📥  Check the library');
+  const lb2 = el('button','btn '+(pending.length?'btn-secondary':'btn-primary'),'📥  Check the library');
   lb2.addEventListener('click',()=>fetchLibrary(lb2));
-  const rq2 = el('button','btn btn-secondary','Review queue');
-  rq2.addEventListener('click',()=>go('review'));
-  lr2.appendChild(lb2); lr2.appendChild(rq2); lc2.appendChild(lr2);
+  lr2.appendChild(lb2);
+  lc2.appendChild(lr2);
   root.appendChild(lc2);
   const sbq = el('div','card');
   const sqr = el('div','row');
