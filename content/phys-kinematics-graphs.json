@@ -4,8 +4,8 @@
     "unit-phys-graphs": {
       "id": "unit-phys-graphs",
       "type": "unit",
-      "updatedAt": 1786913435244,
-      "libv": 2,
+      "updatedAt": 1786913839954,
+      "libv": 3,
       "classId": "physics",
       "quarter": 1,
       "status": "draft",
@@ -852,7 +852,7 @@
           "lv": 3,
           "kind": "mc",
           "from": "source",
-          "q": "If the lab were repeated with the car set to move faster, but released from the same starting mark, how would the graph change?",
+          "q": "In the constant-motion lab, a car released from a starting mark gives the position–time line shown. If the lab were repeated with a faster car released from that same mark, how would the graph change?",
           "opts": [
             "Steeper line, same y-intercept",
             "Same slope, higher y-intercept",
@@ -862,14 +862,37 @@
           "ans": 0,
           "hint": "Name the quantity that changed, then ask which feature of the graph carries it.",
           "steps": [
-            "The quantity that changed is the velocity.",
-            "On a position–time graph, velocity is carried by the slope, so the slope increases.",
-            "The starting mark is unchanged, and the starting position is the y-intercept, so the intercept stays the same.",
-            "The velocity is still constant, so the graph stays straight rather than curving."
+            "Identify what changed between the two runs: only the car's speed.",
+            "On a position–time graph the velocity is carried by the slope, so a faster car gives a steeper line.",
+            "The starting mark is unchanged, and the starting position is the y-intercept, so the intercept stays put.",
+            "The speed is still constant, so the line stays straight rather than curving."
           ],
           "ex": {
             "main": "**Steeper, same intercept.** Faster means a bigger slope; same starting mark means the same intercept. A curve would mean the speed was changing, which it is not.",
             "tip": "For any 'what if' question, name the changed quantity first, then the graph feature that carries it."
+          },
+          "graph": {
+            "w": [
+              0,
+              40,
+              0,
+              35
+            ],
+            "gx": 10,
+            "gy": 5,
+            "series": [
+              {
+                "type": "line",
+                "m": 0.8,
+                "b": 2,
+                "dom": [
+                  0,
+                  10
+                ]
+              }
+            ],
+            "xl": "Time (s)",
+            "yl": "Position (ft)"
           }
         },
         {

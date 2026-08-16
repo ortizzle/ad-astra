@@ -184,6 +184,18 @@ convention, not a mechanic.
   or a numbered problem from the source material. A question restates all the
   context it needs. Fresh scenarios beat reworded worksheet problems — the sheets
   are her homework; this app is *extra*.
+- **Standalone from its SIBLINGS too, which is the half that got missed.**
+  `pickRound()` serves 5 questions from the unit and shuffles them, so the
+  question next door is usually absent. A stem may not open "The same student…",
+  "For that same data…", "Using the same fit…", and an OPTION may not name a
+  thing only a neighbouring question introduced. This shipped for real on
+  2026-08-16: Science Quiz 1 asked about "the same student" as question 4 of 5,
+  with one option mentioning a sidewalk that lived in a question the round never
+  served. Everything a question needs is its own stem, its own `passage`, its own
+  `graph`, and the unit title in the eyebrow — that is the entire context she
+  gets. `check_content.py` now errors on a back-referencing stem and on "the
+  graph shown" with no graph attached; it cannot catch a stem that leans on a
+  scenario more loosely, so read new questions as if each were the only one.
 - **Bold answer first.** A card `def` LEADS with the straightforward answer
   wrapped in `**bold**` (one short sentence that works alone as the study
   answer), then at most 2–3 supporting `\n• ` bullet lines. `richify()` renders
