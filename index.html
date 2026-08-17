@@ -135,6 +135,31 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .runway .rt{flex:1;font-size:13px;line-height:1.35}
 .runway .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
 .runway .rhours{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+/* The week ahead: five cells for the shape of the week, then the same row
+   treatment the runway uses, so a door looks like a door on both cards. */
+.week .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
+  padding:10px 12px;margin-top:9px;border-radius:13px;border:1px solid var(--line);
+  background:var(--deep);color:var(--text);font:inherit;text-align:left}
+.week .rn{flex:0 0 auto;min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;
+  font-size:19px;font-weight:600;color:var(--ac-fg)}
+.week .rt{flex:1;font-size:13px;line-height:1.35}
+.week .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
+.wkgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:12px}
+.wkday{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 2px;
+  border-radius:12px;border:1px solid var(--line);background:var(--deep)}
+.wkday .wl{font-size:10.5px;letter-spacing:.1em;font-weight:700;color:var(--muted)}
+.wkday .wm{font-size:15px;line-height:1;min-height:17px;display:flex;align-items:center}
+.wkday .wm .dot{width:5px;height:5px;border-radius:50%;background:var(--faint);display:block}
+/* Today is marked by a tinted fill AND a heavier label — colour is never the
+   only signal, the same rule the "lands today" row in Coming up follows. */
+.wkday.now{background:var(--ac-8);border-color:var(--ac-fg)}
+.wkday.now .wl{color:var(--ac-fg)}
+.wkday.past{opacity:.5}
+.wkday.off .wm{color:var(--faint)}
+.wksum{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.wkaim{display:flex;align-items:baseline;gap:8px;margin-top:11px;font-size:12.5px}
+.wkaim .k{color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-size:10.5px;font-weight:700}
+.wkaim .v{color:var(--text)}
 /* Locked-in: one chip per subject, carrying that subject's colour. */
 .locked{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .lk{display:flex;align-items:baseline;gap:7px;min-height:var(--tap);padding:9px 14px;
@@ -1039,7 +1064,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v105 · every question stands alone';
+const APP_VERSION = 'v106 · the week ahead';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1920,6 +1945,77 @@ function runway(date){
   return { a:next, days:AZ.daysBetween(date, next.date), cid, cls,
     due: dueMisses().filter(m => m.classId === cid).length,
     open, hours: nextHoursBefore(cid, date, next.date) };
+}
+/* ---- The week ahead (v106) ----
+   Today's prime space used to hold the period list. She does not open the app
+   between lessons, and the list's real job — get me to a subject — is what the
+   Study tab's tiles are for. So the schedule folds and this takes its place:
+   the SHAPE of the school week, and at most three things to do about it.
+
+   Everything is derived from records that already exist — assess, miss, unit,
+   prefs — so nothing new is stored and it backfills instantly.
+
+   Monday to Friday only: weekends carry no school expectations, and a 7-cell
+   strip would spend two of them saying "nothing". On a Sunday the useful week
+   is the one about to start, so Sunday looks forward rather than back. */
+function weekAhead(date){
+  const wd = AZ.weekday(date);
+  if(wd === 6) return null;                       // Saturday: Monday is far enough away
+  const monday = AZ.shift(date, wd === 0 ? 1 : 1 - wd);
+  const days = [];
+  for(let i = 0; i < 5; i++){
+    const d = AZ.shift(monday, i);
+    days.push({
+      date: d, label: 'MTWTF'[i],
+      today: d === date,
+      past: d < date,
+      closed: !!closedToday(d),
+      tests: assessments().filter(a => a.date === d && a.score == null),
+      events: eventsOn(d)
+    });
+  }
+  const friday = days[4].date;
+  const tests = days.flatMap(d => d.tests);
+
+  /* At most three lines, and each one has to be a door. The order is: what a
+     test this week demands, then the subject the plan is most worried about,
+     then her own aim. Never a fourth — a list of everything is the whole week
+     restated as debt, which is the thing the runway already refuses to do. */
+  const lines = [], usedClass = new Set();
+  const addSubject = cid => {
+    const cls = CLASS_BY_ID[cid];
+    if(!cls || usedClass.has(cid) || lines.length >= 3) return;
+    const due = dueMisses().filter(m => m.classId === cid).length;
+    const open = units(cid).filter(u => u.questions.length && !unitDone(u));
+    if(!due && !open.length) return;
+    usedClass.add(cid);
+    if(due) lines.push({ n: due, cid,
+      text: 'review question' + (due === 1 ? '' : 's') + ' due in ' + cls.name,
+      kind: 'due',
+      go: () => { if(buildReviewUnit({classId: cid, title: (cls.short || cls.name) + ' review'}))
+                    go('quiz', {unitId: '__review__', classId: cid});
+                  else go('growth'); } });
+    if(open.length && lines.length < 3){
+      /* Name ONE lesson, never a pile — the count is true, the words point at
+         the next actionable thing. Same rule the runway established. */
+      const touched = open.filter(u => unitLastStudied(u) > 0)
+                          .sort((a, b) => unitLastStudied(b) - unitLastStudied(a));
+      const pick = touched[0] || open[0];
+      lines.push({ n: open.length, cid, kind: 'lesson',
+        text: (open.length === 1 ? 'lesson open · ' : 'lessons open · ') + 'pick up ' + pick.title,
+        go: () => launchQuiz(pick.id, cid, false) });
+    }
+  };
+  tests.forEach(t => addSubject(t.classId));
+  studyPlan(date).forEach(p => addSubject(p.classId));
+
+  const intent = prefs().intent;
+  if(intent && intent.week === AZ.weekStart(date) && intent.text && lines.length < 3)
+    lines.push({ aim: true, text: intent.text, done: !!intent.done });
+
+  return { days, monday, friday, tests, lines,
+           /* the runway yields to this when its test is inside the week */
+           covers: d => d >= monday && d <= friday };
 }
 function threadTarget(date, opt){
   opt = opt || {};
@@ -3241,6 +3337,64 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
+  /* ---- The week ahead. Takes the space the period list used to hold. ---- */
+  const wk = weekAhead(date);
+  /* The runway yields when its test is inside this week — the week card is
+     already saying "before your X test, do Y", and two cards saying it one
+     screen apart is the redundancy this view keeps re-growing. Beyond Friday
+     the runway is genuinely different news: something is coming that the
+     week strip does not show. */
+  const rwShow = rw && !(wk && wk.covers(rw.a.date));
+  if(wk){
+    const c = el('div','card ac week');
+    c.appendChild(el('div','eyebrow','The week ahead'));
+    const grid = el('div','wkgrid');
+    wk.days.forEach(d=>{
+      const cell = el('div','wkday'+(d.today?' now':'')+(d.past?' past':'')+(d.closed?' off':''));
+      cell.appendChild(el('div','wl', d.label));
+      const mark = el('div','wm');
+      if(d.closed) mark.textContent = '—';
+      else if(d.tests.length) mark.textContent = (KINDS[d.tests[0].kind]||KINDS.test).ic || '✍️';
+      else if(d.events.length) mark.textContent = d.events[0].icon;
+      else mark.appendChild(el('span','dot'));
+      cell.appendChild(mark);
+      /* Every cell is a door to that day's detail rather than a decoration. */
+      const named = d.tests[0] ? d.tests[0].title
+        : d.events[0] ? d.events[0].name
+        : d.closed ? closedToday(d.date) : null;
+      cell.title = AZ.pretty(d.date) + (named ? ' · ' + named : '');
+      grid.appendChild(cell);
+    });
+    c.appendChild(grid);
+    /* One line naming what actually lands, so the marks are never the only
+       signal — colour and glyph reinforce words, they do not replace them. */
+    const landing = wk.days.filter(d=>d.tests.length||d.events.length);
+    c.appendChild(el('div','wksum', landing.length
+      ? landing.map(d=>{
+          const nm = d.tests[0] ? (CLASS_BY_ID[d.tests[0].classId]?.short || '') + ' ' +
+                                  ((KINDS[d.tests[0].kind]||KINDS.test).nm||'test').toLowerCase()
+                                : d.events[0].name;
+          return AZ.pretty(d.date).split(',')[0] + ': ' + nm.trim();
+        }).join(' · ')
+      : 'Nothing scheduled this week — a good week to get ahead.'));
+    wk.lines.forEach(L=>{
+      if(L.aim){
+        const a = el('div','wkaim');
+        a.appendChild(el('span','k','Your aim'));
+        a.appendChild(el('span','v', L.text + (L.done ? ' ✓' : '')));
+        c.appendChild(a);
+        return;
+      }
+      const b = el('button','rw');
+      b.appendChild(el('span','rn', String(L.n)));
+      b.appendChild(el('span','rt', L.text));
+      b.appendChild(el('span','rc','›'));
+      b.addEventListener('click', L.go);
+      c.appendChild(b);
+    });
+    root.appendChild(c);
+  }
+
   /* The strip: three live numbers that are really DOORS. Today still is not a
      dashboard — nothing here is scorekeeping for its own sake. Each tile
      answers "what should I do now" and goes straight there. */
@@ -3250,7 +3404,7 @@ SCREENS.today = function(root){
     .reduce((n,l)=>n + (l.minutes || Math.round((l.seconds||0)/60)), 0);
   /* The runway — see runway() above. Sits directly under the school day,
      because before a test it is the most useful thing on the screen. */
-  if(rw){
+  if(rwShow){
     const k = KINDS[rw.a.kind] || KINDS.test;
     const c0 = el('div','card ac runway');
     c0.appendChild(el('div','eyebrow', 'Before your ' + (rw.cls.short || rw.cls.name) + ' ' + k.nm.toLowerCase()));
@@ -3310,7 +3464,12 @@ SCREENS.today = function(root){
      reads as a contradiction rather than as extra information. When that row
      is showing, this tile offers breadth instead — and Growth keeps its
      count badge in the nav either way, so the door never disappears. */
-  if(dueNow2 && !(rw && rw.due)){
+  /* The Growth tile yields to whichever card already printed a review count —
+     the runway, or now the week card. Two review numbers one screen apart read
+     as a contradiction, not as extra information. The nav badge keeps the door
+     visible either way. */
+  const countedDue = (rwShow && rw.due) || (wk && wk.lines.some(L => L.kind === 'due'));
+  if(dueNow2 && !countedDue){
     statTile(dueNow2, 'to review', 'Growth Zone ›', ()=>go('growth'), true);
   } else if(plan2.length){
     const pc3 = CLASS_BY_ID[plan2[0].classId];
@@ -3330,10 +3489,17 @@ SCREENS.today = function(root){
      those is the same fact printed twice. It earns its place for a specific
      open lesson, or for the mixed round in test week. */
   const th0 = threadTarget(date, {skipDue: dueNow2 > 0});
+  /* The week card is now a third voice on this screen, so the hero has to
+     yield to it as well — caught by screenshot: with a Biology quiz on
+     Thursday the week card, the strip tile and the hero all said Biology, and
+     the hero repeated "quiz in 3 days · 1 question in your Growth Zone" back
+     verbatim. If the week already named that subject, the hero says nothing. */
+  const wkClasses = new Set((wk ? wk.lines : []).filter(L => L.cid).map(L => L.cid));
   const dupe = !th0 || th0.kind === 'due'
     || (th0.kind === 'plan' && !dueNow2 && plan2.length && th0.classId === plan2[0].classId)
     || (th0.kind === 'lesson' && rwLesson && th0.unitId === rwLesson.id)
-    || (th0.kind === 'ramp' && rw && th0.classId === rw.cid);
+    || (th0.kind === 'ramp' && rw && th0.classId === rw.cid)
+    || wkClasses.has(th0.classId);
   if(!dupe){
     const heroT = cardButton(th0.title, th0.sub, th0.go);
     heroT.classList.add('hero');
@@ -3403,23 +3569,30 @@ SCREENS.today = function(root){
      rather than being hidden entirely. */
   const schoolDay = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay;
   root.appendChild(divider(schoolDay ? "Today's schedule" : 'Your school day'));
-  if(!schoolDay){
+  /* FOLDED BY DEFAULT (v106), on school days too. She does not open the app
+     mid-lesson, and the grown-ups' "where is she right now" need is real but
+     rare — one tap serves it. What the list mostly does day to day is get her
+     to a subject quickly, and the subject tiles on Study already do that. So
+     the period list stops holding the screen's best space and the week ahead
+     takes it instead. Nothing is removed; ctx._showTT opens it. */
+  if(!ctx._showTT){
     const n = el('div','card quiet');
+    /* Deliberately does NOT name the live class — the day card at the top of
+       the screen already does, and saying it twice is the redundancy this
+       screen keeps re-growing. */
     n.appendChild(el('p',null, date<CAL.firstDay
       ? 'This is your timetable from the first day of school onward. Same order every weekday.'
-      : 'No classes today — this is your normal weekday timetable.'));
-    /* The timetable is identical every weekday, so on a day off it is a
-       hypothetical rather than news. One tap opens it; nothing is lost. */
-    if(!ctx._showTT){
-      const sh = el('button','btn btn-ghost btn-sm','Show the weekday timetable');
-      sh.addEventListener('click',()=>{ ctx._showTT = true; render(); });
-      n.appendChild(sh);
-    }
+      : !schoolDay ? 'No classes today — this is your normal weekday timetable.'
+      : 'Same order every weekday.'));
+    const sh = el('button','btn btn-ghost btn-sm',
+      schoolDay ? "Show today's periods" : 'Show the weekday timetable');
+    sh.addEventListener('click',()=>{ ctx._showTT = true; render(); });
+    n.appendChild(sh);
     root.appendChild(n);
   }
-  /* Events still show when the timetable is folded — an event on a day off
-     (a performance, a community evening) is the opposite of hypothetical. */
-  const foldTT = !schoolDay && !ctx._showTT;
+  /* Events still show when the timetable is folded — an event, a performance
+     or a community evening is the opposite of hypothetical. */
+  const foldTT = !ctx._showTT;
   /* Events for today, pinned above the periods. They are not an extra period,
      so they are painted differently rather than slotted into the timetable. */
   eventsOn(date).forEach(e=>{
@@ -5853,11 +6026,22 @@ SCREENS.postmood = function(root){
   FEELING.forEach(o=>{
     const b = el('button');
     b.appendChild(el('span',null,o.e)); b.appendChild(el('span','lb',o.l));
+    if(ctx._feel === o.v) b.className = 'on';
     b.addEventListener('click',()=>{
-      put({ id:uid('mood'), type:'mood', when:'post', logId:ctx.logId, classId:ctx.classId,
-            feeling:o.v, date:AZ.today(), at:Date.now() });
+      /* Deterministic id: tapping a second time changes her mind rather than
+         writing a second mood for the same round. */
+      put({ id:'mood_post_'+ctx.logId, type:'mood', when:'post', logId:ctx.logId,
+            classId:ctx.classId, feeling:o.v, date:AZ.today(), at:Date.now() });
       checkBadges(); syncSoon();
-      saveTB(); toast('Noted — thanks');
+      ctx._feel = o.v;
+      /* When there is a written question on offer, the tap must NOT leave.
+         The emoji row renders ABOVE the textarea, so auto-advancing here threw
+         away the answer before she could reach the box — the tap required to
+         record the mood was destroying the question underneath it. With
+         nothing else to ask, one tap still finishes, which is the whole point
+         of the check-in. */
+      if(tbOK){ render(); return; }
+      toast('Noted — thanks');
       go(ctx.back || (ctx.missed ? 'growth' : 'unit'), {classId:ctx.classId});
     });
     s.appendChild(b);
@@ -5874,8 +6058,16 @@ SCREENS.postmood = function(root){
     tb.appendChild(el('div','hintline','Optional. It saves with your check-in — a grown-up can read it, and nothing grades it.'));
     root.appendChild(tb);
   }
-  const skip = el('button','btn btn-ghost','Skip');
-  skip.addEventListener('click',()=>{ saveTB(); go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId}); });
+  /* Once a feeling is recorded the exit becomes a real Done, so the written
+     answer has something to be saved BY. Before that it is still Skip — she
+     can always leave without answering anything. */
+  const done = ctx._feel != null && tbOK;
+  const skip = el('button','btn '+(done?'btn-primary':'btn-ghost'), done ? 'Done' : 'Skip');
+  skip.addEventListener('click',()=>{
+    saveTB();
+    if(done) toast('Noted — thanks');
+    go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId});
+  });
   root.appendChild(skip);
 };
 

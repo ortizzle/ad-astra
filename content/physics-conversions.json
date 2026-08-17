@@ -4,7 +4,7 @@
     "unit-phys-conv": {
       "id": "unit-phys-conv",
       "type": "unit",
-      "updatedAt": 1786210000000,
+      "updatedAt": 1786939336766,
       "classId": "physics",
       "quarter": 1,
       "status": "draft",
@@ -534,7 +534,9 @@
             "tip": "Finish chains in metric when you can — the last hops become decimal shifts instead of long division."
           }
         }
-      ]
+      ],
+      "order": 1,
+      "libv": 1
     }
   }
 }
