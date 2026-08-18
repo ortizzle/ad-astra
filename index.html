@@ -249,12 +249,23 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    case 4.90:1 (orchid, dark) and 5.76:1 (lime, light), measured across every
    palette in both themes. The hue stays recognisable, which is the whole point
    of using it. */
-.card.subj-a,.row.subj-a{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
-[data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a{
+/* Declared on every element that can carry its OWN --pc, not just inherited:
+   an unregistered custom property resolves its var() references on the element
+   where it is DECLARED, so a row that overrides --pc would otherwise inherit
+   the card's already-computed --pc-fg — the week card's lead rows wore the
+   focus subject's colour no matter whose door they were. Where --pc is unset
+   the mix is invalid, so every use site falls back with var(--pc-fg,var(--ac-fg)). */
+.card.subj-a,.row.subj-a,.week .rw.lead,.lk,.tile,.plan{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+[data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a,
+[data-theme="light"] .week .rw.lead,[data-theme="light"] .lk,
+[data-theme="light"] .tile,[data-theme="light"] .plan{
   --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
 .card.subj-a>.eyebrow{color:var(--pc-fg)}
-.card.subj-a .rw{border-left:3px solid var(--pc-fg)}
-.card.subj-a .rw .rn{color:var(--pc-fg)}
+/* Runway rows only: every runway row IS the card's subject. The week card's
+   doors are NOT all one subject — a lesson door can point at another class —
+   so there the rule lives on .rw.lead, which carries its own --pc. */
+.card.runway.subj-a .rw{border-left:3px solid var(--pc-fg)}
+.card.runway.subj-a .rw .rn{color:var(--pc-fg)}
 /* A dated row in Coming up belongs to its subject, so it is ruled in that
    subject's colour rather than in the one accent every row used to share. */
 .row.subj-a{border-left:3px solid var(--pc-fg);padding-left:11px;
@@ -270,7 +281,8 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .wkday.subj{border-color:var(--pc,var(--ac));
   background-image:linear-gradient(180deg,color-mix(in srgb,var(--pc,var(--ac)) 16%,transparent),transparent)}
 .wkday.subj.now{background-color:var(--ac-8)}
-.week .rw.lead{border-left:3px solid var(--pc,var(--ac))}
+.week .rw.lead{border-left:3px solid var(--pc-fg,var(--ac-fg))}
+.week .rw.lead .rn{color:var(--pc-fg,var(--ac-fg))}
 .wkday.off .wm{color:var(--faint)}
 .wksum{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
 .wkaim{display:flex;align-items:baseline;gap:8px;margin-top:11px;font-size:12.5px}
@@ -280,7 +292,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .locked{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .lk{display:flex;align-items:baseline;gap:7px;min-height:var(--tap);padding:9px 14px;
   border-radius:999px;border:1px solid var(--line);background:var(--deep);
-  color:var(--text);font:inherit;border-left:3px solid var(--pc,var(--ac))}
+  color:var(--text);font:inherit;border-left:3px solid var(--pc-fg,var(--ac-fg))}
 .lk .ln{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600}
 .lk .lt{font-size:12.5px;color:var(--muted);font-weight:600}
 /* Trophies: earned, permanent, never currency. */
@@ -425,7 +437,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .tag-now{background:var(--ac);color:#04141a;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.09em}
 
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
-.tile{background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc,var(--ac));border-radius:16px;padding:15px;min-height:var(--tap);text-align:left;display:flex;flex-direction:column;gap:4px}
+.tile{background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc-fg,var(--ac-fg));border-radius:16px;padding:15px;min-height:var(--tap);text-align:left;display:flex;flex-direction:column;gap:4px}
 .tile:active{transform:scale(.985)}
 .tile .ic{font-size:21px}
 .tile .nm{font-weight:600;font-size:14px;line-height:1.3}
@@ -1057,7 +1069,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line-soft)}
 .divider span{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.85}
 
-.plan{padding:15px;border-radius:16px;background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc,var(--ac));margin-bottom:var(--gap-row)}
+.plan{padding:15px;border-radius:16px;background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--pc-fg,var(--ac-fg));margin-bottom:var(--gap-row)}
 .plan .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
 .plan .nm{font-weight:600;font-size:15px}
 .plan .mins{font-size:12.5px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
@@ -1230,7 +1242,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v116 · the subject owns the colour';
+const APP_VERSION = 'v117 · the honest clock, and rules that read';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6096,6 +6108,13 @@ SCREENS.quiz = function(root){
       if(quizState.answered !== null && quizState.answered !== undefined) quizState.i++;
       /* Land her ON a question, never on a revealed answer, with fresh clocks. */
       quizState.answered = null;
+      /* Rebase the clock so only time spent IN the round counts — without this,
+         seconds spans the whole parked gap and one resumed quiz logs a day of
+         "study" into the day view and the parent's weekly minutes. A pre-elapsed
+         save (older client) restarts the clock at zero: undercounting is the safe
+         direction. */
+      quizState.start = Date.now() - (quizState.elapsed || 0);
+      delete quizState.elapsed;
       quizState.hintUsed = false;
       quizState.qShownAt = Date.now();
       quizState.perm = null; quizState.permFor = -1;
@@ -6505,7 +6524,11 @@ const roundPrint = (u, order) =>
 function saveRound(u){
   if(!quizState || quizState.settled || !realUnit(quizState.unitId)) return;
   if(!u || !(quizState.seen || []).length) return;   // opened and never answered
-  Store.set(ROUND_KEY, {...quizState, date: AZ.today(), print: roundPrint(u, quizState.order)});
+  Store.set(ROUND_KEY, {...quizState, date: AZ.today(), print: roundPrint(u, quizState.order),
+    /* Time actually spent, not the timestamp: `start` anchors seconds = now − start,
+       and a raw start survives the park — so a round parked at 8am and resumed at
+       6pm would log ten hours of study. The resume path rebases start from this. */
+    elapsed: Date.now() - (quizState.start || Date.now())});
 }
 const clearRound = () => Store.remove(ROUND_KEY);
 function loadRound(u, timed){
