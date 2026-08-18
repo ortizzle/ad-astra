@@ -189,13 +189,43 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   text-shadow:0 0 6px rgba(160,190,255,.55)}
 .skystar.lit{color:#f8e7b4;font-size:21px;text-shadow:0 0 10px rgba(248,231,180,.75)}
 .skystar.open{color:#fff}
-/* A note from home: the parent's own words on her Today screen, set in a
-   hand-written face so it reads as a note left on the counter rather than the
-   app talking. The text is verbatim and uncurated — it is the parent's voice,
-   so the copy rules that bind our strings do not apply to it. */
-.pnote p{font-family:'Caveat','Bradley Hand',cursive;font-size:23px;line-height:1.3;
-  color:var(--text);white-space:pre-line;margin:0}
-.pnote{border-left:3px solid var(--warm)}
+/* Star sky panel states. The win has to be loud — a tick, the word big, the
+   card turning green — because "the word just appeared" is indistinguishable
+   from having been told the answer. */
+.skywon{border-color:var(--good)}
+.skywon .eyebrow{color:var(--good)}
+.skyword{font-family:'Fraunces',Georgia,serif;font-size:29px;line-height:1.15;color:var(--text);margin:2px 0 0}
+.skyhint{margin-top:var(--gap-row);padding:9px 12px;border-radius:11px;background:var(--deep);
+  border-left:3px solid var(--ac-fg);font-size:13.5px;line-height:1.45;color:var(--muted)}
+.skysay{margin-top:var(--gap-row);font-size:13.5px;line-height:1.45;color:var(--warm)}
+/* Recording has to be visibly happening — Chris could not tell it had started. */
+.skylisten{display:flex;align-items:center;gap:10px;margin-top:var(--gap-row);
+  padding:11px 13px;border-radius:12px;background:var(--ac-8);border:1px solid var(--ac-fg);
+  font-size:14px;font-weight:600;color:var(--text)}
+.skylisten .dot{width:11px;height:11px;border-radius:50%;background:var(--bad);flex:0 0 auto;
+  animation:miclive 1s ease-in-out infinite}
+@keyframes miclive{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+
+/* A note from home, as a note. Chris asked for bigger, and for it to look
+   placed on the screen by a person rather than drawn by the app — so it is
+   warm paper, tilted a degree and a half, sitting slightly off the column
+   with a shadow under it. It is the one surface in either app that is NOT
+   the dark theme, and that is the whole point: it did not come from the app.
+
+   Dark ink on warm paper, measured: 12.8:1. It carries its own colours
+   rather than the theme tokens precisely because it is meant to look
+   foreign, so it holds in light mode and under every accent and sky. */
+.card.pnote{background:linear-gradient(170deg,#fdf3b8,#f7e58c);border:none;border-radius:3px;
+  transform:rotate(-1.4deg);margin-left:10px;margin-right:22px;padding:18px 20px 22px;
+  box-shadow:0 10px 20px -8px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.3)}
+.card.pnote .eyebrow{color:#6b5310}
+.card.pnote p{font-family:'Caveat','Bradley Hand',cursive;font-size:30px;line-height:1.22;
+  color:#2f2708;white-space:pre-line;margin:0}
+/* The bit of tape holding it on. */
+.card.pnote::before{content:'';position:absolute;top:-9px;left:50%;width:64px;height:19px;
+  transform:translateX(-50%) rotate(1.4deg);background:rgba(255,255,255,.34);
+  border-left:1px solid rgba(255,255,255,.18);border-right:1px solid rgba(255,255,255,.18)}
+.card.pnote{position:relative}
 /* A test day and its work rows share the SUBJECT's colour, so the eye links
    "History Thursday" to the History rows underneath. Deliberately carried on
    borders and a faint wash, never on the text: every reading token keeps its
@@ -1125,7 +1155,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v113 · nothing crowds a button';
+const APP_VERSION = 'v114 · the word is the answer, not the clue';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5712,6 +5742,28 @@ function skyMatch(term, alts){
     return words.some(w => w === want || dist(w, want) <= tol) || norm(t) === want;
   });
 }
+/* The clue is the DEFINITION ALONE. A card's def leads with the bold meaning
+   and then gives example sentences — and those examples use the word, which
+   hands the answer over before she has guessed. So the game shows the first
+   line only, and the examples become hints with the word blanked out. */
+const skyDefLine = c => String(c.def || '').split('\n')[0];
+const skyExamples = c => String(c.def || '').split('\n').slice(1)
+  .map(l => l.replace(/^\s*[•\-]\s*/, '').trim()).filter(Boolean);
+/* Blank the word and anything grown from it: bewail hides "bewailed",
+   detract hides "detractor", emancipate hides "Emancipation". Rooting by
+   dropping a trailing e catches the -ing and -ion forms that would otherwise
+   walk straight past an exact match. */
+function skyBlank(text, term){
+  const root = String(term || '').toLowerCase().replace(/e$/, '');
+  if(root.length < 3) return text;
+  const esc = root.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return String(text).replace(new RegExp('\\b' + esc + '\\w*', 'gi'), '____');
+}
+function skyHints(c){
+  const out = skyExamples(c).map(t => skyBlank(t, c.term));
+  if(c.hint) out.push(skyBlank(c.hint, c.term));
+  return out;
+}
 function skyLog(u){
   const lit = Object.keys(skyState.lit).length;
   if(!lit) return;
@@ -5727,12 +5779,9 @@ SCREENS.starsky = function(root){
   const cards = skyCards(u);
   if(!skyState || skyState.unitId !== u.id)
     skyState = { unitId: u.id, lit: {}, open: null, tried: {}, start: Date.now(),
-                 listening: false, verdict: null, spell: false, spellTries: 0,
-                 typed: '', reveal: false, srDead: false, logId: null };
+                 listening: false, verdict: null, won: false, spell: false,
+                 spellTries: 0, typed: '', reveal: false, hints: 0, srDead: false, logId: null };
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  /* srDead: recognition failed HARD this session (mic blocked, no service).
-     From then on spelling leads, rather than walking her into the same wall
-     on every star. */
   const voiceOK = !!SR && !skyState.srDead;
   const litCount = Object.keys(skyState.lit).length;
 
@@ -5754,8 +5803,8 @@ SCREENS.starsky = function(root){
     b.setAttribute('aria-label', skyState.lit[c.id] ? c.term : 'A star');
     b.addEventListener('click', () => {
       skyState.open = c.id; skyState.verdict = null; skyState.typed = '';
-      skyState.spellTries = 0; skyState.reveal = false;
-      skyState.spell = !voiceOK;
+      skyState.spellTries = 0; skyState.reveal = false; skyState.hints = 0;
+      skyState.won = false; skyState.spell = !voiceOK;
       render();
     });
     sky.appendChild(b);
@@ -5764,33 +5813,52 @@ SCREENS.starsky = function(root){
 
   const cur = cards.find(c => c.id === skyState.open);
   if(cur){
-    const p = el('div','card ac');
     const isLit = !!skyState.lit[cur.id];
-    p.appendChild(el('div','eyebrow', isLit ? 'You lit this one' : 'What word is this?'));
-    p.appendChild(richify(el('p'), cur.def));
+    /* The moment she gets it has to be unmistakable — Chris said the word
+       just appeared with no fanfare. A won card gets its own green panel,
+       a tick, the celebration and a buzz. */
+    const p = el('div','card ac' + (skyState.won ? ' skywon' : ''));
     if(isLit){
-      /* ONLY here does the app ever speak or show the word unprompted —
-         hearing it before a guess would hand over the answer to saying it
-         AND to spelling it, so before the star is lit there is no ear. */
-      const okEl = el('p',null, cur.term + (cur.sp ? ' — said as ' + cur.sp : ''));
-      okEl.style.fontWeight = '700'; p.appendChild(okEl);
+      p.appendChild(el('div','eyebrow', skyState.won ? '✓ You said it' : 'You lit this one'));
+      const w = el('p','skyword', cur.term);
+      p.appendChild(w);
+      /* The phonetic is SHOWN, never spoken: the voice reads the word itself
+         plainly, and a respelling read aloud is just noise. This diverges from
+         the flashcard 🔊 on purpose — see the note in the commit. */
+      if(cur.sp) p.appendChild(el('div','saidas', cur.sp));
+      p.appendChild(richify(el('p'), cur.def));
       const hear = el('button','btn btn-ghost','🔊 Hear it');
-      hear.addEventListener('click', () => say((cur.sp || cur.term).toLowerCase()));
+      hear.addEventListener('click', () => say(cur.term));
       p.appendChild(hear);
     } else {
-      if(skyState.verdict) p.appendChild(el('p',null, skyState.verdict));
+      p.appendChild(el('div','eyebrow','What word is this?'));
+      /* Definition only — the examples live behind the hint button. */
+      p.appendChild(richify(el('p'), skyDefLine(cur)));
+      const hints = skyHints(cur);
+      for(let i = 0; i < Math.min(skyState.hints, hints.length); i++)
+        p.appendChild(el('div','skyhint', hints[i]));
+      if(skyState.listening){
+        const li = el('div','skylisten');
+        li.appendChild(el('span','dot'));
+        li.appendChild(el('span',null,'Listening — say the word now'));
+        p.appendChild(li);
+      }
+      if(skyState.verdict) p.appendChild(el('p','skysay', skyState.verdict));
       const btns = el('div','btn-row');
       const markTry = () => { skyState.tried[cur.id] = (skyState.tried[cur.id] || 0) + 1; };
       const lightIt = () => {
         skyState.lit[cur.id] = true; skyState.verdict = null; skyState.typed = '';
-        skyLog(u);
-        if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
+        skyState.won = true; skyLog(u);
+        if(navigator.vibrate) navigator.vibrate([18, 40, 18]);
+        const all = Object.keys(skyState.lit).length === cards.length;
+        celebrate(all ? {big:true} : undefined);
       };
       if(voiceOK && !skyState.spell){
-        const mic = el('button','btn btn-primary', skyState.listening ? '🎤 Listening…' : '🎤 Say the word');
+        const mic = el('button','btn btn-primary', skyState.listening ? '● Listening…' : '🎤 Say the word');
         mic.disabled = skyState.listening;
         mic.addEventListener('click', () => {
           skyState.listening = true; skyState.verdict = null; render();
+          if(navigator.vibrate) navigator.vibrate(25);
           const r = new SR(); r.lang = 'en-US'; r.maxAlternatives = 5; r.interimResults = false;
           let done = false;
           r.onresult = e => { done = true; skyState.listening = false;
@@ -5798,17 +5866,11 @@ SCREENS.starsky = function(root){
             if(skyMatch(cur.term, alts)) lightIt();
             else {
               markTry();
-              skyState.verdict = 'Not quite what it heard — try once more, or spell it.';
+              skyState.verdict = 'Heard “' + (alts[0] || '').trim() + '” — not it. Try once more, or spell it.';
               if(skyState.tried[cur.id] >= 2) skyState.spell = true;
             }
             render();
           };
-          /* The error is NAMED, not shrugged at. Chrome's recognition can fail
-             for reasons that need a grown-up (mic blocked), reasons that need
-             wifi (its checking runs on a server), and reasons that just need a
-             second try (silence). Each gets its own words, and the hard ones
-             switch the whole session to spelling rather than failing again on
-             the next star. */
           r.onerror = e => { done = true; skyState.listening = false;
             const k = e.error;
             if(k === 'no-speech'){
@@ -5824,6 +5886,8 @@ SCREENS.starsky = function(root){
             } else if(k === 'audio-capture'){
               skyState.srDead = true; skyState.spell = true;
               skyState.verdict = 'No microphone could be found — spelling counts just the same.';
+            } else if(k === 'aborted'){
+              skyState.verdict = 'That one stopped early — tap and try again.';
             } else {
               markTry(); skyState.spell = true;
               skyState.verdict = 'The microphone had trouble (' + k + ') — spell it instead.';
@@ -5834,11 +5898,11 @@ SCREENS.starsky = function(root){
             skyState.verdict = 'It stopped listening before it heard you — try again.';
             if(skyState.tried[cur.id] >= 2) skyState.spell = true;
             render(); } };
-          r.start();
+          try { r.start(); }
+          catch(err){ skyState.listening = false; skyState.spell = true;
+            skyState.verdict = 'The microphone would not start — spell it instead.'; render(); }
         });
         btns.appendChild(mic);
-        /* The spell door opens only after a guess has been made and missed —
-           before that, the mic is the whole game. */
         if(skyState.tried[cur.id]){
           const sp2 = el('button','btn btn-secondary','Spell it instead');
           sp2.addEventListener('click', () => { skyState.spell = true; render(); });
@@ -5846,10 +5910,6 @@ SCREENS.starsky = function(root){
         }
       }
       if(skyState.spell){
-        /* Spelling is a real guess, checked like one — the kind:'spell' idea,
-           reused. Two wrong spells reveal the word, and typing it once still
-           lights the star: copying a word you just fought for is learning its
-           shape, and a star that takes tries still lights. Sky Map rules. */
         const ti = el('input'); ti.type = 'text';
         ti.autocapitalize = 'none'; ti.autocomplete = 'off'; ti.spellcheck = false;
         ti.placeholder = 'Spell the word';
@@ -5872,6 +5932,15 @@ SCREENS.starsky = function(root){
         btns.appendChild(chk);
       }
       p.appendChild(btns);
+      /* Hints are the example sentences with the word blanked — free, because
+         a definition alone is sometimes genuinely not enough, and a blanked
+         sentence still makes her produce the word herself. */
+      if(skyState.hints < hints.length && !skyState.listening){
+        const hb = el('button','btn btn-ghost',
+          skyState.hints ? 'Another hint' : 'Give me a hint');
+        hb.addEventListener('click', () => { skyState.hints++; render(); });
+        p.appendChild(hb);
+      }
     }
     root.appendChild(p);
   } else {
