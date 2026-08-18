@@ -1125,7 +1125,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v111 · a note from home, and the star sky';
+const APP_VERSION = 'v112 · the mic leads, the spelling answers';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5727,14 +5727,20 @@ SCREENS.starsky = function(root){
   const cards = skyCards(u);
   if(!skyState || skyState.unitId !== u.id)
     skyState = { unitId: u.id, lit: {}, open: null, tried: {}, start: Date.now(),
-                 listening: false, verdict: null, reveal: false, logId: null };
+                 listening: false, verdict: null, spell: false, spellTries: 0,
+                 typed: '', reveal: false, srDead: false, logId: null };
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  /* srDead: recognition failed HARD this session (mic blocked, no service).
+     From then on spelling leads, rather than walking her into the same wall
+     on every star. */
+  const voiceOK = !!SR && !skyState.srDead;
   const litCount = Object.keys(skyState.lit).length;
 
   const head = el('div','card');
   head.appendChild(el('div','eyebrow', u.title + ' · Star sky'));
   const hr = el('div','row');
-  hr.appendChild(el('span','k','Press a star, read the meaning, say the word'));
+  hr.appendChild(el('span','k', voiceOK ? 'Press a star, read the meaning, say the word'
+                                        : 'Press a star, read the meaning, spell the word'));
   hr.appendChild(el('span','v', litCount + ' of ' + cards.length));
   head.appendChild(hr);
   root.appendChild(head);
@@ -5747,7 +5753,9 @@ SCREENS.starsky = function(root){
     b.textContent = skyState.lit[c.id] ? '★' : '✦';
     b.setAttribute('aria-label', skyState.lit[c.id] ? c.term : 'A star');
     b.addEventListener('click', () => {
-      skyState.open = c.id; skyState.verdict = null; skyState.reveal = !!skyState.lit[c.id];
+      skyState.open = c.id; skyState.verdict = null; skyState.typed = '';
+      skyState.spellTries = 0; skyState.reveal = false;
+      skyState.spell = !voiceOK;
       render();
     });
     sky.appendChild(b);
@@ -5757,81 +5765,120 @@ SCREENS.starsky = function(root){
   const cur = cards.find(c => c.id === skyState.open);
   if(cur){
     const p = el('div','card ac');
-    p.appendChild(el('div','eyebrow', skyState.lit[cur.id] ? 'You lit this one' : 'What word is this?'));
+    const isLit = !!skyState.lit[cur.id];
+    p.appendChild(el('div','eyebrow', isLit ? 'You lit this one' : 'What word is this?'));
     p.appendChild(richify(el('p'), cur.def));
-    if(skyState.verdict === 'right'){
-      const okEl = el('p',null,'That is it — ' + cur.term + '. The star is yours.');
+    if(isLit){
+      /* ONLY here does the app ever speak or show the word unprompted —
+         hearing it before a guess would hand over the answer to saying it
+         AND to spelling it, so before the star is lit there is no ear. */
+      const okEl = el('p',null, cur.term + (cur.sp ? ' — said as ' + cur.sp : ''));
       okEl.style.fontWeight = '700'; p.appendChild(okEl);
-    } else if(skyState.verdict === 'close'){
-      p.appendChild(el('p',null, 'Not quite what the microphone heard. ' +
-        (cur.sp ? 'Said as: ' + cur.sp + '. ' : '') + 'Hear it, then try again.'));
-    } else if(skyState.verdict === 'silent'){
-      p.appendChild(el('p',null,'The microphone did not catch anything — hold the phone a little closer and try again.'));
-    }
-    if(skyState.reveal && !skyState.lit[cur.id])
-      p.appendChild(el('p',null,'The word is ' + cur.term + (cur.sp ? ' — said as ' + cur.sp : '') + '.'));
-    const btns = el('div','btn-row');
-    if(!skyState.lit[cur.id]){
-      if(SR && !skyState.reveal){
+      const hear = el('button','btn btn-ghost','🔊 Hear it');
+      hear.addEventListener('click', () => say((cur.sp || cur.term).toLowerCase()));
+      p.appendChild(hear);
+    } else {
+      if(skyState.verdict) p.appendChild(el('p',null, skyState.verdict));
+      const btns = el('div','btn-row');
+      const markTry = () => { skyState.tried[cur.id] = (skyState.tried[cur.id] || 0) + 1; };
+      const lightIt = () => {
+        skyState.lit[cur.id] = true; skyState.verdict = null; skyState.typed = '';
+        skyLog(u);
+        if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
+      };
+      if(voiceOK && !skyState.spell){
         const mic = el('button','btn btn-primary', skyState.listening ? '🎤 Listening…' : '🎤 Say the word');
         mic.disabled = skyState.listening;
         mic.addEventListener('click', () => {
           skyState.listening = true; skyState.verdict = null; render();
           const r = new SR(); r.lang = 'en-US'; r.maxAlternatives = 5; r.interimResults = false;
-          let got = false;
-          r.onresult = e => { got = true;
+          let done = false;
+          r.onresult = e => { done = true; skyState.listening = false;
             const alts = [...e.results[0]].map(a => a.transcript);
-            skyState.listening = false;
-            if(skyMatch(cur.term, alts)){
-              skyState.lit[cur.id] = true; skyState.verdict = 'right'; skyLog(u);
-              if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
-            } else {
-              skyState.tried[cur.id] = (skyState.tried[cur.id] || 0) + 1;
-              skyState.verdict = 'close';
-              /* Two honest misses buys the reveal — sounding a word out from
-                 its letters is still saying it. */
-              if(skyState.tried[cur.id] >= 2) skyState.reveal = true;
+            if(skyMatch(cur.term, alts)) lightIt();
+            else {
+              markTry();
+              skyState.verdict = 'Not quite what it heard — try once more, or spell it.';
+              if(skyState.tried[cur.id] >= 2) skyState.spell = true;
             }
             render();
           };
-          r.onerror = () => { skyState.listening = false; skyState.verdict = 'silent'; render(); };
-          r.onend = () => { if(!got && skyState.listening){ skyState.listening = false; skyState.verdict = 'silent'; render(); } };
+          /* The error is NAMED, not shrugged at. Chrome's recognition can fail
+             for reasons that need a grown-up (mic blocked), reasons that need
+             wifi (its checking runs on a server), and reasons that just need a
+             second try (silence). Each gets its own words, and the hard ones
+             switch the whole session to spelling rather than failing again on
+             the next star. */
+          r.onerror = e => { done = true; skyState.listening = false;
+            const k = e.error;
+            if(k === 'no-speech'){
+              markTry();
+              skyState.verdict = 'It did not catch anything — hold the phone closer and try again, or spell it.';
+              if(skyState.tried[cur.id] >= 2) skyState.spell = true;
+            } else if(k === 'not-allowed' || k === 'service-not-allowed'){
+              skyState.srDead = true; skyState.spell = true;
+              skyState.verdict = 'The microphone is blocked for this site, so spelling is the game today. A grown-up can allow the mic in the browser settings.';
+            } else if(k === 'network'){
+              skyState.srDead = true; skyState.spell = true;
+              skyState.verdict = 'Voice checking needs the internet and could not reach it — spelling counts just the same.';
+            } else if(k === 'audio-capture'){
+              skyState.srDead = true; skyState.spell = true;
+              skyState.verdict = 'No microphone could be found — spelling counts just the same.';
+            } else {
+              markTry(); skyState.spell = true;
+              skyState.verdict = 'The microphone had trouble (' + k + ') — spell it instead.';
+            }
+            render();
+          };
+          r.onend = () => { if(!done){ skyState.listening = false; markTry();
+            skyState.verdict = 'It stopped listening before it heard you — try again.';
+            if(skyState.tried[cur.id] >= 2) skyState.spell = true;
+            render(); } };
           r.start();
         });
         btns.appendChild(mic);
-      }
-      if(!SR || skyState.reveal){
-        /* No recognition on this device, or the reveal was earned: she says it
-           aloud and marks herself. Same honour system as "see it again
-           tomorrow" — metacognition, not surveillance. */
-        if(!skyState.reveal){
-          const rv = el('button','btn btn-primary','Show the word');
-          rv.addEventListener('click', () => { skyState.reveal = true; render(); });
-          btns.appendChild(rv);
-        } else {
-          const yes = el('button','btn btn-primary','I said it right');
-          yes.addEventListener('click', () => {
-            skyState.lit[cur.id] = true; skyState.verdict = 'right'; skyLog(u);
-            if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
-            render();
-          });
-          btns.appendChild(yes);
-          const no = el('button','btn btn-secondary','Not yet — hear it again');
-          no.addEventListener('click', () => { say((cur.sp || cur.term).toLowerCase()); });
-          btns.appendChild(no);
+        /* The spell door opens only after a guess has been made and missed —
+           before that, the mic is the whole game. */
+        if(skyState.tried[cur.id]){
+          const sp2 = el('button','btn btn-secondary','Spell it instead');
+          sp2.addEventListener('click', () => { skyState.spell = true; render(); });
+          btns.appendChild(sp2);
         }
       }
+      if(skyState.spell){
+        /* Spelling is a real guess, checked like one — the kind:'spell' idea,
+           reused. Two wrong spells reveal the word, and typing it once still
+           lights the star: copying a word you just fought for is learning its
+           shape, and a star that takes tries still lights. Sky Map rules. */
+        const ti = el('input'); ti.type = 'text';
+        ti.autocapitalize = 'none'; ti.autocomplete = 'off'; ti.spellcheck = false;
+        ti.placeholder = 'Spell the word';
+        ti.value = skyState.typed || '';
+        ti.addEventListener('input', () => { skyState.typed = ti.value; });
+        p.appendChild(ti);
+        if(skyState.reveal)
+          p.appendChild(el('p',null,'The word is ' + cur.term + ' — type it once to light the star.'));
+        const chk = el('button','btn btn-primary','Check my spelling');
+        chk.addEventListener('click', () => {
+          const norm = t => String(t).toLowerCase().replace(/[^a-z]/g, '');
+          if(norm(skyState.typed) === norm(cur.term)) lightIt();
+          else {
+            skyState.spellTries++;
+            skyState.verdict = 'Not quite — check it letter by letter.';
+            if(skyState.spellTries >= 2) skyState.reveal = true;
+          }
+          render();
+        });
+        btns.appendChild(chk);
+      }
+      p.appendChild(btns);
     }
-    const hear = el('button','btn btn-ghost','🔊 Hear it');
-    hear.addEventListener('click', () => say((cur.sp || cur.term).toLowerCase()));
-    btns.appendChild(hear);
-    p.appendChild(btns);
     root.appendChild(p);
   } else {
     const hint = el('div','card quiet');
     hint.appendChild(el('p',null, litCount === cards.length
       ? 'Every star is lit. That is the whole sky.'
-      : 'Press any star to begin. A lit star is a word you said out loud, correctly, from its meaning alone.'));
+      : 'Press any star to begin. A lit star is a word you produced yourself, from its meaning alone.'));
     root.appendChild(hint);
   }
   const leave = el('button','btn btn-ghost','Back to the unit');
