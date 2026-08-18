@@ -124,12 +124,12 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .swbar button.x{background:none;color:var(--muted);font-weight:600;padding:8px 11px}
 .pickrow{display:flex;align-items:center;justify-content:space-between;width:100%;
   min-height:var(--tap);padding:10px 13px;border-radius:12px;border:1px solid var(--line);
-  background:var(--deep);color:var(--text);font:inherit;margin-top:2px}
+  background:var(--deep);color:var(--text);font:inherit;margin-top:var(--gap-row)}
 .pickrow .cur{font-size:19px}
 .pickrow .pv{color:var(--ac-fg);font-size:12.5px;font-weight:600}
 /* The runway card: what is necessary, then what is possible. */
 .runway .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
-  padding:10px 12px;margin-top:9px;border-radius:13px;border:1px solid var(--line);
+  padding:10px 12px;margin-top:var(--gap-row);border-radius:13px;border:1px solid var(--line);
   background:var(--deep);color:var(--text);font:inherit;text-align:left}
 .runway .rw:disabled{opacity:1}
 .runway .rn{flex:0 0 auto;min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;
@@ -162,7 +162,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 /* The week ahead: five cells for the shape of the week, then the same row
    treatment the runway uses, so a door looks like a door on both cards. */
 .week .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
-  padding:10px 12px;margin-top:9px;border-radius:13px;border:1px solid var(--line);
+  padding:10px 12px;margin-top:var(--gap-row);border-radius:13px;border:1px solid var(--line);
   background:var(--deep);color:var(--text);font:inherit;text-align:left}
 .week .rn{flex:0 0 auto;min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;
   font-size:19px;font-weight:600;color:var(--ac-fg)}
@@ -288,7 +288,7 @@ button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:
 .inrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;margin-top:16px}
 .inrow label{margin-top:0}
 /* Breathing room between stacked buttons — thumbs need margins. */
-.btn+.btn,.btn-row+.btn,.btn+.btn-row{margin-top:var(--gap-row)}
+.btn+.btn,.btn-row+.btn,.btn+.btn-row,.mrow+.btn{margin-top:var(--gap-row)}
 .btn-row .btn+.btn{margin-top:0}
 .btn-sm{min-height:var(--tap);padding:8px 14px;font-size:13px;width:auto;border-radius:11px}
 /* ---- Paper study guide ---- */
@@ -1125,7 +1125,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v112 · the mic leads, the spelling answers';
+const APP_VERSION = 'v113 · nothing crowds a button';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -7795,7 +7795,6 @@ SCREENS.parent = function(root){
     withNotes.forEach(x=>{
       const c2 = CLASS_BY_ID[x.classId];
       const b = el('button','btn btn-ghost', `${c2?c2.icon+'  ':''}${x.title}`);
-      b.style.marginTop='6px';
       b.addEventListener('click',()=>go('brief',{unitId:x.id, classId:x.classId, fromParent:true}));
       mat.appendChild(b);
     });
@@ -7810,7 +7809,6 @@ SCREENS.parent = function(root){
   mrow.appendChild(mr);
   mat.appendChild(mrow);
   const libBtn = el('button','btn btn-ghost','📥  Check the library for new units');
-  libBtn.style.marginTop='8px';
   libBtn.addEventListener('click',()=>fetchLibrary(libBtn));
   mat.appendChild(libBtn);
   mat.appendChild(el('div','hintline','Pulls any new study units published with the app. They land in this review queue, never straight to her.'));
@@ -7882,7 +7880,7 @@ SCREENS.parent = function(root){
       d.appendChild(el('div','n', `${AZ.shortDate(a.date)} · answered by ${a.source==='ai'?'Claude':'the app'}`));
       if(a.a){
         const show = el('button','btn btn-ghost btn-sm','Show what she was told');
-        show.style.marginTop='8px';
+        show.style.marginTop='var(--gap-row)';
         show.addEventListener('click',()=>showModal({title:'Answer', message:a.a}));
         d.appendChild(show);
       }
