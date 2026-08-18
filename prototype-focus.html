@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" data-dir="a">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Where the eye goes</title>
+<style>
+@font-face{font-family:'Fraunces';src:url('fonts/fraunces.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Jakarta';src:url('fonts/jakarta.woff2') format('woff2');font-weight:400 800;font-display:swap}
+
+/* ============================================================
+   Where the eye goes — three answers to one problem.
+   A design prototype for Ad Astra / Wayfinder. Nothing here ships.
+   Built on the apps' OWN tokens, fonts and content, so anything
+   chosen can move across as-is.
+   ============================================================ */
+:root{
+  --ink:#04141a; --deep:#082129; --surface:#0b2a32; --raised:#123842;
+  --line:#1c4a55; --line-soft:#123039;
+  --text:#eaf6f4; --muted:#9fc4c0; --faint:#7ba39f;
+  --ac:#6fe3cd; --ac-fg:#6fe3cd;
+  --warm:#f2c48a; --good:#6fe0b8; --bad:#ff8fa8;
+  --r:20px; --tap:48px; --gap:14px; --gap-row:10px;
+  --ac-8:color-mix(in srgb,var(--ac) 8%,transparent);
+  --ac-14:color-mix(in srgb,var(--ac) 14%,transparent);
+  --ac-25:color-mix(in srgb,var(--ac) 25%,transparent);
+  /* the twelve subject hues the apps already ship, currently quarantined */
+  --bio:#3fbf8f;  --bio2:#1c6b52;
+  --phys:#e8804f; --phys2:#8a3f20;
+  --hist:#e8bd50; --hist2:#8a6a1c;
+  --eng:#f0849e;  --eng2:#8d3550;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--ink);color:var(--text);
+  font-family:'Jakarta',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;
+  padding:0 0 80px}
+h1,h2,h3,.disp{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.015em;margin:0;line-height:1.15}
+
+/* ---- the essay column ---- */
+.wrap{max-width:900px;margin:0 auto;padding:36px 20px 0}
+.eyebrow{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--ac-fg)}
+h1{font-size:38px;margin:8px 0 10px;text-wrap:balance}
+.lede{color:var(--muted);font-size:16.5px;max-width:62ch;margin:0 0 26px}
+.diag{display:grid;gap:12px;margin:0 0 34px;padding:0;list-style:none}
+.diag li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;
+  padding:13px 15px;border-radius:14px;background:var(--deep);border:1px solid var(--line-soft)}
+.diag b{font-family:'Fraunces',Georgia,serif;font-size:17px;color:var(--warm);line-height:1}
+.diag p{margin:0;font-size:14px;color:var(--muted)}
+.diag strong{color:var(--text);font-weight:700}
+
+/* ---- direction switcher ---- */
+.pick{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,var(--ink) 72%,transparent);
+  padding:14px 0 18px;margin:0 0 8px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pk{min-height:var(--tap);padding:9px 8px;border-radius:13px;border:1px solid var(--line);
+  background:var(--deep);color:var(--muted);font:inherit;font-size:12.5px;font-weight:700;
+  cursor:pointer;text-align:center;transition:transform .13s cubic-bezier(.2,.8,.3,1),filter .13s}
+.pk:active{transform:scale(.95)}
+.pk .n{display:block;font-family:'Fraunces',Georgia,serif;font-size:19px;color:var(--faint);line-height:1.1}
+.pk[aria-selected="true"]{background:var(--ac-14);border-color:var(--ac);color:var(--text)}
+.pk[aria-selected="true"] .n{color:var(--ac-fg)}
+
+.thesis{margin:0 0 20px;padding:15px 17px;border-radius:15px;background:var(--deep);
+  border-left:3px solid var(--ac)}
+.thesis h2{font-size:21px;margin:0 0 6px}
+.thesis p{margin:0;color:var(--muted);font-size:14.5px}
+.thesis .cost{margin-top:9px;font-size:13px;color:var(--faint)}
+.thesis .cost b{color:var(--warm);font-weight:700}
+
+/* ---- the phone ---- */
+.stage{display:flex;justify-content:center;padding:6px 0 40px}
+.phone{width:390px;max-width:100%;border-radius:30px;border:1px solid var(--line);
+  background:var(--ink);padding:16px 14px 20px;box-shadow:0 30px 70px -30px #000}
+.sec{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+  color:var(--faint);margin:22px 0 10px}
+
+/* ---- shared app components (as shipped today) ---- */
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);
+  padding:18px;margin-bottom:var(--gap)}
+.card.ac{border-color:var(--ac-25);background-color:var(--surface);
+  background-image:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
+.card .eyebrow{margin-bottom:5px}
+.card h3{font-size:21px;margin:0 0 4px}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:8px}
+.row .k{font-size:13.5px;color:var(--muted)}
+.row .v{font-weight:700;color:var(--ac-fg);font-variant-numeric:tabular-nums}
+.rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
+  padding:10px 12px;margin-top:var(--gap-row);border-radius:13px;border:1px solid var(--line);
+  background:var(--deep);color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.rw .rn{min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;font-size:19px;
+  font-weight:600;color:var(--ac-fg)}
+.rw .rt{flex:1;font-size:13px;line-height:1.35}
+.rw .rc{color:var(--faint);font-size:17px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:var(--gap)}
+.stat{padding:13px 12px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);
+  text-align:left;font:inherit;color:inherit;cursor:pointer}
+.stat .sv{font-family:'Fraunces',Georgia,serif;font-size:25px;line-height:1;color:var(--ac-fg)}
+.stat .sl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+  font-weight:800;margin-top:6px}
+.stat .sx{font-size:12px;color:var(--muted);margin-top:3px}
+.wkgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:12px}
+.wkday{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 2px;
+  border-radius:12px;border:1px solid var(--line);background:var(--deep)}
+.wkday .wl{font-size:10.5px;letter-spacing:.1em;font-weight:800;color:var(--muted)}
+.wkday .wm{font-size:15px;line-height:1;min-height:17px;display:flex;align-items:center}
+.wkday .dot{width:5px;height:5px;border-radius:50%;background:var(--faint)}
+.wkday.now{background:var(--ac-8);border-color:var(--ac-fg)}
+.wkday.now .wl{color:var(--ac-fg)}
+.wksum{margin-top:11px;font-size:12.5px;color:var(--muted)}
+
+/* ============================================================
+   DIRECTION A — "The subject owns the colour"
+   The accent stops being the only hue on screen. It retreats to
+   interactive-only, and everything that BELONGS to a subject wears
+   that subject's colour. Today becomes a map of subjects rather
+   than a wash of teal.
+   ============================================================ */
+[data-dir="a"] .card.subj{background-image:linear-gradient(165deg,
+    color-mix(in srgb,var(--sc) 13%,transparent),var(--surface) 62%);
+  border-color:color-mix(in srgb,var(--sc) 34%,transparent)}
+[data-dir="a"] .card.subj .eyebrow{color:var(--sc)}
+[data-dir="a"] .card.subj .rw{border-left:3px solid var(--sc)}
+[data-dir="a"] .card.subj .rw .rn{color:var(--sc)}
+[data-dir="a"] .wkday.tst{border-color:var(--sc);
+  background-image:linear-gradient(180deg,color-mix(in srgb,var(--sc) 20%,transparent),transparent)}
+[data-dir="a"] .wkday.tst .wl{color:var(--sc)}
+[data-dir="a"] .stat.s1 .sv{color:var(--bio)}
+[data-dir="a"] .stat.s2 .sv{color:var(--warm)}
+[data-dir="a"] .stat.s3 .sv{color:var(--eng)}
+
+/* ============================================================
+   DIRECTION B — "Depth, not hue"
+   Answer the flatness with TONE. Four real surface levels instead
+   of one, plus shadow. The thing that matters now sits highest and
+   brightest; everything else physically recedes. Hue barely moves —
+   this is the same palette, given a z-axis.
+   ============================================================ */
+[data-dir="b"] .card{background:var(--deep);border-color:transparent;box-shadow:none}
+[data-dir="b"] .card.ac{background-image:none;background-color:var(--raised);
+  border:1px solid var(--line);
+  box-shadow:0 18px 34px -22px #000,0 3px 8px -4px rgba(0,0,0,.6)}
+[data-dir="b"] .card.lead{background:linear-gradient(168deg,#17454f,#0e323b);
+  border:1px solid var(--ac-25);box-shadow:0 26px 48px -26px #000,0 0 0 1px var(--ac-8) inset}
+[data-dir="b"] .card.lead h3{font-size:26px}
+[data-dir="b"] .stat{background:var(--deep);border-color:transparent}
+[data-dir="b"] .rw{background:var(--surface);border-color:transparent}
+[data-dir="b"] .wkday{background:var(--surface);border-color:transparent}
+[data-dir="b"] .wkday.now{background:var(--raised);border:1px solid var(--ac-25)}
+[data-dir="b"] .sec{color:var(--faint)}
+
+/* ============================================================
+   DIRECTION C — "One loud thing"
+   Maximum focus, minimum variety. Exactly ONE card is allowed to
+   shout — the thing to do right now — carrying full-bleed subject
+   colour and display type. Everything else drops to near-silent
+   rows. The risk is obvious: on a quiet day the loud card has
+   nothing to say.
+   ============================================================ */
+[data-dir="c"] .card{background:transparent;border:none;border-top:1px solid var(--line-soft);
+  border-radius:0;padding:15px 2px;margin-bottom:0}
+[data-dir="c"] .card.ac{background-image:none}
+[data-dir="c"] .card.hero{margin:0 0 18px;padding:22px 20px 20px;border:none;border-radius:24px;
+  background:linear-gradient(150deg,var(--sc),color-mix(in srgb,var(--sc) 40%,#04141a));
+  box-shadow:0 24px 50px -24px color-mix(in srgb,var(--sc) 60%,transparent)}
+[data-dir="c"] .card.hero .eyebrow{color:rgba(255,255,255,.82)}
+[data-dir="c"] .card.hero h3{font-size:31px;color:#fff;letter-spacing:-.02em}
+[data-dir="c"] .card.hero p{color:rgba(255,255,255,.9);font-size:15px}
+[data-dir="c"] .card.hero .rw{background:rgba(0,0,0,.26);border-color:rgba(255,255,255,.2)}
+[data-dir="c"] .card.hero .rw .rn,[data-dir="c"] .card.hero .rw .rt{color:#fff}
+[data-dir="c"] .card.hero .rw .rc{color:rgba(255,255,255,.7)}
+[data-dir="c"] .strip{grid-template-columns:1fr;gap:0}
+[data-dir="c"] .stat{display:flex;align-items:baseline;gap:10px;background:transparent;
+  border:none;border-top:1px solid var(--line-soft);border-radius:0;padding:12px 2px}
+[data-dir="c"] .stat .sv{font-size:19px}
+[data-dir="c"] .stat .sl{margin:0}
+[data-dir="c"] .stat .sx{margin:0 0 0 auto;color:var(--faint)}
+[data-dir="c"] .wkday{background:transparent;border-color:var(--line-soft)}
+
+.note{max-width:900px;margin:0 auto;padding:0 20px 50px}
+.note h2{font-size:23px;margin:0 0 10px}
+.note p{color:var(--muted);font-size:14.5px;max-width:64ch}
+.note code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--warm)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow">Ad Astra &amp; Wayfinder · design prototype</div>
+  <h1>Where the eye goes</h1>
+  <p class="lede">Chris: “The main pages look too monochromatic… everything falling into
+  the background. It would be nice for the right things to be the center of attention.”
+  Three answers, on the same Today screen, with the same real content. Nothing here ships
+  until it is picked.</p>
+
+  <ul class="diag">
+    <li><b>1</b><p><strong>One hue does every job.</strong> The accent marks eyebrows,
+      numbers, buttons, meters, the active tab, borders and progress. When a single colour
+      means “important”, “interactive”, “active” and “decorative” at once, it stops meaning
+      any of them.</p></li>
+    <li><b>2</b><p><strong>Every surface sits at the same depth.</strong>
+      <code>--ink</code> and <code>--surface</code> are a few points apart, and cards
+      separate by a 1px border rather than by tone. Nothing is foreground, so nothing
+      recedes — which is exactly the flat feeling.</p></li>
+    <li><b>3</b><p><strong>The subject colours are quarantined.</strong> Twelve real hues
+      already ship — jade, ember, gold, rose — and they appear only on subject tiles, book
+      spines and the new week strip. The screens where she actually works never see them.</p></li>
+  </ul>
+
+  <div class="pick">
+    <div class="picks" role="tablist">
+      <button class="pk" role="tab" aria-selected="true" data-d="a"><span class="n">A</span>Subject owns the colour</button>
+      <button class="pk" role="tab" aria-selected="false" data-d="b"><span class="n">B</span>Depth, not hue</button>
+      <button class="pk" role="tab" aria-selected="false" data-d="c"><span class="n">C</span>One loud thing</button>
+    </div>
+  </div>
+
+  <div class="thesis" id="th"></div>
+</div>
+
+<div class="stage">
+  <div class="phone" id="phone"></div>
+</div>
+
+<div class="note">
+  <h2>What I would actually do</h2>
+  <p><strong>B for the structure, A for the colour, and C only for the quiz.</strong>
+  Depth fixes the flatness without adding a single new hue, so it costs nothing in
+  restraint — and it makes “the thing to do now” legible even on a day with no colour to
+  give it. A then spends colour where it already carries meaning: the subject. That keeps
+  the accent for what is <em>tappable</em>, which is the job it should have had all along.</p>
+  <p>C is the risk. It is genuinely more engaging, and on a quiet day it has nothing to
+  shout about — a loud empty card is worse than a quiet full one. It belongs where there is
+  always one obvious next action: inside a unit, not on Today.</p>
+  <p>Everything above is built from the apps' own tokens, so whatever is chosen moves
+  across as CSS, not as a rewrite. The subject hues are <code>SUBJECT_PALETTE</code>
+  already in both apps; the depth levels are <code>--deep</code>, <code>--surface</code>
+  and <code>--raised</code>, all of which already exist and two of which are barely used.</p>
+</div>
+
+<script>
+const TH = {
+  a:{h:'Subject owns the colour',
+     p:'The accent retreats to one job — things you can tap. Every card that belongs to a subject wears that subject’s hue, so Today reads as a map of Biology, Physics and History rather than a wash of teal. The colour already means something; this just stops hiding it.',
+     c:'<b>Cost:</b> more hues on one screen. Held in check because a subject hue only ever appears where that subject is the topic — it is never decoration.'},
+  b:{h:'Depth, not hue',
+     p:'Same palette, given a z-axis. Four real surface levels instead of one, plus shadow. What matters now sits highest and brightest; the rest physically recedes. This is the unshipped prototype3 thesis — surfaces, not outlines — carried through the whole screen.',
+     c:'<b>Cost:</b> shadows on a dark ground are subtle, and can read as muddy if the levels are too close. The levels here are deliberately far apart.'},
+  c:{h:'One loud thing',
+     p:'Exactly one card is allowed to shout: the thing to do right now, in full-bleed subject colour and display type. Everything else drops to near-silent rows. Maximum focus, and the strongest answer to “nothing is the centre of attention”.',
+     c:'<b>Cost:</b> on a quiet day the loud card has nothing to say, and a loud empty card is worse than a quiet full one. Best where a next action always exists.'}
+};
+const SCREEN = d => `
+  <div class="sec">Today</div>
+  <div class="card${d==='b'?' ac':''}">
+    <div class="eyebrow">Monday, August 17</div>
+    <h3>School day is over</h3>
+    <p>Best window for studying — it is still fresh.</p>
+  </div>
+
+  ${d==='c' ? `
+  <div class="card hero" style="--sc:var(--bio)">
+    <div class="eyebrow">Do this now</div>
+    <h3>Biology · Biomolecules</h3>
+    <p>Quiz on Thursday. Twelve questions are waiting for you.</p>
+    <button class="rw"><span class="rn">12</span><span class="rt">review questions due</span><span class="rc">›</span></button>
+  </div>` : ''}
+
+  <div class="card ac${d==='a'?' subj':''}${d==='b'?' lead':''}" style="--sc:var(--bio)">
+    <div class="eyebrow">The week ahead</div>
+    <div class="wkgrid">
+      <div class="wkday now"><div class="wl">M</div><div class="wm"><span class="dot"></span></div></div>
+      <div class="wkday"><div class="wl">T</div><div class="wm"><span class="dot"></span></div></div>
+      <div class="wkday"><div class="wl">W</div><div class="wm"><span class="dot"></span></div></div>
+      <div class="wkday ${d==='a'?'tst':''}" style="--sc:var(--bio)"><div class="wl">T</div><div class="wm">📝</div></div>
+      <div class="wkday"><div class="wl">F</div><div class="wm"><span class="dot"></span></div></div>
+    </div>
+    <div class="wksum">Thursday: Biology quiz</div>
+    ${d==='c' ? '' : `
+    <button class="rw"><span class="rn">12</span><span class="rt">review questions due in Biology 8</span><span class="rc">›</span></button>
+    <button class="rw"><span class="rn">3</span><span class="rt">lessons open · pick up Unit 2: Biomolecules</span><span class="rc">›</span></button>`}
+  </div>
+
+  <div class="strip">
+    <button class="stat s1"><div class="sv">12</div><div class="sl">To review</div><div class="sx">Growth Zone ›</div></button>
+    <button class="stat s2"><div class="sv">86</div><div class="sl">Read this month</div><div class="sx">minutes ›</div></button>
+    <button class="stat s3"><div class="sv">4</div><div class="sl">Level</div><div class="sx">1,429 XP ›</div></button>
+  </div>
+
+  <div class="sec">Coming up</div>
+  <div class="card${d==='a'?' subj':''}" style="--sc:var(--hist)">
+    <div class="eyebrow">History 8</div>
+    <h3>Unit 1 test</h3>
+    <p>Friday · in 4 days</p>
+  </div>
+  <div class="card${d==='a'?' subj':''}" style="--sc:var(--phys)">
+    <div class="eyebrow">Physics 8</div>
+    <h3>Kinematics lab write-up</h3>
+    <p>Next Tuesday · in 8 days</p>
+  </div>`;
+
+const phone = document.getElementById('phone'), th = document.getElementById('th');
+function paint(d){
+  document.documentElement.dataset.dir = d;
+  phone.innerHTML = SCREEN(d);
+  th.innerHTML = '<h2>'+TH[d].h+'</h2><p>'+TH[d].p+'</p><div class="cost">'+TH[d].c+'</div>';
+  document.querySelectorAll('.pk').forEach(b => b.setAttribute('aria-selected', String(b.dataset.d===d)));
+}
+document.querySelectorAll('.pk').forEach(b => b.addEventListener('click', () => paint(b.dataset.d)));
+paint('a');
+</script>
+</body>
+</html>

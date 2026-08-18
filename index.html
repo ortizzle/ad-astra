@@ -754,6 +754,33 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   #screen.enter>*:nth-child(4){animation-delay:.09s}
   #screen.enter>*:nth-child(n+5){animation-delay:.12s}
   .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active{transform:scale(.98)}
+}
+/* ---- Press ----
+   The old press was a 1.5% squeeze, which on a phone is invisible. This is a
+   real one: the control drops, darkens and tightens, and comes back on a
+   spring rather than a linear fade. Held inside no-preference like every
+   other motion in the app.
+
+   Two rules keep it honest: nothing MOVES layout (transform only, so no
+   reflow on touch), and the press is on :active only, so a stuck hover state
+   on a touch device can never leave a control looking pressed. */
+@media (prefers-reduced-motion: no-preference){
+  .btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.wkday,.act,.tool,.chip,.back-chip{
+    transition:transform .13s cubic-bezier(.2,.8,.3,1), filter .13s ease, box-shadow .13s ease;
+    will-change:transform}
+  .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active,.mtile:active,
+  .rw:active,.stat:active,.pickrow:active,.wkday:active,.act:active,.tool:active,
+  .chip:active,.back-chip:active{
+    transform:scale(.955) translateY(1px);filter:brightness(.88)}
+  /* The primary action presses deepest — it is the one with the most weight. */
+  .btn-primary:active{transform:scale(.94) translateY(1px);filter:brightness(.86)}
+  /* A star is a point of light, so it flares instead of dimming. */
+  .skystar{transition:transform .13s cubic-bezier(.2,.8,.3,1),filter .13s ease}
+  .skystar:active{transform:translate(-50%,-50%) scale(1.35);filter:brightness(1.5)}
+  .nav-btn{transition:transform .13s cubic-bezier(.2,.8,.3,1)}
+  .nav-btn:active{transform:scale(.9)}
+}
+@media (prefers-reduced-motion: no-preference){
   .bar i{transition:width .5s cubic-bezier(.2,.7,.3,1)}
 }
 @keyframes rise{from{opacity:0;transform:translateY(6px)}}
@@ -1155,7 +1182,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v114 · the word is the answer, not the clue';
+const APP_VERSION = 'v115 · press, and a note that sends you home';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2222,6 +2249,26 @@ function seasonalSky(){
 }
 /* Read a word or term aloud with the browser's built-in speech — offline,
    free, nothing sent anywhere. One at a time; a new tap cancels the last. */
+/* ---- Press feedback (Ad Astra v115 / Wayfinder v93) ----
+   Chris asked for more press on the buttons, and for haptics where they are
+   possible. Two channels, because the girls are on different phones:
+   navigator.vibrate on River's Android, and NOTHING on Sedona's iPhone —
+   iOS ignores it entirely, which the focus timer already learned the hard
+   way. So a press is carried first by MOTION, which every device has, and
+   the buzz is a bonus where it lands.
+
+   One delegated listener rather than per-button wiring: every control in
+   both apps is created through el(), so anything that looks pressable gets
+   this for free, including screens not written yet. */
+const TAPPY = '.btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.wkday,.skystar,.act,.tool,.nav-btn,.chip,.back-chip';
+function tapBuzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+document.addEventListener('pointerdown', e => {
+  const t = e.target && e.target.closest && e.target.closest(TAPPY);
+  if(!t || t.disabled) return;
+  /* 8ms is under the threshold where a buzz reads as an alert — it reads as
+     the button having weight. Long enough to feel, short enough to ignore. */
+  tapBuzz(8);
+}, {passive:true});
 function say(text){
   try{
     speechSynthesis.cancel();
@@ -7422,6 +7469,8 @@ SCREENS.parent = function(root){
   pnb.addEventListener('click',()=>{
     put({ id:'pnote', type:'pnote', text: pnta.value.trim() });
     syncSoon(); toast(pnta.value.trim() ? 'Posted to her Today screen' : 'Note taken down');
+    /* Posting is a finished errand — go and look at it. */
+    go('today');
   });
   pnc.appendChild(pnb);
   root.appendChild(pnc);
