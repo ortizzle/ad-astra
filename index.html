@@ -1064,7 +1064,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v106 · the week ahead';
+const APP_VERSION = 'v107 · pick the round back up';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5497,12 +5497,42 @@ SCREENS.quiz = function(root){
   if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
   /* Also restart when the mode changes, so switching between the normal quiz
      and Beat the clock never resumes the other one's half-finished run. */
-  if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed)
-    quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
-      order:pickRound(u, !!ctx.timed),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
-      timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[], items:[],
-      limit:quizLimit(), runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0};
-    if(quizState.timed) startQuestionTimer(u);   // sets the deadline synchronously
+  if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed){
+    /* Pick the round back up if one was left today on this same unit. */
+    const saved = loadRound(u, !!ctx.timed);
+    if(saved){
+      quizState = saved;
+      /* The save fires at the END of answer(), before Next advances the index,
+         so a round parked mid-question has `answered` set on a question that
+         is already counted in seen/correct. Resuming without stepping past it
+         would re-ask it and let her answer the same question twice. */
+      if(quizState.answered !== null && quizState.answered !== undefined) quizState.i++;
+      /* Land her ON a question, never on a revealed answer, with fresh clocks. */
+      quizState.answered = null;
+      quizState.hintUsed = false;
+      quizState.qShownAt = Date.now();
+      quizState.perm = null; quizState.permFor = -1;
+    }
+    if(saved && quizState.i >= quizState.order.length){
+      /* She answered the last one and never tapped through to the results —
+         there is no question left to return to, so start clean. */
+      clearRound(); quizState = null;
+    } else if(saved){
+      toast('Picked up where you left off');
+    }
+    if(!quizState){
+      quizState = {unitId:u.id,i:0,correct:0,answered:null,start:Date.now(),
+        order:pickRound(u, !!ctx.timed),missed:[],hintUsed:false,hints:0,pre:ctx.pre||null,
+        timed:!!ctx.timed, speedBonus:0, fastest:null, deadline:0, seen:[], items:[],
+        limit:quizLimit(), runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0};
+    }
+    /* Inside the branch now, and deliberately: this line sat outside an
+       unbraced if, so the countdown restarted on EVERY render of the quiz
+       screen — revealing a hint handed her a fresh clock. The deadline is
+       meant to be an absolute timestamp precisely so a re-render cannot
+       reset it. Beat the clock only. */
+    if(quizState.timed) startQuestionTimer(u);
+  }
   const q = u.questions[quizState.order[quizState.i]];
 
   const head = el('div','card');
@@ -5738,10 +5768,15 @@ SCREENS.quiz = function(root){
      was lost. Log what she answered first, then go. */
   tool('✕','Leave',()=>{
     stopQuestionTimer();
-    if(quizState && !quizState.settled && (quizState.seen||[]).length){
-      const qu = unitFor(quizState.unitId);
-      if(qu) finishQuiz(qu, true);
-    }
+    /* Leaving now behaves exactly like the screen going to sleep: the partial
+       round is logged so the work counts, her place is saved so she can pick
+       it up, and NOTHING is settled. Deliberately changed from v78, where
+       Leave settled the ladder and discarded the round — which made the
+       commonest accidental tap the one that cost her the most. She keeps the
+       XP either way; now she keeps the round too. */
+    const qu = unitFor(quizState && quizState.unitId);
+    persistRound();
+    if(qu) saveRound(qu);
     quizState = null;
     go(back[0],back[1]);
   });
@@ -5820,6 +5855,10 @@ function answer(u,q,idx){
             on:(was&&!was.deleted?was.on:AZ.today()) }, false));
     }
   }
+  /* Saved on every answer, once every field above is settled. A phone screen
+     that sleeps and drops the page fires no pagehide, so waiting for the
+     backgrounding hooks is not enough — this is the one that saves River. */
+  saveRound(u);
   render();
 }
 /* Order questions grade the whole sequence — exact order counts, anything else
@@ -5853,6 +5892,44 @@ function answerOrder(u,q){
    the only thing at risk was the session record, and that is what this
    saves. If she comes back and finishes, finishQuiz updates this same log
    in place — quizState.logId is what keeps it to one record. */
+/* ---- Resuming a round (v107) ----
+   quizState is memory only, so a refresh, a killed PWA, or a screen sleep long
+   enough to drop the page lost her PLACE in the round. Her CREDIT already
+   survived — persistRound writes the log when the app backgrounds — but coming
+   back to question 1 of 5 feels like losing work, and feeling like you lost
+   work is what stops a kid coming back at all.
+
+   Device-local, never a record. A half-finished round is a snapshot of one
+   moment; syncing it would drop it onto her other device mid-question. Same
+   reasoning that keeps the review unit out of DATA.records.
+
+   Synthetic rounds (__review__, __shuffle__, __rescue__) are deliberately NOT
+   saved. They are assembled fresh from whatever is due right now, so a stored
+   order would point at questions the ladder may have moved past. They already
+   resume in spirit: an abandoned round settles nothing, so the same misses are
+   still waiting next time. */
+const ROUND_KEY = 'round';
+const realUnit = id => !!id && !String(id).startsWith('__');
+/* The order is a list of INDEXES into u.questions, so if the unit is edited
+   and re-approved underneath a saved round those indexes silently point at
+   different questions. Fingerprinting the ids makes that detectable. */
+const roundPrint = (u, order) =>
+  (order || []).map(i => u.questions[i] && u.questions[i].id).join(',');
+function saveRound(u){
+  if(!quizState || quizState.settled || !realUnit(quizState.unitId)) return;
+  if(!u || !(quizState.seen || []).length) return;   // opened and never answered
+  Store.set(ROUND_KEY, {...quizState, date: AZ.today(), print: roundPrint(u, quizState.order)});
+}
+const clearRound = () => Store.remove(ROUND_KEY);
+function loadRound(u, timed){
+  const s = Store.get(ROUND_KEY);
+  if(!s || s.unitId !== u.id || !!s.timed !== !!timed) return null;
+  /* Yesterday's half-round is not today's sitting. */
+  if(s.date !== AZ.today()){ clearRound(); return null; }
+  if(s.print !== roundPrint(u, s.order)){ clearRound(); return null; }
+  if(!s.order || !s.order.length || s.i >= s.order.length){ clearRound(); return null; }
+  return s;
+}
 function persistRound(){
   if(!quizState || quizState.settled) return;
   const seen = (quizState.seen || []).length;
@@ -5873,8 +5950,12 @@ function persistRound(){
 /* visibilitychange covers switching apps and locking the phone — the cases a
    PWA actually meets. pagehide covers a real close or reload. beforeunload is
    deliberately not used: mobile browsers fire it unreliably. */
-document.addEventListener('visibilitychange', ()=>{ if(document.hidden) persistRound(); });
-window.addEventListener('pagehide', persistRound);
+/* Both hooks save the PLACE as well as the log — a sleeping screen that drops
+   the page is the commonest way a round ends on a phone. */
+const parkRound = ()=>{ const u = unitFor(quizState && quizState.unitId);
+                        persistRound(); if(u) saveRound(u); };
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) parkRound(); });
+window.addEventListener('pagehide', parkRound);
 
 function finishQuiz(u, partial){
   /* `settled` guards the LADDER, not the log. A round may already have written
@@ -5882,6 +5963,7 @@ function finishQuiz(u, partial){
      then UPDATES that same record rather than adding a second one. */
   if(quizState.settled) return;
   quizState.settled = true;
+  clearRound();          // the round is over; nothing left to come back to
   const total = partial ? quizState.seen.length : quizState.order.length;
   if(!total){ quizState = null; return; }
   const pct = Math.round(quizState.correct/total*100);
