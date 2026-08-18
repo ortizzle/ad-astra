@@ -135,6 +135,28 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .runway .rt{flex:1;font-size:13px;line-height:1.35}
 .runway .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
 .runway .rhours{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+/* ---- Letting the sky through (Ad Astra v108 / Wayfinder v87) ----
+   The cards above the fold sit over the starfield and the shooting stars, and
+   an opaque card is a hole punched in the sky exactly where she looks first.
+   These three go translucent so the comet reads through them.
+
+   --glass is the knob. It is NOT a free parameter: .card.ac was made opaque in
+   the first place because bright stars were punching through its 8% gradient
+   corner behind the eyebrow. So the alpha here is the lowest that still clears
+   4.5:1 for every reading token against the worst case — a star at full
+   brightness directly behind the text — measured, not guessed. Lower it and
+   re-measure, or the sky starts eating words. */
+:root{ --glass:.90; }
+/* The strip is deliberately NOT in this list. Measured against a star at full
+   brightness behind the text: --text, --muted and --ac-fg all clear 4.5:1 at
+   .90, but --faint does not clear at ANY transparency (4.83 opaque, 4.05 at
+   .94, 3.59 at .90). The day and week cards use no --faint; the strip's tile
+   labels do. So the two big cards let the sky through and the strip stays
+   solid, rather than dropping a reading token below the bar for the look. */
+.card.ac.daycard, .card.ac.week{
+  background-color:color-mix(in srgb, var(--surface) calc(var(--glass)*100%), transparent);
+  backdrop-filter:blur(2px);
+}
 /* The week ahead: five cells for the shape of the week, then the same row
    treatment the runway uses, so a door looks like a door on both cards. */
 .week .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
@@ -1064,7 +1086,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v107 · pick the round back up';
+const APP_VERSION = 'v108 · the sky through the glass';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
