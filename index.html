@@ -15,6 +15,8 @@
    family names as before, so every font-family rule below is untouched.
    No CDN: the look can no longer be lost to a filtered or hanging network,
    and the first paint stops waiting on a third party. */
+@font-face{font-family:'Caveat';src:url('fonts/caveat.woff2') format('woff2');
+  font-weight:600;font-display:swap}
 @font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;
   font-display:swap;src:url(fonts/fraunces.woff2) format('woff2-variations')}
 @font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;
@@ -177,6 +179,23 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .wkday.now{background:var(--ac-8);border-color:var(--ac-fg)}
 .wkday.now .wl{color:var(--ac-fg)}
 .wkday.past{opacity:.5}
+/* The star sky: River's game. Stars are buttons, full tap size, positioned on
+   a seeded grid so the same unit always draws the same sky. Lit stars go the
+   gilt gold the finished-book spines use — earned, never currency. */
+.skyfield{position:relative;height:340px;border-radius:var(--r);border:1px solid var(--line);
+  background:linear-gradient(180deg,#050a18,#0a1230 70%,#0d1738);overflow:hidden;margin-bottom:var(--gap)}
+.skystar{position:absolute;transform:translate(-50%,-50%);min-width:var(--tap);min-height:var(--tap);
+  background:none;border:none;color:#8fa3c8;font-size:17px;cursor:pointer;
+  text-shadow:0 0 6px rgba(160,190,255,.55)}
+.skystar.lit{color:#f8e7b4;font-size:21px;text-shadow:0 0 10px rgba(248,231,180,.75)}
+.skystar.open{color:#fff}
+/* A note from home: the parent's own words on her Today screen, set in a
+   hand-written face so it reads as a note left on the counter rather than the
+   app talking. The text is verbatim and uncurated — it is the parent's voice,
+   so the copy rules that bind our strings do not apply to it. */
+.pnote p{font-family:'Caveat','Bradley Hand',cursive;font-size:23px;line-height:1.3;
+  color:var(--text);white-space:pre-line;margin:0}
+.pnote{border-left:3px solid var(--warm)}
 /* A test day and its work rows share the SUBJECT's colour, so the eye links
    "History Thursday" to the History rows underneath. Deliberately carried on
    borders and a faint wash, never on the text: every reading token keeps its
@@ -1106,7 +1125,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v110 · what you came here to do, first';
+const APP_VERSION = 'v111 · a note from home, and the star sky';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2037,18 +2056,36 @@ function weekAhead(date){
      at. Same rule applied across every test in the week. */
   const lead = tests.length ? pickTest(tests) : null;
   const focusCid = lead ? lead.classId : null;
+  /* EVERY subject with a test day this week highlights its rows — not only the
+     single focus. Chris caught this on River's phone: two test days, and only
+     one subject's rows lit, so the other quiz looked like it had no work. */
+  const testCids = [...new Set(days.filter(d => d.lead).map(d => d.lead.classId))];
 
   /* At most three lines, and each one has to be a door. The order is: what a
      test this week demands, then the subject the plan is most worried about,
      then her own aim. Never a fourth — a list of everything is the whole week
      restated as debt, which is the thing the runway already refuses to do. */
   const lines = [], usedClass = new Set();
-  const addSubject = cid => {
+  const addSubject = (cid, fromTest) => {
     const cls = CLASS_BY_ID[cid];
     if(!cls || usedClass.has(cid) || lines.length >= 3) return;
     const due = dueMisses().filter(m => m.classId === cid).length;
     const open = units(cid).filter(u => u.questions.length && !unitDone(u));
-    if(!due && !open.length) return;
+    if(!due && !open.length){
+      /* A test-day subject with nothing due and nothing open would otherwise
+         vanish from its own week — a coloured day with no row beneath it.
+         River's History did exactly this: her one approved unit finished, the
+         next still in the draft queue. Mixed practice is the honest offer;
+         interleaving old material is real revision, not busywork. Only for
+         test subjects, and only when the subject has questions at all. */
+      if(fromTest && units(cid).some(u2 => u2.questions.length) && lines.length < 3){
+        usedClass.add(cid);
+        lines.push({ n:'↻', cid, kind:'mix',
+          text:'all caught up in ' + cls.name + ' — a mixed round keeps it sharp',
+          go: ()=>{ if(buildShuffleUnit(cid)) go('quiz',{unitId:'__shuffle__', classId:cid}); } });
+      }
+      return;
+    }
     usedClass.add(cid);
     if(due) lines.push({ n: due, cid,
       text: 'review question' + (due === 1 ? '' : 's') + ' due in ' + cls.name,
@@ -2067,14 +2104,14 @@ function weekAhead(date){
         go: () => launchQuiz(pick.id, cid, false) });
     }
   };
-  tests.forEach(t => addSubject(t.classId));
+  tests.forEach(t => addSubject(t.classId, true));
   studyPlan(date).forEach(p => addSubject(p.classId));
 
   const intent = prefs().intent;
   if(intent && intent.week === AZ.weekStart(date) && intent.text && lines.length < 3)
     lines.push({ aim: true, text: intent.text, done: !!intent.done });
 
-  return { days, monday, friday, tests, lines, lead, focusCid,
+  return { days, monday, friday, tests, lines, lead, focusCid, testCids,
            /* the runway yields to this when its test is inside the week */
            covers: d => d >= monday && d <= friday };
 }
@@ -2470,6 +2507,7 @@ const focusLogs = () => all('focus').sort((a,b)=>b.at-a.at);
    card). What is shown is what was done, how it went, and how long. */
 function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
+  if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
   if(l.mode==='readfin') return 'Finished a book';
   if(l.mode==='quiz'){
@@ -3437,6 +3475,18 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
+  /* A note from home — the parent's words, shown while they have one posted.
+     Singleton record like prefs, so it syncs to her device and the newest
+     edit wins. Nothing here is graded, counted or gamified; it is a sticky
+     note, not a mechanic. */
+  const pn = DATA.records['pnote'];
+  if(pn && !pn.deleted && (pn.text||'').trim()){
+    const pc = el('div','card pnote');
+    pc.appendChild(el('div','eyebrow','A note from home'));
+    pc.appendChild(el('p',null, pn.text.trim()));
+    root.appendChild(pc);
+  }
+
   /* ---- The week ahead. Takes the space the period list used to hold. ---- */
   const wk = weekAhead(date);
   /* The runway yields when its test is inside this week — the week card is
@@ -3498,8 +3548,8 @@ SCREENS.today = function(root){
       }
       /* A work row for the week's focus subject carries the same colour as the
          day that made it urgent. */
-      const b = el('button','rw'+(L.cid && L.cid === wk.focusCid ? ' lead' : ''));
-      if(L.cid && L.cid === wk.focusCid && CLASS_BY_ID[L.cid])
+      const b = el('button','rw'+(L.cid && wk.testCids.includes(L.cid) ? ' lead' : ''));
+      if(L.cid && wk.testCids.includes(L.cid) && CLASS_BY_ID[L.cid])
         b.style.setProperty('--pc', classColor(CLASS_BY_ID[L.cid]));
       b.appendChild(el('span','rn', String(L.n)));
       b.appendChild(el('span','rt', L.text));
@@ -4210,6 +4260,14 @@ function unitCard(u, c, label){
     row.appendChild(modeTile('clock','Beat the clock','race your pace',()=>launchQuiz(u.id,c.id,true)));
   }
   card.appendChild(row);
+  /* River's game, offered where it fits: vocabulary shelves built from single
+     words. Other units keep their three doors — a physics question is not a
+     word you can say. */
+  if(/wordly wise/i.test(u.title)){
+    const sk = el('button','btn btn-secondary','🌌  Star sky — say the words');
+    sk.addEventListener('click',()=>{ skyState = null; go('starsky',{unitId:u.id, classId:c.id}); });
+    card.appendChild(sk);
+  }
   return card;
 }
 
@@ -5584,6 +5642,203 @@ SCREENS.checkin = function(root){
 };
 
 /* ================= QUIZ ================= */
+
+/* ---- The star sky (v111 / Wayfinder v89) ----
+   River asked for this one, by name: a night sky where pressing a star shows
+   a definition, and then she has to SAY the word out loud. It is retrieval
+   practice run backwards — definition to word, spoken rather than tapped —
+   which is exactly the direction a vocabulary quiz asks for and the direction
+   flashcards practise least.
+
+   Rules that are the point:
+   - Voice checking uses the browser's speech recognition where it exists
+     (Chrome on their Pixels has it). The app NEVER records or stores audio;
+     the transcript is compared and discarded. Where recognition is missing,
+     she reveals the word and marks herself — same honour system as "see it
+     again tomorrow".
+   - A star that takes several tries still lights. Sky Map rules: showing up
+     counts, and a hard word is information, not a fault.
+   - No new record types. One ordinary log (mode:'starsky') updated in place
+     as she goes, so leaving early keeps her minutes and XP.
+   - Ponder cards are excluded — they are dinner-table prompts, not words.
+   - Ships on Wordly Wise units only for now: the game needs single-word
+     terms, and that is the shelf built from single words. */
+let skyState = null;
+const SKY_XP = 4;
+function skyCards(u){
+  return u.cards.filter(c => !/^ponder/i.test(c.term));
+}
+/* Deterministic star positions: same unit, same sky, nothing stored. Grid
+   cells keep stars a tap apart; the hash jitters them so it reads as sky
+   rather than as a chart. */
+function skySpots(n, seed){
+  let h = 2166136261;
+  for(const ch of seed){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  const rnd = () => ((h = Math.imul(h ^ (h >>> 15), 2246822507)) >>> 0) / 4294967296;
+  const cols = Math.ceil(Math.sqrt(n)), rows = Math.ceil(n / cols);
+  const cells = [];
+  for(let i = 0; i < cols * rows; i++) cells.push(i);
+  for(let i = cells.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); [cells[i], cells[j]] = [cells[j], cells[i]]; }
+  return Array.from({length:n}, (_, i) => {
+    const c = cells[i] % cols, r = Math.floor(cells[i] / cols);
+    return { x: (c + 0.24 + rnd() * 0.52) / cols * 100, y: (r + 0.24 + rnd() * 0.52) / rows * 100 };
+  });
+}
+/* Match the transcript to the word. Recognition returns whole phrases and
+   sometimes near-spellings, so: exact word in the phrase first, then an edit
+   distance the length of the word can absorb. Deliberately forgiving — the
+   goal is saying the word, not defeating a microphone. */
+function skyMatch(term, alts){
+  const norm = t => String(t).toLowerCase().replace(/[^a-z]/g, '');
+  const want = norm(term);
+  if(!want) return false;
+  const dist = (a, b) => {
+    if(Math.abs(a.length - b.length) > 2) return 9;
+    let prev = Array.from({length: b.length + 1}, (_, i) => i);
+    for(let i = 0; i < a.length; i++){
+      const cur = [i + 1];
+      for(let j = 0; j < b.length; j++)
+        cur.push(Math.min(prev[j + 1] + 1, cur[j] + 1, prev[j] + (a[i] === b[j] ? 0 : 1)));
+      prev = cur;
+    }
+    return prev[b.length];
+  };
+  /* One edit of slack up to eight letters, two beyond. Two edits on a short
+     word accepts a DIFFERENT word — adept/inept are two edits apart — and a
+     wrong word accepted is worse for learning than a right one re-asked. */
+  const tol = want.length <= 8 ? 1 : 2;
+  return (alts || []).some(t => {
+    const words = String(t).toLowerCase().split(/\s+/).map(norm).filter(Boolean);
+    return words.some(w => w === want || dist(w, want) <= tol) || norm(t) === want;
+  });
+}
+function skyLog(u){
+  const lit = Object.keys(skyState.lit).length;
+  if(!lit) return;
+  skyState.logId = skyState.logId || uid('log');
+  put({ id: skyState.logId, type:'log', mode:'starsky', classId: ctx.classId, unitId: u.id,
+        date: AZ.today(), at: skyState.start, correct: lit, total: skyCards(u).length,
+        seconds: Math.round((Date.now() - skyState.start) / 1000),
+        xp: lit * SKY_XP, hints: 0 });
+}
+SCREENS.starsky = function(root){
+  const u = unitFor(ctx.unitId);
+  if(!u || !u.cards.length) return go('unit', {classId: ctx.classId});
+  const cards = skyCards(u);
+  if(!skyState || skyState.unitId !== u.id)
+    skyState = { unitId: u.id, lit: {}, open: null, tried: {}, start: Date.now(),
+                 listening: false, verdict: null, reveal: false, logId: null };
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const litCount = Object.keys(skyState.lit).length;
+
+  const head = el('div','card');
+  head.appendChild(el('div','eyebrow', u.title + ' · Star sky'));
+  const hr = el('div','row');
+  hr.appendChild(el('span','k','Press a star, read the meaning, say the word'));
+  hr.appendChild(el('span','v', litCount + ' of ' + cards.length));
+  head.appendChild(hr);
+  root.appendChild(head);
+
+  const sky = el('div','skyfield');
+  const spots = skySpots(cards.length, u.id);
+  cards.forEach((c, i) => {
+    const b = el('button','skystar' + (skyState.lit[c.id] ? ' lit' : '') + (skyState.open === c.id ? ' open' : ''));
+    b.style.left = spots[i].x + '%'; b.style.top = spots[i].y + '%';
+    b.textContent = skyState.lit[c.id] ? '★' : '✦';
+    b.setAttribute('aria-label', skyState.lit[c.id] ? c.term : 'A star');
+    b.addEventListener('click', () => {
+      skyState.open = c.id; skyState.verdict = null; skyState.reveal = !!skyState.lit[c.id];
+      render();
+    });
+    sky.appendChild(b);
+  });
+  root.appendChild(sky);
+
+  const cur = cards.find(c => c.id === skyState.open);
+  if(cur){
+    const p = el('div','card ac');
+    p.appendChild(el('div','eyebrow', skyState.lit[cur.id] ? 'You lit this one' : 'What word is this?'));
+    p.appendChild(richify(el('p'), cur.def));
+    if(skyState.verdict === 'right'){
+      const okEl = el('p',null,'That is it — ' + cur.term + '. The star is yours.');
+      okEl.style.fontWeight = '700'; p.appendChild(okEl);
+    } else if(skyState.verdict === 'close'){
+      p.appendChild(el('p',null, 'Not quite what the microphone heard. ' +
+        (cur.sp ? 'Said as: ' + cur.sp + '. ' : '') + 'Hear it, then try again.'));
+    } else if(skyState.verdict === 'silent'){
+      p.appendChild(el('p',null,'The microphone did not catch anything — hold the phone a little closer and try again.'));
+    }
+    if(skyState.reveal && !skyState.lit[cur.id])
+      p.appendChild(el('p',null,'The word is ' + cur.term + (cur.sp ? ' — said as ' + cur.sp : '') + '.'));
+    const btns = el('div','btn-row');
+    if(!skyState.lit[cur.id]){
+      if(SR && !skyState.reveal){
+        const mic = el('button','btn btn-primary', skyState.listening ? '🎤 Listening…' : '🎤 Say the word');
+        mic.disabled = skyState.listening;
+        mic.addEventListener('click', () => {
+          skyState.listening = true; skyState.verdict = null; render();
+          const r = new SR(); r.lang = 'en-US'; r.maxAlternatives = 5; r.interimResults = false;
+          let got = false;
+          r.onresult = e => { got = true;
+            const alts = [...e.results[0]].map(a => a.transcript);
+            skyState.listening = false;
+            if(skyMatch(cur.term, alts)){
+              skyState.lit[cur.id] = true; skyState.verdict = 'right'; skyLog(u);
+              if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
+            } else {
+              skyState.tried[cur.id] = (skyState.tried[cur.id] || 0) + 1;
+              skyState.verdict = 'close';
+              /* Two honest misses buys the reveal — sounding a word out from
+                 its letters is still saying it. */
+              if(skyState.tried[cur.id] >= 2) skyState.reveal = true;
+            }
+            render();
+          };
+          r.onerror = () => { skyState.listening = false; skyState.verdict = 'silent'; render(); };
+          r.onend = () => { if(!got && skyState.listening){ skyState.listening = false; skyState.verdict = 'silent'; render(); } };
+          r.start();
+        });
+        btns.appendChild(mic);
+      }
+      if(!SR || skyState.reveal){
+        /* No recognition on this device, or the reveal was earned: she says it
+           aloud and marks herself. Same honour system as "see it again
+           tomorrow" — metacognition, not surveillance. */
+        if(!skyState.reveal){
+          const rv = el('button','btn btn-primary','Show the word');
+          rv.addEventListener('click', () => { skyState.reveal = true; render(); });
+          btns.appendChild(rv);
+        } else {
+          const yes = el('button','btn btn-primary','I said it right');
+          yes.addEventListener('click', () => {
+            skyState.lit[cur.id] = true; skyState.verdict = 'right'; skyLog(u);
+            if(Object.keys(skyState.lit).length === cards.length) celebrate({big:true});
+            render();
+          });
+          btns.appendChild(yes);
+          const no = el('button','btn btn-secondary','Not yet — hear it again');
+          no.addEventListener('click', () => { say((cur.sp || cur.term).toLowerCase()); });
+          btns.appendChild(no);
+        }
+      }
+    }
+    const hear = el('button','btn btn-ghost','🔊 Hear it');
+    hear.addEventListener('click', () => say((cur.sp || cur.term).toLowerCase()));
+    btns.appendChild(hear);
+    p.appendChild(btns);
+    root.appendChild(p);
+  } else {
+    const hint = el('div','card quiet');
+    hint.appendChild(el('p',null, litCount === cards.length
+      ? 'Every star is lit. That is the whole sky.'
+      : 'Press any star to begin. A lit star is a word you said out loud, correctly, from its meaning alone.'));
+    root.appendChild(hint);
+  }
+  const leave = el('button','btn btn-ghost','Back to the unit');
+  leave.addEventListener('click', () => { skyLog(u); skyState = null; go('unit', {classId: ctx.classId}); });
+  root.appendChild(leave);
+};
+
 let quizState = null;
 let reviewUnit = null;
 
@@ -7038,6 +7293,23 @@ SCREENS.parent = function(root){
      setup group stays collapsed behind its own button, so it costs one line
      until it is wanted. */
   /* Assessments */
+  /* The note that shows on her Today, in a handwritten face. Verbatim. */
+  const pnc = el('div','card');
+  pnc.appendChild(el('div','eyebrow','A note from home'));
+  pnc.appendChild(el('p',null,'A few words on her Today screen, in handwriting. Post it to put it up; clear it and post to take it down.'));
+  const pnta = el('textarea'); pnta.rows = 2;
+  const pnRec = DATA.records['pnote'];
+  pnta.value = (pnRec && !pnRec.deleted && pnRec.text) || '';
+  pnta.placeholder = 'Good luck on the quiz today — we love you.';
+  pnc.appendChild(pnta);
+  const pnb = el('button','btn btn-secondary','Post it');
+  pnb.addEventListener('click',()=>{
+    put({ id:'pnote', type:'pnote', text: pnta.value.trim() });
+    syncSoon(); toast(pnta.value.trim() ? 'Posted to her Today screen' : 'Note taken down');
+  });
+  pnc.appendChild(pnb);
+  root.appendChild(pnc);
+
   root.appendChild(divider('Tests & quizzes'));
   const asc = el('div','card');
   const list = assessments();
