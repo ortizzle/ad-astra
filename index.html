@@ -1106,7 +1106,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v109 · the week in the subject colour';
+const APP_VERSION = 'v110 · what you came here to do, first';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -7031,6 +7031,245 @@ SCREENS.parent = function(root){
   tdCard.appendChild(dayBtn);
   root.appendChild(tdCard);
 
+  /* Order (v110): the two things a grown-up OPENS this screen to do — add a
+     test, or reach the setup tools — now sit directly under Today, above the
+     reporting. Everything below Activity is something you read; these two are
+     things you act on, and they were buried under five report sections. The
+     setup group stays collapsed behind its own button, so it costs one line
+     until it is wanted. */
+  /* Assessments */
+  root.appendChild(divider('Tests & quizzes'));
+  const asc = el('div','card');
+  const list = assessments();
+  if(!list.length) asc.appendChild(el('p',null,'None added yet. Add tests and quizzes here and the app builds study recommendations around them.'));
+  list.slice().reverse().slice(0,12).forEach(a=>{
+    const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
+    const r = el('div','row');
+    const kk = el('span','k',`${k.ic} ${a.title}`);
+    kk.appendChild(el('small',null,`${c?c.name:''} · ${AZ.shortDate(a.date)}`));
+    r.appendChild(kk);
+    const v = el('button','btn btn-ghost btn-sm', assessLabel(a) || 'Add score');
+    v.addEventListener('click',()=>editAssessment(a));
+    r.appendChild(v); asc.appendChild(r);
+  });
+  root.appendChild(asc);
+  /* One-tap adds from the newsletter — accepting writes a normal assess
+     record; dismissing tombstones the same id so it stays handled everywhere. */
+  const sugs = SUGGESTED_ASSESS.filter(sg => sg.date >= date && !DATA.records['assess_'+sg.id]);
+  if(sugs.length){
+    const sgc = el('div','card');
+    sgc.appendChild(el('div','eyebrow','From the newsletter'));
+    sugs.forEach(sg=>{
+      const c2 = CLASS_BY_ID[sg.classId];
+      const rr = el('div','row');
+      const kk = el('span','k',`${c2?c2.icon+' ':''}${sg.title}`);
+      kk.appendChild(el('small',null,AZ.shortDate(sg.date)));
+      rr.appendChild(kk);
+      const act = el('span');
+      const ab = el('button','btn btn-sm btn-secondary','Add');
+      ab.addEventListener('click',()=>{
+        put({ id:'assess_'+sg.id, type:'assess', classId:sg.classId, kind:sg.kind,
+              title:sg.title, date:sg.date, score:null });
+        syncSoon(); toast('Added to tests'); render();
+      });
+      const xb = el('button','btn btn-sm btn-ghost','✕');
+      xb.setAttribute('aria-label','Dismiss suggestion');
+      xb.addEventListener('click',()=>{
+        put({ id:'assess_'+sg.id, type:'assess', deleted:true });
+        syncSoon(); render();
+      });
+      act.appendChild(ab); act.appendChild(xb);
+      rr.appendChild(act); sgc.appendChild(rr);
+    });
+    root.appendChild(sgc);
+  }
+  const add = el('button','btn btn-primary','＋  Add a test or quiz');
+  add.addEventListener('click',()=>editAssessment(null)); root.appendChild(add);
+
+  /* Self-checks: her own rubric judgement, and the real score beside it. The
+     gap is the point — it says whether she can see her work as a marker does,
+     which is worth more than either number alone. */
+  /* Everything below is setup, not daily use — collapsed so the daily
+     things stay within thumb's reach. */
+  root.appendChild(divider('Setup & maintenance'));
+  const mtb = el('button','btn btn-secondary', ctx._more
+    ? 'Hide the setup tools'
+    : 'Show the setup tools — class details, sync, AI key, backup, sandbox & resets');
+  mtb.addEventListener('click',()=>{ ctx._more = !ctx._more; render(); });
+  root.appendChild(mtb);
+  if(ctx._more){
+  root.appendChild(divider('Class details'));
+  const rost = el('div','card');
+  rost.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
+  const r = roster();
+  const nameIn = el('input'); nameIn.type='text'; nameIn.placeholder='First name'; nameIn.value=r.studentName;
+  nameIn.addEventListener('change',()=>{ setRoster('studentName', nameIn.value.trim()); toast('Saved'); render(); });
+  rost.appendChild(el('label',null,'Student')); rost.appendChild(nameIn);
+  const schoolIn = el('input'); schoolIn.type='text'; schoolIn.placeholder='School'; schoolIn.value=r.school;
+  schoolIn.addEventListener('change',()=>{ setRoster('school', schoolIn.value.trim()); toast('Saved'); render(); });
+  rost.appendChild(el('label',null,'School')); rost.appendChild(schoolIn);
+  const bkIn = el('input'); bkIn.type='url'; bkIn.placeholder='https://drive.google.com/drive/folders/…'; bkIn.value=r.backupUrl;
+  bkIn.addEventListener('change',()=>{ setRoster('backupUrl', bkIn.value.trim()); toast('Saved'); render(); });
+  rost.appendChild(el('label',null,'Backup folder link')); rost.appendChild(bkIn);
+  rost.appendChild(el('label',null,'Teachers'));
+  STUDY_CLASSES.forEach(c=>{
+    const row = el('div','row');
+    row.appendChild(el('span','k',`${c.icon} ${c.short}`));
+    const i = el('input'); i.type='text'; i.placeholder='—'; i.value = teacherOf(c.id);
+    i.style.width='58%'; i.style.minHeight='40px'; i.style.fontSize='14px';
+    i.addEventListener('change',()=>{
+      const t = {...roster().teachers}; const v = i.value.trim();
+      if(v) t[c.id]=v; else delete t[c.id];
+      setRoster('teachers', t); toast('Saved');
+    });
+    row.appendChild(i); rost.appendChild(row);
+  });
+  root.appendChild(rost);
+
+  root.appendChild(divider('Shared sync'));
+  const sc = el('div','card');
+  sc.appendChild(el('p',null,'A private GitHub Gist keeps progress and study material identical on every device — her phone and yours.'));
+  const gid = el('input'); gid.type='text'; gid.placeholder='Gist ID'; gid.value=Store.get('gist_id','');
+  const gtk = el('input'); gtk.type='password'; gtk.placeholder='GitHub token (gist scope)'; gtk.value=Store.get('gist_token','');
+  sc.appendChild(el('label',null,'Gist ID')); sc.appendChild(gid);
+  sc.appendChild(el('label',null,'GitHub token')); sc.appendChild(gtk);
+  sc.appendChild(el('div','hintline','Both stay in this browser only, never in the page source and never inside the Gist itself. A token with just the "gist" scope is enough.'));
+  const sv = el('button','btn btn-secondary','Save sync settings');
+  sv.addEventListener('click',()=>{ Store.set('gist_id',gid.value.trim()); Store.set('gist_token',gtk.value.trim());
+    toast('Saved'); render(); });
+  sc.appendChild(sv);
+  if(Sync.configured()){
+    const last = Store.get('last_sync',0);
+    sc.appendChild(el('div','hintline', last?`Last sync ${new Date(last).toLocaleString()}`:'Not synced yet.'));
+    const row = el('div','btn-row');
+    const up = el('button','btn btn-primary','↑ Push');
+    up.addEventListener('click',async()=>{
+      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
+      up.textContent='Syncing…';
+      try{ await Sync.save(); toast('Synced'); }catch(e){ toast('Sync failed'); } render(); });
+    const dn = el('button','btn btn-secondary','↓ Pull');
+    dn.addEventListener('click',async()=>{
+      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
+      dn.textContent='Loading…';
+      try{ await Sync.load(); toast('Up to date'); }catch(e){ toast('Pull failed'); } render(); });
+    row.appendChild(up); row.appendChild(dn); sc.appendChild(row);
+  }
+  root.appendChild(sc);
+
+  root.appendChild(divider('AI features'));
+  const ac2 = el('div','card');
+  ac2.appendChild(el('p',null,'An Anthropic API key powers the tutor and turns class notes into study units. Everything else in the app works without one.'));
+  const key = el('input'); key.type='password'; key.placeholder='sk-ant-…';
+  key.value = Store.get('anthropic_key','');
+  ac2.appendChild(el('label',null,'Anthropic API key')); ac2.appendChild(key);
+  ac2.appendChild(el('div','hintline','Stored in this browser only. Never in the page source, never synced.'));
+  const sk = el('button','btn btn-secondary','Save key');
+  sk.addEventListener('click',()=>{ Store.set('anthropic_key', key.value.trim()); toast('Saved'); });
+  ac2.appendChild(sk); root.appendChild(ac2);
+
+  /* Backup to Drive. A web page cannot write to Drive without a Google OAuth
+     client and a backend, which this app deliberately does not have — so hand
+     the file to Android's share sheet, where "Save to Drive" is one tap.
+     Desktop falls back to a normal download. */
+  root.appendChild(divider('Backup'));
+  const bc2 = el('div','card');
+  const brow = el('div','btn-row');
+  const ex = el('button','btn btn-primary','⬇ Back up');
+  ex.addEventListener('click', async ()=>{
+    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
+    const name = `ad-astra-${AZ.today()}.json`;
+    const json = JSON.stringify(DATA,null,2);
+    const f = new File([json], name, {type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[f]})){
+      try{
+        await navigator.share({files:[f], title:'Ad Astra backup',
+          text:'Save this to the Ad Astra Backups folder in Drive.'});
+        Store.set('last_backup',Date.now()); toast('Sent to share sheet'); render(); return;
+      }catch(err){ if(err && err.name==='AbortError') return; }
+    }
+    const blob = new Blob([json],{type:'application/json'});
+    const a = el('a'); a.href=URL.createObjectURL(blob); a.download=name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    Store.set('last_backup',Date.now()); toast('Downloaded'); render();
+  });
+  const fileIn = el('input'); fileIn.type='file'; fileIn.accept='.json'; fileIn.className='sr';
+  fileIn.addEventListener('change',e=>{
+    const f = e.target.files[0]; if(!f) return;
+    const rd = new FileReader();
+    rd.onload = ()=>{ try{ DATA = Sync.merge(DATA, migrate(JSON.parse(rd.result))); saveLocal();
+      applyTheme(); toast('Imported and merged'); render(); }catch(err){ toast('That file could not be read'); } };
+    rd.readAsText(f);
+  });
+  const im = el('button','btn btn-secondary','⬆ Restore');
+  im.addEventListener('click',()=>{ if(sandboxOn()){ toast('Turn sandbox off first'); return; } fileIn.click(); });
+  brow.appendChild(ex); brow.appendChild(im);
+  bc2.appendChild(brow); bc2.appendChild(fileIn);
+  const lb = Store.get('last_backup',0);
+  bc2.appendChild(el('div','hintline', (lb?`Last backup ${new Date(lb).toLocaleDateString()}. `:'No backup yet. ')
+    + 'On a phone this opens the share sheet — choose Drive, then the Ad Astra Backups folder.'));
+  const dl = el('a','hintline','Open the Ad Astra Backups folder in Drive →');
+  dl.href = roster().backupUrl || 'https://drive.google.com';
+  dl.target = '_blank'; dl.rel = 'noopener';
+  dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
+  bc2.appendChild(dl);
+  root.appendChild(bc2);
+
+  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
+     progress records only (content, tests, goals and personalization stay). */
+  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
+     progress records only (content, tests, goals and personalization stay). */
+  root.appendChild(divider('Testing & reset'));
+  const tst = el('div','card');
+  tst.appendChild(el('p',null,'Sandbox lets you try quizzes, the tutor and the timer without touching her real data. While it is on, nothing is saved or synced on this device, and everything done in it is discarded when it goes off.'));
+  const sbBtn = el('button','btn btn-secondary', sandboxOn() ? 'Turn sandbox off' : 'Turn sandbox on');
+  sbBtn.addEventListener('click',()=>setSandbox(!sandboxOn()));
+  tst.appendChild(sbBtn);
+  tst.appendChild(el('div','hintline','Per device — it only affects the phone or browser it is switched on in.'));
+  root.appendChild(tst);
+
+  const fr = el('div','card');
+  fr.appendChild(el('p',null,'Fresh start clears all progress — sessions, XP, streak, the Growth Zone, question history, check-ins, tutor questions and badges — on every synced device. Study units, tests, goals, class details and personalization stay.'));
+  const frBtn = el('button','btn btn-secondary','Fresh start');
+  frBtn.addEventListener('click',()=>{
+    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
+    const doomed = Object.values(DATA.records).filter(r=>r && !r.deleted && PROGRESS_TYPES.includes(r.type));
+    if(!doomed.length){ toast('Nothing to clear'); return; }
+    showModal({
+      title:'Fresh start',
+      message:`This clears ${doomed.length} progress record${doomed.length===1?'':'s'} everywhere the app syncs. Study material and settings stay. There is no undo — back up first if in doubt.`,
+      confirmText:'Clear progress', cancelText:'Cancel',
+      onConfirm: async ()=>{
+        doomed.forEach(r=>softDelete(r.id));
+        if(Sync.configured()){
+          try{ await Sync.save(); toast('Cleared and synced'); }
+          catch(e){ toast('Cleared here — sync failed, push again later'); }
+        } else toast('Cleared');
+        render();
+      }
+    });
+  });
+  fr.appendChild(frBtn);
+  root.appendChild(fr);
+
+  /* Parent-side bridge to the sister app — the girls' sides stay unlinked
+     on purpose (identity, and no reason to wander). Grown-up areas only. */
+  const sib = el('a','btn btn-ghost','🧭  Wayfinder’s grown-up tools →');
+  sib.href = 'https://ortizzle.github.io/wayfinder/'; sib.target = '_blank'; sib.rel = 'noopener';
+  sib.style.textDecoration = 'none';
+  root.appendChild(sib);
+
+  if(Store.get('parent_trust',false)){
+    const tr = el('button','btn btn-ghost','Require the passcode again on this device');
+    tr.addEventListener('click',()=>{ Store.remove('parent_trust'); toast('This device will ask again'); render(); });
+    root.appendChild(tr);
+  }
+  const chg = el('button','btn btn-ghost','Change passcode');
+  chg.addEventListener('click',()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); go('setup'); });
+  root.appendChild(chg);
+  const back = el('button','btn btn-ghost','← Done');
+  back.addEventListener('click',()=>go('setup')); root.appendChild(back);
+  }
   root.appendChild(divider('Activity, last 7 days'));
   const actA = AZ.shift(date,-6), actB7 = AZ.shift(date,-7), actB14 = AZ.shift(date,-13);
   const actL = logs(), actF = focusLogs();
@@ -7194,58 +7433,6 @@ SCREENS.parent = function(root){
     root.appendChild(mc);
   }
 
-  /* Assessments */
-  root.appendChild(divider('Tests & quizzes'));
-  const asc = el('div','card');
-  const list = assessments();
-  if(!list.length) asc.appendChild(el('p',null,'None added yet. Add tests and quizzes here and the app builds study recommendations around them.'));
-  list.slice().reverse().slice(0,12).forEach(a=>{
-    const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
-    const r = el('div','row');
-    const kk = el('span','k',`${k.ic} ${a.title}`);
-    kk.appendChild(el('small',null,`${c?c.name:''} · ${AZ.shortDate(a.date)}`));
-    r.appendChild(kk);
-    const v = el('button','btn btn-ghost btn-sm', assessLabel(a) || 'Add score');
-    v.addEventListener('click',()=>editAssessment(a));
-    r.appendChild(v); asc.appendChild(r);
-  });
-  root.appendChild(asc);
-  /* One-tap adds from the newsletter — accepting writes a normal assess
-     record; dismissing tombstones the same id so it stays handled everywhere. */
-  const sugs = SUGGESTED_ASSESS.filter(sg => sg.date >= date && !DATA.records['assess_'+sg.id]);
-  if(sugs.length){
-    const sgc = el('div','card');
-    sgc.appendChild(el('div','eyebrow','From the newsletter'));
-    sugs.forEach(sg=>{
-      const c2 = CLASS_BY_ID[sg.classId];
-      const rr = el('div','row');
-      const kk = el('span','k',`${c2?c2.icon+' ':''}${sg.title}`);
-      kk.appendChild(el('small',null,AZ.shortDate(sg.date)));
-      rr.appendChild(kk);
-      const act = el('span');
-      const ab = el('button','btn btn-sm btn-secondary','Add');
-      ab.addEventListener('click',()=>{
-        put({ id:'assess_'+sg.id, type:'assess', classId:sg.classId, kind:sg.kind,
-              title:sg.title, date:sg.date, score:null });
-        syncSoon(); toast('Added to tests'); render();
-      });
-      const xb = el('button','btn btn-sm btn-ghost','✕');
-      xb.setAttribute('aria-label','Dismiss suggestion');
-      xb.addEventListener('click',()=>{
-        put({ id:'assess_'+sg.id, type:'assess', deleted:true });
-        syncSoon(); render();
-      });
-      act.appendChild(ab); act.appendChild(xb);
-      rr.appendChild(act); sgc.appendChild(rr);
-    });
-    root.appendChild(sgc);
-  }
-  const add = el('button','btn btn-primary','＋  Add a test or quiz');
-  add.addEventListener('click',()=>editAssessment(null)); root.appendChild(add);
-
-  /* Self-checks: her own rubric judgement, and the real score beside it. The
-     gap is the point — it says whether she can see her work as a marker does,
-     which is worth more than either number alone. */
   const scs = selfChecks();
   if(scs.length){
     root.appendChild(divider('Her own rubric checks'));
@@ -7484,187 +7671,6 @@ SCREENS.parent = function(root){
   root.appendChild(mc);
 
 
-  /* Everything below is setup, not daily use — collapsed so the daily
-     things stay within thumb's reach. */
-  root.appendChild(divider('Setup & maintenance'));
-  const mtb = el('button','btn btn-secondary', ctx._more
-    ? 'Hide the setup tools'
-    : 'Show the setup tools — class details, sync, AI key, backup, sandbox & resets');
-  mtb.addEventListener('click',()=>{ ctx._more = !ctx._more; render(); });
-  root.appendChild(mtb);
-  if(ctx._more){
-  root.appendChild(divider('Class details'));
-  const rost = el('div','card');
-  rost.appendChild(el('p',null,'Her name, school and teachers are kept out of the app’s public code. Add them once here and they sync to every device.'));
-  const r = roster();
-  const nameIn = el('input'); nameIn.type='text'; nameIn.placeholder='First name'; nameIn.value=r.studentName;
-  nameIn.addEventListener('change',()=>{ setRoster('studentName', nameIn.value.trim()); toast('Saved'); render(); });
-  rost.appendChild(el('label',null,'Student')); rost.appendChild(nameIn);
-  const schoolIn = el('input'); schoolIn.type='text'; schoolIn.placeholder='School'; schoolIn.value=r.school;
-  schoolIn.addEventListener('change',()=>{ setRoster('school', schoolIn.value.trim()); toast('Saved'); render(); });
-  rost.appendChild(el('label',null,'School')); rost.appendChild(schoolIn);
-  const bkIn = el('input'); bkIn.type='url'; bkIn.placeholder='https://drive.google.com/drive/folders/…'; bkIn.value=r.backupUrl;
-  bkIn.addEventListener('change',()=>{ setRoster('backupUrl', bkIn.value.trim()); toast('Saved'); render(); });
-  rost.appendChild(el('label',null,'Backup folder link')); rost.appendChild(bkIn);
-  rost.appendChild(el('label',null,'Teachers'));
-  STUDY_CLASSES.forEach(c=>{
-    const row = el('div','row');
-    row.appendChild(el('span','k',`${c.icon} ${c.short}`));
-    const i = el('input'); i.type='text'; i.placeholder='—'; i.value = teacherOf(c.id);
-    i.style.width='58%'; i.style.minHeight='40px'; i.style.fontSize='14px';
-    i.addEventListener('change',()=>{
-      const t = {...roster().teachers}; const v = i.value.trim();
-      if(v) t[c.id]=v; else delete t[c.id];
-      setRoster('teachers', t); toast('Saved');
-    });
-    row.appendChild(i); rost.appendChild(row);
-  });
-  root.appendChild(rost);
-
-  root.appendChild(divider('Shared sync'));
-  const sc = el('div','card');
-  sc.appendChild(el('p',null,'A private GitHub Gist keeps progress and study material identical on every device — her phone and yours.'));
-  const gid = el('input'); gid.type='text'; gid.placeholder='Gist ID'; gid.value=Store.get('gist_id','');
-  const gtk = el('input'); gtk.type='password'; gtk.placeholder='GitHub token (gist scope)'; gtk.value=Store.get('gist_token','');
-  sc.appendChild(el('label',null,'Gist ID')); sc.appendChild(gid);
-  sc.appendChild(el('label',null,'GitHub token')); sc.appendChild(gtk);
-  sc.appendChild(el('div','hintline','Both stay in this browser only, never in the page source and never inside the Gist itself. A token with just the "gist" scope is enough.'));
-  const sv = el('button','btn btn-secondary','Save sync settings');
-  sv.addEventListener('click',()=>{ Store.set('gist_id',gid.value.trim()); Store.set('gist_token',gtk.value.trim());
-    toast('Saved'); render(); });
-  sc.appendChild(sv);
-  if(Sync.configured()){
-    const last = Store.get('last_sync',0);
-    sc.appendChild(el('div','hintline', last?`Last sync ${new Date(last).toLocaleString()}`:'Not synced yet.'));
-    const row = el('div','btn-row');
-    const up = el('button','btn btn-primary','↑ Push');
-    up.addEventListener('click',async()=>{
-      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
-      up.textContent='Syncing…';
-      try{ await Sync.save(); toast('Synced'); }catch(e){ toast('Sync failed'); } render(); });
-    const dn = el('button','btn btn-secondary','↓ Pull');
-    dn.addEventListener('click',async()=>{
-      if(sandboxOn()){ toast('Sandbox is on — nothing syncs'); return; }
-      dn.textContent='Loading…';
-      try{ await Sync.load(); toast('Up to date'); }catch(e){ toast('Pull failed'); } render(); });
-    row.appendChild(up); row.appendChild(dn); sc.appendChild(row);
-  }
-  root.appendChild(sc);
-
-  root.appendChild(divider('AI features'));
-  const ac2 = el('div','card');
-  ac2.appendChild(el('p',null,'An Anthropic API key powers the tutor and turns class notes into study units. Everything else in the app works without one.'));
-  const key = el('input'); key.type='password'; key.placeholder='sk-ant-…';
-  key.value = Store.get('anthropic_key','');
-  ac2.appendChild(el('label',null,'Anthropic API key')); ac2.appendChild(key);
-  ac2.appendChild(el('div','hintline','Stored in this browser only. Never in the page source, never synced.'));
-  const sk = el('button','btn btn-secondary','Save key');
-  sk.addEventListener('click',()=>{ Store.set('anthropic_key', key.value.trim()); toast('Saved'); });
-  ac2.appendChild(sk); root.appendChild(ac2);
-
-  /* Backup to Drive. A web page cannot write to Drive without a Google OAuth
-     client and a backend, which this app deliberately does not have — so hand
-     the file to Android's share sheet, where "Save to Drive" is one tap.
-     Desktop falls back to a normal download. */
-  root.appendChild(divider('Backup'));
-  const bc2 = el('div','card');
-  const brow = el('div','btn-row');
-  const ex = el('button','btn btn-primary','⬇ Back up');
-  ex.addEventListener('click', async ()=>{
-    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
-    const name = `ad-astra-${AZ.today()}.json`;
-    const json = JSON.stringify(DATA,null,2);
-    const f = new File([json], name, {type:'application/json'});
-    if(navigator.canShare && navigator.canShare({files:[f]})){
-      try{
-        await navigator.share({files:[f], title:'Ad Astra backup',
-          text:'Save this to the Ad Astra Backups folder in Drive.'});
-        Store.set('last_backup',Date.now()); toast('Sent to share sheet'); render(); return;
-      }catch(err){ if(err && err.name==='AbortError') return; }
-    }
-    const blob = new Blob([json],{type:'application/json'});
-    const a = el('a'); a.href=URL.createObjectURL(blob); a.download=name;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-    Store.set('last_backup',Date.now()); toast('Downloaded'); render();
-  });
-  const fileIn = el('input'); fileIn.type='file'; fileIn.accept='.json'; fileIn.className='sr';
-  fileIn.addEventListener('change',e=>{
-    const f = e.target.files[0]; if(!f) return;
-    const rd = new FileReader();
-    rd.onload = ()=>{ try{ DATA = Sync.merge(DATA, migrate(JSON.parse(rd.result))); saveLocal();
-      applyTheme(); toast('Imported and merged'); render(); }catch(err){ toast('That file could not be read'); } };
-    rd.readAsText(f);
-  });
-  const im = el('button','btn btn-secondary','⬆ Restore');
-  im.addEventListener('click',()=>{ if(sandboxOn()){ toast('Turn sandbox off first'); return; } fileIn.click(); });
-  brow.appendChild(ex); brow.appendChild(im);
-  bc2.appendChild(brow); bc2.appendChild(fileIn);
-  const lb = Store.get('last_backup',0);
-  bc2.appendChild(el('div','hintline', (lb?`Last backup ${new Date(lb).toLocaleDateString()}. `:'No backup yet. ')
-    + 'On a phone this opens the share sheet — choose Drive, then the Ad Astra Backups folder.'));
-  const dl = el('a','hintline','Open the Ad Astra Backups folder in Drive →');
-  dl.href = roster().backupUrl || 'https://drive.google.com';
-  dl.target = '_blank'; dl.rel = 'noopener';
-  dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
-  bc2.appendChild(dl);
-  root.appendChild(bc2);
-
-  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
-     progress records only (content, tests, goals and personalization stay). */
-  /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
-     progress records only (content, tests, goals and personalization stay). */
-  root.appendChild(divider('Testing & reset'));
-  const tst = el('div','card');
-  tst.appendChild(el('p',null,'Sandbox lets you try quizzes, the tutor and the timer without touching her real data. While it is on, nothing is saved or synced on this device, and everything done in it is discarded when it goes off.'));
-  const sbBtn = el('button','btn btn-secondary', sandboxOn() ? 'Turn sandbox off' : 'Turn sandbox on');
-  sbBtn.addEventListener('click',()=>setSandbox(!sandboxOn()));
-  tst.appendChild(sbBtn);
-  tst.appendChild(el('div','hintline','Per device — it only affects the phone or browser it is switched on in.'));
-  root.appendChild(tst);
-
-  const fr = el('div','card');
-  fr.appendChild(el('p',null,'Fresh start clears all progress — sessions, XP, streak, the Growth Zone, question history, check-ins, tutor questions and badges — on every synced device. Study units, tests, goals, class details and personalization stay.'));
-  const frBtn = el('button','btn btn-secondary','Fresh start');
-  frBtn.addEventListener('click',()=>{
-    if(sandboxOn()){ toast('Turn sandbox off first'); return; }
-    const doomed = Object.values(DATA.records).filter(r=>r && !r.deleted && PROGRESS_TYPES.includes(r.type));
-    if(!doomed.length){ toast('Nothing to clear'); return; }
-    showModal({
-      title:'Fresh start',
-      message:`This clears ${doomed.length} progress record${doomed.length===1?'':'s'} everywhere the app syncs. Study material and settings stay. There is no undo — back up first if in doubt.`,
-      confirmText:'Clear progress', cancelText:'Cancel',
-      onConfirm: async ()=>{
-        doomed.forEach(r=>softDelete(r.id));
-        if(Sync.configured()){
-          try{ await Sync.save(); toast('Cleared and synced'); }
-          catch(e){ toast('Cleared here — sync failed, push again later'); }
-        } else toast('Cleared');
-        render();
-      }
-    });
-  });
-  fr.appendChild(frBtn);
-  root.appendChild(fr);
-
-  /* Parent-side bridge to the sister app — the girls' sides stay unlinked
-     on purpose (identity, and no reason to wander). Grown-up areas only. */
-  const sib = el('a','btn btn-ghost','🧭  Wayfinder’s grown-up tools →');
-  sib.href = 'https://ortizzle.github.io/wayfinder/'; sib.target = '_blank'; sib.rel = 'noopener';
-  sib.style.textDecoration = 'none';
-  root.appendChild(sib);
-
-  if(Store.get('parent_trust',false)){
-    const tr = el('button','btn btn-ghost','Require the passcode again on this device');
-    tr.addEventListener('click',()=>{ Store.remove('parent_trust'); toast('This device will ask again'); render(); });
-    root.appendChild(tr);
-  }
-  const chg = el('button','btn btn-ghost','Change passcode');
-  chg.addEventListener('click',()=>{ Store.remove('parent_hash'); toast('Passcode cleared'); go('setup'); });
-  root.appendChild(chg);
-  const back = el('button','btn btn-ghost','← Done');
-  back.addEventListener('click',()=>go('setup')); root.appendChild(back);
-  }
 };
 
 /* Subject colour picker — swatches show the real gradient so what she taps is
