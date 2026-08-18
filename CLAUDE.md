@@ -721,6 +721,45 @@ Two cascade traps, both real, both caught by rendering rather than reading:
 `prototype-focus.html` stays as the reference; it is a dev artifact, not cached
 by the service worker and not linked from the app.
 
+### The batch of four (v118 / Wayfinder v96, both apps)
+
+Four small improvements from the v117 review's idea list, shipped together.
+
+**The resume door on Today.** A round parked earlier today renders as a hero
+card — "Pick your round back up · <unit> · N of M answered" — straight back
+into the quiz. Rules that are the point:
+
+- **It outranks every suggestion, and the generic hero yields to it** (`pkLive`
+  joins the dupe conditions): a half-finished round is not advice, it is her
+  own work made findable.
+- **Same validity rules as `loadRound`, WITHOUT consuming the save** — today
+  only, a real approved unit, matching question fingerprint. The quiz screen
+  still owns the actual pickup.
+- **The save fires before Next advances**, so an answered question still sits
+  at `pk.i` — the door's "questions left" check steps past it the way the
+  quiz's own resume does, or it shows for a finished round and tapping it
+  starts a fresh one (caught live: "3 of 3 answered" with nothing to resume).
+- `saveRound` now stores `classId` (it lived only in nav ctx), so the door can
+  route without guessing at `__all__` units.
+
+**The star sky gate is content-shaped, and Latin joined it.** The old gate was
+`/wordly wise/i` on the title; now it also needs **≥6 single-word cards**
+(`skyCards` filters multi-word terms — 'First declension' or 'C — vacca' are
+cards, not words you can say into a microphone), and Latin units qualify.
+Measured on the real shelf: Unit 1's eight case names get the game; the
+Pronunciation & Greetings unit (3 single-word cards after filtering) rightly
+does not. Deliberately NOT opened to science units with single-word terms —
+the allowlist stays vocabulary. Belt and braces: the clue line is now run
+through `skyBlank` too, so a future def that uses its own word cannot hand
+the answer over.
+
+**A right answer buzzes back** — `[12, 40, 12]`, the star sky's win pattern
+scaled down. **A miss deliberately gets nothing: the phone never scolds.**
+
+**Growth Zone group headers wear their subject's rule** (`.subjline`,
+direction A carried to the screen where she acts on it). Same grammar as a
+Coming up row: this colour = this subject, wherever she meets it.
+
 ### Signed up, and the club on the day (v99, THIS APP ONLY)
 
 Starring a club and being registered for it were the **same flag**, which is

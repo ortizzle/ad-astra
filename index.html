@@ -255,10 +255,10 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    the card's already-computed --pc-fg — the week card's lead rows wore the
    focus subject's colour no matter whose door they were. Where --pc is unset
    the mix is invalid, so every use site falls back with var(--pc-fg,var(--ac-fg)). */
-.card.subj-a,.row.subj-a,.week .rw.lead,.lk,.tile,.plan{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+.card.subj-a,.row.subj-a,.week .rw.lead,.lk,.tile,.plan,.subjline{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
 [data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a,
 [data-theme="light"] .week .rw.lead,[data-theme="light"] .lk,
-[data-theme="light"] .tile,[data-theme="light"] .plan{
+[data-theme="light"] .tile,[data-theme="light"] .plan,[data-theme="light"] .subjline{
   --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
 .card.subj-a>.eyebrow{color:var(--pc-fg)}
 /* Runway rows only: every runway row IS the card's subject. The week card's
@@ -272,6 +272,9 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   background:color-mix(in srgb,var(--pc) 7%,transparent);
   border-radius:11px;margin-left:-2px}
 .row.subj-a .k{font-weight:650}
+/* Growth Zone group headers wear their subject's rule — the same grammar as a
+   Coming up row: this colour = this subject, wherever she meets it. */
+.subjline{border-left:3px solid var(--pc-fg,var(--ac-fg));padding-left:10px}
 /* A test day and its work rows share the SUBJECT's colour, so the eye links
    "History Thursday" to the History rows underneath. Deliberately carried on
    borders and a faint wash, never on the text: every reading token keeps its
@@ -1242,7 +1245,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v117 · the honest clock, and rules that read';
+const APP_VERSION = 'v118 · the round found, the word said, the buzz earned';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3794,6 +3797,28 @@ SCREENS.today = function(root){
      above names the lesson to finish before a test; a hero repeating any of
      those is the same fact printed twice. It earns its place for a specific
      open lesson, or for the mixed round in test week. */
+  /* A round parked earlier today outranks every suggestion below: it is not
+     advice, it is her own half-finished work made findable — the "don't lose
+     progress" promise, one door further out. Same validity rules as
+     loadRound — today, a real approved unit, questions left, same content —
+     WITHOUT consuming the save; the quiz screen still owns the pickup. */
+  const pk = Store.get(ROUND_KEY);
+  const pkU = pk && pk.date === AZ.today() && realUnit(pk.unitId) ? unitFor(pk.unitId) : null;
+  const pkLive = !!(pkU && !pkU.deleted && pkU.status !== 'draft' && pkU.questions
+    && (pk.seen || []).length
+    /* The save fires before Next advances, so an answered question still sits
+       at pk.i — step past it the way the quiz's own resume does, or the door
+       shows for a finished round and tapping it starts a fresh one. */
+    && (pk.i + (pk.answered !== null && pk.answered !== undefined ? 1 : 0)) < (pk.order || []).length
+    && pk.print === roundPrint(pkU, pk.order));
+  if(pkLive){
+    const dR = cardButton('Pick your round back up',
+      pkU.title + ' · ' + (pk.seen || []).length + ' of ' + (pk.order || []).length + ' answered'
+      + (pk.timed ? ' · Beat the clock' : ''),
+      () => go('quiz', {unitId: pk.unitId, classId: pk.classId || pkU.classId, timed: !!pk.timed}));
+    dR.classList.add('hero');
+    root.appendChild(dR);
+  }
   const th0 = threadTarget(date, {skipDue: dueNow2 > 0});
   /* The week card is now a third voice on this screen, so the hero has to
      yield to it as well — caught by screenshot: with a Biology quiz on
@@ -3801,7 +3826,7 @@ SCREENS.today = function(root){
      the hero repeated "quiz in 3 days · 1 question in your Growth Zone" back
      verbatim. If the week already named that subject, the hero says nothing. */
   const wkClasses = new Set((wk ? wk.lines : []).filter(L => L.cid).map(L => L.cid));
-  const dupe = !th0 || th0.kind === 'due'
+  const dupe = pkLive || !th0 || th0.kind === 'due'
     || (th0.kind === 'plan' && !dueNow2 && plan2.length && th0.classId === plan2[0].classId)
     || (th0.kind === 'lesson' && rwLesson && th0.unitId === rwLesson.id)
     || (th0.kind === 'ramp' && rw && th0.classId === rw.cid)
@@ -4406,7 +4431,11 @@ function unitCard(u, c, label){
   /* River's game, offered where it fits: vocabulary shelves built from single
      words. Other units keep their three doors — a physics question is not a
      word you can say. */
-  if(/wordly wise/i.test(u.title)){
+  /* Latin joined at Chris's request (v118 / Wayfinder v96): the gate is
+     content-shaped, not class-shaped — the game needs enough single sayable
+     words. 'Latin I · Pronunciation & Greetings' (multi-word guide cards)
+     rightly stays out while Unit 1's case names qualify. */
+  if(skyCards(u).length >= 6 && (/wordly wise/i.test(u.title) || u.classId === 'latin' || c.id === 'latin')){
     const sk = el('button','btn btn-secondary','🌌  Star sky — say the words');
     sk.addEventListener('click',()=>{ skyState = null; go('starsky',{unitId:u.id, classId:c.id}); });
     card.appendChild(sk);
@@ -5809,7 +5838,10 @@ SCREENS.checkin = function(root){
 let skyState = null;
 const SKY_XP = 4;
 function skyCards(u){
-  return u.cards.filter(c => !/^ponder/i.test(c.term));
+  /* Single sayable words only: 'First declension' or 'C — vacca' are cards,
+     not words you can say into a microphone. Ponder cards are dinner-table
+     prompts, not words. */
+  return u.cards.filter(c => !/^ponder/i.test(c.term) && !/\s/.test(String(c.term).trim()));
 }
 /* Deterministic star positions: same unit, same sky, nothing stored. Grid
    cells keep stars a tap apart; the hash jitters them so it reads as sky
@@ -5946,7 +5978,9 @@ SCREENS.starsky = function(root){
     } else {
       p.appendChild(el('div','eyebrow','What word is this?'));
       /* Definition only — the examples live behind the hint button. */
-      p.appendChild(richify(el('p'), skyDefLine(cur)));
+      /* Belt and braces: a def line should never use its own word, but a future
+         card that slips would hand the answer over — blank it like the hints. */
+      p.appendChild(richify(el('p'), skyBlank(skyDefLine(cur), cur.term)));
       const hints = skyHints(cur);
       for(let i = 0; i < Math.min(skyState.hints, hints.length); i++)
         p.appendChild(el('div','skyhint', hints[i]));
@@ -6409,6 +6443,9 @@ function answer(u,q,idx){
   const right = idx===q.ans;
   quizState.runStreak = right ? (quizState.runStreak||0)+1 : 0;
   if(right) quizState.correct++;
+  /* The star sky's win buzz, scaled down: a right answer taps back, softly.
+     A miss deliberately gets nothing — the phone never scolds. */
+  if(right && navigator.vibrate) navigator.vibrate([12, 40, 12]);
   /* What she was asked and what she picked, for the day view's question-level
      drill-down. Stored as short TEXT rather than option indexes: options are
      shuffled per question and a unit can be edited later, so an index would
@@ -6524,7 +6561,7 @@ const roundPrint = (u, order) =>
 function saveRound(u){
   if(!quizState || quizState.settled || !realUnit(quizState.unitId)) return;
   if(!u || !(quizState.seen || []).length) return;   // opened and never answered
-  Store.set(ROUND_KEY, {...quizState, date: AZ.today(), print: roundPrint(u, quizState.order),
+  Store.set(ROUND_KEY, {...quizState, classId: ctx.classId, date: AZ.today(), print: roundPrint(u, quizState.order),
     /* Time actually spent, not the timestamp: `start` anchors seconds = now − start,
        and a raw start survives the park — so a round parked at 8am and resumed at
        6pm would log ten hours of study. The resume path rebases start from this. */
@@ -7003,7 +7040,13 @@ SCREENS.growth = function(root){
     Object.keys(byG).sort((a,b)=> prio(a)-prio(b) || byG[b].length-byG[a].length).forEach(cid=>{
       const items = byG[cid];
       const c = CLASS_BY_ID[cid];
-      if(c) root.appendChild(el('div','hintline', c.icon+' '+c.name+testTag(cid)));
+      if(c){
+        /* Direction A carried into the Growth Zone: the group header wears its
+           subject's rule, so "these are the Biology ones" reads at a glance. */
+        const gh = el('div','hintline subjline', c.icon+' '+c.name+testTag(cid));
+        gh.style.setProperty('--pc', classColor(c));
+        root.appendChild(gh);
+      }
       items.forEach(m=>{
         const box = m.box ?? -1;
         const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
