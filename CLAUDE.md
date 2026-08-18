@@ -657,6 +657,57 @@ Deliberately not ported: Wayfinder's schedule ROTATES, so on an off-day it
 already shows the next school day's real line-up rather than a generic
 timetable. That is news, and folding it would hide something true.
 
+### Direction A — the subject owns the colour (v116 / Wayfinder v94, both apps)
+
+Chris, 2026-08: *"The main pages look too monochromatic... It would be nice for
+the right things to be the center of attention."* Three directions were built as
+real UI in `ad-astra/prototype-focus.html` and he chose **A**.
+
+The diagnosis: one hue was doing every job — important, interactive, active,
+decorative — so it signalled none of them. Under A the accent keeps **one** job,
+*the thing you can tap*, and anything that belongs to a subject wears that
+subject's own hue instead. Three render sites opt in by adding `subj-a` and
+setting `--pc` from `classColor()`: the runway card (always — it is about one
+subject's test), the week card (only when `wk.focusCid` resolves), and a Coming
+up row (only when the item has a `classId`).
+
+Rules that are the point:
+
+- **A subject hue only ever appears where that subject is the topic.** It is
+  never decoration. The three strip tiles (Growth / Reading / Level) deliberately
+  keep the accent: they are not subject-bound, and colouring them would be
+  exactly the "hue everywhere" problem this replaces.
+- **`--pc-fg` is the subject colour as TEXT, exactly as `--ac-fg` is for the
+  accent, and for the same reason.** The palette's `g1` values are FILLS,
+  designed to sit behind white labels on a subject tile. Used as text they
+  measured 4.37:1 for orchid in dark and failed on **all twelve** in light,
+  worst 1.60:1. `--pc-fg` lifts 10% toward white in dark and deepens to 42%
+  over ink in light: worst case **4.90:1** (orchid, dark) and **5.76:1** (lime,
+  light) across every palette in both themes.
+- **The 3px rules use `--pc-fg`, never raw `--pc`** — the same call `.row.now`
+  already made for `--ac-fg`. Raw `--pc` as a rule measured **1.65:1** in light:
+  a hue, not a mark. With `--pc-fg`, 5.98:1.
+- **`.row.now` still wins over `.row.subj-a`** (later in the sheet, equal
+  specificity), and that is correct: accent means "this lands today", subject
+  hue means "this subject". Today is a different axis from topic.
+
+Two cascade traps, both real, both caught by rendering rather than reading:
+
+> ⚠️ **`.card.ac` sets the same `background-image` at equal specificity and
+> later in the sheet.** The subject gradient written with the other `subj-a`
+> rules was silently replaced by the accent one — the eyebrow and rules went
+> subject-coloured while the card itself stayed accent. The wash therefore
+> lives *after* `.card.ac` and is written `.card.subj-a,.card.ac.subj-a`.
+
+> ⚠️ **That rule must NOT set `background-color`.** `.card.ac.week` and
+> `.card.ac.daycard` carry the glass mix that lets the comet through, at the
+> same specificity and earlier in the sheet — setting it would quietly make the
+> two top cards opaque again.
+
+**Directions B (depth, not hue) and C (one loud thing) were not chosen.**
+`prototype-focus.html` stays as the reference; it is a dev artifact, not cached
+by the service worker and not linked from the app.
+
 ### Signed up, and the club on the day (v99, THIS APP ONLY)
 
 Starring a club and being registered for it were the **same flag**, which is

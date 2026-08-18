@@ -226,6 +226,41 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
   transform:translateX(-50%) rotate(1.4deg);background:rgba(255,255,255,.34);
   border-left:1px solid rgba(255,255,255,.18);border-right:1px solid rgba(255,255,255,.18)}
 .card.pnote{position:relative}
+/* ---- Direction A: the subject owns the colour (Ad Astra v116 / Wayfinder v94)
+   Chosen from prototype-focus.html. The diagnosis was that one hue did every
+   job — important, interactive, active, decorative — so it meant none of them.
+   The accent now keeps ONE job, the thing you can tap, and anything that
+   belongs to a subject wears that subject's own hue instead.
+
+   Every subject colour rides on --pc, set from classColor() at the render
+   site, and is carried on borders, eyebrows and a faint wash — never on body
+   text, so every reading token keeps its measured value. Twelve palettes ×
+   two themes is a lot of contrast surface, and the way to keep it safe is to
+   never put a palette hue behind a paragraph. */
+/* The card's own wash lives further down, immediately after .card.ac — see
+   the note there. It cannot live here: .card.ac sets the same background-image
+   at equal specificity and later in the sheet, so a rule written here loses. */
+/* --pc-fg is the subject colour as TEXT, exactly as --ac-fg is for the accent
+   — and for the same reason. The palette's g1 values are FILLS, designed to
+   sit behind white labels on a subject tile; used as text they measured 4.37:1
+   for orchid in dark and failed on ALL TWELVE in light, worst 1.60:1, because
+   a mid-tone on a white card is barely there.
+   Lifted 10% toward white in dark and deepened to 42% over ink in light: worst
+   case 4.90:1 (orchid, dark) and 5.76:1 (lime, light), measured across every
+   palette in both themes. The hue stays recognisable, which is the whole point
+   of using it. */
+.card.subj-a,.row.subj-a{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+[data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a{
+  --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
+.card.subj-a>.eyebrow{color:var(--pc-fg)}
+.card.subj-a .rw{border-left:3px solid var(--pc-fg)}
+.card.subj-a .rw .rn{color:var(--pc-fg)}
+/* A dated row in Coming up belongs to its subject, so it is ruled in that
+   subject's colour rather than in the one accent every row used to share. */
+.row.subj-a{border-left:3px solid var(--pc-fg);padding-left:11px;
+  background:color-mix(in srgb,var(--pc) 7%,transparent);
+  border-radius:11px;margin-left:-2px}
+.row.subj-a .k{font-weight:650}
 /* A test day and its work rows share the SUBJECT's colour, so the eye links
    "History Thursday" to the History rows underneath. Deliberately carried on
    borders and a faint wash, never on the text: every reading token keeps its
@@ -300,6 +335,19 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    showed through behind the eyebrow. Opaque base, same gradient, same look. */
 .card.ac{border-color:var(--ac-25);background-color:var(--surface);
   background-image:linear-gradient(165deg,var(--ac-8),var(--surface) 60%)}
+/* Direction A's card wash, and it MUST sit after .card.ac rather than with the
+   other subj-a rules: .card.ac sets background-image at the same specificity,
+   so the subject gradient written earlier was silently replaced by the accent
+   one — the eyebrow and rules went subject-coloured while the card stayed
+   accent, which is the bug this pair of selectors fixes. Both forms are listed
+   because .card.subj-a alone (0,2,0) still loses to .card.ac.
+   background-color is deliberately NOT set: .card.ac.week / .daycard carry the
+   glass mix that lets the comet through, at the same specificity as this rule
+   and earlier in the sheet, so setting it here would quietly make the two top
+   cards opaque again. */
+.card.subj-a,.card.ac.subj-a{
+  border-color:color-mix(in srgb,var(--pc) 34%,transparent);
+  background-image:linear-gradient(165deg,color-mix(in srgb,var(--pc) 13%,transparent),var(--surface) 62%)}
 .card.quiet{background:transparent;border-style:dashed}
 .card h2{font-size:23px;margin-bottom:6px}
 .card h3{font-size:18px;margin-bottom:6px}
@@ -1182,7 +1230,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v115 · press, and a note that sends you home';
+const APP_VERSION = 'v116 · the subject owns the colour';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3573,7 +3621,9 @@ SCREENS.today = function(root){
      week strip does not show. */
   const rwShow = rw && !(wk && wk.covers(rw.a.date));
   if(wk){
-    const c = el('div','card ac week');
+    const c = el('div','card ac week' + (wk.focusCid && CLASS_BY_ID[wk.focusCid] ? ' subj-a' : ''));
+    if(wk.focusCid && CLASS_BY_ID[wk.focusCid])
+      c.style.setProperty('--pc', classColor(CLASS_BY_ID[wk.focusCid]));
     c.appendChild(el('div','eyebrow','The week ahead'));
     const grid = el('div','wkgrid');
     wk.days.forEach(d=>{
@@ -3648,7 +3698,9 @@ SCREENS.today = function(root){
      because before a test it is the most useful thing on the screen. */
   if(rwShow){
     const k = KINDS[rw.a.kind] || KINDS.test;
-    const c0 = el('div','card ac runway');
+    const c0 = el('div','card ac runway subj-a');
+    /* The runway is about ONE subject's test, so it wears that subject. */
+    c0.style.setProperty('--pc', classColor(rw.cls));
     c0.appendChild(el('div','eyebrow', 'Before your ' + (rw.cls.short || rw.cls.name) + ' ' + k.nm.toLowerCase()));
     c0.appendChild(el('h3',null, rw.days===0 ? 'It is today'
       : rw.days===1 ? 'Tomorrow'
@@ -3772,7 +3824,9 @@ SCREENS.today = function(root){
     const ac = el('div','card');
     up.slice(0,6).forEach(u=>{
       /* Today gets the rule and the tint; everything else renders plain. */
-      const r = el('div','row'+(u.now ? ' now' : ''));
+      const rc = u.classId && CLASS_BY_ID[u.classId];
+      const r = el('div','row'+(u.now ? ' now' : '')+(rc ? ' subj-a' : ''));
+      if(rc) r.style.setProperty('--pc', classColor(rc));
       const kk = el('span','k',`${u.icon} ${u.name}`);
       kk.appendChild(el('small',null,u.sub));
       r.appendChild(kk);

@@ -3,9 +3,15 @@
   "configurations": [
     {
       "name": "ad-astra",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4178"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.js", ".", "4178"],
       "port": 4178
+    },
+    {
+      "name": "wayfinder",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.js", "../wayfinder", "4179"],
+      "port": 4179
     }
   ]
 }

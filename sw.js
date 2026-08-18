@@ -4,7 +4,7 @@
 /* The page asks the waiting worker to take over when she taps Refresh —
    never automatically, so a mid-round quiz is never yanked. */
 self.addEventListener('message', e => { if(e.data === 'skip') self.skipWaiting(); });
-const CACHE_VERSION = 'ad-astra-v115';
+const CACHE_VERSION = 'ad-astra-v116';
 const SHELL = [
   './',
   './index.html',
