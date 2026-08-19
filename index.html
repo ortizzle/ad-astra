@@ -198,6 +198,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .skyhint{margin-top:var(--gap-row);padding:9px 12px;border-radius:11px;background:var(--deep);
   border-left:3px solid var(--ac-fg);font-size:13.5px;line-height:1.45;color:var(--muted)}
 .skysay{margin-top:var(--gap-row);font-size:13.5px;line-height:1.45;color:var(--warm)}
+/* The revealed word, called out the same way a Growth Zone miss marks its
+   correct answer (.miss .a) — bold and --good, not just plain text in a
+   sentence she has to parse. Both are already held to 4.5:1 on card and page. */
+.skyreveal{margin-top:var(--gap-row);font-size:13.5px;line-height:1.45;color:var(--muted)}
+.skyreveal .a{font-weight:700;font-size:16px;color:var(--good)}
 /* Recording has to be visibly happening — Chris could not tell it had started. */
 .skylisten{display:flex;align-items:center;gap:10px;margin-top:var(--gap-row);
   padding:11px 13px;border-radius:12px;background:var(--ac-8);border:1px solid var(--ac-fg);
@@ -1245,7 +1250,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v118 · the round found, the word said, the buzz earned';
+const APP_VERSION = 'v119 · the answer, called out';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6063,8 +6068,16 @@ SCREENS.starsky = function(root){
         ti.value = skyState.typed || '';
         ti.addEventListener('input', () => { skyState.typed = ti.value; });
         p.appendChild(ti);
-        if(skyState.reveal)
-          p.appendChild(el('p',null,'The word is ' + cur.term + ' — type it once to light the star.'));
+        if(skyState.reveal){
+          /* The word itself is the one thing in this sentence she actually needs —
+             plain text buried it mid-sentence and Chris found it hard to read.
+             Same convention as a Growth Zone miss's correct answer: bold, --good. */
+          const rv = el('p','skyreveal');
+          rv.appendChild(el('span',null,'The word is '));
+          rv.appendChild(el('span','a', cur.term));
+          rv.appendChild(el('span',null,' — type it once to light the star.'));
+          p.appendChild(rv);
+        }
         const chk = el('button','btn btn-primary','Check my spelling');
         chk.addEventListener('click', () => {
           const norm = t => String(t).toLowerCase().replace(/[^a-z]/g, '');
