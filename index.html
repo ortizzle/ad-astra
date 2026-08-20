@@ -1284,7 +1284,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v125 · said once, and quieter by Tuesday';
+const APP_VERSION = 'v126 · studying never closes';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2377,9 +2377,17 @@ function weekBrief(date){
   const totalMins = queue.reduce((n, L) => n + L.mins, 0);
   let lead2;
   if(!study.length){
-    lead2 = tests.length
-      ? 'The studying days are behind you now — read something over if you want to, but the work is done.'
-      : 'Nothing is waiting. A good week to pick up whatever you feel like.';
+    /* No study evenings left in the plan. The first draft said "the studying
+       days are behind you — the work is done", and Chris caught both halves
+       overreaching: "the work is done" is a claim the app cannot verify, and
+       studying time always exists — the plan running out must never read as
+       the door closing. Say what is true instead: nothing NEW before a test
+       that is still ahead; shelves always open after it. */
+    lead2 = aheadTests.length
+      ? 'No study evenings left before it — nothing new now. A flip through the cards on the way in is plenty.'
+      : 'Studying never closes, though — your shelves and the Growth Zone are open whenever you want a round.';
+    if(!tests.length)
+      lead2 = 'Nothing is waiting. A good week to pick up whatever you feel like.';
   } else {
     const n = study.length;
     /* Averaged over the DAYS AS PLANNED, not over the subject list. Those are
