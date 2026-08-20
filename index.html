@@ -1250,7 +1250,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v119 · the answer, called out';
+const APP_VERSION = 'v120 · the note moves down';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3620,18 +3620,6 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
-  /* A note from home — the parent's words, shown while they have one posted.
-     Singleton record like prefs, so it syncs to her device and the newest
-     edit wins. Nothing here is graded, counted or gamified; it is a sticky
-     note, not a mechanic. */
-  const pn = DATA.records['pnote'];
-  if(pn && !pn.deleted && (pn.text||'').trim()){
-    const pc = el('div','card pnote');
-    pc.appendChild(el('div','eyebrow','A note from home'));
-    pc.appendChild(el('p',null, pn.text.trim()));
-    root.appendChild(pc);
-  }
-
   /* ---- The week ahead. Takes the space the period list used to hold. ---- */
   const wk = weekAhead(date);
   /* The runway yields when its test is inside this week — the week card is
@@ -3884,6 +3872,23 @@ SCREENS.today = function(root){
       ac.appendChild(r);
     });
     root.appendChild(ac);
+  }
+
+  /* A note from home — the parent's words, shown while they have one posted.
+     Singleton record like prefs, so it syncs to her device and the newest
+     edit wins. Nothing here is graded, counted or gamified; it is a sticky
+     note, not a mechanic.
+
+     Deliberately BELOW Coming up (v120), Chris's call: sitting third from the
+     top it was the first thing the eye landed on and the screen ended there.
+     Down here it is a reward for scrolling past the week — and the scroll is
+     the point, since everything that asks something of her lives above it. */
+  const pn = DATA.records['pnote'];
+  if(pn && !pn.deleted && (pn.text||'').trim()){
+    const pc = el('div','card pnote');
+    pc.appendChild(el('div','eyebrow','A note from home'));
+    pc.appendChild(el('p',null, pn.text.trim()));
+    root.appendChild(pc);
   }
 
   /* Student hours for today — where extra help is on offer, per her planner. */
