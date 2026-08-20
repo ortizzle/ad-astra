@@ -155,30 +155,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    .94, 3.59 at .90). The day and week cards use no --faint; the strip's tile
    labels do. So the two big cards let the sky through and the strip stays
    solid, rather than dropping a reading token below the bar for the look. */
-.card.ac.daycard, .card.ac.week{
+.card.ac.daycard, .card.ac.brief{
   background-color:color-mix(in srgb, var(--surface) calc(var(--glass)*100%), transparent);
   backdrop-filter:blur(2px);
 }
-/* The week ahead: five cells for the shape of the week, then the same row
-   treatment the runway uses, so a door looks like a door on both cards. */
-.week .rw{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--tap);
-  padding:10px 12px;margin-top:var(--gap-row);border-radius:13px;border:1px solid var(--line);
-  background:var(--deep);color:var(--text);font:inherit;text-align:left}
-.week .rn{flex:0 0 auto;min-width:26px;text-align:center;font-family:'Fraunces',Georgia,serif;
-  font-size:19px;font-weight:600;color:var(--ac-fg)}
-.week .rt{flex:1;font-size:13px;line-height:1.35}
-.week .rc{flex:0 0 auto;color:var(--faint);font-size:17px}
-.wkgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:12px}
-.wkday{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 2px;
-  border-radius:12px;border:1px solid var(--line);background:var(--deep)}
-.wkday .wl{font-size:10.5px;letter-spacing:.1em;font-weight:700;color:var(--muted)}
-.wkday .wm{font-size:15px;line-height:1;min-height:17px;display:flex;align-items:center}
-.wkday .wm .dot{width:5px;height:5px;border-radius:50%;background:var(--faint);display:block}
-/* Today is marked by a tinted fill AND a heavier label — colour is never the
-   only signal, the same rule the "lands today" row in Coming up follows. */
-.wkday.now{background:var(--ac-8);border-color:var(--ac-fg)}
-.wkday.now .wl{color:var(--ac-fg)}
-.wkday.past{opacity:.5}
+
 /* The star sky: River's game. Stars are buttons, full tap size, positioned on
    a seeded grid so the same unit always draws the same sky. Lit stars go the
    gilt gold the finished-book spines use — earned, never currency. */
@@ -260,9 +241,9 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    the card's already-computed --pc-fg — the week card's lead rows wore the
    focus subject's colour no matter whose door they were. Where --pc is unset
    the mix is invalid, so every use site falls back with var(--pc-fg,var(--ac-fg)). */
-.card.subj-a,.row.subj-a,.week .rw.lead,.lk,.tile,.plan,.subjline{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+.card.subj-a,.row.subj-a,.lk,.tile,.plan,.subjline{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
 [data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a,
-[data-theme="light"] .week .rw.lead,[data-theme="light"] .lk,
+[data-theme="light"] .lk,
 [data-theme="light"] .tile,[data-theme="light"] .plan,[data-theme="light"] .subjline{
   --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
 .card.subj-a>.eyebrow{color:var(--pc-fg)}
@@ -280,22 +261,69 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 /* Growth Zone group headers wear their subject's rule — the same grammar as a
    Coming up row: this colour = this subject, wherever she meets it. */
 .subjline{border-left:3px solid var(--pc-fg,var(--ac-fg));padding-left:10px}
-/* A test day and its work rows share the SUBJECT's colour, so the eye links
-   "History Thursday" to the History rows underneath. Deliberately carried on
-   borders and a faint wash, never on the text: every reading token keeps its
-   measured value, and the glyph plus the summary line still say it in words.
-   Colour reinforces here, it never carries. */
-.wkday{font:inherit;color:inherit}          /* it becomes a <button> when tappable */
-.wkday.subj{border-color:var(--pc,var(--ac));
-  background-image:linear-gradient(180deg,color-mix(in srgb,var(--pc,var(--ac)) 16%,transparent),transparent)}
-.wkday.subj.now{background-color:var(--ac-8)}
-.week .rw.lead{border-left:3px solid var(--pc-fg,var(--ac-fg))}
-.week .rw.lead .rn{color:var(--pc-fg,var(--ac-fg))}
-.wkday.off .wm{color:var(--faint)}
-.wksum{margin-top:11px;font-size:12.5px;line-height:1.45;color:var(--muted)}
-.wkaim{display:flex;align-items:baseline;gap:8px;margin-top:11px;font-size:12.5px}
-.wkaim .k{color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-size:10.5px;font-weight:700}
-.wkaim .v{color:var(--text)}
+
+/* ---- Your week: the brief (v104). Direction C's prose + ledger with
+   direction B's load bars, chosen from prototype-brief.html. ---- */
+/* The prose is the one place on Today that is meant to be READ rather than
+   scanned, so it takes the serif at a reading size — the same face the
+   headings use, which is what marks it as writing and not a label. */
+.brief-prose{font-family:'Fraunces',Georgia,serif;font-size:17px;line-height:1.52;
+  color:var(--text);font-weight:400;margin:0 0 var(--gap-row)}
+.brief-prose:last-of-type{margin-bottom:0}
+.brief-prose b{font-weight:700}
+/* Load bars: where the time actually sits. Each subject carries its own --pc,
+   set from classColor() at the render site — direction A's rule, a subject
+   hue only ever where that subject is the topic. */
+.load{margin-top:var(--gap)}
+.load-row{margin-bottom:var(--gap-row)}
+.load-row:last-child{margin-bottom:0}
+.load-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px}
+.load-nm{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+.load-nm .subjdot{width:9px;height:9px;border-radius:3px;flex:0 0 auto;background:var(--pc,var(--ac))}
+.load-mins{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:9px;border-radius:999px;background:var(--deep);border:1px solid var(--line-soft);
+  overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar .q{background:var(--pc,var(--ac))}
+.bar .c{background:color-mix(in srgb,var(--pc,var(--ac)) 45%,transparent)}
+.bar .r{background:color-mix(in srgb,var(--pc,var(--ac)) 20%,transparent)}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--muted);margin-top:var(--gap-row);flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;
+  vertical-align:-1px;background:var(--muted)}
+.legend span:nth-child(2) i{opacity:.55}
+.legend span:nth-child(3) i{opacity:.3}
+/* The ledger: the week, day by day. */
+.ledger{margin-top:var(--gap);border-top:1px solid var(--line-soft)}
+/* Padded on both sides so the tinted "today" row can round its corners
+   without a negative margin — the first version bled 9px past the card on
+   each side and gave the whole page a horizontal scroll. The bottom border
+   still spans the full row: padding sits inside the border box. */
+.ledger-row{display:flex;align-items:center;gap:11px;padding:11px 9px;
+  border-bottom:1px solid var(--line-soft);min-height:var(--tap)}
+.ledger-day{flex:0 0 38px;font-size:11px;letter-spacing:.08em;font-weight:800;color:var(--faint)}
+.ledger-what{flex:1;font-size:13.5px;line-height:1.4}
+.ledger-what small{display:block;color:var(--faint);font-size:11.5px}
+.ledger-min{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ledger-row.test .ledger-day{color:var(--bad)}
+/* Today is tinted AND its label is heavier — colour is never the only signal,
+   the same rule the "lands today" row in Coming up follows. */
+.ledger-row.now{background:var(--ac-8);border-radius:9px}
+.ledger-row.now .ledger-day{color:var(--ac-fg)}
+/* Where to actually study. Quiet on purpose: it is a reminder that the app is
+   NOT the source, so it must not out-shout the work above it. */
+.first{background:var(--deep);border:1px dashed var(--line);border-radius:16px;
+  padding:16px;margin-top:var(--gap)}
+.first .fh{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;
+  color:var(--warm);margin-bottom:10px}
+.first .step{display:flex;gap:11px;align-items:flex-start;padding:8px 0}
+.first .step .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--raised);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:800;color:var(--warm);font-variant-numeric:tabular-nums}
+.first .step .t{font-size:13.5px;line-height:1.45}
+.first .step .t b{color:var(--text);font-weight:700}
+.first .step .t span{color:var(--muted)}
+.first .tail{font-size:12.5px;color:var(--muted);margin-top:var(--gap-row);line-height:1.45;
+  padding-top:10px;border-top:1px solid var(--line-soft)}
 /* Locked-in: one chip per subject, carrying that subject's colour. */
 .locked{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .lk{display:flex;align-items:baseline;gap:7px;min-height:var(--tap);padding:9px 14px;
@@ -361,7 +389,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    one — the eyebrow and rules went subject-coloured while the card stayed
    accent, which is the bug this pair of selectors fixes. Both forms are listed
    because .card.subj-a alone (0,2,0) still loses to .card.ac.
-   background-color is deliberately NOT set: .card.ac.week / .daycard carry the
+   background-color is deliberately NOT set: .card.ac.brief / .daycard carry the
    glass mix that lets the comet through, at the same specificity as this rule
    and earlier in the sheet, so setting it here would quietly make the two top
    cards opaque again. */
@@ -833,11 +861,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    reflow on touch), and the press is on :active only, so a stuck hover state
    on a touch device can never leave a control looking pressed. */
 @media (prefers-reduced-motion: no-preference){
-  .btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.wkday,.act,.tool,.chip,.back-chip{
+  .btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.act,.tool,.chip,.back-chip{
     transition:transform .13s cubic-bezier(.2,.8,.3,1), filter .13s ease, box-shadow .13s ease;
     will-change:transform}
   .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active,.mtile:active,
-  .rw:active,.stat:active,.pickrow:active,.wkday:active,.act:active,.tool:active,
+  .rw:active,.stat:active,.pickrow:active,.act:active,.tool:active,
   .chip:active,.back-chip:active{
     transform:scale(.955) translateY(1px);filter:brightness(.88)}
   /* The primary action presses deepest — it is the one with the most weight. */
@@ -1250,7 +1278,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v120 · the note moves down';
+const APP_VERSION = 'v121 · your week, in short';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2144,100 +2172,212 @@ function runway(date){
    Monday to Friday only: weekends carry no school expectations, and a 7-cell
    strip would spend two of them saying "nothing". On a Sunday the useful week
    is the one about to start, so Sunday looks forward rather than back. */
-function weekAhead(date){
+/* ---- The week brief (Ad Astra v121 / Wayfinder v104) ----
+   Chris chose direction C from prototype-brief.html, with direction B's load
+   bars: two sentences of plain writing, a ledger of the week day by day, and
+   a bar per subject showing where the time actually sits. It REPLACES the
+   week-ahead card, which showed the same five days and the same three counts
+   one card higher — his call: "we can probably move the week ahead since that
+   information will be in Your week anyway."
+
+   What it must survive: no tests at all, one test, several on one day,
+   several spread out, a short week, and being opened on a Thursday with most
+   of the week already gone. Every shape below is exercised by tools/
+   test_brief.js — the prose is the risky half of this design and it is the
+   half that is tested hardest. */
+
+/* Her real measured pace, per card, the same shape as quizLimit(). Flashcard
+   logs never stored a card COUNT (total is 0), but xp is min(seen*5,150), so
+   seen is recoverable exactly while the cap is not hit — logs at the cap are
+   skipped rather than guessed at. Clamped either side so one strange session
+   cannot make an estimate absurd. */
+function cardLimit(){
+  let ms = 0, n = 0;
+  logs().forEach(l => {
+    if(l.mode !== 'cards' || !l.seconds || !l.xp || l.xp >= 150) return;
+    const seen = l.xp / 5;
+    if(seen < 1) return;
+    ms += l.seconds * 1000; n += seen;
+  });
+  if(!n) return 12000;
+  return Math.round(Math.min(30000, Math.max(4000, ms / n)));
+}
+/* "a, b and c" — the brief speaks in sentences, so its lists must too. */
+function joinList(a){
+  return a.length <= 1 ? (a[0] || '')
+    : a.length === 2 ? a[0] + ' and ' + a[1]
+    : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+}
+const DAYNAME = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+function weekBrief(date){
   const wd = AZ.weekday(date);
   if(wd === 6) return null;                       // Saturday: Monday is far enough away
+  if(date < CAL.firstDay || date > CAL.lastDay) return null;
   const monday = AZ.shift(date, wd === 0 ? 1 : 1 - wd);
   const days = [];
   for(let i = 0; i < 5; i++){
     const d = AZ.shift(monday, i);
-    days.push({
-      date: d, label: 'MTWTF'[i],
-      today: d === date,
-      past: d < date,
-      closed: !!closedToday(d),
-      tests: assessments().filter(a => a.date === d && a.score == null),
-      events: eventsOn(d)
-    });
+    days.push({ date: d, label: 'MTWTF'[i], name: DAYNAME[AZ.weekday(d)],
+      today: d === date, past: d < date, closed: !!closedToday(d),
+      tests: assessments().filter(a => a.date === d && a.score == null) });
   }
   const friday = days[4].date;
   const tests = days.flatMap(d => d.tests);
 
-  /* Which test drives the week's colour when a day carries more than one.
-     Chris's rule: a test outranks a quiz, and past that the subject she is
-     struggling in more wins — because the point of the colour is to tell her
-     where the hour is best spent, not merely what is scheduled. A subject
-     with no attempts yet counts as neediest: unknown is not the same as fine. */
+  /* Same ranking the week card used: a test outranks a quiz, and past that the
+     subject she is struggling in more wins — the colour, and now the order of
+     the days, is about where the hour is best spent. */
   const KIND_WEIGHT = {test:3, essay:3, project:2, present:2, quiz:1};
-  const neediness = cid => {
-    const a = classStats(cid).accuracy;
-    return a == null ? -1 : a;                      // never studied sorts first
-  };
-  const pickTest = list => list.slice().sort((x, y) =>
-    (KIND_WEIGHT[y.kind] || 1) - (KIND_WEIGHT[x.kind] || 1) ||
-    neediness(x.classId) - neediness(y.classId))[0];
-  days.forEach(d => { d.lead = d.tests.length ? pickTest(d.tests) : null; });
-  /* The week's focus subject: the one the highlight and the tapped day point
-     at. Same rule applied across every test in the week. */
-  const lead = tests.length ? pickTest(tests) : null;
-  const focusCid = lead ? lead.classId : null;
-  /* EVERY subject with a test day this week highlights its rows — not only the
-     single focus. Chris caught this on River's phone: two test days, and only
-     one subject's rows lit, so the other quiz looked like it had no work. */
-  const testCids = [...new Set(days.filter(d => d.lead).map(d => d.lead.classId))];
+  const neediness = cid => { const a = classStats(cid).accuracy; return a == null ? -1 : a; };
+  const rank = (x, y) => (KIND_WEIGHT[y.kind] || 1) - (KIND_WEIGHT[x.kind] || 1)
+    || neediness(x.classId) - neediness(y.classId);
 
-  /* At most three lines, and each one has to be a door. The order is: what a
-     test this week demands, then the subject the plan is most worried about,
-     then her own aim. Never a fourth — a list of everything is the whole week
-     restated as debt, which is the thing the runway already refuses to do. */
-  const lines = [], usedClass = new Set();
-  const addSubject = (cid, fromTest) => {
+  /* One evening's work for a subject: the review that is due, plus the ONE
+     next lesson — never every open lesson at once. "14 lessons open" is the
+     whole book restated as a debt, which the runway already refuses to do. */
+  const qSec = quizLimit() / 1000, cSec = cardLimit() / 1000;
+  const loadFor = cid => {
     const cls = CLASS_BY_ID[cid];
-    if(!cls || usedClass.has(cid) || lines.length >= 3) return;
-    const due = dueMisses().filter(m => m.classId === cid).length;
+    if(!cls) return null;
+    const due = dueMisses(date).filter(m => m.classId === cid).length;
     const open = units(cid).filter(u => u.questions.length && !unitDone(u));
-    if(!due && !open.length){
-      /* A test-day subject with nothing due and nothing open would otherwise
-         vanish from its own week — a coloured day with no row beneath it.
-         River's History did exactly this: her one approved unit finished, the
-         next still in the draft queue. Mixed practice is the honest offer;
-         interleaving old material is real revision, not busywork. Only for
-         test subjects, and only when the subject has questions at all. */
-      if(fromTest && units(cid).some(u2 => u2.questions.length) && lines.length < 3){
-        usedClass.add(cid);
-        lines.push({ n:'↻', cid, kind:'mix',
-          text:'all caught up in ' + cls.name + ' — a mixed round keeps it sharp',
-          go: ()=>{ if(buildShuffleUnit(cid)) go('quiz',{unitId:'__shuffle__', classId:cid}); } });
-      }
+    const touched = open.filter(u => unitLastStudied(u) > 0)
+                        .sort((a, b) => unitLastStudied(b) - unitLastStudied(a));
+    const pick = touched[0] || open[0] || null;
+    const q = pick ? pick.questions.length - unitAttempted(pick) : 0;
+    const cards = pick ? pick.cards.length : 0;
+    if(!due && !q && !cards) return null;
+    const mins = Math.max(1, Math.round((q * qSec + due * qSec + cards * cSec) / 60));
+    return { cid, cls, due, open: open.length, pick, q, cards, mins,
+             qMin: q * qSec / 60, cMin: cards * cSec / 60, dMin: due * qSec / 60 };
+  };
+
+  /* Who gets a day: test subjects first, in test order, then whatever the
+     study plan is most worried about. */
+  const seen = new Set(), queue = [];
+  tests.slice().sort(rank).forEach(t => {
+    if(seen.has(t.classId)) return;
+    seen.add(t.classId);
+    const L = loadFor(t.classId);
+    if(L){ L.forTest = t; queue.push(L); }
+  });
+  const testCids = new Set(seen);
+  studyPlan(date).forEach(pl => {
+    if(seen.has(pl.classId) || queue.length >= 4) return;
+    seen.add(pl.classId);
+    const L = loadFor(pl.classId);
+    if(L) queue.push(L);
+  });
+
+  /* Nothing to say and nothing to do — say nothing rather than render an
+     empty frame. A week with tests always has something to say. */
+  if(!tests.length && !queue.length) return null;
+
+  /* The plan: one row per remaining weekday. Test days ask for nothing new;
+     the last free day before a multi-test day goes to mixed practice, which
+     is the app's existing exam-ramp rule — in test week the right work
+     changes shape, not just minutes. */
+  const upcoming = days.filter(d => !d.past || d.today);
+  const firstTestIdx = upcoming.findIndex(d => d.tests.length);
+  const freeIdx = upcoming.map((d, k) => ({d, k}))
+    .filter(x => !x.d.tests.length && !x.d.closed)
+    .map(x => x.k);
+  let mixIdx = -1;
+  if(testCids.size >= 2 && freeIdx.length >= 2){
+    const before = firstTestIdx < 0 ? freeIdx : freeIdx.filter(k => k < firstTestIdx);
+    if(before.length >= 2) mixIdx = before[before.length - 1];
+  }
+  const plan = [];
+  let qi = 0;
+  upcoming.forEach((d, k) => {
+    if(d.tests.length){
+      plan.push({ d, kind:'test',
+        what: d.tests.length > 1 ? d.tests.length + ' tests today' : d.tests[0].title,
+        sub: d.tests.length > 1
+          ? joinList(d.tests.map(t => (CLASS_BY_ID[t.classId]||{}).short || ''))
+          : (CLASS_BY_ID[d.tests[0].classId]||{}).name || '',
+        mins: null });
       return;
     }
-    usedClass.add(cid);
-    if(due) lines.push({ n: due, cid,
-      text: 'review question' + (due === 1 ? '' : 's') + ' due in ' + cls.name,
-      kind: 'due',
-      go: () => { if(buildReviewUnit({classId: cid, title: (cls.short || cls.name) + ' review'}))
-                    go('quiz', {unitId: '__review__', classId: cid});
-                  else go('growth'); } });
-    if(open.length && lines.length < 3){
-      /* Name ONE lesson, never a pile — the count is true, the words point at
-         the next actionable thing. Same rule the runway established. */
-      const touched = open.filter(u => unitLastStudied(u) > 0)
-                          .sort((a, b) => unitLastStudied(b) - unitLastStudied(a));
-      const pick = touched[0] || open[0];
-      lines.push({ n: open.length, cid, kind: 'lesson',
-        text: (open.length === 1 ? 'lesson open · ' : 'lessons open · ') + 'pick up ' + pick.title,
-        go: () => launchQuiz(pick.id, cid, false) });
+    if(d.closed){ plan.push({ d, kind:'closed', what: closedToday(d.date), sub:'', mins:null }); return; }
+    if(k === mixIdx){
+      plan.push({ d, kind:'mixed', what:'All of them, shuffled',
+        sub:'Working out which kind of question it is, is the skill',
+        mins: Math.max(8, Math.round(queue.slice(0,3).reduce((n,L)=>n+L.mins,0) / 3)),
+        cid: queue[0] ? queue[0].cid : null });
+      return;
     }
+    if(!queue.length){ plan.push({ d, kind:'clear', what:'Yours', sub:'Nothing is waiting', mins:null }); return; }
+    const L = queue[qi % queue.length]; qi++;
+    plan.push({ d, kind:'subject', cid:L.cid, load:L, what:L.cls.name,
+      sub: L.pick ? L.pick.title + (L.due ? ' · ' + L.due + ' review due' : '')
+                  : L.due + ' review question' + (L.due===1?'':'s') + ' due',
+      mins: L.mins });
+  });
+
+  /* ---- The prose. Two sentences: what the week holds, then what to do. ---- */
+  const phrase = t => {
+    const c = CLASS_BY_ID[t.classId];
+    const k = (KINDS[t.kind] || KINDS.test).nm.toLowerCase();
+    const body = (c ? (c.short || c.name) + ' ' : '') + k;
+    /* "an English quiz", not "a English quiz" — the subject short name leads,
+       so the article has to be decided from the assembled phrase. */
+    return (/^[aeiou]/i.test(body) ? 'an ' : 'a ') + body;
   };
-  tests.forEach(t => addSubject(t.classId, true));
-  studyPlan(date).forEach(p => addSubject(p.classId));
+  const byDay = days.filter(d => d.tests.length);
+  let lead1;
+  if(!tests.length){
+    lead1 = 'Nothing is scheduled this week — which makes it a good week to get ahead.';
+  } else if(byDay.length === 1){
+    const d = byDay[0], when = d.today ? 'Today' : d.past ? d.name : d.name;
+    lead1 = d.tests.length > 1
+      /* "both" for two, "all" for three or more — the sentence is read aloud
+         in her head and "all on the same day" for a pair is the kind of wrong
+         that makes generated prose sound generated. */
+      ? when + ' is the busy one — ' + joinList(d.tests.map(phrase))
+        + ', ' + (d.tests.length === 2 ? 'both' : 'all') + ' on the same day.'
+      : (d.today ? 'Today: ' : 'One thing this week: ')
+        + joinList(d.tests.map(phrase)) + (d.today ? '.' : ' on ' + d.name + '.');
+  } else {
+    lead1 = 'Two things to get ready for'.replace('Two', tests.length === 2 ? 'Two' : String(tests.length))
+      + ' this week: ' + joinList(byDay.map(d =>
+          joinList(d.tests.map(phrase)) + ' ' + (d.today ? 'today' : 'on ' + d.name))) + '.';
+  }
 
-  const intent = prefs().intent;
-  if(intent && intent.week === AZ.weekStart(date) && intent.text && lines.length < 3)
-    lines.push({ aim: true, text: intent.text, done: !!intent.done });
+  const study = plan.filter(p => p.kind === 'subject' || p.kind === 'mixed');
+  const totalMins = queue.reduce((n, L) => n + L.mins, 0);
+  let lead2;
+  if(!study.length){
+    lead2 = tests.length
+      ? 'The studying days are behind you now — read something over if you want to, but the work is done.'
+      : 'Nothing is waiting. A good week to pick up whatever you feel like.';
+  } else {
+    const n = study.length;
+    /* Averaged over the DAYS AS PLANNED, not over the subject list. Those are
+       different numbers whenever the queue is shorter than the week and a
+       subject comes round twice — dividing the subject total by five evenings
+       said "roughly 5 minutes each" under a ledger showing 7, 9, 7, 7, 9. */
+    const mins = study.map(p => p.mins).filter(Boolean);
+    const each = mins.length ? Math.round(mins.reduce((a, b) => a + b, 0) / mins.length) : 10;
+    const howLong = n === 1
+      ? 'one evening, and about ' + each + ' minutes'
+      : n + ' evenings, and roughly ' + each + ' minutes each';
+    const shape = (queue.length > 1
+        ? 'Take one subject a night while it is quiet'
+        : 'A little each night beats one long session')
+      + (mixIdx >= 0 ? ', then let ' + upcoming[mixIdx].name + ' mix them together.' : '.');
+    /* "That gives you" promises preparation time. It is only true when a test
+       is still ahead — with the week's tests already sat, the same sentence
+       would be pointing at revision for something that is over. */
+    lead2 = tests.some(t => t.date > date)
+      ? 'That gives you ' + howLong + '. ' + shape
+      : 'The rest of the week is yours — ' + howLong + ' if you want it. ' + shape;
+  }
 
-  return { days, monday, friday, tests, lines, lead, focusCid, testCids,
-           /* the runway yields to this when its test is inside the week */
+  return { monday, friday, days, tests, plan, queue, totalMins, lead1, lead2,
+           namedCids: new Set(queue.map(L => L.cid)),
+           namesDue: queue.some(L => L.due > 0),
            covers: d => d >= monday && d <= friday };
 }
 function threadTarget(date, opt){
@@ -2328,7 +2468,7 @@ function seasonalSky(){
    One delegated listener rather than per-button wiring: every control in
    both apps is created through el(), so anything that looks pressable gets
    this for free, including screens not written yet. */
-const TAPPY = '.btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.wkday,.skystar,.act,.tool,.nav-btn,.chip,.back-chip';
+const TAPPY = '.btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.skystar,.act,.tool,.nav-btn,.chip,.back-chip';
 function tapBuzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 document.addEventListener('pointerdown', e => {
   const t = e.target && e.target.closest && e.target.closest(TAPPY);
@@ -3620,78 +3760,115 @@ SCREENS.today = function(root){
   }
   root.appendChild(st);
 
-  /* ---- The week ahead. Takes the space the period list used to hold. ---- */
-  const wk = weekAhead(date);
-  /* The runway yields when its test is inside this week — the week card is
-     already saying "before your X test, do Y", and two cards saying it one
-     screen apart is the redundancy this view keeps re-growing. Beyond Friday
-     the runway is genuinely different news: something is coming that the
-     week strip does not show. */
+  /* ---- Your week. Takes the space the week-ahead card used to hold. ---- */
+  const wk = weekBrief(date);
+  /* The runway yields when its test is inside this week — the brief already
+     says "before your X test, do Y", and two cards saying it one screen apart
+     is the redundancy this view keeps re-growing. Beyond Friday the runway is
+     genuinely different news. */
   const rwShow = rw && !(wk && wk.covers(rw.a.date));
   if(wk){
-    const c = el('div','card ac week' + (wk.focusCid && CLASS_BY_ID[wk.focusCid] ? ' subj-a' : ''));
-    if(wk.focusCid && CLASS_BY_ID[wk.focusCid])
-      c.style.setProperty('--pc', classColor(CLASS_BY_ID[wk.focusCid]));
-    c.appendChild(el('div','eyebrow','The week ahead'));
-    const grid = el('div','wkgrid');
-    wk.days.forEach(d=>{
-      /* A day with a test wears that SUBJECT's colour, and so do the work rows
-         for the same subject below — so the link between "History on Thursday"
-         and "these are the History things to do" is visible rather than
-         inferred. Colour never carries it alone: the day still shows the
-         kind's glyph and the summary line names the subject in words. */
-      const dCls = d.lead ? CLASS_BY_ID[d.lead.classId] : null;
-      const cell = el(dCls ? 'button' : 'div',
-        'wkday'+(d.today?' now':'')+(d.past?' past':'')+(d.closed?' off':'')+(dCls?' subj':''));
-      if(dCls) cell.style.setProperty('--pc', classColor(dCls));
-      cell.appendChild(el('div','wl', d.label));
-      const mark = el('div','wm');
-      if(d.closed) mark.textContent = '—';
-      else if(d.lead) mark.textContent = (KINDS[d.lead.kind]||KINDS.test).ic || '✍️';
-      else if(d.events.length) mark.textContent = d.events[0].icon;
-      else mark.appendChild(el('span','dot'));
-      cell.appendChild(mark);
-      const named = d.lead ? d.lead.title
-        : d.events[0] ? d.events[0].name
-        : d.closed ? closedToday(d.date) : null;
-      cell.title = AZ.pretty(d.date) + (named ? ' · ' + named : '');
-      /* Tapping a day with a test goes to that test's subject — the one place
-         all of its material lives. Days with nothing on them stay inert
-         rather than pretending to be buttons. */
-      if(dCls) cell.addEventListener('click', ()=>go('unit',{classId:dCls.id}));
-      grid.appendChild(cell);
-    });
-    c.appendChild(grid);
-    /* One line naming what actually lands, so the marks are never the only
-       signal — colour and glyph reinforce words, they do not replace them. */
-    const landing = wk.days.filter(d=>d.tests.length||d.events.length);
-    c.appendChild(el('div','wksum', landing.length
-      ? landing.map(d=>{
-          const nm = d.tests[0] ? (CLASS_BY_ID[d.tests[0].classId]?.short || '') + ' ' +
-                                  ((KINDS[d.tests[0].kind]||KINDS.test).nm||'test').toLowerCase()
-                                : d.events[0].name;
-          return AZ.pretty(d.date).split(',')[0] + ': ' + nm.trim();
-        }).join(' · ')
-      : 'Nothing scheduled this week — a good week to get ahead.'));
-    wk.lines.forEach(L=>{
-      if(L.aim){
-        const a = el('div','wkaim');
-        a.appendChild(el('span','k','Your aim'));
-        a.appendChild(el('span','v', L.text + (L.done ? ' ✓' : '')));
-        c.appendChild(a);
-        return;
+    root.appendChild(divider('Your week'));
+    const c = el('div','card ac brief');
+    c.appendChild(el('div','eyebrow',
+      (wk.days.find(d=>d.today) ? DAYNAME[AZ.weekday(date)] : 'The week') + ' · the week in short'));
+    /* Two sentences, written from the same numbers the ledger below shows.
+       richify() so a **bold** run in a generated sentence renders — never
+       innerHTML with interpolated data. */
+    c.appendChild(richify(el('p','brief-prose'), wk.lead1));
+    c.appendChild(richify(el('p','brief-prose'), wk.lead2));
+
+    /* Direction B's load bars: where the time actually sits. Split into new
+       questions / flashcards / review due, each bar scaled against the
+       BIGGEST subject so the three are comparable at a glance — a bar scaled
+       to its own total would make every subject look equally heavy. */
+    if(wk.queue.length){
+      const top = Math.max(...wk.queue.map(L => L.mins));
+      const load = el('div','load');
+      wk.queue.slice(0,4).forEach(L => {
+        const row = el('div','load-row');
+        row.style.setProperty('--pc', classColor(L.cls));
+        const t = el('div','load-top');
+        const nm = el('div','load-nm');
+        nm.appendChild(el('span','subjdot'));
+        nm.appendChild(document.createTextNode(L.cls.name));
+        t.appendChild(nm);
+        t.appendChild(el('div','load-mins', L.mins + ' min'));
+        row.appendChild(t);
+        const bar = el('div','bar');
+        const seg = (cls, m) => { if(m <= 0) return;
+          const i2 = el('i', cls); i2.style.width = Math.max(2, m / top * 100) + '%'; bar.appendChild(i2); };
+        seg('q', L.qMin); seg('c', L.cMin); seg('r', L.dMin);
+        row.appendChild(bar);
+        load.appendChild(row);
+      });
+      c.appendChild(load);
+      /* The legend earns its place: it is what makes "mostly review" readable
+         off the bar, which is the one thing the minutes alone cannot say. */
+      const lg = el('div','legend');
+      [['q','new questions'],['c','flashcards'],['r','review due']].forEach(([k,txt])=>{
+        const sp = el('span'); sp.appendChild(el('i',k)); sp.appendChild(document.createTextNode(txt));
+        lg.appendChild(sp);
+      });
+      c.appendChild(lg);
+    }
+
+    /* The ledger: the week day by day. Today's row is tinted and every row
+       with somewhere to go is a door. */
+    const led = el('div','ledger');
+    wk.plan.forEach(pn => {
+      const r = el('div','ledger-row' + (pn.d.today ? ' now' : '') + (pn.kind==='test' ? ' test' : ''));
+      /* MON/TUE/WED, not the strip's single letters — T and T are the same
+         glyph for two different days, which was fine in a five-cell row read
+         left to right and is ambiguous in a list that starts mid-week. */
+      r.appendChild(el('div','ledger-day', pn.d.name.slice(0,3).toUpperCase()));
+      const w = el('div','ledger-what');
+      w.appendChild(document.createTextNode(pn.what));
+      if(pn.sub) w.appendChild(el('small',null,pn.sub));
+      r.appendChild(w);
+      r.appendChild(el('div','ledger-min', pn.mins ? pn.mins + ' min' : '—'));
+      if(pn.kind === 'subject' && pn.cid){
+        r.style.cursor = 'pointer';
+        r.addEventListener('click', ()=> go('unit',{classId: pn.cid}));
+      } else if(pn.kind === 'mixed' && pn.cid){
+        r.style.cursor = 'pointer';
+        r.addEventListener('click', ()=>{ if(buildShuffleUnit(pn.cid)) go('quiz',{unitId:'__shuffle__', classId:pn.cid}); });
       }
-      /* A work row for the week's focus subject carries the same colour as the
-         day that made it urgent. */
-      const b = el('button','rw'+(L.cid && wk.testCids.includes(L.cid) ? ' lead' : ''));
-      if(L.cid && wk.testCids.includes(L.cid) && CLASS_BY_ID[L.cid])
-        b.style.setProperty('--pc', classColor(CLASS_BY_ID[L.cid]));
-      b.appendChild(el('span','rn', String(L.n)));
-      b.appendChild(el('span','rt', L.text));
-      b.appendChild(el('span','rc','›'));
-      b.addEventListener('click', L.go);
-      c.appendChild(b);
+      led.appendChild(r);
     });
+    c.appendChild(led);
+
+    /* Where to actually study. Chris's instruction, and the ordering is the
+       point: the CJ first, then the school's own tools, and only then this
+       app. Fixed copy on purpose — the app cannot know whether her CJ is up
+       to date and must never pretend to track it. */
+    const fb = el('div','first');
+    fb.appendChild(el('div','fh','Where to actually study'));
+    const step = (n, bold, rest) => {
+      const st2 = el('div','step');
+      st2.appendChild(el('span','n', String(n)));
+      const t2 = el('span','t');
+      t2.appendChild(el('b',null,bold));
+      t2.appendChild(el('span',null,' ' + rest));
+      st2.appendChild(t2); fb.appendChild(st2);
+    };
+    step(1,'Your CJ first','— make sure every assignment is written down and right.');
+    step(2,'Then Schoology, class notes, worksheets, study guides','— that is where the test comes from.');
+    step(3,'Then here','— for the extra practice once you have read it through.');
+    fb.appendChild(el('div','tail','Minutes come from your own pace, not a guess.'));
+    c.appendChild(fb);
+
+    /* One button, for today only. */
+    const mine = wk.plan.find(pn => pn.d.today);
+    if(mine && mine.kind === 'subject' && mine.load){
+      const b = el('button','btn btn-primary','Tonight: ' + mine.load.cls.name);
+      b.addEventListener('click', ()=> go('unit',{classId: mine.cid}));
+      c.appendChild(b);
+    } else if(mine && mine.kind === 'mixed' && mine.cid){
+      const b = el('button','btn btn-primary','Tonight: a mixed round');
+      b.addEventListener('click', ()=>{ if(buildShuffleUnit(mine.cid)) go('quiz',{unitId:'__shuffle__', classId:mine.cid}); });
+      c.appendChild(b);
+    }
     root.appendChild(c);
   }
 
@@ -3770,7 +3947,7 @@ SCREENS.today = function(root){
      the runway, or now the week card. Two review numbers one screen apart read
      as a contradiction, not as extra information. The nav badge keeps the door
      visible either way. */
-  const countedDue = (rwShow && rw.due) || (wk && wk.lines.some(L => L.kind === 'due'));
+  const countedDue = (rwShow && rw.due) || (wk && wk.namesDue);
   if(dueNow2 && !countedDue){
     statTile(dueNow2, 'to review', 'Growth Zone ›', ()=>go('growth'), true);
   } else if(plan2.length){
@@ -3818,7 +3995,7 @@ SCREENS.today = function(root){
      Thursday the week card, the strip tile and the hero all said Biology, and
      the hero repeated "quiz in 3 days · 1 question in your Growth Zone" back
      verbatim. If the week already named that subject, the hero says nothing. */
-  const wkClasses = new Set((wk ? wk.lines : []).filter(L => L.cid).map(L => L.cid));
+  const wkClasses = wk ? wk.namedCids : new Set();
   const dupe = pkLive || !th0 || th0.kind === 'due'
     || (th0.kind === 'plan' && !dueNow2 && plan2.length && th0.classId === plan2[0].classId)
     || (th0.kind === 'lesson' && rwLesson && th0.unitId === rwLesson.id)
