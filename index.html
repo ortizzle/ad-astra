@@ -861,11 +861,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    reflow on touch), and the press is on :active only, so a stuck hover state
    on a touch device can never leave a control looking pressed. */
 @media (prefers-reduced-motion: no-preference){
-  .btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.act,.tool,.chip,.back-chip{
+  .btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.pickrow,.act,.tool,.chip,.back-chip{
     transition:transform .13s cubic-bezier(.2,.8,.3,1), filter .13s ease, box-shadow .13s ease;
     will-change:transform}
   .btn:active,.opt:active,.tile:active,.cardbtn:active,.spine:active,.mtile:active,
-  .rw:active,.stat:active,.pickrow:active,.act:active,.tool:active,
+  .rw:active,.pickrow:active,.act:active,.tool:active,
   .chip:active,.back-chip:active{
     transform:scale(.955) translateY(1px);filter:brightness(.88)}
   /* The primary action presses deepest — it is the one with the most weight. */
@@ -960,14 +960,6 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
 /* The Today strip: three numbers that are doors, not a scoreboard. */
-.statstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:var(--gap) 0}
-.stat{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;
-  min-height:var(--tap);padding:12px 11px;border-radius:16px;
-  border:1px solid var(--line);background-color:var(--surface)}
-.stat .n{font-family:'Fraunces',Georgia,serif;font-size:23px;line-height:1.1;color:var(--ac-fg)}
-.stat .l{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--faint)}
-.stat .s{font-size:11.5px;color:var(--muted);margin-top:2px}
-.stat.hot{border-color:var(--ac);background-image:linear-gradient(140deg,var(--ac-14),transparent 70%)}
 /* Flashcard definitions: one idea per line, with air between ideas. */
 .def .defline{margin-top:10px}
 .def .defline:first-child{margin-top:0;margin-bottom:3px}
@@ -1278,7 +1270,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v121 · your week, in short';
+const APP_VERSION = 'v122 · one door each';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2468,7 +2460,7 @@ function seasonalSky(){
    One delegated listener rather than per-button wiring: every control in
    both apps is created through el(), so anything that looks pressable gets
    this for free, including screens not written yet. */
-const TAPPY = '.btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.stat,.pickrow,.skystar,.act,.tool,.nav-btn,.chip,.back-chip';
+const TAPPY = '.btn,.opt,.tile,.cardbtn,.spine,.mtile,.rw,.pickrow,.skystar,.act,.tool,.nav-btn,.chip,.back-chip';
 function tapBuzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 document.addEventListener('pointerdown', e => {
   const t = e.target && e.target.closest && e.target.closest(TAPPY);
@@ -3877,8 +3869,6 @@ SCREENS.today = function(root){
      answers "what should I do now" and goes straight there. */
   const dueNow2 = dueMisses().length;
   const plan2 = studyPlan(date);
-  const mRead = logs().filter(l=>l.mode==='read' && l.date.slice(0,7)===date.slice(0,7))
-    .reduce((n,l)=>n + (l.minutes || Math.round((l.seconds||0)/60)), 0);
   /* The runway — see runway() above. Sits directly under the school day,
      because before a test it is the most useful thing on the screen. */
   if(rwShow){
@@ -3929,44 +3919,23 @@ SCREENS.today = function(root){
     root.appendChild(c0);
   }
 
-  const strip = el('div','statstrip');
-  const statTile = (num, label, sub, onTap, hot)=>{
-    const b = el('button','stat'+(hot?' hot':''));
-    b.appendChild(el('span','n', String(num)));
-    b.appendChild(el('span','l', label));
-    b.appendChild(el('span','s', sub));
-    b.addEventListener('click', onTap);
-    strip.appendChild(b);
-  };
-  /* The runway's review row is already the Growth door for the subject that
-     matters most; a tile repeating a second, larger review count beside it
-     reads as a contradiction rather than as extra information. When that row
-     is showing, this tile offers breadth instead — and Growth keeps its
-     count badge in the nav either way, so the door never disappears. */
-  /* The Growth tile yields to whichever card already printed a review count —
-     the runway, or now the week card. Two review numbers one screen apart read
-     as a contradiction, not as extra information. The nav badge keeps the door
-     visible either way. */
-  const countedDue = (rwShow && rw.due) || (wk && wk.namesDue);
-  if(dueNow2 && !countedDue){
-    statTile(dueNow2, 'to review', 'Growth Zone ›', ()=>go('growth'), true);
-  } else if(plan2.length){
-    const pc3 = CLASS_BY_ID[plan2[0].classId];
-    statTile(plan2[0].minutes+'m', 'suggested', pc3.short+' ›', ()=>go('unit',{classId:plan2[0].classId}));
-  } else {
-    statTile('✓', 'all clear', 'Growth Zone ›', ()=>go('growth'));
-  }
-  statTile(mRead >= 90 ? (mRead/60).toFixed(1)+'h' : (mRead ? mRead+'m' : '—'),
-    'read this month', 'Reading log ›', ()=>go('reading'));
-  statTile(stats().level, 'level', stats().xp.toLocaleString()+' XP ›', ()=>go('stars'));
-  root.appendChild(strip);
+  /* The three-tile strip was removed here (Wayfinder v105 / Ad Astra v122),
+     Chris's call, and the brief is why: every one of its tiles had become a
+     second door to something already on the screen or already in the nav.
+     Tile one said "40m suggested · Math" directly under the brief's "Tonight:
+     Accelerated Math"; its Growth variant was already yielding to the brief's
+     review counts. Reading has a whole card on Study. Level went to Stars,
+     which is a nav tab — and a level with nowhere new to go is scorekeeping,
+     which is the one thing the strip's own rule (v51) said would disqualify a
+     tile: "if a tile is ever added that only displays a number, it belongs on
+     Stars instead." Growth keeps its live count badge in the nav, so the door
+     that mattered never disappears. */
 
   /* Carry on, in one tap — but ONLY when it says something the screen does
-     not already say. The strip's first tile is the Growth door when reviews
-     are due and the study-plan door when they are not, and the runway card
-     above names the lesson to finish before a test; a hero repeating any of
-     those is the same fact printed twice. It earns its place for a specific
-     open lesson, or for the mixed round in test week. */
+     not already say. The brief names its subjects and the runway names the
+     lesson to finish before a test; a hero repeating either is the same fact
+     printed twice. It earns its place for a specific open lesson, or for the
+     mixed round in test week. */
   /* A round parked earlier today outranks every suggestion below: it is not
      advice, it is her own half-finished work made findable — the "don't lose
      progress" promise, one door further out. Same validity rules as
