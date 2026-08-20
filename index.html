@@ -241,10 +241,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    the card's already-computed --pc-fg — the week card's lead rows wore the
    focus subject's colour no matter whose door they were. Where --pc is unset
    the mix is invalid, so every use site falls back with var(--pc-fg,var(--ac-fg)). */
-.card.subj-a,.row.subj-a,.lk,.tile,.plan,.subjline{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+.card.subj-a,.row.subj-a,.lk,.tile,.plan,.subjline,.ledger-row.subj{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
 [data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a,
 [data-theme="light"] .lk,
-[data-theme="light"] .tile,[data-theme="light"] .plan,[data-theme="light"] .subjline{
+[data-theme="light"] .tile,[data-theme="light"] .plan,[data-theme="light"] .subjline,
+[data-theme="light"] .ledger-row.subj{
   --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
 .card.subj-a>.eyebrow{color:var(--pc-fg)}
 /* Runway rows only: every runway row IS the card's subject. The week card's
@@ -315,6 +316,10 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 /* Today is tinted AND its label is heavier — colour is never the only signal,
    the same rule the "lands today" row in Coming up follows. */
 .ledger-row.now{background:var(--ac-8);border-radius:9px}
+/* A study row wears its subject — the .subjline grammar carried to the one
+   list on Today that lacked it. Today's row keeps the accent: .now is later
+   in this block, and today is a different axis from topic. */
+.ledger-row.subj .ledger-day{color:var(--pc-fg,var(--ac-fg))}
 .ledger-row.now .ledger-day{color:var(--ac-fg)}
 /* Where to actually study. Quiet on purpose: it is a reminder that the app is
    NOT the source, so it must not out-shout the work above it. */
@@ -329,6 +334,8 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .first .step .t{font-size:13.5px;line-height:1.45}
 .first .step .t b{color:var(--text);font-weight:700}
 .first .step .t span{color:var(--muted)}
+/* The folded study-path line: same plate, one line, a real button. */
+.firstfold{width:100%;cursor:pointer;text-align:left;font:inherit;color:inherit;display:block}
 .first .tail{font-size:12.5px;color:var(--muted);margin-top:var(--gap-row);line-height:1.45;
   padding-top:10px;border-top:1px solid var(--line-soft)}
 /* Locked-in: one chip per subject, carrying that subject's colour. */
@@ -1277,7 +1284,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v124 · sixteen';
+const APP_VERSION = 'v125 · said once, and quieter by Tuesday';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2397,6 +2404,9 @@ function weekBrief(date){
   }
 
   return { monday, friday, days, tests, plan, queue, totalMins, lead1, lead2,
+           /* Coming up skips these — a test the ledger already lists would
+              otherwise print twice, one screen apart. */
+           ledgerTestIds: new Set(aheadTests.map(t => t.id)),
            namedCids: new Set(queue.map(L => L.cid)),
            namesDue: queue.some(L => L.due > 0),
            covers: d => d >= monday && d <= friday };
@@ -3776,7 +3786,20 @@ SCREENS.today = function(root){
       st.appendChild(el('p',null, `First up: ${first.name} at ${fmtTime(first.start)}.`));
     } else {
       st.appendChild(el('h3',null,'School day is over'));
-      st.appendChild(el('p',null,'Best window for studying — it is still fresh.'));
+      /* The study nudge that lived here predates the brief, whose whole job
+         is now that suggestion — two voices, 100px apart. The card says where
+         tomorrow starts instead: tonight belongs to tomorrow. */
+      let nd = AZ.shift(date,1);
+      for(let g=0; g<30 && (AZ.weekday(nd)===0 || AZ.weekday(nd)===6 || closedToday(nd)); g++)
+        nd = AZ.shift(nd,1);
+      const ndReal = CLASSES.filter(c2 => !c2.break && !c2.bookend);
+      if(nd <= CAL.lastDay && ndReal.length){
+        const lbl = nd === AZ.shift(date,1) ? 'Tomorrow starts with'
+          : DAYNAME[AZ.weekday(nd)] + ' starts with';
+        st.appendChild(el('p',null, `${lbl} ${ndReal[0].name} at ${fmtTime(ndReal[0].start)}.`));
+      } else {
+        st.appendChild(el('p',null,'Nothing on the timetable ahead.'));
+      }
     }
   }
   root.appendChild(st);
@@ -3818,7 +3841,9 @@ SCREENS.today = function(root){
         nm.appendChild(el('span','subjdot'));
         nm.appendChild(document.createTextNode(L.cls.name));
         t.appendChild(nm);
-        t.appendChild(el('div','load-mins', '~' + L.mins + ' min  ›'));
+        /* No minutes here — the ledger says WHEN and carries them; the bar's
+           job is composition. The same number twice in one card was noise. */
+        t.appendChild(el('div','load-mins', '›'));
         row.appendChild(t);
         const bar = el('div','bar');
         const seg = (cls, m) => { if(m <= 0) return;
@@ -3842,7 +3867,10 @@ SCREENS.today = function(root){
        with somewhere to go is a door. */
     const led = el('div','ledger');
     wk.plan.forEach(pn => {
-      const r = el('div','ledger-row' + (pn.d.today ? ' now' : '') + (pn.kind==='test' ? ' test' : ''));
+      const r = el('div','ledger-row' + (pn.d.today ? ' now' : '') + (pn.kind==='test' ? ' test' : '')
+        + (pn.kind==='subject' && pn.cid && CLASS_BY_ID[pn.cid] ? ' subj' : ''));
+      if(pn.kind==='subject' && pn.cid && CLASS_BY_ID[pn.cid])
+        r.style.setProperty('--pc', classColor(CLASS_BY_ID[pn.cid]));
       /* MON/TUE/WED, not the strip's single letters — T and T are the same
          glyph for two different days, which was fine in a five-cell row read
          left to right and is ambiguous in a list that starts mid-week. */
@@ -3867,6 +3895,18 @@ SCREENS.today = function(root){
        point: the CJ first, then the school's own tools, and only then this
        app. Fixed copy on purpose — the app cannot know whether her CJ is up
        to date and must never pretend to track it. */
+    /* Full on Sunday and Monday, when the week gets planned; one tappable
+       line the rest of the week. 361px of identical furniture every day is
+       how banner blindness starts — nothing removed, only deferred, the same
+       move the Settings pickers and the badge grid made. */
+    const wd2 = AZ.weekday(date);
+    if(!(wd2 === 0 || wd2 === 1 || ctx._studyPath)){
+      const ff = el('button','first firstfold');
+      ff.appendChild(el('div','fh','Where to actually study'));
+      ff.appendChild(el('div','tail','CJ first → Schoology, notes, study guides → then here  ›'));
+      ff.addEventListener('click', ()=>{ ctx._studyPath = true; render(); });
+      c.appendChild(ff);
+    } else {
     const fb = el('div','first');
     fb.appendChild(el('div','fh','Where to actually study'));
     const step = (n, bold, rest) => {
@@ -3882,6 +3922,7 @@ SCREENS.today = function(root){
     step(3,'Then here','— for the extra practice once you have read it through.');
     fb.appendChild(el('div','tail','The minutes are how long that evening\'s practice should take, timed from your own pace.'));
     c.appendChild(fb);
+    }
 
     /* The button prefers tonight, and falls forward to the first workable day
        when today has nothing to press — a closed day, or a test morning. It
@@ -3907,8 +3948,6 @@ SCREENS.today = function(root){
   /* The strip: three live numbers that are really DOORS. Today still is not a
      dashboard — nothing here is scorekeeping for its own sake. Each tile
      answers "what should I do now" and goes straight there. */
-  const dueNow2 = dueMisses().length;
-  const plan2 = studyPlan(date);
   /* The runway — see runway() above. Sits directly under the school day,
      because before a test it is the most useful thing on the screen. */
   if(rwShow){
@@ -3998,28 +4037,20 @@ SCREENS.today = function(root){
     dR.classList.add('hero');
     root.appendChild(dR);
   }
-  const th0 = threadTarget(date, {skipDue: dueNow2 > 0});
-  /* The week card is now a third voice on this screen, so the hero has to
-     yield to it as well — caught by screenshot: with a Biology quiz on
-     Thursday the week card, the strip tile and the hero all said Biology, and
-     the hero repeated "quiz in 3 days · 1 question in your Growth Zone" back
-     verbatim. If the week already named that subject, the hero says nothing. */
-  const wkClasses = wk ? wk.namedCids : new Set();
-  const dupe = pkLive || !th0 || th0.kind === 'due'
-    || (th0.kind === 'plan' && !dueNow2 && plan2.length && th0.classId === plan2[0].classId)
-    || (th0.kind === 'lesson' && rwLesson && th0.unitId === rwLesson.id)
-    || (th0.kind === 'ramp' && rw && th0.classId === rw.cid)
-    || wkClasses.has(th0.classId);
-  if(!dupe){
-    const heroT = cardButton(th0.title, th0.sub, th0.go);
-    heroT.classList.add('hero');
-    root.appendChild(heroT);
-  }
+  /* The generic thread hero retired here (v108/v125): once the brief named
+     up to four subjects, the dupe rules meant it almost never fired — the one
+     state it still served is the parked-round door above, which stays. Study
+     keeps its own Pick-up-the-thread card, and the #thread home-screen
+     shortcut still resolves through threadTarget(). */
 
   /* Coming up — school events and her own tests in one list, ordered by date.
      A Mini-Comp and a Friday maths quiz are the same kind of thing to plan
      around, so splitting them into two lists would only hide one of them. */
-  const upA = upcomingAssessments(date, 21).map(a=>{
+  const upA = upcomingAssessments(date, 21)
+    /* The brief's ledger already lists this week's tests day by day; Coming up
+       keeps what the ledger cannot show — events, and anything beyond Friday. */
+    .filter(a => !(wk && wk.ledgerTestIds.has(a.id)))
+    .map(a=>{
     const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
     return { on:a.date, icon:k.ic, name:a.title, sub:`${c?c.name:''} · ${AZ.shortDate(a.date)}`,
              when: (dd=>dd===0?'Today':dd===1?'Tomorrow':`${dd} days`)(AZ.daysBetween(date,a.date)),
