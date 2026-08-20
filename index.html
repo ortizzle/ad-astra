@@ -267,15 +267,22 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 /* The prose is the one place on Today that is meant to be READ rather than
    scanned, so it takes the serif at a reading size — the same face the
    headings use, which is what marks it as writing and not a label. */
-.brief-prose{font-family:'Fraunces',Georgia,serif;font-size:17px;line-height:1.52;
+/* .card p.brief-prose, not bare .brief-prose: `.card p` outguns a lone class
+   on specificity and was silently forcing the prose down to 14px muted — the
+   same cascade trap .card.pnote p documents. Chris asked for a bigger font;
+   the styled size had never actually applied. */
+.card p.brief-prose{font-family:'Fraunces',Georgia,serif;font-size:18.5px;line-height:1.52;
   color:var(--text);font-weight:400;margin:0 0 var(--gap-row)}
-.brief-prose:last-of-type{margin-bottom:0}
+.card p.brief-prose:last-of-type{margin-bottom:0}
 .brief-prose b{font-weight:700}
 /* Load bars: where the time actually sits. Each subject carries its own --pc,
    set from classColor() at the render site — direction A's rule, a subject
    hue only ever where that subject is the topic. */
 .load{margin-top:var(--gap)}
-.load-row{margin-bottom:var(--gap-row)}
+/* Button reset: the row is a door now, but must look exactly as it did as a
+   div — the bar itself is the content. */
+.load-row{display:block;width:100%;margin-bottom:var(--gap-row);padding:0;
+  background:none;border:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
 .load-row:last-child{margin-bottom:0}
 .load-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px}
 .load-nm{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
@@ -1270,7 +1277,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v122 · one door each';
+const APP_VERSION = 'v123 · tonight belongs to tomorrow';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2216,6 +2223,17 @@ function weekBrief(date){
   }
   const friday = days[4].date;
   const tests = days.flatMap(d => d.tests);
+  /* After 3pm the school day is over and tonight belongs to TOMORROW'S needs —
+     Chris's rule, and 900 minutes is the same after-school line the rest of
+     the app already draws. Two things follow: a test sat this morning stops
+     being promoted as if it were still coming, and today's ledger row turns
+     back into a study evening instead of showing the test that already
+     happened. */
+  const afterSchool = date === AZ.today() && AZ.nowMinutes() >= 900;
+  const stillAhead = t => t.date > date || (t.date === date && !afterSchool);
+  const aheadTests = tests.filter(stillAhead);
+  /* pending = this day's tests are still in front of her */
+  const pendingDay = d => d.tests.length && !(d.date < date) && !(d.today && afterSchool);
 
   /* Same ranking the week card used: a test outranks a quiz, and past that the
      subject she is struggling in more wins — the colour, and now the order of
@@ -2248,7 +2266,10 @@ function weekBrief(date){
   /* Who gets a day: test subjects first, in test order, then whatever the
      study plan is most worried about. */
   const seen = new Set(), queue = [];
-  tests.slice().sort(rank).forEach(t => {
+  /* Soonest test first, THEN weight and neediness: tonight's slot belongs to
+     whatever she meets next. With everything on one day this is a no-op; with
+     a quiz tomorrow and a test Friday, tomorrow wins tonight. */
+  aheadTests.slice().sort((x, y) => x.date.localeCompare(y.date) || rank(x, y)).forEach(t => {
     if(seen.has(t.classId)) return;
     seen.add(t.classId);
     const L = loadFor(t.classId);
@@ -2271,9 +2292,9 @@ function weekBrief(date){
      is the app's existing exam-ramp rule — in test week the right work
      changes shape, not just minutes. */
   const upcoming = days.filter(d => !d.past || d.today);
-  const firstTestIdx = upcoming.findIndex(d => d.tests.length);
+  const firstTestIdx = upcoming.findIndex(pendingDay);
   const freeIdx = upcoming.map((d, k) => ({d, k}))
-    .filter(x => !x.d.tests.length && !x.d.closed)
+    .filter(x => !pendingDay(x.d) && !x.d.closed)
     .map(x => x.k);
   let mixIdx = -1;
   if(testCids.size >= 2 && freeIdx.length >= 2){
@@ -2283,7 +2304,7 @@ function weekBrief(date){
   const plan = [];
   let qi = 0;
   upcoming.forEach((d, k) => {
-    if(d.tests.length){
+    if(pendingDay(d)){
       plan.push({ d, kind:'test',
         what: d.tests.length > 1 ? d.tests.length + ' tests today' : d.tests[0].title,
         sub: d.tests.length > 1
@@ -2317,24 +2338,32 @@ function weekBrief(date){
        so the article has to be decided from the assembled phrase. */
     return (/^[aeiou]/i.test(body) ? 'an ' : 'a ') + body;
   };
-  const byDay = days.filter(d => d.tests.length);
+  const byDay = days.filter(d => d.tests.some(stillAhead));
+  const dayWord = d => d.today ? 'today'
+    : d.date === AZ.shift(date, 1) ? 'tomorrow' : 'on ' + d.name;
   let lead1;
   if(!tests.length){
     lead1 = 'Nothing is scheduled this week — which makes it a good week to get ahead.';
+  } else if(!aheadTests.length){
+    /* There WERE tests, and they are done — after 3pm on test day the app must
+       not keep promoting a test she already sat. */
+    lead1 = 'The week\'s tests are behind you.';
   } else if(byDay.length === 1){
-    const d = byDay[0], when = d.today ? 'Today' : d.past ? d.name : d.name;
+    const d = byDay[0];
+    const when = d.today ? 'Today' : d.date === AZ.shift(date, 1) ? 'Tomorrow' : d.name;
     lead1 = d.tests.length > 1
       /* "both" for two, "all" for three or more — the sentence is read aloud
          in her head and "all on the same day" for a pair is the kind of wrong
          that makes generated prose sound generated. */
       ? when + ' is the busy one — ' + joinList(d.tests.map(phrase))
         + ', ' + (d.tests.length === 2 ? 'both' : 'all') + ' on the same day.'
-      : (d.today ? 'Today: ' : 'One thing this week: ')
-        + joinList(d.tests.map(phrase)) + (d.today ? '.' : ' on ' + d.name + '.');
+      : (d.today ? 'Today: ' : d.date === AZ.shift(date, 1) ? 'Tomorrow: ' : 'One thing this week: ')
+        + joinList(d.tests.filter(stillAhead).map(phrase))
+        + (d.today || d.date === AZ.shift(date, 1) ? '.' : ' on ' + d.name + '.');
   } else {
-    lead1 = 'Two things to get ready for'.replace('Two', tests.length === 2 ? 'Two' : String(tests.length))
+    lead1 = 'Two things to get ready for'.replace('Two', aheadTests.length === 2 ? 'Two' : String(aheadTests.length))
       + ' this week: ' + joinList(byDay.map(d =>
-          joinList(d.tests.map(phrase)) + ' ' + (d.today ? 'today' : 'on ' + d.name))) + '.';
+          joinList(d.tests.filter(stillAhead).map(phrase)) + ' ' + dayWord(d))) + '.';
   }
 
   const study = plan.filter(p => p.kind === 'subject' || p.kind === 'mixed');
@@ -2362,7 +2391,7 @@ function weekBrief(date){
     /* "That gives you" promises preparation time. It is only true when a test
        is still ahead — with the week's tests already sat, the same sentence
        would be pointing at revision for something that is over. */
-    lead2 = tests.some(t => t.date > date)
+    lead2 = aheadTests.length
       ? 'That gives you ' + howLong + '. ' + shape
       : 'The rest of the week is yours — ' + howLong + ' if you want it. ' + shape;
   }
@@ -3778,14 +3807,18 @@ SCREENS.today = function(root){
       const top = Math.max(...wk.queue.map(L => L.mins));
       const load = el('div','load');
       wk.queue.slice(0,4).forEach(L => {
-        const row = el('div','load-row');
+        /* A button, not a div — every subject here is a door to that subject,
+           the same stats-as-navigation rule the old strip lived by. Chris
+           caught the rows being inert on River's phone. */
+        const row = el('button','load-row');
         row.style.setProperty('--pc', classColor(L.cls));
+        row.addEventListener('click', ()=> go('unit',{classId: L.cid}));
         const t = el('div','load-top');
         const nm = el('div','load-nm');
         nm.appendChild(el('span','subjdot'));
         nm.appendChild(document.createTextNode(L.cls.name));
         t.appendChild(nm);
-        t.appendChild(el('div','load-mins', L.mins + ' min'));
+        t.appendChild(el('div','load-mins', '~' + L.mins + ' min  ›'));
         row.appendChild(t);
         const bar = el('div','bar');
         const seg = (cls, m) => { if(m <= 0) return;
@@ -3818,7 +3851,7 @@ SCREENS.today = function(root){
       w.appendChild(document.createTextNode(pn.what));
       if(pn.sub) w.appendChild(el('small',null,pn.sub));
       r.appendChild(w);
-      r.appendChild(el('div','ledger-min', pn.mins ? pn.mins + ' min' : '—'));
+      r.appendChild(el('div','ledger-min', pn.mins ? '~' + pn.mins + ' min' : '—'));
       if(pn.kind === 'subject' && pn.cid){
         r.style.cursor = 'pointer';
         r.addEventListener('click', ()=> go('unit',{classId: pn.cid}));
@@ -3847,18 +3880,25 @@ SCREENS.today = function(root){
     step(1,'Your CJ first','— make sure every assignment is written down and right.');
     step(2,'Then Schoology, class notes, worksheets, study guides','— that is where the test comes from.');
     step(3,'Then here','— for the extra practice once you have read it through.');
-    fb.appendChild(el('div','tail','Minutes come from your own pace, not a guess.'));
+    fb.appendChild(el('div','tail','The minutes are how long that evening\'s practice should take, timed from your own pace.'));
     c.appendChild(fb);
 
-    /* One button, for today only. */
+    /* The button prefers tonight, and falls forward to the first workable day
+       when today has nothing to press — a closed day, or a test morning. It
+       only disappears when the whole week genuinely asks nothing, because a
+       call to action with nothing behind it would be a nag. */
     const mine = wk.plan.find(pn => pn.d.today);
-    if(mine && mine.kind === 'subject' && mine.load){
-      const b = el('button','btn btn-primary','Tonight: ' + mine.load.cls.name);
-      b.addEventListener('click', ()=> go('unit',{classId: mine.cid}));
-      c.appendChild(b);
-    } else if(mine && mine.kind === 'mixed' && mine.cid){
-      const b = el('button','btn btn-primary','Tonight: a mixed round');
-      b.addEventListener('click', ()=>{ if(buildShuffleUnit(mine.cid)) go('quiz',{unitId:'__shuffle__', classId:mine.cid}); });
+    const target = (mine && ((mine.kind === 'subject' && mine.load) || (mine.kind === 'mixed' && mine.cid)))
+      ? mine
+      : wk.plan.find(pn => (pn.kind === 'subject' && pn.load) || (pn.kind === 'mixed' && pn.cid));
+    if(target){
+      const tonight = target === mine;
+      const nm2 = target.kind === 'mixed' ? 'a mixed round' : target.load.cls.name;
+      const b = el('button','btn btn-primary', (tonight ? 'Tonight: ' : 'Get ahead: ') + nm2);
+      if(target.kind === 'mixed')
+        b.addEventListener('click', ()=>{ if(buildShuffleUnit(target.cid)) go('quiz',{unitId:'__shuffle__', classId:target.cid}); });
+      else
+        b.addEventListener('click', ()=> go('unit',{classId: target.cid}));
       c.appendChild(b);
     }
     root.appendChild(c);
@@ -6884,6 +6924,11 @@ function finishQuiz(u, partial){
         s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest));
         t.appendChild(s); };
       chip(right, ` of ${total}`);
+      /* The percentage returned (v106/v123): v91 removed it, keeping the
+         fraction — and River reported the science quizzes "did not provide
+         grades". 4 of 5 IS the grade, but not in the language school has
+         taught her grades come in. Said once, as a chip, headline unchanged. */
+      chip(pct + '%', '');
       chip('+'+xp, ' XP');
       chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
       box.appendChild(t);
