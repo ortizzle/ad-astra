@@ -271,7 +271,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    on specificity and was silently forcing the prose down to 14px muted — the
    same cascade trap .card.pnote p documents. Chris asked for a bigger font;
    the styled size had never actually applied. */
-.card p.brief-prose{font-family:'Fraunces',Georgia,serif;font-size:18.5px;line-height:1.52;
+.card p.brief-prose{font-family:'Fraunces',Georgia,serif;font-size:16px;line-height:1.52;
   color:var(--text);font-weight:400;margin:0 0 var(--gap-row)}
 .card p.brief-prose:last-of-type{margin-bottom:0}
 .brief-prose b{font-weight:700}
@@ -1277,7 +1277,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v123 · tonight belongs to tomorrow';
+const APP_VERSION = 'v124 · sixteen';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
