@@ -1026,6 +1026,10 @@ input,textarea,select{width:100%;background:var(--deep);border:1px solid var(--l
 textarea{min-height:140px;resize:vertical;line-height:1.55}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .rev{padding:14px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:var(--gap-row)}
+/* Her own cards, listed in the editor. */
+.ocrow .oct{font-weight:700;font-size:15px}
+.ocrow .ocd{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.45}
+.ocrow .btn-row{margin-top:10px}
 .rev.cut{opacity:.42}
 .rev .q{font-size:14px;font-weight:600;margin-bottom:8px;padding-right:34px}
 .rev .o{font-size:13px;color:var(--muted);padding:3px 0 3px 18px;position:relative;line-height:1.45}
@@ -1284,7 +1288,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v126 · studying never closes';
+const APP_VERSION = 'v127 · cards of her own';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4516,13 +4520,31 @@ SCREENS.unit = function(root){
     }
     if(grouped.loose.length){
       root.appendChild(divider(grouped.shelves.length ? 'More units' : 'Units'));
-      grouped.loose.forEach(u => root.appendChild(unitCard(u, c)));
+      /* Her own deck is not a loose unit — it has its own card below, and
+         unitCard would offer a quiz it cannot hold. */
+      grouped.loose.filter(u => !u.own).forEach(u => root.appendChild(unitCard(u, c)));
     }
   }
   const waiting = drafts().filter(u=>u.classId===c.id).length;
   if(waiting) root.appendChild(el('div','hintline',
     waiting===1 ? 'One unit is waiting for a grown-up to check it.'
                 : `${waiting} units are waiting for a grown-up to check them.`));
+
+  /* Her own cards — her words, so no review queue (see SCREENS.owncards). */
+  const own = ownDeck(c.id);
+  if(own && own.cards.length){
+    root.appendChild(divider('Your own cards'));
+    const oc = el('div','card');
+    oc.appendChild(el('h3',null, own.title));
+    oc.appendChild(el('p',null, own.cards.length + (own.cards.length===1 ? ' card' : ' cards') + ', written by you.'));
+    const rb = el('button','btn btn-secondary','🃏  Review your cards');
+    rb.addEventListener('click', ()=> go('cards',{unitId: own.id, classId: c.id}));
+    oc.appendChild(rb);
+    const ebb = el('button','btn btn-ghost','✍️  Add or edit');
+    ebb.addEventListener('click', ()=> go('owncards',{classId: c.id}));
+    oc.appendChild(ebb);
+    root.appendChild(oc);
+  }
 
   /* Interleaving: one round drawn from everything in this subject. Only
      offered once there are two units to mix — and it skips the check-in,
@@ -4547,6 +4569,11 @@ SCREENS.unit = function(root){
       scb.addEventListener('click',()=>go('selfcheck',{classId:c.id}));
       root.appendChild(scb);
     }
+  }
+  if(!(own && own.cards.length)){
+    const mkb = el('button','btn btn-secondary','✍️  Make your own flashcards');
+    mkb.addEventListener('click', ()=> go('owncards',{classId: c.id}));
+    root.appendChild(mkb);
   }
   const fb = el('button','btn btn-secondary','🍅  Focus session for '+c.short);
   fb.addEventListener('click',()=>go('focus',{classId:c.id})); root.appendChild(fb);
@@ -4820,6 +4847,111 @@ function defEl(text){
   return d;
 }
 
+/* ---- Her own cards (v110 / Ad Astra v127) ----
+   One deck per subject that she writes herself, card by card. Rules that are
+   the point:
+   - HER OWN WORDS SKIP THE REVIEW QUEUE. The draft gate exists to catch what
+     the MODEL got wrong before it reaches her; these are her words, like the
+     weekly aim, the motto and the teach-backs, and gating them behind a
+     grown-up would turn making flashcards into being checked on.
+   - Making a card earns nothing. Writing a card IS studying — deciding what
+     matters and saying it in your own words is generation practice, the
+     strongest encoding there is — and pricing it would cheapen it. Reviewing
+     the deck earns ordinary flashcard XP like any other deck.
+   - The deck is a real unit record (deterministic id, so two devices can
+     never mint duplicates), which means sync, the day view and the reading
+     of minutes all work for free. `own:true` keeps it out of every door
+     that needs questions: no quiz tile, no clock, no shuffle, no brief row —
+     all of those already guard on questions.length. */
+const ownDeckId = cid => 'unit-own-' + cid;
+const ownDeck = cid => { const r = DATA.records[ownDeckId(cid)]; return (r && !r.deleted) ? r : null; };
+
+SCREENS.owncards = function(root){
+  const c = CLASS_BY_ID[ctx.classId];
+  if(!c) return go('study');
+  const deck = ownDeck(c.id);
+  const cards = deck ? deck.cards : [];
+  const editing = ctx._ocEdit ? cards.find(k => k.id === ctx._ocEdit) : null;
+
+  const head = el('div','card ac');
+  head.appendChild(el('div','eyebrow', c.name + ' · Your own cards'));
+  head.appendChild(el('h2',null, editing ? 'Edit this card' : 'Make a card'));
+  head.appendChild(el('p',null, 'Writing a card is studying: you decide what matters and say it in your own words. The app never grades these — they are yours.'));
+
+  const lt = el('label',null,'Front — the word or question'); head.appendChild(lt);
+  const ti = el('input'); ti.type='text'; ti.autocomplete='off';
+  ti.placeholder = 'e.g. Nominative';
+  ti.value = editing ? editing.term : '';
+  head.appendChild(ti);
+  const ld = el('label',null,'Back — the answer'); head.appendChild(ld);
+  const ta = el('textarea');
+  ta.placeholder = 'What you want to remember, in your words.';
+  ta.value = editing ? editing.def : '';
+  head.appendChild(ta);
+  const lh = el('label',null,'Hint (optional)'); head.appendChild(lh);
+  const hi = el('input'); hi.type='text'; hi.autocomplete='off';
+  hi.placeholder = 'A memory hook, not the answer.';
+  hi.value = editing && editing.hint ? editing.hint : '';
+  head.appendChild(hi);
+
+  const saveB = el('button','btn btn-primary', editing ? 'Save the change' : 'Add the card');
+  saveB.addEventListener('click', () => {
+    const term = ti.value.trim(), def = ta.value.trim(), hint = hi.value.trim();
+    if(!term || !def){ toast('A card needs both sides.'); return; }
+    let d = ownDeck(c.id);
+    if(!d) d = { id: ownDeckId(c.id), type:'unit', classId:c.id, own:true, status:'approved',
+                 title:'My ' + (c.short || c.name) + ' cards', cards:[], questions:[] };
+    if(editing){
+      editing.term = term; editing.def = def;
+      if(hint) editing.hint = hint; else delete editing.hint;
+    } else {
+      d.cards.push(Object.assign({id:uid('oc'), term, def}, hint ? {hint} : {}));
+    }
+    put(d); syncSoon();
+    ctx._ocEdit = null;
+    toast(editing ? 'Saved.' : d.cards.length === 1 ? 'Your first card.' : d.cards.length + ' cards now.');
+    render();
+  });
+  head.appendChild(saveB);
+  if(editing){
+    const cancelB = el('button','btn btn-ghost','Stop editing');
+    cancelB.addEventListener('click', ()=>{ ctx._ocEdit = null; render(); });
+    head.appendChild(cancelB);
+  }
+  root.appendChild(head);
+
+  if(cards.length){
+    root.appendChild(divider(cards.length === 1 ? 'Your card' : 'Your ' + cards.length + ' cards'));
+    const rv = el('button','btn btn-secondary','🃏  Review these as flashcards');
+    rv.addEventListener('click', ()=> go('cards',{unitId: deck.id, classId: c.id}));
+    root.appendChild(rv);
+    cards.forEach(k => {
+      const row = el('div','rev ocrow');
+      row.appendChild(el('div','oct', k.term));
+      row.appendChild(el('div','ocd', k.def));
+      if(k.hint) row.appendChild(el('div','ocd','💡 ' + k.hint));
+      const br = el('div','btn-row');
+      const eb = el('button','btn btn-ghost','Edit');
+      eb.addEventListener('click', ()=>{ ctx._ocEdit = k.id; render(); window.scrollTo({top:0}); });
+      br.appendChild(eb);
+      const db = el('button','btn btn-ghost','Delete');
+      db.addEventListener('click', ()=> showModal({
+        title:'Delete this card?', message:k.term,
+        confirmText:'Delete', cancelText:'Keep it',
+        onConfirm:()=>{ const d = ownDeck(c.id);
+          d.cards = d.cards.filter(x => x.id !== k.id);
+          if(ctx._ocEdit === k.id) ctx._ocEdit = null;
+          put(d); syncSoon(); render(); }}));
+      br.appendChild(db);
+      row.appendChild(br);
+      root.appendChild(row);
+    });
+  }
+  const back = el('button','btn btn-ghost','← ' + c.name);
+  back.addEventListener('click', ()=>{ ctx._ocEdit = null; go('unit',{classId:c.id}); });
+  root.appendChild(back);
+};
+
 SCREENS.cards = function(root){
   const u = unitFor(ctx.unitId);
   if(!u || !u.cards.length) return go('unit',{classId:ctx.classId});
@@ -4929,10 +5061,14 @@ function finishCards(u){
        date:AZ.today(),at:Date.now(),correct:0,total:0,seconds:secs,xp});
   checkBadges(); syncSoon(); celebrate();
   const seen = cardState.seen.size; cardState.start=0;
-  showModal({ title:`+${xp} XP`,
+  showModal(u.questions.length ? { title:`+${xp} XP`,
     message:`${seen} cards reviewed in ${Math.max(1,Math.round(secs/60))} min.\n\nFlashcards build recognition. The quiz is where you find out what actually stuck.`,
     confirmText:'Take the quiz', cancelText:'Later',
-    onConfirm:()=>launchQuiz(u.id,ctx.classId) });
+    onConfirm:()=>launchQuiz(u.id,ctx.classId) }
+  : { title:`+${xp} XP`,
+    /* Her own deck has no quiz to offer — and the loop is already whole. */
+    message:`${seen} cards reviewed in ${Math.max(1,Math.round(secs/60))} min.\n\nYou wrote these and now you have studied them — that is the whole loop.`,
+    confirmText:'Done', cancelText:null });
   go('unit',{classId:ctx.classId});
 }
 
