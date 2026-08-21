@@ -1030,6 +1030,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .ocrow .oct{font-weight:700;font-size:15px}
 .ocrow .ocd{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.45}
 .ocrow .btn-row{margin-top:10px}
+/* Her deck's stop in a book: no coverage bar, and a mark of its own so it
+   never reads as lesson N. */
+.tmap .stop.own .pip{background:var(--deep);border-color:var(--ac-fg);font-size:13px}
 .rev.cut{opacity:.42}
 .rev .q{font-size:14px;font-weight:600;margin-bottom:8px;padding-right:34px}
 .rev .o{font-size:13px;color:var(--muted);padding:3px 0 3px 18px;position:relative;line-height:1.45}
@@ -1288,7 +1291,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v127 · cards of her own';
+const APP_VERSION = 'v128 · filed in the back of the book';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2020,7 +2023,24 @@ function crestWon(units){
 }
 function topicMap(units, mark, openId, onPick){
   const wrap = el('div','tmap');
+  let n = 0;
   units.forEach(u => {
+    /* Her own deck is a stop in the book but not a lesson in it: no
+       coverage line (there are no questions to cover), no number in the
+       lesson sequence, and its own mark. */
+    if(u.own){
+      const b2 = el('button','stop own' + (u.id === openId ? ' here' : ''));
+      const body2 = el('span','sbody');
+      body2.appendChild(el('span','t','Your cards'));
+      body2.appendChild(el('span','s', (u.cards||[]).length
+        + ((u.cards||[]).length === 1 ? ' card, written by you' : ' cards, written by you')));
+      const pip2 = el('span','pip own'); pip2.textContent = '✍️';
+      b2.appendChild(pip2); b2.appendChild(body2);
+      b2.addEventListener('click', () => onPick(u.id));
+      wrap.appendChild(b2);
+      return;
+    }
+    n++;
     const total = (u.questions || []).length;
     const att = unitAttempted(u);
     const done = unitDone(u);
@@ -2038,7 +2058,7 @@ function topicMap(units, mark, openId, onPick){
       cov.appendChild(fill); body.appendChild(cov);
     }
     const pip = el('span','pip' + (done ? ' done' : att ? ' part' : ''));
-    pip.textContent = cap ? '★' : (done ? '✦' : String(units.indexOf(u) + 1));
+    pip.textContent = cap ? '★' : (done ? '✦' : String(n));
     b.appendChild(pip); b.appendChild(body);
     b.addEventListener('click', () => onPick(u.id));
     wrap.appendChild(b);
@@ -2074,16 +2094,25 @@ function shelvesFor(classId){
        optional `order` — absent means 0, so every lesson keeps its title sort
        and anything tagged falls in behind it, in the sequence the work is
        actually done. Content-only knob; nothing derived changes. */
-    us.sort((a,b) => ((a.order||0) - (b.order||0))
+    /* Her own deck always sits at the back of the book — it is not lesson N,
+       it is her notes tucked in behind them. */
+    us.sort((a,b) => (a.own?1:0) - (b.own?1:0)
+      || ((a.order||0) - (b.order||0))
       || a.title.localeCompare(b.title, undefined, {numeric:true}));
     const last = us.reduce((m,u) => Math.max(m, unitLastStudied(u)), 0);
+    /* LESSONS are what a book is measured by, not everything filed in it.
+       Her own deck has no questions, so unitDone() can never be true for it
+       — counting it would freeze every book she filed cards in at N-1
+       forever and quietly cost the gilt spine. It is never the bookmark
+       either: the bookmark answers "where was I reading". */
+    const lessons = us.filter(u => !u.own);
     /* The bookmark holds her page: the most recently studied unfinished
        lesson; untouched series open at lesson one; a finished book keeps
        the bookmark on its final lesson. */
-    const open = us.filter(u => !unitDone(u));
-    let mark = open[0] || us[us.length-1];
+    const open = lessons.filter(u => !unitDone(u));
+    let mark = open[0] || lessons[lessons.length-1] || us[us.length-1];
     open.forEach(u => { if(unitLastStudied(u) > unitLastStudied(mark)) mark = u; });
-    return { name, units: us, last, mark };
+    return { name, units: us, lessons, last, mark };
   });
   /* Most recent book first — the shelf itself answers "what was I reading?" */
   shelves.sort((a,b) => b.last - a.last || a.name.localeCompare(b.name));
@@ -4530,20 +4559,14 @@ SCREENS.unit = function(root){
     waiting===1 ? 'One unit is waiting for a grown-up to check it.'
                 : `${waiting} units are waiting for a grown-up to check them.`));
 
-  /* Her own cards — her words, so no review queue (see SCREENS.owncards). */
+  /* Her own cards — her words, so no review queue (see SCREENS.owncards).
+     Only shown loose here when the deck is NOT filed in a book; once it is,
+     the book is where it lives and showing it twice would be the same
+     redundancy the rest of this screen keeps pruning. */
   const own = ownDeck(c.id);
-  if(own && own.cards.length){
+  if(own && own.cards.length && !seriesOf(own)){
     root.appendChild(divider('Your own cards'));
-    const oc = el('div','card');
-    oc.appendChild(el('h3',null, own.title));
-    oc.appendChild(el('p',null, own.cards.length + (own.cards.length===1 ? ' card' : ' cards') + ', written by you.'));
-    const rb = el('button','btn btn-secondary','🃏  Review your cards');
-    rb.addEventListener('click', ()=> go('cards',{unitId: own.id, classId: c.id}));
-    oc.appendChild(rb);
-    const ebb = el('button','btn btn-ghost','✍️  Add or edit');
-    ebb.addEventListener('click', ()=> go('owncards',{classId: c.id}));
-    oc.appendChild(ebb);
-    root.appendChild(oc);
+    root.appendChild(ownCardsCard(own, c));
   }
 
   /* Interleaving: one round drawn from everything in this subject. Only
@@ -4570,8 +4593,11 @@ SCREENS.unit = function(root){
       root.appendChild(scb);
     }
   }
-  if(!(own && own.cards.length)){
-    const mkb = el('button','btn btn-secondary','✍️  Make your own flashcards');
+  {
+    /* Always a door to the editor: once the deck is filed in a book, this is
+       the only way back to it from the subject screen. */
+    const mkb = el('button','btn btn-secondary',
+      own && own.cards.length ? '✍️  Your own flashcards' : '✍️  Make your own flashcards');
     mkb.addEventListener('click', ()=> go('owncards',{classId: c.id}));
     root.appendChild(mkb);
   }
@@ -4717,11 +4743,13 @@ function spineEl(s, c, current){
   t.style.height = (142 + (hashStr(s.name+'#') % 3) * 9) + 'px';
   if(current) t.appendChild(el('span','ribbon'));
   t.appendChild(el('span','snm', s.name));
-  const done = s.units.filter(unitDone).length;
-  /* A finished book gets a gilt title — quiet state, not currency. */
-  if(done === s.units.length) t.classList.add('gilt');
-  t.appendChild(el('span','sct', `${done}/${s.units.length}`));
-  t.setAttribute('aria-label', `${s.name} — ${done} of ${s.units.length} lessons finished`);
+  const lessons = s.lessons || s.units;
+  const done = lessons.filter(unitDone).length;
+  /* A finished book gets a gilt title — quiet state, not currency. Her own
+     deck is not counted, so filing cards in a book can never un-gild it. */
+  if(lessons.length && done === lessons.length) t.classList.add('gilt');
+  t.appendChild(el('span','sct', `${done}/${lessons.length}`));
+  t.setAttribute('aria-label', `${s.name} — ${done} of ${lessons.length} lessons finished`);
   t.addEventListener('click', ()=>go('shelf',{classId:c.id, series:s.name}));
   return t;
 }
@@ -4735,15 +4763,16 @@ SCREENS.shelf = function(root){
   const grouped = c ? shelvesFor(c.id) : null;
   const s = grouped && grouped.shelves.find(x => x.name === ctx.series);
   if(!s) return go(c ? 'unit' : 'study', c ? {classId:c.id} : undefined);
-  const done = s.units.filter(unitDone).length;
+  const lessons = s.lessons || s.units;
+  const done = lessons.filter(unitDone).length;
 
   const head = el('div','card ac');
   head.appendChild(el('div','eyebrow', `${c.icon} ${c.name}`));
   head.appendChild(el('h2',null, `📖 ${s.name}`));
   head.appendChild(el('p',null,
-    done === s.units.length
-      ? `All ${s.units.length} lesson${s.units.length>1?'s':''} finished. Anything you reopen from here is pure review.`
-      : `${done} of ${s.units.length} lesson${s.units.length>1?'s':''} finished · your bookmark is on “${lessonLabel(s.mark)}”.`));
+    lessons.length && done === lessons.length
+      ? `All ${lessons.length} lesson${lessons.length>1?'s':''} finished. Anything you reopen from here is pure review.`
+      : `${done} of ${lessons.length} lesson${lessons.length>1?'s':''} finished · your bookmark is on “${lessonLabel(s.mark)}”.`));
   root.appendChild(head);
 
   root.appendChild(divider('The map'));
@@ -4755,7 +4784,10 @@ SCREENS.shelf = function(root){
   const crest = crestEl(s.name, s.units);
   if(crest) root.appendChild(crest);
   const open = s.units.find(u => u.id === openId) || s.units[0];
-  if(open) root.appendChild(unitCard(open, c, lessonLabel(open)));
+  /* unitCard would offer a quiz her deck cannot hold — same trap the loose
+     list hit. Her stop opens her own two doors instead. */
+  if(open && open.own) root.appendChild(ownCardsCard(open, c));
+  else if(open) root.appendChild(unitCard(open, c, lessonLabel(open)));
 
   const back = el('button','btn btn-ghost','← ' + c.name);
   back.addEventListener('click',()=>go('unit',{classId:c.id}));
@@ -4863,6 +4895,20 @@ function defEl(text){
      of minutes all work for free. `own:true` keeps it out of every door
      that needs questions: no quiz tile, no clock, no shuffle, no brief row —
      all of those already guard on questions.length. */
+/* Her deck's card — used on the subject screen when the deck is loose, and
+   inside the book when she has filed it there. */
+function ownCardsCard(deck, c){
+  const oc = el('div','card');
+  oc.appendChild(el('h3',null, deck.title));
+  oc.appendChild(el('p',null, deck.cards.length + (deck.cards.length===1 ? ' card' : ' cards') + ', written by you.'));
+  const rb = el('button','btn btn-secondary','🃏  Review your cards');
+  rb.addEventListener('click', ()=> go('cards',{unitId: deck.id, classId: c.id}));
+  oc.appendChild(rb);
+  const ebb = el('button','btn btn-ghost','✍️  Add or edit');
+  ebb.addEventListener('click', ()=> go('owncards',{classId: c.id}));
+  oc.appendChild(ebb);
+  return oc;
+}
 const ownDeckId = cid => 'unit-own-' + cid;
 const ownDeck = cid => { const r = DATA.records[ownDeckId(cid)]; return (r && !r.deleted) ? r : null; };
 
@@ -4894,6 +4940,22 @@ SCREENS.owncards = function(root){
   hi.value = editing && editing.hint ? editing.hint : '';
   head.appendChild(hi);
 
+  /* Which book this deck lives in. Her cards for a Wordly Wise lesson belong
+     ON the Wordly Wise shelf, where she goes to study it — the deck carries
+     `series`, which seriesOf() honours over the title convention, so nothing
+     is renamed. Only offered once there is a book to file it in. */
+  const books = [...new Set(units(c.id).filter(u2 => !u2.own)
+    .map(seriesOf).filter(Boolean))].sort();
+  let sel = null;
+  if(books.length){
+    head.appendChild(el('label',null,'Keep these cards'));
+    sel = el('select');
+    const o0 = el('option',null,'On their own'); o0.value = ''; sel.appendChild(o0);
+    books.forEach(b => { const o = el('option',null,'In “' + b + '”'); o.value = b; sel.appendChild(o); });
+    sel.value = (deck && deck.series) || '';
+    head.appendChild(sel);
+  }
+
   const saveB = el('button','btn btn-primary', editing ? 'Save the change' : 'Add the card');
   saveB.addEventListener('click', () => {
     const term = ti.value.trim(), def = ta.value.trim(), hint = hi.value.trim();
@@ -4907,6 +4969,7 @@ SCREENS.owncards = function(root){
     } else {
       d.cards.push(Object.assign({id:uid('oc'), term, def}, hint ? {hint} : {}));
     }
+    if(sel){ if(sel.value) d.series = sel.value; else delete d.series; }
     put(d); syncSoon();
     ctx._ocEdit = null;
     toast(editing ? 'Saved.' : d.cards.length === 1 ? 'Your first card.' : d.cards.length + ' cards now.');
@@ -4920,6 +4983,19 @@ SCREENS.owncards = function(root){
   }
   root.appendChild(head);
 
+  if(cards.length && sel){
+    /* Filing is a property of the DECK, not of the card being written, so it
+       can be changed without adding one. */
+    const fb2 = el('button','btn btn-ghost','📖  Save where these are kept');
+    fb2.addEventListener('click', ()=>{
+      const d = ownDeck(c.id); if(!d) return;
+      if(sel.value) d.series = sel.value; else delete d.series;
+      put(d); syncSoon();
+      toast(sel.value ? 'Filed in “' + sel.value + '”.' : 'Kept on their own.');
+      render();
+    });
+    root.appendChild(fb2);
+  }
   if(cards.length){
     root.appendChild(divider(cards.length === 1 ? 'Your card' : 'Your ' + cards.length + ' cards'));
     const rv = el('button','btn btn-secondary','🃏  Review these as flashcards');
