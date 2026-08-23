@@ -1,0 +1,318 @@
+{
+ "v": 4,
+ "records": {
+  "unit-asl1": {
+   "id": "unit-asl1",
+   "type": "unit",
+   "updatedAt": 1787479200000,
+   "classId": "asl",
+   "quarter": 1,
+   "status": "draft",
+   "title": "ASL Club · Class 1",
+   "srcName": "ASL Club — Class 1 (as reported)",
+   "source": "Sedona's account of ASL Club, Class 1 (2026-08-23): fingerspelling practice, then Mom, Dad, Son, Daughter, True, False, Yes, No, Sign, Thank You, See You Later.",
+   "round": 11,
+   "cards": [
+    {
+     "id": "c0",
+     "term": "How to use these cards",
+     "def": "**ASL is a visual language — reading about a sign will never teach you the sign.**\n• Every vocabulary card below has a “Watch the sign” button that opens the real video for that word on Signing Savvy, an ASL video dictionary.\n• The card itself only covers what the word MEANS and when you'd use it — never a written description of the handshape or movement. That's exactly the kind of detail that's easy to get wrong without seeing it, so the video is the only source for it.",
+     "hint": "Flip through the meanings first, then go back and watch each sign once through.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "Mom",
+     "def": "**Your female parent.**\n• One of the four family words from Class 1, alongside Dad, Son, and Daughter.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with Dad — review the two together.",
+     "watchUrl": "https://www.signingsavvy.com/sign/MOM",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Dad",
+     "def": "**Your male parent.**\n• One of the four family words from Class 1, alongside Mom, Son, and Daughter.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with Mom — review the two together.",
+     "watchUrl": "https://www.signingsavvy.com/sign/dad",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Son",
+     "def": "**A parent's male child.**\n• One of the four family words from Class 1, alongside Mom, Dad, and Daughter.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with Daughter — review the two together.",
+     "watchUrl": "https://www.signingsavvy.com/sign/SON",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Daughter",
+     "def": "**A parent's female child.**\n• One of the four family words from Class 1, alongside Mom, Dad, and Son.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with Son — review the two together.",
+     "watchUrl": "https://www.signingsavvy.com/sign/daughter",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "True",
+     "def": "**Correct, or accurate.**\n• The opposite of False — the two were taught together as a pair.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with False — quiz yourself by naming the opposite, not just the word.",
+     "watchUrl": "https://www.signingsavvy.com/sign/TRUE",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "False",
+     "def": "**Not correct, or not accurate.**\n• The opposite of True — the two were taught together as a pair.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with True — quiz yourself by naming the opposite, not just the word.",
+     "watchUrl": "https://www.signingsavvy.com/sign/FALSE",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Yes",
+     "def": "**Agreement, or an affirmative answer.**\n• The opposite of No — the two were taught together as a pair.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with No — quiz yourself by naming the opposite, not just the word.",
+     "watchUrl": "https://www.signingsavvy.com/sign/yes",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "No",
+     "def": "**Disagreement, or a negative answer.**\n• The opposite of Yes — the two were taught together as a pair.\n• Watch the linked video for the actual sign.",
+     "hint": "Pairs with Yes — quiz yourself by naming the opposite, not just the word.",
+     "watchUrl": "https://www.signingsavvy.com/sign/NO/3962/1",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Sign",
+     "def": "**To communicate using American Sign Language — the word ASL itself is named for it.**\n• Also the word for the whole system: a single gesture that stands for a word or idea.\n• Watch the linked video for the actual sign.",
+     "hint": "This is the word the whole class is named after.",
+     "watchUrl": "https://www.signingsavvy.com/sign/SIGN/4506/1",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Thank You",
+     "def": "**Used to show gratitude — the same moment you'd say “thank you” out loud.**\n• A two-word phrase signed as one sign, not spelled out.\n• Watch the linked video for the actual sign.",
+     "hint": "Practice it as something you'd actually use to close out a favor, not just a vocabulary word.",
+     "watchUrl": "https://www.signingsavvy.com/sign/thank+you",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "See You Later",
+     "def": "**A goodbye you use when you expect to see the person again soon.**\n• A closing phrase, signed as one sign — not the same as a goodbye you'd never take back.\n• Watch the linked video for the actual sign.",
+     "hint": "Practice it as a closer at the end of a conversation.",
+     "watchUrl": "https://www.signingsavvy.com/sign/see+you+later",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these four words is one of the family words from ASL Class 1 — not one of the yes/no or true/false pair?",
+     "opts": ["Daughter", "True", "No", "Sign"],
+     "ans": 0,
+     "hint": "Two of the four options are half of an opposite pair; one is neither family nor a pair.",
+     "steps": [
+      "True is half of the True/False pair, so rule it out.",
+      "No is half of the Yes/No pair, so rule it out.",
+      "Sign is the word for the language itself, not a family word, so rule it out.",
+      "Daughter is left — it's one of the four family words alongside Mom, Dad, and Son."
+     ],
+     "ex": {
+      "main": "**Daughter.** The four family words from Class 1 are Mom, Dad, Son, and Daughter — the other three options each belong to a different group.",
+      "tip": "Sort the eleven words into three buckets as you review: family, opposite pairs, and phrases."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word is the exact opposite of No, in the vocabulary from Class 1?",
+     "opts": ["Yes", "False", "Sign", "Son"],
+     "ans": 0,
+     "hint": "Yes and No were taught together as a pair.",
+     "steps": [
+      "False is the opposite of True, not of No, so rule it out.",
+      "Sign and Son are not part of the yes/no pair at all, so rule them out.",
+      "Yes is left — it's the word taught as No's opposite."
+     ],
+     "ex": {
+      "main": "**Yes.** Yes and No were taught as a matched pair, the same way True and False were."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word means the same as “accurate” or “correct”, in the vocabulary from Class 1?",
+     "opts": ["True", "False", "Sign", "Mom"],
+     "ans": 0,
+     "hint": "This word's opposite is False.",
+     "steps": [
+      "False means the opposite of accurate, so rule it out.",
+      "Sign and Mom don't mean anything close to “accurate”, so rule them out.",
+      "True is left — it's the word that means accurate or correct."
+     ],
+     "ex": {
+      "main": "**True.** True and False were taught as an opposite pair, the same way Yes and No were."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "You're leaving a friend's house but you'll see them again soon — which sign from Class 1 fits best as your goodbye?",
+     "opts": ["See You Later", "Thank You", "No", "Sign"],
+     "ans": 0,
+     "hint": "Think about which phrase is specifically a goodbye, not a thank-you or an answer.",
+     "steps": [
+      "Thank You expresses gratitude, not a goodbye, so rule it out.",
+      "No is an answer to a question, not a goodbye, so rule it out.",
+      "Sign is the word for the language itself, not a goodbye, so rule it out.",
+      "See You Later is left — it's the closing phrase for exactly this situation."
+     ],
+     "ex": {
+      "main": "**See You Later.** It's a goodbye for when you expect to see the person again soon — different from a goodbye you'd give if you didn't know when you'd see them next."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "A classmate does something kind for you and you want to respond in ASL — which sign from Class 1 fits?",
+     "opts": ["Thank You", "True", "Dad", "See You Later"],
+     "ans": 0,
+     "hint": "Think about which phrase you'd actually say out loud in this moment.",
+     "steps": [
+      "True answers whether something is accurate, which isn't the situation here, so rule it out.",
+      "Dad names a family member, not a response to kindness, so rule it out.",
+      "See You Later is a goodbye, not a response to a favor, so rule it out.",
+      "Thank You is left — it's the sign for exactly this moment."
+     ],
+     "ex": {
+      "main": "**Thank You.** It's signed as one gesture, the same moment you'd say the words out loud."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In ASL class, which word names the language itself — as in, “to communicate using ASL”?",
+     "opts": ["Sign", "Yes", "Mom", "False"],
+     "ans": 0,
+     "hint": "This is the word the whole class is named after.",
+     "steps": [
+      "Yes and False are both answer words, not names for the language, so rule them out.",
+      "Mom is a family word, not a name for the language, so rule it out.",
+      "Sign is left — it's the word for communicating in American Sign Language."
+     ],
+     "ex": {
+      "main": "**Sign.** “American Sign Language” is named for this exact word — to sign is to communicate this way."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word from Class 1 names your male parent?",
+     "opts": ["Dad", "Son", "True", "Sign"],
+     "ans": 0,
+     "hint": "Its pair in the family group is Mom.",
+     "steps": [
+      "Son names a parent's male CHILD, not the parent, so rule it out.",
+      "True and Sign aren't family words at all, so rule them out.",
+      "Dad is left — it names your male parent."
+     ],
+     "ex": {
+      "main": "**Dad.** Mom and Dad name the two parents; Son and Daughter name the two children."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word from Class 1 names your female parent?",
+     "opts": ["Mom", "Daughter", "No", "Thank You"],
+     "ans": 0,
+     "hint": "Its pair in the family group is Dad.",
+     "steps": [
+      "Daughter names a parent's female CHILD, not the parent, so rule it out.",
+      "No and Thank You aren't family words at all, so rule them out.",
+      "Mom is left — it names your female parent."
+     ],
+     "ex": {
+      "main": "**Mom.** Mom and Dad name the two parents; Son and Daughter name the two children."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word from Class 1 names a parent's male child?",
+     "opts": ["Son", "Dad", "Yes", "See You Later"],
+     "ans": 0,
+     "hint": "Its pair in the family group is Daughter.",
+     "steps": [
+      "Dad names the male PARENT, not the child, so rule it out.",
+      "Yes and See You Later aren't family words at all, so rule them out.",
+      "Son is left — it names a parent's male child."
+     ],
+     "ex": {
+      "main": "**Son.** Son and Daughter name the two children; Mom and Dad name the two parents."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which word from Class 1 names a parent's female child?",
+     "opts": ["Daughter", "Mom", "False", "Sign"],
+     "ans": 0,
+     "hint": "Its pair in the family group is Son.",
+     "steps": [
+      "Mom names the female PARENT, not the child, so rule it out.",
+      "False and Sign aren't family words at all, so rule them out.",
+      "Daughter is left — it names a parent's female child."
+     ],
+     "ex": {
+      "main": "**Daughter.** Son and Daughter name the two children; Mom and Dad name the two parents."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "A friend asks you a yes/no question and the answer is negative — which single sign from Class 1 do you give?",
+     "opts": ["No", "False", "Sign", "Thank You"],
+     "ans": 0,
+     "hint": "This answers a QUESTION; its opposite pair is Yes.",
+     "steps": [
+      "False answers whether a STATEMENT is accurate, not whether the answer to a question is negative, so rule it out.",
+      "Sign and Thank You don't answer a yes/no question at all, so rule them out.",
+      "No is left — it's the direct negative answer to a question."
+     ],
+     "ex": {
+      "main": "**No.** No and Yes answer a question; True and False judge whether a statement is accurate — similar jobs, but not the same word."
+     }
+    }
+   ]
+  }
+ }
+}

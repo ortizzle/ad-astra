@@ -528,6 +528,12 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   repeating-linear-gradient(90deg,var(--pl) 0 1px,transparent 1px 11px),
   var(--fill); background-size:auto,cover}
 .pat-lunch{background-image:var(--fill);background-size:cover}
+/* Paired dots on the diagonal — two points of contact, distinct from Biology's
+   single dot grid. */
+.pat-asl{background-image:
+  radial-gradient(circle at 28% 28%,var(--pl) 1.6px,transparent 2px),
+  radial-gradient(circle at 72% 72%,var(--pl) 1.6px,transparent 2px),
+  var(--fill); background-size:18px 18px,18px 18px,cover}
 /* Schedule rows: a colour wash bleeding in from the left plus a painted icon
    chip. Enough character to read as "this is Physics" without eight saturated
    bars fighting each other. The current period still gets the full fill. */
@@ -592,6 +598,12 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 /* Formulas set like a textbook: serif italics, not code. */
 .face .eq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:17.5px;letter-spacing:.02em;position:relative}
 .face .hint{margin-top:14px;font-size:13px;color:var(--ac-fg);position:relative}
+/* A card's only route to an external video (ASL signs) — a real button, not
+   a link buried in the def, and never smaller than the tap-target floor. */
+.face .watchb{margin-top:14px;align-self:flex-start;min-height:var(--tap);padding:0 16px;
+  border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:inherit;
+  font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:7px;position:relative}
+.face.subj .watchb{background:rgba(0,0,0,.32);border-color:rgba(255,255,255,.28);color:#fff}
 .face .tap{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
@@ -1291,7 +1303,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v128 · filed in the back of the book';
+const APP_VERSION = 'v129 · ASL club';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1541,6 +1553,18 @@ const CLASSES = [
   {id:'pickup',  name:'Pick-up',               short:'Pick-up',  room:'',        start:885, end:900, icon:'🏡', pal:'slate', break:true, bookend:true, note:'2:45 PM'}
 ];
 
+/* Extracurriculars (clubs with a study space of their own) are full subjects
+   for study purposes — flashcards, quizzes, colour, a Study tile — but they
+   are NOT a period on her fixed daily timetable. They deliberately live in
+   their own array rather than CLASSES: every raw read of CLASSES (the literal
+   weekday schedule, "before the bell", "tomorrow starts with…") assumes every
+   entry has a real start/end time, and an extracurricular has neither. They
+   join CLASS_BY_ID and STUDY_CLASSES below instead, which is where a subject
+   needs to exist to get a Study tile, a colour, and a place for units. */
+const EXTRACURRICULARS = [
+  {id:'asl', name:'American Sign Language', short:'ASL', icon:'🤟', pal:'coral', extracurricular:true}
+];
+
 /* Every option is a mid-tone → deep pair, so white text over the darkened
    bottom scrim stays readable no matter which one she picks. Bold is fine;
    unreadable is not. */
@@ -1587,8 +1611,8 @@ function paint(node, cls){
   node.style.setProperty('--pc', p.g1);
   return node;
 }
-const CLASS_BY_ID = Object.fromEntries(CLASSES.map(c=>[c.id,c]));
-const STUDY_CLASSES = CLASSES.filter(c=>!c.break);
+const CLASS_BY_ID = Object.fromEntries(CLASSES.concat(EXTRACURRICULARS).map(c=>[c.id,c]));
+const STUDY_CLASSES = CLASSES.filter(c=>!c.break).concat(EXTRACURRICULARS);
 
 const CAL = {
   firstDay:'2026-08-03', lastDay:'2027-05-21',
@@ -2570,7 +2594,7 @@ const FX_STYLES = [
 ];
 /* Curated per-subject icon choices — enough personality to feel hers, few
    enough that the schedule stays scannable. */
-const ICON_CHOICES = ['🎭','📐','📏','🧮','🧬','🔬','⚛️','🚀','🏛️','📜','🌍','📖','📚','✒️','🏺','⚖️','🎨','🔭'];
+const ICON_CHOICES = ['🎭','📐','📏','🧮','🧬','🔬','⚛️','🚀','🏛️','📜','🌍','📖','📚','✒️','🏺','⚖️','🎨','🔭','🤟'];
 const DEFAULT_PREFS = { accent:'aqua', avatar:'✦', nickname:'', motto:'', companion:null,
   sky:'constellation', fx:'fireworks', subjectIcons:{}, pins:[], mline:'',
   pomodoro:25, brk:5, goals:{}, subjectColors:{}, theme:'auto', intent:null, chime:true };
@@ -2595,7 +2619,7 @@ function applyTheme(){
   /* Her subject icons ride the class objects so every render site — schedule,
      tiles, plan, parent view — picks them up without knowing the feature
      exists. baseIcon keeps the default recoverable. */
-  CLASSES.forEach(c=>{ if(c.baseIcon===undefined) c.baseIcon=c.icon;
+  CLASSES.concat(EXTRACURRICULARS).forEach(c=>{ if(c.baseIcon===undefined) c.baseIcon=c.icon;
     c.icon = (p.subjectIcons||{})[c.id] || c.baseIcon; });
   const m = document.querySelector('meta[name=theme-color]');
   if(m) m.setAttribute('content', resolved==='light' ? '#f2f6f5' : '#04141a');
@@ -2753,7 +2777,7 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/ww9-lesson-01.json', 'content/ww9-lesson-02.json', 'content/ww9-lesson-03.json', 'content/ww9-lesson-04.json',
   'content/ww9-lesson-05.json', 'content/ww9-lesson-06.json', 'content/ww9-lesson-07.json',
   'content/bio-unit-1.json', 'content/latin-unit-1.json', 'content/bio-unit-2.json',
-  'content/phys-kinematics-graphs.json', 'content/bio-unit-1b.json'];
+  'content/phys-kinematics-graphs.json', 'content/bio-unit-1b.json', 'content/asl-1.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same
@@ -4486,7 +4510,10 @@ SCREENS.unit = function(root){
   if(!c) return go('study');
   const st = classStats(c.id), date = AZ.today();
   const head = el('div','card ac');
-  head.appendChild(el('div','eyebrow',`${fmtTime(c.start)} · ${whereLine(c)}`));
+  /* Extracurriculars have no period on the timetable — no start time, no
+     room — so the eyebrow says what kind of subject this is instead of
+     lying with fmtTime(undefined). */
+  head.appendChild(el('div','eyebrow', c.extracurricular ? 'Extracurricular' : `${fmtTime(c.start)} · ${whereLine(c)}`));
   const hrow = el('div','crestrow');
   const cr = el('span','crest');
   cr.style.setProperty('--c1', palOf(c).g1); cr.style.setProperty('--c2', palOf(c).g2);
@@ -5077,6 +5104,19 @@ SCREENS.cards = function(root){
   const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
+  /* Some cards (ASL signs) can only truly be taught by video — the card
+     itself never claims to describe a handshape or movement in words. This
+     button is the sole route to that video, named by its real host so
+     leaving the app is never a surprise. stopPropagation so it opens the
+     link instead of flipping the card back over. */
+  if(card.watchUrl){
+    let host = '';
+    try{ host = new URL(card.watchUrl).hostname.replace(/^www\./,''); }catch(e){}
+    const wb = el('button','watchb', '▶  Watch the sign' + (host ? ` · ${host}` : ''));
+    wb.type = 'button';
+    wb.addEventListener('click', e=>{ e.stopPropagation(); window.open(card.watchUrl,'_blank','noopener'); });
+    back.appendChild(wb);
+  }
   back.appendChild(el('div','tap','Tap to flip back'));
   inner.appendChild(front); inner.appendChild(back); flip.appendChild(inner);
   // Toggle in place — a full render would rebuild the node and kill the transition.

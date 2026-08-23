@@ -1171,6 +1171,72 @@ left out: that is surveillance flavour, not actionable signal.
 "First Week: Rooms & Teachers" was removed in v22 (schema v4 tombstones
 `unit-orientation` on migrate). Don't reintroduce boot-generated units.
 
+### An extracurricular subject — ASL (v129, THIS APP ONLY)
+
+Sedona takes American Sign Language through school as an extracurricular
+club. She wanted it to get the same study space as a real class — flashcards,
+a quiz, its own colour — but it is not a period on her `.ics` timetable, and
+it never will be.
+
+**`EXTRACURRICULARS` is a second array, deliberately not folded into
+`CLASSES`.** Every raw read of `CLASSES` (the weekday timetable, "before the
+bell", "tomorrow starts with…") assumes every entry has a real `start`/`end`
+minute and a room, because it is rendering an actual schedule. An
+extracurricular has neither. Adding it to `CLASSES` would have put it on the
+timetable as a period with a garbage time (`fmtTime(undefined)`), or forced a
+fake time onto a club that doesn't meet during the school day — the app
+inventing her afternoon, which the clubs feature already refuses to do
+elsewhere. Instead `CLASS_BY_ID` and `STUDY_CLASSES` are built from
+`CLASSES.concat(EXTRACURRICULARS)`, so ASL exists everywhere a *subject*
+needs to exist — Study tiles, the study plan, the tutor, Subject colours, the
+Growth Zone, the review queue, focus timer, unit generation — and nowhere a
+*period* needs to exist. If you add another extracurricular, it goes in
+`EXTRACURRICULARS`, never `CLASSES`.
+
+- **One render site assumed every subject has a period and had to be
+  taught otherwise.** `SCREENS.unit`'s eyebrow read
+  `` `${fmtTime(c.start)} · ${whereLine(c)}` `` unconditionally — the one
+  place a raw `CLASSES`-shaped read leaked into a `STUDY_CLASSES`-only
+  screen. It now checks `c.extracurricular` first and prints "Extracurricular"
+  instead of a NaN time and an undefined room.
+- **`applyTheme()`'s icon-override loop was `CLASSES`-only too**, which
+  would have silently ignored her picking a different icon for ASL in
+  Subject colours. Now `CLASSES.concat(EXTRACURRICULARS)`.
+- Palette: **coral** — the one `SUBJECT_PALETTE` entry no class had claimed.
+  Texture: `.pat-asl`, paired dots on the diagonal (two points of contact),
+  distinct from Biology's single dot grid.
+
+**ASL is learned by watching a sign, not by reading about one — so the
+content never tries to describe a handshape or a movement in words.** A
+confidently wrong text description of a physical sign is worse than none,
+the same principle that keeps `sp` (spoken-as) hand-authored-only. Instead a
+card may carry **`watchUrl`**, rendered as a real button on the back face
+(`.watchb`, 44px, opens in a new tab) reading "▶ Watch the sign · \<host\>" —
+the hostname is parsed from the URL and printed on the button itself, so
+leaving the app is never a surprise. `stopPropagation` keeps the tap from
+also flipping the card. Every `watchUrl` in `content/asl-1.json` was found
+and verified by search against Signing Savvy (a real ASL video dictionary),
+never guessed or pattern-matched from the word.
+
+- **The card's own `def` covers only what the sign MEANS and when you'd use
+  it** — never the handshape or motion. The orientation card (`c0`) says
+  this rule outright, so it doesn't need re-explaining on every card.
+- `unit-asl1` is titled `ASL Club · Class 1`, on purpose — the ` · ` shelves
+  it the moment a second class's vocabulary ships, the same convention as
+  the Wordly Wise and Algebra shelves.
+- Quiz questions test vocabulary — meaning, category, opposite pairs, which
+  phrase fits a scenario — never handshape recognition, since there is no
+  way to test that without the video itself. All eleven words from Class 1
+  are covered, `round:11` (one sitting, matching how the class actually
+  runs).
+- Ships `status:'draft'` and through `CONTENT_LIBRARY` like everything else
+  — nothing about a club exempts it from the review queue.
+
+`tools/test_asl.js` covers the split: ASL renders as a Study tile and a
+working subject page, quiz and flashcards (with a working, correctly-hosted
+Watch button that doesn't flip the card) — and never appears on the weekday
+timetable, with no NaN leaking into the schedule render.
+
 ---
 
 ## Visual language
