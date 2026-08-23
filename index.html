@@ -604,6 +604,12 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:inherit;
   font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:7px;position:relative}
 .face.subj .watchb{background:rgba(0,0,0,.32);border-color:rgba(255,255,255,.28);color:#fff}
+/* A verified sign video, embedded right in place — 16:9, cropped to fit
+   whichever card it sits in (a painted flashcard face or a plain review
+   row), never letting the iframe's own size dictate the layout. */
+.vidwrap{position:relative;width:100%;padding-top:56.25%;margin-top:14px;
+  border-radius:12px;overflow:hidden;background:#000}
+.vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .face .tap{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
@@ -3695,6 +3701,38 @@ function graphNode(g){
   if(!svg) return null;
   const w=el('div','graph-wrap'); w.appendChild(svg); return w;
 }
+/* Some cards (ASL signs) can only truly be taught by video, and the card's
+   own text never claims to describe a handshape or movement — a confidently
+   wrong description is worse than none, the same rule that keeps `sp`
+   hand-authored-only. `embedId` is a YouTube video id, hand-verified before
+   it ever ships (never guessed, same bar as `watchUrl`): once a card has
+   one, its sign plays right in the card via the privacy-enhanced
+   youtube-nocookie.com embed — no new tab. Until then `watchUrl` is the
+   fallback, a plain link naming the real host it opens so leaving the app
+   is never a surprise. linkClass lets the two render sites (the flashcard
+   face, the parent review row) each keep their own look. */
+function watchNode(card, linkClass){
+  if(card.embedId){
+    const wrap = el('div','vidwrap');
+    const f = document.createElement('iframe');
+    f.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(card.embedId)}?rel=0&modestbranding=1`;
+    f.title = 'Watch the sign for ' + card.term;
+    f.loading = 'lazy';
+    f.setAttribute('allow','accelerometer; encrypted-media; picture-in-picture');
+    f.allowFullscreen = true;
+    f.addEventListener('click', e=>e.stopPropagation());
+    wrap.appendChild(f);
+    return wrap;
+  }
+  if(card.watchUrl){
+    let host = ''; try{ host = new URL(card.watchUrl).hostname.replace(/^www\./,''); }catch(e){}
+    const a = el('a', linkClass, '▶  Watch the sign' + (host ? ` · ${host}` : ''));
+    a.href = card.watchUrl; a.target = '_blank'; a.rel = 'noopener';
+    a.addEventListener('click', e=>e.stopPropagation());
+    return a;
+  }
+  return null;
+}
 /* **bold** in definitions and explanations — built with elements, never
    innerHTML, so content stays inert text. */
 function richify(node, text){
@@ -5110,18 +5148,8 @@ SCREENS.cards = function(root){
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
   /* Some cards (ASL signs) can only truly be taught by video — the card
-     itself never claims to describe a handshape or movement in words. This
-     button is the sole route to that video, named by its real host so
-     leaving the app is never a surprise. stopPropagation so it opens the
-     link instead of flipping the card back over. */
-  if(card.watchUrl){
-    let host = '';
-    try{ host = new URL(card.watchUrl).hostname.replace(/^www\./,''); }catch(e){}
-    const wb = el('button','watchb', '▶  Watch the sign' + (host ? ` · ${host}` : ''));
-    wb.type = 'button';
-    wb.addEventListener('click', e=>{ e.stopPropagation(); window.open(card.watchUrl,'_blank','noopener'); });
-    back.appendChild(wb);
-  }
+     itself never claims to describe a handshape or movement in words. */
+  const wn = watchNode(card, 'watchb'); if(wn) back.appendChild(wn);
   back.appendChild(el('div','tap','Tap to flip back'));
   inner.appendChild(front); inner.appendChild(back); flip.appendChild(inner);
   // Toggle in place — a full render would rebuild the node and kill the transition.
@@ -9347,14 +9375,9 @@ SCREENS.reviewunit = function(root){
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(richify(el('div','o flat'), card.def));
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
-      /* The one place in the review queue a parent needs the ACTUAL link, not
-         just def text saying a video exists — this is what she'll be shown. */
-      if(card.watchUrl){
-        let host = ''; try{ host = new URL(card.watchUrl).hostname.replace(/^www\./,''); }catch(e){}
-        const a = el('a','rev-watch', '▶  Watch the sign' + (host ? ` · ${host}` : ''));
-        a.href = card.watchUrl; a.target = '_blank'; a.rel = 'noopener';
-        d.appendChild(a);
-      }
+      /* The one place in the review queue a parent needs to see exactly what
+         she'll be shown — the embed if there is one, else the real link. */
+      const wn = watchNode(card, 'rev-watch'); if(wn) d.appendChild(wn);
       if(card.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(card.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutC.has(card.id)?'↩':'✕');
       x.setAttribute('aria-label', cutC.has(card.id)?'Keep this card':'Drop this card');

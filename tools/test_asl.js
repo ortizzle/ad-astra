@@ -62,26 +62,37 @@ const PORT = process.argv[2] || 8099;
   });
   ck('Subject page eyebrow says Extracurricular', subj.eyebrow === 'Extracurricular', subj);
 
-  // Flashcards: the Watch button on a real vocab card (skip c0, the orientation card).
+  // Flashcards: the Watch link on a real vocab card (skip c0, the orientation card).
   const cards = await p.evaluate(() => {
     go('cards', {unitId:'unit-asl1', classId:'asl'});
     cardState.i = cardState.order.indexOf(1); // card c1 = "Mom"
     render();
     document.querySelector('.flip').click(); // flip to the back
-    const btn = document.querySelector('.watchb');
-    return btn ? {text: btn.textContent, term: document.querySelector('.face.front .term').textContent} : null;
+    const a = document.querySelector('.watchb');
+    return a ? {text: a.textContent, href: a.href, target: a.target, rel: a.rel,
+      term: document.querySelector('.face.front .term').textContent} : null;
   });
-  ck('Watch-the-sign button renders on a vocab card', !!cards, cards);
-  ck('Watch button names its real host', cards && /signingsavvy\.com/.test(cards.text), cards);
+  ck('Watch-the-sign link renders on a vocab card', !!cards, cards);
+  ck('Watch link names its real host', cards && /signingsavvy\.com/.test(cards.text), cards);
+  ck('Watch link points at the verified sign URL', cards && cards.href === 'https://www.signingsavvy.com/sign/MOM', cards);
+  ck('Watch link opens a new tab, safely', cards && cards.target === '_blank' && /noopener/.test(cards.rel), cards);
 
-  // Clicking Watch opens a new tab to the right URL and does not flip the card back.
-  const popupUrl = await p.evaluate(() => new Promise(resolve => {
-    window.open = (url) => { resolve(url); return null; };
-    document.querySelector('.watchb').click();
-  }));
-  ck('Watch button opens the verified sign URL', popupUrl === 'https://www.signingsavvy.com/sign/MOM', popupUrl);
+  // Clicking Watch does not flip the card back (the link's own listener
+  // stopPropagation's before the flip container's click handler sees it).
+  // href/target/rel above already establish it is a real, safe new-tab link.
+  await p.click('.watchb');
   const stillFlipped = await p.evaluate(() => document.querySelector('.flip').classList.contains('on'));
   ck('Clicking Watch does not flip the card back', stillFlipped, stillFlipped);
+
+  // watchNode() itself: once a card carries a verified embedId, it must embed
+  // inline (youtube-nocookie.com) instead of falling back to the link.
+  const embed = await p.evaluate(() => {
+    const node = watchNode({id:'x', term:'Test', watchUrl:'https://example.com/x', embedId:'dQw4w9WgXcQ'}, 'watchb');
+    const f = node.querySelector('iframe');
+    return {isVidwrap: node.classList.contains('vidwrap'), src: f && f.src, title: f && f.title};
+  });
+  ck('A card with embedId embeds inline instead of linking out', embed.isVidwrap, embed);
+  ck('The embed uses the privacy-enhanced YouTube domain', /^https:\/\/www\.youtube-nocookie\.com\/embed\/dQw4w9WgXcQ/.test(embed.src||''), embed);
 
   // Quiz: a full round answers cleanly and logs.
   const quiz = await p.evaluate(async () => {
