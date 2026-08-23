@@ -1054,6 +1054,11 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .rev .why{font-size:12.5px;color:var(--faint);margin-top:7px;line-height:1.5}
 .rev-more{display:block;background:none;border:0;color:var(--ac-fg);font:inherit;
   font-size:12.5px;font-weight:600;padding:9px 0 2px;min-height:var(--tap);text-align:left;width:100%}
+/* A card being reviewed may point at an external video (ASL signs) — the one
+   place in the review queue a parent needs to actually check the link, not
+   just read that it exists. */
+.rev-watch{display:flex;align-items:center;min-height:var(--tap);color:var(--ac-fg);
+  font-size:12.5px;font-weight:700;text-decoration:none;margin-top:4px}
 .rev .cut-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:9px;
   background:var(--raised);border:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1}
 .rev{position:relative}
@@ -9342,6 +9347,14 @@ SCREENS.reviewunit = function(root){
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(richify(el('div','o flat'), card.def));
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
+      /* The one place in the review queue a parent needs the ACTUAL link, not
+         just def text saying a video exists — this is what she'll be shown. */
+      if(card.watchUrl){
+        let host = ''; try{ host = new URL(card.watchUrl).hostname.replace(/^www\./,''); }catch(e){}
+        const a = el('a','rev-watch', '▶  Watch the sign' + (host ? ` · ${host}` : ''));
+        a.href = card.watchUrl; a.target = '_blank'; a.rel = 'noopener';
+        d.appendChild(a);
+      }
       if(card.from){ const t=el('div'); t.style.marginTop='8px'; t.appendChild(provTag(card.from)); d.appendChild(t); }
       const x = el('button','cut-btn', cutC.has(card.id)?'↩':'✕');
       x.setAttribute('aria-label', cutC.has(card.id)?'Keep this card':'Drop this card');
