@@ -111,6 +111,66 @@ const PORT = process.argv[2] || 8099;
   });
   ck('Quiz round completes and logs', quiz.logged, quiz);
 
+  // The alphabet deck: 26 letters + orientation card, each with a real image,
+  // no quiz/clock tile (0 questions), shelved alongside Class 1.
+  const alphaSeed = await p.evaluate(async () => {
+    const res = await fetch('./content/asl-alphabet.json', {cache:'no-store'});
+    const j = await res.json();
+    const u = j.records['unit-asl-alpha'];
+    u.status = 'approved'; u.updatedAt = Date.now() - 1000;
+    DATA.records[u.id] = u; saveLocal();
+    return {cards: u.cards.length, questions: u.questions.length};
+  });
+  ck('Alphabet unit has 27 cards (orientation + 26 letters)', alphaSeed.cards === 27, alphaSeed);
+
+  const alphaCard = await p.evaluate(() => {
+    go('cards', {unitId:'unit-asl-alpha', classId:'asl'});
+    const bIdx = unitFor('unit-asl-alpha').cards.findIndex(c=>c.term==='B');
+    cardState.i = cardState.order.indexOf(bIdx);
+    render();
+    document.querySelector('.flip').click();
+    const img = document.querySelector('.signimg img');
+    return img ? {src: img.src, alt: img.alt} : null;
+  });
+  ck('Letter card shows its reference image', !!alphaCard, alphaCard);
+  ck('Image points at the verified Commons file for B', alphaCard &&
+    alphaCard.src === 'https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_B.svg', alphaCard);
+
+  const alphaShelf = await p.evaluate(() => {
+    go('unit', {classId:'asl'});
+    const spines = [...document.querySelectorAll('#screen .spine')].map(s=>s.textContent);
+    return spines;
+  });
+  // One shelf ("ASL Club"), both parts inside it — a spine is per SERIES,
+  // not per lesson, so "Class 1" and "Alphabet" merge into one spine.
+  ck('Alphabet shelves alongside Class 1 (one "ASL Club" spine, 2 parts)',
+    alphaShelf.length === 1 && /^ASL Club/.test(alphaShelf[0]), alphaShelf);
+
+  const alphaTiles = await p.evaluate(() => {
+    ctx.open = 'unit-asl-alpha';
+    go('shelf', {classId:'asl', series:'ASL Club'});
+    const tiles = [...document.querySelectorAll('#screen .mtile')].map(t=>t.textContent);
+    const pill = [...document.querySelectorAll('#screen .pill')].map(p=>p.textContent).find(t=>/reference only|questions/.test(t));
+    return {tiles, pill};
+  });
+  ck('Alphabet deck offers only Flashcards (no Quiz/Clock tile)', alphaTiles.tiles.length === 1 && /Flashcards/.test(alphaTiles.tiles[0]), alphaTiles);
+  ck('Alphabet deck pill says "reference only"', alphaTiles.pill === 'reference only', alphaTiles);
+
+  // Finishing the alphabet deck must not offer a quiz she can't take, and
+  // must not claim she wrote cards she didn't.
+  const alphaFinish = await p.evaluate(async () => {
+    go('cards', {unitId:'unit-asl-alpha', classId:'asl'});
+    const u = unitFor('unit-asl-alpha');
+    cardState.order.forEach((idx,i)=>{ cardState.i = i; cardState.seen.add(idx); });
+    cardState.i = cardState.order.length - 1;
+    finishCards(u);
+    await new Promise(r=>setTimeout(r,50));
+    const modal = document.querySelector('.modal-box');
+    return modal ? modal.textContent : null;
+  });
+  ck('Finishing the deck never claims "you wrote these"', alphaFinish && !/you wrote these/i.test(alphaFinish), alphaFinish);
+  ck('Finishing the deck offers no quiz to take', alphaFinish && !/take the quiz/i.test(alphaFinish), alphaFinish);
+
   out.forEach(r => console.log((r.ok ? ' ok ' : 'FAIL ') + r.n + (r.ok ? '' : ' -> ' + JSON.stringify(r.got))));
   console.log(out.every(r=>r.ok) ? 'ALL PASS' : 'FAILURES');
   console.log('page errors:', errs.length ? errs : 'none');

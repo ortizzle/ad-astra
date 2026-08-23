@@ -1237,6 +1237,72 @@ working subject page, quiz and flashcards (with a working, correctly-hosted
 Watch button that doesn't flip the card) — and never appears on the weekday
 timetable, with no NaN leaking into the schedule render.
 
+**The review queue didn't show the video either (v129 follow-up).** Chris
+caught this live: the parent review screen listed each card's term and
+definition — including the sentence "watch the linked video" — with nothing
+actually clickable. `watchNode(card, linkClass)` is now the one function
+both render sites (the flashcard face, the parent review row) call for a
+card's video affordance, so a fix to one can never again miss the other.
+
+**Inline embeds, ready for verified video ids (v130).** YouTube itself is
+unreachable from this environment's tooling (WebFetch and even a raw
+`curl` both get network-policy-blocked for `youtube.com`), so a real
+per-word video could not be sourced and verified the way the Signing Savvy
+links were — never guess a video id or trust a search-result title alone
+for her app. `watchNode()` now branches: a card carrying **`embedId`** (a
+YouTube video id, hand-verified before it ships — same bar as `watchUrl`)
+embeds inline via `youtube-nocookie.com` in a responsive `.vidwrap`, no new
+tab; a card with only `watchUrl` keeps the external link. The capability
+shipped ahead of the content on purpose, so wiring in real ids later is a
+one-line change per card, not an engine change.
+
+### The manual alphabet (v130, THIS APP ONLY)
+
+Fingerspelling is the one part of ASL a STATIC IMAGE can teach honestly —
+unlike a moving sign, there is no motion to misrepresent, so unlike
+`watchUrl`/`embedId` this needed no video and no click-through. `unit-asl-alpha`
+("ASL Club · Alphabet") ships 27 cards (one orientation card + all 26
+letters), each showing its handshape via a new card field, **`imgUrl`**,
+rendered inline by `signImgNode()` — the same shared-function pattern
+`watchNode()` set: both the flashcard face and the parent review row call it,
+so the review screen shows the actual picture rather than describing one.
+
+- **The images are Wikimedia Commons' `Sign_language_<LETTER>.svg` series**
+  — the same public-domain illustrations used in Wikipedia's "American
+  manual alphabet" article across many language editions — addressed via
+  the stable `Special:FilePath/<filename>` redirect, so no hash-path needed
+  guessing. Existence and the public-domain tag were confirmed for all 26
+  letters by search before any of them shipped; I did not invent or
+  pattern-guess a single filename.
+- **Unlike Signing Savvy, hotlinking Commons media is the intended use** —
+  the whole point of the license. This is why the alphabet embeds directly
+  and the vocabulary signs still only link out: one is a freely-licensed
+  static reference, the other is a commercial video dictionary's paid
+  content, and those two things get different treatment on purpose.
+- **`def` never describes a handshape in words**, same rule as the
+  vocabulary cards — the image is the entire answer. J and Z each say
+  outright that they trace a small motion the image can't show, rather than
+  silently presenting a static picture as the whole story.
+- **A unit with zero questions is a real, general case now, not an
+  `own`-deck special case.** `unitCard()` used to render a Quiz and Beat-the-
+  clock tile unconditionally — harmless before because the only
+  zero-question units were `own:true` decks, which bypass `unitCard()`
+  entirely through `ownCardsCard()`. The alphabet is an ordinary draft unit
+  with `questions:[]`, and would have gotten a Quiz tile that opened onto
+  nothing. Both tiles are now gated on `u.questions.length`, and the pill
+  reads "reference only" instead of "0 questions · one sitting".
+- **`finishCards()`'s no-quiz message now says the right thing for the right
+  reason.** It used to say "You wrote these" unconditionally when a deck had
+  no questions — true for her own cards, false for a reference deck she
+  didn't write. Now checks `u.own` and picks the honest sentence.
+- Shelves onto the same "ASL Club" spine as Class 1, via the ordinary
+  ` · ` title convention — no new mechanism.
+
+`tools/test_asl.js` covers all of it: the image renders and points at the
+real Commons URL, the deck offers Flashcards only, the pill says "reference
+only", and finishing the deck neither claims she wrote the cards nor offers
+a quiz that isn't there.
+
 ---
 
 ## Visual language

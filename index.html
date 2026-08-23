@@ -610,6 +610,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .vidwrap{position:relative;width:100%;padding-top:56.25%;margin-top:14px;
   border-radius:12px;overflow:hidden;background:#000}
 .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* A fingerspelling handshape reference. White plate so the dark line art
+   stays legible over any subject colour or theme. */
+.signimg{align-self:center;width:150px;max-width:60%;margin-top:14px;padding:10px;
+  background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.signimg img{display:block;width:100%;height:auto}
 .face .tap{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
@@ -1314,7 +1319,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v129 · ASL club';
+const APP_VERSION = 'v130 · the manual alphabet';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2788,7 +2793,8 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/ww9-lesson-01.json', 'content/ww9-lesson-02.json', 'content/ww9-lesson-03.json', 'content/ww9-lesson-04.json',
   'content/ww9-lesson-05.json', 'content/ww9-lesson-06.json', 'content/ww9-lesson-07.json',
   'content/bio-unit-1.json', 'content/latin-unit-1.json', 'content/bio-unit-2.json',
-  'content/phys-kinematics-graphs.json', 'content/bio-unit-1b.json', 'content/asl-1.json'];
+  'content/phys-kinematics-graphs.json', 'content/bio-unit-1b.json', 'content/asl-1.json',
+  'content/asl-alphabet.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same
@@ -3732,6 +3738,21 @@ function watchNode(card, linkClass){
     return a;
   }
   return null;
+}
+/* A static handshape (fingerspelling) is the one ASL case an IMAGE can teach
+   safely, unlike a moving sign — no motion to get wrong, so unlike watchUrl
+   this needs no video and no click-through. `imgUrl` is a direct image
+   source, hand-verified against a real reference before it ships (same bar
+   as watchUrl/sp — never guessed). A white plate under it holds the
+   dark-stroke reference art legible no matter which subject colour paints
+   the card around it. */
+function signImgNode(card){
+  if(!card.imgUrl) return null;
+  const wrap = el('div','signimg');
+  const img = document.createElement('img');
+  img.src = card.imgUrl; img.alt = 'The handshape for ' + card.term; img.loading = 'lazy';
+  wrap.appendChild(img);
+  return wrap;
 }
 /* **bold** in definitions and explanations — built with elements, never
    innerHTML, so content stays inert text. */
@@ -4735,7 +4756,9 @@ function unitCard(u, c, label){
   card.appendChild(el('h3',null, label || u.title));
   const bits = el('div');
   bits.appendChild(el('span','pill',`${u.cards.length} cards`));
-  bits.appendChild(el('span','pill',`${u.questions.length} questions · ${(u.round||QUIZ_ROUND)>=u.questions.length?'one sitting':'rounds of '+Math.min(u.round||QUIZ_ROUND,u.questions.length)}`));
+  bits.appendChild(el('span','pill', u.questions.length
+    ? `${u.questions.length} questions · ${(u.round||QUIZ_ROUND)>=u.questions.length?'one sitting':'rounds of '+Math.min(u.round||QUIZ_ROUND,u.questions.length)}`
+    : 'reference only'));
   if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
   if(u.source) bits.appendChild(el('span','pill',u.source));
   card.appendChild(bits);
@@ -4777,13 +4800,20 @@ function unitCard(u, c, label){
       ()=>go('cards',{unitId:u.id, classId:c.id})));
     return card;
   }
-  const row = el('div','mrow'+(!u.book?' three':''));
+  /* A unit with no questions (a pure reference deck, like the ASL alphabet —
+     an image can teach a static handshape safely, but there is nothing a
+     multiple-choice quiz can honestly test) offers only Flashcards. Real
+     content never ships with zero questions otherwise, so this never hides
+     a door a normal unit needs. */
+  const row = el('div','mrow'+(!u.book && u.questions.length ?' three':''));
   row.appendChild(modeTile('cards','Flashcards','flip & check',()=>go('cards',{unitId:u.id,classId:c.id})));
-  row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,c.id,false)));
-  if(!u.book){
-    /* Book-companion units never race a clock — speed-reading a novel
-       quiz teaches exactly the wrong thing. */
-    row.appendChild(modeTile('clock','Beat the clock','race your pace',()=>launchQuiz(u.id,c.id,true)));
+  if(u.questions.length){
+    row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,c.id,false)));
+    if(!u.book){
+      /* Book-companion units never race a clock — speed-reading a novel
+         quiz teaches exactly the wrong thing. */
+      row.appendChild(modeTile('clock','Beat the clock','race your pace',()=>launchQuiz(u.id,c.id,true)));
+    }
   }
   card.appendChild(row);
   /* River's game, offered where it fits: vocabulary shelves built from single
@@ -5145,6 +5175,7 @@ SCREENS.cards = function(root){
   const back = paint(el('div','face back'), cls);
   back.appendChild(defEl(card.def));
   const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
+  const ig = signImgNode(card); if(ig) back.appendChild(ig);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
   /* Some cards (ASL signs) can only truly be taught by video — the card
@@ -5215,8 +5246,13 @@ function finishCards(u){
     confirmText:'Take the quiz', cancelText:'Later',
     onConfirm:()=>launchQuiz(u.id,ctx.classId) }
   : { title:`+${xp} XP`,
-    /* Her own deck has no quiz to offer — and the loop is already whole. */
-    message:`${seen} cards reviewed in ${Math.max(1,Math.round(secs/60))} min.\n\nYou wrote these and now you have studied them — that is the whole loop.`,
+    /* Two different reasons a deck has no quiz: her own cards (she wrote
+       them, so studying them IS the whole loop) versus a pure reference
+       deck like the ASL alphabet (nothing to quiz — the picture is the
+       whole answer). */
+    message:`${seen} cards reviewed in ${Math.max(1,Math.round(secs/60))} min.\n\n`
+      + (u.own ? 'You wrote these and now you have studied them — that is the whole loop.'
+                : 'Some decks are reference, not a quiz — this is one of them.'),
     confirmText:'Done', cancelText:null });
   go('unit',{classId:ctx.classId});
 }
@@ -9374,6 +9410,7 @@ SCREENS.reviewunit = function(root){
       d.appendChild(el('div','q',card.term));
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(richify(el('div','o flat'), card.def));
+      const ig = signImgNode(card); if(ig) d.appendChild(ig);
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
       /* The one place in the review queue a parent needs to see exactly what
          she'll be shown — the embed if there is one, else the real link. */

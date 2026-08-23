@@ -1,0 +1,234 @@
+{
+ "v": 4,
+ "records": {
+  "unit-asl-alpha": {
+   "id": "unit-asl-alpha",
+   "type": "unit",
+   "updatedAt": 1787493600000,
+   "classId": "asl",
+   "quarter": 1,
+   "status": "draft",
+   "title": "ASL Club · Alphabet",
+   "srcName": "ASL Manual Alphabet (Wikimedia Commons, public domain)",
+   "source": "The standard ASL fingerspelling alphabet — public-domain reference illustrations from Wikimedia Commons, the same set used across Wikipedia's American manual alphabet article.",
+   "cards": [
+    {
+     "id": "c0",
+     "term": "How to use these cards",
+     "def": "**Fingerspelling is a handshape you can see and check yourself against a picture — unlike a moving sign, there's nothing to get wrong by showing it as an image.**\n• This is the standard ASL manual alphabet, the same 26 handshapes any ASL class starts with.\n• Flip each card, then check your own hand against the picture.",
+     "hint": "Practice spelling your own name first — it's the fastest way in.",
+     "from": "added"
+    },
+    {
+     "id": "ca",
+     "term": "A",
+     "def": "**The ASL fingerspelling handshape for the letter A.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_A.svg",
+     "from": "added"
+    },
+    {
+     "id": "cb",
+     "term": "B",
+     "def": "**The ASL fingerspelling handshape for the letter B.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_B.svg",
+     "from": "added"
+    },
+    {
+     "id": "cc",
+     "term": "C",
+     "def": "**The ASL fingerspelling handshape for the letter C.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_C.svg",
+     "from": "added"
+    },
+    {
+     "id": "cd",
+     "term": "D",
+     "def": "**The ASL fingerspelling handshape for the letter D.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_D.svg",
+     "from": "added"
+    },
+    {
+     "id": "ce",
+     "term": "E",
+     "def": "**The ASL fingerspelling handshape for the letter E.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_E.svg",
+     "from": "added"
+    },
+    {
+     "id": "cf",
+     "term": "F",
+     "def": "**The ASL fingerspelling handshape for the letter F.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_F.svg",
+     "from": "added"
+    },
+    {
+     "id": "cg",
+     "term": "G",
+     "def": "**The ASL fingerspelling handshape for the letter G.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_G.svg",
+     "from": "added"
+    },
+    {
+     "id": "ch",
+     "term": "H",
+     "def": "**The ASL fingerspelling handshape for the letter H.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_H.svg",
+     "from": "added"
+    },
+    {
+     "id": "ci",
+     "term": "I",
+     "def": "**The ASL fingerspelling handshape for the letter I.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_I.svg",
+     "from": "added"
+    },
+    {
+     "id": "cj",
+     "term": "J",
+     "def": "**The ASL fingerspelling handshape for the letter J.**\n• J and Z are the only two letters that trace a small motion in the air — the image shows the shape, not the movement.",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_J.svg",
+     "from": "added"
+    },
+    {
+     "id": "ck",
+     "term": "K",
+     "def": "**The ASL fingerspelling handshape for the letter K.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_K.svg",
+     "from": "added"
+    },
+    {
+     "id": "cl",
+     "term": "L",
+     "def": "**The ASL fingerspelling handshape for the letter L.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_L.svg",
+     "from": "added"
+    },
+    {
+     "id": "cm",
+     "term": "M",
+     "def": "**The ASL fingerspelling handshape for the letter M.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_M.svg",
+     "from": "added"
+    },
+    {
+     "id": "cn",
+     "term": "N",
+     "def": "**The ASL fingerspelling handshape for the letter N.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_N.svg",
+     "from": "added"
+    },
+    {
+     "id": "co",
+     "term": "O",
+     "def": "**The ASL fingerspelling handshape for the letter O.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_O.svg",
+     "from": "added"
+    },
+    {
+     "id": "cp",
+     "term": "P",
+     "def": "**The ASL fingerspelling handshape for the letter P.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_P.svg",
+     "from": "added"
+    },
+    {
+     "id": "cq",
+     "term": "Q",
+     "def": "**The ASL fingerspelling handshape for the letter Q.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_Q.svg",
+     "from": "added"
+    },
+    {
+     "id": "cr",
+     "term": "R",
+     "def": "**The ASL fingerspelling handshape for the letter R.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_R.svg",
+     "from": "added"
+    },
+    {
+     "id": "cs",
+     "term": "S",
+     "def": "**The ASL fingerspelling handshape for the letter S.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_S.svg",
+     "from": "added"
+    },
+    {
+     "id": "ct",
+     "term": "T",
+     "def": "**The ASL fingerspelling handshape for the letter T.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_T.svg",
+     "from": "added"
+    },
+    {
+     "id": "cu",
+     "term": "U",
+     "def": "**The ASL fingerspelling handshape for the letter U.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_U.svg",
+     "from": "added"
+    },
+    {
+     "id": "cv",
+     "term": "V",
+     "def": "**The ASL fingerspelling handshape for the letter V.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_V.svg",
+     "from": "added"
+    },
+    {
+     "id": "cw",
+     "term": "W",
+     "def": "**The ASL fingerspelling handshape for the letter W.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_W.svg",
+     "from": "added"
+    },
+    {
+     "id": "cx",
+     "term": "X",
+     "def": "**The ASL fingerspelling handshape for the letter X.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_X.svg",
+     "from": "added"
+    },
+    {
+     "id": "cy",
+     "term": "Y",
+     "def": "**The ASL fingerspelling handshape for the letter Y.**",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_Y.svg",
+     "from": "added"
+    },
+    {
+     "id": "cz",
+     "term": "Z",
+     "def": "**The ASL fingerspelling handshape for the letter Z.**\n• J and Z are the only two letters that trace a small motion in the air — the image shows the shape, not the movement.",
+     "hint": "Check your own hand against the picture, not just your memory of it.",
+     "imgUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sign_language_Z.svg",
+     "from": "added"
+    }
+   ],
+   "questions": []
+  }
+ }
+}
