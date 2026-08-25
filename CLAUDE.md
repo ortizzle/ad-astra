@@ -308,6 +308,44 @@ The convention, and it applies to every topic from here on:
   `order` — their Topic Reviews sort last on title alone. Leave them; adding
   `order` would re-draft them for no visible gain.
 
+### Topic 2 — Quadratic Functions and Equations (v132)
+
+All 7 lessons (`aga_24_a2_0201..0207_se.pdf` in her Drive folder, uploaded
+2026-08-25) shipped as `alg-topic2-01.json` … `-07.json`: vertex form,
+standard form, factored form, complex numbers, completing the square, the
+Quadratic Formula, linear-quadratic systems. 9–15 cards and 20 questions
+each, shelving onto `Topic 2` the same way Topic 1 does — no `order` set, so
+they sort 2-1 through 2-7 on title alone.
+
+- **Every numeric answer was independently computed with `sympy` before
+  being written into a question** — vertex/intercept arithmetic, factoring,
+  the discriminant, complex-number operations, linear-quadratic
+  intersections — never worked by hand and never copied from the textbook's
+  own numbers. This caught one real error before it shipped: a completing-
+  the-square rounding question (2-5 · q19) was first drafted with `x ≈ 0.37`
+  from mental estimation; the actual root is `0.3753`, which rounds to
+  `0.38`. Every fresh scenario in these 7 lessons uses numbers not printed in
+  the source PDF, per the standalone-questions rule — the textbook's own
+  worked examples and "Try It!" numbers were used only to calibrate style
+  and difficulty, never copied into a question.
+- **Graphs render liberally**, per the math/physics rule — vertex-form
+  parabolas on the concept cards, with the vertex point labeled, using the
+  same `renderGraph` `parabola` series type Topic 1 and the physics units
+  already use.
+- `tools/test_alg_topic2.js` walks all 7 flashcard decks and a full quiz
+  round end to end, and structurally re-validates every question (4 unique
+  options, `ans` in range) against the live schema, not just at authoring
+  time.
+
+> ⚠️ **`ExamView - Alg 2 Study Guide Test 2.pdf`, in the same Drive folder,
+> is NOT Topic 2 material.** Its actual content is piecewise-defined
+> functions and arithmetic sequences/series — Topic 1 Lessons 1-3 and 1-4,
+> already shipped as `alg-topic1-03.json` / `-04.json`. It was not built
+> into a "Topic 2 Test 2 Study Guide" unit; building it under that title
+> would have shipped a study guide that quizzes the wrong material right
+> before a real test. Flagged to Chris rather than guessed at — find out
+> what Test 2 actually covers before shipping a study guide for it.
+
 ### The round, drawn (v89 / Wayfinder v71, both apps)
 
 River asked for something game-like in the quizzes; Chris wanted nothing too
