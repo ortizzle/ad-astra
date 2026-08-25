@@ -385,6 +385,40 @@ that shipped Topic 2's seven lessons does not repeat here.
   walkthrough, the rescue round drawing only from what was missed, and the
   shelf carrying all six Topic 1 parts (four lessons, two study guides).
 
+### Growth Zone cleanup — a grown-up-only correction tool (v134, THIS APP ONLY)
+
+Chris asked for a way to remove a question from the Growth Zone. Misses
+landing there is automatic and stays automatic — this is the other
+direction, for when the QUESTION was the problem: a misprint since fixed in
+a content edit, a duplicate, or one that no longer applies. It is not a
+shortcut for her. `SCREENS.growthedit`, reached from a "Manage the Growth
+Zone" card in the parent view (only rendered when at least one `miss`
+exists), lists every miss grouped by subject — same box bar, same "due
+now"/"back in N days" line as her own screen — with a "Remove from the
+Growth Zone" button on each.
+
+- **Deliberately unreachable from her side.** Her own `SCREENS.growth` gains
+  no button and no new code path. The Growth Zone's founding rule —
+  "information, not a verdict" — depends on it not being a list she can
+  quietly edit down herself; a self-serve delete button would turn a review
+  ladder into a mechanic for avoiding review.
+- **`softDelete(m.id)`, not a hard delete.** The miss record tombstones like
+  every other delete in the app, so it can never resurrect from a stale
+  device's sync, and Sync.merge handles it exactly like discarding any other
+  record. Nothing else is touched — not the unit, not her `qstat` tally, not
+  her XP. If she goes on to miss the live question again later, it lands
+  back on the ladder as a brand new miss, same as always.
+- **No confirmation modal.** One question, one tap, immediately reversible
+  in effect (missing it again just re-adds it) — the same weight as
+  dismissing a suggested assessment, which already ships with a bare ✕ and
+  no modal. A bulk "clear everything" action would need one; a single row
+  does not.
+- `tools/test_growthedit.js` covers the whole loop: the entry card only
+  appears in the parent view, every miss renders with a working Remove
+  button, removing one drops the count by exactly one and re-renders in
+  place, the record is a tombstone rather than erased, and — the rule that
+  matters most — her own Growth Zone screen never shows the control.
+
 ### The round, drawn (v89 / Wayfinder v71, both apps)
 
 River asked for something game-like in the quizzes; Chris wanted nothing too

@@ -1319,7 +1319,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v133 · Test 2 study guide';
+const APP_VERSION = 'v134 · Growth Zone cleanup';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -7664,6 +7664,68 @@ SCREENS.growth = function(root){
   }
 };
 
+/* ---- Grown-up correction tool: take a question OFF the review ladder ----
+   The Growth Zone fills itself automatically and that stays automatic — this
+   is the other direction, for when a question itself was the problem: a
+   misprint since fixed, a duplicate, a question a content edit superseded.
+   Removing one only tombstones the miss record (softDelete, so it can never
+   resurrect on its own) — it never touches the unit, her qstats, or her XP,
+   and it never re-adds a miss if she goes on to get the live question wrong
+   again some other day.
+
+   Deliberately unreachable from her side. Her own Growth Zone screen has no
+   delete button and stays exactly what it has always been — "information,
+   not a verdict" — never a list she can quietly edit down herself. */
+SCREENS.growthedit = function(root){
+  root.appendChild(headline('Growth Zone',
+    'Remove a question that should not be on the review ladder — a fixed misprint, a duplicate, or one that no longer applies. She never sees this screen or any button on it.'));
+  const ms = all('miss');
+  if(!ms.length){
+    const e = el('div','empty');
+    e.appendChild(el('span','ic','🌱'));
+    e.appendChild(el('p',null,'Nothing on the ladder right now.'));
+    root.appendChild(e);
+  } else {
+    const dueIds = new Set(dueMisses().map(m=>m.id));
+    const byC = {};
+    ms.forEach(m=>{ (byC[m.classId||'__mixed__'] = byC[m.classId||'__mixed__']||[]).push(m); });
+    Object.keys(byC).sort((a,b)=>{
+      const na = CLASS_BY_ID[a]?.name || 'Other', nb = CLASS_BY_ID[b]?.name || 'Other';
+      return na.localeCompare(nb);
+    }).forEach(cid=>{
+      const c = CLASS_BY_ID[cid];
+      const gh = el('div','hintline subjline', c ? c.icon+' '+c.name : 'Other');
+      if(c) gh.style.setProperty('--pc', classColor(c));
+      root.appendChild(gh);
+      const card = el('div','card');
+      byC[cid].forEach(m=>{
+        const box = m.box ?? -1;
+        const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
+        d.appendChild(el('div','q',m.q));
+        d.appendChild(el('div','a','✓ '+m.right));
+        if(m.chose) d.appendChild(el('div','n','She chose: '+m.chose));
+        const bar = el('div','box');
+        for(let i=0;i<BOX_GAPS.length;i++){ const p=el('i'); if(i<=box) p.classList.add('on'); bar.appendChild(p); }
+        bar.appendChild(el('em',null, dueIds.has(m.id) ? 'due now'
+          : box<0 ? 'not seen again yet' : 'back '+AZ.short(m.due)));
+        d.appendChild(bar);
+        const xb = el('button','btn btn-sm btn-ghost','Remove from the Growth Zone');
+        xb.style.marginTop = '10px';
+        xb.addEventListener('click',()=>{
+          softDelete(m.id);
+          syncSoon(); toast('Removed'); render();
+        });
+        d.appendChild(xb);
+        card.appendChild(d);
+      });
+      root.appendChild(card);
+    });
+  }
+  const back = el('button','btn btn-ghost','← Grown-ups');
+  back.addEventListener('click',()=>go('parent'));
+  root.appendChild(back);
+};
+
 /* ================= TUTOR ================= */
 SCREENS.tutor = function(root){
   const date = AZ.today();
@@ -8549,6 +8611,22 @@ SCREENS.parent = function(root){
       });
     }
     root.appendChild(tc);
+  }
+
+  /* Growth Zone correction tool. Misses landing here is automatic and stays
+     that way — this is the other direction: a question that turned out to be
+     wrong, a duplicate, or one a content fix already superseded. Deliberately
+     grown-up only; her own Growth Zone screen keeps its "information, not a
+     verdict" framing and gets no delete button. */
+  const gzMisses = all('miss');
+  if(gzMisses.length){
+    root.appendChild(divider('Growth Zone'));
+    const gzc = el('div','card');
+    gzc.appendChild(el('p',null, gzMisses.length+' question'+(gzMisses.length===1?'':'s')+' on the review ladder right now.'));
+    const gzb = el('button','btn btn-ghost','Manage the Growth Zone ›');
+    gzb.addEventListener('click',()=>go('growthedit'));
+    gzc.appendChild(gzb);
+    root.appendChild(gzc);
   }
 
   /* Wellbeing + calibration */
