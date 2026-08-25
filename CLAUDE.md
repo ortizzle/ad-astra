@@ -346,6 +346,45 @@ they sort 2-1 through 2-7 on title alone.
 > before a real test. Flagged to Chris rather than guessed at — find out
 > what Test 2 actually covers before shipping a study guide for it.
 
+### Topic 1 · Test 2 Study Guide (v133)
+
+Chris confirmed it: the ExamView PDF really is titled "Test 2" for her
+class, and its content — piecewise-defined functions and arithmetic
+sequences/series — is genuinely Topic 1 material (Lessons 1-3 and 1-4), not
+Topic 2. `unit-sgt2` ships **built exactly like `unit-sgt1`**, per Chris's
+own instruction: same `guide:true` paper-study-guide pattern, shelved onto
+**Topic 1** (`order:1`, right alongside the four Topic 1 lessons and the
+Test 1 Study Guide) because the shelf sorts by content, not by the label on
+the paper the school handed out — the Topic-1-vs-Topic-2 folder mismatch
+that shipped Topic 2's seven lessons does not repeat here.
+
+- **The PDF was read directly, not through Drive's native extraction.**
+  The first pass (`search_files`/`read_file_content`) came back with
+  multi-column OCR reflow errors — one question's stem had merged with the
+  next question's answer options. Downloading the file via
+  `download_file_content`, decoding it locally, and reading the actual PDF
+  gave a clean, page-by-page extraction (including the two questions built
+  from a graph). Trust the rendered PDF over Drive's OCR snippet on any
+  multi-column source.
+- **All 30 answers were independently re-derived and matched the printed
+  key with zero discrepancies** — a change from Test 1's guide, which
+  caught two real misprints in the book's own key. Verified with the same
+  discipline regardless: nothing here was assumed correct because the guide
+  before it needed correcting.
+- **Five questions were adapted from a graph or free-response original into
+  an equivalent, independently verified multiple-choice question** (Q1
+  evaluate-from-a-piecewise-graph, Q2 boundary inclusion, Q4 domain/range/
+  min/max from a table, Q16 a sit-ups sequence term, Q22 a beads-in-a-
+  necklace series total) — same "(adapted — …)" convention Test 1's guide
+  established, so the entry grid still works with a single letter tap even
+  where the paper wanted a graph or written response.
+- Every one of the 30 questions carries a hand-authored, independently
+  verified `variant` for the Rescue Round, same as Test 1's guide.
+  `tools/test_sg2.js` exercises the whole loop end to end: paper entry with
+  a realistic mixed pass, `gradeGuide()`'s tally/misses/qstats, the
+  walkthrough, the rescue round drawing only from what was missed, and the
+  shelf carrying all six Topic 1 parts (four lessons, two study guides).
+
 ### The round, drawn (v89 / Wayfinder v71, both apps)
 
 River asked for something game-like in the quizzes; Chris wanted nothing too
