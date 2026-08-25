@@ -799,6 +799,28 @@ last period. Rules that are the point:
 year, and that nothing vague is ever placed; `tools/contrast_clubs.js` sweeps
 the new surfaces across accent × sky × theme (288 samples, worst 6.44:1).
 
+**Real dates beat inferred cadence (v131).** A club may carry **`dates`** —
+an explicit array of ISO meeting dates — and when present `clubMeetsOn()`
+uses it directly instead of computing from `freq`/`first`. Built for ASL
+Club: the teacher's actual remaining-year schedule (ParentSquare, 2026-08)
+turned out to be genuinely irregular — a 7-day gap around Veterans Day, a
+five-week winter-break gap, and Feb 15 named outright as "NO MEETING"
+(which is also Presidents Day on `CAL.closed` — the two independent sources
+agree). A pure every-14-days rule from the original `first:'Aug 17'` would
+have placed both of those wrong, so the real list wins outright rather than
+being reconciled against the cadence math. A date the club is explicitly
+**not** meeting is simply left out of the array — never encoded as a rule of
+its own. `freq`/`first` stay on the record for the "N of yours are placed"
+count and the row's caption text; only placement itself defers to `dates`.
+
+> ⚠️ **`go(screen)` resets `ctx` to `{}`.** Setting `ctx._showTT = true`
+> *before* `go('today')` in a test does nothing — the flag has to be set
+> *after* the navigation, followed by a plain `render()` (not another `go()`,
+> which would reset it again). Caught because the club-row assertion in
+> `tools/test_clubs.js` failed even though `clubsOn(date)` was already
+> returning the right club — the row itself was folded away with the rest of
+> the period list, which has been folded by default since v106.
+
 **"On the horizon" said the same thing twice** (v99 / Wayfinder v80, both
 apps), caught in a screenshot of the club work. The card printed the next
 milestone and then "Quarter N ends" beneath it — and since every milestone in

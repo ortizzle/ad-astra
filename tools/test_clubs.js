@@ -25,19 +25,32 @@ const { chromium } = require('playwright');
   ck('registered is its own state', st.after==='reg' && st.now==='reg', st);
   ck('and can be cleared', st.gone===null, st);
 
-  /* ---- ASL: Mondays, 3:45–4:30, bi-weekly, first Aug 17 ---- */
+  /* ---- ASL: Mondays, 3:45–4:30, an EXPLICIT real schedule from the teacher
+     (2026-08) — supersedes the inferred bi-weekly cadence, because the real
+     dates already account for holidays a pure every-14-days rule can't. */
   const asl = await p.evaluate(()=>{
     const c = CLUBS.find(x=>x.id==='asl');
-    return { first: clubFirstDate(c), days: clubWeekdays(c),
-      mon17: clubMeetsOn(c,'2026-08-17'),   // first meeting
-      mon24: clubMeetsOn(c,'2026-08-24'),   // off week (bi-weekly)
-      mon31: clubMeetsOn(c,'2026-08-31'),   // on week
-      tue18: clubMeetsOn(c,'2026-08-18'),   // wrong weekday
-      aug10: clubMeetsOn(c,'2026-08-10') }; // before the first meeting
+    const allReal = c.dates.every(d => clubMeetsOn(c, d));
+    return { days: clubWeekdays(c), count: c.dates.length, allReal,
+      allMondays: c.dates.every(d => AZ.weekday(d) === 1),
+      sept14: clubMeetsOn(c,'2026-09-14'),     // a real meeting
+      nov9to16: AZ.daysBetween('2026-11-09','2026-11-16'),   // the 7-day gap around Veterans Day
+      dec7toJan11: AZ.daysBetween('2026-12-07','2027-01-11'), // the winter-break gap
+      presidentsDay: clubMeetsOn(c,'2027-02-15'),   // explicitly "NO MEETING" — also a school holiday
+      oldCadenceDate: clubMeetsOn(c,'2026-08-31'),  // the old bi-weekly math would have placed this; the real list doesn't
+      beforeFirstReal: clubMeetsOn(c,'2026-08-17'),
+      presidentsDayClosed: closedToday('2027-02-15') };
   });
-  ck('ASL anchors to its first meeting', asl.first==='2026-08-17' && asl.days.join()==='1', asl);
-  ck('bi-weekly lands on alternate Mondays only',
-     asl.mon17 && !asl.mon24 && asl.mon31 && !asl.tue18 && !asl.aug10, asl);
+  ck('all 14 real meeting dates are honoured', asl.allReal && asl.count===14, asl);
+  ck('every real date is actually a Monday', asl.allMondays, asl);
+  ck('a real meeting date lands on the day', asl.sept14, asl);
+  ck('the schedule is genuinely irregular (not pure bi-weekly)',
+     asl.nov9to16===7 && asl.dec7toJan11===35, asl);
+  ck('Presidents Day (explicitly "NO MEETING") is not placed', !asl.presidentsDay, asl);
+  ck('a date only the OLD cadence math would have placed is not placed', !asl.oldCadenceDate, asl);
+  ck('dates before the real list starts are not placed', !asl.beforeFirstReal, asl);
+  ck('CAL actually closes school for Presidents Day, confirming the "no meeting" note',
+     asl.presidentsDayClosed !== null, asl.presidentsDayClosed);
 
   /* ---- clubs that must NOT be placed ---- */
   const skipped = await p.evaluate(()=>{
@@ -56,9 +69,11 @@ const { chromium } = require('playwright');
 
   /* ---- it shows on the day, and only when registered ---- */
   const day = await p.evaluate(()=>{
-    const real=AZ.today; AZ.today=()=>'2026-08-17'; AZ.nowMinutes=()=>9*60;
+    const real=AZ.today; AZ.today=()=>'2026-09-14'; AZ.nowMinutes=()=>9*60;
     setClubState('asl','reg');
     go('today');
+    ctx._showTT = true; render();   // go() resets ctx — the flag has to be set after, then re-rendered.
+                                     // The period list (and club rows with it) is folded by default since v106.
     const reg = [...document.querySelectorAll('#screen .evt.club')].map(n=>n.textContent.replace(/\s+/g,' ').trim());
     setClubState('asl','want');
     go('today');

@@ -1319,7 +1319,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v130 · the manual alphabet';
+const APP_VERSION = 'v131 · the real ASL schedule';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1342,6 +1342,12 @@ const CLUBS = [
   {id:'humane',    day:'Monday', nm:'Arizona Humane Society', gr:'6th–12th', cost:100, time:'3:40–4:40', freq:'bi-weekly', first:'Aug 17',
    desc:'Helping dogs, cats, rabbits and more. Learn about therapy dogs, collect donations for the shelter, and volunteer with the animals there.'},
   {id:'asl',       day:'Monday', nm:'ASL Club', gr:'5th–12th', cost:65, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
+   /* The real remaining schedule, from the teacher (2026-08, ParentSquare) —
+      supersedes the inferred every-14-days placement above. See the note on
+      `dates` in clubMeetsOn(): this already accounts for the holidays a pure
+      cadence can't, including sitting out Presidents Day (2027-02-15) by name. */
+   dates:['2026-09-14','2026-09-28','2026-10-12','2026-10-26','2026-11-09','2026-11-16','2026-12-07',
+          '2027-01-11','2027-01-25','2027-02-08','2027-03-01','2027-03-22','2027-04-05','2027-04-19'],
    desc:'American Sign Language and Deaf culture — learn basic signs and connect with the local Arizona Deaf community.'},
   {id:'bc2m',      day:'Monday', nm:'Bring Change 2 Mind', gr:'8th–12th', cost:75, time:'3:45–4:30', freq:'bi-weekly', first:'Aug 17',
    desc:'A national nonprofit working to reduce the stigma around mental health. Members start conversations and run campus events and presentations.'},
@@ -1450,6 +1456,15 @@ function setClubState(id, st){
    A club joins the day it meets only when the day, the time AND the cadence
    are all genuinely derivable. Anything vaguer stays off the schedule rather
    than guessing at her week:
+     dates     -> an explicit list of real meeting dates (ISO), when the
+                  club has given one. Real dates beat inferred cadence —
+                  a printed schedule already accounts for holidays and
+                  breaks, which a pure every-14-days rule cannot (ASL
+                  Club's real cadence skips a week around Veterans Day and
+                  sits out Presidents Day entirely; a computed bi-weekly
+                  would have placed both wrong). A date deliberately not
+                  meeting (e.g. "Feb 15 — NO MEETING") is simply left out
+                  of the list, not encoded as a rule.
      weekly*   -> every matching weekday from the first meeting onward
      bi-weekly -> every fourteen days from that first meeting
      otherwise -> not placed (monthly gives no week; "6 weeks only" gives no
@@ -1471,6 +1486,7 @@ const clubWeekdays = c => String(c.day||'').split(/\s*&\s*/)
   .map(d => CLUB_DAYS[d.trim().toLowerCase()]).filter(d => d != null);
 function clubMeetsOn(c, date){
   if(!c.time) return false;
+  if(c.dates) return c.dates.includes(date);
   const freq = String(c.freq||'').toLowerCase();
   const weekly = freq.startsWith('weekly'), fort = freq.startsWith('bi-weekly');
   if(!weekly && !fort) return false;
