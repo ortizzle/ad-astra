@@ -419,6 +419,49 @@ Growth Zone" button on each.
   place, the record is a tombstone rather than erased, and — the rule that
   matters most — her own Growth Zone screen never shows the control.
 
+### Grades, tabulated by subject (v135, THIS APP ONLY)
+
+Chris asked whether grade data could be "calculated and tabulated based on
+subject" as it's entered, with subjects that have nothing recorded still
+visible rather than dropped. `gradesBySubject(date)` does exactly that:
+derived at render time from `assess` records, same discipline as XP/level/
+streak elsewhere — nothing new is stored, so there is no per-subject average
+field that could drift out of sync with the underlying grades. A new "By
+subject" card sits at the top of the parent view's Tests & quizzes section,
+above the existing flat list (which stays, unchanged, for adding/editing
+individual entries).
+
+- **Scoped to the current quarter.** `currentQuarter(date)` already exists
+  for the header's own "Quarter N" line; grades don't carry a `quarter`
+  field of their own, so scoping filters by `a.date` against the quarter's
+  `start`/`end`. A dragged-along average from a finished quarter would
+  misrepresent how the current one is going, and "nothing recorded" needs a
+  time window to mean anything actionable.
+- **Every `STUDY_CLASSES` subject renders, even at zero — this is the
+  point.** The existing activity "By subject" card (further down the same
+  screen) deliberately SKIPS a subject with no sessions and no goal; this
+  card does the opposite on purpose. A subject with nothing entered this
+  quarter shows "No grades entered yet" rather than disappearing, because a
+  silent gap is exactly what a parent scanning this can't act on.
+- **Graded vs. pending are counted separately.** An assessment can exist
+  with `score:null` (added, not marked yet) — `gradesBySubject` reports
+  `graded`/`pending` as distinct counts, so "1 grade · 1 not marked yet"
+  reads as two different facts, not one blurred number.
+- **The average is a plain mean of each assessment's stored percentage** —
+  no weighting by points or kind. The schema already normalizes points/outOf
+  down to `score` (v84's grades-as-points work); tabulating averages it the
+  same way a report card would, without inventing precision the school
+  itself doesn't establish.
+- **The value column stays short, on purpose.** `.row .v` is
+  `white-space:nowrap` (the same trap `guidewalk`'s steps hit once already —
+  see the learning-pass section above); "No grades entered yet" reads as the
+  `.k small` subtext under the subject name, never as the `.v` value, which
+  only ever holds a percentage or an em dash.
+- `tools/test_gradesbysubj.js` seeds a graded subject (verifies the average
+  and confirms a grade from a prior quarter is excluded), a pending-only
+  subject, and a subject with nothing at all — and checks the card text
+  directly, including the quarter label.
+
 ### The round, drawn (v89 / Wayfinder v71, both apps)
 
 River asked for something game-like in the quizzes; Chris wanted nothing too

@@ -1319,7 +1319,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v134 · Growth Zone cleanup';
+const APP_VERSION = 'v135 · grades by subject';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3101,6 +3101,31 @@ function assessLabel(a){
     : a.score + '%';
 }
 function assessments(){ return all('assess').sort((a,b)=>a.date<b.date?-1:1); }
+/* Grades, tabulated by subject — derived at render time from `assess`
+   records, same as everything else derived elsewhere in the app (XP, level,
+   streak): nothing new is stored, so there is no subject-average field to
+   drift out of sync when a grade is edited or deleted.
+
+   Scoped to the current quarter — a stale average dragged along from last
+   quarter would misrepresent how this one is going, and "no grades yet"
+   should mean something a parent can act on, not something permanently true
+   for a subject with one grade back in September.
+
+   Every STUDY_CLASSES subject is included even at zero — the gap (nothing
+   entered yet for a subject) is exactly what a parent scanning this needs to
+   see, and hiding empty rows (the way the activity "By subject" card already
+   does, on purpose, for a different reason) would erase it. */
+function gradesBySubject(date = AZ.today()){
+  const q = currentQuarter(date);
+  const inQ = a => !q || (a.date >= q.start && a.date <= q.end);
+  const list = assessments();
+  return STUDY_CLASSES.map(c=>{
+    const forC = list.filter(a=>a.classId===c.id && inQ(a));
+    const graded = forC.filter(a=>a.score!=null);
+    const avg = graded.length ? Math.round(graded.reduce((s,a)=>s+a.score,0)/graded.length) : null;
+    return { cls:c, count:forC.length, graded:graded.length, pending:forC.length-graded.length, avg, quarter:q };
+  });
+}
 function upcomingAssessments(from, withinDays){
   const to = AZ.shift(from, withinDays);
   return assessments().filter(a=>a.date>=from && a.date<=to);
@@ -8246,6 +8271,26 @@ SCREENS.parent = function(root){
   root.appendChild(pnc);
 
   root.appendChild(divider('Tests & quizzes'));
+
+  /* By subject, tabulated — every grade entered rolls up here automatically,
+     and every subject renders whether or not one has landed yet. */
+  const gradeRows = gradesBySubject(date);
+  const gq = gradeRows[0]?.quarter;
+  const gsc = el('div','card');
+  gsc.appendChild(el('div','eyebrow', 'By subject' + (gq ? ` · Quarter ${gq.n}` : '')));
+  gradeRows.forEach(r=>{
+    const row = el('div','row');
+    const k = el('span','k', `${r.cls.icon} ${r.cls.name}`);
+    k.appendChild(el('small',null,
+      r.count===0 ? 'No grades entered yet'
+      : r.pending ? `${r.graded} grade${r.graded===1?'':'s'} · ${r.pending} not marked yet`
+      : `${r.graded} grade${r.graded===1?'':'s'}`));
+    row.appendChild(k);
+    row.appendChild(el('span','v'+(r.avg==null?' plain':r.avg<70?' bad':''), r.avg==null?'—':r.avg+'%'));
+    gsc.appendChild(row);
+  });
+  root.appendChild(gsc);
+
   const asc = el('div','card');
   const list = assessments();
   if(!list.length) asc.appendChild(el('p',null,'None added yet. Add tests and quizzes here and the app builds study recommendations around them.'));
