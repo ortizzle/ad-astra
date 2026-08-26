@@ -1319,7 +1319,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v135 · grades by subject';
+const APP_VERSION = 'v136 · flag a question';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2813,7 +2813,8 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/asl-alphabet.json',
   'content/alg-topic2-01.json', 'content/alg-topic2-02.json', 'content/alg-topic2-03.json',
   'content/alg-topic2-04.json', 'content/alg-topic2-05.json', 'content/alg-topic2-06.json',
-  'content/alg-topic2-07.json', 'content/sg-test2.json'];
+  'content/alg-topic2-07.json', 'content/sg-test2.json', 'content/phys-kinematics-equations.json',
+  'content/phys-ramp-lab.json', 'content/bio-quiz1-review.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same
@@ -6955,6 +6956,35 @@ SCREENS.quiz = function(root){
         root.appendChild(ag);
       }
     }
+    /* A question she thinks might just be WRONG — a typo'd answer key, a
+       confusing scenario, a graph that doesn't match its own question. Not
+       the Growth Zone (that's about what SHE knows); this is about the
+       content itself, and it goes straight to a grown-up, never auto-acted
+       on. Excluded on a rescue-round variant: it's a sub-field of another
+       question, not something with its own place to remove it from. */
+    if(!q._rescue){
+      const aUnit2 = q._srcUnit || u.id, aClass2 = q._srcClass || ctx.classId, aQid2 = q._srcQid || q.id;
+      const flagId = 'flag_'+aUnit2+'_'+aQid2;
+      const already = DATA.records[flagId] && !DATA.records[flagId].deleted;
+      const fb = el('button','btn btn-ghost btn-sm', already ? '🚩 Flagged for a grown-up' : '🚩 Something wrong with this question?');
+      fb.disabled = already;
+      if(!already) fb.addEventListener('click',()=>{
+        showModal({ title:'Flag this question',
+          message:'A grown-up will take a look — say what seems off if you want, or just flag it.',
+          confirmText:'Flag it', cancelText:'Cancel',
+          build:(box,close)=>{
+            const ta = el('textarea'); ta.placeholder = 'What seems wrong? (optional)'; ta.style.minHeight='72px';
+            box.appendChild(ta);
+            box._go = ()=>{
+              put({ id:flagId, type:'flag', unitId:aUnit2, classId:aClass2, qid:aQid2,
+                q:q.q, note:ta.value.trim()||null, date:AZ.today() });
+              syncSoon(); close(); toast('Flagged — a grown-up will take a look.'); render();
+            };
+          }
+        });
+      });
+      root.appendChild(fb);
+    }
     /* Wrong answer + a question that carries steps → offer the full worked
        path, one step per tap. After the answer, so it teaches rather than
        leaks; free, because it is remediation, not a hint economy. */
@@ -7742,6 +7772,71 @@ SCREENS.growthedit = function(root){
         });
         d.appendChild(xb);
         card.appendChild(d);
+      });
+      root.appendChild(card);
+    });
+  }
+  const back = el('button','btn btn-ghost','← Grown-ups');
+  back.addEventListener('click',()=>go('parent'));
+  root.appendChild(back);
+};
+
+/* ---- Flagged questions: her own eyes on the content, not the Growth Zone ----
+   The Growth Zone is about what SHE knows; this is about the QUESTION itself
+   being wrong — a typo in the answer key, a confusing scenario, a graph that
+   doesn't match its own text. She flags it from the quiz screen with an
+   optional note; nothing happens automatically. Only a grown-up sees this
+   screen, and only a grown-up decides what happens next: remove the question
+   from the unit for good, or dismiss the flag because it checked out fine. */
+SCREENS.flagged = function(root){
+  root.appendChild(headline('Flagged questions',
+    'Something she thought might be wrong. Removing a question takes it out of the unit for everyone; dismissing just clears the flag and leaves the question as it is.'));
+  const flags = all('flag');
+  if(!flags.length){
+    const e = el('div','empty');
+    e.appendChild(el('span','ic','🚩'));
+    e.appendChild(el('p',null,'Nothing flagged right now.'));
+    root.appendChild(e);
+  } else {
+    const byC = {};
+    flags.forEach(f=>{ (byC[f.classId||'__mixed__'] = byC[f.classId||'__mixed__']||[]).push(f); });
+    Object.keys(byC).sort((a,b)=>{
+      const na = CLASS_BY_ID[a]?.name || 'Other', nb = CLASS_BY_ID[b]?.name || 'Other';
+      return na.localeCompare(nb);
+    }).forEach(cid=>{
+      const c = CLASS_BY_ID[cid];
+      const gh = el('div','hintline subjline', c ? c.icon+' '+c.name : 'Other');
+      if(c) gh.style.setProperty('--pc', classColor(c));
+      root.appendChild(gh);
+      const card = el('div','card');
+      byC[cid].forEach(f=>{
+        const u = DATA.records[f.unitId];
+        const row = el('div','miss');
+        row.appendChild(el('div','q', f.q));
+        row.appendChild(el('div','n', (u && !u.deleted ? u.title : 'Unit no longer exists') + ' · flagged '+AZ.short(f.date)));
+        if(f.note) row.appendChild(el('div','n', '“'+f.note+'”'));
+        const btnRow = el('div','btn-row');
+        const rm = el('button','btn btn-sm btn-secondary','Remove the question');
+        rm.addEventListener('click',()=>{
+          if(u && !u.deleted){
+            put({ ...u, questions: u.questions.filter(q=>q.id!==f.qid) });
+            /* A removed-for-being-wrong question shouldn't keep haunting the
+               Growth Zone from an old miss record that already snapshotted
+               it — same softDelete every other correction tool here uses. */
+            const missId = 'miss_'+f.unitId+'_'+f.qid;
+            if(DATA.records[missId] && !DATA.records[missId].deleted) softDelete(missId);
+          }
+          softDelete(f.id);
+          syncSoon(); toast('Removed from the unit'); render();
+        });
+        const dm = el('button','btn btn-sm btn-ghost','Dismiss — it checked out');
+        dm.addEventListener('click',()=>{
+          softDelete(f.id);
+          syncSoon(); toast('Dismissed'); render();
+        });
+        btnRow.appendChild(rm); btnRow.appendChild(dm);
+        row.appendChild(btnRow);
+        card.appendChild(row);
       });
       root.appendChild(card);
     });
@@ -8672,6 +8767,19 @@ SCREENS.parent = function(root){
     gzb.addEventListener('click',()=>go('growthedit'));
     gzc.appendChild(gzb);
     root.appendChild(gzc);
+  }
+
+  /* Flagged questions — she thought one might be wrong; only a grown-up sees
+     the flag, and only a grown-up decides what happens to it. */
+  const openFlags = all('flag');
+  if(openFlags.length){
+    const fqc = el('div','card ac');
+    fqc.appendChild(el('h2',null, openFlags.length===1 ? '1 question was flagged' : openFlags.length+' questions were flagged'));
+    fqc.appendChild(el('p',null,'She thinks something might be wrong with these.'));
+    const fqb = el('button','btn btn-primary','Take a look');
+    fqb.addEventListener('click',()=>go('flagged'));
+    fqc.appendChild(fqb);
+    root.appendChild(fqc);
   }
 
   /* Wellbeing + calibration */

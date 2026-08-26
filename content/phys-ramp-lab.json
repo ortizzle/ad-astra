@@ -1,0 +1,234 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-ramp": {
+   "id": "unit-phys-ramp",
+   "type": "unit",
+   "updatedAt": 1787702900000,
+   "libv": 1,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Kinematics 1 · The Ramp Lab",
+   "srcName": "Ramp Lab handout (Drive)",
+   "source": "Physics 8, Kinematics — 'Ramp Lab' procedure and questions (Drive)",
+   "summary": {
+    "text": "The Ramp Lab measures a ball's average acceleration rolling down a ramp, from position and time data. The twist is graphical: a position-vs-time graph for accelerated motion is a curve, not a straight line, so before you can pull a slope out of it, you have to LINEARIZE it — usually by plotting position against time-squared instead, which turns the curve into a straight line whose slope reveals the acceleration.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Linearizing shows up constantly once labs stop being simple constant-velocity motion — any time the raw data is curved, finding the right thing to plot on the x-axis to straighten it out is the actual analysis skill, more than the ball, the ramp, or the stopwatch.",
+    "from": "added"
+   },
+   "objectives": [
+    {"text": "Explain why a position-vs-time graph for accelerated motion is curved, not straight.", "from": "source"},
+    {"text": "Explain what linearizing the graph accomplishes and why plotting against t² works.", "from": "source"},
+    {"text": "Predict how ramp steepness and location (Earth vs. Moon) change measured acceleration.", "from": "source"},
+    {"text": "Explain why giving the ball a push changes v₀ but not the acceleration itself.", "from": "added"},
+    {"text": "Solve average-speed problems, including recognizing when the target average is impossible.", "from": "added"}
+   ],
+   "parentNote": {
+    "text": "Built from the Ramp Lab handout's procedure and its five conceptual/short-answer questions. The lab itself asks her to collect real data (distance, time, velocity, acceleration) and analyze it graphically — that data doesn't exist yet, so this unit covers the REASONING behind the lab (why linearize, what changes the result) rather than inventing numbers for a data set that's hers to collect. The one numeric question on the sheet (the average-speed word problem) is echoed here with fresh numbers, verified independently with sympy, plus a second version that lands on a real, achievable answer rather than an impossible one — the lab's own version turns out to be impossible as written, which is worth knowing before she's staring at it expecting a normal number.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards once before lab day — the linearizing idea is the one thing worth having straight before you're staring at a curved graph in class.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "round": 10,
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Why a position–time graph curves under acceleration",
+     "from": "source",
+     "def": "**Because position depends on t², not just t — so equal time steps cover growing distances.**\n• Δx = v₀t + ½at² has a t² term, which is what makes the graph bend upward.\n• A straight line only happens when acceleration is zero (constant velocity).",
+     "hint": "t² in the formula = a curve on the graph."
+    },
+    {
+     "id": "c1",
+     "term": "Linearizing a graph",
+     "from": "source",
+     "def": "**Plotting position against TIME-SQUARED (t²) instead of time turns the curve into a straight line.**\n• Since Δx = v₀t + ½at², plotting Δx vs. t² makes the t² term the x-axis itself — the relationship becomes linear.\n• A straight line's slope is easy to measure and trust; a curve's \"slope\" keeps changing, so you can't just draw one line through it.",
+     "hint": "Curve in x-vs-t → straight line in x-vs-t².",
+     "eq": "slope of Δx vs. t² = ½a"
+    },
+    {
+     "id": "c2",
+     "term": "Getting acceleration from the linearized slope",
+     "from": "source",
+     "def": "**The slope of the linearized (Δx vs. t²) graph equals ½a, so a = 2 × slope.**\n• This is the whole point of linearizing — once it's straight, ordinary slope math (rise over run) gets you the acceleration directly.\n• Forgetting to double the slope is the single most common mistake with this graph.",
+     "hint": "Slope is HALF of a — always double it.",
+     "eq": "a = 2 × slope"
+    },
+    {
+     "id": "c3",
+     "term": "Ramp steepness and acceleration",
+     "from": "source",
+     "def": "**A steeper ramp always produces a LARGER acceleration.**\n• Only part of gravity's pull acts along a tilted ramp's surface; a steeper angle redirects more of it along the ramp instead of into it.\n• At a full 90° (straight down), the ball would accelerate at the full value of g.",
+     "hint": "Steeper ramp = more of gravity pointing down the slope."
+    },
+    {
+     "id": "c4",
+     "term": "A push at the start",
+     "from": "source",
+     "def": "**Giving the ball a push changes its INITIAL velocity (v₀) — not its acceleration.**\n• Acceleration on a ramp comes from the ramp's angle (and gravity), which a push doesn't touch.\n• A pushed ball starts faster and covers the ramp quicker, but it speeds up at exactly the same RATE as an un-pushed one.",
+     "hint": "A push changes the starting speed, not the rate of speeding up."
+    },
+    {
+     "id": "c5",
+     "term": "Same ramp on the Moon",
+     "from": "source",
+     "def": "**On the Moon, where gravity is about 1/6 of Earth's, the same ramp would produce about 1/6 the acceleration.**\n• Ramp acceleration is always some fraction of local gravity — shrink gravity, and the ramp's acceleration shrinks by the same fraction.\n• The ball would take noticeably longer to roll the same distance, and the linearized graph's slope would come out about 1/6 as steep.",
+     "hint": "Ramp acceleration scales directly with whatever gravity you're standing under."
+    },
+    {
+     "id": "c6",
+     "term": "Average speed isn't the average of the speeds",
+     "from": "added",
+     "def": "**\"Average speed over a whole trip\" means total distance ÷ total time — NOT the arithmetic average of the speeds on each leg.**\n• A slow leg costs disproportionate TIME, not just \"one slow number to average in.\"\n• Always work in total distance and total time, never by averaging the speed values directly.",
+     "hint": "Add up distances and times separately — then divide."
+    },
+    {
+     "id": "c7",
+     "term": "When a target average speed is impossible",
+     "from": "added",
+     "def": "**If the time already spent on earlier legs meets or exceeds the whole trip's allowed time, no finishing speed — however fast — can fix the average.**\n• Check the running time total against the trip's time budget before solving for what's left.\n• This is the trap in a surprising number of \"what speed do I need\" problems — the answer is sometimes \"there isn't one.\"",
+     "hint": "Compare time spent so far to total time allowed — first, before solving anything."
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1", "lv": 1, "from": "source", "kind": "mc",
+     "q": "A student collects position and time data for a ball speeding up on a ramp, then plots position (y-axis) against time (x-axis). What shape should the raw data form?",
+     "opts": ["A curve, bending upward", "A straight line through the origin", "A straight horizontal line", "A straight line with a negative slope"],
+     "ans": 0,
+     "hint": "Does position depend on t, or on t²?",
+     "steps": [
+      "Position under constant acceleration follows Δx = v₀t + ½at².",
+      "The t² term means position grows faster and faster as time goes on.",
+      "That growing rate of change is exactly what a curve, bending upward, looks like on a graph."
+     ],
+     "ex": {"main": "**A curve, bending upward.** The t² term is what bends the line — a straight line only happens when acceleration is zero.", "tip": "If a graph should be curved but comes out straight (or vice versa), that's a sign to double-check for constant acceleration."}
+    },
+    {
+     "id": "q2", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Why can't you just draw a line of best fit through the raw position-vs-time data from an accelerating ball?",
+     "opts": ["Because the data is curved, and a straight line can't accurately fit a curve", "Because position-vs-time graphs are never useful", "Because a ruler cannot be used on a computer graph", "Because you need at least 20 data points to draw any line"],
+     "ans": 0,
+     "hint": "What shape is the raw data, and what shape is a \"line of best fit\"?",
+     "steps": [
+      "A line of best fit is, by definition, straight.",
+      "The raw position-vs-time data from accelerated motion is curved, not straight.",
+      "Forcing a straight line through curved data would badly misrepresent it — the data needs to be linearized first."
+     ],
+     "ex": {"main": "**Because the data is curved.** A straight line drawn through curved data doesn't actually describe the data — it has to be linearized first.", "tip": "\"Should I draw a line of best fit?\" always starts with \"is this data actually straight?\""}
+    },
+    {
+     "id": "q3", "lv": 2, "from": "source", "kind": "mc",
+     "q": "To linearize position-vs-time data from an accelerating object, what should be plotted on the x-axis instead of plain time?",
+     "opts": ["Time squared (t²)", "The square root of time", "Time divided by two", "Position itself"],
+     "ans": 0,
+     "hint": "Which term in Δx = v₀t + ½at² is the one causing the curve?",
+     "steps": [
+      "The curve comes from the t² term in Δx = v₀t + ½at².",
+      "Plotting Δx against t² (instead of t) turns that t² term into a plain linear relationship.",
+      "The result is a straight line whose slope is ½a."
+     ],
+     "ex": {"main": "**Time squared (t²).** Once t² is the x-axis, the relationship between it and position is a straight line.", "tip": "Whatever term is bending the graph is usually the thing to put on the new x-axis."}
+    },
+    {
+     "id": "q4", "lv": 2, "from": "source", "kind": "mc",
+     "q": "A linearized graph (position vs. t²) has a measured slope of 1.5 m/s². What is the ball's acceleration?",
+     "opts": ["3 m/s²", "1.5 m/s²", "0.75 m/s²", "2.25 m/s²"],
+     "ans": 0,
+     "hint": "The slope of this particular graph equals HALF the acceleration.",
+     "steps": [
+      "The slope of a Δx-vs-t² graph equals ½a, not a itself.",
+      "So a = 2 × slope.",
+      "a = 2 × 1.5 = 3 m/s²"
+     ],
+     "ex": {"main": "**3 m/s².** Doubling the slope is the one step that's easy to forget on this particular graph.", "tip": "Always ask \"is this graph's slope equal to a, or to ½a, or to something else?\" before reading a value off it."}
+    },
+    {
+     "id": "q5", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Two identical ramps are set at different angles: Ramp A at 20° and Ramp B at 40°. A ball is released from rest on each. Which statement is correct?",
+     "opts": ["Ramp B produces a larger acceleration than Ramp A", "Both ramps produce exactly the same acceleration", "Ramp A produces a larger acceleration than Ramp B", "Acceleration depends only on the ball's mass, not the ramp's angle"],
+     "ans": 0,
+     "hint": "Which ramp redirects more of gravity's pull along its own surface?",
+     "steps": [
+      "A steeper ramp redirects more of gravity's downward pull along the ramp's own direction.",
+      "40° is steeper than 20°.",
+      "So Ramp B, the steeper one, produces the larger acceleration."
+     ],
+     "ex": {"main": "**Ramp B produces a larger acceleration.** The steeper the ramp, the more of gravity acts along the direction of motion instead of into the ramp's surface.", "tip": "Mass doesn't affect a ramp's acceleration at all — a heavier and lighter ball released from rest speed up at the same rate."}
+    },
+    {
+     "id": "q6", "lv": 3, "from": "source", "kind": "mc",
+     "q": "A student runs the exact same ramp lab on the Moon, where gravity is about 1/6 of Earth's. Compared to the Earth version, what happens to the measured acceleration?",
+     "opts": ["It becomes about 1/6 as large", "It stays exactly the same", "It becomes 6 times as large", "It becomes zero, since there's no air on the Moon"],
+     "ans": 0,
+     "hint": "Ramp acceleration is always some fraction of local gravity.",
+     "steps": [
+      "A ramp's acceleration is a fraction of whatever gravity is acting — the same ramp angle always redirects the same FRACTION of gravity.",
+      "If gravity itself shrinks to 1/6 of Earth's value, the ramp's acceleration shrinks by that same 1/6 fraction.",
+      "So the Moon version's acceleration comes out to about 1/6 of the Earth version's."
+     ],
+     "ex": {"main": "**About 1/6 as large.** Whatever fraction of gravity a ramp's angle redirects, it does that to whatever gravity IS — shrink gravity, and the result shrinks with it.", "tip": "Air resistance is a red herring here — the effect on acceleration comes entirely from the change in gravity, not from the presence or absence of air."}
+    },
+    {
+     "id": "q7", "lv": 3, "from": "source", "kind": "mc",
+     "q": "A ball rolls down a ramp from rest and is measured to accelerate at 2 m/s². A second, identical trial gives the ball a firm push to start it moving at 1.5 m/s down the same ramp. What is the ball's acceleration in the second trial?",
+     "opts": ["Still 2 m/s²", "Faster than 2 m/s², because it started with extra speed", "Slower than 2 m/s², because the push used up some of gravity's pull", "0 m/s², because it was already moving"],
+     "ans": 0,
+     "hint": "Does a push change the RAMP, or just the ball's starting speed?",
+     "steps": [
+      "Acceleration on a ramp comes from the ramp's angle and gravity — neither of which a push touches.",
+      "A push only changes v₀, the ball's starting velocity.",
+      "The rate at which the ball speeds up (its acceleration) stays exactly the same: 2 m/s²."
+     ],
+     "ex": {"main": "**Still 2 m/s².** A push changes how fast the ball starts, not how fast it speeds up — those are two separate quantities.", "tip": "This is a classic mix-up: a bigger starting speed does NOT mean a bigger acceleration."}
+    },
+    {
+     "id": "q8", "lv": 3, "from": "added", "kind": "mc",
+     "q": "A hiker walks 24 km at a target average speed of 8 km/h. For the first 8 km she manages 12 km/h, and for the next 8 km she only manages 6 km/h. What speed does she need for the final 8 km to still hit her 8 km/h target average?",
+     "opts": ["8 km/h", "10 km/h", "12 km/h", "It's impossible"],
+     "ans": 0,
+     "hint": "Add up the time used on the first two legs and compare it to the total time allowed.",
+     "steps": [
+      "Total time allowed: 24 km ÷ 8 km/h = 3 h.",
+      "First leg: 8 km ÷ 12 km/h = 2/3 h. Second leg: 8 km ÷ 6 km/h = 4/3 h. Together: 2/3 + 4/3 = 2 h used.",
+      "Time left for the final leg: 3 − 2 = 1 h. Required speed: 8 km ÷ 1 h = 8 km/h."
+     ],
+     "ex": {"main": "**8 km/h.** The faster first leg banked exactly enough extra time to offset the slower second leg — she needs precisely her original target speed for the last stretch.", "tip": "It's not a coincidence that this comes out equal to the target — check what happens when a fast leg and a slow leg balance out."}
+    },
+    {
+     "id": "q9", "lv": 3, "from": "added", "kind": "mc",
+     "q": "A cyclist rides 36 km at a target average speed of 18 km/h. For the first 12 km he manages 18 km/h exactly, and for the next 12 km he drops to 9 km/h. What speed does he need for the final 12 km to still hit 18 km/h overall?",
+     "opts": ["Impossible — no time is left", "About 27 km/h for the last leg", "About 36 km/h for the last leg", "About 18 km/h for the last leg"],
+     "ans": 0,
+     "hint": "Check the time spent on the first two legs against the total time allowed before solving for a speed.",
+     "steps": [
+      "Total time allowed: 36 km ÷ 18 km/h = 2 h.",
+      "First leg: 12 km ÷ 18 km/h = 2/3 h. Second leg: 12 km ÷ 9 km/h = 4/3 h. Together: 2/3 + 4/3 = 2 h used.",
+      "That's already the ENTIRE 2-hour budget, with 12 km still to go — no finishing speed can make up for zero remaining time."
+     ],
+     "ex": {"main": "**It's impossible.** The first two legs used up the whole time budget exactly, leaving nothing for the final leg no matter how fast he rides it.", "tip": "Compare this to the hiker question — same shape of problem, but the numbers here leave no slack at all."}
+    },
+    {
+     "id": "q10", "lv": 2, "from": "source", "kind": "mc",
+     "q": "A lab group's accepted value for their ramp's acceleration (from the linearized graph) is 2.0 m/s², but a nearby class's textbook lists the expected value as 2.4 m/s². What is the percent error?",
+     "opts": ["≈16.7%", "≈20%", "≈4%", "≈83.3%"],
+     "ans": 0,
+     "hint": "Percent error = |measured − accepted| ÷ accepted × 100.",
+     "steps": [
+      "Percent error = |measured − accepted| / accepted × 100.",
+      "= |2.0 − 2.4| / 2.4 × 100 = 0.4 / 2.4 × 100",
+      "≈ 16.7%"
+     ],
+     "ex": {"main": "**≈16.7%.** Always divide by the ACCEPTED value, not the measured one — the two give different answers.", "tip": "Dividing by the measured value instead (0.4/2.0 = 20%) is the most common percent-error mistake — check which number is in the denominator."}
+    }
+   ]
+  }
+ }
+}

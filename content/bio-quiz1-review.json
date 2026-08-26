@@ -1,0 +1,366 @@
+{
+ "v": 4,
+ "records": {
+  "unit-bio-q1": {
+   "id": "unit-bio-q1",
+   "type": "unit",
+   "updatedAt": 1787703200000,
+   "libv": 1,
+   "classId": "biology",
+   "quarter": 1,
+   "status": "draft",
+   "book": true,
+   "order": 1,
+   "guide": true,
+   "title": "Biology 8 · Unit 1 Quiz Review",
+   "srcName": "8th Grade Biology Scientific Method Quiz (Drive)",
+   "source": "Biology 8, the actual Unit 1 Scientific Method Quiz, imported as issued",
+   "summary": {
+    "text": "This mirrors the real Scientific Method Quiz — the one already given and returned — covering observation vs. inference, hypothesis-writing, independent/dependent/control variables, sample size, control groups, choosing the right graph type, and reading two graphs (a multi-line trend graph and a data table) for real conclusions.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A returned quiz is the single best study material there is — it shows exactly which of these ideas already stuck and which ones need one more pass before the next one.",
+    "from": "added"
+   },
+   "objectives": [
+    {"text": "Enter what you actually put on the real quiz and see it marked instantly.", "from": "source"},
+    {"text": "Walk through the reasoning behind anything missed.", "from": "source"},
+    {"text": "Practice the same skills again with fresh numbers in the rescue round.", "from": "added"}
+   ],
+   "parentNote": {
+    "text": "Transcribed from the actual returned Scientific Method Quiz (two versions, V1 and V2, given to different class sections with the same 23 items in a different option order — a normal test-security practice, not different content). This guide uses V1's option order as the canonical one; since the two versions test identical concepts, that's a faithful transcription either way. Every multiple-choice answer was independently re-derived from straight science reasoning (there's no separate answer key attached to either version) and both versions agree with each other on every item, which cross-checks the read. Five items on the real quiz (10, 11, 12, 22, 23) were free-response, not multiple choice — asking her to write in the independent/dependent variable and control group for the exercise scenario, and to describe what's wrong with two graphs in her own words — so they don't fit an A/B/C/D letter grid and aren't part of this guide's 18 scored items. Two of those ideas (a graph needs a title; a y-axis that doesn't start at zero exaggerates differences) are covered as recap cards below instead, and the truncated-y-axis idea specifically is already a full lesson in Unit 1 itself. The two graphs behind questions 14–20 were read directly from the PDF's images, not the text extraction, which cannot see graphs at all.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Enter what you put on the real quiz first — the two recap cards below are worth a glance either way.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Reading a multi-line trend graph",
+     "from": "added",
+     "def": "**Compare the lines at the SAME x-value, and look at the overall direction of every line, not just one.**\n• To compare two categories at one point in time, find that one x-value and read straight up to each line.\n• To spot an overall trend, ask whether ALL the lines are rising, all falling, or mixed — one line alone doesn't tell you the trend.",
+     "hint": "One vertical slice for a comparison; the whole graph for a trend."
+    },
+    {
+     "id": "c1",
+     "term": "A graph needs a title",
+     "from": "added",
+     "def": "**Every finished graph needs a title, both axes labeled with units, and a scale that starts at zero — miss any one of the three and the graph is incomplete or misleading.**\n• A missing title leaves a reader guessing what the graph is even about.\n• A y-axis that doesn't start at zero can make a small difference look huge — this is covered in full back in Unit 1.",
+     "hint": "Title, labeled axes with units, zero baseline — the three-item checklist."
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q1 — Which of the following is the best example of a QUANTITATIVE observation?",
+     "opts": ["Ants are small so they can fit in narrow spaces.", "If ants are red, then they will be more aggressive.", "Ants eat sugar.", "There are 300 ants in a colony."],
+     "ans": 3,
+     "hint": "Quantitative means it has a number in it.",
+     "steps": ["Quantitative data can be counted or measured — look for a number.", "\"Small,\" \"eat sugar\" and the if/then claim are all descriptions, not counts.", "\"There are 300 ants\" is the only option with an actual number in it."],
+     "ex": {"main": "**There are 300 ants in a colony.** The only option that's a count.", "tip": "Hunt for the number first — it's the fastest way to spot quantitative data."},
+     "variant": {
+      "q": "Which of the following is the best example of a quantitative observation?",
+      "opts": ["The cat is fluffy.", "The cat seems friendly.", "There are 4 birds in the tree.", "The soup tastes salty."],
+      "ans": 2,
+      "hint": "Look for the number.",
+      "steps": ["Quantitative data is a count or a measurement.", "\"Fluffy,\" \"friendly\" and \"salty\" are all descriptions from the senses.", "\"4 birds\" is the only option with a number in it."],
+      "ex": {"main": "**There are 4 birds in the tree.** The only quantity in the list."}
+     }
+    },
+    {
+     "id": "q2", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q2 — \"The giraffe is very tall in order to better compete for mates\" is an example of…",
+     "opts": ["Qualitative observation", "An inference", "Quantitative observation", "An experiment"],
+     "ans": 1,
+     "hint": "Is this something directly seen, or a reason worked out from what was seen?",
+     "steps": ["An observation is something directly seen; an inference explains WHY using outside knowledge.", "\"Very tall\" is an observation, but \"in order to compete for mates\" is a reason, not something seen.", "Explaining WHY something is the way it is, using outside knowledge, is the definition of an inference."],
+     "ex": {"main": "**An inference.** The height is observed; the reason behind it is worked out, not seen.", "tip": "Any sentence with \"in order to\" or \"because\" explaining a purpose is almost always an inference."},
+     "variant": {
+      "q": "\"The dog is panting because it is hot\" is an example of…",
+      "opts": ["A quantitative observation", "A qualitative observation", "An inference", "A hypothesis"],
+      "ans": 2,
+      "hint": "Panting is seen; \"because it is hot\" is worked out.",
+      "steps": ["Panting is a direct observation.", "\"Because it is hot\" explains a reason using outside knowledge — that's an inference, not something directly seen.", "The whole sentence combines an observation with an inferred cause."],
+      "ex": {"main": "**An inference.** The reason given (\"because it is hot\") is worked out, not observed directly."}
+     }
+    },
+    {
+     "id": "q3", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q3 — What does the \"if\" statement refer to in your hypothesis?",
+     "opts": ["Independent variable", "Control variable", "Dependent variable", "Inference"],
+     "ans": 0,
+     "hint": "The \"if\" part names what YOU are going to change.",
+     "steps": ["A hypothesis is written \"If [I change this]... then [this will happen].\"", "The \"if\" clause names the thing being deliberately changed.", "That's the definition of the independent variable."],
+     "ex": {"main": "**Independent variable.** The \"if\" clause is always the thing being changed on purpose.", "tip": "\"Then\" pairs with the dependent variable — the predicted result."},
+     "variant": {
+      "q": "In the hypothesis \"If a plant gets more sunlight, then it will grow taller,\" what does the \"then\" clause name?",
+      "opts": ["The control variable", "The independent variable", "The dependent variable", "The sample size"],
+      "ans": 2,
+      "hint": "The \"then\" clause predicts the result.",
+      "steps": ["\"If\" names what's changed — the independent variable (sunlight).", "\"Then\" names the predicted result — what gets measured.", "That predicted, measured result is the dependent variable (how tall it grows)."],
+      "ex": {"main": "**The dependent variable.** \"Then\" always names the predicted, measured outcome."}
+     }
+    },
+    {
+     "id": "q4", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q4 — You are trying to answer: How does the ground surface affect the height at which a ball bounces? Which is the most appropriate hypothesis?",
+     "opts": ["Balls bounce higher on harder surfaces.", "Concrete is the best surface.", "If I drop a tennis ball, then it will bounce.", "Bouncing a ball higher will make the surface harder."],
+     "ans": 0,
+     "hint": "A good hypothesis has to connect the actual independent and dependent variable from the question.",
+     "steps": ["The question's independent variable is surface hardness; the dependent variable is bounce height.", "\"Concrete is the best surface\" is an opinion, not a testable if/then relationship.", "\"If I drop a tennis ball, then it will bounce\" never mentions surface at all — it doesn't test the actual question.", "\"Balls bounce higher on harder surfaces\" is the only option that actually connects surface hardness to bounce height."],
+     "ex": {"main": "**Balls bounce higher on harder surfaces.** It's the only option that links the two variables the question is actually about.", "tip": "Check every candidate hypothesis against the question's OWN independent and dependent variable — not just whether it sounds sciencey."},
+     "variant": {
+      "q": "You are trying to answer: How does the amount of salt in water affect how fast an ice cube melts? Which is the most appropriate hypothesis?",
+      "opts": ["Ice cubes melt faster in saltier water.", "Salt water tastes different from fresh water.", "If I put an ice cube in water, then it will melt.", "Melting ice cubes will make the water saltier."],
+      "ans": 0,
+      "hint": "Which option links salt amount to melting speed?",
+      "steps": ["The independent variable is salt amount; the dependent variable is melting speed.", "\"Salt water tastes different\" doesn't mention melting at all.", "\"If I put an ice cube in water\" never mentions salt.", "\"Ice cubes melt faster in saltier water\" is the only one connecting both actual variables."],
+      "ex": {"main": "**Ice cubes melt faster in saltier water.** The only option linking salt amount to melting speed."}
+     }
+    },
+    {
+     "id": "q5", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q5 — You want to determine the optimal AMOUNT of fertilizer for the most rose blooms per bush. Which is the best control variable?",
+     "opts": ["Roses with no fertilizer", "Amount of fertilizer", "Type of fertilizer", "Amount of blooms per bush"],
+     "ans": 2,
+     "hint": "Amount is being tested and blooms are being measured — what's left?",
+     "steps": ["Amount of fertilizer is the independent variable (what's changed).", "Amount of blooms is the dependent variable (what's measured).", "\"Roses with no fertilizer\" describes a control GROUP, not a control variable.", "That leaves type of fertilizer — something not being tested, which must be held constant."],
+     "ex": {"main": "**Type of fertilizer.** It isn't being tested or measured, so it has to be held the same across every bush.", "tip": "A control variable is never the thing changed or the thing measured — always something else."},
+     "variant": {
+      "q": "You want to determine the optimal amount of sunlight for the tallest bean plants. Which is the best control variable?",
+      "opts": ["Plants with no sunlight at all", "Amount of sunlight", "Type of soil used", "Final height of the plants"],
+      "ans": 2,
+      "hint": "Sunlight is being tested and height is being measured — what's left?",
+      "steps": ["Amount of sunlight is the independent variable.", "Final height is the dependent variable.", "\"No sunlight at all\" is a control group description, not a control variable.", "Type of soil is what's left — it must be the same for every plant."],
+      "ex": {"main": "**Type of soil used.** It has to stay constant across every plant in the test."}
+     }
+    },
+    {
+     "id": "q6", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q6 — What is the benefit of having a larger sample size in your experiment?",
+     "opts": ["Easier to collect data", "Faster to collect data", "More reliable results", "Increased likelihood of outliers"],
+     "ans": 2,
+     "hint": "Why do scientists prefer testing more subjects, not fewer?",
+     "steps": ["A bigger sample size is actually harder and slower to collect data for, not easier.", "More outliers is a downside, not a benefit.", "The real benefit is that results are less likely to be thrown off by one unusual subject — they become more reliable."],
+     "ex": {"main": "**More reliable results.** A bigger sample means one weird outlier can't skew the conclusion as much.", "tip": "Bigger sample size always trades convenience for reliability — never the other way around."},
+     "variant": {
+      "q": "A student tests 3 plants with one fertilizer and 30 plants with another. Which group's average result is more trustworthy, and why?",
+      "opts": ["The 3-plant group — it's a simpler comparison", "The 30-plant group — less thrown off by one odd plant", "Neither — sample size makes no difference here", "The 3-plant group — it's easier to average"],
+      "ans": 1,
+      "hint": "Which group is less at the mercy of one weird result?",
+      "steps": ["A small sample can be badly skewed by just one unusual result.", "A larger sample dilutes the effect of any single outlier.", "So the 30-plant group's average is more reliable."],
+      "ex": {"main": "**The 30-plant group.** A larger sample is far less vulnerable to one unusual result throwing off the average."}
+     }
+    },
+    {
+     "id": "q7", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q7 — You are testing a new fertilizer on your plants. How much of this fertilizer should you give the control group?",
+     "opts": ["0 grams", "100 grams", "200 grams", "400 grams"],
+     "ans": 0,
+     "hint": "What defines a control group?",
+     "steps": ["A control group gets NO treatment at all — it's the baseline everything else is compared to.", "\"The treatment\" here is the fertilizer.", "So the control group should get 0 grams of it."],
+     "ex": {"main": "**0 grams.** A control group's whole purpose is to show what happens with none of the tested treatment.", "tip": "Any nonzero amount would make that group just another experimental group, not a control."},
+     "variant": {
+      "q": "You are testing whether a new plant food changes how many tomatoes a plant produces. How much plant food should the control group receive?",
+      "opts": ["None at all", "Half the normal dose", "The full recommended dose", "Double the normal dose"],
+      "ans": 0,
+      "hint": "A control group is the baseline with none of the treatment.",
+      "steps": ["The treatment being tested is the plant food.", "A control group must receive none of it, to serve as a true baseline.", "Any amount at all would make it an experimental group instead."],
+      "ex": {"main": "**None at all.** That's what makes it a genuine baseline to compare against."}
+     }
+    },
+    {
+     "id": "q8", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q8 — You want to determine the optimal BRAND of fertilizer for the most rose blooms per bush. Which type of graph is most appropriate?",
+     "opts": ["Line", "Bar", "Pie chart", "Histogram"],
+     "ans": 1,
+     "hint": "Is \"brand\" a continuous, measurable quantity, or a set of separate categories?",
+     "steps": ["Brand names are separate categories, not points along a continuous scale.", "A line graph is for continuous data (like time or distance) — brand isn't continuous.", "Comparing bloom counts across separate brand categories is exactly what a bar graph is for."],
+     "ex": {"main": "**Bar.** Brand is categorical, and a bar graph is built for comparing categories against each other.", "tip": "Ask first: is the x-axis a number line (line graph) or a list of categories (bar graph)?"},
+     "variant": {
+      "q": "You want to determine the optimal COLOR of grow-light for the fastest seed germination. Which type of graph is most appropriate?",
+      "opts": ["Line", "Bar", "Scatter plot", "None of these work"],
+      "ans": 1,
+      "hint": "Color is a category, not a number on a scale.",
+      "steps": ["Light colors are separate categories, not a continuous scale.", "A bar graph compares categories against each other directly.", "That makes bar the right choice, same reasoning as comparing brands."],
+      "ex": {"main": "**Bar.** Color, like brand, is categorical data — bar graphs are built for exactly this."}
+     }
+    },
+    {
+     "id": "q9", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q9 — Testing fern fertilizer for a science fair, grown indoors near windows because it's hot in AZ. What's the most appropriate sample size?",
+     "opts": ["1 plant", "2 plants", "10 plants", "100 plants"],
+     "ans": 2,
+     "hint": "Too few plants makes results unreliable; too many isn't realistic for a school project.",
+     "steps": ["1 or 2 plants is far too small a sample to trust the results.", "100 plants isn't realistic to manage indoors for a school project.", "10 plants is the reasonable middle ground — enough for reliability, small enough to actually manage."],
+     "ex": {"main": "**10 plants.** Big enough to trust, small enough to actually pull off as a school project.", "tip": "\"Most appropriate\" sample-size questions are usually asking you to balance reliability against what's realistically doable."},
+     "variant": {
+      "q": "Testing paper towel brands for absorbency for a home science project, with a limited budget. What's the most appropriate sample size per brand?",
+      "opts": ["1 sheet", "5 sheets", "500 sheets", "It doesn't matter"],
+      "ans": 1,
+      "hint": "Balance reliability against what's realistic for a home project.",
+      "steps": ["1 sheet is too small a sample to trust.", "500 sheets isn't realistic for a home project on a budget.", "5 sheets balances reliability with what's actually doable."],
+      "ex": {"main": "**5 sheets.** Enough for a reasonable comparison without an unrealistic amount of material."}
+     }
+    },
+    {
+     "id": "q13", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q13 — Which of the following is the best definition of a theory?",
+     "opts": ["A prediction explaining why you have made a particular observation.", "The result of analyzing the data from an experiment.", "The best explanation of a phenomenon based on a large body of evidence from many experiments.", "A statement of what will always happen in a given situation."],
+     "ans": 2,
+     "hint": "A theory is built from MANY experiments, not just one.",
+     "steps": ["A single prediction is a hypothesis, not a theory.", "A single experiment's result is just that — one data set, not a theory.", "\"Always happens\" describes a law, not a theory.", "A theory is the best explanation supported by a large body of evidence across many experiments."],
+     "ex": {"main": "**The best explanation based on a large body of evidence from many experiments.** A theory is built up over many experiments, not handed down from one.", "tip": "In everyday speech \"theory\" can mean a guess — in science it means the opposite: something extremely well-supported."},
+     "variant": {
+      "q": "A student says, \"Gravity is just a theory, so it might not be true.\" What's the flaw in this statement, scientifically speaking?",
+      "opts": ["The student is right — it's just an unproven guess", "In science, a theory means well-supported, not a shaky guess", "Gravity should really be called a hypothesis instead", "Every theory eventually becomes a law given enough time"],
+      "ans": 1,
+      "hint": "What does \"theory\" actually mean in science, versus in everyday speech?",
+      "steps": ["In everyday speech, \"theory\" can mean a guess.", "In science, a theory is the opposite — an explanation supported by a large body of evidence from many experiments.", "So calling something \"just a theory\" scientifically is actually calling it extremely well-supported, not shaky."],
+      "ex": {"main": "**A theory is a well-supported explanation, not a shaky guess.** That's the exact mix-up between everyday and scientific usage of the word."}
+     }
+    },
+    {
+     "id": "q14", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Q14 — A line graph titled \"Vegetable Consumption through the Decades\" plots the weight (in tons) of carrots, potatoes and lettuce eaten, with one line per vegetable, across 1990, 2000 and 2010. What is the independent variable?",
+     "opts": ["Decade", "Weight (tons)", "Vegetable", "There is no independent variable"],
+     "ans": 0,
+     "hint": "What's on the x-axis, deliberately chosen to track change over?",
+     "steps": ["The x-axis is Decade (1990, 2000, 2010) — the thing the graph tracks change across.", "Weight is what's measured — the dependent variable.", "\"Vegetable\" identifies which line is which, but it isn't the axis being tracked.", "The independent variable is Decade."],
+     "ex": {"main": "**Decade.** It's the x-axis — what the graph is tracking change across.", "tip": "On any line graph, the x-axis is almost always the independent variable."},
+     "variant": {
+      "q": "A line graph titled \"Fruit Sales through the Years\" plots pounds of apples, oranges and bananas sold, with one line per fruit, across 2020, 2021 and 2022. What is the independent variable?",
+      "opts": ["Year", "Pounds sold", "Fruit type", "Store location"],
+      "ans": 0,
+      "hint": "What's on the x-axis?",
+      "steps": ["The x-axis is Year — what the graph tracks change across.", "Pounds sold is what's measured — the dependent variable.", "Fruit type labels the lines, but isn't the tracked axis.", "The independent variable is Year."],
+      "ex": {"main": "**Year.** The x-axis is always the variable being tracked across."}
+     }
+    },
+    {
+     "id": "q15", "lv": 3, "from": "source", "kind": "mc",
+     "q": "Q15 — Same graph: by 2010, the potato line has climbed to about 100 tons and the carrot line has climbed to about 96 tons, with potato having tracked slightly above carrot the whole time. Which best compares potato and carrot consumption in 2010?",
+     "opts": ["About twice as much potato was eaten as carrot.", "Potato was eaten in slightly greater quantity than carrot.", "The same amount of potato and carrot was eaten.", "More carrot was eaten than potato."],
+     "ans": 1,
+     "hint": "100 tons vs. 96 tons — is that close, or double?",
+     "steps": ["100 tons and 96 tons are close in value, not double one another.", "They aren't equal either — 100 is clearly a bit more than 96.", "Carrot being higher than potato contradicts the described lines.", "\"Slightly greater\" is the accurate description of a small but real gap."],
+     "ex": {"main": "**Potato was eaten in slightly greater quantity.** 100 vs. 96 tons is a small gap, not a doubling.", "tip": "Reading a graph correctly means matching the SIZE of a described difference, not just its direction."},
+     "variant": {
+      "q": "In a graph of fruit sales, by 2022 apples reach about 60 pounds sold and oranges reach about 58 pounds, with apples tracking slightly above oranges the whole time. Which best compares apple and orange sales in 2022?",
+      "opts": ["Roughly twice as many apples sold as oranges", "Apples sold in slightly greater quantity than oranges", "The same amount of each was sold", "Oranges outsold apples"],
+      "ans": 1,
+      "hint": "60 vs. 58 — close, or double?",
+      "steps": ["60 and 58 are close values, not a doubling.", "They aren't exactly equal either.", "Oranges outselling apples contradicts the description.", "\"Slightly greater\" correctly describes the small real gap."],
+      "ex": {"main": "**Apples sold in slightly greater quantity.** A small gap, correctly read as small."}
+     }
+    },
+    {
+     "id": "q16", "lv": 3, "from": "source", "kind": "mc",
+     "q": "Q16 — Same graph: all three lines (carrot, potato, lettuce) rise steadily from 1990 to 2010. Which conclusion can you actually draw from this graph?",
+     "opts": ["Vegetables are eaten by everyone.", "Vegetables are being eaten in greater quantity.", "The number of vegetarians is rising.", "Vegetables are getting heavier."],
+     "ans": 1,
+     "hint": "What does an upward-sloping line actually tell you — and what does it NOT tell you?",
+     "steps": ["The graph only measures total weight eaten over time — nothing about who eats them or why.", "\"Eaten by everyone\" and \"number of vegetarians rising\" are claims the graph has no data to support.", "\"Getting heavier\" misreads the y-axis — it tracks total amount eaten, not the weight of individual vegetables.", "All three lines rising means one thing directly: more total weight is being eaten over time."],
+     "ex": {"main": "**Vegetables are being eaten in greater quantity.** The only conclusion the actual data supports — everything else reads in information the graph doesn't contain.", "tip": "A graph can only tell you what it actually measured — resist the urge to conclude something it never tracked."},
+     "variant": {
+      "q": "In the fruit-sales graph, all three lines (apples, oranges, bananas) rise steadily from 2020 to 2022. Which conclusion can you actually draw?",
+      "opts": ["Fruit is healthier than vegetables.", "Fruit is being sold in greater quantity.", "More people are becoming vegetarian.", "The fruit is getting bigger."],
+      "ans": 1,
+      "hint": "What does the graph actually measure?",
+      "steps": ["The graph measures pounds sold over time — nothing about health or diet choices.", "\"Healthier\" and \"vegetarian\" claims aren't supported by a sales graph.", "\"Getting bigger\" misreads pounds sold as size of individual fruit.", "Rising lines mean one thing: more is being sold over time."],
+      "ex": {"main": "**Fruit is being sold in greater quantity.** The only claim the data actually supports."}
+     }
+    },
+    {
+     "id": "q17", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q17 — A data table lists oxygen-bubble production rate (bubbles/min) for two plants at six different depths (5m through 30m). Which type of graph would BEST represent this data?",
+     "opts": ["Line", "Bar", "Pie chart", "Any type works equally well"],
+     "ans": 0,
+     "hint": "Depth is a continuous, numeric scale — what graph type suits that?",
+     "steps": ["Depth is continuous, numeric data — 5, 10, 15, 20, 25, 30 meters, evenly spaced.", "A bar graph suits separate categories, not a continuous numeric scale.", "A pie chart shows parts of a whole, not a trend over a scale.", "A line graph is built exactly for showing a trend across a continuous scale like depth."],
+     "ex": {"main": "**Line.** Depth is a continuous scale, and a line graph is the tool for showing a trend across one.", "tip": "Continuous numeric x-axis (time, depth, distance) almost always points to a line graph."},
+     "variant": {
+      "q": "A data table lists a car's speed at six different times (0s through 30s, every 5s). Which type of graph would BEST represent this data?",
+      "opts": ["Line", "Bar", "Pie chart", "Any type works equally well"],
+      "ans": 0,
+      "hint": "Time is a continuous scale.",
+      "steps": ["Time is continuous, numeric data.", "Bar graphs suit categories, not a continuous scale.", "Pie charts show parts of a whole, not trends.", "Line graphs are built for trends over a continuous scale like time."],
+      "ex": {"main": "**Line.** Same reasoning as depth — a continuous numeric scale calls for a line graph."}
+     }
+    },
+    {
+     "id": "q18", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q18 — Same oxygen-bubble experiment (depth vs. bubble rate for two plants). What is the dependent variable?",
+     "opts": ["Depth", "Rate of bubbles", "Type of plant", "Amount of light"],
+     "ans": 1,
+     "hint": "What's actually being measured as the outcome?",
+     "steps": ["Depth is what's deliberately varied — the independent variable.", "Type of plant just labels which data series is which, not a measured outcome.", "Amount of light isn't mentioned as something changed or measured here at all.", "Bubble rate is the number actually recorded at each depth — the dependent variable."],
+     "ex": {"main": "**Rate of bubbles.** The number that's actually measured and recorded as the outcome.", "tip": "The dependent variable is always the column of NUMBERS being recorded as a result, not a label."},
+     "variant": {
+      "q": "In a temperature vs. cricket-chirp-rate experiment, what is the dependent variable?",
+      "opts": ["Temperature", "Chirp rate", "Type of cricket", "Time of day"],
+      "ans": 1,
+      "hint": "What's the outcome actually being recorded?",
+      "steps": ["Temperature is deliberately varied or tracked — the independent variable.", "Type of cricket and time of day aren't the recorded outcome here.", "Chirp rate is the number recorded as a result at each temperature."],
+      "ex": {"main": "**Chirp rate.** The recorded outcome, matching temperature to a measured result."}
+     }
+    },
+    {
+     "id": "q19", "lv": 3, "from": "source", "kind": "mc",
+     "q": "Q19 — Same experiment: depth is the independent variable, bubble rate is dependent. Which pair BOTH belong as control variables?",
+     "opts": ["Amount of light and type of water the plants are in", "Depth and bubble rate", "The plant with the least bubbles and depth", "Bubble rate and type of water"],
+     "ans": 0,
+     "hint": "A control variable can never be the thing changed or the thing measured.",
+     "steps": ["Depth is the independent variable — it can't also be a control variable.", "Bubble rate is the dependent variable — same reasoning.", "\"The plant with the least bubbles\" describes a RESULT, not a variable held constant.", "Amount of light and type of water are both genuinely held the same across trials — control variables."],
+     "ex": {"main": "**Amount of light and type of water the plants are in.** The other three options each smuggle in the independent variable, the dependent variable, or a result rather than a true control.", "tip": "Cross off the independent and dependent variable first — whatever's left is where real control variables live."},
+     "variant": {
+      "q": "In an experiment on how fertilizer amount affects tomato yield, fertilizer amount is independent and yield is dependent. Which pair BOTH belong as control variables?",
+      "opts": ["Pot size and type of soil used", "Fertilizer amount and yield", "The plant with the lowest yield and fertilizer amount", "Yield and type of soil"],
+      "ans": 0,
+      "hint": "Cross off the independent and dependent variable first.",
+      "steps": ["Fertilizer amount is independent — can't be a control variable.", "Yield is dependent — same reasoning.", "\"Lowest yield\" describes a result, not a held-constant variable.", "Pot size and soil type are genuinely held constant — true control variables."],
+      "ex": {"main": "**Pot size and type of soil used.** Both genuinely held the same across every trial."}
+     }
+    },
+    {
+     "id": "q20", "lv": 3, "from": "source", "kind": "mc",
+     "q": "Q20 — Same data: Plant A's bubble rate peaks at 15m depth then drops off sharply by 30m; Plant B's bubble rate keeps climbing until 20m and stays relatively higher at greater depths. Which plant would you expect to find in deeper water in nature?",
+     "opts": ["Plant A", "Plant B", "Both live at the same depth", "Neither could survive underwater"],
+     "ans": 1,
+     "hint": "Which plant's oxygen production holds up better at greater depth?",
+     "steps": ["Plant A's production drops off sharply as depth increases past 15m — it struggles in deeper, dimmer water.", "Plant B's production stays relatively strong even at greater depths.", "A plant that photosynthesizes well at depth is the one adapted to live there.", "That points to Plant B being the one found deeper in nature."],
+     "ex": {"main": "**Plant B.** Its bubble production holds up at greater depth, suggesting it's better adapted to less light there.", "tip": "\"Where would you expect to find it in nature\" questions ask you to connect the DATA to a real adaptation, not just repeat a number."},
+     "variant": {
+      "q": "Two moss species are tested for growth rate at different light levels. Moss X grows fastest in bright light and barely grows in dim light; Moss Y grows steadily across both bright and dim light. Which moss would you expect to find growing on a shaded forest floor?",
+      "opts": ["Moss X", "Moss Y", "Both equally", "Neither could survive there"],
+      "ans": 1,
+      "hint": "Which moss's growth holds up in low light?",
+      "steps": ["Moss X barely grows in dim light — it's poorly suited to shade.", "Moss Y grows steadily even in dim light.", "A shaded forest floor is a low-light environment.", "Moss Y is the one adapted to survive there."],
+      "ex": {"main": "**Moss Y.** Its growth holds up in dim light, matching a shaded forest floor's conditions."}
+     }
+    },
+    {
+     "id": "q21", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Q21 — When do you need to add units to an axis label on your graph?",
+     "opts": ["When the variable is quantitative", "When the variable is qualitative", "Every single time", "It is always optional"],
+     "ans": 2,
+     "hint": "Is there ever a case where units can be skipped?",
+     "steps": ["Even a quantitative axis needs units to mean anything (\"20\" what?).", "A qualitative axis (categories) still needs a clear label, even without a numeric unit.", "There's no version of a finished graph where labeling is optional.", "The rule is: every single time, no exceptions."],
+     "ex": {"main": "**Every single time.** A number or category with no label attached tells the reader nothing.", "tip": "\"It depends\" is never the answer to a graphing-rules question like this one — the rules are absolute."},
+     "variant": {
+      "q": "A graph's y-axis is labeled just \"Amount\" with numbers 0 through 50 and no unit given. What's wrong with this axis?",
+      "opts": ["Nothing — the numbers speak for themselves", "It's missing units, so 50 could mean 50 of almost anything", "The scale should start at 100 instead", "Axis labels are never required"],
+      "ans": 1,
+      "hint": "What does \"50\" even mean without a unit?",
+      "steps": ["\"Amount\" with no unit leaves the reader unable to tell what's being measured.", "50 grams, 50 liters and 50 plants are all completely different things.", "Every axis needs its unit stated, with no exceptions."],
+      "ex": {"main": "**It's missing units.** \"50\" alone tells the reader nothing about what was actually measured."}
+     }
+    }
+   ]
+  }
+ }
+}

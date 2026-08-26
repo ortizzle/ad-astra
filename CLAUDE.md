@@ -462,6 +462,105 @@ individual entries).
   subject, and a subject with nothing at all — and checks the card text
   directly, including the quarter label.
 
+### Kinematics 1 · Equations of Motion, the Ramp Lab, and Biology Quiz 1 Review (v136)
+
+Chris uploaded new material into both girls' Drive folders; these three
+ship for Sedona.
+
+- **`phys-kinematics-equations.json`** (`unit-phys-eqs`) — from HW05
+  ("Kinematic Equations 1 and 2") and HW06 ("Kinematic Equations 3 and 4"),
+  combined into one unit since all four SUVAT equations are one coherent
+  skill (picking the equation missing exactly the one quantity a problem
+  never mentions). 18 questions, every numeric answer independently
+  verified with sympy — this caught a real arithmetic slip mid-build (a
+  thrown-down-ball velocity written as 43.2 m/s where 3 + 9.8×4 actually
+  works out to 42.2). g is taken as 9.8 m/s² throughout, matching how the
+  source worksheet's own dynamite-blast problem is set up.
+- **`phys-ramp-lab.json`** (`unit-phys-ramp`) — from the Ramp Lab handout.
+  The lab itself asks her to collect real data, which doesn't exist yet, so
+  this covers the REASONING behind it instead: why a position-time graph
+  under acceleration is curved and has to be linearized (plot against t²,
+  not t), what a steeper ramp or a push at the start does to the measured
+  acceleration, the Moon-gravity scaling, and percent error. The one numeric
+  question on the sheet (a multi-leg average-speed word problem) turns out
+  to be impossible as printed — the time budget is already spent before the
+  last leg starts — so it's echoed with fresh numbers plus a second version
+  that lands on a real, if extreme, answer (120 km/h), so she isn't
+  blindsided expecting every version to resolve to an ordinary number.
+- **`bio-quiz1-review.json`** (`unit-bio-q1`) — the actual returned
+  "8th Grade Biology Scientific Method Quiz," shipped `guide:true` exactly
+  like the Algebra study guides: paper-entry grid, instant grading, a
+  walkthrough of misses, hand-verified variants for the rescue round. Two
+  versions of the real quiz exist (V1/V2, same 23 items in a different
+  option order — ordinary test security, not different content); V1's order
+  is used as the canonical transcription. **Only 18 of the 23 items are
+  scored here** — five (a three-part free-response exercise-variable
+  question, and two "describe what's wrong with this graph" prompts) were
+  never multiple choice on the real paper, so they don't fit an A/B/C/D
+  grid without misrepresenting what she actually circled (the same principle
+  that keeps guide-unit option order fixed to begin with). Two of those
+  ideas (a graph needs a title; a non-zero y-axis exaggerates differences)
+  land as recap cards instead, and the y-axis one is already a full lesson
+  in `bio-unit-1`. The two graphs behind the scored questions (a three-line
+  vegetable-consumption trend, a depth-vs-bubble-rate data table) were read
+  from the PDF's actual images via `download_file_content` + a direct
+  `Read`, not the OCR text extraction, which cannot see graphs at all.
+  Confirmed with Chris before building, since an untitled "Quiz" PDF with
+  two versions and no visible answer key could just as easily have been an
+  upcoming test — building study content from a live, not-yet-administered
+  quiz would be studying the test itself, not the material it covers.
+- `tools/test_newcontent.js` walks all three: a full quiz round and
+  flashcard deck on each physics unit (including the `kind:'order'`
+  ramp-ranking question), and the Biology guide's full paper-entry →
+  grading → rescue-round loop.
+
+### Flag this question (v136 / Wayfinder v112, both apps)
+
+Chris asked for a way for the girls to flag a question they think might be
+wrong, so he can remove it from the material or explain it to them. Every
+answered question (right or wrong, in an ordinary round, a Growth Zone
+review, or a shuffle round) gets a quiet "🚩 Something wrong with this
+question?" ghost button under its explanation. Tapping it opens a modal with
+an optional textarea — say what seems off, or just flag it — and writes one
+`flag` record (`{unitId, classId, qid, q, note, date}`). The button then
+relabels itself "🚩 Flagged for a grown-up" and disables, so she can't
+double-flag the same question, and gets no other feedback: no XP, no
+Growth Zone entry, nothing gamified.
+
+- **This is not the Growth Zone.** The Growth Zone is about what SHE knows;
+  a flag is about whether the QUESTION ITSELF is right — a typo'd answer key,
+  a confusing scenario, a graph that doesn't match its own text. The two
+  systems don't touch: flagging changes nothing about her tally, her ladder,
+  or her XP.
+- **Nothing happens automatically.** A flag only ever surfaces to a
+  grown-up; it never edits, hides, or skips the question by itself. The
+  parent view gets an accent card ("N questions were flagged") above the
+  wellbeing section, leading to `SCREENS.flagged` — same subject-grouped
+  layout as the Growth Zone cleanup tool, with the question, her optional
+  note in quotes, and two actions: **Remove the question** (filters it out
+  of the live unit's `questions[]` for good, and — the one bit of cleanup
+  this needs that Growth Zone cleanup didn't — tombstones any existing
+  `miss` record for that unit/qid too, so a question pulled for being wrong
+  can't keep resurfacing in the Growth Zone from an old snapshotted miss)
+  or **Dismiss — it checked out** (just softDeletes the flag, question
+  untouched, for when Chris looks and it's actually fine).
+- **`_srcUnit`/`_srcClass`/`_srcQid` are used exactly like the "see it again
+  tomorrow" 🌱 button already does**, so a flag raised mid-review-round or
+  mid-shuffle-round correctly attributes to the real unit and question, not
+  a synthetic round id.
+- **Excluded on a rescue-round variant** (`q._rescue`) — a variant is a
+  sub-field of another question (`q.variant`), not a top-level array entry,
+  so there's no clean "remove this" target. If a variant itself is wrong,
+  flagging the original question it came from is the door.
+- **Not in `PROGRESS_TYPES`.** A flag is a content-correctness signal, not
+  her activity — Fresh start leaves it alone, same as units, assessments,
+  prefs and roster.
+- `tools/test_flag.js` covers the whole loop both ways: flagging a right
+  answer and a wrong one, the note saving, the no-double-flag guard, the
+  parent card appearing, removing (unit shrinks by exactly one question, the
+  matching miss is tombstoned, the flag clears) and dismissing (flag clears,
+  question and unit untouched).
+
 ### The round, drawn (v89 / Wayfinder v71, both apps)
 
 River asked for something game-like in the quizzes; Chris wanted nothing too
