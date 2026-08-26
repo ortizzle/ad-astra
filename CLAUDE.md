@@ -419,7 +419,7 @@ Growth Zone" button on each.
   place, the record is a tombstone rather than erased, and — the rule that
   matters most — her own Growth Zone screen never shows the control.
 
-### Grades, tabulated by subject (v135, THIS APP ONLY)
+### Grades, tabulated by subject (v135 / Wayfinder v113, both apps)
 
 Chris asked whether grade data could be "calculated and tabulated based on
 subject" as it's entered, with subjects that have nothing recorded still
