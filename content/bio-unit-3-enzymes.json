@@ -1,0 +1,280 @@
+{
+ "v": 4,
+ "records": {
+  "unit-bio-u3": {
+   "id": "unit-bio-u3",
+   "type": "unit",
+   "updatedAt": 1787780000000,
+   "libv": 1,
+   "classId": "bio",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Biology 8 · Unit 3: Enzymes",
+   "srcName": "Enzyme Review packet (photographed pages)",
+   "source": "Biology 8, the completed Enzyme Review worksheet",
+   "summary": {
+    "text": "The Enzyme Review covers how an enzyme's shape determines which molecule (substrate) it can bind, how different enzymes are matched to different jobs (digesting starch, sugar, protein, or building DNA and ATP), how pH and temperature each have an optimal range where an enzyme works fastest, and what denaturation actually is at the molecular level.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Enzymes are the working parts behind almost everything a cell does, and this exact shape-plus-conditions model — a molecule that only works within a narrow window, and stops working (not just slows down) outside it — comes back constantly in biology and chemistry.",
+    "from": "added"
+   },
+   "objectives": [
+    {"text": "Explain why an enzyme only works on molecules whose shape fits its active site.", "from": "source"},
+    {"text": "Match a digestive enzyme to the substrate it breaks down, and recognize that some enzymes build molecules rather than break them down.", "from": "source"},
+    {"text": "Read a pH-vs-activity or temperature-vs-activity graph to find an enzyme's optimum.", "from": "source"},
+    {"text": "Explain what denaturation changes about an enzyme, and why that stops it from working.", "from": "source"},
+    {"text": "Tell apart what happens BELOW an enzyme's optimum (just slow, reversible) from what happens well ABOVE it (denatured, not reversible).", "from": "added"}
+   ],
+   "parentNote": {
+    "text": "Built from the completed Enzyme Review packet in her binder (photographed, not from Drive). Two of her own written answers are worth a look together with her, independent of this unit: question 13 asks what internal body condition \"Z\" could represent on a generic rise-then-fall enzyme-activity graph, and her answers were \"Substrate\" and \"active site\" — but the very next question on the same page (15) correctly names the two real answers as pH and temperature, and a graph shaped like that (up, peak, back down) is the classic pH or temperature curve, not a substrate-concentration curve (which typically rises then levels off, not falls) or \"active site\" (a fixed structural feature, not a condition that varies along an axis). And question 14 (\"what kind of organic molecule is an enzyme?\") was answered \"catalyst\" — catalyst is the right word for what an enzyme DOES, but the organic molecule category it belongs to is protein; this unit's cards separate those two on purpose. Every other answer on the packet was correct. Every fresh scenario and every pH/temperature value below is new — none reuse pepsin's pH 3, trypsin's pH 8.5, or the packet's own molecule-shape diagrams, so she can't answer from memory of the worksheet; pepsin and trypsin's real values are only used inside explanations, as reference facts, never as the graded question itself.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards first — the protein-vs-catalyst distinction and the pH/temperature pair are worth being automatic before the graph questions.",
+    "minutes": 16,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0", "term": "Enzyme specificity",
+     "from": "source",
+     "def": "**An enzyme only works on a molecule whose shape fits its active site — everything else just doesn't bind.**\n• The active site is a specific pocket or groove shaped to match one substrate (or a small family of similar ones).\n• This is why one enzyme can't just substitute for another, even for a similar-looking job.",
+     "hint": "Wrong shape, no reaction — no exceptions."
+    },
+    {
+     "id": "c1", "term": "An enzyme IS a protein",
+     "from": "added",
+     "def": "**At the molecular level, an enzyme is a type of protein — a folded chain of amino acids.**\n• \"Catalyst\" describes its JOB (speeding up a reaction), not what it's built from.\n• Every enzyme is a protein, but not every protein is an enzyme — some proteins are structural (like collagen) or transport molecules (like hemoglobin) instead.",
+     "hint": "Protein = what it IS. Catalyst = what it DOES."
+    },
+    {
+     "id": "c2", "term": "Catalyst",
+     "from": "source",
+     "def": "**A substance that speeds up a chemical reaction without being used up itself.**\n• The same enzyme molecule can be reused again and again on new substrate molecules.\n• It lowers the activation energy needed to start the reaction — it doesn't change what the reaction produces, only how fast it happens.",
+     "hint": "Speeds it up, comes out unchanged."
+    },
+    {
+     "id": "c3", "term": "Naming pattern: substrate + \"-ase\"",
+     "from": "source",
+     "def": "**Most enzyme names are built from their substrate's name plus the ending \"-ase.\"**\n• Lactase digests lactose. Maltase digests maltose. Sucrase digests sucrose.\n• This pattern breaks for a few historically-named enzymes (like pepsin and trypsin), but it's a solid first guess for most.",
+     "hint": "Find the substrate's name inside the enzyme's name."
+    },
+    {
+     "id": "c4", "term": "Not every enzyme digests something",
+     "from": "source",
+     "def": "**Some enzymes build molecules instead of breaking them apart.**\n• DNA polymerase builds new DNA strands. ATP synthase builds ATP.\n• \"Enzyme\" just means \"biological catalyst\" — building and breaking down are both reactions an enzyme can speed up.",
+     "hint": "\"-ase\" doesn't always mean \"digests.\""
+    },
+    {
+     "id": "c5", "term": "Optimal pH varies by enzyme",
+     "from": "source",
+     "def": "**Different enzymes have completely different optimal pH ranges, matched to where they actually work in the body.**\n• Pepsin (stomach) has an acidic optimum, around pH 1.5–2 — it needs the stomach's strong acid.\n• Trypsin (small intestine) has a near-neutral-to-basic optimum, around pH 8 — the intestine is far less acidic than the stomach.",
+     "hint": "An enzyme's optimal pH matches the environment it actually lives in.",
+     "eq": "rate ↑ toward optimum, then ↓ past it"
+    },
+    {
+     "id": "c6", "term": "Optimal temperature for a human enzyme",
+     "from": "source",
+     "def": "**Human enzymes generally work best around normal body temperature, about 37°C.**\n• Below that, they're not damaged — just slower, because molecules collide less often.\n• Well above that, they denature and stop working — a completely different kind of \"stopped.\"",
+     "hint": "37°C is the target, not just a nice round number."
+    },
+    {
+     "id": "c7", "term": "Below optimum: slow, not broken",
+     "from": "added",
+     "def": "**Below its optimal temperature (or pH), an enzyme still works — just more slowly.**\n• Lower temperature means molecules move slower and collide less often, so the reaction happens less frequently.\n• This is fully reversible: warm it back up (or bring the pH back), and activity returns right away.",
+     "hint": "Cold enzyme = sluggish enzyme, not a dead one."
+    },
+    {
+     "id": "c8", "term": "Denaturation",
+     "from": "source",
+     "def": "**Extreme heat, extreme pH, or certain chemicals break the bonds holding an enzyme's 3D shape together — permanently changing its shape.**\n• Once the active site's shape is wrecked, the substrate no longer fits, and the enzyme stops working for good.\n• Unlike being merely too cold or at a slightly-off pH, denaturation is NOT reversible by just returning to normal conditions.",
+     "hint": "Wrong shape forever, not just slowed down."
+    },
+    {
+     "id": "c9", "term": "It isn't just heat",
+     "from": "added",
+     "def": "**Temperature is the most familiar way to denature an enzyme, but extreme pH does the same thing.**\n• Both work the same way: they disrupt the bonds that fold the protein into its working shape.\n• A stomach enzyme moved to a strongly basic environment can denature just as surely as one that's been boiled.",
+     "hint": "Denaturation has more than one cause — shape damage is shape damage."
+    },
+    {
+     "id": "c10", "term": "Reading a rise-then-fall enzyme graph",
+     "from": "added",
+     "def": "**A graph that rises to a peak and then falls is the classic shape for enzyme activity plotted against pH OR against temperature — not against substrate amount.**\n• The peak marks the optimum; either side of it, activity drops off (slower below, denatured above).\n• Substrate concentration graphs usually rise and then level off flat (once every active site is busy) — a different shape entirely.",
+     "hint": "Peak-then-drop = pH or temperature. Rise-then-flat = substrate amount."
+    },
+    {
+     "id": "c11", "term": "Lock-and-key vs. induced fit",
+     "from": "added",
+     "def": "**Lock-and-key says the active site's shape already matches the substrate exactly; induced fit says the active site shifts slightly to snug around the substrate as it binds.**\n• Both models agree on the core idea this unit is built on: shape determines which substrate an enzyme can use.\n• Induced fit is the more accurate modern model — most real active sites flex a little.",
+     "hint": "Both models: right shape (or close to it) is required either way."
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1", "lv": 1, "from": "source", "kind": "mc",
+     "q": "An enzyme's active site is shaped like a narrow Y. Of four candidate molecules — one Y-shaped, one round, one star-shaped, and one flat rectangle — which will the enzyme bind to?",
+     "opts": ["The Y-shaped molecule", "The round molecule", "The star-shaped molecule", "All four, equally well"],
+     "ans": 0,
+     "hint": "An active site only accepts a substrate whose shape actually fits it.",
+     "steps": ["An enzyme's active site has one specific shape.", "Only a substrate whose shape matches that active site can bind to it.", "Of the four shapes offered, only the Y-shaped one matches the Y-shaped active site."],
+     "ex": {"main": "**The Y-shaped molecule.** Shape match is the whole rule — the other three simply don't fit.", "tip": "This is why one enzyme can't just substitute for a different-shaped job."}
+    },
+    {
+     "id": "q2", "lv": 1, "from": "source", "kind": "mc",
+     "q": "At the molecular level, an enzyme is best classified as a type of...",
+     "opts": ["Protein", "Catalyst", "Carbohydrate", "Lipid"],
+     "ans": 0,
+     "hint": "\"Catalyst\" describes its job — the question asks what it's actually built from.",
+     "steps": ["The question asks what organic molecule CATEGORY an enzyme belongs to, not what it does.", "Enzymes are folded chains of amino acids — proteins.", "\"Catalyst\" is the correct word for its FUNCTION, but it isn't an organic molecule category the way protein, carbohydrate, and lipid are."],
+     "ex": {"main": "**Protein.** Every enzyme is a protein; \"catalyst\" describes what that protein does, not what it's made of.", "tip": "Two different questions look similar: what IS it (protein) vs. what does it DO (catalyst)."}
+    },
+    {
+     "id": "q3", "lv": 1, "from": "added", "kind": "mc",
+     "q": "What does it mean to call an enzyme a \"catalyst\"?",
+     "opts": ["It speeds up a reaction without being permanently changed or used up", "It is a type of carbohydrate found in cells", "It only works one single time before being destroyed", "It slows down unwanted chemical reactions"],
+     "ans": 0,
+     "hint": "What happens to the enzyme molecule itself after the reaction?",
+     "steps": ["A catalyst speeds up a reaction.", "It comes out of the reaction unchanged, ready to catalyze again.", "\"Slows down\" and \"used up after one reaction\" both describe the opposite of how a catalyst behaves."],
+     "ex": {"main": "**Speeds up a reaction without being used up.** The same enzyme molecule keeps working on substrate after substrate.", "tip": "Reusability is part of the definition, not a bonus feature."}
+    },
+    {
+     "id": "q4", "lv": 2, "from": "source", "kind": "mc",
+     "q": "An enzyme called \"sucrase\" almost certainly digests which substrate?",
+     "opts": ["Sucrose", "Starch", "Protein", "DNA"],
+     "ans": 0,
+     "hint": "Most enzyme names are the substrate's name plus \"-ase.\"",
+     "steps": ["The naming pattern is [substrate name] + \"-ase.\"", "\"Sucr-\" points to sucrose.", "So sucrase digests sucrose."],
+     "ex": {"main": "**Sucrose.** Strip the \"-ase\" and the substrate's name is usually right there.", "tip": "This pattern works for most enzymes, though a few (like pepsin and trypsin) keep older, non-pattern names."}
+    },
+    {
+     "id": "q5", "lv": 2, "from": "source", "kind": "mc",
+     "q": "DNA polymerase and ATP synthase are both enzymes, but neither one \"digests\" anything the way amylase or lactase do. What do they do instead?",
+     "opts": ["They build new molecules rather than breaking existing ones apart", "They are not real enzymes at all", "They only work outside of living cells", "They break down DNA and ATP into smaller pieces"],
+     "ans": 0,
+     "hint": "What do the words \"polymerase\" and \"synthase\" suggest?",
+     "steps": ["\"Synthase\" and \"polymerase\" both point toward BUILDING something, not breaking it down.", "DNA polymerase builds new DNA strands; ATP synthase builds ATP.", "An enzyme is any biological catalyst — building reactions count just as much as digesting ones."],
+     "ex": {"main": "**They build new molecules.** \"Enzyme\" doesn't mean \"digests\" — it means \"speeds up a biological reaction,\" and some of those reactions are constructive.", "tip": "Whenever an enzyme's name doesn't obviously name a digested substrate, consider whether it might be building something instead."}
+    },
+    {
+     "id": "q6", "lv": 2, "from": "source", "kind": "mc",
+     "q": "A digestive enzyme has an optimal pH of about 2, right in the middle of a strongly acidic range. Which organ does this enzyme most likely work in?",
+     "opts": ["The stomach", "The small intestine", "The mouth", "The liver"],
+     "ans": 0,
+     "hint": "Which digestive organ is strongly acidic?",
+     "steps": ["A pH around 2 is strongly acidic.", "The stomach is the digestive organ with strong acid (to help break down food and kill bacteria).", "An enzyme optimized for pH 2 is built to work in that acidic environment — the stomach."],
+     "ex": {"main": "**The stomach.** Its strong acid is exactly the environment a pH-2 enzyme is suited for — this is how the real enzyme pepsin actually works.", "tip": "An enzyme's optimal pH is a clue to WHERE in the body it works."}
+    },
+    {
+     "id": "q7", "lv": 2, "from": "source", "kind": "mc",
+     "q": "A different digestive enzyme has an optimal pH of about 8, mildly basic. Which organ does this enzyme most likely work in?",
+     "opts": ["The small intestine", "The stomach", "The esophagus", "The salivary glands"],
+     "ans": 0,
+     "hint": "Which digestive organ is closer to neutral-to-basic than the stomach?",
+     "steps": ["A pH around 8 is mildly basic.", "The small intestine is far less acidic than the stomach, running closer to neutral-to-basic once digestive fluids from the pancreas are added.", "An enzyme optimized for pH 8 fits the small intestine's environment."],
+     "ex": {"main": "**The small intestine.** This matches how the real enzyme trypsin works — the intestine neutralizes the stomach's acid before digestion continues there.", "tip": "Contrast this with the pH-2 stomach enzyme in the previous question — same body, two very different chemical environments."}
+    },
+    {
+     "id": "q8", "lv": 2, "from": "added", "kind": "mc",
+     "q": "An enzyme's activity is graphed against pH, from 0 to 14. The curve rises to a peak at pH 6 and falls off on both sides. At pH 2, what would you expect?",
+     "opts": ["Low activity — this pH is well below the enzyme's optimum", "The highest activity on the whole graph", "The enzyme is destroyed and could never work again, even at pH 6", "Activity identical to pH 6"],
+     "ans": 0,
+     "hint": "How far is pH 2 from the peak at pH 6?",
+     "steps": ["The peak (optimum) is at pH 6.", "pH 2 is well below that peak, on the rising part of the curve read backwards — meaning low activity there.", "This alone doesn't mean the enzyme is destroyed — that depends on whether pH 2 is merely \"too low\" or \"denaturing\" for this particular enzyme, but the graph shows activity is low there either way."],
+     "ex": {"main": "**Low activity.** Being far from the peak means the enzyme isn't working near its best at that pH.", "tip": "Reading a graph's peak first tells you everything else is relative to that point."}
+    },
+    {
+     "id": "q9", "lv": 3, "from": "source", "kind": "mc",
+     "q": "An enzyme's temperature-activity graph rises from 0°C to a peak at 40°C, then drops sharply and reaches zero activity by 60°C. If the temperature is brought back down from 30°C to 20°C, what happens to the enzyme's activity?",
+     "opts": ["It slows down, but is not damaged, and would speed back up if warmed again", "It stays permanently at whatever level it was at 30°C", "It is denatured and can never work again, even if rewarmed", "It becomes MORE active than at 40°C"],
+     "ans": 0,
+     "hint": "Is 20-30°C on the rising side of the peak, or well past it into the crash?",
+     "steps": ["20°C and 30°C are both BELOW the 40°C optimum, on the rising side of the curve — not in the denaturing zone above 60°C.", "Below the optimum, an enzyme is just slower, not damaged.", "Warming it back toward 40°C would restore full activity — this is reversible."],
+     "ex": {"main": "**It slows down, but isn't damaged.** Only temperatures well ABOVE the optimum (near 60°C here) do permanent damage — below the optimum is just slow.", "tip": "Below-optimum and above-optimum are NOT symmetric: one is reversible, the other isn't."}
+    },
+    {
+     "id": "q10", "lv": 3, "from": "source", "kind": "mc",
+     "q": "Same enzyme (peaks at 40°C, dead by 60°C). If it's heated to 70°C and then cooled back down to 40°C, what happens?",
+     "opts": ["Activity stays at zero — the enzyme was denatured and cooling back down doesn't undo that", "Activity returns to its peak, exactly as if it had never been heated", "Activity becomes higher than the original peak", "Nothing changes because enzymes aren't affected by heat"],
+     "ans": 0,
+     "hint": "Is 70°C past the point where the enzyme's shape is permanently wrecked?",
+     "steps": ["70°C is well past 60°C, where the graph already showed zero activity — the enzyme has denatured.", "Denaturation permanently changes the enzyme's shape by breaking the bonds holding it together.", "Cooling back to 40°C doesn't restore the original shape, so activity stays at zero."],
+     "ex": {"main": "**Activity stays at zero.** Denaturation is a one-way trip — cooling it back down doesn't re-fold the protein.", "tip": "Compare this to the reversible below-optimum case: same enzyme, opposite outcome, because one damages the shape and the other doesn't."}
+    },
+    {
+     "id": "q11", "lv": 2, "from": "source", "kind": "mc",
+     "q": "What specifically happens to an enzyme's structure when it denatures from heat?",
+     "opts": ["The bonds holding its 3D folded shape together break, changing the shape of the active site", "Its amino acids are destroyed and disappear entirely", "It turns into a carbohydrate", "Nothing changes about its structure — it just moves more slowly"],
+     "ans": 0,
+     "hint": "Denaturation is about SHAPE, not disappearing.",
+     "steps": ["Heat energy makes the bonds holding a protein's folded 3D shape unstable.", "Those bonds break, and the protein unfolds or refolds into a different shape.", "Since the active site's shape is part of that overall structure, it changes too — and the substrate no longer fits."],
+     "ex": {"main": "**The bonds holding its shape break.** The protein is still there — its amino acids don't vanish — but its working shape is gone.", "tip": "\"Denatured\" means mis-shaped, not destroyed at the atomic level."}
+    },
+    {
+     "id": "q12", "lv": 2, "from": "added", "kind": "mc",
+     "q": "Besides extreme heat, what else can denature an enzyme?",
+     "opts": ["An extreme pH far outside its normal range", "Simply using the enzyme too many times", "Cooling it below room temperature", "Storing it in the dark"],
+     "ans": 0,
+     "hint": "Denaturation is about breaking the bonds that hold shape together — what else can do that?",
+     "steps": ["Denaturation happens whenever the bonds holding a protein's 3D shape are disrupted.", "Extreme heat is one way to disrupt those bonds — extreme pH is another.", "Cooling and darkness don't disrupt those bonds, and reuse alone doesn't damage an enzyme's shape."],
+     "ex": {"main": "**An extreme pH.** Heat isn't the only way to wreck a protein's shape — a strongly acidic or basic environment can do the same damage.", "tip": "Any condition far outside an enzyme's comfort zone is a candidate for denaturing it, not just temperature."}
+    },
+    {
+     "id": "q13", "lv": 3, "from": "added", "kind": "mc",
+     "q": "A graph shows \"Enzyme Activity\" on the y-axis and an unlabeled condition \"Z\" on the x-axis. The curve rises from zero, peaks in the middle, and falls back to near zero. Which pair of labels could Z correctly represent?",
+     "opts": ["pH or Temperature", "Substrate concentration or Active site", "Number of enzyme molecules or Color", "Time of day or Enzyme name"],
+     "ans": 0,
+     "hint": "Which conditions actually produce a rise-then-FALL curve, rather than a rise-then-flatten curve?",
+     "steps": ["A rise-then-fall shape with a clear peak and a genuine decline afterward is the signature of pH or temperature — both have a true optimum, with real damage or slowdown on either side.", "Substrate concentration graphs typically rise and then level off flat once every active site is occupied — they don't fall back down.", "\"Active site\" isn't a condition that varies along an axis at all — it's a fixed structural feature of the enzyme, not something you dial up or down."],
+     "ex": {"main": "**pH or Temperature.** Both have a true optimum with a real decline on either side; substrate concentration flattens rather than falling, and \"active site\" isn't a variable condition in the first place.", "tip": "Before answering what a mystery axis could be, ask what SHAPE of curve each real candidate would actually produce."}
+    },
+    {
+     "id": "q14", "lv": 1, "from": "source", "kind": "mc",
+     "q": "Which TWO of these are internal body conditions that affect how well an enzyme works?",
+     "opts": ["pH and temperature", "Enzyme name and active site", "Substrate color and enzyme age", "Organ size and blood type"],
+     "ans": 0,
+     "hint": "Which two are actual measurable conditions that change how fast a reaction happens?",
+     "steps": ["pH measures acidity/basicity, and temperature measures heat — both genuinely change how well an enzyme's shape and collision rate work.", "\"Active site\" is a structural feature of the enzyme itself, not a condition of its environment.", "Enzyme name, substrate color, enzyme age, organ size and blood type aren't conditions that directly control reaction rate the way pH and temperature do."],
+     "ex": {"main": "**pH and temperature.** These are the two internal conditions every enzyme has an optimal range for.", "tip": "This is the same pair the mystery-graph question was really asking about, just asked directly this time."}
+    },
+    {
+     "id": "q15", "lv": 2, "from": "source", "kind": "mc",
+     "q": "An enzyme in cold-blooded fish works fine in 10°C water, but the SAME enzyme in a warm-blooded mammal's body needs about 37°C to work at its best. What does this tell you about \"optimal temperature\"?",
+     "opts": ["Optimal temperature depends on the organism's normal body temperature", "All enzymes in all organisms share exactly one optimal temperature", "Cold-water enzymes are broken versions of warm-water enzymes", "Optimal temperature is always exactly 0°C"],
+     "ans": 0,
+     "hint": "Does an enzyme's optimum have to match a fixed number, or does it match its OWN organism's normal conditions?",
+     "steps": ["Different organisms live at different normal body/environmental temperatures.", "Enzymes evolve to work best at whatever temperature their organism normally experiences.", "A fish enzyme optimized for 10°C isn't broken — it's simply tuned to a colder normal environment than a mammal's."],
+     "ex": {"main": "**It depends on the organism.** \"Optimal\" always means optimal FOR that organism's normal conditions, not one fixed universal number.", "tip": "37°C is optimal for human enzymes specifically because that's normal human body temperature — not because it's special in some universal sense."}
+    },
+    {
+     "id": "q16", "lv": 2, "from": "source", "kind": "mc",
+     "q": "Which model of enzyme function says the active site slightly changes shape as it wraps around the substrate, rather than being a fixed shape that already matches perfectly?",
+     "opts": ["Induced fit", "Lock and key", "Denaturation", "Activation energy"],
+     "ans": 0,
+     "hint": "Which name suggests the shape is caused, or induced, by the substrate binding?",
+     "steps": ["Lock and key describes a rigid active site that already matches its substrate exactly.", "Induced fit describes an active site that flexes slightly as the substrate binds, snugging into a closer fit.", "Denaturation and activation energy are different concepts entirely — one is about damage, the other is the energy barrier a reaction must clear."],
+     "ex": {"main": "**Induced fit.** The substrate's presence induces a small shape adjustment in the active site.", "tip": "Both models agree that shape and substrate must match closely — induced fit just allows a bit of flexibility."}
+    },
+    {
+     "id": "q17", "lv": 1, "from": "added", "kind": "mc",
+     "q": "An enzyme called \"cellulase\" most likely breaks down which substrate?",
+     "opts": ["Cellulose", "Cells", "Cellular respiration", "Cell membranes only"],
+     "ans": 0,
+     "hint": "Apply the substrate + \"-ase\" naming pattern.",
+     "steps": ["The naming pattern is [substrate] + \"-ase.\"", "\"Cellul-\" points toward cellulose, a carbohydrate found in plant cell walls.", "So cellulase breaks down cellulose."],
+     "ex": {"main": "**Cellulose.** The name is built the same way as lactase (lactose) and maltase (maltose).", "tip": "Humans don't naturally produce cellulase, which is part of why we can't digest most plant fiber the way herbivores can."}
+    },
+    {
+     "id": "q18", "lv": 3, "from": "added", "kind": "mc",
+     "q": "A student argues: \"Since heating an enzyme past its optimum denatures it, cooling an enzyme far below freezing should denature it too, in the same permanent way.\" Is this reasoning correct?",
+     "opts": ["No — extreme cold just slows molecules down, without breaking the enzyme's shape", "Yes — any extreme condition denatures an enzyme identically", "Yes, but only for enzymes that work in the stomach", "No — enzymes are completely unaffected by any temperature"],
+     "ans": 0,
+     "hint": "Does extreme cold break the bonds holding a protein's shape together the same way extreme heat does?",
+     "steps": ["Denaturation specifically means the bonds holding the 3D shape break, changing that shape permanently.", "Extreme heat provides enough energy to break those bonds; extreme cold does the opposite — it removes energy and slows molecular motion.", "Freezing typically halts a reaction by slowing everything down (and can damage a cell in other ways, like ice crystal formation), but it doesn't denature the enzyme's shape the way heat does — most enzymes return to normal activity once thawed and warmed."],
+     "ex": {"main": "**No.** Extreme cold and extreme heat stop an enzyme for very different reasons — one is reversible slowing, the other is permanent shape damage.", "tip": "\"Extreme\" isn't one single effect — extreme heat and extreme cold act on a protein through completely different mechanisms."}
+    }
+   ]
+  }
+ }
+}

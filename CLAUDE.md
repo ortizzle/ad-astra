@@ -514,6 +514,61 @@ ship for Sedona.
   ramp-ranking question), and the Biology guide's full paper-entry →
   grading → rescue-round loop.
 
+> ⚠️ **`bio-quiz1-review.json` and, on first draft, `bio-unit-3-enzymes.json`
+> both shipped with `classId:'biology'` — the real id is `'bio'`** (matching
+> `bio-unit-1.json`/`bio-unit-1b.json`/`bio-unit-2.json`). A unit under a
+> classId `CLASS_BY_ID` doesn't recognize is effectively orphaned: it never
+> shelves with the rest of Biology, never appears on the subject screen, and
+> the mistake produces no error anywhere — nothing crashes, it just silently
+> doesn't show up. Caught only because `test_enzymes.js` navigated to the
+> real subject screen and checked for the spine; `test_newcontent.js`'s
+> guide-flow test for the same unit called `gradeGuide()`/`buildRescueUnit()`
+> directly and never touched `CLASS_BY_ID`, so it passed the whole time this
+> was broken. `bio-quiz1-review.json` had already shipped with the bad id —
+> fixed in place with `libv` bumped (2), the same "immune to the approval
+> race" mechanism documented above. **Always verify a new content file's
+> `classId` against an existing shipped file for the same subject** before
+> trusting it, and prefer a test that actually navigates to the subject
+> screen over one that only calls the unit's own functions directly.
+
+### Biology 8 · Unit 3: Enzymes (v137)
+
+Built from four photographed pages of her completed "Enzyme Review" packet
+(not from Drive — Chris photographed the physical binder). Covers enzyme
+specificity (shape/active-site matching), the substrate-plus-"-ase" naming
+pattern, digestive enzymes vs. synthesizing enzymes (DNA polymerase, ATP
+synthase), reading a pH-vs-activity or temperature-vs-activity graph, and
+what denaturation actually changes at the molecular level. 12 cards, 18
+questions, every scenario fresh — none reuse the packet's own molecule-shape
+diagrams or pepsin's/trypsin's exact pH values (those appear only inside
+explanations, as real-world reference facts, never as the graded question).
+
+- **Two of her own written answers turned out to be worth flagging in
+  `parentNote`, independent of the unit itself.** Question 13 asked what two
+  internal body conditions could replace "Z" on a generic rise-then-fall
+  enzyme-activity graph; she wrote "Substrate" and "active site," but the
+  very next question on the same page correctly names the real answer as pH
+  and temperature — and a graph shaped like that (up, peak, down) is the
+  textbook curve for pH or temperature, not substrate concentration (which
+  typically rises then flattens, not falls) or "active site" (a fixed
+  structural feature, not a condition that varies). Question 14 asked what
+  KIND of organic molecule an enzyme is; she wrote "catalyst," which is the
+  right word for what an enzyme DOES, not what it IS (a protein) — the same
+  mix-up the unit's own cards (`c1`/`c2`) separate on purpose. Every other
+  answer on the packet was correct; this isn't a pattern of struggling, just
+  two specific, nameable mix-ups worth a word from Chris.
+- **The below-optimum/above-optimum asymmetry gets its own cards and
+  questions** (`c7`/`c8`, `q9`/`q10`): below an enzyme's optimal temperature
+  it's merely slow and fully reversible; well above it, denaturation is
+  permanent. The packet's own questions (21–23) touch this but don't state
+  the reversibility distinction outright, so it's called out explicitly
+  here — a common exam trap is treating "too cold" and "too hot" as
+  symmetric outcomes when they aren't.
+- `tools/test_enzymes.js` seeds all four Biology units together, confirms
+  the new one shelves correctly under the real "Biology 8" spine (the check
+  that caught the classId bug above), and walks a full flashcard deck and
+  quiz round.
+
 ### Flag this question (v136 / Wayfinder v112, both apps)
 
 Chris asked for a way for the girls to flag a question they think might be
