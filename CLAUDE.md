@@ -569,6 +569,57 @@ explanations, as real-world reference facts, never as the graded question).
   that caught the classId bug above), and walks a full flashcard deck and
   quiz round.
 
+### Test prep, in gold (v139 / Wayfinder v116, both apps) + Biology Test 1 Study Guide
+
+Chris: test prep has to STAND OUT, "anytime it's test prep." Two pieces:
+
+**The treatment (engine, both apps).** A unit flagged **`prep:true`** — or
+any `guide:true` unit, since a paper guide is test prep by definition —
+wears an opaque gold "✍️ TEST PREP" band above its title and a 2px gold
+card edge (`prepcard`/`prepband`), and its stop on the topic map wears a
+gold pip ring (`.stop.prep`). Rules that are the point:
+
+- **`prep:true` is an explicit content flag, never inferred** — same rule as
+  `book`/`guide`/`bee`/`capstone`. Deriving it from upcoming `assess`
+  records was considered and rejected: a unit would silently gain and lose
+  the band as tests came and went, and the runway already owns time-based
+  urgency. The flag says what a unit IS, not when it matters.
+- **Guides get the treatment for free** (`u.guide || u.prep`), so the three
+  shipped guide units (both algebra study guides, the Biology quiz review)
+  did not need editing, re-shipping, or re-approval.
+- **The gold is the done-pip/crest gold** (#f2ca63 with #2a1c00 ink — the
+  already-measured ≈11:1 pair `.pip.done` ships), opaque per the badge
+  rule, and identical in both themes on purpose: like the note-from-home
+  post-it, it reads as a physical object, not theme chrome. A DONE prep
+  stop keeps the full gold done pip — done outranks prep.
+
+**The content (`bio-sg-test1.json`, `unit-bio-sgt1`, THIS APP ONLY).** Built
+from the teacher's own "Test 1 (Monday 8/31) Study Guide" PDF — Units 1 and
+2 in one test. The real test is FILL-IN-THE-BLANK, so the unit is built
+recall-first: 27 cards covering every blank on the guide (the nextUp copy
+tells her to say each answer out loud before flipping — production practice,
+not recognition), then 24 fresh-scenario questions including a
+`kind:'order'` pH ranking and two Chargaff calculations with different
+numbers than the guide's own 37%. `prep:true`, `book:true`, `order:1`,
+shelving onto Biology 8 beside the Quiz Review.
+
+- **Her own filled-in answer on the guide's FIRST blank is wrong** — she
+  wrote "dependent variable" for "a proposed explanation linking what is
+  changed to a predicted outcome" (answer: hypothesis). Flagged prominently
+  in `parentNote` because she'd otherwise rehearse the error from her own
+  paper all weekend; the unit's first card and first question both target
+  exactly that distinction. Her other filled blank (quantitative) was right.
+- **Two content calls made honestly rather than confidently**: "which
+  biomolecules are polar" teaches carbs + nucleic acids (lipids nonpolar,
+  proteins mixed/amphipathic) with a note to confirm what her class marked;
+  and "breaking bonds ___ energy" teaches the chemically correct direction
+  (breaking ABSORBS, forming RELEASES) with a card explaining why the "ATP's
+  broken bond releases energy" shorthand is about the whole reaction. Both
+  are in `parentNote`.
+- `tools/test_biosg1.js` covers the unit end to end plus the treatment:
+  both prep stops gold-ringed on the shelf, the band on the opened card, an
+  ordinary lesson NOT getting it, and no Beat-the-clock door (`book:true`).
+
 ### The lesson you meant (v138 / Wayfinder v115, both apps)
 
 Chris asked for a UX review; its top finding was his own report made
