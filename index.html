@@ -788,7 +788,15 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   color:var(--faint);position:relative;z-index:1}
 .stop .pip.part{border-color:var(--ac-25);color:var(--ac-fg)}
 .stop .pip.done{border-color:#f2ca63;background-color:#f2ca63;color:#2a1c00}
-.stop.here .pip{box-shadow:0 0 0 4px var(--ac-8)}
+/* The open lesson has to be unmistakable AT THE ROW — the 4px pip ring alone
+   measured as near-invisible (8% alpha), which is how a mis-tap went unnoticed:
+   nothing at the tap point visibly changed. Full-row wash + accent title now;
+   .s deliberately steps up from --faint to --muted over the wash (the same
+   tint trap .felt hit in v84 — --faint measured 4.30:1 over --ac-8). */
+.stop.here{background-color:var(--ac-8)}
+.stop.here .t{color:var(--ac-fg)}
+.stop.here .s{color:var(--muted)}
+.stop.here .pip{box-shadow:0 0 0 4px var(--ac-8);border-color:var(--ac-25)}
 .stop.cap .pip{border-style:dashed}
 /* display:block matters — these are spans, and inline spans run the title and
    its sub-label together on one line. */
@@ -1319,7 +1327,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v137 · enzymes';
+const APP_VERSION = 'v138 · the lesson you meant';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4925,14 +4933,30 @@ SCREENS.shelf = function(root){
   /* The map IS the contents — one spine, not a path above a duplicate list.
      The lesson she taps opens below it rather than replacing a stop, so the
      path stays whole while she reads. */
-  root.appendChild(topicMap(s.units, s.mark, openId, id => { ctx.open = id; render(); }));
+  root.appendChild(topicMap(s.units, s.mark, openId, id => {
+    ctx.open = id; render();
+    /* The opened card sits below the whole map — off-screen on any topic with
+       more than a few lessons, so a tap used to look like it did nothing and
+       the wrong lesson could be opened without anyone noticing. Bring the card
+       to her instead of making her go find it. */
+    requestAnimationFrame(()=>{
+      const oc = document.getElementById('shelfopen');
+      if(oc) oc.scrollIntoView({
+        behavior: matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto',
+        block:'start' });
+    });
+  }));
   const crest = crestEl(s.name, s.units);
   if(crest) root.appendChild(crest);
   const open = s.units.find(u => u.id === openId) || s.units[0];
   /* unitCard would offer a quiz her deck cannot hold — same trap the loose
      list hit. Her stop opens her own two doors instead. */
-  if(open && open.own) root.appendChild(ownCardsCard(open, c));
-  else if(open) root.appendChild(unitCard(open, c, lessonLabel(open)));
+  if(open){
+    const oc = open.own ? ownCardsCard(open, c) : unitCard(open, c, lessonLabel(open));
+    oc.id = 'shelfopen';
+    oc.style.scrollMarginTop = '10px';
+    root.appendChild(oc);
+  }
 
   const back = el('button','btn btn-ghost','← ' + c.name);
   back.addEventListener('click',()=>go('unit',{classId:c.id}));
@@ -6358,6 +6382,14 @@ SCREENS.checkin = function(root){
   const u = unitFor(ctx.unitId);
   if(!u) return go('study');
   const state = ctx._state || (ctx._state = {readiness:null,feeling:null});
+
+  /* Name what she is about to be quizzed on. This is the last screen before
+     the round starts, and it used to say nothing about WHICH lesson — so a
+     mis-picked lesson sailed through unnoticed until question 1. One line,
+     subject-coloured (the screen already carries the subject accent). */
+  const nameEl = el('div','eyebrow', `📖 ${u.title}${ctx.timed ? ' · Beat the clock' : ''}`);
+  nameEl.style.margin = '2px 2px 8px';
+  root.appendChild(nameEl);
 
   root.appendChild(headline('Before you start','Two quick taps. There is no wrong answer here, and nobody is scored on it.'));
 

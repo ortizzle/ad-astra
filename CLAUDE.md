@@ -569,6 +569,42 @@ explanations, as real-world reference facts, never as the graded question).
   that caught the classId bug above), and walks a full flashcard deck and
   quiz round.
 
+### The lesson you meant (v138 / Wayfinder v115, both apps)
+
+Chris asked for a UX review; its top finding was his own report made
+precise: picking a lesson on the topic map could open the WRONG one without
+anyone noticing, because three screens in a row hid the lesson's identity.
+Tapping a map stop gave nearly no feedback at the tap point (`.stop.here`
+was a 4px ring of 8%-alpha accent around the pip); the opened card rendered
+below the entire map — off-screen on any topic with 5+ lessons, since
+`onPick` re-rendered without scrolling; and the check-in screen never named
+the unit, so the last screen before the round said nothing about which
+lesson was about to be quizzed. Three fixes, all engine, shipped to both
+apps together:
+
+- **The opened card scrolls into view on pick.** The card carries
+  `id:'shelfopen'`; `onPick` scrolls it into view after the re-render,
+  `behavior:'smooth'` gated on `prefers-reduced-motion` like every other
+  motion in the app, with a small `scrollMarginTop` so it doesn't kiss the
+  viewport edge.
+- **The selected map row is unmistakable**: full-row `--ac-8` wash, title in
+  `--ac-fg`, and the sub-label steps up from `--faint` to `--muted` — the
+  same tint trap `.felt` documented in v84 (`--faint` over `--ac-8` fails
+  4.5:1). Measured across all 12 subject palettes × both themes in both
+  apps: worst `.t` 6.63:1, worst `.s` 4.95:1 — and the `--muted` step-up was
+  load-bearing, not precautionary.
+- **The check-in names the unit** — an eyebrow above "Before you start"
+  reading `📖 <unit title>`, plus ` · Beat the clock` when timed. The
+  screen already carries the subject accent, so it colours itself. Review
+  and shuffle rounds still skip the check-in entirely, so this adds no
+  friction to the daily habit loop.
+
+`tools/test_shelfpick.js` (same file, both apps) covers all three: a
+7-lesson shelf, tapping lesson 5, asserting the row visibly selects (real
+computed background, not a pip ring), the page actually scrolled, the opened
+card is the tapped lesson's, and the check-in names the unit — with Beat the
+clock named only in timed mode.
+
 ### Flag this question (v136 / Wayfinder v112, both apps)
 
 Chris asked for a way for the girls to flag a question they think might be
