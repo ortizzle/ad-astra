@@ -1342,7 +1342,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v139 · test prep, in gold';
+const APP_VERSION = 'v140 · tutoring on Today';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1543,6 +1543,18 @@ const STUDENT_HOURS = [
    silently hid the second one. */
 const hoursForAll = id => STUDENT_HOURS.filter(h=>h.ids.includes(id));
 const hoursFor = id => hoursForAll(id)[0];
+
+/* Tutoring — a standing weekly commitment, read once from her calendar at
+   Chris's request (2026-08-30) so Today can say when it lands. Times only;
+   the tutor's name stays private, never in this public file. d uses AZ
+   weekday numbers (0 = Sunday). Not tied to school being in session — it is
+   an outside appointment, not a teacher's office hours — so it is not gated
+   on a school day the way STUDENT_HOURS is. When the schedule changes on the
+   calendar, edit here and redeploy; this does not read the calendar live. */
+const TUTORING = [
+  {d:0, times:'1:00–3:00 pm'},
+  {d:3, times:'3:00–5:30 pm'}
+];
 
 const SIB_NAME = 'Wayfinder';
 const SIB_FILE = 'wayfinder-data.json';
@@ -4321,6 +4333,23 @@ SCREENS.today = function(root){
       hc.appendChild(r);
     });
     root.appendChild(hc);
+  }
+
+  /* Tutoring today — a standing weekly appointment, not the school's. Keyed
+     on the real weekday (wd), never a shown/future day, since it is not
+     tied to a school day the way Student hours is. */
+  const tut = TUTORING.filter(t=>t.d===wd);
+  if(tut.length){
+    const tc = el('div','card quiet');
+    tc.appendChild(el('div','eyebrow','Tutoring today'));
+    tut.forEach(t=>{
+      const r = el('div','row');
+      const kk = el('span','k','🧑‍🏫 Tutoring');
+      kk.appendChild(el('small',null, t.times));
+      r.appendChild(kk);
+      tc.appendChild(r);
+    });
+    root.appendChild(tc);
   }
 
   /* Schedule — the grown-ups check this to know where she is, so it

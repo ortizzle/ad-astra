@@ -620,6 +620,39 @@ shelving onto Biology 8 beside the Quiz Review.
   both prep stops gold-ringed on the shelf, the band on the opened card, an
   ordinary lesson NOT getting it, and no Beat-the-clock door (`book:true`).
 
+### Tutoring on Today (v140 / Wayfinder v118, both apps)
+
+Chris granted a one-time read of both girls' Google Calendar (2026-08-30) to
+check for scheduled tutoring, with the explicit ask that it "show up in the
+daily briefing." A new **`TUTORING`** constant (weekday + times, no other
+fields) renders a quiet card on Today, the same visual weight as Student
+hours but a separate card, because it is a different fact: Student hours are
+optional extra time with a teacher; tutoring is a standing appointment.
+
+- **Read once, not synced live.** The app has no Google OAuth and gains none
+  here — this is the same boundary the Drive pipeline and the "no write path
+  to Drive" rule already draw. Her calendar was read by Claude directly (a
+  connector already available in the session, distinct from Drive), and the
+  result was hand-transcribed into `TUTORING`, exactly like `STUDENT_HOURS`
+  is hand-transcribed from the newsletter. If the schedule changes on the
+  calendar, it will not show here until this is refreshed by hand.
+- **Times only, same privacy rule as everywhere else in this file.** The
+  tutor's name and email are deliberately not in `TUTORING` or anywhere else
+  in this public repo.
+- **Not gated on a school day.** `STUDENT_HOURS` only makes sense when school
+  is in session; tutoring is an outside commitment and keeps running on a
+  weekend or a school holiday (Sedona's runs Sundays; a Labor-Day-Monday
+  tutoring session for a sibling app's equivalent case is exactly what
+  `tools/test_tutoring.js` checks for). It is keyed on the real weekday
+  (`wd`, i.e. `AZ.weekday(AZ.today())`), never a shown/future day.
+- Sedona's real slots as read from the calendar: **Sundays, 1:00–3:00 pm**
+  and **Wednesdays, 3:00–5:30 pm**, weekly, via video call. A one-off Sunday
+  session on 8/23 at a different time and a physical address did not fit the
+  weekly pattern and was treated as a makeup, not a third recurring slot.
+- `tools/test_tutoring.js` checks both weekly slots render with the right
+  time, a non-tutoring day renders nothing, and (documented above) that it
+  is not accidentally school-day-gated.
+
 ### The lesson you meant (v138 / Wayfinder v115, both apps)
 
 Chris asked for a UX review; its top finding was his own report made
