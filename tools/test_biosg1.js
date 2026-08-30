@@ -24,8 +24,8 @@ const PORT = process.argv[2] || 8115;
     const u = DATA.records['unit-bio-sgt1'];
     return {cards: u.cards.length, questions: u.questions.length, prep: !!u.prep, classId: u.classId};
   });
-  ck('unit loads: 27 cards, 24 questions, prep:true, classId bio',
-     seed.cards === 27 && seed.questions === 24 && seed.prep && seed.classId === 'bio', seed);
+  ck('unit loads: 27 cards, 25 questions, prep:true, classId bio',
+     seed.cards === 27 && seed.questions === 25 && seed.prep && seed.classId === 'bio', seed);
 
   const shelf = await p.evaluate(() => {
     go('shelf', {classId:'bio', series:'Biology 8', open:'unit-bio-sgt1'});
@@ -93,6 +93,49 @@ const PORT = process.argv[2] || 8115;
     return !/Beat the clock/.test(document.getElementById('shelfopen').textContent);
   });
   ck('no Beat the clock on the study guide (book:true)', noClock, noClock);
+
+  /* v141: the three answers she got wrong on her own completed copy of the
+     guide. Each one is checked for the CORRECT teaching, not just presence —
+     these are the items the unit exists to fix before Monday. */
+  const fixes = await p.evaluate(() => {
+    const u = DATA.records['unit-bio-sgt1'];
+    const card = id => (u.cards.find(c => c.id === id) || {}).def || '';
+    const q = id => u.questions.find(x => x.id === id);
+    const qBond = q('q23'), qOrder = q('q7'), qPolar = q('q25');
+    return {
+      // (1) breaking absorbs / making releases — she wrote the reverse
+      bondCard: card('c26'),
+      bondAns: qBond && qBond.opts[qBond.ans],
+      bondEx: qBond && qBond.ex.main,
+      // (2) covalent > ionic > hydrogen — she wrote ionic first
+      orderAns: qOrder && qOrder.opts[qOrder.ans],
+      orderEx: qOrder && qOrder.ex.main,
+      // (3) lipids are the nonpolar one — she left out nucleic acids
+      polarCard: card('c11'),
+      polarAns: qPolar && qPolar.opts[qPolar.ans],
+      polarOpts: qPolar && qPolar.opts.length,
+      polarUnique: qPolar && new Set(qPolar.opts).size,
+      polarSteps: qPolar && qPolar.steps.length
+    };
+  });
+  ck('bond-energy question still teaches absorbs · releases',
+     /^absorbs · releases/.test(fixes.bondAns||''), fixes.bondAns);
+  ck('and its explanation names the ATP shorthand behind the mix-up',
+     /ATP/.test(fixes.bondEx||'') && /whole reaction/i.test(fixes.bondEx||''), fixes.bondEx);
+  ck('the bond-energy card leads with ABSORBS, not releases',
+     /^\*\*Breaking bonds ABSORBS energy/.test(fixes.bondCard||''), (fixes.bondCard||'').slice(0,80));
+  ck('bond-order answer is the biology ranking, covalent first',
+     fixes.orderAns === 'Covalent, ionic, hydrogen', fixes.orderAns);
+  ck('and its explanation addresses ranking ionic first',
+     /ionic first/i.test(fixes.orderEx||''), fixes.orderEx);
+  ck('the polar card names lipids as the odd one out',
+     /^\*\*Lipids are the nonpolar one/.test(fixes.polarCard||''), (fixes.polarCard||'').slice(0,80));
+  ck('and says nucleic acids are polar (the one she left out)',
+     /nucleic acids/i.test(fixes.polarCard||''), null);
+  ck('new q25 asks the polar item and answers Lipids',
+     /^Lipids/.test(fixes.polarAns||''), fixes.polarAns);
+  ck('q25 is structurally valid: 4 unique options, 3+ steps',
+     fixes.polarOpts === 4 && fixes.polarUnique === 4 && fixes.polarSteps >= 3, fixes);
 
   out.forEach(r => console.log((r.ok ? ' ok ' : 'FAIL ') + r.n + (r.ok ? '' : ' -> ' + JSON.stringify(r.got).slice(0,300))));
   console.log(out.every(r=>r.ok) ? 'ALL PASS' : 'FAILURES');

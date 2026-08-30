@@ -4,8 +4,8 @@
   "unit-bio-sgt1": {
    "id": "unit-bio-sgt1",
    "type": "unit",
-   "updatedAt": 1788027661046,
-   "libv": 1,
+   "updatedAt": 1788125207661,
+   "libv": 2,
    "classId": "bio",
    "quarter": 1,
    "status": "draft",
@@ -24,15 +24,33 @@
     "from": "added"
    },
    "objectives": [
-    {"text": "Produce (not just recognize) every Unit 1 vocabulary term from its definition.", "from": "source"},
-    {"text": "Identify bond types from diagrams and rank ionic, covalent and hydrogen bonds by strength.", "from": "source"},
-    {"text": "Explain water's polarity and name cohesion, adhesion and capillary action from descriptions.", "from": "source"},
-    {"text": "Read the pH scale: acidic vs. basic, and which ions dominate on each side.", "from": "source"},
-    {"text": "Match each biomolecule to its monomer, polymer and function, and work a Chargaff's-rule calculation.", "from": "source"},
-    {"text": "State what denatures a protein and the four levels of protein organization.", "from": "source"}
+    {
+     "text": "Produce (not just recognize) every Unit 1 vocabulary term from its definition.",
+     "from": "source"
+    },
+    {
+     "text": "Identify bond types from diagrams and rank ionic, covalent and hydrogen bonds by strength.",
+     "from": "source"
+    },
+    {
+     "text": "Explain water's polarity and name cohesion, adhesion and capillary action from descriptions.",
+     "from": "source"
+    },
+    {
+     "text": "Read the pH scale: acidic vs. basic, and which ions dominate on each side.",
+     "from": "source"
+    },
+    {
+     "text": "Match each biomolecule to its monomer, polymer and function, and work a Chargaff's-rule calculation.",
+     "from": "source"
+    },
+    {
+     "text": "State what denatures a protein and the four levels of protein organization.",
+     "from": "source"
+    }
    ],
    "parentNote": {
-    "text": "Built from the teacher's own Test 1 study guide (Monday 8/31), which spans Units 1 and 2. One thing on her actual paper is worth five minutes together before Monday: the first blank asks for 'a proposed explanation to link what is being changed to a predicted outcome,' and she filled in 'dependent variable' — the answer is 'hypothesis.' It's the very first thing on the guide, so if she studies from her own filled-in copy she'll rehearse the wrong answer; this unit's first card and first question both target exactly that distinction. Her other filled blank (quantitative) was right. Two content notes: for 'which biomolecules are polar,' this unit teaches carbohydrates and nucleic acids as the clean answers (lipids are nonpolar; proteins are mixed — worth confirming what her class marked, since courses split on counting proteins). And for 'breaking bonds ___ energy,' it teaches the chemically correct direction — breaking bonds ABSORBS energy, forming bonds RELEASES it — with a card explaining why the 'ATP breaking a bond releases energy' shorthand people hear is about the whole reaction, not the single bond.",
+    "text": "Built from the teacher's own Test 1 study guide (Monday 8/31), spanning Units 1 and 2. Chris shared her COMPLETED copy on 8/30, and it is mostly excellent — all of Unit 1's vocabulary, the whole CHON(PS) chart, all four levels of protein organisation, the saturated/unsaturated fat contrast, and the Chargaff calculation (37% C → 37% G, 13% A, 13% T) are right. The first blank now reads 'hypothesis', so the mix-up flagged last week is fixed. Three answers on it are worth correcting before Monday, and this unit now targets all three head-on. (1) 'Breaking bonds ___ energy' — she wrote 'releases', and 'making bonds uses energy'. It is the other way round: breaking a bond always absorbs energy, forming one releases it. This is the single most common misconception in the topic and it comes from the 'breaking ATP releases energy' shorthand, which describes the whole reaction rather than the one bond; card c26 and question q23 both walk through it. (2) Bond strength order — she wrote 'ionic, covalent, metallic, hydrogen'. For a biology course the expected answer is covalent, ionic, hydrogen: inside a watery cell, water pulls ionic bonds apart while covalent bonds hold. (Ionic-first is the general-chemistry answer, so it is a reasonable thing to have written — worth a sentence rather than a correction.) She also added metallic, which that blank does not ask for. (3) 'Which biomolecules are polar' — she wrote carbohydrates and proteins, leaving out nucleic acids, which carry a charged phosphate backbone and are strongly polar. The clean way to hold it is to name the odd one out: lipids. A new question (q25) covers this, since the guide has a blank for it and nothing graded did. Last thing, and it matters because the real test is fill-in-the-blank rather than multiple choice: several answers are right but misspelled — 'experemental' (experimental), 'controled' (control), 'inferance' (inference), 'deoxiribose' (deoxyribose), 'matallic' (metallic). Worth one pass out loud spelling them.",
     "from": "added"
    },
    "nextUp": {
@@ -42,150 +60,212 @@
    },
    "cards": [
     {
-     "id": "c0", "term": "Hypothesis", "from": "source",
+     "id": "c0",
+     "term": "Hypothesis",
+     "from": "source",
      "def": "**A proposed explanation linking what you change to a predicted outcome.**\n• The if/then statement of an experiment: \"If I change X, then Y will happen.\"\n• NOT the dependent variable — the dependent variable is the thing you MEASURE; the hypothesis is the whole prediction connecting cause to effect.",
      "hint": "The if/then sentence itself — the whole prediction, not either variable alone."
     },
     {
-     "id": "c1", "term": "Quantitative vs. qualitative data", "from": "source",
+     "id": "c1",
+     "term": "Quantitative vs. qualitative data",
+     "from": "source",
      "def": "**Quantitative can be counted or measured; qualitative is described with the five senses.**\n• Quantitative = numbers: 14 bubbles, 37°C, 2.5 cm.\n• Qualitative = qualities that are hard to measure: color, texture, smell.",
      "hint": "QuaNtitative = Numbers. QuaLitative = quaLities."
     },
     {
-     "id": "c2", "term": "Independent vs. dependent variable", "from": "source",
+     "id": "c2",
+     "term": "Independent vs. dependent variable",
+     "from": "source",
      "def": "**Independent is what you intentionally change; dependent is what you observe.**\n• Independent goes in the LEFT column of a table and on the X-AXIS of a graph.\n• Dependent goes on the Y-axis — it depends on what you changed.",
      "hint": "I change the Independent; the Dependent Depends on it. X-axis = what I picked."
     },
     {
-     "id": "c3", "term": "Experimental group vs. control group", "from": "source",
+     "id": "c3",
+     "term": "Experimental group vs. control group",
+     "from": "source",
      "def": "**The experimental group receives the changed variable; the control group does not.**\n• The control group gets no intervention — or gets a placebo — so there's a baseline to compare against.\n• Without it, you can't tell whether your change caused anything.",
      "hint": "Experimental = gets the change. Control = the comparison baseline."
     },
     {
-     "id": "c4", "term": "Placebo", "from": "source",
+     "id": "c4",
+     "term": "Placebo",
+     "from": "source",
      "def": "**A drug with no medicinal value, given to the control group.**\n• It keeps the two groups' EXPERIENCE identical, so the only real difference is the treatment itself.",
      "hint": "The sugar pill — looks like medicine, does nothing."
     },
     {
-     "id": "c5", "term": "Feasibility and repeatability", "from": "source",
+     "id": "c5",
+     "term": "Feasibility and repeatability",
+     "from": "source",
      "def": "**Feasibility is whether the experiment CAN be conducted; repeatability is whether it can be repeated under the same conditions.**\n• Feasible: you actually have the time, tools and access to do it.\n• Repeatable: someone else could run it again the same way and check your result.",
      "hint": "Feasible = doable at all. Repeatable = doable AGAIN, identically."
     },
     {
-     "id": "c6", "term": "Inference", "from": "source",
+     "id": "c6",
+     "term": "Inference",
+     "from": "source",
      "def": "**A logical interpretation of data, made after an observation.**\n• The observation is what you saw; the inference is what you conclude it means.",
      "hint": "Observation = saw it. Inference = what you make of it."
     },
     {
-     "id": "c7", "term": "Control variables", "from": "source",
+     "id": "c7",
+     "term": "Control variables",
+     "from": "source",
      "def": "**The variables that are NOT changed — held the same across every trial.**\n• Plural on purpose: an experiment usually has many control variables but only ONE independent variable.",
      "hint": "Controlled = held still so the test stays fair."
     },
     {
-     "id": "c8", "term": "The four bond types, by diagram", "from": "source",
+     "id": "c8",
+     "term": "The four bond types, by diagram",
+     "from": "source",
      "def": "**Ionic: an electron is TRANSFERRED. Covalent: electrons are SHARED. Hydrogen (dipole–dipole): attraction BETWEEN molecules. Metallic: a grid of + ions in a sea of electrons.**\n• Ionic diagrams show an electron jumping from one atom to another.\n• Covalent diagrams show overlapping electron clouds.\n• The hydrogen-bond diagram is two separate water molecules with a dotted line between an H and an O.",
      "hint": "Transferred / shared / between-molecules / metal grid."
     },
     {
-     "id": "c9", "term": "Bond strength order", "from": "source",
-     "def": "**Strongest to weakest: covalent, then ionic, then hydrogen.**\n• Covalent bonds hold molecules together; hydrogen bonds only attract neighboring molecules to each other — much weaker.\n• Weak isn't useless: water's whole personality comes from its hydrogen bonds.",
+     "id": "c9",
+     "term": "Bond strength order",
+     "from": "source",
+     "def": "**Strongest to weakest: covalent, then ionic, then hydrogen.**\n• Careful — it is tempting to put ionic first, because in chemistry class ionic crystals are described as very strong. In BIOLOGY the ranking is about bonds inside a watery cell, and water pulls ionic bonds apart. Covalent bonds it cannot touch.\n• Hydrogen bonds are only partial-charge attractions BETWEEN molecules — the weakest of the three.\n• Weak isn't useless: water's whole personality comes from its hydrogen bonds.\n• The guide names three bond types in this question — ionic, covalent, hydrogen. Metallic is on the labelling question above it, not in this ranking.",
      "hint": "Co > Io > H — covalent wins, hydrogen is the gentle one.",
      "eq": "covalent > ionic > hydrogen"
     },
     {
-     "id": "c10", "term": "Water's partial charges", "from": "source",
+     "id": "c10",
+     "term": "Water's partial charges",
+     "from": "source",
      "def": "**The oxygen end is partially negative (δ−); each hydrogen end is partially positive (δ+).**\n• That separation of charge is what makes water POLAR — and polarity is why water hydrogen-bonds to itself and to other polar things.\n• Drawing it: bent molecule, O at the peak with δ−, two H arms each with δ+.",
      "hint": "O is the greedy one — pulls electrons closer, goes slightly negative."
     },
     {
-     "id": "c11", "term": "Which biomolecules are polar?", "from": "source",
-     "def": "**Carbohydrates and nucleic acids are polar; lipids are nonpolar.**\n• That's why sugar dissolves in water and oil refuses to.\n• Proteins are the mixed case — they carry both polar and nonpolar regions, which is exactly what lets them fold.",
-     "hint": "Dissolves in water = polar. Oil = the famous nonpolar holdout."
+     "id": "c11",
+     "term": "Which biomolecules are polar?",
+     "from": "source",
+     "def": "**Lipids are the nonpolar one. Carbohydrates, proteins and nucleic acids all carry polar groups.**\n• Easiest way to hold it: name the ODD ONE OUT. Lipids are the fats and oils — they refuse to mix with water.\n• Carbohydrates are covered in –OH groups, and nucleic acids carry a charged phosphate backbone — both strongly polar.\n• Proteins are the mixed case: polar and nonpolar R groups together. That split is exactly what makes them fold.",
+     "hint": "Three are friendly with water. One is oil. Name the oil."
     },
     {
-     "id": "c12", "term": "Cohesion, adhesion, capillary action", "from": "source",
+     "id": "c12",
+     "term": "Cohesion, adhesion, capillary action",
+     "from": "source",
      "def": "**Cohesion: water sticks to ITSELF. Adhesion: water sticks to SURFACES. Capillary action: water climbs along polar materials with no added energy.**\n• Capillary action is cohesion and adhesion working together — how water rises up a thin tube or a paper towel.",
      "hint": "co- = together with itself; ad- = to something else; capillary = the climb."
     },
     {
-     "id": "c13", "term": "The pH scale", "from": "source",
+     "id": "c13",
+     "term": "The pH scale",
+     "from": "source",
      "def": "**0–7 is acidic, with MORE H+ ions; 7–14 is basic, with more OH− ions.**\n• Lower number = more protons (H+) floating around.\n• 7 is neutral — pure water.",
      "hint": "Acid = extra H+. Base = extra OH−. Seven sits in the middle.",
      "eq": "acid: pH < 7 (more H+) · base: pH > 7 (more OH−)"
     },
     {
-     "id": "c14", "term": "Hydrolysis", "from": "source",
+     "id": "c14",
+     "term": "Hydrolysis",
+     "from": "source",
      "def": "**Hydro means water; lysis means to break. Hydrolysis BREAKS polymers by adding water.**\n• Digestion is hydrolysis: water molecules snip the links between monomers.",
      "hint": "lysis = break (think 'analysis' breaking a problem apart)."
     },
     {
-     "id": "c15", "term": "Dehydration synthesis", "from": "source",
+     "id": "c15",
+     "term": "Dehydration synthesis",
+     "from": "source",
      "def": "**Dehydration means removing water; synthesis means to make. Dehydration synthesis MAKES polymers by removing water.**\n• The exact mirror of hydrolysis: pull out a water molecule, and two monomers link.",
      "hint": "De-hydrate = water OUT → chain grows."
     },
     {
-     "id": "c16", "term": "Amphipathic", "from": "source",
+     "id": "c16",
+     "term": "Amphipathic",
+     "from": "source",
      "def": "**A molecule with both hydrophilic (water-loving) and hydrophobic (water-fearing) regions.**\n• The phospholipid is the star example: hydrophilic head, hydrophobic tails.",
      "hint": "amphi- = both (like an amphibian living in both worlds)."
     },
     {
-     "id": "c17", "term": "Mono, di, poly — and the name endings", "from": "source",
+     "id": "c17",
+     "term": "Mono, di, poly — and the name endings",
+     "from": "source",
      "def": "**Mono = one, di = two, poly = many. Carbohydrate names end in -ose; enzyme names end in -ase.**\n• Monosaccharide = one sugar; disaccharide = two; polysaccharide = many.\n• Glucose, sucrose, cellulose = sugars. Lactase, protease = enzymes.",
      "hint": "-ose is a sugar; -ase chews on one."
     },
     {
-     "id": "c18", "term": "Structural carbohydrates", "from": "source",
+     "id": "c18",
+     "term": "Structural carbohydrates",
+     "from": "source",
      "def": "**Plants build with CELLULOSE; some animals and fungi build with CHITIN.**\n• Cellulose is plant cell walls (wood, cotton, celery strings).\n• Chitin is insect shells, crab shells and fungal cell walls.",
      "hint": "CELL-ulose for plant CELL walls; CHitin for Crunchy sHells."
     },
     {
-     "id": "c19", "term": "Triglycerides and phospholipids", "from": "source",
+     "id": "c19",
+     "term": "Triglycerides and phospholipids",
+     "from": "source",
      "def": "**A triglyceride is 3 fatty acids + 1 glycerol. A phospholipid has a hydrophilic head and a hydrophobic tail, and makes up the lipid BILAYER of the cell membrane.**\n• TRI-glyceride: the name counts the three fatty-acid tails for you.\n• Two phospholipid layers, tails hiding inward from water = the bilayer.",
      "hint": "Tri = 3 tails on a glycerol backbone. Phospholipid = the membrane molecule."
     },
     {
-     "id": "c20", "term": "Saturated vs. unsaturated fats", "from": "source",
+     "id": "c20",
+     "term": "Saturated vs. unsaturated fats",
+     "from": "source",
      "def": "**Saturated: full (saturated) with hydrogens, SOLID at room temperature, from animals. Unsaturated: at least one double bond, LIQUID at room temperature, from plants.**\n• Butter vs. olive oil is the kitchen version of this card.\n• The double bond puts a kink in the tail, so unsaturated fats can't pack solid.",
      "hint": "Saturated = stuffed with H = solid = steak. Unsaturated = double bond = liquid = olive oil."
     },
     {
-     "id": "c21", "term": "Waxes and steroids", "from": "source",
+     "id": "c21",
+     "term": "Waxes and steroids",
+     "from": "source",
      "def": "**Waxes are long fatty acids combined with alcohols. Steroids are lipids that often act as HORMONES — chemical messengers — and have 4 fused rings.**\n• Both are lipids, but wildly different jobs: waxes waterproof, steroids carry messages.",
      "hint": "Wax = fatty acid + alcohol. Steroid = 4 rings, sends messages."
     },
     {
-     "id": "c22", "term": "Nucleotides and the bases", "from": "source",
+     "id": "c22",
+     "term": "Nucleotides and the bases",
+     "from": "source",
      "def": "**A nucleotide has 3 parts: a phosphate, a sugar, and a nitrogenous base. DNA's bases are A, T, G, C; RNA swaps T for U (A, U, G, C). DNA's sugar is deoxyribose; RNA's is ribose.**\n• Three parts, drawn as: circle (phosphate) — pentagon (sugar) — rectangle (base).",
      "hint": "Phosphate + sugar + base. RNA replaces T with U and uses ribose."
     },
     {
-     "id": "c23", "term": "Chargaff's rule", "from": "source",
+     "id": "c23",
+     "term": "Chargaff's rule",
+     "from": "source",
      "def": "**In double-stranded DNA, A pairs with T and G pairs with C — so %A = %T and %G = %C.**\n• Given any one base's percentage, you can find all four: its partner matches it, and the other pair splits what's left evenly.\n• Example: 37% C → 37% G, leaving 26% for A+T → 13% each.",
      "hint": "A=T, G=C. Partner matches; the other pair splits the remainder.",
      "eq": "%A = %T,  %G = %C"
     },
     {
-     "id": "c24", "term": "Amino acids and the R group", "from": "source",
+     "id": "c24",
+     "term": "Amino acids and the R group",
+     "from": "source",
      "def": "**An amino acid has 4 parts around a central carbon: an amino group, a carboxyl group, a hydrogen, and an R group — and the R GROUP is the part that changes.**\n• All 20 amino acids share the same frame; only R differs.\n• R is what gives each amino acid its personality — polar, nonpolar, charged.",
      "hint": "Same skeleton every time; R is the variable part."
     },
     {
-     "id": "c25", "term": "Denaturation — the three causes", "from": "source",
+     "id": "c25",
+     "term": "Denaturation — the three causes",
+     "from": "source",
      "def": "**Heat, pH, and chemicals can all denature a protein — unfolding its shape so it stops working.**\n• Same idea from the Enzymes unit: wreck the shape, lose the function.\n• The four levels of protein organization — primary, secondary, tertiary, quaternary — are what denaturation unravels.",
      "hint": "Three shape-wreckers: too hot, wrong pH, harsh chemicals."
     },
     {
-     "id": "c26", "term": "Bond energy, and catalysts", "from": "source",
-     "def": "**Breaking bonds ABSORBS energy; making bonds RELEASES energy. Catalysts are NOT used up in a reaction.**\n• If \"breaking releases energy\" sounds familiar from ATP: the energy from ATP comes from the whole reaction — the new bonds formed afterward release more than the broken one absorbed. The single bond still costs energy to break.\n• A catalyst walks out of the reaction unchanged, ready to go again.",
-     "hint": "Breaking costs, building pays. Catalysts survive the reaction.",
+     "id": "c26",
+     "term": "Bond energy, and catalysts",
+     "from": "source",
+     "def": "**Breaking bonds ABSORBS energy; making bonds RELEASES energy. Catalysts are NOT used up in a reaction.**\n• This one catches almost everybody, because of ATP. You hear \"breaking ATP's phosphate bond releases energy\" — so it sounds like breaking gives energy back. It doesn't.\n• A bond is two atoms holding on to each other. Pulling them apart always COSTS energy, the way pulling two magnets apart costs effort. Letting them snap together gives energy back.\n• What ATP really does: breaking that bond costs a little, and the NEW bonds formed straight afterwards release more than the break cost. The whole reaction gives out energy — the single break still absorbed some.\n• A catalyst speeds a reaction up and walks out unchanged, ready to go again.",
+     "hint": "Magnets: pulling apart costs you, snapping together gives it back.",
      "eq": "break = absorb · make = release"
     }
    ],
    "questions": [
     {
-     "id": "q1", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "\"A proposed explanation that links what is being changed to a predicted outcome.\" Which term does this define?",
-     "opts": ["Hypothesis", "Dependent variable", "Inference", "Control variable"],
+     "opts": [
+      "Hypothesis",
+      "Dependent variable",
+      "Inference",
+      "Control variable"
+     ],
      "ans": 0,
      "hint": "It's the whole if/then prediction, not any single variable.",
      "steps": [
@@ -193,12 +273,23 @@
       "The dependent variable is only the measured half — not the explanation linking the two.",
       "A proposed, testable explanation with a predicted outcome is the definition of a hypothesis."
      ],
-     "ex": {"main": "**Hypothesis.** The dependent variable is just what gets measured; the hypothesis is the whole if/then claim connecting cause to prediction.", "tip": "This exact definition is the first blank on the real study guide — make sure this one is automatic."}
+     "ex": {
+      "main": "**Hypothesis.** The dependent variable is just what gets measured; the hypothesis is the whole if/then claim connecting cause to prediction.",
+      "tip": "This exact definition is the first blank on the real study guide — make sure this one is automatic."
+     }
     },
     {
-     "id": "q2", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "A student records that her plant grew 4.2 cm and that its leaves smell faintly sweet. Which is which?",
-     "opts": ["4.2 cm is quantitative; the smell is qualitative", "4.2 cm is qualitative; the smell is quantitative", "Both are quantitative", "Both are qualitative"],
+     "opts": [
+      "4.2 cm is quantitative; the smell is qualitative",
+      "4.2 cm is qualitative; the smell is quantitative",
+      "Both are quantitative",
+      "Both are qualitative"
+     ],
      "ans": 0,
      "hint": "Which one is a number, and which one comes from the five senses?",
      "steps": [
@@ -206,12 +297,23 @@
       "Qualitative data uses the five senses for things that are hard to measure — a faint sweet smell.",
       "So the length is quantitative and the smell is qualitative."
      ],
-     "ex": {"main": "**4.2 cm is quantitative; the smell is qualitative.** Numbers measure; senses describe.", "tip": "On a fill-in-the-blank, spelling counts: quaNtitative has that N, like Number."}
+     "ex": {
+      "main": "**4.2 cm is quantitative; the smell is qualitative.** Numbers measure; senses describe.",
+      "tip": "On a fill-in-the-blank, spelling counts: quaNtitative has that N, like Number."
+     }
     },
     {
-     "id": "q3", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "In a data table for an experiment on how fertilizer amount affects tomato yield, which column goes on the LEFT — and on a graph, which axis does that same variable take?",
-     "opts": ["Fertilizer amount — left column and x-axis", "Tomato yield — left column and x-axis", "Fertilizer amount — left column and y-axis", "Tomato yield — left column and y-axis"],
+     "opts": [
+      "Fertilizer amount — left column and x-axis",
+      "Tomato yield — left column and x-axis",
+      "Fertilizer amount — left column and y-axis",
+      "Tomato yield — left column and y-axis"
+     ],
      "ans": 0,
      "hint": "The intentionally changed variable claims the left column AND the x-axis.",
      "steps": [
@@ -219,12 +321,23 @@
       "The independent variable goes in the left column of a table and on the x-axis of a graph.",
       "Tomato yield is observed — dependent — and takes the y-axis."
      ],
-     "ex": {"main": "**Fertilizer amount — left column and x-axis.** The study guide states this pairing outright: changed variable → left column → x-axis.", "tip": "One rule covers both table AND graph placement — learn it once, answer twice."}
+     "ex": {
+      "main": "**Fertilizer amount — left column and x-axis.** The study guide states this pairing outright: changed variable → left column → x-axis.",
+      "tip": "One rule covers both table AND graph placement — learn it once, answer twice."
+     }
     },
     {
-     "id": "q4", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "In a headache-medicine trial, one group gets the real pill and another gets a sugar pill with no medicinal value. What are the second group and its pill called?",
-     "opts": ["The control group, taking a placebo", "The experimental group, taking a placebo", "The control group, taking a catalyst", "The placebo group, taking a control"],
+     "opts": [
+      "The control group, taking a placebo",
+      "The experimental group, taking a placebo",
+      "The control group, taking a catalyst",
+      "The placebo group, taking a control"
+     ],
      "ans": 0,
      "hint": "Which group does NOT receive the intervention — and what's the fake drug's name?",
      "steps": [
@@ -232,12 +345,23 @@
       "The group that doesn't receive the intervention is the control group.",
       "A drug with no medicinal value given to that group is a placebo."
      ],
-     "ex": {"main": "**The control group, taking a placebo.** Two study-guide blanks in one scenario — the comparison group, and the nothing-pill it gets.", "tip": "Placebo keeps both groups' experience identical, so the medicine is the only difference."}
+     "ex": {
+      "main": "**The control group, taking a placebo.** Two study-guide blanks in one scenario — the comparison group, and the nothing-pill it gets.",
+      "tip": "Placebo keeps both groups' experience identical, so the medicine is the only difference."
+     }
     },
     {
-     "id": "q5", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A scientist wants to test a growth serum on 10,000 blue whales in a single pool. Another lab wants to rerun her finished mouse study exactly as written. Which terms fit these two situations?",
-     "opts": ["The whale plan lacks feasibility; the mouse rerun tests repeatability", "The whale plan lacks repeatability; the mouse rerun tests feasibility", "Both are about inference", "Both are about control variables"],
+     "opts": [
+      "The whale plan lacks feasibility; the mouse rerun tests repeatability",
+      "The whale plan lacks repeatability; the mouse rerun tests feasibility",
+      "Both are about inference",
+      "Both are about control variables"
+     ],
      "ans": 0,
      "hint": "One asks CAN it be done at all; the other asks can it be done AGAIN.",
      "steps": [
@@ -245,12 +369,23 @@
       "Repeatability is the ability to repeat an experiment under the same conditions — exactly what the second lab is testing.",
       "So: whales → feasibility problem; mouse rerun → repeatability."
      ],
-     "ex": {"main": "**Whales → feasibility; mouse rerun → repeatability.** Can-it-be-done versus can-it-be-done-again.", "tip": "These two are easy to swap on a test — anchor them to an absurd example like the whale pool."}
+     "ex": {
+      "main": "**Whales → feasibility; mouse rerun → repeatability.** Can-it-be-done versus can-it-be-done-again.",
+      "tip": "These two are easy to swap on a test — anchor them to an absurd example like the whale pool."
+     }
     },
     {
-     "id": "q6", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A diagram shows one atom handing an electron over to another atom, leaving one + and one −. A second diagram shows two atoms sharing a pair of electrons between them. Which bonds are these?",
-     "opts": ["First ionic, second covalent", "First covalent, second ionic", "First hydrogen, second metallic", "First metallic, second hydrogen"],
+     "opts": [
+      "First ionic, second covalent",
+      "First covalent, second ionic",
+      "First hydrogen, second metallic",
+      "First metallic, second hydrogen"
+     ],
      "ans": 0,
      "hint": "Transfer vs. share.",
      "steps": [
@@ -258,12 +393,23 @@
       "Electrons SHARED between two atoms is a covalent bond.",
       "Hydrogen bonds are attractions BETWEEN molecules, and metallic bonds are a lattice of metal ions — neither matches."
      ],
-     "ex": {"main": "**Ionic (transfer), then covalent (share).** The study guide's diagrams test exactly this reading: follow where the electrons go.", "tip": "Dotted line between two separate water molecules = hydrogen bond; grid of + ions = metallic."}
+     "ex": {
+      "main": "**Ionic (transfer), then covalent (share).** The study guide's diagrams test exactly this reading: follow where the electrons go.",
+      "tip": "Dotted line between two separate water molecules = hydrogen bond; grid of + ions = metallic."
+     }
     },
     {
-     "id": "q7", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "Which correctly orders ionic, covalent and hydrogen bonds from STRONGEST to weakest?",
-     "opts": ["Covalent, ionic, hydrogen", "Ionic, covalent, hydrogen", "Hydrogen, ionic, covalent", "Covalent, hydrogen, ionic"],
+     "opts": [
+      "Covalent, ionic, hydrogen",
+      "Ionic, covalent, hydrogen",
+      "Hydrogen, ionic, covalent",
+      "Covalent, hydrogen, ionic"
+     ],
      "ans": 0,
      "hint": "The sharing bond is champion; the between-molecules attraction is weakest.",
      "steps": [
@@ -271,12 +417,23 @@
       "Ionic bonds — electrostatic attraction after a transfer — come next.",
       "Hydrogen bonds are only partial-charge attractions between molecules — the weakest."
      ],
-     "ex": {"main": "**Covalent, ionic, hydrogen.** This exact ranking is a blank on the study guide.", "tip": "Weak has a job though: water's cohesion, adhesion and capillary action all run on those weak hydrogen bonds."}
+     "ex": {
+      "main": "**Covalent, ionic, hydrogen.** This exact ranking is a blank on the study guide. If you ranked ionic first, that is the chemistry-class answer — in biology the question is about bonds inside a watery cell, and water pulls ionic bonds apart while covalent bonds hold.",
+      "tip": "Weak has a job though: water's cohesion, adhesion and capillary action all run on those weak hydrogen bonds. And the guide only asks you to rank three — metallic belongs to the labelling question, not this one."
+     }
     },
     {
-     "id": "q8", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "On a correctly drawn water molecule, where do the partial charges sit?",
-     "opts": ["Oxygen δ−, each hydrogen δ+", "Oxygen δ+, each hydrogen δ−", "All three atoms δ+", "Water has no partial charges"],
+     "opts": [
+      "Oxygen δ−, each hydrogen δ+",
+      "Oxygen δ+, each hydrogen δ−",
+      "All three atoms δ+",
+      "Water has no partial charges"
+     ],
      "ans": 0,
      "hint": "Oxygen pulls the shared electrons closer to itself.",
      "steps": [
@@ -284,12 +441,23 @@
       "Extra electron time near oxygen makes that end partially negative (δ−).",
       "The hydrogens, left slightly electron-poor, are partially positive (δ+)."
      ],
-     "ex": {"main": "**Oxygen δ−, hydrogens δ+.** That charge separation IS water's polarity — the fact behind half of Unit 2.", "tip": "The guide asks you to DRAW this — practice sketching the bent molecule with its charges once tonight."}
+     "ex": {
+      "main": "**Oxygen δ−, hydrogens δ+.** That charge separation IS water's polarity — the fact behind half of Unit 2.",
+      "tip": "The guide asks you to DRAW this — practice sketching the bent molecule with its charges once tonight."
+     }
     },
     {
-     "id": "q9", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "Water climbing up a paper towel dipped in a glass — sticking to the paper AND pulling more water up behind it — shows which combination?",
-     "opts": ["Capillary action — adhesion plus cohesion", "Cohesion alone, with no adhesion involved", "Adhesion alone, with no cohesion involved", "Denaturation of the water molecules"],
+     "opts": [
+      "Capillary action — adhesion plus cohesion",
+      "Cohesion alone, with no adhesion involved",
+      "Adhesion alone, with no cohesion involved",
+      "Denaturation of the water molecules"
+     ],
      "ans": 0,
      "hint": "Sticking to a surface + sticking to itself, with no energy added.",
      "steps": [
@@ -297,12 +465,23 @@
       "Water molecules pulling each other along is cohesion.",
       "Water moving along a polar material with no added energy, powered by both together, is capillary action."
      ],
-     "ex": {"main": "**Capillary action — adhesion and cohesion working together.** The guide's fill-in reads 'c________ a______': capillary action.", "tip": "Itself = cohesion. Surfaces = adhesion. The climb = capillary action."}
+     "ex": {
+      "main": "**Capillary action — adhesion and cohesion working together.** The guide's fill-in reads 'c________ a______': capillary action.",
+      "tip": "Itself = cohesion. Surfaces = adhesion. The climb = capillary action."
+     }
     },
     {
-     "id": "q10", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A solution has a pH of 3. Which statement is true?",
-     "opts": ["It is acidic, with more H+ ions", "It is basic, with more OH− ions", "It is acidic, with more OH− ions", "It is neutral"],
+     "opts": [
+      "It is acidic, with more H+ ions",
+      "It is basic, with more OH− ions",
+      "It is acidic, with more OH− ions",
+      "It is neutral"
+     ],
      "ans": 0,
      "hint": "Which side of 7 is 3 on — and which ion rules that side?",
      "steps": [
@@ -310,12 +489,23 @@
       "Acids have MORE H+ ions (protons).",
       "So pH 3 is acidic with an excess of H+."
      ],
-     "ex": {"main": "**Acidic, with more H+ ions.** Below 7 = acid = extra protons; above 7 = base = extra OH−.", "tip": "The guide makes you circle the ion each time — H+ goes with acid, OH− with base, every time."}
+     "ex": {
+      "main": "**Acidic, with more H+ ions.** Below 7 = acid = extra protons; above 7 = base = extra OH−.",
+      "tip": "The guide makes you circle the ion each time — H+ goes with acid, OH− with base, every time."
+     }
     },
     {
-     "id": "q11", "lv": 3, "from": "added", "kind": "order",
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "order",
      "q": "Put these four household liquids in order from MOST ACIDIC to MOST BASIC.",
-     "opts": ["Battery acid (pH 1)", "Lemon juice (pH 2)", "Pure water (pH 7)", "Bleach (pH 13)"],
+     "opts": [
+      "Battery acid (pH 1)",
+      "Lemon juice (pH 2)",
+      "Pure water (pH 7)",
+      "Bleach (pH 13)"
+     ],
      "ans": 0,
      "hint": "Most acidic means the LOWEST pH number.",
      "steps": [
@@ -324,12 +514,23 @@
       "Pure water sits neutral at 7.",
       "Bleach at pH 13 is deep in basic territory — most basic of the four."
      ],
-     "ex": {"main": "**Battery acid → lemon juice → water → bleach.** Reading the scale low-to-high IS reading acid-to-base.", "tip": "Watch for the trap where 'strongest acid' means the SMALLEST number — the scale runs backwards from instinct."}
+     "ex": {
+      "main": "**Battery acid → lemon juice → water → bleach.** Reading the scale low-to-high IS reading acid-to-base.",
+      "tip": "Watch for the trap where 'strongest acid' means the SMALLEST number — the scale runs backwards from instinct."
+     }
     },
     {
-     "id": "q12", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "Digestion breaks a starch polymer into single glucose monomers, using water to snip each link. Which process is this, and why is it named that?",
-     "opts": ["Hydrolysis — hydro (water) + lysis (to break)", "Dehydration synthesis — removing water to build", "Hydrolysis — hydro (water) + lysis (to build)", "Condensation — cooling water into chains"],
+     "opts": [
+      "Hydrolysis — hydro (water) + lysis (to break)",
+      "Dehydration synthesis — removing water to build",
+      "Hydrolysis — hydro (water) + lysis (to build)",
+      "Condensation — cooling water into chains"
+     ],
      "ans": 0,
      "hint": "Take the word apart: hydro + lysis.",
      "steps": [
@@ -337,12 +538,23 @@
       "Hydrolysis uses water to BREAK polymers into monomers — exactly what digestion does.",
       "Dehydration synthesis is the reverse: removing water to MAKE polymers."
      ],
-     "ex": {"main": "**Hydrolysis — water + break.** The guide asks for both word roots AND the circle-one 'forms or breaks polymers' — this covers all three blanks.", "tip": "The two processes are perfect mirrors: water in = chain breaks; water out = chain grows."}
+     "ex": {
+      "main": "**Hydrolysis — water + break.** The guide asks for both word roots AND the circle-one 'forms or breaks polymers' — this covers all three blanks.",
+      "tip": "The two processes are perfect mirrors: water in = chain breaks; water out = chain grows."
+     }
     },
     {
-     "id": "q13", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q13",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "Plants build their cell walls from one structural carbohydrate; crab shells and fungal cell walls use another. Which pair is correct?",
-     "opts": ["Plants: cellulose · animals/fungi: chitin", "Plants: chitin · animals/fungi: cellulose", "Plants: glycogen · animals/fungi: starch", "Plants: glucose · animals/fungi: sucrose"],
+     "opts": [
+      "Plants: cellulose · animals/fungi: chitin",
+      "Plants: chitin · animals/fungi: cellulose",
+      "Plants: glycogen · animals/fungi: starch",
+      "Plants: glucose · animals/fungi: sucrose"
+     ],
      "ans": 0,
      "hint": "CELL-ulose for plant CELL walls.",
      "steps": [
@@ -350,12 +562,23 @@
       "Chitin is the structural carbohydrate in some animals (insect and crab shells) and fungi.",
       "Glycogen and starch are STORAGE carbohydrates, not structural ones."
      ],
-     "ex": {"main": "**Cellulose for plants, chitin for animals and fungi.** Two separate blanks on the guide, one distinction.", "tip": "Both end in -ose/-in but the jobs rhyme: rigid walls vs. crunchy shells."}
+     "ex": {
+      "main": "**Cellulose for plants, chitin for animals and fungi.** Two separate blanks on the guide, one distinction.",
+      "tip": "Both end in -ose/-in but the jobs rhyme: rigid walls vs. crunchy shells."
+     }
     },
     {
-     "id": "q14", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "\"Sucrose\" and \"sucrase\" differ by one letter. Which is the sugar and which is the enzyme?",
-     "opts": ["Sucrose is the sugar (-ose); sucrase is the enzyme (-ase)", "Sucrose is the enzyme; sucrase is the sugar", "Both are sugars", "Both are enzymes"],
+     "opts": [
+      "Sucrose is the sugar (-ose); sucrase is the enzyme (-ase)",
+      "Sucrose is the enzyme; sucrase is the sugar",
+      "Both are sugars",
+      "Both are enzymes"
+     ],
      "ans": 0,
      "hint": "Carbohydrate names end in one three-letter suffix; enzyme names in another.",
      "steps": [
@@ -363,12 +586,23 @@
       "Enzyme names often end in -ase: lactase, protease, sucrase.",
       "So sucrose is the sugar and sucrase is the enzyme that digests it."
      ],
-     "ex": {"main": "**-ose = sugar, -ase = enzyme.** One vowel carries the whole meaning — a classic fill-in-the-blank trap.", "tip": "The guide asks for both endings as separate blanks. Say them out loud: OHS for sugar, ACE for enzyme."}
+     "ex": {
+      "main": "**-ose = sugar, -ase = enzyme.** One vowel carries the whole meaning — a classic fill-in-the-blank trap.",
+      "tip": "The guide asks for both endings as separate blanks. Say them out loud: OHS for sugar, ACE for enzyme."
+     }
     },
     {
-     "id": "q15", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A triglyceride is built from which parts?",
-     "opts": ["3 fatty acids and 1 glycerol", "1 fatty acid and 3 glycerols", "2 fatty acids and 2 glycerols", "4 fused rings"],
+     "opts": [
+      "3 fatty acids and 1 glycerol",
+      "1 fatty acid and 3 glycerols",
+      "2 fatty acids and 2 glycerols",
+      "4 fused rings"
+     ],
      "ans": 0,
      "hint": "The name counts it for you: TRI-glyceride.",
      "steps": [
@@ -376,12 +610,23 @@
       "They attach to a single glycerol backbone.",
       "Four fused rings describes a steroid, not a triglyceride."
      ],
-     "ex": {"main": "**3 fatty acids + 1 glycerol.** Drawn, it looks like a capital E — one spine, three arms.", "tip": "The guide asks you to draw it — sketch the E-shape once and it's yours."}
+     "ex": {
+      "main": "**3 fatty acids + 1 glycerol.** Drawn, it looks like a capital E — one spine, three arms.",
+      "tip": "The guide asks you to draw it — sketch the E-shape once and it's yours."
+     }
     },
     {
-     "id": "q16", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A phospholipid has a hydrophilic ____ and a hydrophobic ____, and these molecules form the lipid ____ of the cell membrane.",
-     "opts": ["head · tail · bilayer", "tail · head · bilayer", "head · tail · monolayer", "ring · chain · bilayer"],
+     "opts": [
+      "head · tail · bilayer",
+      "tail · head · bilayer",
+      "head · tail · monolayer",
+      "ring · chain · bilayer"
+     ],
      "ans": 0,
      "hint": "Which end loves water, and how many layers thick is the membrane?",
      "steps": [
@@ -389,12 +634,23 @@
       "The fatty-acid TAIL is hydrophobic — tails hide in the middle, away from water.",
       "Two layers of these, tails-in, form the lipid BILAYER."
      ],
-     "ex": {"main": "**Head · tail · bilayer** — three blanks straight off the guide, one molecule.", "tip": "This is also the guide's amphipathic example: one molecule, both water-loving and water-fearing parts."}
+     "ex": {
+      "main": "**Head · tail · bilayer** — three blanks straight off the guide, one molecule.",
+      "tip": "This is also the guide's amphipathic example: one molecule, both water-loving and water-fearing parts."
+     }
     },
     {
-     "id": "q17", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "Butter is solid on the counter; olive oil is liquid. Based on Unit 2, which explanation is right?",
-     "opts": ["Butter is saturated (full of hydrogens, animal source); olive oil is unsaturated (has a double bond, plant source)", "Butter is unsaturated (double bond); olive oil is saturated (full of hydrogens)", "Butter contains chitin; olive oil contains cellulose", "Both have identical structures; only temperature differs"],
+     "opts": [
+      "Butter is saturated (full of hydrogens, animal source); olive oil is unsaturated (has a double bond, plant source)",
+      "Butter is unsaturated (double bond); olive oil is saturated (full of hydrogens)",
+      "Butter contains chitin; olive oil contains cellulose",
+      "Both have identical structures; only temperature differs"
+     ],
      "ans": 0,
      "hint": "Solid at room temperature points to which kind of fat, from which source?",
      "steps": [
@@ -402,12 +658,23 @@
       "Unsaturated triglycerides have at least one DOUBLE BOND, are LIQUID at room temperature, and come from PLANTS — olive oil fits all three.",
       "The double bond kinks the tail so the molecules can't pack tightly — that's WHY unsaturated fats stay liquid."
      ],
-     "ex": {"main": "**Butter saturated, olive oil unsaturated.** The guide's six blanks on fats compress into this one kitchen comparison.", "tip": "Remember it as a package: saturated = H-full + solid + animal. Unsaturated = double bond + liquid + plant."}
+     "ex": {
+      "main": "**Butter saturated, olive oil unsaturated.** The guide's six blanks on fats compress into this one kitchen comparison.",
+      "tip": "Remember it as a package: saturated = H-full + solid + animal. Unsaturated = double bond + liquid + plant."
+     }
     },
     {
-     "id": "q18", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "Steroids are lipids with 4 fused rings that often act as chemical messengers. What is the general name for those messengers?",
-     "opts": ["Hormones", "Enzymes", "Placebos", "Monomers"],
+     "opts": [
+      "Hormones",
+      "Enzymes",
+      "Placebos",
+      "Monomers"
+     ],
      "ans": 0,
      "hint": "The guide's phrase: 'chemical messengers.'",
      "steps": [
@@ -415,12 +682,23 @@
       "Enzymes are catalysts, not messengers; a placebo is a fake drug from Unit 1.",
       "Four fused rings + messenger job = the steroid signature."
      ],
-     "ex": {"main": "**Hormones.** Four rings, carrying messages — that's the steroid card in one line.", "tip": "Don't mix the lipid jobs: waxes waterproof, steroids message, triglycerides store energy, phospholipids build membranes."}
+     "ex": {
+      "main": "**Hormones.** Four rings, carrying messages — that's the steroid card in one line.",
+      "tip": "Don't mix the lipid jobs: waxes waterproof, steroids message, triglycerides store energy, phospholipids build membranes."
+     }
     },
     {
-     "id": "q19", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "A double-stranded DNA molecule is 22% adenine (A). Using Chargaff's rule, what are the other three percentages?",
-     "opts": ["T = 22%, G = 28%, C = 28%", "T = 28%, G = 22%, C = 28%", "T = 22%, G = 22%, C = 34%", "T = 78%, G = 11%, C = 11%"],
+     "opts": [
+      "T = 22%, G = 28%, C = 28%",
+      "T = 28%, G = 22%, C = 28%",
+      "T = 22%, G = 22%, C = 34%",
+      "T = 78%, G = 11%, C = 11%"
+     ],
      "ans": 0,
      "hint": "A pairs with T; whatever is left splits evenly between G and C.",
      "steps": [
@@ -428,12 +706,23 @@
       "A and T together take 44%, leaving 100 − 44 = 56% for G and C.",
       "%G = %C, so each gets 56 ÷ 2 = 28%."
      ],
-     "ex": {"main": "**T 22%, G 28%, C 28%.** Match the partner, then split the remainder in half — the same two moves work for any starting number.", "tip": "The guide's own version starts from 37% C — run that one too: G 37%, A 13%, T 13%."}
+     "ex": {
+      "main": "**T 22%, G 28%, C 28%.** Match the partner, then split the remainder in half — the same two moves work for any starting number.",
+      "tip": "The guide's own version starts from 37% C — run that one too: G 37%, A 13%, T 13%."
+     }
     },
     {
-     "id": "q20", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q20",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "Which row correctly compares DNA and RNA?",
-     "opts": ["DNA: bases A,T,G,C and deoxyribose sugar · RNA: bases A,U,G,C and ribose sugar", "DNA: bases A,U,G,C and ribose · RNA: bases A,T,G,C and deoxyribose", "Both use bases A,T,G,C; only the sugar differs", "Both use ribose; only the bases differ"],
+     "opts": [
+      "DNA: bases A,T,G,C and deoxyribose sugar · RNA: bases A,U,G,C and ribose sugar",
+      "DNA: bases A,U,G,C and ribose · RNA: bases A,T,G,C and deoxyribose",
+      "Both use bases A,T,G,C; only the sugar differs",
+      "Both use ribose; only the bases differ"
+     ],
      "ans": 0,
      "hint": "RNA swaps one base and drops the 'deoxy-'.",
      "steps": [
@@ -441,12 +730,23 @@
       "DNA's sugar is deoxyribose; RNA's is ribose.",
       "Two differences, and both point the same way: RNA is the 'U and ribose' one."
      ],
-     "ex": {"main": "**DNA = ATGC + deoxyribose; RNA = AUGC + ribose.** Four blanks on the guide, one clean table in your head.", "tip": "U is RNA's signature — see a U, think RNA instantly."}
+     "ex": {
+      "main": "**DNA = ATGC + deoxyribose; RNA = AUGC + ribose.** Four blanks on the guide, one clean table in your head.",
+      "tip": "U is RNA's signature — see a U, think RNA instantly."
+     }
     },
     {
-     "id": "q21", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q21",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "All 20 amino acids share the same central-carbon frame — an amino group, a carboxyl group, and a hydrogen. Which part CHANGES from one amino acid to the next?",
-     "opts": ["The R group", "The amino group", "The carboxyl group", "The central carbon"],
+     "opts": [
+      "The R group",
+      "The amino group",
+      "The carboxyl group",
+      "The central carbon"
+     ],
      "ans": 0,
      "hint": "One part is literally named like a variable.",
      "steps": [
@@ -454,12 +754,23 @@
       "The fourth part — the R group — is different in each of the 20 amino acids.",
       "That variable R group is what makes each amino acid chemically unique."
      ],
-     "ex": {"main": "**The R group.** R is the variable — the other three parts never change.", "tip": "The guide asks you to DRAW the 4-part structure. Sketch it once: C in the middle, amino left, carboxyl right, H below, R on top."}
+     "ex": {
+      "main": "**The R group.** R is the variable — the other three parts never change.",
+      "tip": "The guide asks you to DRAW the 4-part structure. Sketch it once: C in the middle, amino left, carboxyl right, H below, R on top."
+     }
     },
     {
-     "id": "q22", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q22",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "Which set lists the three things that can denature a protein, AND the four levels of protein organization?",
-     "opts": ["Heat, pH, chemicals · primary, secondary, tertiary, quaternary", "Heat, light, sound · first, second, third, fourth", "Water, salt, sugar · primary, secondary, tertiary, quaternary", "Heat, pH, chemicals · monomer, dimer, trimer, polymer"],
+     "opts": [
+      "Heat, pH, chemicals · primary, secondary, tertiary, quaternary",
+      "Heat, light, sound · first, second, third, fourth",
+      "Water, salt, sugar · primary, secondary, tertiary, quaternary",
+      "Heat, pH, chemicals · monomer, dimer, trimer, polymer"
+     ],
      "ans": 0,
      "hint": "Three shape-wreckers, then the four -ary words.",
      "steps": [
@@ -467,12 +778,23 @@
       "The four levels of protein organization: primary, secondary, tertiary, quaternary.",
       "Monomer/dimer/polymer is chain-length vocabulary, not protein folding levels."
      ],
-     "ex": {"main": "**Heat, pH, chemicals — and primary through quaternary.** Two of the guide's free-answer blanks in one question.", "tip": "The Enzymes unit already gave you the WHY: denaturing wrecks shape, and shape is function."}
+     "ex": {
+      "main": "**Heat, pH, chemicals — and primary through quaternary.** Two of the guide's free-answer blanks in one question.",
+      "tip": "The Enzymes unit already gave you the WHY: denaturing wrecks shape, and shape is function."
+     }
     },
     {
-     "id": "q23", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q23",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "Chemically speaking, breaking a bond ____ energy and making a bond ____ energy — and a catalyst is ____ in the reaction.",
-     "opts": ["absorbs · releases · not used up", "releases · absorbs · not used up", "absorbs · releases · consumed", "releases · absorbs · consumed"],
+     "opts": [
+      "absorbs · releases · not used up",
+      "releases · absorbs · not used up",
+      "absorbs · releases · consumed",
+      "releases · absorbs · consumed"
+     ],
      "ans": 0,
      "hint": "Bonds are like glue: pulling glue apart takes work; setting glue gives off heat.",
      "steps": [
@@ -480,12 +802,23 @@
       "Making a bond RELEASES energy.",
       "A catalyst speeds the reaction but comes out unchanged — it is never used up."
      ],
-     "ex": {"main": "**Absorbs · releases · not used up.** If you've heard 'breaking ATP's bond releases energy' — that's shorthand for the whole reaction: the new bonds formed afterward release MORE than the broken one cost. A single bond still costs energy to break.", "tip": "This is one of the most-missed ideas in intro bio — nailing the direction here is worth real points Monday."}
+     "ex": {
+      "main": "**Absorbs · releases · not used up.** Breaking a bond always COSTS energy — like pulling two magnets apart. Making a bond gives energy back. If you had it the other way round, that is the ATP shorthand talking: \"breaking ATP releases energy\" describes the whole reaction, where the new bonds formed afterwards release more than the break cost. The single break still absorbed energy.",
+      "tip": "This is one of the most-missed ideas in intro bio — nailing the direction here is worth real points Monday."
+     }
     },
     {
-     "id": "q24", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q24",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "From the CHON(PS) chart: which row correctly matches a macromolecule to its monomer and polymer?",
-     "opts": ["Proteins — amino acids → polypeptide", "Carbohydrates — fatty acids → polysaccharide", "Nucleic acids — glucose → DNA", "Lipids — nucleotides → triglyceride"],
+     "opts": [
+      "Proteins — amino acids → polypeptide",
+      "Carbohydrates — fatty acids → polysaccharide",
+      "Nucleic acids — glucose → DNA",
+      "Lipids — nucleotides → triglyceride"
+     ],
      "ans": 0,
      "hint": "Match each family to its own building block.",
      "steps": [
@@ -493,7 +826,35 @@
       "Carbohydrates build from monosaccharides like glucose (fatty acids belong to lipids).",
       "Nucleic acids build from nucleotides (glucose is a sugar monomer), and lipids build from fatty acids + glycerol (not nucleotides)."
      ],
-     "ex": {"main": "**Proteins: amino acids → polypeptide.** The chart's full set: carbs = monosaccharide → polysaccharide; lipids = fatty acids + glycerol → triglyceride; nucleic acids = nucleotide → DNA/RNA.", "tip": "The blank CHON(PS) chart is on the guide — fill the whole 4×4 from memory once tonight; it's the highest-value single item on the page."}
+     "ex": {
+      "main": "**Proteins: amino acids → polypeptide.** The chart's full set: carbs = monosaccharide → polysaccharide; lipids = fatty acids + glycerol → triglyceride; nucleic acids = nucleotide → DNA/RNA.",
+      "tip": "The blank CHON(PS) chart is on the guide — fill the whole 4×4 from memory once tonight; it's the highest-value single item on the page."
+     }
+    },
+    {
+     "id": "q25",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Of the four biomolecule types, which one is NONPOLAR — and what does that mean for it in water?",
+     "opts": [
+      "Lipids — they will not dissolve in water",
+      "Carbohydrates — they will not dissolve in water",
+      "Nucleic acids — they will not dissolve in water",
+      "Proteins — they will not dissolve in water"
+     ],
+     "ans": 0,
+     "hint": "Picture salad dressing sitting in two layers.",
+     "steps": [
+      "Polar things mix with water, because water is polar itself.",
+      "Carbohydrates carry –OH groups and nucleic acids carry a charged phosphate backbone — both polar.",
+      "Proteins carry both polar and nonpolar regions, so they are the mixed case, not the nonpolar one.",
+      "That leaves lipids — fats and oils — as the nonpolar type, which is why oil separates out of water."
+     ],
+     "ex": {
+      "main": "**Lipids.** The guide asks which of the four are POLAR, and the cleanest way in is to name the one that isn't: lipids. Carbohydrates, proteins and nucleic acids all carry polar groups — nucleic acids especially, with that charged phosphate backbone.",
+      "tip": "If you only name two, check whether you left out nucleic acids — DNA is one of the most strongly polar molecules in the cell."
+     }
     }
    ]
   }

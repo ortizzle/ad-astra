@@ -653,6 +653,66 @@ optional extra time with a teacher; tutoring is a standing appointment.
   time, a non-tutoring day renders nothing, and (documented above) that it
   is not accidentally school-day-gated.
 
+### What the completed guide got wrong (v141, THIS APP ONLY)
+
+Chris uploaded Sedona's **completed** Test 1 study guide the day before the
+test ("Biology Study Guide - Test 1 - ANSWERS.pdf", Drive, 2026-08-30) and
+asked for the material to be reviewed against it. Read the same way the
+first pass was — `download_file_content`, decode, render the pages with
+`pypdfium2` and read the images — since the answers are handwritten and no
+text extraction can see them at all.
+
+**Confirmed with Chris before changing anything: these were her own answers,
+not checked against a teacher's key.** That single fact decided every edit
+below, and it is the reason to ask rather than infer — had they been the
+teacher's, the correct response would have been the opposite in two of the
+three cases (match the key, note the real chemistry in the explanation). A
+graded question that trains her against what the test marks correct is worse
+than no question.
+
+Most of the guide is right — all of Unit 1's vocabulary, the CHON(PS) chart,
+all four levels of protein organisation, saturated vs. unsaturated, and the
+Chargaff calculation (37% C → 37% G → 13% A, 13% T). **The first blank now
+reads "hypothesis", so the v139 flag is resolved** — she fixed it herself.
+Three answers were wrong, and all three had already been flagged as open
+questions in v139's `parentNote`, so this closes them:
+
+- **"Breaking bonds ___ energy" — she wrote "releases" (and "making bonds
+  uses").** It is the reverse, and this is not a convention difference:
+  pulling two bonded atoms apart always costs energy. The misconception comes
+  straight from the "breaking ATP's phosphate bond releases energy"
+  shorthand, which describes the whole reaction — the new bonds formed
+  afterwards release more than the break cost. `c26` now leads with the
+  magnet analogy and `q23`'s explanation names the ATP shorthand outright.
+  **The shipped answer was already correct and did not move.**
+- **Bond strength order — she wrote "ionic, covalent, metallic, hydrogen".**
+  Genuinely ambiguous between courses: general chemistry ranks ionic first
+  (lattice energy), biology ranks covalent first, because the question is
+  about bonds inside a watery cell where water pulls ionic bonds apart. This
+  is a biology class, so `c9`/`q7` keep covalent-first — but both now NAME
+  the other convention rather than treating her answer as simply wrong, and
+  note that the blank asks for three types, not the four she listed.
+- **"Which biomolecules are polar" — she wrote carbohydrates and proteins.**
+  The shipped card was *also* incomplete, in the other direction (it said
+  carbohydrates and nucleic acids, calling proteins "the mixed case"). The
+  defensible teaching is the odd one out: **lipids are nonpolar; the other
+  three all carry polar groups**, nucleic acids most of all with their
+  charged phosphate backbone. `c11` rewritten, and a new **`q25`** added —
+  the guide has a blank for this and nothing graded covered it. Its four
+  options are identical but for the biomolecule name, so the length-bias
+  check stays clean.
+
+`parentNote` was rewritten around what is now known rather than what was
+open, and adds the one thing the multiple-choice app cannot practise: **the
+real test is fill-in-the-blank, and five of her right answers are
+misspelled** — experemental, controled, inferance, deoxiribose, matallic.
+
+`libv` bumped to 2 with `updatedAt` stamped in the past, per the
+approval-race rule — so the fix lands even though the unit was shipped
+before Chris approved it. `tools/test_biosg1.js` gained nine assertions
+covering all three corrections by their *teaching*, not merely their
+presence.
+
 ### The lesson you meant (v138 / Wayfinder v115, both apps)
 
 Chris asked for a UX review; its top finding was his own report made
