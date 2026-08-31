@@ -1,4 +1,5 @@
-/* v142 — the physics formula sheet now carries the equations of motion, and
+/* v143 — the physics reference sheet is the teacher's own Equations sheet,
+   transcribed in her notation and covering the whole year; and
    the textbook's Describing Motion unit shelves with the other Kinematics 1
    parts and plays end to end. */
 const { chromium } = require('playwright');
@@ -20,19 +21,33 @@ const PORT = process.argv[2] || 8142;
     const eqs = [...document.querySelectorAll('.frow .eq')].map(x => x.textContent);
     return {txt, heads, eqs};
   });
-  ck('the physics sheet opens and lists equations of motion',
-     /Equations of motion/i.test(sheet.heads.join('|')), sheet.heads);
-  ck('all four constant-acceleration equations are on it',
-     ['v = v₀ + at', 'd = d₀ + v₀t + ½at²', 'v² = v₀² + 2a(d − d₀)', 'd = d₀ + ½(v₀ + v)t']
+  ck('the physics sheet opens and carries the teacher\'s own section headings',
+     ['General','Kinematics',"Newton's Laws",'Work and Energy','Impulse and Momentum',
+      'Waves and Light','Electric Circuits','Physical Constants']
+       .every(h => sheet.heads.includes(h)), sheet.heads);
+  ck('all five of her kinematics equations are on it, in her notation',
+     ['a = (v_f \u2212 v_i) / t',
+      '\u0394x = v_i t + \u00bdt(v_f \u2212 v_i)',
+      '\u0394x = ((v_i + v_f) / 2) t',
+      '\u0394x = v_i t + \u00bdat\u00b2',
+      '\u0394x = (v_f\u00b2 \u2212 v_i\u00b2) / 2a']
        .every(e => sheet.eqs.includes(e)),
-     sheet.eqs.slice(0, 8));
+     sheet.eqs.slice(0, 10));
+  ck('the later units are there too, not just kinematics',
+     ['F_net = ma', 'KE = \u00bdmv\u00b2', 'p = mv', 'v = f\u03bb', '\u0394V = IR']
+       .every(e => sheet.eqs.includes(e)),
+     sheet.eqs.length);
   ck('it still carries the conversion factors it had before',
      sheet.eqs.some(e => /18 228/.test(e)) && sheet.eqs.some(e => /5280/.test(e)),
      sheet.eqs.filter(e => /ft/.test(e)).slice(0, 4));
-  ck('g and its sign rule are stated',
-     /9\.80 m\/s²/.test(sheet.txt) && /always positive/i.test(sheet.txt), null);
-  ck('the worksheet-vs-textbook notation note is there',
-     /Δx/.test(sheet.txt) && /d − d₀/.test(sheet.txt), null);
+  ck('her sheet\'s NEGATIVE g is what is printed, not the textbook\'s +9.80',
+     sheet.eqs.some(e => /g = \u22129\.8 m\/s\u00b2/.test(e)) && !/9\.80 m\/s\u00b2/.test(sheet.txt),
+     sheet.eqs.filter(e => /9\.8/.test(e)));
+  ck('the three-notation note is there, and it names the g conflict',
+     /\u0394x/.test(sheet.txt) && /d \u2212 d\u2080/.test(sheet.txt) &&
+     /sign of g/i.test(sheet.txt), null);
+  ck('the textbook blocks are labelled as the textbook\'s',
+     sheet.heads.some(h => /from the textbook/i.test(h)), sheet.heads);
 
   // ---- the unit ------------------------------------------------------------
   const seed = await p.evaluate(async () => {

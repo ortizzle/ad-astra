@@ -737,10 +737,14 @@ mean, and a notation row. Conversion factors keep their sections underneath.
 - `.frow` is `flex-direction:column` and wraps, so long equations are safe
   there — this is NOT the `.row .v` nowrap trap.
 
-> ⚠️ **No separate teacher equation sheet was ever found in Drive.** The
-> equations on the sheet come from the textbook chapter Chris uploaded
-> (Table 5–2 and the chapter-5 Key Equations summary). If the teacher issued
-> a distinct equations handout, it should replace this transcription.
+> ⚠️ **Superseded by v143 — the teacher's own sheet DOES exist.** v142
+> shipped the textbook's Table 5–2 transcription and said in this file that
+> no separate handout was in Drive. That was wrong: `Equations.docx` was
+> sitting in the Physics 8 folder and my `parentId` search simply didn't
+> return it. Chris pointed at it ("I resaved the equation sheet in physics
+> folder") and it replaced the transcription. **A search that comes back
+> empty is not evidence a file is absent** — say "I didn't find it", not
+> "it isn't there", and ask.
 
 **The unit is `phys-ch3-describing-motion.json`** (`unit-phys-ch3`), from
 chapter 3, shelving onto the existing `Kinematics 1` spine. It is
@@ -777,6 +781,64 @@ equations and still carries its conversion factors, g and the notation note
 render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
+
+### Her teacher's sheet, all of it (v143)
+
+`Equations.docx` — the real handout, found in the Physics 8 Drive folder
+after v142 shipped the textbook's version. It replaces that transcription
+outright, per the `SHEETS` rule that a sheet is *the teacher's own reference
+sheet, transcribed*.
+
+**Getting the equations out took parsing, not extraction.** Drive's
+`read_file_content` returned only the eight section headings — General /
+Kinematics / Newton's Laws / Work and Energy / Impulse and Momentum / Waves
+and Light / Electric Circuits / Physical Constants — and nothing between
+them, because every equation is an **OMML** expression (`<m:oMath>`), which
+Drive's text extractor drops silently. A `.docx` is a zip: downloading it,
+unzipping `word/document.xml` and walking the `m:` namespace recovered all
+56 expressions exactly (fractions, sub/superscripts, radicals, the `|b|`
+delimiter pair), with zero images to render. **If a Word document comes back
+as headings with nothing under them, look for OMML before assuming the file
+is empty or scanned.**
+
+- **It is the WHOLE YEAR, not kinematics** — Newton's Laws, energy, momentum,
+  waves and optics, circuits, constants. All of it ships now rather than
+  being held back until her class reaches each unit: it is a reference sheet,
+  she has the paper copy already, and gating it would be the app deciding
+  what she is allowed to look up.
+- **Her notation, not the book's.** The sheet writes `Δx`, `v_i`, `v_f`; the
+  textbook writes `d − d₀`, `v₀`, `v`. The transcription keeps hers, and the
+  `Notation` block (ours, kept from v142 and now earning its place three
+  times over) says the two are the same quantities.
+- **The sign of g genuinely conflicts between her two sources, and the sheet
+  says so.** Her teacher's sheet builds the minus in — `g = −9.8 m/s² ≈ −10
+  m/s²`; the textbook writes `g = +9.80` and puts the minus in the equation.
+  Neither is wrong, and a student who mixes them loses marks quietly, so the
+  Notation block names both and tells her to use her class's convention.
+- **The missing-quantity labels are ours; every equation is hers.** Her five
+  kinematics equations map onto missing Δx / missing a (twice — two forms of
+  the same relation) / missing `v_f` / missing t, which is exactly how
+  `phys-kinematics-equations.json` already teaches choosing between them.
+  Labelling is not editing.
+- **Two things on the sheet were transcribed as printed rather than
+  "corrected".** `Δp = −Δp` is literally what she has on paper — shorthand
+  for one object's momentum change being minus the other's, with the
+  subscripted `m₂Δv₂ = −m₁Δv₁` on the next line — so the label carries the
+  meaning and the equation stays as issued. And `tan θ` is absent from her
+  Physical Constants block; it was not added, because a sheet with extras on
+  it is no longer the sheet she is holding.
+- **Unicode subscripts where they exist, `_x` where they do not** — the
+  convention `algeo`'s `A_B`/`P_B` already set. `F_net`, `v_i`, `d_o` and
+  `m₁v₁_i` all read cleanly at 390px; verified nothing overflows (`.frow` is
+  `flex-direction:column` and wraps).
+- Two blocks kept from v142 sit under the teacher's sections and are
+  **labelled as the textbook's** in their own headings, so provenance is
+  visible on screen rather than only in this file.
+
+`tools/test_phys_ch3.js` now asserts all eight of her section headings, all
+five kinematics equations verbatim, a sample from each later unit, the
+negative g (and that the textbook's +9.80 is gone), the notation block naming
+the g conflict, and that the textbook blocks say they are the textbook's.
 
 ### The lesson you meant (v138 / Wayfinder v115, both apps)
 

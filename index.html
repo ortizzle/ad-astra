@@ -1342,7 +1342,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v142 · equations on the sheet';
+const APP_VERSION = 'v143 · her teacher\'s sheet';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3534,34 +3534,72 @@ const SHEETS = {
         ['Distributive','a(b + c) = ab + ac']]}
     ]},
   physics: { nm:'Formulas & conversions', ic:'📐',
-    note:'The equations of motion from the textbook, plus the class Unusual Conversion Factors sheet. Nobody memorizes 18 228 — that is what a sheet is for. The method is yours; the facts live here.',
+    note:'Your teacher\'s own equation sheet, transcribed exactly as issued — the whole year, so scroll to the unit you are in. Underneath it: two reference blocks from the textbook (marked as such) and the class Unusual Conversion Factors table. Nobody memorizes 18 228 — that is what a sheet is for. The method is yours; the facts live here.',
     sections:[
-      /* Table 5–2, "Equations of Motion for Uniform Acceleration", from the
-         textbook chapter the teacher shared. Labelled by the quantity each one
-         LEAVES OUT, which is how her homework unit already teaches picking
-         between them — five quantities, cross off the one neither given nor
-         asked for, use the equation missing that letter. */
-      {h:'Equations of motion · constant acceleration', rows:[
-        ['Missing position','v = v₀ + at'],
-        ['Missing final velocity','d = d₀ + v₀t + ½at²'],
-        ['Missing time','v² = v₀² + 2a(d − d₀)'],
-        ['Missing acceleration','d = d₀ + ½(v₀ + v)t']]},
-      {h:'Definitions', rows:[
-        ['Average velocity','v = Δd/Δt = (d₁ − d₀)/(t₁ − t₀)'],
-        ['Average acceleration','a = Δv/Δt = (v₁ − v₀)/(t₁ − t₀)'],
-        ['Displacement','Δd = d₁ − d₀'],
-        ['Position from average velocity','d = d₀ + vt']]},
-      {h:'Free fall', rows:[
-        ['Acceleration due to gravity','g = 9.80 m/s²'],
-        ['The sign of g','g is always positive. If up is positive, the acceleration is −g.']]},
-      {h:'What a motion graph tells you', rows:[
+      /* The teacher's Equations.docx, section for section, in her own notation
+         (Δx, v_i, v_f — not the textbook's d − d₀, v₀, v). The kinematics rows
+         carry the missing-quantity labels her homework unit already teaches:
+         five quantities, cross off the one neither given nor asked for, use
+         the equation missing that letter. The labels are ours; every equation
+         is hers. */
+      {h:'General', rows:[
+        ['Quadratic formula · solved for t','t = (−b ± √(b² − 4ac)) / 2a'],
+        ['Percent error','%Error = (|b| / y_max) · 100']]},
+      {h:'Kinematics', rows:[
+        ['Missing Δx','a = (v_f − v_i) / t'],
+        ['Missing a','Δx = v_i t + ½t(v_f − v_i)'],
+        ['Missing a · the same one, tidied','Δx = ((v_i + v_f) / 2) t'],
+        ['Missing v_f','Δx = v_i t + ½at²'],
+        ['Missing t','Δx = (v_f² − v_i²) / 2a']]},
+      {h:'Newton\'s Laws', rows:[
+        ['Second law','F_net = ma'],
+        ['Kinetic friction','F_fk = μ_k F_N'],
+        ['Static friction · the most it can be','F_fs ≤ μ_s F_N'],
+        ['Spring force','F = −kx'],
+        ['Gravitation','F_G = −G m₁m₂ / r²']]},
+      {h:'Work and Energy', rows:[
+        ['Work','W = FΔx cos θ'],
+        ['Kinetic energy','KE = ½mv²'],
+        ['Gravitational potential energy','PE = mgh'],
+        ['Power','P = W / t = Fv'],
+        ['Elastic potential energy','PE = ½kx²'],
+        ['Work–energy theorem','FΔx cos θ = (KE_f + PE_f) − (KE_o + PE_o)']]},
+      {h:'Impulse and Momentum', rows:[
+        ['Impulse','J = Ft = Δp'],
+        ['In a collision · one object\'s Δp is minus the other\'s','Δp = −Δp'],
+        ['Momentum','p = mv'],
+        ['The same thing, written out','m₂Δv₂ = −m₁Δv₁'],
+        ['Conservation of momentum','m₁v₁_i + m₂v₂_i = m₁v₁_f + m₂v₂_f']]},
+      {h:'Waves and Light', rows:[
+        ['Wave speed · f is frequency here','v = fλ'],
+        ['Index of refraction','n = c_v / c_m = λ_v / λ_m'],
+        ['Snell\'s law','n₁ sin θ₁ = n₂ sin θ₂'],
+        ['Lens and mirror · f is focal length here','1 / f = 1 / d_o + 1 / d_i'],
+        ['Magnification','M = h_i / h_o = d_i / d_o']]},
+      {h:'Electric Circuits', rows:[
+        ['Ohm\'s law','ΔV = IR'],
+        ['Power','P = IΔV = I²R'],
+        ['Resistors in series','R_T = R₁ + R₂ + . . .'],
+        ['Resistors in parallel','1 / R_eq = 1 / R₁ + 1 / R₂ + . . .']]},
+      {h:'Physical Constants', rows:[
+        ['Acceleration due to gravity','g = −9.8 m/s² ≈ −10 m/s²'],
+        ['Speed of light in a vacuum','c_v = 3 × 10⁸ m/s'],
+        ['Sine','sin θ = opp / hyp'],
+        ['Cosine','cos θ = adj / hyp'],
+        ['Gravitational constant','G = 6.67 × 10⁻¹¹ N·m² / kg²']]},
+      /* Ours, not the sheet's — three notations are in play at once (her
+         worksheets, this sheet, the textbook) and the sign of g genuinely
+         differs between two of them, which is the kind of thing that costs
+         marks quietly. */
+      {h:'Notation · your sheet vs. the textbook', rows:[
+        ['Same quantities, different letters','Your sheet writes Δx, v_i, v_f. The textbook writes d − d₀, v₀, v. They mean the same things.'],
+        ['The sign of g','Your sheet builds the minus in: g = −9.8 m/s². The textbook writes g = +9.80 and puts the minus in the equation instead. Use your class\'s convention.'],
+        ['Watch the subscripts','_i and _o both mean "initial" in the energy equations. In the lens equation d_o is the OBJECT distance and d_i the IMAGE distance — same letters, different job.']]},
+      {h:'Reading a motion graph · from the textbook', rows:[
         ['Slope of a position–time graph','velocity'],
         ['Slope of the tangent to a curve','instantaneous velocity'],
         ['Slope of a velocity–time graph','acceleration'],
         ['Area under a velocity–time graph','displacement']]},
-      {h:'Notation', rows:[
-        ['Worksheets vs. the textbook','Δx on your worksheets = d − d₀ in the book. Same quantity.'],
-        ['The subscript 0','Means "initial" — the value at the moment the clock starts.']]},
       {h:'Time', rows:[
         ['Day','86 400 sec = 1 day'],
         ['Hour','3600 sec = 1 hr'],
