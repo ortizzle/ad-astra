@@ -1342,7 +1342,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v141 · what the guide got wrong';
+const APP_VERSION = 'v142 · equations on the sheet';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2851,7 +2851,7 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/alg-topic2-04.json', 'content/alg-topic2-05.json', 'content/alg-topic2-06.json',
   'content/alg-topic2-07.json', 'content/sg-test2.json', 'content/phys-kinematics-equations.json',
   'content/phys-ramp-lab.json', 'content/bio-quiz1-review.json', 'content/bio-unit-3-enzymes.json',
-  'content/bio-sg-test1.json'];
+  'content/bio-sg-test1.json', 'content/phys-ch3-describing-motion.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same
@@ -3533,9 +3533,35 @@ const SHEETS = {
         ['Commutative','a + b = b + a  ·  ab = ba'],
         ['Distributive','a(b + c) = ab + ac']]}
     ]},
-  physics: { nm:'Conversion factors', ic:'🔀',
-    note:'The class Unusual Conversion Factors sheet, as issued. Nobody memorizes 18 228 — that is what the sheet is for. The method is yours; the numbers live here.',
+  physics: { nm:'Formulas & conversions', ic:'📐',
+    note:'The equations of motion from the textbook, plus the class Unusual Conversion Factors sheet. Nobody memorizes 18 228 — that is what a sheet is for. The method is yours; the facts live here.',
     sections:[
+      /* Table 5–2, "Equations of Motion for Uniform Acceleration", from the
+         textbook chapter the teacher shared. Labelled by the quantity each one
+         LEAVES OUT, which is how her homework unit already teaches picking
+         between them — five quantities, cross off the one neither given nor
+         asked for, use the equation missing that letter. */
+      {h:'Equations of motion · constant acceleration', rows:[
+        ['Missing position','v = v₀ + at'],
+        ['Missing final velocity','d = d₀ + v₀t + ½at²'],
+        ['Missing time','v² = v₀² + 2a(d − d₀)'],
+        ['Missing acceleration','d = d₀ + ½(v₀ + v)t']]},
+      {h:'Definitions', rows:[
+        ['Average velocity','v = Δd/Δt = (d₁ − d₀)/(t₁ − t₀)'],
+        ['Average acceleration','a = Δv/Δt = (v₁ − v₀)/(t₁ − t₀)'],
+        ['Displacement','Δd = d₁ − d₀'],
+        ['Position from average velocity','d = d₀ + vt']]},
+      {h:'Free fall', rows:[
+        ['Acceleration due to gravity','g = 9.80 m/s²'],
+        ['The sign of g','g is always positive. If up is positive, the acceleration is −g.']]},
+      {h:'What a motion graph tells you', rows:[
+        ['Slope of a position–time graph','velocity'],
+        ['Slope of the tangent to a curve','instantaneous velocity'],
+        ['Slope of a velocity–time graph','acceleration'],
+        ['Area under a velocity–time graph','displacement']]},
+      {h:'Notation', rows:[
+        ['Worksheets vs. the textbook','Δx on your worksheets = d − d₀ in the book. Same quantity.'],
+        ['The subscript 0','Means "initial" — the value at the moment the clock starts.']]},
       {h:'Time', rows:[
         ['Day','86 400 sec = 1 day'],
         ['Hour','3600 sec = 1 hr'],

@@ -713,6 +713,71 @@ before Chris approved it. `tools/test_biosg1.js` gained nine assertions
 covering all three corrections by their *teaching*, not merely their
 presence.
 
+### The equations on the sheet, and the textbook's definitions (v142)
+
+Chris: the physics teacher shared equations and textbook pages — put the
+equations somewhere they pull up during physics, and make study material
+from the textbook.
+
+**The equations went into `SHEETS.physics`**, which already existed as the
+Unusual Conversion Factors sheet and already renders a button on the subject
+screen AND inside every physics quiz. Nothing new was built: the entry gained
+sections and was renamed `Formulas & conversions`. It now leads with Table
+5–2's four constant-acceleration equations, then the definitions of average
+velocity/acceleration, free fall, what each motion graph's slope and area
+mean, and a notation row. Conversion factors keep their sections underneath.
+
+- **The four equations are labelled by what they LEAVE OUT** — missing
+  position, missing final velocity, missing time, missing acceleration —
+  because that is how `phys-kinematics-equations.json` already teaches
+  choosing between them. Same names on the sheet and in the unit.
+- **A notation row earns its place**: her worksheets write `Δx`, the textbook
+  writes `d − d₀`, and they are the same quantity. Both notations reach her,
+  so the sheet says so rather than letting her guess.
+- `.frow` is `flex-direction:column` and wraps, so long equations are safe
+  there — this is NOT the `.row .v` nowrap trap.
+
+> ⚠️ **No separate teacher equation sheet was ever found in Drive.** The
+> equations on the sheet come from the textbook chapter Chris uploaded
+> (Table 5–2 and the chapter-5 Key Equations summary). If the teacher issued
+> a distinct equations handout, it should replace this transcription.
+
+**The unit is `phys-ch3-describing-motion.json`** (`unit-phys-ch3`), from
+chapter 3, shelving onto the existing `Kinematics 1` spine. It is
+deliberately the VOCABULARY chapter — motion diagrams, the particle model,
+coordinate systems and origins, position vectors, scalar vs. vector,
+displacement, distance, time interval, and the operational definitions of
+average velocity, average speed, instantaneous velocity and average
+acceleration.
+
+- **Chapter 5 was deliberately NOT built as a unit.** Its graphs are already
+  `phys-kinematics-graphs.json` (20 cards, slope/area/best-fit) and its
+  equations already `phys-kinematics-equations.json`. A chapter-5 unit would
+  have re-asked what she has met. Checked the existing card lists before
+  building rather than after.
+- The three ideas the unit targets hardest are the ones that actually cost
+  marks: distance (scalar) vs. displacement (vector), average speed vs.
+  average velocity (a full lap = large speed, zero displacement), and a
+  negative acceleration meaning "velocity is shrinking", never "moving
+  backwards".
+- No graphs, on purpose. Chapter 3 is pre-graph — its visual is the motion
+  diagram, a row of dots — and `renderGraph` draws an axed, gridded plot,
+  which would misrepresent one. "Graphs where graphs teach" is not "graphs
+  everywhere".
+
+**Ad Astra's `tools/builders/unit_common.py` was behind Wayfinder's** and
+gained two things from it, both additive and backwards-compatible: a `kind`
+parameter on `q()` (default `'mc'`, so every existing builder is unaffected)
+and `_balance()`, which rotates correct answers across the four positions.
+Ad Astra content had been drifting to `ans:0` for want of it. `build()`'s
+option validation is now kind-aware to match.
+
+`tools/test_phys_ch3.js` covers both halves: the sheet opens with all four
+equations and still carries its conversion factors, g and the notation note
+render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
+is reachable from inside a physics quiz, and answers are spread across all
+four positions.
+
 ### The lesson you meant (v138 / Wayfinder v115, both apps)
 
 Chris asked for a UX review; its top finding was his own report made
