@@ -196,6 +196,26 @@ convention, not a mechanic.
   gets. `check_content.py` now errors on a back-referencing stem and on "the
   graph shown" with no graph attached; it cannot catch a stem that leans on a
   scenario more loosely, so read new questions as if each were the only one.
+- **A question may never contain its own answer.** In a vocabulary question
+  this is the commonest way to ship an item that tests nothing: glossing the
+  word in the stem — "Which word means the OPPOSITE of accustom (to get used
+  to something)?" — hands over the very fact being tested, and asking for a
+  SYNONYM while glossing is worse still, because the gloss usually *is* the
+  answer ("concept (a general idea)" → `idea`). Chris caught this on
+  2026-09-01. The rule generalises past vocabulary: a stem states the
+  situation, never the knowledge. Where a word has two senses, disambiguate
+  with a part-of-speech tag ("As an ADJECTIVE…") or a usage sentence
+  ("Grandma retired at nine and slept soundly") — **context, never a
+  definition.** Definitions belong on the card, in `steps`, and in `ex.main`,
+  all of which she meets only after answering.
+- **Distractors are the other half of the same bug.** Stripping the gloss
+  achieves nothing if the wrong options are unrelated filler drawn at random
+  from the word list — she still answers by eliminating on part of speech.
+  Every option should be the same part of speech as the answer, and each
+  should hold a *different* real relationship to the stem word. The strongest
+  distractor in a synonym/antonym item is the word's own opposite number: put
+  a synonym in an antonym question and she has to actually read which was
+  asked. Check each one does not accidentally also work.
 - **Bold answer first.** A card `def` LEADS with the straightforward answer
   wrapped in `**bold**` (one short sentence that works alone as the study
   answer), then at most 2–3 supporting `\n• ` bullet lines. `richify()` renders
