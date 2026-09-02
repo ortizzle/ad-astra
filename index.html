@@ -1394,7 +1394,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v146 · swipe sort';
+const APP_VERSION = 'v147 · read the second tile';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5297,7 +5297,7 @@ function matchDeal(u, salt){
   const tiles = [];
   pairs.forEach(c => { tiles.push({id:c.id, side:'t', text:c.term}); tiles.push({id:c.id, side:'d', text:matchLead(c.def)}); });
   matchState = { unitId:u.id, salt:salt||0, pairs, tiles:shuffle(tiles), up:[], found:[],
-                 flips:0, start:Date.now(), logId:null, lock:false };
+                 flips:0, start:Date.now(), logId:null, pending:false };
 }
 SCREENS.match = function(root){
   const u = unitFor(ctx.unitId);
@@ -5308,7 +5308,9 @@ SCREENS.match = function(root){
   const head = el('div','card');
   head.appendChild(el('div','eyebrow', u.title + ' · Match'));
   const hr = el('div','row');
-  hr.appendChild(el('span','k', done ? 'Every pair found' : 'Turn two tiles. Match a word to its meaning.'));
+  hr.appendChild(el('span','k', done ? 'Every pair found'
+    : st.pending ? 'Not a pair. Read them, then tap any tile to carry on.'
+    : 'Turn two tiles. Match a word to its meaning.'));
   hr.appendChild(el('span','v', st.found.length + ' of ' + st.pairs.length));
   head.appendChild(hr);
   root.appendChild(head);
@@ -5322,7 +5324,13 @@ SCREENS.match = function(root){
     b.setAttribute('aria-label', (isUp||isDone) ? t.text : 'Face-down tile');
     if(isDone) b.disabled = true;
     b.addEventListener('click', ()=>{
-      if(st.lock || isUp || isDone) return;
+      if(isDone) return;
+      /* A wrong pair stays face-up until HER next tap — a timer cannot know
+         how long a definition takes to read (Chris, 2026-09: the second tile
+         "flips over too fast to read it"). The next tap turns the pair back;
+         if it landed on a fresh tile, that tile comes up in the same tap. */
+      if(st.pending){ st.pending = false; st.up = []; if(isUp){ render(); return; } }
+      else if(isUp) return;
       st.up.push(i);
       if(st.up.length === 2){
         st.flips++;
@@ -5335,8 +5343,7 @@ SCREENS.match = function(root){
           if(st.found.length === st.pairs.length){ checkBadges(); syncSoon(); celebrate(); }
           render();
         } else {
-          st.lock = true; render();
-          setTimeout(()=>{ if(matchState !== st) return; st.up = []; st.lock = false; render(); }, 750);
+          st.pending = true; render();
         }
       } else render();
     });

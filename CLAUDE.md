@@ -881,9 +881,14 @@ three). Rules that are the point:
   written on every pair found, so leaving early keeps her minutes and XP.
   Star sky's rule. `flips` rides on the log as a number for the day view,
   never as a verdict on screen.
-- **A wrong flip is nothing.** The tiles turn back after 750ms; no penalty,
-  no count of misses, and the right-answer buzz `[12,40,12]` on a match with
-  silence on a miss — the phone never scolds.
+- **A wrong flip is nothing, and it stays up until her next tap.** The first
+  build turned a wrong pair back after 750ms; Chris caught it live — the
+  second tile "flips over too fast to read it". A timer cannot know how long
+  a definition takes to read, so there is none: the pair stays face-up, the
+  header says "tap any tile to carry on", and her next tap turns the pair
+  back and (if it landed on a fresh tile) brings that tile up in the same
+  tap. No penalty, no count of misses, the right-answer buzz `[12,40,12]` on
+  a match and silence on a miss — the phone never scolds.
 - **Flat XP per pair** (`MATCH_XP` 4, so 24 for a full six), the order of a
   flashcard run, and no speed bonus: racing a memory game teaches nothing.
 - **Date-seeded**: the same six all day, a fresh six tomorrow, nothing

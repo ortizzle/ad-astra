@@ -58,11 +58,24 @@ const PORT = process.argv[2] || 8201;
     tiles()[i].click(); await new Promise(r=>setTimeout(r,10));
     tiles()[j].click(); await new Promise(r=>setTimeout(r,10));
     const upDuring = document.querySelectorAll('#screen .mt.up').length;
-    await new Promise(r=>setTimeout(r,850));
-    return {upDuring, upAfter: document.querySelectorAll('#screen .mt.up').length, found: st.found.length,
+    /* No timer: the pair stays up until her next tap. Wait well past the old
+       750ms and it must still be readable. */
+    await new Promise(r=>setTimeout(r,1200));
+    const stillUp = document.querySelectorAll('#screen .mt.up').length;
+    const hint = /tap any tile to carry on/i.test(document.getElementById('screen').textContent);
+    // tapping a fresh third tile turns the pair back and brings that tile up in one tap
+    const k = st.tiles.findIndex((t,idx) => idx!==i && idx!==j);
+    tiles()[k].click(); await new Promise(r=>setTimeout(r,10));
+    const afterThird = document.querySelectorAll('#screen .mt.up').length;
+    // tapping the lone up tile does nothing; tap it again after a wrong pair clears both
+    tiles()[k].click(); await new Promise(r=>setTimeout(r,10));
+    const lone = st.up.length;
+    st.up = []; st.pending = false; render();
+    return {upDuring, stillUp, hint, afterThird, lone, found: st.found.length,
             logged: all('log').some(l => l.mode==='match'), flips: st.flips};
   });
-  ck('a wrong pair shows both, then turns back, logs nothing', wrong.upDuring===2 && wrong.upAfter===0 && wrong.found===0 && !wrong.logged && wrong.flips===1, wrong);
+  ck('a wrong pair stays up until her next tap, which turns it back and flips the new tile; nothing logged',
+     wrong.upDuring===2 && wrong.stillUp===2 && wrong.hint && wrong.afterThird===1 && wrong.lone===1 && wrong.found===0 && !wrong.logged && wrong.flips===1, wrong);
 
   const right = await p.evaluate(async () => {
     const st = matchState;
