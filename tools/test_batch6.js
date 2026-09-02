@@ -50,6 +50,7 @@ const A = r => { if(!r.ok) throw new Error('FAIL '+r.name+' → '+JSON.stringify
     put({id:'assess_t', type:'assess', classId:mathU.classId, kind:'test', title:'Batch test',
          date:AZ.shift(today,2)});
     return { math:mathU.classId, other:otherU.classId, guide:!!guideU,
+             guideInMath: !!guideU && guideU.classId===mathU.classId,
              due:dueMisses().length };
   }, APP);
 
@@ -71,14 +72,22 @@ const A = r => { if(!r.ok) throw new Error('FAIL '+r.name+' → '+JSON.stringify
       clearedBelow: clearedIdx === -1 || (dividerIdx !== -1 && clearedIdx > dividerIdx) };
   }, seedInfo);
   ck('growth: subject chips render', g.chips.length >= 2, g.chips);
-  ck('growth: test subject chip first', g.chips[0] && g.chips[0].includes('test in 2 days'), g.chips);
-  if(seedInfo.guide) ck('growth: guide chip', g.chips.some(t=>t.includes('Study guide')), g.chips);
-  ck('growth: first action high on screen', g.firstAction !== null && g.firstAction < 320, g.firstAction);
+  /* Since the filter rework, chips scope the whole screen: an "Everything"
+     reset leads, then subjects ranked by nearest test. */
+  ck('growth: reset chip leads, then the test subject', /^Everything/.test(g.chips[0]||'') && g.chips[1] && g.chips[1].includes('test in 2 days'), g.chips);
+  /* The chip row above the card is itself a row of actions, so the first
+     primary button sits one chip row lower than the v92 audit measured. */
+  ck('growth: first action high on screen', g.firstAction !== null && g.firstAction < 380, g.firstAction);
   ck('growth: cleared below the lists', g.clearedBelow, g);
   ck('growth: group headers carry test tag', g.heads.length >= 1, g.heads);
 
-  /* subject chip filters the round */
-  await p.evaluate(()=>{ document.querySelector('.gz-chip').click(); });
+  /* subject chip filters the SCREEN; the primary button then starts a round
+     scoped to it. A guide unit inside that subject shows as a 📄 unit chip. */
+  await p.evaluate(()=>{ document.querySelectorAll('.gz-chip')[1].click(); });
+  await p.waitForTimeout(250);
+  const unitChips = await p.evaluate(()=>[...document.querySelectorAll('.gz-chips.units .gz-chip')].map(n=>n.textContent));
+  if(seedInfo.guideInMath) ck('growth: guide unit shows as a 📄 unit chip inside its subject', unitChips.some(t=>t.includes('📄')), unitChips);
+  await p.evaluate(()=>{ [...document.querySelectorAll('#screen .btn-primary')].find(b=>/review/i.test(b.textContent)).click(); });
   await p.waitForTimeout(300);
   const flt = await p.evaluate((mathCls)=>{
     if(!quizState || quizState.unitId!=='__review__') return {state:'no round'};

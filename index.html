@@ -354,7 +354,20 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .trophy .tk{font-size:11.5px;color:var(--faint);letter-spacing:.04em;flex:0 0 auto}
 .gz-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
 .gz-chip{min-height:var(--tap);padding:9px 14px;border-radius:999px;border:1px solid var(--line);
-  background:var(--deep);color:var(--text);font:inherit;font-size:12.5px;font-weight:600}
+  background:var(--deep);color:var(--text);font:inherit;font-size:12.5px;font-weight:600;
+  max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* The selected chip: accent wash and accent border carry the selection; the
+   text stays --text. --ac-fg over --ac-8 on the light paper measured 4.41:1
+   with the aqua accent — the same wash trap .felt hit — so the accent is
+   never the text here. Measured by tools/contrast_gzchip.js. */
+.gz-chip.on{background:var(--ac-8);border-color:var(--ac);color:var(--text)}
+.gz-chips.units{margin-top:8px}
+/* A folded Growth Zone row: question and ladder only; tap the head to open. */
+.miss .mhead{display:block;width:100%;background:none;border:0;padding:0;margin:0;text-align:left;
+  color:inherit;font:inherit;cursor:pointer;min-height:var(--tap)}
+.miss.fold .q{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.miss .box .chev{margin-left:auto;font-style:normal;font-weight:400;color:var(--faint);font-size:12px}
+.miss .mhead+.a,.miss .mhead+.graph,.miss .mhead+svg{margin-top:8px}
 
 .sandbox-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;
   margin-bottom:12px;padding:10px 14px;border:1.5px dashed var(--warm);border-radius:14px;
@@ -1342,7 +1355,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v143 · her teacher\'s sheet';
+const APP_VERSION = 'v144 · the Growth Zone, focused';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6874,10 +6887,20 @@ let reviewUnit = null;
    way whichever door she came through. */
 function buildReviewUnit(opt){
   opt = opt || {};
-  let due = dueMisses();
-  if(opt.classId) due = due.filter(m=>m.classId===opt.classId);
-  if(opt.guide) due = due.filter(m=>{ const u = DATA.records[m.unitId]; return u && !u.deleted && u.guide; });
-  const qs = due.map(missAsQuestion).filter(Boolean);
+  /* `all` widens the pool from what is DUE to everything on the ladder inside
+     the filter — the test-week door. The round settles through the same code
+     an ordinary quiz uses, and that code already promotes a laddered question
+     on ANY correct sighting, due or not, and resets it on a miss; so an early
+     review needs no rule of its own. Due questions still go first. */
+  let pool = opt.all ? all('miss') : dueMisses();
+  if(opt.classId) pool = pool.filter(m=>m.classId===opt.classId);
+  if(opt.unitId)  pool = pool.filter(m=>m.unitId===opt.unitId);
+  if(opt.guide) pool = pool.filter(m=>{ const u = DATA.records[m.unitId]; return u && !u.deleted && u.guide; });
+  if(opt.all){
+    const dueIds = new Set(dueMisses().map(m=>m.id));
+    pool = pool.slice().sort((a,b)=> (dueIds.has(b.id)?1:0)-(dueIds.has(a.id)?1:0) || ((a.box??0)-(b.box??0)));
+  }
+  const qs = pool.map(missAsQuestion).filter(Boolean);
   if(!qs.length) return null;
   reviewUnit = { id:'__review__', classId:opt.classId||'__all__', title:opt.title||'Review', cards:[], questions:qs.slice(0,20) };
   return reviewUnit;
@@ -7750,6 +7773,13 @@ function endFocus(completed){
 }
 
 /* ================= GROWTH ZONE ================= */
+/* The Growth Zone filter survives navigation on purpose: she picks Algebra,
+   reviews, comes back, and it is still Algebra. Session-scoped, never stored —
+   the ladder is hers, the view of it is just where she was looking. `gzOpen`
+   holds which rows she has unfolded, for the same reason. */
+let gzFilter = { cid:null, unitId:null };
+let gzOpen = {};
+
 SCREENS.growth = function(root){
   root.appendChild(headline('Growth Zone','Every question you missed comes back — a day later, then two, then four, then eight, then three weeks. Survive all five and it has stopped being a weak spot.'));
   const ms = all('miss');
@@ -7769,6 +7799,7 @@ SCREENS.growth = function(root){
   }
 
   const due = dueMisses();
+  const dueIds = new Set(due.map(m=>m.id));
   /* Nearest unscored test per subject — the honest tiebreak for where to
      start when the list is long. Undefined when nothing is coming. */
   const today = AZ.today();
@@ -7782,58 +7813,150 @@ SCREENS.growth = function(root){
   const testTag = cid => testIn[cid]!==undefined && testIn[cid]<=14
     ? (testIn[cid]===0 ? ' · test today' : testIn[cid]===1 ? ' · test tomorrow' : ` · test in ${testIn[cid]} days`) : '';
 
-  if(due.length){
-    const c = el('div','card ac');
-    c.appendChild(el('h2',null, due.length===1 ? '1 question is back' : due.length+' questions are back'));
-    const b = el('button','btn btn-primary', due.length>20 ? 'Review 20 of them' : 'Start review');
-    b.addEventListener('click',()=>{
-      if(!buildReviewUnit()){ toast('Nothing due right now'); return; }
-      /* Deliberately skips the readiness check-in: that question is about one
-         unit, and this runs most days. Friction here would kill the habit. */
-      go('quiz',{unitId:'__review__', classId:'__all__'});
-    });
-    c.appendChild(b);
-    c.appendChild(el('p',null,'Get one right and it goes quiet for longer; miss it and it starts over.'));
+  /* ---- The filter: subject, then unit — over the WHOLE ladder. ----
+     In test week the question this screen has to answer is "just Algebra,
+     just the recent topic", and that is a question about everything she has
+     missed, not about what happens to be due this morning. The chips used to
+     live inside the due card and only covered due questions; now they scope
+     the entire screen and both review doors below. */
+  const bySubj = {};
+  ms.forEach(m=>{ (bySubj[m.classId] = bySubj[m.classId]||[]).push(m); });
+  const subjects = Object.keys(bySubj).sort((a,b)=> prio(a)-prio(b) || bySubj[b].length-bySubj[a].length);
+  if(gzFilter.cid && !bySubj[gzFilter.cid]) gzFilter = { cid:null, unitId:null };   // that subject emptied
+  /* One subject on the ladder needs no chooser — it is implicitly chosen, so
+     its units can still be picked between. */
+  const cidEff = gzFilter.cid || (subjects.length===1 ? subjects[0] : null);
 
-    /* One subject at a time. The chips appear once the list spans more than
-       one subject — with a long list, WHERE to start is the real decision,
-       and the nearest test is the honest way to rank it, so that chip leads. */
-    const by = {};
-    due.forEach(m=>{ (by[m.classId] = by[m.classId]||[]).push(m); });
-    const subj = Object.keys(by).sort((a,b)=> prio(a)-prio(b) || by[b].length-by[a].length);
+  if(subjects.length > 1){
     const chips = el('div','gz-chips');
-    if(subj.length > 1) subj.forEach(cid=>{
+    const allc = el('button','gz-chip'+(gzFilter.cid ? '' : ' on'), `Everything · ${ms.length}`);
+    allc.addEventListener('click',()=>{ gzFilter = { cid:null, unitId:null }; render(); });
+    chips.appendChild(allc);
+    subjects.forEach(cid=>{
       const cl = CLASS_BY_ID[cid]; if(!cl) return;
-      const ch = el('button','gz-chip', `${cl.icon} ${cl.short||cl.name} · ${by[cid].length}${testTag(cid)}`);
+      const ch = el('button','gz-chip'+(gzFilter.cid===cid ? ' on' : ''),
+        `${cl.icon} ${cl.short||cl.name} · ${bySubj[cid].length}${testTag(cid)}`);
       ch.addEventListener('click',()=>{
-        if(!buildReviewUnit({classId:cid, title:(cl.short||cl.name)+' review'})){ toast('Nothing due right now'); return; }
-        go('quiz',{unitId:'__review__', classId:cid});
+        gzFilter = gzFilter.cid===cid ? { cid:null, unitId:null } : { cid, unitId:null };
+        render();
       });
       chips.appendChild(ch);
     });
-    /* Paper-guide misses get their own door — test week is exactly when
-       "re-quiz me on the study guide" is the question being asked. */
-    const gDue = due.filter(m=>{ const gu = DATA.records[m.unitId]; return gu && !gu.deleted && gu.guide; });
-    if(gDue.length && gDue.length < due.length){
-      const ch = el('button','gz-chip', `📄 Study guide · ${gDue.length}`);
-      ch.addEventListener('click',()=>{
-        if(!buildReviewUnit({guide:true, title:'Study guide review'})){ toast('Nothing due right now'); return; }
-        go('quiz',{unitId:'__review__', classId:'__all__'});
-      });
-      chips.appendChild(ch);
-    }
-    if(chips.children.length) c.appendChild(chips);
-    root.appendChild(c);
+    root.appendChild(chips);
   }
 
-  const dueIds = new Set(due.map(m=>m.id));
-  const render = (list, header) => {
+  let pool = cidEff ? ms.filter(m=>m.classId===cidEff) : ms;
+  let unitTitle = '';
+  if(cidEff){
+    /* Units inside the chosen subject, MOST RECENTLY MISSED first. "The
+       recent material" is what a test is about, and when she last missed
+       something in a unit is the honest proxy for how recent it is. */
+    const byUnit = {};
+    pool.forEach(m=>{ (byUnit[m.unitId] = byUnit[m.unitId]||[]).push(m); });
+    /* Ranked by when each unit was FIRST missed (`on`), not `updatedAt`:
+       put() re-stamps updatedAt on every write, so a review round would
+       bounce an old unit back to the top. `on` is set when the miss is
+       born and survives every reschedule. A miss with no `on` (pre-v3) sorts
+       oldest. Ties break on updatedAt. */
+    const recentKey = uid => byUnit[uid].map(m=>(m.on||'0000-00-00')+String(m.updatedAt||0).padStart(14,'0')).sort().pop();
+    const unitIds = Object.keys(byUnit).sort((a,b)=> recentKey(b).localeCompare(recentKey(a)));
+    if(gzFilter.unitId && !byUnit[gzFilter.unitId]) gzFilter.unitId = null;
+    const part = uid => {
+      const u = DATA.records[uid];
+      const t = u && u.title ? u.title : 'Mixed round';
+      const i = t.lastIndexOf(' · ');
+      return (u && u.guide ? '📄 ' : '') + (i>0 ? t.slice(i+3) : t);
+    };
+    if(unitIds.length > 1){
+      const chips = el('div','gz-chips units');
+      const allu = el('button','gz-chip'+(gzFilter.unitId ? '' : ' on'), `Every unit · ${pool.length}`);
+      allu.addEventListener('click',()=>{ gzFilter.unitId = null; render(); });
+      chips.appendChild(allu);
+      unitIds.forEach(uid=>{
+        const ch = el('button','gz-chip'+(gzFilter.unitId===uid ? ' on' : ''), `${part(uid)} · ${byUnit[uid].length}`);
+        ch.addEventListener('click',()=>{ gzFilter.unitId = gzFilter.unitId===uid ? null : uid; render(); });
+        chips.appendChild(ch);
+      });
+      root.appendChild(chips);
+    }
+    if(gzFilter.unitId){ pool = pool.filter(m=>m.unitId===gzFilter.unitId); unitTitle = part(gzFilter.unitId); }
+  }
+  const cls = cidEff ? CLASS_BY_ID[cidEff] : null;
+  const scope = unitTitle ? unitTitle : cls ? (cls.short||cls.name) : '';
+  const poolDue = pool.filter(m=>dueIds.has(m.id));
+  const poolRest = pool.filter(m=>!dueIds.has(m.id));
+  const rvOpt = extra => ({ classId: cidEff||undefined, unitId: gzFilter.unitId||undefined,
+                            title: (scope ? scope+' review' : 'Review'), ...extra });
+  const startReview = extra => {
+    if(!buildReviewUnit(rvOpt(extra))){ toast('Nothing to review here'); return; }
+    /* Deliberately skips the readiness check-in: that question is about one
+       unit, and this runs most days. Friction here would kill the habit. */
+    go('quiz',{unitId:'__review__', classId: cidEff||'__all__'});
+  };
+
+  /* ---- Two doors. ----
+     Due is the daily habit. "Ahead of time" is the test-week door: everything
+     in the filter, due or not. It reads as the primary action only when
+     nothing is due, so the habit loop is never upstaged. */
+  const c = el('div','card ac');
+  if(poolDue.length){
+    c.appendChild(el('h2',null, `${poolDue.length} ${poolDue.length===1?'question is':'questions are'} back${scope?' in '+scope:''}`));
+    const b = el('button','btn btn-primary', poolDue.length>20 ? 'Review 20 of them' : 'Start review');
+    b.addEventListener('click',()=>startReview({}));
+    c.appendChild(b);
+  } else {
+    c.appendChild(el('h2',null, `Nothing due${scope?' in '+scope:''} today`));
+  }
+  if(poolRest.length){
+    const n = Math.min(pool.length, 20);
+    const b2 = el('button','btn'+(poolDue.length ? ' btn-ghost' : ' btn-primary'),
+      `Review ${n===pool.length ? 'all '+n : n+' of '+pool.length}${scope?' in '+scope:''} · ahead of time`);
+    b2.addEventListener('click',()=>startReview({all:true}));
+    c.appendChild(b2);
+  }
+  c.appendChild(el('p',null,'Get one right and it goes quiet for longer; miss it and it starts over.'));
+  root.appendChild(c);
+
+  /* ---- The list, folded. ----
+     A row is the question and its ladder bar; the answer, what she chose and
+     the explanation open on a tap. A long ladder used to be a wall of every
+     detail at once, which is the part that made it unappealing to open. */
+  const row = m => {
+    const box = m.box ?? -1;
+    const open = !!gzOpen[m.id];
+    const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : '') + (open ? '' : ' fold'));
+    const head = el('button','mhead');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    head.appendChild(el('div','q', m.q));
+    const bar = el('div','box');
+    for(let i=0;i<BOX_GAPS.length;i++){ const p=el('i'); if(i<=box) p.classList.add('on'); bar.appendChild(p); }
+    bar.appendChild(el('em',null, dueIds.has(m.id) ? 'due now'
+      : box<0 ? 'not seen again yet' : 'back '+AZ.short(m.due)));
+    bar.appendChild(el('b','chev', open ? '▾' : '▸'));
+    head.appendChild(bar);
+    head.addEventListener('click',()=>{ gzOpen[m.id] = !open; render(); });
+    d.appendChild(head);
+    if(open){
+      const mg = graphNode(m.graph); if(mg) d.appendChild(mg);
+      d.appendChild(el('div','a','✓ '+m.right));
+      if(m.chose) d.appendChild(el('div','n','You chose: '+m.chose));
+      /* richify, so a **bold** run in an explanation renders as bold rather
+         than as its asterisks — the old screen printed them raw. */
+      if(m.why) d.appendChild(richify(el('div','n'), m.why));
+    }
+    return d;
+  };
+  const renderList = (list, header) => {
     if(!list.length) return;
+    root.appendChild(divider(header));
+    if(cidEff){
+      /* Inside one subject the group header would only repeat the chip. */
+      list.forEach(m=>root.appendChild(row(m)));
+      return;
+    }
     const byG = {};
     list.forEach(m=>{ (byG[m.classId] = byG[m.classId]||[]).push(m); });
-    root.appendChild(divider(header));
     Object.keys(byG).sort((a,b)=> prio(a)-prio(b) || byG[b].length-byG[a].length).forEach(cid=>{
-      const items = byG[cid];
       const c = CLASS_BY_ID[cid];
       if(c){
         /* Direction A carried into the Growth Zone: the group header wears its
@@ -7842,25 +7965,11 @@ SCREENS.growth = function(root){
         gh.style.setProperty('--pc', classColor(c));
         root.appendChild(gh);
       }
-      items.forEach(m=>{
-        const box = m.box ?? -1;
-        const d = el('div','miss' + (box>=3 ? ' nearly' : box>=1 ? ' settling' : ''));
-        d.appendChild(el('div','q',m.q));
-        const mg = graphNode(m.graph); if(mg) d.appendChild(mg);
-        d.appendChild(el('div','a','✓ '+m.right));
-        if(m.chose) d.appendChild(el('div','n','You chose: '+m.chose));
-        if(m.why) d.appendChild(el('div','n',m.why));
-        const bar = el('div','box');
-        for(let i=0;i<BOX_GAPS.length;i++){ const p=el('i'); if(i<=box) p.classList.add('on'); bar.appendChild(p); }
-        bar.appendChild(el('em',null, dueIds.has(m.id) ? 'due now'
-          : box<0 ? 'not seen again yet' : 'back '+AZ.short(m.due)));
-        d.appendChild(bar);
-        root.appendChild(d);
-      });
+      byG[cid].forEach(m=>root.appendChild(row(m)));
     });
   };
-  render(due, 'Due today');
-  render(ms.filter(m=>!dueIds.has(m.id)).sort((a,b)=>(a.due||'').localeCompare(b.due||'')), 'Settling in');
+  renderList(poolDue, 'Due today');
+  renderList(poolRest.slice().sort((a,b)=>(a.due||'').localeCompare(b.due||'')), 'Settling in');
   /* State, not action — it reads fine below the work. */
   const cleared = all('cleared').length;
   if(cleared){

@@ -802,6 +802,71 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The Growth Zone, focused (v144 / Wayfinder v123, both apps)
+
+Chris: the Growth Zone had grown large and unappealing, and in test week
+there was no way to pick "just maths, and just the recent material that
+will be on the test" — which is the smart use of the time. Three changes
+to `SCREENS.growth`, engine, identical in both apps.
+
+**Chips scope the WHOLE ladder, not the due card.** They used to live
+inside the due card, appear only when due questions spanned more than one
+subject, and cover only what was due. Now a row above the card — an
+"Everything · N" reset, then subjects ranked by nearest unscored test —
+filters both lists and both review doors. Inside a subject a second row
+lists its units, ranked **most recently missed first**, which is the honest
+proxy for "the recent material". One subject on the ladder needs no chooser
+and is implicitly chosen, so its unit chips still appear. The filter is
+session-scoped (`gzFilter`), never stored: she picks Algebra, reviews,
+comes back and it is still Algebra.
+
+> ⚠️ **Rank units by `on`, never by `updatedAt`.** `put()` re-stamps
+> `updatedAt` on every write, so a review round would bounce a weeks-old
+> unit back to the top of "recent". `on` is set when the miss is born and
+> survives every reschedule (`answer()` keeps `was.on` on a re-miss). The
+> first build used `updatedAt` and the test caught the inversion.
+
+**A second door: "Review all N · ahead of time."** Everything in the
+filter, due or not — the test-week door. `buildReviewUnit(opt)` gained
+`unitId` and `all`; with `all`, due questions still come first, then lowest
+box. No new ladder rule was needed: `finishQuiz` already promotes a laddered
+question on ANY correct sighting in an ordinary round and resets it on a
+miss, so an early review settles through the same code. Verified: two box-3
+misses reviewed six days early both cleared. The door renders as the
+primary button only when nothing is due, so the daily habit is never
+upstaged. The old "📄 Study guide" chip is gone; a guide unit is just a unit
+chip wearing 📄.
+
+**Rows fold.** A row is the question (clamped to two lines) and its ladder
+bar; a tap on the head (`.mhead`, 44px, `aria-expanded`) opens the answer,
+what she chose, the explanation and any graph. Measured on the seeded
+screen: folded is under 70% of the fully open height. Inside one subject
+the group header is dropped — it would only repeat the chip. Explanations
+now go through `richify()`, so a `**bold**` run renders as bold; the old
+screen printed the asterisks.
+
+- **The selected chip's text is `--text`, not `--ac-fg`.** The nav's
+  `--ac-fg`-on-`--ac-8` pill is fine on the nav; the same pair over the
+  light paper measured **4.41:1** with the aqua accent — the wash trap
+  `.felt` hit in v84. Wash + accent border carry the selection.
+  `tools/contrast_gzchip.js` sweeps accent × sky × theme for the selected
+  and unselected chip: worst **12.4:1** here, 13.4:1 in Wayfinder.
+- `tools/test_batch6.js`'s Growth section was rewritten to the new
+  contract (a chip filters; the primary button then starts the scoped
+  round), and its first-action threshold moved from 320px to 380px: the
+  chip row above the card is itself a row of actions.
+- `tools/test_gzfilter.js` (same file, both apps): seeds two subjects and
+  three units with mixed due dates and first-missed dates, and walks the
+  reset chip, subject chip, unit ranking, the ahead-of-time door becoming
+  primary when nothing is due, the scoped round, the ladder clearing early
+  reviews, the filter surviving navigation, the fold ratio, and 44px on
+  every chip and row head.
+
+> A probe I wrote first for the chip reported 15:1 and passed. Chrome had
+> returned `color(srgb 0.15 0.41 0.37)` and my regex read the floats as
+> 0–255. `tools/README.md` already says this; `contrast_batch6.js` already
+> parses it. Reuse the parser, do not write a new one.
+
 ### Her teacher's sheet, all of it (v143)
 
 `Equations.docx` — the real handout, found in the Physics 8 Drive folder
