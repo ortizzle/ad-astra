@@ -4,7 +4,7 @@
   "unit-phys-ch3": {
    "id": "unit-phys-ch3",
    "type": "unit",
-   "updatedAt": 1788121053491,
+   "updatedAt": 1788318621335,
    "classId": "physics",
    "quarter": 1,
    "status": "draft",
@@ -576,7 +576,78 @@
       "tip": "The equations of motion on your formula sheet are full of these — v₀ is the starting velocity."
      }
     }
-   ]
+   ],
+   "sorts": [
+    {
+     "id": "s-sv",
+     "title": "Scalar or vector?",
+     "a": "Scalar",
+     "b": "Vector",
+     "items": [
+      {
+       "t": "A speedometer reads 65 km/h",
+       "k": "a",
+       "why": "Speed is a size only. The speedometer says nothing about which way."
+      },
+      {
+       "t": "The hike covered 8 km of trail in total",
+       "k": "a",
+       "why": "Total ground covered is distance — magnitude, no direction."
+      },
+      {
+       "t": "The race lasted 12.4 seconds",
+       "k": "a",
+       "why": "A time interval has a size and nothing else."
+      },
+      {
+       "t": "A bag of flour has a mass of 2 kg",
+       "k": "a",
+       "why": "Mass has no direction. Two kilograms is two kilograms whichever way you hold it."
+      },
+      {
+       "t": "The water is at 37 °C",
+       "k": "a",
+       "why": "Temperature is a number with a unit and no direction."
+      },
+      {
+       "t": "The odometer added 240 km this week",
+       "k": "a",
+       "why": "An odometer totals distance — it cannot tell you where the car ended up."
+      },
+      {
+       "t": "The plane flew 300 km due north",
+       "k": "b",
+       "why": "“Due north” is a direction. Size plus direction is a vector."
+      },
+      {
+       "t": "A ball's velocity is 4 m/s to the left",
+       "k": "b",
+       "why": "Velocity carries direction; “to the left” is part of the quantity."
+      },
+      {
+       "t": "The sled accelerates at 2 m/s² down the hill",
+       "k": "b",
+       "why": "Acceleration has a direction — here, down the hill."
+      },
+      {
+       "t": "She ended up 3 km east of home",
+       "k": "b",
+       "why": "Where you ended up relative to where you started, with a direction, is displacement."
+      },
+      {
+       "t": "A force of 10 N pushes the box forward",
+       "k": "b",
+       "why": "A push has a direction. Ten newtons forward is not ten newtons backward."
+      },
+      {
+       "t": "The boat is 50 m upstream of the dock",
+       "k": "b",
+       "why": "A position measured from an origin in a stated direction is a vector."
+      }
+     ]
+    }
+   ],
+   "libv": 1
   }
  }
 }

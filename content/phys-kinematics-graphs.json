@@ -1,1012 +1,1072 @@
 {
-  "v": 4,
-  "records": {
-    "unit-phys-graphs": {
-      "id": "unit-phys-graphs",
-      "type": "unit",
-      "updatedAt": 1786939336770,
-      "libv": 4,
-      "classId": "physics",
-      "quarter": 1,
-      "status": "draft",
-      "title": "Kinematics 1 · Motion Graphs and the Constant-Velocity Lab",
-      "srcName": "HW04 Kinematics Graphs and Lab 1: Constant Motion (Drive)",
-      "source": "Physics 8, Kinematics — 'HW04 Kinematics Graphs' and 'Lab_Constant Velocity' (Drive)",
-      "summary": {
-        "text": "Two pieces of the kinematics unit, both about reading motion off a graph rather than out of a formula. The constant-motion lab: take position and time data for a car, fit a line of best fit, and get a slope, a y-intercept, a percent error and a mathematical expression out of it — then use that expression to predict a distance and to solve backwards for a time. The graphs homework: position-versus-time and velocity-versus-time graphs — which intervals are forward, which backward, which at rest; average velocity against average speed; acceleration segment by segment; displacement as the area under a velocity graph; and matching a position graph to the velocity graph that describes the same motion.",
-        "from": "source"
-      },
-      "why": {
-        "text": "A graph is a whole experiment on one page, and physics leans on that harder every year. Once slope means velocity and area means displacement, you can read a motion you were never told about — and the same two moves carry straight into acceleration, forces and energy later.",
-        "from": "added"
-      },
-      "objectives": [
-        {
-          "text": "Read velocity off the slope of a position-time graph, including sign.",
-          "from": "source"
-        },
-        {
-          "text": "Tell average velocity and average speed apart, and compute both for a whole trip.",
-          "from": "source"
-        },
-        {
-          "text": "Find acceleration from a velocity-time graph and displacement from the area under it.",
-          "from": "source"
-        },
-        {
-          "text": "State the physical significance of a line of best fit's slope and intercept.",
-          "from": "source"
-        },
-        {
-          "text": "Use a fitted expression in both directions — predict a position, and solve back for a time.",
-          "from": "source"
-        }
-      ],
-      "parentNote": {
-        "text": "Built from the HW04 graphs sheet and the Lab 1 constant-motion write-up. Both are graph-heavy and the originals rely on printed graphs I cannot reproduce, so every graph here is drawn fresh by the app with its own numbers — she can work through this and still have both sheets unspoiled. The lab's own questions shape the unit deliberately: predict forward from the expression, solve backwards for the other variable, say what the slope means physically, reason counterfactually about a faster car, and rank slopes where two can tie. That last one is asked as multiple choice over candidate rankings rather than a drag-to-order question, because a put-in-order question cannot express a tie and two of the lines have the same slope. The thing most likely to trip her up is average velocity versus average speed on the out-and-back graph: the trip ends where it started, so average velocity is exactly zero while average speed is not, and both answers are correct at the same time.",
-        "from": "added"
-      },
-      "nextUp": {
-        "text": "Do the cards first — slope means velocity, area means displacement. The graph questions get much faster once those two are automatic.",
-        "minutes": 24,
-        "from": "added"
-      },
-      "cards": [
-        {
-          "id": "c0",
-          "term": "Position–time graph",
-          "from": "source",
-          "def": "**Time on the horizontal axis, position on the vertical.**\n• Each point says where the object was at that moment.\n• It does not show speed directly — you read speed from the steepness.",
-          "hint": "A position-time graph is a record of where, not of how fast."
-        },
-        {
-          "id": "c1",
-          "term": "Slope of a position–time graph",
-          "from": "source",
-          "def": "**The slope is the velocity.**\n• Rise over run is metres over seconds, which is a speed with a direction attached.\n• This is the single most useful fact in the whole topic.",
-          "hint": "Slope has the units of the answer: m ÷ s = m/s.",
-          "eq": "v = Δx / Δt"
-        },
-        {
-          "id": "c2",
-          "term": "Steeper means faster",
-          "from": "source",
-          "def": "**A steeper line on a position–time graph is a faster object.**\n• Same time, more ground covered.\n• Ranking objects by speed is therefore just ranking lines by steepness — ignoring the sign.",
-          "hint": "Two lines can lean opposite ways and still be equally fast."
-        },
-        {
-          "id": "c3",
-          "term": "Flat line on a position–time graph",
-          "from": "source",
-          "def": "**A horizontal line means the object is at rest.**\n• Time passes, position does not change, so the slope is zero.\n• Zero slope is still a real velocity — it is a velocity of zero.",
-          "hint": "Flat is not the same as nothing happening. Time is still running."
-        },
-        {
-          "id": "c4",
-          "term": "Negative slope",
-          "from": "source",
-          "def": "**A downward line means the object is moving backward.**\n• Its position is decreasing, so the velocity is negative.\n• Backward means back towards the origin, not slower.",
-          "hint": "Sign is direction; steepness is speed. Two separate readings."
-        },
-        {
-          "id": "c5",
-          "term": "Distance vs displacement",
-          "from": "source",
-          "def": "**Distance is the ground covered; displacement is the change in position.**\n• Walk 20 m out and 20 m back: distance 40 m, displacement 0 m.\n• Displacement carries a sign; distance never does.",
-          "hint": "Displacement only cares where you started and where you stopped."
-        },
-        {
-          "id": "c6",
-          "term": "Average velocity",
-          "from": "source",
-          "def": "**Total displacement divided by total time.**\n• Uses only the first and last positions — the route in between is irrelevant.\n• Can be zero even after a long trip, if you end where you began.",
-          "hint": "Straight line from start to finish, divided by the clock.",
-          "eq": "v̄ = Δx / Δt"
-        },
-        {
-          "id": "c7",
-          "term": "Average speed",
-          "from": "source",
-          "def": "**Total distance divided by total time.**\n• Counts every metre travelled, in whichever direction.\n• Never negative, and never zero unless nothing moved at all.",
-          "hint": "Average speed is what the odometer says; average velocity is what the map says.",
-          "eq": "average speed = total distance / Δt"
-        },
-        {
-          "id": "c8",
-          "term": "Velocity–time graph",
-          "from": "source",
-          "def": "**Time on the horizontal axis, velocity on the vertical.**\n• Now the height of the line is the speed, not the position.\n• A horizontal line here means constant velocity, not standing still.",
-          "hint": "Same-looking flat line, completely different meaning. Check the vertical axis label first, every time."
-        },
-        {
-          "id": "c9",
-          "term": "Slope of a velocity–time graph",
-          "from": "source",
-          "def": "**The slope is the acceleration.**\n• Rise over run is now (m/s) ÷ s, which is m/s².\n• Sloping up is speeding up; sloping down is slowing down.",
-          "hint": "Slope always means 'rate of change of the vertical axis'. Change the axis, change the meaning.",
-          "eq": "a = Δv / Δt"
-        },
-        {
-          "id": "c10",
-          "term": "Area under a velocity–time graph",
-          "from": "source",
-          "def": "**The area under the line is the displacement.**\n• Velocity × time = distance, and that product is exactly an area.\n• Split the shape into rectangles and triangles and add them up.",
-          "hint": "Area below the time axis counts as negative displacement.",
-          "eq": "Δx = area under the v–t curve"
-        },
-        {
-          "id": "c11",
-          "term": "Line of best fit",
-          "from": "source",
-          "def": "**A single straight line drawn to pass as close as possible to all the data points.**\n• It does not have to touch any of them.\n• Fitting a line is how you get one clean answer out of messy repeated measurements.",
-          "hint": "Do not connect the dots. Draw the line the dots are scattered around."
-        },
-        {
-          "id": "c12",
-          "term": "What the slope meant in the lab",
-          "from": "source",
-          "def": "**The slope of the position–time fit is the car's constant velocity.**\n• The car was set to run at one steady speed, so the graph came out straight.\n• That is what makes the slope meaningful: it is measuring the thing that was held constant.",
-          "hint": "The lab asks for the physical significance of the slope. The answer is a speed, with units."
-        },
-        {
-          "id": "c13",
-          "term": "What the y-intercept meant",
-          "from": "source",
-          "def": "**The y-intercept is the position at time zero — where the car started.**\n• An intercept of 2 ft means the car was already 2 ft along when timing began.\n• A non-zero intercept is not an error; it is a starting line.",
-          "hint": "Set t = 0 in the expression and whatever is left is the intercept."
-        },
-        {
-          "id": "c14",
-          "term": "The mathematical expression",
-          "from": "source",
-          "def": "**Position = (slope × time) + intercept.**\n• Writing the fit as an equation is what lets you use it instead of squinting at the graph.\n• Once you have it, you can go forwards or backwards.",
-          "hint": "It is y = mx + b wearing physics clothes.",
-          "eq": "x = v t + x₀"
-        },
-        {
-          "id": "c15",
-          "term": "Percent error",
-          "from": "source",
-          "def": "**How far your measured value sits from the accepted one, as a percentage.**\n• Take the difference, divide by the accepted value, multiply by 100.\n• It answers how good, not just how different.",
-          "hint": "Divide by the ACCEPTED value, not by your own.",
-          "eq": "% error = |measured − accepted| / accepted × 100"
-        },
-        {
-          "id": "c16",
-          "term": "Using the expression forwards",
-          "from": "source",
-          "def": "**Put a time in, get a position out.**\n• Substitute the time and evaluate — one line of arithmetic.\n• Watch the units: if the expression is built in seconds, a time in minutes must be converted first.",
-          "hint": "Predicting beyond your data is allowed here, as long as the motion stays constant."
-        },
-        {
-          "id": "c17",
-          "term": "Using the expression backwards",
-          "from": "source",
-          "def": "**Put a position in, solve for the time.**\n• Subtract the intercept, then divide by the slope.\n• Same equation, rearranged — this is the half people forget to practise.",
-          "hint": "Undo the equation in reverse order: the +b comes off before the ÷m."
-        },
-        {
-          "id": "c18",
-          "term": "A faster car",
-          "from": "source",
-          "def": "**A faster car makes a steeper line.**\n• Its velocity is larger, and velocity is the slope, so the slope goes up.\n• The intercept would not change — it started in the same place.",
-          "hint": "Ask which quantity changed, then ask which graph feature carries it."
-        },
-        {
-          "id": "c19",
-          "term": "Ranking slopes, ties allowed",
-          "from": "source",
-          "def": "**Two different lines can have exactly the same slope.**\n• They are parallel, and represent equal velocities from different starting positions.\n• A ranking has to be able to say A = C, not just A > C.",
-          "hint": "Compute every slope before you rank any of them. Parallel is easy to miss by eye."
-        }
-      ],
-      "questions": [
-        {
-          "id": "q0",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "On a position–time graph, what does the slope of the line tell you?",
-          "opts": [
-            "The object's velocity",
-            "The object's acceleration",
-            "The distance travelled",
-            "The object's starting position"
-          ],
-          "ans": 0,
-          "hint": "Check the units of rise over run.",
-          "steps": [
-            "Slope is rise over run: the vertical quantity divided by the horizontal one.",
-            "Here that is a change in position divided by a change in time.",
-            "Metres divided by seconds is m/s, which is a velocity.",
-            "Acceleration would need the vertical axis to be velocity instead."
-          ],
-          "ex": {
-            "main": "**The velocity.** Rise over run is Δx/Δt, whose units are m/s. Reading the units off the axes tells you what any slope means.",
-            "tip": "Slope always means 'rate of change of whatever is on the vertical axis'."
-          }
-        },
-        {
-          "id": "q1",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "On a velocity–time graph, what does the slope tell you?",
-          "opts": [
-            "The displacement",
-            "The acceleration",
-            "The average speed",
-            "The starting velocity"
-          ],
-          "ans": 1,
-          "hint": "Same rule as before — divide the vertical units by the horizontal ones.",
-          "steps": [
-            "The vertical axis is now velocity in m/s and the horizontal is time in s.",
-            "Rise over run is therefore (m/s) divided by s.",
-            "That gives m/s², the units of acceleration.",
-            "Displacement comes from the area under this graph, not from its slope."
-          ],
-          "ex": {
-            "main": "**The acceleration.** (m/s) ÷ s = m/s². The rule never changes — only the axis does.",
-            "tip": "Two graphs, two meanings for slope. Always read the vertical axis label first."
-          }
-        },
-        {
-          "id": "q2",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "A horizontal line on a position–time graph means the object is:",
-          "opts": [
-            "Moving at constant speed",
-            "Speeding up steadily",
-            "At rest",
-            "Moving backward"
-          ],
-          "ans": 2,
-          "hint": "If position is not changing, what is the slope?",
-          "steps": [
-            "A horizontal line has zero slope.",
-            "On a position–time graph the slope is the velocity.",
-            "Zero velocity means the object is not moving.",
-            "Constant speed would be a straight line that is sloping, not flat."
-          ],
-          "ex": {
-            "main": "**At rest.** Time keeps running, the position does not change, so the velocity is zero. Careful: on a VELOCITY–time graph a horizontal line means the opposite — constant speed.",
-            "tip": "The same shape means different things on the two graphs. That is the trap this topic is built on."
-          }
-        },
-        {
-          "id": "q3",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "What does the area under a velocity–time graph give you?",
-          "opts": [
-            "The acceleration",
-            "The average speed",
-            "The final velocity",
-            "The displacement"
-          ],
-          "ans": 3,
-          "hint": "Multiply the two axis quantities together and see what you get.",
-          "steps": [
-            "An area is a height multiplied by a width.",
-            "Here that is velocity multiplied by time.",
-            "m/s × s = m, a distance along the axis — a displacement.",
-            "So the area under the line is how far the object moved."
-          ],
-          "ex": {
-            "main": "**The displacement.** Velocity × time is a distance, and that product is exactly what an area is. Area under the axis counts as negative.",
-            "tip": "Slope and area are the two tools. Slope divides the axes, area multiplies them."
-          }
-        },
-        {
-          "id": "q4",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "In the fitted expression x = vt + x₀, what does x₀ represent?",
-          "opts": [
-            "The position when timing began",
-            "The total distance travelled",
-            "The car's constant speed",
-            "The percent error in the fit"
-          ],
-          "ans": 0,
-          "hint": "Substitute t = 0 and see what is left.",
-          "steps": [
-            "Put t = 0 into the expression.",
-            "The vt term becomes zero, leaving x = x₀.",
-            "So x₀ is the position at the very start of timing.",
-            "On the graph it is where the fitted line crosses the vertical axis."
-          ],
-          "ex": {
-            "main": "**The position when timing began.** It is the y-intercept. A non-zero value is not a mistake — it just means the car was already down the track when the clock started.",
-            "tip": "To find what any constant means, set the other variable to zero."
-          }
-        },
-        {
-          "id": "q5",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "An object walks 20 m forward and then 20 m back to where it started. What is its displacement?",
-          "opts": [
-            "40 m",
-            "0 m",
-            "20 m",
-            "−40 m"
-          ],
-          "ans": 1,
-          "hint": "Displacement compares only the start and the finish.",
-          "steps": [
-            "Displacement is the change in position: final minus initial.",
-            "The object finished exactly where it began.",
-            "So the change in position is zero.",
-            "The 40 m it covered is the distance, which is a different quantity."
-          ],
-          "ex": {
-            "main": "**0 m.** Displacement asks only where you ended relative to where you started. The 40 m is the distance travelled.",
-            "tip": "Two questions worth asking separately: how far did it go, and how far is it from home."
-          }
-        },
-        {
-          "id": "q6",
-          "lv": 1,
-          "kind": "mc",
-          "from": "source",
-          "q": "A line of best fit should be drawn so that it:",
-          "opts": [
-            "Passes exactly through every data point",
-            "Passes as close as it can to all points",
-            "Connects the first and the last point",
-            "Always passes through the origin"
-          ],
-          "ans": 1,
-          "hint": "What is the point of taking repeated measurements?",
-          "steps": [
-            "Repeated measurements scatter because of small random errors.",
-            "A best-fit line represents the trend those scattered points share.",
-            "So it is drawn to sit as close as it can to all of them at once.",
-            "It may touch none of them, and it is not forced through the origin."
-          ],
-          "ex": {
-            "main": "**As close as possible to all of them.** Connecting the dots would preserve the noise, which is the opposite of what fitting is for.",
-            "tip": "If your line hits every point exactly, suspect that you drew the noise instead of the trend."
-          }
-        },
-        {
-          "id": "q7",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "In the graph shown, during which interval is the object moving backward?",
-          "opts": [
-            "From 0 to 10 s",
-            "From 10 to 20 s",
-            "From 20 to 30 s",
-            "It never moves backward"
-          ],
-          "ans": 2,
-          "hint": "Backward means the position is decreasing.",
-          "steps": [
-            "Moving backward means the position value is getting smaller.",
-            "From 0 to 10 s the line rises, so the object moves forward.",
-            "From 10 to 20 s the line is flat, so it is at rest.",
-            "From 20 to 30 s the line falls from 20 m back to 0 m, so that is the backward interval."
-          ],
-          "ex": {
-            "main": "**From 20 to 30 s.** The line slopes down, so the position is decreasing and the velocity is negative — about −2 m/s.",
-            "tip": "Read a position–time graph in three passes: rising, flat, falling. Label each before answering anything."
-          },
-          "graph": {
-            "w": [
-              0,
-              30,
-              0,
-              25
-            ],
-            "gx": 5,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    20,
-                    20
-                  ],
-                  [
-                    30,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (m)"
-          }
-        },
-        {
-          "id": "q8",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "For the whole 30-second trip in the graph shown, what is the average velocity?",
-          "opts": [
-            "1.33 m/s",
-            "2 m/s",
-            "0 m/s",
-            "−2 m/s"
-          ],
-          "ans": 2,
-          "hint": "Average velocity needs only the first and last positions.",
-          "steps": [
-            "Average velocity is total displacement divided by total time.",
-            "The object starts at 0 m and finishes at 0 m, so its displacement is 0 m.",
-            "Zero divided by 30 s is zero.",
-            "The object certainly moved — but it ended where it began, so the average VELOCITY is zero."
-          ],
-          "ex": {
-            "main": "**0 m/s.** The trip ends at the starting position, so the displacement is zero and so is the average velocity. This is not a trick: it is what the quantity means.",
-            "tip": "If a graph ends at the same height it started, the average velocity is zero before you calculate anything."
-          },
-          "graph": {
-            "w": [
-              0,
-              30,
-              0,
-              25
-            ],
-            "gx": 5,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    20,
-                    20
-                  ],
-                  [
-                    30,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (m)"
-          }
-        },
-        {
-          "id": "q9",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "An object moves out and then returns, as shown in the graph. What is its average speed for the whole 30-second trip?",
-          "opts": [
-            "0 m/s",
-            "1.33 m/s",
-            "2 m/s",
-            "0.67 m/s"
-          ],
-          "ans": 1,
-          "hint": "Average speed counts every metre covered, in both directions.",
-          "steps": [
-            "Average speed is total distance divided by total time.",
-            "Out: 0 m to 20 m is 20 m. Resting: 0 m. Back: 20 m to 0 m is another 20 m.",
-            "Total distance is 40 m over 30 s.",
-            "40 ÷ 30 = 1.33 m/s. Note the average velocity for this same trip is 0 — both answers are right at once."
-          ],
-          "ex": {
-            "main": "**1.33 m/s.** Distance adds up regardless of direction, so the return leg counts too. Average speed and average velocity answer different questions about the same journey.",
-            "tip": "When a question offers 0 alongside a positive value, check which of the two it is asking for."
-          },
-          "graph": {
-            "w": [
-              0,
-              30,
-              0,
-              25
-            ],
-            "gx": 5,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    20,
-                    20
-                  ],
-                  [
-                    30,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (m)"
-          }
-        },
-        {
-          "id": "q10",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "In the velocity–time graph shown, what is the acceleration between 0 and 10 seconds?",
-          "opts": [
-            "20 m/s²",
-            "0 m/s²",
-            "2 m/s²",
-            "−2 m/s²"
-          ],
-          "ans": 2,
-          "hint": "Acceleration is the slope of this graph.",
-          "steps": [
-            "Read the two endpoints of that segment: velocity goes from 0 to 20 m/s.",
-            "The time taken is 10 s.",
-            "Acceleration is the slope: Δv ÷ Δt = 20 ÷ 10.",
-            "That gives +2 m/s², positive because the object is speeding up."
-          ],
-          "ex": {
-            "main": "**2 m/s².** Δv/Δt = 20/10. The 20 on its own is the velocity reached, not the acceleration — the division by time is what makes it a rate.",
-            "tip": "An option that repeats a number straight off the axis is usually the trap."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              25
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    30,
-                    20
-                  ],
-                  [
-                    40,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Velocity (m/s)"
-          }
-        },
-        {
-          "id": "q11",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "The constant-motion lab produced the fit x = 0.8t + 2, with x in feet and t in seconds. How far has the car travelled at t = 0.5 minutes?",
-          "opts": [
-            "26 ft",
-            "6 ft",
-            "2.4 ft",
-            "42 ft"
-          ],
-          "ans": 0,
-          "hint": "The expression is built in seconds. What is 0.5 minutes?",
-          "steps": [
-            "The expression uses seconds, so convert first: 0.5 min × 60 = 30 s.",
-            "Substitute: x = 0.8(30) + 2.",
-            "0.8 × 30 = 24, and 24 + 2 = 26.",
-            "So the car is at 26 ft. Skipping the conversion and using 0.5 gives 2.4 ft, which is the trap."
-          ],
-          "ex": {
-            "main": "**26 ft.** The conversion is part of the work, not a formality — substituting 0.5 straight in gives 2.4 ft, off by a factor of sixty.",
-            "tip": "Before substituting anything, check that its units match the ones the expression was built from."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              35
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "line",
-                "m": 0.8,
-                "b": 2,
-                "dom": [
-                  0,
-                  10
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (ft)"
-          }
-        },
-        {
-          "id": "q12",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "A constant-motion lab gives the fit x = 0.8t + 2, with x in feet and t in seconds. How long does the car take to reach 30 ft?",
-          "opts": [
-            "24 s",
-            "40 s",
-            "35 s",
-            "37.5 s"
-          ],
-          "ans": 2,
-          "hint": "This one runs the equation backwards. Undo the +2 first.",
-          "steps": [
-            "Set the expression equal to the target position: 30 = 0.8t + 2.",
-            "Subtract the intercept from both sides: 28 = 0.8t.",
-            "Divide by the slope: t = 28 ÷ 0.8 = 35 s.",
-            "Forgetting to subtract the 2 first gives 37.5 s, which is the common slip."
-          ],
-          "ex": {
-            "main": "**35 s.** Subtract the intercept, then divide by the slope — undo the equation in reverse order.",
-            "tip": "Predicting a position and solving for a time use the same fit. Practise both directions or only one will be quick."
-          }
-        },
-        {
-          "id": "q13",
-          "lv": 2,
-          "kind": "mc",
-          "from": "source",
-          "q": "A car's measured velocity is 0.8 ft/s and the accepted value is 0.75 ft/s. What is the percent error?",
-          "opts": [
-            "6.7%",
-            "6.3%",
-            "5%",
-            "0.05%"
-          ],
-          "ans": 0,
-          "hint": "Divide by the accepted value, not by your own measurement.",
-          "steps": [
-            "Find the difference: 0.80 − 0.75 = 0.05 ft/s.",
-            "Divide by the ACCEPTED value: 0.05 ÷ 0.75 = 0.0667.",
-            "Multiply by 100 to get 6.7%.",
-            "Dividing by the measured 0.80 instead gives 6.3%, which is the usual mistake."
-          ],
-          "ex": {
-            "main": "**6.7%.** 0.05/0.75 × 100. The accepted value goes on the bottom — that is what the error is being judged against.",
-            "tip": "When two close answers appear, one of them is usually the same sum with the wrong denominator."
-          }
-        },
-        {
-          "id": "q14",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "Using the velocity–time graph shown, what is the total displacement over the full 40 seconds?",
-          "opts": [
-            "800 m",
-            "400 m",
-            "600 m",
-            "500 m"
-          ],
-          "ans": 2,
-          "hint": "Split the shape into a triangle, a rectangle and another triangle.",
-          "steps": [
-            "Displacement is the area under the line, so break the shape into pieces.",
-            "0–10 s is a triangle: ½ × 10 × 20 = 100 m.",
-            "10–30 s is a rectangle: 20 × 20 = 400 m.",
-            "30–40 s is another triangle: ½ × 10 × 20 = 100 m. Total 100 + 400 + 100 = 600 m."
-          ],
-          "ex": {
-            "main": "**600 m.** Triangle, rectangle, triangle. Treating the whole shape as a rectangle gives 800 m — the two sloped ends are half-areas, not full ones.",
-            "tip": "Cut every area problem into rectangles and triangles before you calculate anything."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              25
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    30,
-                    20
-                  ],
-                  [
-                    40,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Velocity (m/s)"
-          }
-        },
-        {
-          "id": "q15",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "Four cars have straight position–time lines. W passes (0 s, 0 m) and (4 s, 12 m). X passes (0, 0) and (6, 6). Y passes (0, 2) and (5, 17). Z passes (0, 0) and (8, 4). Rank their speeds, greatest first.",
-          "opts": [
-            "W > Y > X > Z",
-            "W = Y > X > Z",
-            "Y > W > X > Z",
-            "W = Y > Z > X"
-          ],
-          "ans": 1,
-          "hint": "Work out all four slopes before ranking. Two of them match.",
-          "steps": [
-            "W: rise 12 over run 4 = 3 m/s.",
-            "X: 6 over 6 = 1 m/s. Z: 4 over 8 = 0.5 m/s.",
-            "Y: from (0,2) to (5,17) the rise is 15 over a run of 5 = 3 m/s — the different starting position does not change the slope.",
-            "So W and Y tie at 3, then X at 1, then Z at 0.5: W = Y > X > Z."
-          ],
-          "ex": {
-            "main": "**W = Y > X > Z.** Y starts 2 m further along, which shifts its line up but leaves its steepness alone. A ranking has to be able to say 'equals'.",
-            "tip": "A different intercept never changes a slope. Compute every slope before comparing any of them."
-          }
-        },
-        {
-          "id": "q16",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "In the constant-motion lab, what is the physical significance of the slope of the position–time line, and how would you know?",
-          "opts": [
-            "The car's constant velocity — rise over run has units of ft/s",
-            "The distance the car travelled, read off the vertical axis",
-            "The time the car took, read off the horizontal axis",
-            "The car's acceleration, since the line is straight"
-          ],
-          "ans": 0,
-          "hint": "Let the units answer the question for you.",
-          "steps": [
-            "Take rise over run for this graph: feet divided by seconds.",
-            "ft/s is a speed, so the slope must represent a speed.",
-            "The line is straight, which means that speed never changed — the car ran at one constant velocity.",
-            "A straight line means zero acceleration, not constant acceleration, so acceleration cannot be what the slope shows."
-          ],
-          "ex": {
-            "main": "**The car's constant velocity, and the units prove it.** ft ÷ s = ft/s. Straightness tells you the velocity was constant, which is exactly what the lab set out to test.",
-            "tip": "'How did you know' questions want the units or the shape as evidence, not just the right noun."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              35
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "line",
-                "m": 0.8,
-                "b": 2,
-                "dom": [
-                  0,
-                  10
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (ft)"
-          }
-        },
-        {
-          "id": "q17",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "In the constant-motion lab, a car released from a starting mark gives the position–time line shown. If the lab were repeated with a faster car released from that same mark, how would the graph change?",
-          "opts": [
-            "Steeper line, same y-intercept",
-            "Same slope, higher y-intercept",
-            "Steeper line and a higher y-intercept",
-            "The line would curve upward"
-          ],
-          "ans": 0,
-          "hint": "Name the quantity that changed, then ask which feature of the graph carries it.",
-          "steps": [
-            "Identify what changed between the two runs: only the car's speed.",
-            "On a position–time graph the velocity is carried by the slope, so a faster car gives a steeper line.",
-            "The starting mark is unchanged, and the starting position is the y-intercept, so the intercept stays put.",
-            "The speed is still constant, so the line stays straight rather than curving."
-          ],
-          "ex": {
-            "main": "**Steeper, same intercept.** Faster means a bigger slope; same starting mark means the same intercept. A curve would mean the speed was changing, which it is not.",
-            "tip": "For any 'what if' question, name the changed quantity first, then the graph feature that carries it."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              35
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "line",
-                "m": 0.8,
-                "b": 2,
-                "dom": [
-                  0,
-                  10
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Position (ft)"
-          }
-        },
-        {
-          "id": "q18",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "An object's position–time graph is a straight line sloping downward. What does its velocity–time graph look like?",
-          "opts": [
-            "A horizontal line below the time axis",
-            "A horizontal line above the time axis",
-            "A straight line sloping downward",
-            "A line starting high and crossing to negative"
-          ],
-          "ans": 0,
-          "hint": "Straight on a position graph means the velocity is constant. What sign is it?",
-          "steps": [
-            "A straight position–time line has a constant slope, so the velocity is constant.",
-            "Constant velocity plots as a horizontal line on a velocity–time graph.",
-            "The position line slopes downward, so that constant velocity is negative.",
-            "A negative constant plots as a horizontal line below the time axis."
-          ],
-          "ex": {
-            "main": "**A horizontal line below the axis.** Straight position line → constant velocity → horizontal on the v–t graph; downward slope → that constant is negative.",
-            "tip": "Translate in two steps: straight-or-curved decides the shape, up-or-down decides the sign."
-          }
-        },
-        {
-          "id": "q19",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "Two objects cover the same distance in the same time, but one has a positive velocity and the other negative. What can you say about their speeds and their position–time lines?",
-          "opts": [
-            "Equal speeds; lines equally steep, sloping opposite",
-            "Different speeds; one line is steeper than the other",
-            "Equal speeds; the two lines are exactly identical",
-            "One is at rest, since the velocities cancel out"
-          ],
-          "ans": 0,
-          "hint": "Steepness and sign are two separate readings of the same line.",
-          "steps": [
-            "Speed is the size of the velocity, ignoring its sign.",
-            "Same distance in the same time means the sizes are equal, so the speeds are equal.",
-            "Steepness on a position–time graph carries that size, so both lines are equally steep.",
-            "The signs differ, so one slopes up and the other slopes down — mirror images, not identical."
-          ],
-          "ex": {
-            "main": "**Equal speeds, mirrored lines.** Steepness carries the speed and sign carries the direction; reading them separately answers the question in one step.",
-            "tip": "Velocities cancelling is about adding two motions together. Here there are two separate objects, so nothing cancels."
-          }
-        },
-        {
-          "id": "q20",
-          "lv": 3,
-          "kind": "mc",
-          "from": "source",
-          "q": "For the velocity–time graph shown, what is the average velocity across the whole 40 seconds?",
-          "opts": [
-            "20 m/s",
-            "15 m/s",
-            "10 m/s",
-            "600 m/s"
-          ],
-          "ans": 1,
-          "hint": "You already know the displacement from the area. Now divide.",
-          "steps": [
-            "Average velocity is total displacement divided by total time.",
-            "Displacement is the area under the line: a triangle, a rectangle, then a triangle.",
-            "That is ½(10)(20) + (20)(20) + ½(10)(20) = 100 + 400 + 100 = 600 m.",
-            "Divide by the 40 s total: 600 ÷ 40 = 15 m/s, which sits below the 20 m/s cruising speed as it must."
-          ],
-          "ex": {
-            "main": "**15 m/s.** Area gives 600 m, then divide by 40 s. It has to come out below the 20 m/s cruising speed, which is a useful check on the answer.",
-            "tip": "Sanity-check an average against the range it must fall inside. Anything above the peak is wrong on sight."
-          },
-          "graph": {
-            "w": [
-              0,
-              40,
-              0,
-              25
-            ],
-            "gx": 10,
-            "gy": 5,
-            "series": [
-              {
-                "type": "pts",
-                "pts": [
-                  [
-                    0,
-                    0
-                  ],
-                  [
-                    10,
-                    20
-                  ],
-                  [
-                    30,
-                    20
-                  ],
-                  [
-                    40,
-                    0
-                  ]
-                ]
-              }
-            ],
-            "xl": "Time (s)",
-            "yl": "Velocity (m/s)"
-          }
-        }
-      ],
-      "order": 2
+ "v": 4,
+ "records": {
+  "unit-phys-graphs": {
+   "id": "unit-phys-graphs",
+   "type": "unit",
+   "updatedAt": 1788318621335,
+   "libv": 5,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Kinematics 1 · Motion Graphs and the Constant-Velocity Lab",
+   "srcName": "HW04 Kinematics Graphs and Lab 1: Constant Motion (Drive)",
+   "source": "Physics 8, Kinematics — 'HW04 Kinematics Graphs' and 'Lab_Constant Velocity' (Drive)",
+   "summary": {
+    "text": "Two pieces of the kinematics unit, both about reading motion off a graph rather than out of a formula. The constant-motion lab: take position and time data for a car, fit a line of best fit, and get a slope, a y-intercept, a percent error and a mathematical expression out of it — then use that expression to predict a distance and to solve backwards for a time. The graphs homework: position-versus-time and velocity-versus-time graphs — which intervals are forward, which backward, which at rest; average velocity against average speed; acceleration segment by segment; displacement as the area under a velocity graph; and matching a position graph to the velocity graph that describes the same motion.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A graph is a whole experiment on one page, and physics leans on that harder every year. Once slope means velocity and area means displacement, you can read a motion you were never told about — and the same two moves carry straight into acceleration, forces and energy later.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Read velocity off the slope of a position-time graph, including sign.",
+     "from": "source"
+    },
+    {
+     "text": "Tell average velocity and average speed apart, and compute both for a whole trip.",
+     "from": "source"
+    },
+    {
+     "text": "Find acceleration from a velocity-time graph and displacement from the area under it.",
+     "from": "source"
+    },
+    {
+     "text": "State the physical significance of a line of best fit's slope and intercept.",
+     "from": "source"
+    },
+    {
+     "text": "Use a fitted expression in both directions — predict a position, and solve back for a time.",
+     "from": "source"
     }
+   ],
+   "parentNote": {
+    "text": "Built from the HW04 graphs sheet and the Lab 1 constant-motion write-up. Both are graph-heavy and the originals rely on printed graphs I cannot reproduce, so every graph here is drawn fresh by the app with its own numbers — she can work through this and still have both sheets unspoiled. The lab's own questions shape the unit deliberately: predict forward from the expression, solve backwards for the other variable, say what the slope means physically, reason counterfactually about a faster car, and rank slopes where two can tie. That last one is asked as multiple choice over candidate rankings rather than a drag-to-order question, because a put-in-order question cannot express a tie and two of the lines have the same slope. The thing most likely to trip her up is average velocity versus average speed on the out-and-back graph: the trip ends where it started, so average velocity is exactly zero while average speed is not, and both answers are correct at the same time.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do the cards first — slope means velocity, area means displacement. The graph questions get much faster once those two are automatic.",
+    "minutes": 24,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Position–time graph",
+     "from": "source",
+     "def": "**Time on the horizontal axis, position on the vertical.**\n• Each point says where the object was at that moment.\n• It does not show speed directly — you read speed from the steepness.",
+     "hint": "A position-time graph is a record of where, not of how fast."
+    },
+    {
+     "id": "c1",
+     "term": "Slope of a position–time graph",
+     "from": "source",
+     "def": "**The slope is the velocity.**\n• Rise over run is metres over seconds, which is a speed with a direction attached.\n• This is the single most useful fact in the whole topic.",
+     "hint": "Slope has the units of the answer: m ÷ s = m/s.",
+     "eq": "v = Δx / Δt"
+    },
+    {
+     "id": "c2",
+     "term": "Steeper means faster",
+     "from": "source",
+     "def": "**A steeper line on a position–time graph is a faster object.**\n• Same time, more ground covered.\n• Ranking objects by speed is therefore just ranking lines by steepness — ignoring the sign.",
+     "hint": "Two lines can lean opposite ways and still be equally fast."
+    },
+    {
+     "id": "c3",
+     "term": "Flat line on a position–time graph",
+     "from": "source",
+     "def": "**A horizontal line means the object is at rest.**\n• Time passes, position does not change, so the slope is zero.\n• Zero slope is still a real velocity — it is a velocity of zero.",
+     "hint": "Flat is not the same as nothing happening. Time is still running."
+    },
+    {
+     "id": "c4",
+     "term": "Negative slope",
+     "from": "source",
+     "def": "**A downward line means the object is moving backward.**\n• Its position is decreasing, so the velocity is negative.\n• Backward means back towards the origin, not slower.",
+     "hint": "Sign is direction; steepness is speed. Two separate readings."
+    },
+    {
+     "id": "c5",
+     "term": "Distance vs displacement",
+     "from": "source",
+     "def": "**Distance is the ground covered; displacement is the change in position.**\n• Walk 20 m out and 20 m back: distance 40 m, displacement 0 m.\n• Displacement carries a sign; distance never does.",
+     "hint": "Displacement only cares where you started and where you stopped."
+    },
+    {
+     "id": "c6",
+     "term": "Average velocity",
+     "from": "source",
+     "def": "**Total displacement divided by total time.**\n• Uses only the first and last positions — the route in between is irrelevant.\n• Can be zero even after a long trip, if you end where you began.",
+     "hint": "Straight line from start to finish, divided by the clock.",
+     "eq": "v̄ = Δx / Δt"
+    },
+    {
+     "id": "c7",
+     "term": "Average speed",
+     "from": "source",
+     "def": "**Total distance divided by total time.**\n• Counts every metre travelled, in whichever direction.\n• Never negative, and never zero unless nothing moved at all.",
+     "hint": "Average speed is what the odometer says; average velocity is what the map says.",
+     "eq": "average speed = total distance / Δt"
+    },
+    {
+     "id": "c8",
+     "term": "Velocity–time graph",
+     "from": "source",
+     "def": "**Time on the horizontal axis, velocity on the vertical.**\n• Now the height of the line is the speed, not the position.\n• A horizontal line here means constant velocity, not standing still.",
+     "hint": "Same-looking flat line, completely different meaning. Check the vertical axis label first, every time."
+    },
+    {
+     "id": "c9",
+     "term": "Slope of a velocity–time graph",
+     "from": "source",
+     "def": "**The slope is the acceleration.**\n• Rise over run is now (m/s) ÷ s, which is m/s².\n• Sloping up is speeding up; sloping down is slowing down.",
+     "hint": "Slope always means 'rate of change of the vertical axis'. Change the axis, change the meaning.",
+     "eq": "a = Δv / Δt"
+    },
+    {
+     "id": "c10",
+     "term": "Area under a velocity–time graph",
+     "from": "source",
+     "def": "**The area under the line is the displacement.**\n• Velocity × time = distance, and that product is exactly an area.\n• Split the shape into rectangles and triangles and add them up.",
+     "hint": "Area below the time axis counts as negative displacement.",
+     "eq": "Δx = area under the v–t curve"
+    },
+    {
+     "id": "c11",
+     "term": "Line of best fit",
+     "from": "source",
+     "def": "**A single straight line drawn to pass as close as possible to all the data points.**\n• It does not have to touch any of them.\n• Fitting a line is how you get one clean answer out of messy repeated measurements.",
+     "hint": "Do not connect the dots. Draw the line the dots are scattered around."
+    },
+    {
+     "id": "c12",
+     "term": "What the slope meant in the lab",
+     "from": "source",
+     "def": "**The slope of the position–time fit is the car's constant velocity.**\n• The car was set to run at one steady speed, so the graph came out straight.\n• That is what makes the slope meaningful: it is measuring the thing that was held constant.",
+     "hint": "The lab asks for the physical significance of the slope. The answer is a speed, with units."
+    },
+    {
+     "id": "c13",
+     "term": "What the y-intercept meant",
+     "from": "source",
+     "def": "**The y-intercept is the position at time zero — where the car started.**\n• An intercept of 2 ft means the car was already 2 ft along when timing began.\n• A non-zero intercept is not an error; it is a starting line.",
+     "hint": "Set t = 0 in the expression and whatever is left is the intercept."
+    },
+    {
+     "id": "c14",
+     "term": "The mathematical expression",
+     "from": "source",
+     "def": "**Position = (slope × time) + intercept.**\n• Writing the fit as an equation is what lets you use it instead of squinting at the graph.\n• Once you have it, you can go forwards or backwards.",
+     "hint": "It is y = mx + b wearing physics clothes.",
+     "eq": "x = v t + x₀"
+    },
+    {
+     "id": "c15",
+     "term": "Percent error",
+     "from": "source",
+     "def": "**How far your measured value sits from the accepted one, as a percentage.**\n• Take the difference, divide by the accepted value, multiply by 100.\n• It answers how good, not just how different.",
+     "hint": "Divide by the ACCEPTED value, not by your own.",
+     "eq": "% error = |measured − accepted| / accepted × 100"
+    },
+    {
+     "id": "c16",
+     "term": "Using the expression forwards",
+     "from": "source",
+     "def": "**Put a time in, get a position out.**\n• Substitute the time and evaluate — one line of arithmetic.\n• Watch the units: if the expression is built in seconds, a time in minutes must be converted first.",
+     "hint": "Predicting beyond your data is allowed here, as long as the motion stays constant."
+    },
+    {
+     "id": "c17",
+     "term": "Using the expression backwards",
+     "from": "source",
+     "def": "**Put a position in, solve for the time.**\n• Subtract the intercept, then divide by the slope.\n• Same equation, rearranged — this is the half people forget to practise.",
+     "hint": "Undo the equation in reverse order: the +b comes off before the ÷m."
+    },
+    {
+     "id": "c18",
+     "term": "A faster car",
+     "from": "source",
+     "def": "**A faster car makes a steeper line.**\n• Its velocity is larger, and velocity is the slope, so the slope goes up.\n• The intercept would not change — it started in the same place.",
+     "hint": "Ask which quantity changed, then ask which graph feature carries it."
+    },
+    {
+     "id": "c19",
+     "term": "Ranking slopes, ties allowed",
+     "from": "source",
+     "def": "**Two different lines can have exactly the same slope.**\n• They are parallel, and represent equal velocities from different starting positions.\n• A ranking has to be able to say A = C, not just A > C.",
+     "hint": "Compute every slope before you rank any of them. Parallel is easy to miss by eye."
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "On a position–time graph, what does the slope of the line tell you?",
+     "opts": [
+      "The object's velocity",
+      "The object's acceleration",
+      "The distance travelled",
+      "The object's starting position"
+     ],
+     "ans": 0,
+     "hint": "Check the units of rise over run.",
+     "steps": [
+      "Slope is rise over run: the vertical quantity divided by the horizontal one.",
+      "Here that is a change in position divided by a change in time.",
+      "Metres divided by seconds is m/s, which is a velocity.",
+      "Acceleration would need the vertical axis to be velocity instead."
+     ],
+     "ex": {
+      "main": "**The velocity.** Rise over run is Δx/Δt, whose units are m/s. Reading the units off the axes tells you what any slope means.",
+      "tip": "Slope always means 'rate of change of whatever is on the vertical axis'."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "On a velocity–time graph, what does the slope tell you?",
+     "opts": [
+      "The displacement",
+      "The acceleration",
+      "The average speed",
+      "The starting velocity"
+     ],
+     "ans": 1,
+     "hint": "Same rule as before — divide the vertical units by the horizontal ones.",
+     "steps": [
+      "The vertical axis is now velocity in m/s and the horizontal is time in s.",
+      "Rise over run is therefore (m/s) divided by s.",
+      "That gives m/s², the units of acceleration.",
+      "Displacement comes from the area under this graph, not from its slope."
+     ],
+     "ex": {
+      "main": "**The acceleration.** (m/s) ÷ s = m/s². The rule never changes — only the axis does.",
+      "tip": "Two graphs, two meanings for slope. Always read the vertical axis label first."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "A horizontal line on a position–time graph means the object is:",
+     "opts": [
+      "Moving at constant speed",
+      "Speeding up steadily",
+      "At rest",
+      "Moving backward"
+     ],
+     "ans": 2,
+     "hint": "If position is not changing, what is the slope?",
+     "steps": [
+      "A horizontal line has zero slope.",
+      "On a position–time graph the slope is the velocity.",
+      "Zero velocity means the object is not moving.",
+      "Constant speed would be a straight line that is sloping, not flat."
+     ],
+     "ex": {
+      "main": "**At rest.** Time keeps running, the position does not change, so the velocity is zero. Careful: on a VELOCITY–time graph a horizontal line means the opposite — constant speed.",
+      "tip": "The same shape means different things on the two graphs. That is the trap this topic is built on."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "What does the area under a velocity–time graph give you?",
+     "opts": [
+      "The acceleration",
+      "The average speed",
+      "The final velocity",
+      "The displacement"
+     ],
+     "ans": 3,
+     "hint": "Multiply the two axis quantities together and see what you get.",
+     "steps": [
+      "An area is a height multiplied by a width.",
+      "Here that is velocity multiplied by time.",
+      "m/s × s = m, a distance along the axis — a displacement.",
+      "So the area under the line is how far the object moved."
+     ],
+     "ex": {
+      "main": "**The displacement.** Velocity × time is a distance, and that product is exactly what an area is. Area under the axis counts as negative.",
+      "tip": "Slope and area are the two tools. Slope divides the axes, area multiplies them."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "In the fitted expression x = vt + x₀, what does x₀ represent?",
+     "opts": [
+      "The position when timing began",
+      "The total distance travelled",
+      "The car's constant speed",
+      "The percent error in the fit"
+     ],
+     "ans": 0,
+     "hint": "Substitute t = 0 and see what is left.",
+     "steps": [
+      "Put t = 0 into the expression.",
+      "The vt term becomes zero, leaving x = x₀.",
+      "So x₀ is the position at the very start of timing.",
+      "On the graph it is where the fitted line crosses the vertical axis."
+     ],
+     "ex": {
+      "main": "**The position when timing began.** It is the y-intercept. A non-zero value is not a mistake — it just means the car was already down the track when the clock started.",
+      "tip": "To find what any constant means, set the other variable to zero."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "An object walks 20 m forward and then 20 m back to where it started. What is its displacement?",
+     "opts": [
+      "40 m",
+      "0 m",
+      "20 m",
+      "−40 m"
+     ],
+     "ans": 1,
+     "hint": "Displacement compares only the start and the finish.",
+     "steps": [
+      "Displacement is the change in position: final minus initial.",
+      "The object finished exactly where it began.",
+      "So the change in position is zero.",
+      "The 40 m it covered is the distance, which is a different quantity."
+     ],
+     "ex": {
+      "main": "**0 m.** Displacement asks only where you ended relative to where you started. The 40 m is the distance travelled.",
+      "tip": "Two questions worth asking separately: how far did it go, and how far is it from home."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "kind": "mc",
+     "from": "source",
+     "q": "A line of best fit should be drawn so that it:",
+     "opts": [
+      "Passes exactly through every data point",
+      "Passes as close as it can to all points",
+      "Connects the first and the last point",
+      "Always passes through the origin"
+     ],
+     "ans": 1,
+     "hint": "What is the point of taking repeated measurements?",
+     "steps": [
+      "Repeated measurements scatter because of small random errors.",
+      "A best-fit line represents the trend those scattered points share.",
+      "So it is drawn to sit as close as it can to all of them at once.",
+      "It may touch none of them, and it is not forced through the origin."
+     ],
+     "ex": {
+      "main": "**As close as possible to all of them.** Connecting the dots would preserve the noise, which is the opposite of what fitting is for.",
+      "tip": "If your line hits every point exactly, suspect that you drew the noise instead of the trend."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "In the graph shown, during which interval is the object moving backward?",
+     "opts": [
+      "From 0 to 10 s",
+      "From 10 to 20 s",
+      "From 20 to 30 s",
+      "It never moves backward"
+     ],
+     "ans": 2,
+     "hint": "Backward means the position is decreasing.",
+     "steps": [
+      "Moving backward means the position value is getting smaller.",
+      "From 0 to 10 s the line rises, so the object moves forward.",
+      "From 10 to 20 s the line is flat, so it is at rest.",
+      "From 20 to 30 s the line falls from 20 m back to 0 m, so that is the backward interval."
+     ],
+     "ex": {
+      "main": "**From 20 to 30 s.** The line slopes down, so the position is decreasing and the velocity is negative — about −2 m/s.",
+      "tip": "Read a position–time graph in three passes: rising, flat, falling. Label each before answering anything."
+     },
+     "graph": {
+      "w": [
+       0,
+       30,
+       0,
+       25
+      ],
+      "gx": 5,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          20,
+          20
+         ],
+         [
+          30,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (m)"
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "For the whole 30-second trip in the graph shown, what is the average velocity?",
+     "opts": [
+      "1.33 m/s",
+      "2 m/s",
+      "0 m/s",
+      "−2 m/s"
+     ],
+     "ans": 2,
+     "hint": "Average velocity needs only the first and last positions.",
+     "steps": [
+      "Average velocity is total displacement divided by total time.",
+      "The object starts at 0 m and finishes at 0 m, so its displacement is 0 m.",
+      "Zero divided by 30 s is zero.",
+      "The object certainly moved — but it ended where it began, so the average VELOCITY is zero."
+     ],
+     "ex": {
+      "main": "**0 m/s.** The trip ends at the starting position, so the displacement is zero and so is the average velocity. This is not a trick: it is what the quantity means.",
+      "tip": "If a graph ends at the same height it started, the average velocity is zero before you calculate anything."
+     },
+     "graph": {
+      "w": [
+       0,
+       30,
+       0,
+       25
+      ],
+      "gx": 5,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          20,
+          20
+         ],
+         [
+          30,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (m)"
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "An object moves out and then returns, as shown in the graph. What is its average speed for the whole 30-second trip?",
+     "opts": [
+      "0 m/s",
+      "1.33 m/s",
+      "2 m/s",
+      "0.67 m/s"
+     ],
+     "ans": 1,
+     "hint": "Average speed counts every metre covered, in both directions.",
+     "steps": [
+      "Average speed is total distance divided by total time.",
+      "Out: 0 m to 20 m is 20 m. Resting: 0 m. Back: 20 m to 0 m is another 20 m.",
+      "Total distance is 40 m over 30 s.",
+      "40 ÷ 30 = 1.33 m/s. Note the average velocity for this same trip is 0 — both answers are right at once."
+     ],
+     "ex": {
+      "main": "**1.33 m/s.** Distance adds up regardless of direction, so the return leg counts too. Average speed and average velocity answer different questions about the same journey.",
+      "tip": "When a question offers 0 alongside a positive value, check which of the two it is asking for."
+     },
+     "graph": {
+      "w": [
+       0,
+       30,
+       0,
+       25
+      ],
+      "gx": 5,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          20,
+          20
+         ],
+         [
+          30,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (m)"
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "In the velocity–time graph shown, what is the acceleration between 0 and 10 seconds?",
+     "opts": [
+      "20 m/s²",
+      "0 m/s²",
+      "2 m/s²",
+      "−2 m/s²"
+     ],
+     "ans": 2,
+     "hint": "Acceleration is the slope of this graph.",
+     "steps": [
+      "Read the two endpoints of that segment: velocity goes from 0 to 20 m/s.",
+      "The time taken is 10 s.",
+      "Acceleration is the slope: Δv ÷ Δt = 20 ÷ 10.",
+      "That gives +2 m/s², positive because the object is speeding up."
+     ],
+     "ex": {
+      "main": "**2 m/s².** Δv/Δt = 20/10. The 20 on its own is the velocity reached, not the acceleration — the division by time is what makes it a rate.",
+      "tip": "An option that repeats a number straight off the axis is usually the trap."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       25
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          30,
+          20
+         ],
+         [
+          40,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Velocity (m/s)"
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "The constant-motion lab produced the fit x = 0.8t + 2, with x in feet and t in seconds. How far has the car travelled at t = 0.5 minutes?",
+     "opts": [
+      "26 ft",
+      "6 ft",
+      "2.4 ft",
+      "42 ft"
+     ],
+     "ans": 0,
+     "hint": "The expression is built in seconds. What is 0.5 minutes?",
+     "steps": [
+      "The expression uses seconds, so convert first: 0.5 min × 60 = 30 s.",
+      "Substitute: x = 0.8(30) + 2.",
+      "0.8 × 30 = 24, and 24 + 2 = 26.",
+      "So the car is at 26 ft. Skipping the conversion and using 0.5 gives 2.4 ft, which is the trap."
+     ],
+     "ex": {
+      "main": "**26 ft.** The conversion is part of the work, not a formality — substituting 0.5 straight in gives 2.4 ft, off by a factor of sixty.",
+      "tip": "Before substituting anything, check that its units match the ones the expression was built from."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       35
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "line",
+        "m": 0.8,
+        "b": 2,
+        "dom": [
+         0,
+         10
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (ft)"
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "A constant-motion lab gives the fit x = 0.8t + 2, with x in feet and t in seconds. How long does the car take to reach 30 ft?",
+     "opts": [
+      "24 s",
+      "40 s",
+      "35 s",
+      "37.5 s"
+     ],
+     "ans": 2,
+     "hint": "This one runs the equation backwards. Undo the +2 first.",
+     "steps": [
+      "Set the expression equal to the target position: 30 = 0.8t + 2.",
+      "Subtract the intercept from both sides: 28 = 0.8t.",
+      "Divide by the slope: t = 28 ÷ 0.8 = 35 s.",
+      "Forgetting to subtract the 2 first gives 37.5 s, which is the common slip."
+     ],
+     "ex": {
+      "main": "**35 s.** Subtract the intercept, then divide by the slope — undo the equation in reverse order.",
+      "tip": "Predicting a position and solving for a time use the same fit. Practise both directions or only one will be quick."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "kind": "mc",
+     "from": "source",
+     "q": "A car's measured velocity is 0.8 ft/s and the accepted value is 0.75 ft/s. What is the percent error?",
+     "opts": [
+      "6.7%",
+      "6.3%",
+      "5%",
+      "0.05%"
+     ],
+     "ans": 0,
+     "hint": "Divide by the accepted value, not by your own measurement.",
+     "steps": [
+      "Find the difference: 0.80 − 0.75 = 0.05 ft/s.",
+      "Divide by the ACCEPTED value: 0.05 ÷ 0.75 = 0.0667.",
+      "Multiply by 100 to get 6.7%.",
+      "Dividing by the measured 0.80 instead gives 6.3%, which is the usual mistake."
+     ],
+     "ex": {
+      "main": "**6.7%.** 0.05/0.75 × 100. The accepted value goes on the bottom — that is what the error is being judged against.",
+      "tip": "When two close answers appear, one of them is usually the same sum with the wrong denominator."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "Using the velocity–time graph shown, what is the total displacement over the full 40 seconds?",
+     "opts": [
+      "800 m",
+      "400 m",
+      "600 m",
+      "500 m"
+     ],
+     "ans": 2,
+     "hint": "Split the shape into a triangle, a rectangle and another triangle.",
+     "steps": [
+      "Displacement is the area under the line, so break the shape into pieces.",
+      "0–10 s is a triangle: ½ × 10 × 20 = 100 m.",
+      "10–30 s is a rectangle: 20 × 20 = 400 m.",
+      "30–40 s is another triangle: ½ × 10 × 20 = 100 m. Total 100 + 400 + 100 = 600 m."
+     ],
+     "ex": {
+      "main": "**600 m.** Triangle, rectangle, triangle. Treating the whole shape as a rectangle gives 800 m — the two sloped ends are half-areas, not full ones.",
+      "tip": "Cut every area problem into rectangles and triangles before you calculate anything."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       25
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          30,
+          20
+         ],
+         [
+          40,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Velocity (m/s)"
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "Four cars have straight position–time lines. W passes (0 s, 0 m) and (4 s, 12 m). X passes (0, 0) and (6, 6). Y passes (0, 2) and (5, 17). Z passes (0, 0) and (8, 4). Rank their speeds, greatest first.",
+     "opts": [
+      "W > Y > X > Z",
+      "W = Y > X > Z",
+      "Y > W > X > Z",
+      "W = Y > Z > X"
+     ],
+     "ans": 1,
+     "hint": "Work out all four slopes before ranking. Two of them match.",
+     "steps": [
+      "W: rise 12 over run 4 = 3 m/s.",
+      "X: 6 over 6 = 1 m/s. Z: 4 over 8 = 0.5 m/s.",
+      "Y: from (0,2) to (5,17) the rise is 15 over a run of 5 = 3 m/s — the different starting position does not change the slope.",
+      "So W and Y tie at 3, then X at 1, then Z at 0.5: W = Y > X > Z."
+     ],
+     "ex": {
+      "main": "**W = Y > X > Z.** Y starts 2 m further along, which shifts its line up but leaves its steepness alone. A ranking has to be able to say 'equals'.",
+      "tip": "A different intercept never changes a slope. Compute every slope before comparing any of them."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "In the constant-motion lab, what is the physical significance of the slope of the position–time line, and how would you know?",
+     "opts": [
+      "The car's constant velocity — rise over run has units of ft/s",
+      "The distance the car travelled, read off the vertical axis",
+      "The time the car took, read off the horizontal axis",
+      "The car's acceleration, since the line is straight"
+     ],
+     "ans": 0,
+     "hint": "Let the units answer the question for you.",
+     "steps": [
+      "Take rise over run for this graph: feet divided by seconds.",
+      "ft/s is a speed, so the slope must represent a speed.",
+      "The line is straight, which means that speed never changed — the car ran at one constant velocity.",
+      "A straight line means zero acceleration, not constant acceleration, so acceleration cannot be what the slope shows."
+     ],
+     "ex": {
+      "main": "**The car's constant velocity, and the units prove it.** ft ÷ s = ft/s. Straightness tells you the velocity was constant, which is exactly what the lab set out to test.",
+      "tip": "'How did you know' questions want the units or the shape as evidence, not just the right noun."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       35
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "line",
+        "m": 0.8,
+        "b": 2,
+        "dom": [
+         0,
+         10
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (ft)"
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "In the constant-motion lab, a car released from a starting mark gives the position–time line shown. If the lab were repeated with a faster car released from that same mark, how would the graph change?",
+     "opts": [
+      "Steeper line, same y-intercept",
+      "Same slope, higher y-intercept",
+      "Steeper line and a higher y-intercept",
+      "The line would curve upward"
+     ],
+     "ans": 0,
+     "hint": "Name the quantity that changed, then ask which feature of the graph carries it.",
+     "steps": [
+      "Identify what changed between the two runs: only the car's speed.",
+      "On a position–time graph the velocity is carried by the slope, so a faster car gives a steeper line.",
+      "The starting mark is unchanged, and the starting position is the y-intercept, so the intercept stays put.",
+      "The speed is still constant, so the line stays straight rather than curving."
+     ],
+     "ex": {
+      "main": "**Steeper, same intercept.** Faster means a bigger slope; same starting mark means the same intercept. A curve would mean the speed was changing, which it is not.",
+      "tip": "For any 'what if' question, name the changed quantity first, then the graph feature that carries it."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       35
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "line",
+        "m": 0.8,
+        "b": 2,
+        "dom": [
+         0,
+         10
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Position (ft)"
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "An object's position–time graph is a straight line sloping downward. What does its velocity–time graph look like?",
+     "opts": [
+      "A horizontal line below the time axis",
+      "A horizontal line above the time axis",
+      "A straight line sloping downward",
+      "A line starting high and crossing to negative"
+     ],
+     "ans": 0,
+     "hint": "Straight on a position graph means the velocity is constant. What sign is it?",
+     "steps": [
+      "A straight position–time line has a constant slope, so the velocity is constant.",
+      "Constant velocity plots as a horizontal line on a velocity–time graph.",
+      "The position line slopes downward, so that constant velocity is negative.",
+      "A negative constant plots as a horizontal line below the time axis."
+     ],
+     "ex": {
+      "main": "**A horizontal line below the axis.** Straight position line → constant velocity → horizontal on the v–t graph; downward slope → that constant is negative.",
+      "tip": "Translate in two steps: straight-or-curved decides the shape, up-or-down decides the sign."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "Two objects cover the same distance in the same time, but one has a positive velocity and the other negative. What can you say about their speeds and their position–time lines?",
+     "opts": [
+      "Equal speeds; lines equally steep, sloping opposite",
+      "Different speeds; one line is steeper than the other",
+      "Equal speeds; the two lines are exactly identical",
+      "One is at rest, since the velocities cancel out"
+     ],
+     "ans": 0,
+     "hint": "Steepness and sign are two separate readings of the same line.",
+     "steps": [
+      "Speed is the size of the velocity, ignoring its sign.",
+      "Same distance in the same time means the sizes are equal, so the speeds are equal.",
+      "Steepness on a position–time graph carries that size, so both lines are equally steep.",
+      "The signs differ, so one slopes up and the other slopes down — mirror images, not identical."
+     ],
+     "ex": {
+      "main": "**Equal speeds, mirrored lines.** Steepness carries the speed and sign carries the direction; reading them separately answers the question in one step.",
+      "tip": "Velocities cancelling is about adding two motions together. Here there are two separate objects, so nothing cancels."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "kind": "mc",
+     "from": "source",
+     "q": "For the velocity–time graph shown, what is the average velocity across the whole 40 seconds?",
+     "opts": [
+      "20 m/s",
+      "15 m/s",
+      "10 m/s",
+      "600 m/s"
+     ],
+     "ans": 1,
+     "hint": "You already know the displacement from the area. Now divide.",
+     "steps": [
+      "Average velocity is total displacement divided by total time.",
+      "Displacement is the area under the line: a triangle, a rectangle, then a triangle.",
+      "That is ½(10)(20) + (20)(20) + ½(10)(20) = 100 + 400 + 100 = 600 m.",
+      "Divide by the 40 s total: 600 ÷ 40 = 15 m/s, which sits below the 20 m/s cruising speed as it must."
+     ],
+     "ex": {
+      "main": "**15 m/s.** Area gives 600 m, then divide by 40 s. It has to come out below the 20 m/s cruising speed, which is a useful check on the answer.",
+      "tip": "Sanity-check an average against the range it must fall inside. Anything above the peak is wrong on sight."
+     },
+     "graph": {
+      "w": [
+       0,
+       40,
+       0,
+       25
+      ],
+      "gx": 10,
+      "gy": 5,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          10,
+          20
+         ],
+         [
+          30,
+          20
+         ],
+         [
+          40,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "Time (s)",
+      "yl": "Velocity (m/s)"
+     }
+    }
+   ],
+   "order": 2,
+   "sorts": [
+    {
+     "id": "s-graph",
+     "title": "Which graph is it true of?",
+     "a": "Position–time",
+     "b": "Velocity–time",
+     "items": [
+      {
+       "t": "The slope of the line is the object's velocity",
+       "k": "a",
+       "why": "Rise is position, run is time, so slope is position over time — velocity."
+      },
+      {
+       "t": "A flat horizontal line means the object is at rest",
+       "k": "a",
+       "why": "Position not changing over time is standing still."
+      },
+      {
+       "t": "A line sloping downward means the object is moving backward",
+       "k": "a",
+       "why": "Position decreasing over time — heading back toward the origin."
+      },
+      {
+       "t": "A steeper line means a faster object",
+       "k": "a",
+       "why": "More position covered per second is a bigger velocity."
+      },
+      {
+       "t": "The y-intercept is where the object started",
+       "k": "a",
+       "why": "At time zero the graph reads the starting position."
+      },
+      {
+       "t": "The slope of the line is the acceleration",
+       "k": "b",
+       "why": "Rise is velocity, run is time — velocity over time is acceleration."
+      },
+      {
+       "t": "The area under the line is the displacement",
+       "k": "b",
+       "why": "Velocity × time is displacement, and that product is the area under the line."
+      },
+      {
+       "t": "A flat horizontal line means constant velocity",
+       "k": "b",
+       "why": "Velocity not changing over time is constant velocity — the object is still moving."
+      },
+      {
+       "t": "The line crossing the time axis means the object turned around",
+       "k": "b",
+       "why": "Velocity passing through zero and changing sign is a change of direction."
+      },
+      {
+       "t": "A steeper line means the velocity is changing faster",
+       "k": "b",
+       "why": "More velocity gained per second is a bigger acceleration."
+      }
+     ]
+    }
+   ]
   }
+ }
 }

@@ -802,6 +802,68 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Swipe sort (v146 / Wayfinder v125, both apps)
+
+The third cheap game, and the first that needed authored content. Two
+buckets, one card at a time, swipe left or right (or tap a side). The
+material is the category judgement itself — observation or inference,
+scalar or vector, changed-on-purpose or measured — which is what the tests
+actually ask and what a four-option quiz reaches only sideways.
+
+**Sets ride on the unit**: `u.sorts = [{id, title, a, b, items:[{t, k:'a'|'b',
+why}]}]`, left is always `a`. So a set drafts, approves and shelves with its
+unit, `unitDelta` treats `sorts` as a meta change (re-approval shows only
+the changed sets), and `SCREENS.reviewunit` lists every item with its
+bucket — nothing reaches her unread. Adding a set to a shipped file bumps
+`libv`, so the five units below re-draft once. Rules that are the point:
+
+- **A wrong swipe is information, not a fault.** The card turns, says which
+  bucket it belonged in and why, waits for a tap, and goes to the back of the
+  pile — the round ends only when every card is in its place. Nothing
+  breaks. No buzz on a miss; the right-answer buzz on a hit.
+- **Speed is hers.** An elapsed clock, never a countdown.
+- **One log** (`mode:'sort'`) updated in place as cards land, so leaving
+  keeps what she earned; `correct` is right-first-time, XP flat per
+  first-time-right (`SORT_XP` 3), no speed bonus.
+- **Never on the review ladder.** A sort item is not a question record and
+  never becomes a miss. The quiz owns the ladder.
+- **Date-seeded with `mixHash`**, same pile all day, fresh tomorrow;
+  "Again" re-salts.
+- **An item may not name its own bucket.** `check_content.py` errors on it
+  (first word of either label, five letters or more, inside the item
+  text) — the sort-set form of the glossed-stem rule. It also requires 6+
+  items, 2+ per bucket, unique text, and a `why` on each.
+- Bucket plates use `--text` on the accent wash, the pair the chip fix
+  settled on; a hit or miss borrows `--good` / `--bad`.
+
+**The first five sets**, each 10–12 fresh items, none lifted from the
+unit's own questions:
+
+| App | Unit | Set |
+|---|---|---|
+| Wayfinder | Quiz 1: Thinking Like a Scientist | Observation or inference? |
+| Wayfinder | Quiz 1 Part 2: Measurement | Quantitative or qualitative? |
+| Wayfinder | Quiz 1 Part 3: Variables | Changed on purpose, or measured at the end |
+| Ad Astra | Kinematics 1 · Describing Motion | Scalar or vector? |
+| Ad Astra | Kinematics 1 · Motion Graphs | Which graph is it true of? (position–time / velocity–time) |
+
+The variables set names the experiment inside every item ("Testing whether
+salt changes how fast ice melts: the amount of salt…") because the pile
+shuffles and a returned card can arrive far from its partner — the
+standalone rule, applied to a game. The scalar/vector set mixes named
+quantities (velocity, acceleration) with described ones (“she ended up
+3 km east of home”) so it tests the concept, not the glossary.
+
+`tools/test_sort.js` (same file, both apps): the door on the card and on
+the shelf, the deal, a right tap counting and logging in place, a wrong
+tap's verdict/why/Got-it and the card returning to the back, pointer
+swipes (a short drag snaps back, a long one sorts), the finish tally at
+(n−1)×3 XP with the returned card named, Again reordering, the review
+queue showing the set, and `unitDelta` flagging a sorts change.
+
+**Next**: the number line (`kind:'slider'`) needs engine plus content;
+spot-the-flaw is content-heavy. Both are still on the list.
+
 ### Match, and the daily three (v145 / Wayfinder v124, both apps)
 
 Chris asked for learning games and picked the low-hanging fruit first. Two

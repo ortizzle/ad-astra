@@ -175,6 +175,28 @@ def check(root, name):
                   'guide unit: %d of %d questions have no variant'
                   % (sum(1 for q in qs if not q.get('variant')), len(qs)))
 
+            # Sort sets (v146 / Wayfinder v125): {id, title, a, b, items:[{t, k, why}]}.
+            # Left is `a`, right is `b`. An item that names its own bucket
+            # tests nothing, exactly as a stem that glosses its word does.
+            for sset in (u.get('sorts') or []):
+                stag = 'sort %r' % str(sset.get('id'))
+                P(not sset.get('id') or not sset.get('title'), '%s: needs id and title' % stag)
+                a, b = str(sset.get('a','')), str(sset.get('b',''))
+                P(not a or not b or a.lower()==b.lower(), '%s: buckets must be two different labels' % stag)
+                items = sset.get('items') or []
+                P(len(items) < 6, '%s: %d items, want 6+' % (stag, len(items)))
+                ks = [it.get('k') for it in items]
+                P(any(k not in ('a','b') for k in ks), '%s: every item needs k of a or b' % stag)
+                P(ks.count('a') < 2 or ks.count('b') < 2, '%s: each bucket needs at least 2 items' % stag)
+                ts = [str(it.get('t','')).strip().lower() for it in items]
+                P(len(set(ts)) != len(ts), '%s: duplicate item text' % stag)
+                for it in items:
+                    t = str(it.get('t',''))
+                    for lab in (a, b):
+                        w = lab.lower().split()[0] if lab.split() else ''
+                        P(bool(w) and len(w) > 4 and w in t.lower(),
+                          '%s: item %r names its own bucket (%r)' % (stag, t[:40], lab))
+                    P(not it.get('why'), '%s: item %r has no why' % (stag, t[:40]))
             for c in (u.get('cards') or []):
                 P(not c.get('term'), 'a card has no term')
                 dfn = str(c.get('def', ''))

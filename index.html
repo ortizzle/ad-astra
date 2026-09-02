@@ -867,6 +867,26 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .dsq.big{justify-content:center;width:100%;margin:6px 0 2px}
 .dsq.big i{font-size:22px}
 .card.dailydone .row{align-items:center}
+/* Sort: two buckets over one card. Bucket plates use --text on the accent
+   wash (the --ac-fg-on-wash pair measured 4.41:1 on light paper); a hit or
+   a miss borrows the measured --good / --bad reading tokens. */
+.sortbk{display:flex;gap:10px;margin-top:12px}
+.sortbk span{flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:8px 10px;border-radius:12px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
+  color:var(--text);font-weight:700;font-size:12.5px;text-align:center}
+.sortbk span.hit{border-color:var(--good);color:var(--good)}
+.sortbk span.miss{border-color:var(--bad);color:var(--bad)}
+.sortbk span b{font-weight:500;color:var(--faint);font-size:11px}
+.sortcard{min-height:150px;margin-top:10px;border-radius:18px;background:var(--surface);border:1px solid var(--line);
+  padding:18px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  font-family:'Fraunces',Georgia,serif;font-size:18px;line-height:1.35;touch-action:pan-y;user-select:none;
+  -webkit-user-select:none;will-change:transform;cursor:grab}
+.sortcard.wrong{border-color:var(--bad);cursor:default}
+.sortcard .why{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
+.sortcard .was{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--bad);margin-top:8px}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.sortbtns .btn{margin:0}
+.sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
 .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
 .mt{min-height:96px;border-radius:14px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
   color:var(--text);font:inherit;font-size:12.5px;font-weight:600;line-height:1.3;padding:8px 7px;
@@ -1374,7 +1394,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v145 · match, and the daily three';
+const APP_VERSION = 'v146 · swipe sort';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2905,7 +2925,7 @@ function unitDelta(oldU, newU){
     return out;
   };
   const d = { c:diff(oldU.cards,newU.cards), q:diff(oldU.questions,newU.questions), meta:[] };
-  ['title','round','order','guide','capstone','book'].forEach(k=>{
+  ['title','round','order','guide','capstone','book','sorts'].forEach(k=>{
     if(JSON.stringify(oldU[k]??null)!==JSON.stringify(newU[k]??null)) d.meta.push(k); });
   return (d.c.a.length||d.c.d.length||d.c.m.length||d.q.a.length||d.q.d.length||d.q.m.length||d.meta.length) ? d : null;
 }
@@ -2995,6 +3015,7 @@ const focusLogs = () => all('focus').sort((a,b)=>b.at-a.at);
 function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
   if(l.mode==='match')   return 'Match';
+  if(l.mode==='sort')    return 'Sort';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
   if(l.mode==='readfin') return 'Finished a book';
@@ -5053,6 +5074,14 @@ function unitCard(u, c, label){
     mb.addEventListener('click',()=>{ matchState = null; go('match',{unitId:u.id, classId:c.id}); });
     card.appendChild(mb);
   }
+  /* Sort — one door per set the unit carries. Content-shaped: a set is
+     authored on the unit, so it drafts, approves and shelves with it. */
+  (u.sorts||[]).forEach(set=>{
+    if(!set || !Array.isArray(set.items) || set.items.length < 4) return;
+    const sb = el('button','btn btn-secondary','⇄  Sort — ' + set.title);
+    sb.addEventListener('click',()=>{ sortState = null; go('sort',{unitId:u.id, classId:c.id, sortId:set.id}); });
+    card.appendChild(sb);
+  });
   /* River's game, offered where it fits: vocabulary shelves built from single
      words. Other units keep their three doors — a physics question is not a
      word you can say. */
@@ -5345,6 +5374,147 @@ SCREENS.match = function(root){
   }
   const leave = el('button','btn btn-ghost', done ? '← Back' : '← Leave — pairs found so far still count');
   leave.addEventListener('click',()=>{ matchLog(u); matchState = null; go('unit',{classId:ctx.classId}); });
+  root.appendChild(leave);
+};
+
+/* ================= SORT ================= */
+/* Swipe sort: two buckets, one card at a time, left or right. The material is
+   the category judgement itself — observation or inference, scalar or
+   vector, independent or dependent — which is what the tests actually ask
+   and what a four-option quiz tests only sideways. Rules that are the point:
+   - A wrong swipe is information, not a fault: the card says which bucket it
+     belonged in and why, waits for a tap, then goes to the back of the pile,
+     so the round ends only when every card is in its right place. Nothing
+     breaks. Sky Map rules.
+   - Speed is hers: an elapsed clock, never a countdown.
+   - One log (mode:'sort') updated in place as cards land, so leaving keeps
+     what she earned. correct = right first time; XP flat per first-time
+     right (SORT_XP), no speed bonus.
+   - Not on the review ladder: a sort item is not a question record and never
+     becomes a miss. The quiz owns the ladder.
+   - Sets ride on the unit (u.sorts: {id, title, a, b, items:[{t, k:'a'|'b',
+     why}]}), so they draft, approve and shelve with it, and the review queue
+     shows every item with its bucket. Left is always `a`, right is `b`.
+   - Order is date-seeded with mixHash: the same pile all day, fresh
+     tomorrow, nothing stored. */
+let sortState = null;
+const SORT_XP = 3;
+function sortSet(u){ return (u.sorts||[]).find(s => s.id === ctx.sortId) || (u.sorts||[])[0]; }
+function sortLog(u, set){
+  const st = sortState;
+  if(!st.done.length) return;
+  st.logId = st.logId || uid('log');
+  put({ id:st.logId, type:'log', mode:'sort', classId:ctx.classId, unitId:u.id, sortId:set.id,
+        date:AZ.today(), at:st.start, correct:st.firstRight, total:set.items.length,
+        seconds:Math.round((Date.now()-st.start)/1000), xp:st.firstRight*SORT_XP, hints:0 });
+}
+function sortDeal(u, set, salt){
+  const seed = mixHash(u.id + ':' + set.id + ':' + AZ.today() + ':' + (salt||0));
+  const queue = set.items.map((_,i)=>i).map(i => ({i, k: mixHash(seed + ':' + i)})).sort((x,y)=>x.k-y.k).map(x=>x.i);
+  sortState = { unitId:u.id, sortId:set.id, salt:salt||0, queue, done:[], tried:{}, firstRight:0,
+                counts:{a:0,b:0}, verdict:null, start:Date.now(), logId:null, flash:null };
+}
+SCREENS.sort = function(root){
+  const u = unitFor(ctx.unitId);
+  const set = u && sortSet(u);
+  if(!set || !Array.isArray(set.items) || set.items.length < 2) return go('unit',{classId:ctx.classId});
+  if(!sortState || sortState.unitId !== u.id || sortState.sortId !== set.id) sortDeal(u, set, 0);
+  const st = sortState, finished = !st.queue.length;
+  const item = finished ? null : set.items[st.queue[0]];
+
+  const head = el('div','card');
+  head.appendChild(el('div','eyebrow', u.title + ' · Sort'));
+  const hr = el('div','row');
+  hr.appendChild(el('span','k', finished ? 'Every card in its place' : 'Swipe the card left or right — or tap a side.'));
+  hr.appendChild(el('span','v', st.done.length + ' of ' + set.items.length));
+  head.appendChild(hr);
+  root.appendChild(head);
+
+  const choose = k => {
+    if(st.verdict || finished) return;
+    const idx = st.queue[0], it = set.items[idx];
+    if(k === it.k){
+      if(!st.tried[idx]) st.firstRight++;
+      st.done.push(idx); st.queue.shift(); st.counts[k]++;
+      if(navigator.vibrate) navigator.vibrate([12,40,12]);
+      st.flash = k;
+      sortLog(u, set);
+      if(!st.queue.length){ checkBadges(); syncSoon(); celebrate(); }
+      render();
+      setTimeout(()=>{ if(sortState !== st) return; st.flash = null; render(); }, 450);
+    } else {
+      /* Wrong: say where it belonged and why, wait for her tap, then it goes
+         to the back of the pile. No buzz — the phone never scolds. */
+      st.tried[idx] = true;
+      st.verdict = { idx, k: it.k, why: it.why || '' };
+      st.queue.shift(); st.queue.push(idx);
+      render();
+    }
+  };
+
+  const bk = el('div','sortbk');
+  const A = el('span', st.flash==='a' ? 'hit' : (st.verdict && st.verdict.k==='a') ? 'hit' : '');
+  A.appendChild(document.createTextNode('◀ ' + set.a)); A.appendChild(el('b',null, String(st.counts.a)));
+  const B = el('span', st.flash==='b' ? 'hit' : (st.verdict && st.verdict.k==='b') ? 'hit' : '');
+  B.appendChild(el('b',null, String(st.counts.b))); B.appendChild(document.createTextNode(set.b + ' ▶'));
+  bk.appendChild(A); bk.appendChild(B);
+  root.appendChild(bk);
+
+  if(!finished){
+    const showing = st.verdict ? set.items[st.verdict.idx] : item;
+    const card = el('div','sortcard' + (st.verdict ? ' wrong' : ''));
+    card.appendChild(el('div','txt', showing.t));
+    if(st.verdict){
+      card.appendChild(el('div','was', 'This one is ' + (st.verdict.k==='a' ? set.a : set.b) + ' — it comes back around'));
+      if(st.verdict.why) card.appendChild(richify(el('div','why'), st.verdict.why));
+    } else {
+      /* Pointer-driven swipe. pan-y keeps the page scrollable; a short drag
+         snaps back so a scroll never counts as a sort. */
+      let x0 = null, dx = 0;
+      card.addEventListener('pointerdown', e => { x0 = e.clientX; dx = 0; card.setPointerCapture(e.pointerId); card.style.transition = 'none'; });
+      card.addEventListener('pointermove', e => { if(x0===null) return; dx = e.clientX - x0;
+        card.style.transform = `translateX(${dx}px) rotate(${dx/18}deg)`; });
+      const end = e => { if(x0===null) return; const d = dx; x0 = null;
+        card.style.transition = 'transform .18s'; card.style.transform = '';
+        if(d <= -70) choose('a'); else if(d >= 70) choose('b'); };
+      card.addEventListener('pointerup', end); card.addEventListener('pointercancel', end);
+    }
+    root.appendChild(card);
+    if(st.verdict){
+      const ok = el('button','btn btn-primary','Got it →');
+      ok.addEventListener('click', ()=>{ st.verdict = null; render(); });
+      root.appendChild(ok);
+    } else {
+      const btns = el('div','sortbtns');
+      const ba = el('button','btn btn-secondary','◀ ' + set.a); ba.addEventListener('click', ()=>choose('a'));
+      const bb = el('button','btn btn-secondary', set.b + ' ▶'); bb.addEventListener('click', ()=>choose('b'));
+      btns.appendChild(ba); btns.appendChild(bb); root.appendChild(btns);
+    }
+    const meta = el('div','sortmeta');
+    meta.appendChild(el('span',null, st.firstRight + ' right first time'));
+    meta.appendChild(el('span',null, Math.round((Date.now()-st.start)/1000) + ' sec so far'));
+    root.appendChild(meta);
+  } else {
+    const c = el('div','card ac');
+    c.appendChild(el('h2',null, 'Every card in its place'));
+    const t = el('div','tally');
+    const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
+    chip(st.firstRight, ' of ' + set.items.length + ' first time');
+    const secs = Math.round((Date.now()-st.start)/1000);
+    chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
+    chip('+'+(st.firstRight*SORT_XP), ' XP');
+    c.appendChild(t);
+    const hard = set.items.filter((_,i)=>st.tried[i]);
+    c.appendChild(el('p',null, hard.length
+      ? 'The ones that came back around are the ones to reread: ' + hard.map(x=>'“'+x.t+'”').join(', ') + '.'
+      : 'Nothing came back around. That is the whole set sorted on sight.'));
+    const again = el('button','btn btn-primary','Again · new order');
+    again.addEventListener('click',()=>{ sortDeal(u, set, st.salt + 1); render(); });
+    c.appendChild(again);
+    root.appendChild(c);
+  }
+  const leave = el('button','btn btn-ghost', finished ? '← Back' : '← Leave — cards sorted so far still count');
+  leave.addEventListener('click',()=>{ sortLog(u, set); sortState = null; go('unit',{classId:ctx.classId}); });
   root.appendChild(leave);
 };
 
@@ -10185,6 +10355,25 @@ SCREENS.reviewunit = function(root){
   recount();
   root.appendChild(counts);
 
+  /* Sort sets are content she will see, so they are reviewed like anything
+     else: every item and the bucket it belongs in. In chg mode they show only
+     when the sets themselves changed. */
+  if((u.sorts||[]).length && (!chg || chg.meta.includes('sorts'))){
+    root.appendChild(divider(chg ? 'Changed sort sets' : 'Sort sets'));
+    u.sorts.forEach(set=>{
+      const d = el('div','card');
+      d.appendChild(el('div','eyebrow', '⇄ ' + set.title));
+      d.appendChild(el('p',null, `Left: ${set.a}  ·  Right: ${set.b}  ·  ${set.items.length} cards`));
+      set.items.forEach(it=>{
+        const r = el('div','row');
+        r.appendChild(el('span','k', it.t));
+        r.appendChild(el('span','v', it.k==='a' ? set.a : set.b));
+        d.appendChild(r);
+        if(it.why) d.appendChild(el('div','hintline', it.why));
+      });
+      root.appendChild(d);
+    });
+  }
   if(u.cards.length && (!chgC || chgC.size)){
     root.appendChild(divider(chg ? 'Changed flashcards' : 'Flashcards'));
     u.cards.forEach(card=>{
