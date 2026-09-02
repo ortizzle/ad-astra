@@ -89,11 +89,24 @@ def check(root, name):
                 opts = q.get('opts') or []
                 ans = q.get('ans')
                 if kind in ('mc', 'analogy'):
-                    P(len(opts) != 4, '%s: %d options, must be 4' % (tag, len(opts)))
+                    # A guide unit transcribes a real paper, and a real paper is
+                    # allowed a True/False item. The grid in SCREENS.guideentry
+                    # is driven by opts.length, so it renders A/B correctly —
+                    # forcing two invented extra options onto it would change
+                    # what she is entering. Everywhere else, four.
+                    ok_counts = (2, 4) if u.get('guide') else (4,)
+                    P(len(opts) not in ok_counts,
+                      '%s: %d options, must be %s' % (tag, len(opts),
+                       ' or '.join(map(str, ok_counts))))
                     P(len(set(map(str, opts))) != len(opts), '%s: duplicate options' % tag)
                     P(not isinstance(ans, int) or not (0 <= ans < len(opts)),
                       '%s: ans %r out of range' % (tag, ans))
-                    over = length_tell(opts, ans)
+                    # Same guide-unit reasoning as the two rules above, with one
+                    # extra: these options are the teacher's, copied out word for
+                    # word. Editing them to even up the lengths would break the
+                    # letter-for-letter contract the whole paper-entry mode rests
+                    # on. Variants are ours and shuffled, so they stay checked.
+                    over = 0 if u.get('guide') else length_tell(opts, ans)
                     W(over, '%s: correct option %d%% longer than the next longest'
                       % (tag, over))
                 if kind == 'order':
@@ -107,8 +120,16 @@ def check(root, name):
                 blob = ' '.join([str(q.get('q', ''))] + [str(o) for o in opts]
                                 + [str(s) for s in (q.get('steps') or [])]
                                 + [str((q.get('ex') or {}).get('main', ''))])
+                # The rule exists because options shuffle at render time. On a
+                # guide unit they explicitly do NOT (index.html scopes the
+                # shuffle to `!u.guide`): she is entering the letter she wrote
+                # on the paper, so "All of the above" is a faithful
+                # transcription, not a smell. The exemption is the MAIN
+                # question only — a guide unit's variants run in the rescue
+                # round, which shuffles normally, and are checked below.
                 m = POSITIONAL.search(blob)
-                P(bool(m), '%s: positional reference %r (options shuffle)' % (tag, m.group(0)) if m else '')
+                P(bool(m) and not u.get('guide'),
+                  '%s: positional reference %r (options shuffle)' % (tag, m.group(0)) if m else '')
 
                 stem = str(q.get('q', ''))
                 b = BACKREF.match(stem)
