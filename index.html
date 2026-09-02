@@ -858,6 +858,25 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
   background-color:var(--ac-8);font-weight:700;font-size:12.5px;cursor:pointer}
 .mtile svg{width:54px;height:40px;color:var(--ac-fg);overflow:visible}
 .mtile small{font-weight:500;font-size:10px;color:var(--faint);letter-spacing:.04em}
+/* Match: a 3-across grid of face-down tiles. Face-down is the accent wash;
+   face-up is the surface; a found pair keeps its text and goes quiet. Tiles
+   are square-ish and never under 44px — they are the only tap targets. */
+/* The daily three's squares: lit stars in the accent, said once. */
+.dsq{display:inline-flex;gap:4px}
+.dsq i{font-style:normal;color:var(--ac-fg);font-size:15px}
+.dsq.big{justify-content:center;width:100%;margin:6px 0 2px}
+.dsq.big i{font-size:22px}
+.card.dailydone .row{align-items:center}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.mt{min-height:96px;border-radius:14px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
+  color:var(--text);font:inherit;font-size:12.5px;font-weight:600;line-height:1.3;padding:8px 7px;
+  display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;
+  overflow:hidden;word-break:break-word}
+.mt .pip{font-size:20px;color:var(--ac-fg);opacity:.7}
+.mt.up{background-color:var(--surface);border-color:var(--ac)}
+.mt.done{background-color:var(--surface);border-color:var(--line-soft);color:var(--muted);cursor:default}
+.mt.t{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:14px}
+.mt .txt{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 @media (prefers-reduced-motion:no-preference){
   .mtile{transition:transform .12s ease}
   .mtile:active{transform:scale(.96)}
@@ -1355,7 +1374,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v144 · the Growth Zone, focused';
+const APP_VERSION = 'v145 · match, and the daily three';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2975,12 +2994,14 @@ const focusLogs = () => all('focus').sort((a,b)=>b.at-a.at);
    card). What is shown is what was done, how it went, and how long. */
 function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
+  if(l.mode==='match')   return 'Match';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
   if(l.mode==='readfin') return 'Finished a book';
   if(l.mode==='quiz'){
     if(l.unitId==='__review__')  return 'Growth Zone review';
     if(l.unitId==='__shuffle__') return 'Shuffle round';
+    if(l.unitId==='__daily__')   return 'The daily three';
     return (l.timed ? 'Beat the clock' : 'Quiz') + (l.partial ? ' · stopped early' : '');
   }
   return 'Session';
@@ -4325,6 +4346,28 @@ SCREENS.today = function(root){
     dR.classList.add('hero');
     root.appendChild(dR);
   }
+  /* The daily three: one tiny fixed ritual, under the parked round and above
+     everything else, because a habit needs a door that is always in the same
+     place. Done, it turns into the day's three squares and stops asking. */
+  {
+    const dl = dailyDone(date);
+    if(dl){
+      const dc = el('div','card quiet dailydone');
+      const dr = el('div','row');
+      dr.appendChild(el('span','k','The daily three · done'));
+      dr.appendChild(dailySquares(false));
+      dc.appendChild(dr);
+      if(navigator.share || navigator.clipboard) dc.appendChild(dailyShareButton(false));
+      root.appendChild(dc);
+    } else if(buildDailyUnit(date)){
+      const dd = cardButton('The daily three',
+        dailyUnit.questions.length === 3
+          ? 'Three questions, about a minute, one from each corner of your week.'
+          : dailyUnit.questions.length + ' question' + (dailyUnit.questions.length===1?'':'s') + ' today — that is all there is so far.',
+        () => { quizState = null; go('quiz', {unitId:'__daily__', classId:'__all__'}); });
+      root.appendChild(dd);
+    }
+  }
   /* The generic thread hero retired here (v108/v125): once the brief named
      up to four subjects, the dupe rules meant it almost never fired — the one
      state it still served is the parked-round door above, which stays. Study
@@ -5002,6 +5045,14 @@ function unitCard(u, c, label){
     }
   }
   card.appendChild(row);
+  /* Match — pairs on any deck with enough matchable cards. Same weight as
+     Star sky's door: a secondary button under the three tiles, never a
+     fourth tile (the row is measured for three). */
+  if(matchCards(u).length >= 4){
+    const mb = el('button','btn btn-secondary','🃏  Match — pair the cards');
+    mb.addEventListener('click',()=>{ matchState = null; go('match',{unitId:u.id, classId:c.id}); });
+    card.appendChild(mb);
+  }
   /* River's game, offered where it fits: vocabulary shelves built from single
      words. Other units keep their three doors — a physics question is not a
      word you can say. */
@@ -5166,6 +5217,135 @@ SCREENS.brief = function(root){
   const back = el('button','btn btn-ghost','← Back');
   back.addEventListener('click',()=>go(ctx.fromParent?'parent':'unit',{classId:u.classId}));
   root.appendChild(back);
+};
+
+/* ================= MATCH ================= */
+/* Memory match on any deck: terms and definitions face down, find the pairs.
+   Rules that are the point:
+   - No new record types. One ordinary log (mode:'match') updated in place as
+     pairs land, so leaving early keeps her minutes and XP — Star sky's rule.
+   - A wrong flip is nothing. The tiles turn back; no penalty, no count of
+     misses on screen. Flips are logged for the parent's day view only as a
+     number, never as a verdict.
+   - XP is flat per pair (MATCH_XP), the same order as a flashcard run, and
+     there is no speed bonus — racing a memory game teaches nothing.
+   - The set is date-seeded: the same six pairs all day, a fresh six tomorrow,
+     nothing stored. "Play again" re-seeds within the day.
+   - Ponder cards and picture-only cards (the ASL alphabet) are skipped: a
+     prompt is not a definition, and you cannot match a picture to text.
+   - The def tile shows the def's bold lead only — the study answer — so the
+     match is term ↔ meaning, not term ↔ paragraph. */
+let matchState = null;
+const MATCH_PAIRS = 6, MATCH_XP = 4;
+/* FNV-1a, not hashStr. hashStr is a polynomial roll: change the seed in
+   front of a card id and EVERY key moves by the same constant, so the
+   relative order never changes — the first build dealt the same six for
+   every salt, and consecutive ids at that. xor-multiply mixes the seed
+   into every later character. */
+const mixHash = s => { let h = 2166136261; for(const ch of String(s)){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+function matchCards(u){
+  return (u.cards||[]).filter(c => c.term && c.def && !/^ponder/i.test(String(c.term)) && !c.imgUrl);
+}
+function matchLead(def){
+  const m = String(def).match(/\*\*(.+?)\*\*/);
+  let t = (m ? m[1] : String(def).split('\n')[0]).replace(/\*\*/g,'').trim();
+  return t.length > 90 ? t.slice(0,87).replace(/\s+\S*$/,'') + '…' : t;
+}
+function matchLog(u){
+  const found = matchState.found.length;
+  if(!found) return;
+  matchState.logId = matchState.logId || uid('log');
+  put({ id:matchState.logId, type:'log', mode:'match', classId:ctx.classId, unitId:u.id,
+        date:AZ.today(), at:matchState.start, correct:found, total:matchState.pairs.length,
+        seconds:Math.round((Date.now()-matchState.start)/1000), xp:found*MATCH_XP,
+        hints:0, flips:matchState.flips });
+}
+function matchDeal(u, salt){
+  const pool = matchCards(u);
+  const seed = hashStr(u.id + AZ.today() + ':' + (salt||0));
+  const order = pool.map(c => ({c, k: mixHash(seed + ':' + c.id)})).sort((a,b)=>a.k-b.k).map(x=>x.c);
+  const pairs = order.slice(0, Math.min(MATCH_PAIRS, order.length));
+  const tiles = [];
+  pairs.forEach(c => { tiles.push({id:c.id, side:'t', text:c.term}); tiles.push({id:c.id, side:'d', text:matchLead(c.def)}); });
+  matchState = { unitId:u.id, salt:salt||0, pairs, tiles:shuffle(tiles), up:[], found:[],
+                 flips:0, start:Date.now(), logId:null, lock:false };
+}
+SCREENS.match = function(root){
+  const u = unitFor(ctx.unitId);
+  if(!u || matchCards(u).length < 2) return go('unit',{classId:ctx.classId});
+  if(!matchState || matchState.unitId !== u.id) matchDeal(u, 0);
+  const st = matchState, done = st.found.length === st.pairs.length;
+
+  const head = el('div','card');
+  head.appendChild(el('div','eyebrow', u.title + ' · Match'));
+  const hr = el('div','row');
+  hr.appendChild(el('span','k', done ? 'Every pair found' : 'Turn two tiles. Match a word to its meaning.'));
+  hr.appendChild(el('span','v', st.found.length + ' of ' + st.pairs.length));
+  head.appendChild(hr);
+  root.appendChild(head);
+
+  const grid = el('div','mgrid');
+  st.tiles.forEach((t, i) => {
+    const isUp = st.up.includes(i), isDone = st.found.includes(t.id);
+    const b = el('button','mt' + (isDone ? ' done' : isUp ? ' up' : '') + (t.side==='t' ? ' t' : ''));
+    if(isUp || isDone){ b.appendChild(el('span','txt', t.text)); }
+    else b.appendChild(el('span','pip','✦'));
+    b.setAttribute('aria-label', (isUp||isDone) ? t.text : 'Face-down tile');
+    if(isDone) b.disabled = true;
+    b.addEventListener('click', ()=>{
+      if(st.lock || isUp || isDone) return;
+      st.up.push(i);
+      if(st.up.length === 2){
+        st.flips++;
+        const [a, c] = st.up.map(k => st.tiles[k]);
+        if(a.id === c.id && a.side !== c.side){
+          st.found.push(a.id); st.up = [];
+          /* The right-answer buzz, scaled down — a miss gets nothing. */
+          if(navigator.vibrate) navigator.vibrate([12,40,12]);
+          matchLog(u);
+          if(st.found.length === st.pairs.length){ checkBadges(); syncSoon(); celebrate(); }
+          render();
+        } else {
+          st.lock = true; render();
+          setTimeout(()=>{ if(matchState !== st) return; st.up = []; st.lock = false; render(); }, 750);
+        }
+      } else render();
+    });
+    grid.appendChild(b);
+  });
+  root.appendChild(grid);
+
+  if(done){
+    const c = el('div','card ac');
+    c.appendChild(el('h2',null, "That's every pair"));
+    const t = el('div','tally');
+    const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
+    chip(st.pairs.length, ' pairs'); chip(st.flips, ' turns');
+    const secs = Math.round((Date.now()-st.start)/1000);
+    chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
+    chip('+'+(st.found.length*MATCH_XP), ' XP');
+    c.appendChild(t);
+    /* The fewest turns possible is one per pair; the number is information
+       about the set, not a grade on her. */
+    c.appendChild(el('p',null, st.flips === st.pairs.length
+      ? 'Every turn a match. Nothing left to learn from this six.'
+      : 'Matching terms to meanings is recognition. The quiz is where you find out what actually stuck.'));
+    /* A deck with more than six matchable cards deals a different six; a
+       deck of exactly six can only shuffle their places — say which. */
+    const again = el('button','btn btn-primary', matchCards(u).length > MATCH_PAIRS
+      ? 'Play again · a fresh six' : 'Play again · same pairs, new places');
+    again.addEventListener('click',()=>{ matchDeal(u, st.salt + 1); render(); });
+    c.appendChild(again);
+    if(u.questions.length){
+      const q = el('button','btn btn-secondary','Take the quiz');
+      q.addEventListener('click',()=>{ matchState = null; launchQuiz(u.id, ctx.classId, false); });
+      c.appendChild(q);
+    }
+    root.appendChild(c);
+  }
+  const leave = el('button','btn btn-ghost', done ? '← Back' : '← Leave — pairs found so far still count');
+  leave.addEventListener('click',()=>{ matchLog(u); matchState = null; go('unit',{classId:ctx.classId}); });
+  root.appendChild(leave);
 };
 
 /* ================= FLASHCARDS ================= */
@@ -6447,6 +6627,85 @@ function buildShuffleUnit(classId){
   return shuffleUnit;
 }
 
+/* ================= THE DAILY THREE ================= */
+/* One tiny fixed ritual: three questions, one per subject where she has
+   approved units, drawn deterministically by date — the same three all day,
+   a fresh three tomorrow — served as an ordinary round, so misses land in
+   the Growth Zone and qstats credit the real units exactly as a shuffle
+   round's do. Rules that are the point:
+   - Never more than three, never gated on anything, never a streak. The door
+     on Today turns into three squares when it is done and stops asking.
+   - Subjects rotate with the date; inside a subject the least-practised
+     question wins, ties by hash. Nothing is stored: it is a view of the
+     library and the date.
+   - The share is one plain line through the Web Share API (the backup
+     already uses it), else the clipboard. It says done, never a score. */
+let dailyUnit = null;
+function dailyPicks(date){
+  const seed = hashStr('daily:' + date);
+  const byC = {};
+  STUDY_CLASSES.forEach(c => {
+    const qs = [];
+    units(c.id).forEach(un => { if(un.own || un.guide) return;
+      (un.questions||[]).forEach(q => { if(!q.kind || q.kind==='mc') qs.push({un, q, cid:c.id}); }); });
+    if(qs.length) byC[c.id] = qs;
+  });
+  const cids = Object.keys(byC);
+  if(!cids.length) return [];
+  const start = seed % cids.length, picked = [];
+  for(let i=0; i<cids.length && picked.length<3; i++){
+    const cid = cids[(start+i) % cids.length];
+    const cand = byC[cid].filter(x => !picked.some(p => p.un.id===x.un.id && p.q.id===x.q.id));
+    if(!cand.length) continue;
+    const att = x => (DATA.records['qstat_'+x.un.id+'_'+x.q.id]?.attempts)||0;
+    cand.sort((a,b) => att(a)-att(b) || (mixHash(seed+':'+a.un.id+a.q.id) - mixHash(seed+':'+b.un.id+b.q.id)));
+    picked.push(cand[0]);
+  }
+  /* One subject only: fill to three from it rather than serve one question. */
+  if(picked.length < 3 && cids.length === 1){
+    const cid = cids[0];
+    const rest = byC[cid].filter(x => !picked.some(p => p.q.id===x.q.id && p.un.id===x.un.id))
+      .sort((a,b) => mixHash(seed+':'+a.un.id+a.q.id) - mixHash(seed+':'+b.un.id+b.q.id));
+    while(picked.length < 3 && rest.length) picked.push(rest.shift());
+  }
+  return picked;
+}
+function buildDailyUnit(date){
+  const picks = dailyPicks(date || AZ.today());
+  if(!picks.length) return null;
+  dailyUnit = { id:'__daily__', classId:'__all__', title:'The daily three', book:true, cards:[], round:3,
+    questions: picks.map(({un,q,cid}) => ({ ...q, id: un.id+'~'+q.id,
+      _srcUnit: un.id, _srcClass: un.classId==='__all__' ? cid : un.classId, _srcQid: q.id })) };
+  return dailyUnit;
+}
+const dailyDone = date => logs().find(l => l.unitId==='__daily__' && l.date===(date||AZ.today()) && !l.partial);
+/* Three squares: lit for done. Inside the results modal the round's own
+   constellation already shows which stars lit, so the squares repeat only
+   the fact that matters for the ritual — the day is done. */
+function dailySquares(big){
+  const w = el('span','dsq' + (big ? ' big' : ''));
+  const n = (dailyUnit && dailyUnit.questions.length) || 3;
+  for(let i=0;i<n;i++) w.appendChild(el('i',null,'✦'));
+  return w;
+}
+function dailyShareText(){
+  const n = (dailyUnit && dailyUnit.questions.length) || 3;
+  return '✦'.repeat(n) + ' ' + (typeof APP_NAME!=='undefined' ? APP_NAME : document.title.split('·')[0].trim())
+    + ' · The daily three · ' + AZ.short(AZ.today()) + ' · done';
+}
+function dailyShareButton(inModal){
+  const b = el('button', inModal ? 'btn btn-ghost' : 'btn btn-ghost btn-sm', 'Share today\'s three');
+  b.addEventListener('click', async ()=>{
+    const text = dailyShareText();
+    try{
+      if(navigator.share){ await navigator.share({text}); return; }
+      if(navigator.clipboard){ await navigator.clipboard.writeText(text); toast('Copied — paste it to the family'); return; }
+    }catch(e){ /* she cancelled the sheet, or it is unavailable — nothing to do */ }
+    toast(text);
+  });
+  return b;
+}
+
 /* Timed mode. Each question gets a countdown; answering faster is worth more,
    and running out of time simply moves on. The deadline is an absolute
    timestamp so a re-render never resets the clock.
@@ -6906,6 +7165,7 @@ function buildReviewUnit(opt){
   return reviewUnit;
 }
 const unitFor = id => id==='__review__' ? reviewUnit
+  : id==='__daily__' ? dailyUnit
   : id==='__shuffle__' ? shuffleUnit
   : id==='__rescue__' ? rescueUnit : DATA.records[id];
 
@@ -7215,7 +7475,7 @@ SCREENS.quiz = function(root){
   /* Just "Sheet" in the row — a sheet's full name ("DBQ essay rubric") does not
      fit a quarter of the width, and the subject screen still names it in full. */
   if(SHEETS[ctx.classId]) tool(SHEETS[ctx.classId].ic, 'Sheet', ()=>openSheet(ctx.classId));
-  const back = ctx.unitId==='__review__' ? ['growth',{}] : ['unit',{classId:ctx.classId}];
+  const back = ctx.unitId==='__review__' ? ['growth',{}] : ctx.unitId==='__daily__' ? ['today',{}] : ['unit',{classId:ctx.classId}];
   /* Exit is the usual way she leaves a round, and it used to drop quizState
      before navigating — which meant the go() hook never saw it and the work
      was lost. Log what she answered first, then go. */
@@ -7430,7 +7690,12 @@ function finishQuiz(u, partial){
   const secs = Math.round((Date.now()-quizState.start)/1000);
   /* The completion and speed bonuses are for finishing; a short round still
      earns the per-question XP, just not the bonus on top. */
-  const bonus = partial ? 0 : (pct===100?50 : pct>=80?25 : 0);
+  /* The daily three is a finished round by design, but a short one: its
+     completion bonus scales with its length (3 of 5 → 30 for a clean run,
+     60 XP in all), or a one-minute ritual would out-earn a full quiz round
+     at 4 of 5 — 80 against 65 — and quietly cheapen the quiz. */
+  const bonus = partial ? 0 : Math.round((pct===100?50 : pct>=80?25 : 0)
+    * (u.id==='__daily__' ? Math.min(1, total/QUIZ_ROUND) : 1));
   const speed = (!partial && quizState.timed) ? quizState.speedBonus : 0;
   const fastest = quizState.fastest;
   const wasTimed = quizState.timed;
@@ -7521,7 +7786,7 @@ function finishQuiz(u, partial){
 
   quizState = null; ctx._state = null; ctx._pre = null;
   const clsId = ctx.classId;
-  const wasReview = u.id==='__review__';
+  const wasReview = u.id==='__review__', wasDaily = u.id==='__daily__';
   showModal({ title:"That's the whole round", message:msg,
     confirmText:'How did that feel?', cancelText:null,
     build:(box)=>{
@@ -7541,6 +7806,14 @@ function finishQuiz(u, partial){
       chip('+'+xp, ' XP');
       chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
       box.appendChild(t);
+      /* The daily three ends on its three squares and a share, before the
+         companion. The squares say done, not a score: the constellation above
+         already shows which stars lit, and what goes to the family thread is
+         the ritual, never the marks. */
+      if(wasDaily){
+        box.appendChild(dailySquares(true));
+        box.appendChild(dailyShareButton(true));
+      }
       /* The companion turns up when a quiz ends — a natural seam, never an
          interruption. Same steady creature whatever the score. */
       const comp = companionOf();
@@ -7548,8 +7821,8 @@ function finishQuiz(u, partial){
       const pool = companionPool(pct>=80 ? 'cheer' : 'steady', comp);
       box.appendChild(companionSays(pool[logs().length % pool.length], comp));
     },
-    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed, back: wasReview?'growth':null}) });
-  go(wasReview ? 'growth' : 'unit', {classId:clsId});
+    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed, back: wasReview?'growth': wasDaily?'today':null}) });
+  go(wasReview ? 'growth' : wasDaily ? 'today' : 'unit', {classId:clsId});
 }
 
 SCREENS.postmood = function(root){

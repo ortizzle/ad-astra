@@ -802,6 +802,85 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Match, and the daily three (v145 / Wayfinder v124, both apps)
+
+Chris asked for learning games and picked the low-hanging fruit first. Two
+shipped together, both engine, both zero-content: they run on the decks and
+questions the girls already have. Swipe sort and the number line come next
+and need authored content; spot-the-flaw after that.
+
+**Match** (`SCREENS.match`, `matchCards`, `matchDeal`, `matchLog`): terms
+and definitions face down in a 3-across grid, find the pairs. A secondary
+button under the three mode tiles on any deck with 4+ matchable cards —
+Star sky's door, same weight, never a fourth tile (the row is measured for
+three). Rules that are the point:
+
+- **One log, updated in place** (`mode:'match'`, `logId` on `matchState`),
+  written on every pair found, so leaving early keeps her minutes and XP.
+  Star sky's rule. `flips` rides on the log as a number for the day view,
+  never as a verdict on screen.
+- **A wrong flip is nothing.** The tiles turn back after 750ms; no penalty,
+  no count of misses, and the right-answer buzz `[12,40,12]` on a match with
+  silence on a miss — the phone never scolds.
+- **Flat XP per pair** (`MATCH_XP` 4, so 24 for a full six), the order of a
+  flashcard run, and no speed bonus: racing a memory game teaches nothing.
+- **Date-seeded**: the same six all day, a fresh six tomorrow, nothing
+  stored. "Play again" re-salts within the day, and the button says which it
+  can do — "a fresh six" on a deck of more than six, "same pairs, new places"
+  on a deck of exactly six.
+- **Ponder cards and picture-only cards are skipped** (a prompt is not a
+  definition; the ASL alphabet cannot be matched to text), and the def tile
+  shows the def's `**bold lead**` only — term ↔ meaning, not term ↔ paragraph.
+
+> ⚠️ **Seed with `mixHash` (FNV-1a), never `hashStr`.** `hashStr` is a
+> polynomial roll: changing the salt in front of a card id adds the same
+> constant to every key, so the relative order never changes. The first
+> build dealt the identical six for every salt — consecutive ids, at that —
+> and `test_games.js` caught it. `mixHash` xor-multiplies, so the salt
+> reaches every later character. The daily three's tie-break uses it too.
+
+**The daily three** (`dailyPicks`, `buildDailyUnit`, `dailyDone`,
+`dailySquares`, `dailyShareButton`): one tiny fixed ritual on Today, under
+the parked-round door and above everything else, because a habit needs a
+door that is always in the same place. Three questions, one per subject
+where she has approved units, subjects rotating with the date and the
+least-practised question winning inside each. Served as an ordinary round
+with the synthetic id `__daily__` — so it skips the check-in like a shuffle
+round, misses land in the Growth Zone on their REAL unit, qstats credit the
+real unit, `realUnit()` keeps it out of save/resume, and `finishQuiz`'s
+existing `_srcUnit` pairing settles any laddered question it re-asks.
+
+- **Done is done.** The door becomes a quiet card — "The daily three ·
+  done ✦✦✦" — and stops asking. No streak, nothing gated, never more than
+  three. A partial round leaves the door up.
+- **The completion bonus scales with its length** (3 of 5 → 30, so 60 XP
+  for a clean run). Unscaled, a one-minute ritual paid 80 against a full
+  quiz round's 65 at 4 of 5, which would quietly cheapen the quiz. Only
+  `__daily__` scales; nothing else moved.
+- **The share is one plain line** through the Web Share API (the backup
+  already uses it), else the clipboard, else a toast: `✦✦✦ Ad Astra · The
+  daily three · Sep 2 · done`. It says done, never a score — what goes to
+  the family thread is the ritual, not the marks. The results modal shows
+  the three squares and the share button above the companion; the
+  constellation above already shows which stars lit.
+- The quiz's Back and the results/mood return path go to Today for the
+  daily, not to a `__all__` unit screen.
+
+`tools/test_games.js` (same file, both apps): the Match door on a rich deck
+and its absence on a thin one, 12 face-down 44px tiles, a wrong pair turning
+back with nothing logged, a right pair logging in place, a full game keeping
+ONE log at 24 XP, Play again dealing a genuinely different six; then the
+daily door, three questions from three subjects identical all day and
+different tomorrow, the round skipping the check-in, a deliberate miss
+landing on its real unit and subject, 20 XP at 2 of 3, three squares and a
+share button in the modal, the done card back on Today, and a share line
+with no score in it.
+
+> `tools/test_polish.js` fails two checks in BOTH apps on the state before
+> this work ("thread hero present", "check-in starts itself") — the hero it
+> looks for was retired in v125 / Wayfinder v108. Stale test, not a
+> regression; left for a separate pass.
+
 ### The Growth Zone, focused (v144 / Wayfinder v123, both apps)
 
 Chris: the Growth Zone had grown large and unappealing, and in test week
