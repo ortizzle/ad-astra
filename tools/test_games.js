@@ -1,9 +1,11 @@
-/* Memory match and the daily three — the first two of the "low-hanging fruit"
-   games. Both are engine, identical in both apps; same file in both repos.
-   Match: pairs on any deck, one log updated in place, wrong flips cost
-   nothing. Daily: three questions by date as an ordinary round, misses to the
-   Growth Zone, qstats to the real units, a door on Today that becomes three
-   squares when done. */
+/* The daily three — one of the "low-hanging fruit" games from the original
+   batch (v145 / Wayfinder v124). Same file in both repos. Three questions by
+   date as an ordinary round, misses to the Growth Zone, qstats to the real
+   units, a door on Today that becomes three squares when done.
+
+   Memory Match, the other game from that batch, was removed in v154 /
+   Wayfinder v135 (Chris: "it isn't very helpful") — this file used to test
+   it too; those assertions went with the feature. */
 const { chromium } = require('playwright');
 const PORT = process.argv[2] || 8201;
 (async () => {
@@ -13,111 +15,14 @@ const PORT = process.argv[2] || 8201;
   await p.goto(`http://localhost:${PORT}/index.html`, {waitUntil:'networkidle'});
   const out = []; const ck = (n, ok, got) => out.push({n, ok: !!ok, got});
 
-  const seed = await p.evaluate(async () => {
+  await p.evaluate(async () => {
     for (const f of CONTENT_LIBRARY) { try { const j = await (await fetch(f,{cache:'no-store'})).json();
       Object.values(j.records||{}).forEach(r => { if (r.type==='unit') { r.status='approved'; DATA.records[r.id]=r; } }); } catch(e){} }
     saveLocal();
-    const big = all('unit').find(u => matchCards(u).length >= 10 && u.questions.length >= 3 && !u.own && !u.guide && u.classId!=='__all__');
-    const small = all('unit').find(u => matchCards(u).length < 4);
-    return {big: big && big.id, bigCls: big && big.classId, small: small && small.id, subjects: new Set(all('unit').map(u=>u.classId)).size};
   });
-  ck('seed: a big deck and a small one exist', !!seed.big, seed);
-
-  /* ---------- Match ---------- */
-  /* unitCard() is the one render site for the door — the loose list and the
-     opened shelf card both go through it. Check the card itself, then the
-     screen a real tap reaches (the shelf's opened card where the unit shelves,
-     else the subject screen). */
-  const doors = await p.evaluate(({big, small, bigCls}) => {
-    const u = DATA.records[big], c = CLASS_BY_ID[bigCls];
-    const onCard = /Match — pair the cards/.test(unitCard(u, c).textContent);
-    const ser = seriesOf(u);
-    if (ser) go('shelf',{classId: bigCls, series: ser, open: big}); else go('unit',{classId: bigCls});
-    const onScreen = /Match — pair the cards/.test(document.getElementById('screen').textContent);
-    let onSmall = null;
-    if (small) { const su = DATA.records[small]; onSmall = /Match — pair the cards/.test(unitCard(su, CLASS_BY_ID[su.classId] || c).textContent); }
-    return {onCard, onScreen, onSmall, ser};
-  }, seed);
-  ck('the Match door renders on a deck with enough cards, and reaches the screen', doors.onCard && doors.onScreen, doors);
-  if (doors.onSmall !== null) ck('a deck with too few matchable cards gets no Match door', doors.onSmall === false, doors);
-
-  const grid = await p.evaluate(({big, bigCls}) => {
-    matchState = null; go('match',{unitId: big, classId: bigCls});
-    const tiles = [...document.querySelectorAll('#screen .mt')];
-    return {n: tiles.length, faceDown: tiles.filter(t => t.querySelector('.pip')).length,
-            minH: Math.min(...tiles.map(t => t.getBoundingClientRect().height)),
-            pairs: matchState.pairs.length, tally: document.querySelector('#screen .row .v').textContent};
-  }, seed);
-  ck('the grid deals 6 pairs as 12 face-down tiles, every one at least 44px',
-     grid.n === 12 && grid.faceDown === 12 && grid.pairs === 6 && grid.minH >= 44, grid);
-
-  const wrong = await p.evaluate(async () => {
-    const st = matchState;
-    const i = 0, j = st.tiles.findIndex((t,k) => k!==0 && t.id !== st.tiles[0].id);
-    const tiles = () => [...document.querySelectorAll('#screen .mt')];
-    tiles()[i].click(); await new Promise(r=>setTimeout(r,10));
-    tiles()[j].click(); await new Promise(r=>setTimeout(r,10));
-    const upDuring = document.querySelectorAll('#screen .mt.up').length;
-    /* No timer: the pair stays up until her next tap. Wait well past the old
-       750ms and it must still be readable. */
-    await new Promise(r=>setTimeout(r,1200));
-    const stillUp = document.querySelectorAll('#screen .mt.up').length;
-    const hint = /tap any tile to carry on/i.test(document.getElementById('screen').textContent);
-    // tapping a fresh third tile turns the pair back and brings that tile up in one tap
-    const k = st.tiles.findIndex((t,idx) => idx!==i && idx!==j);
-    tiles()[k].click(); await new Promise(r=>setTimeout(r,10));
-    const afterThird = document.querySelectorAll('#screen .mt.up').length;
-    // tapping the lone up tile does nothing; tap it again after a wrong pair clears both
-    tiles()[k].click(); await new Promise(r=>setTimeout(r,10));
-    const lone = st.up.length;
-    st.up = []; st.pending = false; render();
-    return {upDuring, stillUp, hint, afterThird, lone, found: st.found.length,
-            logged: all('log').some(l => l.mode==='match'), flips: st.flips};
-  });
-  ck('a wrong pair stays up until her next tap, which turns it back and flips the new tile; nothing logged',
-     wrong.upDuring===2 && wrong.stillUp===2 && wrong.hint && wrong.afterThird===1 && wrong.lone===1 && wrong.found===0 && !wrong.logged && wrong.flips===1, wrong);
-
-  const right = await p.evaluate(async () => {
-    const st = matchState;
-    const i = 0, j = st.tiles.findIndex((t,k) => k!==0 && t.id === st.tiles[0].id && t.side !== st.tiles[0].side);
-    const tiles = () => [...document.querySelectorAll('#screen .mt')];
-    tiles()[i].click(); await new Promise(r=>setTimeout(r,10));
-    tiles()[j].click(); await new Promise(r=>setTimeout(r,10));
-    const log = all('log').find(l => l.mode==='match');
-    return {done: document.querySelectorAll('#screen .mt.done').length, found: st.found.length,
-            log: log && {correct: log.correct, total: log.total, xp: log.xp, id: log.id}, tally: document.querySelector('#screen .row .v').textContent};
-  });
-  ck('a right pair stays up as done and the match log is written in place',
-     right.done===2 && right.found===1 && right.log && right.log.correct===1 && right.log.total===6 && right.log.xp===4 && /1 of 6/.test(right.tally), right);
-
-  const finished = await p.evaluate(async () => {
-    const st = matchState; const firstLog = all('log').find(l => l.mode==='match').id;
-    while (st.found.length < st.pairs.length) {
-      const id = st.tiles.find(t => !st.found.includes(t.id)).id;
-      const [a, c] = st.tiles.map((t,k)=>({t,k})).filter(x => x.t.id===id).map(x=>x.k);
-      const tiles = () => [...document.querySelectorAll('#screen .mt')];
-      tiles()[a].click(); await new Promise(r=>setTimeout(r,8));
-      tiles()[c].click(); await new Promise(r=>setTimeout(r,8));
-    }
-    const logs = all('log').filter(l => l.mode==='match');
-    const txt = document.getElementById('screen').textContent;
-    return {logs: logs.length, sameId: logs[0].id === firstLog, xp: logs[0].xp, doneCard: /That's every pair/.test(txt),
-            again: /Play again/.test(txt), quiz: /Take the quiz/.test(txt), label: modeLabel(logs[0])};
-  });
-  ck('finishing keeps ONE log (updated in place), 24 XP, and offers again / the quiz',
-     finished.logs===1 && finished.sameId && finished.xp===24 && finished.doneCard && finished.again && finished.quiz && finished.label==='Match', finished);
-
-  const again = await p.evaluate(async () => {
-    const before = matchState.pairs.map(c=>c.id).join(',');
-    const label = [...document.querySelectorAll('#screen .btn')].find(b=>/Play again/.test(b.textContent)).textContent;
-    [...document.querySelectorAll('#screen .btn')].find(b=>/Play again/.test(b.textContent)).click();
-    await new Promise(r=>setTimeout(r,10));
-    return {fresh: matchState.pairs.map(c=>c.id).join(',') !== before, label, found: matchState.found.length, tiles: document.querySelectorAll('#screen .mt').length};
-  });
-  ck('Play again on a deck of ten+ promises and deals a fresh six', /fresh six/.test(again.label) && again.fresh && again.found===0 && again.tiles===12, again);
 
   /* ---------- The daily three ---------- */
-  await p.evaluate(() => { matchState = null; go('today'); });
+  await p.evaluate(() => { go('today'); });
   const door = await p.evaluate(() => {
     const txt = document.getElementById('screen').textContent;
     const u = buildDailyUnit(AZ.today());

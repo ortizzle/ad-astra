@@ -802,6 +802,73 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### After the quiz (v154 / Wayfinder v135, both apps)
+
+Chris, having lived with v150's "back to the lesson" behavior: "after a
+quiz is completed, we want to go back to the subject page from which they
+came in case there is more quizzes or stuff to study." This reverses the
+v150 landing rule — a real correction from using it, not a taste call.
+
+- **`finishQuiz`'s modal now opens over the SUBJECT page**, not the
+  specific lesson: `go('unit',{classId})` instead of the old
+  `lessonHome()`, which used to open the shelf with that lesson's stop
+  expanded. Review rounds still land in the Growth Zone and the daily
+  three on Today — those are their own destinations, not an ordinary
+  lesson quiz, and Chris's note was specifically about "a quiz".
+- **`SCREENS.postmood`'s `leave()` simplified to match**: it always
+  returns to the subject page for an ordinary round (`ctx.back` still
+  wins for review/daily), dropping the old "stay on the lesson unless
+  finished-and-missed" logic entirely. A miss no longer redirects her to
+  the Growth Zone automatically — it is a tap away in the nav either way,
+  and an automatic redirect was exactly what this fix removes.
+- **`finishCards` follows the same rule** — flashcards finishing also
+  lands on the subject page now, for the same reason: after any one
+  activity, the door back to everything else in that subject is the
+  useful one.
+- **`lessonHome()` is gone** — all three call sites collapsed to a plain
+  `go('unit',{classId})`, so there is no longer a function whose whole
+  job was routing back into a specific lesson.
+- The lesson itself is unaffected: its round status (`quizProgress()`),
+  its map stop, and the gold pip when finished are exactly as v150 left
+  them — she just isn't returned there automatically. Tapping into the
+  bookshelf still opens right where she left off.
+
+`tools/test_ux2.js` was rewritten for the new landing (a finished round's
+modal opens over the subject page; the check-in leaves to the subject
+page with rounds left AND with a miss AND once the lesson is done — the
+lesson's own progress is then re-verified by reopening it, not by being
+returned to it).
+
+### Match, removed (v154 / Wayfinder v135, both apps)
+
+Chris: "the matching game... isn't very helpful." Removed outright, not
+hidden behind a flag — `SCREENS.match`, `matchState`, `MATCH_PAIRS`,
+`MATCH_XP`, `matchCards()`, `matchLead()`, `matchLog()`, `matchDeal()`,
+the `🃏 Match — pair the cards` door in `unitCard()`, and the `.mgrid`/
+`.mt*` CSS. This was the first of the "low-hanging fruit" games (v145 /
+Wayfinder v124) — the daily three, its neighbor from that same batch,
+stays; it is a different mechanic (an ordinary quiz round, not a memory
+game) and nothing here suggested removing it too.
+
+- **`mixHash` is kept** — it was defined inside Match's block but is load-
+  bearing well beyond it: swipe sort's daily deal, `pickRound()`'s
+  Growth-Zone-last tie-break, and the plan-of-attack's affirmation swap
+  (v151) all seed off it. Moved to its own short standalone definition
+  with a comment naming what actually depends on it now.
+- **`modeLabel()` keeps its `mode==='match'` case.** Real match sessions
+  already exist in the girls' synced gists; removing the label would
+  render old day-view entries with no name. Nothing plays a new one, but
+  history still reads correctly — the same restraint as the retired
+  orientation unit (schema v4 tombstones it; old records are read, never
+  rewritten to hide what happened).
+- No record type existed solely for Match (`mode:'match'` rode on the
+  ordinary `log` type), so there is no migration and no tombstoning to
+  do — the feature disappears from the door forward, and past sessions
+  stay exactly as they were.
+
+`tools/test_games.js` — the same file in both repos — dropped its Match
+assertions and kept the daily-three ones; its header comment says why.
+
 ### Bunch the plan (v153 / Wayfinder v134, both apps)
 
 Chris sent a screenshot from River's real Wayfinder: three subjects in

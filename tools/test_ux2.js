@@ -69,7 +69,8 @@ const [PORT, TAG] = process.argv.slice(2);
   });
   ck('a tap on the title opens the details', dtl.open && /6 cards/.test(dtl.txt) && /12 questions/.test(dtl.txt) && dtl.exp==='true', dtl);
 
-  // ---- flashcards: a full deck run marks the tile done
+  // ---- flashcards: a full deck run marks the tile done, and finishing
+  //      lands on the SUBJECT PAGE (Chris, v154), not the lesson.
   const fc = await p.evaluate(([cid])=>{
     cardState = {start:0};
     go('cards', {unitId:'ux-1', classId:cid});
@@ -77,13 +78,15 @@ const [PORT, TAG] = process.argv.slice(2);
     const u = DATA.records['ux-1'];
     finishCards(u);
     const log = all('log').filter(l=>l.mode==='cards' && l.unitId==='ux-1').pop();
-    // finishCards lands on the lesson (its shelf), where the tile now reads done
+    const landed = view, landedCid = ctx.classId;
+    // reopen the lesson to confirm the tile itself now reads done
+    go('shelf', {classId:cid, series:'UX Series', open:'ux-1'});
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
     const tile = document.querySelector('#shelfopen .mtile');
-    return { view, seen: log && log.seen, deck: log && log.deck, tile: T(tile), done: tile && tile.classList.contains('done'),
+    return { landed, landedCid, seen: log && log.seen, deck: log && log.deck, tile: T(tile), done: tile && tile.classList.contains('done'),
       prog: cardsProgress(u) };
   }, [cid]);
-  ck('cards log carries seen and deck; the tile reads done and lands on the lesson', fc.view==='shelf' && fc.seen===6 && fc.deck===6 && fc.done && /deck done/.test(fc.tile), fc);
+  ck('cards log carries seen and deck; the deck reads done; finishing lands on the subject page', fc.landed==='unit' && fc.landedCid===cid && fc.seen===6 && fc.deck===6 && fc.done && /deck done/.test(fc.tile), fc);
   const fcOld = await p.evaluate(()=>{
     put({ id:'ux-log-old', type:'log', mode:'cards', classId:'x', unitId:'ux-2', date:AZ.today(), at:Date.now(), correct:0, total:0, seconds:30, xp:20 });
     return cardsProgress(DATA.records['ux-2']);
@@ -110,7 +113,8 @@ const [PORT, TAG] = process.argv.slice(2);
   ck('a qstat written before v150 still counts as met', legacy===1, legacy);
 
   // ---- an ordinary round: 5 met → round 1 of 3 done, door says round 2 of 3,
-  //      postmood returns to the LESSON (rounds remain) even with a miss
+  //      and the check-in returns to the SUBJECT PAGE (Chris, v154) even with
+  //      rounds left and even with a miss — not back into the lesson.
   const round1 = await p.evaluate(([cid])=>{
     quizState = null; ctx.pre = null;
     go('quiz', {unitId:'ux-0', classId:cid});
@@ -119,21 +123,24 @@ const [PORT, TAG] = process.argv.slice(2);
     finishQuiz(u);
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
     const modal = T([...document.querySelectorAll('.modal-box')].pop());
-    const landed = view;
+    const landed = view, landedCid = ctx.classId;
     // confirm → postmood; the check-in → leaves
     closeModal();
     const pm = view;
     leavePostmood();
-    const after = { view, open: ctx.open, series: ctx.series };
+    const after = { view, classId: ctx.classId };
+    // reopen the lesson to confirm the door and map moved on regardless of
+    // where she actually landed
+    go('shelf', {classId:cid, series:'UX Series', open:'ux-0'});
     const door = T(document.querySelector('#shelfopen .qdoor'));
     const stopS = T(document.querySelector('#screen .stop.here .s'));
-    return { modal, landed, pm, after, door, prog: quizProgress(u), stopS, missed: all('miss').filter(m=>m.unitId==='ux-0').length };
+    return { modal, landed, landedCid, pm, after, door, prog: quizProgress(u), stopS, missed: all('miss').filter(m=>m.unitId==='ux-0').length };
   }, [cid]);
   ck('the results say round 1 of 3 · 2 more', /Round 1 of 3 · 2 more/.test(round1.modal), round1.modal);
-  ck('the modal opens over the lesson on its shelf', round1.landed==='shelf' && round1.after.open==='ux-0', round1);
-  ck('with rounds left, the check-in returns to the lesson — not the Growth Zone — despite a miss',
-     round1.pm==='postmood' && round1.after.view==='shelf' && round1.after.series==='UX Series' && round1.missed===1, round1.after);
-  ck('the door now reads round 2 of 3 with 5 of 12 met and a bar', /round 2 of 3/.test(round1.door) && /5 of 12/.test(round1.door) && /2 rounds to go/.test(round1.door), round1.door);
+  ck('the modal opens over the subject page', round1.landed==='unit' && round1.landedCid===cid, round1);
+  ck('with rounds left and a miss, the check-in still returns to the subject page — never the lesson or the Growth Zone',
+     round1.pm==='postmood' && round1.after.view==='unit' && round1.after.classId===cid && round1.missed===1, round1.after);
+  ck('the door still reads round 2 of 3 with 5 of 12 met and a bar (found by reopening the lesson)', /round 2 of 3/.test(round1.door) && /5 of 12/.test(round1.door) && /2 rounds to go/.test(round1.door), round1.door);
   ck('the map stop agrees: 5 of 12 met', /5 of 12 met/.test(round1.stopS), round1.stopS);
 
   // ---- finish the lesson with a miss → Growth Zone
@@ -148,9 +155,9 @@ const [PORT, TAG] = process.argv.slice(2);
       if(r===0) leavePostmood();
     }
     leavePostmood();
-    return { view, prog: quizProgress(u), done: unitDone(u) };
+    return { view, classId: ctx.classId, prog: quizProgress(u), done: unitDone(u) };
   }, [cid]);
-  ck('once the lesson is finished, a miss sends the check-in to the Growth Zone', fin.view==='growth' && fin.done && fin.prog.roundsDone===3, fin);
+  ck('once the lesson is finished, a miss still lands on the subject page — never an automatic redirect to the Growth Zone', fin.view==='unit' && fin.classId===cid && fin.done && fin.prog.roundsDone===3, fin);
   const doneDoor = await p.evaluate(([cid])=>{
     go('shelf', {classId:cid, series:'UX Series', open:'ux-0'});
     const d = document.querySelector('#shelfopen .qdoor');

@@ -921,16 +921,6 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .sortbtns .btn{margin:0}
 .sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
-.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.mt{min-height:96px;border-radius:14px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
-  color:var(--text);font:inherit;font-size:12.5px;font-weight:600;line-height:1.3;padding:8px 7px;
-  display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;
-  overflow:hidden;word-break:break-word}
-.mt .pip{font-size:20px;color:var(--ac-fg);opacity:.7}
-.mt.up{background-color:var(--surface);border-color:var(--ac)}
-.mt.done{background-color:var(--surface);border-color:var(--line-soft);color:var(--muted);cursor:default}
-.mt.t{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:14px}
-.mt .txt{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 @media (prefers-reduced-motion:no-preference){
   .mtile{transition:transform .12s ease}
   .mtile:active{transform:scale(.96)}
@@ -1451,7 +1441,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v153 · bunch the plan';
+const APP_VERSION = 'v154 · after the quiz';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2170,15 +2160,6 @@ function cardsProgress(u){
 }
 function clockRuns(u){
   return all('log').filter(l => l.mode==='quiz' && l.timed && !l.partial && l.unitId===u.id).length;
-}
-/* Back to the lesson, wherever it lives (v150): a lesson in a book opens on
-   its shelf with its own stop open, so the next round's door is right there;
-   a loose unit opens its subject screen. Synthetic rounds have no lesson. */
-function lessonHome(unitId, classId){
-  const u = unitId && !String(unitId).startsWith('__') ? DATA.records[unitId] : null;
-  const series = u && !u.deleted ? seriesOf(u) : null;
-  if(series && classId && CLASS_BY_ID[classId]) return go('shelf', {classId, series, open:unitId});
-  return go('unit', {classId});
 }
 /* A test prompt opens the Growth Zone scoped to that subject (Kat, v150):
    before a test the smart work is what she has missed in THAT subject. The
@@ -3131,7 +3112,7 @@ const focusLogs = () => all('focus').sort((a,b)=>b.at-a.at);
    card). What is shown is what was done, how it went, and how long. */
 function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
-  if(l.mode==='match')   return 'Match';
+  if(l.mode==='match')   return 'Match';   // historical logs only — the game itself was removed in v154
   if(l.mode==='sort')    return 'Sort';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
@@ -5151,14 +5132,6 @@ function unitCard(u, c, label){
       ()=>launchQuiz(u.id,c.id,true)));
   } else row.classList.add('one');
   card.appendChild(row);
-  /* Match — pairs on any deck with enough matchable cards. Same weight as
-     Star sky's door: a secondary button under the three tiles, never a
-     fourth tile (the row is measured for three). */
-  if(matchCards(u).length >= 4){
-    const mb = el('button','btn btn-secondary','🃏  Match — pair the cards');
-    mb.addEventListener('click',()=>{ matchState = null; go('match',{unitId:u.id, classId:c.id}); });
-    card.appendChild(mb);
-  }
   /* Sort — one door per set the unit carries. Content-shaped: a set is
      authored on the unit, so it drafts, approves and shelves with it. */
   (u.sorts||[]).forEach(set=>{
@@ -5364,141 +5337,13 @@ SCREENS.brief = function(root){
   root.appendChild(back);
 };
 
-/* ================= MATCH ================= */
-/* Memory match on any deck: terms and definitions face down, find the pairs.
-   Rules that are the point:
-   - No new record types. One ordinary log (mode:'match') updated in place as
-     pairs land, so leaving early keeps her minutes and XP — Star sky's rule.
-   - A wrong flip is nothing. The tiles turn back; no penalty, no count of
-     misses on screen. Flips are logged for the parent's day view only as a
-     number, never as a verdict.
-   - XP is flat per pair (MATCH_XP), the same order as a flashcard run, and
-     there is no speed bonus — racing a memory game teaches nothing.
-   - The set is date-seeded: the same six pairs all day, a fresh six tomorrow,
-     nothing stored. "Play again" re-seeds within the day.
-   - Ponder cards and picture-only cards (the ASL alphabet) are skipped: a
-     prompt is not a definition, and you cannot match a picture to text.
-   - The def tile shows the def's bold lead only — the study answer — so the
-     match is term ↔ meaning, not term ↔ paragraph. */
-let matchState = null;
-const MATCH_PAIRS = 6, MATCH_XP = 4;
-/* FNV-1a, not hashStr. hashStr is a polynomial roll: change the seed in
-   front of a card id and EVERY key moves by the same constant, so the
-   relative order never changes — the first build dealt the same six for
-   every salt, and consecutive ids at that. xor-multiply mixes the seed
-   into every later character. */
+/* mixHash — FNV-1a, not hashStr. hashStr is a polynomial roll: change the
+   seed in front of an id and EVERY key moves by the same constant, so the
+   relative order never changes; xor-multiply mixes the seed into every
+   later character. Used well beyond the game it was built for (Match,
+   removed in v154) — swipe sort's daily deal, pickRound's Growth-Zone-last
+   tie-break, and the plan-of-attack's affirmation swap all seed off it. */
 const mixHash = s => { let h = 2166136261; for(const ch of String(s)){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
-function matchCards(u){
-  return (u.cards||[]).filter(c => c.term && c.def && !/^ponder/i.test(String(c.term)) && !c.imgUrl);
-}
-function matchLead(def){
-  const m = String(def).match(/\*\*(.+?)\*\*/);
-  let t = (m ? m[1] : String(def).split('\n')[0]).replace(/\*\*/g,'').trim();
-  return t.length > 90 ? t.slice(0,87).replace(/\s+\S*$/,'') + '…' : t;
-}
-function matchLog(u){
-  const found = matchState.found.length;
-  if(!found) return;
-  matchState.logId = matchState.logId || uid('log');
-  put({ id:matchState.logId, type:'log', mode:'match', classId:ctx.classId, unitId:u.id,
-        date:AZ.today(), at:matchState.start, correct:found, total:matchState.pairs.length,
-        seconds:Math.round((Date.now()-matchState.start)/1000), xp:found*MATCH_XP,
-        hints:0, flips:matchState.flips });
-}
-function matchDeal(u, salt){
-  const pool = matchCards(u);
-  const seed = hashStr(u.id + AZ.today() + ':' + (salt||0));
-  const order = pool.map(c => ({c, k: mixHash(seed + ':' + c.id)})).sort((a,b)=>a.k-b.k).map(x=>x.c);
-  const pairs = order.slice(0, Math.min(MATCH_PAIRS, order.length));
-  const tiles = [];
-  pairs.forEach(c => { tiles.push({id:c.id, side:'t', text:c.term}); tiles.push({id:c.id, side:'d', text:matchLead(c.def)}); });
-  matchState = { unitId:u.id, salt:salt||0, pairs, tiles:shuffle(tiles), up:[], found:[],
-                 flips:0, start:Date.now(), logId:null, pending:false };
-}
-SCREENS.match = function(root){
-  const u = unitFor(ctx.unitId);
-  if(!u || matchCards(u).length < 2) return go('unit',{classId:ctx.classId});
-  if(!matchState || matchState.unitId !== u.id) matchDeal(u, 0);
-  const st = matchState, done = st.found.length === st.pairs.length;
-
-  const head = el('div','card');
-  head.appendChild(el('div','eyebrow', u.title + ' · Match'));
-  const hr = el('div','row');
-  hr.appendChild(el('span','k', done ? 'Every pair found'
-    : st.pending ? 'Not a pair. Read them, then tap any tile to carry on.'
-    : 'Turn two tiles. Match a word to its meaning.'));
-  hr.appendChild(el('span','v', st.found.length + ' of ' + st.pairs.length));
-  head.appendChild(hr);
-  root.appendChild(head);
-
-  const grid = el('div','mgrid');
-  st.tiles.forEach((t, i) => {
-    const isUp = st.up.includes(i), isDone = st.found.includes(t.id);
-    const b = el('button','mt' + (isDone ? ' done' : isUp ? ' up' : '') + (t.side==='t' ? ' t' : ''));
-    if(isUp || isDone){ b.appendChild(el('span','txt', t.text)); }
-    else b.appendChild(el('span','pip','✦'));
-    b.setAttribute('aria-label', (isUp||isDone) ? t.text : 'Face-down tile');
-    if(isDone) b.disabled = true;
-    b.addEventListener('click', ()=>{
-      if(isDone) return;
-      /* A wrong pair stays face-up until HER next tap — a timer cannot know
-         how long a definition takes to read (Chris, 2026-09: the second tile
-         "flips over too fast to read it"). The next tap turns the pair back;
-         if it landed on a fresh tile, that tile comes up in the same tap. */
-      if(st.pending){ st.pending = false; st.up = []; if(isUp){ render(); return; } }
-      else if(isUp) return;
-      st.up.push(i);
-      if(st.up.length === 2){
-        st.flips++;
-        const [a, c] = st.up.map(k => st.tiles[k]);
-        if(a.id === c.id && a.side !== c.side){
-          st.found.push(a.id); st.up = [];
-          /* The right-answer buzz, scaled down — a miss gets nothing. */
-          if(navigator.vibrate) navigator.vibrate([12,40,12]);
-          matchLog(u);
-          if(st.found.length === st.pairs.length){ checkBadges(); syncSoon(); celebrate(); }
-          render();
-        } else {
-          st.pending = true; render();
-        }
-      } else render();
-    });
-    grid.appendChild(b);
-  });
-  root.appendChild(grid);
-
-  if(done){
-    const c = el('div','card ac');
-    c.appendChild(el('h2',null, "That's every pair"));
-    const t = el('div','tally');
-    const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
-    chip(st.pairs.length, ' pairs'); chip(st.flips, ' turns');
-    const secs = Math.round((Date.now()-st.start)/1000);
-    chip(secs < 90 ? secs : Math.round(secs/60), secs < 90 ? ' sec' : ' min');
-    chip('+'+(st.found.length*MATCH_XP), ' XP');
-    c.appendChild(t);
-    /* The fewest turns possible is one per pair; the number is information
-       about the set, not a grade on her. */
-    c.appendChild(el('p',null, st.flips === st.pairs.length
-      ? 'Every turn a match. Nothing left to learn from this six.'
-      : 'Matching terms to meanings is recognition. The quiz is where you find out what actually stuck.'));
-    /* A deck with more than six matchable cards deals a different six; a
-       deck of exactly six can only shuffle their places — say which. */
-    const again = el('button','btn btn-primary', matchCards(u).length > MATCH_PAIRS
-      ? 'Play again · a fresh six' : 'Play again · same pairs, new places');
-    again.addEventListener('click',()=>{ matchDeal(u, st.salt + 1); render(); });
-    c.appendChild(again);
-    if(u.questions.length){
-      const q = el('button','btn btn-secondary','Take the quiz');
-      q.addEventListener('click',()=>{ matchState = null; launchQuiz(u.id, ctx.classId, false); });
-      c.appendChild(q);
-    }
-    root.appendChild(c);
-  }
-  const leave = el('button','btn btn-ghost', done ? '← Back' : '← Leave — pairs found so far still count');
-  leave.addEventListener('click',()=>{ matchLog(u); matchState = null; go('unit',{classId:ctx.classId}); });
-  root.appendChild(leave);
-};
 
 /* ================= SORT ================= */
 /* Swipe sort: two buckets, one card at a time, left or right. The material is
@@ -5930,7 +5775,8 @@ function finishCards(u){
       + (u.own ? 'You wrote these and now you have studied them — that is the whole loop.'
                 : 'Some decks are reference, not a quiz — this is one of them.'),
     confirmText:'Done', cancelText:null });
-  lessonHome(u.id, ctx.classId);
+  /* Back to the subject page (v154), same as after a quiz — see finishQuiz. */
+  go('unit', {classId:ctx.classId});
 }
 
 /* ================= THE CLUB CATALOG ================= */
@@ -8200,10 +8046,12 @@ function finishQuiz(u, partial){
       box.appendChild(companionSays(pool[logs().length % pool.length], comp));
     },
     onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, unitId:u.id, missed, back: wasReview?'growth': wasDaily?'today':null}) });
-  /* The modal opens over the lesson's own card, and postmood returns there
-     too while rounds remain (Kat, v150): the next round's door is the thing
-     to land on, not the Growth Zone. */
-  if(wasReview) go('growth',{classId:clsId}); else if(wasDaily) go('today'); else lessonHome(u.id, clsId);
+  /* The modal opens over the subject page, not the specific lesson (Chris,
+     v154): after a quiz she lands back where she can see everything else
+     there is to study in that subject, not just the one lesson she was in.
+     Review rounds still return to the Growth Zone and the daily three to
+     Today — those are their own destinations. */
+  if(wasReview) go('growth',{classId:clsId}); else if(wasDaily) go('today'); else go('unit',{classId:clsId});
 }
 
 SCREENS.postmood = function(root){
@@ -8222,17 +8070,14 @@ SCREENS.postmood = function(root){
           logId:ctx.logId, date:AZ.today(), at:Date.now(), text:t.slice(0,500) });
     ctx._tb = '';
   };
-  /* Where the check-in leaves her (v150): a review round goes back to the
-     Growth Zone and the daily three to Today, as before. An ordinary round
-     goes back to its LESSON while rounds remain — the next round's door is
-     the encouragement — and to the Growth Zone only once the lesson is
-     finished and something was missed. */
+  /* Where the check-in leaves her (v154): a review round goes back to the
+     Growth Zone and the daily three to Today, as before (both set ctx.back).
+     An ordinary round always goes back to the SUBJECT PAGE — not the specific
+     lesson — so more of what there is to study in that subject is one tap
+     away, per Chris. */
   const leave = ()=>{
     if(ctx.back) return go(ctx.back, {classId:ctx.classId});
-    const pu = ctx.unitId && !String(ctx.unitId).startsWith('__') ? DATA.records[ctx.unitId] : null;
-    const open = pu && !pu.deleted && !unitDone(pu);
-    if(ctx.missed && !open) return go('growth', {classId:ctx.classId});
-    lessonHome(ctx.unitId, ctx.classId);
+    go('unit', {classId:ctx.classId});
   };
   root.appendChild(headline('How did that feel?','One tap. This is the part that tells you whether studying is actually working for you.'));
   const c = el('div','card');
