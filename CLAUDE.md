@@ -802,6 +802,82 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The Trivia Ladder (v156 / Wayfinder v137, both apps)
+
+Chris mocked up a Jeopardy-style game with real cards from both apps as a
+standalone Artifact first, to decide whether it was worth building. He
+picked a phone-native, solo version: "only the student will play... maybe
+just 10 questions... lesson related, or unit quiz to mix it up... fun and
+interesting."
+
+**It is a new door, not a new quiz engine.** `SCREENS.ladder` deals up to
+ten of a unit's own multiple-choice/analogy questions onto point-valued
+tiles (100 up to 1000) she can open in ANY order — the "choose your gamble"
+feel Jeopardy has and an ordinary straight-through quiz round doesn't.
+Tapping a tile hands the question to the real, completely unmodified quiz
+screen (`ctx.ladder:true` on `go('quiz', …)`), which means every existing
+tool travels for free: hints, the steps walkthrough, the calculator and
+subject sheet, "🌱 Right, but shaky?", "🚩 something wrong with this
+question?", passages and graphs. `answer()` itself needed **zero changes**
+— it never reads `quizState.i`/`.order`, only the current question's
+outcome, so the exact same qstat/miss crediting an ordinary round writes
+happens per tile. Because it is untimed, `qstat.plain` credits each tile
+the same as any other quiz sighting — **playing the ladder genuinely
+finishes the lesson**, not just a side amusement.
+
+- **Two doors, matching Chris's "lesson related, or mix it up."** On the
+  unit card, "🎯 Trivia Ladder — play for points" draws from that lesson's
+  own bank. On the subject screen, next to Shuffle round, "🎯 Trivia
+  Ladder — a mix of everything" calls `buildShuffleUnit()` — the *exact*
+  function the Shuffle round already uses — then deals from its
+  `_srcUnit`/`_srcQid`-tagged pool, so a mixed miss still lands on the
+  right unit's ladder. Both gate on **6+ eligible questions** (order/
+  slider/spell kinds are excluded — `pickLadder()` filters them out, since
+  this board has no controls for them and reusing the plain-MC screen is
+  the whole point); below that a lesson isn't worth a whole board and the
+  door simply doesn't render.
+- **`pickLadder()` mirrors `pickRound()`'s ranking** (Growth-Zone-owed
+  questions last, then least-attempted, then longest-unseen) but slices to
+  up to 10 instead of `u.round||QUIZ_ROUND` — a deliberate sibling
+  function rather than widening `pickRound()`'s own signature, so the
+  ordinary quiz's round-size math is untouched.
+- **The displayed "points" are flavor, not a second economy.** The bigger
+  numbers make choosing a harder tile feel like a real swing, but real XP
+  still follows the exact same rule as everywhere else — 10 per correct,
+  the same 50/25 completion bonus at 100%/80%, hints still cost 5. Two
+  numbers show at the end on purpose: the in-session points total (never
+  saved, resets every play) and the real `+XP` (saved, same ledger as
+  everything else).
+- **One log, updated every time she returns to the board** — `ladderLog()`,
+  matching Sort's and the (retired) Match's own rule: an interrupted
+  session keeps whatever it already earned. The one thing NOT durably
+  saved if she quits mid-question is that single open tile's contribution
+  to the ladder's own summary — its qstat/miss are unaffected either way,
+  since `answer()` already wrote them the instant she picked an option, not
+  when she taps back to the board.
+- **Three small, precisely-scoped guards on shared code**, and nothing
+  else in the ordinary quiz path changed: `go()`'s auto-`finishQuiz`-on-
+  leave hook, `saveRound()`, and `persistRound()` all skip when
+  `quizState.ladder` is set — the ladder handles its own return-to-board
+  and its own log, and without these guards each would fire a stray extra
+  `log` or try to resume a ladder tile as though it were an ordinary
+  sequential round. All ladder-internal navigation passes `{back:true}` so
+  the tile↔question shuttling never pollutes `HIST` — the generic back-chip
+  still returns cleanly from the board to the subject screen.
+- **No check-in, no mood ritual, no roundBand constellation.** This is
+  meant to be quick and light — the board itself is the progress picture,
+  and check-in is for the readiness-calibration research, which doesn't
+  fit a "for fun" ten-tile board.
+
+`tools/test_ladder.js` (same file, both apps) seeds its own 10-question
+unit: the door gates on 6+/absent below it, the board deals exactly 10
+ascending tiles all open, tapping a tile opens the real quiz screen with
+the ladder header and no constellation, a wrong answer writes a real miss
+and counts toward the lesson, leaving mid-question keeps the tile open,
+finishing shows the tally/points/real-XP and writes exactly one log, Play
+again deals a fresh board, the mix-mode door draws from `__shuffle__` with
+real source ids, and `modeLabel()` names it for the day view.
+
 ### A fuller sky, and "Do now" (v155 / Wayfinder v136, both apps)
 
 Chris liked the starfield in a screenshot from the v154 work and asked for

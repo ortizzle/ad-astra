@@ -921,6 +921,15 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .sortbtns .btn{margin:0}
 .sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
+/* Trivia Ladder tiles — same tinted-accent language as the mode tiles
+   (.mtile) and Sort's bucket plates, so the board reads as part of the
+   subject screen rather than importing a separate game-show identity. */
+.ladder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.ladder-tile{min-height:56px;border-radius:14px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
+  color:var(--ac-fg);font-weight:800;font-size:19px;font-variant-numeric:tabular-nums}
+.ladder-tile.done{background-color:var(--surface);border-color:var(--line-soft);color:var(--muted);cursor:default}
+.ladder-tile.done.right{color:var(--good);border-color:var(--good)}
+.ladder-tile.done.wrong{color:var(--bad);border-color:var(--bad)}
 @media (prefers-reduced-motion:no-preference){
   .mtile{transition:transform .12s ease}
   .mtile:active{transform:scale(.96)}
@@ -1454,7 +1463,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v155 · a fuller sky';
+const APP_VERSION = 'v156 · the trivia ladder';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3127,6 +3136,7 @@ function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
   if(l.mode==='match')   return 'Match';   // historical logs only — the game itself was removed in v154
   if(l.mode==='sort')    return 'Sort';
+  if(l.mode==='ladder')  return 'Trivia Ladder';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
   if(l.mode==='readfin') return 'Finished a book';
@@ -4105,7 +4115,7 @@ function go(v,c={},opts={}){
   /* Leaving a quiz part-way records the questions she answered. See
      finishQuiz's note: this is the difference between a short session and a
      session that never happened. */
-  if(view==='quiz' && v!=='quiz' && quizState && !quizState.settled
+  if(view==='quiz' && v!=='quiz' && quizState && !quizState.settled && !quizState.ladder
      && (quizState.seen||[]).length){
     const qLeft = unitFor(quizState.unitId);
     if(qLeft) finishQuiz(qLeft, true);
@@ -4979,6 +4989,16 @@ SCREENS.unit = function(root){
       if(buildShuffleUnit(c.id)) go('quiz',{unitId:'__shuffle__', classId:c.id});
     });
     root.appendChild(shb);
+    /* Same board, drawing from every unit in the subject instead of one. */
+    const mcTotal = units(c.id).reduce((n,u2)=> n + u2.questions.filter(qq=>!qq.kind||qq.kind==='mc'||qq.kind==='analogy').length, 0);
+    if(mcTotal >= 6){
+      const lb = el('button','btn btn-secondary','🎯  Trivia Ladder — a mix of everything');
+      lb.addEventListener('click',()=>{
+        const su = buildShuffleUnit(c.id);
+        if(su && buildLadder(su)) go('ladder',{unitId:'__shuffle__', classId:c.id});
+      });
+      root.appendChild(lb);
+    }
   }
   if(CALC_CLASSES.has(c.id)){
     const cb = el('button','btn btn-secondary','🧮  Calculator');
@@ -5168,6 +5188,15 @@ function unitCard(u, c, label){
     const sk = el('button','btn btn-secondary','🌌  Star sky — say the words');
     sk.addEventListener('click',()=>{ skyState = null; go('starsky',{unitId:u.id, classId:c.id}); });
     card.appendChild(sk);
+  }
+  /* Trivia Ladder: her own quiz bank, dealt onto point tiles she can open in
+     any order — solo, phone-sized, escalating stakes. Needs a real pool to
+     draw from; a lesson with only a handful of MC questions isn't worth a
+     whole board. */
+  if(u.questions.filter(qq=>!qq.kind||qq.kind==='mc'||qq.kind==='analogy').length >= 6){
+    const lb = el('button','btn btn-secondary','🎯  Trivia Ladder — play for points');
+    lb.addEventListener('click',()=>{ if(buildLadder(u)) go('ladder',{unitId:u.id, classId:c.id}); });
+    card.appendChild(lb);
   }
   if(qp){
     card.appendChild(el('div','seclab','Test yourself'));
@@ -6785,6 +6814,126 @@ function buildShuffleUnit(classId){
   return shuffleUnit;
 }
 
+/* ================= TRIVIA LADDER ================= */
+/* A phone-sized, solo Jeopardy-style spin on her own quiz bank (Chris,
+   2026-09: "only the student will play"). Up to ten of a unit's own
+   multiple-choice/analogy questions — or, from the subject screen, a mix
+   across every unit, reusing buildShuffleUnit exactly as the Shuffle round
+   does — dealt onto point-valued tiles she opens in ANY order rather than
+   the usual straight line. Rules that are the point:
+   - Answering runs through the real, unmodified quiz screen and answer() —
+     same qstat/miss/XP crediting as any other untimed round (so it counts
+     toward the lesson the same way an ordinary quiz round does), same
+     hints/steps/flag-this-question/graphs. Only the choosing and the point
+     display are new; nothing about how a miss is scheduled changes.
+   - Never timed — order/slider/spell kinds need their own controls this
+     board doesn't render, so pickLadder excludes them; everything else
+     already supported by the ordinary MC screen works here for free.
+   - The displayed "points" are flavor for the choosing, not a second
+     currency: real XP still follows the same 10-per-correct rule as
+     everywhere else, with the same completion bonus and hint cost.
+   - One log, updated every time she returns to the board (matchLog's
+     rule) — an interrupted session keeps whatever it already earned; only
+     the one tile she never finished answering is not yet credited (its
+     qstat/miss are unaffected either way — answer() already wrote them the
+     moment she picked an option). */
+let ladderState = null;
+const LADDER_SIZE = 10;
+const LADDER_VALUES = [100,200,300,400,500,600,700,800,900,1000];
+function pickLadder(u){
+  const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
+  const att = q => (DATA.records['qstat_'+key(q)]?.attempts)||0;
+  const seen = q => (DATA.records['qstat_'+key(q)]?.updatedAt)||0;
+  const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
+  const idx = u.questions.map((q,i)=>({i,q,a:att(q),g:owed(q),t:seen(q),r:Math.random()}))
+    .filter(x => !x.q.kind || x.q.kind==='mc' || x.q.kind==='analogy');
+  idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
+  return shuffle(idx.slice(0, Math.min(LADDER_SIZE, idx.length)).map(x=>x.i));
+}
+function buildLadder(u){
+  const order = pickLadder(u);
+  if(order.length < 6) return false;
+  ladderState = { unitId:u.id, classId:u.classId, order,
+    values: LADDER_VALUES.slice(0, order.length), results: new Array(order.length).fill(null),
+    items:[], hintPenalty:0, logId:null, start:Date.now(), current:null };
+  return true;
+}
+function ladderReturn(u, q){
+  const right = quizState.answered === q.ans;
+  ladderState.results[quizState.i] = right ? 'right' : 'wrong';
+  ladderState.hintPenalty = (ladderState.hintPenalty||0) + (quizState.hints||0)*5;
+  const lastItem = (quizState.items||[])[quizState.items.length-1];
+  if(lastItem) ladderState.items.push(lastItem);
+  quizState = null;
+  ladderLog(u);
+  go('ladder', {unitId: ladderState.unitId, classId: ladderState.classId}, {back:true});
+}
+function ladderLog(u){
+  const played = ladderState.results.filter(x=>x!==null).length;
+  const correct = ladderState.results.filter(x=>x==='right').length;
+  const doneAll = played === ladderState.order.length;
+  const pct = played ? Math.round(correct/played*100) : 0;
+  const bonus = doneAll ? (pct===100?50:pct>=80?25:0) : 0;
+  const xp = Math.max(0, correct*10 + bonus - (ladderState.hintPenalty||0));
+  const lid = ladderState.logId || uid('log');
+  ladderState.logId = lid;
+  put({ id:lid, type:'log', mode:'ladder', classId:ladderState.classId, unitId:ladderState.unitId,
+        date:AZ.today(), at:ladderState.start, correct, total:played,
+        seconds:Math.round((Date.now()-ladderState.start)/1000), xp, hints:0,
+        items:(ladderState.items||[]).slice(0,QUIZ_ITEM_MAX) });
+  if(doneAll){ checkBadges(); syncSoon(); if(pct>=80) celebrate(); }
+}
+SCREENS.ladder = function(root){
+  const u = unitFor(ctx.unitId);
+  if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
+  if(!ladderState || ladderState.unitId !== u.id){
+    if(!buildLadder(u)) return go('unit',{classId:ctx.classId});
+  }
+  const played = ladderState.results.filter(x=>x!==null).length;
+  const done = played === ladderState.order.length;
+  const cls = CLASS_BY_ID[ctx.classId];
+  const head = el('div','card ac');
+  head.appendChild(el('div','eyebrow', cls ? cls.icon+' '+cls.name : u.title));
+  head.appendChild(el('h2',null,'🎯 Trivia Ladder'));
+  if(done){
+    const correct = ladderState.results.filter(x=>x==='right').length;
+    const points = ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
+    head.appendChild(el('p',null, correct===ladderState.order.length ? 'Every tile — the whole board.'
+      : correct/ladderState.order.length>=0.8 ? 'A strong board.'
+      : 'A round worth playing again.'));
+    const t = el('div','tally');
+    const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
+    chip(correct, ` of ${ladderState.order.length}`);
+    chip(points.toLocaleString(), ' pts');
+    const log = DATA.records[ladderState.logId];
+    if(log) chip('+'+log.xp, ' XP');
+    head.appendChild(t);
+    const comp = companionOf();
+    if(comp){
+      const pool = companionPool(correct/ladderState.order.length>=0.8 ? 'cheer' : 'steady', comp);
+      head.appendChild(companionSays(pool[logs().length % pool.length], comp));
+    }
+    const again = el('button','btn btn-primary','Play again');
+    again.addEventListener('click',()=>{ buildLadder(u); render(); });
+    head.appendChild(again);
+  } else {
+    head.appendChild(el('p',null,'Pick any tile — the bigger the number, the bigger the swing.'));
+  }
+  root.appendChild(head);
+  if(!done){
+    const grid = el('div','ladder-grid');
+    ladderState.order.forEach((qi,k)=>{
+      const res = ladderState.results[k];
+      const t = el('button','ladder-tile'+(res?' done '+res:''));
+      t.textContent = res ? (res==='right'?'✓ ':'✕ ')+ladderState.values[k] : String(ladderState.values[k]);
+      t.disabled = !!res;
+      if(!res) t.addEventListener('click',()=>{ ladderState.current = k; go('quiz',{unitId:u.id, classId:ctx.classId, ladder:true},{back:true}); });
+      grid.appendChild(t);
+    });
+    root.appendChild(grid);
+  }
+};
+
 /* ================= THE DAILY THREE ================= */
 /* One tiny fixed ritual: three questions, one per subject where she has
    approved units, drawn deterministically by date — the same three all day,
@@ -7362,6 +7511,17 @@ const unitFor = id => id==='__review__' ? reviewUnit
 SCREENS.quiz = function(root){
   const u = unitFor(ctx.unitId);
   if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
+  /* Trivia Ladder hands this screen exactly one question at a time, picked by
+     tapping a tile rather than sitting next in line — a fresh quizState per
+     tile, never resumed/saved (see saveRound/persistRound/go's own guards). */
+  if(ctx.ladder){
+    if(!quizState || !quizState.ladder || quizState.unitId!==u.id || quizState.i!==ladderState.current){
+      quizState = {unitId:u.id, i:ladderState.current, correct:0, answered:null, start:Date.now(),
+        order:ladderState.order, missed:[], hintUsed:false, hints:0, pre:null,
+        timed:false, speedBonus:0, fastest:null, deadline:0, seen:[], items:[],
+        limit:0, runStreak:0, qShownAt:Date.now(), ansMs:0, ansN:0, ladder:true};
+    }
+  } else
   /* Also restart when the mode changes, so switching between the normal quiz
      and Beat the clock never resumes the other one's half-finished run. */
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed){
@@ -7410,14 +7570,23 @@ SCREENS.quiz = function(root){
   const q = u.questions[quizState.order[quizState.i]];
 
   const head = el('div','card');
-  head.appendChild(el('div','eyebrow',`${u.title} · Level ${q.lv||1}`));
-  const r = el('div','row');
-  r.appendChild(el('span','k',`Question ${quizState.i+1} of ${quizState.order.length}`));
-  r.appendChild(el('span','v',`${quizState.correct} correct`));
-  head.appendChild(r);
-  /* One star per question in the round — gold when right, dim-but-lit on a
-     miss (showing up still counts; Sky Map rules). */
-  head.appendChild(roundBand(u));
+  if(quizState.ladder){
+    /* No constellation here — the board itself is the progress picture. */
+    head.appendChild(el('div','eyebrow', u.title));
+    const r0 = el('div','row');
+    r0.appendChild(el('span','k','🎯 Worth '+ladderState.values[quizState.i]));
+    r0.appendChild(el('span','v', ladderState.results.filter(x=>x!==null).length + ' of ' + ladderState.order.length + ' played'));
+    head.appendChild(r0);
+  } else {
+    head.appendChild(el('div','eyebrow',`${u.title} · Level ${q.lv||1}`));
+    const r = el('div','row');
+    r.appendChild(el('span','k',`Question ${quizState.i+1} of ${quizState.order.length}`));
+    r.appendChild(el('span','v',`${quizState.correct} correct`));
+    head.appendChild(r);
+    /* One star per question in the round — gold when right, dim-but-lit on a
+       miss (showing up still counts; Sky Map rules). */
+    head.appendChild(roundBand(u));
+  }
   if(quizState.timed){
     const t = el('div','qtimer-track'), ti = el('i');
     ti.id = 'qtimer';
@@ -7673,9 +7842,11 @@ SCREENS.quiz = function(root){
         root.appendChild(wb);
       }
     }
-    const n = el('button','btn btn-primary', quizState.i===quizState.order.length-1?'See results →':'Next question →');
+    const n = el('button','btn btn-primary', quizState.ladder ? 'Back to the board →'
+      : quizState.i===quizState.order.length-1?'See results →':'Next question →');
     n.id = 'qnext';
     n.addEventListener('click',()=>{
+      if(quizState.ladder){ ladderReturn(u, q); return; }
       if(quizState.i<quizState.order.length-1){
         quizState.i++; quizState.answered=null; quizState.hintUsed=false; quizState.stepsShown=0;
         quizState.qShownAt = Date.now();
@@ -7711,6 +7882,13 @@ SCREENS.quiz = function(root){
      was lost. Log what she answered first, then go. */
   tool('✕','Leave',()=>{
     stopQuestionTimer();
+    /* A ladder tile has its own board to return to, and its own log — the
+       ordinary partial-round save below doesn't apply here. */
+    if(quizState && quizState.ladder){
+      if(quizState.answered!==null) ladderReturn(u, q);
+      else { quizState = null; go('ladder', {unitId:ladderState.unitId, classId:ladderState.classId}, {back:true}); }
+      return;
+    }
     /* Leaving now behaves exactly like the screen going to sleep: the partial
        round is logged so the work counts, her place is saved so she can pick
        it up, and NOTHING is settled. Deliberately changed from v78, where
@@ -7865,7 +8043,7 @@ const realUnit = id => !!id && !String(id).startsWith('__');
 const roundPrint = (u, order) =>
   (order || []).map(i => u.questions[i] && u.questions[i].id).join(',');
 function saveRound(u){
-  if(!quizState || quizState.settled || !realUnit(quizState.unitId)) return;
+  if(!quizState || quizState.settled || quizState.ladder || !realUnit(quizState.unitId)) return;
   if(!u || !(quizState.seen || []).length) return;   // opened and never answered
   Store.set(ROUND_KEY, {...quizState, classId: ctx.classId, date: AZ.today(), print: roundPrint(u, quizState.order),
     /* Time actually spent, not the timestamp: `start` anchors seconds = now − start,
@@ -7884,7 +8062,10 @@ function loadRound(u, timed){
   return s;
 }
 function persistRound(){
-  if(!quizState || quizState.settled) return;
+  /* The ladder keeps its own running log (ladderLog), updated every time she
+     returns to the board — the background/pagehide hooks would otherwise
+     write a second, competing partial log for the same session. */
+  if(!quizState || quizState.settled || quizState.ladder) return;
   const seen = (quizState.seen || []).length;
   if(!seen) return;                       // opened and never answered: nothing happened
   const lid = quizState.logId || uid('log');
