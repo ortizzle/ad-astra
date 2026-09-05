@@ -49,10 +49,12 @@ const PORT = process.argv[2] || 8099;
   const tile = await p.evaluate(() => {
     ctx._showTT = false;
     go('study');
-    const t = [...document.querySelectorAll('#screen .tile')].find(x => /American Sign Language/.test(x.textContent));
-    return t ? {text: t.textContent} : null;
+    /* v150: Study lists the day's line-up as .period rows; a club has no
+       period, so it follows the line-up with 'Club' where the time goes. */
+    const t = [...document.querySelectorAll('#screen .period.tap')].find(x => /American Sign Language/.test(x.textContent));
+    return t ? {text: t.textContent, club: /Club/.test(t.querySelector('.tm')?.textContent||'')} : null;
   });
-  ck('ASL tile renders on Study', !!tile, tile);
+  ck('ASL row renders on Study, marked as a club', !!tile && tile.club, tile);
 
   // Subject page: eyebrow must say Extracurricular, not a NaN time/room.
   const subj = await p.evaluate(() => {

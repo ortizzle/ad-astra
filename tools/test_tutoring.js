@@ -14,8 +14,11 @@ const PORT = process.argv[2] || 8140;
   const r = await p.evaluate(() => {
     const readCard = () => {
       const cards = [...document.querySelectorAll('#screen .card.quiet')];
-      const c = cards.find(x => (x.querySelector('.eyebrow')||{}).textContent === 'Tutoring today');
-      return c ? c.querySelector('.row .k').textContent + '|' + c.querySelector('.row small').textContent : null;
+      /* v150: student hours and tutoring share one 'Extra help today' card;
+         the tutoring row is the one with the tutor glyph. */
+      const c = cards.find(x => (x.querySelector('.eyebrow')||{}).textContent === 'Extra help today');
+      const row = c && [...c.querySelectorAll('.row')].find(r => /🧑/.test(r.querySelector('.k').textContent));
+      return row ? row.querySelector('.k').textContent + '|' + row.querySelector('small').textContent : null;
     };
     const out = {};
 

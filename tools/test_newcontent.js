@@ -42,6 +42,14 @@ const PORT = process.argv[2] || 8106;
         if (opts.length) {
           for (const o of opts) { o.click(); await new Promise(r => setTimeout(r, 5)); }
         }
+        // kind:'slider' (v149): drag the marker, then Place it.
+        const rng = document.querySelector('#screen input[type=range]');
+        if (rng && !opts.length && document.getElementById('nplace')) {
+          rng.value = String((Number(rng.min) + Number(rng.max)) / 2);
+          rng.dispatchEvent(new Event('input', {bubbles:true}));
+          await new Promise(r => setTimeout(r, 10));
+          const pl = document.getElementById('nplace'); if (pl && !pl.disabled) { pl.click(); opts.push(pl); }
+        }
         await new Promise(r => setTimeout(r, 10));
         const next = document.querySelector('#screen .btn-primary, #screen .explain.go-on');
         if (next) { next.click(); await new Promise(r => setTimeout(r, 10)); continue; }

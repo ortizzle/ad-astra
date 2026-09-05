@@ -802,6 +802,123 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Practice, then the test (v150 / Wayfinder v131, both apps)
+
+Chris reviewed both apps with Kat and sent nine notes, to be read "as a UX
+and UI expert who builds kid learning apps". All nine shipped together,
+engine, identical in both apps; every one is a rule, not a preference.
+
+**Status on the doors.** A door says where she is with it, or it is just a
+picture. `cardsProgress(u)` is the best single run through the deck
+("4 of 13 seen" → "✓ deck done"); `quizProgress(u)` is the quiz in
+ROUNDS, because the round is the unit she experiences — 16 questions in
+rounds of 5 is four quizzes, and the door reads "Quiz · round 2 of 4 · 7 of
+16 questions met · 3 rounds to go" with a bar. Rounds done is floored from
+questions met; `pickRound` serves least-practised first, so k clean rounds
+meet k×size questions and the count is exact until the lesson is done. A
+round she leaves early counts its questions, never itself.
+
+- **`seen` and `deck` ride on cards logs from v150.** Earlier logs kept only
+  xp (seen×5, capped at 150), so a run under the cap is recovered exactly
+  and one at the cap counts as 30 — a floor, never an invention.
+- **"Met" means met in the QUIZ.** Kat's rule, and the biggest change:
+  Beat the clock is practice, and a question she has only raced no longer
+  moves the map, the shelf count, the gilt spine or the crest. `qstat.plain`
+  counts untimed sightings (`answer()` adds one when `!quizState.timed`;
+  `gradeGuide()` always adds one) and `unitAttempted()` reads it through
+  `qstatPlain()`, which treats a tally written before the field existed as
+  all-plain — so nothing already finished un-does, and only clock-only
+  attempts made from here on stop counting.
+
+**Practice, then the test.** The unit card has two labelled sections
+(`.seclab`): **Practice** — Flashcards and Beat the clock as tiles, then
+Match, Sort, Star sky, the Bee — and **Test yourself** — the quiz as one wide
+door (`quizDoor()`, `.qdoor`, the `.door` layout with the quiz drawing),
+last on the card. The order on the card is the order of the work, and the
+quiz is deliberately not a third tile: the thing that finishes a lesson
+should not look like one more way to practise it. A finished lesson's door
+says "finished ✓" and stays open — another round is review, never a lock.
+
+**The details fold behind the title.** Counts, the time estimate and the
+source are grown-up facts; they sat between her and the doors on every
+card. The title is now a 44px button (`.ttl`, `aria-expanded`) that opens
+`.dtl`. **"What this covers" is gone from her side** (Chris: the kids will
+not read it); `SCREENS.brief` stays for the review queue.
+
+**The lesson opens under its own stop.** `topicMap()` takes an `openNode`
+and appends it directly after the matching `.stop`, so what was tapped and
+what opened are never a screen apart — `SCREENS.shelf` builds the card
+first and passes it in. `.tmap>.card` is positioned so it paints over the
+spine line. `#shelfopen` and the scroll-into-view from v138 are unchanged.
+
+**After a round, back to the lesson.** `lessonHome(unitId, classId)` opens
+a book lesson on its shelf with its own stop open, else the subject screen.
+`finishQuiz` lands there (the results modal opens over the next round's
+door) and `SCREENS.postmood`'s `leave()` returns there while rounds remain
+— **even with a miss**. The Growth Zone is the destination only once the
+lesson is finished and something was missed; review rounds and the daily
+three keep their own `back`. The results say "Round 1 of 3 · 2 more to
+finish the lesson" so the next round is named before she leaves.
+
+**A test prompt is a door to the Growth Zone for its subject.**
+`goGrowthFor(cid)` sets `gzFilter` to the subject when it has anything on
+the ladder (an empty filter would be a chip for nothing) and opens Growth.
+Wired on: Coming up test rows (and exam events carrying a `classId`), the
+subject screen's upcoming-tests rows, the brief's ledger test rows
+(single-test days carry `cid`), and the runway's head (`.rwhead`, a button
+around the eyebrow and heading).
+
+**Today, streamlined; the timetable lives on Study.** Chris: "getting
+crowded visually and the monochromatic scheme isn't helping… okay to
+remove things with little to no value", and "move the schedule line up in
+Today to Study — it looks better and does the same thing".
+
+- **The day's line-up IS the subject list.** Study's tile grid is gone;
+  `.period.tap` rows in the day's order (each a button to its subject, the
+  live one painted with NOW, the old tile's units/accuracy/goal line as
+  `.dt`, the start time as `.tm`) replace it. A subject with no period on
+  the shown day — a club here, an off-rotation class in Wayfinder — follows
+  the line-up with its days (`daysFor`) or "Club" where the time goes, so
+  nothing she studies is ever missing. A day off shows the weekday order
+  (Wayfinder: the next school day's) with nothing painted. Registered clubs
+  went with it. Breaks and bookends are not subjects and stay off.
+- **Today keeps what is about today.** The day card wears the live (or
+  about-to-start) class's subject hue (`subj-a`, direction A carried to
+  the top of the tab); events are pinned directly under it, and an event
+  pinned there is dropped from Coming up rather than said twice. **Early
+  release moved onto the day card** (`.erline`, warm) because the pick-up
+  row that carried it left with the timetable — never the usual time, "not
+  published yet" until the school says. Student hours and tutoring share
+  one quiet "Extra help today" card (both keyed on the real weekday; hours
+  only on a school day). **"On the horizon" is gone**: the next milestone is
+  one quiet Coming up row when within three weeks, and the quarter
+  countdown row is not printed at all — the header names the quarter, and
+  a number that only counts down is scorekeeping.
+
+Measured (`tools/contrast_ux2.js`, accent × theme): section labels 6.44:1
+worst, the door's status line 4.83:1, the done tile's status 5.71:1, the
+day card's text and early-release line on the subject wash 6.60:1 and
+7.55:1. One trap: `.erline` was first written as a bare class and lost to
+`.card p` on specificity — it rendered muted, not warm, and only the probe
+noticing the two ratios were identical caught it. It is `.card p.erline`.
+
+`tools/test_ux2.js` (same file, both apps) seeds its own three-lesson
+series and walks all of it: the card inside the map under its stop, the
+section order, the folded details, a full deck run marking the tile done
+(and a pre-v150 log read back from xp), a timed round leaving "0 of 12 met",
+a legacy qstat still counting, round 1 → "round 2 of 3" on the door and the
+stop, the check-in returning to the lesson despite a miss, the finished
+lesson going to Growth, and all three test prompts landing on Growth with
+the subject filter set. `test_foldtt.js` now tests the Study line-up;
+`test_horizon.js` the folded row; `test_tutoring.js`, `test_clubs.js` and
+`test_asl.js` were moved to the new surfaces.
+
+> Stale before this work and left alone: `test_guide.js`'s resume check
+> (it reads `order[0]` from a round the v117 resume path restores whole)
+> and `test_polish.js` (the retired hero). `test_alg_topic2.js` and
+> `test_newcontent.js` were failing since v149 on slider questions (one
+> option by contract; no `.opt` to tap) and were fixed here.
+
 ### The number line (v149 / Wayfinder v130, both apps)
 
 The fourth game, and the first new QUESTION KIND since analogies. `kind:'slider'`

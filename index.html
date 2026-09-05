@@ -853,6 +853,37 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    every subject colours its own set. */
 .mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .mrow.three{grid-template-columns:repeat(3,1fr)}
+.mrow.one{grid-template-columns:1fr}
+/* Practice, then the test (v150 / Wayfinder v131): two labelled sections
+   on the unit card. The quiz is a wide door rather than a third tile, so
+   the thing that finishes a lesson does not look like one more way to
+   practise it. */
+.seclab{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.seclab+.mrow{margin-top:0}
+.mtile.done{border-color:#f2ca63}
+.mtile.done small{color:var(--muted)}
+.ttl{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:var(--tap);
+  padding:0;text-align:left;color:inherit;font:inherit}
+.ttl h3{margin:0}
+.ttl .tchev{color:var(--faint);font-size:13px;flex:0 0 auto;transition:transform .15s}
+.ttl[aria-expanded="true"] .tchev{transform:rotate(180deg)}
+.dtl{margin:2px 0 6px}
+.qdoor{margin:0 0 4px}
+.qdoor svg{width:44px;height:33px;color:var(--ac-fg);flex:0 0 auto;overflow:visible}
+.qdoor.done{border-color:#f2ca63}
+.qdoor .dx{color:var(--faint);font-size:18px;flex:0 0 auto}
+.qbar{display:block;height:4px;border-radius:2px;background:var(--line-soft);margin-top:7px;overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--ac);border-radius:2px}
+/* The opened lesson sits INSIDE the map, right under its stop (Kat, v150),
+   so what was tapped and what opened are never a screen apart. Positioned so
+   it paints over the spine line. */
+.tmap>.card{position:relative;z-index:1;margin:6px 0 12px}
+/* A test prompt is a door to the Growth Zone for that subject. */
+.rwhead{display:block;width:100%;text-align:left;padding:0;margin:0;color:inherit}
+.rwhead h3::after{content:' \203A';color:var(--faint);font-weight:400}
+.period.tap{width:100%;text-align:left;font:inherit}
+.period.tap .nm{font-size:15px}
+.card p.erline{font-size:13px;color:var(--warm);margin-top:8px}
 .mtile{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:96px;
   padding:12px 6px 11px;border:1.5px solid var(--ac-25);border-radius:14px;
   background-color:var(--ac-8);font-weight:700;font-size:12.5px;cursor:pointer}
@@ -1420,7 +1451,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v149 · the number line';
+const APP_VERSION = 'v150 · practice and test';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2098,10 +2129,66 @@ function lessonLabel(u){
 }
 /* A lesson is "done" when every question has been attempted at least once —
    coverage, not score. Scores stay the Growth Zone's business. */
+/* "Met" means met in the QUIZ (v150 / Wayfinder v131 — Kat's rule): a
+   question she has only raced in Beat the clock is practice, not evidence.
+   qstat.plain counts untimed sightings; a tally written before the field
+   existed reads its attempts as plain, so nothing already finished un-does. */
+function qstatPlain(r){ return r ? (r.plain != null ? r.plain : (r.attempts||0)) : 0; }
 function unitAttempted(u){
-  return u.questions.filter(q => ((DATA.records['qstat_'+u.id+'_'+q.id]||{}).attempts||0) > 0).length;
+  return u.questions.filter(q => qstatPlain(DATA.records['qstat_'+u.id+'_'+q.id]) > 0).length;
 }
 function unitDone(u){ return u.questions.length > 0 && unitAttempted(u) === u.questions.length; }
+/* Quiz progress in ROUNDS, the unit she actually experiences: 20 questions
+   in rounds of 5 is four quizzes, and "round 2 of 4" is the status Kat asked
+   for. Rounds done is floored from questions met — pickRound serves the
+   least-practised first, so k clean rounds meet k×size questions; a round
+   she leaves early counts its questions and not itself. */
+function quizProgress(u){
+  const total = (u.questions||[]).length;
+  const size = Math.max(1, Math.min(u.round||QUIZ_ROUND, total||1));
+  const rounds = total ? Math.ceil(total/size) : 0;
+  const met = unitAttempted(u);
+  const done = total > 0 && met === total;
+  const roundsDone = done ? rounds : Math.min(rounds, Math.floor(met/size));
+  return { total, size, rounds, met, done, roundsDone, left: rounds - roundsDone,
+           next: Math.min(rounds, roundsDone+1) };
+}
+/* Flashcard progress: the best single run through the deck. `seen` rides on
+   cards logs from v150; earlier logs kept only xp (seen×5, capped at 150),
+   so a run under the cap is recovered exactly and one at the cap counts as
+   30 — a floor, never an invention. */
+function cardsProgress(u){
+  const total = (u.cards||[]).length;
+  let best = 0;
+  all('log').forEach(l => {
+    if(l.mode !== 'cards' || l.unitId !== u.id) return;
+    const n = l.seen != null ? l.seen : Math.round((l.xp||0)/5);
+    if(n > best) best = n;
+  });
+  best = Math.min(best, total);
+  return { total, best, done: total > 0 && best >= total };
+}
+function clockRuns(u){
+  return all('log').filter(l => l.mode==='quiz' && l.timed && !l.partial && l.unitId===u.id).length;
+}
+/* Back to the lesson, wherever it lives (v150): a lesson in a book opens on
+   its shelf with its own stop open, so the next round's door is right there;
+   a loose unit opens its subject screen. Synthetic rounds have no lesson. */
+function lessonHome(unitId, classId){
+  const u = unitId && !String(unitId).startsWith('__') ? DATA.records[unitId] : null;
+  const series = u && !u.deleted ? seriesOf(u) : null;
+  if(series && classId && CLASS_BY_ID[classId]) return go('shelf', {classId, series, open:unitId});
+  return go('unit', {classId});
+}
+/* A test prompt opens the Growth Zone scoped to that subject (Kat, v150):
+   before a test the smart work is what she has missed in THAT subject. The
+   filter only holds when the subject has something on the ladder — an
+   empty filter would be a chip for nothing. */
+function goGrowthFor(cid){
+  const has = !!cid && all('miss').some(m => m.classId === cid);
+  gzFilter = { cid: has ? cid : null, unitId:null };
+  go('growth');
+}
 function unitLastStudied(u){
   let t = 0;
   all('log').forEach(l => { if(l.unitId === u.id && (l.updatedAt||0) > t) t = l.updatedAt; });
@@ -2190,7 +2277,7 @@ function crestWon(units){
   const cap = capstoneOf(units);
   return !!cap && unitDone(cap);
 }
-function topicMap(units, mark, openId, onPick){
+function topicMap(units, mark, openId, onPick, openNode){
   const wrap = el('div','tmap');
   let n = 0;
   units.forEach(u => {
@@ -2207,6 +2294,7 @@ function topicMap(units, mark, openId, onPick){
       b2.appendChild(pip2); b2.appendChild(body2);
       b2.addEventListener('click', () => onPick(u.id));
       wrap.appendChild(b2);
+      if(openNode && u.id === openId) wrap.appendChild(openNode);
       return;
     }
     n++;
@@ -2232,6 +2320,9 @@ function topicMap(units, mark, openId, onPick){
     b.appendChild(pip); b.appendChild(body);
     b.addEventListener('click', () => onPick(u.id));
     wrap.appendChild(b);
+    /* The opened lesson lives right under its stop (Kat, v150) — what she
+       tapped and what opened are never a screen apart. */
+    if(openNode && u.id === openId) wrap.appendChild(openNode);
   });
   return wrap;
 }
@@ -2515,7 +2606,7 @@ function weekBrief(date){
   let qi = 0;
   upcoming.forEach((d, k) => {
     if(pendingDay(d)){
-      plan.push({ d, kind:'test',
+      plan.push({ d, kind:'test', cid: d.tests.length === 1 ? d.tests[0].classId : null,
         what: d.tests.length > 1 ? d.tests.length + ' tests today' : d.tests[0].title,
         sub: d.tests.length > 1
           ? joinList(d.tests.map(t => (CLASS_BY_ID[t.classId]||{}).short || ''))
@@ -4121,6 +4212,12 @@ SCREENS.today = function(root){
     const now = AZ.nowMinutes();
     const dayList = CLASSES;
     const cur = dayList.find(c=>now>=c.start&&now<c.end), next = dayList.find(c=>c.start>now);
+    /* The day card wears the subject it is about (direction A, carried to
+       the top of Today): the live class, or the one about to start. Breaks
+       and bookends are not subjects and keep the app's own colour. */
+    const wear = cur && !cur.break && !cur.bookend ? cur
+      : (next && !next.break && !next.bookend && next.start - now <= 45) ? next : null;
+    if(wear){ st.classList.add('subj-a'); st.style.setProperty('--pc', classColor(wear)); }
     if(cur){
       st.appendChild(el('h3',null,`${cur.icon} ${cur.name}`));
       st.appendChild(el('p',null, cur.bookend ? cur.note : cur.break ? `Until ${fmtTime(cur.end)}.`
@@ -4158,7 +4255,29 @@ SCREENS.today = function(root){
       }
     }
   }
+  /* Early release is a correctness issue, not decoration: the pick-up row
+     that carried it left with the timetable (v150), so the day card says it
+     — never the usual time, and "not published" until the school says. */
+  const erT = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay && earlyReleaseOn(date);
+  if(erT) st.appendChild(el('p','erline', '🕑 Early release today · pick-up ' + (erT.dismiss || 'time not published yet')));
   root.appendChild(st);
+  /* Today's events, pinned right under the day (v150). They used to sit
+     above the folded timetable, two screens down; they are today's facts
+     and belong beside today's card. */
+  eventsOn(date).forEach(e=>{
+    const row = el('div','evt'+(e.kind==='early'||e.kind==='note' ? ' quiet' : ''));
+    row.appendChild(el('div','pchip',e.icon));
+    const m = el('div','meta');
+    m.appendChild(el('div','nm',e.name));
+    const bits = [];
+    if(evEnd(e)!==e.start) bits.push(whenLabel(date, e));
+    if(e.note) bits.push(e.note);
+    if(bits.length) m.appendChild(el('div','dt', bits.join(' · ')));
+    row.appendChild(m);
+    row.appendChild(el('div','tm', e.kind==='early' ? 'Early' : e.kind==='exam' ? 'Exam' : e.kind==='dress' ? 'Dress' : 'Today'));
+    if(e.screen){ row.style.cursor='pointer'; row.addEventListener('click',()=>go(e.screen)); }
+    root.appendChild(row);
+  });
 
   /* ---- Your week. Takes the space the week-ahead card used to hold. ---- */
   const wk = weekBrief(date);
@@ -4242,6 +4361,9 @@ SCREENS.today = function(root){
       } else if(pn.kind === 'mixed' && pn.cid){
         r.style.cursor = 'pointer';
         r.addEventListener('click', ()=>{ if(buildShuffleUnit(pn.cid)) go('quiz',{unitId:'__shuffle__', classId:pn.cid}); });
+      } else if(pn.kind === 'test'){
+        r.style.cursor = 'pointer';
+        r.addEventListener('click', ()=> goGrowthFor(pn.cid));
       }
       led.appendChild(r);
     });
@@ -4311,10 +4433,15 @@ SCREENS.today = function(root){
     const c0 = el('div','card ac runway subj-a');
     /* The runway is about ONE subject's test, so it wears that subject. */
     c0.style.setProperty('--pc', classColor(rw.cls));
-    c0.appendChild(el('div','eyebrow', 'Before your ' + (rw.cls.short || rw.cls.name) + ' ' + k.nm.toLowerCase()));
-    c0.appendChild(el('h3',null, rw.days===0 ? 'It is today'
+    /* The head is a door to the Growth Zone for this subject (Kat, v150). */
+    const rh = el('button','rwhead');
+    rh.appendChild(el('div','eyebrow', 'Before your ' + (rw.cls.short || rw.cls.name) + ' ' + k.nm.toLowerCase()));
+    rh.appendChild(el('h3',null, rw.days===0 ? 'It is today'
       : rw.days===1 ? 'Tomorrow'
       : AZ.pretty(rw.a.date).split(',')[0] + ' · in ' + rw.days + ' days'));
+    rh.setAttribute('aria-label', 'Growth Zone for ' + rw.cls.name);
+    rh.addEventListener('click', ()=>goGrowthFor(rw.cid));
+    c0.appendChild(rh);
     const line = (n, text, onTap) => {
       const b = el('button','rw');
       b.appendChild(el('span','rn', String(n)));
@@ -4432,18 +4559,30 @@ SCREENS.today = function(root){
     const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
     return { on:a.date, icon:k.ic, name:a.title, sub:`${c?c.name:''} · ${AZ.shortDate(a.date)}`,
              when: (dd=>dd===0?'Today':dd===1?'Tomorrow':`${dd} days`)(AZ.daysBetween(date,a.date)),
-             soon: AZ.daysBetween(date,a.date)<=2, classId:a.classId,
+             soon: AZ.daysBetween(date,a.date)<=2, classId:a.classId, test:true,
              now: a.date === date };
   });
-  const upE = upcomingEvents(date, 21).map(e=>{
+  /* An event already pinned under the day card is not repeated here (v150):
+     the same fact twice, four cards apart, was part of what made Today
+     crowded. Tests dated today are not pinned, so they keep their row. */
+  const pinned = new Set(eventsOn(date));
+  const upE = upcomingEvents(date, 21).filter(e => !pinned.has(e)).map(e=>{
     const span = evEnd(e)===e.start ? AZ.shortDate(e.start)
       : `${AZ.shortDate(e.start)} – ${AZ.shortDate(evEnd(e))}`;
     return { on:e.start, icon:e.icon, name:e.name, sub: e.note ? `${span} · ${e.note}` : span,
              when: whenLabel(date, e), soon: date>=e.start || AZ.daysBetween(date,e.start)<=2,
-             now: e.start === date,
+             now: e.start === date, classId: e.classId||null, test: e.kind==='exam' && !!e.classId,
              quiet: e.kind==='early' || e.kind==='note', screen: e.screen||null };
   });
-  const up = [...upA, ...upE].sort((a,b)=>a.on.localeCompare(b.on));
+  /* "On the horizon" folded in here (v150): the next milestone is one quiet
+     row when it is near enough to plan around, not its own section. The
+     quarter countdown is gone — the header names the quarter, and a number
+     that only counts down is scorekeeping. */
+  const ms = nextMilestone(date);
+  const upM = ms && AZ.daysBetween(date, ms.date) <= 21 ? [{ on:ms.date, icon:ms.icon, name:ms.name,
+    sub:AZ.shortDate(ms.date), when:(dd=>dd===0?'Today':dd===1?'Tomorrow':`${dd} days`)(AZ.daysBetween(date,ms.date)),
+    soon:false, now: ms.date===date, quiet:true, screen:null }] : [];
+  const up = [...upA, ...upE, ...upM].sort((a,b)=>a.on.localeCompare(b.on));
   if(up.length){
     root.appendChild(divider('Coming up'));
     const ac = el('div','card');
@@ -4462,7 +4601,10 @@ SCREENS.today = function(root){
         clickable ? u.when+'  ›' : u.when));
       if(clickable){
         r.style.cursor = 'pointer';
-        r.addEventListener('click',()=> u.screen ? go(u.screen) : go('unit',{classId:u.classId}));
+        /* A test is a door to the Growth Zone for its subject (Kat, v150):
+           what she has missed there is the smart use of the days before it. */
+        r.addEventListener('click',()=> u.screen ? go(u.screen)
+          : u.test ? goGrowthFor(u.classId) : go('unit',{classId:u.classId}));
       }
       ac.appendChild(r);
     });
@@ -4486,147 +4628,37 @@ SCREENS.today = function(root){
     root.appendChild(pc);
   }
 
-  /* Student hours for today — where extra help is on offer, per her planner. */
-  const shrs = STUDENT_HOURS.filter(h=>h.days.includes(AZ.weekday(date)));
-  if(shrs.length){
+  /* Extra help today — student hours and tutoring in one quiet card (v150).
+     Two different facts (the school's open door, and a standing appointment
+     that runs school day or not), one place: they were two cards saying
+     "after school" 60px apart. Both keyed on the real weekday. */
+  const schoolDay = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay;
+  const shrs = schoolDay ? STUDENT_HOURS.filter(h=>h.days.includes(wd)) : [];
+  const tut = TUTORING.filter(t=>t.d===wd);
+  if(shrs.length || tut.length){
     const hc = el('div','card quiet');
-    hc.appendChild(el('div','eyebrow','Student hours today'));
+    hc.appendChild(el('div','eyebrow','Extra help today'));
     shrs.forEach(h=>{
       const names = h.ids.map(id=>CLASS_BY_ID[id]?.short||id).join(' & ');
       const r = el('div','row');
-      const kk = el('span','k','🕖 '+names);
+      const kk = el('span','k','🕖 Student hours · '+names);
       kk.appendChild(el('small',null, h.times + (h.tbd ? ' · to be confirmed' : '')));
       r.appendChild(kk);
       hc.appendChild(r);
     });
-    root.appendChild(hc);
-  }
-
-  /* Tutoring today — a standing weekly appointment, not the school's. Keyed
-     on the real weekday (wd), never a shown/future day, since it is not
-     tied to a school day the way Student hours is. */
-  const tut = TUTORING.filter(t=>t.d===wd);
-  if(tut.length){
-    const tc = el('div','card quiet');
-    tc.appendChild(el('div','eyebrow','Tutoring today'));
     tut.forEach(t=>{
       const r = el('div','row');
       const kk = el('span','k','🧑‍🏫 Tutoring');
       kk.appendChild(el('small',null, t.times));
       r.appendChild(kk);
-      tc.appendChild(r);
+      hc.appendChild(r);
     });
-    root.appendChild(tc);
+    if(shrs.length) hc.appendChild(el('div','hintline','Student hours are extra time with your teacher. Anyone can go — it is help, not trouble.'));
+    root.appendChild(hc);
   }
-
-  /* Schedule — the grown-ups check this to know where she is, so it
-     renders every day. On a non-school day it shows as her standing timetable
-     rather than being hidden entirely. */
-  const schoolDay = !weekend && !closed && date>=CAL.firstDay && date<=CAL.lastDay;
-  root.appendChild(divider(schoolDay ? "Today's schedule" : 'Your school day'));
-  /* FOLDED BY DEFAULT (v106), on school days too. She does not open the app
-     mid-lesson, and the grown-ups' "where is she right now" need is real but
-     rare — one tap serves it. What the list mostly does day to day is get her
-     to a subject quickly, and the subject tiles on Study already do that. So
-     the period list stops holding the screen's best space and the week ahead
-     takes it instead. Nothing is removed; ctx._showTT opens it. */
-  if(!ctx._showTT){
-    const n = el('div','card quiet');
-    /* Deliberately does NOT name the live class — the day card at the top of
-       the screen already does, and saying it twice is the redundancy this
-       screen keeps re-growing. */
-    n.appendChild(el('p',null, date<CAL.firstDay
-      ? 'This is your timetable from the first day of school onward. Same order every weekday.'
-      : !schoolDay ? 'No classes today — this is your normal weekday timetable.'
-      : 'Same order every weekday.'));
-    const sh = el('button','btn btn-ghost btn-sm',
-      schoolDay ? "Show today's periods" : 'Show the weekday timetable');
-    sh.addEventListener('click',()=>{ ctx._showTT = true; render(); });
-    n.appendChild(sh);
-    root.appendChild(n);
-  }
-  /* Events still show when the timetable is folded — an event, a performance
-     or a community evening is the opposite of hypothetical. */
-  const foldTT = !ctx._showTT;
-  /* Events for today, pinned above the periods. They are not an extra period,
-     so they are painted differently rather than slotted into the timetable. */
-  eventsOn(date).forEach(e=>{
-    const row = el('div','evt'+(e.kind==='early'||e.kind==='note' ? ' quiet' : ''));
-    row.appendChild(el('div','pchip',e.icon));
-    const m = el('div','meta');
-    m.appendChild(el('div','nm',e.name));
-    const bits = [];
-    if(evEnd(e)!==e.start) bits.push(whenLabel(date, e));
-    if(e.note) bits.push(e.note);
-    if(bits.length) m.appendChild(el('div','dt', bits.join(' · ')));
-    row.appendChild(m);
-    row.appendChild(el('div','tm', e.kind==='early' ? 'Early' : e.kind==='exam' ? 'Exam' : e.kind==='dress' ? 'Dress' : 'Today'));
-    root.appendChild(row);
-  });
-
-  const now = AZ.nowMinutes();
-  (foldTT ? [] : CLASSES).forEach(c=>{
-    const live = schoolDay && now>=c.start && now<c.end;
-    const cls0 = 'period'+(live?' now':'')+(schoolDay&&now>=c.end?' done':'')+(c.bookend?' bookend':'');
-    /* Live period gets the full painted fill; the rest get a colour wash. */
-    const p = live ? paint(el('div',cls0), c) : tint(el('div',cls0+' tinted'), c);
-    p.appendChild(paint(el('div','pchip',c.icon), c));
-    const m = el('div','meta');
-    m.appendChild(el('div','nm',c.name));
-    const er = schoolDay && earlyReleaseOn(date);
-    /* Never show the usual pick-up time on an early-release day — that row is
-       what a parent plans around. Until the school states the time, say so. */
-    const note = (c.id==='pickup' && er)
-      ? (er.dismiss || 'Early release — time not published')
-      : (c.bookend ? c.note : c.break ? `Room ${c.room}` : whereLine(c));
-    m.appendChild(el('div','dt', note));
-    p.appendChild(m);
-    if(live){
-      /* How far through the period — the one number a glance at NOW wants. */
-      const frac = Math.min(1, Math.max(0, (now - c.start) / (c.end - c.start)));
-      const pb = el('div','pleft'), fi = el('i');
-      fi.style.width = Math.round(frac*100)+'%';
-      pb.appendChild(fi); m.appendChild(pb);
-      p.appendChild(el('span','tag-now','NOW'));
-    }
-    else p.appendChild(el('div','tm',fmtTime(c.start)));
-    if(!c.break) p.addEventListener('click',()=>go('unit',{classId:c.id}));
-    root.appendChild(p);
-  });
-
-  /* Clubs she is SIGNED UP for that meet today — after the last bell, which
-     is where they actually sit in her day. Only registered ones: a star is a
-     wish and does not belong on a schedule. Folded away with the timetable on
-     a day off, because a club does not meet when there is no school. */
-  const todayClubs = foldTT ? [] : clubsOn(date);
-  todayClubs.forEach(c=>{
-    const row = el('div','evt club');
-    row.appendChild(el('div','pchip','🎟️'));
-    const m2 = el('div','meta');
-    m2.appendChild(el('div','nm',c.nm));
-    m2.appendChild(el('div','dt', 'After school' + (c.freq ? ' · '+c.freq : '')));
-    row.appendChild(m2);
-    row.appendChild(el('div','tm', c.time || 'After school'));
-    row.addEventListener('click',()=>clubDetails(c));
-    root.appendChild(row);
-  });
-
-  const ms = nextMilestone(date);
-  if(ms){
-    root.appendChild(divider('On the horizon'));
-    const c = el('div','card');
-    const r = el('div','row');
-    r.appendChild(el('span','k',`${ms.icon} ${ms.name}`));
-    const d = AZ.daysBetween(date, ms.date);
-    r.appendChild(el('span','v', d===0?'Today':d===1?'Tomorrow':`${d} days`));
-    c.appendChild(r);
-    /* Only when it is a DIFFERENT fact: when the next milestone is itself the
-       end of the quarter, this row restated it word for word, same number. */
-    if(q && ms.date !== q.end){ const r2=el('div','row');
-      r2.appendChild(el('span','k',`Quarter ${q.n} ends`));
-      r2.appendChild(el('span','v plain',`${AZ.daysBetween(date,q.end)} days`)); c.appendChild(r2); }
-    root.appendChild(c);
-  }
+  /* The timetable lives on Study now (v150 / Wayfinder v131, Chris and
+     Kat): it was the subject list wearing a clock, and Study is where a
+     subject gets chosen. Registered clubs went with it. */
 };
 
 /* ================= STUDY ================= */
@@ -4770,21 +4802,51 @@ SCREENS.study = function(root){
     });
   }
 
-  root.appendChild(divider('Your subjects'));
-  const g = el('div','grid');
-  STUDY_CLASSES.forEach(c=>{
+  /* The day's line-up IS the subject list (Chris and Kat, v150 / Wayfinder
+     v131): the rows Today used to fold away, in the order she meets them,
+     each a door to its subject, the live one painted. The timetable moved
+     here because this is where it does work — a subject is chosen from it,
+     and the time beside it says when that class is. Breaks and bookends
+     are not subjects, so they stay off; a subject with no period today
+     (a club, or a class not on today's rotation) follows the line-up with
+     its days in place of a time, so nothing she studies is ever missing. */
+  const sdWd = AZ.weekday(date);
+  const sdSchool = !(sdWd===0||sdWd===6) && !closedToday(date) && date>=CAL.firstDay && date<=CAL.lastDay;
+  const sdShown = date;
+  const lineup = CLASSES.filter(c=>!c.break && !c.bookend);
+  root.appendChild(divider(sdSchool ? "Your subjects · today's order" : 'Your subjects · weekday order'));
+  const nowM = AZ.nowMinutes();
+  const subjRow = (c, live, tm) => {
     const n = units(c.id).length, st = classStats(c.id);
     const goal = prefs().goals[c.id];
-    const wk = goal ? minutesInRange(AZ.weekStart(date), date, c.id) : null;
-    const t = paint(el('button','tile'), c);
-    t.appendChild(el('span','ic',c.icon));
-    t.appendChild(el('span','nm',c.name));
-    t.appendChild(el('span','ct', goal ? `${wk}/${goal} min this week`
+    const wkm = goal ? minutesInRange(AZ.weekStart(date), date, c.id) : null;
+    const p = live ? paint(el('button','period tap now'), c) : tint(el('button','period tap tinted'), c);
+    p.appendChild(paint(el('div','pchip',c.icon), c));
+    const m = el('div','meta');
+    m.appendChild(el('div','nm',c.name));
+    m.appendChild(el('div','dt', goal ? `${wkm}/${goal} min this week`
       : n===0 ? 'No units yet' : `${n} unit${n>1?'s':''}${st.accuracy!==null?` · ${st.accuracy}%`:''}`));
-    t.addEventListener('click',()=>go('unit',{classId:c.id}));
-    g.appendChild(t);
+    p.appendChild(m);
+    if(live) p.appendChild(el('span','tag-now','NOW')); else p.appendChild(el('div','tm', tm));
+    p.addEventListener('click',()=>go('unit',{classId:c.id}));
+    return p;
+  };
+  lineup.forEach(c => root.appendChild(subjRow(c, sdSchool && nowM>=c.start && nowM<c.end, fmtTime(c.start))));
+  STUDY_CLASSES.filter(c => !lineup.some(l => l.id === c.id)).forEach(c =>
+    root.appendChild(subjRow(c, false, c.extracurricular ? 'Club' : (typeof daysFor === 'function' ? daysFor(c.id) : ''))));
+  /* A club she is signed up for that meets today sits after the last class,
+     where it sits in her day. Registered only — a star is a wish. */
+  (sdSchool ? clubsOn(date) : []).forEach(c=>{
+    const row = el('div','evt club');
+    row.appendChild(el('div','pchip','🎟️'));
+    const m2 = el('div','meta');
+    m2.appendChild(el('div','nm',c.nm));
+    m2.appendChild(el('div','dt', 'After school' + (c.freq ? ' · '+c.freq : '')));
+    row.appendChild(m2);
+    row.appendChild(el('div','tm', c.time || 'After school'));
+    row.addEventListener('click',()=>clubDetails(c));
+    root.appendChild(row);
   });
-  root.appendChild(g);
 
   /* Whole-card buttons rather than a card with a button inside it. */
   root.appendChild(divider('Tools'));
@@ -4880,7 +4942,9 @@ SCREENS.unit = function(root){
       const kk = el('span','k',`${k.ic} ${a.title}`);
       kk.appendChild(el('small',null,AZ.shortDate(a.date)));
       r.appendChild(kk);
-      r.appendChild(el('span','v'+(d<=2?'':' plain'), d===0?'Today':`${d} days`));
+      r.appendChild(el('span','v'+(d<=2?'':' plain'), (d===0?'Today':`${d} days`) + '  ›'));
+      r.style.cursor = 'pointer';
+      r.addEventListener('click', ()=>goGrowthFor(c.id));
       ac.appendChild(r);
     });
     root.appendChild(ac);
@@ -5009,8 +5073,8 @@ function modeSVG(kind){
   }
   return svg;
 }
-function modeTile(kind, label, sub, fn){
-  const b = el('button','mtile');
+function modeTile(kind, label, sub, fn, done){
+  const b = el('button','mtile' + (done ? ' done' : ''));
   b.appendChild(modeSVG(kind));
   b.appendChild(el('span', null, label));
   if(sub) b.appendChild(el('small', null, sub));
@@ -5029,22 +5093,27 @@ function unitCard(u, c, label){
     band.appendChild(el('span',null,'Test prep'));
     card.appendChild(band);
   }
-  card.appendChild(el('h3',null, label || u.title));
-  const bits = el('div');
+  /* The title folds the details (Kat, v150): the counts, the source and the
+     time estimate are grown-up facts. They used to sit between her and the
+     doors on every card; now they are one tap on the title, and "What this
+     covers" is gone from her side altogether (Chris: the kids will not read
+     it) — the brief stays in the review queue, where it is read. */
+  const ttl = el('button','ttl');
+  ttl.appendChild(el('h3',null, label || u.title));
+  ttl.appendChild(el('span','tchev','▾'));
+  ttl.setAttribute('aria-expanded', ctx._dtl === u.id ? 'true' : 'false');
+  ttl.addEventListener('click', ()=>{ ctx._dtl = ctx._dtl === u.id ? null : u.id; render(); });
+  card.appendChild(ttl);
+  const bits = el('div','dtl');
+  if(ctx._dtl !== u.id) bits.hidden = true;
   bits.appendChild(el('span','pill',`${u.cards.length} cards`));
   bits.appendChild(el('span','pill', u.questions.length
     ? `${u.questions.length} questions · ${(u.round||QUIZ_ROUND)>=u.questions.length?'one sitting':'rounds of '+Math.min(u.round||QUIZ_ROUND,u.questions.length)}`
     : 'reference only'));
   if(u.nextUp && u.nextUp.minutes) bits.appendChild(el('span','pill',`~${u.nextUp.minutes} min`));
   if(u.source) bits.appendChild(el('span','pill',u.source));
+  if(u.srcName) bits.appendChild(el('div','cite',`From ${u.srcName}`));
   card.appendChild(bits);
-  if(u.srcName) card.appendChild(el('div','cite',`From ${u.srcName}`));
-  if(u.summary && u.summary.text){
-    const ov = el('button','btn btn-ghost','📖  What this covers');
-    ov.style.marginTop='10px';
-    ov.addEventListener('click',()=>go('brief',{unitId:u.id,classId:c.id}));
-    card.appendChild(ov);
-  }
   /* A paper guide gets its own two doors instead of the usual mode tiles: the
      modes are different enough in kind that an icon and two words would not
      carry the difference. */
@@ -5081,16 +5150,24 @@ function unitCard(u, c, label){
      multiple-choice quiz can honestly test) offers only Flashcards. Real
      content never ships with zero questions otherwise, so this never hides
      a door a normal unit needs. */
-  const row = el('div','mrow'+(!u.book && u.questions.length ?' three':''));
-  row.appendChild(modeTile('cards','Flashcards','flip & check',()=>go('cards',{unitId:u.id,classId:c.id})));
-  if(u.questions.length){
-    row.appendChild(modeTile('quiz','Quiz','prove it',()=>launchQuiz(u.id,c.id,false)));
-    if(!u.book){
-      /* Book-companion units never race a clock — speed-reading a novel
-         quiz teaches exactly the wrong thing. */
-      row.appendChild(modeTile('clock','Beat the clock','race your pace',()=>launchQuiz(u.id,c.id,true)));
-    }
-  }
+  /* Practice, then the test (Kat, v150 / Wayfinder v131). Flashcards and
+     the clock are how she gets ready; the quiz is what finishes the lesson,
+     and only the quiz moves the map. The order on the card is the order of
+     the work, and each door says where she is with it. Book units never
+     race a clock — speed-reading a novel quiz teaches the wrong thing. */
+  const qp = u.questions.length ? quizProgress(u) : null;
+  const cp = cardsProgress(u);
+  card.appendChild(el('div','seclab','Practice'));
+  const row = el('div','mrow');
+  row.appendChild(modeTile('cards','Flashcards',
+    cp.done ? '✓ deck done' : cp.best ? cp.best+' of '+cp.total+' seen' : 'flip & check',
+    ()=>go('cards',{unitId:u.id,classId:c.id}), cp.done));
+  if(qp && !u.book){
+    const runs = clockRuns(u);
+    row.appendChild(modeTile('clock','Beat the clock',
+      runs ? runs+' run'+(runs===1?'':'s')+' so far' : 'race your pace',
+      ()=>launchQuiz(u.id,c.id,true)));
+  } else row.classList.add('one');
   card.appendChild(row);
   /* Match — pairs on any deck with enough matchable cards. Same weight as
      Star sky's door: a secondary button under the three tiles, never a
@@ -5120,7 +5197,37 @@ function unitCard(u, c, label){
     sk.addEventListener('click',()=>{ skyState = null; go('starsky',{unitId:u.id, classId:c.id}); });
     card.appendChild(sk);
   }
+  if(qp){
+    card.appendChild(el('div','seclab','Test yourself'));
+    card.appendChild(quizDoor(u, c, qp));
+  }
   return card;
+}
+/* The quiz door: a wide button with the round count on it, because the
+   round is the unit she experiences — "round 2 of 4" answers Kat's "how
+   many quizzes are there and how many have I done". A finished lesson says
+   so and stays open: another round is review, never a lock. */
+function quizDoor(u, c, qp){
+  const b = el('button','door qdoor' + (qp.done ? ' done' : ''));
+  b.appendChild(modeSVG('quiz'));
+  const db = el('span','db');
+  db.appendChild(el('b',null, qp.done ? 'Quiz · finished ✓'
+    : qp.rounds > 1 ? `Quiz · round ${qp.next} of ${qp.rounds}` : 'Quiz'));
+  const n = qp.left;
+  db.appendChild(el('small',null, qp.done
+    ? `Every one of the ${qp.total} questions met. Another round is pure review.`
+    : qp.met ? `${qp.met} of ${qp.total} questions met · ${n} round${n===1?'':'s'} to go`
+    : qp.rounds > 1 ? `${qp.total} questions in ${qp.rounds} rounds of ${qp.size} — this is what finishes the lesson`
+    : `${qp.total} questions, one sitting — this is what finishes the lesson`));
+  if(qp.met && !qp.done){
+    const bar = el('span','qbar'), fi = el('i');
+    fi.style.width = Math.round(qp.met/qp.total*100)+'%';
+    bar.appendChild(fi); db.appendChild(bar);
+  }
+  b.appendChild(db);
+  b.appendChild(el('span','dx','›'));
+  b.addEventListener('click', ()=>launchQuiz(u.id,c.id,false));
+  return b;
 }
 
 /* A book spine on the shelf: a solid colour picked by a stable hash of the
@@ -5169,10 +5276,20 @@ SCREENS.shelf = function(root){
 
   root.appendChild(divider('The map'));
   const openId = ctx.open || s.mark.id;
+  const open = s.units.find(u => u.id === openId) || s.units[0];
+  /* unitCard would offer a quiz her deck cannot hold — same trap the loose
+     list hit. Her stop opens her own two doors instead. */
+  let oc = null;
+  if(open){
+    oc = open.own ? ownCardsCard(open, c) : unitCard(open, c, lessonLabel(open));
+    oc.id = 'shelfopen';
+    oc.style.scrollMarginTop = '10px';
+  }
   /* The map IS the contents — one spine, not a path above a duplicate list.
-     The lesson she taps opens below it rather than replacing a stop, so the
-     path stays whole while she reads. */
-  root.appendChild(topicMap(s.units, s.mark, openId, id => {
+     The lesson she taps opens INSIDE the map, directly under its own stop
+     (Kat, v150): the path stays whole, and what opened is never a screen
+     away from what was tapped. */
+  root.appendChild(topicMap(s.units, s.mark, open ? open.id : openId, id => {
     ctx.open = id; render();
     /* The opened card sits below the whole map — off-screen on any topic with
        more than a few lessons, so a tap used to look like it did nothing and
@@ -5184,18 +5301,9 @@ SCREENS.shelf = function(root){
         behavior: matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto',
         block:'start' });
     });
-  }));
+  }, oc));
   const crest = crestEl(s.name, s.units);
   if(crest) root.appendChild(crest);
-  const open = s.units.find(u => u.id === openId) || s.units[0];
-  /* unitCard would offer a quiz her deck cannot hold — same trap the loose
-     list hit. Her stop opens her own two doors instead. */
-  if(open){
-    const oc = open.own ? ownCardsCard(open, c) : unitCard(open, c, lessonLabel(open));
-    oc.id = 'shelfopen';
-    oc.style.scrollMarginTop = '10px';
-    root.appendChild(oc);
-  }
 
   const back = el('button','btn btn-ghost','← ' + c.name);
   back.addEventListener('click',()=>go('unit',{classId:c.id}));
@@ -5823,7 +5931,8 @@ function finishCards(u){
   const secs = Math.round((Date.now()-cardState.start)/1000);
   const xp = Math.min(cardState.seen.size*5,150);
   put({id:uid('log'),type:'log',mode:'cards',classId:ctx.classId,unitId:u.id,
-       date:AZ.today(),at:Date.now(),correct:0,total:0,seconds:secs,xp});
+       date:AZ.today(),at:Date.now(),correct:0,total:0,seconds:secs,xp,
+       seen:cardState.seen.size, deck:u.cards.length});
   checkBadges(); syncSoon(); celebrate();
   const seen = cardState.seen.size; cardState.start=0;
   showModal(u.questions.length ? { title:`+${xp} XP`,
@@ -5839,7 +5948,7 @@ function finishCards(u){
       + (u.own ? 'You wrote these and now you have studied them — that is the whole loop.'
                 : 'Some decks are reference, not a quiz — this is one of them.'),
     confirmText:'Done', cancelText:null });
-  go('unit',{classId:ctx.classId});
+  lessonHome(u.id, ctx.classId);
 }
 
 /* ================= THE CLUB CATALOG ================= */
@@ -6502,7 +6611,8 @@ function gradeGuide(u){
     const key = 'qstat_'+u.id+'_'+q.id;
     const prev = DATA.records[key];
     put({ id:key, type:'qstat', unitId:u.id, classId:u.classId, qid:q.id, q:q.q,
-          attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(ok?1:0) });
+          attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(ok?1:0),
+          plain: qstatPlain(prev) + 1 });
     if(items.length < QUIZ_ITEM_MAX)
       items.push({ c: ok?1:0, qt:String(q.q).slice(0,110),
         ch:String(q.opts[ans[q.id]]||'').slice(0,70),
@@ -7822,7 +7932,9 @@ function answer(u,q,idx){
   const key = 'qstat_'+unitId+'_'+qid;
   const prev = DATA.records[key];
   put({ id:key, type:'qstat', unitId, classId, qid, q:q.q,
-        attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0) });
+        attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0),
+        /* Only an untimed sighting counts toward finishing the lesson. */
+        plain: qstatPlain(prev) + (quizState.timed ? 0 : 1) });
   /* Working the guide in the app saves her place after every question, so
      closing it mid-pass costs nothing. */
   if(u.guide) guideSet(u.id, q.id, idx);
@@ -8048,6 +8160,13 @@ function finishQuiz(u, partial){
      and a box. */
   const shape = roundState(u);
   const right = quizState.correct;
+  /* Where this round leaves the LESSON (v150): rounds done of rounds needed,
+     so a finished round points at the next one rather than at nothing. */
+  const qpNow = (u.id && !String(u.id).startsWith('__')) ? quizProgress(u) : null;
+  const roundsLine = !qpNow || wasTimed ? ''
+    : qpNow.done ? '\n\nThat finishes the lesson — every question met at least once.'
+    : qpNow.rounds > 1 ? `\n\nRound ${Math.max(1,qpNow.roundsDone)} of ${qpNow.rounds} · ${qpNow.left} more to finish the lesson.`
+    : '';
   const msg = (pct===100 ? 'Every one, first pass.'
     : pct>=80 ? 'A strong run.'
     : pct>=60 ? 'A solid base, with gaps in it.'
@@ -8058,7 +8177,8 @@ function finishQuiz(u, partial){
         ? (u.id==='__review__'
             ? `\n\n${missed} still needs another look — ${missed>1?'they go':'it goes'} back to the start of the ladder.`
             : `\n\n${missed} question${missed>1?'s':''} went to your Growth Zone.`)
-        : (u.id==='__review__' ? '\n\nEvery one of those moved further out. That is the list shrinking.' : ''));
+        : (u.id==='__review__' ? '\n\nEvery one of those moved further out. That is the list shrinking.' : ''))
+    + roundsLine;
 
   quizState = null; ctx._state = null; ctx._pre = null;
   const clsId = ctx.classId;
@@ -8097,8 +8217,11 @@ function finishQuiz(u, partial){
       const pool = companionPool(pct>=80 ? 'cheer' : 'steady', comp);
       box.appendChild(companionSays(pool[logs().length % pool.length], comp));
     },
-    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, missed, back: wasReview?'growth': wasDaily?'today':null}) });
-  go(wasReview ? 'growth' : wasDaily ? 'today' : 'unit', {classId:clsId});
+    onConfirm:()=>go('postmood',{logId:log.id, classId:clsId, unitId:u.id, missed, back: wasReview?'growth': wasDaily?'today':null}) });
+  /* The modal opens over the lesson's own card, and postmood returns there
+     too while rounds remain (Kat, v150): the next round's door is the thing
+     to land on, not the Growth Zone. */
+  if(wasReview) go('growth',{classId:clsId}); else if(wasDaily) go('today'); else lessonHome(u.id, clsId);
 }
 
 SCREENS.postmood = function(root){
@@ -8116,6 +8239,18 @@ SCREENS.postmood = function(root){
     put({ id:'teach_'+ctx.logId, type:'teach', classId:ctx.classId, unitId:tbLog.unitId,
           logId:ctx.logId, date:AZ.today(), at:Date.now(), text:t.slice(0,500) });
     ctx._tb = '';
+  };
+  /* Where the check-in leaves her (v150): a review round goes back to the
+     Growth Zone and the daily three to Today, as before. An ordinary round
+     goes back to its LESSON while rounds remain — the next round's door is
+     the encouragement — and to the Growth Zone only once the lesson is
+     finished and something was missed. */
+  const leave = ()=>{
+    if(ctx.back) return go(ctx.back, {classId:ctx.classId});
+    const pu = ctx.unitId && !String(ctx.unitId).startsWith('__') ? DATA.records[ctx.unitId] : null;
+    const open = pu && !pu.deleted && !unitDone(pu);
+    if(ctx.missed && !open) return go('growth', {classId:ctx.classId});
+    lessonHome(ctx.unitId, ctx.classId);
   };
   root.appendChild(headline('How did that feel?','One tap. This is the part that tells you whether studying is actually working for you.'));
   const c = el('div','card');
@@ -8139,7 +8274,7 @@ SCREENS.postmood = function(root){
          of the check-in. */
       if(tbOK){ render(); return; }
       toast('Noted — thanks');
-      go(ctx.back || (ctx.missed ? 'growth' : 'unit'), {classId:ctx.classId});
+      leave();
     });
     s.appendChild(b);
   });
@@ -8163,7 +8298,7 @@ SCREENS.postmood = function(root){
   skip.addEventListener('click',()=>{
     saveTB();
     if(done) toast('Noted — thanks');
-    go(ctx.back || (ctx.missed?'growth':'unit'),{classId:ctx.classId});
+    leave();
   });
   root.appendChild(skip);
 };

@@ -71,12 +71,12 @@ const { chromium } = require('playwright');
   const day = await p.evaluate(()=>{
     const real=AZ.today; AZ.today=()=>'2026-09-14'; AZ.nowMinutes=()=>9*60;
     setClubState('asl','reg');
-    go('today');
-    ctx._showTT = true; render();   // go() resets ctx — the flag has to be set after, then re-rendered.
+    /* v150: the timetable — and a registered club with it — lives on Study. */
+    go('study');
                                      // The period list (and club rows with it) is folded by default since v106.
     const reg = [...document.querySelectorAll('#screen .evt.club')].map(n=>n.textContent.replace(/\s+/g,' ').trim());
     setClubState('asl','want');
-    go('today');
+    go('study');
     const want = document.querySelectorAll('#screen .evt.club').length;
     setClubState('asl','reg');
     AZ.today=real;

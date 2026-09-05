@@ -37,6 +37,7 @@ const PORT = process.argv[2] || 8101;
       if (!u.cards.length) bad.push(id + ': no cards');
       if (u.questions.length < 15) bad.push(id + ': too few questions (' + u.questions.length + ')');
       u.questions.forEach(q => {
+        if (q.kind === 'slider' || q.kind === 'spell') return;   // one option by contract (v149)
         if (q.opts.length !== 4) bad.push(id + '/' + q.id + ': opts != 4');
         if (new Set(q.opts).size !== 4) bad.push(id + '/' + q.id + ': dup opts');
         if (q.ans < 0 || q.ans > 3) bad.push(id + '/' + q.id + ': bad ans');
