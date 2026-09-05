@@ -939,19 +939,31 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .skyfx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 [data-theme="light"] .skyfx{display:none}
 /* Each star is one box-shadow with a 2px blur, so it reads as a point of light
-   with a soft edge rather than a hard pixel. Three layers at different scales,
+   with a soft edge rather than a hard pixel. Four layers at different scales,
    speeds and phases: the field shimmers instead of pulsing in unison, which is
    what makes it read as sky. Sized and timed to be noticed at a glance — the
-   first pass was 2px dots fading between .1 and .45, which nobody ever saw. */
+   first pass was 2px dots fading between .1 and .45, which nobody ever saw.
+   Doubled from 14 to 28 points and given a 4th layer (Chris, v155: "add more
+   stars") — 112 visible dots across the four layers, up from 42.
+   A minority of the points carry a real star's tint rather than plain white
+   ("sprinkled with color") — hot blue-white, cool gold, a rare warm rose, the
+   same variation real starlight actually has by temperature, which keeps it
+   feeling like a richer sky rather than a scatter of colored confetti; still
+   mostly white so the field reads as stars first. */
 .skyfx .tw{position:absolute;top:0;left:0;width:3px;height:3px;border-radius:50%;background:#fff;
   box-shadow:
     44px 130px 2px 0 #fff,  140px 310px 2px 0 #fff, 330px 90px 2px 0 #fff,  255px 520px 2px 0 #fff,
     64px 660px 2px 0 #fff,  355px 430px 2px 0 #fff, 200px 180px 2px 0 #fff, 20px 400px 2px 0 #fff,
     290px 250px 2px 0 #fff, 120px 580px 2px 0 #fff, 380px 620px 2px 0 #fff,  8px 240px 2px 0 #fff,
-    170px 470px 2px 0 #fff, 305px 700px 2px 0 #fff;
+    170px 470px 2px 0 #fff, 305px 700px 2px 0 #fff,
+    95px 20px 2px 0 #9ecbff, 250px 45px 2px 0 #fff, 15px 150px 2px 0 #fff, 340px 190px 2px 0 #ffd77a,
+    60px 230px 2px 0 #fff, 230px 320px 2px 0 #ffb4c6, 375px 355px 2px 0 #fff, 130px 405px 2px 0 #8ee6c8,
+    5px 495px 2px 0 #fff, 260px 565px 2px 0 #fff, 190px 630px 2px 0 #c9b8ff, 350px 705px 2px 0 #fff,
+    95px 555px 2px 0 #ffd77a, 30px 650px 2px 0 #fff;
   opacity:.6;animation:tw 4.4s ease-in-out infinite}
 .skyfx .t2{transform:translate(105px,55px) scale(.8);animation-duration:6.4s;animation-delay:1.4s}
 .skyfx .t3{transform:translate(212px,268px) scale(1.15);animation-duration:8.1s;animation-delay:2.9s}
+.skyfx .t4{transform:translate(58px,410px) scale(.95);animation-duration:7.2s;animation-delay:.6s}
 @keyframes tw{0%,100%{opacity:.3}50%{opacity:1}}
 /* Shooting stars. The head is the bright end of the gradient, so the streak
    points the way it travels. Two of them on offset cycles — one every ~13s,
@@ -1292,6 +1304,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .cb-t{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--text)}
 .cb-d{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
 .cb-x{font-size:26px;color:var(--faint);line-height:1;flex-shrink:0}
+.cb-eye{margin-bottom:3px}
 
 .subrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);cursor:pointer}
 .subrow:last-of-type{border-bottom:none}
@@ -1370,7 +1383,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 <body>
 
 <!-- The living sky: ambient, dark-mode-only, gone entirely under reduced motion. -->
-<div class="skyfx" aria-hidden="true"><i class="tw"></i><i class="tw t2"></i><i class="tw t3"></i><i class="shoot"></i><i class="shoot s2"></i><i class="aur"></i></div>
+<div class="skyfx" aria-hidden="true"><i class="tw"></i><i class="tw t2"></i><i class="tw t3"></i><i class="tw t4"></i><i class="shoot"></i><i class="shoot s2"></i><i class="aur"></i></div>
 
 <div id="app">
   <header>
@@ -1441,7 +1454,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v154 · after the quiz';
+const APP_VERSION = 'v155 · a fuller sky';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4519,7 +4532,8 @@ SCREENS.today = function(root){
         dailyUnit.questions.length === 3
           ? 'Three questions, about a minute, one from each corner of your week.'
           : dailyUnit.questions.length + ' question' + (dailyUnit.questions.length===1?'':'s') + ' today — that is all there is so far.',
-        () => { quizState = null; go('quiz', {unitId:'__daily__', classId:'__all__'}); });
+        () => { quizState = null; go('quiz', {unitId:'__daily__', classId:'__all__'}); },
+        'Do now');
       root.appendChild(dd);
     }
   }
@@ -4848,9 +4862,12 @@ function emptyScene(){
   return d;
 }
 
-function cardButton(title, desc, onClick){
+/* eyebrow is optional — a small caps label above the title, same size and
+   weight as a date header (v155: the daily three's "DO NOW"). */
+function cardButton(title, desc, onClick, eyebrow){
   const b = el('button','cardbtn');
   const t = el('div','cb-txt');
+  if(eyebrow) t.appendChild(el('div','eyebrow cb-eye', eyebrow));
   t.appendChild(el('div','cb-t',title));
   t.appendChild(el('div','cb-d',desc));
   b.appendChild(t);

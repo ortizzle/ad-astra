@@ -802,6 +802,30 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### A fuller sky, and "Do now" (v155 / Wayfinder v136, both apps)
+
+Chris liked the starfield in a screenshot from the v154 work and asked for
+more of it: "add more stars, make them sprinkled with color." Two small
+changes, both `.skyfx`, dark mode only.
+
+- **A 4th twinkle layer.** `.tw`'s shared box-shadow list (the one 3×3px
+  element reused via `.t2`/`.t3`'s `transform: translate()+scale()`) doubled
+  from 14 points to 28, and a new `.t4` layer was added on its own phase and
+  offset — 112 visible points across four layers, up from 42.
+- **A minority of the points now carry real color** instead of plain white:
+  hot blue-white, cool gold, a rare warm rose, mint, lavender — the same
+  variation actual starlight has by temperature, so it reads as a richer sky
+  rather than scattered confetti. Roughly one point in five is colored; the
+  rest stay white on purpose, or the field stops reading as stars.
+- CSS box-shadow already supports a distinct colour per shadow in one list,
+  so this needed no new elements — just more entries in the one list every
+  layer already shares.
+
+**"Do now"** — a small caps eyebrow above "The daily three" on Today, same
+size and weight as a date header (`.eyebrow`, 10.5px). `cardButton()` grew
+an optional 4th argument; every other call site is unaffected since the
+argument is only ever passed for the daily three's door.
+
 ### After the quiz (v154 / Wayfinder v135, both apps)
 
 Chris, having lived with v150's "back to the lesson" behavior: "after a
