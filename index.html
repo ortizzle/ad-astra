@@ -1286,11 +1286,10 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .plan .nm{font-weight:600;font-size:15px}
 .plan .mins{font-size:12.5px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
 .plan .why{font-size:13px;color:var(--muted);line-height:1.5}
-/* The mixed-round button (studyPlan's ramp case) sits between one
-   subject's .plan card and the next — it needs the same bottom
-   margin the cards give themselves, or the next subject sits flush
-   against it (Chris/Kat, v152). */
-.rampbtn{margin-bottom:var(--gap-row)}
+/* The mixed-round button (studyPlan's ramp case) lives INSIDE its
+   subject's .plan card (v153) — one bunched block per subject
+   instead of a card plus a separate full-width button. */
+.plan .rampbtn{margin-top:var(--gap-row)}
 
 .whyline{font-size:13px;color:var(--ac-fg);font-weight:600;margin:2px 0 8px;line-height:1.45}
 
@@ -1452,7 +1451,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v152 · font and spacing';
+const APP_VERSION = 'v153 · bunch the plan';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4765,17 +4764,23 @@ SCREENS.study = function(root){
       d.appendChild(hd);
       d.appendChild(el('div','why', p.why));
       d.addEventListener('click',()=>go('unit',{classId:p.classId}));
-      root.appendChild(d);
       /* Test week: the plan offers the mixed round itself, not just the door
-         to the subject. Same rules as any shuffle round — untimed, no check-in. */
+         to the subject. Nested INSIDE the subject's own card (v153, Chris:
+         'can we bunch subjects?') rather than a separate full-width button —
+         three ramped subjects used to stack as six blocks; now three. Same
+         rules as any shuffle round — untimed, no check-in. stopPropagation so
+         the tap launches the mixed round instead of also firing the card's
+         own go('unit'). */
       if(p.ramp){
         const sh = el('button','btn btn-secondary rampbtn','🔀  Mixed round — all ' + (c.short||c.name) + ' units');
-        sh.addEventListener('click',()=>{
+        sh.addEventListener('click',(e)=>{
+          e.stopPropagation();
           if(buildShuffleUnit(p.classId)) go('quiz',{unitId:'__shuffle__', classId:p.classId});
           else go('unit',{classId:p.classId});
         });
-        root.appendChild(sh);
+        d.appendChild(sh);
       }
+      root.appendChild(d);
     });
   }
 

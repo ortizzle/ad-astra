@@ -802,6 +802,28 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Bunch the plan (v153 / Wayfinder v134, both apps)
+
+Chris sent a screenshot from River's real Wayfinder: three subjects in
+range of a test, so "What to study today" stacked six pieces — a `.plan`
+card, then a full-width `🔀 Mixed round` button, repeated three times —
+and asked to "bunch subjects". The button now lives **inside** its
+subject's own card (`d.appendChild(sh)`, not `root.appendChild(sh)`), so
+a ramped subject is one bordered block, not two. Three ramped subjects on
+a real test week: six blocks → three.
+
+- **`stopPropagation` on the button's click.** The card itself already
+  opens the subject on a tap; nesting the button inside it means a tap on
+  the button would otherwise also bubble to the card and re-navigate to
+  the subject a beat after the mixed round started. Verified: the button
+  alone launches `__shuffle__`, nothing else fires.
+- `.rampbtn`'s margin moved from `margin-bottom` (spacing itself off the
+  NEXT card, back when it was a sibling) to `.plan .rampbtn{margin-top:
+  var(--gap-row)}` — spacing itself off the `why` line above it, inside
+  the card it now lives in.
+- An unramped subject's card is untouched — the button only ever appends
+  when `p.ramp` is true, same as before.
+
 ### Font and spacing on the plan (v152 / Wayfinder v133, both apps)
 
 Two small fixes to the perch from v151, both Chris and Kat, both real
