@@ -802,6 +802,47 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The plan of attack (v151 / Wayfinder v132, both apps)
+
+Chris, after v150: on Study, replace "Pick up the thread" with the
+companion, since it says the same thing, and make it a plan of attack;
+remove the affirmations, which the girls were not engaging with, but let
+the companion "swap out sometimes" with one.
+
+Study now OPENS on the perch. The companion's line is the thread itself —
+`threadTarget()`'s answer (due reviews, then a test inside three days,
+then the open lesson, then the top of the plan), said in the companion's
+voice — and the perch is the door (`.perch.plan.tap`, `role=button`,
+keyboard-reachable, a chevron in the bubble). The thread hero and its
+divider are gone; `threadTarget()` stays for the `#thread` home-screen
+shortcut. The lesson case is new copy: "You are 2 rounds from finishing
+Topic 2 · 2-3 Factored Form. That is the place to start", from
+`quizProgress()`, straight into that quiz.
+
+**The affirmation card is gone; the affirmation is not.** Roughly one day
+in three (`mixHash('plan:'+date) % 3`, deterministic so it does not
+reshuffle on render) the companion says `affirmationFor(date)` instead of
+the plan, set in Fraunces (`.perch.plan.aff`) so it reads as a line, not a
+task, and it is not a door. **Never over a due review or a close test** —
+those are the plan of attack, and the swap only happens when the thread is
+a lesson, the plan, or nothing. The research grounding in "The psychology
+features" still holds for the pool; what changed is the delivery: a
+creature saying it sometimes, not a card with two buttons and XP. The
+`affirm` records, their XP in `stats()` and the parent view's "Morning
+lines read" row stay as history; nothing writes new ones.
+
+**No companion chosen, same perch.** `companionOf()` returns null when the
+companion is off, so the perch falls back to the app's own star (`✦`,
+named "Plan of attack") — the plan must never be missing just because a
+creature was not picked. The weekly aim sits directly under the perch,
+unchanged: it is hers.
+
+`tools/test_plan.js` (same file, both apps): the affirmation card and the
+thread divider are gone, Study opens on the perch, a due day says the
+thread and taps to the Growth Zone, a swap day with nothing due says the
+day's affirmation and is not a door, a plain day says the plan and is,
+and the no-companion perch carries the star.
+
 ### Practice, then the test (v150 / Wayfinder v131, both apps)
 
 Chris reviewed both apps with Kat and sent nine notes, to be read "as a UX

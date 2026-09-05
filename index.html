@@ -376,6 +376,9 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 
 .perch{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px}
 .perch.tap{cursor:pointer}
+.perch.plan .bubble{font-size:15px;line-height:1.45}
+.perch.plan.tap .bubble::after{content:'\203A';position:absolute;right:12px;top:10px;color:var(--faint);font-size:18px}
+.perch.plan.aff .bubble{font-family:'Fraunces',serif;font-size:17px;line-height:1.4}
 .perch .pet{font-size:36px;line-height:1;flex-shrink:0;animation:pet-bob 3.4s ease-in-out infinite}
 @keyframes pet-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.perch .pet{animation:none}}
@@ -1307,13 +1310,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .palsw{height:52px;border-radius:13px;border:2px solid transparent}
 .palsw.on{border-color:var(--text);box-shadow:0 0 0 3px var(--ac-25)}
 
-.affirm-acts{display:flex;gap:10px;margin-top:16px}
-.affirm-acts .act{flex:1;min-height:var(--tap);border-radius:13px;background:var(--deep);
-  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
-  gap:8px;font-size:15px;font-weight:600;color:var(--muted)}
-.affirm-acts .act .lb{font-size:13px}
-.affirm-acts .act.on{border-color:var(--ac);background:var(--ac-14);color:var(--ac-fg)}
-.affirm-acts .act:active{transform:scale(.98)}
 
 .glance{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}
 .gl{background:var(--deep);border:1px solid var(--line-soft);border-radius:13px;padding:11px 6px;text-align:center}
@@ -1451,7 +1447,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v150 · practice and test';
+const APP_VERSION = 'v151 · the plan of attack';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4665,45 +4661,60 @@ SCREENS.today = function(root){
 SCREENS.study = function(root){
   const date = AZ.today();
 
-  /* The morning line, with a way to say you actually read it. */
-  const seen = DATA.records['affirm_'+date];
-  const aff = el('div','card ac');
-  aff.appendChild(el('div','eyebrow','Today'));
-  const at = el('p','lede', affirmationFor(date));
-  at.style.fontFamily="'Fraunces',serif"; at.style.fontSize='20px';
-  at.style.lineHeight='1.38'; at.style.marginTop='8px';
-  aff.appendChild(at);
-  if(prefs().motto){
-    const m = el('p',null,'“'+prefs().motto+'”');
-    m.style.fontStyle='italic'; m.style.marginTop='12px'; m.style.fontSize='13.5px';
-    aff.appendChild(m);
+  /* The plan of attack (v151 / Wayfinder v132, Chris): the companion fronts
+     it — one line, one door — and it is the top of the tab. The affirmation
+     card and the "Pick up the thread" hero are gone: the girls were not
+     engaging with the morning line, and the hero said what the perch
+     already said. The line is the thread itself (threadTarget: due reviews,
+     then a test inside three days, then the open lesson, then the plan),
+     said in the companion's voice; roughly one day in three, when nothing
+     is due and no test is close, the companion says the affirmation
+     instead — the morning line survives as something the creature
+     sometimes says, not as a card with buttons. Deterministic by date, so
+     it does not reshuffle on every render. No companion chosen: the same
+     perch, with the app's own star for a creature, so the plan is never
+     missing. */
+  const comp = companionOf() || { id:null, e:'✦', name:'Plan of attack' };
+  {
+    const th = threadTarget(date);
+    const dueN = dueMisses().length;
+    const swap = !(th && (th.kind==='due' || th.kind==='ramp')) && (mixHash('plan:'+date) % 3 === 0);
+    let line, dest = null;
+    if(swap){
+      line = affirmationFor(date);
+    } else if(th && th.kind==='due'){
+      line = dueN===1 ? 'One question cycled back today. Clearing it now is what stops it coming back.'
+        : `${dueN} questions cycled back today. Clearing them now is what stops them coming back.`;
+      dest = th.go;
+    } else if(th && th.kind==='ramp'){
+      line = th.title.charAt(0).toUpperCase() + th.title.slice(1) + '. ' + th.sub;
+      dest = th.go;
+    } else if(th && th.kind==='lesson'){
+      const lu = DATA.records[th.unitId], qp = quizProgress(lu);
+      line = qp.left > 0 && qp.rounds > 1
+        ? `You are ${qp.left} round${qp.left===1?'':'s'} from finishing ${lu.title}. That is the place to start.`
+        : `One more round finishes ${lu.title}. That is the place to start.`;
+      dest = th.go;
+    } else if(th && th.kind==='plan'){
+      const pc2 = CLASS_BY_ID[th.classId], tp = studyPlan(date)[0];
+      line = `${pc2.name} could use ${tp.minutes} minutes today — ${tp.why}.`;
+      dest = th.go;
+    } else {
+      const seed = date.split('-').reduce((a,b)=>a+ +b, 0);
+      const idle = companionPool('idle', comp);
+      /* Her own line (Settings) joins the idle rotation — her words, her voice,
+         so the curation rules do not apply to it. */
+      const mine = (prefs().mline||'').trim();
+      const pool = mine ? idle.concat(mine) : idle;
+      line = pool[seed % pool.length];
+    }
+    const perch = companionSays(line, comp);
+    perch.classList.add('plan'); if(swap) perch.classList.add('aff');
+    if(dest){ perch.classList.add('tap'); perch.setAttribute('role','button'); perch.tabIndex = 0;
+      perch.addEventListener('click',dest);
+      perch.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); dest(); } }); }
+    root.appendChild(perch);
   }
-  const acts = el('div','affirm-acts');
-  /* Toggles, not one-way switches — a tap that didn't land can be taken back.
-     The day's XP stays as long as EITHER action is on; undoing both takes it
-     back too (no farming by re-tapping: it is the same one award). */
-  const mark = (field, xp) => {
-    const prev = DATA.records['affirm_'+date] || {id:'affirm_'+date, type:'affirm', date, xp:0};
-    const turningOn = !prev[field];
-    prev[field] = turningOn;
-    const anyOn = prev.liked || prev.read;
-    prev.xp = anyOn ? (prev.xp || xp) : 0;
-    put(prev); checkBadges(); syncSoon();
-    if(turningOn && xp && !seen) toast(`+${xp} XP`);
-    render();
-  };
-  const heart = el('button','act'+(seen&&seen.liked?' on':''));
-  heart.appendChild(el('span',null, seen&&seen.liked ? '❤️' : '🤍'));
-  heart.appendChild(el('span','lb','That one lands'));
-  heart.addEventListener('click',()=>mark('liked',10));
-  const check = el('button','act'+(seen&&seen.read?' on':''));
-  check.appendChild(el('span',null, seen&&seen.read ? '✅' : '☑️'));
-  check.appendChild(el('span','lb', seen&&seen.read ? 'Read' : 'Mark as read'));
-  check.addEventListener('click',()=>mark('read',10));
-  acts.appendChild(heart); acts.appendChild(check);
-  aff.appendChild(acts);
-  if(seen && seen.xp) aff.appendChild(el('div','hintline',`+${seen.xp} XP today`));
-  root.appendChild(aff);
 
   /* One small aim, hers. Set whenever, gone next Monday. Tracked by nothing
      except her own tap on Done — no penalty, no streak, appears nowhere else
@@ -4734,45 +4745,6 @@ SCREENS.study = function(root){
           setPref('intent',{text:t, week:wk, done:false}); toast('Yours for the week'); } });
     });
     root.appendChild(aib);
-  }
-
-  /* The companion's perch: one line for the day, deterministic so it does not
-     reshuffle on every render. It fronts what the screen already knows —
-     due reviews first, then the top of the study plan, else a quiet line. */
-  const comp = companionOf();
-  if(comp){
-    const dueN = dueMisses().length;
-    const topPlan = studyPlan(date)[0];
-    let line, dest = null;
-    if(dueN){
-      line = dueN===1 ? 'One question cycled back today. Clearing it now is what stops it coming back.'
-        : `${dueN} questions cycled back today. Clearing them now is what stops them coming back.`;
-      dest = ()=>go('growth');
-    } else if(topPlan){
-      const pc2 = CLASS_BY_ID[topPlan.classId];
-      line = `${pc2.name} could use ${topPlan.minutes} minutes today — ${topPlan.why}.`;
-      dest = ()=>go('unit',{classId:topPlan.classId});
-    } else {
-      const seed = date.split('-').reduce((a,b)=>a+ +b, 0);
-      const idle = companionPool('idle', comp);
-      /* Her own line (Settings) joins the idle rotation — her words, her voice,
-         so the curation rules do not apply to it. */
-      const mine = (prefs().mline||'').trim();
-      const pool = mine ? idle.concat(mine) : idle;
-      line = pool[seed % pool.length];
-    }
-    const perch = companionSays(line, comp);
-    if(dest){ perch.classList.add('tap'); perch.addEventListener('click',dest); }
-    root.appendChild(perch);
-  }
-
-  /* One tap back into the work — due reviews first, else her open lesson. */
-  const th = threadTarget(date);
-  if(th){
-    root.appendChild(divider('Pick up the thread'));
-    const hero = cardButton(th.title, th.sub, th.go);
-    hero.classList.add('hero');
-    root.appendChild(hero);
   }
 
   /* What to study — moved here from Today */
