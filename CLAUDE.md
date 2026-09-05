@@ -802,6 +802,24 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Font and spacing on the plan (v152 / Wayfinder v133, both apps)
+
+Two small fixes to the perch from v151, both Chris and Kat, both real
+bugs rather than taste calls.
+
+- **The companion's line was 15px** (17px only in the affirmation swap
+  state), too small for the tab's new lead element. Now **17px in both
+  states** — the plan line and the affirmation read at the same size, so
+  swapping between them is not also a size jump.
+- **The mixed-round button had no bottom margin.** `studyPlan()`'s ramp
+  case appends `🔀 Mixed round` directly under a subject's `.plan` card;
+  the card supplies the 10px gap ABOVE the button (its own margin-bottom),
+  but the button had none below, so the next subject's card sat flush
+  against it — "borders on the next shown subject… looks crowded". The
+  button now carries `.rampbtn` (`margin-bottom:var(--gap-row)`), the same
+  10px every `.plan` card already uses, so a ramp subject reads no denser
+  than an ordinary one.
+
 ### The plan of attack (v151 / Wayfinder v132, both apps)
 
 Chris, after v150: on Study, replace "Pick up the thread" with the

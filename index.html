@@ -376,9 +376,9 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 
 .perch{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px}
 .perch.tap{cursor:pointer}
-.perch.plan .bubble{font-size:15px;line-height:1.45}
+.perch.plan .bubble{font-size:17px;line-height:1.5}
 .perch.plan.tap .bubble::after{content:'\203A';position:absolute;right:12px;top:10px;color:var(--faint);font-size:18px}
-.perch.plan.aff .bubble{font-family:'Fraunces',serif;font-size:17px;line-height:1.4}
+.perch.plan.aff .bubble{font-family:'Fraunces',serif;font-size:17px;line-height:1.45}
 .perch .pet{font-size:36px;line-height:1;flex-shrink:0;animation:pet-bob 3.4s ease-in-out infinite}
 @keyframes pet-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.perch .pet{animation:none}}
@@ -1286,6 +1286,11 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .plan .nm{font-weight:600;font-size:15px}
 .plan .mins{font-size:12.5px;font-weight:700;color:var(--ac-fg);white-space:nowrap}
 .plan .why{font-size:13px;color:var(--muted);line-height:1.5}
+/* The mixed-round button (studyPlan's ramp case) sits between one
+   subject's .plan card and the next — it needs the same bottom
+   margin the cards give themselves, or the next subject sits flush
+   against it (Chris/Kat, v152). */
+.rampbtn{margin-bottom:var(--gap-row)}
 
 .whyline{font-size:13px;color:var(--ac-fg);font-weight:600;margin:2px 0 8px;line-height:1.45}
 
@@ -1447,7 +1452,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v151 · the plan of attack';
+const APP_VERSION = 'v152 · font and spacing';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4764,7 +4769,7 @@ SCREENS.study = function(root){
       /* Test week: the plan offers the mixed round itself, not just the door
          to the subject. Same rules as any shuffle round — untimed, no check-in. */
       if(p.ramp){
-        const sh = el('button','btn btn-secondary','🔀  Mixed round — all ' + (c.short||c.name) + ' units');
+        const sh = el('button','btn btn-secondary rampbtn','🔀  Mixed round — all ' + (c.short||c.name) + ' units');
         sh.addEventListener('click',()=>{
           if(buildShuffleUnit(p.classId)) go('quiz',{unitId:'__shuffle__', classId:p.classId});
           else go('unit',{classId:p.classId});
