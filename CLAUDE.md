@@ -802,6 +802,63 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The number line (v149 / Wayfinder v130, both apps)
+
+The fourth game, and the first new QUESTION KIND since analogies. `kind:'slider'`
+draws a number line and she drags a marker to where the number belongs;
+right means within `line.tol` of `line.ans`. Placing numbers on a line is the
+best-evidenced activity there is for number sense, and the same widget does
+estimation for physics: guess first, then compute.
+
+**The contract mirrors `spell` everywhere else**, which is what made it
+cheap: `opts:[<answer as text>]`, `ans:0`, and a `line` object the engine
+reads — `{lo, hi, ans, tol, step?, ticks?, labels?, unit?}`. So misses, qstats,
+the day view's `items`, the review queue and the Growth Zone all read the
+answer as they read any other question, and a missed slider comes back live
+(`missAsQuestion` falls through to the unit for anything with fewer than
+four options) with its line intact. `-4` is the off-the-mark sentinel; her
+value lives on `quizState.sliderVal` so a hint re-render never moves the
+marker; **never served in a timed round** (dragging against a countdown
+tests dragging) — the same filter as `spell`.
+
+- **The control is a native range input over a hand-drawn track.** Chrome
+  moves a 28px thumb's centre from 14px to width−14px, so every tick,
+  label and marker is placed with one `calc()` and the thumb sits exactly on
+  the value it reads. Touch-friendly, keyboard-accessible, no library.
+- **Place it stays disabled until she has moved the marker.** Starting at
+  `lo` and allowing an immediate tap would let a wrong answer happen by
+  accident.
+- **The answered view shows both markers**, hers and the answer, and says
+  "You put it at 0.77 · it belongs at 0.65" — the gap is the lesson, so it
+  is drawn rather than described.
+- **Tolerance is a content decision and the checker polices it**: `0 < tol <
+  a quarter of the line`, and `step` never coarser than twice `tol`. River's
+  hundredths questions zoom the line (0.3 to 0.4) so a thumb-width on a
+  phone is never the difference between right and wrong.
+- `check_content.py` validates the line; `unit_common.slider()` authors one
+  with opts derived from the line and its step's decimals.
+
+**Content, this app**: four estimation questions on `Kinematics 1 · Equations
+of Motion` (fallen distance after 2 s, braking distance from 20 m/s, height
+of a 15 m/s throw, a sled's speed after 5 s — every answer computed in the
+builder, never typed) and three on `Topic 2 · 2-1 Vertex Form` (where the
+vertex sits; the sign of h is the whole trap, and placing −3 instead of 3
+is visible on a line in a way a wrong option is not). Both files re-draft
+once (`libv` bumped). River's twelve-decimal unit is in wayfinder/CLAUDE.md.
+
+> The physics file's ids ran `q1…q18`, not `q0…`, and the first append
+> minted a duplicate `q18` — the checker caught it. New ids are minted from
+> `max(existing)+1`, never from `len()`.
+
+`tools/test_numberline.js` (same file, both apps) seeds its own three-slider
+unit so it never depends on which app's content carries sliders: the timed
+filter, the rendered control's bounds and ticks, dragging enabling Place it,
+a re-render keeping the marker, the −4 sentinel with her value in the miss
+and the day-view item, a within-tolerance hit writing no miss, and the miss
+coming back in the Growth Zone as a slider.
+
+**Spot-the-flaw is the last of the cheap tier.** Content-heavy; still on the list.
+
 ### `kind:'dress'` (v148 / Wayfinder v127, engine in both apps)
 
 A day she dresses differently for — Picture Day, a Spirit Week theme — is

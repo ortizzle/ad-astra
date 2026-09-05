@@ -1112,6 +1112,32 @@ label{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:upperca
 input,textarea,select{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:13px;color:var(--text);padding:13px 14px;font-family:inherit;font-size:16px;min-height:var(--tap)}
 textarea{min-height:140px;resize:vertical;line-height:1.55}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
+/* The number line (kind:'slider'). The track, ticks, labels and markers are
+   plain positioned divs; the control is a native range input laid over the
+   track with a 28px thumb. Chrome moves that thumb's centre from 14px to
+   width−14px, so every mark is placed with the same calc and the thumb sits
+   exactly on the value it reads. */
+.nline{position:relative;height:78px;margin:8px 0 2px}
+.nline .trk{position:absolute;left:14px;right:14px;top:22px;height:4px;border-radius:2px;background:var(--line)}
+.nline .tk{position:absolute;top:17px;width:2px;height:14px;margin-left:-1px;background:var(--line)}
+.nline .tk.maj{top:12px;height:24px;background:var(--muted)}
+.nline .lb{position:absolute;top:44px;transform:translateX(-50%);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.nline input[type=range]{-webkit-appearance:none;appearance:none;position:absolute;left:0;top:8px;width:100%;height:32px;
+  margin:0;padding:0;background:transparent;border:0;min-height:0;border-radius:0;touch-action:pan-y}
+.nline input[type=range]:focus{outline:none;border:0}
+.nline input[type=range]::-webkit-slider-runnable-track{height:32px;background:transparent;border:0}
+.nline input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:2px;border-radius:50%;
+  background:var(--ac);border:3px solid var(--surface);box-shadow:0 1px 5px rgba(0,0,0,.35);cursor:grab}
+.nline input[type=range]::-moz-range-track{height:32px;background:transparent;border:0}
+.nline input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--ac);border:3px solid var(--surface)}
+.nline .mk{position:absolute;top:14px;width:20px;height:20px;margin-left:-10px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.nline .mk.you{background:var(--ac)}
+.nline .mk.ans{background:var(--good)}
+.nline .mk small{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;white-space:nowrap;color:var(--muted)}
+.nread{font-family:'Fraunces',Georgia,serif;font-size:28px;text-align:center;margin:2px 0 0;line-height:1.2}
+.nread small{display:block;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:12px;color:var(--faint);font-weight:500;margin-top:2px}
+.nverdict{text-align:center;font-size:13.5px;color:var(--muted);margin-top:6px}
+.nverdict b{color:var(--text)}
 .rev{padding:14px;border-radius:15px;background:var(--surface);border:1px solid var(--line-soft);margin-bottom:var(--gap-row)}
 /* Her own cards, listed in the editor. */
 .ocrow .oct{font-weight:700;font-size:15px}
@@ -1394,7 +1420,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v148 · dress days';
+const APP_VERSION = 'v149 · the number line';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6778,7 +6804,7 @@ function pickRound(u, timed){
   const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
   const idx = u.questions.map((q,i)=>({i, q, a:att(q), g:owed(q), t:seen(q), r:Math.random()}))
     /* Typing against a countdown tests typing, not spelling. */
-    .filter(x => !timed || x.q.kind!=='spell');
+    .filter(x => !timed || (x.q.kind!=='spell' && x.q.kind!=='slider'));
   idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
   /* A unit may set its own sitting size (u.round) — a lesson-a-day maths
      quiz serves all ~10 in one go; a topic review serves 12. Content-side
@@ -6924,6 +6950,38 @@ function cheerLabel(right, timedOut){
     return CHEER_RIGHT[(quizState.correct*7+quizState.i)%CHEER_RIGHT.length];
   }
   return CHEER_WRONG[(quizState.missed.length*5+quizState.i)%CHEER_WRONG.length];
+}
+/* ---- The number line (kind:'slider') ---- */
+/* Decimal places follow the step, so 0.35 reads "0.35" and 20 reads "20". */
+function sliderDec(L){ const s = String(L.step ?? ((L.hi - L.lo) / 100)); const i = s.indexOf('.'); return i < 0 ? 0 : Math.min(4, s.length - i - 1); }
+function sliderFmt(q, v){ const L = q.line || {lo:0,hi:1}; return Number(v).toFixed(sliderDec(L)) + (L.unit || ''); }
+/* Track, ticks, labels, markers and (unless disabled) the range control.
+   `you` and `ans` are values on the line; `onInput` receives the new value. */
+function numberLine(L, o){
+  o = o || {};
+  const lo = +L.lo, hi = +L.hi, span = hi - lo || 1;
+  const pos = v => { const p = Math.min(1, Math.max(0, (v - lo) / span)); return `calc(${(p*100).toFixed(3)}% + ${(14 - 28*p).toFixed(2)}px)`; };
+  const w = el('div','nline');
+  w.appendChild(el('div','trk'));
+  const tick = L.ticks || span / 10, dec = sliderDec(L);
+  const labels = Array.isArray(L.labels) ? L.labels : [lo, hi];
+  const isLbl = v => labels.some(x => Math.abs(x - v) < tick/1000);
+  for(let v = lo; v <= hi + tick/1000; v = +(v + tick).toFixed(6)){
+    const t = el('div','tk' + (isLbl(v) ? ' maj' : '')); t.style.left = pos(v); w.appendChild(t);
+  }
+  labels.forEach(v => { const l = el('div','lb', Number(v).toFixed(dec) + (L.unit||'')); l.style.left = pos(v); w.appendChild(l); });
+  if(o.disabled){
+    if(o.ans != null){ const a = el('div','mk ans'); a.style.left = pos(o.ans); a.appendChild(el('small',null,'answer')); w.appendChild(a); }
+    if(o.you != null){ const y = el('div','mk you'); y.style.left = pos(o.you); y.appendChild(el('small',null,'you')); w.appendChild(y); }
+    return w;
+  }
+  const inp = el('input');
+  inp.type = 'range'; inp.min = String(lo); inp.max = String(hi);
+  inp.step = String(L.step ?? span/100); inp.value = String(o.you ?? lo);
+  inp.setAttribute('aria-label', 'Number line from ' + lo + ' to ' + hi);
+  inp.addEventListener('input', ()=>{ if(o.onInput) o.onInput(+inp.value); });
+  w.appendChild(inp);
+  return w;
 }
 function timeUp(u){
   const q = u.questions[quizState.order[quizState.i]];
@@ -7465,6 +7523,46 @@ SCREENS.quiz = function(root){
         root.appendChild(el('div','hintline','Tap the events in the order they happened.'));
       }
     }
+  } else if(q.kind==='slider'){
+    /* The number line: she drags a marker to where the number belongs and
+       places it. Right means within `line.tol` of `line.ans`. Her value lives
+       on quizState so a hint re-render never moves the marker. -4 is the
+       off-the-mark sentinel (-1 out of time, -2 wrong sequence, -3 wrong
+       spelling). opts[ans] carries the answer as text, so misses, qstats and
+       the day view read it exactly as they read any other question. */
+    const L = q.line || {lo:0, hi:1, ans:0.5, tol:0.05};
+    if(quizState.sliderFor !== q.id){ quizState.sliderFor = q.id; quizState.sliderVal = L.lo; quizState.sliderMoved = false; }
+    const box = el('div','card');
+    if(quizState.answered!==null){
+      const ok = quizState.answered===q.ans;
+      box.appendChild(el('div','eyebrow', ok ? 'Placed' : 'Where it belongs'));
+      box.appendChild(numberLine(L, {you: quizState.sliderVal, ans: L.ans, disabled:true}));
+      const v = el('div','nverdict');
+      if(ok){ v.appendChild(document.createTextNode('You put it at ')); v.appendChild(el('b',null,sliderFmt(q, quizState.sliderVal)));
+              v.appendChild(document.createTextNode(' — within reach of ')); v.appendChild(el('b',null,sliderFmt(q, L.ans))); v.appendChild(document.createTextNode('.')); }
+      else { v.appendChild(document.createTextNode('You put it at ')); v.appendChild(el('b',null,sliderFmt(q, quizState.sliderVal)));
+             v.appendChild(document.createTextNode(' · it belongs at ')); v.appendChild(el('b',null,sliderFmt(q, L.ans))); v.appendChild(document.createTextNode('.')); }
+      box.appendChild(v);
+      root.appendChild(box);
+    } else {
+      const rd = el('div','nread', sliderFmt(q, quizState.sliderVal));
+      rd.appendChild(el('small',null, quizState.sliderMoved ? 'Drag until it is right, then place it' : 'Drag the marker'));
+      box.appendChild(rd);
+      box.appendChild(numberLine(L, {you: quizState.sliderVal, onInput: v => {
+        quizState.sliderVal = v; quizState.sliderMoved = true;
+        rd.firstChild.nodeValue = sliderFmt(q, v);
+        const b = document.getElementById('nplace'); if(b) b.disabled = false;
+        const s = rd.querySelector('small'); if(s) s.textContent = 'Drag until it is right, then place it';
+      }}));
+      root.appendChild(box);
+      const place = el('button','btn btn-primary','Place it');
+      place.id = 'nplace'; place.disabled = !quizState.sliderMoved;
+      place.addEventListener('click',()=>{
+        if(!quizState.sliderMoved) return;
+        answer(u, q, Math.abs(quizState.sliderVal - L.ans) <= (L.tol ?? 0) + 1e-9 ? q.ans : -4);
+      });
+      root.appendChild(place);
+    }
   } else if(q.kind==='spell'){
     /* Type-the-word: multiple choice can't test spelling. Her typing lives on
        quizState, so a hint re-render never eats it. -3 is the wrong-spelling
@@ -7706,6 +7804,7 @@ function answer(u,q,idx){
   const choseTxt = idx===-1 ? '(ran out of time)'
     : idx===-2 ? (quizState.orderPick||[]).map(k=>q.opts[k]).join(' → ')
     : idx===-3 ? ((quizState.spellVal||'').trim() || '(blank)')
+    : idx===-4 ? sliderFmt(q, quizState.sliderVal)
     : (q.opts && q.opts[idx]!=null ? q.opts[idx] : '');
   if(!quizState.items) quizState.items = [];
   if(quizState.items.length < QUIZ_ITEM_MAX)

@@ -16,6 +16,16 @@ def q(Q, lv, text, opts, ans, hint, steps, main, tip, frm='source', kind='mc'):
               'ex': {'main': main, 'tip': tip}})
 
 
+def slider(Q, lv, text, line, hint, steps, main, tip, frm='source'):
+    """A number-line question. `line` = {lo, hi, ans, tol, step?, ticks?, labels?, unit?};
+    opts carries the answer as text so misses and the day view read it like any question."""
+    dec = 0
+    st = str(line.get('step', (line['hi'] - line['lo']) / 100))
+    if '.' in st: dec = min(4, len(st.split('.')[1]))
+    disp = ('%.' + str(dec) + 'f') % line['ans'] + line.get('unit', '')
+    q(Q, lv, text, [disp], 0, hint, steps, main, tip, frm=frm, kind='slider')
+    Q[-1]['line'] = dict(line)
+
 def _balance(Q):
     """Spread correct answers across positions deterministically. The app
     shuffles options at render time (v64), so file order never reaches the
@@ -48,6 +58,11 @@ def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, 
         elif kind == 'spell':
             if len(x['opts']) != 1: errs.append('%s: spell must carry exactly opts:[word]' % x['id'])
             if x['ans'] != 0: errs.append('%s: spell must have ans 0' % x['id'])
+        elif kind == 'slider':
+            L = x.get('line') or {}
+            if len(x['opts']) != 1 or x['ans'] != 0: errs.append('%s: slider must carry opts:[answer], ans:0' % x['id'])
+            if not all(isinstance(L.get(k), (int, float)) for k in ('lo','hi','ans','tol')): errs.append('%s: slider line incomplete' % x['id'])
+            elif not (L['lo'] < L['hi'] and L['lo'] <= L['ans'] <= L['hi'] and 0 < L['tol']): errs.append('%s: slider line inconsistent' % x['id'])
         if not (3 <= len(x['steps']) <= 6): errs.append('%s: %d steps' % (x['id'], len(x['steps'])))
         if not x['ex']['main'].startswith('**'): errs.append('%s: ex.main not bold' % x['id'])
         if x['lv'] not in (1, 2, 3): errs.append('%s: bad lv' % x['id'])

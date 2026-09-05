@@ -109,6 +109,19 @@ def check(root, name):
                     over = 0 if u.get('guide') else length_tell(opts, ans)
                     W(over, '%s: correct option %d%% longer than the next longest'
                       % (tag, over))
+                if kind == 'slider':
+                    # The number line: opts:[answer as text], ans:0, and a `line`
+                    # {lo, hi, ans, tol, step?, ticks?, labels?, unit?} the engine
+                    # reads. Right means within tol of line.ans.
+                    P(len(opts) != 1 or ans != 0, '%s: slider must carry opts:[answer], ans:0' % tag)
+                    L = q.get('line') or {}
+                    nums = all(isinstance(L.get(k), (int, float)) for k in ('lo','hi','ans','tol'))
+                    P(not nums, '%s: slider line needs numeric lo, hi, ans, tol' % tag)
+                    if nums:
+                        P(not (L['lo'] < L['hi']), '%s: slider lo must be below hi' % tag)
+                        P(not (L['lo'] <= L['ans'] <= L['hi']), '%s: slider ans %r is off the line' % (tag, L['ans']))
+                        P(not (0 < L['tol'] < (L['hi']-L['lo'])/4), '%s: slider tol %r is zero or too generous' % (tag, L['tol']))
+                        if L.get('step'): P(not (0 < L['step'] <= L['tol']*2), '%s: slider step %r coarser than its tolerance' % (tag, L.get('step')))
                 if kind == 'order':
                     P(len(opts) != 4, '%s: order needs exactly 4 events' % tag)
                     P(ans != 0, '%s: order must have ans 0' % tag)

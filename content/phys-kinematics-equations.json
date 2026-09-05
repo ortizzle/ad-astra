@@ -4,8 +4,8 @@
   "unit-phys-eqs": {
    "id": "unit-phys-eqs",
    "type": "unit",
-   "updatedAt": 1787702806597,
-   "libv": 1,
+   "updatedAt": 1788615004740,
+   "libv": 2,
    "classId": "physics",
    "quarter": 1,
    "status": "draft",
@@ -21,11 +21,26 @@
     "from": "added"
    },
    "objectives": [
-    {"text": "Choose the correct kinematic equation from what is given and what is asked for.", "from": "source"},
-    {"text": "Solve for any one of v₀, v, a, t or Δx given the other three.", "from": "source"},
-    {"text": "Apply the equations to free fall, using g as the acceleration.", "from": "source"},
-    {"text": "Explain what changes and what stays the same when a scenario is reversed (thrown up vs. thrown down).", "from": "added"},
-    {"text": "Recognize when a problem is actually impossible to complete in the time or distance given.", "from": "added"}
+    {
+     "text": "Choose the correct kinematic equation from what is given and what is asked for.",
+     "from": "source"
+    },
+    {
+     "text": "Solve for any one of v₀, v, a, t or Δx given the other three.",
+     "from": "source"
+    },
+    {
+     "text": "Apply the equations to free fall, using g as the acceleration.",
+     "from": "source"
+    },
+    {
+     "text": "Explain what changes and what stays the same when a scenario is reversed (thrown up vs. thrown down).",
+     "from": "added"
+    },
+    {
+     "text": "Recognize when a problem is actually impossible to complete in the time or distance given.",
+     "from": "added"
+    }
    ],
    "parentNote": {
     "text": "Built from the two Kinematic Equations worksheets (HW05: equations 1 and 2; HW06: equations 3 and 4). Every scenario below is fresh — none reuse the sheet's own Jane-running, Grace-biking, VW-Beetle, dynamite-blast, jetliner, knights-on-horseback or Spock-on-an-unknown-planet numbers, so she can't answer from memory of the worksheet. Every numeric answer was independently computed with sympy before being written in, never worked by hand and never copied from anywhere. g is taken as 9.8 m/s² throughout, matching how the worksheet's own dynamite-blast and ball-throwing problems are set up (not the rounder 10 m/s² some textbooks use) — worth knowing if her teacher's answer key uses a different rounding.",
@@ -39,60 +54,69 @@
    "round": 9,
    "cards": [
     {
-     "id": "c0", "term": "Kinematic Equation 1 — no position",
+     "id": "c0",
+     "term": "Kinematic Equation 1 — no position",
      "from": "source",
      "def": "**v = v₀ + at**\n• Use this one when position (Δx) never comes up — you're only given/asked about velocity, acceleration and time.\n• It's just \"final speed equals starting speed plus how much you sped up.\"",
      "hint": "No Δx in the equation — no Δx given in the problem.",
      "eq": "v = v₀ + at"
     },
     {
-     "id": "c1", "term": "Kinematic Equation 2 — no final velocity",
+     "id": "c1",
+     "term": "Kinematic Equation 2 — no final velocity",
      "from": "source",
      "def": "**Δx = v₀t + ½at²**\n• Use this one when final velocity (v) never comes up.\n• It's the position you'd reach from coasting at your starting speed, PLUS the extra distance the acceleration adds.",
      "hint": "No v in the equation — no final velocity given or asked for.",
      "eq": "Δx = v₀t + ½at²"
     },
     {
-     "id": "c2", "term": "Kinematic Equation 3 — no time",
+     "id": "c2",
+     "term": "Kinematic Equation 3 — no time",
      "from": "source",
      "def": "**v² = v₀² + 2aΔx**\n• Use this one when time never comes up.\n• The only equation of the four that doesn't need a clock — handy when a problem gives distance and speeds but never a duration.",
      "hint": "No t in the equation — no time given or asked for.",
      "eq": "v² = v₀² + 2aΔx"
     },
     {
-     "id": "c3", "term": "Kinematic Equation 4 — no acceleration",
+     "id": "c3",
+     "term": "Kinematic Equation 4 — no acceleration",
      "from": "source",
      "def": "**Δx = ½(v₀ + v)t**\n• Use this one when acceleration never comes up.\n• It's just average velocity (the halfway point between v₀ and v, true only because acceleration is constant) multiplied by time.",
      "hint": "No a in the equation — no acceleration given or asked for.",
      "eq": "Δx = ½(v₀ + v)t"
     },
     {
-     "id": "c4", "term": "Picking the right equation",
+     "id": "c4",
+     "term": "Picking the right equation",
      "from": "added",
      "def": "**List the five quantities (v₀, v, a, t, Δx). Cross off the one that's neither given nor asked for. The equation missing exactly that letter is the one to use.**\n• Every kinematics problem has five quantities in play; a well-posed one gives you three and asks for a fourth, leaving one totally unmentioned.\n• That unmentioned one tells you which equation to reach for.",
      "hint": "Five letters, one missing — that missing letter names your equation."
     },
     {
-     "id": "c5", "term": "Free fall as constant acceleration",
+     "id": "c5",
+     "term": "Free fall as constant acceleration",
      "from": "source",
      "def": "**Anything falling (or thrown) near Earth's surface accelerates at g = 9.8 m/s², straight down, the whole time it's in the air.**\n• All four kinematic equations still apply — just plug in a = -9.8 m/s² (taking up as positive) or a = 9.8 m/s² (taking down as positive).\n• Pick ONE direction as positive at the start of a problem and stay consistent, or the signs will fight each other.",
      "hint": "g never changes mid-flight — not on the way up, not at the top, not on the way down.",
      "eq": "a = g = 9.8 m/s²"
     },
     {
-     "id": "c6", "term": "Symmetric projectile motion",
+     "id": "c6",
+     "term": "Symmetric projectile motion",
      "from": "added",
      "def": "**Something thrown straight up returns to its starting height moving at the SAME speed it left with — just pointed the other way.**\n• Time to rise to the top equals time to fall back down from the top.\n• This symmetry is a shortcut: you often don't need to solve the whole trip, just half of it.",
      "hint": "Up and down mirror each other in speed and in time."
     },
     {
-     "id": "c7", "term": "At the very top of a throw",
+     "id": "c7",
+     "term": "At the very top of a throw",
      "from": "added",
      "def": "**Velocity is momentarily zero at the peak of a vertical throw — but acceleration is NOT zero.**\n• Gravity never stops pulling down, even for the instant the object is motionless at the top.\n• This is a classic trap: zero velocity does not mean zero acceleration.",
      "hint": "Stopped moving ≠ nothing acting on it."
     },
     {
-     "id": "c8", "term": "When a problem has no real answer",
+     "id": "c8",
+     "term": "When a problem has no real answer",
      "from": "added",
      "def": "**If the time or distance a problem gives you has already been used up by earlier parts of the trip, no finishing speed can make up the difference.**\n• Add up the time (or distance) already spent; if it already meets or exceeds the total allowed, the remaining leg is impossible as stated.\n• This shows up most in average-speed problems, where slow early segments quietly eat the whole time budget.",
      "hint": "Check the running total against the limit BEFORE solving for what's left."
@@ -100,9 +124,17 @@
    ],
    "questions": [
     {
-     "id": "q1", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "A cyclist is riding at 4 m/s and speeds up at 1.2 m/s² for 8 seconds. What is her final velocity?",
-     "opts": ["13.6 m/s", "9.6 m/s", "4.96 m/s", "38.4 m/s"],
+     "opts": [
+      "13.6 m/s",
+      "9.6 m/s",
+      "4.96 m/s",
+      "38.4 m/s"
+     ],
      "ans": 0,
      "hint": "No position is mentioned — which equation leaves out Δx?",
      "steps": [
@@ -110,12 +142,23 @@
       "v = 4 + (1.2)(8)",
       "v = 4 + 9.6 = 13.6 m/s"
      ],
-     "ex": {"main": "**13.6 m/s.** Multiplying a by t gives the speed GAINED (9.6 m/s), which then adds to the starting speed.", "tip": "9.6 m/s alone is a common wrong answer — that's the speed gained, not the final speed."}
+     "ex": {
+      "main": "**13.6 m/s.** Multiplying a by t gives the speed GAINED (9.6 m/s), which then adds to the starting speed.",
+      "tip": "9.6 m/s alone is a common wrong answer — that's the speed gained, not the final speed."
+     }
     },
     {
-     "id": "q2", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A skater slows from 6 m/s to 2 m/s over 5 seconds, decelerating at a constant rate. What is her acceleration?",
-     "opts": ["−0.8 m/s²", "0.8 m/s²", "−1.6 m/s²", "1.6 m/s²"],
+     "opts": [
+      "−0.8 m/s²",
+      "0.8 m/s²",
+      "−1.6 m/s²",
+      "1.6 m/s²"
+     ],
      "ans": 0,
      "hint": "Rearrange v = v₀ + at to solve for a.",
      "steps": [
@@ -123,12 +166,23 @@
       "a = (2 - 6) / 5 = -4 / 5",
       "a = -0.8 m/s². The negative sign says the acceleration points opposite her motion — she's slowing down."
      ],
-     "ex": {"main": "**−0.8 m/s².** The negative sign is meaningful, not a mistake — it means the acceleration opposes her direction of travel.", "tip": "A negative acceleration doesn't always mean \"speeding up backward\" — here it correctly means \"slowing down forward.\""}
+     "ex": {
+      "main": "**−0.8 m/s².** The negative sign is meaningful, not a mistake — it means the acceleration opposes her direction of travel.",
+      "tip": "A negative acceleration doesn't always mean \"speeding up backward\" — here it correctly means \"slowing down forward.\""
+     }
     },
     {
-     "id": "q3", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A go-kart starts at 5 m/s and accelerates at 2 m/s² for 6 seconds. How far does it travel?",
-     "opts": ["66 m", "30 m", "36 m", "42 m"],
+     "opts": [
+      "66 m",
+      "30 m",
+      "36 m",
+      "42 m"
+     ],
      "ans": 0,
      "hint": "Final velocity is never mentioned — which equation leaves out v?",
      "steps": [
@@ -136,12 +190,23 @@
       "Δx = (5)(6) + ½(2)(6²) = 30 + ½(2)(36)",
       "Δx = 30 + 36 = 66 m"
      ],
-     "ex": {"main": "**66 m.** The 30 m from coasting at the starting speed, plus 36 m of extra distance from the acceleration.", "tip": "Forgetting the ½ in front of at² is the single most common mistake with this equation — check for it."}
+     "ex": {
+      "main": "**66 m.** The 30 m from coasting at the starting speed, plus 36 m of extra distance from the acceleration.",
+      "tip": "Forgetting the ½ in front of at² is the single most common mistake with this equation — check for it."
+     }
     },
     {
-     "id": "q4", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A sprinter starts a race at 3 m/s and accelerates at 1.5 m/s² over the first 20 m. What is her velocity at the 20 m mark?",
-     "opts": ["≈8.3 m/s", "≈6 m/s", "9 m/s", "≈11.6 m/s"],
+     "opts": [
+      "≈8.3 m/s",
+      "≈6 m/s",
+      "9 m/s",
+      "≈11.6 m/s"
+     ],
      "ans": 0,
      "hint": "Time is never mentioned — which equation leaves out t?",
      "steps": [
@@ -149,12 +214,23 @@
       "v² = 3² + 2(1.5)(20) = 9 + 60 = 69",
       "v = √69 ≈ 8.3 m/s"
      ],
-     "ex": {"main": "**≈8.3 m/s.** Square-rooting 69 gives the final speed — don't forget the square root at the end.", "tip": "This equation is the one to reach for the moment you notice a problem never mentions a duration."}
+     "ex": {
+      "main": "**≈8.3 m/s.** Square-rooting 69 gives the final speed — don't forget the square root at the end.",
+      "tip": "This equation is the one to reach for the moment you notice a problem never mentions a duration."
+     }
     },
     {
-     "id": "q5", "lv": 1, "from": "source", "kind": "mc",
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
      "q": "A freight train speeds up from 10 m/s to 30 m/s over 8 seconds, at a constant rate. How far does it travel in those 8 seconds?",
-     "opts": ["160 m", "240 m", "80 m", "320 m"],
+     "opts": [
+      "160 m",
+      "240 m",
+      "80 m",
+      "320 m"
+     ],
      "ans": 0,
      "hint": "Acceleration is never mentioned — which equation leaves out a?",
      "steps": [
@@ -162,12 +238,23 @@
       "Δx = ½(10+30)(8) = ½(40)(8)",
       "Δx = 20 × 8 = 160 m"
      ],
-     "ex": {"main": "**160 m.** This equation is really just \"average velocity × time\" — the average of 10 and 30 is 20 m/s.", "tip": "Δx = ½(v₀+v)t is the fastest equation when you're handed both speeds and a time, with no acceleration in sight."}
+     "ex": {
+      "main": "**160 m.** This equation is really just \"average velocity × time\" — the average of 10 and 30 is 20 m/s.",
+      "tip": "Δx = ½(v₀+v)t is the fastest equation when you're handed both speeds and a time, with no acceleration in sight."
+     }
     },
     {
-     "id": "q6", "lv": 2, "from": "added", "kind": "mc",
+     "id": "q6",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
      "q": "A skateboarder rolling at 8 m/s brakes to a stop in exactly 4 seconds, decelerating at a constant rate. How far does the skateboarder travel while braking?",
-     "opts": ["16 m", "32 m", "8 m", "4 m"],
+     "opts": [
+      "16 m",
+      "32 m",
+      "8 m",
+      "4 m"
+     ],
      "ans": 0,
      "hint": "You could use either Equation 2 or Equation 4 here — try Equation 4 first, since v=0 is easy to work with.",
      "steps": [
@@ -175,12 +262,23 @@
       "Δx = ½(8+0)(4) = ½(8)(4)",
       "Δx = 4 × 4 = 16 m"
      ],
-     "ex": {"main": "**16 m.** Notice this problem could ALSO be solved with Equation 2, after first finding a = -2 m/s² — Equation 4 just skips that extra step.", "tip": "When a problem hands you both speeds directly, Equation 4 is usually the shortest path — no need to find acceleration first."}
+     "ex": {
+      "main": "**16 m.** Notice this problem could ALSO be solved with Equation 2, after first finding a = -2 m/s² — Equation 4 just skips that extra step.",
+      "tip": "When a problem hands you both speeds directly, Equation 4 is usually the shortest path — no need to find acceleration first."
+     }
     },
     {
-     "id": "q7", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "A rock launched straight up from a slingshot is rising at 12 m/s. Using g = 9.8 m/s², about how long does it take to reach its highest point?",
-     "opts": ["≈1.2 s", "≈0.8 s", "≈2.4 s", "≈12 s"],
+     "opts": [
+      "≈1.2 s",
+      "≈0.8 s",
+      "≈2.4 s",
+      "≈12 s"
+     ],
      "ans": 0,
      "hint": "At the highest point, what is the rock's velocity?",
      "steps": [
@@ -188,12 +286,23 @@
       "Use v = v₀ + at with v=0, v₀=12, a=-9.8 (taking up as positive).",
       "0 = 12 - 9.8t, so t = 12/9.8 ≈ 1.2 s"
      ],
-     "ex": {"main": "**≈1.2 s.** Setting the final velocity to zero is the key move for any \"time to the top\" question.", "tip": "\"Highest point\" always means v=0 — write that down before touching an equation."}
+     "ex": {
+      "main": "**≈1.2 s.** Setting the final velocity to zero is the key move for any \"time to the top\" question.",
+      "tip": "\"Highest point\" always means v=0 — write that down before touching an equation."
+     }
     },
     {
-     "id": "q8", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "Same rock, launched straight up at 12 m/s (g = 9.8 m/s²). About how high above the launch point does it rise?",
-     "opts": ["≈7.3 m", "≈14.7 m", "≈1.2 m", "≈117.6 m"],
+     "opts": [
+      "≈7.3 m",
+      "≈14.7 m",
+      "≈1.2 m",
+      "≈117.6 m"
+     ],
      "ans": 0,
      "hint": "Time is never mentioned this time — which equation leaves out t?",
      "steps": [
@@ -201,12 +310,23 @@
       "0² = 12² + 2(-9.8)Δx, so 0 = 144 - 19.6Δx",
       "Δx = 144/19.6 ≈ 7.3 m"
      ],
-     "ex": {"main": "**≈7.3 m.** Same rock as the last question, but skipping time entirely by using the no-time equation instead.", "tip": "Two ways to reach the same physical answer (find t first, then Δx — or skip straight to Δx) is a good way to double-check your work."}
+     "ex": {
+      "main": "**≈7.3 m.** Same rock as the last question, but skipping time entirely by using the no-time equation instead.",
+      "tip": "Two ways to reach the same physical answer (find t first, then Δx — or skip straight to Δx) is a good way to double-check your work."
+     }
     },
     {
-     "id": "q9", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A ball is thrown straight down from a bridge with an initial speed of 3 m/s. Using g = 9.8 m/s² (down is positive), what is its velocity after falling for 4 seconds?",
-     "opts": ["42.2 m/s", "36.2 m/s", "12 m/s", "39.2 m/s"],
+     "opts": [
+      "42.2 m/s",
+      "36.2 m/s",
+      "12 m/s",
+      "39.2 m/s"
+     ],
      "ans": 0,
      "hint": "No position needed here — use v = v₀ + at.",
      "steps": [
@@ -214,12 +334,23 @@
       "v = 3 + (9.8)(4) = 3 + 39.2",
       "v = 42.2 m/s"
      ],
-     "ex": {"main": "**42.2 m/s.** Multiply g by the time to get speed gained from falling, then add the initial downward speed.", "tip": "Keeping \"down\" as the positive direction the whole way through avoids sign mix-ups on a thrown-down problem."}
+     "ex": {
+      "main": "**42.2 m/s.** Multiply g by the time to get speed gained from falling, then add the initial downward speed.",
+      "tip": "Keeping \"down\" as the positive direction the whole way through avoids sign mix-ups on a thrown-down problem."
+     }
     },
     {
-     "id": "q10", "lv": 3, "from": "source", "kind": "mc",
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
      "q": "If that same ball had instead been thrown straight UP at 3 m/s from the same bridge, and you tracked it for the same 4 seconds, what would be true about its velocity at the 4-second mark, compared to being thrown down?",
-     "opts": ["It would be moving downward, but slower than the thrown-down case", "It would be moving upward the whole time", "It would be moving at exactly the same speed and direction", "It would have stopped completely by 4 seconds"],
+     "opts": [
+      "It would be moving downward, but slower than the thrown-down case",
+      "It would be moving upward the whole time",
+      "It would be moving at exactly the same speed and direction",
+      "It would have stopped completely by 4 seconds"
+     ],
      "ans": 0,
      "hint": "Does 4 seconds give gravity enough time to turn the ball around and bring it back down past its start?",
      "steps": [
@@ -227,12 +358,23 @@
       "v = -3 + (9.8)(4) = -3 + 39.2 = 36.2 m/s (positive = downward)",
       "That's slower than the thrown-down case's 42.2 m/s, because gravity first had to cancel out the initial upward speed before adding any downward speed at all — but by 4 seconds it's well past the peak and clearly moving down."
      ],
-     "ex": {"main": "**Moving downward, but slower than the thrown-down case.** The initial upward toss costs some downward speed by the same moment in time — the ball spent part of its trip going the \"wrong\" way first.", "tip": "Comparing thrown-up and thrown-down at the SAME elapsed time (not the same position) is what makes this question tricky — track the clock, not the ball's height."}
+     "ex": {
+      "main": "**Moving downward, but slower than the thrown-down case.** The initial upward toss costs some downward speed by the same moment in time — the ball spent part of its trip going the \"wrong\" way first.",
+      "tip": "Comparing thrown-up and thrown-down at the SAME elapsed time (not the same position) is what makes this question tricky — track the clock, not the ball's height."
+     }
     },
     {
-     "id": "q11", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A car decelerating at a constant rate slows from 25 m/s to 5 m/s over a distance of 400 m. What is its acceleration?",
-     "opts": ["−0.75 m/s²", "−1.25 m/s²", "0.75 m/s²", "−2.5 m/s²"],
+     "opts": [
+      "−0.75 m/s²",
+      "−1.25 m/s²",
+      "0.75 m/s²",
+      "−2.5 m/s²"
+     ],
      "ans": 0,
      "hint": "Time is never mentioned — rearrange the no-time equation to solve for a.",
      "steps": [
@@ -240,12 +382,23 @@
       "a = (5² - 25²) / (2×400) = (25 - 625) / 800",
       "a = -600 / 800 = -0.75 m/s²"
      ],
-     "ex": {"main": "**−0.75 m/s².** The negative sign confirms it's slowing down, matching the problem.", "tip": "Squaring BOTH velocities before subtracting is essential — 5²-25² is not the same as (5-25)²."}
+     "ex": {
+      "main": "**−0.75 m/s².** The negative sign confirms it's slowing down, matching the problem.",
+      "tip": "Squaring BOTH velocities before subtracting is essential — 5²-25² is not the same as (5-25)²."
+     }
     },
     {
-     "id": "q12", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A cheetah accelerates from rest to 28 m/s over a distance of 60 m, at a constant rate. What is its acceleration?",
-     "opts": ["≈6.5 m/s²", "≈13.1 m/s²", "≈0.47 m/s²", "≈3.3 m/s²"],
+     "opts": [
+      "≈6.5 m/s²",
+      "≈13.1 m/s²",
+      "≈0.47 m/s²",
+      "≈3.3 m/s²"
+     ],
      "ans": 0,
      "hint": "\"From rest\" tells you v₀ — and time is never mentioned.",
      "steps": [
@@ -253,12 +406,23 @@
       "28² = 0² + 2a(60), so 784 = 120a",
       "a = 784/120 ≈ 6.5 m/s²"
      ],
-     "ex": {"main": "**≈6.5 m/s².** \"From rest\" is a phrase worth circling immediately — it silently hands you v₀=0.", "tip": "A cheetah's real top acceleration is close to this — it's one of the fastest-accelerating animals on land."}
+     "ex": {
+      "main": "**≈6.5 m/s².** \"From rest\" is a phrase worth circling immediately — it silently hands you v₀=0.",
+      "tip": "A cheetah's real top acceleration is close to this — it's one of the fastest-accelerating animals on land."
+     }
     },
     {
-     "id": "q13", "lv": 3, "from": "added", "kind": "order",
+     "id": "q13",
+     "lv": 3,
+     "from": "added",
+     "kind": "order",
      "q": "Rank these four ramps from LEAST to GREATEST acceleration of a ball rolling down them, if steeper ramps always produce more acceleration along the ramp's surface.",
-     "opts": ["A 10° ramp", "A 20° ramp", "A 35° ramp", "A 50° ramp"],
+     "opts": [
+      "A 10° ramp",
+      "A 20° ramp",
+      "A 35° ramp",
+      "A 50° ramp"
+     ],
      "ans": 0,
      "hint": "The steeper the ramp, the more of gravity's pull acts along the ramp's direction, not against the ramp's surface.",
      "steps": [
@@ -267,12 +431,23 @@
       "At 50°, a much larger slice of gravity acts along the ramp — the largest acceleration of the four.",
       "So the order from least to greatest acceleration is 10°, then 20°, then 35°, then 50°."
      ],
-     "ex": {"main": "**10°, then 20°, then 35°, then 50°.** Steeper ramp means more of gravity's pull points down the slope instead of into it, so acceleration keeps climbing as the angle does.", "tip": "This is exactly the effect the Ramp Lab's own steepness question is asking about — a steeper ramp always means a bigger average acceleration."}
+     "ex": {
+      "main": "**10°, then 20°, then 35°, then 50°.** Steeper ramp means more of gravity's pull points down the slope instead of into it, so acceleration keeps climbing as the angle does.",
+      "tip": "This is exactly the effect the Ramp Lab's own steepness question is asking about — a steeper ramp always means a bigger average acceleration."
+     }
     },
     {
-     "id": "q14", "lv": 3, "from": "added", "kind": "mc",
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
      "q": "A drone flies 90 m at a target average speed of 30 m/s. For the first 30 m it only manages 20 m/s, and for the next 30 m it manages 15 m/s. What speed must it fly for the final 30 m to still hit its overall target average of 30 m/s?",
-     "opts": ["Impossible — the time is already gone", "About 45 m/s for the last leg", "About 60 m/s for the last leg", "About 90 m/s for the last leg"],
+     "opts": [
+      "Impossible — the time is already gone",
+      "About 45 m/s for the last leg",
+      "About 60 m/s for the last leg",
+      "About 90 m/s for the last leg"
+     ],
      "ans": 0,
      "hint": "Add up the time already spent on the first two legs and compare it to the total time allowed.",
      "steps": [
@@ -281,12 +456,23 @@
       "1.5 s + 2 s = 3.5 s — already more than the 3 s allowed, before the final leg has even started.",
       "No speed for the last leg can undo time that's already gone — the target average is impossible from here."
      ],
-     "ex": {"main": "**It's impossible.** By the end of the second leg, more time has already passed (3.5 s) than the whole trip was ever allowed (3 s) — the average speed target was lost before the last leg began.", "tip": "Before solving for a \"required\" speed, always check whether the time already spent has already blown the budget."}
+     "ex": {
+      "main": "**It's impossible.** By the end of the second leg, more time has already passed (3.5 s) than the whole trip was ever allowed (3 s) — the average speed target was lost before the last leg began.",
+      "tip": "Before solving for a \"required\" speed, always check whether the time already spent has already blown the budget."
+     }
     },
     {
-     "id": "q15", "lv": 3, "from": "added", "kind": "mc",
+     "id": "q15",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
      "q": "A different drone flies 60 km at a target average speed of 30 km/h. For the first 20 km it manages 40 km/h, and for the next 20 km it only manages 15 km/h. What speed must it fly for the final 20 km to hit the 30 km/h target average?",
-     "opts": ["120 km/h", "30 km/h", "60 km/h", "It's impossible"],
+     "opts": [
+      "120 km/h",
+      "30 km/h",
+      "60 km/h",
+      "It's impossible"
+     ],
      "ans": 0,
      "hint": "This time, check the time budget first — is there any time left for the final leg?",
      "steps": [
@@ -295,12 +481,23 @@
       "Time used so far: 0.5 + 1.33 = 1.83 h, leaving 2 − 1.83 ≈ 0.17 h (1/6 h) for the last 20 km.",
       "Required speed = 20 km ÷ (1/6 h) = 120 km/h — fast, but there's just enough time left to make it work."
      ],
-     "ex": {"main": "**120 km/h.** Unlike the last question, this trip still has a sliver of time budget left — just enough that a real (if extreme) speed can make up for the slow middle leg.", "tip": "Compare this to the drone question before it: same shape of problem, but check the numbers each time rather than assuming every version is impossible."}
+     "ex": {
+      "main": "**120 km/h.** Unlike the last question, this trip still has a sliver of time budget left — just enough that a real (if extreme) speed can make up for the slow middle leg.",
+      "tip": "Compare this to the drone question before it: same shape of problem, but check the numbers each time rather than assuming every version is impossible."
+     }
     },
     {
-     "id": "q16", "lv": 1, "from": "added", "kind": "mc",
+     "id": "q16",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
      "q": "A ball is at the very top of its path after being thrown straight up. Which statement is TRUE at that exact instant?",
-     "opts": ["Its velocity is zero, but gravity is still accelerating it downward", "Both its velocity and its acceleration are zero", "Its acceleration is zero, but it still has some velocity", "It has stopped experiencing gravity"],
+     "opts": [
+      "Its velocity is zero, but gravity is still accelerating it downward",
+      "Both its velocity and its acceleration are zero",
+      "Its acceleration is zero, but it still has some velocity",
+      "It has stopped experiencing gravity"
+     ],
      "ans": 0,
      "hint": "Does gravity ever take a break during a throw?",
      "steps": [
@@ -308,12 +505,23 @@
       "But gravity never stops acting on the ball, in the air or at the peak.",
       "So acceleration stays at -9.8 m/s² the entire time, even during that one zero-velocity instant."
      ],
-     "ex": {"main": "**Zero velocity, but gravity is still accelerating it.** This is one of the most common misconceptions in kinematics — a momentary stop does not mean the forces stopped too.", "tip": "Whenever you see \"at the highest point,\" set v=0 for that instant — but never set a=0 too."}
+     "ex": {
+      "main": "**Zero velocity, but gravity is still accelerating it.** This is one of the most common misconceptions in kinematics — a momentary stop does not mean the forces stopped too.",
+      "tip": "Whenever you see \"at the highest point,\" set v=0 for that instant — but never set a=0 too."
+     }
     },
     {
-     "id": "q17", "lv": 2, "from": "source", "kind": "mc",
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
      "q": "A stone is dropped from rest off a cliff (g = 9.8 m/s², down is positive). How far does it fall during the 3rd second of its fall (that is, between t=2s and t=3s), not the total distance fallen by t=3s?",
-     "opts": ["≈24.5 m", "≈44.1 m", "≈9.8 m", "≈14.7 m"],
+     "opts": [
+      "≈24.5 m",
+      "≈44.1 m",
+      "≈9.8 m",
+      "≈14.7 m"
+     ],
      "ans": 0,
      "hint": "Find the total distance fallen by t=2s and by t=3s, then subtract.",
      "steps": [
@@ -321,12 +529,23 @@
       "Distance by t=3s: Δx = ½(9.8)(3²) = ½(9.8)(9) = 44.1 m.",
       "Distance fallen DURING the 3rd second = 44.1 − 19.6 = 24.5 m."
      ],
-     "ex": {"main": "**≈24.5 m.** \"During the 3rd second\" means the interval from t=2s to t=3s, not the total drop by t=3s — a very common misread.", "tip": "Read \"during the Nth second\" as \"between t=(N-1) and t=N,\" and compute both totals before subtracting."}
+     "ex": {
+      "main": "**≈24.5 m.** \"During the 3rd second\" means the interval from t=2s to t=3s, not the total drop by t=3s — a very common misread.",
+      "tip": "Read \"during the Nth second\" as \"between t=(N-1) and t=N,\" and compute both totals before subtracting."
+     }
     },
     {
-     "id": "q18", "lv": 3, "from": "added", "kind": "mc",
+     "id": "q18",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
      "q": "A rover on an unfamiliar planet throws a rock straight up at 10 m/s and finds it reaches a maximum height of 25 m. What is the acceleration due to gravity on this planet?",
-     "opts": ["2 m/s²", "4 m/s²", "5 m/s²", "0.5 m/s²"],
+     "opts": [
+      "2 m/s²",
+      "4 m/s²",
+      "5 m/s²",
+      "0.5 m/s²"
+     ],
      "ans": 0,
      "hint": "At the top, v=0 — use the no-time equation to solve for a.",
      "steps": [
@@ -334,7 +553,154 @@
       "0² = 10² + 2a(25), so 0 = 100 + 50a",
       "a = -100/50 = -2 m/s² — the planet's gravity has a magnitude of 2 m/s²."
      ],
-     "ex": {"main": "**2 m/s².** About a fifth of Earth's gravity — this is roughly Mars's actual surface gravity, worked out the same way a real mission would.", "tip": "The same equation used for a thrown object on Earth works on any planet — only the value of a (gravity's strength) changes."}
+     "ex": {
+      "main": "**2 m/s².** About a fifth of Earth's gravity — this is roughly Mars's actual surface gravity, worked out the same way a real mission would.",
+      "tip": "The same equation used for a thrown object on Earth works on any planet — only the value of a (gravity's strength) changes."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "added",
+     "kind": "slider",
+     "q": "A ball is dropped from rest. Estimate how far it has fallen after 2.0 s, then place it (take g = 9.8 m/s²).",
+     "opts": [
+      "19.6 m"
+     ],
+     "ans": 0,
+     "hint": "Missing final velocity — the equation with ½at² — and v₀ is zero.",
+     "steps": [
+      "Dropped from rest means v₀ = 0, so Δx = ½at².",
+      "a = 9.8 m/s² and t = 2.0 s, so t² = 4.0 s².",
+      "Δx = ½ × 9.8 × 4.0 = 19.6 m.",
+      "Place the marker just under 20 m."
+     ],
+     "ex": {
+      "main": "**About 19.6 m.** Half of 9.8 is 4.9, and 4.9 × 4 = 19.6. Guessing first and then computing is the habit: your gut said one thing, the equation says 19.6.",
+      "tip": "Falling objects cover distance that grows with the SQUARE of time: 2 s is four times as far as 1 s, not twice."
+     },
+     "line": {
+      "lo": 0,
+      "hi": 40,
+      "ans": 19.6,
+      "tol": 2.5,
+      "step": 0.5,
+      "ticks": 5,
+      "labels": [
+       0,
+       20,
+       40
+      ],
+      "unit": " m"
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "added",
+     "kind": "slider",
+     "q": "A car moving at 20 m/s brakes with an acceleration of 4.0 m/s² until it stops. Estimate the stopping distance, then place it.",
+     "opts": [
+      "50 m"
+     ],
+     "ans": 0,
+     "hint": "No time is given and none is asked for — that is the missing-time equation.",
+     "steps": [
+      "The quantity never mentioned is time, so use v² = v₀² + 2aΔx.",
+      "v = 0 at the stop, v₀ = 20, and a = −4.0 because it is slowing.",
+      "0 = 400 − 8Δx, so Δx = 50 m.",
+      "Place the marker at 50 m."
+     ],
+     "ex": {
+      "main": "**50 m.** 20² is 400, and 2a is 8; 400 ÷ 8 = 50 — halfway along the line.",
+      "tip": "Double the speed and the stopping distance quadruples — v² is the whole reason speed limits matter."
+     },
+     "line": {
+      "lo": 0,
+      "hi": 100,
+      "ans": 50.0,
+      "tol": 6,
+      "step": 1,
+      "ticks": 10,
+      "labels": [
+       0,
+       50,
+       100
+      ],
+      "unit": " m"
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "added",
+     "kind": "slider",
+     "q": "A ball is thrown straight up at 15 m/s. Estimate how high above the throw it rises, then place it (g = 9.8 m/s²).",
+     "opts": [
+      "11.5 m"
+     ],
+     "ans": 0,
+     "hint": "At the top the velocity is zero — and time is not in the question.",
+     "steps": [
+      "At the very top v = 0; v₀ = 15 m/s; a = −9.8 m/s².",
+      "Time is not given or asked, so v² = v₀² + 2aΔx.",
+      "0 = 225 − 19.6Δx, so Δx = 225 ÷ 19.6 ≈ 11.5 m.",
+      "Place the marker a little under 12 m."
+     ],
+     "ex": {
+      "main": "**About 11.5 m.** 15² is 225, and 2g is 19.6; 225 ÷ 19.6 ≈ 11.5. Higher than most people guess for a 15 m/s throw.",
+      "tip": "The same equation gives the speed it comes back down with: 15 m/s, by symmetry."
+     },
+     "line": {
+      "lo": 0,
+      "hi": 25,
+      "ans": 11.5,
+      "tol": 1.5,
+      "step": 0.5,
+      "ticks": 5,
+      "labels": [
+       0,
+       12.5,
+       25
+      ],
+      "unit": " m"
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 2,
+     "from": "added",
+     "kind": "slider",
+     "q": "A rocket sled starts from rest and accelerates at 6.0 m/s². Estimate its speed after 5.0 s, then place it.",
+     "opts": [
+      "30 m/s"
+     ],
+     "ans": 0,
+     "hint": "No distance anywhere in the question — the missing-position equation.",
+     "steps": [
+      "Position is never mentioned, so v = v₀ + at.",
+      "v₀ = 0, a = 6.0, t = 5.0.",
+      "v = 0 + 6.0 × 5.0 = 30 m/s.",
+      "Place the marker at 30 m/s."
+     ],
+     "ex": {
+      "main": "**30 m/s.** Six metres per second gained every second, for five seconds. Halfway along the line.",
+      "tip": "This one is linear in time — unlike the falling distance, which grows with t²."
+     },
+     "line": {
+      "lo": 0,
+      "hi": 60,
+      "ans": 30.0,
+      "tol": 4,
+      "step": 1,
+      "ticks": 10,
+      "labels": [
+       0,
+       30,
+       60
+      ],
+      "unit": " m/s"
+     }
     }
    ]
   }
