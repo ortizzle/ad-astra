@@ -802,6 +802,15 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### `kind:'dress'` (v148 / Wayfinder v127, engine in both apps)
+
+A day she dresses differently for — Picture Day, a Spirit Week theme — is
+an event `kind` of its own: it pins on Today with a `Dress` label, never
+quiet, and lists in Coming up. Built for River's Cub Hub (see
+wayfinder/CLAUDE.md, same section); this app carries the kind with no
+content yet. When the upper-school newsletter lists one, it goes in
+`CAL.events` like any other event.
+
 ### Swipe sort (v146 / Wayfinder v125, both apps)
 
 The third cheap game, and the first that needed authored content. Two

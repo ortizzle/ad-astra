@@ -1394,7 +1394,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v147 · read the second tile';
+const APP_VERSION = 'v148 · dress days';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4534,7 +4534,7 @@ SCREENS.today = function(root){
     if(e.note) bits.push(e.note);
     if(bits.length) m.appendChild(el('div','dt', bits.join(' · ')));
     row.appendChild(m);
-    row.appendChild(el('div','tm', e.kind==='early' ? 'Early' : e.kind==='exam' ? 'Exam' : 'Today'));
+    row.appendChild(el('div','tm', e.kind==='early' ? 'Early' : e.kind==='exam' ? 'Exam' : e.kind==='dress' ? 'Dress' : 'Today'));
     root.appendChild(row);
   });
 
