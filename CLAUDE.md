@@ -802,6 +802,38 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Breathing room under "Start review" (v159 / Wayfinder v140, both apps)
+
+Chris sent a screenshot of the Growth Zone's due card — the heading, the
+"Start review" button, then its caption ("Get one right and it goes quiet
+for longer; miss it and it starts over.") sitting flush against the
+button's bottom edge, with none of the breathing room the heading above it
+gets — and asked to fix the spacing.
+
+**The bug is in the CSS, not the markup.** `.card h2{margin-bottom:6px}`
+gives the heading-to-button gap; `.btn` carries no margin of its own; and
+`.card p{margin:0 0 10px}` sets `margin-top:0`. Stack a button directly
+before a paragraph inside a card and the measured gap is exactly **0px** —
+confirmed live with `getBoundingClientRect()` before touching anything,
+same discipline the contrast probes use. Every OTHER card in both apps
+puts its explanatory line *before* its button (`p`, then `.btn`), where `p`'s
+own 10px bottom margin already does the job — this shape (button then
+caption) is what the Growth Zone's "Start review" card does uniquely, so
+the bug had nowhere else to show up.
+
+**The fix is one shared rule, not a card-specific patch:**
+`.card .btn+p,.card .btn-row+p{margin-top:var(--gap-row)}` — the exact same
+10px `.btn+.btn` already gives two stacked buttons, so a button and its
+caption now read as one family of "things after the button," not two
+different rules that happen to collide at zero. Scoped to `.card` so it
+never reaches buttons in modals, the nav, or the sandbox banner, where no
+such adjacency exists to begin with. Purely additive: it can only ever ADD
+space where there was accidentally none, never remove space anywhere else.
+
+`tools/test_gzfilter.js` gained one assertion, measuring the live gap
+between the due card's last button and its caption paragraph rather than
+trusting the stylesheet: exactly 10px.
+
 ### Where to start (v158 / Wayfinder v139, both apps)
 
 Chris, watching the companion on Study: *"I notice the companion will quote
