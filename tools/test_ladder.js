@@ -64,12 +64,12 @@ const [PORT, TAG] = process.argv.slice(2);
     ladderState.current = 6;
     go('quiz', {unitId:ladderState.unitId, classId:ladderState.classId, ladder:true}, {back:true});
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
-    return { view, ladderFlag: quizState.ladder, worth: T(document.querySelector('#screen .row .k')),
+    return { view, ladderFlag: quizState.ladder, worth: T(document.querySelector('#screen .ladderworth')),
       hasRoundBand: !!document.querySelector('#screen .qstars'),
       question: T(document.querySelector('#screen h3')) };
   });
-  ck('tapping tile 7 opens the real quiz screen for a real ladder question, worth 700, no constellation — the shuffled order means it need not be seed question #6', 
-     opened.view==='quiz' && opened.ladderFlag && /Worth 700/.test(opened.worth) && /^Ladder Q\d\?$/.test(opened.question) && !opened.hasRoundBand, opened);
+  ck('tapping tile 7 opens the real quiz screen for a real ladder question, worth 700 in gold, no constellation — the shuffled order means it need not be seed question #6', 
+     opened.view==='quiz' && opened.ladderFlag && /700/.test(opened.worth) && /^Ladder Q\d\?$/.test(opened.question) && !opened.hasRoundBand, opened);
 
   // ---- answering wrong: real miss + qstat.plain written, "Back to the board"
   const wrongPlay = await p.evaluate(()=>{
@@ -120,14 +120,19 @@ const [PORT, TAG] = process.argv.slice(2);
     const logs = Object.values(DATA.records).filter(r=>r.type==='log' && r.mode==='ladder' && r.unitId==='ladder-unit');
     const correct = ladderState.results.filter(x=>x==='right').length;
     const points = ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
+    const scoreEl = document.querySelector('.ladderscore');
     return { view, screenTxt: T(document.querySelector('#screen')), logCount: logs.length, log: logs[0],
-      correct, points, attempted: unitAttempted(u) };
+      correct, points, attempted: unitAttempted(u),
+      scoreGold: scoreEl && getComputedStyle(scoreEl).backgroundColor,
+      scoreText: T(scoreEl) };
   });
   const expectXp = finished.correct*10 + (finished.correct===10?50:finished.correct>=8?25:0);
   ck('finishing shows the tally, points and real XP, one log record only', 
      finished.logCount===1 && finished.log.total===10 && finished.log.correct===finished.correct
      && finished.log.xp===expectXp && new RegExp(finished.correct+' of 10').test(finished.screenTxt)
      && new RegExp(finished.points.toLocaleString()+' pts').test(finished.screenTxt), finished);
+  ck('the final score is the same gold reveal as the in-question badge (#f2ca63)', 
+     finished.scoreGold==='rgb(242, 202, 99)' && finished.scoreText===finished.points.toLocaleString()+' pts', finished);
   ck('every one of the 10 questions counts toward the lesson (qstat.plain)', finished.attempted===10, finished);
 
   // ---- Play again deals a fresh board

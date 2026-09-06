@@ -802,6 +802,67 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The grown-up door, and the ladder in gold (v157 / Wayfinder v138, both apps)
+
+Two small, unrelated requests from the same conversation, shipped together
+because both are cosmetic-but-not-trivial polish on doors Chris and Kat
+already use daily.
+
+**"In settings the girls rarely go here, but Kat and I go often to check
+sandbox mode. Can we make parent access more highlighted and sandboxed as
+well?"** The Grown-ups door on Settings was a `.card.quiet` dashed ghost
+card — visually the least important thing on the screen, on the one screen
+a parent opens constantly. It is now the FIRST thing on Settings, a `.hero`
+`cardButton()` — the same treatment the resume-round and thread cards use
+elsewhere — with a live eyebrow reading **"🧪 Sandbox is on"** or **"🧪
+Sandbox is off"**, so the fact Kat and Chris keep checking is answered
+before the tap, not after.
+
+- **Status only, never a toggle, on the ungated side.** The eyebrow reads
+  `sandboxOn()` and nothing else — no switch was added here. Sandbox is a
+  real per-device write-blocking mode; a toggle reachable without the
+  parent passcode would let either girl's own phone flip it with zero gate,
+  which is a real regression the request did not ask for. The actual
+  Sandbox switch stays exactly where it was, behind `openParentGate()`.
+- **Nothing new is exposed.** The `.sandbox-banner` already announces this
+  exact fact app-wide, on every screen, whenever sandbox is on — this only
+  surfaces the same information one screen earlier, on the door that leads
+  to turning it off.
+- The eyebrow wears `--warm` only when sandbox is actually on
+  (`.cb-eye.warn`); off, it reads in the ordinary muted eyebrow color, so
+  the warm color still means "look at this," not "here is a status line."
+- `tools/test_settings_door.js` (same file, both apps): the door renders
+  first on Settings at 44px+, the eyebrow says "Sandbox is off" with no
+  warning color by default, and flipping sandbox on flips the eyebrow's
+  text and color without adding a control.
+
+**"Can we somehow make trivia ladder show the points as if on a game show?
+We can at least make that part fun, even within the app."** The ladder
+already had its points — a plain `.row .k` label in the question header,
+plain text in the results tally. Two of those spots, and only two, now
+wear the app's existing done-pip/prep-band gold (`#f2ca63` on `#2a1c00`,
+~11:1, already measured and already shipped elsewhere) as a rounded pill:
+the in-question **"🎯 700"** badge, and the finish screen's own points
+total, pulled out of the ordinary `.tally` chip row into its own gold
+`.ladderscore` line above it.
+
+- **Spend the gold in exactly two places, not a re-theme.** The board's own
+  tiles keep the subject's accent color — a board that turned every tile
+  gold would just be a differently-colored board, not a spotlight. Gold
+  marks the moment a number becomes real: what a tile is worth while she's
+  looking at the question, and what she actually won at the end.
+- **No new color.** The pair already exists and is already measured for
+  contrast (done pips, prep bands) — reusing it keeps the "game show"
+  feeling like part of this app's own visual language rather than a
+  bolted-on skin.
+- **Tile text scales with value** on the board itself (15px at 100 up to
+  26px at 1000) — a quiet, non-color way of saying the higher tiles are the
+  bigger swing, before she has tapped one.
+- `tools/test_ladder.js` gained an assertion that the finish screen's score
+  renders in the identical gold (`rgb(242, 202, 99)`) as the in-question
+  badge, and its existing "worth" assertion was updated for the badge's new
+  markup (`.ladderworth`, text now just "🎯 700" rather than "Worth 700").
+
 ### The Trivia Ladder (v156 / Wayfinder v137, both apps)
 
 Chris mocked up a Jeopardy-style game with real cards from both apps as a

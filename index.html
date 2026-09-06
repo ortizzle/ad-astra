@@ -930,6 +930,17 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .ladder-tile.done{background-color:var(--surface);border-color:var(--line-soft);color:var(--muted);cursor:default}
 .ladder-tile.done.right{color:var(--good);border-color:var(--good)}
 .ladder-tile.done.wrong{color:var(--bad);border-color:var(--bad)}
+/* The one gold moment in the whole feature (Chris, 2026-09: "show the
+   points as if on a game show") — reused for both reveals (the question's
+   own "worth" badge and the finish screen's score) rather than spread
+   thin, and it is the app's OWN established gold (the done-pip/prep-band
+   pair, already measured ≈11:1) rather than a new colour. Everything else
+   about the board stays in the subject's own accent — this is the one
+   place spending it. */
+.ladderworth{display:inline-flex;align-items:center;gap:6px;background-color:#f2ca63;color:#2a1c00;
+  font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;
+  padding:7px 16px;border-radius:999px}
+.ladderscore{font-size:27px;padding:11px 22px;margin:2px 0 12px}
 @media (prefers-reduced-motion:no-preference){
   .mtile{transition:transform .12s ease}
   .mtile:active{transform:scale(.96)}
@@ -1314,6 +1325,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 .cb-d{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
 .cb-x{font-size:26px;color:var(--faint);line-height:1;flex-shrink:0}
 .cb-eye{margin-bottom:3px}
+.cb-eye.warn{color:var(--warm)}
 
 .subrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);cursor:pointer}
 .subrow:last-of-type{border-bottom:none}
@@ -1463,7 +1475,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v156 · the trivia ladder';
+const APP_VERSION = 'v157 · the spotlight';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6901,10 +6913,13 @@ SCREENS.ladder = function(root){
     head.appendChild(el('p',null, correct===ladderState.order.length ? 'Every tile — the whole board.'
       : correct/ladderState.order.length>=0.8 ? 'A strong board.'
       : 'A round worth playing again.'));
+    /* The final score gets the same gold as the question badge — the
+       one moment on this screen that is allowed to be loud. */
+    const scoreEl = el('span','ladderworth ladderscore', points.toLocaleString()+' pts');
+    head.appendChild(scoreEl);
     const t = el('div','tally');
     const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
     chip(correct, ` of ${ladderState.order.length}`);
-    chip(points.toLocaleString(), ' pts');
     const log = DATA.records[ladderState.logId];
     if(log) chip('+'+log.xp, ' XP');
     head.appendChild(t);
@@ -6926,6 +6941,8 @@ SCREENS.ladder = function(root){
       const res = ladderState.results[k];
       const t = el('button','ladder-tile'+(res?' done '+res:''));
       t.textContent = res ? (res==='right'?'✓ ':'✕ ')+ladderState.values[k] : String(ladderState.values[k]);
+      /* Escalating size: the higher the stakes, the bigger it reads. */
+      t.style.fontSize = Math.round(15 + (ladderState.values[k]/LADDER_VALUES[LADDER_VALUES.length-1])*11) + 'px';
       t.disabled = !!res;
       if(!res) t.addEventListener('click',()=>{ ladderState.current = k; go('quiz',{unitId:u.id, classId:ctx.classId, ladder:true},{back:true}); });
       grid.appendChild(t);
@@ -7574,7 +7591,7 @@ SCREENS.quiz = function(root){
     /* No constellation here — the board itself is the progress picture. */
     head.appendChild(el('div','eyebrow', u.title));
     const r0 = el('div','row');
-    r0.appendChild(el('span','k','🎯 Worth '+ladderState.values[quizState.i]));
+    r0.appendChild(el('span','ladderworth','🎯 '+ladderState.values[quizState.i]));
     r0.appendChild(el('span','v', ladderState.results.filter(x=>x!==null).length + ' of ' + ladderState.order.length + ' played'));
     head.appendChild(r0);
   } else {
@@ -8963,14 +8980,22 @@ SCREENS.setup = function(root){
   root.appendChild(headline('You','Make it yours. Nothing here leaves this device unless you turn on sync.'));
 
   /* The grown-up door sits FIRST — it is opened daily (drafts to approve,
-     sandbox, her stats) and was buried under the whole personalize section.
-     It stays a quiet card so her own settings still read as hers. */
+     sandbox, her stats). It used to be a quiet, dashed card so her own
+     settings still read as hers — but Chris and Kat open it often enough,
+     mainly to check sandbox mode, that "quiet" was working against them
+     (2026-09). A hero card now, with sandbox's current state read straight
+     off it as an eyebrow — checking no longer costs a tap. The toggle
+     itself stays behind the passcode; this line is read-only, and it
+     leaks nothing new: sandbox already announces itself app-wide via the
+     dashed banner on every screen while it's on. */
   root.appendChild(divider('Grown-ups'));
-  const gc = el('div','card quiet');
-  gc.appendChild(el('p',null,'Progress summary, tests and goals, sync and backups. For a parent or tutor.'));
-  const gb = el('button','btn btn-ghost','Open');
-  gb.addEventListener('click',openParentGate); gc.appendChild(gb);
-  root.appendChild(gc);
+  const sbOn = sandboxOn();
+  const gb = cardButton('Grown-ups',
+    'Progress summary, tests and goals, sync and backups. For a parent or tutor.',
+    openParentGate, sbOn ? '🧪 Sandbox is on' : '🧪 Sandbox is off');
+  gb.classList.add('hero');
+  if(sbOn) gb.querySelector('.cb-eye').classList.add('warn');
+  root.appendChild(gb);
 
   root.appendChild(divider('Personalize'));
   const pc = el('div','card');
