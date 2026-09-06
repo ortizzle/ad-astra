@@ -376,7 +376,7 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 
 .perch{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px}
 .perch.tap{cursor:pointer}
-.perch.plan .bubble{font-size:17px;line-height:1.5}
+.perch.plan .bubble{font-style:normal;font-weight:600;font-size:19px;line-height:1.5;color:var(--ac-fg)}
 .perch.plan.tap .bubble::after{content:'\203A';position:absolute;right:12px;top:10px;color:var(--faint);font-size:18px}
 .perch.plan.aff .bubble{font-family:'Fraunces',serif;font-size:17px;line-height:1.45}
 .perch .pet{font-size:36px;line-height:1;flex-shrink:0;animation:pet-bob 3.4s ease-in-out infinite}
@@ -1475,7 +1475,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v157 · the spotlight';
+const APP_VERSION = 'v158 · where to start';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2731,11 +2731,29 @@ function weekBrief(date){
 function threadTarget(date, opt){
   opt = opt || {};
   const due = dueMisses();
-  if(due.length && !opt.skipDue) return {
-    kind:'due',
-    title: due.length===1 ? '1 question is back' : due.length+' questions are back',
-    sub:'You missed these before. Getting them right now is what makes them stick.',
-    go:()=>go('growth') };
+  if(due.length && !opt.skipDue){
+    /* Name the subject leading the queue rather than a bare cross-subject
+       total. Same nearest-unscored-test-then-count ranking the Growth Zone
+       screen already uses for its own subject chips, so "where to start"
+       agrees wherever it is said. */
+    const today = date || AZ.today();
+    const bySubj = {};
+    due.forEach(m=>{ (bySubj[m.classId] = bySubj[m.classId]||[]).push(m); });
+    const testIn = {};
+    assessments().forEach(a=>{
+      if(a.score!=null || a.date<today) return;
+      const d = AZ.daysBetween(today, a.date);
+      if(testIn[a.classId]===undefined || d<testIn[a.classId]) testIn[a.classId]=d;
+    });
+    const prio = cid => testIn[cid]!==undefined ? testIn[cid] : 9999;
+    const topCid = Object.keys(bySubj).sort((a,b)=> prio(a)-prio(b) || bySubj[b].length-bySubj[a].length)[0];
+    return {
+      kind:'due', classId: topCid, dueTotal: due.length, dueTop: bySubj[topCid].length,
+      testSoon: testIn[topCid]!==undefined && testIn[topCid]<=14,
+      title: due.length===1 ? '1 question is back' : due.length+' questions are back',
+      sub:'You missed these before. Getting them right now is what makes them stick.',
+      go:()=>{ gzFilter = { cid: topCid, unitId:null }; go('growth'); } };
+  }
   /* A test within three days outranks picking up the newest lesson — mixed
      practice for that subject is the honest use of the sitting. It never
      outranks due reviews, which return above. */
@@ -4556,6 +4574,7 @@ SCREENS.today = function(root){
           : dailyUnit.questions.length + ' question' + (dailyUnit.questions.length===1?'':'s') + ' today — that is all there is so far.',
         () => { quizState = null; go('quiz', {unitId:'__daily__', classId:'__all__'}); },
         'Do now');
+      dd.classList.add('hero');
       root.appendChild(dd);
     }
   }
@@ -4704,8 +4723,13 @@ SCREENS.study = function(root){
     if(swap){
       line = affirmationFor(date);
     } else if(th && th.kind==='due'){
-      line = dueN===1 ? 'One question cycled back today. Clearing it now is what stops it coming back.'
-        : `${dueN} questions cycled back today. Clearing them now is what stops them coming back.`;
+      const cl = CLASS_BY_ID[th.classId];
+      const multi = cl && th.dueTop < th.dueTotal;
+      line = !cl ? (dueN===1 ? 'One question cycled back today. Clearing it now is what stops it coming back.'
+                             : `${dueN} questions cycled back today. Clearing them now is what stops them coming back.`)
+        : multi ? `${dueN} questions cycled back today — ${th.dueTop} in ${cl.name}${th.testSoon ? ' before your test' : ''}. That is where to start.`
+        : (dueN===1 ? `One question cycled back today in ${cl.name}. Clearing it now is what stops it coming back.`
+                    : `${dueN} questions cycled back today, all in ${cl.name}. Clearing them now is what stops them coming back.`);
       dest = th.go;
     } else if(th && th.kind==='ramp'){
       line = th.title.charAt(0).toUpperCase() + th.title.slice(1) + '. ' + th.sub;

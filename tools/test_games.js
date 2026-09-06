@@ -35,6 +35,17 @@ const PORT = process.argv[2] || 8201;
   ck('Today offers the door; the three come from three subjects, same all day, different tomorrow',
      door.door && door.n===3 && door.subjects===3 && door.same && door.tomorrowDiffers, door);
 
+  /* v158/Wayfinder v139: the not-yet-done door stands out with the app's
+     existing hero gradient/accent border, same treatment as the resume-round
+     and Grown-ups doors — no new colour, just more of the one it already has. */
+  const hero = await p.evaluate(() => {
+    const eyebrows = [...document.querySelectorAll('.cb-eye')];
+    const doNow = eyebrows.find(e => /Do now/i.test(e.textContent));
+    const card = doNow && doNow.closest('.cardbtn');
+    return { found: !!card, hero: !!(card && card.classList.contains('hero')) };
+  });
+  ck('the daily-three door wears the hero gradient/accent treatment', hero.found && hero.hero, hero);
+
   const played = await p.evaluate(async () => {
     buildDailyUnit(AZ.today());
     const first = dailyUnit.questions[0];

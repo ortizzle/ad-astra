@@ -802,6 +802,64 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Where to start (v158 / Wayfinder v139, both apps)
+
+Chris, watching the companion on Study: *"I notice the companion will quote
+the sum total growth section. Can we make it smarter and have it highlight
+the subject that appears next up for a quiz, or where practice might be
+needed? Can we change the font here too? Italics might be hard to read,
+maybe we can change the color of the font and make it bigger?"* Two fixes,
+both on the perch's due-review line, which was the one line on Study that
+had regressed to a bare cross-subject count.
+
+**The companion now names the subject leading the queue.** `threadTarget()`'s
+`due` case used to return just a total — "7 questions are back" — built from
+`dueMisses().length` across every subject at once, and the Study screen
+turned that into "7 questions cycled back today" with nowhere to look. It now
+groups the due misses by subject and ranks them with the *exact* nearest-
+unscored-test-then-count ordering the Growth Zone screen's own subject chips
+already use (v144), so "where to start" agrees wherever it is said. The line
+becomes **"7 questions cycled back today — 4 in Algebra & Geometry II. That
+is where to start,"** and a tap sets `gzFilter` to that subject before
+opening Growth Zone — she lands already scoped to it, not on the full list.
+A single-subject queue drops the em dash and just says "all in `<Subject>`."
+
+- **No new ranking invented.** Reusing the Growth Zone's own
+  nearest-test-then-count logic means a subject named here is the same one
+  that chip would already show first — one honest ranking, not two that
+  could disagree.
+- **`when a test is inside two weeks, the line says so** ("4 in Algebra &
+  Geometry II before your test") — the other half of "where practice might
+  be needed": due count and test proximity both point at the same subject
+  often enough that saying both costs one clause.
+- The 'ramp' and 'plan' cases already named a subject (studyPlan's own
+  ranking); only 'due' was summing across all of them. Nothing else on the
+  perch changed.
+
+**The font: no more italics.** `.perch.plan .bubble` inherited the base
+`.bubble` style built for the companion's *voice* — Fraunces, italic, 14px —
+which reads fine as a quick aside in a quiz-results modal but was hard to
+read as the first thing on Study, sized up to a whole sentence. It is now
+upright, 600 weight, 19px, and colored `--ac-fg` — the same "accent as text"
+token already used for the bubble's own species-name eyebrow, so the line
+now pops as a highlight rather than reading like a caption. Scoped to
+`.perch.plan` only: the modal's companion lines and the affirmation swap
+(`.perch.plan.aff`, deliberately still Fraunces italic — "so it reads as a
+line, not a task") are untouched.
+
+**The daily three, in gradient.** *"For the daily 3, can we make that card
+standout via gradient coloring, or a sharper accent color?"* The not-yet-done
+door was a plain card among plain cards. It now carries `.hero` — the same
+accent-gradient, left-bordered treatment already used for the resume-round
+door and the Grown-ups door — no new color invented, just the app's existing
+"this deserves a look" idiom applied to a third door that earns it.
+
+`tools/test_plan.js` gained two assertions: the due line names the subject
+leading the queue and the count agrees, and the tap lands with `gzFilter`
+set to it; plus a check that the bubble renders upright at 18px+. 
+`tools/test_games.js` gained one: the daily-three door carries the hero
+class.
+
 ### The grown-up door, and the ladder in gold (v157 / Wayfinder v138, both apps)
 
 Two small, unrelated requests from the same conversation, shipped together

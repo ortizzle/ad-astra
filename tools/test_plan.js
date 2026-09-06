@@ -25,7 +25,13 @@ const [PORT, TAG] = process.argv.slice(2);
     setPref('companion', {sp: COMPANIONS[0].id, nm:'Pip'});
     o.dueN = dueMisses().length;
     o.due = read();
-    sc.querySelector('.perch').click(); o.dueLands = view;
+    /* the line names the subject leading the queue, not a bare total */
+    const bySubj = {}; dueMisses().forEach(m=>(bySubj[m.classId]=bySubj[m.classId]||[]).push(m));
+    const topCid = Object.keys(bySubj).sort((a,b)=>bySubj[b].length-bySubj[a].length)[0];
+    o.topCl = CLASS_BY_ID[topCid].name; o.topN = bySubj[topCid].length;
+    const bubble = sc.querySelector('.perch .bubble');
+    o.bubbleStyle = { fontStyle: getComputedStyle(bubble).fontStyle, fontSize: parseFloat(getComputedStyle(bubble).fontSize) };
+    sc.querySelector('.perch').click(); o.dueLands = view; o.dueLandsCid = gzFilter.cid;
     /* find a swap day and a non-swap day with nothing due */
     all('miss').forEach(m => softDelete(m.id));
     const days = []; for(let i=0;i<9;i++) days.push(AZ.shift('2026-09-14', i));
@@ -43,6 +49,8 @@ const [PORT, TAG] = process.argv.slice(2);
   ck('"Pick up the thread" is gone', !r.due.divs.includes('Pick up the thread'), r.due.divs);
   ck('Study opens on the perch', r.due.first === 'perch plan tap' || /^perch/.test(r.due.first), r.due.first);
   ck('with reviews due, the line is the thread and taps to the Growth Zone', r.dueN > 0 && /question/.test(r.due.perch) && r.due.tap && !r.due.aff && r.dueLands==='growth', r);
+  ck('the due line names the subject leading the queue, and the tap lands filtered to it', r.due.perch.includes(r.topCl) && r.due.perch.includes(String(r.topN)) && r.dueLandsCid, r);
+  ck('the plan-line bubble is upright and 18px+, not the italic default', r.bubbleStyle.fontStyle==='normal' && r.bubbleStyle.fontSize>=18, r.bubbleStyle);
   ck('a swap day with nothing due says the affirmation', r.swap.aff && r.swap.perch.includes(r.swapAff) && !r.swap.tap, r.swap);
   ck('a plain day says the plan (lesson or subject) and is a door', !r.plain.aff && r.plain.tap && ['lesson','plan','ramp'].includes(r.plainTh) && /checkin|unit|quiz/.test(r.plainLands||''), {plain:r.plain, th:r.plainTh, lands:r.plainLands});
   ck('no companion: the star carries the plan', r.none.perch && r.none.pet === '✦' && /Plan of attack/i.test(r.none.perch), r.none);
