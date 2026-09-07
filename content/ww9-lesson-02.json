@@ -4,7 +4,7 @@
   "unit-ww9-02": {
    "id": "unit-ww9-02",
    "type": "unit",
-   "updatedAt": 1786305223003,
+   "updatedAt": 1788819326982,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -188,12 +188,12 @@
      "kind": "mc",
      "q": "To deduce something is to:",
      "opts": [
-      "Draw a conclusion from given facts",
       "Guess without any evidence",
+      "Draw a conclusion from given facts",
       "Repeat what someone else concluded",
       "Refuse to reach a conclusion"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Evidence has to come first.",
      "steps": [
       "Deduce means to draw a conclusion from given facts.",
@@ -212,12 +212,12 @@
      "kind": "mc",
      "q": "Haphazard arrangements are:",
      "opts": [
-      "Without plan, order, or direction",
-      "Carefully planned in advance",
       "Dangerous to be near",
+      "Carefully planned in advance",
+      "Without plan, order, or direction",
       "Extremely expensive"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Hap is an old word for chance.",
      "steps": [
       "Haphazard means marked by lack of plan, order or direction.",
@@ -236,12 +236,12 @@
      "kind": "mc",
      "q": "An incontrovertible fact is one that:",
      "opts": [
-      "Cannot be disputed",
+      "Was discovered recently",
       "Has not yet been tested",
       "Is widely misunderstood",
-      "Was discovered recently"
+      "Cannot be disputed"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Take the word apart: in + controvert.",
      "steps": [
       "Incontrovertible means impossible to dispute; unquestionable.",
@@ -284,12 +284,12 @@
      "kind": "mc",
      "q": "A laggard is someone who:",
      "opts": [
-      "Falls behind others by moving slowly",
       "Leads a group confidently",
+      "Falls behind others by moving slowly",
       "Explains things clearly",
       "Gives generously to others"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think of the last runners across the line.",
      "steps": [
       "A laggard is one who falls behind others because of moving slowly or loitering; a straggler.",
@@ -308,12 +308,12 @@
      "kind": "mc",
      "q": "Something ubiquitous is:",
      "opts": [
-      "Seemingly present everywhere",
-      "Extremely rare",
       "Impossible to explain",
+      "Extremely rare",
+      "Seemingly present everywhere",
       "Hot and dry"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think of tourists with cameras in Europe in July.",
      "steps": [
       "Ubiquitous means appearing to be present in large numbers or in many different places.",
@@ -332,12 +332,12 @@
      "kind": "mc",
      "q": "A report says the expedition was \"fraught with difficulty.\" This means the expedition was:",
      "opts": [
-      "Full of difficulty throughout",
+      "Difficult only at the start",
       "Cancelled because of difficulty",
       "Surprisingly free of difficulty",
-      "Difficult only at the start"
+      "Full of difficulty throughout"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Fraught means full of, and takes \"with\".",
      "steps": [
       "Fraught means full of or accompanied by, usually followed by with.",
@@ -380,12 +380,12 @@
      "kind": "mc",
      "q": "A scientist calls a result \"inexplicable.\" She means it:",
      "opts": [
-      "Cannot currently be explained",
       "Did not really happen",
+      "Cannot currently be explained",
       "Was predicted in advance",
       "Was caused by an error"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Inexplicable is about explanation, not existence.",
      "steps": [
       "Inexplicable means hard to explain or impossible to understand.",
@@ -404,12 +404,12 @@
      "kind": "mc",
      "q": "Debt described as an \"encumbrance\" on a young couple is:",
      "opts": [
-      "A burden weighing them down",
-      "A benefit helping them save",
       "A legal document they signed",
+      "A benefit helping them save",
+      "A burden weighing them down",
       "A short-term loan"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Encumber means to weigh down.",
      "steps": [
       "To encumber is to weigh down or burden, and also to impede action.",
@@ -428,12 +428,12 @@
      "kind": "analogy",
      "q": "TORRID : HOT",
      "opts": [
-      "ubiquitous : common",
+      "deduce : conclusion",
       "haphazard : orderly",
       "zenith : peak",
-      "deduce : conclusion"
+      "ubiquitous : common"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "How hot is torrid?",
      "steps": [
       "Torrid means INTENSELY hot — the first word is the extreme version of the second.",
@@ -478,12 +478,12 @@
      "kind": "analogy",
      "q": "LAGGARD : STRAGGLER",
      "opts": [
-      "zenith : peak",
       "encumber : free",
+      "zenith : peak",
       "haphazard : disorder",
       "alacrity : delay"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The book defines one of these words using the other.",
      "steps": [
       "A laggard IS a straggler — the book gives the second word as the definition of the first.",
@@ -503,12 +503,12 @@
      "kind": "analogy",
      "q": "ALACRITY : RELUCTANCE",
      "opts": [
-      "incontrovertible : debatable",
-      "sustenance : nourishment",
       "torrid : heat",
+      "sustenance : nourishment",
+      "incontrovertible : debatable",
       "deduce : facts"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Alacrity is eagerness. What is its opposite?",
      "steps": [
       "Alacrity means promptness and eagerness; reluctance is unwillingness. Opposites.",
@@ -528,12 +528,12 @@
      "kind": "mc",
      "q": "A reviewer writes that a novel’s plot is \"ingenious but fraught with coincidence.\" What is the mixed verdict?",
      "opts": [
-      "The plot is cleverly constructed yet leans heavily on coincidence",
+      "The plot was written by more than one author",
       "The plot is confusing and also boring",
       "The plot is simple but emotionally powerful",
-      "The plot was written by more than one author"
+      "The plot is cleverly constructed yet leans heavily on coincidence"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "One word praises, the other criticizes. Sort out which is which.",
      "steps": [
       "Ingenious means marked by imagination, resourcefulness or cleverness — clear praise.",
@@ -578,12 +578,12 @@
      "kind": "mc",
      "q": "Which Lesson 2 word pair is most likely to be confused, and why?",
      "opts": [
-      "ingenious and ingenuous — one means clever, the other means innocent and open",
       "zenith and peak — they mean the same thing",
+      "ingenious and ingenuous — one means clever, the other means innocent and open",
       "torrid and hot — one is just a stronger version of the other",
       "array and arrangement — they overlap almost completely"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Look for a pair that differs by one letter but not by degree.",
      "steps": [
       "The question asks which pair is easy to CONFUSE — meaning they look alike but mean different things.",
@@ -595,7 +595,8 @@
       "tip": "Build a short list of look-alike pairs as you meet them: ingenious/ingenuous, censure/censor, fateful/fatal."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

@@ -4,7 +4,7 @@
   "unit-hist-u1p5": {
    "id": "unit-hist-u1p5",
    "type": "unit",
-   "updatedAt": 1786231680102,
+   "updatedAt": 1788819326982,
    "classId": "history",
    "quarter": 1,
    "status": "draft",
@@ -195,12 +195,12 @@
      "kind": "mc",
      "q": "What happened to New Netherlands in 1664?",
      "opts": [
-      "England took it and renamed it New York",
       "It was destroyed by fire",
+      "England took it and renamed it New York",
       "It became independent",
       "It was sold to Sweden"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "It changed hands, and the new name is a large city today.",
      "steps": [
       "New Netherlands was a Dutch colony on the Hudson, run as a trading venture.",
@@ -220,12 +220,12 @@
      "kind": "mc",
      "q": "Why were the middle colonies called the breadbasket colonies?",
      "opts": [
-      "They grew and exported large amounts of wheat and other grain",
-      "They baked bread for the whole empire",
       "They had the most bakeries",
+      "They baked bread for the whole empire",
+      "They grew and exported large amounts of wheat and other grain",
       "They imported all their food"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think about what a breadbasket holds and where bread comes from.",
      "steps": [
       "The middle colonies had rich, fertile soil suited to grain.",
@@ -245,12 +245,12 @@
      "kind": "mc",
      "q": "What is pacifism?",
      "opts": [
-      "The refusal to take part in war or violence",
+      "A tax on imported goods",
       "A form of self-government",
       "A type of cash crop",
-      "A tax on imported goods"
+      "The refusal to take part in war or violence"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is a Quaker commitment and it shaped Pennsylvania.",
      "steps": [
       "Pacifism is a principled refusal to take part in war or violence.",
@@ -294,12 +294,12 @@
      "kind": "mc",
      "q": "How did Quaker beliefs shape Pennsylvania's laws?",
      "opts": [
-      "Belief in an inner light in every person supported religious liberty and fair dealing",
       "They required an official state church",
+      "Belief in an inner light in every person supported religious liberty and fair dealing",
       "They banned all trade",
       "They restricted voting to clergy"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "If every person carries an inner light, what follows about how you must treat them?",
      "steps": [
       "Quakers hold that every person carries an inner light and needs no clergy to reach God.",
@@ -319,12 +319,12 @@
      "kind": "mc",
      "q": "What is the difference between pluralism and religious tolerance?",
      "opts": [
-      "Pluralism describes many groups living together; tolerance is the policy that permits it",
-      "They mean the same thing",
       "Pluralism is a law; tolerance is a belief",
+      "They mean the same thing",
+      "Pluralism describes many groups living together; tolerance is the policy that permits it",
       "Pluralism applies only to Christians"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "One is a description of a situation. The other is a rule.",
      "steps": [
       "Pluralism describes a fact: many distinct religious and ethnic groups living alongside each other.",
@@ -344,12 +344,12 @@
      "kind": "mc",
      "q": "Why did New Jersey and Pennsylvania advertise religious freedom?",
      "opts": [
-      "To attract settlers, since colonies competed for migrants",
+      "Because their founders were not religious",
       "Because the king required it",
       "Because they had no churches",
-      "Because their founders were not religious"
+      "To attract settlers, since colonies competed for migrants"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does a new colony need most, and who was it competing with?",
      "steps": [
       "A new colony needs people, and every colony was competing for the same migrants.",
@@ -394,12 +394,12 @@
      "kind": "mc",
      "q": "Colonial toleration laws often protected Protestants while excluding Catholics. What does that tell you about the limits of colonial toleration?",
      "opts": [
-      "It was real but partial, usually bounded by which Christians were considered acceptable",
       "It did not exist at all",
+      "It was real but partial, usually bounded by which Christians were considered acceptable",
       "It applied equally to everyone",
       "It applied only to Catholics"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Look at where the line was drawn rather than whether a line existed.",
      "steps": [
       "Several colonies did extend genuine toleration, and dissenters really were safer in Rhode Island or Pennsylvania.",
@@ -419,12 +419,12 @@
      "kind": "mc",
      "q": "Why did the middle colonies develop a different social order from both New England and the southern colonies?",
      "opts": [
-      "Grain farming, diverse migration and port cities produced a mixed commercial society rather than a plantation or a religious one",
-      "They were founded much later",
       "They had no farming at all",
+      "They were founded much later",
+      "Grain farming, diverse migration and port cities produced a mixed commercial society rather than a plantation or a religious one",
       "They were governed directly from England"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Consider all three: what they grew, who came, and where they traded.",
      "steps": [
       "The southern colonies were organised around plantation cash crops and enslaved labour.",
@@ -444,12 +444,12 @@
      "kind": "mc",
      "q": "Pennsylvania's pacifism supported good relations with the Lenape but later caused difficulty. Why?",
      "opts": [
-      "A colony committed to non-violence struggled to respond when frontier conflict arrived",
+      "Because England banned pacifism",
       "Because pacifists cannot farm",
       "Because the Lenape demanded a militia",
-      "Because England banned pacifism"
+      "A colony committed to non-violence struggled to respond when frontier conflict arrived"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does a colony without a militia do when it is attacked?",
      "steps": [
       "Quaker pacifism meant Pennsylvania kept no militia for many years.",
@@ -462,7 +462,8 @@
       "tip": "This eventually pushed many Quakers out of Pennsylvania politics. A conviction can be admirable and still be hard to govern with."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

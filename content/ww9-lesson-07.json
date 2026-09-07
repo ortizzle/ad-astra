@@ -4,7 +4,7 @@
   "unit-ww9-07": {
    "id": "unit-ww9-07",
    "type": "unit",
-   "updatedAt": 1786305606133,
+   "updatedAt": 1788819326982,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -187,12 +187,12 @@
      "kind": "mc",
      "q": "An exorbitant price is one that is:",
      "opts": [
-      "Far beyond what seems reasonable",
       "Slightly below average",
+      "Far beyond what seems reasonable",
       "Fixed by law",
       "Paid in instalments"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Ex- plus orbit.",
      "steps": [
       "Exorbitant means exceeding normal bounds; more than seems reasonable.",
@@ -211,12 +211,12 @@
      "kind": "mc",
      "q": "An ingrate is a person who is:",
      "opts": [
-      "Ungrateful",
-      "Untruthful",
       "Unwell",
+      "Untruthful",
+      "Ungrateful",
       "Unemployed"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The root is the same as in gratitude.",
      "steps": [
       "An ingrate is an ungrateful person.",
@@ -235,12 +235,12 @@
      "kind": "mc",
      "q": "A moribund industry is one that is:",
      "opts": [
-      "Close to dying out",
+      "Heavily regulated",
       "Growing rapidly",
       "Newly established",
-      "Heavily regulated"
+      "Close to dying out"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Mor- means death.",
      "steps": [
       "Moribund means close to death; in a dying state.",
@@ -283,12 +283,12 @@
      "kind": "mc",
      "q": "A voluble speaker is one who:",
      "opts": [
-      "Talks readily and at length",
       "Speaks rarely and briefly",
+      "Talks readily and at length",
       "Speaks with a strong accent",
       "Refuses to answer questions"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "It describes the flow, not the quality.",
      "steps": [
       "Voluble means characterized by a ready flow of words; talkative.",
@@ -307,12 +307,12 @@
      "kind": "mc",
      "q": "A judge \"censured\" an attorney. This means the judge:",
      "opts": [
-      "Formally criticized the attorney",
-      "Removed the attorney from the case",
       "Suppressed the attorney’s evidence",
+      "Removed the attorney from the case",
+      "Formally criticized the attorney",
       "Praised the attorney’s conduct"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Careful — censure and censor are different words.",
      "steps": [
       "Censure means to blame or find fault with.",
@@ -332,12 +332,12 @@
      "kind": "mc",
      "q": "A historian calls a decision \"fateful.\" She means it was:",
      "opts": [
-      "Momentous, with far-reaching consequences",
+      "Reversed almost immediately",
       "Certainly fatal to everyone involved",
       "Made by chance rather than reason",
-      "Reversed almost immediately"
+      "Momentous, with far-reaching consequences"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Fateful and fatal are not the same word.",
      "steps": [
       "Fateful means having great or significant consequences.",
@@ -380,12 +380,12 @@
      "kind": "analogy",
      "q": "BELITTLE : PRAISE",
      "opts": [
-      "censure : commend",
       "sumptuous : luxurious",
+      "censure : commend",
       "divulge : reveal",
       "ingrate : ungrateful"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "These two verbs pull in opposite directions.",
      "steps": [
       "To belittle is to make something seem unimportant; to praise is to raise it up. Opposites.",
@@ -405,12 +405,12 @@
      "kind": "analogy",
      "q": "SUMPTUOUS : SPARTAN",
      "opts": [
-      "exorbitant : cheap",
-      "voluble : talkative",
       "moribund : dying",
+      "voluble : talkative",
+      "exorbitant : cheap",
       "motif : theme"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Lesson 4 gave you one of these words. Are they alike or opposite?",
      "steps": [
       "Sumptuous means extravagantly luxurious; Spartan (Lesson 4) means plain and without luxury. Opposites.",
@@ -430,12 +430,12 @@
      "kind": "analogy",
      "q": "INGRATE : GRATITUDE",
      "opts": [
-      "miser : generosity",
+      "motif : repetition",
       "orator : speech",
       "proponent : support",
-      "motif : repetition"
+      "miser : generosity"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does an ingrate not have?",
      "steps": [
       "An ingrate is a person defined by LACKING gratitude.",
@@ -479,12 +479,12 @@
      "kind": "mc",
      "q": "In a novel, \"the motif of separation\" appears in chapters 2, 9, and 21. Why is motif the right word rather than \"event\"?",
      "opts": [
-      "A motif is an idea that recurs across a work, not a single occurrence",
       "A motif must always be visual rather than thematic",
+      "A motif is an idea that recurs across a work, not a single occurrence",
       "A motif is only used for poetry, never novels",
       "A motif means the same thing as the plot"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What does appearing three times establish?",
      "steps": [
       "A motif is a theme or idea that is developed or REPEATED in a work.",
@@ -504,12 +504,12 @@
      "kind": "analogy",
      "q": "MORIBUND : DYING",
      "opts": [
-      "voluble : talkative",
-      "belittle : praise",
       "ingrate : gratitude",
+      "belittle : praise",
+      "voluble : talkative",
       "censure : criticism"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "How far apart are these two in meaning?",
      "steps": [
       "Moribund means close to death, in a dying state — the two words mean nearly the same thing.",
@@ -529,12 +529,12 @@
      "kind": "mc",
      "q": "To deem something prudent is to:",
      "opts": [
-      "Consider or judge it to be prudent",
+      "Require that it be prudent",
       "Prove it is prudent",
       "Doubt that it is prudent",
-      "Require that it be prudent"
+      "Consider or judge it to be prudent"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Deem reports a judgement.",
      "steps": [
       "Deem means to consider; to believe.",
@@ -577,12 +577,12 @@
      "kind": "mc",
      "q": "Which sentence uses amorous correctly?",
      "opts": [
-      "The letters between them grew steadily more amorous over the summer",
       "She gave the machine an amorous kick when it jammed",
+      "The letters between them grew steadily more amorous over the summer",
       "The amorous storm lasted three days",
       "He made an amorous calculation of the total cost"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Amor is Latin for love.",
      "steps": [
       "Amorous means expressing love or being in love.",
@@ -601,12 +601,12 @@
      "kind": "mc",
      "q": "A newspaper writes that a proposal met \"vociferous censure from a voluble opponent.\" Unpack what that says.",
      "opts": [
-      "Loud criticism from someone who talks a great deal",
-      "Quiet criticism from someone who rarely speaks",
       "Loud praise from someone who talks a great deal",
+      "Quiet criticism from someone who rarely speaks",
+      "Loud criticism from someone who talks a great deal",
       "Legal suppression by someone in authority"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Three Lesson 6 and 7 words are stacked here. Take them one at a time.",
      "steps": [
       "Vociferous (Lesson 6) means making feelings known loudly.",
@@ -619,7 +619,8 @@
       "tip": "Dense sentences are easier taken one word at a time. Translate each, then reassemble."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

@@ -4,7 +4,7 @@
   "unit-latin-u1": {
    "id": "unit-latin-u1",
    "type": "unit",
-   "updatedAt": 1786530144736,
+   "updatedAt": 1788819326982,
    "classId": "latin",
    "quarter": 1,
    "status": "draft",
@@ -177,12 +177,12 @@
      "kind": "mc",
      "q": "A Latin dictionary lists *rex, regis*. What does the second form tell you?",
      "opts": [
-      "The genitive singular, which reveals the declension",
       "The plural",
+      "The genitive singular, which reveals the declension",
       "The accusative",
       "The meaning in English"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Why would a dictionary give two forms of the same word?",
      "steps": [
       "Dictionaries list the nominative and the genitive singular.",
@@ -201,12 +201,12 @@
      "kind": "mc",
      "q": "What does the ending on a Latin verb tell you?",
      "opts": [
-      "Who is performing the action",
-      "Where the action happens",
       "Whether the sentence is a question",
+      "Where the action happens",
+      "Who is performing the action",
       "Which declension the subject belongs to"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think about why Latin rarely needs the word for \"I\".",
      "steps": [
       "The personal endings -o/-m, -s, -t, -mus, -tis, -nt identify the subject.",
@@ -225,12 +225,12 @@
      "kind": "mc",
      "q": "Which case is used for the direct object?",
      "opts": [
-      "Accusative",
+      "Genitive",
       "Nominative",
       "Dative",
-      "Genitive"
+      "Accusative"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What the verb acts upon.",
      "steps": [
       "The accusative marks the direct object — the thing receiving the action.",
@@ -274,12 +274,12 @@
      "kind": "mc",
      "q": "Why is *laeta* nominative in *Puella laeta est*?",
      "opts": [
-      "*Sum* takes no direct object, so the describing word matches the subject",
       "Adjectives are always nominative",
+      "*Sum* takes no direct object, so the describing word matches the subject",
       "*Laeta* is the direct object of *est*",
       "First-declension nouns force the adjective into the nominative"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What kind of verb is *est*, and can it take an object?",
      "steps": [
       "*Est* is a form of *sum, esse* — the verb \"to be\".",
@@ -299,12 +299,12 @@
      "kind": "mc",
      "q": "What is the difference between *in villam* and *in villa*?",
      "opts": [
-      "*In villam* is into the house (motion); *in villa* is in the house (place)",
-      "They mean the same thing in different declensions",
       "*In villam* is plural and *in villa* is singular",
+      "They mean the same thing in different declensions",
+      "*In villam* is into the house (motion); *in villa* is in the house (place)",
       "*In villam* is a question form"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "One is accusative, one is ablative. What does that change?",
      "steps": [
       "*villam* is accusative and *villa* is ablative.",
@@ -324,12 +324,12 @@
      "kind": "mc",
      "q": "In *rex bonus*, the noun is third declension and the adjective is second. Why is this correct?",
      "opts": [
-      "An adjective agrees in case, number and gender — not necessarily in ending",
+      "Third-declension nouns always take second-declension adjectives",
       "Adjectives may only be second declension",
       "The endings match by coincidence",
-      "Third-declension nouns always take second-declension adjectives"
+      "An adjective agrees in case, number and gender — not necessarily in ending"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What exactly must an adjective match?",
      "steps": [
       "Adjective agreement requires case, number and gender to match.",
@@ -374,12 +374,12 @@
      "kind": "mc",
      "q": "Why must a Latin noun be learned together with its genitive singular?",
      "opts": [
-      "The genitive reveals the declension, and third-declension nominatives are unpredictable",
       "The genitive is the most commonly used case",
+      "The genitive reveals the declension, and third-declension nominatives are unpredictable",
       "The genitive gives the English meaning",
       "The nominative is never used in real sentences"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Look at *rex, regis* — could you have predicted the second from the first?",
      "steps": [
       "The genitive ending identifies the declension: -ae, -i or -is.",
@@ -399,12 +399,12 @@
      "kind": "mc",
      "q": "A student translates *Puellae rosas dant* as \"The girl gives roses.\" What went wrong?",
      "opts": [
-      "*Dant* is plural, so the subject is plural: the girls give roses",
-      "Nothing — the translation is correct",
       "*Rosas* is nominative, so the roses are giving",
+      "Nothing — the translation is correct",
+      "*Dant* is plural, so the subject is plural: the girls give roses",
       "*Puellae* must be dative, so it means \"to the girl\""
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Check the verb ending before anything else.",
      "steps": [
       "*dant* ends in -nt: third person PLURAL. They give.",
@@ -424,12 +424,12 @@
      "kind": "mc",
      "q": "Which case shows possession?",
      "opts": [
-      "Genitive",
+      "Accusative",
       "Dative",
       "Ablative",
-      "Accusative"
+      "Genitive"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "The \"of\" case.",
      "steps": [
       "The genitive shows possession, usually translated with \"of\" or an apostrophe-s.",
@@ -472,12 +472,12 @@
      "kind": "mc",
      "q": "What does *sumus* mean?",
      "opts": [
-      "We are",
       "They are",
+      "We are",
       "You are",
       "He is"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Look at the personal ending.",
      "steps": [
       "*Sum, esse* runs sum, es, est, sumus, estis, sunt.",
@@ -496,12 +496,12 @@
      "kind": "mc",
      "q": "Which case follows a preposition showing motion toward something?",
      "opts": [
-      "Accusative",
-      "Ablative",
       "Genitive",
+      "Ablative",
+      "Accusative",
       "Nominative"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think of *in villam* — into the house.",
      "steps": [
       "Prepositions take either the accusative or the ablative.",
@@ -520,12 +520,12 @@
      "kind": "mc",
      "q": "Translate *amabit*.",
      "opts": [
-      "He will love",
+      "They love",
       "He was loving",
       "He loves",
-      "They love"
+      "He will love"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "The -bi- marks a tense; the -t marks the person.",
      "steps": [
       "Present system verbs cover present, imperfect and future.",
@@ -570,12 +570,12 @@
      "kind": "mc",
      "q": "Which pair of case jobs would change the meaning of a sentence if you swapped them?",
      "opts": [
-      "Nominative and accusative — swapping them reverses who acts on whom",
       "Genitive and dative — both translate with \"of\"",
+      "Nominative and accusative — swapping them reverses who acts on whom",
       "Ablative and nominative — both mark the subject",
       "Swapping any two cases leaves the meaning unchanged"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which two cases decide who does what to whom?",
      "steps": [
       "The nominative marks the doer and the accusative marks the receiver.",
@@ -588,7 +588,8 @@
       "tip": "This is why case errors are not small slips: swapping two endings can reverse the whole sentence."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

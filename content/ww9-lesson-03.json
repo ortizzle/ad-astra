@@ -4,7 +4,7 @@
   "unit-ww9-03": {
    "id": "unit-ww9-03",
    "type": "unit",
-   "updatedAt": 1786305606094,
+   "updatedAt": 1788819326982,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -188,12 +188,12 @@
      "kind": "mc",
      "q": "Which best describes feckless behaviour?",
      "opts": [
-      "Careless and irresponsible",
       "Stiff and overly formal",
+      "Careless and irresponsible",
       "Deeply thoughtful",
       "Excessively showy"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "It leaves nothing accomplished.",
      "steps": [
       "Feckless means careless or irresponsible.",
@@ -212,12 +212,12 @@
      "kind": "mc",
      "q": "To subjugate a people is to:",
      "opts": [
-      "Bring them under control by conquest",
-      "Set them free",
       "Spread information among them",
+      "Set them free",
+      "Bring them under control by conquest",
       "Grieve for them"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Look at the \"sub\" — it means under.",
      "steps": [
       "Subjugate means to bring under control; to conquer.",
@@ -236,12 +236,12 @@
      "kind": "mc",
      "q": "A pensive expression suggests someone is:",
      "opts": [
-      "Deep in thought",
+      "Pretending to listen",
       "Extremely angry",
       "Physically unwell",
-      "Pretending to listen"
+      "Deep in thought"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is a quiet, inward look.",
      "steps": [
       "Pensive means deep in thought, in a dreamy rather than intense way.",
@@ -284,12 +284,12 @@
      "kind": "mc",
      "q": "What does it mean to disseminate information?",
      "opts": [
-      "To spread it widely",
       "To keep it secret",
+      "To spread it widely",
       "To prove it false",
       "To record it permanently"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think of seeds scattered by the wind.",
      "steps": [
       "Disseminate means to scatter or spread widely.",
@@ -308,12 +308,12 @@
      "kind": "mc",
      "q": "A newspaper reports that a witness \"implicated\" a company executive. This means the witness:",
      "opts": [
-      "Gave evidence suggesting the executive was involved in wrongdoing",
-      "Proved the executive guilty beyond doubt",
       "Defended the executive against the accusations",
+      "Proved the executive guilty beyond doubt",
+      "Gave evidence suggesting the executive was involved in wrongdoing",
       "Refused to name the executive"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Implicate points; it does not convict.",
      "steps": [
       "To implicate is to show someone to be involved in something dishonest or illegal.",
@@ -332,12 +332,12 @@
      "kind": "mc",
      "q": "A critic writes that the dialogue in a play was \"stilted throughout.\" The critic means the dialogue:",
      "opts": [
-      "Sounded artificially stiff and formal rather than natural",
+      "Was improvised rather than scripted",
       "Was too fast for the audience to follow",
       "Contained too many references to other plays",
-      "Was improvised rather than scripted"
+      "Sounded artificially stiff and formal rather than natural"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Would real people talk that way?",
      "steps": [
       "Stilted means artificially stiff or formal in manner.",
@@ -380,12 +380,12 @@
      "kind": "analogy",
      "q": "INJURY : TRAUMA",
      "opts": [
-      "fondness : adoration",
       "consecrate : profane",
+      "fondness : adoration",
       "pensive : thoughtful",
       "monetary : money"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "A trauma is not just any injury. How much more is it?",
      "steps": [
       "Work out the stem: a trauma is a SEVERE injury — the second word is the intense version of the first.",
@@ -405,12 +405,12 @@
      "kind": "analogy",
      "q": "DISSEMINATE : SCATTER",
      "opts": [
-      "exhort : urge",
-      "subjugate : liberate",
       "trauma : injury",
+      "subjugate : liberate",
+      "exhort : urge",
       "pomp : ceremony"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "These two words mean nearly the same thing.",
      "steps": [
       "To disseminate is to scatter or spread widely — the two words are near-synonyms.",
@@ -430,12 +430,12 @@
      "kind": "analogy",
      "q": "WANTON : RESTRAINT",
      "opts": [
-      "feckless : responsibility",
+      "lament : grief",
       "monetary : money",
       "consecrate : dedicate",
-      "lament : grief"
+      "feckless : responsibility"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What quality is a wanton person missing?",
      "steps": [
       "In its \"excessive\" sense, wanton means lacking restraint — the adjective names what is ABSENT.",
@@ -480,12 +480,12 @@
      "kind": "mc",
      "q": "A historian writes: \"The victors consecrated the ground where the defenders had been subjugated.\" What tension does this sentence create?",
      "opts": [
-      "A place is being called holy precisely where people were conquered",
       "The victors are admitting they lost the battle",
+      "A place is being called holy precisely where people were conquered",
       "The ground was too damaged to be used again",
       "The defenders were the ones who performed the ceremony"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Look at what each verb means, then notice they land on the same ground.",
      "steps": [
       "Consecrate means to set apart as holy.",
@@ -505,12 +505,12 @@
      "kind": "mc",
      "q": "Which pairing shows the SAME word being used approvingly by one speaker and critically by another?",
      "opts": [
-      "pomp — \"the pomp of the ceremony\" versus \"all that empty pomp\"",
-      "trauma — used the same way by everyone",
       "feckless — always a criticism",
+      "trauma — used the same way by everyone",
+      "pomp — \"the pomp of the ceremony\" versus \"all that empty pomp\"",
       "monetary — always neutral"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which word can swing either way depending on the speaker?",
      "steps": [
       "Pomp means a showy or dignified display — and dignity and showiness are judged differently by different people.",
@@ -529,12 +529,12 @@
      "kind": "mc",
      "q": "To consecrate a building is to:",
      "opts": [
-      "Set it apart as holy",
+      "Fill it with noisy activity",
       "Tear it down for materials",
       "Sell it to the highest bidder",
-      "Fill it with noisy activity"
+      "Set it apart as holy"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is a religious or dedicating act.",
      "steps": [
       "Consecrate means to set apart as holy, or to dedicate to a cause.",
@@ -578,12 +578,12 @@
      "kind": "mc",
      "q": "A speaker \"alluded to\" a scandal; a second speaker \"exhorted\" the audience about it. What is the difference in what each did?",
      "opts": [
-      "The first referred to it indirectly; the second urged the audience strongly",
       "The first proved it happened; the second denied it",
+      "The first referred to it indirectly; the second urged the audience strongly",
       "The first spoke privately; the second spoke publicly",
       "The first grieved over it; the second celebrated it"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "One word is about indirectness, the other about force.",
      "steps": [
       "To allude is to refer to something indirectly, without naming it outright.",
@@ -596,7 +596,8 @@
       "tip": "Verbs of speaking are worth sorting on two axes: how direct the speaker is, and how hard they are pushing."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

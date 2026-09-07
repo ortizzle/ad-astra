@@ -4,7 +4,7 @@
   "unit-bio-u1": {
    "id": "unit-bio-u1",
    "type": "unit",
-   "updatedAt": 1786529951607,
+   "updatedAt": 1788819326982,
    "classId": "bio",
    "quarter": 1,
    "status": "draft",
@@ -196,12 +196,12 @@
      "kind": "mc",
      "q": "A scientist writes: \"The water reached 87 °C.\" This is:",
      "opts": [
-      "An observation",
       "An inference",
+      "An observation",
       "A hypothesis",
       "A conclusion"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Was this determined directly, or interpreted?",
      "steps": [
       "An observation is what you determine directly with your senses or a tool.",
@@ -220,12 +220,12 @@
      "kind": "mc",
      "q": "Which is the independent variable in an experiment testing how fertiliser amount affects tree growth?",
      "opts": [
-      "The amount of fertiliser given",
-      "How quickly the trees grow",
       "The species of tree",
+      "How quickly the trees grow",
+      "The amount of fertiliser given",
       "The amount of water given"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which one does the scientist deliberately change?",
      "steps": [
       "The independent variable is the one the scientist deliberately changes.",
@@ -244,12 +244,12 @@
      "kind": "mc",
      "q": "A control group is:",
      "opts": [
-      "The subjects that receive the unmodified independent variable",
+      "The group whose data is measured most carefully",
       "Any condition kept the same throughout the experiment",
       "The group with the largest sample size",
-      "The group whose data is measured most carefully"
+      "The subjects that receive the unmodified independent variable"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Careful — this is not the same as a controlled variable.",
      "steps": [
       "The control group receives the unmodified independent variable, usually none of it.",
@@ -292,12 +292,12 @@
      "kind": "mc",
      "q": "Which graph type suits temperature readings taken every minute as ice water warms?",
      "opts": [
-      "A line graph — the data is continuous over time",
       "A bar graph — the readings are separate categories",
+      "A line graph — the data is continuous over time",
       "A pie chart — the readings sum to a whole",
       "Either one shows it equally well"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Change over time, or distinct categories?",
      "steps": [
       "A line graph shows change over time or continuous data.",
@@ -316,12 +316,12 @@
      "kind": "mc",
      "q": "Observation: the leaves are turning brown. Which statement is an INFERENCE from it?",
      "opts": [
-      "The plant is not getting enough water",
-      "The leaves are brown at the edges",
       "Three of the twelve leaves have changed",
+      "The leaves are brown at the edges",
+      "The plant is not getting enough water",
       "The leaves feel dry to the touch"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which one goes beyond what the senses report?",
      "steps": [
       "An inference is a logical interpretation of what was observed.",
@@ -340,12 +340,12 @@
      "kind": "mc",
      "q": "An investigation divides people into five groups: walking, running, weights, sitting, and yoga, each for 30 minutes, measuring heart rate. Which is the control group?",
      "opts": [
-      "The group that sat down for 30 minutes",
+      "There is no control group in this design",
       "The group that walked for 30 minutes",
       "The group that did yoga for 30 minutes",
-      "There is no control group in this design"
+      "The group that sat down for 30 minutes"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Which group got none of the independent variable?",
      "steps": [
       "The independent variable is the type of exercise.",
@@ -389,12 +389,12 @@
      "kind": "mc",
      "q": "In a drug trial, why must the control group receive a placebo rather than nothing at all?",
      "opts": [
-      "To control for the mental effect of believing you have been treated",
       "To make the groups the same size",
+      "To control for the mental effect of believing you have been treated",
       "To reduce the cost of the trial",
       "To make the experiment repeatable"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What changes in a patient simply because a doctor hands them something?",
      "steps": [
       "A placebo has no medicinal value but the patient believes it does.",
@@ -414,12 +414,12 @@
      "kind": "mc",
      "q": "A student tests laundry detergents on chocolate stains. Which should be a controlled variable?",
      "opts": [
-      "The amount of detergent used in each wash",
-      "The brand of detergent used",
       "How clean the clothes end up",
+      "The brand of detergent used",
+      "The amount of detergent used in each wash",
       "The number of different detergents tested"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which one must stay identical so it cannot skew the result?",
      "steps": [
       "A controlled variable is deliberately kept the same.",
@@ -439,12 +439,12 @@
      "kind": "mc",
      "q": "A researcher wants to test how warmer ocean water affects coral by heating the ocean. What is wrong with the plan?",
      "opts": [
-      "It is not feasible — you cannot actually heat an ocean",
+      "Its sample size is too small",
       "It has no independent variable",
       "It has no dependent variable",
-      "Its sample size is too small"
+      "It is not feasible — you cannot actually heat an ocean"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "The idea is sound. Can the experiment actually be done?",
      "steps": [
       "Feasibility is whether the experiment can actually be carried out.",
@@ -489,12 +489,12 @@
      "kind": "mc",
      "q": "An experiment gives four mouse groups these maze times: 33 s, 122 s, 118 s, 130 s. What should the researcher do FIRST?",
      "opts": [
-      "Repeat the experiment with different mice to see whether 33 s holds up",
       "Remove the 33 s result because it does not fit",
+      "Repeat the experiment with different mice to see whether 33 s holds up",
       "Conclude that group 1 is faster and publish",
       "Increase the y-axis scale so the difference looks smaller"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "One result is wildly unlike the rest. What tests whether it is real?",
      "steps": [
       "Three groups cluster near 120 seconds and one is far away at 33.",
@@ -514,12 +514,12 @@
      "kind": "mc",
      "q": "Why can an experiment have only ONE independent variable at a time?",
      "opts": [
-      "With two changing at once you cannot tell which one caused the result",
-      "Two variables would make the graph too complicated to draw",
       "The control group can only be compared against one thing",
+      "Two variables would make the graph too complicated to draw",
+      "With two changing at once you cannot tell which one caused the result",
       "Measuring two dependent variables is not allowed"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Imagine changing fertiliser AND water together, then seeing growth.",
      "steps": [
       "Change fertiliser and water at the same time, and the plants grow taller.",
@@ -539,12 +539,12 @@
      "kind": "mc",
      "q": "A student measures plant growth and records \"9, 8, 6, 6\" for one fertiliser and \"9 cm, 8 cm, 6 cm, 6 cm\" for another. What is the issue?",
      "opts": [
-      "Units must be consistent — either in every cell or in the column heading",
+      "The independent variable belongs in the right-hand column",
       "The two fertilisers cannot be compared at all",
       "The numbers should have been graphed rather than tabled",
-      "The independent variable belongs in the right-hand column"
+      "Units must be consistent — either in every cell or in the column heading"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Both rows carry the same numbers. What differs?",
      "steps": [
       "A data table must handle units consistently.",
@@ -582,7 +582,8 @@
       "tip": "Sample-size questions are really feasibility questions in disguise. Read the constraints in the stem."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

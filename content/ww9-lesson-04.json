@@ -4,8 +4,8 @@
   "unit-ww9-04": {
    "id": "unit-ww9-04",
    "type": "unit",
-   "updatedAt": 1788816272000,
-   "libv": 1,
+   "updatedAt": 1788819326982,
+   "libv": 2,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -188,12 +188,12 @@
      "kind": "mc",
      "q": "Which describes extraneous information?",
      "opts": [
-      "Details that are unnecessary to the point",
       "Details that are secret",
+      "Details that are unnecessary to the point",
       "Details that are false",
       "Details that are difficult to understand"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Extra is hiding inside the word.",
      "steps": [
       "Extraneous means not necessary; irrelevant.",
@@ -212,12 +212,12 @@
      "kind": "mc",
      "q": "Sedentary work is work that:",
      "opts": [
-      "Involves a lot of sitting",
-      "Requires travelling constantly",
       "Is done outdoors",
+      "Requires travelling constantly",
+      "Involves a lot of sitting",
       "Pays very little"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think of what \"sedan\" and \"sediment\" have in common.",
      "steps": [
       "Sedentary means doing or requiring a lot of sitting.",
@@ -236,12 +236,12 @@
      "kind": "mc",
      "q": "To recuperate is to:",
      "opts": [
-      "Regain health or strength",
+      "Repeat an experiment",
       "Retell a story from memory",
       "Recover a lost object",
-      "Repeat an experiment"
+      "Regain health or strength"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is about a body, not an object.",
      "steps": [
       "Recuperate means to regain health or strength.",
@@ -284,12 +284,12 @@
      "kind": "mc",
      "q": "A Spartan room would be:",
      "opts": [
-      "Simple and without luxury",
       "Crowded with decorations",
+      "Simple and without luxury",
       "Very brightly lit",
       "Filled with the smell of cooking"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Named after a famously tough ancient city.",
      "steps": [
       "Spartan means marked by simplicity and lack of luxury.",
@@ -308,12 +308,12 @@
      "kind": "mc",
      "q": "A coach tells the team \"you will have to contend with rain and a heavy field.\" She means the team will have to:",
      "opts": [
-      "Struggle against those conditions",
-      "Argue that the conditions are unfair",
       "Wait until the conditions improve",
+      "Argue that the conditions are unfair",
+      "Struggle against those conditions",
       "Report the conditions to the referee"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Contend has two senses. Which fits this sentence?",
      "steps": [
       "Contend can mean to struggle with, or to maintain and assert.",
@@ -333,12 +333,12 @@
      "kind": "mc",
      "q": "Which sentence uses punctilious correctly?",
      "opts": [
-      "He was punctilious about thank-you notes, writing each one the same evening",
+      "He gave a punctilious shrug and walked away",
       "She was punctilious and arrived nearly an hour late",
       "The punctilious storm knocked out power across the county",
-      "He gave a punctilious shrug and walked away"
+      "He was punctilious about thank-you notes, writing each one the same evening"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is about attention to small points, especially social ones.",
      "steps": [
       "Punctilious means careful of and attentive to details, especially details of good manners.",
@@ -381,12 +381,12 @@
      "kind": "analogy",
      "q": "SPARTAN : LUXURY",
      "opts": [
-      "extraneous : necessity",
       "adage : saying",
+      "extraneous : necessity",
       "regale : entertain",
       "recuperate : illness"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What does a Spartan room not have?",
      "steps": [
       "Spartan means marked by a LACK of luxury — the adjective names what is absent.",
@@ -406,12 +406,12 @@
      "kind": "analogy",
      "q": "MEANDER : WANDER",
      "opts": [
-      "contend : struggle",
-      "sedentary : active",
       "punctilious : detail",
+      "sedentary : active",
+      "contend : struggle",
       "camaraderie : friends"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "How close in meaning are these two?",
      "steps": [
       "To meander is to wander — following a winding course or drifting aimlessly.",
@@ -431,12 +431,12 @@
      "kind": "analogy",
      "q": "PUNCTILIOUS : CARELESS",
      "opts": [
-      "sedentary : active",
+      "wry : humour",
       "meander : wander",
       "adage : wisdom",
-      "wry : humour"
+      "sedentary : active"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "These two describe opposite attitudes to detail.",
      "steps": [
       "Punctilious means highly attentive to detail; careless means the reverse.",
@@ -481,12 +481,12 @@
      "kind": "mc",
      "q": "Which Lesson 4 word would BEST replace \"quietly amused, slightly twisted\" in this sentence: \"She accepted the criticism with a ___ smile\"?",
      "opts": [
-      "wry",
       "punctilious",
+      "wry",
       "sedentary",
       "odoriferous"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "One of these words means exactly that kind of smile.",
      "steps": [
       "The phrase describes amusement that is quiet and a little bent to one side.",
@@ -505,12 +505,12 @@
      "kind": "analogy",
      "q": "HUBBUB : NOISE",
      "opts": [
-      "adage : saying",
-      "meander : wander",
       "recuperate : weaken",
+      "meander : wander",
+      "adage : saying",
       "punctilious : detail"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Is every noise a hubbub, or every hubbub a noise?",
      "steps": [
       "A hubbub is a specific KIND of noise — noise with confusion in it.",
@@ -530,12 +530,12 @@
      "kind": "mc",
      "q": "A hubbub is:",
      "opts": [
-      "Noisy confusion or uproar",
+      "A short saying accepted as true",
       "A quiet, orderly queue",
       "A winding path through hills",
-      "A short saying accepted as true"
+      "Noisy confusion or uproar"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Two things at once: noise and disorder.",
      "steps": [
       "A hubbub is noisy confusion; uproar.",
@@ -578,12 +578,12 @@
      "kind": "mc",
      "q": "A shop sells \"cycling paraphernalia.\" This means it sells:",
      "opts": [
-      "The gear and equipment associated with cycling",
       "Bicycles only, with no accessories",
+      "The gear and equipment associated with cycling",
       "Books about the history of cycling",
       "Memberships to a cycling club"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Paraphernalia is the stuff that goes WITH an activity.",
      "steps": [
       "Paraphernalia means personal belongings, or equipment associated with a particular activity.",
@@ -602,12 +602,12 @@
      "kind": "mc",
      "q": "A reviewer writes that a novel \"meanders for two hundred pages before finding its subject.\" The reviewer means the novel:",
      "opts": [
-      "Wanders without clear direction for a long stretch",
-      "Moves too quickly to follow",
       "Repeats the same scene several times",
+      "Moves too quickly to follow",
+      "Wanders without clear direction for a long stretch",
       "Is written in an old-fashioned style"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which sense of meander fits a book rather than a river?",
      "steps": [
       "Meander means to follow a winding course, or to wander aimlessly.",

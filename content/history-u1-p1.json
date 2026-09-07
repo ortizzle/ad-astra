@@ -4,7 +4,7 @@
   "unit-hist-u1p1": {
    "id": "unit-hist-u1p1",
    "type": "unit",
-   "updatedAt": 1786231342984,
+   "updatedAt": 1788819326982,
    "classId": "history",
    "quarter": 1,
    "status": "draft",
@@ -168,12 +168,12 @@
      "kind": "mc",
      "q": "What was the Columbian Exchange?",
      "opts": [
-      "The transfer of plants, animals, people and diseases between the Americas and the rest of the world",
       "A treaty dividing land between Spain and Portugal",
+      "The transfer of plants, animals, people and diseases between the Americas and the rest of the world",
       "The trade of gold for enslaved people",
       "The exchange of ambassadors between European courts"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The word exchange is doing the work. What moved, and in which directions?",
      "steps": [
       "After 1492, contact between the Americas and Europe, Africa and Asia became permanent.",
@@ -193,12 +193,12 @@
      "kind": "mc",
      "q": "What is mercantilism?",
      "opts": [
-      "The theory that a nation grows rich by exporting more than it imports",
-      "The belief that trade should be completely free of rules",
       "A system of religious tolerance in the colonies",
+      "The belief that trade should be completely free of rules",
+      "The theory that a nation grows rich by exporting more than it imports",
       "The practice of trading only with nearby nations"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "It is a theory about where national wealth comes from.",
      "steps": [
       "Mercantilism treats wealth as a fixed pile of gold and silver to be competed over.",
@@ -218,12 +218,12 @@
      "kind": "mc",
      "q": "What were the three legs of the Triangular Trade?",
      "opts": [
-      "Goods to Africa, enslaved people to the Americas, cash crops to Europe",
+      "Enslaved people to Europe, sugar to Africa, cloth to the Americas",
       "Gold to Europe, guns to Asia, spices to Africa",
       "Settlers to the Americas, crops to Africa, gold to Europe",
-      "Enslaved people to Europe, sugar to Africa, cloth to the Americas"
+      "Goods to Africa, enslaved people to the Americas, cash crops to Europe"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Start in Europe and follow the ships around the triangle.",
      "steps": [
       "From Europe to Africa went manufactured goods: guns, textiles, iron.",
@@ -268,12 +268,12 @@
      "kind": "mc",
      "q": "Why did the Great Dying make European colonisation easier?",
      "opts": [
-      "Disease had already devastated Indigenous populations before most settlers arrived",
       "Because it killed European rivals as well",
+      "Disease had already devastated Indigenous populations before most settlers arrived",
       "Because it made the soil more fertile",
       "It did not — it made colonisation harder"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think about the order of events: when did the diseases arrive relative to most settlers?",
      "steps": [
       "European diseases spread ahead of settlement, often faster than Europeans themselves travelled.",
@@ -293,12 +293,12 @@
      "kind": "mc",
      "q": "A colony is required to sell its tobacco only to its parent country and to buy manufactured goods only from it. Which idea does this reflect?",
      "opts": [
-      "Mercantilism",
-      "Pluralism",
       "Separatism",
+      "Pluralism",
+      "Mercantilism",
       "Self-governance"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which theory says colonies exist to enrich the parent country?",
      "steps": [
       "Pluralism is about a mix of peoples, and separatism is a religious position — neither is economic.",
@@ -318,12 +318,12 @@
      "kind": "mc",
      "q": "Why did cash crops increase the demand for forced labour?",
      "opts": [
-      "They need large areas of land and constant intensive work to be profitable",
+      "They grow only in winter, when free workers were unavailable",
       "They cannot be grown by families",
       "They require special skills only enslaved people had",
-      "They grow only in winter, when free workers were unavailable"
+      "They need large areas of land and constant intensive work to be profitable"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Think about the scale a crop must reach before it is worth shipping across an ocean.",
      "steps": [
       "A cash crop is grown to sell, not to eat, so profit depends on volume.",
@@ -368,12 +368,12 @@
      "kind": "mc",
      "q": "Which best explains the connection between the Renaissance and European exploration?",
      "opts": [
-      "A renewed willingness to question old knowledge encouraged new ventures and new techniques",
       "The Renaissance produced the ships used to cross the Atlantic",
+      "A renewed willingness to question old knowledge encouraged new ventures and new techniques",
       "Renaissance artists drew the first maps of America",
       "There is no meaningful connection"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The Renaissance was a change in thinking. What does a change in thinking make possible?",
      "steps": [
       "The Renaissance rediscovered classical learning and, more importantly, the habit of questioning received wisdom.",
@@ -393,12 +393,12 @@
      "kind": "mc",
      "q": "A textbook says the Columbian Exchange \"enriched the diets of the world.\" What does this framing leave out?",
      "opts": [
-      "The diseases that travelled the same routes and killed millions",
-      "The names of the crops involved",
       "That the exchange lasted several centuries",
+      "The names of the crops involved",
+      "The diseases that travelled the same routes and killed millions",
       "That Columbus made four voyages"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The exchange carried more than food. What else moved along exactly the same routes?",
      "steps": [
       "It is true that maize and potatoes transformed diets in Europe, Africa and Asia.",
@@ -418,12 +418,12 @@
      "kind": "mc",
      "q": "Why did national competition between European powers speed up colonisation?",
      "opts": [
-      "A claim was valuable partly because it denied the same land to a rival",
+      "Because they agreed to divide the Americas equally",
       "Because the powers pooled their resources",
       "Because they shared maps freely",
-      "Because they agreed to divide the Americas equally"
+      "A claim was valuable partly because it denied the same land to a rival"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "If your rival gains something you did not take, what have you lost?",
      "steps": [
       "Portugal, Spain, England, France and the Netherlands were rivals, not partners.",
@@ -436,7 +436,8 @@
       "tip": "Mercantilism and national competition reinforce each other. Explaining one usually means mentioning the other."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

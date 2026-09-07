@@ -4,7 +4,7 @@
   "unit-alg-0103": {
    "id": "unit-alg-0103",
    "type": "unit",
-   "updatedAt": 1786228828911,
+   "updatedAt": 1788819326982,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -165,12 +165,12 @@
      "kind": "mc",
      "q": "On a piecewise graph, what does an open circle at an endpoint mean?",
      "opts": [
-      "That endpoint value is not included in that piece",
       "The function is undefined everywhere nearby",
+      "That endpoint value is not included in that piece",
       "The graph continues forever in that direction",
       "The function has a maximum there"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Open circles pair up with one of the two inequality signs.",
      "steps": [
       "Open and closed circles record whether an endpoint belongs to a piece.",
@@ -189,12 +189,12 @@
      "kind": "mc",
      "q": "What is a step function?",
      "opts": [
-      "A piecewise function whose pieces are all constants",
-      "Any function with a vertical asymptote",
       "A function that increases by exactly 1 each time",
+      "Any function with a vertical asymptote",
+      "A piecewise function whose pieces are all constants",
       "A function drawn with dashed lines"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "What does the graph look like if every piece is a flat line?",
      "steps": [
       "In a step function each piece is a constant value.",
@@ -213,12 +213,12 @@
      "kind": "mc",
      "q": "Write |x| as a piecewise-defined function.",
      "opts": [
-      "x when x ≥ 0, and −x when x < 0",
+      "x² when x ≥ 0, and −x² when x < 0",
       "x when x > 0, and x when x < 0",
       "−x when x ≥ 0, and x when x < 0",
-      "x² when x ≥ 0, and −x² when x < 0"
+      "x when x ≥ 0, and −x when x < 0"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Absolute value removes the sign. What do you do to a negative number to make it positive?",
      "steps": [
       "Absolute value returns the distance from zero, which is never negative.",
@@ -262,12 +262,12 @@
      "kind": "mc",
      "q": "A piecewise function is defined as f(x) = 2x for 0 ≤ x < 5 and f(x) = 10 for x ≥ 5. What is f(3)?",
      "opts": [
-      "6",
       "10",
+      "6",
       "3",
       "5"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which interval does 3 fall into?",
      "steps": [
       "Check the intervals: 3 is between 0 and 5, so it satisfies 0 ≤ x < 5.",
@@ -286,12 +286,12 @@
      "kind": "mc",
      "q": "How does a piecewise-defined function differ from a step function?",
      "opts": [
-      "A step function is a piecewise function whose pieces are all constant",
-      "They are the same thing",
       "A step function has only two pieces",
+      "They are the same thing",
+      "A step function is a piecewise function whose pieces are all constant",
       "A piecewise function must be continuous"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "One of these is a special case of the other.",
      "steps": [
       "A piecewise function allows any rule on each interval — linear, quadratic, constant, anything.",
@@ -310,12 +310,12 @@
      "kind": "mc",
      "q": "A parking garage charges $5 per hour or part of an hour, up to a $24 daily maximum. What kind of function is the cost, and why?",
      "opts": [
-      "A step function, because the price holds constant across each hour and then jumps",
+      "An absolute value function",
       "A linear function, because it increases at a steady rate",
       "A quadratic function, because of the daily cap",
-      "An absolute value function"
+      "A step function, because the price holds constant across each hour and then jumps"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "\"Or part of an hour\" is doing the work. What does the cost do at 61 minutes versus 70 minutes?",
      "steps": [
       "Charging by the hour \"or part of an hour\" means any time within the same hour costs the same.",
@@ -360,12 +360,12 @@
      "kind": "mc",
      "q": "For f(x) = −2x + 4 on 0 ≤ x < 8, what is the rate of change over the interval [2, 7]?",
      "opts": [
-      "−2",
       "2",
+      "−2",
       "−10",
       "4"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Check the interval sits inside one piece, then remember what the rate of change of a line is.",
      "steps": [
       "Both 2 and 7 lie inside 0 ≤ x < 8, so the whole interval sits within this single piece.",
@@ -385,12 +385,12 @@
      "kind": "mc",
      "q": "Rewrite g(x) = |x − 6| as a piecewise-defined function.",
      "opts": [
-      "x − 6 when x ≥ 6, and 6 − x when x < 6",
-      "x − 6 when x ≥ 0, and 6 − x when x < 0",
       "x + 6 when x ≥ 6, and −x − 6 when x < 6",
+      "x − 6 when x ≥ 0, and 6 − x when x < 0",
+      "x − 6 when x ≥ 6, and 6 − x when x < 6",
       "x − 6 when x ≥ 6, and x − 6 when x < 6"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Split where the expression inside the bars equals zero.",
      "steps": [
       "Set the inside to zero: x − 6 = 0, so the split is at x = 6.",
@@ -410,12 +410,12 @@
      "kind": "mc",
      "q": "A worker earns $14 per hour for the first 40 hours in a week and 1.5 times that for each extra hour. What is the weekly pay for 46 hours?",
      "opts": [
-      "$686",
+      "$966",
       "$560",
       "$644",
-      "$966"
+      "$686"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Split the 46 hours at the 40-hour boundary and pay each part at its own rate.",
      "steps": [
       "The first 40 hours pay the base rate: 40 × 14 = $560.",
@@ -461,12 +461,12 @@
      "kind": "mc",
      "q": "Which x-values is f(x) = −3x + 4 for −2 < x < 3 and 2x + 1 for 4 < x < 9 defined for?",
      "opts": [
-      "(−2, 3) and (4, 9), with a gap between 3 and 4",
       "(−2, 9), the whole stretch",
+      "(−2, 3) and (4, 9), with a gap between 3 and 4",
       "All real numbers",
       "(−2, 3] and [4, 9)"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "List what each piece covers, then check whether anything is left out.",
      "steps": [
       "The first piece covers −2 < x < 3.",
@@ -486,12 +486,12 @@
      "kind": "mc",
      "q": "A student writes a piecewise rule with 2x + 5 on −2 < x ≤ 4 and −4x − 7 on 4 ≤ x ≤ 9, and says there is an open circle at x = 4 on both pieces. What is wrong?",
      "opts": [
-      "Both pieces use a closed inequality at 4, so both circles are closed — and that makes it not a function",
-      "Both circles should be open, so the student is right",
       "The first piece should have an open circle and the second a closed one",
+      "Both circles should be open, so the student is right",
+      "Both pieces use a closed inequality at 4, so both circles are closed — and that makes it not a function",
       "Nothing is wrong"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Look at the inequality signs at x = 4 in each piece, not at the student's claim.",
      "steps": [
       "The first piece ends at x ≤ 4, and ≤ means 4 IS included — a closed circle.",
@@ -511,12 +511,12 @@
      "kind": "mc",
      "q": "Why can a piecewise-defined function be increasing, constant and decreasing all at once, when an ordinary linear function cannot?",
      "opts": [
-      "Because each piece has its own rule, so each interval can behave differently",
+      "Because absolute value is involved",
       "Because piecewise functions are not really functions",
       "Because the domain has gaps in it",
-      "Because absolute value is involved"
+      "Because each piece has its own rule, so each interval can behave differently"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does a single linear rule force to be true everywhere?",
      "steps": [
       "A linear function has one slope, and that slope is the same for every input.",
@@ -561,12 +561,12 @@
      "kind": "mc",
      "q": "Two phone plans: A costs $25 for 4 GB then $20 per extra GB; B costs $40 for 5 GB then $25 per extra GB. What does a 6 GB user pay under each?",
      "opts": [
-      "$65 under both — they tie at 6 GB",
       "$65 under A and $55 under B",
+      "$65 under both — they tie at 6 GB",
       "$45 under A and $65 under B",
       "$85 under A and $65 under B"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Work each plan out separately. Watch how many GB actually count as \"extra\" in each one.",
      "steps": [
       "Plan A: the $25 base covers the first 4 GB, so the extra is 6 − 4 = 2 GB.",
@@ -587,12 +587,12 @@
      "kind": "mc",
      "q": "What does ⌊−2.3⌋ equal, and why does it surprise people?",
      "opts": [
-      "−3, because it rounds down and down means more negative",
-      "−2, because it rounds toward zero",
       "−2.3, because integers are unchanged",
+      "−2, because it rounds toward zero",
+      "−3, because it rounds down and down means more negative",
       "2, because absolute value is taken first"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Greatest integer LESS THAN OR EQUAL TO. Which integers qualify, and which is the greatest of them?",
      "steps": [
       "The function returns the greatest integer that is not above the input.",
@@ -612,12 +612,12 @@
      "kind": "mc",
      "q": "A piecewise function's pieces are 4x on 0 ≤ x < 3 and 12 on x ≥ 3. Is the graph connected at x = 3?",
      "opts": [
-      "Yes — the first piece approaches 12 as x nears 3, and the second piece equals 12 there",
+      "It cannot be determined without a graph",
       "No, there is a jump at x = 3",
       "No, because x = 3 is not in the domain",
-      "It cannot be determined without a graph"
+      "Yes — the first piece approaches 12 as x nears 3, and the second piece equals 12 there"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Work out what the first piece is heading toward at x = 3, then compare with what the second piece gives.",
      "steps": [
       "The first piece is 4x, so as x approaches 3 the value approaches 4(3) = 12.",
@@ -630,7 +630,8 @@
       "tip": "To test any boundary: evaluate what each piece heads toward there. Equal means connected, different means a jump."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

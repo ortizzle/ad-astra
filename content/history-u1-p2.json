@@ -4,7 +4,7 @@
   "unit-hist-u1p2": {
    "id": "unit-hist-u1p2",
    "type": "unit",
-   "updatedAt": 1786284278283,
+   "updatedAt": 1788819326982,
    "classId": "history",
    "quarter": 1,
    "status": "draft",
@@ -160,12 +160,12 @@
      "kind": "mc",
      "q": "What was Jamestown?",
      "opts": [
-      "The first permanent English settlement in North America, founded 1607",
       "The first Spanish settlement in North America",
+      "The first permanent English settlement in North America, founded 1607",
       "An Indigenous city on the Mississippi",
       "The capital of the Powhatan Confederacy"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The key word is permanent, and the year is 1607.",
      "steps": [
       "English attempts before it, including Roanoke, had failed.",
@@ -184,12 +184,12 @@
      "kind": "mc",
      "q": "What was indentured servitude?",
      "opts": [
-      "Working without wages for a set term in exchange for passage to the colonies",
-      "Lifelong, inherited, unpaid labour",
       "A land grant for paying someone's passage",
+      "Lifelong, inherited, unpaid labour",
+      "Working without wages for a set term in exchange for passage to the colonies",
       "A tax paid by colonists to England"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The key features are a contract and an end date.",
      "steps": [
       "An indentured servant signed a contract before travelling.",
@@ -209,12 +209,12 @@
      "kind": "mc",
      "q": "Which crop made Virginia profitable?",
      "opts": [
-      "Tobacco",
+      "Sugar",
       "Rice",
       "Indigo",
-      "Sugar"
+      "Tobacco"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "John Rolfe introduced a sweeter variety of it in 1612.",
      "steps": [
       "Jamestown spent its early years searching for gold and finding none.",
@@ -258,12 +258,12 @@
      "kind": "mc",
      "q": "Why did tobacco increase pressure on Indigenous land in Virginia?",
      "opts": [
-      "It exhausts the soil quickly, so planters constantly needed new fields",
       "It can only be grown near rivers",
+      "It exhausts the soil quickly, so planters constantly needed new fields",
       "It requires very cold weather",
       "It grows only on land already cleared by Indigenous farmers"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What happens to a field after a few years of growing tobacco?",
      "steps": [
       "Tobacco draws nutrients out of the soil unusually fast.",
@@ -283,12 +283,12 @@
      "kind": "mc",
      "q": "Why did colonists often ally with one Indigenous nation against another?",
      "opts": [
-      "Existing rivalries, such as between Iroquois and Algonquian peoples, could be turned to their advantage",
-      "Because all Indigenous nations were allied with each other",
       "Because colonists could not tell the nations apart",
+      "Because all Indigenous nations were allied with each other",
+      "Existing rivalries, such as between Iroquois and Algonquian peoples, could be turned to their advantage",
       "Because Indigenous nations refused to trade otherwise"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Were Indigenous nations a single bloc, or many separate powers?",
      "steps": [
       "Indigenous North America held many distinct nations with their own interests and histories.",
@@ -308,12 +308,12 @@
      "kind": "mc",
      "q": "What does the Powhatan Confederacy tell you about the situation Jamestown was founded in?",
      "opts": [
-      "The English settled inside the territory of an organised regional power",
+      "The Powhatan had no central leadership",
       "The land around Jamestown was uninhabited",
       "The English were the strongest force in the region from the start",
-      "The Powhatan had no central leadership"
+      "The English settled inside the territory of an organised regional power"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Roughly thirty groups under one leader. What does that add up to?",
      "steps": [
       "The Powhatan Confederacy united about thirty Algonquian-speaking groups under Wahunsenacawh.",
@@ -358,12 +358,12 @@
      "kind": "mc",
      "q": "Roanoke failed and Jamestown survived. Which difference best explains it?",
      "opts": [
-      "Jamestown eventually found a profitable export in tobacco, which brought continued investment and supply",
       "Jamestown had a better climate",
+      "Jamestown eventually found a profitable export in tobacco, which brought continued investment and supply",
       "Roanoke had no contact with Indigenous peoples",
       "Jamestown was founded by the Crown rather than a company"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What does a struggling colony need from home to keep going?",
      "steps": [
       "Both colonies were badly supplied and both nearly died — Jamestown lost most of its people in the Starving Time.",
@@ -383,12 +383,12 @@
      "kind": "mc",
      "q": "A student writes that indentured servitude and chattel slavery were \"basically the same thing.\" What is the strongest correction?",
      "opts": [
-      "Indenture was temporary and contractual; chattel slavery was lifelong, inherited and racial",
-      "They were the same, so no correction is needed",
       "Indentured servants were paid wages",
+      "They were the same, so no correction is needed",
+      "Indenture was temporary and contractual; chattel slavery was lifelong, inherited and racial",
       "Chattel slavery ended after seven years"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Name the differences precisely rather than just disagreeing.",
      "steps": [
       "Both involved unfree labour in harsh conditions, which is why the comparison gets made at all.",
@@ -408,12 +408,12 @@
      "kind": "mc",
      "q": "How did the shift from indentured servitude to chattel slavery connect to the headright system and tobacco?",
      "opts": [
-      "Tobacco demanded ever more land and labour; headrights rewarded importing people; when servants survived to claim land and freedom, planters turned to a permanent labour force",
+      "There is no connection between them",
       "The headright system was abolished, forcing planters to buy enslaved people",
       "Tobacco stopped growing well, so planters needed more skilled workers",
-      "There is no connection between them"
+      "Tobacco demanded ever more land and labour; headrights rewarded importing people; when servants survived to claim land and freedom, planters turned to a permanent labour force"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Follow the chain: what does tobacco need, what do headrights reward, and what happens when an indenture ends?",
      "steps": [
       "Tobacco exhausts soil, so planters needed constant new land, and it is labour-intensive, so they needed constant workers.",
@@ -426,7 +426,8 @@
       "tip": "This is the essay question hiding in this unit. Be able to say it in four sentences without notes."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

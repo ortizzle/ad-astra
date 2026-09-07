@@ -4,7 +4,7 @@
   "unit-alg-0102": {
    "id": "unit-alg-0102",
    "type": "unit",
-   "updatedAt": 1786228684878,
+   "updatedAt": 1788819326982,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -211,12 +211,12 @@
      "kind": "mc",
      "q": "What does g(x) = f(x − 6) do to the graph of f?",
      "opts": [
-      "Slides it 6 units right",
       "Slides it 6 units left",
+      "Slides it 6 units right",
       "Slides it 6 units down",
       "Reflects it across the y-axis"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "It is inside the function, so it feels backwards. Check by asking where g does what f did at 0.",
      "steps": [
       "The − 6 is inside f, so it changes the input.",
@@ -235,12 +235,12 @@
      "kind": "mc",
      "q": "Which equation reflects the graph of f across the x-axis?",
      "opts": [
-      "g(x) = −f(x)",
-      "g(x) = f(−x)",
       "g(x) = f(x) − 1",
+      "g(x) = f(−x)",
+      "g(x) = −f(x)",
       "g(x) = |f(x)|"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Reflecting across the x-axis flips top to bottom, so it must change the y-values.",
      "steps": [
       "A reflection across the x-axis sends each point (x, y) to (x, −y).",
@@ -259,12 +259,12 @@
      "kind": "mc",
      "q": "In a · f[b(x − h)] + k, which letter controls the vertical translation?",
      "opts": [
-      "k",
+      "h",
       "a",
       "b",
-      "h"
+      "k"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Which value gets added at the very end, after everything else is done?",
      "steps": [
       "a multiplies the output, giving a vertical stretch or compression.",
@@ -308,12 +308,12 @@
      "kind": "mc",
      "q": "Which transformations do NOT change the shape of a graph?",
      "opts": [
-      "Translations and reflections",
       "Stretches and compressions",
+      "Translations and reflections",
       "Only translations",
       "All four change the shape"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which ones move the graph rigidly, without altering any distance inside it?",
      "steps": [
       "A translation slides every point the same distance in the same direction, so distances inside the graph are preserved.",
@@ -333,12 +333,12 @@
      "kind": "mc",
      "q": "What is the vertex of y = (x − 2)² + 7?",
      "opts": [
-      "(2, 7)",
-      "(−2, 7)",
       "(2, −7)",
+      "(−2, 7)",
+      "(2, 7)",
       "(7, 2)"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Vertex form is y = a(x − h)² + k, and h reads backwards from the sign in the bracket.",
      "steps": [
       "Compare with vertex form y = a(x − h)² + k.",
@@ -358,12 +358,12 @@
      "kind": "mc",
      "q": "The graph of f has domain [−3, 3]. What is the domain of g(x) = f(x − 5)?",
      "opts": [
-      "[2, 8]",
+      "[−15, 15]",
       "[−8, −2]",
       "[−3, 3]",
-      "[−15, 15]"
+      "[2, 8]"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "A horizontal shift moves the domain. Which direction, and by how much?",
      "steps": [
       "g(x) = f(x − 5) is a translation 5 units right.",
@@ -408,12 +408,12 @@
      "kind": "mc",
      "q": "Reflect f(x) = 4x − 9 across the y-axis. What is the new function?",
      "opts": [
-      "g(x) = −4x − 9",
       "g(x) = −4x + 9",
+      "g(x) = −4x − 9",
       "g(x) = 4x + 9",
       "g(x) = −(4x − 9)"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Reflecting across the y-axis means g(x) = f(−x). Substitute carefully.",
      "steps": [
       "A reflection across the y-axis is g(x) = f(−x).",
@@ -433,12 +433,12 @@
      "kind": "mc",
      "q": "What transformations turn f(x) = x² into g(x) = −(x + 3)² − 8?",
      "opts": [
-      "Left 3, reflect across the x-axis, down 8",
-      "Right 3, reflect across the x-axis, down 8",
       "Left 3, reflect across the y-axis, down 8",
+      "Right 3, reflect across the x-axis, down 8",
+      "Left 3, reflect across the x-axis, down 8",
       "Left 3, reflect across the x-axis, up 8"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Take the pieces one at a time: what is inside the bracket, what is the minus doing, what is added at the end.",
      "steps": [
       "Inside the bracket: (x + 3), which is (x − (−3)), so h = −3 — a translation 3 units LEFT.",
@@ -458,12 +458,12 @@
      "kind": "mc",
      "q": "A student says g(x) = |x + 2| − 7 is the graph of f(x) = |x| moved 2 right and 7 down. What did they get wrong?",
      "opts": [
-      "It moves 2 LEFT, not right — the horizontal shift is 7 down is correct",
+      "Nothing is wrong",
       "It moves 7 up, not down",
       "It also reflects across the x-axis",
-      "Nothing is wrong"
+      "It moves 2 LEFT, not right — the horizontal shift is 7 down is correct"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "One of the two claims is right. Check the inside one.",
      "steps": [
       "The − 7 is outside, so it is a vertical translation 7 units down. That part is correct.",
@@ -508,12 +508,12 @@
      "kind": "mc",
      "q": "Which function has the same graph as f(x) = |2x − 8|?",
      "opts": [
-      "g(x) = |2(x − 4)|",
       "g(x) = |2(x − 8)|",
+      "g(x) = |2(x − 4)|",
       "g(x) = 2|x − 8|",
       "g(x) = |2x| − 8"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Factor the coefficient out of the inside before you read off any transformation.",
      "steps": [
       "Factor 2 out of the inside: 2x − 8 = 2(x − 4).",
@@ -533,12 +533,12 @@
      "kind": "mc",
      "q": "Why does a minus sign outside a function flip it vertically, while a minus inside flips it horizontally?",
      "opts": [
-      "Outside acts on the output, which is the y-coordinate; inside acts on the input, which is the x-coordinate",
-      "Because the order of operations puts the outside first",
       "Because reflections always work on the y-axis first",
+      "Because the order of operations puts the outside first",
+      "Outside acts on the output, which is the y-coordinate; inside acts on the input, which is the x-coordinate",
       "It is a convention with no underlying reason"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Ask which coordinate each minus actually touches.",
      "steps": [
       "g(x) = −f(x) computes f(x) first, then negates the result — so the output changes sign.",
@@ -558,12 +558,12 @@
      "kind": "mc",
      "q": "For vertical scaling, k > 1 stretches. For horizontal scaling, k > 1 compresses. Why the reversal?",
      "opts": [
-      "A vertical k multiplies the output directly, while a horizontal k means the input must be k times smaller to reach the same value",
+      "It is a mistake in the textbook",
       "Because horizontal distances are measured differently",
       "Because the x-axis and y-axis have different scales",
-      "It is a mistake in the textbook"
+      "A vertical k multiplies the output directly, while a horizontal k means the input must be k times smaller to reach the same value"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "For h(x) = f(3x), what x makes h do what f did at 6?",
      "steps": [
       "For g(x) = 3f(x), the output is simply tripled, so every point moves three times further from the axis — a stretch.",
@@ -609,12 +609,12 @@
      "kind": "mc",
      "q": "The graph of f(x) = x² is reflected across the y-axis. What happens, and why?",
      "opts": [
-      "Nothing visible changes, because x² is symmetric about the y-axis",
       "It flips upside down",
+      "Nothing visible changes, because x² is symmetric about the y-axis",
       "It shifts to the left",
       "It becomes narrower"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Work out f(−x) algebraically and compare it with f(x).",
      "steps": [
       "A reflection across the y-axis gives g(x) = f(−x).",
@@ -634,12 +634,12 @@
      "kind": "mc",
      "q": "Describe the graph of g(x) = 0.5|x| both as a stretch and as a compression of f(x) = |x|. What does that tell you?",
      "opts": [
-      "It is a vertical compression by 0.5 and a horizontal stretch by 2 — one graph can be reached by different routes",
-      "Only the vertical description is correct",
       "Only the horizontal description is correct",
+      "Only the vertical description is correct",
+      "It is a vertical compression by 0.5 and a horizontal stretch by 2 — one graph can be reached by different routes",
       "The two descriptions contradict each other, so one must be wrong"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Try writing g both as k·f(x) and as f(kx), and check whether both produce the same graph.",
      "steps": [
       "As a vertical scaling: g(x) = 0.5 · f(x), and 0.5 is between 0 and 1, so it is a vertical compression by 0.5.",
@@ -659,12 +659,12 @@
      "kind": "mc",
      "q": "For f(x) = x² with domain [−2, 2], the graph is translated 3 units down. What happens to the domain and range?",
      "opts": [
-      "Domain stays [−2, 2]; range moves from [0, 4] to [−3, 1]",
+      "Domain stays [−2, 2]; range stays [0, 4]",
       "Domain moves to [−5, −1]; range stays [0, 4]",
       "Both the domain and the range shift down by 3",
-      "Domain stays [−2, 2]; range stays [0, 4]"
+      "Domain stays [−2, 2]; range moves from [0, 4] to [−3, 1]"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "A vertical shift touches only one of the two. Work out the parent range first.",
      "steps": [
       "On [−2, 2], x² runs from 0 at x = 0 up to 4 at the endpoints, so the range of f is [0, 4].",
@@ -677,7 +677,8 @@
       "tip": "Work out the parent range before transforming. Half the mistakes here start from getting [0, 4] wrong."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

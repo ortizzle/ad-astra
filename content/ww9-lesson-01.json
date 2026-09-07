@@ -4,7 +4,7 @@
   "unit-ww9-01": {
    "id": "unit-ww9-01",
    "type": "unit",
-   "updatedAt": 1786303653498,
+   "updatedAt": 1788819326982,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -190,12 +190,12 @@
      "kind": "mc",
      "q": "A maxim is best described as:",
      "opts": [
-      "A short saying that states a general truth or rule of conduct",
       "A driving force behind an action",
+      "A short saying that states a general truth or rule of conduct",
       "A person who moves from town to town",
       "An expression of deep sorrow"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think of a proverb printed on a poster.",
      "steps": [
       "A maxim is a compact statement of a general truth.",
@@ -214,12 +214,12 @@
      "kind": "mc",
      "q": "What does it mean to extol something?",
      "opts": [
-      "To praise it highly",
-      "To take away from its value",
       "To require it of everyone",
+      "To take away from its value",
+      "To praise it highly",
       "To examine it closely for meaning"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "It is praise, but not mild praise.",
      "steps": [
       "Extol means to praise highly.",
@@ -238,12 +238,12 @@
      "kind": "mc",
      "q": "Which situation is intermittent?",
      "opts": [
-      "A porch light that flickers on and off through the evening",
+      "A porch light that is brighter than the neighbours’",
       "A porch light that stays on all night",
       "A porch light that has burned out completely",
-      "A porch light that is brighter than the neighbours’"
+      "A porch light that flickers on and off through the evening"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Not continuous — happening at intervals.",
      "steps": [
       "Intermittent means happening at intervals rather than continuously.",
@@ -286,12 +286,12 @@
      "kind": "mc",
      "q": "To plumb a mystery is to:",
      "opts": [
-      "Understand it by examining it closely",
       "Announce it publicly",
+      "Understand it by examining it closely",
       "Make it seem less important",
       "Set it aside for later"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think about a weight dropped to find the bottom.",
      "steps": [
       "Plumb literally means to measure the depth of water.",
@@ -310,12 +310,12 @@
      "kind": "mc",
      "q": "Wheedling involves:",
      "opts": [
-      "Sly persuasion or insincere flattery",
-      "Direct and forceful demands",
       "Silent disapproval",
+      "Direct and forceful demands",
+      "Sly persuasion or insincere flattery",
       "Careful measurement"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "What kind of persuasion has an agenda hidden in it?",
      "steps": [
       "To wheedle is to coax using sly persuasion or insincere praise.",
@@ -334,12 +334,12 @@
      "kind": "mc",
      "q": "A city council member argues that a proposed glass tower \"detracts from the historic character of the square.\" She means the tower would:",
      "opts": [
-      "Diminish something valuable that is already there",
+      "Require approval from the state government",
       "Physically block the road through the square",
       "Cost more than the city can afford",
-      "Require approval from the state government"
+      "Diminish something valuable that is already there"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Detract is about value, not money or logistics.",
      "steps": [
       "Detract means to take away from the value, beauty or importance of something.",
@@ -382,12 +382,12 @@
      "kind": "mc",
      "q": "A reviewer writes that an actor’s performance was \"flamboyant to the point of distraction.\" The reviewer is saying the performance was:",
      "opts": [
-      "So showy that it pulled attention away from the play",
       "So quiet that the audience struggled to hear",
+      "So showy that it pulled attention away from the play",
       "Technically skilled but emotionally cold",
       "Faithful to the playwright’s original intent"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Flamboyant carries a built-in \"too much\".",
      "steps": [
       "Flamboyant means excessively showy or unrestrained.",
@@ -406,12 +406,12 @@
      "kind": "mc",
      "q": "Attendance at the assembly is obligatory. This means students:",
      "opts": [
-      "Are required to attend",
-      "Are encouraged but not required to attend",
       "May attend only with a signed permission form",
+      "Are encouraged but not required to attend",
+      "Are required to attend",
       "Will be rewarded for attending"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Same root as obligation.",
      "steps": [
       "Obligatory means required or demanded.",
@@ -430,12 +430,12 @@
      "kind": "analogy",
      "q": "EXTOL : PRAISE",
      "opts": [
-      "bewail : regret",
+      "vagabond : travel",
       "detract : add",
       "visage : face",
-      "vagabond : travel"
+      "bewail : regret"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "How is extolling different from ordinary praising? Same difference, same direction.",
      "steps": [
       "First work out the stem’s relationship: to extol is to praise INTENSELY.",
@@ -480,12 +480,12 @@
      "kind": "analogy",
      "q": "FLAMBOYANT : RESTRAINED",
      "opts": [
-      "obligatory : optional",
       "maxim : proverb",
+      "obligatory : optional",
       "extol : praise",
       "vagabond : road"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "These two describe opposite ends of the same quality.",
      "steps": [
       "Flamboyant means unrestrained showiness, so the stem pair is opposites.",
@@ -505,12 +505,12 @@
      "kind": "analogy",
      "q": "DETRACT : VALUE",
      "opts": [
-      "emancipate : bondage",
-      "plumb : depth",
       "bewail : sorrow",
+      "plumb : depth",
+      "emancipate : bondage",
       "wheedle : flattery"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "What does detracting DO to value? Look for a pair doing the same thing.",
      "steps": [
       "To detract is to take value AWAY — the verb removes the noun.",
@@ -530,12 +530,12 @@
      "kind": "mc",
      "q": "A biographer writes: \"His detractors bewailed the appointment; his admirers extolled it.\" What does this sentence establish about the appointment?",
      "opts": [
-      "It divided opinion sharply, with strong feeling on both sides",
+      "It was reversed shortly after being announced",
       "It was universally unpopular",
       "It was met mostly with indifference",
-      "It was reversed shortly after being announced"
+      "It divided opinion sharply, with strong feeling on both sides"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Three Lesson 1 words are doing the work. Sort them by who is speaking.",
      "steps": [
       "Detractors are critics; they bewailed — expressed deep sorrow over — the appointment.",
@@ -580,12 +580,12 @@
      "kind": "mc",
      "q": "Which pair of Lesson 1 words could describe the SAME obstacle from opposite attitudes?",
      "opts": [
-      "insuperable and surmountable — one says it cannot be beaten, the other that it can",
       "obligatory and required — both say the same thing",
+      "insuperable and surmountable — one says it cannot be beaten, the other that it can",
       "maxim and adage — both mean a short saying",
       "visage and face — both name the same thing"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which of these pairs actually disagrees?",
      "steps": [
       "The question asks for words describing one obstacle from OPPOSITE attitudes.",
@@ -597,7 +597,8 @@
       "tip": "Whether an obstacle is \"insuperable\" is often an argument in disguise. Notice when a description is really a prediction."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

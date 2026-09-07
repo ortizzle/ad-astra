@@ -4,8 +4,8 @@
   "unit-bio-sgt1": {
    "id": "unit-bio-sgt1",
    "type": "unit",
-   "updatedAt": 1788125207661,
-   "libv": 2,
+   "updatedAt": 1788819326982,
+   "libv": 3,
    "classId": "bio",
    "quarter": 1,
    "status": "draft",
@@ -285,12 +285,12 @@
      "kind": "mc",
      "q": "A student records that her plant grew 4.2 cm and that its leaves smell faintly sweet. Which is which?",
      "opts": [
-      "4.2 cm is quantitative; the smell is qualitative",
       "4.2 cm is qualitative; the smell is quantitative",
+      "4.2 cm is quantitative; the smell is qualitative",
       "Both are quantitative",
       "Both are qualitative"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which one is a number, and which one comes from the five senses?",
      "steps": [
       "Quantitative data can be counted or measured — 4.2 cm is a measurement.",
@@ -309,12 +309,12 @@
      "kind": "mc",
      "q": "In a data table for an experiment on how fertilizer amount affects tomato yield, which column goes on the LEFT — and on a graph, which axis does that same variable take?",
      "opts": [
-      "Fertilizer amount — left column and x-axis",
-      "Tomato yield — left column and x-axis",
       "Fertilizer amount — left column and y-axis",
+      "Tomato yield — left column and x-axis",
+      "Fertilizer amount — left column and x-axis",
       "Tomato yield — left column and y-axis"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The intentionally changed variable claims the left column AND the x-axis.",
      "steps": [
       "Fertilizer amount is what's intentionally changed — the independent variable.",
@@ -333,12 +333,12 @@
      "kind": "mc",
      "q": "In a headache-medicine trial, one group gets the real pill and another gets a sugar pill with no medicinal value. What are the second group and its pill called?",
      "opts": [
-      "The control group, taking a placebo",
+      "The placebo group, taking a control",
       "The experimental group, taking a placebo",
       "The control group, taking a catalyst",
-      "The placebo group, taking a control"
+      "The control group, taking a placebo"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Which group does NOT receive the intervention — and what's the fake drug's name?",
      "steps": [
       "The group receiving the changed variable (the real medicine) is the experimental group.",
@@ -381,12 +381,12 @@
      "kind": "mc",
      "q": "A diagram shows one atom handing an electron over to another atom, leaving one + and one −. A second diagram shows two atoms sharing a pair of electrons between them. Which bonds are these?",
      "opts": [
-      "First ionic, second covalent",
       "First covalent, second ionic",
+      "First ionic, second covalent",
       "First hydrogen, second metallic",
       "First metallic, second hydrogen"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Transfer vs. share.",
      "steps": [
       "An electron TRANSFERRED from one atom to another — creating charged ions — is an ionic bond.",
@@ -405,12 +405,12 @@
      "kind": "mc",
      "q": "Which correctly orders ionic, covalent and hydrogen bonds from STRONGEST to weakest?",
      "opts": [
-      "Covalent, ionic, hydrogen",
-      "Ionic, covalent, hydrogen",
       "Hydrogen, ionic, covalent",
+      "Ionic, covalent, hydrogen",
+      "Covalent, ionic, hydrogen",
       "Covalent, hydrogen, ionic"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The sharing bond is champion; the between-molecules attraction is weakest.",
      "steps": [
       "Covalent bonds — full electron sharing — are the strongest of the three.",
@@ -429,12 +429,12 @@
      "kind": "mc",
      "q": "On a correctly drawn water molecule, where do the partial charges sit?",
      "opts": [
-      "Oxygen δ−, each hydrogen δ+",
+      "Water has no partial charges",
       "Oxygen δ+, each hydrogen δ−",
       "All three atoms δ+",
-      "Water has no partial charges"
+      "Oxygen δ−, each hydrogen δ+"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Oxygen pulls the shared electrons closer to itself.",
      "steps": [
       "Oxygen attracts the shared electrons more strongly than hydrogen does.",
@@ -477,12 +477,12 @@
      "kind": "mc",
      "q": "A solution has a pH of 3. Which statement is true?",
      "opts": [
-      "It is acidic, with more H+ ions",
       "It is basic, with more OH− ions",
+      "It is acidic, with more H+ ions",
       "It is acidic, with more OH− ions",
       "It is neutral"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Which side of 7 is 3 on — and which ion rules that side?",
      "steps": [
       "pH between 0 and 7 is acidic.",
@@ -526,12 +526,12 @@
      "kind": "mc",
      "q": "Digestion breaks a starch polymer into single glucose monomers, using water to snip each link. Which process is this, and why is it named that?",
      "opts": [
-      "Hydrolysis — hydro (water) + lysis (to break)",
-      "Dehydration synthesis — removing water to build",
       "Hydrolysis — hydro (water) + lysis (to build)",
+      "Dehydration synthesis — removing water to build",
+      "Hydrolysis — hydro (water) + lysis (to break)",
       "Condensation — cooling water into chains"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Take the word apart: hydro + lysis.",
      "steps": [
       "Hydro means water; lysis means to break.",
@@ -550,12 +550,12 @@
      "kind": "mc",
      "q": "Plants build their cell walls from one structural carbohydrate; crab shells and fungal cell walls use another. Which pair is correct?",
      "opts": [
-      "Plants: cellulose · animals/fungi: chitin",
+      "Plants: glucose · animals/fungi: sucrose",
       "Plants: chitin · animals/fungi: cellulose",
       "Plants: glycogen · animals/fungi: starch",
-      "Plants: glucose · animals/fungi: sucrose"
+      "Plants: cellulose · animals/fungi: chitin"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "CELL-ulose for plant CELL walls.",
      "steps": [
       "Cellulose is the plant structural carbohydrate — wood, cotton, cell walls.",
@@ -598,12 +598,12 @@
      "kind": "mc",
      "q": "A triglyceride is built from which parts?",
      "opts": [
-      "3 fatty acids and 1 glycerol",
       "1 fatty acid and 3 glycerols",
+      "3 fatty acids and 1 glycerol",
       "2 fatty acids and 2 glycerols",
       "4 fused rings"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The name counts it for you: TRI-glyceride.",
      "steps": [
       "TRI = three: three fatty-acid tails.",
@@ -622,12 +622,12 @@
      "kind": "mc",
      "q": "A phospholipid has a hydrophilic ____ and a hydrophobic ____, and these molecules form the lipid ____ of the cell membrane.",
      "opts": [
-      "head · tail · bilayer",
-      "tail · head · bilayer",
       "head · tail · monolayer",
+      "tail · head · bilayer",
+      "head · tail · bilayer",
       "ring · chain · bilayer"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Which end loves water, and how many layers thick is the membrane?",
      "steps": [
       "The phosphate HEAD is hydrophilic — it faces the watery outside and inside of the cell.",
@@ -646,12 +646,12 @@
      "kind": "mc",
      "q": "Butter is solid on the counter; olive oil is liquid. Based on Unit 2, which explanation is right?",
      "opts": [
-      "Butter is saturated (full of hydrogens, animal source); olive oil is unsaturated (has a double bond, plant source)",
+      "Both have identical structures; only temperature differs",
       "Butter is unsaturated (double bond); olive oil is saturated (full of hydrogens)",
       "Butter contains chitin; olive oil contains cellulose",
-      "Both have identical structures; only temperature differs"
+      "Butter is saturated (full of hydrogens, animal source); olive oil is unsaturated (has a double bond, plant source)"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Solid at room temperature points to which kind of fat, from which source?",
      "steps": [
       "Saturated triglycerides are saturated with HYDROGENS, are SOLID at room temperature, and come from ANIMALS — butter fits all three.",
@@ -694,12 +694,12 @@
      "kind": "mc",
      "q": "A double-stranded DNA molecule is 22% adenine (A). Using Chargaff's rule, what are the other three percentages?",
      "opts": [
-      "T = 22%, G = 28%, C = 28%",
       "T = 28%, G = 22%, C = 28%",
+      "T = 22%, G = 28%, C = 28%",
       "T = 22%, G = 22%, C = 34%",
       "T = 78%, G = 11%, C = 11%"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "A pairs with T; whatever is left splits evenly between G and C.",
      "steps": [
       "Chargaff's rule: %A = %T, so T is also 22%.",
@@ -718,12 +718,12 @@
      "kind": "mc",
      "q": "Which row correctly compares DNA and RNA?",
      "opts": [
-      "DNA: bases A,T,G,C and deoxyribose sugar · RNA: bases A,U,G,C and ribose sugar",
-      "DNA: bases A,U,G,C and ribose · RNA: bases A,T,G,C and deoxyribose",
       "Both use bases A,T,G,C; only the sugar differs",
+      "DNA: bases A,U,G,C and ribose · RNA: bases A,T,G,C and deoxyribose",
+      "DNA: bases A,T,G,C and deoxyribose sugar · RNA: bases A,U,G,C and ribose sugar",
       "Both use ribose; only the bases differ"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "RNA swaps one base and drops the 'deoxy-'.",
      "steps": [
       "DNA's bases: A, T, G, C. RNA replaces T with U — so A, U, G, C.",
@@ -742,12 +742,12 @@
      "kind": "mc",
      "q": "All 20 amino acids share the same central-carbon frame — an amino group, a carboxyl group, and a hydrogen. Which part CHANGES from one amino acid to the next?",
      "opts": [
-      "The R group",
+      "The central carbon",
       "The amino group",
       "The carboxyl group",
-      "The central carbon"
+      "The R group"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "One part is literally named like a variable.",
      "steps": [
       "Every amino acid shares the same three fixed parts around the central carbon.",
@@ -790,12 +790,12 @@
      "kind": "mc",
      "q": "Chemically speaking, breaking a bond ____ energy and making a bond ____ energy — and a catalyst is ____ in the reaction.",
      "opts": [
-      "absorbs · releases · not used up",
       "releases · absorbs · not used up",
+      "absorbs · releases · not used up",
       "absorbs · releases · consumed",
       "releases · absorbs · consumed"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Bonds are like glue: pulling glue apart takes work; setting glue gives off heat.",
      "steps": [
       "Breaking a bond always ABSORBS (requires) energy — you're pulling something apart that wants to stay together.",
@@ -814,12 +814,12 @@
      "kind": "mc",
      "q": "From the CHON(PS) chart: which row correctly matches a macromolecule to its monomer and polymer?",
      "opts": [
-      "Proteins — amino acids → polypeptide",
-      "Carbohydrates — fatty acids → polysaccharide",
       "Nucleic acids — glucose → DNA",
+      "Carbohydrates — fatty acids → polysaccharide",
+      "Proteins — amino acids → polypeptide",
       "Lipids — nucleotides → triglyceride"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Match each family to its own building block.",
      "steps": [
       "Proteins: monomer = amino acid, polymer = polypeptide. ✓",
@@ -838,12 +838,12 @@
      "kind": "mc",
      "q": "Of the four biomolecule types, which one is NONPOLAR — and what does that mean for it in water?",
      "opts": [
-      "Lipids — they will not dissolve in water",
+      "Proteins — they will not dissolve in water",
       "Carbohydrates — they will not dissolve in water",
       "Nucleic acids — they will not dissolve in water",
-      "Proteins — they will not dissolve in water"
+      "Lipids — they will not dissolve in water"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Picture salad dressing sitting in two layers.",
      "steps": [
       "Polar things mix with water, because water is polar itself.",

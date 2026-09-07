@@ -910,6 +910,22 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Fifty units, all answer A (v167 / Wayfinder v149, both apps)
+
+Chris reported the first Junior Jeopardy board's answers "were all A".
+The render-time shuffle was measured working in both apps; what the scan
+found was that **31 shipped Ad Astra units** (every Algebra Topic 1 and 2
+lesson, every Wordly Wise Book 9 lesson, History Unit 1, both Latin
+units, Biology, the Physics equations and ramp units, ASL Class 1) were
+authored with the correct answer in slot A on every question — the
+`_balance()` step never ran on them. Three things shipped, identical
+here: the checker warns on the skew, `fetchLibrary()` carries an
+ORDER-ONLY update without re-drafting (`orderOnly()`, so the rebalance
+never enters Chris's queue — `test_orderonly.js` covers it), and all 31
+files were rotated with `libv` bumped and verified identical to HEAD
+apart from option order. See wayfinder/CLAUDE.md's section of the same
+name for the full account.
+
 ### Junior Jeopardy (v167 / Wayfinder v149, both apps)
 
 The Trivia Ladder rebuilt as a game show at Chris's request, engine,

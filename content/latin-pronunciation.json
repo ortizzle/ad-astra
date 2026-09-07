@@ -4,7 +4,7 @@
   "unit-latin-pron": {
    "id": "unit-latin-pron",
    "type": "unit",
-   "updatedAt": 1786210121543,
+   "updatedAt": 1788819326982,
    "classId": "latin",
    "quarter": 1,
    "status": "draft",
@@ -302,12 +302,12 @@
      "kind": "mc",
      "q": "Latin C is pronounced how?",
      "opts": [
-      "Always a hard k, as in cat",
       "Soft, as in city, before e and i",
+      "Always a hard k, as in cat",
       "Like ch in church before e and i",
       "Silent before another consonant"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Ask yourself whether Latin has any exceptions here. It does not.",
      "steps": [
       "English softens c before e and i: city, cent, cinema.",
@@ -326,12 +326,12 @@
      "kind": "mc",
      "q": "The Latin vowel I sounds like which English vowel?",
      "opts": [
-      "The ee in feet",
-      "The eye in ice",
       "The i in sit",
+      "The eye in ice",
+      "The ee in feet",
       "The ay in late"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Latin vowels each have one sound, and it is usually the \"continental\" one.",
      "steps": [
       "The five Latin vowels are ah, ay, ee, oh, oo.",
@@ -350,12 +350,12 @@
      "kind": "mc",
      "q": "Which phrase means \"Thank you\"?",
      "opts": [
-      "Gratias tibi ago",
+      "Valete",
       "Quid agis",
       "Mihi nomen est",
-      "Valete"
+      "Gratias tibi ago"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "One of these has a word that survived into English as gratitude.",
      "steps": [
       "gratias is the ancestor of grateful and gratitude.",
@@ -398,12 +398,12 @@
      "kind": "mc",
      "q": "\"Salve!\" is used to greet how many people?",
      "opts": [
-      "One person",
       "Two or more",
+      "One person",
       "Only a teacher",
       "Only in writing"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "There is a second version of this greeting with an extra ending.",
      "steps": [
       "Latin marks how many people you are addressing; English does not.",
@@ -443,12 +443,12 @@
      "kind": "mc",
      "q": "You read \"Vale!\" aloud. Which is right?",
      "opts": [
-      "WAH-lay",
-      "vah-LAY",
       "VAY-lee",
+      "vah-LAY",
+      "WAH-lay",
       "wah-LEE"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Two rules collide here: what V says, and where a two-syllable word takes its stress.",
      "steps": [
       "V says w, so the word starts with a w-sound. That rules out anything beginning vah- or VAY-.",
@@ -468,12 +468,12 @@
      "kind": "mc",
      "q": "How is \"vacca\" said?",
      "opts": [
-      "WAHK-kah",
+      "WAH-say",
       "VAK-suh",
       "VAH-chah",
-      "WAH-say"
+      "WAHK-kah"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Two c-sounds, and neither of them softens.",
      "steps": [
       "V says w, so it opens with a w.",
@@ -518,12 +518,12 @@
      "kind": "mc",
      "q": "Someone walks up to your whole group and says \"Salvete!\" What did they just do?",
      "opts": [
-      "Greeted all of you",
       "Greeted one of you",
+      "Greeted all of you",
       "Said goodbye to all of you",
       "Asked your names"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The -te ending is doing the work.",
      "steps": [
       "salve greets one person.",
@@ -542,12 +542,12 @@
      "kind": "mc",
      "q": "\"Iulius\" begins with I before another vowel, at the start of the word. What is its first sound?",
      "opts": [
-      "y, as in yes",
-      "ee, as in feet",
       "j, as in jam",
+      "ee, as in feet",
+      "y, as in yes",
       "eye, as in ice"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "The rule has two conditions and this word meets both.",
      "steps": [
       "I is normally the vowel ee.",
@@ -567,12 +567,12 @@
      "kind": "mc",
      "q": "Which phrase asks \"How are you?\" of more than one person?",
      "opts": [
-      "Quid agitis?",
+      "Valetis?",
       "Quid agis?",
       "Quid nomen est?",
-      "Valetis?"
+      "Quid agitis?"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Look for the plural ending you already know from salvete.",
      "steps": [
       "quid agis asks one person how they are doing.",
@@ -638,12 +638,12 @@
      "kind": "mc",
      "q": "Why does \"salvete\" stress its middle syllable while \"vescere\" stresses its first?",
      "opts": [
-      "The second-to-last syllable is long in salvete and short in vescere",
       "Because salvete is a greeting and vescere is a command",
+      "The second-to-last syllable is long in salvete and short in vescere",
       "Because Latin alternates stress word by word",
       "Because longer words always shift the stress backwards"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Both are three syllables, so the difference has to be inside the second-to-last one.",
      "steps": [
       "Both words have three syllables: sal-ve-te and ves-ce-re.",
@@ -663,12 +663,12 @@
      "kind": "mc",
      "q": "English says \"Caesar\" with a soft s-sound at the front. Applying the Latin rules, how did the Romans say it?",
      "opts": [
-      "KIGH-sar",
-      "SEE-zer",
       "CHAY-zar",
+      "SEE-zer",
+      "KIGH-sar",
       "SAY-zar"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Two rules apply, one for the C and one for the ae.",
      "steps": [
       "C is always hard, so the word opens with a k.",
@@ -688,12 +688,12 @@
      "kind": "mc",
      "q": "In \"Vescere bracis meis\" (Eat my shorts), which sound is an English reader most likely to get wrong?",
      "opts": [
-      "The v in vescere, which says w",
+      "The final s in meis",
       "The b in bracis",
       "The m in meis",
-      "The final s in meis"
+      "The v in vescere, which says w"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Three of these letters behave the same in both languages. One does not.",
      "steps": [
       "B, M and S sound the same in Latin and English, so none of them is a trap.",
@@ -737,12 +737,12 @@
      "kind": "mc",
      "q": "In \"Te audire non possum\", the au of audire makes which sound?",
      "opts": [
-      "The ow in now",
       "The aw in awe",
+      "The ow in now",
       "The ai in aid",
       "The ough in ought"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "au is a diphthong, so the two letters make one sound.",
      "steps": [
       "au is one of the five diphthongs: ae, oe, ei, au, eu.",
@@ -754,7 +754,8 @@
       "tip": "The five diphthongs are worth a single pass of memorising — they cover most mispronunciations."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

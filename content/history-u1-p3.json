@@ -4,7 +4,7 @@
   "unit-hist-u1p3": {
    "id": "unit-hist-u1p3",
    "type": "unit",
-   "updatedAt": 1786231680099,
+   "updatedAt": 1788819326982,
    "classId": "history",
    "quarter": 1,
    "status": "draft",
@@ -153,12 +153,12 @@
      "kind": "mc",
      "q": "What does chattel mean in \"chattel slavery\"?",
      "opts": [
-      "A movable piece of property",
       "A written contract",
+      "A movable piece of property",
       "A term of years",
       "A religious duty"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The word is a legal term about ownership.",
      "steps": [
       "Chattel is an old legal word for a movable possession, like livestock or furniture.",
@@ -177,12 +177,12 @@
      "kind": "mc",
      "q": "What was Bacon's Rebellion?",
      "opts": [
-      "A 1676 uprising of Virginia frontier settlers against the colonial governor",
-      "A slave revolt in South Carolina",
       "A war between Maryland and Virginia",
+      "A slave revolt in South Carolina",
+      "A 1676 uprising of Virginia frontier settlers against the colonial governor",
       "A protest against British taxes"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "It happened in Virginia in 1676 and Jamestown was burned.",
      "steps": [
       "Nathaniel Bacon led frontier settlers against Governor Berkeley in 1676.",
@@ -202,12 +202,12 @@
      "kind": "mc",
      "q": "Why was Georgia originally founded?",
      "opts": [
-      "As a refuge for debtors and a military buffer against Spanish Florida",
+      "As a Puritan settlement",
       "As a Catholic refuge",
       "To grow rice for the Crown",
-      "As a Puritan settlement"
+      "As a refuge for debtors and a military buffer against Spanish Florida"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Two reasons, one charitable and one military.",
      "steps": [
       "James Oglethorpe founded Georgia in 1732, the last of the thirteen.",
@@ -252,12 +252,12 @@
      "kind": "mc",
      "q": "How did Bacon's Rebellion affect the development of racial hierarchy in Virginia?",
      "opts": [
-      "It frightened elites into hardening racial divisions to prevent poor whites and Black workers uniting",
       "It ended slavery in Virginia",
+      "It frightened elites into hardening racial divisions to prevent poor whites and Black workers uniting",
       "It gave enslaved people legal rights",
       "It had no lasting effect"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Who rebelled together, and what would the elite most want to prevent happening again?",
      "steps": [
       "Bacon's force included poor white settlers, indentured servants, and some Black participants.",
@@ -277,12 +277,12 @@
      "kind": "mc",
      "q": "Georgia banned slavery at its founding but allowed it by 1751. What does this best show?",
      "opts": [
-      "The economic pull of the plantation model overcame the colony's founding principles",
-      "That the ban had never been enforced",
       "That Georgia was conquered by South Carolina",
+      "That the ban had never been enforced",
+      "The economic pull of the plantation model overcame the colony's founding principles",
       "That the Crown ordered the change"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "What were Georgia's neighbours doing, and how were they doing financially?",
      "steps": [
       "Georgia was founded with bans on slavery and on large landholdings, deliberately.",
@@ -302,12 +302,12 @@
      "kind": "mc",
      "q": "What distinguishes chattel slavery from indentured servitude?",
      "opts": [
-      "It was lifelong, inherited by children, and defined by race in law",
+      "It lasted exactly twenty years",
       "It involved harder physical work",
       "It applied only to men",
-      "It lasted exactly twenty years"
+      "It was lifelong, inherited by children, and defined by race in law"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Name the structural differences, not the conditions.",
      "steps": [
       "Both were unfree labour in brutal conditions, so severity alone does not separate them.",
@@ -352,12 +352,12 @@
      "kind": "mc",
      "q": "Which best explains why South Carolina had a Black majority for much of the colonial period, while Virginia did not?",
      "opts": [
-      "Rice cultivation demanded a far larger workforce per acre than tobacco did",
       "Virginia had banned slavery",
+      "Rice cultivation demanded a far larger workforce per acre than tobacco did",
       "South Carolina was much larger in area",
       "Virginia relied entirely on indentured servants throughout"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Compare what the two crops require in labour.",
      "steps": [
       "Both colonies used enslaved labour, so a ban is not the explanation.",
@@ -377,12 +377,12 @@
      "kind": "mc",
      "q": "Britain paid a bounty for indigo grown in South Carolina. Which idea does that best illustrate?",
      "opts": [
-      "Mercantilism — Britain wanted to buy dye from its own colony rather than from rivals",
-      "Free trade",
       "Religious toleration",
+      "Free trade",
+      "Mercantilism — Britain wanted to buy dye from its own colony rather than from rivals",
       "Self-governance"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Why would a government pay extra to have something grown in its own colony?",
      "steps": [
       "A bounty is a payment to encourage production of a particular good.",
@@ -402,12 +402,12 @@
      "kind": "mc",
      "q": "Why do historians group indenture, debt bondage and chattel slavery together as \"forced labour systems\" while insisting they are not equivalent?",
      "opts": [
-      "All three compel work, but they differ in whether the labour ends, passes to children, and is defined by race",
+      "Because all three were voluntary",
       "Because they all began in the same year",
       "Because they were all legally identical",
-      "Because all three were voluntary"
+      "All three compel work, but they differ in whether the labour ends, passes to children, and is defined by race"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does the grouping capture, and what would it hide if you stopped there?",
      "steps": [
       "Grouping them captures something real: colonial economies consistently relied on labour that was not freely given.",
@@ -420,7 +420,8 @@
       "tip": "Good historical writing does both at once: name the pattern, then name what the pattern hides."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

@@ -4,7 +4,7 @@
   "unit-ww9-06": {
    "id": "unit-ww9-06",
    "type": "unit",
-   "updatedAt": 1786305606131,
+   "updatedAt": 1788819326982,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -187,12 +187,12 @@
      "kind": "mc",
      "q": "A proponent of a plan is someone who:",
      "opts": [
-      "Supports and advocates for it",
       "Opposes it publicly",
+      "Supports and advocates for it",
       "Is undecided about it",
       "Is paid to study it"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Think of the opposite of a detractor.",
      "steps": [
       "A proponent is someone who proposes or supports an idea; an advocate.",
@@ -211,12 +211,12 @@
      "kind": "mc",
      "q": "Rudimentary knowledge is:",
      "opts": [
-      "Basic and not fully developed",
-      "Complete and expert",
       "Entirely incorrect",
+      "Complete and expert",
+      "Basic and not fully developed",
       "Kept secret from others"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Think of the first stage of something.",
      "steps": [
       "Rudimentary means not yet fully developed; basic or elementary.",
@@ -235,12 +235,12 @@
      "kind": "mc",
      "q": "To aver something is to:",
      "opts": [
-      "Declare it positively as the truth",
+      "Repeat it without understanding",
       "Doubt it openly",
       "Ask about it politely",
-      "Repeat it without understanding"
+      "Declare it positively as the truth"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "It is a strong, confident statement.",
      "steps": [
       "Aver means to declare positively; to state as the truth.",
@@ -283,12 +283,12 @@
      "kind": "mc",
      "q": "A sojourn is:",
      "opts": [
-      "A temporary stay",
       "A permanent move",
+      "A temporary stay",
       "A formal speech",
       "A controlling influence"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Jour is French for day.",
      "steps": [
       "A sojourn is a visit or temporary stay.",
@@ -307,12 +307,12 @@
      "kind": "mc",
      "q": "A scientist warns that \"a useful theory can harden into dogma.\" She is warning that the theory might:",
      "opts": [
-      "Come to be treated as unquestionable fact",
-      "Be disproved by new evidence",
       "Become too complicated to teach",
+      "Be disproved by new evidence",
+      "Come to be treated as unquestionable fact",
       "Be forgotten by the next generation"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Dogma is belief held without proof.",
      "steps": [
       "Dogma is an unproven principle or belief held to be true.",
@@ -331,12 +331,12 @@
      "kind": "mc",
      "q": "A senator \"conceded that the programme had gone over budget.\" The word conceded tells you she:",
      "opts": [
-      "Admitted it reluctantly",
+      "Learned it for the first time",
       "Announced it proudly",
       "Denied it firmly",
-      "Learned it for the first time"
+      "Admitted it reluctantly"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Reluctance is built into the word.",
      "steps": [
       "Concede means to admit to be true, often reluctantly.",
@@ -379,12 +379,12 @@
      "kind": "analogy",
      "q": "PROPONENT : SUPPORT",
      "opts": [
-      "detractor : criticize",
       "dogma : proof",
+      "detractor : criticize",
       "sojourn : permanence",
       "apropos : fitting"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "What does a proponent do?",
      "steps": [
       "A proponent is someone who supports — the noun names a person by the action they perform.",
@@ -404,12 +404,12 @@
      "kind": "analogy",
      "q": "DEFICIENT : LACKING",
      "opts": [
-      "vociferous : loud",
-      "ascendancy : decline",
       "rudimentary : complete",
+      "ascendancy : decline",
+      "vociferous : loud",
       "orator : speech"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "How close are these two in meaning?",
      "steps": [
       "Deficient means lacking — the two words are synonyms.",
@@ -429,12 +429,12 @@
      "kind": "analogy",
      "q": "DOGMA : PROOF",
      "opts": [
-      "rudimentary : development",
+      "sojourn : visit",
       "proponent : support",
       "assess : judgement",
-      "sojourn : visit"
+      "rudimentary : development"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "What does dogma not have?",
      "steps": [
       "Dogma is an UNPROVEN belief held to be true — the noun names what is absent.",
@@ -478,12 +478,12 @@
      "kind": "mc",
      "q": "Which sentence shows propagate in its \"foster the spread of\" sense rather than its biological sense?",
      "opts": [
-      "He wrote several articles to propagate his theory about climate change",
       "Begonias are easy plants to propagate from cuttings",
+      "He wrote several articles to propagate his theory about climate change",
       "The frogs that propagated in the fall had few offspring",
       "The gardener propagated the roses successfully"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "One of these spreads an idea; the others spread organisms.",
      "steps": [
       "Propagate means to reproduce or cause to reproduce, and also to foster the spread of something.",
@@ -502,12 +502,12 @@
      "kind": "analogy",
      "q": "ASCENDANCY : DECLINE",
      "opts": [
-      "vociferous : silent",
-      "assess : evaluate",
       "dogma : belief",
+      "assess : evaluate",
+      "vociferous : silent",
       "orator : oratory"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "One of these is power rising, the other power falling.",
      "steps": [
       "Ascendancy is controlling influence risen to the top; decline is the fall away from it. Opposites.",
@@ -527,12 +527,12 @@
      "kind": "mc",
      "q": "Ascendancy means:",
      "opts": [
-      "Controlling influence or domination",
+      "A temporary stay",
       "A steep physical climb",
       "A formal apology",
-      "A temporary stay"
+      "Controlling influence or domination"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Ascend is sitting inside it.",
      "steps": [
       "Ascendancy means controlling influence; domination.",
@@ -575,12 +575,12 @@
      "kind": "mc",
      "q": "A chef says the herbs \"impart a subtle flavour.\" Impart here means to:",
      "opts": [
-      "Give or bestow",
       "Disclose a secret",
+      "Give or bestow",
       "Remove entirely",
       "Measure precisely"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Impart has two senses. Which fits herbs and flavour?",
      "steps": [
       "Impart means to make known or disclose, and also to bestow.",
@@ -599,12 +599,12 @@
      "kind": "mc",
      "q": "A critic writes that a politician is \"dogmatic about policies she once held tentatively.\" What has changed?",
      "opts": [
-      "She now asserts as certain what she previously treated as open to question",
-      "She has abandoned the policies entirely",
       "She has become better informed about them",
+      "She has abandoned the policies entirely",
+      "She now asserts as certain what she previously treated as open to question",
       "She now keeps her views private"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Dogmatic describes how firmly a belief is held.",
      "steps": [
       "Dogmatic means overly positive and assertive about opinions, as if they were facts.",
@@ -617,7 +617,8 @@
       "tip": "A criticism can target how a belief is held rather than what it says. That is a subtler and often fairer attack."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

@@ -4,7 +4,7 @@
   "unit-asl1": {
    "id": "unit-asl1",
    "type": "unit",
-   "updatedAt": 1787479200000,
+   "updatedAt": 1788819326982,
    "classId": "asl",
    "quarter": 1,
    "status": "draft",
@@ -116,7 +116,12 @@
      "from": "source",
      "kind": "mc",
      "q": "Which of these four words is one of the family words from ASL Class 1 — not one of the yes/no or true/false pair?",
-     "opts": ["Daughter", "True", "No", "Sign"],
+     "opts": [
+      "Daughter",
+      "True",
+      "No",
+      "Sign"
+     ],
      "ans": 0,
      "hint": "Two of the four options are half of an opposite pair; one is neither family nor a pair.",
      "steps": [
@@ -136,8 +141,13 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word is the exact opposite of No, in the vocabulary from Class 1?",
-     "opts": ["Yes", "False", "Sign", "Son"],
-     "ans": 0,
+     "opts": [
+      "False",
+      "Yes",
+      "Sign",
+      "Son"
+     ],
+     "ans": 1,
      "hint": "Yes and No were taught together as a pair.",
      "steps": [
       "False is the opposite of True, not of No, so rule it out.",
@@ -154,8 +164,13 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word means the same as “accurate” or “correct”, in the vocabulary from Class 1?",
-     "opts": ["True", "False", "Sign", "Mom"],
-     "ans": 0,
+     "opts": [
+      "Sign",
+      "False",
+      "True",
+      "Mom"
+     ],
+     "ans": 2,
      "hint": "This word's opposite is False.",
      "steps": [
       "False means the opposite of accurate, so rule it out.",
@@ -172,8 +187,13 @@
      "from": "added",
      "kind": "mc",
      "q": "You're leaving a friend's house but you'll see them again soon — which sign from Class 1 fits best as your goodbye?",
-     "opts": ["See You Later", "Thank You", "No", "Sign"],
-     "ans": 0,
+     "opts": [
+      "Sign",
+      "Thank You",
+      "No",
+      "See You Later"
+     ],
+     "ans": 3,
      "hint": "Think about which phrase is specifically a goodbye, not a thank-you or an answer.",
      "steps": [
       "Thank You expresses gratitude, not a goodbye, so rule it out.",
@@ -191,7 +211,12 @@
      "from": "added",
      "kind": "mc",
      "q": "A classmate does something kind for you and you want to respond in ASL — which sign from Class 1 fits?",
-     "opts": ["Thank You", "True", "Dad", "See You Later"],
+     "opts": [
+      "Thank You",
+      "True",
+      "Dad",
+      "See You Later"
+     ],
      "ans": 0,
      "hint": "Think about which phrase you'd actually say out loud in this moment.",
      "steps": [
@@ -210,8 +235,13 @@
      "from": "source",
      "kind": "mc",
      "q": "In ASL class, which word names the language itself — as in, “to communicate using ASL”?",
-     "opts": ["Sign", "Yes", "Mom", "False"],
-     "ans": 0,
+     "opts": [
+      "Yes",
+      "Sign",
+      "Mom",
+      "False"
+     ],
+     "ans": 1,
      "hint": "This is the word the whole class is named after.",
      "steps": [
       "Yes and False are both answer words, not names for the language, so rule them out.",
@@ -228,8 +258,13 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word from Class 1 names your male parent?",
-     "opts": ["Dad", "Son", "True", "Sign"],
-     "ans": 0,
+     "opts": [
+      "True",
+      "Son",
+      "Dad",
+      "Sign"
+     ],
+     "ans": 2,
      "hint": "Its pair in the family group is Mom.",
      "steps": [
       "Son names a parent's male CHILD, not the parent, so rule it out.",
@@ -246,8 +281,13 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word from Class 1 names your female parent?",
-     "opts": ["Mom", "Daughter", "No", "Thank You"],
-     "ans": 0,
+     "opts": [
+      "Thank You",
+      "Daughter",
+      "No",
+      "Mom"
+     ],
+     "ans": 3,
      "hint": "Its pair in the family group is Dad.",
      "steps": [
       "Daughter names a parent's female CHILD, not the parent, so rule it out.",
@@ -264,7 +304,12 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word from Class 1 names a parent's male child?",
-     "opts": ["Son", "Dad", "Yes", "See You Later"],
+     "opts": [
+      "Son",
+      "Dad",
+      "Yes",
+      "See You Later"
+     ],
      "ans": 0,
      "hint": "Its pair in the family group is Daughter.",
      "steps": [
@@ -282,8 +327,13 @@
      "from": "source",
      "kind": "mc",
      "q": "Which word from Class 1 names a parent's female child?",
-     "opts": ["Daughter", "Mom", "False", "Sign"],
-     "ans": 0,
+     "opts": [
+      "Mom",
+      "Daughter",
+      "False",
+      "Sign"
+     ],
+     "ans": 1,
      "hint": "Its pair in the family group is Son.",
      "steps": [
       "Mom names the female PARENT, not the child, so rule it out.",
@@ -300,8 +350,13 @@
      "from": "added",
      "kind": "mc",
      "q": "A friend asks you a yes/no question and the answer is negative — which single sign from Class 1 do you give?",
-     "opts": ["No", "False", "Sign", "Thank You"],
-     "ans": 0,
+     "opts": [
+      "Sign",
+      "False",
+      "No",
+      "Thank You"
+     ],
+     "ans": 2,
      "hint": "This answers a QUESTION; its opposite pair is Yes.",
      "steps": [
       "False answers whether a STATEMENT is accurate, not whether the answer to a question is negative, so rule it out.",
@@ -312,7 +367,8 @@
       "main": "**No.** No and Yes answer a question; True and False judge whether a statement is accurate — similar jobs, but not the same word."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

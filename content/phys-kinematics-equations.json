@@ -4,8 +4,8 @@
   "unit-phys-eqs": {
    "id": "unit-phys-eqs",
    "type": "unit",
-   "updatedAt": 1788615004740,
-   "libv": 2,
+   "updatedAt": 1788819326982,
+   "libv": 3,
    "classId": "physics",
    "quarter": 1,
    "status": "draft",
@@ -154,12 +154,12 @@
      "kind": "mc",
      "q": "A skater slows from 6 m/s to 2 m/s over 5 seconds, decelerating at a constant rate. What is her acceleration?",
      "opts": [
-      "−0.8 m/s²",
       "0.8 m/s²",
+      "−0.8 m/s²",
       "−1.6 m/s²",
       "1.6 m/s²"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Rearrange v = v₀ + at to solve for a.",
      "steps": [
       "v = v₀ + at, so a = (v - v₀) / t.",
@@ -178,12 +178,12 @@
      "kind": "mc",
      "q": "A go-kart starts at 5 m/s and accelerates at 2 m/s² for 6 seconds. How far does it travel?",
      "opts": [
-      "66 m",
-      "30 m",
       "36 m",
+      "30 m",
+      "66 m",
       "42 m"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Final velocity is never mentioned — which equation leaves out v?",
      "steps": [
       "Given v₀=5, a=2, t=6, and v is never mentioned — use Δx = v₀t + ½at².",
@@ -202,12 +202,12 @@
      "kind": "mc",
      "q": "A sprinter starts a race at 3 m/s and accelerates at 1.5 m/s² over the first 20 m. What is her velocity at the 20 m mark?",
      "opts": [
-      "≈8.3 m/s",
+      "≈11.6 m/s",
       "≈6 m/s",
       "9 m/s",
-      "≈11.6 m/s"
+      "≈8.3 m/s"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Time is never mentioned — which equation leaves out t?",
      "steps": [
       "Given v₀=3, a=1.5, Δx=20, and time is never mentioned — use v² = v₀² + 2aΔx.",
@@ -250,12 +250,12 @@
      "kind": "mc",
      "q": "A skateboarder rolling at 8 m/s brakes to a stop in exactly 4 seconds, decelerating at a constant rate. How far does the skateboarder travel while braking?",
      "opts": [
-      "16 m",
       "32 m",
+      "16 m",
       "8 m",
       "4 m"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "You could use either Equation 2 or Equation 4 here — try Equation 4 first, since v=0 is easy to work with.",
      "steps": [
       "Given v₀=8, v=0 (stopped), t=4. Acceleration isn't needed, so use Δx = ½(v₀+v)t.",
@@ -274,12 +274,12 @@
      "kind": "mc",
      "q": "A rock launched straight up from a slingshot is rising at 12 m/s. Using g = 9.8 m/s², about how long does it take to reach its highest point?",
      "opts": [
-      "≈1.2 s",
-      "≈0.8 s",
       "≈2.4 s",
+      "≈0.8 s",
+      "≈1.2 s",
       "≈12 s"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "At the highest point, what is the rock's velocity?",
      "steps": [
       "At the highest point, velocity is momentarily zero (even though gravity is still acting).",
@@ -298,12 +298,12 @@
      "kind": "mc",
      "q": "Same rock, launched straight up at 12 m/s (g = 9.8 m/s²). About how high above the launch point does it rise?",
      "opts": [
-      "≈7.3 m",
+      "≈117.6 m",
       "≈14.7 m",
       "≈1.2 m",
-      "≈117.6 m"
+      "≈7.3 m"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Time is never mentioned this time — which equation leaves out t?",
      "steps": [
       "At the highest point, v=0. Given v₀=12, a=-9.8, v=0, and time isn't needed — use v² = v₀² + 2aΔx.",
@@ -346,12 +346,12 @@
      "kind": "mc",
      "q": "If that same ball had instead been thrown straight UP at 3 m/s from the same bridge, and you tracked it for the same 4 seconds, what would be true about its velocity at the 4-second mark, compared to being thrown down?",
      "opts": [
-      "It would be moving downward, but slower than the thrown-down case",
       "It would be moving upward the whole time",
+      "It would be moving downward, but slower than the thrown-down case",
       "It would be moving at exactly the same speed and direction",
       "It would have stopped completely by 4 seconds"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Does 4 seconds give gravity enough time to turn the ball around and bring it back down past its start?",
      "steps": [
       "Thrown up: v₀=-3 (taking down as positive still, so up is negative), a=9.8, t=4.",
@@ -370,12 +370,12 @@
      "kind": "mc",
      "q": "A car decelerating at a constant rate slows from 25 m/s to 5 m/s over a distance of 400 m. What is its acceleration?",
      "opts": [
-      "−0.75 m/s²",
-      "−1.25 m/s²",
       "0.75 m/s²",
+      "−1.25 m/s²",
+      "−0.75 m/s²",
       "−2.5 m/s²"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Time is never mentioned — rearrange the no-time equation to solve for a.",
      "steps": [
       "v² = v₀² + 2aΔx, so a = (v² - v₀²) / (2Δx).",
@@ -394,12 +394,12 @@
      "kind": "mc",
      "q": "A cheetah accelerates from rest to 28 m/s over a distance of 60 m, at a constant rate. What is its acceleration?",
      "opts": [
-      "≈6.5 m/s²",
+      "≈3.3 m/s²",
       "≈13.1 m/s²",
       "≈0.47 m/s²",
-      "≈3.3 m/s²"
+      "≈6.5 m/s²"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "\"From rest\" tells you v₀ — and time is never mentioned.",
      "steps": [
       "\"From rest\" means v₀=0. Given v=28, Δx=60, and no time — use v² = v₀² + 2aΔx.",
@@ -468,12 +468,12 @@
      "kind": "mc",
      "q": "A different drone flies 60 km at a target average speed of 30 km/h. For the first 20 km it manages 40 km/h, and for the next 20 km it only manages 15 km/h. What speed must it fly for the final 20 km to hit the 30 km/h target average?",
      "opts": [
-      "120 km/h",
       "30 km/h",
+      "120 km/h",
       "60 km/h",
       "It's impossible"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "This time, check the time budget first — is there any time left for the final leg?",
      "steps": [
       "Total time allowed: 60 km ÷ 30 km/h = 2 h.",
@@ -493,12 +493,12 @@
      "kind": "mc",
      "q": "A ball is at the very top of its path after being thrown straight up. Which statement is TRUE at that exact instant?",
      "opts": [
-      "Its velocity is zero, but gravity is still accelerating it downward",
-      "Both its velocity and its acceleration are zero",
       "Its acceleration is zero, but it still has some velocity",
+      "Both its velocity and its acceleration are zero",
+      "Its velocity is zero, but gravity is still accelerating it downward",
       "It has stopped experiencing gravity"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Does gravity ever take a break during a throw?",
      "steps": [
       "At the peak, the ball's velocity is momentarily zero — that's what \"peak\" means.",
@@ -517,12 +517,12 @@
      "kind": "mc",
      "q": "A stone is dropped from rest off a cliff (g = 9.8 m/s², down is positive). How far does it fall during the 3rd second of its fall (that is, between t=2s and t=3s), not the total distance fallen by t=3s?",
      "opts": [
-      "≈24.5 m",
+      "≈14.7 m",
       "≈44.1 m",
       "≈9.8 m",
-      "≈14.7 m"
+      "≈24.5 m"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Find the total distance fallen by t=2s and by t=3s, then subtract.",
      "steps": [
       "Distance by t=2s: Δx = ½(9.8)(2²) = ½(9.8)(4) = 19.6 m.",

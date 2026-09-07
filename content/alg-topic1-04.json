@@ -4,7 +4,7 @@
   "unit-alg-0104": {
    "id": "unit-alg-0104",
    "type": "unit",
-   "updatedAt": 1786228947747,
+   "updatedAt": 1788819326982,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -181,12 +181,12 @@
      "kind": "mc",
      "q": "What is the common difference of 40, 33, 26, 19, …?",
      "opts": [
-      "−7",
       "7",
+      "−7",
       "−13",
       "33"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Subtract a term from the one that follows it, keeping the order right.",
      "steps": [
       "Take the second term minus the first: 33 − 40 = −7.",
@@ -205,12 +205,12 @@
      "kind": "mc",
      "q": "What does a recursive definition of a sequence need in order to work?",
      "opts": [
-      "A starting value",
-      "The last term",
       "The sum of all the terms",
+      "The last term",
+      "A starting value",
       "At least ten terms"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "A recursive rule tells you how to get the next term from the previous one. What is missing at the very beginning?",
      "steps": [
       "A recursive rule says how to get each term from the one before it.",
@@ -229,12 +229,12 @@
      "kind": "mc",
      "q": "What is the difference between a sequence and a series?",
      "opts": [
-      "A sequence is the list of terms; a series is their sum",
+      "They are two words for the same thing",
       "A sequence is finite; a series is infinite",
       "A sequence uses addition; a series uses multiplication",
-      "They are two words for the same thing"
+      "A sequence is the list of terms; a series is their sum"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "One of them is a single number at the end.",
      "steps": [
       "A sequence is an ordered list: 1, 4, 7, 10, 13.",
@@ -278,12 +278,12 @@
      "kind": "mc",
      "q": "In the explicit formula aₙ = a₁ + d(n − 1), why is it (n − 1) and not n?",
      "opts": [
-      "The first term has had no common differences added to it yet",
       "Because sequences start counting at zero",
+      "The first term has had no common differences added to it yet",
       "To make the formula work for negative d",
       "It is a convention with no reason"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Count how many times you add d to get from the 1st term to the 3rd.",
      "steps": [
       "To reach the 1st term you add d zero times — you are already there.",
@@ -303,12 +303,12 @@
      "kind": "mc",
      "q": "Is 2, 4, 8, 16, 32 an arithmetic sequence?",
      "opts": [
-      "No — the differences are 2, 4, 8, 16, which are not constant",
-      "Yes, with d = 2",
       "Yes, with d = 4",
+      "Yes, with d = 2",
+      "No — the differences are 2, 4, 8, 16, which are not constant",
       "Yes, because every term is even"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Work out all the differences before deciding, not just the first one.",
      "steps": [
       "Differences: 4 − 2 = 2, then 8 − 4 = 4, then 16 − 8 = 8, then 32 − 16 = 16.",
@@ -327,12 +327,12 @@
      "kind": "mc",
      "q": "Write the explicit definition for the sequence 11, 18, 25, 32, …",
      "opts": [
-      "aₙ = 11 + 7(n − 1)",
+      "aₙ = 11n + 7",
       "aₙ = 7 + 11(n − 1)",
       "aₙ = 11 + 7n",
-      "aₙ = 11n + 7"
+      "aₙ = 11 + 7(n − 1)"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Identify a₁ and d, then substitute into aₙ = a₁ + d(n − 1).",
      "steps": [
       "The first term is a₁ = 11.",
@@ -377,12 +377,12 @@
      "kind": "mc",
      "q": "An auditorium has 20 seats in the first row and 32 seats in the fifth row, increasing arithmetically. How many seats are in the tenth row?",
      "opts": [
-      "47",
       "44",
+      "47",
       "50",
       "42"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Use the two known rows to find d first, then apply the explicit formula to row 10.",
      "steps": [
       "Use aₙ = a₁ + d(n − 1) with a₁ = 20, n = 5 and a₅ = 32.",
@@ -402,12 +402,12 @@
      "kind": "mc",
      "q": "What is the sum of the arithmetic series with 12 terms, a₁ = 5 and a₁₂ = 60?",
      "opts": [
-      "390",
-      "780",
       "325",
+      "780",
+      "390",
       "360"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "You have all three pieces the sum formula needs. Substitute carefully.",
      "steps": [
       "Use Sₙ = n(a₁ + aₙ) / 2.",
@@ -427,12 +427,12 @@
      "kind": "mc",
      "q": "Find the sum: 4 + 9 + 14 + 19 + 24 + 29 + 34.",
      "opts": [
-      "133",
+      "119",
       "126",
       "140",
-      "119"
+      "133"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Count the terms, then use the first and last with the sum formula.",
      "steps": [
       "Count the terms: 4, 9, 14, 19, 24, 29, 34 — that is n = 7.",
@@ -477,12 +477,12 @@
      "kind": "mc",
      "q": "How many terms are in the series 6 + 13 + 20 + … + 90?",
      "opts": [
-      "13",
       "12",
+      "13",
       "14",
       "11"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Use the explicit formula with the last term known and solve for n.",
      "steps": [
       "First term a₁ = 6, and d = 13 − 6 = 7.",
@@ -502,12 +502,12 @@
      "kind": "mc",
      "q": "Two students write formulas for −1, 6, 13, 20, …. One writes aₙ = −1 + 7(n − 1); the other writes aₙ = 7n − 8. Who is right?",
      "opts": [
-      "Both — expanding the first gives the second",
-      "Only the first",
       "Only the second",
+      "Only the first",
+      "Both — expanding the first gives the second",
       "Neither"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Expand the first formula and compare, then test both at n = 1.",
      "steps": [
       "Expand the first: −1 + 7(n − 1) = −1 + 7n − 7 = 7n − 8.",
@@ -527,12 +527,12 @@
      "kind": "mc",
      "q": "A stack of logs has 12 logs on the bottom row and one fewer in each row above, ending with 1 log at the top. How many logs are in the stack?",
      "opts": [
-      "78",
+      "84",
       "66",
       "72",
-      "84"
+      "78"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "This is a series. Identify n, a₁ and aₙ before reaching for the formula.",
      "steps": [
       "The rows hold 12, 11, 10, … down to 1, so this is arithmetic with d = −1.",
@@ -577,12 +577,12 @@
      "kind": "mc",
      "q": "Why does writing an arithmetic series forwards and backwards, then adding, give the sum formula?",
      "opts": [
-      "Every column then adds to a₁ + aₙ, and there are n columns, giving twice the sum",
       "Because addition is commutative, so the order does not matter",
+      "Every column then adds to a₁ + aₙ, and there are n columns, giving twice the sum",
       "Because the middle term is always the average",
       "Because the common difference cancels out of every term"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Line up 1 + 4 + 7 + 10 + 13 above 13 + 10 + 7 + 4 + 1 and add each column.",
      "steps": [
       "Write the series forwards and again backwards, lined up in columns.",
@@ -602,12 +602,12 @@
      "kind": "mc",
      "q": "A colony has 175 bees in week 1 and grows arithmetically to 259 by week 4. In which week does it first exceed 1,015 bees?",
      "opts": [
-      "Week 31",
-      "Week 30",
       "Week 32",
+      "Week 30",
+      "Week 31",
       "Week 29"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Find d from the two known weeks, then solve for the n that reaches 1,015.",
      "steps": [
       "From week 1 to week 4 is 3 steps: 259 = 175 + d(4 − 1), so 84 = 3d and d = 28.",
@@ -627,12 +627,12 @@
      "kind": "mc",
      "q": "A student claims 0, 1, 3, 6, 10, … is arithmetic with a next term of 15. What is right and what is wrong?",
      "opts": [
-      "The next term is 15, but the sequence is not arithmetic — the differences grow",
+      "Both claims are wrong",
       "The sequence is arithmetic, but the next term is 14",
       "Both claims are correct",
-      "Both claims are wrong"
+      "The next term is 15, but the sequence is not arithmetic — the differences grow"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Check the differences, then check whether the pattern still predicts a next term.",
      "steps": [
       "Differences: 1 − 0 = 1, 3 − 1 = 2, 6 − 3 = 3, 10 − 6 = 4.",
@@ -645,7 +645,8 @@
       "tip": "A predictable pattern is not the same as an arithmetic one. Arithmetic demands a CONSTANT difference."
      }
     }
-   ]
+   ],
+   "libv": 1
   }
  }
 }

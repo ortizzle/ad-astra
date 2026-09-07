@@ -4,7 +4,7 @@
   "unit-alg-t2-01": {
    "id": "unit-alg-t2-01",
    "type": "unit",
-   "updatedAt": 1788615004740,
+   "updatedAt": 1788819326982,
    "classId": "algeo",
    "quarter": 1,
    "status": "draft",
@@ -201,12 +201,12 @@
      "kind": "mc",
      "q": "What is the vertex of g(x) = 5(x − 6)² + 1?",
      "opts": [
-      "(6, 1)",
       "(−6, 1)",
+      "(6, 1)",
       "(6, −1)",
       "(1, 6)"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Read h and k straight from the equation.",
      "steps": [
       "Match the equation to y = a(x − h)² + k.",
@@ -224,12 +224,12 @@
      "kind": "mc",
      "q": "What is the vertex of h(x) = −3(x + 4)² − 2?",
      "opts": [
-      "(−4, −2)",
-      "(4, −2)",
       "(−4, 2)",
+      "(4, −2)",
+      "(−4, −2)",
       "(4, 2)"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "(x + 4) means h is negative — watch the sign flip.",
      "steps": [
       "Rewrite (x + 4) as (x − (−4)) to match the vertex form pattern y = a(x − h)² + k.",
@@ -247,12 +247,12 @@
      "kind": "mc",
      "q": "For f(x) = −7(x − 2)² + 9, which way does the graph open?",
      "opts": [
-      "Downward, because a is negative",
+      "Upward, because k is positive",
       "Upward, because a is negative",
       "Downward, because a is greater than 1 in size",
-      "Upward, because k is positive"
+      "Downward, because a is negative"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Only the SIGN of a decides the direction.",
      "steps": [
       "a = −7 in this equation.",
@@ -293,12 +293,12 @@
      "kind": "mc",
      "q": "The graph of f(x) = x² is translated 5 units left and 3 units down. What is the resulting equation?",
      "opts": [
-      "g(x) = (x + 5)² − 3",
       "g(x) = (x − 5)² − 3",
+      "g(x) = (x + 5)² − 3",
       "g(x) = (x + 5)² + 3",
       "g(x) = (x − 5)² + 3"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Left means h is negative, and the sign inside the parentheses flips.",
      "steps": [
       "A translation left by 5 means h = −5, written as (x − (−5)) = (x + 5).",
@@ -316,12 +316,12 @@
      "kind": "mc",
      "q": "What is the range of g(x) = 4(x − 1)² + 8?",
      "opts": [
-      "[8, ∞)",
-      "(−∞, 8]",
       "[1, ∞)",
+      "(−∞, 8]",
+      "[8, ∞)",
       "(−∞, ∞)"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Check the sign of a first — it decides which direction the range goes.",
      "steps": [
       "a = 4 is positive, so the parabola opens upward.",
@@ -339,12 +339,12 @@
      "kind": "mc",
      "q": "What is the range of g(x) = −2(x + 3)² + 5?",
      "opts": [
-      "(−∞, 5]",
+      "[−3, ∞)",
       "[5, ∞)",
       "(−∞, −3]",
-      "[−3, ∞)"
+      "(−∞, 5]"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "a is negative here — which direction does that send the range?",
      "steps": [
       "a = −2 is negative, so the parabola opens downward.",
@@ -385,12 +385,12 @@
      "kind": "mc",
      "q": "A parabola has vertex (3, −2) and passes through the point (5, 6). What is its equation in vertex form?",
      "opts": [
-      "y = 2(x − 3)² − 2",
       "y = 4(x − 3)² − 2",
+      "y = 2(x − 3)² − 2",
       "y = 2(x − 5)² − 2",
       "y = 2(x − 3)² + 6"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Substitute the vertex, then use the point to solve for a.",
      "steps": [
       "Substitute the vertex (3, −2) for h and k: y = a(x − 3)² − 2.",
@@ -408,12 +408,12 @@
      "kind": "mc",
      "q": "A parabola has vertex (−1, 4) and y-intercept 10. What is its equation in vertex form?",
      "opts": [
-      "y = 6(x + 1)² + 4",
-      "y = 6(x − 1)² + 4",
       "y = 10(x + 1)² + 4",
+      "y = 6(x − 1)² + 4",
+      "y = 6(x + 1)² + 4",
       "y = 6(x + 1)² + 10"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "A y-intercept is the point where x = 0.",
      "steps": [
       "Substitute the vertex (−1, 4): y = a(x + 1)² + 4.",
@@ -431,12 +431,12 @@
      "kind": "mc",
      "q": "A parabola has vertex (4, −3) and passes through (6, 5). What is its equation in vertex form?",
      "opts": [
-      "y = 2(x − 4)² − 3",
+      "y = 2(x − 4)² + 5",
       "y = 8(x − 4)² − 3",
       "y = 2(x − 6)² − 3",
-      "y = 2(x − 4)² + 5"
+      "y = 2(x − 4)² − 3"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Same method as before, different numbers — substitute the vertex, then solve for a.",
      "steps": [
       "Substitute the vertex (4, −3): y = a(x − 4)² − 3.",
@@ -477,12 +477,12 @@
      "kind": "mc",
      "q": "A diver's board is 8 ft above the water. She jumps and reaches her highest point of 40 ft after 1 second. Using vertex form with x as time in seconds, what equation models her height?",
      "opts": [
-      "y = −32(x − 1)² + 40",
       "y = 32(x − 1)² + 40",
+      "y = −32(x − 1)² + 40",
       "y = −8(x − 1)² + 40",
       "y = −32(x − 1)² + 8"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "The peak of the flight is the vertex. The launch point is a second point, at x = 0.",
      "steps": [
       "The peak height of 40 ft at 1 second is the vertex: (1, 40). Substitute: y = a(x − 1)² + 40.",
@@ -500,12 +500,12 @@
      "kind": "mc",
      "q": "What is the standard-form equation (y = ax² + bx + c) equivalent to y = −32(x − 1)² + 40?",
      "opts": [
-      "y = −32x² + 64x + 8",
-      "y = −32x² + 32x + 40",
       "y = −32x² + 64x + 40",
+      "y = −32x² + 32x + 40",
+      "y = −32x² + 64x + 8",
       "y = 32x² + 64x + 8"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Expand (x − 1)² first, then distribute the −32.",
      "steps": [
       "Expand (x − 1)²: (x − 1)² = x² − 2x + 1.",
@@ -523,12 +523,12 @@
      "kind": "mc",
      "q": "Martin says the graph of g(x) = (x + 6)² is the graph of f(x) = x² translated 6 units RIGHT. What is his error?",
      "opts": [
-      "(x + 6) translates the graph LEFT, not right",
+      "There is no error — Martin is correct",
       "g(x) should be (x − 6)² to be a valid translation",
       "The vertex of g is (0, 6), not (−6, 0)",
-      "There is no error — Martin is correct"
+      "(x + 6) translates the graph LEFT, not right"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Check the sign inside the parentheses against the actual direction it shifts.",
      "steps": [
       "To match y = a(x − h)² + k, rewrite (x + 6) as (x − (−6)), so h = −6.",
@@ -569,12 +569,12 @@
      "kind": "mc",
      "q": "Two parabolas both have vertex (2, 5). One has a = 3, the other has a = 0.5. Which statement is true?",
      "opts": [
-      "The a = 3 graph is narrower than the a = 0.5 graph",
       "The a = 3 graph is wider than the a = 0.5 graph",
+      "The a = 3 graph is narrower than the a = 0.5 graph",
       "Both graphs are exactly the same width",
       "The vertex tells you which one is wider, not a"
      ],
-     "ans": 0,
+     "ans": 1,
      "hint": "Compare the SIZE of each a, not its sign.",
      "steps": [
       "Both values of a are positive, so both parabolas open upward — the vertex alone doesn't distinguish their width.",
@@ -592,12 +592,12 @@
      "kind": "mc",
      "q": "A kicked ball's height is modeled by y = −16(x − 0.8)² + 12.24, where x is time in seconds. A second ball is modeled by y = −16(x − 0.6)² + 9.76. Which ball reaches a greater maximum height, and how do you know?",
      "opts": [
-      "The first ball — its vertex's y-value, 12.24, is greater than 9.76",
-      "The second ball — it reaches its peak sooner, at 0.6 seconds",
       "They reach the same height — both have a = −16",
+      "The second ball — it reaches its peak sooner, at 0.6 seconds",
+      "The first ball — its vertex's y-value, 12.24, is greater than 9.76",
       "The first ball — it was in the air longer"
      ],
-     "ans": 0,
+     "ans": 2,
      "hint": "Maximum height is read from the vertex, not from the time it happens.",
      "steps": [
       "The maximum height of each ball is the y-value of its vertex, k — not how quickly it gets there.",
@@ -615,12 +615,12 @@
      "kind": "mc",
      "q": "Which of these is written in vertex form?",
      "opts": [
-      "y = −4(x − 5)² + 9",
+      "y = 2x + 5",
       "y = 3x² + 12x − 7",
       "y = (x − 2)(x + 6)",
-      "y = 2x + 5"
+      "y = −4(x − 5)² + 9"
      ],
-     "ans": 0,
+     "ans": 3,
      "hint": "Vertex form always has a squared binomial, written as (x − h)².",
      "steps": [
       "Vertex form has the specific shape y = a(x − h)² + k — a single squared binomial, plus a constant.",
@@ -737,7 +737,7 @@
      }
     }
    ],
-   "libv": 1
+   "libv": 2
   }
  }
 }

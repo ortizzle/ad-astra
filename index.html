@@ -3148,6 +3148,21 @@ function unitDelta(oldU, newU){
     if(JSON.stringify(oldU[k]??null)!==JSON.stringify(newU[k]??null)) d.meta.push(k); });
   return (d.c.a.length||d.c.d.length||d.c.m.length||d.q.a.length||d.q.d.length||d.q.m.length||d.meta.length) ? d : null;
 }
+/* An ORDER-ONLY change — every question keeps the same four options and the
+   same correct answer, only their order moved — is not new content, so it
+   must not cost a re-approval or re-draft a unit she is using. Built for the
+   2026-09 rebalance of fifty shipped units whose correct answers all sat in
+   slot A (the app shuffles at render, so nothing she sees changes at all).
+   Cards, meta and question text must be identical; anything else is a real
+   change and takes the ordinary re-draft path. */
+function orderOnly(oldU, newU){
+  if(!unitDelta(oldU, newU)) return false;
+  const norm = u => ({ ...u, questions:(u.questions||[]).map(q => {
+    if(!Array.isArray(q.opts) || typeof q.ans!=='number' || (q.kind && q.kind!=='mc' && q.kind!=='analogy')) return q;
+    return { ...q, opts: q.opts.map(String).slice().sort(), ans: String(q.opts[q.ans]) };
+  }) });
+  return !unitDelta(norm(oldU), norm(newU));
+}
 async function fetchLibrary(btn){
   if(sandboxOn()){ toast('Sandbox is on — nothing is saved'); return; }
   const label = btn.textContent; btn.disabled = true; btn.textContent = 'Checking…';
@@ -3184,6 +3199,9 @@ async function fetchLibrary(btn){
         const cur = DATA.records[r.id];
         if(!cur || cur.deleted || cur.type!=='unit' || cur.status==='draft') return;
         if((r.updatedAt||0) <= (cur.updatedAt||0)) return;   // loses the merge anyway
+        /* Only the option order moved: keep her approval on the record, so
+           the merged copy is live and the queue never sees it. */
+        if(orderOnly(cur, r)){ r.status = cur.status; delete r.chg; r._orderOnly = true; return; }
         const d = unitDelta(cur, r);
         if(d) r.chg = d;
       });
@@ -3197,6 +3215,7 @@ async function fetchLibrary(btn){
   }
   let refreshed = 0;
   Object.values(DATA.records).forEach(r=>{
+    if(r && r._orderOnly){ delete r._orderOnly; return; }
     if(r && r.type==='unit' && !r.deleted && r.status==='draft'
        && wasApproved.has(r.id) && !r.wasApproved){
       r.wasApproved = true; r.updatedAt = Date.now(); refreshed++;
