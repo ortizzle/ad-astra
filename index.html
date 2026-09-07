@@ -362,6 +362,12 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    never the text here. Measured by tools/contrast_gzchip.js. */
 .gz-chip.on{background:var(--ac-8);border-color:var(--ac);color:var(--text)}
 .gz-chips.units{margin-top:8px}
+/* Whichever chip row is last — subject or unit — sat flush against the due
+   card below it: .gz-chips carries no margin-bottom, and .card carries no
+   margin-top, so the two collapse to 0. This is the block-to-block gap
+   (leaving the filter chips for the actual review card), not the tighter
+   row rhythm the chips use among themselves. */
+.gz-chips+.card{margin-top:var(--gap)}
 /* A folded Growth Zone row: question and ladder only; tap the head to open. */
 .miss .mhead{display:block;width:100%;background:none;border:0;padding:0;margin:0;text-align:left;
   color:inherit;font:inherit;cursor:pointer;min-height:var(--tap)}
@@ -1481,7 +1487,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v159 · breathing room';
+const APP_VERSION = 'v160 · breathing room, take two';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 

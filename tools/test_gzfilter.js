@@ -61,11 +61,14 @@ const PORT = process.argv[2] || 8201;
     const rows = [...sc.querySelectorAll('.miss')];
     const lastBtn = card ? [...card.querySelectorAll('.btn')].pop() : null;
     const capP = card ? card.querySelector('p') : null;
+    const chipsRows = [...sc.querySelectorAll('.gz-chips')];
+    const lastChips = chipsRows[chipsRows.length-1];
     return {chips, uchips, btns, h2, rows: rows.length,
             folded: rows.filter(r=>r.classList.contains('fold')).length,
             open: rows.filter(r=>!r.classList.contains('fold')).length,
             height: sc.scrollHeight,
-            btnCapGap: (lastBtn && capP) ? capP.getBoundingClientRect().top - lastBtn.getBoundingClientRect().bottom : null};
+            btnCapGap: (lastBtn && capP) ? capP.getBoundingClientRect().top - lastBtn.getBoundingClientRect().bottom : null,
+            chipsCardGap: (lastChips && card) ? card.getBoundingClientRect().top - lastChips.getBoundingClientRect().bottom : null};
   });
 
   await p.evaluate(() => { gzFilter = {cid:null, unitId:null}; gzOpen = {}; go('growth'); });
@@ -78,6 +81,7 @@ const PORT = process.argv[2] || 8201;
      /^3 questions are back$/.test(v.h2) && v.btns.some(t=>/Review all 7 · ahead of time/.test(t)), {h2:v.h2, btns:v.btns});
   ck('every row starts folded', v.rows === 7 && v.folded === 7, v);
   ck('the caption under "Start review" keeps a real gap, not flush against the button', v.btnCapGap === 10, v.btnCapGap);
+  ck('the last chip row keeps a real gap above the due card, not flush against it', v.chipsCardGap >= 12 && v.chipsCardGap <= 16, v.chipsCardGap);
   const hFolded = v.height;
 
   // Tap a row: it opens, shows the answer, and only that one opens.

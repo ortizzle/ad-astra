@@ -802,6 +802,37 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Breathing room, take two (v160 / Wayfinder v141, both apps)
+
+Chris, on v159's fix: *"for me, the issue was the bottom-most pills being
+so close to the card below. almost flush."* v159 fixed a real 0px gap
+inside the due card (button to caption) — but the one in the screenshot was
+a different 0px gap, one row up: the last row of filter chips (subject or
+unit pills) sitting flush against the due card underneath it.
+
+**Same shape of bug, different pair of elements.** `.gz-chips` carries
+`margin-top:11px` but no `margin-bottom`; `.card` carries no `margin-top`.
+Two block siblings with nothing between them collapse to 0 — confirmed live
+at exactly 0px before the fix, same discipline as v159. The fix is the same
+kind of shared rule: `.gz-chips+.card{margin-top:var(--gap)}`, using the
+block-to-block token (14px) rather than the tighter row rhythm the chips use
+among themselves (`.gz-chips.units{margin-top:8px}`, unchanged) — leaving
+the filter chips for the due card is a bigger transition than moving between
+two rows of chips.
+
+- **`.gz-chips+.card` catches either chip row**, subject or unit, whichever
+  happens to be last before the card — no need to special-case which one is
+  present, since both carry the base `.gz-chips` class the sibling selector
+  matches on.
+- Fixing this made `tools/test_rhythm.js`'s own gap sweep cleaner as a side
+  effect: its "gaps seen" tally had a stray `"0":1` entry before this fix
+  and does not after — independent confirmation this was the real,
+  previously-uncaught 0px gap on the screen, not a second, separate one.
+
+`tools/test_gzfilter.js` gained a second gap assertion (chips row to due
+card, 12–16px tolerance for the sub-pixel jitter font-loading introduces at
+measurement time — the same reason `test_rhythm.js` rounds).
+
 ### Breathing room under "Start review" (v159 / Wayfinder v140, both apps)
 
 Chris sent a screenshot of the Growth Zone's due card — the heading, the
