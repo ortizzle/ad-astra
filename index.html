@@ -1502,7 +1502,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v163 · fewer, clearer lines';
+const APP_VERSION = 'v164 · the map, on tap';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3888,6 +3888,19 @@ function openSheet(classId){
       });
     }});
 }
+/* A unit may carry `mapRef` — a graph spec, opened as an on-demand reference
+   from its card and again from inside its own quiz's tool row, exactly like
+   Calculator/Sheet. Engine only here — Wayfinder's lat/long unit is the first
+   content to use it. Content-shaped, like `sorts`/`bee` — a unit opts in by
+   carrying the field, never inferred. */
+function openMapRef(u){
+  showModal({ title: u.mapTitle || 'Map', confirmText:'Close', cancelText:null,
+    build:(box)=>{
+      if(u.mapNote) box.appendChild(el('p',null,u.mapNote));
+      const g = graphNode(u.mapRef);
+      if(g) box.appendChild(g);
+    }});
+}
 function calcEval(s){
   let i = 0;
   const eat = c=>{ if(s[i]===c){ i++; return true; } return false; };
@@ -5260,6 +5273,15 @@ function unitCard(u, c, label){
     sb.addEventListener('click',()=>{ sortState = null; go('sort',{unitId:u.id, classId:c.id, sortId:set.id}); });
     card.appendChild(sb);
   });
+  /* A unit's own reference map, if it carries one (see openMapRef) — a door
+     here, and the SAME map again from inside the quiz's tool row, so it is
+     never more than a tap away while she is actually answering. Engine only
+     here — no Ad Astra content uses it yet. */
+  if(u.mapRef){
+    const mb = el('button','btn btn-secondary','🗺️  '+(u.mapLabel||'Map — see it full-size'));
+    mb.addEventListener('click',()=>openMapRef(u));
+    card.appendChild(mb);
+  }
   /* River's game, offered where it fits: vocabulary shelves built from single
      words. Other units keep their three doors — a physics question is not a
      word you can say. */
@@ -7964,6 +7986,12 @@ SCREENS.quiz = function(root){
   /* Just "Sheet" in the row — a sheet's full name ("DBQ essay rubric") does not
      fit a quarter of the width, and the subject screen still names it in full. */
   if(SHEETS[ctx.classId]) tool(SHEETS[ctx.classId].ic, 'Sheet', ()=>openSheet(ctx.classId));
+  /* A unit's own reference map, if it carries one — see openMapRef. Reads
+     off the real source unit via `_srcUnit` (same resolution `answer()`
+     already uses for qstats/misses), not the synthetic review/shuffle/ladder
+     wrapper, so a laddered or reviewed question from this unit still offers it. */
+  const mru = unitFor(q._srcUnit || u.id) || u;
+  if(mru.mapRef) tool('🗺️','Map',()=>openMapRef(mru));
   const back = ctx.unitId==='__review__' ? ['growth',{}] : ctx.unitId==='__daily__' ? ['today',{}] : ['unit',{classId:ctx.classId}];
   /* Exit is the usual way she leaves a round, and it used to drop quizState
      before navigating — which meant the go() hook never saw it and the work

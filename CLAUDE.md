@@ -861,6 +861,24 @@ in this app omits both, so `lx`/`ly` default to `gx`/`gy` and nothing here
 renders any differently. See wayfinder/CLAUDE.md's section of the same
 name for the full story, including the exact measurement that caught it.
 
+### The map, on tap (v164 / Wayfinder v146, engine only here)
+
+Chris: "can we make the actual map, a tool to reference when questions are
+asked?" A unit may now carry **`mapRef`** — a graph spec, opened via
+`openMapRef(u)` exactly like `openSheet()` opens a `SHEETS` entry — as a
+door on its own card (`unitCard()`) and again as a "🗺️ Map" button in the
+quiz's own tool row, alongside Hint/Calculator/Sheet. Content-shaped like
+`sorts`/`bee`/`guide` — a unit opts in by carrying the field, never
+inferred — and the tool row resolves the REAL source unit via
+`unitFor(q._srcUnit || u.id)`, the same resolution `answer()` already uses,
+so a laddered or reviewed question from a mapRef unit still offers it even
+though the synthetic wrapper unit in that moment carries no `mapRef` of its
+own. See wayfinder/CLAUDE.md's section of the same name for the full
+reasoning and the measurement discipline. Engine only here — no Ad Astra
+unit carries `mapRef` yet, so `unitCard()`'s new door and the tool row's
+new button are both dead code until one does, the same posture `SHEETS`
+already ships in before a teacher issues a reference sheet.
+
 ### Reading the map, not memorizing it (Wayfinder v144, engine only here)
 
 Wayfinder built a lat/long practice map (Chris: a further-practice quiz with
