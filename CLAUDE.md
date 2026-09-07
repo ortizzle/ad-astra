@@ -802,6 +802,66 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### The Lemonade Crime got a sibling: To Kill a Mockingbird, re-chunked (v162, THIS APP ONLY)
+
+Chris: Sedona had only read through chapter 5 of To Kill a Mockingbird, but
+`unit-tkam1` (the reading companion shipped earlier) covered chapters 1–8 —
+she couldn't use any of it without risking chapters 6–8 spoiling ahead of
+where she actually is. Recreated into a smaller chunk, same id, same
+filename: the unit now stops exactly at chapter 5.
+
+**This was a real rewrite, not a retitle.** Unlike the Algebra study-guide
+shelving cases where a unit gets renamed while its content stays put, several
+cards and questions here were BUILT OUT OF chapters 6–8 material — the porch
+raid and mended pants (ch. 6), the further knothole gifts and the cemented
+knothole (ch. 7), Miss Maudie's fire and the blanket (ch. 8) — and had to be
+either cut outright or rewritten from scratch around what actually happens
+by the end of chapter 5:
+
+- **One card was dropped entirely** (a "predict what happens to the
+  cemented knothole" ponder card — the cementing is a chapter 7 event she
+  hasn't reached) and replaced with a chapter-5-appropriate prediction: will
+  Jem and Dill actually stop tormenting Boo, now that Atticus has caught them.
+- **Three cards were trimmed** (Boo's record, the knothole's contents, the
+  legend-vs-evidence motif) to drop the mended pants and blanket and stop at
+  what the knothole has actually given up through chapter 4 (gum, two old
+  pennies) — the twine, medal, watch and soap figures are chapter 7.
+- **Six of the fourteen questions were fully rewritten**, replacing an order
+  question and a spot-the-lie question built entirely from chapters 6 and 8,
+  plus four questions about the porch raid, the soap figures, the cementing,
+  and the fire — none of which she's read. The replacements draw on chapter
+  1's Boo backstory (the scissors incident, never asked about in the original
+  unit) and chapter 5's Miss Maudie conversation and fishing-pole scene,
+  giving chapter 5 more coverage than the original ch. 1–8 unit gave it.
+- **Two cards and two questions are new**: the "foot-washing Baptists" concept
+  (Miss Maudie's explanation for why the Radleys shut their door — religion,
+  not a monster) and a dedicated card on the fishing-pole note itself.
+
+Since `unit-tkam1` had never been approved — no progress was attached to it —
+reusing the id and bumping `libv` was safe; there was no "retitle, never
+re-mint" concern here because there was nothing yet to preserve.
+
+`tools/test_tkam1.js` covers both halves: the ordinary functional checks
+(counts, a full quiz round, both order questions, the passage plates, the
+19-card deck, no Beat the clock) AND a content-safety sweep — it scans the
+whole unit's JSON for chapter 6–8 tells (mended, blanket, cement, porch
+raid, shotgun, "chapter 6/7/8") and fails if any of them slipped back in.
+Future chunks (chapters 6–8 and beyond) can ship the same way once she's
+actually read that far.
+
+### The Arizona map (Wayfinder v143, engine only here)
+
+Wayfinder built a lat/long practice map (Chris: a further-practice quiz with
+a map, for Arizona) on top of `renderGraph()`, which needed one small engine
+addition carried here too: optional `g.xabs`/`g.yabs` (strip the sign off an
+axis for display) and `g.xsuf`/`g.ysuf` (append a letter, e.g. "°W") so a
+map plotting real signed longitude can still show "112°W" instead of "-112"
+on its tick labels. Every existing graph spec in this app omits these
+fields, so nothing here renders any differently. See wayfinder/CLAUDE.md's
+section of the same name for the full feature — the map, the content, and a
+real Wayfinder-only parity gap (its flashcard screen never rendered
+`card.graph` at all) the work turned up along the way.
+
 ### Cardstock (v161 / Wayfinder v142, both apps)
 
 Chris: *"can we also make the flashcards look more like paper? is there a way

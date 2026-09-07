@@ -1502,7 +1502,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v161 · cardstock';
+const APP_VERSION = 'v162 · chapter by chapter';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4017,6 +4017,13 @@ function renderGraph(g){
         'font-family':'Inter,system-ui,sans-serif','font-weight':weight}); n.textContent=t; return n; };
     const gx=g.gx||niceStep(x1-x0), gy=g.gy||niceStep(y1-y0);
     const fmt=v=>{ const r=Math.round(v*100)/100; return Object.is(r,-0)?0:r; };
+    /* Optional per-axis abs()+suffix (v162/Wayfinder v143): a lat/long map
+       plots real signed degrees (west and south are negative, so the shape
+       lands in the right place on screen) but a 4th grader reads "112°W",
+       not "-112" — g.xabs/g.yabs strips the sign for display only, g.xsuf/
+       g.ysuf appends the letter. Every existing caller omits these, so
+       fmtAxis matches fmt exactly when they're unset. */
+    const fmtAxis=(v,abs,suf)=>fmt(abs?Math.abs(v):v)+(suf||'');
     /* grid */
     for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx)
       add('line',{x1:sx(x),y1:sy(y0),x2:sx(x),y2:sy(y1),stroke:GRAPH_GRID,'stroke-width':1});
@@ -4031,11 +4038,11 @@ function renderGraph(g){
     /* numbers along the axes (0 once, at the origin corner) */
     for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx){
       if(Math.abs(x)<gx/2&&x0<=0) continue;
-      txt(sx(x),ax+11,fmt(x));
+      txt(sx(x),ax+11,fmtAxis(x,g.xabs,g.xsuf));
     }
     for(let y=Math.ceil(y0/gy-1e-9)*gy; y<=y1+1e-9; y+=gy){
       if(Math.abs(y)<gy/2&&y0<=0) continue;
-      txt(ay-4,sy(y)+3,fmt(y),'end');
+      txt(ay-4,sy(y)+3,fmtAxis(y,g.yabs,g.ysuf),'end');
     }
     if(x0<=0&&y0<=0) txt(ay-4,ax+11,'0','end');
     /* series, clipped to the window (a segment breaks where it leaves it) */
