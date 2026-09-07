@@ -910,6 +910,24 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### A shorter, slower clock (v166 / Wayfinder v148, both apps)
+
+Chris asked about River's Beat the clock feeling long, which turned out to
+be two separate things wearing one name: the per-question countdown
+(`quizLimit()`, already calibrated to her own measured pace) and the round
+SIZE, which had quietly been borrowed from the ordinary quiz's own sitting
+size (`u.round||QUIZ_ROUND`) — up to 12 questions on a Topic Review. Fixed
+both, since he asked for both: the clamp is 1.5x more generous (8–40s/20s
+→ 12–60s/30s), and `pickRound(u, timed)` now deals a fixed
+**`BEAT_CLOCK_ROUND`** (5) whenever timed, completely ignoring `u.round` —
+the ordinary quiz keeps clearing the whole lesson exactly as before, only
+the clock round shrank. Same call applies here: her Topic 1/2 study guides
+and Bio guides all set `u.round` well above 5 for the ordinary quiz, so
+this same fix shortens Sedona's Beat the clock rounds too. See
+wayfinder/CLAUDE.md's section of the same name for the full reasoning.
+`tools/test_beatclock.js` (same file, both apps) covers both halves plus
+an end-to-end launch confirming the ordinary quiz is unaffected.
+
 ### Reading the map, not memorizing it (Wayfinder v144, engine only here)
 
 Wayfinder built a lat/long practice map (Chris: a further-practice quiz with

@@ -1525,7 +1525,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v165 · atlas paper, ladder scores';
+const APP_VERSION = 'v166 · a shorter, slower clock';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6903,6 +6903,13 @@ function launchQuiz(unitId, classId, timed){ go('checkin',{unitId,classId,timed:
 const QUIZ_ROUND = 5;
 /* Per-question detail is capped so one very long round cannot bloat the gist. */
 const QUIZ_ITEM_MAX = 40;
+/* Beat the clock's own sitting size (Wayfinder v148, Chris, 2026-09: River's
+   round felt long). A lesson's `u.round` (10 for a math lesson-a-day, 12 for
+   a Topic Review) is sized for the ORDINARY quiz, where she is meant to
+   clear the whole lesson; racing a countdown through the same 10-12
+   questions is a different kind of long. Beat the clock now always deals
+   BEAT_CLOCK_ROUND regardless of u.round — the ordinary quiz is untouched. */
+const BEAT_CLOCK_ROUND = 5;
 function pickRound(u, timed){
   if(u.id==='__review__') return shuffle(u.questions.map((_,i)=>i));
   /* A paper guide is a sequence, not a sample: every question, in the order
@@ -6932,8 +6939,12 @@ function pickRound(u, timed){
   idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
   /* A unit may set its own sitting size (u.round) — a lesson-a-day maths
      quiz serves all ~10 in one go; a topic review serves 12. Content-side
-     knob, engine default unchanged. */
-  return shuffle(idx.slice(0, Math.min(u.round||QUIZ_ROUND, idx.length)).map(x=>x.i));
+     knob, engine default unchanged. Beat the clock ignores it on purpose
+     (see BEAT_CLOCK_ROUND) — racing a countdown through a whole lesson's
+     worth of questions is a different, longer thing than clearing the
+     lesson itself. */
+  const size = timed ? BEAT_CLOCK_ROUND : (u.round||QUIZ_ROUND);
+  return shuffle(idx.slice(0, Math.min(size, idx.length)).map(x=>x.i));
 }
 
 /* A shuffle round mixes the least-practised questions from ACROSS a subject's
@@ -7183,12 +7194,16 @@ function dailyShareButton(inModal){
    timestamp so a re-render never resets the clock.
    The countdown calibrates to HER: regular (untimed) quizzes measure how long
    she actually takes per answer, and Beat the clock uses that average —
-   clamped to 8–40s, 20s until there is data. */
+   clamped to 12–60s, 30s until there is data. (Raised from 8–40s/20s,
+   Wayfinder v148, Chris, 2026-09: River's round felt long — per-question
+   time is 1.5x more generous across the board; the round itself is
+   shortened separately, see BEAT_CLOCK_ROUND above, since a long round was
+   really two problems.) */
 function quizLimit(){
   let ms=0, n=0;
   logs().forEach(l=>{ if(l.mode==='quiz' && !l.timed && l.ansSeconds && l.ansCount){ ms += l.ansSeconds*1000; n += l.ansCount; } });
-  if(!n) return 20000;
-  return Math.round(Math.min(40000, Math.max(8000, ms/n)));
+  if(!n) return 30000;
+  return Math.round(Math.min(60000, Math.max(12000, ms/n)));
 }
 let quizTimer = null;
 function stopQuestionTimer(){ clearInterval(quizTimer); quizTimer = null; }
