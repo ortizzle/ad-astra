@@ -849,18 +849,22 @@ raid, shotgun, "chapter 6/7/8") and fails if any of them slipped back in.
 Future chunks (chapters 6–8 and beyond) can ship the same way once she's
 actually read that far.
 
-### The Arizona map (Wayfinder v143, engine only here)
+### Reading the map, not memorizing it (Wayfinder v144, engine only here)
 
 Wayfinder built a lat/long practice map (Chris: a further-practice quiz with
-a map, for Arizona) on top of `renderGraph()`, which needed one small engine
-addition carried here too: optional `g.xabs`/`g.yabs` (strip the sign off an
-axis for display) and `g.xsuf`/`g.ysuf` (append a letter, e.g. "°W") so a
-map plotting real signed longitude can still show "112°W" instead of "-112"
-on its tick labels. Every existing graph spec in this app omits these
-fields, so nothing here renders any differently. See wayfinder/CLAUDE.md's
-section of the same name for the full feature — the map, the content, and a
-real Wayfinder-only parity gap (its flashcard screen never rendered
-`card.graph` at all) the work turned up along the way.
+a map) on top of `renderGraph()`, which needed one small engine addition
+carried here too: optional `g.xabs`/`g.yabs` (strip the sign off an axis
+for display) and `g.xsuf`/`g.ysuf` (append a letter, e.g. "°W") so a map
+plotting real signed longitude can still show "112°W" instead of "-112" on
+its tick labels. Every existing graph spec in this app omits these fields,
+so nothing here renders any differently. See wayfinder/CLAUDE.md's section
+of the same name for the full feature — an invented Arizona-only map
+rebuilt around the real map her class uses (28 US cities, Drive-sourced),
+every "memorize this city's exact coordinate" card and question removed in
+favor of comparison and estimation, a real Wayfinder-only parity gap (its
+flashcard screen never rendered `card.graph` at all), and a real label-
+overlap rendering bug caught by measuring bounding boxes rather than
+eyeballing.
 
 ### Cardstock (v161 / Wayfinder v142, both apps)
 
