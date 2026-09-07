@@ -4,7 +4,8 @@
   "unit-ww9-04": {
    "id": "unit-ww9-04",
    "type": "unit",
-   "updatedAt": 1786305606097,
+   "updatedAt": 1788816272000,
+   "libv": 1,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -478,7 +479,7 @@
      "lv": 3,
      "from": "source",
      "kind": "mc",
-     "q": "Which Lesson 4 word would BEST replace the underlined phrase: \"She accepted the criticism with a *quietly amused, slightly twisted* smile\"?",
+     "q": "Which Lesson 4 word would BEST replace \"quietly amused, slightly twisted\" in this sentence: \"She accepted the criticism with a ___ smile\"?",
      "opts": [
       "wry",
       "punctilious",
