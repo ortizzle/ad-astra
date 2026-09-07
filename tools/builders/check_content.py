@@ -83,6 +83,22 @@ def check(root, name):
             qids = [q.get('id') for q in qs]
             P(len(qids) != len(set(qids)), 'duplicate question ids')
 
+            # Answer-position skew (2026-09): 50 shipped units across both apps
+            # had every correct answer in slot A. The app shuffles at render
+            # time (v64), so she never sees it — but the grown-up review queue
+            # reads the file as written, and a file that skewed is a file whose
+            # _balance() step never ran. Guides are exempt: their order is the
+            # paper's, letter for letter.
+            mc = [q for q in qs if (q.get('kind') or 'mc') in ('mc', 'analogy')
+                  and isinstance(q.get('ans'), int) and len(q.get('opts') or []) == 4]
+            if len(mc) >= 4 and not u.get('guide'):
+                tally = [0, 0, 0, 0]
+                for q in mc: tally[q['ans'] % 4] += 1
+                top = max(tally)
+                W(top >= 0.7 * len(mc),
+                  'correct answer sits in slot %s on %d of %d questions — rotate them (_balance())'
+                  % ('ABCD'[tally.index(top)], top, len(mc)))
+
             for q in qs:
                 tag = 'q%s' % q.get('id')
                 kind = q.get('kind') or 'mc'
