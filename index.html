@@ -374,6 +374,23 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
 .miss.fold .q{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .miss .box .chev{margin-left:auto;font-style:normal;font-weight:400;color:var(--faint);font-size:12px}
 .miss .mhead+.a,.miss .mhead+.graph,.miss .mhead+svg{margin-top:8px}
+/* Atlas treatment (v165/Wayfinder v147): a map-flagged graph (g.atlas) gets
+   an explicit white paper background, a lifted-page shadow and a slight
+   tilt, plus the same cardstock grain the flashcards use — so it reads as
+   a page pulled out of a physical atlas, not a UI panel sitting on the
+   app's own (often dark) surface colour. Deliberately theme-independent,
+   like the cardstock grain and the note-from-home post-it: a physical
+   object does not change with dark mode. Content-shaped — a graph opts in
+   with g.atlas, never inferred, so an ordinary math/physics graph (graph
+   paper's own metaphor) is untouched. Engine only here — no Ad Astra graph
+   uses it yet. */
+.graph-wrap.atlas{position:relative;background:#fefcf5;border:1px solid #ddd3b0;
+  border-radius:5px;padding:9px 7px 5px;box-shadow:0 4px 14px rgba(0,0,0,.25),0 1px 3px rgba(0,0,0,.15);
+  transform:rotate(-.6deg)}
+.graph-wrap.atlas::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:5px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;opacity:.18;mix-blend-mode:multiply}
+.graph-wrap.atlas svg{position:relative;z-index:1;display:block}
 
 .sandbox-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;
   margin-bottom:12px;padding:10px 14px;border:1.5px dashed var(--warm);border-radius:14px;
@@ -948,6 +965,12 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .sortbtns .btn{margin:0}
 .sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
+/* A two-line .btn-secondary — icon+title, then a quiet status line — for
+   doors that gain a "last played" fact once she's used them once (the
+   Trivia Ladder doors below). The outer .btn keeps centering the whole
+   stack; only the stack itself goes column. */
+.btnstack{display:flex;flex-direction:column;align-items:center;gap:2px}
+.btnstack small{font-weight:500;font-size:11.5px;color:var(--faint)}
 /* Trivia Ladder tiles — same tinted-accent language as the mode tiles
    (.mtile) and Sort's bucket plates, so the board reads as part of the
    subject screen rather than importing a separate game-show identity. */
@@ -1502,7 +1525,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v164 · the map, on tap';
+const APP_VERSION = 'v165 · atlas paper, ladder scores';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4117,7 +4140,9 @@ function graphNode(g){
   if(!g) return null;
   const svg=renderGraph(g);
   if(!svg) return null;
-  const w=el('div','graph-wrap'); w.appendChild(svg); return w;
+  /* g.atlas (v165/Wayfinder v147): a real-world map, not a math/physics
+     graph, gets the white-paper "atlas page" treatment — see .graph-wrap.atlas. */
+  const w=el('div','graph-wrap'+(g.atlas?' atlas':'')); w.appendChild(svg); return w;
 }
 /* Some cards (ASL signs) can only truly be taught by video, and the card's
    own text never claims to describe a handshape or movement — a confidently
@@ -5088,7 +5113,12 @@ SCREENS.unit = function(root){
     /* Same board, drawing from every unit in the subject instead of one. */
     const mcTotal = units(c.id).reduce((n,u2)=> n + u2.questions.filter(qq=>!qq.kind||qq.kind==='mc'||qq.kind==='analogy').length, 0);
     if(mcTotal >= 6){
-      const lb = el('button','btn btn-secondary','🎯  Trivia Ladder — a mix of everything');
+      const lb = el('button','btn btn-secondary');
+      const stack = el('span','btnstack');
+      stack.appendChild(el('span',null,'🎯  Trivia Ladder — a mix of everything'));
+      const last = ladderLast('__shuffle__', c.id);
+      if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
+      lb.appendChild(stack);
       lb.addEventListener('click',()=>{
         const su = buildShuffleUnit(c.id);
         if(su && buildLadder(su)) go('ladder',{unitId:'__shuffle__', classId:c.id});
@@ -5299,7 +5329,12 @@ function unitCard(u, c, label){
      draw from; a lesson with only a handful of MC questions isn't worth a
      whole board. */
   if(u.questions.filter(qq=>!qq.kind||qq.kind==='mc'||qq.kind==='analogy').length >= 6){
-    const lb = el('button','btn btn-secondary','🎯  Trivia Ladder — play for points');
+    const lb = el('button','btn btn-secondary');
+    const stack = el('span','btnstack');
+    stack.appendChild(el('span',null,'🎯  Trivia Ladder — play for points'));
+    const last = ladderLast(u.id, c.id);
+    if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
+    lb.appendChild(stack);
     lb.addEventListener('click',()=>{ if(buildLadder(u)) go('ladder',{unitId:u.id, classId:c.id}); });
     card.appendChild(lb);
   }
@@ -6973,6 +7008,9 @@ function ladderReturn(u, q){
   ladderLog(u);
   go('ladder', {unitId: ladderState.unitId, classId: ladderState.classId}, {back:true});
 }
+function ladderPoints(){
+  return ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
+}
 function ladderLog(u){
   const played = ladderState.results.filter(x=>x!==null).length;
   const correct = ladderState.results.filter(x=>x==='right').length;
@@ -6985,8 +7023,25 @@ function ladderLog(u){
   put({ id:lid, type:'log', mode:'ladder', classId:ladderState.classId, unitId:ladderState.unitId,
         date:AZ.today(), at:ladderState.start, correct, total:played,
         seconds:Math.round((Date.now()-ladderState.start)/1000), xp, hints:0,
+        /* Points are still flavor — the real XP above follows the ordinary
+           quiz rule — but Chris asked that a finished board leave a trace
+           she can see later, so a completed board's score is saved here
+           purely for that visibility (ladderLast()/ladderGames() below and
+           the Stars-tab summary). Nothing changes about how real XP or
+           qstats/misses are credited. */
+        done:doneAll, points:ladderPoints(),
         items:(ladderState.items||[]).slice(0,QUIZ_ITEM_MAX) });
   if(doneAll){ checkBadges(); syncSoon(); if(pct>=80) celebrate(); }
+}
+/* Trivia Ladder history — purely for visibility (Chris, 2026-09: "can we
+   have the girls see when they finish the trivia" and "store game points
+   ... so the girls can see how they've done"). Reads the done/points
+   fields ladderLog() writes above; nothing new is stored beyond those two
+   fields, and nothing here is a leaderboard or a new mechanic — same
+   posture as Trophies (v95): earned already, just made visible. */
+function ladderGames(){ return logs().filter(l => l.mode==='ladder' && l.done); }
+function ladderLast(unitId, classId){
+  return ladderGames().find(l => l.unitId===unitId && l.classId===classId) || null;
 }
 SCREENS.ladder = function(root){
   const u = unitFor(ctx.unitId);
@@ -7002,7 +7057,7 @@ SCREENS.ladder = function(root){
   head.appendChild(el('h2',null,'🎯 Trivia Ladder'));
   if(done){
     const correct = ladderState.results.filter(x=>x==='right').length;
-    const points = ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
+    const points = ladderPoints();
     head.appendChild(el('p',null, correct===ladderState.order.length ? 'Every tile — the whole board.'
       : correct/ladderState.order.length>=0.8 ? 'A strong board.'
       : 'A round worth playing again.'));
@@ -10418,6 +10473,25 @@ SCREENS.stars = function(root){
       tg.appendChild(d);
     });
     root.appendChild(tg);
+  }
+
+  /* Trivia Ladder: the game's points are still flavor — real XP already
+     follows the ordinary quiz rule (see ladderLog()) — but Chris asked for
+     a place she can see how she's done over time, so a finished board's
+     score is saved and summarized here. Same posture as Trophies just
+     above: earned already, just made visible — not a leaderboard, and
+     each device only ever reads its own logs. "We'll figure out a use for
+     it later" (Chris) — so this stays a plain summary, nothing more. */
+  const lg = ladderGames();
+  if(lg.length){
+    const best = lg.reduce((a,b)=> (b.points||0) > (a.points||0) ? b : a);
+    const bestUnit = DATA.records[best.unitId];
+    root.appendChild(divider('Trivia Ladder'));
+    const ldc = el('div','card ac');
+    ldc.appendChild(el('div','eyebrow', lg.length===1 ? '1 board finished' : lg.length+' boards finished'));
+    ldc.appendChild(el('div','ladderworth', (best.points||0).toLocaleString()+' pts — best score'));
+    if(bestUnit) ldc.appendChild(el('p',null, `${bestUnit.title}, ${AZ.shortDate(best.date)}`));
+    root.appendChild(ldc);
   }
 
   /* How well you call it. Every check-in asks how ready you feel; every quiz

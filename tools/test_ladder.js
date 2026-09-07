@@ -135,12 +135,38 @@ const [PORT, TAG] = process.argv.slice(2);
      finished.scoreGold==='rgb(242, 202, 99)' && finished.scoreText===finished.points.toLocaleString()+' pts', finished);
   ck('every one of the 10 questions counts toward the lesson (qstat.plain)', finished.attempted===10, finished);
 
+  // ---- a finished board leaves a trace she can see later: done/points on
+  //      the log (Chris, 2026-09: "see when they finish the trivia" /
+  //      "store game points ... so the girls can see how they've done"),
+  //      and the lesson's own door names the last time she played it.
+  const trace = await p.evaluate(([cid])=>{
+    const u = DATA.records['ladder-unit'];
+    const log = Object.values(DATA.records).find(r=>r.type==='log'&&r.mode==='ladder'&&r.unitId==='ladder-unit');
+    const card = unitCard(u, CLASS_BY_ID[cid]);
+    const doorText = [...card.querySelectorAll('button')].map(b=>b.textContent.replace(/\s+/g,' ').trim())
+      .find(t=>/Trivia Ladder/.test(t));
+    return { done: log.done, points: log.points, doorText };
+  }, [cid]);
+  ck('the finished log carries done:true and the same points the results screen showed',
+     trace.done===true && trace.points===finished.points, trace);
+  ck('the lesson\'s own door now names when it was last played, with the score',
+     new RegExp('Last played .* '+finished.points.toLocaleString()+' pts').test(trace.doorText), trace);
+
+  // ---- the Stars tab summarizes finished boards: a count and the best score
+  const stars = await p.evaluate(()=>{
+    go('stars', {});
+    return document.getElementById('screen').textContent;
+  });
+  ck('the Stars tab shows a Trivia Ladder summary with a best-score pill',
+     /Trivia Ladder/.test(stars) && /1 board finished/.test(stars) && /pts — best score/.test(stars), {stars: stars.slice(0,50)});
+
   // ---- Play again deals a fresh board
-  const again = await p.evaluate(()=>{
+  const again = await p.evaluate(([cid])=>{
+    go('ladder', {unitId:'ladder-unit', classId:cid});
     const before = ladderState.order.slice();
     document.querySelector('#screen .btn-primary').click();
     return { resultsReset: ladderState.results.every(r=>r===null), sameLength: ladderState.order.length===before.length };
-  });
+  }, [cid]);
   ck('Play again deals a fresh board with every tile open', again.resultsReset && again.sameLength, again);
 
   // ---- the mix-mode door on the subject screen, gated the same way

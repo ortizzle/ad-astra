@@ -879,6 +879,37 @@ unit carries `mapRef` yet, so `unitCard()`'s new door and the tool row's
 new button are both dead code until one does, the same posture `SHEETS`
 already ships in before a teacher issues a reference sheet.
 
+### Atlas paper (v165 / Wayfinder v147, engine only here)
+
+Chris, looking at the new map tool: "can we make the map have its own
+white background so it looks like it was ripped out of an Atlas." A graph
+spec may now carry **`atlas:true`** — content-shaped, never inferred, so
+an ordinary math/physics graph is untouched — and `graphNode()` adds an
+`atlas` class its `.graph-wrap` carries: an explicit white/cream page
+background, a lifted-page shadow, a slight rotation, and the same
+`feTurbulence` grain the Cardstock flashcard treatment (v161) already
+uses, deliberately theme-independent like that same grain. See
+wayfinder/CLAUDE.md's section of the same name for the full reasoning.
+Engine only here — no Ad Astra graph carries `atlas` yet.
+
+### The Trivia Ladder gets a memory (v165 / Wayfinder v147, engine in both apps)
+
+Chris: "can we have the girls see when they finish the trivia" and "can
+we store game points in the stars tab... so the girls can see how they've
+done." A finished board's log now carries `done:true` and its flavor
+`points` score (via the new `ladderPoints()`, shared by the finish screen
+and the log write). Two visibility surfaces read it: both Trivia Ladder
+doors (`unitCard()`'s lesson door and the subject screen's mix-mode door)
+gain a "Last played Sep 7 · 5,500 pts" status line via `ladderLast()`, and
+a new "🎯 Trivia Ladder" card on Stars (right after Trophies) reports
+boards finished and the all-time best score in the game's own gold pill.
+Real XP, qstats and misses are completely unaffected — this is two new
+fields on an existing record, not a second ledger. See wayfinder/
+CLAUDE.md's section of the same name for the full reasoning, including
+why this is a deliberate, narrow reversal of the v156 "points reset every
+play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
+new assertions.
+
 ### Reading the map, not memorizing it (Wayfinder v144, engine only here)
 
 Wayfinder built a lat/long practice map (Chris: a further-practice quiz with
