@@ -802,6 +802,59 @@ render, the unit shelves with the other Kinematics 1 parts, the Sheet tool
 is reachable from inside a physics quiz, and answers are spread across all
 four positions.
 
+### Cardstock (v161 / Wayfinder v142, both apps)
+
+Chris: *"can we also make the flashcards look more like paper? is there a way
+to do that? like the texture?"* Every subject already paints its flashcard
+faces with a color-and-pattern fill (graph paper, ruled paper, cell dots,
+Greek key…), but the fill itself was a flat, saturated digital gradient — it
+read as an app tile, not a physical card. Mocked three grain strengths live
+against real cards (Algebra's graph paper, English's ruled paper, a dark-mode
+Latin card) before touching anything, per the usual practice of showing a
+visual change before shipping it broadly; Chris picked the middle one.
+
+**One SVG noise, blended low and soft.** `.face::before` layers a fine
+`feTurbulence` fractal-noise tile (encoded inline, no new asset file) behind
+every card face, `mix-blend-mode:soft-light` at `opacity:.22` — strong enough
+to read as fiber/tooth on close inspection, subtle enough that the subject's
+own saturated color and pattern lines are completely undisturbed. Two earlier
+passes were rejected before this one: full-strength `overlay` at high opacity
+turned the color muddy and grayish (more static than paper), and a coarser,
+lower-frequency noise blotched rather than grained. The shipped version uses
+a finer, higher-frequency turbulence and a gentler blend.
+
+- **Applies to every face, subject-painted or plain** — `.face::before`, not
+  scoped to `.subj`, so the rare `:not(.subj)` fallback (an unrecognized
+  `classId`) gets the same cardstock read as an ordinary subject card, on
+  both the plain surface color and the plain back gradient.
+- **Sits at `z-index:0`, strictly behind the scrim and the text.** `.subj>*`
+  is already `z-index:1`, and `.subj::after`'s legibility scrim paints above
+  the grain in normal stacking order — the grain never touches anything a
+  contrast measurement already covers, because it never reaches the pixels
+  under the text or the scrim's own gradient.
+- **`position:relative` added to the base `.face` rule**, not just `.subj`
+  (which already had it) — a plain fallback face needs it too, or the
+  `::before` positions against a larger ancestor and can bleed past the
+  card's own rounded corners.
+
+> ⚠️ **The Spelling Bee honeycomb card (Wayfinder) already owned `::before`
+> for its opaque striped top bar**, at higher specificity (`.face.bee::before`
+> beats `.face::before`). Confirmed live before shipping: the collision let
+> `background-image` correctly stay the bee's own stripe (the only property
+> the more specific rule fully overrides), but `opacity:.22`,
+> `mix-blend-mode:soft-light` and `background-size:160px 160px` all leaked
+> through unset, washing the bold black-and-yellow bar down to a barely
+> visible wisp. Fixed with `.face:not(.bee)::before` — kept in this app's
+> copy too, byte-for-byte, even though Ad Astra has no bee cards, so the
+> shared engine block stays identical between repos.
+
+`tools/test_papertexture.js` (same file, both apps): every real subject's
+front AND back face keeps its own pattern and gains the grain at the exact
+opacity/blend, a plain fallback face gets it too, her own handwritten deck
+gets it (same door, same treatment), and — Wayfinder only — the bee card's
+striped bar is asserted to stay fully opaque and blend-mode `normal`,
+unaffected by the shared rule.
+
 ### Breathing room, take two (v160 / Wayfinder v141, both apps)
 
 Chris, on v159's fix: *"for me, the issue was the bottom-most pills being

@@ -600,12 +600,27 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .flip.on .flip-in{transform:rotateY(180deg)}
 /* Left-aligned like a ruled page — centered text reads as a poster, not
    study material. The watermark and tap-cue stay centered underneath. */
-.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px 44px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;text-align:left;border:1px solid var(--line);overflow:hidden}
+.face{position:relative;grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:28px 24px 44px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;text-align:left;border:1px solid var(--line);overflow:hidden}
 /* :not(.subj) so a subject-painted card keeps its own texture — a plain
    `background` shorthand here would wipe the pattern layers. */
 .face:not(.subj){background:var(--surface)}
 .face.back{transform:rotateY(180deg)}
 .face.back:not(.subj){background:linear-gradient(165deg,var(--ac-14),var(--deep));border-color:var(--ac-25)}
+/* Paper grain (v161/Wayfinder v142): every face, painted or plain, gets a
+   faint fiber texture so it reads as cardstock rather than a flat color
+   tile — a fine SVG feTurbulence noise, soft-light blended at low opacity
+   so it adds tooth without muddying the subject's own color or pattern.
+   z-index:0 keeps it under both the .subj::after scrim and the content
+   (.subj>* is z-index:1); a plain face has nothing else claiming z-index,
+   so it simply sits behind the text there too.
+   :not(.bee) — this app has no bee cards, but Wayfinder's Spelling Bee
+   honeycomb card already owns ::before for its opaque striped top bar, and
+   this rule's opacity/blend-mode/background-size would otherwise leak onto
+   it (only background-image doesn't cascade through) and wash the bar out
+   to near-invisible. Kept identical here so the shared engine code matches. */
+.face:not(.bee)::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;opacity:.22;mix-blend-mode:soft-light}
 .face .wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:130px;opacity:.045;pointer-events:none;user-select:none}
 .face .term{font-family:'Fraunces',serif;font-size:27px;line-height:1.25;position:relative;text-align:center}
 /* The respelling under a term. Deliberately NOT the serif the term wears —
@@ -1487,7 +1502,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v160 · breathing room, take two';
+const APP_VERSION = 'v161 · cardstock';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
