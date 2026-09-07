@@ -1544,7 +1544,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v167 · Junior Jeopardy';
+const APP_VERSION = 'v168 · fixing the board that followed her home';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4295,10 +4295,23 @@ function go(v,c={},opts={}){
   /* Leaving a quiz part-way records the questions she answered. See
      finishQuiz's note: this is the difference between a short session and a
      session that never happened. */
-  if(view==='quiz' && v!=='quiz' && quizState && !quizState.settled && !quizState.ladder
-     && (quizState.seen||[]).length){
-    const qLeft = unitFor(quizState.unitId);
-    if(qLeft) finishQuiz(qLeft, true);
+  if(view==='quiz' && v!=='quiz' && quizState){
+    if(quizState.ladder){
+      /* She left a Junior Jeopardy question by some route OTHER than the
+         board's own Leave button or answering through (a nav tab, the
+         back chip, the brand logo) — that flow's own return-to-board never
+         ran, so nothing here settles the tile or writes a log, same as any
+         other abandoned tile. But quizState itself must be cleared: left
+         as-is it still says ladder:true and unitId:'__ladder__', and the
+         NEXT quiz she opens rebuilds only when quizState is falsy (see
+         SCREENS.quiz) — a lingering-but-wrong quizState would otherwise
+         survive untouched and hijack that round, sending her back to this
+         board instead. Confirmed live: this was silently happening. */
+      quizState = null;
+    } else if(!quizState.settled && (quizState.seen||[]).length){
+      const qLeft = unitFor(quizState.unitId);
+      if(qLeft) finishQuiz(qLeft, true);
+    }
   }
   if(ROOT_SCREENS.has(v)) HIST = [];
   else if(!opts.back && view && view!==v && !SKIP_HIST.has(view)){
@@ -7916,6 +7929,16 @@ SCREENS.quiz = function(root){
   /* Also restart when the mode changes, so switching between the normal quiz
      and Beat the clock never resumes the other one's half-finished run. */
   if(!quizState || quizState.unitId!==u.id || quizState.timed !== !!ctx.timed){
+    /* This condition can be true with quizState still NON-null — a mismatched
+       unit or mode, not just a missing one. Discard it outright before trying
+       to load or build a replacement: below, the fresh-build fallback only
+       fires `if(!quizState)`, so a quizState that was merely WRONG (rather
+       than absent) used to survive untouched when loadRound also came back
+       empty — silently answering these next questions into whatever stale
+       round was left behind (go()'s own leave-hook clears an abandoned
+       Junior Jeopardy question, but nothing forced this path to cope with
+       every other way quizState could arrive mismatched). */
+    quizState = null;
     /* Pick the round back up if one was left today on this same unit. */
     const saved = loadRound(u, !!ctx.timed);
     if(saved){

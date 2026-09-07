@@ -910,6 +910,22 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### The board that followed her home (v167 fix / Wayfinder v149 fix, both apps)
+
+Chris reported it on Sedona's app too: leave a Junior Jeopardy question by
+anything other than its own Leave button (a nav tab, the back chip), then
+take an ordinary quiz elsewhere — after the mood check-in, she landed back
+on the old Jeopardy board instead of the subject page. Root cause and fix
+identical here — see wayfinder/CLAUDE.md's section of the same name for
+the full account: `quizState` was left dangling with `ladder:true` because
+`go()`'s leave-hook skips settling a ladder round on the assumption the
+board cleans up after itself, true only via the board's OWN exit paths;
+and `SCREENS.quiz`'s rebuild logic only replaced a quizState that was
+absent, not one that was merely wrong for the new unit, so the stale
+ladder state survived into the next quiz and hijacked its "Next" button
+into `ladderReturn()`. Fixed in both places; `tools/test_ladder.js` is the
+same file as Wayfinder's, including the reproduction.
+
 ### Fifty units, all answer A (v167 / Wayfinder v149, both apps)
 
 Chris reported the first Junior Jeopardy board's answers "were all A".

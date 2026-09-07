@@ -181,6 +181,70 @@ const [PORT, TAG] = process.argv.slice(2);
   const label = await p.evaluate(()=> modeLabel({mode:'ladder'}));
   ck('modeLabel names it Junior Jeopardy for the day view', label==='Junior Jeopardy', label);
 
+  // ---- Chris, 2026-09: "I tested out a jeopardy question, left the game and
+  // tested a quiz question, but after the how do you feel questions, I was
+  // brought back to the jeopardy game." Real bug: leaving a Junior Jeopardy
+  // question by anything OTHER than the board's own Leave button or
+  // answering through — a nav tab, the back chip, the brand logo — left
+  // quizState dangling with ladder:true and unitId:'__ladder__'. go()'s own
+  // leave-hook explicitly skips a ladder round (the board handles its own
+  // return), so nothing else cleared it; the NEXT quiz's rebuild logic in
+  // SCREENS.quiz only rebuilds `if(!quizState)`, so a merely WRONG (not
+  // absent) quizState survived untouched when no saved round existed for
+  // the new unit — silently routing that quiz's own "Next" taps through
+  // ladderReturn() instead of finishQuiz(), which is what sent her back to
+  // the old board once she reached it. Fixed in two places: go()'s
+  // leave-hook now always clears an abandoned ladder quizState, and
+  // SCREENS.quiz's rebuild unconditionally discards a mismatched quizState
+  // before trying to load or build a replacement, so the same class of bug
+  // can't recur from a different leave path.
+  const contaminated = await p.evaluate(([cid])=>{
+    const mk = (i) => ({ id:'q'+i, lv:1, from:'source', q:'CX Q'+i+'?', opts:['a'+i,'b'+i,'c'+i,'d'+i], ans:i%4 });
+    put({ id:'cx-jj', type:'unit', classId:cid, status:'approved', title:'Contamination Lesson',
+      cards:[], questions:[...Array(8).keys()].map(mk) });
+    put({ id:'cx-plain', type:'unit', classId:cid, status:'approved', title:'Plain Lesson', round:5,
+      cards:[], questions:[...Array(5).keys()].map(mk) });
+
+    // Open a Junior Jeopardy question, then leave it via a NAV TAB —
+    // never the tile's own Leave button — while it is still unanswered.
+    ladderState = null;
+    go('ladder', {unitId:'cx-jj', classId:cid});
+    ladderState.current = 0;
+    go('quiz', {unitId:'__ladder__', classId:cid, ladder:true}, {back:true});
+    const midLadder = quizState && quizState.ladder;
+    go('study', {});                          // tapping a bottom nav tab
+    const clearedByNav = quizState;            // must be null right away
+
+    // Take a completely ordinary quiz on a different lesson, start to finish.
+    go('checkin', {unitId:'cx-plain', classId:cid});
+    document.querySelectorAll('#screen .scale')[0].querySelectorAll('button')[2].click();
+    document.querySelectorAll('#screen .scale')[1].querySelectorAll('button')[1].click(); // low feeling: no auto-start
+    const startBtn = [...document.querySelectorAll('#screen button')].find(b=>/Start the quiz/.test(b.textContent));
+    startBtn.click();
+    const rebuiltCorrectly = quizState && !quizState.ladder && quizState.unitId==='cx-plain';
+    let guard=0;
+    while (view==='quiz' && guard++<20){
+      const u = unitFor('cx-plain');
+      const q = u.questions[quizState.order[quizState.i]];
+      document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(q.ans)].click();
+      document.getElementById('qnext').click();
+    }
+    const reachedResults = view==='unit' && !!document.querySelector('.modal-overlay .btn-primary');
+    document.querySelector('.modal-overlay .btn-primary').click();  // "How did that feel?"
+    const atPostmood = view==='postmood';
+    const doneBtn = [...document.querySelectorAll('#screen button')].find(b=>/Done|Skip/.test(b.textContent));
+    doneBtn.click();
+    return { midLadder, clearedByNav, rebuiltCorrectly, reachedResults, atPostmood, finalView: view, finalClassId: ctx.classId };
+  }, [cid]);
+  ck('leaving a Jeopardy question via a nav tab clears quizState immediately, rather than leaving ladder:true dangling',
+     contaminated.midLadder===true && contaminated.clearedByNav===null, contaminated);
+  ck('an ordinary quiz opened afterward rebuilds correctly for its own unit, never inheriting the stale ladder state',
+     contaminated.rebuiltCorrectly===true, contaminated);
+  ck('it reaches the results modal and the postmood check-in exactly like any other ordinary round',
+     contaminated.reachedResults===true && contaminated.atPostmood===true, contaminated);
+  ck('after "How did that feel?" she lands on the subject page — NOT back on the old Jeopardy board',
+     contaminated.finalView==='unit' && contaminated.finalClassId===cid, contaminated);
+
   out.forEach(r=>console.log((r.ok?'  ok ':'FAIL ')+r.n+(r.ok?'':' → '+JSON.stringify(r.got).slice(0,600))));
   console.log(TAG, out.every(r=>r.ok)?'ALL PASS':'FAILURES');
   console.log('errors:', errs.length?errs:'none');
