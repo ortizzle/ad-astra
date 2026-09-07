@@ -1,8 +1,12 @@
-/* Trivia Ladder (v156 / Wayfinder v137): a phone-sized, solo Jeopardy-style
-   spin on the real quiz bank. Up to ten MC/analogy questions dealt onto
-   point tiles she opens in any order; answering runs through the real,
-   unmodified quiz screen and answer() — same qstat/miss/XP crediting as any
-   other untimed round. Same file in both repos. */
+/* Junior Jeopardy (Wayfinder v149 / Ad Astra v167) — the Trivia Ladder
+   rebuilt as a game show at Chris's request: categories × values on a
+   board of blue screens, harder questions on higher values, a Daily
+   Double, a wrong answer that costs the tile, sounds, and a Double round
+   (bigger values, harder tiers, one category from an older lesson) once a
+   board has been finished. Answering still runs through the real quiz
+   screen and answer() via a synthetic __ladder__ unit carrying _srcUnit —
+   same qstat/miss/XP crediting as any untimed round. Same file in both
+   repos. */
 const { chromium } = require('playwright');
 const [PORT, TAG] = process.argv.slice(2);
 (async () => {
@@ -11,181 +15,173 @@ const [PORT, TAG] = process.argv.slice(2);
   const errs=[]; p.on('pageerror',e=>errs.push(String(e.message)));
   await p.goto(`http://localhost:${PORT}/index.html`,{waitUntil:'domcontentloaded'});
   await p.addScriptTag({path:__dirname+'/seed.js'}); await p.waitForTimeout(300);
-  await p.evaluate(async ()=>{ for(const path of CONTENT_LIBRARY){
-    try{ const r=await fetch(path); const j=await r.json();
-      Object.values(j.records||{}).forEach(rec=>{rec.status='approved';DATA.records[rec.id]=rec;});
-    }catch(e){} } });
   const out=[]; const ck=(n,ok,got)=>out.push({n,ok:!!ok,got});
 
-  // ---- seed a 10-question lesson so the test never depends on which real
-  //      content happens to be shipped
+  // ---- seed: a 12-question lesson with an even spread of levels, an older
+  //      lesson on the same shelf she has already worked, and a too-thin unit
   const seeded = await p.evaluate(()=>{
     const cid = STUDY_CLASSES.find(c => units(c.id).length).id;
-    const mk = i => ({ id:'q'+i, lv:1, from:'source', q:'Ladder Q'+i+'?', opts:['a'+i,'b'+i,'c'+i,'d'+i], ans:i%4,
+    const mk = (i, lv) => ({ id:'q'+i, lv, from:'source', q:'JJ Q'+i+' (lv'+lv+')?', opts:['a'+i,'b'+i,'c'+i,'d'+i], ans:i%4,
       hint:'h'+i, steps:['s1','s2','s3'], ex:{main:'because '+i} });
-    put({ id:'ladder-unit', type:'unit', classId:cid, status:'approved', title:'Ladder Test Unit',
-      cards:[], questions:[...Array(10).keys()].map(mk) });
-    put({ id:'ladder-thin', type:'unit', classId:cid, status:'approved', title:'Too Thin For A Board',
-      cards:[], questions:[0,1,2,3].map(mk) });
+    put({ id:'jj-unit', type:'unit', classId:cid, status:'approved', title:'Topic 9 · 9-2 Test Lesson',
+      cards:[], questions:[...Array(12).keys()].map(i=>mk(i,(i%3)+1)) });
+    put({ id:'jj-older', type:'unit', classId:cid, status:'approved', title:'Topic 9 · 9-1 Older Lesson',
+      cards:[], questions:[...Array(9).keys()].map(i=>mk(i,(i%3)+1)) });
+    DATA.records['jj-older'].questions.forEach(q=>put({id:'qstat_jj-older_'+q.id,type:'qstat',unitId:'jj-older',qid:q.id,attempts:2,correct:2,plain:2}));
+    put({ id:'jj-thin', type:'unit', classId:cid, status:'approved', title:'Too Thin For A Board',
+      cards:[], questions:[0,1,2,3].map(i=>mk(i,1)) });
     return { cid };
   });
   const cid = seeded.cid;
 
-  // ---- the door: gated on 6+ eligible questions, absent below that
+  // ---- the door: renamed, gated on 6+ eligible questions
   const doors = await p.evaluate(([cid])=>{
-    const uFull = DATA.records['ladder-unit'], uThin = DATA.records['ladder-thin'];
-    const cardFull = unitCard(uFull, CLASS_BY_ID[cid]);
-    const cardThin = unitCard(uThin, CLASS_BY_ID[cid]);
-    return {
-      full: /Trivia Ladder — play for points/.test(cardFull.textContent),
-      thin: /Trivia Ladder — play for points/.test(cardThin.textContent),
-    };
+    const full = unitCard(DATA.records['jj-unit'], CLASS_BY_ID[cid]).textContent;
+    const thin = unitCard(DATA.records['jj-thin'], CLASS_BY_ID[cid]).textContent;
+    return { full: /Junior Jeopardy — play for points/.test(full), thin: /Junior Jeopardy/.test(thin), old: /Trivia Ladder/.test(full) };
   }, [cid]);
-  ck('the lesson door renders on a 10-question unit', doors.full, doors);
-  ck('the lesson door is absent on a 4-question unit', !doors.thin, doors);
+  ck('the lesson door says Junior Jeopardy (never Trivia Ladder) and renders on a 12-question unit', doors.full && !doors.old, doors);
+  ck('the door is absent on a 4-question unit', !doors.thin, doors);
 
-  // ---- the board deals 10 ascending point tiles, none pre-played
-  const board = await p.evaluate(([cid])=>{
-    const u = DATA.records['ladder-unit'];
+  // ---- Round 1: 3 categories × 3 values, 100/200/300 down each column,
+  //      harder questions on higher values, a Daily Double below the top row
+  const r1 = await p.evaluate(([cid])=>{
     ladderState = null;
-    const built = buildLadder(u);
-    go('ladder', {unitId:u.id, classId:cid});
-    const tiles = [...document.querySelectorAll('.ladder-tile')];
-    return { built, count: tiles.length, values: tiles.map(t=>t.textContent),
-      allEnabled: tiles.every(t=>!t.disabled), minH: Math.min(...tiles.map(t=>t.getBoundingClientRect().height)) };
+    go('ladder',{unitId:'jj-unit', classId:cid});
+    const cats=[...document.querySelectorAll('.jj-cat')].map(x=>x.textContent);
+    const tiles=[...document.querySelectorAll('.jj-tile')];
+    const lv = k => ladderUnit.questions[k].lv;
+    const rows = ladderState.rows;
+    let monotone = true;
+    for(let c=0;c<ladderState.cats.length;c++) for(let r=1;r<rows;r++) if(lv(c*rows+r) < lv(c*rows+r-1)) monotone = false;
+    return { cats, tiles: tiles.map(t=>t.textContent), enabled: tiles.every(t=>!t.disabled),
+      minH: Math.min(...tiles.map(t=>t.getBoundingClientRect().height)),
+      values: ladderState.values.join(','), monotone, ddRow: ladderState.dd % rows, mode: ladderState.mode,
+      round: document.querySelector('.jj-round').textContent, srcs: [...new Set(ladderUnit.questions.map(q=>q._srcUnit))],
+      tileBg: getComputedStyle(tiles[0]).color };
   }, [cid]);
-  ck('the board deals exactly 10 tiles, ascending 100..1000, none played, each 44px+', board.built
-    && board.count===10 && board.values.join(',')==='100,200,300,400,500,600,700,800,900,1000'
-    && board.allEnabled && board.minH>=44, board);
+  ck('Round 1 deals 3 categories × 3 screens, 100/200/300 down each column, all open, 44px+',
+     r1.cats.length===3 && r1.tiles.length===9 && r1.values==='100,200,300,100,200,300,100,200,300' && r1.enabled && r1.minH>=44 && r1.mode==='single' && r1.round==='Round 1', r1);
+  ck('categories are named (the lesson, split I/II/III) and every question is the lesson\'s own', r1.cats.every(c=>/9-2 Test Lesson (I|II|III)/.test(c)) && r1.srcs.join()==='jj-unit', r1);
+  ck('questions get harder down each column (level never drops as the value rises)', r1.monotone, r1);
+  ck('one Daily Double, never in the top row', r1.ddRow > 0, r1);
+  ck('the screens are gold-on-blue, not the subject accent', r1.tileBg==='rgb(255, 204, 51)', r1);
 
-  // ---- tapping a tile opens the REAL quiz screen for that one question, in
-  //      any order (open tile index 6, not tile 0)
-  const opened = await p.evaluate(()=>{
-    ladderState.current = 6;
-    go('quiz', {unitId:ladderState.unitId, classId:ladderState.classId, ladder:true}, {back:true});
+  // ---- opening the Daily Double reveals it first, then hands the real quiz
+  //      screen the question with the category as its eyebrow and double stakes
+  const dd = await p.evaluate(()=>{
+    const k = ladderState.dd, s = ladderState;
+    const tile = [...document.querySelectorAll('.jj-tile')].find(t=>t.getAttribute('aria-label')===`${s.cats[s.catOf[k]].nm} for ${s.values[k]}`);
+    tile.click();
+    const modal = document.querySelector('.modal-overlay');
+    const modalTxt = modal ? modal.textContent : '';
+    modal.querySelector('.btn-primary').click();
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
-    return { view, ladderFlag: quizState.ladder, worth: T(document.querySelector('#screen .ladderworth')),
-      hasRoundBand: !!document.querySelector('#screen .qstars'),
-      question: T(document.querySelector('#screen h3')) };
+    return { modalTxt, view, ladder: quizState.ladder, unitId: quizState.unitId,
+      eyebrow: T(document.querySelector('#screen .eyebrow')), worth: T(document.querySelector('#screen .ladderworth')), expect: s.values[k]*2 };
   });
-  ck('tapping tile 7 opens the real quiz screen for a real ladder question, worth 700 in gold, no constellation — the shuffled order means it need not be seed question #6', 
-     opened.view==='quiz' && opened.ladderFlag && /700/.test(opened.worth) && /^Ladder Q\d\?$/.test(opened.question) && !opened.hasRoundBand, opened);
+  ck('the Daily Double announces itself, then opens the real quiz screen at double stakes with the category as eyebrow',
+     /Daily Double!/.test(dd.modalTxt) && dd.view==='quiz' && dd.ladder && dd.unitId==='__ladder__' && /📺 9-2 Test Lesson/.test(dd.eyebrow) && dd.worth==='★ Daily Double · '+dd.expect, dd);
 
-  // ---- answering wrong: real miss + qstat.plain written, "Back to the board"
-  const wrongPlay = await p.evaluate(()=>{
-    const u = DATA.records['ladder-unit'];
-    const q = u.questions[quizState.order[quizState.i]];
-    const wrongIdx = q.opts.findIndex((_,i)=>i!==q.ans);
-    const pos = quizState.optArr.indexOf(wrongIdx);
-    document.querySelectorAll('#screen .opt')[pos].click();
-    const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
-    const nextLabel = T(document.getElementById('qnext'));
-    document.getElementById('qnext').click();
-    return { nextLabel, view, missWritten: !!DATA.records['miss_ladder-unit_'+q.id],
-      qstatPlain: DATA.records['qstat_ladder-unit_'+q.id]?.plain,
-      tile6: T(document.querySelectorAll('.ladder-tile')[6]), tile6Class: document.querySelectorAll('.ladder-tile')[6].className,
-      histNotGrown: HIST[HIST.length-1] && HIST[HIST.length-1][0] !== 'quiz' };
-  });
-  ck('"Next" reads "Back to the board", a wrong answer writes a real miss and counts toward the lesson', 
-     wrongPlay.nextLabel==='Back to the board →' && wrongPlay.view==='ladder' && wrongPlay.missWritten && wrongPlay.qstatPlain===1, wrongPlay);
-  ck('the played tile shows ✕ 700 and locks', /✕ 700/.test(wrongPlay.tile6) && /done wrong/.test(wrongPlay.tile6Class), wrongPlay);
-
-  // ---- leaving mid-question (unanswered) does not consume the tile
-  const leftEarly = await p.evaluate(()=>{
-    ladderState.current = 2;
-    go('quiz', {unitId:ladderState.unitId, classId:ladderState.classId, ladder:true}, {back:true});
-    const leaveBtn = [...document.querySelectorAll('#screen .tool')].find(b=>/Leave/.test(b.textContent));
-    leaveBtn.click();
-    return { view, tile2Class: document.querySelectorAll('.ladder-tile')[2].className,
-      tile2Disabled: document.querySelectorAll('.ladder-tile')[2].disabled };
-  });
-  ck('leaving before answering returns to the board with the tile still open', 
-     leftEarly.view==='ladder' && leftEarly.tile2Class==='ladder-tile' && !leftEarly.tile2Disabled, leftEarly);
-
-  // ---- finishing the whole board: tally, points, real XP (10/correct + bonus), one log
-  const finished = await p.evaluate(()=>{
-    const u = DATA.records['ladder-unit'];
-    // tile 6 and some other are already 'wrong'/unplayed from above; play everything else right,
-    // and answer tile 2 (left open) correctly too, for a clean, checkable total.
-    for(let k=0;k<10;k++){
-      if(ladderState.results[k]!==null) continue;
-      ladderState.current = k;
-      go('quiz', {unitId:u.id, classId:u.classId, ladder:true}, {back:true});
-      const q = u.questions[quizState.order[quizState.i]];
-      const pos = quizState.optArr.indexOf(q.ans);
-      document.querySelectorAll('#screen .opt')[pos].click();
+  // ---- scoring: wrong costs the tile (double on the DD), right pays it, and
+  //      the score floors at zero as she goes — a miss at zero costs nothing
+  const sc = await p.evaluate(()=>{
+    const u = ladderUnit, s = ladderState, out=[];
+    const play = (k, right)=>{
+      s.current=k; go('quiz',{unitId:'__ladder__',classId:s.classId,ladder:true},{back:true});
+      const qq = u.questions[quizState.order[quizState.i]];
+      const idx = right ? qq.ans : qq.opts.findIndex((_,i)=>i!==qq.ans);
+      document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(idx)].click();
+      const nextLabel = document.getElementById('qnext').textContent;
       document.getElementById('qnext').click();
-    }
+      out.push({k, right, pts: ladderPoints(), view, nextLabel});
+    };
+    play(s.dd, false);
+    const k300 = s.values.findIndex((v,k)=>v===300 && k!==s.dd && !s.results[k]);
+    play(k300, true);
+    const k100 = s.values.findIndex((v,k)=>v===100 && !s.results[k]);
+    play(k100, false);
+    const ddTile = [...document.querySelectorAll('.jj-tile')].find(t=>/\bdd\b/.test(t.className));
+    return { out, strip: document.querySelector('.jj-strip .ladderworth').textContent,
+      ddTile: ddTile && ddTile.className, ddText: ddTile && ddTile.textContent, ddWorth: s.values[s.dd]*2,
+      missOnRealUnit: Object.keys(DATA.records).some(id=>id.startsWith('miss_jj-unit_')),
+      qstatPlain: DATA.records['qstat_jj-unit_'+u.questions[s.dd]._srcQid]?.plain };
+  });
+  ck('a wrong Daily Double at zero costs nothing (floor), a right 300 pays 300, a wrong 100 leaves 200',
+     sc.out.map(o=>o.pts).join()==='0,300,200' && sc.strip==='200 pts' && sc.out.every(o=>o.view==='ladder' && o.nextLabel==='Back to the board →'), sc);
+  ck('the played Daily Double screen goes dark showing ✕ and double its value, with its star; the miss and qstat land on the REAL lesson',
+     /done wrong/.test(sc.ddTile) && sc.ddText==='✕ '+sc.ddWorth && sc.missOnRealUnit && sc.qstatPlain===1, sc);
+
+  // ---- sounds: synthesized, and silent under the quiet opt-down
+  const snd = await p.evaluate(()=>{
+    const before = prefs().fx;
+    try{ sfx('right'); sfx('wrong'); sfx('dd'); }catch(e){ return {threw:String(e)}; }
+    const made = !!sfxCtx;
+    sfxCtx = null;
+    put({ ...(DATA.records['prefs']||{}), id:'prefs', type:'prefs', fx:'quiet' });
+    sfx('right');
+    const quietMade = !!sfxCtx;
+    put({ ...(DATA.records['prefs']||{}), id:'prefs', type:'prefs', fx:before||'fireworks' });
+    return { made, quietMade };
+  });
+  ck('the show sounds play through WebAudio without throwing, and stay silent when celebrations are set to quiet', snd.made && !snd.quietMade, snd);
+
+  // ---- finishing: log carries done/points/round, the door remembers, Stars summarizes
+  const fin = await p.evaluate(([cid])=>{
+    const u = ladderUnit, s = ladderState;
+    for(let k=0;k<s.order.length;k++){ if(s.results[k]) continue;
+      s.current=k; go('quiz',{unitId:'__ladder__',classId:s.classId,ladder:true},{back:true});
+      const qq = u.questions[quizState.order[quizState.i]];
+      document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(qq.ans)].click();
+      document.getElementById('qnext').click(); }
+    const logs2 = Object.values(DATA.records).filter(r=>r.type==='log'&&r.mode==='ladder'&&r.unitId==='jj-unit');
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
-    const logs = Object.values(DATA.records).filter(r=>r.type==='log' && r.mode==='ladder' && r.unitId==='ladder-unit');
-    const correct = ladderState.results.filter(x=>x==='right').length;
-    const points = ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
-    const scoreEl = document.querySelector('.ladderscore');
-    return { view, screenTxt: T(document.querySelector('#screen')), logCount: logs.length, log: logs[0],
-      correct, points, attempted: unitAttempted(u),
-      scoreGold: scoreEl && getComputedStyle(scoreEl).backgroundColor,
-      scoreText: T(scoreEl) };
-  });
-  const expectXp = finished.correct*10 + (finished.correct===10?50:finished.correct>=8?25:0);
-  ck('finishing shows the tally, points and real XP, one log record only', 
-     finished.logCount===1 && finished.log.total===10 && finished.log.correct===finished.correct
-     && finished.log.xp===expectXp && new RegExp(finished.correct+' of 10').test(finished.screenTxt)
-     && new RegExp(finished.points.toLocaleString()+' pts').test(finished.screenTxt), finished);
-  ck('the final score is the same gold reveal as the in-question badge (#f2ca63)', 
-     finished.scoreGold==='rgb(242, 202, 99)' && finished.scoreText===finished.points.toLocaleString()+' pts', finished);
-  ck('every one of the 10 questions counts toward the lesson (qstat.plain)', finished.attempted===10, finished);
-
-  // ---- a finished board leaves a trace she can see later: done/points on
-  //      the log (Chris, 2026-09: "see when they finish the trivia" /
-  //      "store game points ... so the girls can see how they've done"),
-  //      and the lesson's own door names the last time she played it.
-  const trace = await p.evaluate(([cid])=>{
-    const u = DATA.records['ladder-unit'];
-    const log = Object.values(DATA.records).find(r=>r.type==='log'&&r.mode==='ladder'&&r.unitId==='ladder-unit');
-    const card = unitCard(u, CLASS_BY_ID[cid]);
-    const doorText = [...card.querySelectorAll('button')].map(b=>b.textContent.replace(/\s+/g,' ').trim())
-      .find(t=>/Trivia Ladder/.test(t));
-    return { done: log.done, points: log.points, doorText };
+    const screen = T(document.getElementById('screen'));
+    const door = T(unitCard(DATA.records['jj-unit'], CLASS_BY_ID[cid]));
+    go('stars',{});
+    const stars = T(document.getElementById('screen'));
+    return { view, logCount: logs2.length, log: logs2[0], pts: ladderPoints(), screen, door, stars, attempted: unitAttempted(DATA.records['jj-unit']) };
   }, [cid]);
-  ck('the finished log carries done:true and the same points the results screen showed',
-     trace.done===true && trace.points===finished.points, trace);
-  ck('the lesson\'s own door now names when it was last played, with the score',
-     new RegExp('Last played .* '+finished.points.toLocaleString()+' pts').test(trace.doorText), trace);
+  ck('finishing shows the score in gold, 7 of 9, real XP, and promises Double Jeopardy next — one log with done/points/round',
+     fin.logCount===1 && fin.log.done && fin.log.points===fin.pts && fin.log.round==='single' && fin.log.xp===70
+     && fin.screen.includes(fin.pts.toLocaleString()+' pts') && /7 of 9/.test(fin.screen) && /Next time is Double Jeopardy/.test(fin.screen), fin);
+  ck('all nine questions count toward the lesson (qstat.plain), the door says when it was last played, Stars summarizes',
+     fin.attempted===9 && fin.door.includes('Last played') && fin.door.includes(fin.pts.toLocaleString()+' pts') && /Junior Jeopardy/.test(fin.stars) && /1 board finished/.test(fin.stars), fin);
 
-  // ---- the Stars tab summarizes finished boards: a count and the best score
-  const stars = await p.evaluate(()=>{
-    go('stars', {});
-    return document.getElementById('screen').textContent;
-  });
-  ck('the Stars tab shows a Trivia Ladder summary with a best-score pill',
-     /Trivia Ladder/.test(stars) && /1 board finished/.test(stars) && /pts — best score/.test(stars), {stars: stars.slice(0,50)});
-
-  // ---- Play again deals a fresh board
-  const again = await p.evaluate(([cid])=>{
-    go('ladder', {unitId:'ladder-unit', classId:cid});
-    const before = ladderState.order.slice();
+  // ---- Play again = Double Jeopardy: 200/400/600, harder tiers, and the
+  //      last category from the older lesson on the same shelf
+  const r2 = await p.evaluate(([cid])=>{
+    go('ladder',{unitId:'jj-unit', classId:cid});
     document.querySelector('#screen .btn-primary').click();
-    return { resultsReset: ladderState.results.every(r=>r===null), sameLength: ladderState.order.length===before.length };
+    const s = ladderState;
+    const cats = s.cats.map(c=>c.nm), older = s.cats.map(c=>!!c.older);
+    const src = s.order.map(k=>ladderUnit.questions[k]._srcUnit);
+    const lvTop = [0,1].map(c=>ladderUnit.questions[c*s.rows].lv);
+    return { mode:s.mode, values:s.values.join(','), cats, older, src, lvTop, round: document.querySelector('.jj-round').textContent,
+      tiles: document.querySelectorAll('.jj-tile').length };
   }, [cid]);
-  ck('Play again deals a fresh board with every tile open', again.resultsReset && again.sameLength, again);
+  ck('the second board is Double Jeopardy: 200/400/600 and harder tiers (the top row asks level 2+)',
+     r2.mode==='double' && r2.values==='200,400,600,200,400,600,200,400,600' && r2.round==='Double Jeopardy' && r2.lvTop.every(l=>l>=2) && r2.tiles===9, r2);
+  ck('its last category is the older lesson from the same shelf — three questions, tagged to that lesson',
+     r2.cats[2]==='9-1 Older Lesson' && r2.older.join()==='false,false,true' && r2.src.slice(6).every(x=>x==='jj-older') && r2.src.slice(0,6).every(x=>x==='jj-unit'), r2);
 
-  // ---- the mix-mode door on the subject screen, gated the same way
+  // ---- the subject-screen board: every column a different lesson
   const mix = await p.evaluate(([cid])=>{
-    go('unit', {classId:cid});
-    const btn = [...document.querySelectorAll('#screen .btn-secondary')].find(b=>/Trivia Ladder — a mix/.test(b.textContent));
+    go('unit',{classId:cid});
+    const btn=[...document.querySelectorAll('#screen .btn-secondary')].find(b=>/Junior Jeopardy — a mix/.test(b.textContent));
     if(!btn) return {found:false};
     btn.click();
-    const tagged = ladderState.order.every(i => !!shuffleUnit.questions[i]._srcUnit);
-    return { found:true, view, unitId: ctx.unitId, tagged };
-  }, [cid]);
-  ck('the subject screen offers a mix-mode ladder door, drawing from __shuffle__ with real source ids', 
-     mix.found && mix.view==='ladder' && mix.unitId==='__shuffle__' && mix.tagged, mix);
+    return { found:true, view, unitId: ctx.unitId, cats: ladderState.cats.map(c=>c.nm),
+      srcs:[...new Set(ladderState.order.map(k=>ladderUnit.questions[k]._srcUnit))] };
+  },[cid]);
+  ck('the subject screen offers a mix board whose categories are lessons, each drawing its own questions',
+     mix.found && mix.view==='ladder' && mix.unitId==='__shuffle__' && mix.cats.length>=2 && mix.srcs.length===mix.cats.length, mix);
 
-  // ---- modeLabel knows the mode
+  // ---- modeLabel knows the new name
   const label = await p.evaluate(()=> modeLabel({mode:'ladder'}));
-  ck('modeLabel names it Trivia Ladder for the day view', label==='Trivia Ladder', label);
+  ck('modeLabel names it Junior Jeopardy for the day view', label==='Junior Jeopardy', label);
 
-  out.forEach(r=>console.log((r.ok?'  ok ':'FAIL ')+r.n+(r.ok?'':' → '+JSON.stringify(r.got).slice(0,500))));
+  out.forEach(r=>console.log((r.ok?'  ok ':'FAIL ')+r.n+(r.ok?'':' → '+JSON.stringify(r.got).slice(0,600))));
   console.log(TAG, out.every(r=>r.ok)?'ALL PASS':'FAILURES');
   console.log('errors:', errs.length?errs:'none');
   await b.close();

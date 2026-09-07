@@ -967,19 +967,38 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
 /* A two-line .btn-secondary — icon+title, then a quiet status line — for
    doors that gain a "last played" fact once she's used them once (the
-   Trivia Ladder doors below). The outer .btn keeps centering the whole
+   Junior Jeopardy doors below). The outer .btn keeps centering the whole
    stack; only the stack itself goes column. */
 .btnstack{display:flex;flex-direction:column;align-items:center;gap:2px}
 .btnstack small{font-weight:500;font-size:11.5px;color:var(--faint)}
-/* Trivia Ladder tiles — same tinted-accent language as the mode tiles
-   (.mtile) and Sort's bucket plates, so the board reads as part of the
-   subject screen rather than importing a separate game-show identity. */
-.ladder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
-.ladder-tile{min-height:56px;border-radius:14px;border:1.5px solid var(--ac-25);background-color:var(--ac-8);
-  color:var(--ac-fg);font-weight:800;font-size:19px;font-variant-numeric:tabular-nums}
-.ladder-tile.done{background-color:var(--surface);border-color:var(--line-soft);color:var(--muted);cursor:default}
-.ladder-tile.done.right{color:var(--good);border-color:var(--good)}
-.ladder-tile.done.wrong{color:var(--bad);border-color:var(--bad)}
+/* Junior Jeopardy board (Wayfinder v149 / Ad Astra v167): categories
+   across the top, values down, blue screens with gold numbers — the show's
+   own wall of TVs. Deliberately theme-independent, like the atlas page and
+   the cardstock: it is a set, not chrome, and it looks the same in the dark.
+   (This reverses v156's "the board stays in the subject's accent" — Chris
+   asked for the show.) Gold on the blue measures ≈8:1; the played screens'
+   ✓/✕ read at ≈6:1 on the dark glass. */
+.jj-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 4px}
+.jj-round{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.jj-board{display:grid;gap:6px;margin-top:12px;padding:8px;border-radius:14px;background:#0b0f2b;
+  border:2px solid #1c2255;box-shadow:inset 0 0 0 1px #2a3380,0 6px 18px rgba(0,0,0,.35)}
+.jj-cat{min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;padding:5px 4px;
+  border-radius:5px;background:linear-gradient(180deg,#0a12c9,#060a8e);color:#fff;font-size:10.5px;line-height:1.2;
+  font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.6);
+  border:1px solid #1d2ac0;overflow:hidden}
+.jj-tile{min-height:62px;border-radius:5px;border:1px solid #1d2ac0;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#0b18e8 0%,#060cb8 55%,#04077f 100%);color:#ffcc33;
+  font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:26px;font-variant-numeric:tabular-nums;
+  text-shadow:0 2px 0 #7a5a00,0 3px 6px rgba(0,0,0,.6);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.06),inset 0 -14px 20px rgba(0,0,0,.35)}
+/* Faint scanlines — the screen, not the number. */
+.jj-tile::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)}
+.jj-tile.done{background:#0a0d22;color:#9aa3c7;text-shadow:none;font-size:16px;cursor:default;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.04)}
+.jj-tile.done.right{color:#8fe3a8}
+.jj-tile.done.wrong{color:#f4a0a0}
+.jj-tile.done.dd::before{content:'★';position:absolute;top:3px;right:6px;font-size:11px;color:#ffcc33}
 /* The one gold moment in the whole feature (Chris, 2026-09: "show the
    points as if on a game show") — reused for both reveals (the question's
    own "worth" badge and the finish screen's score) rather than spread
@@ -1525,7 +1544,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v166 · a shorter, slower clock';
+const APP_VERSION = 'v167 · Junior Jeopardy';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3216,7 +3235,7 @@ function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
   if(l.mode==='match')   return 'Match';   // historical logs only — the game itself was removed in v154
   if(l.mode==='sort')    return 'Sort';
-  if(l.mode==='ladder')  return 'Trivia Ladder';
+  if(l.mode==='ladder')  return 'Junior Jeopardy';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
   if(l.mode==='readfin') return 'Finished a book';
@@ -3665,6 +3684,33 @@ function showModal({title,message,confirmText='OK',cancelText=null,onConfirm=nul
    spreads DEFAULT_PREFS into the stored record, so both girls already have
    fx baked in from the first preference they ever changed, and a new default
    would never reach them. */
+/* Game-show sounds for Junior Jeopardy, synthesized in WebAudio — no asset
+   files, so the app stays four files. Gated on the same fx:'quiet' opt-down
+   celebrate() honours: opting down keeps costing nothing. Nothing else in
+   the app plays a sound on a miss; see answer(). */
+let sfxCtx = null;
+function sfx(kind){
+  if((prefs().fx||'') === 'quiet') return;
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    sfxCtx = sfxCtx || new AC();
+    if(sfxCtx.state === 'suspended') sfxCtx.resume();
+    const t0 = sfxCtx.currentTime;
+    const tone = (f, at, dur, type='sine', gain=.16) => {
+      const o = sfxCtx.createOscillator(), g = sfxCtx.createGain();
+      o.type = type; o.frequency.setValueAtTime(f, t0+at);
+      g.gain.setValueAtTime(0.0001, t0+at);
+      g.gain.exponentialRampToValueAtTime(gain, t0+at+.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0+at+dur);
+      o.connect(g).connect(sfxCtx.destination);
+      o.start(t0+at); o.stop(t0+at+dur+.05);
+    };
+    if(kind==='right'){ tone(660,0,.16); tone(880,.13,.3); }
+    else if(kind==='wrong'){ tone(233,0,.2,'triangle',.12); tone(175,.19,.32,'triangle',.12); }
+    else if(kind==='dd'){ tone(523,0,.14); tone(659,.12,.14); tone(784,.24,.14); tone(1047,.36,.4); }
+  }catch(e){ /* no audio here — the board plays silently */ }
+}
 function celebrate(opt){
   const chosen = prefs().fx || 'fireworks';
   const fx = (opt && opt.big && chosen !== 'quiet') ? 'fireworks' : chosen;
@@ -5115,7 +5161,7 @@ SCREENS.unit = function(root){
     if(mcTotal >= 6){
       const lb = el('button','btn btn-secondary');
       const stack = el('span','btnstack');
-      stack.appendChild(el('span',null,'🎯  Trivia Ladder — a mix of everything'));
+      stack.appendChild(el('span',null,'📺  Junior Jeopardy — a mix of everything'));
       const last = ladderLast('__shuffle__', c.id);
       if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
       lb.appendChild(stack);
@@ -5324,14 +5370,14 @@ function unitCard(u, c, label){
     sk.addEventListener('click',()=>{ skyState = null; go('starsky',{unitId:u.id, classId:c.id}); });
     card.appendChild(sk);
   }
-  /* Trivia Ladder: her own quiz bank, dealt onto point tiles she can open in
+  /* Junior Jeopardy: her own quiz bank, dealt onto a board of screens she can open in
      any order — solo, phone-sized, escalating stakes. Needs a real pool to
      draw from; a lesson with only a handful of MC questions isn't worth a
      whole board. */
   if(u.questions.filter(qq=>!qq.kind||qq.kind==='mc'||qq.kind==='analogy').length >= 6){
     const lb = el('button','btn btn-secondary');
     const stack = el('span','btnstack');
-    stack.appendChild(el('span',null,'🎯  Trivia Ladder — play for points'));
+    stack.appendChild(el('span',null,'📺  Junior Jeopardy — play for points'));
     const last = ladderLast(u.id, c.id);
     if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
     lb.appendChild(stack);
@@ -6965,53 +7011,165 @@ function buildShuffleUnit(classId){
   return shuffleUnit;
 }
 
-/* ================= TRIVIA LADDER ================= */
-/* A phone-sized, solo Jeopardy-style spin on her own quiz bank (Chris,
-   2026-09: "only the student will play"). Up to ten of a unit's own
-   multiple-choice/analogy questions — or, from the subject screen, a mix
-   across every unit, reusing buildShuffleUnit exactly as the Shuffle round
-   does — dealt onto point-valued tiles she opens in ANY order rather than
-   the usual straight line. Rules that are the point:
-   - Answering runs through the real, unmodified quiz screen and answer() —
-     same qstat/miss/XP crediting as any other untimed round (so it counts
-     toward the lesson the same way an ordinary quiz round does), same
-     hints/steps/flag-this-question/graphs. Only the choosing and the point
-     display are new; nothing about how a miss is scheduled changes.
-   - Never timed — order/slider/spell kinds need their own controls this
-     board doesn't render, so pickLadder excludes them; everything else
-     already supported by the ordinary MC screen works here for free.
-   - The displayed "points" are flavor for the choosing, not a second
-     currency: real XP still follows the same 10-per-correct rule as
-     everywhere else, with the same completion bonus and hint cost.
-   - One log, updated every time she returns to the board (matchLog's
-     rule) — an interrupted session keeps whatever it already earned; only
-     the one tile she never finished answering is not yet credited (its
-     qstat/miss are unaffected either way — answer() already wrote them the
-     moment she picked an option). */
-let ladderState = null;
-const LADDER_SIZE = 10;
-const LADDER_VALUES = [100,200,300,400,500,600,700,800,900,1000];
-function pickLadder(u){
-  const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
-  const att = q => (DATA.records['qstat_'+key(q)]?.attempts)||0;
-  const seen = q => (DATA.records['qstat_'+key(q)]?.updatedAt)||0;
-  const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
-  const idx = u.questions.map((q,i)=>({i,q,a:att(q),g:owed(q),t:seen(q),r:Math.random()}))
-    .filter(x => !x.q.kind || x.q.kind==='mc' || x.q.kind==='analogy');
-  idx.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
-  return shuffle(idx.slice(0, Math.min(LADDER_SIZE, idx.length)).map(x=>x.i));
+/* ================= JUNIOR JEOPARDY ================= */
+/* The Trivia Ladder, rebuilt as a game show (Chris, 2026-09: "can we make
+   trivia ladder called Junior Jeopardy and make the boxes look like screens
+   similar to the tv show? ... questions get harder the more points they're
+   worth ... a double jeopardy for fun ... category names ... sounds for
+   correct and incorrect ... wrong answers subtract points ... first time
+   smaller amounts, second time higher amounts with harder questions ...
+   another category from an older lesson, just a few though"). Every one of
+   those is here; the rules underneath did not move:
+   - Answering STILL runs through the real, unmodified quiz screen and
+     answer() — the board hands it one question at a time through a
+     synthetic `__ladder__` unit whose questions carry _srcUnit/_srcClass/
+     _srcQid (the Shuffle round's own mechanism), so qstats, misses, hints,
+     steps, flags and the map tool all land on the REAL lesson exactly as
+     an ordinary untimed round would. Playing a board finishes the lesson.
+   - The board is categories × values. A category is a column; a value is a
+     row; the ROW picks the difficulty — row 1 wants a level-1 (recall)
+     question, row 2 level 2 (apply), row 3 level 3 (analyze), nearest
+     level when a column lacks one. In the Double round the tiers shift
+     up (2/3/3). Categories: a question's authored `cat` when a unit
+     carries them; a lesson's analogies as their own column when it has
+     3+; the lesson itself, split I/II/III, otherwise. The subject-screen
+     board makes each column a different lesson.
+   - Round 1 vs Double: the FIRST board on a lesson deals 100/200/300; once
+     she has finished one (ladderLast), every later board is Double
+     Jeopardy — 200/400/600, harder tiers, and on a lesson board the last
+     column comes from an OLDER lesson in the same subject (same shelf
+     preferred, the one she has worked most), three questions only. This
+     is "the second time they play the game" and "just a few though".
+   - One Daily Double per board, never in the top row, revealed only when
+     she opens it: that screen pays double and costs double.
+   - Points are still flavor (real XP follows the ordinary quiz rule and is
+     never subtracted), but on THIS board a wrong answer now costs the
+     tile's value — Chris's ask, and the show's rule. The score floors at
+     zero: a negative number on a nine-year-old's screen is a verdict, and
+     the rest of the app never hands one out.
+   - Sounds are the show's, synthesized in WebAudio (no asset files — the
+     app stays four files) and gated on the same `fx:'quiet'` opt-down the
+     celebrations honour, so opting down keeps costing nothing. The wrong
+     sound is a soft low two-note, not a buzzer. They play ONLY on this
+     board — everywhere else the phone still never scolds.
+   - One log, updated every time she returns to the board, same as before;
+     it now also carries `round`. mode:'ladder' stays as the record key so
+     boards played under the old name still read. */
+let ladderState = null, ladderUnit = null;
+const JJ_ROWS = 3, JJ_COLS = 3;
+const JJ_VALUES = { single:[100,200,300], double:[200,400,600] };
+const JJ_TIERS  = { single:[1,2,3],       double:[2,3,3] };
+const jjEligible = q => !q.kind || q.kind==='mc' || q.kind==='analogy';
+/* Eligible questions of a unit with their ranking fields — the same
+   Growth-Zone-owed-last / least-attempted / longest-unseen order pickRound
+   uses, so a board asks what the ordinary quiz would ask next. */
+function jjRefs(un){
+  return un.questions.map((q,i)=>({un,q,i})).filter(r=>jjEligible(r.q)).map(r=>{
+    const key = (r.q._srcUnit||un.id)+'_'+(r.q._srcQid||r.q.id);
+    const st = DATA.records['qstat_'+key], m = DATA.records['miss_'+key];
+    return { ...r, a:(st?.attempts)||0, t:(st?.updatedAt)||0, g:(m && !m.deleted)?1:0, rnd:Math.random() };
+  });
+}
+const jjOrder = (x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.rnd-y.rnd;
+/* Deal a lesson's questions across n columns so every column gets a spread
+   of levels — sorted by level first, then the quiz order, then round-robin —
+   otherwise one column can end up all recall and another all analysis. */
+function jjSplit(refs, n, label){
+  const sorted = refs.slice().sort((x,y)=> (x.q.lv||1)-(y.q.lv||1) || jjOrder(x,y));
+  const cols = Array.from({length:n}, ()=>[]);
+  sorted.forEach((r,i)=>cols[i%n].push(r));
+  const rom = ['I','II','III'];
+  return cols.map((pool,i)=>({ nm: n>1 ? `${label} ${rom[i]}` : label, pool }));
+}
+/* The older lesson for a Double-round column: same subject, not this one,
+   enough eligible questions for a column, same shelf preferred, then the
+   one she has worked the most — "older" in the sense that matters, which
+   is that she has been there. */
+function jjOlderLesson(u){
+  const ser = seriesOf(u);
+  const cands = units(u.classId).filter(x => x.id!==u.id && !x.own && !x.guide && jjRefs(x).length >= JJ_ROWS);
+  if(!cands.length) return null;
+  const score = x => (ser && seriesOf(x)===ser ? 1000 : 0) + (x.questions.length ? unitAttempted(x)/x.questions.length*100 : 0);
+  cands.sort((a,b)=> score(b)-score(a) || String(a.title).localeCompare(String(b.title), undefined, {numeric:true}));
+  return cands[0];
+}
+function jjColumns(u, dbl){
+  if(u.id==='__shuffle__'){
+    /* The subject board: every column is a different lesson, the least
+       practised lessons first. */
+    const lessons = units(u.classId).filter(x=>!x.own && !x.guide).map(x=>({x, refs:jjRefs(x)})).filter(o=>o.refs.length >= JJ_ROWS);
+    lessons.sort((a,b)=> (b.refs.filter(r=>!r.a).length/b.refs.length) - (a.refs.filter(r=>!r.a).length/a.refs.length) || Math.random()-.5);
+    if(lessons.length >= 2) return lessons.slice(0, JJ_COLS).map(o=>({ nm: lessonLabel(o.x), pool: o.refs }));
+    if(lessons.length === 1){ const o = lessons[0]; return jjSplit(o.refs, Math.min(JJ_COLS, Math.floor(o.refs.length/JJ_ROWS)), lessonLabel(o.x)); }
+    return [];
+  }
+  const label = lessonLabel(u), refs = jjRefs(u);
+  const cols = Math.min(JJ_COLS, Math.floor(refs.length/JJ_ROWS));
+  if(cols < 2) return [];
+  /* In the Double round the last column is an older lesson, so this lesson
+     is dealt across the columns it will actually keep — splitting three
+     ways and discarding one would starve the survivors of hard questions. */
+  const old = dbl ? jjOlderLesson(u) : null;
+  const own = old ? Math.max(1, cols-1) : cols;
+  let out = null;
+  /* Authored categories win when the unit carries them (content-shaped,
+     like everything else about a unit). */
+  const byCat = {};
+  refs.forEach(r=>{ if(r.q.cat) (byCat[r.q.cat] = byCat[r.q.cat] || []).push(r); });
+  const groups = Object.entries(byCat).filter(([,l])=>l.length >= JJ_ROWS).sort((a,b)=>b[1].length-a[1].length).slice(0, own);
+  if(groups.length >= 2 || (groups.length === 1 && old)) out = groups.map(([nm,pool])=>({nm,pool}));
+  else {
+    const ana = refs.filter(r=>r.q.kind==='analogy'), rest = refs.filter(r=>r.q.kind!=='analogy');
+    if(own > 1 && ana.length >= JJ_ROWS && rest.length >= JJ_ROWS*(own-1)) out = [...jjSplit(rest, own-1, label), {nm:'Analogies', pool:ana}];
+    else out = jjSplit(refs, own, label);
+  }
+  if(old) out.push({ nm: lessonLabel(old), pool: jjRefs(old), older:true });
+  return out;
 }
 function buildLadder(u){
-  const order = pickLadder(u);
-  if(order.length < 6) return false;
-  ladderState = { unitId:u.id, classId:u.classId, order,
-    values: LADDER_VALUES.slice(0, order.length), results: new Array(order.length).fill(null),
+  const dbl = !!ladderLast(u.id, u.classId);
+  const mode = dbl ? 'double' : 'single';
+  const cols = jjColumns(u, dbl);
+  if(cols.length < 2) return false;
+  const qs = [], values = [], catOf = [];
+  const tiers = JJ_TIERS[mode];
+  for(let ci=0; ci<cols.length; ci++){
+    /* The column's three questions are the best MONOTONE fit to the row
+       tiers: sort the pool easy→hard (quiz order inside a level) and take
+       the three, in that order, whose levels sit closest to 1/2/3 (or
+       2/3/3 in the Double) — so the 300 is never easier than the 200,
+       which a row-by-row greedy pick could produce. Ties go to the
+       questions the ordinary quiz would ask next. Pools are small (≤ a
+       dozen), so trying every triple is cheap. */
+    const pool = cols[ci].pool.slice().sort((x,y)=> (x.q.lv||1)-(y.q.lv||1) || jjOrder(x,y));
+    if(pool.length < JJ_ROWS) return false;
+    let best = null;
+    for(let a=0;a<pool.length-2;a++) for(let b2=a+1;b2<pool.length-1;b2++) for(let c=b2+1;c<pool.length;c++){
+      const tri = [pool[a],pool[b2],pool[c]];
+      const cost = tri.reduce((n,r,i)=> n + Math.abs((r.q.lv||1)-tiers[i]), 0)*100 + a + b2 + c;
+      if(!best || cost < best.cost) best = {cost, tri};
+    }
+    best.tri.forEach((pick, r)=>{
+      qs.push({ ...pick.q, id: pick.un.id+'~'+pick.q.id, _srcUnit: pick.un.id,
+        _srcClass: pick.un.classId==='__all__' ? u.classId : pick.un.classId, _srcQid: pick.q.id });
+      values.push(JJ_VALUES[mode][r]); catOf.push(ci);
+    });
+  }
+  ladderUnit = { id:'__ladder__', classId:u.classId, title:'Junior Jeopardy', book:true, cards:[], questions:qs };
+  /* The Daily Double hides anywhere but the top row. */
+  const belowTop = qs.map((_,k)=>k).filter(k => k % JJ_ROWS > 0);
+  ladderState = { unitId:u.id, classId:u.classId, order: qs.map((_,k)=>k), values, catOf,
+    cats: cols.map(c=>({ nm:c.nm, older:!!c.older })), rows:JJ_ROWS, mode,
+    dd: belowTop[Math.floor(Math.random()*belowTop.length)], ddSeen:false,
+    results: new Array(qs.length).fill(null),
     items:[], hintPenalty:0, logId:null, start:Date.now(), current:null };
   return true;
 }
+const jjWorth = k => ladderState.values[k] * (k===ladderState.dd ? 2 : 1);
 function ladderReturn(u, q){
   const right = quizState.answered === q.ans;
   ladderState.results[quizState.i] = right ? 'right' : 'wrong';
+  (ladderState.seq = ladderState.seq || []).push(quizState.i);
   ladderState.hintPenalty = (ladderState.hintPenalty||0) + (quizState.hints||0)*5;
   const lastItem = (quizState.items||[])[quizState.items.length-1];
   if(lastItem) ladderState.items.push(lastItem);
@@ -7019,8 +7177,14 @@ function ladderReturn(u, q){
   ladderLog(u);
   go('ladder', {unitId: ladderState.unitId, classId: ladderState.classId}, {back:true});
 }
+/* Right pays the tile, wrong costs it, the Daily Double doubles both ways —
+   and the score floors at zero AS SHE GOES (a miss at zero costs nothing),
+   not on the total: a right answer must always show on the strip, never be
+   swallowed by an earlier hole. Played in the order she played them. */
 function ladderPoints(){
-  return ladderState.order.reduce((n,_,k)=> n + (ladderState.results[k]==='right'?ladderState.values[k]:0), 0);
+  const s = ladderState;
+  const seq = s.seq || s.order.filter(k=>s.results[k]);
+  return seq.reduce((n,k)=> Math.max(0, n + (s.results[k]==='right' ? jjWorth(k) : -jjWorth(k))), 0);
 }
 function ladderLog(u){
   const played = ladderState.results.filter(x=>x!==null).length;
@@ -7040,74 +7204,101 @@ function ladderLog(u){
            purely for that visibility (ladderLast()/ladderGames() below and
            the Stars-tab summary). Nothing changes about how real XP or
            qstats/misses are credited. */
-        done:doneAll, points:ladderPoints(),
+        done:doneAll, points:ladderPoints(), round:ladderState.mode,
         items:(ladderState.items||[]).slice(0,QUIZ_ITEM_MAX) });
   if(doneAll){ checkBadges(); syncSoon(); if(pct>=80) celebrate(); }
 }
-/* Trivia Ladder history — purely for visibility (Chris, 2026-09: "can we
+/* Junior Jeopardy history — purely for visibility (Chris, 2026-09: "can we
    have the girls see when they finish the trivia" and "store game points
    ... so the girls can see how they've done"). Reads the done/points
-   fields ladderLog() writes above; nothing new is stored beyond those two
+   fields ladderLog() writes above; nothing new is stored beyond those
    fields, and nothing here is a leaderboard or a new mechanic — same
-   posture as Trophies (v95): earned already, just made visible. */
+   posture as Trophies (v95): earned already, just made visible. It is also
+   what decides Round 1 vs Double Jeopardy: a finished board on this
+   lesson means the next one is the Double. */
 function ladderGames(){ return logs().filter(l => l.mode==='ladder' && l.done); }
 function ladderLast(unitId, classId){
   return ladderGames().find(l => l.unitId===unitId && l.classId===classId) || null;
 }
 SCREENS.ladder = function(root){
-  const u = unitFor(ctx.unitId);
-  if(!u || !u.questions.length) return go('unit',{classId:ctx.classId});
-  if(!ladderState || ladderState.unitId !== u.id){
-    if(!buildLadder(u)) return go('unit',{classId:ctx.classId});
+  const cid = ctx.classId;
+  const u = ctx.unitId==='__shuffle__' ? buildShuffleUnit(cid) : unitFor(ctx.unitId);
+  if(!u || !u.questions.length) return go('unit',{classId:cid});
+  if(!ladderState || ladderState.unitId !== u.id || ladderState.classId !== u.classId){
+    if(!buildLadder(u)) return go('unit',{classId:cid});
   }
-  const played = ladderState.results.filter(x=>x!==null).length;
-  const done = played === ladderState.order.length;
-  const cls = CLASS_BY_ID[ctx.classId];
+  const s = ladderState;
+  const played = s.results.filter(x=>x!==null).length;
+  const done = played === s.order.length;
+  const cls = CLASS_BY_ID[cid];
+  const dbl = s.mode==='double';
   const head = el('div','card ac');
-  head.appendChild(el('div','eyebrow', cls ? cls.icon+' '+cls.name : u.title));
-  head.appendChild(el('h2',null,'🎯 Trivia Ladder'));
+  head.appendChild(el('div','eyebrow', cls ? cls.icon+' '+cls.name : 'Junior Jeopardy'));
+  head.appendChild(el('h2',null,'📺 Junior Jeopardy'));
   if(done){
-    const correct = ladderState.results.filter(x=>x==='right').length;
+    const correct = s.results.filter(x=>x==='right').length;
     const points = ladderPoints();
-    head.appendChild(el('p',null, correct===ladderState.order.length ? 'Every tile — the whole board.'
-      : correct/ladderState.order.length>=0.8 ? 'A strong board.'
-      : 'A round worth playing again.'));
+    head.appendChild(el('p',null, correct===s.order.length ? 'Every screen — the whole board.'
+      : correct/s.order.length>=0.8 ? 'A strong board.'
+      : 'A board worth playing again.'));
     /* The final score gets the same gold as the question badge — the
        one moment on this screen that is allowed to be loud. */
-    const scoreEl = el('span','ladderworth ladderscore', points.toLocaleString()+' pts');
-    head.appendChild(scoreEl);
+    head.appendChild(el('span','ladderworth ladderscore', points.toLocaleString()+' pts'));
     const t = el('div','tally');
-    const chip = (n, rest) => { const s = el('span'); s.appendChild(el('b',null,String(n))); s.appendChild(document.createTextNode(rest)); t.appendChild(s); };
-    chip(correct, ` of ${ladderState.order.length}`);
-    const log = DATA.records[ladderState.logId];
+    const chip = (n, rest) => { const sp = el('span'); sp.appendChild(el('b',null,String(n))); sp.appendChild(document.createTextNode(rest)); t.appendChild(sp); };
+    chip(correct, ` of ${s.order.length}`);
+    const log = DATA.records[s.logId];
     if(log) chip('+'+log.xp, ' XP');
     head.appendChild(t);
+    head.appendChild(el('p',null, dbl
+      ? 'That was Double Jeopardy — the big board. Play again for another.'
+      : 'Next time is Double Jeopardy: bigger values, harder questions' + (u.id==='__shuffle__' ? '.' : ', and one category from an older lesson.')));
     const comp = companionOf();
     if(comp){
-      const pool = companionPool(correct/ladderState.order.length>=0.8 ? 'cheer' : 'steady', comp);
+      const pool = companionPool(correct/s.order.length>=0.8 ? 'cheer' : 'steady', comp);
       head.appendChild(companionSays(pool[logs().length % pool.length], comp));
     }
     const again = el('button','btn btn-primary','Play again');
     again.addEventListener('click',()=>{ buildLadder(u); render(); });
     head.appendChild(again);
-  } else {
-    head.appendChild(el('p',null,'Pick any tile — the bigger the number, the bigger the swing.'));
+    root.appendChild(head);
+    return;
   }
+  const strip = el('div','jj-strip');
+  strip.appendChild(el('span','jj-round', dbl ? 'Double Jeopardy' : 'Round 1'));
+  strip.appendChild(el('span','ladderworth', ladderPoints().toLocaleString()+' pts'));
+  head.appendChild(strip);
+  head.appendChild(el('p',null, played ? `${played} of ${s.order.length} screens played.`
+    : 'Pick any screen. Higher numbers are harder questions — and one of them is a Daily Double.'));
   root.appendChild(head);
-  if(!done){
-    const grid = el('div','ladder-grid');
-    ladderState.order.forEach((qi,k)=>{
-      const res = ladderState.results[k];
-      const t = el('button','ladder-tile'+(res?' done '+res:''));
-      t.textContent = res ? (res==='right'?'✓ ':'✕ ')+ladderState.values[k] : String(ladderState.values[k]);
-      /* Escalating size: the higher the stakes, the bigger it reads. */
-      t.style.fontSize = Math.round(15 + (ladderState.values[k]/LADDER_VALUES[LADDER_VALUES.length-1])*11) + 'px';
-      t.disabled = !!res;
-      if(!res) t.addEventListener('click',()=>{ ladderState.current = k; go('quiz',{unitId:u.id, classId:ctx.classId, ladder:true},{back:true}); });
-      grid.appendChild(t);
+  /* The board: categories across the top, values down, blue screens with
+     gold numbers — a wall of TVs, not a row of app tiles. Theme-independent
+     on purpose, like the atlas page and the cardstock: it is a set, not
+     chrome. */
+  const board = el('div','jj-board');
+  board.style.gridTemplateColumns = `repeat(${s.cats.length},1fr)`;
+  s.cats.forEach(c=>{
+    const h = el('div','jj-cat', c.nm);
+    if(c.older) h.title = 'From an older lesson';
+    board.appendChild(h);
+  });
+  for(let r=0; r<s.rows; r++) s.cats.forEach((_,ci)=>{
+    const k = ci*s.rows + r, res = s.results[k];
+    const t = el('button','jj-tile'+(res ? ' done '+res : '')+(res && k===s.dd ? ' dd' : ''));
+    t.textContent = res ? (res==='right' ? '✓ ' : '✕ ') + jjWorth(k) : String(s.values[k]);
+    t.disabled = !!res;
+    t.setAttribute('aria-label', `${s.cats[ci].nm} for ${s.values[k]}`);
+    if(!res) t.addEventListener('click',()=>{
+      const open = ()=>{ s.current = k; go('quiz',{unitId:'__ladder__', classId:cid, ladder:true},{back:true}); };
+      if(k===s.dd && !s.ddSeen){
+        s.ddSeen = true; sfx('dd');
+        showModal({ title:'Daily Double!', message:`This screen is worth double — ${s.values[k]*2} points either way.`,
+          confirmText:'Bring it on', onConfirm:open });
+      } else open();
     });
-    root.appendChild(grid);
-  }
+    board.appendChild(t);
+  });
+  root.appendChild(board);
 };
 
 /* ================= THE DAILY THREE ================= */
@@ -7686,7 +7877,8 @@ function buildReviewUnit(opt){
 const unitFor = id => id==='__review__' ? reviewUnit
   : id==='__daily__' ? dailyUnit
   : id==='__shuffle__' ? shuffleUnit
-  : id==='__rescue__' ? rescueUnit : DATA.records[id];
+  : id==='__rescue__' ? rescueUnit
+  : id==='__ladder__' ? ladderUnit : DATA.records[id];
 
 SCREENS.quiz = function(root){
   const u = unitFor(ctx.unitId);
@@ -7752,10 +7944,13 @@ SCREENS.quiz = function(root){
   const head = el('div','card');
   if(quizState.ladder){
     /* No constellation here — the board itself is the progress picture. */
-    head.appendChild(el('div','eyebrow', u.title));
+    /* The category is the eyebrow — that is what the show reads out. */
+    const cat = ladderState.cats[ladderState.catOf[quizState.i]] || {};
+    head.appendChild(el('div','eyebrow', '📺 ' + (cat.nm || u.title) + (cat.older ? ' · from an older lesson' : '')));
     const r0 = el('div','row');
-    r0.appendChild(el('span','ladderworth','🎯 '+ladderState.values[quizState.i]));
-    r0.appendChild(el('span','v', ladderState.results.filter(x=>x!==null).length + ' of ' + ladderState.order.length + ' played'));
+    const isDD = quizState.i === ladderState.dd;
+    r0.appendChild(el('span','ladderworth', (isDD ? '★ Daily Double · ' : '🎯 ') + jjWorth(quizState.i)));
+    r0.appendChild(el('span','v', ladderPoints().toLocaleString() + ' pts'));
     head.appendChild(r0);
   } else {
     head.appendChild(el('div','eyebrow',`${u.title} · Level ${q.lv||1}`));
@@ -8113,6 +8308,9 @@ function answer(u,q,idx){
   /* The star sky's win buzz, scaled down: a right answer taps back, softly.
      A miss deliberately gets nothing — the phone never scolds. */
   if(right && navigator.vibrate) navigator.vibrate([12, 40, 12]);
+  /* Junior Jeopardy is the one place a miss makes a sound — the show's
+     own, soft and short, and only on the board she chose to play. */
+  if(quizState.ladder) sfx(right ? 'right' : 'wrong');
   /* What she was asked and what she picked, for the day view's question-level
      drill-down. Stored as short TEXT rather than option indexes: options are
      shuffled per question and a unit can be edited later, so an index would
@@ -10490,7 +10688,7 @@ SCREENS.stars = function(root){
     root.appendChild(tg);
   }
 
-  /* Trivia Ladder: the game's points are still flavor — real XP already
+  /* Junior Jeopardy: the game's points are still flavor — real XP already
      follows the ordinary quiz rule (see ladderLog()) — but Chris asked for
      a place she can see how she's done over time, so a finished board's
      score is saved and summarized here. Same posture as Trophies just
@@ -10500,12 +10698,14 @@ SCREENS.stars = function(root){
   const lg = ladderGames();
   if(lg.length){
     const best = lg.reduce((a,b)=> (b.points||0) > (a.points||0) ? b : a);
-    const bestUnit = DATA.records[best.unitId];
-    root.appendChild(divider('Trivia Ladder'));
+    const bestUnit = DATA.records[best.unitId], bestCls = CLASS_BY_ID[best.classId];
+    root.appendChild(divider('Junior Jeopardy'));
     const ldc = el('div','card ac');
-    ldc.appendChild(el('div','eyebrow', lg.length===1 ? '1 board finished' : lg.length+' boards finished'));
+    ldc.appendChild(el('div','eyebrow', (lg.length===1 ? '1 board finished' : lg.length+' boards finished')
+      + (lg.some(l=>l.round==='double') ? ' · Double Jeopardy unlocked' : '')));
     ldc.appendChild(el('div','ladderworth', (best.points||0).toLocaleString()+' pts — best score'));
-    if(bestUnit) ldc.appendChild(el('p',null, `${bestUnit.title}, ${AZ.shortDate(best.date)}`));
+    const where = bestUnit ? bestUnit.title : bestCls ? bestCls.name + ' · a mix of everything' : null;
+    if(where) ldc.appendChild(el('p',null, `${where}, ${AZ.shortDate(best.date)}`));
     root.appendChild(ldc);
   }
 

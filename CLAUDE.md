@@ -910,6 +910,24 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Junior Jeopardy (v167 / Wayfinder v149, both apps)
+
+The Trivia Ladder rebuilt as a game show at Chris's request, engine,
+identical here — see wayfinder/CLAUDE.md's section of the same name for
+all nine asks and every rule. In short: a 3×3 board of blue TV screens,
+categories across the top (a question's authored `cat`, else a lesson's
+analogies, else the lesson split I/II/III; the subject board makes every
+column a lesson), harder questions on higher values chosen as the best
+monotone fit to the row tiers, one Daily Double below the top row, a wrong
+answer that costs the tile with the score flooring at zero as she goes,
+WebAudio sounds gated on the `fx:'quiet'` opt-down and played only on this
+board, and a Double Jeopardy (200/400/600, harder tiers, the last column
+from an older lesson on the same shelf) once a board has been finished.
+Answering still runs through the real quiz screen via a synthetic
+`__ladder__` unit carrying `_srcUnit`, so Sedona's qstats, misses and XP
+land on the real lesson exactly as before; `mode:'ladder'` stays as the
+log key. `tools/test_ladder.js` is the same file as Wayfinder's.
+
 ### A shorter, slower clock (v166 / Wayfinder v148, both apps)
 
 Chris asked about River's Beat the clock feeling long, which turned out to
