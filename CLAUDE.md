@@ -849,6 +849,18 @@ raid, shotgun, "chapter 6/7/8") and fails if any of them slipped back in.
 Future chunks (chapters 6–8 and beyond) can ship the same way once she's
 actually read that far.
 
+### Fewer, clearer gridlines (v163 / Wayfinder v145, engine only here)
+
+Wayfinder's US map packed 12 longitude tick labels into `renderGraph()`'s
+300-unit SVG closely enough that adjacent ones measurably overlapped.
+`renderGraph()` gained optional `g.lx`/`g.ly` — a label step, a whole
+multiple of `gx`/`gy`, that thins which gridlines get a printed number
+while every gridline still draws (so the fine grid stays usable for
+estimating between lines, only the label clutter goes). Every graph spec
+in this app omits both, so `lx`/`ly` default to `gx`/`gy` and nothing here
+renders any differently. See wayfinder/CLAUDE.md's section of the same
+name for the full story, including the exact measurement that caught it.
+
 ### Reading the map, not memorizing it (Wayfinder v144, engine only here)
 
 Wayfinder built a lat/long practice map (Chris: a further-practice quiz with

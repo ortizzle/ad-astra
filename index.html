@@ -1502,7 +1502,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v162 · chapter by chapter';
+const APP_VERSION = 'v163 · fewer, clearer lines';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4024,6 +4024,17 @@ function renderGraph(g){
        g.ysuf appends the letter. Every existing caller omits these, so
        fmtAxis matches fmt exactly when they're unset. */
     const fmtAxis=(v,abs,suf)=>fmt(abs?Math.abs(v):v)+(suf||'');
+    /* Optional per-axis label thinning (v144/Wayfinder v144): a wide window
+       with a fine grid — a US map's 5-degree longitude lines across 60
+       degrees — draws 12 gridlines, and 12 tick labels don't fit the
+       300-unit viewBox without overlapping (measured live: ~29px-wide
+       labels, ~21px apart). g.lx/g.ly (a multiple of gx/gy) labels only
+       every Nth gridline while every gridline still draws; omitted, they
+       equal gx/gy and every caller that predates this labels every line
+       exactly as before. */
+    const lx=g.lx||gx, ly=g.ly||gy;
+    const xStart=Math.ceil(x0/gx-1e-9)*gx, yStart=Math.ceil(y0/gy-1e-9)*gy;
+    const lxSteps=Math.max(1,Math.round(lx/gx)), lySteps=Math.max(1,Math.round(ly/gy));
     /* grid */
     for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx)
       add('line',{x1:sx(x),y1:sy(y0),x2:sx(x),y2:sy(y1),stroke:GRAPH_GRID,'stroke-width':1});
@@ -4036,12 +4047,14 @@ function renderGraph(g){
     add('path',{d:`M ${W-P+6} ${ax} l -5 -3 v 6 z`,fill:GRAPH_INK});
     add('path',{d:`M ${ay} ${P-6} l -3 5 h 6 z`,fill:GRAPH_INK});
     /* numbers along the axes (0 once, at the origin corner) */
-    for(let x=Math.ceil(x0/gx-1e-9)*gx; x<=x1+1e-9; x+=gx){
+    for(let x=xStart,xi=0; x<=x1+1e-9; x+=gx,xi++){
       if(Math.abs(x)<gx/2&&x0<=0) continue;
+      if(xi%lxSteps!==0) continue;
       txt(sx(x),ax+11,fmtAxis(x,g.xabs,g.xsuf));
     }
-    for(let y=Math.ceil(y0/gy-1e-9)*gy; y<=y1+1e-9; y+=gy){
+    for(let y=yStart,yi=0; y<=y1+1e-9; y+=gy,yi++){
       if(Math.abs(y)<gy/2&&y0<=0) continue;
+      if(yi%lySteps!==0) continue;
       txt(ay-4,sy(y)+3,fmtAxis(y,g.yabs,g.ysuf),'end');
     }
     if(x0<=0&&y0<=0) txt(ay-4,ax+11,'0','end');
