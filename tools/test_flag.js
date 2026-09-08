@@ -28,14 +28,14 @@ const PORT = process.argv[2] || 8105;
     answer(u, q0, q0.ans);           // answer correctly
     render();
     o.flagButtonPresentAfterAnswer = [...document.querySelectorAll('#screen button')]
-      .some(b => /Something wrong with this question/.test(b.textContent));
+      .some(b => /Flag this question/.test(b.textContent));
     return o;
   });
   ck('flag button appears after answering', r.flagButtonPresentAfterAnswer, r);
 
   // Open the flag modal, write a note, submit.
   const flagged = await p.evaluate(async () => {
-    const btn = [...document.querySelectorAll('#screen button')].find(b => /Something wrong with this question/.test(b.textContent));
+    const btn = [...document.querySelectorAll('#screen button')].find(b => /Flag this question/.test(b.textContent));
     btn.click();
     await new Promise(res=>setTimeout(res,30));
     const ta = document.querySelector('.modal-overlay textarea');
@@ -48,7 +48,7 @@ const PORT = process.argv[2] || 8105;
     return {
       wrote: !!f, unitId: f && f.unitId, qid: f && f.qid, note: f && f.note,
       buttonNowDisabled: [...document.querySelectorAll('#screen button')]
-        .some(b => /Flagged for a grown-up/.test(b.textContent) && b.disabled)
+        .some(b => /Flagged/.test(b.textContent) && b.disabled)
     };
   });
   ck('flagging writes a flag record with the right unit/question', flagged.wrote && flagged.unitId==='unit-flagtest' && flagged.qid==='fq0', flagged);
@@ -63,7 +63,7 @@ const PORT = process.argv[2] || 8105;
     const q1 = u.questions[1];
     answer(u, q1, (q1.ans+1)%4);     // answer WRONG on purpose
     render();
-    const btn = [...document.querySelectorAll('#screen button')].find(b => /Something wrong with this question/.test(b.textContent));
+    const btn = [...document.querySelectorAll('#screen button')].find(b => /Flag this question/.test(b.textContent));
     btn.click();
     await new Promise(res=>setTimeout(res,30));
     const go2 = [...document.querySelectorAll('.modal-overlay button')].find(b=>/Flag it/.test(b.textContent));

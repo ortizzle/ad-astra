@@ -1211,6 +1211,10 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .opt.wrong .ltr{background:var(--bad);color:#2a0810;border-color:var(--bad)}
 .explain{border-radius:15px;padding:16px;margin-top:12px;border:1px solid var(--line);background:var(--deep)}
+/* The explain card carries no bottom margin and .btn carries none of its own,
+   so whatever follows it (Growth/Flag, or straight to Next) sat flush at
+   exactly 0px — measured live before this fix. */
+.explain+.btn,.explain+.btn-row{margin-top:var(--gap)}
 .explain.ok{border-color:var(--good)} .explain.no{border-color:var(--bad)}
 .explain .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-fg);font-weight:700;margin-top:12px}
 /* Bulleted lists inside content: definitions, questions, and explanations
@@ -1567,7 +1571,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v173 · jeopardy wrong-answer feedback';
+const APP_VERSION = 'v174 · growth and flag share a row';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -8365,11 +8369,12 @@ SCREENS.quiz = function(root){
        so she can put it on the ladder herself. Her call entirely: no XP change,
        no penalty, an ordinary Growth Zone entry due tomorrow. Hidden in review
        rounds (the ladder already owns those) and when it is already laddered. */
+    let ag = null;
     if(right && u.id!=='__review__'){
       const aUnit = q._srcUnit || u.id, aClass = q._srcClass || ctx.classId, aQid = q._srcQid || q.id;
       const live = DATA.records['miss_'+aUnit+'_'+aQid];
       if(!live || live.deleted){
-        const ag = el('button','btn btn-ghost','🌱  Right, but shaky? See it again tomorrow');
+        ag = el('button','btn btn-ghost','🌱  Add to Growth');
         ag.addEventListener('click',()=>{
           put(scheduleMiss({ id:'miss_'+aUnit+'_'+aQid, type:'miss', unitId:aUnit, classId:aClass,
             qid:aQid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
@@ -8378,7 +8383,6 @@ SCREENS.quiz = function(root){
             why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null, on:AZ.today() }, false));
           syncSoon(); toast('Back tomorrow. Knowing what is shaky is half the work.'); render();
         });
-        root.appendChild(ag);
       }
     }
     /* A question she thinks might just be WRONG — a typo'd answer key, a
@@ -8387,11 +8391,12 @@ SCREENS.quiz = function(root){
        content itself, and it goes straight to a grown-up, never auto-acted
        on. Excluded on a rescue-round variant: it's a sub-field of another
        question, not something with its own place to remove it from. */
+    let fb = null;
     if(!q._rescue){
       const aUnit2 = q._srcUnit || u.id, aClass2 = q._srcClass || ctx.classId, aQid2 = q._srcQid || q.id;
       const flagId = 'flag_'+aUnit2+'_'+aQid2;
       const already = DATA.records[flagId] && !DATA.records[flagId].deleted;
-      const fb = el('button','btn btn-ghost btn-sm', already ? '🚩 Flagged for a grown-up' : '🚩 Something wrong with this question?');
+      fb = el('button','btn btn-ghost', already ? '🚩  Flagged' : '🚩  Flag this question');
       fb.disabled = already;
       if(!already) fb.addEventListener('click',()=>{
         showModal({ title:'Flag this question',
@@ -8408,8 +8413,15 @@ SCREENS.quiz = function(root){
           }
         });
       });
-      root.appendChild(fb);
     }
+    /* Growth and Flag share one row when both are offered (Chris, 2026-09) —
+       two related, secondary, one-tap actions belong side by side, not
+       stacked as two separate stops. Either can appear alone (a wrong answer
+       never offers Growth; a rescue variant never offers Flag), and a lone
+       button still reads full-width — .btn-row .btn is flex:1. */
+    if(ag && fb){ const row = el('div','btn-row'); row.appendChild(ag); row.appendChild(fb); root.appendChild(row); }
+    else if(ag){ root.appendChild(ag); }
+    else if(fb){ root.appendChild(fb); }
     /* Wrong answer + a question that carries steps → offer the full worked
        path, one step per tap. After the answer, so it teaches rather than
        leaks; free, because it is remediation, not a hint economy. */

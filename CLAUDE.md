@@ -910,6 +910,44 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Growth and Flag share a row, and a real 0px gap fixed (v174 / Wayfinder v155, both apps)
+
+Chris, looking at an answered question: "can we have growth and flag share a
+row and it say... add to growth and flag this question? then fix the
+spacing." Two changes, both engine.
+
+**The two secondary actions now share one `.btn-row`**, same layout pattern
+Map/Leave and every other paired-button row already uses. `ag` (the 🌱
+"see it again tomorrow" button) and `fb` (the 🚩 flag button) are built as
+before but no longer appended straight to `root`; whichever of the two
+actually renders for this question decides the shape — both in one row when
+both apply, either one alone (full width, since `.btn-row .btn` is
+`flex:1`) when only one does. A wrong answer never offers Growth; a rescue
+variant never offers Flag, so the single-button case is common and needed to
+look right on its own, not just as a fallback.
+
+**The labels shortened to fit two across**: "🌱 Add to Growth" and "🚩 Flag
+this question" (already-flagged: "🚩 Flagged"), replacing the old
+sentence-length copy ("🚩 Something wrong with this question?", "🌱 Right,
+but shaky? See it again tomorrow") that only worked full-width. `fb` also
+dropped `btn-sm` — sharing a row with an ordinary `.btn-ghost` needs the same
+font size and padding, or the two buttons visibly mismatch.
+
+**"Fix the spacing" was a real, measured bug, not the row change itself.**
+`.explain` carries `margin-top:12px` but no bottom margin, and `.btn` carries
+none of its own — whatever followed the explanation card (the grow/flag
+row, or a lone one, or straight to Next on a rescue variant with no flag)
+sat flush at **exactly 0px**, confirmed live with `getBoundingClientRect()`
+before touching anything, same discipline as every other spacing fix in this
+file. One shared rule, `.explain+.btn,.explain+.btn-row{margin-top:var(--gap)}`
+— the sibling-block token (14px), matching how `.gz-chips+.card` closed the
+same shape of gap on the Growth Zone screen (v160).
+
+`tools/test_flag.js`'s button-text matchers were updated for the new copy
+(same file, both apps) and re-run clean; `tools/test_rhythm.js` and
+`tools/test_ladder.js` were re-run to confirm nothing else depended on the
+old markup or text.
+
 ### A wrong answer, felt as well as heard (v173 / Wayfinder v154, both apps)
 
 Chris: "for the jeopardy game can we make a wrong answer have 2 beeps and
