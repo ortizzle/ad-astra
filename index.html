@@ -1567,7 +1567,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v172 · story blanks, sharper analogies, one shelf';
+const APP_VERSION = 'v173 · jeopardy wrong-answer feedback';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3807,7 +3807,11 @@ function sfx(kind){
       o.start(t0+at); o.stop(t0+at+dur+.05);
     };
     if(kind==='right'){ tone(660,0,.16); tone(880,.13,.3); }
-    else if(kind==='wrong'){ tone(233,0,.2,'triangle',.12); tone(175,.19,.32,'triangle',.12); }
+    /* Two CLEARLY separated beeps, not the old overlapping "wah wah" glide —
+       Chris asked for the wrong buzz to read as two distinct beeps, with a
+       real gap so the second never starts while the first is still ringing. */
+    else if(kind==='wrong'){ tone(233,0,.16,'triangle',.13); tone(175,.26,.2,'triangle',.13);
+      if(navigator.vibrate) navigator.vibrate([60,80,60]); }
     else if(kind==='dd'){ tone(523,0,.14); tone(659,.12,.14); tone(784,.24,.14); tone(1047,.36,.4); }
   }catch(e){ /* no audio here — the board plays silently */ }
 }

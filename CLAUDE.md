@@ -910,6 +910,33 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### A wrong answer, felt as well as heard (v173 / Wayfinder v154, both apps)
+
+Chris: "for the jeopardy game can we make a wrong answer have 2 beeps and
+vibration feedback?" `sfx('wrong')`'s two tones (233Hz then 175Hz) already
+existed, but the second started at .19s while the first was still ringing
+out its decay to .25s — the overlap read as one soft "wah-wah" glide, not
+two beeps. The second tone now starts at .26s, safely after the first has
+finished, so it reads as **beep… beep** rather than a portamento. The pitch
+pair (still 233 then 175, still `'triangle'`, still gain .13) is unchanged
+on purpose — Chris asked for two beeps, not a different sound, and the
+existing "soft low two-note, not a buzzer" character (documented under
+Junior Jeopardy's build) still holds.
+
+**Vibration lives inside `sfx('wrong')` itself**, not a separate call site,
+so it inherits the exact same gating the sound already had for free: the
+`fx:'quiet'` opt-down returns before either fires, and it only ever plays on
+this board (`sfx()` is called nowhere else on a miss — see `answer()`).
+`navigator.vibrate([60,80,60])` — buzz, pause, buzz — mirrors the two-beep
+cadence rather than one flat pulse, and is guarded by
+`if(navigator.vibrate)` the same way `celebrate()`'s haptic already is, so a
+browser without the Vibration API (iOS Safari) just skips it silently.
+
+`tools/test_ladder.js`'s existing "sounds play without throwing, and stay
+silent when quiet" assertion already exercises this call path; no new
+assertion was needed since nothing about the *contract* changed — only the
+timing of an existing tone and one additive, guarded side effect.
+
 ### Everything on the Algebra shelf (v172, THIS APP ONLY)
 
 Chris: "Algebra & Geo include some lessons outside of the bookshelf. Can we
