@@ -180,14 +180,26 @@ const [PORT, TAG] = process.argv.slice(2);
     const r2 = [...document.querySelectorAll('#screen .row')].find(r => /UX test/.test(T(r)));
     let subj = null;
     if(r2){ r2.click(); subj = { view, cid: gzFilter.cid }; }
-    // runway: 3 days out
-    AZ.today = () => AZ.shift(d, 7);
+    // runway: needs its own assessment, clear of the OTHER one above (same
+    // subject, so the two would otherwise compete for "nearest test" and
+    // whichever is closer wins, not necessarily the one this block means to
+    // test) and clear of the CURRENT week — a date anchored to a real future
+    // Monday, not a fixed day-offset from "today", so this cannot land inside
+    // the week brief's Mon-Fri window by accident depending on which real
+    // weekday the test happens to run (the week brief's own covers() rule
+    // correctly hides the runway for a test it already names — v121).
+    softDelete('ux-assess');
+    const wd = AZ.weekday(d);
+    const mon = AZ.shift(d, (8 - wd) % 7 || 7);       // the next Monday, never today
+    const rwDate = AZ.shift(mon, 9);                   // a Wednesday the week after
+    put({ id:'ux-assess-rw', type:'assess', classId:cid, kind:'test', title:'UX runway test', date:rwDate, score:null });
+    AZ.today = () => mon;
     go('today');
     const rh = document.querySelector('#screen .runway .rwhead');
     let run = null;
     if(rh){ rh.click(); run = { view, cid: gzFilter.cid }; }
     AZ.today = real;
-    softDelete('ux-assess');
+    softDelete('ux-assess-rw');
     return { coming, subj, run, hasMiss: all('miss').some(m=>m.classId===cid) };
   }, [cid]);
   ck('Coming up test row → Growth Zone, filtered to the subject', prompts.coming && prompts.coming.view==='growth' && prompts.coming.cid===cid, prompts);
