@@ -1210,11 +1210,13 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .opt.right .ltr{background:var(--good);color:#04141a;border-color:var(--good)}
 .opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .opt.wrong .ltr{background:var(--bad);color:#2a0810;border-color:var(--bad)}
-.explain{border-radius:15px;padding:16px;margin-top:12px;border:1px solid var(--line);background:var(--deep)}
-/* The explain card carries no bottom margin and .btn carries none of its own,
-   so whatever follows it (Growth/Flag, or straight to Next) sat flush at
-   exactly 0px — measured live before this fix. */
-.explain+.btn,.explain+.btn-row{margin-top:var(--gap)}
+/* It is card-shaped, so it owns its own bottom margin the way .card, .opt,
+   .period, .door and .perch already do — never a pairwise `.explain+X` rule.
+   It had none, and .btn/.card/.perch all carry no margin-top, so EVERY block
+   after it sat flush at exactly 0px (measured). A pairwise rule would have
+   fixed only the adjacencies it happened to name and left the rescue-round
+   path — explain → steps card, explain → companion perch — still at zero. */
+.explain{border-radius:15px;padding:16px;margin:12px 0 var(--gap);border:1px solid var(--line);background:var(--deep)}
 .explain.ok{border-color:var(--good)} .explain.no{border-color:var(--bad)}
 .explain .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-fg);font-weight:700;margin-top:12px}
 /* Bulleted lists inside content: definitions, questions, and explanations
@@ -1571,7 +1573,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v174 · growth and flag share a row';
+const APP_VERSION = 'v175 · the explain card owns its spacing';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3795,6 +3797,13 @@ function showModal({title,message,confirmText='OK',cancelText=null,onConfirm=nul
 let sfxCtx = null;
 function sfx(kind){
   if((prefs().fx||'') === 'quiet') return;
+  /* The haptic fires FIRST and outside the try, because touch feedback must
+     not depend on audio: a device with no AudioContext returns two lines
+     below, and anything that throws during audio setup lands in a catch whose
+     whole point is that the board carries on silently. tapBuzz already owns
+     the navigator.vibrate guard and its own try/catch. Buzz, pause, buzz —
+     the same two-beat cadence as the sound. */
+  if(kind==='wrong') tapBuzz([60,80,60]);
   try{
     const AC = window.AudioContext || window.webkitAudioContext;
     if(!AC) return;
@@ -3813,9 +3822,9 @@ function sfx(kind){
     if(kind==='right'){ tone(660,0,.16); tone(880,.13,.3); }
     /* Two CLEARLY separated beeps, not the old overlapping "wah wah" glide —
        Chris asked for the wrong buzz to read as two distinct beeps, with a
-       real gap so the second never starts while the first is still ringing. */
-    else if(kind==='wrong'){ tone(233,0,.16,'triangle',.13); tone(175,.26,.2,'triangle',.13);
-      if(navigator.vibrate) navigator.vibrate([60,80,60]); }
+       real gap so the second never starts while the first is still ringing.
+       Its haptic twin fires at the top of this function. */
+    else if(kind==='wrong'){ tone(233,0,.16,'triangle',.13); tone(175,.26,.2,'triangle',.13); }
     else if(kind==='dd'){ tone(523,0,.14); tone(659,.12,.14); tone(784,.24,.14); tone(1047,.36,.4); }
   }catch(e){ /* no audio here — the board plays silently */ }
 }
@@ -8365,19 +8374,24 @@ SCREENS.quiz = function(root){
     if(q.ex?.tip){ ex.appendChild(el('div','lbl','Test tip')); ex.appendChild(el('p',null,q.ex.tip)); }
     if(q.ex?.mnemonic){ ex.appendChild(el('div','lbl','Memory hook')); ex.appendChild(el('p',null,q.ex.mnemonic)); }
     root.appendChild(ex);
+    /* Both secondary actions below attribute to the REAL question. A review,
+       shuffle, daily or ladder round wraps it in a synthetic unit, and
+       _srcUnit/_srcClass/_srcQid carry the original identity — the same
+       resolution answer() uses for qstats and misses. Resolved once here
+       rather than once per button. */
+    const sUnit = q._srcUnit || u.id, sClass = q._srcClass || ctx.classId, sQid = q._srcQid || q.id;
     /* A right answer she is not sure of is hidden shakiness no tally can see —
        so she can put it on the ladder herself. Her call entirely: no XP change,
        no penalty, an ordinary Growth Zone entry due tomorrow. Hidden in review
        rounds (the ladder already owns those) and when it is already laddered. */
     let ag = null;
     if(right && u.id!=='__review__'){
-      const aUnit = q._srcUnit || u.id, aClass = q._srcClass || ctx.classId, aQid = q._srcQid || q.id;
-      const live = DATA.records['miss_'+aUnit+'_'+aQid];
+      const live = DATA.records['miss_'+sUnit+'_'+sQid];
       if(!live || live.deleted){
         ag = el('button','btn btn-ghost','🌱  Add to Growth');
         ag.addEventListener('click',()=>{
-          put(scheduleMiss({ id:'miss_'+aUnit+'_'+aQid, type:'miss', unitId:aUnit, classId:aClass,
-            qid:aQid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
+          put(scheduleMiss({ id:'miss_'+sUnit+'_'+sQid, type:'miss', unitId:sUnit, classId:sClass,
+            qid:sQid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
             right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]),
             chose:'(you chose to see it again)',
             why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null, on:AZ.today() }, false));
@@ -8393,8 +8407,7 @@ SCREENS.quiz = function(root){
        question, not something with its own place to remove it from. */
     let fb = null;
     if(!q._rescue){
-      const aUnit2 = q._srcUnit || u.id, aClass2 = q._srcClass || ctx.classId, aQid2 = q._srcQid || q.id;
-      const flagId = 'flag_'+aUnit2+'_'+aQid2;
+      const flagId = 'flag_'+sUnit+'_'+sQid;
       const already = DATA.records[flagId] && !DATA.records[flagId].deleted;
       fb = el('button','btn btn-ghost', already ? '🚩  Flagged' : '🚩  Flag this question');
       fb.disabled = already;
@@ -8406,7 +8419,7 @@ SCREENS.quiz = function(root){
             const ta = el('textarea'); ta.placeholder = 'What seems wrong? (optional)'; ta.style.minHeight='72px';
             box.appendChild(ta);
             box._go = ()=>{
-              put({ id:flagId, type:'flag', unitId:aUnit2, classId:aClass2, qid:aQid2,
+              put({ id:flagId, type:'flag', unitId:sUnit, classId:sClass, qid:sQid,
                 q:q.q, note:ta.value.trim()||null, date:AZ.today() });
               syncSoon(); close(); toast('Flagged — a grown-up will take a look.'); render();
             };
@@ -8414,14 +8427,16 @@ SCREENS.quiz = function(root){
         });
       });
     }
-    /* Growth and Flag share one row when both are offered (Chris, 2026-09) —
-       two related, secondary, one-tap actions belong side by side, not
-       stacked as two separate stops. Either can appear alone (a wrong answer
-       never offers Growth; a rescue variant never offers Flag), and a lone
-       button still reads full-width — .btn-row .btn is flex:1. */
-    if(ag && fb){ const row = el('div','btn-row'); row.appendChild(ag); row.appendChild(fb); root.appendChild(row); }
-    else if(ag){ root.appendChild(ag); }
-    else if(fb){ root.appendChild(fb); }
+    /* Growth and Flag share one row (Chris, 2026-09) — two related, secondary,
+       one-tap actions belong side by side, not stacked as two separate stops.
+       The row is built unconditionally and takes whichever buttons exist:
+       either can be absent (a wrong answer never offers Growth, a rescue
+       variant never offers Flag) and a lone button still fills the row, since
+       .btn-row .btn is flex:1. Same shape as every other .btn-row in the file. */
+    const acts = el('div','btn-row');
+    if(ag) acts.appendChild(ag);
+    if(fb) acts.appendChild(fb);
+    if(acts.children.length) root.appendChild(acts);
     /* Wrong answer + a question that carries steps → offer the full worked
        path, one step per tap. After the answer, so it teaches rather than
        leaks; free, because it is remediation, not a hint economy. */
@@ -8549,7 +8564,10 @@ function answer(u,q,idx){
   quizState.runStreak = right ? (quizState.runStreak||0)+1 : 0;
   if(right) quizState.correct++;
   /* The star sky's win buzz, scaled down: a right answer taps back, softly.
-     A miss deliberately gets nothing — the phone never scolds. */
+     A miss gets nothing here — the phone never scolds. The ONE exception is
+     a Junior Jeopardy miss, which buzzes from inside sfx() below: that board
+     is the only place a wrong answer answers back at all, and opting down to
+     fx:'quiet' takes the buzz with the sound. */
   if(right && navigator.vibrate) navigator.vibrate([12, 40, 12]);
   /* Junior Jeopardy is the one place a miss makes a sound — the show's
      own, soft and short, and only on the board she chose to play. */

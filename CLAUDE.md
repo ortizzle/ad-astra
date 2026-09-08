@@ -910,7 +910,7 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
-### Growth and Flag share a row, and a real 0px gap fixed (v174 / Wayfinder v155, both apps)
+### Growth and Flag share a row, and a real 0px gap fixed (v174–v175 / Wayfinder v155–v156, both apps)
 
 Chris, looking at an answered question: "can we have growth and flag share a
 row and it say... add to growth and flag this question? then fix the
@@ -934,19 +934,54 @@ dropped `btn-sm` — sharing a row with an ordinary `.btn-ghost` needs the same
 font size and padding, or the two buttons visibly mismatch.
 
 **"Fix the spacing" was a real, measured bug, not the row change itself.**
-`.explain` carries `margin-top:12px` but no bottom margin, and `.btn` carries
-none of its own — whatever followed the explanation card (the grow/flag
-row, or a lone one, or straight to Next on a rescue variant with no flag)
-sat flush at **exactly 0px**, confirmed live with `getBoundingClientRect()`
-before touching anything, same discipline as every other spacing fix in this
-file. One shared rule, `.explain+.btn,.explain+.btn-row{margin-top:var(--gap)}`
-— the sibling-block token (14px), matching how `.gz-chips+.card` closed the
-same shape of gap on the Growth Zone screen (v160).
+`.explain` carries `margin-top:12px` but had no bottom margin, and `.btn`
+carries none of its own — whatever followed the explanation card sat flush at
+**exactly 0px**, confirmed live with `getBoundingClientRect()` before touching
+anything, same discipline as every other spacing fix in this file.
+
+> ⚠️ **The first fix was a pairwise `.explain+.btn,.explain+.btn-row` rule,
+> and it was the wrong altitude — corrected in v175 before the next deploy.**
+> `.explain` can be followed by FOUR things, not two: the Growth/Flag row, a
+> lone button, the **steps card** (`.card`), and the **companion perch**
+> (`.perch`). A rescue variant answered wrong offers neither Growth (not
+> right) nor Flag (`q._rescue`), so the walkthrough card lands directly under
+> the explanation — measured at **0px on the shipped v174 build** and 14px
+> after. Naming adjacencies one pair at a time fixes the ones you thought of.
+>
+> The real cause is that `.explain` is card-shaped but did not own a bottom
+> margin the way `.card`, `.opt`, `.period`, `.door` and `.perch` all do. It
+> now does — `margin:12px 0 var(--gap)` — and the pairwise rule is deleted.
+> One property, all four adjacencies, and anything added after it later
+> spaces itself for free. Adjacent sibling margins collapse to the larger of
+> the two, so `.btn-row`'s own `margin-top:8px` still yields 14px.
+>
+> **A container-level `> * + *` "owl" rule was considered and rejected**: 38
+> elements already declare their own `margin-bottom`, so an owl would stack
+> on top of every one of them, and the quiz screen's root is a deliberately
+> heterogeneous list that needs all three rhythm tokens at once — which one
+> owl value cannot express. Of the three fixes of this shape in this file,
+> v160's `.gz-chips+.card` has the same better form available; v159's
+> `.card .btn+p` is genuinely pairwise and correct, because `.btn` must NOT
+> own a bottom margin (it would fight `.btn-row .btn+.btn` and add trailing
+> space at the foot of every card).
+
+**The haptic moved out of the audio path (v175).** `navigator.vibrate` was
+first written inline in `sfx()`'s `wrong` branch — which sits *after* the
+`if(!AC) return` audio-availability check and *inside* the `try` whose catch
+means "no audio here, the board plays silently". So a device with no
+WebAudio, or any throw during audio setup, silently lost the buzz too. It is
+now the first thing `sfx()` does after the `fx:'quiet'` gate, outside the
+try, and goes through the existing **`tapBuzz()`** helper, which already owns
+the `navigator.vibrate` guard and its own try/catch. Sound availability must
+not gate touch feedback.
+
+`answer()`'s standing comment — *"a miss deliberately gets nothing, the phone
+never scolds"* — was left **false** by the v174 change and now names its one
+exception outright, so the rule and its exception live together.
 
 `tools/test_flag.js`'s button-text matchers were updated for the new copy
-(same file, both apps) and re-run clean; `tools/test_rhythm.js` and
-`tools/test_ladder.js` were re-run to confirm nothing else depended on the
-old markup or text.
+(same file, both apps); `test_ladder.js`, `test_rhythm.js`, `test_gzfilter.js`,
+`test_misses.js` and `test_ux2.js` were re-run clean in both apps.
 
 ### A wrong answer, felt as well as heard (v173 / Wayfinder v154, both apps)
 
