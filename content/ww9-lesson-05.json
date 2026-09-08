@@ -4,7 +4,7 @@
   "unit-ww9-05": {
    "id": "unit-ww9-05",
    "type": "unit",
-   "updatedAt": 1788819326982,
+   "updatedAt": 1788841400000,
    "classId": "english",
    "quarter": 1,
    "status": "draft",
@@ -399,7 +399,7 @@
     },
     {
      "id": "q10",
-     "lv": 2,
+     "lv": 3,
      "from": "added",
      "kind": "analogy",
      "q": "DESPOT : RULER",
@@ -593,9 +593,105 @@
       "main": "**Ethics taught without reference to faith.** Secular is defined by the absence of religious grounding.",
       "tip": "Secular pairs with temporal from Lesson 4 — both mean \"of this world\" and both are defined against the spiritual."
      }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "passage": "For decades a ___① ruled the kingdom, taxing farmers until their fields lay bare. Endless ___② between rival families made matters worse, and years of drought began to ___③ the countryside. Yet elders still ___④ the king's memory, blaming the troubles on his death.",
+     "q": "Which word belongs in blank ①?",
+     "opts": [
+      "despot",
+      "diplomat",
+      "magistrate",
+      "chieftain"
+     ],
+     "ans": 0,
+     "hint": "Taxing farmers until their fields lay bare is not the mark of shared or limited power.",
+     "steps": [
+      "The ruler in blank ① taxes farmers until their fields lay bare — a sign of unchecked, oppressive power.",
+      "A diplomat, magistrate and chieftain can all hold limited or shared power, so none of the three is forced by the sentence alone.",
+      "A despot is a ruler with absolute or tyrannical control — the one word that matches a ruler who taxes people into ruin."
+     ],
+     "ex": {
+      "main": "**Despot.** A despot holds absolute, unchecked power — exactly the kind of ruler who could tax farmers until their fields lay bare."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "passage": "For decades a ___① ruled the kingdom, taxing farmers until their fields lay bare. Endless ___② between rival families made matters worse, and years of drought began to ___③ the countryside. Yet elders still ___④ the king's memory, blaming the troubles on his death.",
+     "q": "Which word belongs in blank ②?",
+     "opts": [
+      "harmony",
+      "strife",
+      "commerce",
+      "ceremony"
+     ],
+     "ans": 1,
+     "hint": "Something between rival families that made an already bad situation worse.",
+     "steps": [
+      "Blank ② describes what was happening between rival families, and it made matters worse.",
+      "Harmony would make things better, not worse; commerce and ceremony describe trade and formal events, not rivalry.",
+      "Strife means conflict or struggle — exactly what compounds trouble between rivals."
+     ],
+     "ex": {
+      "main": "**Strife.** Strife is conflict or struggle, which is exactly what worsens tension between rival families."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "passage": "For decades a ___① ruled the kingdom, taxing farmers until their fields lay bare. Endless ___② between rival families made matters worse, and years of drought began to ___③ the countryside. Yet elders still ___④ the king's memory, blaming the troubles on his death.",
+     "q": "Which word belongs in blank ③?",
+     "opts": [
+      "enrich",
+      "populate",
+      "impoverish",
+      "fortify"
+     ],
+     "ans": 2,
+     "hint": "What years of drought do to farmland that depends on its harvest.",
+     "steps": [
+      "Blank ③ is what years of drought does to a countryside.",
+      "Enrich means to make wealthy — the opposite of what a drought does. Populate and fortify describe adding people or defenses, unrelated to drought.",
+      "Impoverish means to make poor — exactly what a long drought does to farmland."
+     ],
+     "ex": {
+      "main": "**Impoverish.** To impoverish is to make poor, which is what years of drought do to land that depends on its harvest."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "passage": "For decades a ___① ruled the kingdom, taxing farmers until their fields lay bare. Endless ___② between rival families made matters worse, and years of drought began to ___③ the countryside. Yet elders still ___④ the king's memory, blaming the troubles on his death.",
+     "q": "Which word belongs in blank ④?",
+     "opts": [
+      "forget",
+      "doubt",
+      "dismiss",
+      "venerate"
+     ],
+     "ans": 3,
+     "hint": "Something the elders still do for a memory they defend, even while others blame it for the drought.",
+     "steps": [
+      "Blank ④ is something elders still do to the old king's memory.",
+      "Forget, doubt and dismiss would all mean the memory fades or is questioned — but the elders clearly still hold onto it.",
+      "Venerate means to show great respect for — elders who still defend a king's memory, even while others blame him, are venerating it."
+     ],
+     "ex": {
+      "main": "**Venerate.** To venerate is to show great respect for — these elders still hold the king's memory in high regard, defending it against blame."
+     }
     }
    ],
-   "libv": 1
+   "libv": 2
   }
  }
 }

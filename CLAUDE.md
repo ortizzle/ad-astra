@@ -910,6 +910,145 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Everything on the Algebra shelf (v172, THIS APP ONLY)
+
+Chris: "Algebra & Geo include some lessons outside of the bookshelf. Can we
+move everything onto the bookshelf? Maybe these can be Pre-Year Review or
+something?" One loose unit: `unit-a2r1`, titled "Algebra 1 Tune-Up: The
+Readiness Rebuild" — no ` · ` in its title, so `seriesOf()` never recognized
+it as belonging to a series and it rendered as an ordinary loose card
+alongside the Topic 1 and Topic 2 shelves rather than as its own spine.
+
+**Retitled to `"Pre-Year Review · The Readiness Rebuild"`, keeping its id** —
+the same "retitle, never re-mint" rule `unit-sgt1` and Wayfinder's `unit-m11`
+already established, so any progress already attached to it (qstats, misses)
+stays attached. It now shelves as its own one-lesson book named "Pre-Year
+Review," sitting alongside "Topic 1" and "Topic 2" on the subject screen —
+Chris's own suggested name, used verbatim as the series title, which reads
+correctly since the unit really is Algebra 1 review material a placement
+assessment surfaced, not this year's Topic content. A one-lesson shelf is
+not a special case: the Wordly Wise and ASL shelves both started this way
+too. `libv` bumped (this file had none before) and `updatedAt` stamped in
+the past, per the approval-race rule, since the retitle needs to win the
+merge regardless of whether Chris already approved the old title.
+
+Verified directly rather than assumed: `shelvesFor('algeo')` now returns
+`loose: []` and a fourth shelf named "Pre-Year Review" holding exactly this
+one unit.
+
+### Reduce the hard analogies, and make them earn the hard slots (v172, THIS APP ONLY)
+
+Chris: "We can reduce the despot:ruler :: questions since these aren't
+tested on just yet and a bit hard for Sedona. These should definitely be
+the harder questions in any jeopardy game, or questions that often get
+missed." The four analogies in Wordly Wise Book 9 · Lesson 5 were levelled
+`[2, 2, 3, 3]` — VORACIOUS:HUNGRY and DESPOT:RULER both at level 2 (apply),
+CALLOW:EXPERIENCE and WANE:GROW at level 3 (analyze). Junior Jeopardy's
+column-fit already picks the LOWEST-level questions for the low-value tiles
+and the highest for the high-value ones — so with two questions tied at
+level 2, DESPOT:RULER (a genuinely subtle type-to-category relationship,
+not a plain synonym like VORACIOUS:HUNGRY) could just as easily land on the
+board's cheapest, easiest-looking tile as its hardest.
+
+**`unit-ww9-05`'s `q10` (DESPOT:RULER) is now level 3**, matching
+CALLOW:EXPERIENCE and WANE:GROW. The four analogies are now `[2, 3, 3, 3]`:
+VORACIOUS:HUNGRY (the one genuinely easy synonym pairing) is the only
+candidate for a Jeopardy board's low-value analogy tile, and DESPOT:RULER
+can no longer be one — the column-fit cost function (`buildLadder`'s
+sorted-pool + best-monotone-triple search) means the three tied level-3
+questions compete only for the 200/300 slots from here on, never the 100.
+
+**No lever exists to separately throttle a question's odds in an ORDINARY
+(non-Jeopardy) round** — `pickRound()`'s ordering is least-attempted, then
+Growth-Zone-owed-last, then recency; it does not weight by `lv`. Building
+one was out of scope for a one-line difficulty fix, and the two venues Chris
+actually named — Jeopardy's hard tier, and "questions that often get
+missed" — both already work correctly once the level is right: Jeopardy via
+the fix above, and the Growth Zone automatically, since a genuinely missed
+question lands on the review ladder regardless of its authored level. Cutting
+the analogy COUNT was considered and rejected — "four per vocabulary lesson,
+four different relationships" is a standing content rule, and a lesson with
+only three would be inconsistent with every other Wordly Wise lesson for no
+real gain.
+
+`libv` bumped, `updatedAt` stamped in the past, same file as the cloze
+questions below (one content edit, two asks).
+
+### A story to fill in (v172, THIS APP ONLY)
+
+Chris: "As part of the vocabulary testing for english, are you able to
+write short stories that include some of the words and then ask for the
+words to be selected that fit into the right blanks? So a few sentence
+story, which blanks, probably 4, and the girls need to complete the segment
+with the correct answers."
+
+**No engine change was needed.** A cloze blank turns out to be exactly what
+`passage` already does for a reading companion — a short quoted excerpt
+rendered as a styled quotation above the question — except the "quotation"
+here is an original story rather than a book excerpt, and it carries
+numbered blanks (①②③④) instead of being read straight through. Four
+ordinary `kind:'mc'` questions (`q19`–`q22` in `unit-ww9-05`, Wordly Wise
+Book 9 · Lesson 5) each carry the **identical, complete** story as their
+`passage`, and each stem asks about exactly one blank ("Which word belongs
+in blank ①?"). Every question is therefore fully self-contained — a round
+that serves only ONE of the four still shows the whole story, satisfying
+the standalone-from-siblings rule the same way a `passage`-bearing reading
+question always has, rather than needing a new interactive "fill all four
+blanks in one screen" widget.
+
+- **A fresh, original scenario**, per the standalone-questions rule — not
+  reworded from any worksheet or from the lesson's own example sentences.
+  Four of the lesson's power/hardship words (despot, strife, impoverish,
+  venerate) build one short story about a kingdom's fall, under the
+  checker's ~40-word `passage` cap (44 words).
+- **Context, never a gloss** — same rule as every vocabulary question in
+  both apps. No blank's surrounding sentence states its word's definition;
+  each is inferable only from what the story actually describes (a ruler
+  who "taxed farmers until their fields lay bare" implies unchecked power,
+  never stating despotism outright).
+  Options are the same part of speech as the answer and hold different real
+  relationships, not random filler — despot's distractors (diplomat,
+  magistrate, chieftain) are all real political-role nouns that don't imply
+  tyranny, so eliminating actually requires reading the sentence.
+- **Answer positions balance 0,1,2,3 across the four blanks** (the `_balance`
+  rule, hand-verified here since these were authored by hand rather than
+  through the Python builder) — the v167 "fifty units, all answer A" mistake
+  is exactly the trap four hand-written questions in a row would repeat if
+  left unchecked.
+- **`from:'added'`, level 2** — the vocabulary is sourced from the lesson,
+  but the story itself is original framing, the same tag every analogy
+  question in this file already carries for the identical reason.
+
+`tools/test_ww9_cloze.js` (new): all four blank-questions exist, every one
+shows the full story with all four numbered blanks (not just its own),
+options are structurally valid (4 unique, answer in range), the four answers
+spread across at least 3 different letters, answering each correctly scores
+right, and an ordinary round on the lesson can draw one. `check_content.py`
+was run against the whole library after this edit and flagged nothing new.
+
+### The companion does more, and a clearer voice (v171 / Wayfinder v153, both apps)
+
+Chris agreed to a scoped-down version of "the companion doing more work...
+sharing words of encouragement during tests and games" — extend it to
+existing pause points, never true mid-question interruption — plus a
+separate bug: "when the AI says the words, it rarely says them correctly."
+Engine, identical here — see wayfinder/CLAUDE.md's section of the same name
+for the full reasoning. In short: two new companion moments, each firing
+exactly once — a mid-round line in the answer explanation card at the
+round's midpoint (`COMPANION_MID`), and a line on a Junior Jeopardy Daily
+Double before she answers it (`COMPANION_DD`) — both skipped on Beat the
+clock, the Growth Zone review, the daily three, and (the mid-round one)
+Junior Jeopardy rounds generally, since the Daily Double already gets its
+own. The dragon gained `mid`/`dd` entries in its own voice; every other
+companion uses the shared defaults. Separately, `say()` now sets an explicit
+`lang` and picks the best available real English voice via
+`speechSynthesis.getVoices()`, instead of leaving the choice to whatever the
+phone's default TTS happens to be — the standard fix for inconsistent
+pronunciation on Android Chrome, unverifiable by ear from this environment
+but safe and additive.
+
+`tools/test_companion_mid.js` is the same file as Wayfinder's.
+
 ### One question, and it moves (v170 / Wayfinder v152, both apps)
 
 Chris: rethink the pre-quiz mood questions, drop to one before plus the one

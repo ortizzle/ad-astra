@@ -1567,7 +1567,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v170 · one question, and it moves';
+const APP_VERSION = 'v172 · story blanks, sharper analogies, one shelf';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2935,10 +2935,37 @@ document.addEventListener('pointerdown', e => {
      the button having weight. Long enough to feel, short enough to ignore. */
   tapBuzz(8);
 }, {passive:true});
+/* Chris, 2026-09: "when the AI says the words, it rarely says them
+   correctly." The utterance never named a language or a voice — on Android
+   Chrome that leaves the choice to whatever TTS engine and default voice the
+   phone happens to have installed, which varies by device and is often the
+   lower-quality network/compact voice rather than the best one available.
+   Picking an explicit `lang` and the best-available local English voice (a
+   real synchronous, on-device voice — no network round-trip, no compact
+   fallback) is the standard fix and costs nothing when it is unavailable:
+   the utterance still has `lang` set even with no voice picked. `getVoices()`
+   loads asynchronously on first use, hence `onvoiceschanged`. */
+let ttsVoice = null;
+function pickTTSVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  return voices.find(v=>/^en-US/i.test(v.lang) && /Google/i.test(v.name) && v.localService)
+      || voices.find(v=>/^en-US/i.test(v.lang) && v.localService)
+      || voices.find(v=>/^en/i.test(v.lang) && v.localService)
+      || voices.find(v=>/^en/i.test(v.lang))
+      || null;
+}
+if('speechSynthesis' in window){
+  ttsVoice = pickTTSVoice();
+  speechSynthesis.onvoiceschanged = () => { ttsVoice = pickTTSVoice(); };
+}
 function say(text){
   try{
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    if(ttsVoice) u.voice = ttsVoice;
     u.rate = 0.9;
     speechSynthesis.speak(u);
   }catch(e){}
@@ -3033,6 +3060,25 @@ const COMPANION_IDLE = [    // nothing due, nothing planned
   'Nothing is chasing you. Worth remembering how you got here.',
   'Clear board. Pick a subject on vibes; the plan has no complaints.'
 ];
+/* Mid-round and Daily-Double lines (Chris, 2026-09: "sharing words of
+   encouragement during tests and games"). Both fire exactly ONCE per
+   activity — mid-round at a fixed, deterministic question, and on a Junior
+   Jeopardy Daily Double the one time she opens it — never on every question,
+   which is what would turn a messenger into a coach shadowing the round.
+   Same hard rules as everywhere else: no verdict on how she is doing so far,
+   no exclamation marks, never sad, process only. */
+const COMPANION_MID = [     // partway through an ordinary quiz round
+  'Halfway. Whatever pace you are keeping, keep keeping it.',
+  'No verdict yet — just keep answering what is in front of you.',
+  'This is the unglamorous part. It counts exactly as much as the exciting part.',
+  'Nothing to report at the midpoint. Carry on.'
+];
+const COMPANION_DD = [      // opening a Junior Jeopardy Daily Double
+  'Daily Double. The value went up; the way you answer it did not.',
+  'Same skill as every other tile. This one just pays better.',
+  'Nothing about this tile is harder than what already got you here.',
+  'Bigger number, same method. Go ahead.'
+];
 /* Species voices. A species listed here speaks with its own pools; everyone
    else uses the defaults above. The dragon is hers: witty, dry, a shade dark —
    but the rules still hold. Dark humor about the QUESTIONS is fine; gloom
@@ -3061,12 +3107,24 @@ const COMPANION_VOICES = {
       'Nothing is chasing you today, which for a dragon is almost boring. Enjoy it — you earned the quiet.',
       'All quiet. An empty Growth Zone is its own kind of treasure.',
       'The hoard is safe, {name}. Nothing is due.'
+    ],
+    mid:[
+      'Halfway through, and the hoard grows regardless of how any one question lands.',
+      'A dragon does not tally mid-flight. Land the round; we will count after.',
+      'Keep going. I have seen far worse middles turn into fine endings.',
+      'No verdict yet, {name}. Finish the round — the accounting comes later.'
+    ],
+    dd:[
+      'A Daily Double. Wager or not, answer it the same way you answer everything else.',
+      'The stakes went up. Your method did not need to.',
+      'Big number, same dragon. Proceed as usual.'
     ]
   }
 };
 function companionPool(kind, comp){
   const v = comp && COMPANION_VOICES[comp.id];
-  const raw = (v && v[kind]) || { cheer:COMPANION_CHEER, steady:COMPANION_STEADY, idle:COMPANION_IDLE }[kind];
+  const raw = (v && v[kind]) || { cheer:COMPANION_CHEER, steady:COMPANION_STEADY, idle:COMPANION_IDLE,
+    mid:COMPANION_MID, dd:COMPANION_DD }[kind];
   /* {name} lines exist only when a first name is in the roster; without one
      they drop out of the pool rather than render a blank. */
   const name = (roster().studentName||'').trim().split(' ')[0];
@@ -8095,6 +8153,17 @@ SCREENS.quiz = function(root){
     r0.appendChild(el('span','ladderworth', (isDD ? '★ Daily Double · ' : '🎯 ') + jjWorth(quizState.i)));
     r0.appendChild(el('span','v', ladderPoints().toLocaleString() + ' pts'));
     head.appendChild(r0);
+    /* One companion line on the Daily Double itself — before she answers,
+       gone once she does, so it reads as a vote of confidence going in
+       rather than lingering commentary. The board's own finish screen
+       already carries the end-of-game line; this is the mid-game one. */
+    if(isDD && quizState.answered===null){
+      const comp = companionOf();
+      if(comp){
+        const pool = companionPool('dd', comp);
+        head.appendChild(companionSays(pool[mixHash(u.id+':dd') % pool.length], comp));
+      }
+    }
   } else {
     head.appendChild(el('div','eyebrow',`${u.title} · Level ${q.lv||1}`));
     const r = el('div','row');
@@ -8358,6 +8427,21 @@ SCREENS.quiz = function(root){
           shown===0 ? '🧭  Walk me through it' : `Next step  (${shown} of ${q.steps.length})`);
         wb.addEventListener('click',()=>{ quizState.stepsShown = shown+1; render(); });
         root.appendChild(wb);
+      }
+    }
+    /* The companion turns up mid-round now too (Chris, 2026-09), not just at
+       the end — but exactly ONCE per round, at a fixed question, so it reads
+       as a moment rather than a running commentary. Skipped on Beat the
+       clock (nothing should slow a countdown round down), the review ladder
+       and the daily three (both built for speed and low friction), and a
+       Junior Jeopardy round (which gets its own Daily Double line instead —
+       two companion moments in one quiz screen would be one too many). */
+    if(!quizState.ladder && !quizState.timed && u.id!=='__review__' && u.id!=='__daily__'
+       && quizState.i===Math.floor(quizState.order.length/2)){
+      const comp = companionOf();
+      if(comp){
+        const pool = companionPool('mid', comp);
+        root.appendChild(companionSays(pool[mixHash(u.id+':mid') % pool.length], comp));
       }
     }
     const n = el('button','btn btn-primary', quizState.ladder ? 'Back to the board →'
