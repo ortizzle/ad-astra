@@ -999,6 +999,21 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .jj-tile.done.right{color:#8fe3a8}
 .jj-tile.done.wrong{color:#f4a0a0}
 .jj-tile.done.dd::before{content:'★';position:absolute;top:3px;right:6px;font-size:11px;color:#ffcc33}
+/* The Double Jeopardy wager (Chris, 2026-09): a plain range input inside the
+   Daily Double modal — not the number-line widget's tick-marked track (that
+   is a math/physics reading skill; a wager is just "pick a number"), a
+   simple slider with a live gold readout instead. */
+.wager{margin:14px 0 2px}
+.wager input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:32px;background:transparent}
+.wager input[type=range]:focus{outline:none}
+.wager input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--line)}
+.wager input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;
+  border-radius:50%;background:#f2ca63;border:3px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.wager input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--line)}
+.wager input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#f2ca63;
+  border:3px solid var(--surface)}
+.wager .wrange{display:flex;justify-content:space-between;font-size:11px;color:var(--faint);margin-top:2px}
+.wagerread{margin:4px 0 2px}
 /* The one gold moment in the whole feature (Chris, 2026-09: "show the
    points as if on a game show") — reused for both reveals (the question's
    own "worth" badge and the finish screen's score) rather than spread
@@ -1544,7 +1559,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v168 · fixing the board that followed her home';
+const APP_VERSION = 'v169 · a wager, and a game report';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -7192,12 +7207,21 @@ function buildLadder(u){
   const belowTop = qs.map((_,k)=>k).filter(k => k % JJ_ROWS > 0);
   ladderState = { unitId:u.id, classId:u.classId, order: qs.map((_,k)=>k), values, catOf,
     cats: cols.map(c=>({ nm:c.nm, older:!!c.older })), rows:JJ_ROWS, mode,
-    dd: belowTop[Math.floor(Math.random()*belowTop.length)], ddSeen:false,
+    dd: belowTop[Math.floor(Math.random()*belowTop.length)], ddSeen:false, wager:null,
     results: new Array(qs.length).fill(null),
     items:[], hintPenalty:0, logId:null, start:Date.now(), current:null };
   return true;
 }
-const jjWorth = k => ladderState.values[k] * (k===ladderState.dd ? 2 : 1);
+/* Double Jeopardy's Daily Double is a real wager (Chris, 2026-09: "let's
+   make double jeopardy a wager they can make ... show confidence in how
+   well they know their material") — she picks the stake herself, between
+   the tile's own face value (the floor, same number Round 1's flat double
+   would have paid) and her current running score (so a strong board lets
+   her bet big). Round 1's Daily Double stays the simple flat double —
+   ladderState.wager is only ever set in the Double round; jjWorth() falls
+   back to the old *2 whenever it is null. */
+const jjWorth = k => (k===ladderState.dd && ladderState.wager!=null) ? ladderState.wager
+  : ladderState.values[k] * (k===ladderState.dd ? 2 : 1);
 function ladderReturn(u, q){
   const right = quizState.answered === q.ans;
   ladderState.results[quizState.i] = right ? 'right' : 'wrong';
@@ -7237,6 +7261,12 @@ function ladderLog(u){
            the Stars-tab summary). Nothing changes about how real XP or
            qstats/misses are credited. */
         done:doneAll, points:ladderPoints(), round:ladderState.mode,
+        /* The wager itself, and whether it paid off — for the parent report
+           and nothing else on her own side (Stars stays "a smaller degree",
+           per Chris, and shows none of this). null when this board's Daily
+           Double hasn't been opened yet, or it was a Round 1 board with no
+           wager to record. */
+        wager: ladderState.wager, wagerWon: ladderState.wager!=null ? ladderState.results[ladderState.dd]==='right' : null,
         items:(ladderState.items||[]).slice(0,QUIZ_ITEM_MAX) });
   if(doneAll){ checkBadges(); syncSoon(); if(pct>=80) celebrate(); }
 }
@@ -7251,6 +7281,23 @@ function ladderLog(u){
 function ladderGames(){ return logs().filter(l => l.mode==='ladder' && l.done); }
 function ladderLast(unitId, classId){
   return ladderGames().find(l => l.unitId===unitId && l.classId===classId) || null;
+}
+/* The parent-side report (Chris, 2026-09: "it would be nice to see a report
+   of this game on the parent side too... how well they've done and how
+   much"). Everything here is derived from ladderGames() at render time —
+   no new record types — and it is deliberately fuller than the Stars-tab
+   card, which stays the small, curated version "to a smaller degree" on
+   her own side. */
+function ladderParentReport(){
+  const games = ladderGames();
+  if(!games.length) return null;
+  const best = games.reduce((a,b)=> (b.points||0) > (a.points||0) ? b : a);
+  const totalCorrect = games.reduce((n,g)=>n+(g.correct||0),0);
+  const totalAsked = games.reduce((n,g)=>n+(g.total||0),0);
+  const doubles = games.filter(g=>g.round==='double').length;
+  const wagers = games.filter(g=>g.wager!=null);
+  const wagerWins = wagers.filter(g=>g.wagerWon).length;
+  return { games, best, totalCorrect, totalAsked, doubles, wagers, wagerWins };
 }
 SCREENS.ladder = function(root){
   const cid = ctx.classId;
@@ -7324,8 +7371,46 @@ SCREENS.ladder = function(root){
       const open = ()=>{ s.current = k; go('quiz',{unitId:'__ladder__', classId:cid, ladder:true},{back:true}); };
       if(k===s.dd && !s.ddSeen){
         s.ddSeen = true; sfx('dd');
-        showModal({ title:'Daily Double!', message:`This screen is worth double — ${s.values[k]*2} points either way.`,
-          confirmText:'Bring it on', onConfirm:open });
+        if(!dbl){
+          /* Round 1 keeps the simple reveal — no choice to make yet. */
+          showModal({ title:'Daily Double!', message:`This screen is worth double — ${s.values[k]*2} points either way.`,
+            confirmText:'Bring it on', onConfirm:open });
+          return;
+        }
+        /* Double Jeopardy makes it a real wager: bounded between the tile's
+           own face value (the floor — what a flat double would have paid
+           anyway) and her current score, so a strong board lets her bet big.
+           A score that hasn't caught up to the tile's value yet leaves no
+           real choice, so it says so instead of showing a slider with
+           nowhere to move. */
+        const min = s.values[k], max = Math.max(min, ladderPoints());
+        if(max <= min){
+          showModal({ title:'Daily Double!',
+            message:`Your score isn't ahead of this tile yet, so it's worth ${min.toLocaleString()} points either way.`,
+            confirmText:'Bring it on', onConfirm:()=>{ s.wager = min; open(); } });
+          return;
+        }
+        let wager = min;
+        showModal({ title:'Daily Double!',
+          message:"This is the wager round: pick how many points to risk. Get it right and you win that many; get it wrong and you lose them.",
+          confirmText:'Place my bet', cancelText:null,
+          build:(box)=>{
+            const read = el('div','ladderworth wagerread', wager.toLocaleString()+' pts');
+            box.appendChild(read);
+            const w = el('div','wager');
+            const step = Math.max(10, Math.round((max-min)/20/10)*10);
+            const inp = el('input'); inp.type='range'; inp.min=String(min); inp.max=String(max);
+            inp.step=String(step); inp.value=String(min);
+            inp.setAttribute('aria-label','Wager amount');
+            inp.addEventListener('input',()=>{ wager = +inp.value; read.textContent = wager.toLocaleString()+' pts'; });
+            w.appendChild(inp);
+            const range = el('div','wrange');
+            range.appendChild(el('span',null,min.toLocaleString()+' pts'));
+            range.appendChild(el('span',null,max.toLocaleString()+' pts'));
+            w.appendChild(range);
+            box.appendChild(w);
+          },
+          onConfirm:()=>{ s.wager = wager; open(); } });
       } else open();
     });
     board.appendChild(t);
@@ -10326,6 +10411,7 @@ SCREENS.parent = function(root){
    ['Focus minutes', s.focusMin],
    ['Flashcard sessions', logs().filter(l=>l.mode==='cards').length],
    ['Quizzes taken', logs().filter(l=>l.mode==='quiz').length],
+   ['Junior Jeopardy boards finished', ladderGames().length],
    ['Morning lines read', all('affirm').filter(a=>a.read).length]
   ].forEach(([k,v])=>{ const r=el('div','row');
     r.appendChild(el('span','k',k)); r.appendChild(el('span','v plain',String(v))); use.appendChild(r); });
@@ -10350,6 +10436,44 @@ SCREENS.parent = function(root){
     root.appendChild(qc);
   }
 
+  /* Junior Jeopardy: boards finished, the best score and where it came from,
+     accuracy across every board, and — once she's placed one — how her Daily
+     Double wagers have gone. A short recent-boards list underneath, the same
+     "more detail than her own screens" rule the tutor questions above and
+     the day view elsewhere already follow. */
+  const jjRep = ladderParentReport();
+  if(jjRep){
+    root.appendChild(divider('Junior Jeopardy'));
+    const jc = el('div','card');
+    const bestUnit = DATA.records[jjRep.best.unitId], bestCls = CLASS_BY_ID[jjRep.best.classId];
+    const bestWhere = bestUnit ? bestUnit.title : bestCls ? bestCls.name+' · a mix of everything' : null;
+    [['Boards finished', jjRep.games.length + (jjRep.doubles ? ` (${jjRep.doubles} Double Jeopardy)` : '')],
+     ['Best score', jjRep.best.points.toLocaleString()+' pts'+(bestWhere?' · '+bestWhere:'')],
+     ['Accuracy across every board', jjRep.totalAsked ? Math.round(jjRep.totalCorrect/jjRep.totalAsked*100)+'%' : '—']
+    ].forEach(([k,v])=>{ const r=el('div','row');
+      r.appendChild(el('span','k',k)); r.appendChild(el('span','v',String(v))); jc.appendChild(r); });
+    if(jjRep.wagers.length){
+      const r = el('div','row');
+      r.appendChild(el('span','k','Daily Double wagers'));
+      r.appendChild(el('span','v', `${jjRep.wagerWins} won of ${jjRep.wagers.length}`));
+      jc.appendChild(r);
+    }
+    root.appendChild(jc);
+    const rc3 = el('div','card');
+    rc3.appendChild(el('div','eyebrow','Recent boards'));
+    jjRep.games.slice(0,6).forEach(g=>{
+      const gu = DATA.records[g.unitId], gc = CLASS_BY_ID[g.classId];
+      const r = el('div','row');
+      const k = el('span','k', gu ? gu.title : gc ? gc.name+' · mix' : 'Junior Jeopardy');
+      k.appendChild(el('small',null, `${AZ.shortDate(g.date)} · ${g.round==='double'?'Double Jeopardy':'Round 1'} · ${g.correct}/${g.total}`
+        + (g.wager!=null ? ` · wagered ${g.wager.toLocaleString()} (${g.wagerWon?'won':'lost'})` : '')));
+      r.appendChild(k);
+      r.appendChild(el('span','v plain',(g.points||0).toLocaleString()+' pts'));
+      rc3.appendChild(r);
+    });
+    root.appendChild(rc3);
+  }
+
   /* Recent sessions */
   root.appendChild(divider('Recent sessions'));
   const rc = el('div','card');
@@ -10359,9 +10483,15 @@ SCREENS.parent = function(root){
     const c = CLASS_BY_ID[l.classId];
     const r = el('div','row');
     const k = el('span','k', c?`${c.icon} ${c.name}`:'General');
+    const secs = Math.round((l.seconds||0)/60);
+    /* modeLabel() names every mode correctly (Beat the clock, Growth Zone
+       review, Junior Jeopardy, Sort, ...) — this used to hand-roll three
+       cases and silently call everything else "Flashcards", which is what
+       a Junior Jeopardy session showed up as here before this fix. */
     const label = l.type==='focus' ? `Focus · ${l.minutes} min`
-      : l.mode==='quiz' ? `Quiz · ${l.correct}/${l.total} · ${Math.round((l.seconds||0)/60)} min`
-      : `Flashcards · ${Math.round((l.seconds||0)/60)} min`;
+      : l.mode==='quiz' ? `${modeLabel(l)} · ${l.correct}/${l.total} · ${secs} min`
+      : l.mode==='ladder' ? `${modeLabel(l)} · ${l.correct}/${l.total}${l.points!=null?' · '+l.points.toLocaleString()+' pts':''}`
+      : `${modeLabel(l)} · ${secs} min`;
     k.appendChild(el('small',null,`${AZ.shortDate(l.date)} · ${label}`));
     r.appendChild(k); r.appendChild(el('span','v plain','+'+(l.xp||0)));
     rc.appendChild(r);

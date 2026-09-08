@@ -165,6 +165,92 @@ const [PORT, TAG] = process.argv.slice(2);
   ck('its last category is the older lesson from the same shelf — three questions, tagged to that lesson',
      r2.cats[2]==='9-1 Older Lesson' && r2.older.join()==='false,false,true' && r2.src.slice(6).every(x=>x==='jj-older') && r2.src.slice(0,6).every(x=>x==='jj-unit'), r2);
 
+  // ---- the wager (Chris, 2026-09: "let's make double jeopardy a wager they
+  // can make, I think this might show confidence in how well they know
+  // their material"). Scoped to Double Jeopardy's Daily Double only — Round
+  // 1's stays the old flat double, already exercised above (the `dd`/`sc`
+  // blocks ran entirely in Round 1 and never saw a wager slider). Play the
+  // Double board's Daily Double twice over: once at zero score (the
+  // degraded flat-bet path, since the wager range would otherwise collapse
+  // to nothing), once after banking points (the real slider, bounded
+  // [tile value, current score], and a wrong answer costs exactly what was
+  // wagered rather than the tile's flat value).
+  const wagerLow = await p.evaluate(()=>{
+    const s = ladderState;
+    const k = s.dd;
+    const tile = [...document.querySelectorAll('.jj-tile')].find(t=>t.getAttribute('aria-label')===`${s.cats[s.catOf[k]].nm} for ${s.values[k]}`);
+    tile.click();
+    const modal = document.querySelector('.modal-overlay');
+    const modalTxt = modal.textContent;
+    const hasSlider = !!modal.querySelector('.wager input[type=range]');
+    modal.querySelector('.btn-primary').click();
+    return { modalTxt, hasSlider, wager: s.wager, tileVal: s.values[k], view, worth: document.querySelector('#screen .ladderworth')?.textContent };
+  });
+  ck('at zero score the Daily Double degrades to a flat bet (no slider, worth the tile either way)',
+     !wagerLow.hasSlider && /isn.t ahead of this tile yet/.test(wagerLow.modalTxt) && wagerLow.wager===wagerLow.tileVal
+     && wagerLow.view==='quiz' && wagerLow.worth===('★ Daily Double · '+wagerLow.tileVal), wagerLow);
+
+  const wagerHigh = await p.evaluate(([cid])=>{
+    const u = ladderUnit, s = ladderState;
+    // bank the flat-bet DD from the current (already-degraded) board, then
+    // finish it so a fresh Double board is dealt with an unplayed DD of its own
+    const qq0 = u.questions[quizState.order[quizState.i]];
+    document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(qq0.ans)].click();
+    document.getElementById('qnext').click();
+    const play = (unit, st, k)=>{ st.current=k; go('quiz',{unitId:'__ladder__',classId:st.classId,ladder:true},{back:true});
+      const qq = unit.questions[quizState.order[quizState.i]];
+      document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(qq.ans)].click();
+      document.getElementById('qnext').click(); };
+    s.order.forEach((_,k)=>{ if(k!==s.dd && !s.results[k]) play(u, s, k); });
+    // a fresh Double board: score resets to 0 per board, so bank every
+    // NON-Daily-Double tile first — that is what makes the wager range real
+    // rather than degrading to the flat-bet path again
+    go('unit',{classId:cid});
+    go('ladder',{unitId:'jj-unit', classId:cid});
+    document.querySelector('#screen .btn-primary').click();
+    const s2 = ladderState, u2 = ladderUnit;
+    s2.order.forEach((_,k)=>{ if(k!==s2.dd) play(u2, s2, k); });
+    const scoreBefore = ladderPoints();
+    const k2 = s2.dd, tileVal2 = s2.values[k2];
+    const tile2 = [...document.querySelectorAll('.jj-tile')].find(t=>t.getAttribute('aria-label')===`${s2.cats[s2.catOf[k2]].nm} for ${s2.values[k2]}`);
+    tile2.click();
+    const modal = document.querySelector('.modal-overlay');
+    const inp = modal.querySelector('.wager input[type=range]');
+    const bounds = inp ? { min:+inp.min, max:+inp.max, step:+inp.step, startVal:+inp.value } : null;
+    let mid = null, readAfterDrag = null;
+    if(inp){
+      // setting .value snaps to the nearest step from min, same as a real
+      // drag would — read the SNAPPED value back rather than trusting the
+      // unsnapped midpoint arithmetic
+      inp.value = String(Math.round((+inp.min + +inp.max) / 2));
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      mid = +inp.value;
+      readAfterDrag = modal.querySelector('.wagerread').textContent;
+      modal.querySelector('.btn-primary').click();
+    }
+    const wager = s2.wager;
+    const scoreAtQuestion = ladderPoints();
+    // answer wrong: should cost exactly the wager, not the tile's flat value
+    const q2 = ladderUnit.questions[quizState.order[quizState.i]];
+    const wrongIdx = q2.opts.findIndex((_,i)=>i!==q2.ans);
+    document.querySelectorAll('#screen .opt')[quizState.optArr.indexOf(wrongIdx)].click();
+    document.getElementById('qnext').click();
+    const scoreAfter = ladderPoints();
+    return { scoreBefore, tileVal2, bounds, mid, readAfterDrag, wager, scoreAtQuestion, scoreAfter, delta: scoreAtQuestion-scoreAfter };
+  }, [cid]);
+  ck('with a banked score, the wager slider is bounded [tile value, current score] and the live readout tracks it',
+     wagerHigh.bounds && wagerHigh.bounds.min===wagerHigh.tileVal2 && wagerHigh.bounds.max===wagerHigh.scoreBefore
+     && wagerHigh.wager===wagerHigh.mid && wagerHigh.readAfterDrag===wagerHigh.mid.toLocaleString()+' pts', wagerHigh);
+  ck('a wrong answer on the wagered Daily Double costs exactly the wager, not the tile\'s flat value',
+     wagerHigh.delta===wagerHigh.wager && wagerHigh.wager!==wagerHigh.tileVal2*2, wagerHigh);
+
+  const wagerLog = await p.evaluate(()=>{
+    const logs = Object.values(DATA.records).filter(r=>r.type==='log'&&r.mode==='ladder'&&r.round==='double');
+    const l = logs[logs.length-1];
+    return { wager: l.wager, wagerWon: l.wagerWon };
+  });
+  ck('the log records the wager and that it was lost', wagerLog.wager===wagerHigh.wager && wagerLog.wagerWon===false, wagerLog);
+
   // ---- the subject-screen board: every column a different lesson
   const mix = await p.evaluate(([cid])=>{
     go('unit',{classId:cid});
@@ -180,6 +266,58 @@ const [PORT, TAG] = process.argv.slice(2);
   // ---- modeLabel knows the new name
   const label = await p.evaluate(()=> modeLabel({mode:'ladder'}));
   ck('modeLabel names it Junior Jeopardy for the day view', label==='Junior Jeopardy', label);
+
+  // ---- the parent-side report (Chris, 2026-09: "It would nice to see a
+  // report of this game on the parent side too"). Derived entirely from
+  // ladderGames() at render time — no new record types — and deliberately
+  // fuller than the Stars-tab card (which stays the small, curated "smaller
+  // degree" version on her own side, per Chris's own framing). By this
+  // point in the run there are 3 finished boards (Round 1, and two Double
+  // boards from the wager tests, one of which carries a lost wager).
+  const rep = await p.evaluate(()=>{
+    go('parent',{});
+    const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
+    const screen = T(document.getElementById('screen'));
+    const usingRow = [...document.querySelectorAll('.row')].find(r=>/Junior Jeopardy boards finished/.test(r.textContent));
+    const recentHead = [...document.querySelectorAll('.eyebrow')].find(e=>e.textContent==='Recent boards');
+    const recentCard = recentHead && recentHead.closest('.card');
+    const jjRep = ladderParentReport();
+    return {
+      screen, usingRow: T(usingRow),
+      hasJJDivider: /Junior Jeopardy/.test(screen),
+      boardsFinishedRow: [...document.querySelectorAll('.row')].some(r=>/Boards finished/.test(r.textContent) && new RegExp(jjRep.games.length+' \\(').test(r.textContent)),
+      bestScoreRow: [...document.querySelectorAll('.row')].some(r=>/Best score/.test(r.textContent) && r.textContent.includes(jjRep.best.points.toLocaleString())),
+      wagerRow: [...document.querySelectorAll('.row')].some(r=>/Daily Double wagers/.test(r.textContent) && r.textContent.includes(jjRep.wagerWins+' won of '+jjRep.wagers.length)),
+      recentRows: recentCard ? recentCard.textContent : null,
+      gamesCount: jjRep.games.length, wagers: jjRep.wagers.length, wagerWins: jjRep.wagerWins
+    };
+  });
+  ck('the parent view carries a Junior Jeopardy boards-finished line in "What she is using"',
+     rep.usingRow && rep.usingRow.includes(String(rep.gamesCount)), rep);
+  ck('a "Junior Jeopardy" card reports boards finished (with the Double count), best score, and accuracy',
+     rep.hasJJDivider && rep.boardsFinishedRow && rep.bestScoreRow, rep);
+  ck('the card also reports the Daily Double wager win rate, since one was wagered and lost',
+     rep.wagerRow && rep.wagers>0 && rep.wagerWins < rep.wagers, rep);
+  ck('a "Recent boards" list names each board with its round, score, and wager outcome',
+     rep.recentRows && /Double Jeopardy/.test(rep.recentRows) && /Round 1/.test(rep.recentRows) && /wagered/.test(rep.recentRows) && /lost/.test(rep.recentRows), rep);
+
+  // ---- "Recent sessions" used to mislabel every session, quiz or not:
+  // ANY non-focus/non-quiz mode (Junior Jeopardy included) fell through a
+  // ternary straight to "Flashcards", and every quiz-mode session said the
+  // bare word "Quiz" whether it was Beat the clock, a Growth Zone review,
+  // a shuffle round, or the daily three. Both bugs are fixed by routing
+  // through modeLabel() like every other render site already does.
+  const sessions = await p.evaluate(()=>{
+    const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
+    const rows = [...document.querySelectorAll('.row')].map(T);
+    return { jjRow: rows.find(t=>/Junior Jeopardy/.test(t) && /pts/.test(t)),
+      anyBareFlashcardsForJJ: rows.some(t=>/Junior Jeopardy/.test(t) && /Flashcards/.test(t)),
+      reviewRow: rows.find(t=>/Growth Zone review/.test(t)) };
+  });
+  ck('a Recent sessions row for a Junior Jeopardy log names it correctly with its points, never "Flashcards"',
+     sessions.jjRow && !sessions.anyBareFlashcardsForJJ && /pts/.test(sessions.jjRow), sessions);
+  ck('the seeded Growth Zone review session is named correctly too, not the bare word "Quiz"',
+     !!sessions.reviewRow && !/^[^·]*·\s*Quiz\s*·/.test(sessions.reviewRow), sessions);
 
   // ---- Chris, 2026-09: "I tested out a jeopardy question, left the game and
   // tested a quiz question, but after the how do you feel questions, I was

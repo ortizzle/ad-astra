@@ -910,6 +910,42 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### A wager, and a report of the game (v169 / Wayfinder v151, both apps)
+
+Chris, after confirming the quizState-leak fix held: "let's make double
+jeopardy a wager they can make... It would nice to see a report of this
+game on the parent side too. And to a smaller degree in the kids Star
+tab." Engine, identical here — see wayfinder/CLAUDE.md's section of the
+same name for the full reasoning. In short: Double Jeopardy's Daily
+Double only (Round 1 keeps its plain flat double) becomes a real bet,
+bounded between the tile's own value and her current running score, with
+a native range slider and a live gold readout; when her score hasn't
+caught up to the tile yet it degrades to the same flat-double modal
+rather than offering a zero-width choice. Winning pays the wager and
+losing costs exactly the wager, never the tile's flat value. A new
+"Junior Jeopardy" card in the parent view (`ladderParentReport()`) reports
+boards finished, best score, accuracy and — once a wager exists — the win
+rate, plus a "Recent boards" list; "What she is using" gained one line
+for boards finished. The Stars-tab card Chris asked for "to a smaller
+degree" already shipped in v165 ("The Trivia Ladder gets a memory") and
+was deliberately left as-is — wager detail is grown-up information, not
+something her own screen needs to add.
+
+**A real pre-existing bug surfaced building the report and was fixed
+alongside it**: "Recent sessions" mislabeled every non-focus/non-quiz
+session as "Flashcards" (Junior Jeopardy included) and every `mode:'quiz'`
+session — Beat the clock, a Growth Zone review, a Shuffle round, the daily
+three — as the bare word "Quiz," losing the distinction `modeLabel()`
+already draws everywhere else. Fixed by routing through `modeLabel()`
+instead of a second, drifted copy of the same logic.
+
+`tools/test_ladder.js` is the same file as Wayfinder's, with the same new
+assertions: Round 1's flat double untouched, the degraded modal at zero
+score, the real slider's bounds and live readout, a loss costing exactly
+the wager, the log's `wager`/`wagerWon` fields, the parent card's three
+numbers and Recent-boards list, and both halves of the Recent-sessions
+fix.
+
 ### The board that followed her home (v167 fix / Wayfinder v149 fix, both apps)
 
 Chris reported it on Sedona's app too: leave a Junior Jeopardy question by
