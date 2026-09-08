@@ -15,8 +15,9 @@ const [PORT, TAG] = process.argv.slice(2);
 
   // ---- seed: a 3-lesson series, 12 questions each (rounds of 5 → 3 rounds)
   await p.evaluate(()=>{
-    /* The topmost modal's confirm; then out of the check-in whichever way it
-       offers (a strong round adds teach-it-back, so a feeling tap alone stays). */
+    /* The topmost modal's confirm; then out of the post-quiz screen — tapping
+       the first (lowest) feeling shows the care note and waits for a real
+       Done tap (2026-09), so the helper still needs its own follow-up click. */
     window.closeModal = () => { const b = [...document.querySelectorAll('.modal-box .btn-primary')].pop(); if(b) b.click(); };
     window.leavePostmood = () => { if(view !== 'postmood') return;
       const f = document.querySelector('#screen .scale button'); if(f) f.click();

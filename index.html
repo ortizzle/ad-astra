@@ -1232,6 +1232,14 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .scale button .lb{font-size:9.5px;color:var(--faint);font-weight:600;letter-spacing:.02em;line-height:1.2;text-align:center}
 .scale button.on{border-color:var(--ac);background:var(--ac-14)}
 .scale button.on .lb{color:var(--ac-fg)}
+/* The lone pre-quiz readiness question (Chris, 2026-09: "make that question
+   much larger") — the only thing on the screen now, so it gets the room a
+   two-question layout couldn't spare. */
+.checkin-big{padding:22px 14px}
+.scale-big{gap:10px}
+.scale-big button{min-height:100px;border-radius:18px;gap:8px}
+.scale-big button .em{font-size:40px;line-height:1}
+.scale-big button .lb{font-size:13px}
 
 .ring-wrap{display:flex;flex-direction:column;align-items:center;padding:14px 0 6px}
 .ring{position:relative;width:236px;height:236px}
@@ -1559,7 +1567,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v169 · a wager, and a game report';
+const APP_VERSION = 'v170 · one question, and it moves';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -6352,8 +6360,13 @@ function daySignals(rep){
     ? (CLASS_BY_ID[s.classId].short || CLASS_BY_ID[s.classId].name) : 'that round';
   rep.sessions.forEach((s, idx) => {
     const key = 'ses' + idx;
-    if(s.pre && s.pre.feeling <= 2)
-      out.push({ rank:1, key, t:'She logged a low mood going into ' + nm(s) + '.',
+    /* Pre-quiz feeling is history only (2026-09, down to one question
+       before) — s.post.feeling covers every session old and new, since the
+       post-quiz tap has always existed. Old sessions with only s.pre.feeling
+       still surface it, so nothing already recorded goes quiet. */
+    const lowFeeling = (s.post && s.post.feeling) ?? (s.pre && s.pre.feeling);
+    if(lowFeeling != null && lowFeeling <= 2)
+      out.push({ rank:1, key, t:'She logged a low mood around ' + nm(s) + '.',
         d:'Worth a gentle check-in, not a confrontation.' });
     if(s.partial && s.total > 0)
       out.push({ rank:2, key, t:'She stopped the ' + nm(s) + ' round after ' + s.total +
@@ -6480,8 +6493,15 @@ function daySessionRow(s, idx, date){
   }
   if(openable){
     head.appendChild(el('span','exp', open ? '−' : '+'));
-    head.addEventListener('click', () => go('day',
-      { date, dayView: ctx.dayView, openSes: open ? null : key }));
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    /* ctx mutation + render(), not go() — go() always scrolls to the top
+       (Chris, 2026-09: tapping + to open a session's dropdown threw her
+       back to the top of the page instead of just opening it in place). */
+    /* ctx.allQ is dropped here, matching the old go()-based rebuild it
+       replaced: opening a session (or a different one) always starts
+       misses-first, never carrying "show all" over from whatever was open
+       before. */
+    head.addEventListener('click', () => { ctx.openSes = open ? null : key; ctx.allQ = null; render(); });
   }
   wrap.appendChild(head);
   if(open){
@@ -6916,9 +6936,10 @@ SCREENS.reading = function(root){
 };
 
 /* ================= EMOTION CHECK ================= */
-/* Asked before every quiz. Two taps. The readiness rating is compared to her
-   actual score afterwards, which is a calibration signal — it teaches her
-   whether her gut feeling about being prepared is accurate. */
+/* One tap before a quiz, one after (Chris, 2026-09: down from two before —
+   see "One question, and it moves" below). The readiness rating is compared
+   to her actual score afterwards, which is a calibration signal — it teaches
+   her whether her gut feeling about being prepared is accurate. */
 const READY = [
   {v:1,e:'😰',l:'Not at all'},{v:2,e:'😕',l:'Shaky'},{v:3,e:'😐',l:'Kind of'},
   {v:4,e:'🙂',l:'Pretty good'},{v:5,e:'😎',l:'Totally'}
@@ -6927,6 +6948,24 @@ const FEELING = [
   {v:1,e:'😩',l:'Rough'},{v:2,e:'😔',l:'Meh'},{v:3,e:'😌',l:'OK'},
   {v:4,e:'😊',l:'Good'},{v:5,e:'🤩',l:'Great'}
 ];
+/* A pool rather than one fixed line, now that this is the ONLY thing on the
+   screen and renders large — asked every quiz, so it needs enough variety not
+   to go stale. Deterministic per unit per day (mixHash), so re-rendering the
+   screen (picking an option calls render()) never swaps the question out from
+   under her mid-decision. The RATING SCALE itself (READY, above) is unchanged
+   — only the prompt wording rotates, so calibrationPairs() keeps comparing
+   the same 1-5 scale it always has. */
+const READY_PROMPTS = [
+  'How ready do you feel for this?',
+  'How prepared do you feel right now?',
+  'Where is your head at going in?',
+  'How confident are you feeling about this one?',
+  'How dialed in do you feel right now?',
+  'How solid does this material feel today?'
+];
+function readinessPrompt(unitId){
+  return READY_PROMPTS[mixHash(AZ.today()+':ready:'+unitId) % READY_PROMPTS.length];
+}
 /* ---------- Paper study guides ----------
    A unit flagged `guide:true` mirrors a printout the class handed out, and
    that changes three things about how the engine may treat it.
@@ -7597,10 +7636,15 @@ function timeUp(u){
   render();
 }
 
+/* One question, and it moves (Chris, 2026-09): the pre-quiz feeling tap and
+   "Skip and just quiz" are both gone — readiness is the only thing asked
+   before a round now, it gets the whole screen, and answering it is the
+   only action there is to take. The feeling question survives, but only
+   AFTER the quiz (SCREENS.postmood), which is also where the low-mood care
+   note now lives — there is no "before" tap left to hang it on. */
 SCREENS.checkin = function(root){
   const u = unitFor(ctx.unitId);
   if(!u) return go('study');
-  const state = ctx._state || (ctx._state = {readiness:null,feeling:null});
 
   /* Name what she is about to be quizzed on. This is the last screen before
      the round starts, and it used to say nothing about WHICH lesson — so a
@@ -7610,59 +7654,31 @@ SCREENS.checkin = function(root){
   nameEl.style.margin = '2px 2px 8px';
   root.appendChild(nameEl);
 
-  root.appendChild(headline('Before you start','Two quick taps. There is no wrong answer here, and nobody is scored on it.'));
+  root.appendChild(headline(readinessPrompt(u.id),
+    'One tap. There is no wrong answer here, and nobody is scored on it.'));
 
-  const c1 = el('div','card');
-  c1.appendChild(el('div','eyebrow','How ready do you feel for this?'));
-  const s1 = el('div','scale');
+  const c1 = el('div','card checkin-big');
+  const s1 = el('div','scale scale-big');
   READY.forEach(o=>{
-    const b = el('button', state.readiness===o.v?'on':'');
-    b.appendChild(el('span',null,o.e)); b.appendChild(el('span','lb',o.l));
-    b.addEventListener('click',()=>{ state.readiness=o.v; render(); });
+    const b = el('button', ctx._readyPick===o.v?'on':'');
+    b.appendChild(el('span','em',o.e)); b.appendChild(el('span','lb',o.l));
+    b.addEventListener('click',()=>{
+      /* Every tap (re)sets the pick and restarts the beat — tapping a
+         different button within the window corrects a mis-tap rather than
+         stacking a second commit on top of the first, since there is no
+         longer a separate Start button to catch that at. */
+      ctx._readyPick = o.v; render();
+      clearTimeout(ctx._ciT);
+      const myCtx = ctx;
+      ctx._ciT = setTimeout(()=>{
+        if(ctx !== myCtx) return;
+        ctx._pre = {readiness:o.v};
+        go('quiz',{unitId:ctx.unitId, classId:ctx.classId, pre:ctx._pre, timed:ctx.timed});
+      }, 350);
+    });
     s1.appendChild(b);
   });
   c1.appendChild(s1); root.appendChild(c1);
-
-  const c2 = el('div','card');
-  c2.appendChild(el('div','eyebrow','How are you feeling right now?'));
-  const s2 = el('div','scale');
-  FEELING.forEach(o=>{
-    const b = el('button', state.feeling===o.v?'on':'');
-    b.appendChild(el('span',null,o.e)); b.appendChild(el('span','lb',o.l));
-    b.addEventListener('click',()=>{ state.feeling=o.v; render(); });
-    s2.appendChild(b);
-  });
-  c2.appendChild(s2); root.appendChild(c2);
-
-  if(state.feeling !== null && state.feeling <= 2){
-    const care = el('div','card quiet');
-    care.appendChild(el('p',null,"Rough day. You can still do this, and you can also stop after a few questions — that is a real option, not a failure. If something bigger is going on, tell someone you trust today."));
-    root.appendChild(care);
-  }
-
-  const start = el('button','btn btn-primary','Start the quiz →');
-  start.disabled = state.readiness===null || state.feeling===null;
-  const begin = ()=>{
-    ctx._pre = {readiness:state.readiness, feeling:state.feeling};
-    go('quiz',{unitId:ctx.unitId, classId:ctx.classId, pre:ctx._pre, timed:ctx.timed});
-  };
-  start.addEventListener('click',begin);
-  /* Both answered → begin on its own after a beat. The button confirmed
-     nothing the two taps had not already said. The pause leaves room to
-     re-tap a mis-hit — readiness feeds the calibration record, so a polluted
-     pair matters — and a LOW MOOD never auto-starts: the care note above,
-     and the real option to stop, must get their moment. */
-  clearTimeout(ctx._ciT);
-  if(state.readiness!==null && state.feeling!==null && state.feeling>2 && !ctx._ciDone){
-    ctx._ciDone = true;                     // one arming per visit — never re-fires
-    const myCtx = ctx;
-    start.textContent = 'Starting…';
-    ctx._ciT = setTimeout(()=>{ if(ctx===myCtx) begin(); }, 700);
-  }
-  root.appendChild(start);
-  const skip = el('button','btn btn-ghost','Skip and just quiz');
-  skip.addEventListener('click',()=>go('quiz',{unitId:ctx.unitId,classId:ctx.classId,timed:ctx.timed}));
-  root.appendChild(skip);
 };
 
 /* ================= QUIZ ================= */
@@ -8634,8 +8650,12 @@ function finishQuiz(u, partial){
     hints:hintsUsed, timed:wasTimed, speedBonus:speed, partial:!!partial,
     items:(quizState.items||[]).slice(0, QUIZ_ITEM_MAX),
     ansSeconds:Math.round((quizState.ansMs||0)/1000), ansCount:quizState.ansN||0 });
+  /* `feeling` is no longer collected pre-quiz (2026-09: down to one
+     question) — omitted rather than written null, so an old record with a
+     real pre.feeling and a new one without it are told apart by the field's
+     mere presence, not by a value that could be confused with "rough". */
   if(pre) put({ id:uid('mood'), type:'mood', when:'pre', logId:log.id, classId:ctx.classId,
-    unitId:u.id, readiness:pre.readiness, feeling:pre.feeling, date:AZ.today(), at:Date.now() });
+    unitId:u.id, readiness:pre.readiness, date:AZ.today(), at:Date.now() });
 
   const askedThisRound = new Set(quizState.seen);
   if(u.id==='__review__'){
@@ -8717,7 +8737,7 @@ function finishQuiz(u, partial){
         : (u.id==='__review__' ? '\n\nEvery one of those moved further out. That is the list shrinking.' : ''))
     + roundsLine;
 
-  quizState = null; ctx._state = null; ctx._pre = null;
+  quizState = null; ctx._pre = null;
   const clsId = ctx.classId;
   const wasReview = u.id==='__review__', wasDaily = u.id==='__daily__';
   showModal({ title:"That's the whole round", message:msg,
@@ -8763,22 +8783,12 @@ function finishQuiz(u, partial){
   if(wasReview) go('growth',{classId:clsId}); else if(wasDaily) go('today'); else go('unit',{classId:clsId});
 }
 
+/* Teach it back is gone (Chris, 2026-09: "remove the 'teach' question at the
+   end") — the textarea, its save, and the strong-round gate that used to
+   decide whether to show it. `teach` stays a real record type: old answers
+   still read in the parent view's "In her own words" and Fresh start still
+   clears them, but nothing writes a new one. */
 SCREENS.postmood = function(root){
-  /* Teach it back. After a strong round (80%+ of at least 4 questions) she can
-     explain the trickiest idea in her own words — the protégé effect, made
-     one optional textarea. Saved verbatim for the parent view, never graded,
-     never required, no XP attached: explaining is its own payoff and pricing
-     it would cheapen it. Keyed to the log id so it can only be written once. */
-  const tbLog = DATA.records[ctx.logId];
-  const tbOK = tbLog && tbLog.mode==='quiz' && tbLog.total>=4 &&
-               (tbLog.correct/tbLog.total)>=0.8 && !DATA.records['teach_'+ctx.logId];
-  const saveTB = ()=>{
-    const t = (ctx._tb||'').trim();
-    if(!tbOK || !t) return;
-    put({ id:'teach_'+ctx.logId, type:'teach', classId:ctx.classId, unitId:tbLog.unitId,
-          logId:ctx.logId, date:AZ.today(), at:Date.now(), text:t.slice(0,500) });
-    ctx._tb = '';
-  };
   /* Where the check-in leaves her (v154): a review round goes back to the
      Growth Zone and the daily three to Today, as before (both set ctx.back).
      An ordinary round always goes back to the SUBJECT PAGE — not the specific
@@ -8802,37 +8812,27 @@ SCREENS.postmood = function(root){
             classId:ctx.classId, feeling:o.v, date:AZ.today(), at:Date.now() });
       checkBadges(); syncSoon();
       ctx._feel = o.v;
-      /* When there is a written question on offer, the tap must NOT leave.
-         The emoji row renders ABOVE the textarea, so auto-advancing here threw
-         away the answer before she could reach the box — the tap required to
-         record the mood was destroying the question underneath it. With
-         nothing else to ask, one tap still finishes, which is the whole point
-         of the check-in. */
-      if(tbOK){ render(); return; }
+      /* A low feeling gets a beat with the care note before leaving — the
+         explicit permission-to-stop this check carried pre-quiz has nowhere
+         else to live now that the pre-quiz feeling tap is gone, so it moved
+         here, reworded past tense since the round is already behind her.
+         Anything above 2 leaves right away: one tap still finishes, the
+         whole point of asking only once. */
+      if(o.v <= 2){ render(); return; }
       toast('Noted — thanks');
       leave();
     });
     s.appendChild(b);
   });
   c.appendChild(s); root.appendChild(c);
-  if(tbOK){
-    const tb = el('div','card');
-    tb.appendChild(el('div','eyebrow','Teach it back'));
-    tb.appendChild(el('p',null,'Strong round. Explain the trickiest idea from it as if you were teaching it — a sentence or two is plenty.'));
-    const ta = el('textarea'); ta.rows = 3; ta.placeholder = 'The trickiest idea was…';
-    ta.value = ctx._tb || '';
-    ta.addEventListener('input',()=>{ ctx._tb = ta.value; });
-    tb.appendChild(ta);
-    tb.appendChild(el('div','hintline','Optional. It saves with your check-in — a grown-up can read it, and nothing grades it.'));
-    root.appendChild(tb);
+  if(ctx._feel != null && ctx._feel <= 2){
+    const care = el('div','card quiet');
+    care.appendChild(el('p',null,"That was a rough one — well done for finishing it anyway. If something bigger than a hard round is going on, tell someone you trust today."));
+    root.appendChild(care);
   }
-  /* Once a feeling is recorded the exit becomes a real Done, so the written
-     answer has something to be saved BY. Before that it is still Skip — she
-     can always leave without answering anything. */
-  const done = ctx._feel != null && tbOK;
+  const done = ctx._feel != null;
   const skip = el('button','btn '+(done?'btn-primary':'btn-ghost'), done ? 'Done' : 'Skip');
   skip.addEventListener('click',()=>{
-    saveTB();
     if(done) toast('Noted — thanks');
     leave();
   });
@@ -10278,9 +10278,14 @@ SCREENS.parent = function(root){
     const mc = el('div','card');
     const pre = moods.filter(m=>m.when==='pre'), post = moods.filter(m=>m.when==='post');
     const avg = arr => arr.length ? (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1) : '—';
+    /* pre-quiz feeling is history only (2026-09) — a mixed old+new pre list
+       has `undefined` on every new record, which would poison avg()'s sum to
+       NaN if it went in unfiltered. Readiness is unaffected; it is still
+       asked on every round. */
+    const preFeel = pre.map(m=>m.feeling).filter(f=>f!=null);
     const rows = [
       ['Average readiness before quizzes', avg(pre.map(m=>m.readiness))+' / 5'],
-      ['Average mood before studying', avg(pre.map(m=>m.feeling))+' / 5'],
+      ['Average mood before studying', avg(preFeel)+' / 5'],
       ['Average mood after', avg(post.map(m=>m.feeling))+' / 5']
     ];
     const pairs = calibrationPairs();

@@ -910,6 +910,37 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### One question, and it moves (v170 / Wayfinder v152, both apps)
+
+Chris: rethink the pre-quiz mood questions, drop to one before plus the one
+after (removing "teach it back"), make the survivor much bigger with no
+Skip, and answering it should walk straight into the quiz. Plus a real bug:
+the **+** that opens a session's dropdown in the parent's day view threw her
+back to the top of the screen. Engine, identical here — see
+wayfinder/CLAUDE.md's section of the same name for the full reasoning. In
+short: `daySessionRow`'s toggle now mutates `ctx.openSes` (and explicitly
+clears `ctx.allQ`, which the old `go()`-based rebuild used to drop as a
+side effect) and calls `render()` instead of `go()`, which always scrolls to
+top. `SCREENS.checkin` is down to one large readiness question
+(`.checkin-big`/`.scale-big`, a rotating `READY_PROMPTS` pool via
+`readinessPrompt()`) that commits and moves into the quiz on its own 350ms
+beat — no Start button, no Skip, tapping a different option within the beat
+corrects a mis-tap. The low-mood care note moved from pre-quiz to postmood
+(reworded past tense) since the pre-quiz feeling tap it depended on is gone;
+"teach it back" is removed outright, though `teach` stays a real record type
+so old answers keep reading in "In her own words". The pre-quiz `mood`
+record no longer writes `feeling`, which needed two downstream fixes:
+`daySignals()`'s low-mood signal reads `s.post.feeling` instead (always
+existed, so it still fires for every session), and the parent view's
+"Average mood before studying" filters `undefined` out before averaging —
+otherwise one new-style record poisons `avg()`'s sum to `NaN`.
+
+`tools/test_polish.js`, `tools/test_misses.js`, `tools/test_ux2.js` and
+`tools/test_ladder.js` are the same files as Wayfinder's, updated the same
+way — including a bonus fix `test_polish.js` picked up along the way (a
+stale check-in test was reusing a unit an earlier test had already parked a
+round on, so the resume path silently won over the fresh readiness tap).
+
 ### A wager, and a report of the game (v169 / Wayfinder v151, both apps)
 
 Chris, after confirming the quizState-leak fix held: "let's make double

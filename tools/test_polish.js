@@ -1,7 +1,8 @@
 /* The polish release, behavior by behavior:
-   thread hero on Today; right answer's feedback advances; check-in
-   auto-starts on a good mood and never on a low one; the parent's synced
-   line; the live period's progress; the nav's active pill.
+   thread hero on Today; right answer's feedback advances; the one-question
+   check-in moves straight into the quiz on its own beat; a low post-quiz
+   feeling shows the care note and waits for Done; the parent's synced line;
+   the live period's progress; the nav's active pill.
    Run: node test_polish.js <port> */
 const { chromium } = require('playwright');
 const PORT = process.argv[2];
@@ -86,44 +87,45 @@ const PORT = process.argv[2];
   ck('quiz: wrong answer keeps the deliberate path', !wr2.goOn && wr3 === wr, {wr, wr2, wr3});
   await p.evaluate(()=>{ quizState = null; });
 
-  /* check-in: auto-start on a good mood */
+  /* check-in (2026-09): one readiness tap, no Start button, no Skip — the
+     tap itself moves into the quiz on its own short beat. A unit of its own
+     (not the one the feedback tests above just quizzed) — reusing that one
+     let a parked/resumed round win over the fresh readiness tap, which is a
+     separate, real resume-path question and not what this check is about. */
   await p.evaluate(()=>{
-    const u = Object.values(DATA.records).find(r=>r.type==='unit' && !r.deleted
-      && (r.questions||[]).length>=4 && !r.guide);
-    go('checkin',{unitId:u.id, classId:u.classId});
+    const cid = Object.values(DATA.records).find(r=>r.type==='unit'&&!r.deleted)?.classId || STUDY_CLASSES[0].id;
+    const mk = (i) => ({ id:'q'+i, lv:1, from:'source', q:'Checkin Q'+i+'?', opts:['a'+i,'b'+i,'c'+i,'d'+i], ans:i%4 });
+    put({ id:'checkin-fresh', type:'unit', classId:cid, status:'approved', title:'Checkin Test Unit',
+      cards:[], questions:[...Array(5).keys()].map(mk) });
+    go('checkin',{unitId:'checkin-fresh', classId:cid});
   });
   await p.waitForTimeout(250);
+  const oneScale = await p.evaluate(()=>document.querySelectorAll('#screen .scale').length);
   await p.evaluate(()=>{
-    const scales = document.querySelectorAll('#screen .scale');
-    scales[0].querySelectorAll('button')[3].click();   // ready
+    document.querySelectorAll('#screen .scale')[0].querySelectorAll('button')[3].click();
   });
-  await p.waitForTimeout(150);
-  await p.evaluate(()=>{
-    const scales = document.querySelectorAll('#screen .scale');
-    scales[1].querySelectorAll('button')[3].click();   // feeling good (v=4)
-  });
-  await p.waitForTimeout(1100);
+  await p.waitForTimeout(500);
   const auto = await p.evaluate(()=>({ inQuiz: !!quizState, pre: quizState && quizState.pre ? quizState.pre.readiness : null }));
-  ck('check-in: starts itself on a good mood', auto.inQuiz && auto.pre === 4, auto);
+  ck('check-in: a single tap moves straight into the quiz on its own', oneScale===1 && auto.inQuiz && auto.pre === 4, {oneScale, auto});
   await p.evaluate(()=>{ quizState = null; });
 
-  /* check-in: a low mood never auto-starts */
+  /* postmood: a low feeling shows the care note and waits for a real Done
+     tap — the explicit-permission-to-stop message this used to carry
+     pre-quiz now lives here, since the pre-quiz feeling tap is gone. */
   await p.evaluate(()=>{
-    const u = Object.values(DATA.records).find(r=>r.type==='unit' && !r.deleted
-      && (r.questions||[]).length>=4 && !r.guide);
-    go('checkin',{unitId:u.id, classId:u.classId});
+    put({ id:'log-polish', type:'log', mode:'quiz', classId:STUDY_CLASSES[0].id, unitId:'unit-a',
+      date:AZ.today(), correct:3, total:4, seconds:60, xp:20 });
+    go('postmood',{logId:'log-polish', classId:STUDY_CLASSES[0].id, unitId:'unit-a'});
   });
-  await p.waitForTimeout(250);
-  await p.evaluate(()=>{ document.querySelectorAll('#screen .scale')[0].querySelectorAll('button')[2].click(); });
   await p.waitForTimeout(150);
-  await p.evaluate(()=>{ document.querySelectorAll('#screen .scale')[1].querySelectorAll('button')[1].click(); });  // low (v=2)
-  await p.waitForTimeout(1100);
+  await p.evaluate(()=>{ document.querySelectorAll('#screen .scale button')[1].click(); }); // low (v=2)
+  await p.waitForTimeout(150);
   const low = await p.evaluate(()=>({
-    stayed: !quizState,
-    careNote: /stop after a few questions/.test(document.getElementById('screen').textContent),
-    startEnabled: ![...document.querySelectorAll('#screen .btn-primary')].find(x=>/Start the quiz/.test(x.textContent))?.disabled
+    stayed: view==='postmood',
+    careNote: /tell someone you trust today/.test(document.getElementById('screen').textContent),
+    doneBtn: [...document.querySelectorAll('#screen button')].find(x=>/^Done$/.test(x.textContent.trim()))?.className
   }));
-  ck('check-in: low mood waits, care note shows', low.stayed && low.careNote && low.startEnabled, low);
+  ck('postmood: a low feeling shows the care note and waits for Done', low.stayed && low.careNote && /btn-primary/.test(low.doneBtn||''), low);
 
   /* parent synced line */
   await p.evaluate(()=>{

@@ -336,7 +336,7 @@ const [PORT, TAG] = process.argv.slice(2);
   // SCREENS.quiz's rebuild unconditionally discards a mismatched quizState
   // before trying to load or build a replacement, so the same class of bug
   // can't recur from a different leave path.
-  const contaminated = await p.evaluate(([cid])=>{
+  const contaminated = await p.evaluate(async ([cid])=>{
     const mk = (i) => ({ id:'q'+i, lv:1, from:'source', q:'CX Q'+i+'?', opts:['a'+i,'b'+i,'c'+i,'d'+i], ans:i%4 });
     put({ id:'cx-jj', type:'unit', classId:cid, status:'approved', title:'Contamination Lesson',
       cards:[], questions:[...Array(8).keys()].map(mk) });
@@ -354,11 +354,11 @@ const [PORT, TAG] = process.argv.slice(2);
     const clearedByNav = quizState;            // must be null right away
 
     // Take a completely ordinary quiz on a different lesson, start to finish.
+    // The check-in is one readiness tap now, which moves straight into the
+    // quiz on its own beat (no Start button to click any more).
     go('checkin', {unitId:'cx-plain', classId:cid});
     document.querySelectorAll('#screen .scale')[0].querySelectorAll('button')[2].click();
-    document.querySelectorAll('#screen .scale')[1].querySelectorAll('button')[1].click(); // low feeling: no auto-start
-    const startBtn = [...document.querySelectorAll('#screen button')].find(b=>/Start the quiz/.test(b.textContent));
-    startBtn.click();
+    await new Promise(r=>setTimeout(r,450));
     const rebuiltCorrectly = quizState && !quizState.ladder && quizState.unitId==='cx-plain';
     let guard=0;
     while (view==='quiz' && guard++<20){
