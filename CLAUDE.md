@@ -910,6 +910,57 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Enzymes is Unit 2 (v179, THIS APP ONLY)
+
+Chris, settling the v176 flag: *"enzymes was part of unit 2."* So the inferred
+"Unit 3" on the Enzymes unit was wrong, and the Cells unit — numbered from the
+teacher's own deck — is the real Unit 3.
+
+**Retitled, never re-minted.** `unit-bio-u3` keeps its id, so her question
+tallies and any Growth Zone misses stay attached; only the name on the shelf
+moved. Same rule `unit-sgt1`, `unit-a2r1` and Wayfinder's `unit-m11` already
+follow. The file was renamed `bio-unit-3-enzymes.json` →
+`bio-unit-2b-enzymes.json` (matching `bio-unit-1b.json`) so the repo does not
+carry a filename that contradicts its own content; nothing references a content
+file by name except `CONTENT_LIBRARY` and two tests, all updated. The Cells
+`parentNote` lost the paragraph asking Chris to confirm this — a note that
+tells him to go settle something already settled is worse than no note.
+
+> ⚠️ **It is titled `Unit 2: Enzymes`, NOT `Unit 2 Part 2: Enzymes`, and the
+> reason is a real ordering bug.** `shelvesFor()` sorts a book by title alone
+> (after `own` and `order`), and a space sorts before a colon — so
+> `"Unit N Part 2: …"` lands **above** its own `"Unit N: …"`. That inversion is
+> live right now on the Unit 1 pair, which has read *Part 2, then Part 1* since
+> the day it shipped: "Unit 1 Part 2: Data Analysis and Graphing" sorts before
+> "Unit 1: Experimental Design". Naming Enzymes the same way would have added a
+> second one, so it did not.
+>
+> **`order` is not the fix**, per the Wayfinder v102 warning: it is a
+> whole-shelf key, so `order:1` would bucket Enzymes behind *every* order-0
+> lesson — after Unit 3 Cells, and alongside the study guides.
+>
+> `Unit 2: Enzymes` sorts correctly **because B < E**, which is luck, not
+> structure: a future `Unit 2: Acids` would jump to the front of its own unit.
+> The structural fix is the numbered form River's maths shelves already prove
+> (`Topic 3 · 3-1 …`, `3-2 …`, which `numeric:true` orders correctly) — here
+> that would mean `Unit 2-1: Biomolecules` / `Unit 2-2: Enzymes` and the same
+> for Unit 1, at the cost of re-drafting three units Chris has already
+> approved. Not done unasked; raised instead. `tools/test_enzymes.js` pins the
+> id, the title and the position directly after Biomolecules, so the inversion
+> cannot come back silently on THIS pair.
+
+`libv` bumped and `updatedAt` stamped in the past on both files, per the
+approval-race rule — a title is a `unitDelta` meta field, so both re-draft once
+and the queue labels them updates rather than strangers. A `parentNote`-only
+edit (Cells) is deliberately NOT a `unitDelta` field: `chg` mode hides the
+unit-level blocks as "what was already read", so flagging it would hide the one
+thing that changed. It re-drafts and shows in full, which is correct.
+
+> `tools/test_cells.js` had pinned `libv === 1` exactly. Every honest content
+> edit bumps `libv`, so that assertion fails on the next fix by construction —
+> it asserts the field is PRESENT now. Pin what a change must preserve, never
+> the version number that is supposed to move.
+
 ### The review pass (v178 / Wayfinder v158, both apps)
 
 Chris: "let's run a full debug and app review." Every test in both repos
@@ -1090,13 +1141,15 @@ helper, so this stays Ad Astra only.
 > pointing at the right term with the wrong card underneath it. Seek the
 > POSITION in `order[]` instead. Cost twenty minutes here.
 
-**Flagged rather than guessed: two units now both claim Unit 3.** This one is
+**Flagged rather than guessed: two units both claimed Unit 3.** This one is
 numbered from both the Drive folder name and the deck's own title slide. The
 existing Enzymes unit (`unit-bio-u3`) was built from a photographed packet with
-no unit number visible, so its number was inferred — and enzymes are proteins,
-which would sit with Unit 2 Biomolecules. Nothing breaks (both shelve under
-Biology 8, sorted by title), so it ships as-is with the ambiguity named in
-`parentNote` for Chris to settle; retitling keeps the id, per the standing rule.
+no unit number visible, so its number was inferred. It shipped as-is with the
+ambiguity named in `parentNote` for Chris to settle — **and he settled it in
+v179 below: enzymes were taught as part of Unit 2.** Asking beat guessing here
+by one unit either way; the guess in the `parentNote` (that the *inferred*
+number was the one more likely wrong) happened to be right, which is not the
+same as knowing.
 
 `tools/test_cells.js`: the unit loads with `classId:'bio'` (the v136 orphan
 trap), the seven exact filenames, alt text and credit on each, the diagram

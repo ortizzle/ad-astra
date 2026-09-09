@@ -4,12 +4,12 @@
   "unit-bio-u3": {
    "id": "unit-bio-u3",
    "type": "unit",
-   "updatedAt": 1788819326982,
-   "libv": 2,
+   "updatedAt": 1788944513726,
+   "libv": 3,
    "classId": "bio",
    "quarter": 1,
    "status": "draft",
-   "title": "Biology 8 · Unit 3: Enzymes",
+   "title": "Biology 8 · Unit 2: Enzymes",
    "srcName": "Enzyme Review packet (photographed pages)",
    "source": "Biology 8, the completed Enzyme Review worksheet",
    "summary": {
@@ -43,7 +43,7 @@
     }
    ],
    "parentNote": {
-    "text": "Built from the completed Enzyme Review packet in her binder (photographed, not from Drive). Two of her own written answers are worth a look together with her, independent of this unit: question 13 asks what internal body condition \"Z\" could represent on a generic rise-then-fall enzyme-activity graph, and her answers were \"Substrate\" and \"active site\" — but the very next question on the same page (15) correctly names the two real answers as pH and temperature, and a graph shaped like that (up, peak, back down) is the classic pH or temperature curve, not a substrate-concentration curve (which typically rises then levels off, not falls) or \"active site\" (a fixed structural feature, not a condition that varies along an axis). And question 14 (\"what kind of organic molecule is an enzyme?\") was answered \"catalyst\" — catalyst is the right word for what an enzyme DOES, but the organic molecule category it belongs to is protein; this unit's cards separate those two on purpose. Every other answer on the packet was correct. Every fresh scenario and every pH/temperature value below is new — none reuse pepsin's pH 3, trypsin's pH 8.5, or the packet's own molecule-shape diagrams, so she can't answer from memory of the worksheet; pepsin and trypsin's real values are only used inside explanations, as reference facts, never as the graded question itself.",
+    "text": "Built from the completed Enzyme Review packet in her binder (photographed, not from Drive). Two of her own written answers are worth a look together with her, independent of this unit: question 13 asks what internal body condition \"Z\" could represent on a generic rise-then-fall enzyme-activity graph, and her answers were \"Substrate\" and \"active site\" — but the very next question on the same page (15) correctly names the two real answers as pH and temperature, and a graph shaped like that (up, peak, back down) is the classic pH or temperature curve, not a substrate-concentration curve (which typically rises then levels off, not falls) or \"active site\" (a fixed structural feature, not a condition that varies along an axis). And question 14 (\"what kind of organic molecule is an enzyme?\") was answered \"catalyst\" — catalyst is the right word for what an enzyme DOES, but the organic molecule category it belongs to is protein; this unit's cards separate those two on purpose. Every other answer on the packet was correct. Every fresh scenario and every pH/temperature value below is new — none reuse pepsin's pH 3, trypsin's pH 8.5, or the packet's own molecule-shape diagrams, so she can't answer from memory of the worksheet; pepsin and trypsin's real values are only used inside explanations, as reference facts, never as the graded question itself.\n\nRENUMBERED (2026-09): this unit shipped as \"Unit 3\" because the packet it was built from is a photograph with no unit number on it, so the number was inferred. Chris confirmed enzymes were taught as part of Unit 2, so it is retitled onto Unit 2 alongside Biomolecules — which is also where it belongs on the science: enzymes ARE proteins. The unit keeps its id, so anything already attached to it — her question tallies, and any Growth Zone misses — stays attached. Only the name on the shelf moved.",
     "from": "added"
    },
    "nextUp": {

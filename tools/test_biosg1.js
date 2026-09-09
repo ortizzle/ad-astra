@@ -13,7 +13,7 @@ const PORT = process.argv[2] || 8115;
   const ck = (n, ok, got) => out.push({n, ok: !!ok, got});
 
   const seed = await p.evaluate(async () => {
-    for (const f of ['bio-unit-1','bio-unit-2','bio-unit-3-enzymes','bio-quiz1-review','bio-sg-test1']) {
+    for (const f of ['bio-unit-1','bio-unit-2','bio-unit-2b-enzymes','bio-quiz1-review','bio-sg-test1']) {
       const res = await fetch(`./content/${f}.json`, {cache:'no-store'});
       const j = await res.json();
       const u = Object.values(j.records)[0];

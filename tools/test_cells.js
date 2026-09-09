@@ -24,8 +24,12 @@ const [PORT, TAG] = process.argv.slice(2);
              cards:u.cards.length, qs:u.questions.length,
              withImg:u.cards.filter(c=>c.imgUrl).length };
   });
+  /* libv is asserted as PRESENT, not pinned to a value — every content edit
+     bumps it (the parentNote was rewritten in v179 when the Unit 3 numbering
+     was settled), and a test that freezes the number just fails on the next
+     honest fix. */
   ck('the unit loads from the library file and carries libv',
-     seeded.id==='unit-bio-u3c' && seeded.libv===1, seeded);
+     seeded.id==='unit-bio-u3c' && seeded.libv>=1, seeded);
   ck('classId is "bio" — the real id, not "biology" (v136 orphan trap)',
      seeded.classId==='bio', seeded.classId);
   ck('27 cards, 18 questions, 7 of them carrying a diagram',

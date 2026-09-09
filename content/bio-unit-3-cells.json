@@ -4,7 +4,7 @@
   "unit-bio-u3c": {
    "id": "unit-bio-u3c",
    "type": "unit",
-   "updatedAt": 1788907046215,
+   "updatedAt": 1788944528268,
    "classId": "bio",
    "quarter": 1,
    "status": "draft",
@@ -46,7 +46,7 @@
     }
    ],
    "parentNote": {
-    "text": "Built from the teacher's own Unit 3 deck (G8_Cells_VA.pdf), which is thorough — this unit follows it closely rather than adding outside material.\n\nTWO THINGS TO KNOW. First, the diagrams: seven cards carry a labelled cell diagram (prokaryote, animal cell, plant cell, nucleus, mitochondrion, chloroplast, and the endomembrane system). They are hotlinked from Wikimedia Commons and every one is public domain — mostly the LadyofHats scientific illustrations that Wikipedia's own cell articles use. They are NOT the teacher's slide images, which are likely textbook figures and are not ours to republish. Each filename was verified to exist and verified public domain before it shipped. They need a network connection to load; everything else in the unit works offline as usual.\n\nSecond, and worth a look: this unit is numbered Unit 3 because both the Drive folder and the deck's own title slide say Unit 3, but the Enzymes unit already in her app is ALSO titled Unit 3 — that one came from a photographed packet with no unit number visible, so its number was inferred and is the one more likely to be wrong (enzymes are proteins, which would sit with Unit 2 Biomolecules). Nothing breaks either way; both shelve under Biology 8. Worth confirming with her which unit the enzymes packet actually belongs to, and it can be retitled in place if it needs to move.\n\nThe questions deliberately do not ask her to name a structure from a diagram. Every diagram here is fully labelled, so the answer would be printed on the image — the picture is there to teach on the cards, and the questions test reasoning instead.",
+    "text": "Built from the teacher's own Unit 3 deck (G8_Cells_VA.pdf), which is thorough — this unit follows it closely rather than adding outside material.\n\nTWO THINGS TO KNOW. First, the diagrams: seven cards carry a labelled cell diagram (prokaryote, animal cell, plant cell, nucleus, mitochondrion, chloroplast, and the endomembrane system). They are hotlinked from Wikimedia Commons and every one is public domain — mostly the LadyofHats scientific illustrations that Wikipedia's own cell articles use. They are NOT the teacher's slide images, which are likely textbook figures and are not ours to republish. Each filename was verified to exist and verified public domain before it shipped. They need a network connection to load; everything else in the unit works offline as usual.\n\nSecond: this unit is numbered Unit 3 from both the Drive folder and the deck's own title slide. The Enzymes unit briefly carried the same number — its packet is a photograph with no unit number on it, so the number had been inferred — and Chris confirmed enzymes were taught as part of Unit 2, so that one has been retitled onto Unit 2 alongside Biomolecules. Unit 3 is this one.\n\nThe questions deliberately do not ask her to name a structure from a diagram. Every diagram here is fully labelled, so the answer would be printed on the image — the picture is there to teach on the cards, and the questions test reasoning instead.",
     "from": "added"
    },
    "nextUp": {
@@ -725,7 +725,7 @@
      }
     }
    ],
-   "libv": 1
+   "libv": 2
   }
  }
 }

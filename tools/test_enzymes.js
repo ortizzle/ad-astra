@@ -1,4 +1,4 @@
-/* Smoke test for Biology 8 · Unit 3: Enzymes (content/bio-unit-3-enzymes.json):
+/* Smoke test for Biology 8 · Unit 2: Enzymes (content/bio-unit-2b-enzymes.json):
    loads, shelves alongside the existing Biology 8 units, flashcards and a
    full quiz round complete cleanly, and every question is structurally
    sound against the live schema. */
@@ -15,7 +15,7 @@ const PORT = process.argv[2] || 8109;
 
   const seed = await p.evaluate(async () => {
     const ids = [];
-    for (const f of ['bio-unit-1','bio-unit-1b','bio-unit-2','bio-unit-3-enzymes']) {
+    for (const f of ['bio-unit-1','bio-unit-1b','bio-unit-2','bio-unit-2b-enzymes']) {
       const res = await fetch(`./content/${f}.json`, {cache:'no-store'});
       const j = await res.json();
       const u = Object.values(j.records)[0];
@@ -48,6 +48,26 @@ const PORT = process.argv[2] || 8109;
     return spines;
   });
   ck('Biology 8 shelves as one spine with all 4 parts', shelf.some(t => /^Biology 8/.test(t)), shelf);
+
+  /* Renumbered onto Unit 2 (v179): Chris confirmed enzymes were taught as part
+     of Unit 2, so the inferred "Unit 3" is gone. Two things are pinned here.
+     The id is UNCHANGED — retitle, never re-mint — so anything already attached
+     to the unit stays attached; and the title has to sort DIRECTLY AFTER
+     Biomolecules. The shelf comparator is title-only, and a space beats a
+     colon, so the "Unit N Part 2:" form the Unit 1 pair uses sorts BEFORE its
+     own Unit N — which is why this one is not named that way. */
+  const order = await p.evaluate(() => {
+    const sh = shelvesFor('bio').shelves.find(s => /^Biology 8/.test(s.name));
+    const titles = sh.lessons.map(u => u.title);
+    const u = DATA.records['unit-bio-u3'];
+    return { titles, title: u.title, i: titles.indexOf(u.title),
+             bio: titles.indexOf('Biology 8 · Unit 2: Biomolecules'),
+             stillU3: /Unit 3/.test(u.title) };
+  });
+  ck('the enzymes unit keeps its id and is retitled onto Unit 2, never Unit 3',
+     order.title === 'Biology 8 · Unit 2: Enzymes' && !order.stillU3, order);
+  ck('it sits DIRECTLY after Unit 2: Biomolecules on the shelf, not ahead of it',
+     order.bio >= 0 && order.i === order.bio + 1, order.titles);
 
   const cardsWalk = await p.evaluate(async () => {
     go('cards', {unitId:'unit-bio-u3', classId:'bio'});
