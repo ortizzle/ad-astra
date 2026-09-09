@@ -670,11 +670,19 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .vidwrap{position:relative;width:100%;padding-top:56.25%;margin-top:14px;
   border-radius:12px;overflow:hidden;background:#000}
 .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-/* A fingerspelling handshape reference. White plate so the dark line art
-   stays legible over any subject colour or theme. */
-.signimg{align-self:center;width:150px;max-width:60%;margin-top:14px;padding:10px;
+/* Reference art on a card face — a fingerspelling handshape, a labelled cell
+   diagram. White plate so dark line art stays legible over any subject colour
+   or theme, in both themes, exactly like the atlas page and the cardstock:
+   a printed figure does not change colour with dark mode.
+   `.wide` is for a labelled diagram, where the labels are the whole point and
+   a 150px plate would render them unreadable. */
+.cardimg{align-self:center;width:150px;max-width:60%;margin-top:14px;padding:10px;
   background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
-.signimg img{display:block;width:100%;height:auto}
+.cardimg.wide{width:100%;max-width:100%;padding:12px}
+.cardimg img{display:block;width:100%;height:auto}
+/* Fixed dark ink: the credit sits ON the white plate, not on the card, so it
+   must not follow the theme's text colour. */
+.cardimg .imgcredit{margin-top:7px;font-size:9.5px;line-height:1.35;color:#5c6660;text-align:center}
 .face .tap{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
 .face.subj .tap{color:rgba(255,255,255,.6)}
 .face.subj .hint{color:#fff;opacity:.92}
@@ -1573,7 +1581,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v175 · the explain card owns its spacing';
+const APP_VERSION = 'v176 · cells, with diagrams';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3209,6 +3217,7 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/alg-topic2-04.json', 'content/alg-topic2-05.json', 'content/alg-topic2-06.json',
   'content/alg-topic2-07.json', 'content/sg-test2.json', 'content/phys-kinematics-equations.json',
   'content/phys-ramp-lab.json', 'content/bio-quiz1-review.json', 'content/bio-unit-3-enzymes.json',
+  'content/bio-unit-3-cells.json',
   'content/bio-sg-test1.json', 'content/phys-ch3-describing-motion.json'];
 
 /* ---------- The unit library ----------
@@ -4339,19 +4348,29 @@ function watchNode(card, linkClass){
   }
   return null;
 }
-/* A static handshape (fingerspelling) is the one ASL case an IMAGE can teach
-   safely, unlike a moving sign — no motion to get wrong, so unlike watchUrl
-   this needs no video and no click-through. `imgUrl` is a direct image
-   source, hand-verified against a real reference before it ships (same bar
-   as watchUrl/sp — never guessed). A white plate under it holds the
-   dark-stroke reference art legible no matter which subject colour paints
-   the card around it. */
-function signImgNode(card){
+/* Reference art on a card. Two content kinds use it so far, and both are cases
+   where a STATIC image teaches honestly: a fingerspelling handshape (no motion
+   to misrepresent, unlike a moving sign — which is why those still only link
+   out) and a labelled cell diagram. `imgUrl` is a direct image source,
+   hand-verified against a real reference before it ships (same bar as
+   watchUrl/sp — never guessed, never pattern-matched from the term).
+
+   `imgAlt` carries the real description; the fallback is the ASL alphabet's
+   phrasing, which shipped before this field existed and carries none of its
+   own. `imgWide` opts a labelled diagram out of the 150px handshape plate —
+   its labels are the content, and they have to be readable. */
+function cardImgNode(card){
   if(!card.imgUrl) return null;
-  const wrap = el('div','signimg');
+  const wrap = el('div','cardimg' + (card.imgWide ? ' wide' : ''));
   const img = document.createElement('img');
-  img.src = card.imgUrl; img.alt = 'The handshape for ' + card.term; img.loading = 'lazy';
+  img.src = card.imgUrl;
+  img.alt = card.imgAlt || ('The handshape for ' + card.term);
+  img.loading = 'lazy';
   wrap.appendChild(img);
+  if(card.imgCredit){
+    const cr = el('div','imgcredit', card.imgCredit);
+    wrap.appendChild(cr);
+  }
   return wrap;
 }
 /* **bold** in definitions and explanations — built with elements, never
@@ -6057,7 +6076,7 @@ SCREENS.cards = function(root){
   const back = paint(el('div','face back'), cls);
   back.appendChild(defEl(card.def));
   const bg = graphNode(card.graph); if(bg) back.appendChild(bg);
-  const ig = signImgNode(card); if(ig) back.appendChild(ig);
+  const ig = cardImgNode(card); if(ig) back.appendChild(ig);
   if(card.eq) back.appendChild(el('div','eq',card.eq));
   if(card.hint) back.appendChild(el('div','hint','💡 '+card.hint));
   /* Some cards (ASL signs) can only truly be taught by video — the card
@@ -11357,7 +11376,7 @@ SCREENS.reviewunit = function(root){
       d.appendChild(el('div','q',card.term));
       const cg = graphNode(card.graph); if(cg) d.appendChild(cg);
       d.appendChild(richify(el('div','o flat'), card.def));
-      const ig = signImgNode(card); if(ig) d.appendChild(ig);
+      const ig = cardImgNode(card); if(ig) d.appendChild(ig);
       if(card.hint) d.appendChild(el('div','why','Hint: '+card.hint));
       /* The one place in the review queue a parent needs to see exactly what
          she'll be shown — the embed if there is one, else the real link. */

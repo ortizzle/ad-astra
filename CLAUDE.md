@@ -910,6 +910,79 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Unit 3: Cells, with real diagrams (v176, THIS APP ONLY)
+
+Chris updated her Biology Drive folder and asked for a unit on cells "and
+include images of cells, either from that material or other accurate and
+complete sources." `bio-unit-3-cells.json` (`unit-bio-u3c`) is built from
+**`G8_Cells_VA.pdf`** — the teacher's own Unit 3 lecture deck, uploaded
+2026-09-09, with a clean text layer that read straight through. 27 cards, 18
+questions (7 / 6 / 5 across the levels), shelving onto the existing Biology 8
+spine. The other file in the folder is a page of video links with no content
+to build from, per the video rule.
+
+**Seven cards carry a labelled diagram** — prokaryote, animal cell, plant
+cell, nucleus, mitochondrion, chloroplast, and the endomembrane system.
+
+- **They are Wikimedia Commons, not the teacher's slides.** The deck's own
+  figures are almost certainly textbook art; republishing them from a public
+  repo is not ours to do. Commons public-domain reference art is the opposite
+  case — reuse is the entire point of the licence — which is exactly the
+  distinction the ASL alphabet already draws (v130: Commons images embed,
+  the commercial video dictionary only links out).
+- **Every filename was verified to exist and verified public domain by search
+  before it shipped**, the same bar the 26 handshapes were held to. This was
+  not ceremony: three of the seven punctuate differently
+  (`Animal_cell_structure_en.svg`, `Plant_cell_structure-en.svg`,
+  `Average_prokaryote_cell-_en.svg`), and a pattern-guess would have got two
+  of them wrong. Mostly the LadyofHats illustrations Wikipedia's own cell
+  articles use.
+- **Commons is egress-blocked from this environment**, so the URLs could not
+  be fetched to confirm — only searched. The hotlink mechanism itself is
+  already proven in production by the alphabet's 26 images, and `test_cells.js`
+  pins the exact filenames so a later edit cannot quietly alter one.
+
+> ⚠️ **A fully-labelled diagram can never be a question's answer key.** Every
+> label is printed on the picture, so "which organelle is shown here?" hands
+> over the answer — the visual form of the glossed-stem bug. The diagrams
+> teach on the CARDS; the questions stay text and test reasoning (predict what
+> a gland cell is rich in, predict what fails when the Golgi is blocked, work
+> the surface-area-to-volume ratio). `test_cells.js` asserts no question
+> carries an image or points at one.
+
+**`signImgNode()` became `cardImgNode()`** (with `.signimg` → `.cardimg`),
+since it is no longer sign-specific. Three additive fields: `imgAlt` (real
+alt text — the ASL default phrasing stays as the fallback, because those cards
+predate the field and re-shipping them would cost a re-approval for nothing),
+`imgWide` (a labelled diagram opts out of the 150px handshape plate, since its
+labels ARE the content), and `imgCredit` (a fixed-dark credit line on the white
+plate — it sits on the plate, not the card, so it must not follow the theme).
+`unit_common.card()` gained matching optional parameters. Wayfinder has no such
+helper, so this stays Ad Astra only.
+
+> ⚠️ **The flashcard deck is SHUFFLED.** The card on screen is
+> `u.cards[cardState.order[cardState.i]]` — setting `cardState.i` to a card's
+> own index in a test shows a different card entirely, and the assertion fails
+> pointing at the right term with the wrong card underneath it. Seek the
+> POSITION in `order[]` instead. Cost twenty minutes here.
+
+**Flagged rather than guessed: two units now both claim Unit 3.** This one is
+numbered from both the Drive folder name and the deck's own title slide. The
+existing Enzymes unit (`unit-bio-u3`) was built from a photographed packet with
+no unit number visible, so its number was inferred — and enzymes are proteins,
+which would sit with Unit 2 Biomolecules. Nothing breaks (both shelve under
+Biology 8, sorted by title), so it ships as-is with the ambiguity named in
+`parentNote` for Chris to settle; retitling keeps the id, per the standing rule.
+
+`tools/test_cells.js`: the unit loads with `classId:'bio'` (the v136 orphan
+trap), the seven exact filenames, alt text and credit on each, the diagram
+rendering on the card back at the wide plate on fixed white, the ASL fallback
+still narrow and unlabelled, no question pointing at a diagram, the Biology 8
+spine, a full quiz round, and the secretory pathway shipping as a correctly
+ordered `kind:'order'` question. `check_content.py` reports no problems; the
+six length-bias warnings are all short-option artifacts (21 characters against
+14) and were left rather than distorting real terminology to satisfy a ratio.
+
 ### Growth and Flag share a row, and a real 0px gap fixed (v174–v175 / Wayfinder v155–v156, both apps)
 
 Chris, looking at an answered question: "can we have growth and flag share a

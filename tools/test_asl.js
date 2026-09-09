@@ -131,7 +131,7 @@ const PORT = process.argv[2] || 8099;
     cardState.i = cardState.order.indexOf(bIdx);
     render();
     document.querySelector('.flip').click();
-    const img = document.querySelector('.signimg img');
+    const img = document.querySelector('.cardimg img');
     return img ? {src: img.src, alt: img.alt} : null;
   });
   ck('Letter card shows its reference image', !!alphaCard, alphaCard);

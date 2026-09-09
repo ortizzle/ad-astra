@@ -3,10 +3,20 @@ import json, io, time, re
 
 POSREF = re.compile(r'\b(all|none) of the above\b|\boptions? [a-d1-4]\b|\b(first|second|third|last) (option|choice)\b', re.I)
 
-def card(C, term, d, hint=None, eq=None, frm='source'):
+def card(C, term, d, hint=None, eq=None, frm='source', img=None, imgAlt=None,
+         imgWide=False, imgCredit=None):
+    """`img` is a direct image URL, hand-verified before it ships — never
+    guessed from the term. `imgAlt` describes it for a screen reader, and
+    `imgWide` opts a labelled diagram out of the narrow handshape plate.
+    All four are additive, so every existing builder is unaffected."""
     c = {'id': 'c%d' % len(C), 'term': term, 'def': d}
     if eq: c['eq'] = eq
     if hint: c['hint'] = hint
+    if img:
+        c['imgUrl'] = img
+        if imgAlt: c['imgAlt'] = imgAlt
+        if imgWide: c['imgWide'] = True
+        if imgCredit: c['imgCredit'] = imgCredit
     c['from'] = frm
     C.append(c)
 
