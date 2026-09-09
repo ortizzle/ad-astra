@@ -910,6 +910,66 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### The board waits for you (v177 / Wayfinder v157, both apps)
+
+Chris, 2026-09: *"river lost her jeopardy progress. can we save progress in
+case of hitting back by accident?"* Two separate bugs were losing a board,
+and **only the second one is about reloading** — the first is the one that
+actually cost her the game.
+
+**Both Junior Jeopardy doors called `buildLadder()` unconditionally.** That
+function MINTS a board; it does not open one. `SCREENS.ladder` has always
+reused a matching live `ladderState` (`if(!ladderState || unitId !== u.id
+…)`), so the screen itself would have resumed her game perfectly — but she
+never got back to the screen with the board intact, because the door
+re-dealt on the way in. Step out to Today by a nav tab or the back chip,
+tap "📺 Junior Jeopardy" again, and a fresh 3×3 board with different
+questions replaced the one she was four screens into. Nothing was written
+anywhere; the state was simply overwritten in memory.
+**`openLadder(u, cid)` is now the one way in** and only builds when there is
+nothing to return to.
+
+**And `ladderState` was memory-only**, so a reload, an app-kill or a long
+enough background lost the board outright even without the door bug. It now
+saves to `LADDER_KEY` — **device-local, never a record, one slot, day-scoped
+— exactly the parked-round save (`ROUND_KEY`) and for exactly its reasons.**
+A half-played board is a snapshot of one moment; syncing it would drop it
+onto her other device mid-game, which is worse than losing it. Starting a
+board in another subject overwrites the slot, same as a parked round.
+
+- **The questions ride along in the save rather than being re-dealt.**
+  `buildLadder`'s pick is random inside a tie (`jjOrder`'s `rnd`), so
+  rebuilding from the source unit would hand her a DIFFERENT board and
+  quietly call it the same one. `loadLadder()` restores `ladderUnit`
+  wholesale from the stored questions.
+- **Every stored question must still resolve to a live, approved question in
+  its own unit**, or the save is discarded — the same fingerprint discipline
+  `roundPrint()` applies to a parked round. A board dealt before its lesson
+  was edited, re-drafted or discarded would otherwise ask something her
+  qstats and misses can no longer be credited to.
+- **A finished board clears the slot.** `saveLadder()` calls `clearLadder()`
+  when every screen is played: the log is already written, `ladderLast()`
+  already reports it, and the next tap should deal a fresh board. The
+  in-memory `ladderState` survives, so the finish screen still renders.
+- **The door says the board is waiting** — "Still playing · 4 of 9 screens",
+  outranking the "Last played … pts" line, via `ladderPending()`, which peeks
+  at the live state or the save WITHOUT restoring either. Losing a game
+  silently is the actual complaint; a door that says the game is still there
+  is half the fix.
+- **Nothing was saved mid-question, deliberately.** `saveLadder()` runs at
+  the end of `buildLadder()` and after `ladderReturn()`'s `ladderLog()` — the
+  two moments the board itself changes. Dying mid-question restores the board
+  with that tile still open, which is exactly the documented v156 rule
+  ("leaving mid-question keeps the tile open") and what `answer()` already
+  guarantees, since it writes the qstat and miss the instant she picks.
+
+`tools/test_ladderresume.js` (same file, both apps) plays two screens, leaves
+by a nav tab, and re-enters **through the real door** rather than
+`go('ladder')` — the door is where the bug lived. **Verified by reverting the
+door to its old one-liner and watching it fail**: the resumed board came back
+with nine different question ids and every result null, which is precisely
+what River saw.
+
 ### Unit 3: Cells, with real diagrams (v176, THIS APP ONLY)
 
 Chris updated her Biology Drive folder and asked for a unit on cells "and

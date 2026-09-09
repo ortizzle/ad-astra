@@ -1581,7 +1581,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v176 · cells, with diagrams';
+const APP_VERSION = 'v177 · the board waits for you';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5311,12 +5311,13 @@ SCREENS.unit = function(root){
       const lb = el('button','btn btn-secondary');
       const stack = el('span','btnstack');
       stack.appendChild(el('span',null,'📺  Junior Jeopardy — a mix of everything'));
-      const last = ladderLast('__shuffle__', c.id);
-      if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
+      const pend = ladderPending('__shuffle__', c.id), last = ladderLast('__shuffle__', c.id);
+      if(pend) stack.appendChild(el('small',null,`Still playing · ${pend.played} of ${pend.total} screens`));
+      else if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
       lb.appendChild(stack);
       lb.addEventListener('click',()=>{
         const su = buildShuffleUnit(c.id);
-        if(su && buildLadder(su)) go('ladder',{unitId:'__shuffle__', classId:c.id});
+        if(su) openLadder(su, c.id);
       });
       root.appendChild(lb);
     }
@@ -5527,10 +5528,13 @@ function unitCard(u, c, label){
     const lb = el('button','btn btn-secondary');
     const stack = el('span','btnstack');
     stack.appendChild(el('span',null,'📺  Junior Jeopardy — play for points'));
-    const last = ladderLast(u.id, c.id);
-    if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
+    /* A board still in progress outranks what the last finished one scored:
+       the thing to say on the door is that the game is still there. */
+    const pend = ladderPending(u.id, c.id), last = ladderLast(u.id, c.id);
+    if(pend) stack.appendChild(el('small',null,`Still playing · ${pend.played} of ${pend.total} screens`));
+    else if(last) stack.appendChild(el('small',null,`Last played ${AZ.shortDate(last.date)} · ${(last.points||0).toLocaleString()} pts`));
     lb.appendChild(stack);
-    lb.addEventListener('click',()=>{ if(buildLadder(u)) go('ladder',{unitId:u.id, classId:c.id}); });
+    lb.addEventListener('click',()=>openLadder(u, c.id));
     card.appendChild(lb);
   }
   if(qp){
@@ -7343,7 +7347,77 @@ function buildLadder(u){
     dd: belowTop[Math.floor(Math.random()*belowTop.length)], ddSeen:false, wager:null,
     results: new Array(qs.length).fill(null),
     items:[], hintPenalty:0, logId:null, start:Date.now(), current:null };
+  saveLadder();
   return true;
+}
+/* A board survives leaving it (Chris, 2026-09: River lost a game to a stray
+   Back). Two things were losing one, and only the second is about reloading:
+
+   - Both Junior Jeopardy doors called buildLadder() unconditionally, which
+     MINTS a fresh board — so stepping out to Today and tapping the door
+     again wiped a game the screen itself would happily have resumed, since
+     SCREENS.ladder has always reused a matching live ladderState. openLadder()
+     is now the one way in, and it only deals when there is nothing to return
+     to.
+   - ladderState was memory-only, so a reload, an app-kill or a long enough
+     background lost the board outright.
+
+   Device-local, never a record, one slot — exactly the parked-round save
+   (ROUND_KEY) and for the same reasons: a half-played board is a snapshot of
+   one moment, and dropping it onto her other device mid-game would be worse
+   than losing it. Starting a board in another subject overwrites the slot,
+   same as a parked round. Day-scoped, because yesterday's board is not
+   today's game.
+
+   The questions ride along rather than being re-dealt from the source unit:
+   the deal is random inside a tie, so a rebuild would hand her a DIFFERENT
+   board and quietly call it the same one. */
+const LADDER_KEY = 'ladder';
+const clearLadder = () => Store.remove(LADDER_KEY);
+function saveLadder(){
+  if(!ladderState || !ladderUnit) return;
+  /* A finished board has nothing to come back to — its log is already
+     written, and the door should deal a fresh one next time. */
+  if(ladderState.results.every(x => x !== null)) return clearLadder();
+  Store.set(LADDER_KEY, { date:AZ.today(), s:ladderState,
+    qs:ladderUnit.questions, classId:ladderUnit.classId, title:ladderUnit.title });
+}
+/* The saved board, without restoring it — for the door's status line. */
+function ladderPending(unitId, classId){
+  let s = null;
+  if(ladderState && ladderState.unitId===unitId && ladderState.classId===classId) s = ladderState;
+  else {
+    const sv = Store.get(LADDER_KEY);
+    if(sv && sv.date===AZ.today() && sv.s && sv.s.unitId===unitId && sv.s.classId===classId) s = sv.s;
+  }
+  if(!s) return null;
+  const played = s.results.filter(x => x !== null).length;
+  return played && played < s.results.length ? { played, total:s.results.length } : null;
+}
+function loadLadder(u){
+  const sv = Store.get(LADDER_KEY);
+  if(!sv || !sv.s || !sv.qs) return false;
+  if(sv.date !== AZ.today()){ clearLadder(); return false; }
+  if(sv.s.unitId !== u.id || sv.s.classId !== u.classId) return false;
+  /* Every question still has to resolve to a live, approved question in its
+     own unit. A board dealt before a unit was edited, re-drafted or discarded
+     would otherwise ask something her qstats and misses can no longer be
+     credited to — the same reason a parked round is fingerprinted. */
+  const ok = sv.qs.every(q => {
+    const su = DATA.records[q._srcUnit];
+    return su && !su.deleted && su.status !== 'draft' && (su.questions||[]).some(x => x.id === q._srcQid);
+  });
+  if(!ok){ clearLadder(); return false; }
+  ladderState = sv.s;
+  ladderUnit = { id:'__ladder__', classId:sv.classId, title:sv.title || 'Junior Jeopardy',
+    book:true, cards:[], questions:sv.qs };
+  return true;
+}
+/* The one way onto the board. Resume a live board, else the saved one, else
+   deal — never re-deal over a game in progress. */
+function openLadder(u, cid){
+  const live = (ladderState && ladderState.unitId===u.id && ladderState.classId===u.classId) || loadLadder(u);
+  if(live || buildLadder(u)) go('ladder', {unitId:u.id, classId:cid});
 }
 /* Double Jeopardy's Daily Double is a real wager (Chris, 2026-09: "let's
    make double jeopardy a wager they can make ... show confidence in how
@@ -7364,6 +7438,7 @@ function ladderReturn(u, q){
   if(lastItem) ladderState.items.push(lastItem);
   quizState = null;
   ladderLog(u);
+  saveLadder();
   go('ladder', {unitId: ladderState.unitId, classId: ladderState.classId}, {back:true});
 }
 /* Right pays the tile, wrong costs it, the Daily Double doubles both ways —
@@ -7437,7 +7512,7 @@ SCREENS.ladder = function(root){
   const u = ctx.unitId==='__shuffle__' ? buildShuffleUnit(cid) : unitFor(ctx.unitId);
   if(!u || !u.questions.length) return go('unit',{classId:cid});
   if(!ladderState || ladderState.unitId !== u.id || ladderState.classId !== u.classId){
-    if(!buildLadder(u)) return go('unit',{classId:cid});
+    if(!loadLadder(u) && !buildLadder(u)) return go('unit',{classId:cid});
   }
   const s = ladderState;
   const played = s.results.filter(x=>x!==null).length;
