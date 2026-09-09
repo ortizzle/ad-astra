@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 __pycache__/
 *.pyc
+# Test screenshots land in the repo root when a probe is run from here — never ship them.
+/*.png
