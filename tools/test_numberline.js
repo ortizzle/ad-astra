@@ -43,7 +43,11 @@ const PORT = process.argv[2] || 8201;
   // Drag (set the value and fire input), miss on purpose, place.
   const miss = await p.evaluate((cid) => {
     const q = unitFor('unit-nl-test').questions[quizState.order[quizState.i]];
-    const L = q.line, wrong = L.ans + L.tol*3 <= L.hi ? L.ans + L.tol*3 : L.ans - L.tol*3;
+    /* Snap the target to the line's own step: the range control snaps her
+       value the same way, so 0.35 + 3×0.025 = 0.425 would otherwise be
+       recorded as 0.43 and compared against 0.425 — a flake, not a bug. */
+    const L = q.line, rawWrong = L.ans + L.tol*3 <= L.hi ? L.ans + L.tol*3 : L.ans - L.tol*3;
+    const wrong = +Number(rawWrong).toFixed(sliderDec(L));
     const inp = document.querySelector('.nline input[type=range]');
     inp.value = String(wrong); inp.dispatchEvent(new Event('input', {bubbles:true}));
     const readAfterDrag = document.querySelector('.nread').firstChild.nodeValue;

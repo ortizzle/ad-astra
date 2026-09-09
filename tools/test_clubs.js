@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
   const b = await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium'});
   const p = await b.newPage({viewport:{width:390,height:844}});
   const errs=[]; p.on('pageerror',e=>errs.push(String(e.message)));
-  await p.goto('http://localhost:8130/index.html',{waitUntil:'domcontentloaded'});
+  await p.goto('http://localhost:'+(process.argv[2]||'8130')+'/index.html',{waitUntil:'domcontentloaded'});
   await p.addScriptTag({path:__dirname+'/seed.js'}); await p.waitForTimeout(300);
   const out=[]; const ck=(n,ok,got)=>out.push({n,ok:!!ok,got});
 

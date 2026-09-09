@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
 (async () => {
   const b = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
   const p = await b.newPage({viewport:{width:390,height:844}});
-  await p.goto('http://localhost:8130/index.html',{waitUntil:'domcontentloaded'});
+  await p.goto('http://localhost:'+(process.argv[2]||'8130')+'/index.html',{waitUntil:'domcontentloaded'});
   await p.addScriptTag({path:__dirname+'/seed.js'}); await p.waitForTimeout(300);
   const r = await p.evaluate(()=>{
     AZ.today = ()=>'2026-08-17'; AZ.nowMinutes = ()=>9*60;

@@ -241,11 +241,11 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    the card's already-computed --pc-fg — the week card's lead rows wore the
    focus subject's colour no matter whose door they were. Where --pc is unset
    the mix is invalid, so every use site falls back with var(--pc-fg,var(--ac-fg)). */
-.card.subj-a,.row.subj-a,.lk,.tile,.plan,.subjline,.ledger-row.subj{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
+.card.subj-a,.row.subj-a,.lk,.tile,.plan,.subjline,.ledger-row.ofsubj{--pc-fg:color-mix(in srgb,var(--pc) 90%,#ffffff)}
 [data-theme="light"] .card.subj-a,[data-theme="light"] .row.subj-a,
 [data-theme="light"] .lk,
 [data-theme="light"] .tile,[data-theme="light"] .plan,[data-theme="light"] .subjline,
-[data-theme="light"] .ledger-row.subj{
+[data-theme="light"] .ledger-row.ofsubj{
   --pc-fg:color-mix(in srgb,var(--pc) 42%,#0b1b22)}
 .card.subj-a>.eyebrow{color:var(--pc-fg)}
 /* Runway rows only: every runway row IS the card's subject. The week card's
@@ -317,9 +317,13 @@ header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space
    the same rule the "lands today" row in Coming up follows. */
 .ledger-row.now{background:var(--ac-8);border-radius:9px}
 /* A study row wears its subject — the .subjline grammar carried to the one
-   list on Today that lacked it. Today's row keeps the accent: .now is later
+   list on Today that lacked it. The class is `ofsubj`, NOT `subj`: `.subj` is
+   the painted-tile treatment (white text, a dark bottom scrim via ::after),
+   and a plain ledger row wearing it rendered its subject name white on the
+   light card — invisible — from v108 until this was caught in a light-mode
+   screenshot. Dark mode masked it completely. Today's row keeps the accent: .now is later
    in this block, and today is a different axis from topic. */
-.ledger-row.subj .ledger-day{color:var(--pc-fg,var(--ac-fg))}
+.ledger-row.ofsubj .ledger-day{color:var(--pc-fg,var(--ac-fg))}
 .ledger-row.now .ledger-day{color:var(--ac-fg)}
 /* Where to actually study. Quiet on purpose: it is a reminder that the app is
    NOT the source, so it must not out-shout the work above it. */
@@ -1581,7 +1585,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v177 · the board waits for you';
+const APP_VERSION = 'v178 · the review pass';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3189,8 +3193,15 @@ const Sync = {
   async save(){
     if(sandboxOn()) throw new Error('SANDBOX');
     if(!this.configured()) throw new Error('NO_SYNC');
-    let merged = DATA;
-    try{ merged = this.merge(DATA, await this.pullRemote()); }catch(e){}
+    /* Fetch, merge, THEN write — and if the fetch fails, do not write at all.
+       This used to swallow a failed pull and PATCH the local copy over the
+       remote anyway, which is exactly the blind overwrite the merge exists
+       to prevent: a rate-limited GET, a flaky connection on the way in, or a
+       truncated-file raw fetch that failed would have let this device's copy
+       erase whatever the other device had written since. A failed save is
+       harmless — syncSoon retries on the next write, and the manual Push
+       says "Sync failed" — while a blind overwrite is silent data loss. */
+    const merged = this.merge(DATA, await this.pullRemote());
     const res = await fetch(`https://api.github.com/gists/${this.gistId}`,{
       method:'PATCH', headers:{...this.headers(),'Content-Type':'application/json'},
       body: JSON.stringify({files:{[this.filename]:{content:JSON.stringify(merged,null,2)}}}) });
@@ -4657,7 +4668,7 @@ SCREENS.today = function(root){
     const led = el('div','ledger');
     wk.plan.forEach(pn => {
       const r = el('div','ledger-row' + (pn.d.today ? ' now' : '') + (pn.kind==='test' ? ' test' : '')
-        + (pn.kind==='subject' && pn.cid && CLASS_BY_ID[pn.cid] ? ' subj' : ''));
+        + (pn.kind==='subject' && pn.cid && CLASS_BY_ID[pn.cid] ? ' ofsubj' : ''));
       if(pn.kind==='subject' && pn.cid && CLASS_BY_ID[pn.cid])
         r.style.setProperty('--pc', classColor(CLASS_BY_ID[pn.cid]));
       /* MON/TUE/WED, not the strip's single letters — T and T are the same

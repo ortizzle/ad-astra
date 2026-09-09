@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
   const b = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
   const p = await b.newPage({viewport:{width:390,height:844}});
   const errs=[]; p.on('pageerror',e=>errs.push(String(e.message)));
-  await p.goto('http://localhost:8131/index.html',{waitUntil:'domcontentloaded'});
+  await p.goto('http://localhost:'+(process.argv[2]||'8130')+'/index.html',{waitUntil:'domcontentloaded'});
   await p.addScriptTag({path:__dirname+'/seed.js'}); await p.waitForTimeout(300);
   await p.evaluate(async ()=>{ for(const path of CONTENT_LIBRARY){
     try{ const r=await fetch(path); const j=await r.json();

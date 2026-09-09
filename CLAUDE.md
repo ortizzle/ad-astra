@@ -910,6 +910,70 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### The review pass (v178 / Wayfinder v158, both apps)
+
+Chris: "let's run a full debug and app review." Every test in both repos
+(51 here, 42 in Wayfinder), every contrast probe, the content checker, a
+static sweep (parse, duplicate declarations, version lock-step, service-
+worker shell, `CONTENT_LIBRARY` vs `content/`, forbidden patterns), a
+runtime sweep that opens all 31 screens on a seeded app and collects thrown
+and console errors (zero in both), and a screenshot pass over the main
+tabs in both themes. Two real bugs, one flaky test, and some harness rot.
+
+**The week ledger's study rows were invisible in light mode — both apps,
+since v108 / v125.** A study row carried the class `subj` to wear its
+subject colour — but `.subj` is the painted-tile treatment: `color:#fff`
+and a dark bottom scrim drawn by `::after`. On the light card the subject
+name rendered white on near-white, under a grey band. Dark mode masked it
+completely (white on a dark scrim reads fine), which is why fifty versions
+of screenshots never showed it and the v108 measurement — which read the
+day label's colour, not the row's — passed. The modifier is **`ofsubj`**
+now, in the JS and all three CSS selectors, so it can never match the tile
+rules; `tools/test_ledger.js` (same file, both apps) measures the
+light-mode row itself: no `::after`, the name in the text token, both the
+name and the day label at 4.5:1+ against the card.
+
+> ⚠️ **Never reuse `subj` as a modifier on anything that is not a painted
+> tile.** `.subj`, `.subj::after` and `.subj > *` are bare class selectors
+> and apply to any element carrying the class, whatever else it is.
+> `subj-a`, `subjline`, `subjtag` and `subjdot` are all safe precisely
+> because they are different tokens.
+
+**`Sync.save()` could blind-overwrite the remote.** The pull was wrapped in
+a swallowing `try/catch`, so a failed GET — a rate limit, a flaky
+connection on the way in, a failed raw fetch of a truncated file — fell
+through to a PATCH of the LOCAL copy over the remote: exactly the overwrite
+the merge exists to prevent, and silent. It now propagates: a failed pull
+means no write. `syncSoon` already retries on the next write and the manual
+Push already says "Sync failed", so nothing user-facing changes except that
+the other device's work survives. `tools/test_syncsave.js` (same file, both
+apps) mocks `fetch`: a 403 on GET → `save()` throws and no PATCH is sent;
+a good GET → the newer remote record wins the merge and the PATCH follows.
+
+**`test_numberline.js` flaked one run in three.** It drags to
+`ans + 3×tol` = 0.425 on a line whose `step` is 0.01, so the control snaps
+her value to 0.43 and the assertion compared 0.43 against 0.425 — only
+when `pickRound` happened to serve that question first. The target is now
+snapped through the app's own `sliderDec()`. Test bug; the slider is fine.
+
+**Harness rot, cleaned up rather than worked around**: `tools/test_hours.js`
+in THIS repo was Wayfinder's schedule test (Mondays/Tuesdays/Thursdays
+hours) — it can only fail here and `test_hours_aa.js` is the real one, so
+it is gone. Five tests hardcoded `localhost:8130/8131` from an older
+harness and now take the port from `argv` like every other test.
+**Still stale and left alone, documented so nobody re-diagnoses them**:
+`test_runway.js` and `test_newsletter.js` (both apps) query a `.runway`
+class the brief rework removed and crash before their first assertion;
+`test_guide.js`'s resume check (`order[0]` on a round the v117 resume
+restores whole); `test_lib.js`, `test_redraw.js` and — in Wayfinder —
+`test_math_shelf.js` and `test_wf_math.js` are probes that print JSON with
+no pass/fail line. Everything else is green in both apps.
+
+**Raised, not acted on: `index.html` is ~11,900 lines in both apps**,
+against the standing "raise splitting at ~4,000" note in Architecture.
+It parses, loads and tests fine, and the single-file rule is Chris's;
+this is the flag the note asks for, not a change.
+
 ### The board waits for you (v177 / Wayfinder v157, both apps)
 
 Chris, 2026-09: *"river lost her jeopardy progress. can we save progress in

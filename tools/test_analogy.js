@@ -8,7 +8,7 @@ const { chromium } = require('playwright');
   page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message));
   page.on('console', m => { if (m.type()==='error') errors.push('CONSOLE: ' + m.text()); });
 
-  await page.goto('http://localhost:8130/index.html', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:'+(process.argv[2]||'8130')+'/index.html', { waitUntil: 'networkidle' });
 
   const out = await page.evaluate(async () => {
     const r = {};
