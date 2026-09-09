@@ -1,4 +1,4 @@
-/* Smoke test for Biology 8 · Unit 2: Enzymes (content/bio-unit-2b-enzymes.json):
+/* Smoke test for Biology 8 · Unit 2-2: Enzymes (content/bio-unit-2b-enzymes.json):
    loads, shelves alongside the existing Biology 8 units, flashcards and a
    full quiz round complete cleanly, and every question is structurally
    sound against the live schema. */
@@ -49,25 +49,42 @@ const PORT = process.argv[2] || 8109;
   });
   ck('Biology 8 shelves as one spine with all 4 parts', shelf.some(t => /^Biology 8/.test(t)), shelf);
 
-  /* Renumbered onto Unit 2 (v179): Chris confirmed enzymes were taught as part
-     of Unit 2, so the inferred "Unit 3" is gone. Two things are pinned here.
-     The id is UNCHANGED — retitle, never re-mint — so anything already attached
-     to the unit stays attached; and the title has to sort DIRECTLY AFTER
-     Biomolecules. The shelf comparator is title-only, and a space beats a
-     colon, so the "Unit N Part 2:" form the Unit 1 pair uses sorts BEFORE its
-     own Unit N — which is why this one is not named that way. */
+  /* Renumbered onto Unit 2 (v179), then numbered structurally (v180). Chris
+     confirmed enzymes were taught as part of Unit 2, so the inferred "Unit 3"
+     is gone; the id is UNCHANGED — retitle, never re-mint — so anything already
+     attached to the unit stays attached.
+
+     The shelf comparator is title-only (after `own` and `order`), so ORDER ON
+     THE SHELF IS A PROPERTY OF THE TITLES. Every Biology lesson therefore
+     carries `Unit N-M:`, the numbered form `numeric:true` sorts correctly.
+     The two forms it replaced both sort WRONG: "Unit N Part 2:" lands above
+     its own "Unit N:" (a space beats a colon), and a bare "Unit N:" would land
+     BELOW a later "Unit N-2:" (a hyphen also beats a colon). Neither is
+     hypothetical — the first shipped live on the Unit 1 pair for months.
+
+     So this asserts the whole shelf reads in teaching order, not just that one
+     unit sits after another: a pair-wise check is exactly what let the Unit 1
+     inversion survive. */
   const order = await p.evaluate(() => {
     const sh = shelvesFor('bio').shelves.find(s => /^Biology 8/.test(s.name));
-    const titles = sh.lessons.map(u => u.title);
     const u = DATA.records['unit-bio-u3'];
-    return { titles, title: u.title, i: titles.indexOf(u.title),
-             bio: titles.indexOf('Biology 8 · Unit 2: Biomolecules'),
-             stillU3: /Unit 3/.test(u.title) };
+    /* Lessons only — the guides carry order:1 and deliberately trail. */
+    const lessons = sh.lessons.filter(x => !x.order).map(x => x.title);
+    const nums = lessons.map(t => (t.match(/Unit (\d+)-(\d+):/) || []).slice(1).map(Number));
+    let ascending = true;
+    for (let i = 1; i < nums.length; i++) {
+      const a = nums[i-1], b = nums[i];
+      if (a.length !== 2 || b.length !== 2 || (b[0] < a[0]) || (b[0] === a[0] && b[1] <= a[1])) ascending = false;
+    }
+    return { lessons, title: u.title, stillU3: /Unit 3/.test(u.title), ascending,
+             allNumbered: nums.every(n => n.length === 2) };
   });
   ck('the enzymes unit keeps its id and is retitled onto Unit 2, never Unit 3',
-     order.title === 'Biology 8 · Unit 2: Enzymes' && !order.stillU3, order);
-  ck('it sits DIRECTLY after Unit 2: Biomolecules on the shelf, not ahead of it',
-     order.bio >= 0 && order.i === order.bio + 1, order.titles);
+     order.title === 'Biology 8 · Unit 2-2: Enzymes' && !order.stillU3, order);
+  ck('EVERY Biology lesson carries the numbered Unit N-M form — one bare title reopens the inversion',
+     order.allNumbered, order.lessons);
+  ck('the shelf reads in teaching order: unit then part, strictly ascending',
+     order.ascending, order.lessons);
 
   const cardsWalk = await p.evaluate(async () => {
     go('cards', {unitId:'unit-bio-u3', classId:'bio'});

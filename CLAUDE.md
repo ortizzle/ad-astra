@@ -551,7 +551,7 @@ ship for Sedona.
 > trusting it, and prefer a test that actually navigates to the subject
 > screen over one that only calls the unit's own functions directly.
 
-### Biology 8 · Unit 3: Enzymes (v137)
+### Biology 8 · Enzymes, shipped as "Unit 3" (v137 — renumbered in v179/v180)
 
 Built from four photographed pages of her completed "Enzyme Review" packet
 (not from Drive — Chris photographed the physical binder). Covers enzyme
@@ -910,6 +910,58 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### The Biology shelf, numbered (v180, THIS APP ONLY)
+
+Chris, on the v179 warning block's own proposal: *"let's do it. it makes sense
+for now. we may change this later since we're still learning the way the
+teacher organizes information."* So the numbered form River's maths shelves
+already prove is now on every Biology lesson, and the shelf's order is
+structural rather than lucky:
+
+| id | title |
+|---|---|
+| `unit-bio-u1` | `Biology 8 · Unit 1-1: Experimental Design` |
+| `unit-bio-u1b` | `Biology 8 · Unit 1-2: Data Analysis and Graphing` |
+| `unit-bio-u2` | `Biology 8 · Unit 2-1: Biomolecules` |
+| `unit-bio-u3` | `Biology 8 · Unit 2-2: Enzymes` |
+| `unit-bio-u3c` | `Biology 8 · Unit 3-1: Cells and Cell Structures` |
+
+The two `order:1` study guides (Test 1 Study Guide, Unit 1 Quiz Review) trail
+them unchanged — `order` is a whole-shelf bucket and that is exactly what it is
+for here.
+
+- **This fixes a live inversion, not a hypothetical one.** The Unit 1 pair has
+  read *Part 2, then Part 1* since the day it shipped — `"Unit 1 Part 2: Data
+  Analysis…"` sorts above `"Unit 1: Experimental Design"` because a space beats
+  a colon. v179 declined to add a second one; this removes the first.
+- **Every lesson had to be renumbered, not just the ambiguous ones.** Verified
+  live rather than assumed: a bare `"Unit 3: Cells…"` sorts BELOW a later
+  `"Unit 3-2: …"` (a hyphen beats a colon), so leaving any lesson on the bare
+  form just moves the inversion somewhere else. Mixing the two forms is the
+  bug; the form has to be uniform across the shelf. `numeric:true` handles the
+  far edge too — `Unit 10-1` correctly sorts after `Unit 3-2`.
+- **Retitled, never re-minted** — all five keep their ids, so her qstats and
+  any Growth Zone misses stay attached. Same rule `unit-sgt1`, `unit-a2r1` and
+  Wayfinder's `unit-m11` follow.
+- **The re-approval cost is the whole cost, and Chris took it knowingly.** A
+  title is a `unitDelta` meta field, so each of the five re-drafts once and the
+  queue labels them updates to units he already approved, not strangers. `libv`
+  bumped and `updatedAt` stamped three hours back on every file, per the
+  approval-race rule.
+- **The numbering is provisional and this file should say so**: it is our best
+  read of how the teacher groups the material (Unit 1 = experimental design and
+  graphing, Unit 2 = biomolecules and enzymes, Unit 3 = cells), settled by
+  Chris for enzymes and inferred for the rest from the Drive folder names and
+  the decks' own title slides. If the teacher's own numbering turns out to
+  differ, retitle again — the ids are what must not move.
+
+> `tools/test_enzymes.js` now asserts the WHOLE shelf ascends by unit then
+> part, not that Enzymes sits directly after Biomolecules. A pairwise check is
+> exactly what let the Unit 1 inversion live undetected through fifty
+> versions: it can only ever see the pair it was written about. It also
+> asserts every lesson carries the numbered form, since one bare title is all
+> it takes to reintroduce this.
+
 ### Enzymes is Unit 2 (v179, THIS APP ONLY)
 
 Chris, settling the v176 flag: *"enzymes was part of unit 2."* So the inferred
@@ -926,7 +978,12 @@ file by name except `CONTENT_LIBRARY` and two tests, all updated. The Cells
 `parentNote` lost the paragraph asking Chris to confirm this — a note that
 tells him to go settle something already settled is worse than no note.
 
-> ⚠️ **It is titled `Unit 2: Enzymes`, NOT `Unit 2 Part 2: Enzymes`, and the
+> ⚠️ **Superseded by v180 below — every Biology lesson now carries the
+> numbered form (`Unit 2-2: Enzymes`), which is the structural fix this block
+> raised and Chris then approved. The reasoning is kept because it is why the
+> numbering exists.**
+>
+> ⚠️ **It was titled `Unit 2: Enzymes`, NOT `Unit 2 Part 2: Enzymes`, and the
 > reason is a real ordering bug.** `shelvesFor()` sorts a book by title alone
 > (after `own` and `order`), and a space sorts before a colon — so
 > `"Unit N Part 2: …"` lands **above** its own `"Unit N: …"`. That inversion is
@@ -945,7 +1002,8 @@ tells him to go settle something already settled is worse than no note.
 > (`Topic 3 · 3-1 …`, `3-2 …`, which `numeric:true` orders correctly) — here
 > that would mean `Unit 2-1: Biomolecules` / `Unit 2-2: Enzymes` and the same
 > for Unit 1, at the cost of re-drafting three units Chris has already
-> approved. Not done unasked; raised instead. `tools/test_enzymes.js` pins the
+> approved. Not done unasked; raised instead — and Chris asked for it one
+> version later, so v180 below is that change. `tools/test_enzymes.js` pins the
 > id, the title and the position directly after Biomolecules, so the inversion
 > cannot come back silently on THIS pair.
 

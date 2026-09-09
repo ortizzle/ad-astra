@@ -1,4 +1,4 @@
-/* Biology 8 · Unit 3: Cells — the first unit whose CARDS carry labelled
+/* Biology 8 · Unit 3-1: Cells — the first unit whose CARDS carry labelled
    reference diagrams (v176). Covers the content, the generalized cardImgNode
    (imgAlt / imgWide / imgCredit, which the ASL alphabet predates), and the
    rule that matters most here: a fully-labelled diagram may never be the
