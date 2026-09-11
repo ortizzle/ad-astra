@@ -1485,8 +1485,25 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
   animation:glowfade 1.4s ease-out forwards}
 @keyframes glowfade{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
 .badges.pinned .bdg{transform:scale(1.06)}
-.trustrow{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:12px;cursor:pointer}
+/* A <label> inherits the global label rule (uppercase, letterspaced, 700) —
+   which is right for a field caption and wrong for a sentence beside a
+   checkbox. `.trustrow` never reset it, so the passcode modal's
+   trusted-device line has rendered in bold caps since v93 in both apps.
+   Reset the three properties that rule imposes; measured, not guessed. */
+.trustrow{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--muted);
+  margin-top:12px;cursor:pointer;text-transform:none;letter-spacing:normal;font-weight:400}
+.trustrow .small{font-size:12px;color:var(--faint);margin-top:2px}
+.trustrow > div > div:first-child{color:var(--text);font-weight:600}
 .trustrow input{width:18px;height:18px;margin-top:1px;accent-color:var(--ac)}
+/* The review queue's bulk-select row. The checkbox is its own 44px target
+   beside the card, never inside it — tapping the card must still open the
+   full read, which is the whole point of the queue. */
+.selbar{display:flex;gap:8px;align-items:center;margin-bottom:var(--gap)}
+.selbar .btn{flex:1;margin:0}
+.selrow{display:flex;gap:10px;align-items:stretch;margin-bottom:var(--gap)}
+.selrow .cardbtn{flex:1;margin:0}
+.selbox{width:24px;height:24px;min-width:24px;align-self:center;accent-color:var(--ac);
+  margin:0 0 0 10px;cursor:pointer}
 
 .sky-card{cursor:pointer}
 .skysvg{width:100%;height:auto;display:block;margin:6px 0 2px}
@@ -1585,7 +1602,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v181 · Kinematics 2';
+const APP_VERSION = 'v182 · approve in bulk';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2241,8 +2258,20 @@ const all = t => Object.values(DATA.records).filter(r=>r && !r.deleted && r.type
 const PROGRESS_TYPES = ['log','focus','miss','cleared','qstat','mood','ask','badge','affirm','selfcheck','teach','guidepass'];
 /* Student-facing everywhere. A unit without a status predates the review gate
    and is treated as already approved. */
+/* Approving and RELEASING are two different acts (v182 / Wayfinder v163).
+   A grown-up can read a whole topic in one sitting and still have it reach
+   her a lesson at a time: an approved unit may carry `releaseOn`, an ISO
+   date before which she cannot see it. Absent means live now, so every
+   record written before this is unaffected and no migration is needed.
+   `liveUnit()` is the ONE definition of "she can see this" — units() is the
+   main gate, and the three other places that tested status directly (the
+   parked-round door, a stored ladder question, fetchLibrary's approval set)
+   go through it too, or a held unit could be resumed into. */
+const heldBack = u => !!(u.releaseOn && u.releaseOn > AZ.today());
+const liveUnit = u => !!u && !u.deleted && u.status !== 'draft' && !heldBack(u);
+
 const units = cid => all('unit')
-  .filter(u => u.status !== 'draft')
+  .filter(liveUnit)
   .filter(u => !cid || u.classId===cid || u.classId==='__all__');
 
 /* ---------- The Bookshelf ----------
@@ -4831,7 +4860,7 @@ SCREENS.today = function(root){
      WITHOUT consuming the save; the quiz screen still owns the pickup. */
   const pk = Store.get(ROUND_KEY);
   const pkU = pk && pk.date === AZ.today() && realUnit(pk.unitId) ? unitFor(pk.unitId) : null;
-  const pkLive = !!(pkU && !pkU.deleted && pkU.status !== 'draft' && pkU.questions
+  const pkLive = !!(liveUnit(pkU) && pkU.questions
     && (pk.seen || []).length
     /* The save fires before Next advances, so an answered question still sits
        at pk.i — step past it the way the quiz's own resume does, or the door
@@ -7417,7 +7446,7 @@ function loadLadder(u){
      credited to — the same reason a parked round is fingerprinted. */
   const ok = sv.qs.every(q => {
     const su = DATA.records[q._srcUnit];
-    return su && !su.deleted && su.status !== 'draft' && (su.questions||[]).some(x => x.id === q._srcQid);
+    return liveUnit(su) && (su.questions||[]).some(x => x.id === q._srcQid);
   });
   if(!ok){ clearLadder(); return false; }
   ladderState = sv.s;
@@ -10560,9 +10589,16 @@ SCREENS.parent = function(root){
   root.appendChild(divider('Study material'));
   const mat = el('div','card');
   const approved = units().length;
+  const held = scheduled();
   mat.appendChild(el('p',null, approved
     ? `${approved} unit${approved===1?'':'s'} approved and in her app${pending.length?`, ${pending.length} waiting on you`:''}.`
     : 'No units approved yet. Generate one from class notes and read it here before it reaches her.'));
+  if(held.length){
+    const hb = el('button','btn btn-ghost btn-sm',
+      `📬  ${held.length} scheduled · next ${AZ.pretty(held[0].releaseOn)}`);
+    hb.addEventListener('click',()=>go('scheduled'));
+    mat.appendChild(hb);
+  }
   const withNotes = units().filter(x=>x.parentNote && x.parentNote.text)
     .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)).slice(0,3);
   if(withNotes.length){
@@ -11326,8 +11362,90 @@ function shotPicker(onAdd){
 /* ================= CONTENT REVIEW ================= */
 /* Anything generated lands as a draft. It reaches her only once a grown-up has
    read it — the model is good, but it is not the one who knows her class. */
+/* Sorted by subject then title, numeric-aware — the SAME order the shelf
+   uses. Insertion order (what all() returns) is arbitrary and shifts as
+   records are rewritten, which was fine while every approval was one tap
+   but is not fine now: a paced bulk release hands out dates in the order
+   shown, so an unsorted queue could release lesson 12 today and lesson 1
+   three weeks out. Caught by the test, not by reading it. */
 const drafts = () => all('unit').filter(u=>u.status==='draft')
+  .sort((a,b)=>{
+    const an = (CLASS_BY_ID[a.classId]||{}).name || '', bn = (CLASS_BY_ID[b.classId]||{}).name || '';
+    return an !== bn ? an.localeCompare(bn)
+      : (a.title||'').localeCompare(b.title||'', undefined, {numeric:true});
+  })
                      .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+
+/* Units approved but not yet visible to her, soonest first. */
+const scheduled = () => all('unit')
+  .filter(u => !u.deleted && u.status !== 'draft' && heldBack(u))
+  .sort((a,b)=> a.releaseOn < b.releaseOn ? -1 : a.releaseOn > b.releaseOn ? 1 : 0);
+
+/* The dates a bulk approval hands out. 'now' releases everything today;
+   'day' walks school days (weekends and CAL.closed skipped, because a
+   lesson-a-day pace is a lesson a SCHOOL day); 'week' steps seven days.
+   The FIRST unit always lands today whatever the pace — he is approving it
+   now, so holding the first one back would only be confusing. */
+function releaseDates(n, pace){
+  const out = []; let d = AZ.today();
+  const schoolDay = ds => AZ.weekday(ds)>=1 && AZ.weekday(ds)<=5 && !closedToday(ds);
+  for(let i=0;i<n;i++){
+    if(pace==='now'){ out.push(null); continue; }
+    out.push(d);
+    if(pace==='week') d = AZ.shift(d,7);
+    else { let g=0; do { d = AZ.shift(d,1); g++; } while(!schoolDay(d) && g<14); }
+  }
+  return out;
+}
+
+function bulkApprove(ids){
+  const pace = {v:'now'};
+  showModal({ title:`Approve ${ids.length} lesson${ids.length===1?'':'s'}`,
+    confirmText:'Approve', cancelText:'Cancel',
+    build:(box, close)=>{
+      box.appendChild(el('p',null,'Reading them is done. When should she actually see them?'));
+      const opts = [
+        ['now','All of them today','They appear in her app straight away.'],
+        ['day','One a school day','Starting today, skipping weekends and days off.'],
+        ['week','One a week','Starting today, then every seven days.']];
+      const preview = el('div','hintline');
+      const paint = () => {
+        const ds = releaseDates(ids.length, pace.v);
+        const last = ds[ds.length-1];
+        preview.textContent = pace.v==='now'
+          ? 'All ' + ids.length + ' land today.'
+          : 'The first lands today, the last on ' + AZ.pretty(last) + '.';
+      };
+      opts.forEach(([v,nm,sub])=>{
+        const row = el('label','trustrow');
+        const r = el('input'); r.type='radio'; r.name='pace'; r.checked = v===pace.v;
+        r.addEventListener('change',()=>{ pace.v=v; paint(); });
+        row.appendChild(r);
+        const tx = el('div');
+        tx.appendChild(el('div',null,nm));
+        tx.appendChild(el('div','small',sub));
+        row.appendChild(tx);
+        box.appendChild(row);
+      });
+      box.appendChild(preview); paint();
+      box._go = ()=>{
+        const ds = releaseDates(ids.length, pace.v);
+        let held = 0;
+        ids.forEach((id,i)=>{
+          const u = DATA.records[id];
+          if(!u || u.deleted) return;
+          const rec = {...u, status:'approved', approvedOn:AZ.today()};
+          delete rec.wasApproved; delete rec.chg;
+          if(ds[i]){ rec.releaseOn = ds[i]; if(heldBack(rec)) held++; }
+          else delete rec.releaseOn;
+          put(rec);
+        });
+        syncSoon(); close();
+        toast(held ? `Approved ${ids.length} · ${held} scheduled` : `Approved ${ids.length}`);
+        go('review');
+      };
+    }});
+}
 
 SCREENS.review = function(root){
   root.appendChild(headline('Waiting for review','Generated units stay here until you have read them. Nothing on this page has reached her yet.'));
@@ -11338,13 +11456,84 @@ SCREENS.review = function(root){
     e.appendChild(el('p',null,'Nothing waiting. New units land here the moment they are generated.'));
     root.appendChild(e);
   } else {
+    /* Session-scoped, never stored — a tick is not a decision until Approve. */
+    const sel = ctx._sel = ctx._sel || new Set();
+    ds.forEach(u=>{ if(!DATA.records[u.id]) sel.delete(u.id); });
+
+    const bar = el('div','selbar');
+    const all2 = el('button','btn btn-ghost btn-sm','');
+    const okb = el('button','btn btn-primary','');
+    const paint = ()=>{
+      all2.textContent = sel.size === ds.length ? 'Clear all' : `Select all ${ds.length}`;
+      okb.textContent = sel.size ? `Approve ${sel.size}` : 'Approve';
+      okb.disabled = !sel.size;
+    };
+    all2.addEventListener('click',()=>{
+      if(sel.size === ds.length) sel.clear(); else ds.forEach(u=>sel.add(u.id));
+      render();
+    });
+    okb.addEventListener('click',()=>{
+      /* Approve in the order shown, so a paced release follows the shelf. */
+      bulkApprove(ds.filter(u=>sel.has(u.id)).map(u=>u.id));
+    });
+    bar.appendChild(all2); bar.appendChild(okb);
+    root.appendChild(bar);
+
     ds.forEach(u=>{
       const c = CLASS_BY_ID[u.classId];
       const n = (k,w) => `${k} ${w}${k===1?'':'s'}`;
-      root.appendChild(cardButton(u.title,
+      const row = el('div','selrow');
+      const cb = el('input','selbox'); cb.type='checkbox'; cb.checked = sel.has(u.id);
+      cb.setAttribute('aria-label','Select '+u.title);
+      cb.addEventListener('change',()=>{ cb.checked ? sel.add(u.id) : sel.delete(u.id); paint(); });
+      row.appendChild(cb);
+      const card = cardButton(u.title,
         `${u.wasApproved?'🔁 Update to a unit you approved — the content changed, so it gets one more read. · ':''}${c?c.name+' · ':''}${n(u.cards.length,'card')} · ${n(u.questions.length,'question')}${u.source?' · '+u.source:''}`,
-        ()=>go('reviewunit',{unitId:u.id})));
+        ()=>{ ctx._sel = null; go('reviewunit',{unitId:u.id}); });
+      row.appendChild(card);
+      root.appendChild(row);
     });
+    paint();
+  }
+  const back = el('button','btn btn-ghost','← Back to the grown-up view');
+  back.addEventListener('click',()=>{ ctx._sel = null; go('parent'); });
+  root.appendChild(back);
+};
+
+SCREENS.scheduled = function(root){
+  root.appendChild(headline('Scheduled to appear',
+    'Approved, and waiting their turn. She cannot see these yet.'));
+  const sc = scheduled();
+  if(!sc.length){
+    const e = el('div','empty');
+    e.appendChild(el('span','ic','📬'));
+    e.appendChild(el('p',null,'Nothing held back. Everything you have approved is in her app.'));
+    root.appendChild(e);
+  } else {
+    sc.forEach(u=>{
+      const c = CLASS_BY_ID[u.classId];
+      const card = el('div','card');
+      const r = el('div','row');
+      const k = el('div','k');
+      k.appendChild(el('div',null,u.title));
+      k.appendChild(el('div','small', (c?c.name+' · ':'') + AZ.pretty(u.releaseOn)));
+      r.appendChild(k);
+      card.appendChild(r);
+      const b = el('button','btn btn-ghost btn-sm','Release it now');
+      b.addEventListener('click',()=>{
+        const rec = {...DATA.records[u.id]}; delete rec.releaseOn;
+        put(rec); syncSoon(); toast('In her app now'); render();
+      });
+      card.appendChild(b);
+      root.appendChild(card);
+    });
+    const allb = el('button','btn btn-secondary',`Release all ${sc.length} now`);
+    allb.addEventListener('click',()=>showModal({ title:'Release everything?',
+      message:`All ${sc.length} appear in her app straight away, rather than on their dates.`,
+      confirmText:'Release all', cancelText:'Cancel',
+      onConfirm:()=>{ sc.forEach(u=>{ const rec={...DATA.records[u.id]};
+        delete rec.releaseOn; put(rec); }); syncSoon(); toast('All released'); render(); } }));
+    root.appendChild(allb);
   }
   const back = el('button','btn btn-ghost','← Back to the grown-up view');
   back.addEventListener('click',()=>go('parent'));
@@ -11533,7 +11722,9 @@ SCREENS.reviewunit = function(root){
     if(!cards.length && !qs.length){ toast('Nothing left to approve'); return; }
     const rec = {...u, cards, questions:qs, title:ti.value.trim()||u.title,
          status:'approved', approvedOn:AZ.today()};
-    delete rec.wasApproved; delete rec.chg;
+    /* This button says "send it to her", so it always means now — a hold
+       left over from a bulk pass on an earlier version must not survive. */
+    delete rec.wasApproved; delete rec.chg; delete rec.releaseOn;
     put(rec);
     syncSoon();
     const dropped = cutC.size + cutQ.size;

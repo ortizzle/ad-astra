@@ -910,6 +910,78 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Approve in bulk, release on a schedule (v182 / Wayfinder v163, both apps)
+
+Chris: *"I made a change and just asked to approve 30 lessons — can we make
+it so these can be approved in bulk. there isn't much that I review. I just
+don't want all of the lessons to go live too far ahead of the lessons."*
+
+**Bulk approval alone would have made his second sentence worse**, which is
+why this is two features and not one. Thirty taps is the complaint; thirty
+lessons landing in her app at once is the thing he is protecting against by
+tapping thirty times. So **approving and RELEASING come apart**: he reads a
+whole topic in one sitting, she meets it a lesson at a time.
+
+**`releaseOn`** — an ISO date an approved unit may carry, before which she
+cannot see it. Absent means live now, so every record written before this is
+unaffected and **no migration is needed**.
+
+- **`liveUnit()` is the one definition of "she can see this."** `units()` was
+  already the single gate for her whole side (only two places in the app read
+  `all('unit')` at all — verified before building, not assumed), so the filter
+  goes in once. Three other places tested `status !== 'draft'` by hand and now
+  go through `liveUnit()` too — the parked-round resume door and a stored
+  Junior Jeopardy question, either of which could otherwise have resumed INTO
+  a held-back unit.
+- **The queue gets a checkbox per row and a select-all**, and the checkbox is
+  its own target BESIDE the card rather than inside it: tapping the card must
+  still open the full read, which is the whole reason the queue exists. The
+  selection is session-scoped (`ctx._sel`) and cleared on every exit — a tick
+  is not a decision until Approve.
+- **Three paces, chosen in one modal**: all today, one a school day, one a
+  week. School-day pacing walks weekends and `CAL.closed` (a lesson a day means
+  a lesson a SCHOOL day), and the modal previews the last date before he
+  commits. **The first unit always lands today whatever the pace** — he is
+  approving it now, and holding the first one back would only confuse.
+- **`SCREENS.scheduled`** lists what is held with its date, "Release it now"
+  per row and "Release all now" behind a confirm, reached from a line on the
+  parent view's Study material card ("📬 7 scheduled · next Friday, September
+  11"). Held units leave the review queue entirely — they are read — so this
+  is the only place they live, and it has to exist for the hold to be
+  reversible.
+- **The single-unit Approve button still means NOW** and deletes any
+  `releaseOn`. Its label is "Approve — send it to her"; a hold inherited from
+  a bulk pass on an earlier version must not survive a button that says that.
+
+> ⚠️ **`drafts()` returned insertion order, and a paced release made that a
+> real bug.** `all()` is `Object.values(DATA.records)` — arbitrary, and it
+> shifts as records are rewritten. Harmless while every approval was one tap;
+> not harmless now, because a paced release hands out dates **in the order
+> shown**. The first run scheduled lesson 1 for the 25th and lesson 2 for
+> today. `drafts()` now sorts by subject then title, numeric-aware — the same
+> sort the shelf uses — so the queue reads like the shelf and the release order
+> is correct by construction. Caught by the test, not by reading the code.
+
+> ⚠️ **A real pre-existing bug, found by screenshotting the new modal: the
+> global `label{}` rule is uppercase/letterspaced/700, and `.trustrow` never
+> reset it.** So the passcode modal's trusted-device line ("Stop asking on
+> this device") has rendered in **bold capitals since v93, in both apps** — it
+> just never got looked at, because nobody screenshots a passcode prompt.
+> Measured before and after (`text-transform: uppercase` → `none`) rather than
+> eyeballed. Fixing `.trustrow` fixes that line and the new radio rows
+> together; this is the `.erline`/`.brief-prose` specificity trap for the
+> third time, and the lesson repeats: **a `<label>` used as a sentence has to
+> opt out of the field-caption styling.**
+
+`tools/test_bulkapprove.js` (same file, both apps) seeds twelve drafts and
+walks it end to end: a checkbox per draft, Approve disabled until something is
+ticked, the queue in shelf order, tapping a card still opening the full read,
+select-all → one-a-school-day, only the FIRST going live with eleven held, the
+dates strictly ascending and never on a weekend or a day off, a held unit
+absent from the shelf / `units()` / a shuffle round, "Release it now" and
+"Release all now", the parent line, the default pace writing no hold at all,
+and a single-unit approve clearing an inherited one.
+
 ### Kinematics 2 — vectors, components and projectiles (v181)
 
 Chris: *"the folders are updated for sedona and river for new material to be
