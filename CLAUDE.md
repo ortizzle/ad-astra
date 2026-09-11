@@ -910,6 +910,76 @@ why this is a deliberate, narrow reversal of the v156 "points reset every
 play" rule. `tools/test_ladder.js` (same file, both apps) gained the three
 new assertions.
 
+### Kinematics 2 — vectors, components and projectiles (v181)
+
+Chris: *"the folders are updated for sedona and river for new material to be
+created."* Her Physics 8 folder had two new files — **"Kinematics 2
+Objectives.pdf"** (the teacher's own objective list) and
+**"Textbook 2D Kinematics.pdf"** (chapter 7). The objectives split cleanly in
+half, so the unit does too: `phys-k2-vectors.json` (`unit-phys-k2-vectors`,
+14 cards / 16 questions) and `phys-k2-projectiles.json`
+(`unit-phys-k2-projectiles`, 16 cards / 17 questions).
+
+**A new shelf, `Kinematics 2`, and both parts carry the numbered form.**
+Kinematics 1 already holds four parts and this is a new unit of study with its
+own objective sheet, not a fifth part of that one. The numbering is structural,
+straight from v180's Biology lesson: `"Projectile Motion"` title-sorts AHEAD of
+`"Vectors and Components"`, which is backwards for how the class meets them, so
+`2-1` / `2-2` fixes the order by construction rather than by luck. Kinematics 1
+keeps its unnumbered titles — **mixing the two forms inside ONE shelf is the
+bug; two shelves may differ.**
+
+- **Every number was computed with sympy inside the builder and asserted before
+  it could be written into a question**, g = 9.80 m/s² throughout (matching the
+  textbook and the existing Equations of Motion unit). This caught two real
+  slips at build time: 50 cos 28° is 44.1, not the 44.2 I had drafted, and the
+  landing speed off the 20 m cliff is 23.2 m/s, not 23.1. Neither would have
+  looked wrong on the page.
+- **None of the chapter's own worked examples is reused** — not the 15 m/s stone
+  off a 44 m cliff, not the 4.47 m/s ball at 66°, not the 27 m/s football. They
+  were read to calibrate difficulty and nothing else, per the standalone rule.
+- **The three errors that actually cost marks each get deliberate airtime**:
+  using the time to the TOP of the arc where the full hang time is needed (it
+  halves the range, and 20.1 m is offered as a real wrong option against the
+  correct 40.2 m); applying ½at² horizontally, where there is no acceleration
+  to put in it; and reading "vertical velocity is zero at the top" as "the
+  projectile stops at the top". 2-1's equivalents are the radian-mode
+  calculator (cos 60° = 0.5 is the one-second test, and a radian-mode answer is
+  a plausible number rather than an obviously wrong one) and an unknown side
+  sitting in a denominator, which needs dividing rather than multiplying.
+- **The 45° crossover is taught as a checking habit, not a fact** — above it the
+  vertical component wins, below it the horizontal — because it catches a
+  swapped sine and cosine without a calculator, which is the single commonest
+  error in the topic. One question is built entirely around using it that way.
+- **Ignoring air resistance is named as a simplification rather than a fact**,
+  true enough for a dense compact object and wildly untrue for a golf ball, so
+  the assumption is visible instead of hidden.
+
+> ⚠️ **`build()` in THIS repo never called `_balance()`, and the first unit
+> through it shipped all-answer-A.** v142 ported the function across from
+> Wayfinder and the note in this file says so — but only the definition
+> travelled, not the call, which Wayfinder's copy has always had. So the exact
+> v167 bug was still live in the builder, and `check_content.py`'s own skew
+> warning caught it the moment a new unit was built: 16 of 16 in slot A, on
+> both files. **Scanned the whole library before fixing: every shipped unit is
+> still fine**, because v167's rotation held and nothing else has been built
+> through `build()` since. The call is now in `build()` with a comment naming
+> what happened. Porting a function is not porting a feature — check the call
+> site too.
+
+`tools/builders/unit_common.py` also picked up Wayfinder's `REPO`-relative
+output path (it had a hardcoded `/home/user/<app>/` that silently writes
+nowhere useful on any other machine) and its `order_` parameter. Both additive.
+
+`check_content.py` caught one real standalone violation of mine as well — a stem
+opening "That same stone…", which restates all its own facts but still breaks the
+rule, and was reworded. `tools/test_k2.js` covers both units: the classId (the
+v136 orphan trap), the two-part shelf in teaching order with Kinematics 1
+untouched, answers spread across all four slots (the `_balance` bug, pinned so it
+cannot come back), no back-references and no positional references, a full round
+with the physics Sheet reachable from inside it, the flashcard deck, the
+`kind:'order'` ranking, and each named trap asserted by its teaching.
+
 ### The Biology shelf, numbered (v180, THIS APP ONLY)
 
 Chris, on the v179 warning block's own proposal: *"let's do it. it makes sense

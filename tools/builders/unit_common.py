@@ -1,5 +1,6 @@
 # Generic unit builder for either app (non-vocab units).
-import json, io, time, re
+import json, io, time, re, os
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 POSREF = re.compile(r'\b(all|none) of the above\b|\boptions? [a-d1-4]\b|\b(first|second|third|last) (option|choice)\b', re.I)
 
@@ -53,7 +54,7 @@ def _balance(Q):
             x['ans'] = want
 
 def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, nextUp,
-          path, srcName, source, offset_hours=4, round_=None):
+          path, srcName, source, offset_hours=4, round_=None, order_=None):
     errs = []
     for c in C:
         if not c['def'].startswith('**'): errs.append('%s: def not bold-first' % c['id'])
@@ -79,6 +80,11 @@ def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, 
         blob = ' '.join([x['q'], x['hint'], x['ex']['main'], x['ex']['tip']] + x['steps'] + x['opts'])
         if POSREF.search(blob): errs.append('%s: positional reference' % x['id'])
     assert not errs, errs
+    # v142 ported _balance() into this file but never called it here, so every
+    # unit built through build() in THIS repo kept shipping all-answer-A — the
+    # exact v167 bug, still live in the builder. Wayfinder's copy has always
+    # called it. Caught by check_content's own skew warning on first use.
+    _balance(Q)
     unit = {
         'id': uid, 'type': 'unit',
         'updatedAt': int(time.time()*1000) - int(offset_hours*3600*1000),
@@ -92,7 +98,11 @@ def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, 
         'cards': C, 'questions': Q,
     }
     if round_: unit['round'] = round_
-    io.open('/home/user/%s/%s' % (app, path), 'w', encoding='utf-8').write(
+    if order_: unit['order'] = order_
+    # REPO is this repo's root; a sibling app is next to it. The old absolute
+    # container path silently wrote nowhere useful on any other machine.
+    root = REPO if os.path.basename(REPO) == app else os.path.join(os.path.dirname(REPO), app)
+    io.open(os.path.join(root, path), 'w', encoding='utf-8').write(
         json.dumps({'v': 4, 'records': {uid: unit}}, ensure_ascii=False, indent=1))
     lv = {1:0,2:0,3:0}
     for x in Q: lv[x['lv']] += 1
