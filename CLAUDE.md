@@ -982,6 +982,59 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The test-correction session, and the History hours that were missing (v183)
+
+Chris forwarded a teacher's note about Sedona's US History Unit One exam,
+offering test corrections at student hours **Tuesday 3:40–4:30**. *"Let's make
+this an official part of her calendar for next week. And add it to Sedona's
+calendar and the family calendar."* (The note's specifics — her mark and the
+mark corrections earn — are deliberately not repeated here; see the rule below,
+which this paragraph broke on its first draft and which the sweep caught.)
+
+**The note contained two separate facts and they belong in different places.**
+
+- **`STUDENT_HOURS` had no `history` row at all** — the planner this file was
+  built from never listed one, and nobody noticed until a teacher's note
+  supplied the times. That is a standing, **class-wide** fact, so it goes in
+  code like every other row: Tuesdays, 3:40–4:30. Today's "Extra help today"
+  card now names History on a Tuesday, and `nextHoursBefore()` can offer it
+  ahead of a History test. This is the permanent half and it outlives next week.
+- **The dated appointment** is one `CAL.events` entry on 2026-09-15,
+  `kind:'note'`, `classId:'history'` (so the Coming up row wears History's gold
+  and taps through to the subject).
+
+> ⚠️ **Her mark is nowhere in either one, and that is the rule, not a
+> nicety.** This repo is public. The event names the appointment and the task
+> — "Bring your Unit 1 exam and work the corrections with your teacher" — and
+> never her mark or the threshold. It is the same line `TUTORING`
+> already draws: the commitment may live in code, the private detail behind it
+> may not. `tools/test_histcorr.js` asserts the absence directly, sweeping the
+> shipped event and hours data for a grade, a threshold or the word "score".
+>
+> The standing CLAUDE.md rule — *"Per-class tests stay as `assess` records —
+> those are hers, and only she and a parent know them"* — still holds for the
+> EXAM itself. The exam and its score are Chris's to enter in the parent view,
+> where they reach `gradesBySubject` and the study plan privately through the
+> Gist. Only the appointment is in code.
+
+**A real conflict turned up by reading her actual calendar rather than trusting
+the time on the note: Yellow Belt Tae Kwon Do starts 4:35 the same afternoon**,
+five minutes after corrections end. Flagged to Chris rather than silently
+booked over; the event says so on both calendars.
+
+Both Google Calendar events were created — hers and the family's. Worth knowing
+for next time: **the first attempt at hers was refused by the auto-mode
+classifier for "Excess Sensitive Detail"** (a minor's grade in a description).
+The fix was to strip the detail, which is what the guard is for — the family
+copy, written for the parents, keeps the teacher's own wording.
+
+> `tools/test_bulkapprove.js` (same file, both apps) had a **weekend time-bomb**:
+> it swept every paced release date for "is a school day", including `rel[0]`,
+> which is deliberately TODAY whatever the pace ("he is approving it now"). It
+> passed Monday to Friday and failed every Saturday and Sunday — found by
+> running it on a Sunday. It now exempts `rel[0]` and pins the rule instead of
+> the calendar, the same correction `test_suggest.js` needed in Wayfinder v160.
+
 ### Kinematics 2 — vectors, components and projectiles (v181)
 
 Chris: *"the folders are updated for sedona and river for new material to be

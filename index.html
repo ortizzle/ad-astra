@@ -1602,7 +1602,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v182 · approve in bulk';
+const APP_VERSION = 'v183 · history corrections';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1796,7 +1796,11 @@ const STUDENT_HOURS = [
   {ids:['english'], days:[2], label:'Tuesdays',             times:'3:45–4:15 pm'},
   /* English 8 also holds a morning slot before school (syllabus, 2026-08). */
   {ids:['english'], days:[3], label:'Wednesdays',           times:'7:45–8:15 am'},
-  {ids:['latin'],   days:[2], label:'Tuesdays',             times:'3:45–4:45 pm'}
+  {ids:['latin'],   days:[2], label:'Tuesdays',             times:'3:45–4:45 pm'},
+  /* History 8's slot was never in the planner this file was built from; the
+     teacher's own note (2026-09) supplies it. Class-wide, like every row here
+     — a student's own marks never belong in this public file. */
+  {ids:['history'], days:[2], label:'Tuesdays',           times:'3:40–4:30 pm'}
 ];
 /* A subject may hold more than one slot a week, so this returns ALL of them —
    English 8 has a Tuesday afternoon and a Wednesday morning, and a .find()
@@ -1977,6 +1981,8 @@ const CAL = {
     {start:'2026-08-10', end:'2026-08-11', name:'JH girls volleyball tryouts', icon:'🏐', kind:'note',
      note:'Grades 6–8, after school in the gym, 4:00–6:00. Physical and waiver due before tryouts.'},
     {start:'2026-09-03', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
+    {start:'2026-09-15', name:'History test corrections', icon:'✍️', kind:'note', classId:'history',
+     note:'Student hours, 3:40–4:30. Bring your Unit 1 exam and work the corrections with your teacher.'},
     {start:'2026-12-07', end:'2026-12-14', name:'Pre-Comp review', icon:'📚', kind:'note',
      note:'The school sets aside eight days for this. Spreading it over them beats one long night.'},
     {start:'2026-12-15', end:'2026-12-16', name:'Pre-Comp Exams', icon:'✍️', kind:'exam',

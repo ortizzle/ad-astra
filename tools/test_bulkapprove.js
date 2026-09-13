@@ -86,9 +86,13 @@ const PORT = process.argv[2] || 8402;
   ck('the first releases today and the rest are dated forward, in shelf order',
      paced.rel[0] === (await p.evaluate(()=>AZ.today())) &&
      paced.rel.slice(1).every((d,i)=> d > paced.rel[i]), paced.rel);
-  const weekend = await p.evaluate((rel) => rel.filter(d =>
+  // rel[0] is deliberately TODAY whatever the pace ("he is approving it now"),
+  // so it is exempt — sweeping it made this assertion fail every weekend, which
+  // is the calendar moving, not the rule breaking. Pin the rule: every date the
+  // PACE chose is a school day.
+  const weekend = await p.evaluate((rel) => rel.slice(1).filter(d =>
      d && (AZ.weekday(d) === 0 || AZ.weekday(d) === 6 || !!closedToday(d))), paced.rel);
-  ck('no release lands on a weekend or a day off', weekend.length === 0, weekend);
+  ck('no paced release lands on a weekend or a day off', weekend.length === 0, weekend);
 
   // A held unit is invisible to HER, everywhere that matters.
   const hidden = await p.evaluate((cid) => {
