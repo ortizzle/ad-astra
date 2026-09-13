@@ -21,20 +21,29 @@ const [PORT, TAG] = process.argv.slice(2);
         divs: [...sc.querySelectorAll('.divider')].map(T), pet: T(sc.querySelector('.perch .pet')) }; };
     const o = {};
     /* a day with reviews due (the seed has misses): the line is the thread */
-    const real = AZ.today; AZ.today = () => '2026-09-09';
+    const real = AZ.today;
+    /* Ask the seed which day it actually makes something due, rather than
+       pinning a literal.  This read '2026-09-09' and quietly expired the day
+       that date fell into the past: dueMisses() went empty and the test threw
+       `CLASS_BY_ID[undefined].name` four lines on — a crash, not a failure,
+       so the suite reported no pass/fail line at all.  Third date-bomb of
+       this family; pin what the seed guarantees, never a calendar date. */
+    const dueDay = all('miss').map(m => m.due).filter(Boolean).sort()[0] || real();
+    AZ.today = () => dueDay;
     setPref('companion', {sp: COMPANIONS[0].id, nm:'Pip'});
     o.dueN = dueMisses().length;
     o.due = read();
     /* the line names the subject leading the queue, not a bare total */
     const bySubj = {}; dueMisses().forEach(m=>(bySubj[m.classId]=bySubj[m.classId]||[]).push(m));
     const topCid = Object.keys(bySubj).sort((a,b)=>bySubj[b].length-bySubj[a].length)[0];
-    o.topCl = CLASS_BY_ID[topCid].name; o.topN = bySubj[topCid].length;
+    o.topCl = topCid && CLASS_BY_ID[topCid] ? CLASS_BY_ID[topCid].name : null;
+    o.topN = topCid ? bySubj[topCid].length : 0;
     const bubble = sc.querySelector('.perch .bubble');
     o.bubbleStyle = { fontStyle: getComputedStyle(bubble).fontStyle, fontSize: parseFloat(getComputedStyle(bubble).fontSize) };
     sc.querySelector('.perch').click(); o.dueLands = view; o.dueLandsCid = gzFilter.cid;
     /* find a swap day and a non-swap day with nothing due */
     all('miss').forEach(m => softDelete(m.id));
-    const days = []; for(let i=0;i<9;i++) days.push(AZ.shift('2026-09-14', i));
+    const days = []; for(let i=1;i<=9;i++) days.push(AZ.shift(dueDay, i));
     const swapDay = days.find(d => mixHash('plan:'+d) % 3 === 0), plainDay = days.find(d => mixHash('plan:'+d) % 3 !== 0);
     AZ.today = () => swapDay; o.swap = read(); o.swapAff = affirmationFor(swapDay);
     AZ.today = () => plainDay; o.plain = read(); o.plainTh = (threadTarget(plainDay)||{}).kind;
