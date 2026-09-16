@@ -982,6 +982,72 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The Junior Thespians, on the Tuesdays they actually meet (v184)
+
+Chris forwarded the sponsor's meeting email and asked to put it on Sedona's
+calendar and her app. The club **already existed** in `CLUBS` as
+`jrthespian` — invite-only, no time, no cadence — so it was listed and
+starrable but could never land on a day. It now carries `time:'3:50–4:30'`
+and the twelve real dates.
+
+**This is the v131 `dates` case, and the email itself is why.** The same note
+says "every other Tuesday" and then lists dates that are not every other
+Tuesday: five of the eleven gaps are 21 days and the winter one is 35. The
+printed list wins outright; the two dates it names as NOT meeting — Oct 6
+(Fall Break) and Feb 23 (Upper School tech week) — are simply absent from the
+array, never encoded as rules of their own. `CAL.closed` independently agrees
+on Oct 6, the same two-sources-agree confirmation ASL Club got on Presidents
+Day. All twelve were verified to be Tuesdays and to miss every school closure
+before they shipped.
+
+> ⚠️ **The "N of yours are placed" count on the clubs screen tested the
+> CADENCE, not placement.** `c.time && /^(weekly|bi-weekly)/.test(c.freq) &&
+> clubFirstDate(c)` — which is not what `clubMeetsOn()` does, since that reads
+> `dates` first and ignores `freq`/`first` entirely. A club whose only schedule
+> is a real date list would have been reported as unplaced while its meetings
+> were already rendering on her Study line-up. ASL Club masked this for fifty
+> versions by keeping its superseded `freq`/`first` on the record. The
+> predicate now accepts `dates`, and `test_clubs.js`'s own copy of it was
+> aligned so the two cannot drift again.
+
+- **`freq:'bi-weekly'` and `first:'Sept 29'` stay on the record**, per the ASL
+  precedent: they are the sponsor's own framing and they feed the row's caption
+  text. Placement never reads them. The caption therefore says "bi-weekly" on a
+  club whose gaps are not all fourteen days — known, and left, because it is
+  how the sponsor describes it and the dates carry the truth.
+- **The teacher's name is not in the club, the desc or anywhere else in this
+  repo**, same rule as `STUDENT_HOURS`, `TUTORING` and the History corrections.
+  `tools/test_jrthespian.js` sweeps the shipped record for it directly.
+- **Nothing places until she taps "I am signed up for this."** `clubState` is a
+  stored `clubpicks` record, not code — a star is a wish and only registering
+  is a claim about her afternoon — so the twelve dates are inert until that tap.
+
+**On her real calendar, two things worth knowing.** Tae Kwon Do starts 4:35
+every Tuesday and the club's pick-up deadline is 4:40, so every one of the
+twelve is a tight hand-off — flagged in the event rather than booked over, the
+same call the History corrections made. And a **`Jr. Thespian Society` entry
+already existed** on her calendar from 8/31, recurring on
+`FREQ=MONTHLY;BYDAY=2TU,4TU`: measured against the real list, that rule invents
+**nine** meetings that do not happen (Feb 23 among them, and Dec 22 inside
+Winter Break) and misses three that do. It was left in place and raised rather
+than deleted — it is someone else's entry.
+
+> Two more harness artifacts turned up running the full suite and are recorded
+> here so they are not re-diagnosed as regressions: **`test_analogy.js` is a
+> JSON-printing probe with no pass/fail line**, exactly like `test_lib.js` and
+> `test_redraw.js`, so a sweep that greps for "ALL PASS" scores it as a
+> failure; and **`test_swflow.js` takes the repo directory as a SECOND argv**
+> (`node tools/test_swflow.js <port> .`) and dies on `undefined/sw.js` without
+> it. Given both arguments it passes and restores `sw.js` correctly. Fifty-one
+> of the suite's fifty-seven files pass; the other five are the stale ones v178
+> already documented.
+
+`tools/test_jrthespian.js`: all twelve honoured and every one a Tuesday, none
+on a closed day, the two named skips absent, the two dates a pure bi-weekly
+would have invented absent, nothing before the first meeting, the row reaching
+her Study line-up with its time only once registered, an off-week Tuesday
+empty, the placed-count fix, and the privacy sweep.
+
 ### The test-correction session, and the History hours that were missing (v183)
 
 Chris forwarded a teacher's note about Sedona's US History Unit One exam,

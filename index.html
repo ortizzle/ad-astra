@@ -1602,7 +1602,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v183 · history corrections';
+const APP_VERSION = 'v184 · thespians on tuesdays';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -1646,8 +1646,18 @@ const CLUBS = [
    desc:'Closing the gender gap in STEM — open to all genders, grades 7–12. Members organize fundraising events that encourage girls into STEM fields.'},
   {id:'glee',      day:'Tuesday', nm:'Glee Club', gr:'8th–12th', cost:75, time:'3:45–5:00', freq:'weekly', first:'Aug',
    desc:'Sing popular songs and perform for a range of audiences. No experience needed — learn to harmonize, build vocal range, get comfortable on stage.'},
-  {id:'jrthespian',day:'Tuesday', nm:'International Junior Thespian Society', gr:'6th–8th', cost:150, flag:'invite only · grades 6–8',
-   desc:'The middle-school branch of the international theatre honor society. Membership comes by invitation through ParentSquare.'},
+  {id:'jrthespian',day:'Tuesday', nm:'International Junior Thespian Society', gr:'6th–8th', cost:150, time:'3:50–4:30', freq:'bi-weekly', first:'Sept 29', flag:'invite only · grades 6–8',
+   /* The sponsor's own meeting list (2026-09, by email) — it wins outright over
+      the "every other Tuesday" in the same note, which the real dates do not hold
+      to: five of the eleven gaps are three weeks and the winter one is five. The
+      two dates named in the email as NOT meeting — Oct 6 (Fall Break, which
+      CAL.closed independently agrees on) and Feb 23 — are simply absent here,
+      never encoded as a rule of their own. See the note on `dates` in
+      clubMeetsOn(). */
+   dates:['2026-09-29','2026-10-20','2026-11-10','2026-11-24','2026-12-08',
+          '2027-01-12','2027-01-26','2027-02-09','2027-03-02','2027-03-23',
+          '2027-04-13','2027-04-27'],
+   desc:'The middle-school branch of the international theatre honor society. Membership comes by invitation through ParentSquare. Meetings run 3:50–4:30; pick-up is at the front of the school, and anyone not collected by 4:40 goes to Late Bird.'},
   {id:'medethics', day:'Tuesday', nm:'Med-Ethics', gr:'8th–12th', cost:75, time:'3:45–4:30', freq:'weekly', first:'Aug 18',
    desc:'Guest speakers, the High School Ethics Bowl, and medical ethics discussions. Snacks every week, per the catalog.'},
   {id:'acapent',   day:'Tuesday', nm:'Academic Pentathlon', gr:'6th–8th', cost:275, time:'3:45–5:15', freq:'weekly', first:'Aug 18',
@@ -6286,7 +6296,13 @@ SCREENS.clubs = function(root){
       r.appendChild(el('span','v', c.cost ? '$'+c.cost : 'free'));
       jc.appendChild(r);
     });
-    const placed = joined.filter(c=>c.time && /^(weekly|bi-weekly)/i.test(c.freq||'') && clubFirstDate(c));
+    /* A club carrying a real `dates` list IS placed, whatever its cadence
+       fields say — clubMeetsOn() reads `dates` first and ignores freq/first
+       entirely. Testing only the cadence here would have called the Junior
+       Thespians unplaced while its twelve real dates were already rendering
+       on her schedule. */
+    const placed = joined.filter(c=>c.time && ((c.dates && c.dates.length)
+      || (/^(weekly|bi-weekly)/i.test(c.freq||'') && clubFirstDate(c))));
     jc.appendChild(el('div','hintline', placed.length
       ? (placed.length===joined.length ? 'These show up on your schedule on the days they meet.'
          : `${placed.length} of these show up on your schedule; the rest do not list a day, time or how often.`)

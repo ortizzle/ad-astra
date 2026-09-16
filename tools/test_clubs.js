@@ -55,7 +55,10 @@ const { chromium } = require('playwright');
   /* ---- clubs that must NOT be placed ---- */
   const skipped = await p.evaluate(()=>{
     const bad = CLUBS.filter(c=>{
-      const placeable = c.time && /^(weekly|bi-weekly)/i.test(c.freq||'') && clubFirstDate(c);
+      /* Mirrors the app's own placeability test, `dates` included — a club
+         with a real date list is placed however its cadence fields read. */
+      const placeable = c.time && ((c.dates && c.dates.length)
+        || (/^(weekly|bi-weekly)/i.test(c.freq||'') && clubFirstDate(c)));
       if(placeable) return false;
       /* none of these may ever return true for any day of a whole year */
       for(let i=0;i<365;i++) if(clubMeetsOn(c, AZ.shift('2026-08-03', i))) return true;
