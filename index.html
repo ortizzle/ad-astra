@@ -997,6 +997,23 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .pairtile .pt{display:block;overflow-wrap:anywhere}
 .pairtile .pmark{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:10.5px;
   font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
+/* Sticky so it survives the scroll down to the answers; z-index keeps it over
+   the tiles it overlaps, and it sits BELOW the nav (z-index 50). */
+.pairsel{position:sticky;top:6px;z-index:5;display:flex;align-items:center;gap:10px;
+  margin-top:12px;padding:10px 12px;border-radius:14px;
+  background:color-mix(in srgb,var(--raised) 94%,transparent);
+  backdrop-filter:blur(10px);border:1.5px solid var(--ac);
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+/* --muted, NOT --ac-fg: on a subject screen #screen overrides --ac with the
+   SUBJECT's colour, and the science green over River's raised plate measured
+   4.14:1 — the same wash trap the Growth Zone chip hit in v123. The 1.5px
+   --ac border carries the accent; the label does not have to. */
+.pairsel .pseye{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.pairsel .pst{flex:1 1 auto;min-width:0;font-size:12.5px;line-height:1.35;color:var(--text);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pairsel .psx{flex:0 0 auto;width:var(--tap);min-height:var(--tap);border:0;background:none;
+  color:var(--muted);font-size:15px;line-height:1}
 .pairnote{margin-top:12px;padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.5;
   border:1.5px solid var(--line);background:var(--surface);color:var(--text)}
 .pairnote.ok{border-color:var(--good)}
@@ -1626,7 +1643,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v186 · pair up';
+const APP_VERSION = 'v187 · real rivals';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5878,7 +5895,6 @@ function creditAnswer(o){
    Match paired terms with definitions off the CARDS, which carry no tally,
    which is precisely why it was not helpful. */
 const PAIR_ROUND = 5;    /* prompts on a board */
-const PAIR_DECOYS = 2;   /* extra answers belonging to no prompt — see below */
 const PAIR_XP = 10, PAIR_CLEAN = 50, PAIR_GOOD = 25;
 let pairState = null;
 
@@ -5913,14 +5929,39 @@ function pickPairs(u){
   const ranked = pool.map(q=>({q, a:att(q), g:owed(q), t:seen(q), r:Math.random()}));
   ranked.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
   const take = ranked.slice(0, Math.min(PAIR_ROUND, ranked.length)).map(x=>x.q);
-  /* Decoys: answers from questions NOT on the board. Without them the pool
-     shrinks as she goes and the last pair is free — she would be credited a
-     right answer for having no other tile left to tap. With two decoys the
-     final prompt still has three candidates, so every pairing is a real
-     choice. They are never themselves pairable, so they cost nothing. */
-  const decoys = ranked.slice(take.length)
-    .slice(0, PAIR_DECOYS)
-    .map(x => String(x.q.opts[x.q.ans]));
+  /* Every prompt brings ONE of its OWN wrong options onto the board as a rival.
+     The first build drew decoys from other questions' right answers, and the
+     screenshot of a real board is what showed why that is not enough: a
+     lowest-to-highest-energy question's answer ("a steel nail, milk in a
+     glass, the air in the room") was the only comma-list of objects among
+     seven sentences, so it could be matched on SHAPE without knowing that a
+     solid holds less energy than a gas — and the two unrelated decoys
+     competed with nothing.
+
+     A question's own distractors are already authored to be plausible, the
+     same part of speech, the same register and — crucially — the same SHAPE:
+     the rivals for a list answer are other orderings of the same list. So
+     sourcing decoys here kills the shape tell, the length tell and the
+     elimination tell at once, and turns every pairing into the question the
+     quiz actually asks. The one closest in length to the real answer is
+     chosen, since length is the tell that survives everything else. */
+  const norm = t => String(t).trim().toLowerCase();
+  const claimed = new Set(take.map(q => norm(q.opts[q.ans])));
+  const decoys = [];
+  take.forEach(q => {
+    const right = String(q.opts[q.ans]);
+    const rival = (q.opts||[])
+      .filter((_,k) => k !== q.ans)
+      .map(String)
+      .filter(t => t.trim() && !claimed.has(norm(t)))
+      .sort((a,b) => Math.abs(a.length-right.length) - Math.abs(b.length-right.length))[0];
+    /* A question whose every wrong option is already on the board (as another
+       prompt's answer, or as an earlier rival) simply contributes none — it is
+       still covered by the four other prompts' rivals. */
+    if(!rival) return;
+    claimed.add(norm(rival));
+    decoys.push(rival);
+  });
   return { qs: take, decoys };
 }
 
@@ -5969,6 +6010,24 @@ SCREENS.pairup = function(root){
     ? 'Tap a question, then the answer that goes with it. These are the lesson’s real questions — getting one right counts exactly as it would in the quiz.'
     : 'All of them counted toward the lesson, the same as a quiz round.'));
   root.appendChild(head);
+
+  /* One prompt's rival can sit ten tiles away now that every prompt brings its
+     own, so the board is taller than the phone and a selected question used to
+     scroll out of sight while she hunted for its answer — which is how a
+     matching game turns into a memory game by accident. The selection rides
+     along at the top of the viewport instead. It is a working surface, not a
+     second copy of the board: it says what she picked and clears it. */
+  if(st.sel){
+    const sel = el('div','pairsel');
+    sel.appendChild(el('span','pseye','Matching'));
+    sel.appendChild(el('span','pst', st.sel.q.q));
+    const x = el('button','psx','✕');
+    x.type = 'button';
+    x.setAttribute('aria-label','Clear the selected question');
+    x.addEventListener('click',()=>{ st.sel = null; st.note = null; render(); });
+    sel.appendChild(x);
+    root.appendChild(sel);
+  }
 
   if(st.note){
     const n = el('div','pairnote' + (st.note.ok ? ' ok' : ' no'), st.note.t);

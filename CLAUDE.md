@@ -982,6 +982,66 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The rivals have to be the question's own (v187 / Wayfinder v167, both apps)
+
+Chris, relaying a played session: *"the pair session was great but the answers
+still seemed clear. One question had objects in order where there was only one
+obvious match. A decoy would be good in that instance."* A screenshot of the
+real board named the bug exactly, and v186's decoys were the cause.
+
+**The reported question is the cleanest possible example.** *"Which list puts
+these in order from LOWEST energy to HIGHEST energy?"* — answer, *"A steel
+nail, milk in a glass, the air in the room."* It was the only comma-list of
+objects among seven sentences and single words, so it could be matched **on
+shape**, without knowing that a solid holds less energy than a gas. Meanwhile
+the two decoys ("How much stuff the flour is made of", "No — each grain is
+still a solid with its own shape") came from unrelated questions and competed
+with nothing.
+
+**v186 drew decoys from OTHER questions' right answers. They now come from each
+prompt's OWN wrong options — one per prompt, so five prompts deal ten tiles.**
+A question's authored distractors are already the same part of speech, the same
+register, the same length band and — the half that matters here — the same
+SHAPE: the rivals for a list answer are other orderings of the same list. So
+one change kills the shape tell, the length tell and the elimination tell
+together, and turns every pairing into the question the quiz actually asks:
+
+| answer | its rival on the board |
+|---|---|
+| A steel nail, milk in a glass, the air in the room | The air in the room, milk in a glass, a steel nail |
+| Their volume | Their mass |
+| Liquid | Solid |
+| The particles in both are moving at the same average speed | The bath and the cup contain the same number of particles |
+
+- **The rival closest in LENGTH to the real answer is the one chosen**, since
+  length is the tell that survives every other fix.
+- **A prompt whose every wrong option is already on the board contributes
+  none** — as another prompt's answer, or as an earlier rival — rather than
+  duplicating a tile. It is still covered by the other four prompts' rivals.
+- `PAIR_DECOYS` is gone: "one per prompt" is the rule, not a number to tune.
+
+> ⚠️ **Doubling the tiles broke something I then had to fix: the board is
+> taller than the phone, so a selected question scrolled out of sight while she
+> hunted for its answer** — which is how a matching game turns into a memory
+> game by accident. A sticky `.pairsel` bar carries the selection at the top of
+> the viewport with a 44px ✕ to clear it. Caused by this change, so fixed with
+> it rather than left to be reported.
+
+> ⚠️ **The bar's eyebrow measured 4.14:1, and the giveaway was that all six
+> accents failed at exactly the same ratio.** `#screen` overrides `--ac` with
+> the SUBJECT's colour on any subject screen, so that was the science green on
+> Wayfinder's River sky, not her accent — which is why the accent made no
+> difference. It is `--muted` now and the 1.5px `--ac` border carries the
+> accent, the same resolution the Growth Zone chip reached in v144. 5.59:1
+> worst case across 480 samples in both apps.
+
+`tools/test_pairup.js` pins the RULE rather than the tile count: every prompt
+has a rival drawn from its own wrong options, no answer stands alone on length,
+no tile is printed twice, and the selection survives a scroll. **Verified by
+reverting `pickPairs` to v186's decoys and watching it fail** — `rivalled: 0`
+of 5 — because a guard that passes on the bug it was written for is not a
+guard.
+
 ### Pair up — matching that counts (v186 / Wayfinder v166, both apps)
 
 Chris: *"Can we create a sorting game for the girls where it counts? Basically

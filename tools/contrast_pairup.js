@@ -46,15 +46,20 @@ const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(
       const plain=[...document.querySelectorAll('.pairtile')].find(t=>!t.classList.contains('sel')&&!t.classList.contains('done'));
       const sel=document.querySelector('.pairtile.sel'), done=document.querySelector('.pairtile.done');
       const note=document.querySelector('.pairnote'), lab=document.querySelector('.pairlab');
-      if(!plain||!sel||!done||!note||!lab) throw new Error('board incomplete');
+      /* The sticky selection bar lays a translucent, blurred plate over the
+         tiles — both its eyebrow and its question text are read at 10.5/12.5px. */
+      const bar=document.querySelector('.pairsel');
+      if(!plain||!sel||!done||!note||!lab||!bar) throw new Error('board incomplete');
       const grab=n=>({fg:getComputedStyle(n).color, bg:getComputedStyle(n).backgroundColor, op:+getComputedStyle(n).opacity});
       return {plain:grab(plain), sel:grab(sel), done:grab(done),
               mark:{...grab(done.querySelector('.pmark')), op:+getComputedStyle(done).opacity},
               note:grab(note), lab:grab(lab),
+              selbar:{...grab(bar.querySelector('.pst')), bg:getComputedStyle(bar).backgroundColor},
+              seleye:{...grab(bar.querySelector('.pseye')), bg:getComputedStyle(bar).backgroundColor},
               page:getComputedStyle(document.body).backgroundColor};
     },{theme,sky,acc});
     const page=parse(g.page);
-    for(const k of ['plain','sel','done','mark','note','lab']){
+    for(const k of ['plain','sel','done','mark','note','lab','selbar','seleye']){
       let bg=over(parse(g[k].bg), page);
       let fg=parse(g[k].fg);
       /* A paired tile is dimmed with opacity, which fades its text TOWARD the
@@ -66,7 +71,7 @@ const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(
   }
   rows.sort((a,b)=>a.ratio-b.ratio);
   console.log('samples:',rows.length);
-  ['plain','sel','done','mark','note','lab'].forEach(k=>
+  ['plain','sel','done','mark','note','lab','selbar','seleye'].forEach(k=>
     console.log(('worst '+k).padEnd(12)+':', JSON.stringify(rows.filter(r=>r.part===k)[0])));
   const bad=rows.filter(r=>r.ratio<4.5);
   console.log('BELOW 4.5:1 →', bad.length? JSON.stringify(bad.slice(0,6)) : 'none');

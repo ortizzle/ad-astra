@@ -62,18 +62,64 @@ const PORT = process.argv[2] || 8201;
     const st = pairState;
     const promptIds = st.lefts.map(x => x.q.id);
     const decoys = st.rights.filter(r => r.decoy);
+    const norm = t => String(t).trim().toLowerCase();
+    const answers = st.lefts.map(x => norm(x.q.opts[x.q.ans]));
+    const tileTxt = st.rights.map(r => norm(r.txt));
+    /* THE GUARANTEE, and the bug this replaced: every prompt must have a rival
+       on the board drawn from its OWN wrong options. A rival authored for the
+       question is the same shape, register and length as its answer, so the
+       answer cannot be found by elimination, by length, or — the case that was
+       actually reported — by being the only list-shaped tile among sentences. */
+    const rivalled = st.lefts.filter(x => {
+      const wrongs = x.q.opts.filter((_,k)=>k!==x.q.ans).map(norm);
+      return st.rights.some(r => r.decoy && wrongs.includes(norm(r.txt)));
+    }).length;
+    /* And nothing is uniquely identifiable by LENGTH — the tell that survives
+       every other fix. Each answer needs at least one other tile of comparable
+       length sitting beside it. */
+    const lonely = st.lefts.filter(x => {
+      const L = String(x.q.opts[x.q.ans]).length;
+      return st.rights.filter(r => Math.abs(String(r.txt).length - L) <= Math.max(12, L*0.5)).length < 2;
+    }).map(x => x.q.q.slice(0,40));
     return {lefts: st.lefts.length, rights: st.rights.length, decoys: decoys.length,
             decoyOrphan: decoys.every(d => d.qid === null),
+            rivalled, lonely,
+            decoyDupesAnswer: decoys.some(d => answers.includes(norm(d.txt))),
+            dupeTiles: tileTxt.length - new Set(tileTxt).size,
             tilesL: sc.querySelectorAll('.paircol .pairtile:not(.ans)').length,
             tilesR: sc.querySelectorAll('.paircol .pairtile.ans').length,
             minH: Math.min(...[...sc.querySelectorAll('.pairtile')].map(e=>e.getBoundingClientRect().height)),
             overflow: document.documentElement.scrollWidth <= 390,
             rightsMatch: st.rights.filter(r => r.qid).every(r => promptIds.includes(r.qid))};
   }, seed);
-  ck('the board deals five prompts, seven answers, and the two extras belong to nothing on it',
-     deal.lefts === 5 && deal.rights === 7 && deal.decoys === 2 && deal.decoyOrphan && deal.rightsMatch, deal);
+  ck('the board deals five prompts and their answers, plus a rival per prompt, pairable to nothing',
+     deal.lefts === 5 && deal.rights === deal.lefts + deal.decoys && deal.decoys >= 4
+     && deal.decoyOrphan && deal.rightsMatch, deal);
+  ck('every prompt has a rival drawn from its OWN wrong options — no answer by elimination',
+     deal.rivalled === deal.lefts, {rivalled: deal.rivalled, of: deal.lefts});
+  ck('no answer stands alone on length, and no tile is printed twice',
+     deal.lonely.length === 0 && !deal.decoyDupesAnswer && deal.dupeTiles === 0, deal);
   ck('every tile renders, is at least 44px tall, and nothing overflows the phone',
-     deal.tilesL === 5 && deal.tilesR === 7 && deal.minH >= 44 && deal.overflow, deal);
+     deal.tilesL === 5 && deal.tilesR === deal.rights && deal.minH >= 44 && deal.overflow, deal);
+
+  /* The board is taller than the phone now, so the selection has to ride along. */
+  const sticky = await p.evaluate(() => {
+    const st = pairState;
+    st.sel = st.lefts[0]; render();
+    window.scrollTo(0, 700);
+    const bar = document.querySelector('.pairsel');
+    if(!bar) return {bar:false};
+    const r = bar.getBoundingClientRect();
+    const names = bar.textContent.includes(st.lefts[0].q.q.slice(0,24));
+    document.querySelector('.pairsel .psx').click();
+    return {bar:true, onScreen: r.top >= 0 && r.bottom <= 844, names,
+            x: Math.round(document.querySelector('.pairsel') ? 0 : 1),
+            cleared: pairState.sel === null,
+            tap: Math.round(r.height)};
+  });
+  ck('the question she picked stays on screen while she scrolls the answers, and clears on ✕',
+     sticky.bar && sticky.onScreen && sticky.names && sticky.cleared, sticky);
+  await p.evaluate(() => window.scrollTo(0,0));
 
   /* THE POINT: a first-time-right pairing is credited exactly as a quiz
      answer — the tally, the plain count that finishes the lesson, and XP. */
