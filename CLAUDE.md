@@ -1020,12 +1020,45 @@ alone.
   items on that sheet check out exactly. The builder asserts both the right
   answer and the fact that the printed one is wrong, so the misprint cannot be
   re-introduced by a later edit.
-- **`aga_24_a2_0306_se.pdf` is the one student-edition file NOT in the folder.**
-  3-6 was built from its vocabulary sheet and answer key — which show the lesson
-  working with rational roots plus irrational and complex conjugate pairs — and
-  from the standard theorem set that vocabulary names. Said outright in its
-  `parentNote` rather than papered over; if the missing pages turn up and the
-  lesson covers something else, this is the unit to revisit.
+> ⚠️ **3-6's material WAS in the folder; I searched for the wrong filename and
+> then said it was absent.** Every other lesson has an `aga_24_a2_03NN_se.pdf`,
+> and 3-6 genuinely has no such file — so a `title contains '0306'` search came
+> back empty and the first build shipped from the vocabulary sheet alone, with a
+> `parentNote` saying the pages "were not uploaded". Chris: *"Lesson 3.6 is
+> marked differently. it has '3-6 HW' in the title and there are two of them."*
+> Both were sitting there as **`Lesson+3-6+HW.pdf`** and
+> **`Lesson+3-6+HW+2,+33-38.pdf`**. This is the v142 `Equations.docx` lesson
+> repeating almost word for word: **an empty search is not evidence of absence.**
+> Say "I did not find it", name the pattern searched, and ask — the cost of
+> asking is one sentence and the cost of not asking was a unit missing a quarter
+> of its lesson. Both PDFs are scans with no text layer; `pypdfium2` read them.
+
+**Reading the real homework changed the unit substantially.** Scope inferred
+from a vocabulary sheet was right about the theorems and wrong about the
+balance — roughly a quarter of the homework is **application word problems**
+(a closet at 220 ft³, a fireproof safe at 540 in³ as a four-part task, a fish
+tank at 176 ft³, a cost function at $1,706) where a volume or total is given
+and the dimensions have to come back out of a polynomial. The first build had
+**zero** of them. 3-6 went from 10 cards / 20 questions to **13 / 24**:
+
+- Three cards and three questions on the application pattern, covering the two
+  steps most often dropped: **substituting x back to get the dimensions rather
+  than stopping at x**, and **discarding the roots a length cannot be** — the
+  latter settled by the leftover quadratic's discriminant, so the two rejected
+  roots never have to be computed at all.
+- **The candidate-list question was rewritten because its leading coefficient
+  was 1.** Her homework lists candidates for polynomials with leading
+  coefficients of 2, 4 and 8, where the candidates are genuinely fractions; a
+  leading coefficient of 1 makes every candidate a whole number and hides the
+  entire difficulty. It now uses `2x³ − 5x² − x + 6`, and the builder asserts
+  that **³⁄₂ really is one of its roots** — so "I only wrote the whole numbers"
+  is not a tidy-looking mistake there, it loses a root outright.
+- A quadratic-form quartic (`x⁴ + 5x² − 36`) whose factor `x² + 9` contributes
+  a complex pair, since the homework's own Q27/Q28 are exactly this shape.
+- Fresh numbers throughout, per the standalone rule — none of the source's
+  220 / 540 / 176 / 1,706 appears. Every one verified with sympy, **including
+  that no distractor triple also multiplies to the stated volume**, which is
+  the specific way a dimensions question can quietly have two right answers.
 
 > ⚠️ **`renderGraph()` had no polynomial curve type at all, which is why this
 > needed an engine change before any content could be authored around it.** Its
@@ -1082,7 +1115,7 @@ the checker reports zero errors.
 > stem, plus `that same` anywhere. Pin the rule, not a phrase that happens to
 > contain its words.
 
-`tools/test_alg_topic3.js` (16 assertions): the classId (the v136 orphan trap),
+`tools/test_alg_topic3.js` (23 assertions): the classId (the v136 orphan trap),
 the numbered form on every lesson and the shelf ascending 3-1..3-7 with no
 `order` set, **Topics 1 and 2 seeded alongside** so "its own shelf" is a claim
 about coexistence rather than about an empty subject screen, answers spread
@@ -1091,7 +1124,18 @@ no positional references, a `poly` graph rendering a real curve with real
 vertical extent, every deck walking to the end, and a full quiz round on all
 seven with the `algeo` Sheet reachable from inside it. Question counts are
 asserted as a **minimum of 18, never an exact number** — a unit should be free
-to grow when her work shows a gap (the Wayfinder v165 lesson).
+to grow when her work shows a gap (the Wayfinder v165 lesson), which is exactly
+what 3-6 then did. Seven more assertions pin 3-6's homework coverage **by its
+teaching rather than by question id**, which would not survive a renumber: the
+P(x) = 0 set-up, the dimensions-not-x answer, the discriminant rejection, the
+quadratic-form quartic, a fractional candidate list, the application card, and
+the `parentNote` naming the HW sheets rather than a missing file.
+
+> ⚠️ **`parentNote` is a `{text, from}` provenance object, not a string** — as
+> are `summary`, `why` and `nextUp`. A bare regex against it stringifies to
+> `"[object Object]"` and can only ever be false, which reads as missing content
+> when the content is fine. My first version of that assertion failed for
+> exactly this reason; the note was correct all along.
 
 > The suite's own noise, recorded so it is not re-diagnosed: `test_bulkapprove.js`
 > failed once in a batch run and passed standalone, because a `sed -i` version

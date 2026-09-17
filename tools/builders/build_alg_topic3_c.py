@@ -453,6 +453,26 @@ assert sp.factor(_P) == (x - 2)*(x**2 + 1)
 assert set(sp.solve(sp.Eq(_P, 0), x)) == {sp.Integer(2), I, -I}
 ck('(x - (2+I))*(x - (2-I))', 'x**2 - 4*x + 5')
 
+card(C, 'Using roots to find a dimension',
+     "**When a volume is given and the sides are expressions in x, multiply them out, set the result equal to the volume, and solve the polynomial.**"
+     "\n• A box measuring x by x + 2 by x − 1 with volume 140 gives x³ + x² − 2x = 140, so P(x) = x³ + x² − 2x − 140 = 0."
+     "\n• Everything must be on one side before the Rational Root Theorem or the Zero Product Property can be used — that subtraction is a step, not a formality.",
+     eq='length × width × height = volume',
+     hint='Multiply first, move the volume across second, hunt roots third.')
+
+card(C, 'x is not the answer — the dimensions are',
+     "**Solving gives you x; the sides are what the expressions equal once x is put back in.**"
+     "\n• x = 5 in a box measuring x by x + 2 by x − 1 means 5 by 7 by 4, not 5."
+     "\n• Check by multiplying the three back together — it costs a moment and catches an arithmetic slip immediately.",
+     hint='Solve for x, then substitute. Stopping at x answers a question nobody asked.')
+
+card(C, 'Throw away the roots a length cannot be',
+     "**A measurement has to be real and positive, so negative and non-real roots are rejected — even though they genuinely solve the equation.**"
+     "\n• A cubic from a volume problem usually has one usable root and two that are non-real."
+     "\n• If the leftover quadratic has a negative discriminant, its two roots are non-real, which is how you know the real one you found is the only one to consider.",
+     eq='b² − 4ac < 0 ⇒ no real roots',
+     hint='The algebra offers three answers. The box accepts one.')
+
 # ---- questions -------------------------------------------------------------
 q(Q, 1, 'How many roots does a degree-5 polynomial have, counting multiplicity and allowing complex roots?',
   ['Exactly 5', 'At most 5', 'At least 5', 'It depends on the coefficients'], 0,
@@ -464,15 +484,21 @@ q(Q, 1, 'How many roots does a degree-5 polynomial have, counting multiplicity a
   '**Exactly 5.** "At most" is the right phrasing for REAL roots only — over the complex numbers the count is exact and never depends on the coefficients. That precision is what makes the theorem useful: you always know how many roots you are still looking for.',
   'Real roots: at most n. All roots: exactly n. The word changes with the number system.')
 
-q(Q, 1, 'For P(x) = x³ + 4x − 6, which list gives every possible RATIONAL root?',
-  ['±1, ±2, ±3, ±6', '±1, ±2, ±3', '±1, ±6', '±1, ±2, ±4, ±6'], 0,
-  'Factors of the constant over factors of the leading coefficient.',
-  ['The constant is −6, whose factors are 1, 2, 3 and 6.',
-   'The leading coefficient is 1, whose only factor is 1.',
-   'Candidates are ±p⁄q = ±1, ±2, ±3, ±6.',
-   'That is the complete list.'],
-  '**±1, ±2, ±3, ±6.** Every factor of the constant counts, including 6 itself. The 4 from the middle term never enters the theorem at all — only the constant and the leading coefficient do, which is worth knowing because the middle coefficients are a natural distraction.',
-  'Two numbers matter: the constant and the leading coefficient. Ignore everything between them.')
+# Her homework lists candidates for polynomials with leading coefficients of
+# 2, 4 and 8, where the candidates are genuinely fractions — an example with a
+# leading coefficient of 1 hides the whole difficulty, so this one does not.
+q(Q, 1, 'Which list gives every possible RATIONAL root of 0 = 2x³ − 5x² − x + 6?',
+  ['±1, ±2, ±3, ±6, ±½, ±³⁄₂',
+   '±1, ±2, ±3, ±6',
+   '±1, ±2, ±½, ±⅓, ±⅙',
+   '±1, ±2, ±3, ±6, ±⅓, ±⅔'], 0,
+  'Factors of the constant on top, factors of the leading coefficient underneath. A leading 2 means halves.',
+  ['The constant is 6, so p comes from 1, 2, 3 and 6.',
+   'The leading coefficient is 2, so q comes from 1 and 2.',
+   'Dividing each p by each q gives ±1, ±2, ±3, ±6 and the halves ±½ and ±³⁄₂.',
+   '(6⁄2 and 2⁄2 repeat 3 and 1, so they add nothing new.)'],
+  '**±1, ±2, ±3, ±6, ±½ and ±³⁄₂.** Stopping at the whole numbers is the commonest way to miss a root outright — and here it would, because ³⁄₂ really is a root of this polynomial. A leading coefficient of 1 is the only case where every candidate is a whole number, which is exactly why an example with one teaches nothing about the hard part.',
+  'Leading coefficient 1 → whole numbers only. Anything else → expect fractions, and write them down.')
 
 q(Q, 1, 'If 3 + 2i is a root of a polynomial with real coefficients, what else must be a root?',
   ['3 − 2i', '−3 − 2i', '−3 + 2i', '2 + 3i'], 0,
@@ -704,6 +730,79 @@ assert sp.sympify('x**3 + 2*x**2 + 3*x + 6').subs(x, -2) == 0
 assert set(roots_of('x**3 + 2*x**2 + 3*x + 6')) == {sp.Integer(-2), sp.I*sp.sqrt(3), -sp.I*sp.sqrt(3)}
 assert sp.expand((x - (1 + I)) * (x - (1 - I))) == x**2 - 2*x + 2
 
+# --- the application half of the lesson: her HW carries four of these -------
+q(Q, 2, 'A storage bin shaped like a rectangular prism measures x by x + 2 by x − 1 feet and holds 140 ft³. Which equation represents this, written as P(x) = 0?',
+  ['x³ + x² − 2x − 140 = 0',
+   'x³ + x² − 2x + 140 = 0',
+   'x³ + 3x² + 2x − 140 = 0',
+   '3x + 1 − 140 = 0'], 0,
+  'Multiply the three sides out first, then get everything onto one side.',
+  ['Volume is the product: x(x + 2)(x − 1).',
+   '(x + 2)(x − 1) = x² + x − 2, so the product is x³ + x² − 2x.',
+   'Set that equal to 140: x³ + x² − 2x = 140.',
+   'Subtract 140 from both sides: x³ + x² − 2x − 140 = 0.'],
+  '**x³ + x² − 2x − 140 = 0.** Subtracting the volume across is what makes the Zero Product Property and the Rational Root Theorem available at all — both need a zero on one side. Watch the middle bracket: (x + 2)(x − 1) is x² + x − 2, and reading the minus as a plus gives x² + 3x + 2 and a wrong cubic that still looks plausible.',
+  'Multiply, then move the volume across. A volume problem is not solved until one side is 0.')
+
+q(Q, 2, 'A crate measures x − 1 by x by x + 4 feet and holds 96 ft³. What are its dimensions?',
+  ['3 ft by 4 ft by 8 ft',
+   '4 ft by 5 ft by 9 ft',
+   '2 ft by 3 ft by 7 ft',
+   '1 ft by 2 ft by 6 ft'], 0,
+  'Find x first, then work out what each expression comes to. Multiplying your answer back is the check.',
+  ['The volume gives x(x − 1)(x + 4) = 96, so x³ + 3x² − 4x − 96 = 0.',
+   'Testing candidates, x = 4 works: 64 + 48 − 16 − 96 = 0.',
+   'Substituting back: x − 1 = 3, x = 4 and x + 4 = 8.',
+   'Check: 3 × 4 × 8 = 96.'],
+  '**3 ft by 4 ft by 8 ft.** Finding x = 4 is only most of the work — the question asks for the dimensions, and answering 4 is the commonest way to lose the mark. Multiplying the three back together takes a second and confirms the whole thing at once.',
+  'Solve for x, substitute into every side, then multiply back to check.')
+
+q(Q, 3, 'Solving a crate’s volume gives x³ + 3x² − 4x − 96 = 0, which factors as (x − 4)(x² + 7x + 24). How many usable values of x are there, and how do you know?',
+  ['One — x = 4; the quadratic’s discriminant is negative, so its roots are not real',
+   'Three — every root of the cubic is a side length the box could have',
+   'Two — x = 4, and one of the two roots of the quadratic factor',
+   'None — a cubic cannot describe a real box in the first place'], 0,
+  'Check the discriminant of the quadratic before hunting for its roots.',
+  ['x − 4 = 0 gives the real root x = 4.',
+   'For x² + 7x + 24 the discriminant is 7² − 4(1)(24) = 49 − 96 = −47.',
+   'A negative discriminant means both of its roots are non-real.',
+   'A side length must be real and positive, so x = 4 is the only usable value.'],
+  '**One — x = 4, and the discriminant proves it.** Computing 49 − 96 = −47 settles the other two roots without ever finding them, which is the efficient move. They are perfectly good roots of the equation and completely useless as a measurement — the algebra answers a wider question than the box does.',
+  'A negative discriminant closes the question. You never have to work out roots you are going to reject.')
+
+q(Q, 3, 'What are all the real and complex roots of x⁴ + 5x² − 36?',
+  ['2, −2, 3i and −3i',
+   '2, −2, 3 and −3',
+   '4 and −9, from x² = 4 and x² = −9',
+   '2, −2 and 3i only'], 0,
+  'It factors like a quadratic in x². Then take the square root of each part — including the negative one.',
+  ['Treat it as a quadratic in x²: it factors as (x² + 9)(x² − 4).',
+   'x² − 4 = 0 gives x = 2 and x = −2.',
+   'x² + 9 = 0 gives x² = −9, so x = 3i and x = −3i.',
+   'All four roots: 2, −2, 3i and −3i.'],
+  '**2, −2, 3i and −3i.** Answering 4 and −9 is the un-substitution trap: those are values of x², not of x. The x² + 9 factor is the interesting one — over the real numbers it does not factor at all, but with i available it contributes two perfectly good roots, and a degree-4 polynomial has to have four.',
+  'x² = −9 is not a dead end once i exists. It is 3i and −3i.')
+
+# Every number in the four application questions above, verified before it ships.
+ck('x*(x+2)*(x-1)', 'x**3 + x**2 - 2*x')                 # the storage bin
+assert sp.sympify('x**3 + x**2 - 2*x - 140').subs(x, 5) == 0
+assert [5, 5+2, 5-1] == [5, 7, 4] and 5*7*4 == 140
+ck('x*(x-1)*(x+4)', 'x**3 + 3*x**2 - 4*x')               # the crate
+assert sp.sympify('x**3 + 3*x**2 - 4*x - 96').subs(x, 4) == 0
+assert (4-1)*4*(4+4) == 96
+# none of the crate's distractor triples may also come to 96
+assert [(v-1)*v*(v+4) for v in (5, 3, 2)] == [180, 42, 12]
+ck('(x-4)*(x**2+7*x+24)', 'x**3 + 3*x**2 - 4*x - 96')
+assert 7**2 - 4*1*24 == -47 < 0                          # so the pair is non-real
+assert len([r for r in sp.Poly('x**3 + 3*x**2 - 4*x - 96', x).all_roots() if r.is_real]) == 1
+ck('(x**2+9)*(x**2-4)', 'x**4 + 5*x**2 - 36')            # the quadratic-form quartic
+assert set(sp.solve('x**4 + 5*x**2 - 36')) == {2, -2, 3*I, -3*I}
+# the candidate-list question: 3/2 must really be a root, or the point does not land
+assert sp.sympify('2*x**3 - 5*x**2 - x + 6').subs(x, sp.Rational(3, 2)) == 0
+assert set(sp.solve('2*x**3 - 5*x**2 - x + 6')) == {sp.Rational(3, 2), -1, 2}
+_cand = sorted({sp.Rational(pp, qq) for pp in (1, 2, 3, 6) for qq in (1, 2)})
+assert _cand == [sp.Rational(1, 2), 1, sp.Rational(3, 2), 2, 3, 6], _cand
+
 build('ad-astra', C, Q, 'unit-alg-t3-06',
       'Topic 3 · 3-6 Theorems About Roots of Polynomial Equations', 'algeo',
       'Lesson 3-6 covers the theorems that let you find every root of a polynomial: the Fundamental Theorem of '
@@ -715,18 +814,24 @@ build('ad-astra', C, Q, 'unit-alg-t3-06',
        ('List the possible rational roots using the Rational Root Theorem', 'source'),
        ('Use the Complex and Irrational Conjugate Theorems to name paired roots', 'source'),
        ('Combine testing, division and the Quadratic Formula to find every root', 'added')],
-      'One thing to know about this unit’s sources: her Topic 3 folder has the student-edition pages for every '
-      'lesson EXCEPT 3-6 — aga_24_a2_0306_se.pdf is the one file missing. This was built from the 3-6 '
-      'vocabulary sheet and its answer key (which show the lesson working with rational roots alongside '
-      'irrational and complex conjugate pairs) plus the standard theorem set that vocabulary names, so the '
-      'scope should be right, but it is worth a glance against her actual textbook pages if anything looks '
-      'unfamiliar.\n\nThe distinction most worth reinforcing is what each theorem promises: the Fundamental '
+      'A note on sources: her Topic 3 folder has no student-edition file for 3-6 the way it does for the other '
+      'six lessons — this one is covered instead by the two “Lesson 3-6 HW” PDFs, and those are what this unit '
+      'is built from, alongside the 3-6 vocabulary sheet and its answer key.\n\nWorth knowing about that '
+      'homework: roughly a quarter of it is WORD PROBLEMS — a closet, a safe, a fish tank, a cost function — '
+      'where a volume or a total is given and the dimensions have to come back out of a polynomial. Those are '
+      'the questions that look least like the rest of the lesson and are the easiest to be caught out by, so '
+      'this unit covers them directly, including the two steps most often dropped: substituting x back to get '
+      'the actual dimensions rather than stopping at x, and discarding the roots a length cannot be. Her '
+      'homework also lists rational-root candidates for polynomials with leading coefficients of 2, 4 and 8, '
+      'where the candidates are genuinely fractions — so the unit asks for one of those rather than an easier '
+      'leading coefficient of 1, which hides the whole difficulty.\n\nThe distinction most worth reinforcing '
+      'is what each theorem promises: the Fundamental '
       'Theorem guarantees the COUNT, while the Rational Root Theorem only supplies a list to try — and a '
       'polynomial can easily have no rational roots at all. The other reliable trap is the conjugate: only ONE '
       'sign flips, the one on the imaginary part or the radical.',
       ('Work one quartic all the way through — candidates, divide, divide, then the Quadratic Formula.', 22),
       'content/alg-topic3-06.json',
-      'enVision Algebra 2, Lesson 3-6 (Drive — vocabulary sheet and answer key)',
+      'enVision Algebra 2, Lesson 3-6 (Drive — the two Lesson 3-6 HW sheets, plus the vocabulary sheet and key)',
       'enVision Algebra 2 Lesson 3-6: Theorems About Roots of Polynomial Equations')
 
 # ---------------------------------------------------------------- 3-7

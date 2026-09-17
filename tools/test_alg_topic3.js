@@ -179,6 +179,40 @@ const NEIGHBOURS = ['alg-topic1-01','alg-topic1-02','alg-topic1-03','alg-topic1-
   ck('a poly spec renders a real curve with real vertical extent',
      graphs.drawn > 50 && graphs.spread > 20, graphs);
 
+  /* ---- 3-6 must cover what her homework actually drills.
+     Roughly a quarter of the two "Lesson 3-6 HW" sheets is volume/dimension
+     word problems, and its candidate lists use leading coefficients of 2, 4
+     and 8 — an example with a leading coefficient of 1 hides the whole
+     difficulty. Both were missing from the first build, so both are pinned
+     by their TEACHING rather than by a question id, which would not survive
+     a renumber. */
+  const hw = await p.evaluate(() => {
+    const u = DATA.records['unit-alg-t3-06'];
+    const blob = q => [q.q, ...(q.opts||[]), ...(q.steps||[]), (q.ex||{}).main||''].join(' ');
+    const qs = u.questions;
+    return {
+      setup:   qs.some(q => /volume|ft³|holds/i.test(q.q) && /=\s*0/.test(q.opts[q.ans])),
+      dims:    qs.some(q => /dimensions/i.test(q.q) && /ft by .* ft by .* ft/i.test(q.opts[q.ans])),
+      reject:  qs.some(q => /discriminant/i.test(blob(q)) && /real/i.test(q.opts[q.ans])),
+      qform:   qs.some(q => /x⁴/.test(q.q) && /i\b/.test(q.opts[q.ans])),
+      fracs:   qs.some(q => /rational root/i.test(q.q) && /[½⅓⅔⅙]|³⁄₂/.test(q.opts[q.ans])),
+      subCard: u.cards.some(c => /dimension|volume/i.test(c.term + ' ' + c.def)),
+      srcNamesHW: /HW/i.test(u.srcName || '') || /HW/i.test(u.source || ''),
+      /* parentNote is a {text, from} provenance object, NOT a string — a bare
+         regex on the object stringifies to "[object Object]" and can only
+         ever be false, which looks like missing content rather than a bad
+         probe. Same shape as `summary`, `why` and `nextUp`. */
+      noteNamesHW: /HW/i.test((u.parentNote && u.parentNote.text) || '')
+    };
+  });
+  ck('3-6 asks for the P(x) = 0 set-up from a given volume', hw.setup, hw);
+  ck('3-6 asks for the DIMENSIONS, not just x', hw.dims, hw);
+  ck('3-6 rejects the roots a length cannot be, via the discriminant', hw.reject, hw);
+  ck('3-6 covers the quadratic-form quartic with complex roots', hw.qform, hw);
+  ck('3-6 lists rational candidates that are genuinely fractions', hw.fracs, hw);
+  ck('3-6 carries a card on the volume/dimension pattern', hw.subCard, hw);
+  ck('3-6 names the HW sheets as its source, not a missing file', hw.srcNamesHW && hw.noteNamesHW, hw);
+
   /* ---- every deck walks to the end */
   const cardsWalk = await p.evaluate(async ids => {
     const results = [];
