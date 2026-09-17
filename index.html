@@ -977,6 +977,30 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .sortbtns .btn{margin:0}
 .sortmeta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px}
+/* Pair up (Wayfinder v166 / Ad Astra v186): two columns of tiles, tap a
+   question then tap its answer. The columns deliberately do NOT align row for
+   row — a tile is as tall as its own text and both columns stack from the
+   top, so nothing about the LAYOUT hints at which pairs go together. Colour
+   is never the only signal: a selected tile also says so via aria-pressed, a
+   paired one prints the word "paired" and is disabled. */
+.pairboard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;align-items:start}
+.paircol{display:flex;flex-direction:column;gap:8px;min-width:0}
+.pairlab{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);padding:0 2px 2px}
+.pairtile{width:100%;min-height:var(--tap);padding:11px 12px;border-radius:14px;
+  background:var(--surface);border:1.5px solid var(--line);color:var(--text);
+  font-size:12.5px;line-height:1.4;text-align:left;display:flex;flex-direction:column;gap:4px}
+.pairtile.ans{font-family:'Fraunces',Georgia,serif;font-size:14px}
+.pairtile.sel{border-color:var(--ac);background-color:var(--ac-8)}
+.pairtile.done{border-color:var(--good);color:var(--muted);
+  background-color:color-mix(in srgb,var(--good) 8%,var(--surface))}
+.pairtile .pt{display:block;overflow-wrap:anywhere}
+.pairtile .pmark{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:10.5px;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
+.pairnote{margin-top:12px;padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.5;
+  border:1.5px solid var(--line);background:var(--surface);color:var(--text)}
+.pairnote.ok{border-color:var(--good)}
+.pairnote.no{border-color:var(--bad)}
 /* A two-line .btn-secondary — icon+title, then a quiet status line — for
    doors that gain a "last played" fact once she's used them once (the
    Junior Jeopardy doors below). The outer .btn keeps centering the whole
@@ -1602,7 +1626,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v185 · polynomial topic';
+const APP_VERSION = 'v186 · pair up';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3411,6 +3435,7 @@ function modeLabel(l){
   if(l.mode==='cards')   return 'Flashcards';
   if(l.mode==='match')   return 'Match';   // historical logs only — the game itself was removed in v154
   if(l.mode==='sort')    return 'Sort';
+  if(l.mode==='pair')    return 'Pair up';
   if(l.mode==='ladder')  return 'Junior Jeopardy';
   if(l.mode==='starsky') return 'Star sky';
   if(l.mode==='read')    return 'Reading';
@@ -5570,6 +5595,19 @@ function unitCard(u, c, label){
     sb.addEventListener('click',()=>{ sortState = null; go('sort',{unitId:u.id, classId:c.id, sortId:set.id}); });
     card.appendChild(sb);
   });
+  /* Pair up — matching, on the lesson's real questions, so it COUNTS. No
+     content flag and nothing to author: any lesson with four pairable
+     questions has a board. Sits in Practice beside Junior Jeopardy, which
+     credits the same way for the same reason. */
+  if(pairPool(u).length >= 4){
+    const pb = el('button','btn btn-secondary');
+    const ps = el('span','btnstack');
+    ps.appendChild(el('span',null,'🃏  Pair up — match them, and it counts'));
+    ps.appendChild(el('small',null,'Every pair you get first time counts toward finishing the lesson'));
+    pb.appendChild(ps);
+    pb.addEventListener('click',()=>{ pairState = null; go('pairup',{unitId:u.id, classId:c.id}); });
+    card.appendChild(pb);
+  }
   /* A unit's own reference map, if it carries one (see openMapRef) — a door
      here, and the SAME map again from inside the quiz's tool row, so it is
      never more than a tap away while she is actually answering. Engine only
@@ -5800,6 +5838,255 @@ SCREENS.brief = function(root){
    removed in v154) — swipe sort's daily deal, pickRound's Growth-Zone-last
    tie-break, and the plan-of-attack's affirmation swap all seed off it. */
 const mixHash = s => { let h = 2166136261; for(const ch of String(s)){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+
+/* ================= WHAT MAKES AN ANSWER COUNT ================= */
+/* The two writes that turn an answer into progress: the per-question tally
+   (which powers strong/weak topics, the lesson doors, the topic map and the
+   gilt spine) and the Growth Zone miss. Extracted from answer() so Pair Up
+   credits a pairing through THIS path rather than a second copy of it — the
+   "one function, one truth" rule the Recent-sessions label fix learned the
+   hard way. answer() keeps the parts that are genuinely quiz-only: the
+   speed bonus, the pace measurement, the items[] drill-down, the guide's
+   saved place, and finishQuiz's ladder settling. */
+function creditAnswer(o){
+  const key = 'qstat_'+o.unitId+'_'+o.qid;
+  const prev = DATA.records[key];
+  put({ id:key, type:'qstat', unitId:o.unitId, classId:o.classId, qid:o.qid, q:o.q.q,
+        attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(o.right?1:0),
+        plain: qstatPlain(prev) + (o.plain ? 1 : 0) });
+  if(!o.miss) return;
+  /* Keyed to the ORIGINAL unit, so a miss from anywhere re-asks and promotes
+     exactly like a miss from the unit's own quiz. */
+  const was = DATA.records['miss_'+o.unitId+'_'+o.qid];
+  put(scheduleMiss({ id:'miss_'+o.unitId+'_'+o.qid, type:'miss', unitId:o.unitId, classId:o.classId,
+        qid:o.qid, q:o.q.q, opts:o.q.opts, ans:o.q.ans, kind:o.q.kind||null, passage:o.q.passage||null,
+        right:(o.q.kind==='order' ? o.q.opts.join(' → ') : o.q.opts[o.q.ans]), chose:o.chose,
+        why:o.q.ex?.main||'', graph:o.q.graph||null, steps:o.q.steps||null,
+        on:(was&&!was.deleted?was.on:AZ.today()) }, false));
+}
+
+/* ================= PAIR UP ================= */
+/* A matching game that COUNTS. Chris, 2026-09: "a sorting game for the girls
+   where it counts... basically a fun way to do matching."
+   Built on the lesson's OWN questions rather than on new content, which is
+   the whole reason it can count: a sort item is {t,k,why} with no id, so it
+   can carry no tally and can never become a miss ("the quiz owns the ladder").
+   A question already has an id, so pairing one correctly is just answering it
+   — qstats, the Growth Zone, XP and the lesson's progress all work through
+   creditAnswer() with no new record type and no content to author.
+   This is the "fun way to do matching" that Match (removed in v154) was not:
+   Match paired terms with definitions off the CARDS, which carry no tally,
+   which is precisely why it was not helpful. */
+const PAIR_ROUND = 5;    /* prompts on a board */
+const PAIR_DECOYS = 2;   /* extra answers belonging to no prompt — see below */
+const PAIR_XP = 10, PAIR_CLEAN = 50, PAIR_GOOD = 25;
+let pairState = null;
+
+/* Eligible: plain multiple-choice and analogies only. order/slider/spell are
+   excluded for the same reason the Jeopardy board excludes them — their answer
+   is not a single option you can put on a tile.
+   The dedupe is load-bearing, not tidiness: two questions whose correct answer
+   reads identically would put two identical tiles on the right, and the pairing
+   would be genuinely ambiguous — she could be marked wrong for picking a tile
+   that says the right thing. */
+function pairPool(u){
+  const seenTxt = new Set();
+  return (u.questions||[]).filter(q => {
+    if(q.kind && q.kind!=='mc' && q.kind!=='analogy') return false;
+    const a = q.opts && q.opts[q.ans];
+    if(!a || !String(a).trim()) return false;
+    const t = String(a).trim().toLowerCase();
+    if(seenTxt.has(t)) return false;
+    seenTxt.add(t); return true;
+  });
+}
+
+/* Same ranking as pickRound: Growth-Zone-owed last, then least-attempted,
+   then longest-unseen. A deliberate sibling rather than widening pickRound's
+   signature, exactly as pickLadder is. */
+function pickPairs(u){
+  const pool = pairPool(u);
+  const key = q => (q._srcUnit||u.id)+'_'+(q._srcQid||q.id);
+  const att  = q => (DATA.records['qstat_'+key(q)]?.attempts)||0;
+  const seen = q => (DATA.records['qstat_'+key(q)]?.updatedAt)||0;
+  const owed = q => { const m = DATA.records['miss_'+key(q)]; return (m && !m.deleted) ? 1 : 0; };
+  const ranked = pool.map(q=>({q, a:att(q), g:owed(q), t:seen(q), r:Math.random()}));
+  ranked.sort((x,y)=> x.g-y.g || x.a-y.a || x.t-y.t || x.r-y.r);
+  const take = ranked.slice(0, Math.min(PAIR_ROUND, ranked.length)).map(x=>x.q);
+  /* Decoys: answers from questions NOT on the board. Without them the pool
+     shrinks as she goes and the last pair is free — she would be credited a
+     right answer for having no other tile left to tap. With two decoys the
+     final prompt still has three candidates, so every pairing is a real
+     choice. They are never themselves pairable, so they cost nothing. */
+  const decoys = ranked.slice(take.length)
+    .slice(0, PAIR_DECOYS)
+    .map(x => String(x.q.opts[x.q.ans]));
+  return { qs: take, decoys };
+}
+
+function pairLog(){
+  const st = pairState; if(!st) return;
+  /* One log, updated in place as pairs land — Sort's and the ladder's own
+     rule, so leaving early keeps whatever she already earned. */
+  put({ id:st.logId, type:'log', mode:'pair', classId:st.classId, unitId:st.unitId,
+        date:AZ.today(), at:st.start, correct:st.met, total:st.lefts.length,
+        seconds:Math.round((Date.now()-st.start)/1000), xp:st.xp, hints:0 });
+}
+
+function pairDeal(u, cid){
+  const { qs, decoys } = pickPairs(u);
+  const rights = shuffle(qs.map(q=>({ qid:q.id, txt:String(q.opts[q.ans]), done:false }))
+    .concat(decoys.map(d=>({ qid:null, txt:d, done:false, decoy:true }))));
+  pairState = {
+    unitId:u.id, classId:cid, logId:uid('log'),
+    start:Date.now(), sel:null, xp:0, met:0, gzN:0, note:null,
+    lefts: qs.map(q=>({ q, done:false, missed:false })),
+    rights
+  };
+}
+
+function pairCredit(q, right, chose){
+  const st = pairState;
+  const unitId  = q._srcUnit  || st.unitId;
+  const classId = q._srcClass || st.classId;
+  const qid     = q._srcQid   || q.id;
+  /* Pair Up is always untimed, so every sighting is a "plain" one and
+     genuinely finishes the lesson — the same call the Jeopardy board makes. */
+  creditAnswer({ unitId, classId, qid, q, right, chose, plain:true, miss:!right });
+}
+
+SCREENS.pairup = function(root){
+  const u = unitFor(ctx.unitId); if(!u) return go('today');
+  const cid = ctx.classId || u.classId;
+  if(!pairState || pairState.unitId !== u.id) pairDeal(u, cid);
+  const st = pairState;
+
+  const head = el('div','card');
+  head.appendChild(el('div','eyebrow','🃏 Pair up · ' + u.title));
+  const left = st.lefts.filter(x=>!x.done).length;
+  head.appendChild(el('h2', null, left ? 'Match each one to its answer' : 'Every pair found'));
+  head.appendChild(el('p', null, left
+    ? 'Tap a question, then the answer that goes with it. These are the lesson’s real questions — getting one right counts exactly as it would in the quiz.'
+    : 'All of them counted toward the lesson, the same as a quiz round.'));
+  root.appendChild(head);
+
+  if(st.note){
+    const n = el('div','pairnote' + (st.note.ok ? ' ok' : ' no'), st.note.t);
+    n.id = 'pairnote';
+    n.setAttribute('role','status');
+    root.appendChild(n);
+    /* The board is taller than the screen, so pairing a tile near the bottom
+       used to put the verdict somewhere she never saw. Bring it to her — the
+       same fix, and the same reduced-motion gate, as the shelf's opened card
+       (v115). Only on a NEW note, or every re-render would yank the page. */
+    if(st.noteFresh){
+      st.noteFresh = false;
+      requestAnimationFrame(()=>{
+        const nn = document.getElementById('pairnote');
+        if(nn) nn.scrollIntoView({
+          behavior: matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto',
+          block:'center' });
+      });
+    }
+  }
+
+  const board = el('div','pairboard');
+  const colL = el('div','paircol'), colR = el('div','paircol');
+  colL.appendChild(el('div','pairlab','The question'));
+  colR.appendChild(el('div','pairlab','The answer'));
+
+  st.lefts.forEach(it=>{
+    const b = el('button','pairtile' + (it.done?' done':'') + (st.sel===it?' sel':''));
+    b.type = 'button';
+    b.appendChild(el('span','pt', it.q.q));
+    if(it.done) b.appendChild(el('span','pmark','paired'));
+    b.disabled = it.done;
+    b.setAttribute('aria-pressed', st.sel===it ? 'true' : 'false');
+    b.addEventListener('click',()=>{ st.sel = (st.sel===it ? null : it); st.note=null; render(); });
+    colL.appendChild(b);
+  });
+
+  st.rights.forEach(it=>{
+    const b = el('button','pairtile ans' + (it.done?' done':''));
+    b.type = 'button';
+    b.appendChild(el('span','pt', it.txt));
+    b.disabled = it.done;
+    b.addEventListener('click',()=>pairPick(u, it));
+    colR.appendChild(b);
+  });
+
+  board.appendChild(colL); board.appendChild(colR);
+  root.appendChild(board);
+
+  if(!left){
+    const done = el('div','card');
+    done.appendChild(el('div','eyebrow','Round done'));
+    const chips = el('div','tally');
+    chips.appendChild(el('span','chip', st.met + ' of ' + st.lefts.length + ' first time'));
+    chips.appendChild(el('span','chip', '+' + st.xp + ' XP'));
+    if(st.gzN) chips.appendChild(el('span','chip', st.gzN + ' to the Growth Zone'));
+    done.appendChild(chips);
+    done.appendChild(el('p', null, st.gzN
+      ? 'The ones that slipped come back tomorrow — that is the Growth Zone doing its job, not a mark against you.'
+      : 'Clean board. Every one of those counted toward finishing the lesson.'));
+    const again = el('button','btn btn-primary','Deal another board');
+    again.addEventListener('click',()=>{ pairState=null; go('pairup',{unitId:u.id, classId:cid}); });
+    done.appendChild(again);
+    root.appendChild(done);
+  }
+
+  const leave = el('button','btn btn-ghost','Leave');
+  leave.addEventListener('click',()=>{ pairLog(); pairState=null; go('unit',{classId:cid}); });
+  root.appendChild(leave);
+};
+
+/* One setter, so a new call site cannot forget to mark the note fresh and
+   quietly lose its scroll-into-view. */
+function pairSay(t, ok){ pairState.note = {t, ok}; pairState.noteFresh = true; }
+
+function pairPick(u, r){
+  const st = pairState;
+  if(r.done) return;
+  if(!st.sel){ pairSay('Pick a question on the left first.', false); return render(); }
+  const L = st.sel;
+  if(r.qid === L.q.id){
+    L.done = true; r.done = true; st.sel = null;
+    if(!L.missed){
+      /* First time right — credited exactly as a quiz answer. */
+      pairCredit(L.q, true, r.txt);
+      st.met++; st.xp += PAIR_XP;
+      /* st.note.t is rendered as textContent, so the explanation's **bold**
+         markers are stripped rather than left on screen as asterisks. */
+      pairSay('Paired. That one counted — ' + (L.q.ex?.main ? String(L.q.ex.main).replace(/\*\*/g,'') : 'nicely done.'), true);
+    } else {
+      /* Already on the ladder from this board — the attempt was recorded when
+         she missed it; crediting again would undo the miss she just made. */
+      pairSay('Paired. That one is on the review ladder now, so it will come back tomorrow.', true);
+    }
+    if(navigator.vibrate) navigator.vibrate([12,40,12]);
+    pairLog();
+    if(st.lefts.every(x=>x.done)){
+      /* Same shape of bonus as a quiz round, and for the same reason: finishing
+         is what the bonus is for. Scaled to the board so a 5-pair board cannot
+         out-earn a 5-question round. */
+      const pct = st.met / st.lefts.length;
+      if(pct === 1) st.xp += PAIR_CLEAN; else if(pct >= .8) st.xp += PAIR_GOOD;
+      pairLog();
+    }
+    return render();
+  }
+  /* Wrong. One miss per prompt per board: the second wrong guess at the same
+     question would reset a box she has not been re-tested on. */
+  if(!L.missed){
+    L.missed = true; st.gzN++;
+    pairCredit(L.q, false, r.txt);
+    pairSay('Not that one. It goes to the Growth Zone and comes back tomorrow — keep going and find its partner.', false);
+  } else {
+    pairSay('Still not it. Nothing new recorded — it is already on the ladder.', false);
+  }
+  st.sel = null;
+  render();
+}
 
 /* ================= SORT ================= */
 /* Swipe sort: two buckets, one card at a time, left or right. The material is
@@ -8767,36 +9054,23 @@ function answer(u,q,idx){
   const classId = src ? src.classId : (q._srcClass || ctx.classId);
   const qid     = src ? src.qid     : (q._srcQid   || q.id);
 
-  /* Per-question tally powers the strong/weak topic breakdown in the parent view. */
-  const key = 'qstat_'+unitId+'_'+qid;
-  const prev = DATA.records[key];
-  put({ id:key, type:'qstat', unitId, classId, qid, q:q.q,
-        attempts:(prev?.attempts||0)+1, correct:(prev?.correct||0)+(right?1:0),
-        /* Only an untimed sighting counts toward finishing the lesson. */
-        plain: qstatPlain(prev) + (quizState.timed ? 0 : 1) });
+  /* The tally and the Growth Zone miss both go through creditAnswer(), which
+     Pair Up also calls — one crediting path, so the two can never drift. */
+  creditAnswer({ unitId, classId, qid, q, right, chose:choseTxt,
+                 /* Only an untimed sighting counts toward finishing the lesson. */
+                 plain: !quizState.timed,
+                 /* A rescue variant is practice on a question ALREADY on the
+                    ladder, and a review/shuffle miss is demoted by finishQuiz —
+                    neither writes a new miss here. Attempts count either way. */
+                 miss: !right && !q._rescue && !src });
   /* Working the guide in the app saves her place after every question, so
      closing it mid-pass costs nothing. */
   if(u.guide) guideSet(u.id, q.id, idx);
   if(!right){
     quizState.missed.push(q.id);
-    const chose = choseTxt;
-    /* A rescue variant is practice on a question that is ALREADY on the
-       ladder. Writing a second miss would double-count it and reset a box she
-       has not been re-tested on. Attempts are recorded above either way. */
     if(q._rescue){ render(); return; }
-    if(src){
-      /* Demotion is finishQuiz's job; here we just record what she picked this time. */
-      put({ ...src, chose });
-    } else {
-      /* Keyed to the ORIGINAL unit, so a shuffle-round miss re-asks and
-         promotes exactly like a miss from the unit's own quiz. */
-      const was = DATA.records['miss_'+unitId+'_'+qid];
-      put(scheduleMiss({ id:'miss_'+unitId+'_'+qid, type:'miss', unitId, classId,
-            qid, q:q.q, opts:q.opts, ans:q.ans, kind:q.kind||null, passage:q.passage||null,
-            right:(q.kind==='order' ? q.opts.join(' → ') : q.opts[q.ans]), chose,
-            why:q.ex?.main||'', graph:q.graph||null, steps:q.steps||null,
-            on:(was&&!was.deleted?was.on:AZ.today()) }, false));
-    }
+    /* Demotion is finishQuiz's job; here we just record what she picked this time. */
+    if(src) put({ ...src, chose:choseTxt });
   }
   /* Saved on every answer, once every field above is settled. A phone screen
      that sleeps and drops the page fires no pagehide, so waiting for the

@@ -982,6 +982,92 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Pair up — matching that counts (v186 / Wayfinder v166, both apps)
+
+Chris: *"Can we create a sorting game for the girls where it counts? Basically
+a fun way to do matching."* Prototyped first as a standalone Artifact, then
+built after he picked all three levels of counting: XP, progress toward
+finishing the lesson, and misses landing in the Growth Zone.
+
+**The reason matching could not count before is structural, and naming it is
+what produced the design.** Swipe sort's items are `{t, k, why}` — **no id** —
+so a sort item can carry no tally and can never become a `miss`; hence the
+standing rule *"the quiz owns the ladder."* Match (removed in v154 as "not
+very helpful") paired terms with definitions off the CARDS, which have no
+tally either — that is precisely why it wasn't helpful. **A question already
+has an id.** So Pair Up deals the lesson's own questions: the prompt on the
+left, its correct option on the right, and pairing one correctly is simply
+answering it. Zero new content, zero new record types, and it worked on every
+shipped unit in both libraries the moment it existed.
+
+**`creditAnswer()` is the whole point of the change.** The two writes that
+turn an answer into progress — the `qstat` tally and the Growth Zone `miss` —
+were extracted out of `answer()` into one function that Pair Up also calls.
+One crediting path, so the game and the quiz can never drift; the same "one
+function, one truth" correction the Recent-sessions label fix already learned.
+`answer()` keeps only what is genuinely quiz-only: the speed bonus, the pace
+measurement, the `items[]` drill-down, the guide's saved place, and
+`finishQuiz`'s ladder settling. Verified against the old code hunk that the
+rescue-variant and review-round guards are preserved exactly — a rescue
+variant still writes no new miss and still returns before `saveRound`.
+
+- **Always `plain:true`.** Pair Up is untimed, so every sighting genuinely
+  finishes the lesson — the same call the Jeopardy board makes, and the
+  reason the door can honestly say it counts.
+- **Decoys, or the last pair is free.** A board deals `PAIR_ROUND` (5)
+  prompts and `PAIR_ROUND + PAIR_DECOYS` (7) answer tiles, the two extras
+  drawn from questions NOT on the board. Without them the pool shrinks as she
+  goes and the final prompt has exactly one candidate left — she would be
+  credited a right answer for having nothing else to tap.
+- **The pool dedupes by answer text, and that is load-bearing rather than
+  tidiness.** Two prompts whose correct answers read identically would put
+  two identical tiles on the right and the pairing would be genuinely
+  ambiguous — she could be marked wrong for tapping a tile that says the
+  right thing. `order`/`slider`/`spell` are excluded for the Jeopardy
+  board's own reason: their answer is not a single option you can put on a
+  tile.
+- **One miss per prompt per board.** A second wrong guess at the same
+  question would reset a box she has not been re-tested on. And pairing it
+  correctly *afterwards* deliberately credits nothing — crediting there would
+  undo the miss she just made, seconds later, which is massed practice
+  wearing a spaced-retrieval badge (the rescue round's own rule).
+- **`pickPairs()` mirrors `pickRound()`'s ranking** — Growth-Zone-owed last,
+  then least-attempted, then longest-unseen — a deliberate sibling function
+  like `pickLadder`, rather than widening `pickRound`'s signature.
+- **One `mode:'pair'` log updated in place** as pairs land, so leaving early
+  keeps what she earned (Sort's and the ladder's rule). The completion bonus
+  is scaled to the board so five pairs cannot out-earn a five-question round.
+
+> ⚠️ **`opacity` is not a way to de-emphasise text, and the probe is what
+> said so.** A paired tile was first dimmed with `opacity:.55`; composited
+> properly its text measured **3.61:1** and its "PAIRED" mark **2.54:1** in
+> light mode — a tile she still needs to read, to know what she has already
+> matched. It is `color:var(--muted)` on a faint `--good` tint now, with the
+> mark at full strength. `tools/contrast_pairup.js` models the opacity fade
+> toward the page rather than ignoring it, which is the only reason this was
+> visible at all. Worst case after the fix: 5.34:1 here, 5.63:1 in
+> Wayfinder, across 288/360 accent × sky × theme samples.
+
+> ⚠️ **The verdict was rendering somewhere she could not see it.** The board
+> is taller than the phone, so pairing a tile near the bottom put the
+> explanation at the top of the page — found by playing a board, not by
+> reading the code. It scrolls into view now, on a NEW note only (every
+> re-render would otherwise yank the page), behind the same
+> `prefers-reduced-motion` gate as the shelf's opened card. Every note goes
+> through one `pairSay()` setter so a later call site cannot forget the flag
+> and quietly lose the scroll.
+
+`tools/test_pairup.js` (same file in both repos, bar its default port) is
+mostly about what lands in `DATA.records`, because the crediting IS the
+feature: the door's gate, the deal and its orphan decoys, a right pairing
+writing a real qstat with `plain` incremented and no miss, a wrong one
+landing at box 0 due tomorrow, the no-double-record guard, recovering a
+missed pair without undoing the miss, the scaled bonus in one log, and — the
+assertion that says why this exists rather than Match — `quizProgress()`
+counting those questions as met afterwards. It also asserts **every subject
+in the library has at least one board**, since the claim the game makes is
+that it needs no content authored for it.
+
 ### Topic 3 — Polynomial Functions, all seven lessons (v185)
 
 Chris: *"I've updated Sedona's math section. Can we organize the topic 3 folder
