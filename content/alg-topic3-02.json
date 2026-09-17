@@ -1,0 +1,642 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-02": {
+   "id": "unit-alg-t3-02",
+   "type": "unit",
+   "updatedAt": 1789600054157,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-2 Adding, Subtracting, and Multiplying Polynomials",
+   "srcName": "enVision Algebra 2, Lesson 3-2 (Drive)",
+   "source": "enVision Algebra 2 Lesson 3-2: Adding, Subtracting, and Multiplying Polynomials",
+   "summary": {
+    "text": "Lesson 3-2 covers the arithmetic of polynomials: combining like terms to add and subtract, distributing to multiply, and the fact that polynomials are closed under all three operations but not under division.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Every later lesson in this topic — dividing, factoring, finding roots — assumes you can expand and combine without slips. This is the lesson where accuracy is worth more than speed.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Add and subtract polynomials by combining like terms",
+     "from": "source"
+    },
+    {
+     "text": "Distribute the subtraction sign across every term of the second polynomial",
+     "from": "source"
+    },
+    {
+     "text": "Multiply polynomials of any size, term by term",
+     "from": "source"
+    },
+    {
+     "text": "Predict the degree of a sum or a product before expanding",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "The error to watch for is the subtraction sign: it has to reach EVERY term in the second bracket, and the term most often missed is the last one. Several questions here are built so that stopping halfway produces one of the wrong options rather than an obviously silly answer. The other pattern worth knowing is that exponents ADD on multiplication and never move on addition — mixing those two up accounts for most of the rest. Suggest she write the −1 in front of the bracket explicitly rather than distributing it mentally.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do the subtraction questions slowly and check the last term of every bracket.",
+    "minutes": 16,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Like terms",
+     "def": "**Terms with exactly the same variable raised to exactly the same power.**\n• 5x³ and −2x³ are like terms; 5x³ and 5x² are not.\n• Only like terms can be combined, and combining them adds the coefficients while the power stays put.",
+     "hint": "Same variable, same exponent — both, not either.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Adding polynomials",
+     "def": "**Combine like terms; every unlike term just comes along unchanged.**\n• (3x² + x) + (x² − 4) = 4x² + x − 4.\n• The exponents never change when you add — only the coefficients do.",
+     "hint": "Add the coefficients, leave the powers alone.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Subtracting polynomials",
+     "def": "**Distribute the minus sign to EVERY term in the second polynomial, then add.**\n• (5x² + 2x − 1) − (3x² − 7x + 4) = 5x² + 2x − 1 − 3x² + 7x − 4.\n• Note −7x became +7x and +4 became −4. Missing the terms after the first is the single most common error in this lesson.",
+     "eq": "(A) − (B) = A + (−1)·B",
+     "hint": "The minus belongs to the whole bracket, not just its first term.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Why the minus sign is the trap",
+     "def": "**Subtracting is multiplying the second polynomial by −1, so every single term flips sign — not just the one at the front.**\n• Writing the −1 in front of the bracket and distributing it deliberately is slower and much safer than doing it in your head.\n• If you check one thing on a subtraction problem, check that the LAST term flipped.",
+     "hint": "Check the last term — that is the one that gets forgotten.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Closure",
+     "def": "**Add, subtract or multiply two polynomials and the result is always another polynomial.**\n• Polynomials are closed under addition, subtraction and multiplication.\n• They are NOT closed under division — (x + 1) ÷ x is not a polynomial.",
+     "hint": "Three of the four operations stay inside the club; division is the one that escapes.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Multiplying a monomial by a polynomial",
+     "def": "**Distribute: multiply the monomial by every term.**\n• 3x²(2x³ − 5x + 1) = 6x⁵ − 15x³ + 3x².\n• Multiply the coefficients and ADD the exponents — x² · x³ = x⁵, never x⁶.",
+     "eq": "x^m · x^n = x^(m+n)",
+     "hint": "Coefficients multiply; exponents add.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Multiplying two binomials",
+     "def": "**Every term in the first multiplies every term in the second.**\n• (2x + 3)(x − 5) = 2x² − 10x + 3x − 15 = 2x² − 7x − 15.\n• Two terms times two terms gives four products before you combine.",
+     "hint": "Count the products first: 2 × 2 = 4. If you have fewer, you missed one.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Multiplying larger polynomials",
+     "def": "**Same rule — every term times every term — so an m-term by an n-term product has m × n products before combining.**\n• A binomial times a trinomial gives 2 × 3 = 6 products.\n• Counting them first is the cheapest way to catch a missed one.",
+     "hint": "m × n products. Count before you combine.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Degree of a product",
+     "def": "**Multiply two polynomials and the degrees ADD.**\n• A degree-3 times a degree-4 gives a degree-7 polynomial.\n• It follows from the highest-degree terms multiplying: x³ · x⁴ = x⁷.\n• This lets you predict the degree of an answer before you expand — a fast check that you did not drop a term.",
+     "eq": "deg(A·B) = deg A + deg B",
+     "hint": "Degrees add on multiplication, the same way exponents do.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Degree of a sum or difference",
+     "def": "**Usually the larger of the two degrees — but it can be LOWER if the leading terms cancel.**\n• (x³ + 2x) + (−x³ + 5) = 2x + 5, which is degree 1, not 3.\n• So the rule for sums is genuinely different from the clean one for products.",
+     "hint": "Products are predictable; sums can collapse.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Example: a subtraction, worked",
+     "def": "**(4x³ − x² + 6) − (x³ + 5x² − 2) = 3x³ − 6x² + 8.**\n• Distribute: 4x³ − x² + 6 − x³ − 5x² + 2.\n• Watch the last term: −2 became +2. Combine: (4 − 1)x³, (−1 − 5)x², (6 + 2).",
+     "hint": "Every sign in the second bracket flipped — check the constant.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Example: a multiplication, worked",
+     "def": "**(x + 4)(2x² − 3x + 1) = 2x³ + 5x² − 11x + 4.**\n• Expect 1 × 3 + 1 × 3 = 6 products, and degree 1 + 2 = 3.\n• x gives 2x³ − 3x² + x; 4 gives 8x² − 12x + 4; combining gives 2x³ + 5x² − 11x + 4.",
+     "hint": "Predict the degree and the product count first, then check your answer against both.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pair are like terms?",
+     "opts": [
+      "−7x⁵ and 2x⁵",
+      "−7x⁵ and 2x³",
+      "−7x⁵ and 2y⁵",
+      "−7x⁵ and −7x³"
+     ],
+     "ans": 0,
+     "hint": "Like terms need the same variable AND the same exponent.",
+     "steps": [
+      "Compare the variable: both must be x.",
+      "Compare the exponent: both must be the same power.",
+      "−7x⁵ and 2x⁵ match on both counts.",
+      "The others differ in exponent, in variable, or in exponent again."
+     ],
+     "ex": {
+      "main": "**−7x⁵ and 2x⁵.** Both conditions have to hold at once. Matching coefficients (the two −7s) counts for nothing — that is the one thing that is allowed to differ.",
+      "tip": "Only like terms combine, and combining adds the coefficients while the power stays put."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (2x³ + 5x − 1) + (4x³ − 3x + 6).",
+     "opts": [
+      "6x³ + 8x + 5",
+      "6x³ + 2x + 5",
+      "6x⁶ + 2x + 5",
+      "6x³ + 2x − 7"
+     ],
+     "ans": 1,
+     "hint": "Group like terms, then add coefficients.",
+     "steps": [
+      "Cubes: 2x³ + 4x³ = 6x³.",
+      "x terms: 5x + (−3x) = 2x.",
+      "Constants: −1 + 6 = 5.",
+      "The sum is 6x³ + 2x + 5."
+     ],
+     "ex": {
+      "main": "**6x³ + 2x + 5.** Adding combines coefficients and leaves exponents alone — 6x⁶ comes from adding the exponents, which is the multiplication rule wandering into an addition problem.",
+      "tip": "Exponents only add when you MULTIPLY. On a sum they never move."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (8x² − 3x + 5) − (2x² + 6x − 9).",
+     "opts": [
+      "6x² − 9x − 4",
+      "6x² + 3x − 4",
+      "6x² − 9x + 14",
+      "10x² + 3x − 4"
+     ],
+     "ans": 2,
+     "hint": "Distribute the minus across all three terms before combining anything.",
+     "steps": [
+      "Rewrite as 8x² − 3x + 5 − 2x² − 6x + 9 — all three signs flipped.",
+      "Squares: 8x² − 2x² = 6x².",
+      "x terms: −3x − 6x = −9x.",
+      "Constants: 5 + 9 = 14. The result is 6x² − 9x + 14."
+     ],
+     "ex": {
+      "main": "**6x² − 9x + 14.** The constant is where this is won or lost: −(−9) is +9, so 5 + 9 = 14. Getting −4 there means the minus sign reached the first term and then quietly stopped.",
+      "tip": "On any subtraction, check the LAST term first. It is the one that gets forgotten."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Polynomials are closed under which operations?",
+     "opts": [
+      "Multiplication and division only",
+      "Addition and subtraction only",
+      "All four, including division",
+      "Addition, subtraction and multiplication"
+     ],
+     "ans": 3,
+     "hint": "Closed means the answer is always the same kind of thing you started with.",
+     "steps": [
+      "Add two polynomials and you always get a polynomial.",
+      "Subtract two and you always get a polynomial.",
+      "Multiply two and you always get a polynomial.",
+      "Divide and you may not — (x + 1) ÷ x is not a polynomial. So it is the first three."
+     ],
+     "ex": {
+      "main": "**Addition, subtraction and multiplication.** Division is the one that escapes: dividing can produce a variable in a denominator, which is a negative exponent, which a polynomial is not allowed. This is exactly like the integers — closed under the first three, not under division.",
+      "tip": "The integers are the analogy: 3 ÷ 2 leaves the integers the same way (x + 1) ÷ x leaves the polynomials."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify 5x³(3x² − 4x + 2).",
+     "opts": [
+      "15x⁵ − 20x⁴ + 10x³",
+      "15x⁶ − 20x³ + 10x³",
+      "15x⁵ − 4x + 2",
+      "8x⁵ − 20x⁴ + 10x³"
+     ],
+     "ans": 0,
+     "hint": "Multiply the coefficients, add the exponents, and reach every term.",
+     "steps": [
+      "5x³ · 3x² = 15x⁵ (coefficients multiply, exponents add).",
+      "5x³ · (−4x) = −20x⁴.",
+      "5x³ · 2 = 10x³.",
+      "Together: 15x⁵ − 20x⁴ + 10x³."
+     ],
+     "ex": {
+      "main": "**15x⁵ − 20x⁴ + 10x³.** Coefficients multiply and exponents ADD — x³ · x² = x⁵, not x⁶. And the monomial has to reach all three terms; stopping after the first leaves the rest of the bracket untouched.",
+      "tip": "Adding the exponents on a multiplication is the mirror image of the mistake on the previous kind of question."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A degree-4 polynomial is multiplied by a degree-5 polynomial. What is the degree of the product?",
+     "opts": [
+      "20",
+      "9",
+      "5",
+      "1"
+     ],
+     "ans": 1,
+     "hint": "On a product, degrees behave the way exponents do.",
+     "steps": [
+      "The highest-degree terms multiply to give the highest-degree term of the product.",
+      "x⁴ · x⁵ = x⁹.",
+      "So the degrees add: 4 + 5 = 9.",
+      "The product has degree 9."
+     ],
+     "ex": {
+      "main": "**9.** Degrees add on multiplication because exponents do. Multiplying them (20) confuses the rule with the coefficients, which genuinely do multiply — but degrees are exponents, and exponents add.",
+      "tip": "Predicting the degree before you expand catches a dropped term instantly."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (x + 7)(x − 2).",
+     "opts": [
+      "x² + 5x + 14",
+      "x² − 5x − 14",
+      "x² + 5x − 14",
+      "x² − 14"
+     ],
+     "ans": 2,
+     "hint": "Expect four products before combining.",
+     "steps": [
+      "x · x = x².",
+      "x · (−2) = −2x and 7 · x = 7x.",
+      "Combine the middle: −2x + 7x = 5x.",
+      "7 · (−2) = −14. So x² + 5x − 14."
+     ],
+     "ex": {
+      "main": "**x² + 5x − 14.** The middle term comes from combining two separate products, which is why \"x² − 14\" is wrong — that answer multiplies only the first terms and only the last terms and skips the cross products entirely.",
+      "tip": "Four products from two binomials. If you wrote fewer, one is missing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (3x − 4)(2x² + x − 5).",
+     "opts": [
+      "6x³ − 8x² − 19x + 20",
+      "6x³ + 5x² − 19x − 20",
+      "6x³ − 5x² − 11x + 20",
+      "6x³ − 5x² − 19x + 20"
+     ],
+     "ans": 3,
+     "hint": "Two terms times three terms: expect six products, and degree 1 + 2 = 3.",
+     "steps": [
+      "3x across the trinomial: 6x³ + 3x² − 15x.",
+      "−4 across the trinomial: −8x² − 4x + 20.",
+      "Combine x²: 3x² − 8x² = −5x². Combine x: −15x − 4x = −19x.",
+      "The product is 6x³ − 5x² − 19x + 20."
+     ],
+     "ex": {
+      "main": "**6x³ − 5x² − 19x + 20.** The −4 must reach all three terms and carry its sign each time — including −4 · (−5) = +20. Checking the degree (3) and the product count (6) before combining catches a dropped term before it becomes a wrong answer.",
+      "tip": "Distributing a NEGATIVE term across a trinomial is where this goes wrong. Write the sign every time."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (2x + 5)².",
+     "opts": [
+      "4x² + 20x + 25",
+      "4x² + 25",
+      "2x² + 20x + 25",
+      "4x² + 10x + 25"
+     ],
+     "ans": 0,
+     "hint": "Squaring means multiplying the binomial by itself — write it out twice.",
+     "steps": [
+      "(2x + 5)² means (2x + 5)(2x + 5).",
+      "First terms: 2x · 2x = 4x².",
+      "Cross terms: 2x · 5 = 10x, twice, giving 20x.",
+      "Last: 5 · 5 = 25. So 4x² + 20x + 25."
+     ],
+     "ex": {
+      "main": "**4x² + 20x + 25.** The middle term is the one that disappears if you square each piece separately — \"4x² + 25\" is what you get by squaring the terms and forgetting they multiply each other too. There are TWO cross products, which is why it is 20x and not 10x.",
+      "tip": "Writing the bracket out twice rather than squaring in place prevents both wrong answers here."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the degree of (x³ + 2x) + (−x³ + 5)?",
+     "opts": [
+      "3",
+      "1",
+      "0",
+      "6"
+     ],
+     "ans": 1,
+     "hint": "Simplify before you answer — something cancels.",
+     "steps": [
+      "Combine the cubes: x³ + (−x³) = 0.",
+      "What is left is 2x + 5.",
+      "The greatest exponent there is 1.",
+      "The degree is 1."
+     ],
+     "ex": {
+      "main": "**1.** The leading terms cancelled, so the sum has a LOWER degree than either polynomial it came from. That is the real difference between sums and products: a product’s degree is always the sum of the degrees, but a sum’s degree can collapse.",
+      "tip": "Always simplify before reading a degree off. On sums, the answer can be smaller than you expect."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (x² + 3x − 1) − (x² − 3x + 1).",
+     "opts": [
+      "2x² − 2",
+      "0",
+      "6x − 2",
+      "6x"
+     ],
+     "ans": 2,
+     "hint": "Flip every sign in the second bracket, then see what survives.",
+     "steps": [
+      "Distribute: x² + 3x − 1 − x² + 3x − 1.",
+      "Squares: x² − x² = 0.",
+      "x terms: 3x + 3x = 6x.",
+      "Constants: −1 − 1 = −2. The result is 6x − 2."
+     ],
+     "ex": {
+      "main": "**6x − 2.** The two polynomials look nearly identical, which tempts you into answering 0 — but they differ in the signs of the last two terms, and subtracting flips those, so those terms DOUBLE rather than cancel. Only the x² terms cancel.",
+      "tip": "Near-identical brackets are the classic setup for this. Distribute first, judge afterwards."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rectangular garden is x m by (x + 4) m. A path widens the longer pair of sides so the garden becomes (x + 6) m by (x + 4) m. How much area was added?",
+     "opts": [
+      "(x² + 10x + 24) m²",
+      "(6x) m²",
+      "(2x² + 10x + 24) m²",
+      "(6x + 24) m²"
+     ],
+     "ans": 3,
+     "hint": "New area minus old area — and subtraction means distributing the minus.",
+     "steps": [
+      "New area: (x + 6)(x + 4) = x² + 10x + 24.",
+      "Old area: x(x + 4) = x² + 4x.",
+      "Subtract, distributing the minus: x² + 10x + 24 − x² − 4x.",
+      "That leaves 6x + 24 square metres."
+     ],
+     "ex": {
+      "main": "**(6x + 24) m².** Expand both areas, then subtract with the minus reaching every term. The x² terms cancel, which makes sense: the added strip is a rectangle, so its area should be degree 1 in x, not degree 2. Answering with an x² term means the subtraction never happened.",
+      "tip": "A quick reality check: a strip added to one side should grow linearly, so an x² in the answer is a red flag."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student expands (3x − 2)(x² + 5x − 4) and gets 3x³ + 15x² − 12x − 2x² − 10x + 8, then writes the answer as 3x³ + 13x² − 2x + 8. What went wrong?",
+     "opts": [
+      "The expansion is right; the x terms were combined wrong",
+      "The expansion is right; the x² terms were combined wrong",
+      "The −2 was not distributed to every term of the trinomial",
+      "The exponents were added instead of being multiplied"
+     ],
+     "ans": 0,
+     "hint": "Check the student’s work line by line instead of just redoing the problem.",
+     "steps": [
+      "3x across the trinomial gives 3x³ + 15x² − 12x. Correct.",
+      "−2 across the trinomial gives −2x² − 10x + 8. Correct, including −2 · (−4) = +8.",
+      "Combining: 15x² − 2x² = 13x², and −12x − 10x = −22x.",
+      "The student wrote −2x where it should be −22x — an error in combining the x terms, not in the expansion."
+     ],
+     "ex": {
+      "main": "**The expansion is right; the x terms were combined wrong.** Every product was distributed correctly, including −2 · (−4) = +8. The error is in the very last step: −12x − 10x is −22x, not −2x. A question asking \"what went wrong\" can have its error in the combining rather than the method, so check the final line as carefully as the first.",
+      "tip": "Read a worked solution line by line. The mistake is often later than you expect."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Is it possible for the product of two polynomials of degree 3 to have degree 5?",
+     "opts": [
+      "Yes — if the leading terms cancel",
+      "No — the degrees add, so the product must be degree 6",
+      "Yes — if one polynomial has a negative leading coefficient",
+      "No — the product must be degree 9"
+     ],
+     "ans": 1,
+     "hint": "Ask what produces the highest-degree term of a product.",
+     "steps": [
+      "The highest-degree term of a product comes from multiplying the two leading terms.",
+      "Two leading terms multiply to something of degree 3 + 3 = 6.",
+      "Two non-zero numbers can never multiply to zero, so that term can never vanish.",
+      "The product must have degree 6 — 5 is impossible."
+     ],
+     "ex": {
+      "main": "**No — the degrees add, so it is always degree 6.** Cancellation is exactly what CAN happen on a sum and cannot happen on a product: adding can zero out a leading term, but multiplying two non-zero leading coefficients always gives a non-zero result. That asymmetry is the whole point.",
+      "tip": "Sums can collapse in degree; products never can. Know which rule you are under."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box has a square base of side (2x + 1) cm and height (x + 3) cm. Which expression gives its volume, and what degree is it?",
+     "opts": [
+      "2x³ + 7x² + 3x, degree 3",
+      "4x³ + 16x² + 13x + 3, degree 4",
+      "4x³ + 16x² + 13x + 3, degree 3",
+      "4x² + 4x + 1, degree 2"
+     ],
+     "ans": 2,
+     "hint": "Volume is base area times height — and predict the degree before expanding.",
+     "steps": [
+      "Base area: (2x + 1)² = 4x² + 4x + 1.",
+      "Predict the degree: 2 + 1 = 3, so the answer must be a cubic.",
+      "Multiply by (x + 3): 4x³ + 4x² + x + 12x² + 12x + 3.",
+      "Combine: 4x³ + 16x² + 13x + 3, degree 3."
+     ],
+     "ex": {
+      "main": "**4x³ + 16x² + 13x + 3, degree 3.** Three linear factors multiply to a cubic, so the degree is settled before any expanding — a free check on the answer. The degree-2 option is the base area alone, with the height never used.",
+      "tip": "Volume from three lengths is always degree 3. If your answer is not a cubic, you dropped a factor."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does subtracting polynomials cause more errors than adding them?",
+     "opts": [
+      "Because like terms cannot be combined under subtraction",
+      "Because subtraction changes the exponents as well as the coefficients",
+      "Because the answer can have a different degree",
+      "Because the minus sign must be distributed to every term of the second polynomial"
+     ],
+     "ans": 3,
+     "hint": "One of these names an actual extra step; the others describe things that do not happen.",
+     "steps": [
+      "Addition just combines like terms straight away.",
+      "Subtraction inserts a step first: multiply the whole second polynomial by −1.",
+      "That step touches EVERY term, and skipping the terms after the first is the usual slip.",
+      "So it is the distribution of the minus sign that creates the extra risk."
+     ],
+     "ex": {
+      "main": "**Because the minus sign must be distributed to every term.** Exponents never change under either operation, and like terms combine normally under both. A degree change from cancellation can happen on an addition just as easily, so it is not what makes subtraction harder — the extra distribution step is.",
+      "tip": "Writing the −1 explicitly in front of the bracket turns the risky step into a visible one."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (x − 3)(x + 3).",
+     "opts": [
+      "x² − 9",
+      "x² + 9",
+      "x² − 6x − 9",
+      "x² − 6x + 9"
+     ],
+     "ans": 0,
+     "hint": "Work the four products and watch what happens to the middle two.",
+     "steps": [
+      "First terms: x · x = x².",
+      "Cross terms: x · 3 = 3x and −3 · x = −3x.",
+      "Those two cancel exactly, so there is no middle term.",
+      "Last: −3 · 3 = −9. So x² − 9."
+     ],
+     "ex": {
+      "main": "**x² − 9.** The cross terms cancel because the two constants are opposites — this is the difference-of-squares pattern, and Lesson 3-3 names it as an identity worth memorising. Getting −6x + 9 is the answer to (x − 3)², a different product entirely.",
+      "tip": "A sum times its difference always loses the middle term. Spotting it saves real time later."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify 2x(x − 4) + 3(x − 4).",
+     "opts": [
+      "2x² + 5x − 12",
+      "2x² − 5x − 12",
+      "2x² − 8x − 12",
+      "2x² − 5x + 12"
+     ],
+     "ans": 1,
+     "hint": "Distribute both products first, then gather like terms.",
+     "steps": [
+      "2x(x − 4) = 2x² − 8x.",
+      "3(x − 4) = 3x − 12.",
+      "Add them: 2x² − 8x + 3x − 12.",
+      "Combine the x terms: −8x + 3x = −5x, giving 2x² − 5x − 12."
+     ],
+     "ex": {
+      "main": "**2x² − 5x − 12.** Both brackets have to be distributed before anything can be combined. Worth noticing: both terms share the factor (x − 4), so this is (2x + 3)(x − 4) — the same answer reached by factoring instead of expanding.",
+      "tip": "A shared bracket is a factoring opportunity. Expanding and factoring should agree, which makes each a check on the other."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the degree of (4x⁵ + x² − 7) − (4x⁵ + x² − 7)?",
+     "opts": [
+      "Degree 2, from the x² terms",
+      "Degree 5, the highest power written down",
+      "No degree at all, because the result is 0",
+      "Degree 0, the same as any constant"
+     ],
+     "ans": 2,
+     "hint": "Do the subtraction before you answer anything about degree.",
+     "steps": [
+      "Distribute the minus: 4x⁵ + x² − 7 − 4x⁵ − x² + 7.",
+      "Every single term cancels with its partner.",
+      "The result is the zero polynomial.",
+      "The zero polynomial has no degree at all — it is the one polynomial with none."
+     ],
+     "ex": {
+      "main": "**No degree at all, because the result is 0.** Subtracting a polynomial from itself leaves nothing, and the zero polynomial is the one case where \"degree\" is left undefined rather than being some number. Answering 0 confuses the zero polynomial with a constant like 7, which does have degree 0.",
+      "tip": "A non-zero constant has degree 0. Zero itself is the exception, and it is the only one."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Without expanding, how many terms will (x + 2)(x − 5) have after it is fully simplified, and why?",
+     "opts": [
+      "3, because the degrees add to 2",
+      "4, because two terms times two terms gives four products",
+      "2, because the cross terms always cancel",
+      "3, because two of the four products are like terms and combine"
+     ],
+     "ans": 3,
+     "hint": "Count the products first, then ask which of them can combine.",
+     "steps": [
+      "Two terms times two terms gives 2 × 2 = 4 products.",
+      "They are x², −5x, 2x and −10.",
+      "The two middle products are both x terms, so they are like terms and combine into one.",
+      "That leaves 3 terms: x² − 3x − 10."
+     ],
+     "ex": {
+      "main": "**3, because two of the four products are like terms.** Four products go in and three terms come out, because the cross terms are both degree 1. They only vanish entirely when the constants are exact opposites, as in (x − 3)(x + 3) — here 2 and −5 are not, so they combine to −3x rather than cancelling.",
+      "tip": "Count products, then check which are like terms. That predicts the shape of the answer before you do any of it."
+     }
+    }
+   ]
+  }
+ }
+}

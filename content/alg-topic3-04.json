@@ -1,0 +1,643 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-04": {
+   "id": "unit-alg-t3-04",
+   "type": "unit",
+   "updatedAt": 1789600054567,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-4 Dividing Polynomials",
+   "srcName": "enVision Algebra 2, Lesson 3-4 (Drive)",
+   "source": "enVision Algebra 2 Lesson 3-4: Dividing Polynomials",
+   "summary": {
+    "text": "Lesson 3-4 covers polynomial long division and synthetic division, and the two theorems that come with them: the Remainder Theorem (dividing by x − a leaves P(a)) and the Factor Theorem (it is a factor exactly when P(a) = 0).",
+    "from": "source"
+   },
+   "why": {
+    "text": "Division is how a polynomial gets broken down, and the Factor Theorem is the doorway into finding roots — which is what the next two lessons are entirely about. Getting fluent here pays off twice.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Divide polynomials by long division and, where the divisor is linear, by synthetic division",
+     "from": "source"
+    },
+    {
+     "text": "Write an answer as quotient plus remainder over divisor",
+     "from": "source"
+    },
+    {
+     "text": "Apply the Remainder Theorem to find a remainder by substitution",
+     "from": "source"
+    },
+    {
+     "text": "Apply the Factor Theorem to test whether a linear expression is a factor",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Two mechanical traps account for most lost marks here, and both are in the questions. The first is the SIGN: dividing by (x + 5) means synthetic-dividing with −5, because you use the value that makes the divisor zero — solving \"divisor = 0\" rather than copying the sign is the habit that fixes it. The second is MISSING TERMS: x³ − 7 needs the row 1, 0, 0, −7, and leaving the zeros out silently shifts every coefficient into the wrong column, producing a confident wrong answer with nothing visibly broken. Predicting the quotient’s degree first (dividend minus divisor) catches that one every time.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do a couple of divisions both ways — synthetically and by substituting — so the two agree.",
+    "minutes": 20,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Dividing polynomials",
+     "def": "**Splitting a polynomial into a quotient and a remainder, exactly like long division with numbers.**\n• dividend ÷ divisor = quotient + remainder⁄divisor.\n• 17 ÷ 5 = 3 remainder 2 works the same way as a polynomial division — the shape of the answer is identical.",
+     "eq": "P(x) ÷ d(x) = q(x) + r(x)⁄d(x)",
+     "hint": "Same shape as number division: a whole part and a leftover.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Long division of polynomials",
+     "def": "**Works for ANY divisor, of any degree.**\n• Divide the leading terms, multiply back, subtract, bring down, repeat.\n• The subtraction step is where signs get lost — you are subtracting the whole product, not just its first term.",
+     "hint": "Divide, multiply, subtract, bring down. The subtraction is the dangerous step.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Synthetic division",
+     "def": "**A shortcut that works ONLY when the divisor is linear, of the form x − a.**\n• Much faster than long division, but it is not general.\n• For a divisor like x² + 1 or 2x − 3, you need long division instead.",
+     "hint": "Linear divisors only. Anything else is long division.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Reverse the sign",
+     "def": "**Dividing by (x − 2) means you synthetic-divide with +2.**\n• The number you use is the value that makes the divisor ZERO, so the sign flips.\n• Dividing by (x + 5) means using −5, since x + 5 = 0 at x = −5.",
+     "hint": "Use the number that makes the divisor equal zero — not the one you see written.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Placeholder zeros",
+     "def": "**Every missing power needs a 0 in the coefficient row.**\n• x³ − 7 is really x³ + 0x² + 0x − 7, so its row is 1, 0, 0, −7.\n• Leaving a gap out shifts every later coefficient into the wrong column and makes the whole division wrong.",
+     "hint": "Write the polynomial in standard form with nothing missing before you start.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Quotient and remainder",
+     "def": "**The bottom row of a synthetic division gives the quotient’s coefficients, and the very last number is the remainder.**\n• The quotient starts one degree LOWER than the dividend.\n• A remainder of 0 means the divisor divided evenly — it is a factor.",
+     "hint": "Last number is the leftover; everything before it is the answer.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Degree of the quotient",
+     "def": "**deg(quotient) = deg(dividend) − deg(divisor).**\n• A cubic divided by a linear gives a quadratic.\n• Checking this before you start tells you how many coefficients the answer should have — a free check on your work.",
+     "eq": "deg q = deg P − deg d",
+     "hint": "Subtract the degrees to predict the shape of the answer.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "The Remainder Theorem",
+     "def": "**Dividing P(x) by (x − a) leaves a remainder of exactly P(a).**\n• So you can find a remainder by SUBSTITUTING, with no division at all.\n• To find the remainder when P is divided by (x − 3), just compute P(3).",
+     "eq": "P(x) ÷ (x − a) leaves P(a)",
+     "hint": "The remainder is just the function evaluated at the number that zeroes the divisor.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "The Factor Theorem",
+     "def": "**(x − a) is a factor of P(x) exactly when P(a) = 0.**\n• It is the Remainder Theorem with remainder zero — no leftover means it divided evenly.\n• This is the bridge to finding roots, which is what Lessons 3-5 and 3-6 are built on.",
+     "eq": "(x − a) is a factor ⇔ P(a) = 0",
+     "hint": "Zero remainder and \"is a factor\" are the same statement.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Writing the answer properly",
+     "def": "**Quotient plus remainder over divisor — the remainder never just gets dropped.**\n• (x² + 4x + 14) + 19⁄(x − 2) is a complete answer; the quotient alone is not.\n• Only when the remainder is 0 does the quotient stand by itself.",
+     "hint": "A leftover has to appear in the answer, written over the divisor.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Example: a synthetic division, worked",
+     "def": "**(x³ − 5x² − 2x + 24) ÷ (x − 3) = x² − 2x − 8, remainder 0.**\n• Use +3. Row: 1, −5, −2, 24.\n• Bring down 1; 1·3 = 3, −5 + 3 = −2; −2·3 = −6, −2 + (−6) = −8; −8·3 = −24, 24 + (−24) = 0.\n• Remainder 0, so (x − 3) IS a factor.",
+     "hint": "Bring down, multiply, add — and the last add gives the remainder.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Example: a remainder without dividing",
+     "def": "**The remainder of (2x³ + x − 5) ÷ (x − 2) is 13, found by substituting.**\n• P(2) = 2(8) + 2 − 5 = 16 + 2 − 5 = 13.\n• No division was done at all — that is the Remainder Theorem earning its keep.",
+     "hint": "If a question asks only for the remainder, substitute rather than divide.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To divide a polynomial by (x − 6) using synthetic division, which number do you use?",
+     "opts": [
+      "6",
+      "−6",
+      "1",
+      "0"
+     ],
+     "ans": 0,
+     "hint": "You use the value that makes the divisor zero.",
+     "steps": [
+      "Set the divisor equal to zero: x − 6 = 0.",
+      "Solving gives x = 6.",
+      "That is the number synthetic division uses.",
+      "So you use 6."
+     ],
+     "ex": {
+      "main": "**6.** The sign flips from the one written, because the number you need is the ZERO of the divisor. The habit that prevents the error is actually solving x − 6 = 0 rather than copying the sign you see.",
+      "tip": "Same rule for (x + 6): it is zero at −6, so you would use −6."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "When is synthetic division allowed?",
+     "opts": [
+      "For any divisor at all",
+      "Only when the divisor is linear, of the form x − a",
+      "Only when the remainder will be zero",
+      "Only when the dividend has degree 3 or less"
+     ],
+     "ans": 1,
+     "hint": "Think about what the shortcut’s single row of numbers can represent.",
+     "steps": [
+      "Synthetic division compresses the divisor down to one number.",
+      "That only works when the divisor is x minus a constant.",
+      "A divisor like x² + 1, or 2x − 3, cannot be reduced to one number this way.",
+      "So it is linear divisors of the form x − a only."
+     ],
+     "ex": {
+      "main": "**Only when the divisor is linear, of the form x − a.** The dividend can be any degree at all, and the remainder can be anything — those are not restrictions. The restriction is entirely on the DIVISOR, which is why long division still has to exist.",
+      "tip": "When the divisor is anything else, long division is the tool. It always works."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Writing 2x⁴ − 3x + 1 as a row of coefficients for synthetic division gives",
+     "opts": [
+      "2, 0, −3, 1",
+      "2, −3, 1",
+      "2, 0, 0, −3, 1",
+      "2, 0, 0, 0, −3, 1"
+     ],
+     "ans": 2,
+     "hint": "Every power from the highest down to the constant needs a slot.",
+     "steps": [
+      "The degree is 4, so there are five slots: x⁴, x³, x², x, constant.",
+      "x⁴ has coefficient 2.",
+      "x³ and x² are missing, so both are 0.",
+      "Then −3 for x and 1 for the constant: 2, 0, 0, −3, 1."
+     ],
+     "ex": {
+      "main": "**2, 0, 0, −3, 1.** A degree-4 polynomial always needs exactly five coefficients. Writing only the terms you can see shifts everything into the wrong column and the whole division comes out wrong — with no obvious sign that anything went astray.",
+      "tip": "Count the slots first: degree + 1. If your row is shorter, a placeholder is missing."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the Remainder Theorem say?",
+     "opts": [
+      "The remainder equals the leading coefficient of P(x)",
+      "Dividing P(x) by (x − a) always leaves a remainder of zero",
+      "The remainder is always smaller than the divisor",
+      "Dividing P(x) by (x − a) leaves a remainder of P(a)"
+     ],
+     "ans": 3,
+     "hint": "It connects dividing to substituting.",
+     "steps": [
+      "The theorem links the remainder to the function’s value.",
+      "Specifically, the remainder of P(x) ÷ (x − a) is P(a).",
+      "That lets you find a remainder by substituting instead of dividing.",
+      "So: dividing P(x) by (x − a) leaves P(a)."
+     ],
+     "ex": {
+      "main": "**Dividing P(x) by (x − a) leaves a remainder of P(a).** A remainder of zero is the special case — that is the Factor Theorem, and it is what makes (x − a) a factor. The theorem’s real value is that it replaces a whole division with one substitution.",
+      "tip": "Remainder Theorem: any remainder. Factor Theorem: the remainder is zero."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A degree-5 polynomial is divided by a degree-2 polynomial. What degree is the quotient?",
+     "opts": [
+      "3",
+      "7",
+      "10",
+      "2"
+     ],
+     "ans": 0,
+     "hint": "Degrees subtract on division, the way they add on multiplication.",
+     "steps": [
+      "Multiplying adds degrees, so dividing subtracts them.",
+      "deg(quotient) = deg(dividend) − deg(divisor).",
+      "That is 5 − 2 = 3.",
+      "The quotient has degree 3."
+     ],
+     "ex": {
+      "main": "**3.** Degrees subtract on division for the same reason they add on multiplication — quotient times divisor has to rebuild the dividend, and 3 + 2 = 5. Knowing the answer’s degree in advance tells you how many coefficients to expect, which catches a dropped placeholder.",
+      "tip": "Predict the degree first; then a quotient with the wrong number of terms announces itself."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A synthetic division ends with a last number of 0. What does that mean?",
+     "opts": [
+      "The polynomial itself is equal to zero everywhere",
+      "The divisor is a factor of the polynomial",
+      "A mistake was made somewhere in the working",
+      "The quotient has to come out as zero as well"
+     ],
+     "ans": 1,
+     "hint": "The last number of the bottom row is the remainder.",
+     "steps": [
+      "The final number is the remainder.",
+      "A remainder of 0 means the division came out evenly.",
+      "Dividing evenly is exactly what \"is a factor\" means.",
+      "So the divisor is a factor of the polynomial."
+     ],
+     "ex": {
+      "main": "**The divisor is a factor.** This is the Factor Theorem showing up in the arithmetic. It says nothing about the polynomial itself being zero — P(x) is zero only at that one x-value, not everywhere — and the quotient is certainly not zero.",
+      "tip": "Zero remainder is good news: you have found a factor and can keep factoring the quotient."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide x³ + 4x² − 7x − 10 by (x − 2).",
+     "opts": [
+      "x² + 6x + 5, remainder 10",
+      "x² + 2x − 3, remainder −4",
+      "x² + 6x + 5, remainder 0",
+      "x² + 4x − 7, remainder −10"
+     ],
+     "ans": 2,
+     "hint": "Use +2, and take the row as 1, 4, −7, −10.",
+     "steps": [
+      "Bring down 1. Multiply 1 · 2 = 2; add to 4 to get 6.",
+      "Multiply 6 · 2 = 12; add to −7 to get 5.",
+      "Multiply 5 · 2 = 10; add to −10 to get 0.",
+      "Bottom row 1, 6, 5, 0: the quotient is x² + 6x + 5 with remainder 0."
+     ],
+     "ex": {
+      "main": "**x² + 6x + 5, remainder 0.** The quotient drops one degree from the dividend, as it must. The zero remainder means (x − 2) is a factor — and since x² + 6x + 5 factors further into (x + 1)(x + 5), the whole cubic is (x − 2)(x + 1)(x + 5).",
+      "tip": "A zero remainder is an invitation to keep factoring the quotient."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Use the Remainder Theorem: what is the remainder when x³ − 4x² + x + 6 is divided by (x − 3)?",
+     "opts": [
+      "−6",
+      "6",
+      "18",
+      "0"
+     ],
+     "ans": 3,
+     "hint": "Substitute the value that makes the divisor zero — no division needed.",
+     "steps": [
+      "The divisor is zero at x = 3, so compute P(3).",
+      "P(3) = 27 − 4(9) + 3 + 6.",
+      "That is 27 − 36 + 3 + 6 = 0.",
+      "The remainder is 0."
+     ],
+     "ex": {
+      "main": "**0.** One substitution replaces the whole division. And the zero is informative: it means (x − 3) is a factor of this cubic, which is the Factor Theorem arriving for free.",
+      "tip": "When a question asks only for the remainder, substituting is always faster than dividing."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the remainder when x⁴ − 3x² + 2x − 1 is divided by (x + 1)?",
+     "opts": [
+      "−5",
+      "5",
+      "−1",
+      "3"
+     ],
+     "ans": 0,
+     "hint": "Careful with the sign of the value you substitute.",
+     "steps": [
+      "x + 1 = 0 gives x = −1, so compute P(−1).",
+      "(−1)⁴ = 1 and −3(−1)² = −3.",
+      "2(−1) = −2, and the constant is −1.",
+      "1 − 3 − 2 − 1 = −5."
+     ],
+     "ex": {
+      "main": "**−5.** The divisor (x + 1) is zero at −1, not +1 — substituting +1 instead gives −1, which is offered as a wrong option precisely because it is what the sign slip produces. Note (−1)⁴ is positive while 2(−1) is negative; even and odd powers behave differently.",
+      "tip": "Solve divisor = 0 rather than reading the sign off the bracket."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which division requires LONG division rather than synthetic division?",
+     "opts": [
+      "(x³ + 2x − 1) ÷ (x − 4)",
+      "(x³ + 2x − 1) ÷ (x² + 3)",
+      "(x⁵ + x) ÷ (x + 2)",
+      "(x⁴ − 16) ÷ (x − 2)"
+     ],
+     "ans": 1,
+     "hint": "Check the DIVISOR in each, not the dividend.",
+     "steps": [
+      "Synthetic division needs a divisor of the form x − a.",
+      "(x − 4), (x + 2) and (x − 2) are all that shape.",
+      "(x² + 3) is degree 2, so it cannot be reduced to a single number.",
+      "That one needs long division."
+     ],
+     "ex": {
+      "main": "**(x³ + 2x − 1) ÷ (x² + 3).** Only the divisor decides. The dividends here range from degree 3 to degree 5 and none of that matters — a degree-5 dividend with a linear divisor is still perfectly fine for synthetic division.",
+      "tip": "Look only at what you are dividing BY. The thing being divided is never the constraint."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide 2x³ − 3x² + 4 by (x + 1).",
+     "opts": [
+      "2x² − x + 4, remainder 0",
+      "2x² − 5x + 5, remainder 9",
+      "2x² − 5x + 5, remainder −1",
+      "2x² − 3x + 4, remainder −1"
+     ],
+     "ans": 2,
+     "hint": "There is a missing term — write the row carefully — and the divisor is zero at −1.",
+     "steps": [
+      "The x term is missing, so the row is 2, −3, 0, 4.",
+      "Use −1. Bring down 2; 2 · (−1) = −2, and −3 + (−2) = −5.",
+      "−5 · (−1) = 5, and 0 + 5 = 5.",
+      "5 · (−1) = −5, and 4 + (−5) = −1. So 2x² − 5x + 5, remainder −1."
+     ],
+     "ex": {
+      "main": "**2x² − 5x + 5, remainder −1.** Two traps in one question: the missing x term needs a 0 placeholder, and the divisor (x + 1) is zero at −1. Checking with the Remainder Theorem confirms it — P(−1) = −2 − 3 + 4 = −1.",
+      "tip": "You can always check a synthetic division’s remainder independently by substituting. Two methods agreeing is real confidence."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student divides x³ + 2x − 5 by (x − 1) and writes the row as 1, 2, −5. What will go wrong?",
+     "opts": [
+      "The coefficients belong in ascending order, lowest power first",
+      "Nothing is wrong — the row lists every coefficient there is",
+      "The divisor sign is wrong: (x − 1) should be entered as −1",
+      "The x² placeholder is missing, so every column shifts over by one"
+     ],
+     "ans": 3,
+     "hint": "Count the slots a degree-3 polynomial needs.",
+     "steps": [
+      "A cubic needs four coefficients: x³, x², x, constant.",
+      "x³ + 2x − 5 has no x² term, so that slot is 0.",
+      "The correct row is 1, 0, 2, −5.",
+      "Writing only three numbers shifts the 2 and the −5 left, so the division is wrong throughout."
+     ],
+     "ex": {
+      "main": "**The x² placeholder is missing, so every column shifts over by one.** A degree-3 dividend always needs four coefficients, and the answer will come out as a quadratic-looking thing that is simply wrong — with nothing obviously broken to alert her. Predicting the quotient’s degree first is the check that catches it.",
+      "tip": "Degree + 1 slots, always. A short row is a missing placeholder every time."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "For P(x) = x³ + x² − 10x + 8, which of these is a factor?",
+     "opts": [
+      "(x − 2)",
+      "(x + 2)",
+      "(x − 3)",
+      "(x + 1)"
+     ],
+     "ans": 0,
+     "hint": "The Factor Theorem turns this into four quick substitutions.",
+     "steps": [
+      "(x − a) is a factor exactly when P(a) = 0.",
+      "P(2) = 8 + 4 − 20 + 8 = 0. That one works.",
+      "P(−2) = −8 + 4 + 20 + 8 = 24, not zero.",
+      "P(3) = 27 + 9 − 30 + 8 = 14 and P(−1) = −1 + 1 + 10 + 8 = 18. So (x − 2) is the factor."
+     ],
+     "ex": {
+      "main": "**(x − 2).** Testing candidates by substitution is far faster than dividing by each one. And the sign matters: (x − 2) asks about P(2), while (x + 2) asks about P(−2) — which here is 24, nowhere near zero.",
+      "tip": "This is exactly the tool Lesson 3-6 builds on to find all the roots of a polynomial."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "P(x) divided by (x − 4) gives a quotient of x² + 3x − 1 and a remainder of 6. What is P(x)?",
+     "opts": [
+      "x³ + 3x² − x + 6",
+      "x³ − x² − 13x + 10",
+      "x³ − x² − 13x + 4",
+      "x² + 3x + 5"
+     ],
+     "ans": 1,
+     "hint": "Reverse the division: multiply the quotient by the divisor and add the remainder.",
+     "steps": [
+      "Division says P(x) = divisor × quotient + remainder.",
+      "(x − 4)(x² + 3x − 1) = x³ + 3x² − x − 4x² − 12x + 4.",
+      "Combine: x³ − x² − 13x + 4.",
+      "Add the remainder 6: x³ − x² − 13x + 10."
+     ],
+     "ex": {
+      "main": "**x³ − x² − 13x + 10.** The relationship runs both ways, and reversing it is the standard way to CHECK a division. Forgetting to add the remainder gives x³ − x² − 13x + 4 — offered here because it is the near-miss that catches most people.",
+      "tip": "Check any division by multiplying back and adding the remainder. It should rebuild the dividend exactly."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "For what value of k is (x + 2) a factor of x³ − 2x² + x + k?",
+     "opts": [
+      "−2",
+      "16",
+      "18",
+      "−18"
+     ],
+     "ans": 2,
+     "hint": "Use the Factor Theorem and solve for k.",
+     "steps": [
+      "(x + 2) is a factor exactly when P(−2) = 0.",
+      "P(−2) = −8 − 2(4) + (−2) + k = −8 − 8 − 2 + k.",
+      "That is −18 + k, and it must equal 0.",
+      "So k = 18."
+     ],
+     "ex": {
+      "main": "**18.** Substituting x = −2 gives −8 − 8 − 2 + k = −18 + k, and setting that to zero gives k = 18. Using +2 by mistake would give k = −2, and dropping the lone x term would give 16 — both offered here, because both are what the two usual slips actually produce.",
+      "tip": "The Factor Theorem turns \"make this a factor\" into a plain equation in k."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide x³ − 8 by (x − 2).",
+     "opts": [
+      "x² + 2x + 4, remainder −16",
+      "x² − 2x + 4, remainder 0",
+      "x² + 4, remainder 0",
+      "x² + 2x + 4, remainder 0"
+     ],
+     "ans": 3,
+     "hint": "Two missing terms — build the coefficient row before anything else.",
+     "steps": [
+      "x³ − 8 is x³ + 0x² + 0x − 8, so the row is 1, 0, 0, −8.",
+      "Use +2. Bring down 1; 1 · 2 = 2, and 0 + 2 = 2.",
+      "2 · 2 = 4, and 0 + 4 = 4.",
+      "4 · 2 = 8, and −8 + 8 = 0. So x² + 2x + 4, remainder 0."
+     ],
+     "ex": {
+      "main": "**x² + 2x + 4, remainder 0.** Both placeholder zeros were needed. The zero remainder is no accident — x³ − 8 is a difference of cubes, and Lesson 3-3’s identity gives exactly (x − 2)(x² + 2x + 4). Division and factoring agreeing is a real check on both.",
+      "tip": "When a division comes out even, look for the identity that predicted it."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the remainder when 3x³ − 2x² + 5 is divided by (x − 1)?",
+     "opts": [
+      "6",
+      "0",
+      "5",
+      "−6"
+     ],
+     "ans": 0,
+     "hint": "Substitute rather than divide.",
+     "steps": [
+      "The divisor is zero at x = 1, so compute P(1).",
+      "3(1)³ = 3 and −2(1)² = −2.",
+      "The x term is absent and the constant is 5.",
+      "3 − 2 + 5 = 6."
+     ],
+     "ex": {
+      "main": "**6.** Substituting 1 is about as fast as this gets — every power of 1 is 1, so the remainder is just the sum of the coefficients. That shortcut works for any division by (x − 1) and is worth remembering on its own.",
+      "tip": "Divide by (x − 1) and the remainder is always the coefficients added up."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which statement about a remainder of 0 is TRUE?",
+     "opts": [
+      "The polynomial has no roots at all, of any kind",
+      "The divisor is a factor, so the polynomial factors further",
+      "The quotient must come out as 0 as well, for the same reason",
+      "The division was done incorrectly and should be worked again"
+     ],
+     "ans": 1,
+     "hint": "A remainder of zero is the Factor Theorem speaking.",
+     "steps": [
+      "A zero remainder means the divisor divided evenly.",
+      "Dividing evenly is what being a factor means.",
+      "So P(x) = (divisor)(quotient), and the quotient may factor further still.",
+      "The divisor is a factor and factoring can continue."
+     ],
+     "ex": {
+      "main": "**The divisor is a factor, so the polynomial factors further.** It is the opposite of a problem — a zero remainder is progress, because it has split the polynomial into two pieces and the quotient is now a smaller problem to attack.",
+      "tip": "Every zero remainder reduces the degree of what is left to factor."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide x⁴ − 3x² + 1 by (x² − 2). What is the quotient?",
+     "opts": [
+      "x² + 1",
+      "x² − 3",
+      "x² − 1",
+      "x² − 2x − 1"
+     ],
+     "ans": 2,
+     "hint": "The divisor is not linear, so synthetic division is out — and predict the quotient’s degree first.",
+     "steps": [
+      "deg 4 − deg 2 = 2, so the quotient is a quadratic.",
+      "x⁴ ÷ x² = x². Multiply back: x⁴ − 2x². Subtract: −x² + 1.",
+      "−x² ÷ x² = −1. Multiply back: −x² + 2. Subtract: −1.",
+      "So the quotient is x² − 1 with remainder −1."
+     ],
+     "ex": {
+      "main": "**x² − 1.** A quadratic divisor rules synthetic division out entirely — this one has to be long division. Predicting the quotient’s degree as 2 first is what tells you the answer is a quadratic, so an option with an x term in it can be ruled out before any arithmetic.",
+      "tip": "Degree subtraction predicts the SHAPE of the answer, which narrows the options before you start."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "You find that P(2) = 0 for P(x) = x³ + 2x² − 5x − 6. What is the most useful next step?",
+     "opts": [
+      "Substitute more values one by one until another gives zero",
+      "Conclude that 2 must therefore be the only root it has",
+      "Divide P(x) by (x + 2) and factor whatever is left over",
+      "Divide P(x) by (x − 2) and factor the quadratic that comes out"
+     ],
+     "ans": 3,
+     "hint": "A known root gives you a known factor — use it to shrink the problem.",
+     "steps": [
+      "P(2) = 0 means (x − 2) is a factor, by the Factor Theorem.",
+      "Dividing by it turns the cubic into a quadratic, which is far easier to handle.",
+      "Here the quotient is x² + 4x + 3, which factors as (x + 1)(x + 3).",
+      "So P(x) = (x − 2)(x + 1)(x + 3), and all three roots fall out at once."
+     ],
+     "ex": {
+      "main": "**Divide by (x − 2) and factor the quotient.** One known root converts a cubic into a quadratic, and a quadratic can be finished by factoring or the Quadratic Formula — no more guessing needed. Note the sign: P(2) = 0 gives the factor (x − 2), not (x + 2). Hunting for more roots by substitution would work eventually but throws away the shortcut you have just earned.",
+      "tip": "This is the whole method of Lesson 3-6: find one root, divide it out, finish the smaller polynomial."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,737 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-01": {
+   "id": "unit-alg-t3-01",
+   "type": "unit",
+   "updatedAt": 1789600054126,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-1 Graphing Polynomial Functions",
+   "srcName": "enVision Algebra 2, Lesson 3-1 (Drive)",
+   "source": "enVision Algebra 2 Lesson 3-1: Graphing Polynomial Functions",
+   "summary": {
+    "text": "Lesson 3-1 introduces polynomial functions and how to read their graphs: standard form, degree, leading coefficient and terms, then end behaviour, turning points, and relative maximums and minimums.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Degree and leading coefficient are only two numbers, but between them they fix the whole shape of the graph before you plot a single point. Getting fluent at reading them costs seconds and saves whole questions.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Write a polynomial in standard form and identify its degree and leading coefficient",
+     "from": "source"
+    },
+    {
+     "text": "State the end behaviour from the degree and the leading coefficient alone",
+     "from": "source"
+    },
+    {
+     "text": "Use turning points to put a lower bound on the degree",
+     "from": "source"
+    },
+    {
+     "text": "Read relative maximums, relative minimums and intervals of increase off a graph",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "The single most common slip in this lesson is reading the degree or the leading coefficient off the FIRST term written rather than the highest-degree one — several questions here are built to catch exactly that, and the fix is simply to write standard form first. The second is treating \"at most n − 1 turning points\" as a promise rather than a ceiling; a graph can only put a FLOOR under the degree, never pin it down. Her teacher’s own practice sheet (3.1–3.2) drills end behaviour hard, so it is worth the time.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the four end-behaviour cases — they turn into free marks once they are automatic.",
+    "minutes": 18,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Polynomial function",
+     "def": "**A function built from terms of the form axⁿ, where every exponent on the variable is a whole number.**\n• No variable in a denominator, under a radical, or with a negative or fractional exponent.\n• f(x) = 4x³ − x + 7 is one; f(x) = 4x⁻³ + 7 and f(x) = √x are not.",
+     "hint": "Whole-number exponents only — that single test rules every impostor out.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Standard form",
+     "def": "**The terms written in order from the greatest exponent down to the least.**\n• 3x² − 1 + 5x⁴ − x becomes 5x⁴ + 3x² − x − 1.\n• Put it in standard form FIRST — degree and leading coefficient are both read off the front, and reading them off an unsorted polynomial is the commonest slip in this lesson.",
+     "hint": "Sort before you read anything off it.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Degree",
+     "def": "**The greatest exponent on the variable once the polynomial is simplified.**\n• The degree tells you the SHAPE: how the ends behave and how many turns are possible.\n• 7x³ − 9x⁵ + 2 has degree 5, not 3 — the greatest exponent, not the first one written.",
+     "hint": "Greatest exponent, not the leading one as written.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Leading coefficient",
+     "def": "**The number multiplying the highest-degree term.**\n• In standard form it is simply the first coefficient.\n• Its SIGN decides which way the right-hand end of the graph goes.",
+     "hint": "It rides on the highest power, wherever that term happens to be written.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Term",
+     "def": "**One part of a polynomial — a coefficient times a power of the variable.**\n• Terms are separated by + and − signs.\n• 5x⁴ + 3x² − x − 1 has four terms.",
+     "hint": "Count the pieces the plus and minus signs cut it into.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "End behaviour",
+     "def": "**What the function values do as x runs far out to the left and far out to the right.**\n• Written as: as x → ∞, f(x) → ∞ (and separately for x → −∞).\n• It depends on exactly two things — the degree's parity and the leading coefficient's sign. Nothing else in the polynomial matters.",
+     "hint": "Only the highest-degree term survives far from the origin; everything else is dwarfed.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The four end-behaviour cases",
+     "def": "**Even degree: both ends agree. Odd degree: the ends disagree.**\n• Even degree, positive lead — both ends up. Even degree, negative lead — both ends down.\n• Odd degree, positive lead — down on the left, up on the right. Odd degree, negative lead — up on the left, down on the right.\n• Sanity check: y = x² is both ends up, y = x³ falls left and rises right. Every case is one of those two pictures, possibly flipped.",
+     "hint": "Parity says whether the ends MATCH; the sign says which way the right end points.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Turning point",
+     "def": "**A point where the graph changes direction — from rising to falling, or falling to rising.**\n• Each one is either a relative maximum or a relative minimum.\n• A polynomial of degree n has AT MOST n − 1 turning points, and may have fewer.",
+     "hint": "At most n − 1 — an upper limit, never a promise.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Relative maximum",
+     "def": "**A point higher than every point immediately around it — where the graph stops rising and starts falling.**\n• \"Relative\" because it only beats its own neighbourhood; the graph may climb higher somewhere else entirely.\n• On an odd-degree polynomial there is never a highest point overall, since one end runs off to +∞.",
+     "hint": "A local hilltop, not necessarily the highest hill on the map.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Relative minimum",
+     "def": "**A point lower than every point immediately around it — where the graph stops falling and starts rising.**\n• The mirror image of a relative maximum.\n• Reading these off a graph is how you describe where a quantity bottoms out.",
+     "hint": "A local valley floor.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Why at most n − 1 turns",
+     "def": "**A degree-n polynomial changes direction at most n − 1 times, so counting turns puts a FLOOR under the degree.**\n• Three visible turning points means the degree is at least 4 — it could be higher.\n• This is the usual way a question gives you a graph and asks for the smallest degree that could produce it.",
+     "hint": "Turns seen + 1 = the least degree that could do it.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Increasing and decreasing intervals",
+     "def": "**Intervals of x on which the graph is going up, or going down, read left to right.**\n• Always described in terms of x-values, never y-values.\n• They are separated exactly by the turning points.",
+     "hint": "Read left to right, and name the x-interval.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "A cubic, read off its graph",
+     "def": "**f(x) = x³ − 4x has odd degree and a positive leading coefficient, so it falls on the left and rises on the right.**\n• Two turning points — the most a degree-3 polynomial can have.\n• It crosses at x = −2, 0 and 2.",
+     "eq": "f(x) = x³ − 4x",
+     "hint": "Odd degree: the two ends point opposite ways.",
+     "from": "added",
+     "graph": {
+      "w": [
+       -3.2,
+       3.2,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "poly",
+        "c": [
+         1,
+         0,
+         -4,
+         0
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": -2,
+        "y": 0,
+        "label": "−2"
+       },
+       {
+        "x": 2,
+        "y": 0,
+        "label": "2"
+       }
+      ],
+      "xl": "x",
+      "yl": "f(x)"
+     }
+    },
+    {
+     "id": "c13",
+     "term": "A quartic, read off its graph",
+     "def": "**g(x) = −x⁴ + 5x² − 4 has even degree and a negative leading coefficient, so BOTH ends go down.**\n• Three turning points — the most a degree-4 polynomial can have.\n• Because both ends fall, this one does have a highest point overall.",
+     "eq": "g(x) = −x⁴ + 5x² − 4",
+     "hint": "Even degree: both ends agree, and the negative lead sends both of them down.",
+     "from": "added",
+     "graph": {
+      "w": [
+       -3,
+       3,
+       -8,
+       4
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "poly",
+        "c": [
+         -1,
+         0,
+         5,
+         0,
+         -4
+        ]
+       }
+      ],
+      "xl": "x",
+      "yl": "g(x)"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which one of these is a polynomial function?",
+     "opts": [
+      "h(x) = 6x⁴ − 2x + 9",
+      "h(x) = 6x⁻⁴ − 2x + 9",
+      "h(x) = 6√x − 2x + 9",
+      "h(x) = 6⁄x⁴ − 2x + 9"
+     ],
+     "ans": 0,
+     "hint": "Check every exponent on the variable.",
+     "steps": [
+      "A polynomial allows only whole-number exponents on the variable.",
+      "A negative exponent (x⁻⁴) is disqualifying.",
+      "A radical is a ½ power, and a variable in a denominator is a negative power — both disqualifying.",
+      "Only 6x⁴ − 2x + 9 has whole-number exponents throughout."
+     ],
+     "ex": {
+      "main": "**h(x) = 6x⁴ − 2x + 9.** Every exponent on x is a whole number. The other three each break that in a different way: a negative exponent, a radical (which is really the ½ power), and a variable in a denominator (which is really a negative power).",
+      "tip": "The three impostors are the same disqualification wearing three costumes."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the degree of 2x² − 7x⁵ + x − 4?",
+     "opts": [
+      "2",
+      "5",
+      "4",
+      "−7"
+     ],
+     "ans": 1,
+     "hint": "Degree is about the greatest exponent, not the term written first.",
+     "steps": [
+      "Scan every term for its exponent on x: 2, 5, 1, 0.",
+      "The greatest of those is 5.",
+      "It does not matter that the 5 is not the first term written.",
+      "The degree is 5."
+     ],
+     "ex": {
+      "main": "**5.** Degree is the GREATEST exponent once you look at every term — not the exponent on whichever term happens to be written first. Writing it in standard form (−7x⁵ + 2x² + x − 4) makes it obvious, which is exactly why standard form comes first.",
+      "tip": "Sorting into standard form before reading anything off costs a second and prevents this."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the leading coefficient of 2x² − 7x⁵ + x − 4?",
+     "opts": [
+      "5",
+      "2",
+      "−7",
+      "−4"
+     ],
+     "ans": 2,
+     "hint": "The leading coefficient rides on the highest-degree term.",
+     "steps": [
+      "Find the highest-degree term first: −7x⁵.",
+      "The leading coefficient is the number multiplying it.",
+      "The sign travels with it — it is −7, not 7.",
+      "The leading coefficient is −7."
+     ],
+     "ex": {
+      "main": "**−7.** The leading coefficient belongs to the highest-degree term wherever that term is written, and the minus sign is part of it. Answering 2 means reading the first term written rather than the highest-degree one.",
+      "tip": "Negative leading coefficients matter enormously here — the sign flips the end behaviour."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Write 4x³ − 9 + x⁶ − 2x in standard form.",
+     "opts": [
+      "x⁶ + 4x³ − 9 − 2x",
+      "−9 − 2x + 4x³ + x⁶",
+      "4x³ + x⁶ − 2x − 9",
+      "x⁶ + 4x³ − 2x − 9"
+     ],
+     "ans": 3,
+     "hint": "Greatest exponent first, then down.",
+     "steps": [
+      "List each term with its exponent: 4x³ (3), −9 (0), x⁶ (6), −2x (1).",
+      "Order them from greatest exponent to least: 6, 3, 1, 0.",
+      "That gives x⁶ + 4x³ − 2x − 9.",
+      "Each term keeps the sign it already had."
+     ],
+     "ex": {
+      "main": "**x⁶ + 4x³ − 2x − 9.** Standard form runs from the greatest exponent down to the constant, and every term keeps its own sign on the way. Ascending order is a real ordering, just not this one.",
+      "tip": "The constant is the x⁰ term, so it always lands last."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A polynomial function has degree 6. What is the greatest number of turning points its graph can have?",
+     "opts": [
+      "5",
+      "6",
+      "7",
+      "3"
+     ],
+     "ans": 0,
+     "hint": "The rule is one less than the degree.",
+     "steps": [
+      "A degree-n polynomial has at most n − 1 turning points.",
+      "Here n = 6.",
+      "So at most 6 − 1 = 5 turning points.",
+      "It may well have fewer — 5 is a ceiling, not a promise."
+     ],
+     "ex": {
+      "main": "**5.** The bound is n − 1, so a degree-6 polynomial turns at most 5 times. Note the direction of the rule: it caps the turns, it does not guarantee them — y = x⁶ is degree 6 and turns exactly once.",
+      "tip": "Read it as a ceiling. The same rule run backwards gives a FLOOR on the degree from a graph."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the end behaviour of a polynomial function describe?",
+     "opts": [
+      "Where the graph crosses the x-axis and the y-axis",
+      "What the function values do as x runs far out in both directions",
+      "The highest and lowest points the graph ever reaches",
+      "The intervals on which the graph is increasing or decreasing"
+     ],
+     "ans": 1,
+     "hint": "The word \"end\" is about the far ends of the x-axis.",
+     "steps": [
+      "End behaviour looks at x → ∞ and x → −∞.",
+      "It reports what f(x) does out there — rising without bound, or falling without bound.",
+      "Crossings, peaks and intervals are all features near the middle of the graph.",
+      "End behaviour is about the far left and far right."
+     ],
+     "ex": {
+      "main": "**What the function values do as x runs far out in both directions.** Far from the origin the highest-degree term dwarfs everything else, which is why only the degree and the leading coefficient decide end behaviour — the rest of the polynomial stops mattering out there.",
+      "tip": "That is also why you can state the end behaviour without doing any arithmetic at all."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "On a graph, a relative minimum is the point where the function changes from",
+     "opts": [
+      "positive to negative",
+      "increasing to decreasing",
+      "decreasing to increasing",
+      "negative to positive"
+     ],
+     "ans": 2,
+     "hint": "Picture the bottom of a valley and walk through it left to right.",
+     "steps": [
+      "Walking left to right, you come DOWN into a valley — the function is decreasing.",
+      "At the bottom it stops falling.",
+      "Then you climb out — the function is increasing.",
+      "So a relative minimum is decreasing changing to increasing."
+     ],
+     "ex": {
+      "main": "**Decreasing to increasing.** Increasing-to-decreasing is the other one, a relative maximum. Positive-to-negative describes crossing the x-axis, which is a different feature entirely — a valley floor can sit well above or well below the axis.",
+      "tip": "Sign changes are about the x-axis; turning points are about direction."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Describe the end behaviour of f(x) = 3x⁴ − x² + 5.",
+     "opts": [
+      "As x → −∞, f(x) → −∞ and as x → ∞, f(x) → −∞",
+      "As x → −∞, f(x) → −∞ and as x → ∞, f(x) → ∞",
+      "As x → −∞, f(x) → ∞ and as x → ∞, f(x) → −∞",
+      "As x → −∞, f(x) → ∞ and as x → ∞, f(x) → ∞"
+     ],
+     "ans": 3,
+     "hint": "Two questions only: is the degree even or odd, and is the lead positive or negative?",
+     "steps": [
+      "The degree is 4, which is even, so both ends agree.",
+      "The leading coefficient is 3, which is positive, so the right end rises.",
+      "Both ends agree and the right one rises, so both rise.",
+      "As x → −∞, f(x) → ∞ and as x → ∞, f(x) → ∞."
+     ],
+     "ex": {
+      "main": "**Both ends rise.** Even degree makes the ends agree; a positive leading coefficient sends the right end up; agreeing means the left goes up too. The −x² and the +5 have no say — far from the origin 3x⁴ dwarfs both.",
+      "tip": "Think of y = x² and stretch it: same picture, higher degree."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Describe the end behaviour of g(x) = −2x⁵ + 40x².",
+     "opts": [
+      "As x → −∞, g(x) → ∞ and as x → ∞, g(x) → −∞",
+      "As x → −∞, g(x) → −∞ and as x → ∞, g(x) → ∞",
+      "As x → −∞, g(x) → ∞ and as x → ∞, g(x) → ∞",
+      "As x → −∞, g(x) → −∞ and as x → ∞, g(x) → −∞"
+     ],
+     "ans": 0,
+     "hint": "Odd degree means the two ends disagree — then let the sign place them.",
+     "steps": [
+      "The degree is 5, which is odd, so the ends point opposite ways.",
+      "The leading coefficient is −2, which is negative, so the right end falls.",
+      "The ends disagree, so the left end must rise.",
+      "As x → −∞, g(x) → ∞ and as x → ∞, g(x) → −∞."
+     ],
+     "ex": {
+      "main": "**Up on the left, down on the right.** Odd degree makes the ends disagree, and the negative lead pulls the right-hand end down. The +40x² is a big-looking coefficient, and it genuinely shapes the middle of the graph — but far out, x⁵ beats x² no matter what sits in front of them.",
+      "tip": "A large coefficient on a low-degree term never changes end behaviour. Degree wins every time."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A polynomial graph has exactly 3 turning points. What is the LEAST degree it could have?",
+     "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+     ],
+     "ans": 1,
+     "hint": "Run the turning-point rule backwards.",
+     "steps": [
+      "A degree-n polynomial has at most n − 1 turning points.",
+      "To allow 3 turns you need n − 1 ≥ 3.",
+      "So n ≥ 4.",
+      "The least possible degree is 4."
+     ],
+     "ex": {
+      "main": "**4.** Turns + 1 gives the least degree that could produce the graph. It really is only a floor: a degree-6 polynomial can also show exactly 3 turns, so a graph can never pin the degree down exactly — it can only rule degrees out from below.",
+      "tip": "Answering 3 uses n turns instead of n − 1 — off by one in the direction that makes the polynomial too simple."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown has how many turning points, and what does that say about its degree?",
+     "opts": [
+      "2 turning points, so the degree is exactly 2",
+      "3 turning points, so the degree is at least 4",
+      "2 turning points, so the degree is at least 3",
+      "3 turning points, so the degree is exactly 3"
+     ],
+     "ans": 2,
+     "hint": "Count the direction changes, then add one.",
+     "steps": [
+      "Walk the curve left to right and count where it changes direction.",
+      "It falls, turns up, rises, turns down — no, here it rises to a peak then falls to a valley then rises: 2 turns.",
+      "Two turns means n − 1 ≥ 2, so n ≥ 3.",
+      "2 turning points, so the degree is at least 3."
+     ],
+     "ex": {
+      "main": "**2 turning points, so the degree is at least 3.** Counting turns gives a floor on the degree, never an exact value — \"exactly 3\" claims more than a picture can tell you. And a degree-2 graph (a parabola) turns only once, so 2 turns rules degree 2 out completely.",
+      "tip": "A graph bounds the degree from below. Only the equation pins it down."
+     },
+     "graph": {
+      "w": [
+       -3.2,
+       3.2,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "poly",
+        "c": [
+         1,
+         0,
+         -4,
+         0
+        ]
+       }
+      ],
+      "xl": "x",
+      "yl": "f(x)"
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A function is decreasing on (−∞, −1), increasing on (−1, 2), and decreasing on (2, ∞). Where are its turning points?",
+     "opts": [
+      "There are no turning points",
+      "At x = 0 only",
+      "At x = −1, 0 and 2",
+      "At x = −1 and x = 2"
+     ],
+     "ans": 3,
+     "hint": "A turning point sits exactly where the description switches direction.",
+     "steps": [
+      "The description changes from decreasing to increasing at x = −1.",
+      "That switch is a turning point — a relative minimum.",
+      "It changes from increasing to decreasing at x = 2, another turning point — a relative maximum.",
+      "The turning points are at x = −1 and x = 2."
+     ],
+     "ex": {
+      "main": "**At x = −1 and x = 2.** Turning points are exactly the boundaries between the increasing and decreasing intervals, so you can read them straight off a description like this without ever seeing the graph. Two turns also tells you the degree is at least 3.",
+      "tip": "The intervals and the turning points are two ways of saying the same thing."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Without multiplying it out, what are the degree and end behaviour of f(x) = (x − 1)(x + 3)(x − 4)?",
+     "opts": [
+      "Degree 3; falls on the left, rises on the right",
+      "Degree 3; rises on the left, falls on the right",
+      "Degree 1; falls on the left, rises on the right",
+      "Degree 3; both ends rise"
+     ],
+     "ans": 0,
+     "hint": "Degrees add when factors multiply, and each x here carries a coefficient of 1.",
+     "steps": [
+      "Each factor contributes one power of x, so the degree is 1 + 1 + 1 = 3.",
+      "Multiplying the leading terms gives x · x · x = x³, so the leading coefficient is +1.",
+      "Odd degree means the ends disagree; a positive lead sends the right end up.",
+      "Degree 3, falling on the left and rising on the right."
+     ],
+     "ex": {
+      "main": "**Degree 3; falls left, rises right.** You never have to expand it: the degree is the number of linear factors, and the leading coefficient is the product of the factors’ leading coefficients. Answering degree 1 counts the factors’ individual degrees instead of adding them.",
+      "tip": "Factored form hands you the degree and the end behaviour faster than standard form does."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which statement about a polynomial of EVEN degree with a NEGATIVE leading coefficient is true?",
+     "opts": [
+      "It has a lowest point overall, but no highest point overall",
+      "It has a highest point overall, but no lowest point overall",
+      "It has both a highest and a lowest point overall",
+      "It has neither a highest nor a lowest point overall"
+     ],
+     "ans": 1,
+     "hint": "Sketch the ends first, then ask what the middle must do.",
+     "steps": [
+      "Even degree means both ends agree; a negative lead sends the right end down.",
+      "So both ends run down to −∞.",
+      "Running down forever in both directions means there is no lowest point — the values go below any number you name.",
+      "But the graph must top out somewhere in the middle, so there IS a highest point overall."
+     ],
+     "ex": {
+      "main": "**A highest point overall, but no lowest.** Both ends dive to −∞, so no value is the smallest — you can always go further out and get lower. In between, the curve has to reach a maximum. This is the upside-down version of y = x², which has a lowest point and no highest.",
+      "tip": "Odd-degree polynomials have neither, since one end goes each way."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "f(x) = x³ − 6x falls on the left and rises on the right. What happens to the end behaviour of −f(x)?",
+     "opts": [
+      "Both ends of −f now rise",
+      "It is unchanged, because the degree did not change",
+      "It reverses: −f rises on the left and falls on the right",
+      "Both ends of −f now fall"
+     ],
+     "ans": 2,
+     "hint": "Multiplying by −1 flips the sign of every output, including out at the ends.",
+     "steps": [
+      "Negating the whole function negates the leading coefficient: +1 becomes −1.",
+      "The degree is still 3, so the ends still disagree.",
+      "But the sign flip sends the right end the other way — down instead of up.",
+      "So −f rises on the left and falls on the right: the end behaviour reverses."
+     ],
+     "ex": {
+      "main": "**It reverses.** Negating a function reflects the whole graph across the x-axis, so every rise becomes a fall. The degree is untouched, which is why the ends still disagree — they have just swapped places. \"Unchanged because the degree did not change\" gets half the rule right and forgets the sign does the other half.",
+      "tip": "Degree decides whether the ends match; the sign decides which way they point. Change one and only that half moves."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can a polynomial of degree 4 never have 5 turning points?",
+     "opts": [
+      "Because a degree-4 polynomial has at most 4 x-intercepts",
+      "Because a degree-4 polynomial always has exactly 3 turning points",
+      "Because turning points must come in pairs",
+      "Because a degree-n polynomial changes direction at most n − 1 times"
+     ],
+     "ans": 3,
+     "hint": "One of these states the actual rule; the others state true-sounding things that do not answer it.",
+     "steps": [
+      "The bound on turning points is n − 1.",
+      "For n = 4 that is 3, so 5 is impossible.",
+      "\"Exactly 3\" is false — y = x⁴ is degree 4 and turns once, so the rule has to be an upper bound.",
+      "The reason is that a degree-n polynomial changes direction at most n − 1 times."
+     ],
+     "ex": {
+      "main": "**Because a degree-n polynomial changes direction at most n − 1 times.** That is the rule itself. The x-intercept bound is a real and separate fact about a different feature, and \"exactly 3\" overstates a rule that is genuinely only a ceiling — y = x⁴ turns once.",
+      "tip": "When a question asks WHY, the answer that states the governing rule beats one that states a true but unrelated fact."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "An open box is made from a 12 cm by 9 cm sheet by cutting a square of side x from each corner and folding the sides up. Its volume is V(x) = x(12 − 2x)(9 − 2x). What is the degree of V, and what do the x-intercepts mean here?",
+     "opts": [
+      "Degree 3; they are the cut sizes that give a box of zero volume",
+      "Degree 3; they are the cut sizes that give the largest box",
+      "Degree 2; they are the cut sizes that give a box of zero volume",
+      "Degree 3; they are the possible heights of the box"
+     ],
+     "ans": 0,
+     "hint": "An intercept is where the OUTPUT is zero — so ask what a zero output means in this situation.",
+     "steps": [
+      "Three linear factors multiply to a degree-3 polynomial.",
+      "An x-intercept is a value of x making V(x) = 0.",
+      "V is the volume, so those are cut sizes producing no box at all — x = 0 (no sides folded up), x = 4.5 (the 9 cm side vanishes) and x = 6 (the 12 cm side vanishes).",
+      "Degree 3, and the intercepts are the cut sizes giving zero volume."
+     ],
+     "ex": {
+      "main": "**Degree 3, and they are the cut sizes giving zero volume.** Always translate an intercept back through the context: here the output is volume, so a zero means no box. The LARGEST box is at a turning point between the intercepts, not at one — a different feature answering a different question.",
+      "tip": "Intercepts answer \"when is the output nothing?\"; turning points answer \"when is it most?\""
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two polynomials both have degree 5. One has leading coefficient 100 and the other has leading coefficient 0.01, and both are positive. How do their end behaviours compare?",
+     "opts": [
+      "Opposite, because one coefficient is so much larger",
+      "Identical — both fall on the left and rise on the right",
+      "The one with lead 100 rises on both ends; the other does not",
+      "Neither can be determined without the full polynomials"
+     ],
+     "ans": 1,
+     "hint": "Ask which two facts the rule actually uses.",
+     "steps": [
+      "End behaviour depends on the degree’s parity and the leading coefficient’s SIGN.",
+      "Both have degree 5, which is odd, so both have ends that disagree.",
+      "Both leading coefficients are positive, so both right ends rise.",
+      "Their end behaviours are identical — the size of the coefficient never enters the rule."
+     ],
+     "ex": {
+      "main": "**Identical.** The rule reads the SIGN of the leading coefficient and nothing else about it. The size changes how steeply the graph climbs and where its turns sit, so the two curves look very different near the origin — but \"eventually rises\" and \"eventually falls\" are the same for both.",
+      "tip": "Size shapes the middle of the picture. Only the sign shapes the ends."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these polynomials in order from LEAST degree to greatest degree.",
+     "opts": [
+      "7x − 4",
+      "2x² − x³ + 1",
+      "x⁴ + 3x⁶ − x",
+      "5x⁹ − x⁸"
+     ],
+     "ans": 0,
+     "hint": "Write each one in standard form first, then read the front.",
+     "steps": [
+      "7x − 4 has greatest exponent 1.",
+      "2x² − x³ + 1 has greatest exponent 3 — not 2, which is only written first.",
+      "x⁴ + 3x⁶ − x has greatest exponent 6, again not the one written first.",
+      "5x⁹ − x⁸ has greatest exponent 9. So the order is 1, 3, 6, 9."
+     ],
+     "ex": {
+      "main": "**Degrees 1, 3, 6 and 9.** Two of these deliberately do not lead with their highest-degree term, which is the whole trap — sorting into standard form first turns a fiddly comparison into reading four numbers off the front.",
+      "tip": "The habit that prevents this is sorting before reading, every single time."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A graph falls on the left, rises to a peak, falls to a valley, and then rises on the right. What can you conclude about its degree and leading coefficient?",
+     "opts": [
+      "Odd degree, exactly 3, with a negative leading coefficient",
+      "Even degree, at least 4, with a positive leading coefficient",
+      "Odd degree, at least 3, with a positive leading coefficient",
+      "Even degree, at least 4, with a negative leading coefficient"
+     ],
+     "ans": 2,
+     "hint": "Take the ends and the turns as two separate pieces of evidence, then combine them.",
+     "steps": [
+      "The ends disagree — down on the left, up on the right — so the degree is odd.",
+      "The right end rises, so the leading coefficient is positive.",
+      "There are 2 turning points, so the degree is at least 3.",
+      "Odd, at least 3, positive lead."
+     ],
+     "ex": {
+      "main": "**Odd degree, at least 3, positive lead.** Two independent readings: the ends give parity and sign, the turns give a floor on the degree. \"Exactly 3\" overreaches — a degree-5 polynomial can draw this same picture.",
+      "tip": "Ends and turns answer different questions. Read both, and claim only what each supports."
+     }
+    }
+   ]
+  }
+ }
+}

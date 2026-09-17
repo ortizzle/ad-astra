@@ -1,0 +1,693 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-05": {
+   "id": "unit-alg-t3-05",
+   "type": "unit",
+   "updatedAt": 1789600054873,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-5 Zeros of Polynomial Functions",
+   "srcName": "enVision Algebra 2, Lesson 3-5 (Drive)",
+   "source": "enVision Algebra 2 Lesson 3-5: Zeros of Polynomial Functions",
+   "summary": {
+    "text": "Lesson 3-5 finds the zeros of a polynomial by factoring and applying the Zero Product Property, and reads multiplicity off the factors — including what an even or odd multiplicity does to the graph.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Zeros are where algebra and the graph meet: the same numbers that solve the equation are the places the curve crosses the axis. Everything in Lesson 3-6 is about finding them when factoring alone will not.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Find zeros by factoring and applying the Zero Product Property",
+     "from": "source"
+    },
+    {
+     "text": "Identify the multiplicity of each zero from the factored form",
+     "from": "source"
+    },
+    {
+     "text": "Predict whether the graph crosses or touches the axis at each zero",
+     "from": "source"
+    },
+    {
+     "text": "Write a polynomial function given its zeros",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Two habits are worth drilling. First, factor out the GCF before anything else — when there is a common x, the zero at x = 0 is genuinely easy to lose, and an answer that comes up short against the degree is the tell. Second, never divide both sides by a variable: it destroys a root silently, which is a real error with no visible symptom, and one question here is built entirely around it. The sign flip between a factor and its zero — (x + 3) gives −3 — accounts for most of the rest.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Sketch a few from their factored form: zeros, then multiplicity, then the ends.",
+    "minutes": 18,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Zero of a function",
+     "def": "**A value of x that makes the function equal 0.**\n• Zero, root, solution and x-intercept are four names for the same thing — which one gets used depends only on whether you are talking about the function, the equation or the graph.\n• If x = 4 is a zero, then (x − 4) is a factor, and the graph meets the x-axis at 4.",
+     "hint": "Four words, one idea. Questions switch between them freely.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The Zero Product Property",
+     "def": "**If a product equals zero, at least one of the factors must be zero.**\n• This is why factoring solves equations: (x − 6)(x + 2) = 0 forces x = 6 or x = −2.\n• It only works against ZERO. From (x − 6)(x + 2) = 5 you can conclude nothing about the individual factors.",
+     "eq": "AB = 0 ⇒ A = 0 or B = 0",
+     "hint": "Get one side to zero BEFORE you factor, or the property does not apply.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Factor out the GCF first",
+     "def": "**Always pull out the greatest common factor before anything else.**\n• x³ − 4x² − 12x = x(x² − 4x − 12) = x(x − 6)(x + 2).\n• That leading x is itself a factor, so **x = 0 is a zero** — the one most often missed, because it does not look like a factor worth writing down.",
+     "hint": "A common x means 0 is a root. Do not lose it.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Multiplicity",
+     "def": "**How many times a factor is repeated.**\n• In (x − 3)²(x + 1), the zero 3 has multiplicity 2 and −1 has multiplicity 1.\n• Multiplicities add up to the degree, which is what makes the count come out right.",
+     "hint": "The exponent on the factor IS the multiplicity.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "What multiplicity does to the graph",
+     "def": "**Odd multiplicity CROSSES the axis; even multiplicity TOUCHES and turns back.**\n• A multiplicity of 1 is an ordinary crossing; 3 crosses too, but flattens as it goes through.\n• A multiplicity of 2 bounces off the axis without ever changing sign.",
+     "hint": "Odd crosses, even bounces. The parity is the whole rule.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Reading zeros off a factored polynomial",
+     "def": "**Set each factor to zero and solve — the zero is the value that kills that factor, so the sign flips.**\n• (x − 5) gives the zero +5; (x + 5) gives −5.\n• (2x − 3) gives x = 3⁄2 — a factor with a coefficient does not give a whole number.",
+     "hint": "Solve each factor = 0. Never just read the number off the bracket.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Building a polynomial from its zeros",
+     "def": "**Turn each zero a into a factor (x − a) and multiply.**\n• Zeros at 2, −1 and 4 give (x − 2)(x + 1)(x − 4).\n• Any non-zero multiple of that works too, so there are infinitely many — usually the one with leading coefficient 1 is wanted.",
+     "hint": "Zeros to factors is the reverse of factors to zeros, sign flip and all.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "How many zeros to expect",
+     "def": "**A degree-n polynomial has at most n real zeros — and at most n − 1 turning points.**\n• Those are two different counts about two different features; do not swap them.\n• A cubic has at most 3 zeros and at most 2 turns.",
+     "hint": "Zeros: n. Turns: n − 1. Different questions, different bounds.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Zeros and end behaviour together sketch the graph",
+     "def": "**The zeros say where it meets the axis; multiplicity says how; end behaviour says where it goes.**\n• With those three you can sketch a polynomial without plotting a single extra point.\n• Between consecutive zeros the graph stays entirely above or entirely below the axis — it cannot change sign without a zero.",
+     "hint": "Zeros, multiplicity, ends. Three facts and the shape is decided.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Example: zeros with a repeated factor",
+     "def": "**f(x) = (x + 2)²(x − 1) has zeros at −2 (multiplicity 2) and 1 (multiplicity 1).**\n• At −2 the graph touches and turns back; at 1 it crosses.\n• Degree 3, so both ends behave oppositely: down on the left, up on the right.",
+     "eq": "f(x) = (x + 2)²(x − 1)",
+     "hint": "Count the exponents: 2 + 1 = 3, which is the degree.",
+     "from": "added",
+     "graph": {
+      "w": [
+       -3.5,
+       2.5,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "poly",
+        "c": [
+         1,
+         3,
+         0,
+         -4
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": -2,
+        "y": 0,
+        "label": "touches"
+       },
+       {
+        "x": 1,
+        "y": 0,
+        "label": "crosses"
+       }
+      ],
+      "xl": "x",
+      "yl": "f(x)"
+     }
+    },
+    {
+     "id": "c10",
+     "term": "Example: the zero that hides",
+     "def": "**g(x) = 2x³ − 8x factors to 2x(x − 2)(x + 2), so the zeros are 0, 2 and −2.**\n• Pulling out 2x first is what surfaces the zero at 0.\n• What is left, x² − 4, is a difference of squares from Lesson 3-3.",
+     "eq": "g(x) = 2x(x − 2)(x + 2)",
+     "hint": "GCF first, every time — it is where the missing root lives.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What are the zeros of f(x) = (x − 5)(x + 3)?",
+     "opts": [
+      "5 and −3",
+      "−5 and 3",
+      "5 and 3",
+      "−5 and −3"
+     ],
+     "ans": 0,
+     "hint": "Set each factor to zero and solve it.",
+     "steps": [
+      "x − 5 = 0 gives x = 5.",
+      "x + 3 = 0 gives x = −3.",
+      "The signs flip from what is written in the brackets.",
+      "The zeros are 5 and −3."
+     ],
+     "ex": {
+      "main": "**5 and −3.** Each zero is the value that makes its own factor vanish, which is why the sign is the opposite of the one printed. Reading the numbers straight off the brackets gives −5 and 3 — exactly backwards, and it is the commonest error in this lesson.",
+      "tip": "Actually solve each little equation. It takes a second and removes the guesswork."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the Zero Product Property let you conclude from (x − 4)(x + 7) = 0?",
+     "opts": [
+      "x = 4 and x = −7 simultaneously",
+      "x = 4 or x = −7",
+      "x = −4 or x = 7",
+      "Nothing without expanding first"
+     ],
+     "ans": 1,
+     "hint": "If a product is zero, at least one factor is zero.",
+     "steps": [
+      "A product equals zero only when a factor equals zero.",
+      "So either x − 4 = 0 or x + 7 = 0.",
+      "That gives x = 4 or x = −7.",
+      "They are alternatives, not simultaneous — x cannot be two numbers at once."
+     ],
+     "ex": {
+      "main": "**x = 4 or x = −7.** The word is OR: each zero is a separate solution, and the graph meets the axis at two different places. Expanding first would only make the problem harder — factored form is already the useful form.",
+      "tip": "This is why factoring solves equations: it converts one hard equation into several easy ones."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In f(x) = (x − 2)³(x + 5), what is the multiplicity of the zero at 2?",
+     "opts": [
+      "2",
+      "1",
+      "3",
+      "4"
+     ],
+     "ans": 2,
+     "hint": "The exponent on the factor is the multiplicity.",
+     "steps": [
+      "The factor associated with the zero 2 is (x − 2).",
+      "It is raised to the power 3.",
+      "That exponent IS the multiplicity.",
+      "So the zero at 2 has multiplicity 3."
+     ],
+     "ex": {
+      "main": "**3.** Multiplicity is just the exponent on that factor. Answering 2 reads the zero’s VALUE rather than its exponent — an easy confusion when the number 2 appears in both roles in the same expression.",
+      "tip": "The multiplicities add up to the degree: 3 + 1 = 4 here."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A polynomial has a zero of multiplicity 2 at x = 6. What does its graph do at x = 6?",
+     "opts": [
+      "Never reaches the x-axis",
+      "Crosses the x-axis",
+      "Crosses the axis while flattening out",
+      "Touches the x-axis and turns back"
+     ],
+     "ans": 3,
+     "hint": "Even or odd is the whole question.",
+     "steps": [
+      "Multiplicity 2 is even.",
+      "Even multiplicity means the graph touches the axis without crossing it.",
+      "So the function does not change sign there — it comes down to the axis and goes back the way it came.",
+      "It touches and turns back."
+     ],
+     "ex": {
+      "main": "**Touches and turns back.** Even multiplicity means no sign change: the graph reaches zero and retreats. Crossing-while-flattening is what an ODD multiplicity of 3 or more looks like, which is a different picture with a different parity.",
+      "tip": "Odd crosses, even bounces. It is the only thing multiplicity changes about the picture."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the greatest number of real zeros a degree-7 polynomial can have?",
+     "opts": [
+      "7",
+      "6",
+      "8",
+      "14"
+     ],
+     "ans": 0,
+     "hint": "Careful — this is the zero count, not the turning-point count.",
+     "steps": [
+      "Each real zero corresponds to a linear factor.",
+      "A degree-7 polynomial has at most 7 linear factors.",
+      "So it has at most 7 real zeros.",
+      "The n − 1 rule is about TURNING POINTS, which would be 6 — a different feature."
+     ],
+     "ex": {
+      "main": "**7.** Zeros are capped at n; turning points are capped at n − 1. The two bounds get swapped constantly because they sit one apart and both mention the degree, so it is worth naming which feature a question is asking about before answering.",
+      "tip": "Zeros: at most n. Turns: at most n − 1. Read the question for which it wants."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which polynomial has zeros at 3, −2 and 0?",
+     "opts": [
+      "f(x) = (x − 3)(x − 2)",
+      "f(x) = x(x − 3)(x + 2)",
+      "f(x) = x(x + 3)(x − 2)",
+      "f(x) = (x + 3)(x − 2)(x − 0)"
+     ],
+     "ans": 1,
+     "hint": "Each zero a becomes a factor (x − a) — including zero itself.",
+     "steps": [
+      "The zero 3 gives the factor (x − 3).",
+      "The zero −2 gives the factor (x + 2).",
+      "The zero 0 gives the factor (x − 0), which is just x.",
+      "So f(x) = x(x − 3)(x + 2)."
+     ],
+     "ex": {
+      "main": "**f(x) = x(x − 3)(x + 2).** Zero is a zero like any other; its factor is simply x. And the signs flip going from zero to factor, which is why a zero of −2 produces (x + 2) rather than (x − 2).",
+      "tip": "Zeros to factors flips every sign. Going the other way flips them back."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Find all the zeros of f(x) = x³ − 9x.",
+     "opts": [
+      "x = 0 and x = 3 only",
+      "x = 3 and x = −3 only",
+      "x = 0, x = 3 and x = −3",
+      "x = 9 and x = −9"
+     ],
+     "ans": 2,
+     "hint": "Factor out the greatest common factor before doing anything else.",
+     "steps": [
+      "The GCF is x: f(x) = x(x² − 9).",
+      "x² − 9 is a difference of squares: x(x − 3)(x + 3).",
+      "Set each factor to zero.",
+      "The zeros are 0, 3 and −3."
+     ],
+     "ex": {
+      "main": "**0, 3 and −3.** The zero at 0 is the one people lose, because pulling out the x does not feel like finding a root — but that x is a genuine factor. A cubic should have up to three zeros, so an answer with only two is worth a second look on those grounds alone.",
+      "tip": "Count your zeros against the degree. Coming up short usually means a GCF went unclaimed."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A graph crosses the x-axis at x = −1, and touches without crossing at x = 4. Which function fits?",
+     "opts": [
+      "f(x) = (x + 1)(x − 4)",
+      "f(x) = (x + 1)²(x − 4)",
+      "f(x) = (x − 1)(x + 4)²",
+      "f(x) = (x + 1)(x − 4)²"
+     ],
+     "ans": 3,
+     "hint": "Crossing means odd multiplicity; touching means even.",
+     "steps": [
+      "Crossing at −1 means that factor has odd multiplicity: (x + 1) to the first power.",
+      "Touching at 4 means that factor has even multiplicity: (x − 4)².",
+      "The zeros also have to have the right signs: −1 gives (x + 1), and 4 gives (x − 4).",
+      "So f(x) = (x + 1)(x − 4)²."
+     ],
+     "ex": {
+      "main": "**f(x) = (x + 1)(x − 4)².** Two things have to line up at once: which zero is which (signs flip from the bracket) and which one carries the even exponent. Putting the square on the wrong factor describes a graph that touches at −1 and crosses at 4 — the exact mirror of what was asked.",
+      "tip": "Handle the values first, then the multiplicities. Two separate decisions, made in order."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What are the zeros of f(x) = 2x² − 7x − 15?",
+     "opts": [
+      "5 and −3⁄2",
+      "5 and 3⁄2",
+      "−5 and 3⁄2",
+      "5 and −3"
+     ],
+     "ans": 0,
+     "hint": "Factor it, then solve each factor — one of them has a coefficient.",
+     "steps": [
+      "2x² − 7x − 15 factors as (2x + 3)(x − 5).",
+      "x − 5 = 0 gives x = 5.",
+      "2x + 3 = 0 gives 2x = −3, so x = −3⁄2.",
+      "The zeros are 5 and −3⁄2."
+     ],
+     "ex": {
+      "main": "**5 and −3⁄2.** A factor with a coefficient in front does not hand you a whole number — you have to divide as well as move the constant across. Answering −3 stops halfway through solving 2x + 3 = 0.",
+      "tip": "Whenever a factor starts with a number other than 1, expect a fraction."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Between two consecutive zeros, what can the graph of a polynomial NOT do?",
+     "opts": [
+      "Have a turning point",
+      "Change from positive to negative",
+      "Stay entirely above the axis",
+      "Curve"
+     ],
+     "ans": 1,
+     "hint": "Changing sign requires passing through a particular value.",
+     "steps": [
+      "To go from positive to negative, the graph must pass through zero.",
+      "Passing through zero means hitting the x-axis — which would be another zero.",
+      "But we said the two zeros are consecutive, so there is none in between.",
+      "So it cannot change sign there."
+     ],
+     "ex": {
+      "main": "**Change from positive to negative.** Between consecutive zeros the graph keeps one sign the whole way. It can certainly turn, curve, and stay above or below — it just cannot cross, because crossing is what a zero IS.",
+      "tip": "This is what makes sketching from zeros work: each interval between zeros has a single sign to determine."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve x³ = 2x² + 8x.",
+     "opts": [
+      "x = 0 or 4",
+      "x = 4 or −2",
+      "x = 0, 4 or −2",
+      "x = 2 or 8"
+     ],
+     "ans": 2,
+     "hint": "Move everything to one side first — the Zero Product Property needs a zero.",
+     "steps": [
+      "Rewrite as x³ − 2x² − 8x = 0.",
+      "Factor out x: x(x² − 2x − 8) = 0.",
+      "Factor the quadratic: x(x − 4)(x + 2) = 0.",
+      "So x = 0, 4 or −2."
+     ],
+     "ex": {
+      "main": "**x = 0, 4 or −2.** Two steps that both get skipped: moving everything to one side (the Zero Product Property says nothing about a product equal to 2x² + 8x), and keeping the x = 0 that the GCF produces. Dividing both sides by x would have destroyed that root silently.",
+      "tip": "Never divide both sides by a variable — you throw away a solution and get no warning."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student solves x² = 5x by dividing both sides by x to get x = 5. What is wrong?",
+     "opts": [
+      "x² = 5x has no solutions",
+      "Nothing — x = 5 is the complete answer",
+      "They should have divided by 5 instead",
+      "Dividing by x loses the solution x = 0"
+     ],
+     "ans": 3,
+     "hint": "Check whether any value was quietly excluded by that division.",
+     "steps": [
+      "Dividing by x assumes x is not zero — you cannot divide by zero.",
+      "But x = 0 does satisfy the original: 0² = 5(0) is 0 = 0.",
+      "Done properly: x² − 5x = 0, so x(x − 5) = 0, giving x = 0 or x = 5.",
+      "Dividing by x threw away the solution x = 0."
+     ],
+     "ex": {
+      "main": "**Dividing by x loses the solution x = 0.** Dividing by a variable silently assumes it is not zero, and that assumption removes a real answer with no error message. The safe move is always to bring everything to one side and factor — then the Zero Product Property finds every root.",
+      "tip": "Subtract, never divide, when a variable is involved on both sides."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A degree-4 polynomial has zeros at −3 and 2 only, and its graph touches the axis at both. What are the multiplicities?",
+     "opts": [
+      "Both have multiplicity 2",
+      "Both have multiplicity 1",
+      "−3 has multiplicity 3 and 2 has multiplicity 1",
+      "It is impossible to tell"
+     ],
+     "ans": 0,
+     "hint": "Touching means even; and the multiplicities have to add to the degree.",
+     "steps": [
+      "Touching without crossing means each multiplicity is EVEN.",
+      "The multiplicities must sum to the degree, which is 4.",
+      "Two even numbers adding to 4 can only be 2 and 2.",
+      "So both zeros have multiplicity 2."
+     ],
+     "ex": {
+      "main": "**Both have multiplicity 2.** Two constraints pin it down exactly: even (from the touching) and summing to 4 (from the degree). The 3-and-1 option sums correctly but makes both multiplicities odd, which would mean the graph crosses at both — contradicting what was described.",
+      "tip": "When a question gives you both the degree and the behaviour, the multiplicities are usually forced."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does knowing all the zeros of a polynomial let you write the whole function (up to a constant multiple)?",
+     "opts": [
+      "Because the zeros are also where the turning points sit",
+      "Each zero gives a linear factor, and those factors multiply up",
+      "Because every polynomial has exactly one zero to build on",
+      "Because the zeros determine the end behaviour of the graph"
+     ],
+     "ans": 1,
+     "hint": "Ask what a zero actually tells you about the polynomial’s structure.",
+     "steps": [
+      "By the Factor Theorem, a zero at a means (x − a) is a factor.",
+      "Knowing every zero therefore means knowing every linear factor.",
+      "Multiplying them rebuilds the polynomial.",
+      "Only an overall constant is left undetermined, since scaling does not move any zero."
+     ],
+     "ex": {
+      "main": "**Each zero gives a linear factor, and those factors multiply up.** The leftover constant is exactly why it is \"up to a multiple\" — 2(x − 1)(x + 3) and (x − 1)(x + 3) have identical zeros. End behaviour, by contrast, comes from the degree and the leading coefficient, not from where the zeros sit.",
+      "tip": "Zeros fix the SHAPE; the leading coefficient fixes how stretched it is."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown crosses at x = 1 and touches the axis at x = −2. What is the least possible degree?",
+     "opts": [
+      "4",
+      "2",
+      "3",
+      "5"
+     ],
+     "ans": 2,
+     "hint": "Add the smallest multiplicity each behaviour allows.",
+     "steps": [
+      "Crossing at 1 needs odd multiplicity — smallest is 1.",
+      "Touching at −2 needs even multiplicity — smallest is 2.",
+      "The multiplicities sum to at least 1 + 2 = 3.",
+      "So the least possible degree is 3."
+     ],
+     "ex": {
+      "main": "**3.** Each behaviour sets a minimum multiplicity, and the degree is at least their sum. It is only a minimum: a degree-5 polynomial could draw the same picture with multiplicities 3 and 2. As always, a graph bounds the degree from below rather than pinning it down.",
+      "tip": "Crossing costs at least 1, touching costs at least 2. Add up the minimums."
+     },
+     "graph": {
+      "w": [
+       -3.5,
+       2.5,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "poly",
+        "c": [
+         1,
+         3,
+         0,
+         -4
+        ]
+       }
+      ],
+      "xl": "x",
+      "yl": "f(x)"
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these steps in the order you would use them to find the zeros of 3x³ − 12x.",
+     "opts": [
+      "Set the function equal to zero",
+      "Factor out the greatest common factor, 3x",
+      "Factor the remaining difference of squares",
+      "Solve each factor for x"
+     ],
+     "ans": 0,
+     "hint": "One step has to come before any factoring, and one factoring has to come before the other.",
+     "steps": [
+      "First set 3x³ − 12x = 0, because the Zero Product Property needs a zero on one side.",
+      "Then pull out the GCF 3x, giving 3x(x² − 4) = 0.",
+      "Then factor x² − 4 as (x − 2)(x + 2).",
+      "Finally solve each factor: x = 0, 2 and −2."
+     ],
+     "ex": {
+      "main": "**Set to zero, GCF, factor the rest, then solve.** The GCF always comes before any other factoring, because pulling it out is what makes the remainder simple enough to recognise — here it exposes a plain difference of squares. Solving can only happen once nothing factors further.",
+      "tip": "GCF first is not a preference; it is what makes the next step visible."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "f(x) = x(x − 7)(x + 1). How many distinct zeros does it have, and what are they?",
+     "opts": [
+      "Three — 1, 7 and −1",
+      "Two — 7 and −1",
+      "Three — 0, −7 and 1",
+      "Three — 0, 7 and −1"
+     ],
+     "ans": 3,
+     "hint": "A lone x out front is a factor like any other.",
+     "steps": [
+      "Set each factor to zero in turn.",
+      "x = 0 from the bare x, which is a factor even though nothing is subtracted from it.",
+      "x − 7 = 0 gives x = 7, and x + 1 = 0 gives x = −1.",
+      "That is three distinct zeros: 0, 7 and −1."
+     ],
+     "ex": {
+      "main": "**Three — 0, 7 and −1.** The factor that costs the most marks is the bare x, because it does not look like a factor worth writing down. Every factor is set to zero, including that one. Note also that x + 1 gives −1, not 1 — you undo the sign that is written, you do not copy it.",
+      "tip": "A bare x in front means 0 is a zero. Count it."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Find all the zeros of f(x) = x⁴ − 5x² + 4.",
+     "opts": [
+      "1, −1, 2 and −2",
+      "1 and 4 only",
+      "1, 2 and 4",
+      "0, 1 and 4"
+     ],
+     "ans": 0,
+     "hint": "It factors like a quadratic, but x² is what gets factored — not x.",
+     "steps": [
+      "Treat it as a quadratic in x²: it factors as (x² − 1)(x² − 4).",
+      "Both brackets are differences of squares: (x − 1)(x + 1)(x − 2)(x + 2).",
+      "Set each of the four factors to zero.",
+      "The zeros are 1, −1, 2 and −2."
+     ],
+     "ex": {
+      "main": "**1, −1, 2 and −2.** Factoring gets you to x² = 1 and x² = 4, and stopping there is the whole trap — those are values of x², not of x. Taking the square root of each gives two answers apiece, which is why a quartic that looks like it has two zeros actually has four.",
+      "tip": "x² = 4 is not the answer. x = ±2 is."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "P(x) = x³ − 4x² + x + 6, and you are told P(3) = 0. What does that give you, and what is left to do?",
+     "opts": [
+      "(x + 3) is a factor — divide it out and solve the quadratic left behind",
+      "(x − 3) is a factor — divide it out and solve the quadratic left behind",
+      "3 is the only zero, so the work is finished at that point",
+      "(x − 3) is a factor, and the two remaining zeros must be positive too"
+     ],
+     "ans": 1,
+     "hint": "A root and a factor are the same fact said two ways — mind which sign goes where.",
+     "steps": [
+      "P(3) = 0 says 3 is a root, and the Factor Theorem turns that into a factor.",
+      "A root of 3 gives the factor (x − 3), because that is what is zero when x = 3.",
+      "Dividing P(x) by (x − 3) leaves x² − x − 2.",
+      "That factors as (x − 2)(x + 1), so the other zeros are 2 and −1."
+     ],
+     "ex": {
+      "main": "**(x − 3) is a factor — divide it out and solve what is left.** One known root turns a cubic you cannot factor into a quadratic you can, which is the whole reason the Factor Theorem is worth having. The sign flips: a root of 3 means (x − 3), never (x + 3). Here the remaining zeros are 2 and −1, so one of them is negative.",
+      "tip": "Root 3 → factor (x − 3). Divide, then solve the leftovers."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "f(x) = x³ + x² + x + 1 has a zero at x = −1. Dividing that out leaves x² + 1. How many REAL zeros does f have altogether?",
+     "opts": [
+      "Two — x = −1 and x = 1, from the leftover factor",
+      "Three — every cubic has three real zeros",
+      "One — only x = −1, since x² + 1 is never zero for real x",
+      "One — but only because the cubic was not factored completely"
+     ],
+     "ans": 2,
+     "hint": "Ask whether the leftover quadratic can ever hit zero on a real number line.",
+     "steps": [
+      "x² + 1 = 0 would need x² = −1.",
+      "No real number squares to a negative, so that factor contributes no real zeros.",
+      "The only real zero left is the one already found, x = −1.",
+      "So f has exactly one real zero."
+     ],
+     "ex": {
+      "main": "**One — only x = −1.** A cubic always has three zeros counting complex ones, and here two of them are ±i. The option blaming incomplete factoring is the tempting wrong reason: x² + 1 really is factored as far as it goes over the real numbers, and the answer is one because of what the numbers are, not because the work stopped early.",
+      "tip": "x² + 1 never reaches zero on the real line. That is a fact about it, not a sign you stopped early."
+     }
+    }
+   ]
+  }
+ }
+}

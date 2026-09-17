@@ -1,0 +1,629 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-06": {
+   "id": "unit-alg-t3-06",
+   "type": "unit",
+   "updatedAt": 1789600054898,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-6 Theorems About Roots of Polynomial Equations",
+   "srcName": "enVision Algebra 2, Lesson 3-6 (Drive — vocabulary sheet and answer key)",
+   "source": "enVision Algebra 2 Lesson 3-6: Theorems About Roots of Polynomial Equations",
+   "summary": {
+    "text": "Lesson 3-6 covers the theorems that let you find every root of a polynomial: the Fundamental Theorem of Algebra (exactly n roots), the Rational Root Theorem (a finite list of candidates), and the Complex and Irrational Conjugate Theorems (awkward roots always come in pairs).",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the lesson that finishes the job Lesson 3-5 started. Factoring finds the easy roots; these theorems find the rest, and tell you when to stop looking.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "State how many roots a polynomial has, counting multiplicity",
+     "from": "source"
+    },
+    {
+     "text": "List the possible rational roots using the Rational Root Theorem",
+     "from": "source"
+    },
+    {
+     "text": "Use the Complex and Irrational Conjugate Theorems to name paired roots",
+     "from": "source"
+    },
+    {
+     "text": "Combine testing, division and the Quadratic Formula to find every root",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "One thing to know about this unit’s sources: her Topic 3 folder has the student-edition pages for every lesson EXCEPT 3-6 — aga_24_a2_0306_se.pdf is the one file missing. This was built from the 3-6 vocabulary sheet and its answer key (which show the lesson working with rational roots alongside irrational and complex conjugate pairs) plus the standard theorem set that vocabulary names, so the scope should be right, but it is worth a glance against her actual textbook pages if anything looks unfamiliar.\n\nThe distinction most worth reinforcing is what each theorem promises: the Fundamental Theorem guarantees the COUNT, while the Rational Root Theorem only supplies a list to try — and a polynomial can easily have no rational roots at all. The other reliable trap is the conjugate: only ONE sign flips, the one on the imaginary part or the radical.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Work one quartic all the way through — candidates, divide, divide, then the Quadratic Formula.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "The Fundamental Theorem of Algebra",
+     "def": "**A polynomial of degree n has exactly n roots, counting multiplicity, if complex roots are allowed.**\n• “Exactly”, not “at most” — the count is only guaranteed once imaginary numbers are on the table.\n• A cubic always has 3 roots; some may be repeated and some may be complex, but there are always 3.",
+     "hint": "Count in the complex numbers and the answer is always exactly the degree.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Real roots versus all roots",
+     "def": "**Over the REAL numbers a degree-n polynomial has AT MOST n roots; over the complex numbers it has EXACTLY n.**\n• x² + 1 has no real roots but two complex ones, i and −i.\n• The graph only shows the real ones — a complex root is never an x-intercept.",
+     "hint": "The graph shows real roots only. The rest are invisible on it.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "The Rational Root Theorem",
+     "def": "**Any rational root is ±p⁄q, where p divides the constant term and q divides the leading coefficient.**\n• It gives a finite LIST OF CANDIDATES to test — it does not say any of them actually work.\n• For 2x³ + x − 6: p ∈ {1,2,3,6}, q ∈ {1,2}, so candidates are ±1, ±2, ±3, ±6, ±½, ±3⁄2.",
+     "eq": "possible root = ± p⁄q",
+     "hint": "p from the constant, q from the leading coefficient. Constant on top.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Testing a candidate",
+     "def": "**Substitute it, or synthetic-divide by it — a zero result means you have found a root AND a factor.**\n• Synthetic division is usually better: it confirms the root and hands you the quotient at the same time.\n• The quotient is one degree lower, so the problem shrinks every time a root is found.",
+     "hint": "Each root found makes the next one easier — the polynomial gets smaller.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The Complex Conjugate Theorem",
+     "def": "**If a + bi is a root of a polynomial with real coefficients, then a − bi is a root too.**\n• Complex roots always arrive in PAIRS.\n• So a polynomial with real coefficients always has an EVEN number of complex roots — which is why every odd-degree polynomial must have at least one real root.",
+     "eq": "a + bi is a root ⇒ a − bi is a root",
+     "hint": "Complex roots come two at a time, never alone.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "The Irrational Conjugate Theorem",
+     "def": "**If a + √b is a root of a polynomial with RATIONAL coefficients, then a − √b is a root too.**\n• The same pairing rule as complex roots, for irrational ones.\n• So finding 2 + √5 as a root tells you 2 − √5 is one as well, for free.",
+     "eq": "a + √b is a root ⇒ a − √b is a root",
+     "hint": "Surds pair up too, for the same reason complex roots do.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Why conjugates must pair",
+     "def": "**Because the coefficients are real, anything irrational or imaginary has to cancel out when the factors are multiplied.**\n• (x − (2 + i))(x − (2 − i)) = x² − 4x + 5 — every trace of i is gone.\n• Only the pair multiplies to something with real coefficients, which is why one can never appear without the other.",
+     "hint": "The pair multiplies to a real quadratic. A lone one never could.",
+     "from": "added"
+    },
+    {
+     "id": "c7",
+     "term": "The strategy for finding every root",
+     "def": "**List candidates, test until one works, divide it out, then solve what is left.**\n• Rational Root Theorem for the list; synthetic division to test and to shrink.\n• Once the quotient is a QUADRATIC, stop hunting — factor it or use the Quadratic Formula, which finds complex roots too.",
+     "hint": "Hunt only until the leftover is a quadratic. Then use a formula.",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "What the theorems do and do not promise",
+     "def": "**The Fundamental Theorem guarantees the COUNT; the Rational Root Theorem only offers a list to try.**\n• A polynomial can easily have no rational roots at all — the candidate list can come up empty-handed.\n• Knowing there are exactly n roots does not tell you what any of them are.",
+     "hint": "One theorem counts; the other suggests. Neither hands you an answer.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Example: finding every root of a cubic",
+     "def": "**x³ − 2x² + x − 2 has roots 2, i and −i.**\n• Candidates from the Rational Root Theorem: ±1, ±2. Testing 2 gives zero.\n• Dividing by (x − 2) leaves x² + 1, whose roots are i and −i — a conjugate pair, as required.\n• Three roots for a cubic, exactly as the Fundamental Theorem promises.",
+     "eq": "x³ − 2x² + x − 2 = (x − 2)(x² + 1)",
+     "hint": "One rational root, then a quadratic. That is the usual shape of these.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "How many roots does a degree-5 polynomial have, counting multiplicity and allowing complex roots?",
+     "opts": [
+      "Exactly 5",
+      "At most 5",
+      "At least 5",
+      "It depends on the coefficients"
+     ],
+     "ans": 0,
+     "hint": "The Fundamental Theorem of Algebra is an exact count, not a bound.",
+     "steps": [
+      "The Fundamental Theorem of Algebra gives the count over the complex numbers.",
+      "A degree-n polynomial has exactly n roots there, counting multiplicity.",
+      "Here n = 5.",
+      "So exactly 5."
+     ],
+     "ex": {
+      "main": "**Exactly 5.** \"At most\" is the right phrasing for REAL roots only — over the complex numbers the count is exact and never depends on the coefficients. That precision is what makes the theorem useful: you always know how many roots you are still looking for.",
+      "tip": "Real roots: at most n. All roots: exactly n. The word changes with the number system."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "For P(x) = x³ + 4x − 6, which list gives every possible RATIONAL root?",
+     "opts": [
+      "±1, ±2, ±3",
+      "±1, ±2, ±3, ±6",
+      "±1, ±6",
+      "±1, ±2, ±4, ±6"
+     ],
+     "ans": 1,
+     "hint": "Factors of the constant over factors of the leading coefficient.",
+     "steps": [
+      "The constant is −6, whose factors are 1, 2, 3 and 6.",
+      "The leading coefficient is 1, whose only factor is 1.",
+      "Candidates are ±p⁄q = ±1, ±2, ±3, ±6.",
+      "That is the complete list."
+     ],
+     "ex": {
+      "main": "**±1, ±2, ±3, ±6.** Every factor of the constant counts, including 6 itself. The 4 from the middle term never enters the theorem at all — only the constant and the leading coefficient do, which is worth knowing because the middle coefficients are a natural distraction.",
+      "tip": "Two numbers matter: the constant and the leading coefficient. Ignore everything between them."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "If 3 + 2i is a root of a polynomial with real coefficients, what else must be a root?",
+     "opts": [
+      "−3 + 2i",
+      "−3 − 2i",
+      "3 − 2i",
+      "2 + 3i"
+     ],
+     "ans": 2,
+     "hint": "A conjugate flips the sign of the imaginary part only.",
+     "steps": [
+      "The Complex Conjugate Theorem says roots come in conjugate pairs.",
+      "The conjugate of a + bi is a − bi.",
+      "Here a = 3 and b = 2.",
+      "So 3 − 2i must also be a root."
+     ],
+     "ex": {
+      "main": "**3 − 2i.** Only the imaginary part changes sign — the real part stays exactly as it is. Negating both (−3 − 2i) or swapping the numbers around (2 + 3i) are the two near-misses, and neither is the conjugate.",
+      "tip": "Conjugate: same real part, opposite imaginary part. Nothing else moves."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "If 1 + √7 is a root of a polynomial with rational coefficients, what else must be a root?",
+     "opts": [
+      "√7",
+      "−1 − √7",
+      "−1 + √7",
+      "1 − √7"
+     ],
+     "ans": 3,
+     "hint": "Irrational roots pair the same way complex ones do.",
+     "steps": [
+      "The Irrational Conjugate Theorem applies when the coefficients are rational.",
+      "The conjugate of a + √b is a − √b.",
+      "Here a = 1 and √b = √7.",
+      "So 1 − √7 is also a root."
+     ],
+     "ex": {
+      "main": "**1 − √7.** Only the sign in front of the radical flips. It is the same idea as complex conjugates and for the same underlying reason: only the pair multiplies back to something with rational coefficients.",
+      "tip": "Both conjugate theorems flip exactly one sign — the one on the \"awkward\" part."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the Rational Root Theorem actually guarantee?",
+     "opts": [
+      "Any rational root there is will appear in the list",
+      "At least one of the candidates is bound to be a root",
+      "Every candidate on the list turns out to be a root",
+      "The polynomial has no irrational roots to worry about"
+     ],
+     "ans": 0,
+     "hint": "It narrows the search; it does not promise a find.",
+     "steps": [
+      "The theorem says where rational roots CAN be.",
+      "So a rational root, if one exists, is somewhere in the list.",
+      "It never promises the list contains an actual root — a polynomial may have none that are rational.",
+      "So: any rational root will appear in the list."
+     ],
+     "ex": {
+      "main": "**Any rational root will appear in the candidate list.** It is a filter, not a finder. x² − 2 has candidates ±1 and ±2 and neither works, because its real roots are ±√2 — irrational, and completely outside what this theorem can see.",
+      "tip": "It shrinks an infinite search to a finite one. That is the whole contribution."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A polynomial with real coefficients has degree 3 and one root equal to 2i. What are its other roots?",
+     "opts": [
+      "−2i and another complex root",
+      "−2i and one real root",
+      "Two more complex roots",
+      "2i again, with multiplicity 3"
+     ],
+     "ans": 1,
+     "hint": "Count what the Fundamental Theorem requires, then apply the pairing rule.",
+     "steps": [
+      "Degree 3 means exactly 3 roots.",
+      "2i is a root, so its conjugate −2i must be too — that is 2 roots.",
+      "The third cannot be complex, because complex roots pair up and there is no partner left.",
+      "So the third root is real: −2i and one real root."
+     ],
+     "ex": {
+      "main": "**−2i and one real root.** Complex roots always come in pairs, so an odd-degree polynomial with real coefficients must have at least one real root — there is no way to pair up an odd number. That is why every cubic graph crosses the x-axis somewhere.",
+      "tip": "Odd degree with real coefficients always has a real root. The ends run opposite ways, so it has to cross."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "For P(x) = 2x³ − 5x² + x + 2, which is a candidate the Rational Root Theorem allows but ±4 is not?",
+     "opts": [
+      "4",
+      "¼",
+      "½",
+      "⅔"
+     ],
+     "ans": 2,
+     "hint": "Build the candidate list from the constant and the leading coefficient.",
+     "steps": [
+      "The constant is 2, so p ∈ {1, 2}.",
+      "The leading coefficient is 2, so q ∈ {1, 2}.",
+      "Candidates are ±1, ±2 and ±½.",
+      "½ is allowed; 4, ¼ and ⅔ all involve numbers that are not factors of 2."
+     ],
+     "ex": {
+      "main": "**½.** Fractional candidates arise exactly when the leading coefficient is not 1, and both parts have to be legitimate factors: 1 divides the constant and 2 divides the leading coefficient. ¼ would need a 4 in the denominator, and ⅔ a 3 — neither divides 2.",
+      "tip": "A leading coefficient of 1 means the candidates are all whole numbers. Anything else opens up fractions."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Find all roots of x³ − 6x² + 11x − 6.",
+     "opts": [
+      "1 and 6",
+      "1, 2 and 6",
+      "−1, −2 and −3",
+      "1, 2 and 3"
+     ],
+     "ans": 3,
+     "hint": "Test the small candidates first — they are the likeliest.",
+     "steps": [
+      "Candidates are ±1, ±2, ±3, ±6.",
+      "P(1) = 1 − 6 + 11 − 6 = 0, so 1 is a root.",
+      "Dividing by (x − 1) leaves x² − 5x + 6.",
+      "That factors as (x − 2)(x − 3), so the roots are 1, 2 and 3."
+     ],
+     "ex": {
+      "main": "**1, 2 and 3.** One rational root found by testing turns the cubic into a quadratic, and the quadratic finishes by ordinary factoring. Note the roots are positive even though the constant is −6 — the signs of the roots are not read off the constant directly.",
+      "tip": "Test 1 and −1 first. They are quick to evaluate and often work."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A degree-4 polynomial with real coefficients has roots 1 + i and 3. How many roots are still unaccounted for, and what do you know about them?",
+     "opts": [
+      "One, and it must be real — 1 − i is already forced by the pairing",
+      "Two, and both of them are bound to be non-real numbers",
+      "Three, and every one of them has to be a real number",
+      "None — all four roots are already named or forced"
+     ],
+     "ans": 0,
+     "hint": "Apply the pairing rule before you count. It supplies a root the question never listed.",
+     "steps": [
+      "Degree 4 means exactly four roots, counting multiplicity.",
+      "1 + i is non-real, so its conjugate 1 − i is forced — the two given roots really account for three.",
+      "That leaves exactly one root unaccounted for.",
+      "A lone non-real root would need a partner, and there is no room left — so the fourth root is real."
+     ],
+     "ex": {
+      "main": "**One, and it has to be real.** Naming 1 + i quietly names 1 − i as well, so two stated roots account for three. The last one cannot be non-real: that would demand a conjugate partner, and a degree-4 polynomial has no fifth slot to put one in. Which real number it is stays open — it could even be 3 over again.",
+      "tip": "The pairing rule does two jobs: it adds roots you were not given, and it forces the odd one out to be real."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why must every polynomial of ODD degree with real coefficients have at least one real root?",
+     "opts": [
+      "Because an odd-degree polynomial has no complex roots at all",
+      "Non-real roots come in pairs, so an odd count cannot all be non-real",
+      "Because the Rational Root Theorem always turns one of them up",
+      "Because an odd function always passes through the origin"
+     ],
+     "ans": 1,
+     "hint": "Count parity: complex roots arrive two at a time.",
+     "steps": [
+      "An odd-degree polynomial has an odd number of roots in total.",
+      "Complex roots always come in conjugate pairs, so they contribute an EVEN number.",
+      "An even number can never account for an odd total.",
+      "So at least one root must be real."
+     ],
+     "ex": {
+      "main": "**Complex roots come in pairs, so an odd number of roots cannot all be complex.** It is a pure parity argument and needs no computation at all. The graph says the same thing a different way: odd degree means the ends run opposite directions, so the curve has to cross the axis somewhere.",
+      "tip": "Two independent arguments — parity of the root count, and the end behaviour — reach the same conclusion."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "How many REAL roots and how many non-real roots does x⁴ − 1 have?",
+     "opts": [
+      "0 real and 4 non-real",
+      "4 real and 0 non-real",
+      "2 real and 2 non-real",
+      "3 real and 1 non-real"
+     ],
+     "ans": 2,
+     "hint": "Factor it completely and read off what each factor contributes.",
+     "steps": [
+      "x⁴ − 1 = (x² − 1)(x² + 1).",
+      "x² − 1 = (x − 1)(x + 1), giving the real roots 1 and −1.",
+      "x² + 1 = 0 gives x = ±i, two non-real roots.",
+      "So 2 real and 2 non-real — four altogether, as degree 4 requires."
+     ],
+     "ex": {
+      "main": "**2 real and 2 non-real.** The Fundamental Theorem guarantees four roots in total; the graph shows only the two real ones as x-intercepts. And the non-real pair is exactly that — a pair — which is what the Complex Conjugate Theorem requires. The \"3 real and 1 non-real\" option is impossible for that reason alone.",
+      "tip": "A split with an ODD number of non-real roots is impossible when the coefficients are real."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "You are finding all roots of a quartic. You find one rational root and divide it out, leaving a cubic; you find another and divide again, leaving a quadratic. What now?",
+     "opts": [
+      "Start again, because the division must have gone wrong somewhere",
+      "Keep testing rational candidates until two more of them work",
+      "Conclude that the two remaining roots must be irrational",
+      "Solve the quadratic directly — the formula finds complex roots too"
+     ],
+     "ans": 3,
+     "hint": "Ask what tool finishes a quadratic completely.",
+     "steps": [
+      "A quadratic can always be solved outright, by factoring or by the Quadratic Formula.",
+      "The Quadratic Formula finds the roots whatever they are — rational, irrational or complex.",
+      "So no more candidate-testing is needed.",
+      "Solve the quadratic directly."
+     ],
+     "ex": {
+      "main": "**Solve the quadratic directly.** The candidate-testing is only there to get you DOWN to a quadratic — once you are there, a formula finishes it for certain. Carrying on testing would be slow and could fail entirely, since the last two roots may be irrational or complex and no rational candidate would ever match them.",
+      "tip": "Hunt down to degree 2, then stop hunting. That is the whole method."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the Fundamental Theorem of Algebra actually guarantee?",
+     "opts": [
+      "Every polynomial of degree 1 or more has at least one complex root",
+      "Every polynomial of degree n has exactly n real roots",
+      "Every polynomial can be factored using only rational numbers",
+      "Every polynomial with real coefficients has at least one real root"
+     ],
+     "ans": 0,
+     "hint": "Remember that every real number is also a complex number — the word is not a promise of an i.",
+     "steps": [
+      "The theorem is about existence: a non-constant polynomial always has a root somewhere.",
+      "That root is guaranteed only in the COMPLEX numbers, which include the real ones.",
+      "Applying it repeatedly is what gives exactly n roots counting multiplicity.",
+      "So the guarantee is at least one complex root for any degree of 1 or more."
+     ],
+     "ex": {
+      "main": "**At least one complex root, for any degree of 1 or more.** Applying it over and over — root, divide out, root again — is what builds up to exactly n roots counting multiplicity. Guaranteeing a REAL root is a different and weaker claim that only holds for odd degree; x² + 1 has no real root at all and is the standard counterexample.",
+      "tip": "Complex includes real. The theorem promises a root, not a real one."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "For P(x) = 3x³ + x − 10, the Rational Root Theorem builds its candidates from which two numbers?",
+     "opts": [
+      "Factors of 3 on top, factors of 10 underneath",
+      "Factors of 10 on top, factors of 3 underneath",
+      "Factors of 10 on top, factors of 1 underneath",
+      "Factors of 1 on top, factors of 10 underneath"
+     ],
+     "ans": 1,
+     "hint": "p over q — and p is the end of the polynomial furthest from the leading term.",
+     "steps": [
+      "The candidates are ±p/q, where p divides the CONSTANT term and q divides the LEADING coefficient.",
+      "The constant term here is −10, so p comes from 1, 2, 5 and 10.",
+      "The leading coefficient is 3, so q comes from 1 and 3.",
+      "Candidates are therefore factors of 10 over factors of 3."
+     ],
+     "ex": {
+      "main": "**Factors of 10 over factors of 3.** Getting this upside down is the single commonest slip in the whole theorem, and it is silent — the wrong list still looks like a list of fractions. A quick check: if the leading coefficient is 1, every candidate should be a whole number, which only works with the leading coefficient underneath.",
+      "tip": "Constant on top, leading coefficient underneath. Leading 1 means whole-number candidates."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A polynomial with RATIONAL coefficients has degree 4, and two of its roots are 2 − √5 and i. What are the other two?",
+     "opts": [
+      "−2 + √5 and −i",
+      "2 + √5 only — i does not need a partner",
+      "2 + √5 and −i",
+      "√5 − 2 and −i"
+     ],
+     "ans": 2,
+     "hint": "Two different conjugate rules apply here, and each one pairs off exactly one of the given roots.",
+     "steps": [
+      "Irrational roots of a rational polynomial come in pairs: 2 − √5 forces 2 + √5.",
+      "Non-real roots of a real polynomial come in pairs: i forces −i.",
+      "Only the sign on the radical or on the i flips — the rest of the number stays put.",
+      "So the other two roots are 2 + √5 and −i."
+     ],
+     "ex": {
+      "main": "**2 + √5 and −i.** Both conjugate rules are running at once, which is why this shape shows up on tests. Flipping the 2 as well gives −2 + √5, a different number entirely: the conjugate of a − √b is a + √b, changing only the sign in front of the radical.",
+      "tip": "Flip the sign on the radical, or on the i. Never on anything else."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which polynomial has 1 + i and 1 − i as its only roots?",
+     "opts": [
+      "x² + 2",
+      "x² + 2x + 2",
+      "x² − 2x − 2",
+      "x² − 2x + 2"
+     ],
+     "ans": 3,
+     "hint": "Multiply the two factors out — the i terms are meant to cancel.",
+     "steps": [
+      "The factors are (x − (1 + i)) and (x − (1 − i)).",
+      "Their sum of roots is 2, so the middle term is −2x.",
+      "Their product is (1 + i)(1 − i) = 1 − i² = 2, so the constant is 2.",
+      "The polynomial is x² − 2x + 2."
+     ],
+     "ex": {
+      "main": "**x² − 2x + 2.** Building a polynomial from a conjugate pair is the reverse of finding roots, and it always lands on real coefficients — that is what the pairing is for. The product (1 + i)(1 − i) is 2 rather than 0, because i² = −1 makes the last term ADD rather than subtract.",
+      "tip": "Sum of roots → middle term (negated). Product of roots → constant."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The Rational Root Theorem lists twelve candidates for a cubic with real coefficients, and testing shows none of them is a root. What does that tell you?",
+     "opts": [
+      "It has no rational roots — its roots are irrational, non-real, or a mix",
+      "It has no roots at all, so there is nothing further to find",
+      "An arithmetic error was made, since every cubic has a rational root",
+      "All three of its roots are non-real, and none of them is real"
+     ],
+     "ans": 0,
+     "hint": "The theorem only ever ruled on one kind of number.",
+     "steps": [
+      "The theorem lists every POSSIBLE rational root and nothing else.",
+      "An empty result therefore rules out rational roots, and only rational roots.",
+      "Irrational roots like √2 and non-real roots like 2i were never on the list to begin with.",
+      "So the roots exist, but none of them is rational."
+     ],
+     "ex": {
+      "main": "**No rational roots — they are irrational, non-real, or both.** x³ − 2 is the plain example: its only real root is the cube root of 2, which no candidate list could ever contain. And a real cubic always has at least one real root, because its ends point opposite ways, so \"all three non-real\" is impossible whatever the candidates say.",
+      "tip": "An empty candidate list rules out rational roots. It rules out nothing else."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "P(x) = x³ + 2x² + 3x + 6. Find its one real root and say what the other two are.",
+     "opts": [
+      "x = −2, and the other two are ±√3",
+      "x = −2, and the other two are ±i√3",
+      "x = 2, and the other two are ±i√3",
+      "x = −3, and the other two are ±i√2"
+     ],
+     "ans": 1,
+     "hint": "Four terms with a shared structure — try grouping them in pairs.",
+     "steps": [
+      "Group: x²(x + 2) + 3(x + 2).",
+      "Both pairs share (x + 2), so P(x) = (x + 2)(x² + 3).",
+      "x + 2 = 0 gives the real root x = −2.",
+      "x² + 3 = 0 gives x² = −3, so x = ±i√3."
+     ],
+     "ex": {
+      "main": "**x = −2, with ±i√3 as the other two.** Grouping is worth trying on any four-term cubic before reaching for the candidate list. The leftover x² + 3 has no real root, since squaring a real number never gives −3 — dropping the i and writing ±√3 is the slip to watch, and those are not roots of this polynomial at all.",
+      "tip": "Four terms → try grouping. x² = −k gives ±i√k, never ±√k."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can a polynomial with real coefficients never have exactly ONE non-real root?",
+     "opts": [
+      "Every root of a polynomial with real coefficients has to be real itself",
+      "The Fundamental Theorem of Algebra forbids non-real roots in a real polynomial",
+      "Non-real roots of a real polynomial arrive in conjugate pairs, so they come in twos",
+      "A polynomial with real coefficients always has an even degree"
+     ],
+     "ans": 2,
+     "hint": "What would have to be true of the coefficients if a lone non-real root were allowed?",
+     "steps": [
+      "If a + bi is a root of a real polynomial, so is a − bi.",
+      "The two are different numbers whenever b is not zero, so they are two separate roots.",
+      "Non-real roots therefore always come in twos and are even in number.",
+      "One on its own is impossible."
+     ],
+     "ex": {
+      "main": "**They come in conjugate pairs, so always in twos.** The pairing is what keeps the coefficients real when the factors are multiplied out — the i terms cancel, which they could not do without a partner. This is also why an odd-degree real polynomial must have a real root: an odd count cannot be made entirely of pairs.",
+      "tip": "Pairs cancel the i terms. A lone non-real root would leave one behind in the coefficients."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A degree-5 polynomial with real coefficients has 2i, −2i and 1 + i among its roots. How many real roots does it have?",
+     "opts": [
+      "It cannot be decided without knowing the leading coefficient of the polynomial",
+      "None — with four non-real roots the fifth must be non-real as well",
+      "Two — 1 − i is already one of the five listed, leaving two real ones",
+      "One — 1 − i must be a root too, so four are non-real and the fifth cannot be"
+     ],
+     "ans": 3,
+     "hint": "One of the three given roots is still missing its partner. Add it in before you count.",
+     "steps": [
+      "1 + i is non-real, so its conjugate 1 − i must be a root as well.",
+      "2i and −2i are already a pair, so the non-real roots now number four.",
+      "Degree 5 means five roots in total, leaving exactly one unaccounted for.",
+      "A single leftover cannot be non-real, because it would need a partner of its own — so it is real."
+     ],
+     "ex": {
+      "main": "**Exactly one real root.** The counting argument is the point: non-real roots come in twos, so whatever is left over after the pairs must be real if it is odd in number. The leading coefficient scales the whole polynomial and moves no root at all, which is why it cannot affect the answer.",
+      "tip": "Pair everything off first. An odd leftover has to be real."
+     }
+    }
+   ]
+  }
+ }
+}

@@ -982,6 +982,125 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Topic 3 — Polynomial Functions, all seven lessons (v185)
+
+Chris: *"I've updated Sedona's math section. Can we organize the topic 3 folder
+into the appropriate lessons and build out great study material for her?"* Her
+Drive "Topic 3" folder holds the student-edition pages plus a Mathematical
+Literacy and Vocabulary sheet and answer key per lesson. Shipped as
+`alg-topic3-01.json` … `-07.json`, 10–14 cards and **20 questions each** (7/7/6
+across recall / apply / analyze), shelving onto a new `Topic 3` spine the same
+way Topic 2 does — no `order` anywhere, so they sort 3-1 through 3-7 on title
+alone.
+
+| id | title |
+|---|---|
+| `unit-alg-t3-01` | `Topic 3 · 3-1 Graphing Polynomial Functions` |
+| `unit-alg-t3-02` | `Topic 3 · 3-2 Adding, Subtracting, and Multiplying Polynomials` |
+| `unit-alg-t3-03` | `Topic 3 · 3-3 Polynomial Identities` |
+| `unit-alg-t3-04` | `Topic 3 · 3-4 Dividing Polynomials` |
+| `unit-alg-t3-05` | `Topic 3 · 3-5 Zeros of Polynomial Functions` |
+| `unit-alg-t3-06` | `Topic 3 · 3-6 Theorems About Roots of Polynomial Equations` |
+| `unit-alg-t3-07` | `Topic 3 · 3-7 Transformations of Polynomial Functions` |
+
+- **The lesson titles came from the school's own Mathematical Literacy sheets,
+  not from the standard enVision sequence.** Guessing them from the topic number
+  would have been easy and would have looked right; they were read off the
+  sheets instead.
+- **Every expansion, division, root and end behaviour is computed with sympy
+  inside the builder and asserted before it can reach a question** — `ck()`
+  expands both sides and compares, `deg()`/`lead()`/`end()` derive end behaviour
+  rather than my eye asserting it, and `divmod_()` does every polynomial
+  division. Nothing was worked by hand, and none of the sources' own numbers are
+  reused: the textbook examples were read to calibrate difficulty and style
+  only, per the standalone rule.
+- **A real misprint on her 3-3 vocabulary sheet**, confirmed by rendering the
+  PDF rather than trusting Drive's OCR: the "Square of a Sum" answer is printed
+  `20x² + 40xy + 25y²` where (4x + 5y)² is `16x² + 40xy + 25y²`. The other three
+  items on that sheet check out exactly. The builder asserts both the right
+  answer and the fact that the printed one is wrong, so the misprint cannot be
+  re-introduced by a later edit.
+- **`aga_24_a2_0306_se.pdf` is the one student-edition file NOT in the folder.**
+  3-6 was built from its vocabulary sheet and answer key — which show the lesson
+  working with rational roots plus irrational and complex conjugate pairs — and
+  from the standard theorem set that vocabulary names. Said outright in its
+  `parentNote` rather than papered over; if the missing pages turn up and the
+  lesson covers something else, this is the unit to revisit.
+
+> ⚠️ **`renderGraph()` had no polynomial curve type at all, which is why this
+> needed an engine change before any content could be authored around it.** Its
+> series types were `line`, `abs`, `pts` and a **vertex-form** parabola — fine
+> for Topic 2, useless for a cubic or a quartic, which is the entire visual
+> vocabulary of Topic 3. The new **`poly`** type takes coefficients
+> highest-degree first, exactly the way standard form is written (`c:[1,0,-4,0]`
+> is x³ − 4x), and evaluates by Horner's method. It samples at **160 points, not
+> the parabola's 60**: a cubic or quartic can turn twice inside one window, and
+> at 60 the turning points visibly flatten — which is the one feature a
+> polynomial graph exists to show. Verified by rendering one and looking at it,
+> not by trusting the vertex count. `GRAPH`'s enum and a `c` array joined
+> `UNIT_SCHEMA` so generated units can use it too.
+
+**The length-bias sweep was the other half of the work, and it caught a real
+one of mine.** `check_content.py` flagged 3-2's q18 at **4000% — the worst in
+either library**: the answer was a 41-character sentence ("It has no degree,
+because the result is 0") against `2`, `5` and `0`. She could pick it without
+reading the question. Ten more Topic 3 questions sat between 30% and 100%. All
+eleven were fixed by **giving the distractors real substance, not by trimming
+the answer into something vaguer** — and two of them got better as questions
+in the process:
+
+- 3-3's "Which statement is a polynomial identity?" offered one identity against
+  three obvious equations (`x² = 16`). Its three wrong options are now
+  *conditional equations dressed as identities* — a factored cubic, a
+  two-variable `a² + 2ab + b² = 4ab`, a completed square — so eliminating means
+  testing values rather than spotting the odd shape out. All four verified with
+  sympy.
+- 3-6's q8 had a **real content error**, found only because the length check
+  sent me to read it. Its explanation said the fourth root of a degree-4 real
+  polynomial with roots 1 + i and 3 "is not constrained by the conjugate rule at
+  all." It is: a lone non-real root would demand a partner and there is no fifth
+  slot, so that root **must be real**. The question, its options, its steps and
+  its explanation were rewritten around that. It also carried a leftover
+  `Q[-1]['opts'] = …` override patch stacked on top of the original `q()` call,
+  with a half-finished step string in it — collapsed back into one correct call.
+
+Worst remaining Topic 3 warning is 27%, inside the library's accepted band, and
+the checker reports zero errors.
+
+> ⚠️ **`renderGraph` draws a series as a `<polyline points=…>`, never a
+> `<path d=…>`.** The only `<path>` elements in the SVG are the two axis
+> arrowheads. My first graph probe counted path commands, got 2 on a perfectly
+> good curve, and looked exactly like a rendering bug. It counts polyline
+> vertices and their vertical extent now — a curve that is drawn but flat is
+> still a failure.
+
+> ⚠️ **A back-reference regex of `/\bthe same\b/` is too blunt and fails a good
+> question.** It flagged 3-7's *"…whether a polynomial's two ends point the same
+> way"*, where "the same" means "as each other" inside its own stem. The
+> documented failure is a stem that OPENS on a neighbour's scenario — "The same
+> student…", "That same stone…" — so the check is anchored to the start of the
+> stem, plus `that same` anywhere. Pin the rule, not a phrase that happens to
+> contain its words.
+
+`tools/test_alg_topic3.js` (16 assertions): the classId (the v136 orphan trap),
+the numbered form on every lesson and the shelf ascending 3-1..3-7 with no
+`order` set, **Topics 1 and 2 seeded alongside** so "its own shelf" is a claim
+about coexistence rather than about an empty subject screen, answers spread
+across all four slots (the v181 `_balance` bug, pinned), no back-references and
+no positional references, a `poly` graph rendering a real curve with real
+vertical extent, every deck walking to the end, and a full quiz round on all
+seven with the `algeo` Sheet reachable from inside it. Question counts are
+asserted as a **minimum of 18, never an exact number** — a unit should be free
+to grow when her work shows a gap (the Wayfinder v165 lesson).
+
+> The suite's own noise, recorded so it is not re-diagnosed: `test_bulkapprove.js`
+> failed once in a batch run and passed standalone, because a `sed -i` version
+> bump rewrote `index.html` underneath the running suite. **Do not edit the app
+> while the suite is running against it.** Re-run clean, 52 of 58 files pass, and
+> the other six are exactly the five v178 documented as stale plus
+> `test_analogy.js`, the JSON probe v184 recorded. `test_swflow.js` still needs
+> its second argv (`node tools/test_swflow.js <port> .`).
+
 ### The Junior Thespians, on the Tuesdays they actually meet (v184)
 
 Chris forwarded the sponsor's meeting email and asked to put it on Sedona's

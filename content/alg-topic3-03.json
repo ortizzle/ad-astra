@@ -1,0 +1,645 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t3-03": {
+   "id": "unit-alg-t3-03",
+   "type": "unit",
+   "updatedAt": 1789600054545,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Topic 3 · 3-3 Polynomial Identities",
+   "srcName": "enVision Algebra 2, Lesson 3-3 (Drive)",
+   "source": "enVision Algebra 2 Lesson 3-3: Polynomial Identities",
+   "summary": {
+    "text": "Lesson 3-3 covers the polynomial identities: difference of squares, the square of a sum and of a difference, and the sum and difference of cubes — used both to expand and, read backwards, to factor.",
+    "from": "source"
+   },
+   "why": {
+    "text": "These five patterns turn up constantly for the rest of the year, in factoring, in solving, and in simplifying. Recognising one on sight is worth more than being able to grind it out.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "State and apply the difference of squares, square of a sum, and square of a difference",
+     "from": "source"
+    },
+    {
+     "text": "Factor a sum or difference of cubes, placing the signs with SOAP",
+     "from": "source"
+    },
+    {
+     "text": "Recognise a perfect square trinomial by testing the middle term",
+     "from": "source"
+    },
+    {
+     "text": "Use an identity to simplify arithmetic and to factor completely",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Two things to watch. The first is (a + b)² = a² + b² — the single most common algebra error there is, and several questions here are built to catch it; the cure is testing with two small numbers. The second is stopping one step early on \"factor completely\", since a first factoring often leaves a factor that factors again.\n\nWorth knowing: her 3-3 vocabulary worksheet has a genuine misprint. In question 2, the \"Square of a Sum\" answer is printed as 20x² + 40xy + 25y², but (4x + 5y)² is 16x² + 40xy + 25y² — the first coefficient should be 16, not 20. Every other item on that sheet checks out exactly. She can still match it correctly (it is the only expression of that shape), but if she verifies the algebra she will find it does not expand, and it is worth her knowing the sheet is wrong rather than her arithmetic.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Learn the five patterns by their SHAPE first — recognising which one applies is most of the work.",
+    "minutes": 18,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Polynomial identity",
+     "def": "**An equation between two polynomials that is true for EVERY value of the variable.**\n• Not something you solve — something you use, in either direction.\n• Left to right it expands; right to left it factors. Same statement, two jobs.",
+     "hint": "An equation you solve has answers. An identity has no answers because it is always true.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Difference of squares",
+     "def": "**a² − b² = (a − b)(a + b).**\n• Spot it by two perfect squares with a MINUS between them.\n• a² + b² does NOT factor this way — a sum of squares has no real factoring.",
+     "eq": "a² − b² = (a − b)(a + b)",
+     "hint": "Minus between two squares. A plus is a dead end.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Square of a sum",
+     "def": "**(a + b)² = a² + 2ab + b².**\n• The middle term is the one people lose: there are TWO cross products, so it is 2ab.\n• (a + b)² is never a² + b². Test it with a = 3, b = 4: 49 against 25.",
+     "eq": "(a + b)² = a² + 2ab + b²",
+     "hint": "Two squares and TWICE the product — three terms, not two.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Square of a difference",
+     "def": "**(a − b)² = a² − 2ab + b².**\n• Only the middle sign changes from the square of a sum.\n• The last term is still POSITIVE — a negative times a negative.",
+     "eq": "(a − b)² = a² − 2ab + b²",
+     "hint": "Middle goes negative; the end stays positive.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Sum of cubes",
+     "def": "**a³ + b³ = (a + b)(a² − ab + b²).**\n• Unlike a sum of squares, a sum of CUBES does factor.\n• The three-term factor never factors further.",
+     "eq": "a³ + b³ = (a + b)(a² − ab + b²)",
+     "hint": "Cubes are the friendly case: both the sum and the difference factor.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Difference of cubes",
+     "def": "**a³ − b³ = (a − b)(a² + ab + b²).**\n• Same shape as the sum of cubes with two signs flipped.\n• Note the middle term of the long factor has NO 2 in front — that is what separates it from a squared binomial.",
+     "eq": "a³ − b³ = (a − b)(a² + ab + b²)",
+     "hint": "No 2 on the middle term — that is the giveaway it is a cube factor, not a square.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "SOAP — the signs on the cube identities",
+     "def": "**Same, Opposite, Always Positive.**\n• The binomial factor takes the SAME sign as the original.\n• The middle term of the trinomial takes the OPPOSITE sign.\n• The last term is ALWAYS POSITIVE. That is the whole sign pattern for both cube identities.",
+     "hint": "S-O-AP: same, opposite, always positive.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Perfect square trinomial",
+     "def": "**A trinomial that came from squaring a binomial — spot it when the first and last terms are perfect squares and the middle is twice the product of their roots.**\n• x² + 10x + 25 qualifies: √x² = x, √25 = 5, and 2 · x · 5 = 10x. So it is (x + 5)².\n• x² + 11x + 25 does not — the middle term fails the test, so it is not a perfect square.",
+     "hint": "Check the middle term against twice the product. That is the test.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Identities as a shortcut for arithmetic",
+     "def": "**43 × 37 = (40 + 3)(40 − 3) = 40² − 3² = 1600 − 9 = 1591.**\n• Any pair of numbers equally spaced either side of a round number is a difference of squares.\n• It is the same identity, used on numbers instead of variables — which is the point of calling it an identity.",
+     "hint": "Numbers are just polynomials with the variable already filled in.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "The commonest identity error",
+     "def": "**(a + b)² ≠ a² + b², and √(a² + b²) ≠ a + b.**\n• Squaring does not distribute over addition — the cross terms are real and they do not vanish.\n• Whenever you are tempted, test it with two small numbers. One counterexample settles it.",
+     "hint": "Try a = 3, b = 4 on anything that looks too convenient.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Which identity to reach for",
+     "def": "**Count the terms first, then look for squares or cubes.**\n• Two terms, both squares, minus between them → difference of squares.\n• Two terms, both cubes → sum or difference of cubes (either works).\n• Three terms with the middle equal to twice the product → perfect square trinomial.",
+     "hint": "Term count narrows it to one or two candidates before you do any work.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Example: factoring a difference of cubes",
+     "def": "**27x³ − 8 = (3x − 2)(9x² + 6x + 4).**\n• Write each part as a cube first: 27x³ = (3x)³ and 8 = 2³, so a = 3x and b = 2.\n• Then a² = 9x², ab = 6x, b² = 4, and SOAP places the signs.",
+     "eq": "27x³ − 8 = (3x − 2)(9x² + 6x + 4)",
+     "hint": "Name a and b before substituting — most cube-factoring errors are really a-and-b errors.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which statement is a polynomial identity?",
+     "opts": [
+      "(a − b)(a + b) = a² − b²",
+      "(x − 2)(x − 3)(x + 1) = 0",
+      "a² + 2ab + b² = 4ab",
+      "x² + 6x + 9 = 25"
+     ],
+     "ans": 0,
+     "hint": "Try putting a couple of different numbers in. An identity survives every one of them.",
+     "steps": [
+      "(a − b)(a + b) = a² − b² holds for any a and b at all — try 5 and 2, or 1 and 1.",
+      "(x − 2)(x − 3)(x + 1) = 0 is true only at x = 2, 3 and −1.",
+      "a² + 2ab + b² = 4ab rearranges to (a − b)² = 0, so it holds only when a = b.",
+      "x² + 6x + 9 = 25 is (x + 3)² = 25, true only at x = 2 and x = −8."
+     ],
+     "ex": {
+      "main": "**(a − b)(a + b) = a² − b².** An identity holds for EVERY value, which is what makes it a rewriting tool you can reach for anywhere. The other three are equations to solve, true only at particular values — and two of them are written in the shape of an identity on purpose, which is why testing numbers beats trusting the look of it.",
+      "tip": "Equations have solutions. An identity has nothing to solve, because nothing is excluded."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor x² − 49.",
+     "opts": [
+      "(x − 7)²",
+      "(x − 7)(x + 7)",
+      "(x + 7)²",
+      "It cannot be factored"
+     ],
+     "ans": 1,
+     "hint": "Two perfect squares with a minus between them.",
+     "steps": [
+      "x² is a perfect square and 49 = 7² is a perfect square.",
+      "They are separated by a minus, so this is a difference of squares.",
+      "a² − b² = (a − b)(a + b) with a = x and b = 7.",
+      "So x² − 49 = (x − 7)(x + 7)."
+     ],
+     "ex": {
+      "main": "**(x − 7)(x + 7).** One factor of each sign. (x − 7)² would expand to x² − 14x + 49, which has a middle term this expression does not — a fast way to rule it out without expanding fully.",
+      "tip": "A difference of squares always factors into a matched pair, one plus and one minus."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (x + 6)².",
+     "opts": [
+      "x² + 6x + 36",
+      "x² + 36",
+      "x² + 12x + 36",
+      "x² + 12x + 12"
+     ],
+     "ans": 2,
+     "hint": "Two squares and twice the product.",
+     "steps": [
+      "a = x and b = 6.",
+      "a² = x² and b² = 36.",
+      "The middle term is 2ab = 2 · x · 6 = 12x.",
+      "So (x + 6)² = x² + 12x + 36."
+     ],
+     "ex": {
+      "main": "**x² + 12x + 36.** The middle term is TWICE the product, because there are two cross products when you multiply the bracket by itself. \"x² + 36\" is the classic error — squaring does not distribute over addition, and testing x = 1 settles it: 49 against 37.",
+      "tip": "Whenever you are tempted to distribute a square, test it with one number."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor x³ + 27.",
+     "opts": [
+      "(x + 3)³",
+      "(x + 3)(x² + 3x + 9)",
+      "(x + 3)(x² − 6x + 9)",
+      "(x + 3)(x² − 3x + 9)"
+     ],
+     "ans": 3,
+     "hint": "Write 27 as a cube first, then let SOAP place the signs.",
+     "steps": [
+      "27 = 3³, so a = x and b = 3.",
+      "The binomial factor takes the SAME sign: (x + 3).",
+      "The trinomial’s middle term takes the OPPOSITE sign: −3x. The last term is always positive: +9.",
+      "So x³ + 27 = (x + 3)(x² − 3x + 9)."
+     ],
+     "ex": {
+      "main": "**(x + 3)(x² − 3x + 9).** SOAP: Same, Opposite, Always Positive. The x² − 6x + 9 option is (x − 3)² — a perfect square trinomial, which is a different shape entirely: a cube identity’s middle term never carries a 2.",
+      "tip": "No coefficient 2 on the middle term is what tells a cube factor from a squared binomial."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which expression CANNOT be factored using the identities in this lesson?",
+     "opts": [
+      "x² + 16",
+      "x² − 16",
+      "x³ + 64",
+      "x³ − 64"
+     ],
+     "ans": 0,
+     "hint": "One of these is a sum; ask which sums are allowed.",
+     "steps": [
+      "x² − 16 is a difference of squares and factors.",
+      "x³ + 64 is a sum of cubes and factors.",
+      "x³ − 64 is a difference of cubes and factors.",
+      "x² + 16 is a SUM of squares, which has no factoring over the real numbers."
+     ],
+     "ex": {
+      "main": "**x² + 16.** A sum of squares is the one case that does not factor — which makes cubes the surprising ones, since BOTH the sum and the difference of cubes factor. Squares are fussy about the sign; cubes are not.",
+      "tip": "Difference of squares yes, sum of squares no, both cubes yes. Worth memorising as three facts."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the identity a³ − b³ = (a − b)(a² + ab + b²), what is the sign of the last term of the trinomial?",
+     "opts": [
+      "Always negative",
+      "Always positive",
+      "The same as the sign in the original",
+      "The opposite of the sign in the original"
+     ],
+     "ans": 1,
+     "hint": "The P in SOAP.",
+     "steps": [
+      "SOAP stands for Same, Opposite, Always Positive.",
+      "The binomial factor takes the SAME sign as the original.",
+      "The trinomial’s middle term takes the OPPOSITE sign.",
+      "The last term is ALWAYS POSITIVE, in both cube identities."
+     ],
+     "ex": {
+      "main": "**Always positive.** It is +b² in both the sum and the difference of cubes, which is what the final \"AP\" of SOAP is for. Since b² is a square, a positive value there is also what you would expect.",
+      "tip": "Two of the three signs move; the last one never does."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor 4x² − 81.",
+     "opts": [
+      "(2x − 9)²",
+      "(4x − 9)(x + 9)",
+      "(2x − 9)(2x + 9)",
+      "(4x − 81)(x + 1)"
+     ],
+     "ans": 2,
+     "hint": "Both terms are perfect squares — but take the square root of the coefficient too.",
+     "steps": [
+      "4x² = (2x)², so a = 2x — not x.",
+      "81 = 9², so b = 9.",
+      "a² − b² = (a − b)(a + b).",
+      "So 4x² − 81 = (2x − 9)(2x + 9)."
+     ],
+     "ex": {
+      "main": "**(2x − 9)(2x + 9).** The coefficient has to be square-rooted along with the variable: √(4x²) is 2x. Leaving the 4 alone is the usual slip here and produces a pair that does not multiply back.",
+      "tip": "Multiply your factors back mentally — the middle terms must cancel exactly."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which expression is a perfect square trinomial?",
+     "opts": [
+      "x² + 16x − 64",
+      "x² − 16x + 60",
+      "x² − 10x + 64",
+      "x² − 16x + 64"
+     ],
+     "ans": 3,
+     "hint": "Square-root the ends, double their product, and compare with the middle.",
+     "steps": [
+      "For x² − 16x + 64: √x² = x and √64 = 8.",
+      "Twice their product is 2 · x · 8 = 16x, which matches the middle term.",
+      "So it is (x − 8)².",
+      "The others fail: 60 is not a perfect square, 2 · x · 8 is not 10x, and a negative last term cannot come from squaring."
+     ],
+     "ex": {
+      "main": "**x² − 16x + 64.** The test is whether the middle term equals twice the product of the square roots of the ends. An option whose constant is NEGATIVE fails for a structural reason: squaring a binomial always gives a positive last term, so a negative one rules itself out before you test anything.",
+      "tip": "Three quick checks: are both ends squares, is the last one positive, does the middle match 2ab?"
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Use an identity to compute 52 × 48 without a calculator.",
+     "opts": [
+      "2496",
+      "2500",
+      "2504",
+      "2596"
+     ],
+     "ans": 0,
+     "hint": "The two numbers sit the same distance either side of a round number.",
+     "steps": [
+      "52 = 50 + 2 and 48 = 50 − 2.",
+      "So the product is (50 + 2)(50 − 2), a difference of squares.",
+      "That is 50² − 2² = 2500 − 4.",
+      "The product is 2496."
+     ],
+     "ex": {
+      "main": "**2496.** Recognising a ± b either side of a round number turns a two-digit multiplication into two squares and a subtraction. Answering 2500 forgets the −b² — which is exactly the middle-term-style omission the identities exist to prevent.",
+      "tip": "This is the identity doing real work: the same rewriting, on numbers rather than variables."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor x⁴ − 81 completely.",
+     "opts": [
+      "(x² − 9)(x² + 9)",
+      "(x − 3)(x + 3)(x² + 9)",
+      "(x − 3)(x + 3)(x − 3)(x + 3)",
+      "(x² − 9)²"
+     ],
+     "ans": 1,
+     "hint": "It is a difference of squares — and then check whether either factor is one too.",
+     "steps": [
+      "x⁴ = (x²)² and 81 = 9², so it factors as (x² − 9)(x² + 9).",
+      "That is not finished: x² − 9 is itself a difference of squares.",
+      "x² − 9 = (x − 3)(x + 3).",
+      "x² + 9 is a SUM of squares and stops there. So the full factoring is (x − 3)(x + 3)(x² + 9)."
+     ],
+     "ex": {
+      "main": "**(x − 3)(x + 3)(x² + 9).** \"Completely\" is the whole instruction: after the first step you have to look again. x² − 9 factors further; x² + 9 does not, because a sum of squares has no real factoring — so the answer keeps it intact rather than forcing it.",
+      "tip": "After any factoring step, re-examine each factor. Stopping one step early is the usual way to lose the mark."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (5x + 2)².",
+     "opts": [
+      "25x² + 10x + 4",
+      "25x² + 4",
+      "25x² + 20x + 4",
+      "10x² + 20x + 4"
+     ],
+     "ans": 2,
+     "hint": "Square each end, then double the product of the two terms.",
+     "steps": [
+      "a = 5x and b = 2.",
+      "a² = 25x² and b² = 4.",
+      "2ab = 2 · 5x · 2 = 20x.",
+      "So (5x + 2)² = 25x² + 20x + 4."
+     ],
+     "ex": {
+      "main": "**25x² + 20x + 4.** The coefficient gets squared too, so 5x becomes 25x², and the middle is 2 · 5x · 2 = 20x. Writing 10x there is the error of forgetting the doubling; 10x² is the error of doubling instead of squaring the first term.",
+      "tip": "Both a² and 2ab involve the coefficient. Compute them separately rather than in one go."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor 8x³ + 125.",
+     "opts": [
+      "(2x + 5)³",
+      "(2x + 5)(4x² + 10x + 25)",
+      "(8x + 125)(x² − x + 1)",
+      "(2x + 5)(4x² − 10x + 25)"
+     ],
+     "ans": 3,
+     "hint": "Identify a and b as cube roots before touching the signs.",
+     "steps": [
+      "8x³ = (2x)³ so a = 2x; 125 = 5³ so b = 5.",
+      "Same sign on the binomial: (2x + 5).",
+      "a² = 4x², ab = 10x, b² = 25; the middle takes the opposite sign, the last is always positive.",
+      "So 8x³ + 125 = (2x + 5)(4x² − 10x + 25)."
+     ],
+     "ex": {
+      "main": "**(2x + 5)(4x² − 10x + 25).** Both coefficients need cube-rooting: ∛8 = 2 and ∛125 = 5. Then SOAP places every sign, so the only real work is naming a and b correctly — which is where nearly all the errors in cube factoring actually happen.",
+      "tip": "Name a and b out loud first. The rest of the identity is mechanical once they are right."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student writes (x + 7)² = x² + 49. Give a single value of x that proves this is wrong.",
+     "opts": [
+      "x = 1, since 64 ≠ 50",
+      "x = 0, since 49 = 49",
+      "No value disproves it",
+      "x = −7, since 0 = 0"
+     ],
+     "ans": 0,
+     "hint": "A counterexample has to make the two sides actually DIFFER.",
+     "steps": [
+      "At x = 1: (1 + 7)² = 64, while 1² + 49 = 50.",
+      "64 ≠ 50, so the claim fails — one counterexample is enough.",
+      "x = 0 gives 49 on both sides, and x = −7 gives 0 on both sides, so neither disproves anything.",
+      "x = 1 is the value that proves it wrong."
+     ],
+     "ex": {
+      "main": "**x = 1, since 64 ≠ 50.** The missing 2ab term is 14x, which happens to vanish at x = 0 — so testing zero would have wrongly \"confirmed\" the claim. A counterexample has to be a value where the two sides genuinely differ, which means avoiding the values that make the missing piece zero.",
+      "tip": "When testing a suspected identity, avoid 0 and any root — those are exactly where a false claim can look true."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does a² + b² fail to factor while a³ + b³ succeeds?",
+     "opts": [
+      "Because cubes are always larger than squares, so they split",
+      "A sum of cubes has a matching identity; a sum of squares has none",
+      "Because a² + b² is not really a polynomial in the first place",
+      "Because a³ + b³ has three terms while a² + b² has only two"
+     ],
+     "ans": 1,
+     "hint": "One option states the actual mathematical situation; the others state things that are false or beside the point.",
+     "steps": [
+      "a³ + b³ = (a + b)(a² − ab + b²) — multiply it out and the cross terms cancel.",
+      "No comparable real factoring exists for a² + b².",
+      "a² + b² is certainly a polynomial, and a³ + b³ has two terms, not three.",
+      "The real reason is simply that one has a matching identity and the other does not."
+     ],
+     "ex": {
+      "main": "**A sum of cubes has a matching identity; a sum of squares has none over the reals.** It is worth knowing this is a statement about the REAL numbers specifically — a² + b² does factor once imaginary numbers are allowed, which she met in Topic 2. Over the reals, it stops.",
+      "tip": "Whenever a factoring rule has an exception, ask which number system the rule is stated over."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor (x + 4)² − 25 completely.",
+     "opts": [
+      "(x + 4)(x − 25)",
+      "(x + 4 − 5)(x + 4 + 5), which cannot be simplified",
+      "(x − 1)(x + 9)",
+      "x² + 8x − 9, which cannot be factored"
+     ],
+     "ans": 2,
+     "hint": "Treat the whole bracket as a single square, then simplify what you get.",
+     "steps": [
+      "This is A² − b² with A = (x + 4) and b = 5.",
+      "So it factors as ((x + 4) − 5)((x + 4) + 5).",
+      "Simplify each bracket: (x − 1) and (x + 9).",
+      "So the complete factoring is (x − 1)(x + 9)."
+     ],
+     "ex": {
+      "main": "**(x − 1)(x + 9).** The identity works with a whole expression in place of a — it never required a single letter. Stopping at ((x + 4) − 5)((x + 4) + 5) applies the identity correctly and then fails to finish the arithmetic, which is not \"complete\".",
+      "tip": "An identity applies to any expression in the a slot, not just a bare variable."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "You want to factor 16x⁴ − 1. Which sequence gets you there completely?",
+     "opts": [
+      "Perfect square trinomial, then difference of squares",
+      "Difference of squares once, then stop",
+      "Difference of cubes, then difference of squares",
+      "Difference of squares twice, then stop at the sum of squares"
+     ],
+     "ans": 3,
+     "hint": "Plan it before doing it: what shape is it, and what shape is each piece?",
+     "steps": [
+      "16x⁴ = (4x²)² and 1 = 1², so it is a difference of squares: (4x² − 1)(4x² + 1).",
+      "4x² − 1 is itself a difference of squares: (2x − 1)(2x + 1).",
+      "4x² + 1 is a SUM of squares, so it stops there.",
+      "So: difference of squares twice, then stop at the sum of squares."
+     ],
+     "ex": {
+      "main": "**Difference of squares twice, then stop at the sum of squares.** Planning the route first is what stops you either finishing early or trying to force the sum of squares. There are no cubes here at all, and nothing has three terms, so neither of those identities can apply.",
+      "tip": "Count terms and check for squares before starting. It rules out most of the identities immediately."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rectangle has length (n + 5) and width (n − 5). A square has side n. How much bigger is the square’s area?",
+     "opts": [
+      "25 square units larger, whatever n happens to be",
+      "10n square units larger, so the gap grows with n",
+      "25n square units larger, so the gap grows with n",
+      "Neither is larger — they are always exactly equal"
+     ],
+     "ans": 0,
+     "hint": "Write both areas and subtract — and notice what the rectangle’s area is a difference of.",
+     "steps": [
+      "Rectangle area: (n + 5)(n − 5) = n² − 25.",
+      "Square area: n².",
+      "Difference: n² − (n² − 25) = 25.",
+      "The square is bigger by 25 square units, regardless of n."
+     ],
+     "ex": {
+      "main": "**25 square units, whatever n is.** This is the difference-of-squares identity read as a fact about area: stretching one side by 5 and shrinking the other by 5 always costs exactly 25 — the amount lost never depends on the starting size. The n² terms cancel, which is what makes the answer a constant.",
+      "tip": "A constant answer to a question with a variable in it is usually an identity in disguise."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Expand (x + 2y)².",
+     "opts": [
+      "x² + 2xy + 4y²",
+      "x² + 4xy + 4y²",
+      "x² + 4y²",
+      "x² + 4xy + 2y²"
+     ],
+     "ans": 1,
+     "hint": "Both letters carry their coefficients through the squaring and the doubling.",
+     "steps": [
+      "a = x and b = 2y.",
+      "a² = x² and b² = (2y)² = 4y² — the 2 is squared too.",
+      "2ab = 2 · x · 2y = 4xy.",
+      "So (x + 2y)² = x² + 4xy + 4y²."
+     ],
+     "ex": {
+      "main": "**x² + 4xy + 4y².** Two places the coefficient 2 has to be handled: squared in the last term (giving 4y²) and doubled in the middle (giving 4xy). They come out the same number here, which is a coincidence of this example, not a rule — with 3y they would be 6xy and 9y².",
+      "tip": "Compute a², b² and 2ab as three separate pieces. Doing it in one sweep is what loses a coefficient."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Factor 49x² − 64y².",
+     "opts": [
+      "(49x − 64y)(x + y)",
+      "(7x − 8y)²",
+      "(7x − 8y)(7x + 8y)",
+      "It cannot be factored"
+     ],
+     "ans": 2,
+     "hint": "Square-root both coefficients as well as both variables.",
+     "steps": [
+      "49x² = (7x)², so a = 7x.",
+      "64y² = (8y)², so b = 8y.",
+      "A minus between two squares is a difference of squares.",
+      "So it factors as (7x − 8y)(7x + 8y)."
+     ],
+     "ex": {
+      "main": "**(7x − 8y)(7x + 8y).** Two variables changes nothing about the identity — a and b can be any expressions at all. What it does change is that there are now two coefficients to square-root, and both have to be done.",
+      "tip": "Check by multiplying back: the cross terms must cancel to leave exactly two terms."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is NOT a correct polynomial identity?",
+     "opts": [
+      "(a + b)² = a² + 2ab + b²",
+      "(a − b)(a + b) = a² − b²",
+      "a³ + b³ = (a + b)(a² − ab + b²)",
+      "(a − b)² = a² − b²"
+     ],
+     "ans": 3,
+     "hint": "One of these confuses squaring a difference with a difference of squares.",
+     "steps": [
+      "(a − b)² expands to a² − 2ab + b², which has three terms.",
+      "a² − b² has two terms and comes from (a − b)(a + b) instead.",
+      "Test with a = 5, b = 3: (5 − 3)² = 4, while 25 − 9 = 16.",
+      "So (a − b)² = a² − b² is the false one."
+     ],
+     "ex": {
+      "main": "**(a − b)² = a² − b².** It welds two real identities into a false one: squaring a difference gives three terms, while a difference of SQUARES is what factors into a matched pair. The two look alike written down and describe completely different operations, which is exactly why they get swapped.",
+      "tip": "Squaring a binomial always produces three terms. Any claimed square with only two is wrong."
+     }
+    }
+   ]
+  }
+ }
+}
