@@ -982,6 +982,57 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Words for the note from home (v188 / Wayfinder v168, both apps)
+
+Chris: *"can you generate messages for the post-it notes?"*
+
+**The note's founding rule is that it did not come from the app** — it is the
+one surface in either app that refuses the dark theme, warm paper tilted a
+degree and a half, because it is supposed to look placed there by a person.
+Generating its words is therefore exactly the thing that could hollow it out,
+so the feature is built so that it cannot: **`NOTE_IDEAS` are suggestions, they
+land in the TEXTAREA, and he still presses Post.** The app never posts one, and
+never fills the box unasked. His hand is the last one on the words, which is
+what keeps them his.
+
+- **Opt-in.** A "Need words?" button under the box; nothing is shown until he
+  asks. One line per occasion — before a test, a hard day, no reason at all,
+  proud of the work, a heavy week, just silly — because a note gets posted for
+  a reason. "Show me different ones" re-rolls; an ordinary re-render does not,
+  so the list cannot reshuffle under his thumb while he reads it.
+- **The suggestion previews in the note's own handwriting face**, at 19px
+  rather than the note's 30px — a list to scan, not a note to read. Ordinary
+  theme tokens: this is the parent's workbench, not the note.
+- **Written in HIS voice, which is not the app's, and the difference is the
+  point.** Contractions and an exclamation mark are fine here where the app's
+  own copy refuses them. **The one rule that carries over is Dweck's**, and it
+  matters more from a parent than from software: process and effort, never a
+  fixed trait. Nothing in either pool says clever, smart or talented, and
+  nothing mentions a grade — `tools/test_notewords.js` asserts both by regex,
+  so a later addition cannot quietly break it.
+- **The pools are IDENTITY, like the companion rosters** — Sedona's is drier
+  ("This note took me twenty minutes. Enjoy it."), River's warmer and plainer
+  ("The dog fell asleep on your bed again."). Do not sync them. The picker,
+  the CSS and the test are engine and are byte-identical.
+
+> ⚠️ **Measuring the lines on the real note caught one in each app that ran to
+> FOUR handwritten rows** — nothing overflowed, so it would have shipped
+> looking fine in code and like a wall on her phone. It renders at 30px in
+> Caveat on a ~330px card, which is about 20 characters a line, so a 63-
+> character note is four rows. Both were tightened and the test now pins
+> **three rows maximum, measured on the rendered note** rather than by
+> counting characters.
+
+> ⚠️ **The first build's suggestion vanished the instant it was chosen, and
+> the test is the only reason that is not live.** The click handler set
+> `pnta.value` and then called `render()` — which rebuilds the textarea from
+> the RECORD, so the suggestion was thrown away in the same tick it was
+> picked, and tapping appeared to do nothing at all. The draft now lives on
+> `ctx._noteDraft`, which the textarea initialises from and his own typing
+> keeps in sync, and Post deletes. **A value set on a node that a re-render
+> owns does not survive the re-render** — the same altitude mistake as
+> reading a screen's state off the DOM.
+
 ### The rivals have to be the question's own (v187 / Wayfinder v167, both apps)
 
 Chris, relaying a played session: *"the pair session was great but the answers
