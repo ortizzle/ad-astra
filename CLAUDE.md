@@ -982,6 +982,110 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The quiz that was shared blank, and the lab with no data yet (v189)
+
+Chris: *"The physics quiz was shared with us blank so I wanted to build lessons
+from it to help with either the actual quiz or the eventual review of the
+material."* That sentence is what unblocked this — an unmarked quiz PDF in a
+Drive folder is ambiguous in exactly the way the Biology Quiz 1 Review already
+documented, so it was flagged rather than guessed at. Two units ship onto the
+existing `Kinematics 2` shelf, taking it to four parts.
+
+| id | title | |
+|---|---|---|
+| `unit-phys-k2-lab` | `Kinematics 2 · 2-3 Horizontal Projectile Motion Lab` | — |
+| `unit-phys-k2-sgq1` | `Kinematics 2 · Quiz 1 Review: Vectors and Trig` | `prep:true`, `order:1` |
+
+**The review was scoped against 2-1 before a single card was written**, the same
+discipline that kept chapter 5 from becoming a unit in v142. `2-1 Vectors and
+Components` already teaches resolving, SOHCAHTOA, choosing the ratio, the
+unknown-in-a-denominator, recombining components, the radian-mode trap and the
+45° crossover — none of it is repeated. What the paper asks that 2-1 does not
+teach is exactly what this unit is, and the five gaps are its whole structure:
+
+- **Adding THREE vectors where two of them partly cancel.** The paper's first
+  item is 300 N north, 450 N east, 200 N south. Collapsing the north–south pair
+  first turns a three-vector problem into an ordinary right triangle, and that
+  move gets its own card.
+- **Head-to-tail addition on paper**, and that the ORDER cannot change the
+  resultant — the chain takes a different shape, its two ends do not move. Which
+  makes re-adding a set in a different order a free check on your own arithmetic.
+- **Saying a direction so somebody else could draw it.** "25° north of west" and
+  "25° west of north" are 40° apart and read almost identically at speed. And
+  `tan⁻¹` returns a perfectly correct angle measured from whichever component you
+  put on the BOTTOM — 22.6° and 67.4° are both true of the same arrow — so a bare
+  number with no axis named is not an answer at all. One question is built
+  entirely on that.
+- **The units-and-ratios item** the paper finishes on (sheets per ream, a weight
+  per ream, a count of students). Rounding a count of real objects UP comes
+  first, then the conversion; rounding at the end quietly changes the answer.
+- **The plain definitions** of vector, scalar, resultant and magnitude.
+
+**Every number is fresh, per the standalone rule** — none of the paper's own
+300/450/200 N, 5000 m, 25°, or its sheets-and-students figures appears anywhere.
+The quiz was read to calibrate what it asks, never copied.
+
+**`prep:true` and `order:1` are both deliberate.** A quiz review genuinely IS
+test prep, which is what the v139 flag means; and `order` is a whole-shelf bucket,
+so it trails the three numbered lessons exactly the way the two Biology study
+guides trail theirs. The lab gets neither — **a lab is not test prep**, and
+flagging every unit that happens to sit near a test on the calendar would spend
+the gold band for nothing.
+
+**The lab unit teaches the reasoning, not a results table.** `Horizontal
+Projectile Motion Lab.pdf` asks her to measure a Nerf launcher and then run a
+PhET cannonball — data that does not exist yet, so inventing it would be
+inventing her experiment. Same call the Kinematics 1 Ramp Lab made. What it
+covers is the handout's own Question 1 and everything downstream of it: solving
+Δy = ½gt² for t, substituting into Δx = v t to get **Δx = v √(2Δy / g)**, and
+recognising that as a straight line once range is plotted against **√Δy**.
+
+- **The slope is v √(2/g), not the launch speed**, and reading it straight off
+  as a speed is the single mistake most likely to cost marks. It has its own
+  card and its own question, and the wrong answer is offered as a real option.
+- **The Moon question is worth stating carefully.** Gravity there is about six
+  times weaker and the slope changes by only about **2.46** times, because g
+  sits under a square root. "Six times farther" is a natural and quite wrong
+  thing to write.
+- Quadrupling the drop height only DOUBLES the range, for the same reason —
+  which is the counterfactual the whole lab exists to make visible.
+- Air resistance is named with a DIRECTION: a foam dart falls short, so a speed
+  worked out this way reads a little low. "Ignoring air resistance" says little;
+  "so this is an underestimate" says something a reader can use.
+
+Every number in both units was computed with sympy inside the builder and
+asserted before it could reach a question. That caught three real slips: the
+linearized slope is 5.72, not the 5.74 I had drafted; the Moon ratio rounds to
+2.46, not 2.459; and the percent-error item has to be computed from the **stated**
+12.7 m/s rather than the unrounded 12.6714 behind it, or the printed answer and
+the assertion disagree by a tenth of a percent.
+
+> ⚠️ **The head-to-tail diagram's last leg rendered invisible, and only looking
+> at it caught that.** The card's chain was `(0,0) → (4,0) → (4,3) → (7,5)`; the
+> resultant from the origin to (7,5) passes through (4, 2.86), so the third leg
+> lay almost exactly underneath it and the diagram showed a two-leg chain with a
+> line through it. Moved to `(3,0) → (3,4) → (7,5)`, which no longer coincides
+> anywhere. `test_k2_quiz.js` counts polyline vertices and vertical extent (the
+> v185 probe rule — `renderGraph` emits `<polyline>`, never `<path>`), but a
+> polyline that is drawn and hidden under another one passes that check. **A
+> graph still has to be rendered and looked at.**
+
+`check_content.py` reports zero errors; the worst length-bias warning across
+both units is 25%, inside the library's accepted band. Two were fixed rather
+than excused — a scalar question whose answer ran 50% long (now `Distance`
+against `Displacement`/`Acceleration`/`Force`, where the answer is the
+SHORTEST option) and an axis-labelling question at 64%.
+
+`tools/test_k2_quiz.js` (37 assertions): the classId (the v136 orphan trap),
+the four-part shelf in teaching order with Kinematics 1 untouched, `prep`/`order`
+on the review and neither on the lab, answers spread across all four slots (the
+v181 `_balance` bug, pinned), no back-references and no positional references,
+**all five gaps asserted by their teaching rather than by question id**, the
+lab's three named traps the same way, the `kind:'order'` ranking really stored
+longest-first, the head-to-tail graph drawing two real polylines with height, a
+full round on each with the physics Sheet reachable, the gold prep band on the
+review and its absence on the lab beside it, and the deck walking to the end.
+
 ### Words for the note from home (v188 / Wayfinder v168, both apps)
 
 Chris: *"can you generate messages for the post-it notes?"*

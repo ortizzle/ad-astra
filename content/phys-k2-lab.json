@@ -1,0 +1,814 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-k2-lab": {
+   "id": "unit-phys-k2-lab",
+   "type": "unit",
+   "updatedAt": 1789724982912,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Kinematics 2 · 2-3 Horizontal Projectile Motion Lab",
+   "srcName": "Horizontal Projectile Motion Lab (Nerf launcher + PhET simulation)",
+   "source": "Horizontal Projectile Motion Lab.pdf (Drive, Physics 8)",
+   "summary": {
+    "text": "The reasoning behind the Horizontal Projectile Motion Lab: merging the two projectile equations into one, why a height-against-range graph is curved and how to straighten it, what the slope of the straightened line physically is and how to get a launch speed back out of it, and what the Moon, a doubled launch speed and air resistance each do to the result.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A lab mark is mostly not for collecting the data — it is for knowing what to plot, what the slope means, and which way your own assumptions pushed the answer. Those are the parts that transfer to every lab after this one, and they are the parts this lesson drills.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Combine the horizontal and vertical projectile equations into a single equation linking launch speed, drop height and range.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why range grows with the square root of drop height, and linearize the graph accordingly.",
+     "from": "source"
+    },
+    {
+     "text": "State what the slope of the linearized graph represents, and use it to find the launch speed.",
+     "from": "source"
+    },
+    {
+     "text": "Predict the effect of lower gravity and of a doubled launch speed on that slope.",
+     "from": "source"
+    },
+    {
+     "text": "Find a launch speed from a single measured height and range.",
+     "from": "source"
+    },
+    {
+     "text": "Compute a percent error, and say which way an ignored assumption pushed the result.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "The lab asks her to collect real data — a Nerf launcher on a bench, then a PhET cannonball — and that data does not exist yet, so this unit deliberately does not invent a results table. It teaches the reasoning the lab runs on instead, which is the same call the Kinematics 1 Ramp Lab unit made. The heart of it is the merge the handout asks for in its own Question 1: solving the vertical equation for time and substituting it into the horizontal one gives Δx = v √(2Δy / g), which is already a straight line once range is plotted against the SQUARE ROOT of the drop height — and the slope of that line is v √(2/g), not the launch speed itself. Reading the slope straight off as a speed is the single mistake most likely to cost marks here, so it gets its own card and its own question. The Moon question is worth a word too: gravity there is about six times weaker, but the slope changes by only about 2.46 times, because g sits under a square root — \"six times farther\" is a very natural and quite wrong thing to write. Every number was computed with sympy inside the builder and asserted before it could be written, and none of the handout's own numbers is reused as a question.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do the merge on paper before anything else — solve Δy = ½gt² for t and put it into Δx = v t. Once you have that one equation, every question in this lesson is a rearrangement of it.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "What the lab measures",
+     "def": "**A projectile launched horizontally is timed by its FALL, and carried by its launch speed — so the height it starts from and the distance it lands away are enough to work out how fast it left.**\n• Nothing about the launcher itself has to be known.\n• Two measurements with a tape measure replace a speed sensor.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Two equations, one unknown in common",
+     "def": "**The vertical drop gives the time; the horizontal distance uses it.**\n• Launched level, the starting vertical velocity is zero, so the drop is purely free fall.\n• There is no horizontal acceleration, so the sideways trip is at a steady speed.",
+     "eq": "Δy = ½gt²        Δx = v t",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Merging them into one",
+     "def": "**Solve the vertical equation for t, substitute it into the horizontal one, and the time disappears — leaving one equation in the two things you actually measured.**\n• t = √(2Δy ÷ g) from the drop.\n• Put that in place of t in Δx = v t.\n• Nothing was assumed doing this; it is the same two equations rearranged.",
+     "eq": "Δx = v √(2Δy / g)",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Why the raw graph curves",
+     "def": "**Range does not grow in step with height — it grows with the SQUARE ROOT of height, so a plot of range against height bends over.**\n• Doubling the height does not double the range.\n• A curve cannot be given a meaningful slope, which is why the lab asks for a second, straightened graph.",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       2,
+       0,
+       3
+      ],
+      "gx": 0.5,
+      "gy": 0.5,
+      "xl": "drop height Δy (m)",
+      "yl": "range Δx (m)",
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0.0,
+          0.0
+         ],
+         [
+          0.05,
+          0.404
+         ],
+         [
+          0.1,
+          0.571
+         ],
+         [
+          0.15,
+          0.7
+         ],
+         [
+          0.2,
+          0.808
+         ],
+         [
+          0.25,
+          0.904
+         ],
+         [
+          0.3,
+          0.99
+         ],
+         [
+          0.35,
+          1.069
+         ],
+         [
+          0.4,
+          1.143
+         ],
+         [
+          0.45,
+          1.212
+         ],
+         [
+          0.5,
+          1.278
+         ],
+         [
+          0.55,
+          1.34
+         ],
+         [
+          0.6,
+          1.4
+         ],
+         [
+          0.65,
+          1.457
+         ],
+         [
+          0.7,
+          1.512
+         ],
+         [
+          0.75,
+          1.565
+         ],
+         [
+          0.8,
+          1.616
+         ],
+         [
+          0.85,
+          1.666
+         ],
+         [
+          0.9,
+          1.714
+         ],
+         [
+          0.95,
+          1.761
+         ],
+         [
+          1.0,
+          1.807
+         ],
+         [
+          1.05,
+          1.852
+         ],
+         [
+          1.1,
+          1.895
+         ],
+         [
+          1.15,
+          1.938
+         ],
+         [
+          1.2,
+          1.979
+         ],
+         [
+          1.25,
+          2.02
+         ],
+         [
+          1.3,
+          2.06
+         ],
+         [
+          1.35,
+          2.1
+         ],
+         [
+          1.4,
+          2.138
+         ],
+         [
+          1.45,
+          2.176
+         ],
+         [
+          1.5,
+          2.213
+         ],
+         [
+          1.55,
+          2.25
+         ],
+         [
+          1.6,
+          2.286
+         ],
+         [
+          1.65,
+          2.321
+         ],
+         [
+          1.7,
+          2.356
+         ],
+         [
+          1.75,
+          2.39
+         ],
+         [
+          1.8,
+          2.424
+         ],
+         [
+          1.85,
+          2.458
+         ],
+         [
+          1.9,
+          2.491
+         ],
+         [
+          1.95,
+          2.523
+         ],
+         [
+          2.0,
+          2.556
+         ]
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "id": "c4",
+     "term": "Linearizing it",
+     "def": "**Plot range against the SQUARE ROOT of the drop height and the curve becomes a straight line through the origin.**\n• The equation is already in the shape y = mx once √Δy is treated as the x variable.\n• Straightening a curve by plotting against a function of the variable is the standard move — the Ramp Lab does the same thing with t².",
+     "eq": "Δx = [ v √(2/g) ] · √Δy",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       1.5,
+       0,
+       3
+      ],
+      "gx": 0.5,
+      "gy": 0.5,
+      "xl": "√Δy (√m)",
+      "yl": "range Δx (m)",
+      "series": [
+       {
+        "type": "line",
+        "m": 1.807,
+        "b": 0
+       }
+      ]
+     }
+    },
+    {
+     "id": "c5",
+     "term": "What the slope physically is",
+     "def": "**The slope of the straightened line is the launch speed multiplied by √(2 ÷ g) — so it is not the speed itself, and it is not dimensionless.**\n• With g = 9.80 m/s², √(2/g) works out at 0.4518 s/√m.\n• A faster launch tilts the line up; nothing else on the graph changes.",
+     "eq": "slope = v √(2/g)",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Getting the speed back out",
+     "def": "**Multiply the measured slope by √(g ÷ 2) to recover the launch speed.**\n• √(9.80 ÷ 2) = 2.2136, so a slope of 5.72 means a launch speed of about 12.7 m/s.\n• Dividing by √(2/g) is the same move written the other way up.",
+     "eq": "v = slope × √(g/2)",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "The intercept should be zero",
+     "def": "**A launcher fired level from a height of zero would land at a distance of zero, so the straightened line is expected to pass through the origin.**\n• A noticeably non-zero intercept points at a systematic error — the height measured from the wrong reference point, or a launcher that is not quite level.\n• Report it rather than forcing the line through the origin to hide it.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "A line of best fit, not dot to dot",
+     "def": "**Draw one straight line that balances the scatter, and take the slope from two points ON THE LINE — never from two data points.**\n• Joining the dots turns random scatter into fake structure.\n• Use two widely separated points on the line so a small reading error in either matters less.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Axes, labels, units",
+     "def": "**Every axis needs the quantity, its unit, and a scale that uses most of the page.**\n• The linearized x-axis is √Δy in √m, not Δy in m — labelling it wrong makes the slope meaningless.\n• A scale that crams the data into one corner throws away precision you already paid for.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "On the Moon",
+     "def": "**Lower gravity means a longer fall, so the same launcher shoots farther and the line gets steeper — the slope grows by √(g_earth ÷ g_moon), about 2.46 times.**\n• Nothing about the launcher changed. Only the clock did.\n• Gravity sits under a square root, so a sixth of the gravity is not six times the range.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Doubling the launch speed",
+     "def": "**The slope doubles, exactly.**\n• v multiplies the whole slope expression, so the relationship between them is straight proportion.\n• Gravity and the drop height are untouched, so the shape of the graph is the same line, tilted up.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Percent error",
+     "def": "**Compare what you measured with the accepted value, as a fraction of the accepted value.**\n• The accepted value goes on the bottom; using your own measurement there is the usual slip.\n• It is always a positive number — take the size of the difference.",
+     "eq": "% error = |measured − accepted| ÷ accepted × 100",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Why a simulation needs no repeats",
+     "def": "**Repeat trials exist to average away random measurement error, and a simulation has none — the same settings give the same answer every time.**\n• The real Nerf launch does need repeats: the trigger, the dart and the tape measure all vary.\n• A simulation can still be systematically wrong, but running it three times will never reveal it.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "What the model leaves out",
+     "def": "**Air resistance is ignored, which is a decent approximation for a dense compact object over a short flight and a poor one for a foam dart.**\n• A real dart falls slightly short, so a speed worked out this way tends to read a little low.\n• Naming the assumption is part of the write-up, not an excuse added afterwards.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball rolls off the end of a level bench. What is its vertical velocity at the instant it leaves?",
+     "opts": [
+      "Zero",
+      "Equal to its rolling speed",
+      "Equal to g",
+      "Half its rolling speed"
+     ],
+     "ans": 0,
+     "hint": "It was travelling sideways along the bench the whole way to the edge.",
+     "steps": [
+      "Along the bench the ball moves horizontally and only horizontally.",
+      "Leaving the edge does not give it any sudden downward push.",
+      "So at that instant it has no vertical velocity at all.",
+      "Its vertical velocity starts at zero and grows from there."
+     ],
+     "ex": {
+      "main": "**Zero.** That is exactly what makes the vertical half of the problem ordinary free fall from rest, so the drop is ½gt² with no extra term.",
+      "tip": "This is the one fact that lets the two equations be merged in the first place. A launch at an angle would carry a starting vertical velocity and the whole method would need another term."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which quantity does the vertical drop of a horizontally launched object give you?",
+     "opts": [
+      "The horizontal distance it covers",
+      "The time it spends in the air",
+      "Its launch speed",
+      "Its landing angle"
+     ],
+     "ans": 1,
+     "hint": "Ask which of these could be found without knowing how fast it left.",
+     "steps": [
+      "The drop is pure free fall from rest, so Δy = ½gt².",
+      "That equation contains only the drop height, g, and the time.",
+      "Rearranged, it gives the time in the air.",
+      "The launch speed never appears in it, so time is what falls out."
+     ],
+     "ex": {
+      "main": "**The time it spends in the air.** The vertical half of the problem knows nothing about the launch speed, which is why the fall works as a clock.",
+      "tip": "This is why a dropped ball and a ball rolled off the same table at any speed land at the same moment — they share the identical fall."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a graph of range against drop height for a horizontally launched projectile, what shape does the data take?",
+     "opts": [
+      "A straight line with a positive intercept",
+      "A straight line through the origin",
+      "A curve that rises steeply then flattens",
+      "A curve that rises ever more steeply"
+     ],
+     "ans": 2,
+     "hint": "Range depends on the square root of the height, not on the height itself.",
+     "steps": [
+      "Range is the launch speed times the fall time.",
+      "The fall time goes as the square root of the height.",
+      "So range goes as √Δy, and a square-root curve climbs fast at first.",
+      "It then flattens off, rather than staying straight or steepening."
+     ],
+     "ex": {
+      "main": "**A curve that rises steeply then flattens.** Each extra centimetre of height buys less range than the one before it, which is exactly what a square root does.",
+      "tip": "A curve has a different slope at every point, so no single number can be read off it. That is why the lab asks for a second graph rather than more data."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To straighten the height-versus-range graph, what belongs on the horizontal axis?",
+     "opts": [
+      "The fall time squared",
+      "The drop height itself",
+      "The square of the drop height",
+      "The square root of the drop height"
+     ],
+     "ans": 3,
+     "hint": "Look at the merged equation and ask what would make it read y = mx.",
+     "steps": [
+      "The merged equation is Δx = v √(2Δy / g).",
+      "Pull the constants together: Δx = [v √(2/g)] × √Δy.",
+      "That is y = mx with √Δy playing the part of x.",
+      "So plotting range against √Δy gives a straight line through the origin."
+     ],
+     "ex": {
+      "main": "**The square root of the drop height.** Once √Δy is treated as the variable, the equation is already in straight-line form and nothing else needs rearranging.",
+      "tip": "Squaring the height would bend the graph further the wrong way. The Ramp Lab straightens its own curve the mirror-image way, by plotting against t² rather than t."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What would a clearly non-zero vertical intercept on the straightened graph suggest?",
+     "opts": [
+      "A systematic error, such as measuring the height from the wrong point",
+      "That the launcher was fired harder on some trials than others",
+      "That gravity was stronger than 9.80 m/s² during the experiment",
+      "That the data simply needs more trials averaged into it"
+     ],
+     "ans": 0,
+     "hint": "Ask what range the equation predicts for a drop height of zero.",
+     "steps": [
+      "At a drop height of zero the merged equation gives a range of zero.",
+      "So the line is expected to pass through the origin.",
+      "An offset means every reading is shifted the same way, not scattered.",
+      "A consistent shift like that is a systematic error, not random noise."
+     ],
+     "ex": {
+      "main": "**A systematic error, such as measuring the height from the wrong point.** Random scatter moves points both ways around the line; a systematic error moves them all the same way and lifts the whole line.",
+      "tip": "Report the intercept you actually got. Forcing the line through the origin to make it look right hides the one thing the intercept was there to tell you."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does the simulation half of this lab not need the trial repeated two more times?",
+     "opts": [
+      "A simulation is guaranteed to be more accurate than a real launcher",
+      "A simulation has no random measurement error to average away",
+      "Repeats are only needed when the graph turns out to be curved",
+      "A simulation already averages several runs before showing a result"
+     ],
+     "ans": 1,
+     "hint": "Ask what repeating a trial is actually FOR.",
+     "steps": [
+      "Repeats exist to average out random error — a slightly misread tape, a slightly different trigger pull.",
+      "The same settings in a simulation give an identical answer every time.",
+      "Averaging identical numbers changes nothing.",
+      "So the repeats have nothing left to do."
+     ],
+     "ex": {
+      "main": "**A simulation has no random measurement error to average away.** The real Nerf launch does, which is why that half of the lab still needs repeats.",
+      "tip": "It does not follow that a simulation is right. A simulation can be systematically wrong, and running it three times will never show that — only comparing it with something real will."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A launcher is fired level from a height of 1.25 m and its dart lands 6.40 m away. What was the launch speed?",
+     "opts": [
+      "25.3 m/s",
+      "5.12 m/s",
+      "12.7 m/s",
+      "8.94 m/s"
+     ],
+     "ans": 2,
+     "hint": "Find how long the dart was in the air before you touch the 6.40 m.",
+     "steps": [
+      "The fall is free fall from rest: 1.25 = ½ × 9.80 × t².",
+      "t² = 2 × 1.25 ÷ 9.80 = 0.2551, so t = 0.505 s.",
+      "Horizontally there is no acceleration, so v = Δx ÷ t.",
+      "v = 6.40 ÷ 0.505 = 12.7 m/s."
+     ],
+     "ex": {
+      "main": "**12.7 m/s.** The drop supplies the clock and the horizontal distance supplies the trip, so two tape-measure readings are enough to get a speed.",
+      "tip": "Dividing 6.40 by 1.25 gives 5.12, which is the commonest wrong turn here — it divides a distance by a distance and calls the result a speed. Check the units of what you divided."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The straightened graph of a level launch has a slope of 5.72. Taking g as 9.80 m/s², what was the launch speed?",
+     "opts": [
+      "56.1 m/s",
+      "2.58 m/s",
+      "5.72 m/s",
+      "12.7 m/s"
+     ],
+     "ans": 3,
+     "hint": "The slope is the launch speed times a constant, so undo the constant.",
+     "steps": [
+      "The slope of this graph is v √(2/g).",
+      "√(2 ÷ 9.80) = 0.4518, so slope = v × 0.4518.",
+      "Divide to recover v: v = 5.72 ÷ 0.4518.",
+      "That is 12.7 m/s."
+     ],
+     "ex": {
+      "main": "**12.7 m/s.** Multiplying the slope by √(g/2) = 2.2136 is the same step written the other way up, and gives the same 12.7 m/s.",
+      "tip": "Reading the slope straight off as the speed is the trap this graph is built to catch. The slope carries a √(2/g) inside it, so it is not a speed and its units are not m/s."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball is launched horizontally at 4.0 m/s from a bench 0.50 m high. How does its range change if the same launch is repeated from 2.0 m?",
+     "opts": [
+      "It doubles",
+      "It quadruples",
+      "It grows by half",
+      "It stays the same, since the launch speed did not change"
+     ],
+     "ans": 0,
+     "hint": "Range follows the square root of the height, not the height.",
+     "steps": [
+      "Range = v √(2Δy / g), so range is proportional to √Δy.",
+      "The height went from 0.50 m to 2.0 m, a factor of four.",
+      "The square root of four is two.",
+      "So the range doubles."
+     ],
+     "ex": {
+      "main": "**It doubles.** Quadrupling the height doubles the range — the square root is what turns a factor of four into a factor of two.",
+      "tip": "This is the counterfactual worth remembering from the whole lab: because height sits under a square root, big changes in height produce modest changes in range."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "If this lab were repeated on the Moon, where gravity is much weaker, what would happen to the slope of the straightened graph?",
+     "opts": [
+      "It would get shallower",
+      "It would get steeper",
+      "It would be unchanged, since the launcher is the same",
+      "The graph would stop being a straight line"
+     ],
+     "ans": 1,
+     "hint": "Weaker gravity means a longer fall from the same height.",
+     "steps": [
+      "The slope is v √(2/g), and g is on the bottom inside the root.",
+      "A smaller g therefore makes the whole slope bigger.",
+      "Physically: the fall takes longer, so the same launch speed carries it farther sideways.",
+      "So the line gets steeper."
+     ],
+     "ex": {
+      "main": "**It would get steeper.** With g = 1.62 m/s² the slope grows by √(9.80 ÷ 1.62), which is about 2.46 times — noticeably steeper, but nothing like six times.",
+      "tip": "Gravity is six times weaker and the slope changes by only about two and a half. That gap is the square root doing its work, and it is worth stating in the write-up rather than saying \"six times farther\"."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A launch speed is measured as 12.7 m/s where the accepted value is 13.5 m/s. What is the percent error?",
+     "opts": [
+      "0.8%",
+      "6.3%",
+      "5.9%",
+      "94.1%"
+     ],
+     "ans": 2,
+     "hint": "The accepted value belongs on the bottom of the fraction.",
+     "steps": [
+      "Take the size of the difference: |12.7 − 13.5| = 0.8 m/s.",
+      "Divide by the ACCEPTED value: 0.8 ÷ 13.5 = 0.0593.",
+      "Multiply by 100 to get a percentage.",
+      "That is 5.9%."
+     ],
+     "ex": {
+      "main": "**5.9%.** Percent error always measures the gap as a fraction of the value you were aiming at, not of the one you got.",
+      "tip": "Dividing by 12.7 instead gives 6.3%, which is close enough to look right and is still the wrong calculation. And 0.8 on its own is the difference, not a percentage of anything."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball is thrown horizontally at 12 m/s from a height of 1.90 m, toward a wall 4.50 m away. How far above the ground does it strike the wall?",
+     "opts": [
+      "2.59 m",
+      "0.69 m",
+      "1.90 m",
+      "1.21 m"
+     ],
+     "ans": 3,
+     "hint": "Work out how long it takes to cover the 4.50 m, then see how far it fell in that time.",
+     "steps": [
+      "Horizontally there is no acceleration: t = 4.50 ÷ 12 = 0.375 s.",
+      "Vertically it falls from rest: drop = ½ × 9.80 × 0.375² = 0.689 m.",
+      "Subtract the drop from the height it started at.",
+      "1.90 − 0.689 = 1.21 m above the ground."
+     ],
+     "ex": {
+      "main": "**1.21 m.** The horizontal trip sets the clock and the vertical fall is read off that clock — the same two-step the whole lab runs on.",
+      "tip": "Stopping at 0.689 m answers a different question: that is how far it FELL, not how high it ended up. Read the last line of the question again before writing the number down."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two students launch identical balls level from the same bench. One launches at 3.0 m/s, the other at 6.0 m/s. What do their two straightened graphs look like?",
+     "opts": [
+      "Both straight through the origin, the faster launch twice as steep",
+      "Both straight through the origin, the faster launch four times as steep",
+      "Both straight but the faster launch lifted to a higher intercept",
+      "The faster launch straight, the slower one still curved"
+     ],
+     "ans": 0,
+     "hint": "The launch speed multiplies the whole slope expression.",
+     "steps": [
+      "The slope is v √(2/g), and only v differs between them.",
+      "Doubling v doubles the slope exactly — there is no square involved.",
+      "Neither line gains an intercept: a zero drop still means a zero range for both.",
+      "So both pass through the origin and one is twice as steep."
+     ],
+     "ex": {
+      "main": "**Both straight through the origin, the faster launch twice as steep.** The straightening works for any launch speed, so both graphs are lines; only the tilt carries the difference between them.",
+      "tip": "Height sits under a square root and launch speed does not, which is why doubling the height and doubling the speed do such different things to this graph. Knowing which quantity is under the root is most of this topic."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Four horizontal launches are set up. Put them in order from the LONGEST range to the SHORTEST. Take g as 9.80 m/s².",
+     "opts": [
+      "4.0 m/s from 1.25 m",
+      "3.0 m/s from 2.00 m",
+      "6.0 m/s from 0.45 m",
+      "8.0 m/s from 0.20 m"
+     ],
+     "ans": 0,
+     "hint": "The fastest launch is not automatically the longest — the fall time matters just as much.",
+     "steps": [
+      "Range = v √(2Δy / g), so work each one out rather than judging on speed.",
+      "4.0 m/s from 1.25 m: 4.0 × 0.505 = 2.02 m.",
+      "3.0 m/s from 2.00 m: 3.0 × 0.639 = 1.92 m.",
+      "6.0 m/s from 0.45 m: 6.0 × 0.303 = 1.82 m.",
+      "8.0 m/s from 0.20 m: 8.0 × 0.202 = 1.62 m — the shortest, despite the fastest launch."
+     ],
+     "ex": {
+      "main": "**4.0 m/s from 1.25 m, then 3.0 m/s from 2.00 m, then 6.0 m/s from 0.45 m, then 8.0 m/s from 0.20 m.** The slowest launch of the four is not last, and the fastest is — height buys time, and time is what the speed gets to act on.",
+      "tip": "Ranking by launch speed alone puts the list in almost exactly the wrong order here. Both quantities have to be carried through before anything can be compared."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student takes the slope of the straightened graph by drawing a line of best fit and then using the coordinates of the first and last DATA points. What is wrong with that?",
+     "opts": [
+      "The first and last points are too far apart to give a reliable slope",
+      "The slope should come from two points on the LINE, not from the data",
+      "The slope should be taken from the raw curve rather than the fitted line",
+      "Data points cannot be used for a slope unless there are at least ten of them"
+     ],
+     "ans": 1,
+     "hint": "Ask what the line of best fit was drawn for in the first place.",
+     "steps": [
+      "The line of best fit averages out the scatter in the data.",
+      "Using two data points throws that averaging away and takes whatever error those two happen to carry.",
+      "Two widely separated points ON THE LINE keep the benefit of the fit.",
+      "So the slope must be read off the line, not off the data."
+     ],
+     "ex": {
+      "main": "**The slope should come from two points on the LINE, not from the data.** Drawing the fit and then ignoring it leaves you with the scatter you drew it to remove.",
+      "tip": "Widely separated points are genuinely better, so that instinct was right — it is just that they need to be points on the fitted line."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The lab ignores air resistance. For a foam dart measured this way, which way would that push the calculated launch speed?",
+     "opts": [
+      "It is unaffected, because air resistance acts vertically only",
+      "It reads a little high, because the dart stays in the air longer",
+      "It reads a little low, because the dart falls short of the ideal range",
+      "It is unaffected, because both measurements are made with the same tape"
+     ],
+     "ans": 2,
+     "hint": "Air resistance shortens the horizontal trip; the calculation reads that shortfall as something else.",
+     "steps": [
+      "Air resistance drags on the dart, so it lands closer than the ideal model predicts.",
+      "The calculation takes the measured range and divides by the fall time.",
+      "A smaller measured range with the same fall time gives a smaller speed.",
+      "So the answer comes out a little below the true launch speed."
+     ],
+     "ex": {
+      "main": "**It reads a little low, because the dart falls short of the ideal range.** A foam dart is light and blunt, so this is not a negligible effect for it, even if it would be for a marble.",
+      "tip": "Naming the direction an assumption pushes your answer is worth more in a write-up than naming the assumption alone. \"Ignoring air resistance\" says little; \"so this is an underestimate\" says something a reader can use."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does the merged equation contain no reference to the mass of the object being launched?",
+     "opts": [
+      "Because mass only matters once air resistance is included in the model",
+      "Because the masses used in this lab are all small enough to ignore",
+      "Because the mass cancels between the two original equations",
+      "Because the fall time and the horizontal motion are both mass-independent"
+     ],
+     "ans": 3,
+     "hint": "Look at where mass could have entered: the free fall, or the steady sideways trip.",
+     "steps": [
+      "The vertical half is free fall, and free fall accelerates every mass at g.",
+      "The horizontal half is motion at a steady speed, which involves no mass either.",
+      "So mass never enters either equation.",
+      "It cannot appear in the merged one, because it was never in the originals."
+     ],
+     "ex": {
+      "main": "**Because the fall time and the horizontal motion are both mass-independent.** Mass had no route into the equations to begin with, so nothing had to cancel it out.",
+      "tip": "Air resistance is the real reason a feather and a marble behave differently, and it is exactly what this model sets aside — which is why an air-resistance answer is tempting here and still not the reason mass is absent from these two equations."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the straightened graph, the horizontal axis is labelled simply \"height (m)\" while the plotted values are square roots of the height. What does that cost?",
+     "opts": [
+      "The slope's units become wrong, so the speed it gives cannot be checked",
+      "Nothing — the points are plotted correctly, so the line is correct",
+      "The line stops passing through the origin, so the fit is unusable",
+      "The plotted points land in the wrong places along the axis"
+     ],
+     "ans": 0,
+     "hint": "The points are where they should be. Ask what a reader of the graph would now believe.",
+     "steps": [
+      "The values plotted are right, so the line itself is unaffected.",
+      "But the label tells a reader the x variable is Δy when it is really √Δy.",
+      "The units of the slope are then wrong, and √(2/g) cannot be applied to it with any confidence.",
+      "So the number survives and the meaning does not."
+     ],
+     "ex": {
+      "main": "**The slope's units become wrong, so the speed it gives cannot be checked.** A slope is a ratio of two labelled quantities; mislabel one and the ratio stops meaning anything.",
+      "tip": "This is why the rubric gives separate marks for labelling the axes with units. It is not tidiness — an unlabelled or wrongly labelled axis makes every calculation downstream unverifiable."
+     }
+    }
+   ],
+   "round": 9,
+   "libv": 1
+  }
+ }
+}
