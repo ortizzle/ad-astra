@@ -96,6 +96,11 @@ body::before{
 #app{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 18px 128px}
 h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.015em;margin:0;line-height:1.15}
 .eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac-fg);font-weight:700;opacity:.85}
+/* A second eyebrow partway down a card is a GROUP heading, and the row above
+   it keeps its own bottom border — so it needs air or it reads as a caption
+   on that border rather than a heading for what follows. */
+.eyebrow.grp{display:block;margin-top:var(--gap)}
+.card .row+.btn{margin-top:var(--gap-row)}
 /* Subject screens borrow the subject's colour as their accent — the derived
    tints are re-mixed here so a JS override of --ac on #screen cascades. */
 #screen{--ac-8:color-mix(in srgb, var(--ac) 8%, transparent);
@@ -1656,7 +1661,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v189 · vectors and the lab';
+const APP_VERSION = 'v190 · ungraded first';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3725,6 +3730,10 @@ function upcomingAssessments(from, withinDays){
   return assessments().filter(a=>a.date>=from && a.date<=to);
 }
 const KINDS = {test:{nm:'Test',ic:'✍️'},quiz:{nm:'Quiz',ic:'📝'},project:{nm:'Project',ic:'🛠️'},essay:{nm:'Essay',ic:'📄'},present:{nm:'Presentation',ic:'🎤'}};
+/* How many graded assessments the folded block shows when opened. A whole
+   year's worth is not a list anybody reads; the by-subject card above is
+   where the full history actually lives. */
+const GRADED_SHOWN = 20;
 
 /* ---------- Study plan (rule-based — always works, no API key needed) ---------- */
 function studyPlan(date){
@@ -10593,19 +10602,63 @@ SCREENS.parent = function(root){
   });
   root.appendChild(gsc);
 
+  /* Ungraded first, graded folded away. Chris: "once graded can they get
+     tucked away or ordered separately, so I can focus on ungraded quiz and
+     tests." A graded row is finished business; this list is what he acts on.
+
+     THREE groups, not two, because "ungraded" holds two different facts. An
+     assessment whose date has passed is waiting on HIM for a number; one
+     still ahead is waiting on the school, and is only here so the study plan
+     and the runway can see it. Merging them would put four upcoming tests at
+     the top of a list whose whole job is to say what needs typing in.
+
+     The test is `a.score == null`, never `!a.score` — a real zero is a grade.
+     That exact bug drove studyPlan() for a while before v84 caught it. */
   const asc = el('div','card');
   const list = assessments();
   if(!list.length) asc.appendChild(el('p',null,'None added yet. Add tests and quizzes here and the app builds study recommendations around them.'));
-  list.slice().reverse().slice(0,12).forEach(a=>{
+  const newest   = list.slice().reverse();                                   /* newest first */
+  const needsSc  = newest.filter(a=>a.score == null && a.date <= date);      /* sat, unmarked */
+  const ahead    = newest.filter(a=>a.score == null && a.date >  date).reverse(); /* soonest first */
+  const graded   = newest.filter(a=>a.score != null);
+  /* The button is always the edit door, but it only says "Add score" where a
+     score is genuinely the missing thing. An assessment still ahead has no
+     score to add yet, and four rows reading "Add score" under "Still to come"
+     would put the exact false to-do back that this split removes. */
+  const assessRow = (a, into, soon)=>{
     const c = CLASS_BY_ID[a.classId], k = KINDS[a.kind]||KINDS.test;
     const r = el('div','row');
     const kk = el('span','k',`${k.ic} ${a.title}`);
     kk.appendChild(el('small',null,`${c?c.name:''} · ${AZ.shortDate(a.date)}`));
     r.appendChild(kk);
-    const v = el('button','btn btn-ghost btn-sm', assessLabel(a) || 'Add score');
+    const v = el('button','btn btn-ghost btn-sm', assessLabel(a) || (soon ? 'Edit' : 'Add score'));
     v.addEventListener('click',()=>editAssessment(a));
-    r.appendChild(v); asc.appendChild(r);
-  });
+    r.appendChild(v); into.appendChild(r);
+  };
+  let grp = false;
+  const head = txt => { asc.appendChild(el('div','eyebrow'+(grp?' grp':''), txt)); grp = true; };
+  if(needsSc.length){
+    head(`Waiting on a score · ${needsSc.length}`);
+    needsSc.forEach(a=>assessRow(a, asc));
+  }
+  if(ahead.length){
+    head('Still to come');
+    ahead.forEach(a=>assessRow(a, asc, true));
+  }
+  if(list.length && !needsSc.length && !ahead.length)
+    asc.appendChild(el('p',null,'Everything entered has a score — nothing is waiting on you.'));
+  if(graded.length){
+    const shown = graded.slice(0, GRADED_SHOWN);
+    const gb = el('button','btn btn-ghost btn-sm',
+      (ctx._showGraded ? 'Hide the ' : 'Show the ') + graded.length + ' already graded');
+    gb.addEventListener('click',()=>{ ctx._showGraded = !ctx._showGraded; render(); });
+    asc.appendChild(gb);
+    if(ctx._showGraded){
+      shown.forEach(a=>assessRow(a, asc));
+      if(graded.length > shown.length)
+        asc.appendChild(el('p',null,`The ${shown.length} most recent. Older ones stay in the by-subject averages above.`));
+    }
+  }
   root.appendChild(asc);
   /* One-tap adds from the newsletter — accepting writes a normal assess
      record; dismissing tombstones the same id so it stays handled everywhere. */

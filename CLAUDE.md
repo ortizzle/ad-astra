@@ -982,6 +982,71 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Ungraded first, graded tucked away (v190 / Wayfinder v170, both apps)
+
+Chris: *"For grading quizzes, once graded can they get tucked away or ordered
+separately, so I can focus on ungraded quiz and tests?"* The parent view's
+Tests & quizzes list was one flat run of the twelve most recent, newest first,
+with a graded row and one still waiting on a number sitting identically among
+each other. A graded row is finished business; the list is what he acts on.
+
+**Three groups, not two, and the third is why this is worth writing down.**
+"Ungraded" holds two genuinely different facts. An assessment whose date has
+passed is waiting on HIM for a number. One still ahead is waiting on the
+school, and is only in the store at all so the study plan, the runway and the
+brief can see it. Merging them would have put four upcoming tests at the top
+of a list whose entire job is to say what needs typing in — the same complaint
+one level down.
+
+- **Waiting on a score · N** leads, newest first: the one she just sat is the
+  one a grade is about to arrive for.
+- **Still to come** follows, soonest first, and its rows say **"Edit"** rather
+  than "Add score". The button is the same edit door either way, but a test
+  that has not happened has no score to add, and four rows reading "Add score"
+  under that heading would put the false to-do straight back.
+- **The graded ones fold behind one door** — "Show the 3 already graded",
+  session-scoped on `ctx._showGraded`, capped at `GRADED_SHOWN` (20) when
+  opened. Nothing is hidden silently: the door names the count, and the
+  by-subject card directly above it is where the full history actually lives
+  and always has.
+- **Everything marked says so** ("nothing is waiting on you") rather than
+  rendering an empty group, the same rule "Worth a word" already follows.
+
+> ⚠️ **The partition is `a.score == null`, never `!a.score`.** A real zero is a
+> grade. This is the identical bug v84 found driving `studyPlan()` — a test she
+> scored nothing on kept reading as "not marked yet" — and it would land here
+> in a worse place, permanently parking a zero in the to-do list. Pinned by the
+> test with a seeded 0%.
+
+Two CSS additions, both purely additive and both measured on the rendered card
+rather than reasoned about. `.eyebrow.grp` gives a **second** eyebrow partway
+down a card a `--gap` of air: the `.row` above it is not `:last-child`, so it
+keeps its own bottom border, and a flush eyebrow reads as that border's caption
+instead of a heading for what follows. And `.card .row+.btn` gives the fold
+door the same `--gap-row` two stacked buttons already get — the `.card .btn+p`
+family from v159, one more adjacency.
+
+> `drafts()`-style ordering is not a risk here: `assessments()` already sorts
+> by date, so all three groups derive from one sorted list and the order is
+> correct by construction rather than by insertion.
+
+`tools/test_gradesplit.js` (same file, both apps, 18 assertions) pins the RULE
+rather than the seeded titles: the waiting group and its count, the zero
+counting as graded, the two groups' orders, nothing graded rendering while the
+fold is shut, the door naming its count and flipping to Hide, the Edit-vs-Add
+score labels, both measured gaps, a row still opening its edit modal, and the
+all-marked message.
+
+> `tools/test_suggest.js` (Wayfinder) had **rotted by the calendar for the
+> second time** and was rewritten while it was in front of me. It pinned the
+> 9/18 quiz by name; that expired on 9/19 and took four other assertions down
+> with it — exactly what v160 already fixed once when it pinned the 9/10 test
+> and broke on 9/11. It now runs the whole accept-flow against whichever
+> suggestion is still ahead TODAY and names no date at all. **Pin the rule,
+> never the almanac** — and check the browser actually gets closed, since a
+> missing `b.close()` is why the first run of the rewrite hung rather than
+> failed.
+
 ### The quiz that was shared blank, and the lab with no data yet (v189)
 
 Chris: *"The physics quiz was shared with us blank so I wanted to build lessons
