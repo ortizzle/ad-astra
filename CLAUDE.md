@@ -982,6 +982,88 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The word list (v191 / Wayfinder v171, both apps)
+
+Chris: *"for the different wordly wise units, can we figure out a way to
+include the complete word list? What is the best way to do that?"*
+
+**The complete list was already there, and checking that first is what
+decided the design.** Every Wordly Wise lesson in both apps ships exactly 15
+cards, one per word, in the book's own alphabetical order, each carrying the
+word, its `sp` respelling, its part of speech and its definition — 14 units,
+15/15, no gaps. So nothing needed authoring. What was missing was a place to
+see all fifteen AT ONCE: the flashcard deck is shuffled and shows one at a
+time by design, the quiz never shows more than five, and the unit card's
+folded details give only counts. The word list is a render site, not content.
+
+`openWordList(u)` is a modal off the unit card — the `openSheet`/`openMapRef`
+idiom, which is already proven at length by the physics sheet's 56 equations.
+
+- **Derived from the cards, never authored.** One source of truth, so the
+  list and the deck cannot drift, and every future vocabulary lesson has one
+  for free — the same call Pair Up made ("no content flag and nothing to
+  author").
+- **Meanings are hidden until she asks, and each row reveals only itself.**
+  Cover, recall, check, move on. A bare list is a retrieval cue; a list with
+  the meanings showing is reading. "Show every meaning" opens the lot for a
+  quick scan. This is the recall-first reasoning `bio-sg-test1` already used
+  for a fill-in-the-blank test.
+- **The row shows how to SAY the word before it shows what it means.** `sp`
+  is a pronunciation, not the answer, and the standing `sp` rule is that it
+  always renders where it is spoken.
+- **The meaning is the card's own first line** (`defLead`) — the bold lead
+  plus its part-of-speech tag, which is exactly one line per word. The
+  bullets underneath stay on the card.
+
+> ⚠️ **It must NEVER reach the quiz's tool row.** `SHEETS` and `mapRef` both
+> put a button there, and that is right for them: a formula sheet or a map
+> restates what the class hands out on paper, so the skill under test is
+> untouched. A vocabulary list WITH its meanings, open during a vocabulary
+> quiz, is the answer key — the glossed-stem rule one level up. Two of
+> `test_wordlist.js`'s assertions exist only to pin this.
+
+> ⚠️ **The first gate was "six or more single-word cards" and it shipped a
+> lie.** That is `skyCards`'s own line, so it looked like the right reuse —
+> but it caught 17 Ad Astra units and 13 Wayfinder ones, including
+> *"Word list — all 6 words"* on an EIGHTEEN-card Biology deck. A partial
+> list that says "all" is worse than no list: she would revise six terms
+> believing she had seen the lot. `hasWordList()` now requires the deck to BE
+> a word list — **every** card a single word, six minimum — which makes the
+> label true by construction and yields exactly the 14 vocabulary lessons.
+> **A Spelling Bee deck passes that test and is excluded anyway** (`!u.bee`):
+> the Bee announces its word and refuses to show it until she has spelled it,
+> so printing all thirteen on one screen hands over the one thing that unit
+> withholds.
+
+> ⚠️ **`display:block` beats the UA's `[hidden]{display:none}`, so setting
+> `d.hidden = true` hid nothing — and the test passed anyway because it read
+> the PROPERTY.** Every meaning rendered on screen while fifteen assertions
+> went green. Caught by screenshotting the modal, which is the only reason it
+> is not live. `.wld[hidden]{display:none}` restates it, and the test now
+> measures `getComputedStyle().display` and `offsetHeight` instead of the
+> flag — **verified by reverting the CSS and watching it fail.** Any element
+> given a `display` of its own has to restate `[hidden]` itself.
+
+> The modal is built once by `showModal`'s `build(box)` and is **not** owned
+> by `render()`, so a row toggles its own nodes directly. Calling `render()`
+> here would rebuild the screen behind the modal and leave the list alone —
+> the v188 note-draft trap, in reverse.
+
+`tools/test_wordlist.js` (same file, both apps, 22 assertions) **discovers
+its own unit** rather than naming one in argv, since the two libraries use
+different ids and a hardcoded one is the harness rot this file keeps paying
+for: it loads the whole shipped library and takes the first unit the app
+itself says has a word list. It pins the door and its count, the words
+matching the deck exactly and in its order, nothing revealed before she asks,
+one row revealing only itself, the meaning being the card's own lead rather
+than a rewritten copy, both reveal-all states, 44px on every row, the four
+gate cases (a real list, a mixed deck, a bee deck, a three-word deck), and
+the two quiet-quiz rules. `tools/contrast_wordlist.js` sweeps six reading
+tokens across accent × sky × theme on both an open and a shut row, since an
+open row lays `--ac-8` over `--raised` — the tint trap `.felt` and the Growth
+Zone chip both hit. Worst case **5.34:1** here across 288 samples, 5.38:1 in
+Wayfinder across 360; nothing below 4.5.
+
 ### Ungraded first, graded tucked away (v190 / Wayfinder v170, both apps)
 
 Chris: *"For grading quizzes, once graded can they get tucked away or ordered

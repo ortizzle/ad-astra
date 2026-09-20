@@ -936,6 +936,24 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    the thing that finishes a lesson does not look like one more way to
    practise it. */
 .seclab{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+/* The word list. A row is a tap target, so it holds the 44px floor even
+   folded; the meaning is block-level underneath so a long one wraps rather
+   than fighting the word for the line. */
+.wlnote{font-size:12.5px;color:var(--muted)}
+.wlrow{display:block;width:100%;text-align:left;min-height:var(--tap);
+  padding:9px 12px;margin:0 0 6px;background:var(--raised);color:var(--text);
+  border:1px solid var(--line);border-radius:10px;font:inherit;cursor:pointer}
+.wlrow.open{border-color:var(--ac);background:var(--ac-8)}
+.wlhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.wlw{font-size:16px;font-weight:700}
+.wlsp{font-size:12px;color:var(--muted);font-style:italic}
+.wld{display:block;margin-top:5px;font-size:13.5px;color:var(--text);white-space:pre-line}
+/* ⚠️ `display:block` on the line above BEATS the UA's own [hidden]{display:none},
+   which is a low-specificity rule — so `d.hidden = true` set the property and
+   changed nothing on screen. Every meaning rendered while the test, which read
+   the PROPERTY, passed. Caught by screenshotting the modal. Any element given a
+   display of its own must restate [hidden] itself. */
+.wld[hidden]{display:none}
 .seclab+.mrow{margin-top:0}
 .mtile.done{border-color:#f2ca63}
 .mtile.done small{color:var(--muted)}
@@ -1661,7 +1679,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v190 · ungraded first';
+const APP_VERSION = 'v191 · the word list';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4263,6 +4281,90 @@ function openSheet(classId){
    Calculator/Sheet. Engine only here — Wayfinder's lat/long unit is the first
    content to use it. Content-shaped, like `sorts`/`bee` — a unit opts in by
    carrying the field, never inferred. */
+/* The word list — every word in the lesson on one screen, which is the one
+   thing a vocabulary deck could not do. The cards ALREADY are the complete
+   list (one card per word, in the book's own order); what was missing was a
+   place to see all fifteen at once, since the flashcard deck is shuffled and
+   shows one at a time by design. So this is derived from the cards and never
+   authored: it cannot drift from them, and it works on every vocabulary
+   lesson in the library the moment it exists — the same call Pair Up made.
+
+   ⚠️ It is a STUDY door and must never reach the quiz's tool row. `SHEETS`
+   and `mapRef` both put a button in there, and that is right for them: a
+   formula sheet or a map restates what the class hands out on paper, so the
+   skill under test is untouched. A vocabulary list WITH its meanings, open
+   during a vocabulary quiz, is the answer key. Same rule as the glossed
+   stem, one level up. */
+function wordListCards(u){
+  /* skyCards already draws this exact line — single sayable words, no ponder
+     prompts — so the two surfaces can never disagree about what a word is. */
+  return skyCards(u);
+}
+/* A lesson has a word list only when its deck IS one: every card a single
+   word, and at least six of them. The first cut gated on "six or more single
+   words", which caught the fourteen vocabulary lessons — and also put
+   "Word list — all 6 words" on an eighteen-card Biology deck, where the
+   label is simply false. A partial list is worse than none: she would
+   revise six terms believing she had seen the lot.
+
+   Spelling Bee decks pass that test (thirteen single words each) and are
+   excluded anyway, because the Bee's founding rule is that the word is
+   ANNOUNCED and never shown until she has spelled it — printing all thirteen
+   on one screen hands over exactly what that unit refuses to give. */
+function hasWordList(u){
+  const cards = u.cards || [];
+  return !u.bee && cards.length >= 6 && wordListCards(u).length === cards.length;
+}
+/* The first LINE of a def is the bold lead plus its part-of-speech tag, which
+   is precisely one line per word. The bullets underneath are the supporting
+   detail and belong on the card, not in a list of fifteen. */
+function defLead(def){ return String(def || '').split('\n')[0].trim(); }
+
+function openWordList(u){
+  const cards = wordListCards(u);
+  showModal({ title:'Word list', confirmText:'Close', cancelText:null,
+    build:(box)=>{
+      box.appendChild(el('p',null, u.title));
+      box.appendChild(el('p','wlnote', cards.length + ' words. Cover the meanings and say each one before you tap it — '
+        + 'saying it from memory is the practice; reading it is not.'));
+
+      const rows = [];
+      const reveal = (r, on)=>{
+        r.node.classList.toggle('open', on);
+        r.node.setAttribute('aria-expanded', on ? 'true' : 'false');
+        r.def.hidden = !on;
+      };
+      cards.forEach(c=>{
+        /* A row is its own tap target so she can check one word without
+           spoiling the other fourteen — cover, recall, check, move on. */
+        const b = el('button','wlrow');
+        b.setAttribute('aria-expanded','false');
+        const head = el('span','wlhead');
+        head.appendChild(el('span','wlw', c.term));
+        if(c.sp) head.appendChild(el('span','wlsp', c.sp));
+        b.appendChild(head);
+        const d = el('span','wld'); d.hidden = true;
+        richify(d, defLead(c.def));
+        b.appendChild(d);
+        const r = {node:b, def:d};
+        b.addEventListener('click',()=>reveal(r, d.hidden));
+        rows.push(r);
+        box.appendChild(b);
+      });
+
+      /* The modal is built once and is NOT owned by render(), so toggling a
+         row mutates its own nodes directly. Calling render() here would
+         rebuild the screen behind the modal and leave this list untouched. */
+      const all = el('button','btn btn-ghost btn-sm','Show every meaning');
+      let shown = false;
+      all.addEventListener('click',()=>{
+        shown = !shown;
+        rows.forEach(r=>reveal(r, shown));
+        all.textContent = shown ? 'Hide the meanings' : 'Show every meaning';
+      });
+      box.appendChild(all);
+    }});
+}
 function openMapRef(u){
   showModal({ title: u.mapTitle || 'Map', confirmText:'Close', cancelText:null,
     build:(box)=>{
@@ -5665,6 +5767,17 @@ function unitCard(u, c, label){
   const qp = u.questions.length ? quizProgress(u) : null;
   const cp = cardsProgress(u);
   card.appendChild(el('div','seclab','Practice'));
+  /* The list first, then the drills — it is what you read before you
+     practise, the way the book prints it at the head of the lesson. */
+  if(hasWordList(u)){
+    const wb = el('button','btn btn-secondary');
+    const ws = el('span','btnstack');
+    ws.appendChild(el('span',null,'\ud83d\udcd6  Word list \u2014 all ' + wordListCards(u).length + ' words'));
+    ws.appendChild(el('small',null,'Every word in this lesson, meanings hidden until you tap'));
+    wb.appendChild(ws);
+    wb.addEventListener('click',()=>openWordList(u));
+    card.appendChild(wb);
+  }
   const row = el('div','mrow');
   row.appendChild(modeTile('cards','Flashcards',
     cp.done ? '✓ deck done' : cp.best ? cp.best+' of '+cp.total+' seen' : 'flip & check',
