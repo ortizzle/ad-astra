@@ -48,7 +48,14 @@ def _balance(Q):
     slot = 0
     for x in Q:
         if x.get('kind') in ('order', 'spell'): continue
-        want = slot % 4; slot += 1
+        # Modulo the question's OWN option count, not a hardcoded four: a
+        # three-option parts-of-speech item would otherwise be handed slot 3
+        # and throw an IndexError, and a one-option slider would throw on the
+        # first rotation past zero. No shipped unit ever hit this, because
+        # build_numberline.py writes its unit directly and never calls build().
+        n = len(x['opts'])
+        if n < 2: continue
+        want = slot % n; slot += 1
         if x['ans'] != want:
             x['opts'][x['ans']], x['opts'][want] = x['opts'][want], x['opts'][x['ans']]
             x['ans'] = want
@@ -63,9 +70,20 @@ def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, 
         # kind:'spell' carries opts:[word] (one option), ans:0 — the 4-option
         # rule is an MC rule. Matches Wayfinder's copy and check_content.py.
         if kind in ('mc', 'analogy', 'order'):
-            if len(x['opts']) != 4: errs.append('%s: %d opts' % (x['id'], len(x['opts'])))
-            if len(set(x['opts'])) != 4: errs.append('%s: duplicate opts' % x['id'])
-            if not (0 <= x['ans'] < 4): errs.append('%s: ans out of range' % x['id'])
+            # Three options is allowed for exactly ONE shape: a parts-of-speech
+            # item, whose options ARE the parts of speech. River's real
+            # vocabulary test offers three, and padding to four with an
+            # "adverb" that is never the answer anywhere in the unit hands her
+            # a dead option to eliminate for free. Gated on the option SET
+            # rather than a flag, so it cannot wave through a thin
+            # three-option vocabulary question. See check_content.py.
+            n_ok = 3 if (len(x['opts']) == 3 and
+                         all(str(o).strip().lower() in
+                             ('noun', 'adjective', 'verb', 'adverb')
+                             for o in x['opts'])) else 4
+            if len(x['opts']) != n_ok: errs.append('%s: %d opts' % (x['id'], len(x['opts'])))
+            if len(set(x['opts'])) != n_ok: errs.append('%s: duplicate opts' % x['id'])
+            if not (0 <= x['ans'] < n_ok): errs.append('%s: ans out of range' % x['id'])
         elif kind == 'spell':
             if len(x['opts']) != 1: errs.append('%s: spell must carry exactly opts:[word]' % x['id'])
             if x['ans'] != 0: errs.append('%s: spell must have ans 0' % x['id'])

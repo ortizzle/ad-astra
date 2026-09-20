@@ -1086,6 +1086,38 @@ longest-first, the head-to-tail graph drawing two real polylines with height, a
 full round on each with the physics Sheet reachable, the gold prep band on the
 review and its absence on the lab beside it, and the deck walking to the end.
 
+### Three-option questions in the builder (Wayfinder v169, tooling only here)
+
+River's real vocabulary test has a parts-of-speech section offering exactly
+three choices — noun, adjective, verb — so Wayfinder's units gained that
+shape. The engine never needed anything: `optArr` maps over `q.opts` and the
+letters come from position, so A/B/C renders correctly. What needed relaxing
+was the authoring guard in `unit_common.build()` and `check_content.py`, and
+both changes are shared tooling, so they are here too:
+
+- **Three options are allowed only when the options ARE the parts of speech.**
+  Gated on the option set rather than on a flag, so it cannot be used to wave
+  through a thin three-option question of any other kind.
+- **The length-bias check skips those items** — "adjective" is longer than
+  "noun" and "verb", and the words are not ours to pad. Same reasoning as the
+  existing guide-unit exemption.
+- **`_balance()` rotates modulo the question's own option count**, not a
+  hardcoded four. It would otherwise hand a three-option question the target
+  slot 3 and throw an IndexError. Nothing shipped ever hit it, but Ad Astra's
+  copy had the identical bug waiting.
+
+> ⚠️ **The FORMAT is River's teacher's and is deliberately not applied here.**
+> Sedona's Wordly Wise Book 9 is a different year, a different teacher and a
+> different book, and nothing has been seen of how her English class actually
+> tests. Do not reshape her vocabulary units to Wayfinder's five sections
+> without a real paper of hers to work from — see wayfinder/CLAUDE.md,
+> "Practice shaped like the real test", for what that evidence looked like.
+
+> The two `unit_common.py` copies are NOT identical and never have been —
+> Ad Astra's `card()` takes the image parameters the Cells unit needs and
+> validates `order` in the 4-option branch, Wayfinder's `build()` takes
+> `bee_`. Patch them per-file; a shared search-and-replace fails on both.
+
 ### Words for the note from home (v188 / Wayfinder v168, both apps)
 
 Chris: *"can you generate messages for the post-it notes?"*

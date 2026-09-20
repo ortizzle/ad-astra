@@ -110,8 +110,19 @@ def check(root, name):
                     # is driven by opts.length, so it renders A/B correctly —
                     # forcing two invented extra options onto it would change
                     # what she is entering. Everywhere else, four.
+                    # A parts-of-speech item offers exactly the parts of
+                    # speech — three of them on River's real vocabulary test.
+                    # Padding it to four with an "adverb" that is never the
+                    # answer anywhere in the unit hands her a dead option to
+                    # eliminate for free, which is worse than three honest
+                    # ones. The allowance is gated on the option SET rather
+                    # than on a flag, so it cannot be used to smuggle in a
+                    # thin three-option vocabulary question.
+                    POS = {'noun', 'adjective', 'verb', 'adverb'}
+                    is_pos = (len(opts) == 3
+                              and all(str(o).strip().lower() in POS for o in opts))
                     ok_counts = (2, 4) if u.get('guide') else (4,)
-                    P(len(opts) not in ok_counts,
+                    P(len(opts) not in ok_counts and not is_pos,
                       '%s: %d options, must be %s' % (tag, len(opts),
                        ' or '.join(map(str, ok_counts))))
                     P(len(set(map(str, opts))) != len(opts), '%s: duplicate options' % tag)
@@ -122,7 +133,15 @@ def check(root, name):
                     # word. Editing them to even up the lengths would break the
                     # letter-for-letter contract the whole paper-entry mode rests
                     # on. Variants are ours and shuffled, so they stay checked.
-                    over = 0 if u.get('guide') else length_tell(opts, ans)
+                    # A parts-of-speech item can never pass the length check:
+                    # "adjective" is simply longer than "noun" and "verb", and
+                    # padding the words is not an option — they are the names
+                    # of the parts of speech. Same reasoning as the guide
+                    # exemption above: fixed options nobody may edit. (The tell
+                    # is not exploitable anyway — on her real paper the five
+                    # answers ran noun, noun, noun, verb, adjective, so
+                    # "always pick the longest" would have scored 1 of 5.)
+                    over = 0 if (u.get('guide') or is_pos) else length_tell(opts, ans)
                     W(over, '%s: correct option %d%% longer than the next longest'
                       % (tag, over))
                 if kind == 'slider':
