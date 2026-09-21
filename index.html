@@ -936,6 +936,20 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
    the thing that finishes a lesson does not look like one more way to
    practise it. */
 .seclab{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+/* "Needs you" rows. A row with somewhere to go is a button and holds the
+   44px floor; a warning (sandbox, a dead token) has nowhere to go and is a
+   plain div, so it never looks pressable when it is not. */
+.nyrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  min-height:var(--tap);padding:9px 0;background:none;border:0;
+  border-bottom:1px solid var(--line-soft);color:var(--text);font:inherit}
+.nyrow:last-of-type{border-bottom:none}
+.nyrow.tap{cursor:pointer}
+.nyi{font-size:18px;line-height:1;flex:0 0 auto}
+.nyk{flex:1;min-width:0}
+.nyl{display:block;font-size:14px;font-weight:650}
+.nyk small{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
+.nyrow.warn .nyl{color:var(--warm)}
+.nyv{color:var(--muted);font-size:18px;flex:0 0 auto}
 /* The word list. A row is a tap target, so it holds the 44px floor even
    folded; the meaning is block-level underneath so a long one wraps rather
    than fighting the word for the line. */
@@ -1679,7 +1693,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v191 · the word list';
+const APP_VERSION = 'v192 · needs you';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -10563,26 +10577,44 @@ SCREENS.parent = function(root){
      what needs doing. The count and the gate lead when something is pending; the
      library fetch stays reachable either way. */
   const pending = drafts();
-  const lc2 = el('div','card ac');
-  if(pending.length){
-    lc2.appendChild(el('h2',null, pending.length===1
-      ? '1 unit is waiting for you' : pending.length+' units are waiting for you'));
-    lc2.appendChild(el('p',null,'Generated material stays out of her app until you have read it.'));
+  /* "Needs you" — everything waiting on a grown-up, in one card, reading
+     needsYou() rather than re-deriving any of it. It REPLACES the old
+     drafts-only lead card: that card's whole job (say what is waiting, offer
+     the door) is now one row among four, and leaving it up would print the
+     draft count twice on one screen — the duplication its own comment was
+     written about. The library fetch stays; it is how new material arrives. */
+  const ny = needsYou(date);
+  const nyCard = el('div','card ac');
+  nyCard.appendChild(el('div','eyebrow','Needs you'));
+  if(ny.items.length){
+    ny.items.forEach(it=>{
+      const r = el(it.go ? 'button' : 'div', 'nyrow' + (it.warn ? ' warn' : '') + (it.go ? ' tap' : ''));
+      r.appendChild(el('span','nyi', it.icon));
+      const k = el('span','nyk');
+      k.appendChild(el('span','nyl', it.label));
+      if(it.sub) k.appendChild(el('small',null,it.sub));
+      r.appendChild(k);
+      if(it.go){ r.appendChild(el('span','nyv','›')); r.addEventListener('click', it.go); }
+      nyCard.appendChild(r);
+    });
   }else{
-    lc2.appendChild(el('div','eyebrow','New lessons'));
-    lc2.appendChild(el('p',null,'Nothing waiting — check the library for anything newly published.'));
+    nyCard.appendChild(el('p',null,'Nothing is waiting on you. Everything shipped has been read, '
+      + 'and every test that has happened has a score.'));
   }
-  const lr2 = el('div','btn-row');
-  if(pending.length){
-    const rb = el('button','btn btn-primary','Read them');
-    rb.addEventListener('click',()=>go('review'));
-    lr2.appendChild(rb);
+  /* Held units are a decision already taken, so they report UNDER the list as
+     an aside rather than as one more thing owed. This is the only place they
+     get a door now — the Study material card's copy was the same fact twice,
+     two screens apart. */
+  if(ny.held){
+    const hb = el('button','btn btn-ghost btn-sm',
+      '📬  ' + ny.held + ' scheduled · next ' + AZ.pretty(ny.heldNext));
+    hb.addEventListener('click',()=>go('scheduled'));
+    nyCard.appendChild(hb);
   }
-  const lb2 = el('button','btn '+(pending.length?'btn-secondary':'btn-primary'),'📥  Check the library');
+  const lb2 = el('button','btn btn-secondary','📥  Check the library');
   lb2.addEventListener('click',()=>fetchLibrary(lb2));
-  lr2.appendChild(lb2);
-  lc2.appendChild(lr2);
-  root.appendChild(lc2);
+  nyCard.appendChild(lb2);
+  root.appendChild(nyCard);
   const sbq = el('div','card');
   const sqr = el('div','row');
   const sqk = el('span','k','🧪 Sandbox');
@@ -11220,16 +11252,11 @@ SCREENS.parent = function(root){
   root.appendChild(divider('Study material'));
   const mat = el('div','card');
   const approved = units().length;
-  const held = scheduled();
   mat.appendChild(el('p',null, approved
     ? `${approved} unit${approved===1?'':'s'} approved and in her app${pending.length?`, ${pending.length} waiting on you`:''}.`
     : 'No units approved yet. Generate one from class notes and read it here before it reaches her.'));
-  if(held.length){
-    const hb = el('button','btn btn-ghost btn-sm',
-      `📬  ${held.length} scheduled · next ${AZ.pretty(held[0].releaseOn)}`);
-    hb.addEventListener('click',()=>go('scheduled'));
-    mat.appendChild(hb);
-  }
+  /* The 📬 door for these lives on the "Needs you" card at the top of
+     this screen now — one door, not two on one page. */
   const withNotes = units().filter(x=>x.parentNote && x.parentNote.text)
     .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)).slice(0,3);
   if(withNotes.length){
@@ -12006,6 +12033,68 @@ const drafts = () => all('unit').filter(u=>u.status==='draft')
       : (a.title||'').localeCompare(b.title||'', undefined, {numeric:true});
   })
                      .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+
+/* ---- What needs a grown-up, in one place ----
+   Chris: "would there be a way to provide me with a summary of what needs
+   attention daily?" Everything below was already on the parent screen and
+   was already correct — drafts led the page, held releases sat on the Study
+   material card, unmarked tests on Tests & quizzes, flagged questions down
+   in Topics. Four true facts, four screens apart, so the answer to "is there
+   anything for me today" was: scroll and add up.
+
+   This is ONE function rather than a card that re-derives them, because a
+   summary that computes its own version of "waiting" will disagree with the
+   screen it points at — the Recent-sessions/modeLabel lesson. Anything that
+   later says this out loud (a card, a scheduled email) reads it from here.
+
+   Two rules it must keep:
+   - Only what a GROWN-UP can act on. Her Growth Zone, her streak and her
+     accuracy are hers and are not chores for him; they belong on her own
+     screens and in the day view, not on a to-do list.
+   - When nothing is waiting it SAYS so, rather than rendering empty rows —
+     an ordinary quiet evening is information too (daySignals' own rule). */
+function needsYou(date = AZ.today()){
+  const out = [];
+  const d = drafts();
+  if(d.length) out.push({ k:'drafts', n:d.length, icon:'\ud83d\udcd6',
+    label: d.length + ' unit' + (d.length===1?'':'s') + ' to read',
+    sub: 'Nothing reaches her until you have', go: ()=>go('review') });
+
+  /* Sat, and still without a number — the SAME partition the Tests & quizzes
+     list uses, `score == null` and never `!score`, so a real zero is a grade
+     and never a chore. One definition, two surfaces. */
+  const unmarked = assessments().filter(a => a.score == null && a.date <= date);
+  if(unmarked.length) out.push({ k:'scores', n:unmarked.length, icon:'\ud83d\udcdd',
+    label: unmarked.length + ' test' + (unmarked.length===1?'':'s') + ' waiting on a score',
+    sub: unmarked.map(a=>a.title).slice(0,2).join(' · '), go: ()=>go('parent') });
+
+  const fl = all('flag').filter(f=>!f.deleted);
+  if(fl.length) out.push({ k:'flags', n:fl.length, icon:'\ud83d\udea9',
+    label: fl.length + ' flagged question' + (fl.length===1?'':'s'),
+    sub: 'She thinks something is wrong with these', go: ()=>go('flagged') });
+
+  /* Sandbox is the one FOOTGUN on this list: left on, nothing she does is
+     saved, and the only clue is a banner that stops being seen by day two. */
+  if(sandboxOn()) out.push({ k:'sandbox', n:0, icon:'\ud83e\uddea', warn:true,
+    label: 'Sandbox is still on',
+    sub: 'Nothing is being saved or synced on this device', go: null });
+
+  /* A dead token goes quiet by design (offline-first is right for her), so
+     the only way it surfaces is here. 36h matches the existing hintline. */
+  if(Sync.configured()){
+    const ls = Store.get('last_sync', 0);
+    if(!ls || (Date.now()-ls) > 36*3600e3) out.push({ k:'sync', n:0, icon:'\ud83d\udd04', warn:true,
+      label: 'Sync has not run in a while',
+      sub: 'Check the token in Setup — her other device may be out of date', go: null });
+  }
+
+  /* Held units are NOT a chore — they are a decision already taken, running
+     to a schedule he chose. It reports as a quiet aside, never as a count of
+     things owed. */
+  const held = scheduled();
+  return { items: out, held: held.length,
+           heldNext: held.length ? held[0].releaseOn : null };
+}
 
 /* Units approved but not yet visible to her, soonest first. */
 const scheduled = () => all('unit')
