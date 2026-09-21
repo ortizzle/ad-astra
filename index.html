@@ -12031,8 +12031,15 @@ const drafts = () => all('unit').filter(u=>u.status==='draft')
     const an = (CLASS_BY_ID[a.classId]||{}).name || '', bn = (CLASS_BY_ID[b.classId]||{}).name || '';
     return an !== bn ? an.localeCompare(bn)
       : (a.title||'').localeCompare(b.title||'', undefined, {numeric:true});
-  })
-                     .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  });
+/* No second .sort() here, and that is the whole point. A trailing
+   newest-updated-first sort rode on the end of this expression from v66,
+   so when v182 prepended the subject-then-title shelf sort it was dead on
+   arrival — the queue has never actually read in shelf order, in either
+   app, despite CLAUDE.md saying it did. It matters because a paced bulk
+   release hands out dates IN THE ORDER SHOWN: lessons shipped in one batch
+   would be released newest-first, which is backwards. Sorting twice means
+   only the last sort counts. */
 
 /* ---- What needs a grown-up, in one place ----
    Chris: "would there be a way to provide me with a summary of what needs

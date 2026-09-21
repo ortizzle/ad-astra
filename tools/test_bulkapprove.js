@@ -17,7 +17,13 @@ const PORT = process.argv[2] || 8402;
     const cid = STUDY_CLASSES[0].id;
     for (let i = 1; i <= 12; i++) {
       DATA.records['bt'+i] = {id:'bt'+i, type:'unit', status:'draft', classId:cid,
-        title:'Bulk Topic · '+i, updatedAt: Date.now()-1000,
+        /* updatedAt runs BACKWARDS against the title on purpose: bt12 is the
+           newest. The queue must still read 1 → 12, because it sorts by
+           shelf order and a paced release hands out dates in the order
+           shown. Seeding them all at one timestamp (as this did until
+           v192) only caught a stray newest-first sort when the loop
+           happened to straddle a millisecond — about one run in five. */
+        title:'Bulk Topic · '+i, updatedAt: Date.now()-(13-i)*1000,
         cards:[{id:'c1',term:'T'+i,def:'**D'+i+'**'}],
         questions:[{id:'q1',lv:1,q:'Q'+i+'?',opts:['a','b','c','d'],ans:0,
           hint:'h',steps:['1','2','3'],ex:{main:'**m**',tip:'t'}}]};

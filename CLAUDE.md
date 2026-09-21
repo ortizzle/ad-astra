@@ -982,6 +982,108 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Needs you (v192 / Wayfinder v172, both apps)
+
+Chris: *"Would there be a way for you to provide me with a summary of what
+needs attention daily. Could this come in the form of an email? Or another
+method? Perhaps in the home app?"*
+
+**The in-app half ships first, and it is built so a delivered summary could
+never disagree with it.** Four facts a grown-up has to act on lived four
+screens apart — drafts to read, releases held back, tests sat but unmarked,
+questions she flagged — so answering "what needs me today" meant walking the
+whole parent view and assembling it yourself. `needsYou(date)` gathers them
+into one definition, derived at render time like everything else on that
+screen, and a **"Needs you"** `.card.ac` leads the parent view with the
+result. It replaces the drafts-only lead card that was there before.
+
+- **It is HIS list, never a list about HER.** The Growth Zone, her streak,
+  her accuracy and her open lessons are all deliberately excluded — they are
+  hers, and a to-do list assembled out of them would turn the parent view
+  into a scoreboard of her, which is the one thing that screen refuses to
+  be. Every row is something a grown-up does, not something she owes.
+- **The partition is `a.score == null`, never `!a.score`** — the same rule
+  v190's grading split runs on, and for the same reason: a real zero is a
+  grade, and reading it as unmarked would park it in the to-do list forever.
+  Pinned with a seeded 0%.
+- **An upcoming test is not a chore.** Only `a.date <= date` counts. A test
+  still ahead is waiting on the school; it is in the store so the runway and
+  the brief can see it, and listing it here would recreate exactly the false
+  to-do the grading split just removed one card down.
+- **Two rows are warnings, not doors** (`.nyrow.warn`, a plain div rather
+  than a button). **Sandbox left on** is the one real footgun on the list:
+  nothing she does is saved, and its banner stops being seen by day two. A
+  **sync that has not run in 36 hours** is the other — `Sync.load()` swallows
+  network errors by design, which is right for her and means a dead token
+  goes quiet, so this is the only place it can surface. Neither has a screen
+  to open; both are states to notice.
+- **Held releases are an aside, not a count of things owed.** A paced release
+  is a decision already taken, running to a schedule he chose, so it reports
+  on its own line under the rows with one door to `SCREENS.scheduled` — and
+  the duplicate 📬 door on the Study material card came out, because the
+  count was being printed twice.
+- **Nothing waiting SAYS so** — "nothing is waiting on you" — rather than
+  rendering an empty card, the same rule "Worth a word" already follows. An
+  ordinary evening is information.
+
+> **The email was asked about and deliberately not built.** A daily emailed
+> summary needs a scheduled session holding both Gist IDs and a GitHub token
+> it can read them with — and a classic `gist`-scope token can read *and
+> write* every gist on the account, the girls' data included. That trade-off
+> is Chris's to make, not one to make for him, and he chose to live with the
+> card first. If it is ever built: it reads `needsYou()` and **only sends
+> when something is actually waiting**, or it becomes an email nobody opens,
+> which is worse than no email.
+
+`tools/test_needsyou.js` (same file, both apps, 11 assertions) pins the rules
+rather than the seeded rows: a clean install saying nothing is waiting with
+zero rows, drafts / unmarked tests / a flag each surfacing, a test scored zero
+counting as graded, an upcoming test not counting, **her nine due reviews
+never appearing**, 44px on every tappable row, the draft count printed once
+with the old lead card gone, a held unit rendering as an aside with exactly
+one door, and sandbox rendering as a warning div that is not pressable.
+`tools/contrast_needsyou.js` sweeps five reading tokens over the accent-washed
+card across accent × sky × theme — worst **5.25:1** here across 240 samples,
+6.09:1 in Wayfinder across 300; nothing below 4.5.
+
+> ⚠️ **`drafts()` sorted twice, so v182's shelf-order sort has been dead
+> since the day it shipped — in BOTH apps.** A trailing
+> `.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0))` had ridden on the end of
+> that expression since v66; v182 *prepended* the subject-then-title sort to
+> it, and only the last sort counts. So this file's claim that "the queue
+> reads like the shelf and the release order is correct by construction" was
+> never true of the shipped app. It is not cosmetic: **a paced bulk release
+> hands out dates in the order shown**, so approving a topic released it
+> newest-updated-first — with twelve seeded lessons the fix's own test now
+> shows lesson 12 getting today and lesson 1 getting three weeks out, which
+> is exactly backwards and exactly the bug v182 was written to prevent.
+> Verified before removing it that nothing wants newest-first: of four
+> `drafts()` callers, three read only `.length` and the fourth is the queue.
+> **Sorting an array twice is not "sort by A, then B" — it is "sort by B".**
+
+> ⚠️ **`test_bulkapprove.js` caught this only about one run in five, which is
+> why it survived.** It seeded all twelve drafts with one `Date.now()-1000`,
+> so they tied on `updatedAt` and a stable sort kept the title order — unless
+> the loop happened to straddle a millisecond, which split the batch and
+> rotated the queue by a varying amount. The tell was the rotation MOVING
+> between two runs minutes apart; a sort bug does not drift. The seed now
+> runs `updatedAt` deliberately BACKWARDS against the title, so shelf order
+> and newest-first disagree outright and the guard is deterministic —
+> **verified by restoring the stray sort and watching it fail 12 → 1.** A
+> test that only sometimes sees the bug is not a guard, and a single green
+> run against the old build proves nothing.
+
+> ⚠️ **`test_ux2.js`'s Coming-up assertion was pinned to a day offset and
+> Wayfinder's calendar finally broke it.** It seeded a test at today + 10 and
+> expected the row; Coming up squeezes that from both sides — this week's
+> tests are filtered out because the brief's ledger already lists them, and
+> the list is capped at `slice(0,6)`. On 2026-09-21, River's Spirit Week put
+> five dress days plus a lunch into those six rows and pushed the test off
+> the end, so the same file passed in Ad Astra and failed here for reasons
+> that had nothing to do with either app. It now walks out from today and
+> takes the first date the row actually appears on. **Pin the rule, never the
+> almanac** — the fourth time this file has had to say so.
+
 ### The word list (v191 / Wayfinder v171, both apps)
 
 Chris: *"for the different wordly wise units, can we figure out a way to

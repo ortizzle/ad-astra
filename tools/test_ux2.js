@@ -169,12 +169,22 @@ const [PORT, TAG] = process.argv.slice(2);
   // ---- test prompts open the Growth Zone for the subject
   const prompts = await p.evaluate(([cid])=>{
     const real = AZ.today; const d = AZ.today();
-    put({ id:'ux-assess', type:'assess', classId:cid, kind:'test', title:'UX test', date:AZ.shift(d, 10), score:null });
     const T = n => n ? n.textContent.replace(/\s+/g,' ').trim() : null;
-    go('today');
-    const rows = [...document.querySelectorAll('#screen .row')];
-    const row = rows.find(r => /UX test/.test(T(r)));
-    let coming = null;
+    /* Coming up squeezes a seeded test from BOTH sides, so a fixed day
+       offset cannot be right on every calendar: this week's tests are
+       filtered out (the brief's ledger already lists them day by day), and
+       the list is capped at six rows, so a distant one falls off the end.
+       A flat +10 passed in Ad Astra and failed in Wayfinder purely because
+       River's Spirit Week puts five dress days in one week. So walk out
+       from today and take the first date the row actually appears on —
+       pin the rule, never the almanac. */
+    let coming = null, row = null;
+    for(let dd = 1; dd <= 21 && !row; dd++){
+      put({ id:'ux-assess', type:'assess', classId:cid, kind:'test',
+            title:'UX test', date:AZ.shift(d, dd), score:null });
+      go('today');
+      row = [...document.querySelectorAll('#screen .row')].find(r => /UX test/.test(T(r)));
+    }
     if(row){ row.click(); coming = { view, cid: gzFilter.cid }; }
     go('unit', {classId:cid});
     const r2 = [...document.querySelectorAll('#screen .row')].find(r => /UX test/.test(T(r)));
