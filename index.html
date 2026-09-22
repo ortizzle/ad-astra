@@ -1693,7 +1693,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v192 · needs you';
+const APP_VERSION = 'v193 · the note moves';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -5159,6 +5159,26 @@ SCREENS.today = function(root){
       root.appendChild(dd);
     }
   }
+  /* A note from home — the parent's words, shown while they have one posted.
+     Singleton record like prefs, so it syncs to her device and the newest
+     edit wins. Nothing here is graded, counted or gamified; it is a sticky
+     note, not a mechanic.
+
+     Directly under the daily three (Chris, v193), which REVERSES the earlier
+     call to bury it below Coming up. That older placement made it a reward
+     for scrolling past the week; this one makes it one of the first things
+     she meets, right after the one ritual that asks something of her. A note
+     from a parent is not news she has to plan around, so it does not belong
+     among the things that are — and it is the one card here that is purely
+     for her, which is the argument for meeting her early rather than last. */
+  const pn = DATA.records['pnote'];
+  if(pn && !pn.deleted && (pn.text||'').trim()){
+    const pc = el('div','card pnote');
+    pc.appendChild(el('div','eyebrow','A note from home'));
+    pc.appendChild(el('p',null, pn.text.trim()));
+    root.appendChild(pc);
+  }
+
   /* The generic thread hero retired here (v108/v125): once the brief named
      up to four subjects, the dupe rules meant it almost never fired — the one
      state it still served is the parked-round door above, which stays. Study
@@ -5226,23 +5246,6 @@ SCREENS.today = function(root){
       ac.appendChild(r);
     });
     root.appendChild(ac);
-  }
-
-  /* A note from home — the parent's words, shown while they have one posted.
-     Singleton record like prefs, so it syncs to her device and the newest
-     edit wins. Nothing here is graded, counted or gamified; it is a sticky
-     note, not a mechanic.
-
-     Deliberately BELOW Coming up (v120), Chris's call: sitting third from the
-     top it was the first thing the eye landed on and the screen ended there.
-     Down here it is a reward for scrolling past the week — and the scroll is
-     the point, since everything that asks something of her lives above it. */
-  const pn = DATA.records['pnote'];
-  if(pn && !pn.deleted && (pn.text||'').trim()){
-    const pc = el('div','card pnote');
-    pc.appendChild(el('div','eyebrow','A note from home'));
-    pc.appendChild(el('p',null, pn.text.trim()));
-    root.appendChild(pc);
   }
 
   /* Extra help today — student hours and tutoring in one quiet card (v150).

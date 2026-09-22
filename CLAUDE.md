@@ -982,6 +982,38 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The note moves up (v193 / Wayfinder v173, both apps)
+
+Chris: *"Let's move the note to just below the daily 3 section."* It sat under
+Coming up; it now sits directly under the daily three, which puts it above the
+week rather than after it.
+
+**This reverses a deliberate earlier call, and the reversal is the interesting
+part.** The note was put below Coming up on purpose (Ad Astra v120 / Wayfinder
+v103, also Chris's): third from the top it was the first thing the eye landed
+on and the screen effectively ended there, so burying it made it a reward for
+scrolling past the week. Living with it produced the opposite read — the one
+card on Today that is purely FOR her, with nothing to do and nothing to plan
+around, was the one she had to scroll furthest to reach. Under the daily three
+it lands right after the single ritual that asks something of her and before
+everything that is merely scheduled.
+
+- **The rule that decides the slot: a note from home is not news she has to
+  plan around.** Coming up, the runway and the brief are all things with dates
+  attached; the note has none, so sorting it among them was always a category
+  error. Directly under the daily three, the top of Today reads: the one thing
+  to do, then the one thing that is just hers, then the week.
+- **Nothing about the note itself changed** — same singleton `pnote` record,
+  same post-it treatment that refuses the dark theme, same `NOTE_IDEAS`
+  suggestions in the parent's composer. Only the position in the render moved.
+- Measured rather than assumed, on a seeded Today with the daily three
+  actually rendering: **daily three → note → Coming up** in both apps. The
+  first probe ran on a clean install, where `buildDailyUnit()` returns nothing
+  and the daily three door never renders at all — so it put the note above
+  Coming up and looked right while proving nothing about the ordering that was
+  asked for. A screenshot taken in the same pass was blank mid-stagger; the
+  compose animation has to settle (or `reducedMotion`) before Today photographs.
+
 ### Needs you (v192 / Wayfinder v172, both apps)
 
 Chris: *"Would there be a way for you to provide me with a summary of what
