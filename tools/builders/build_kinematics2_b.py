@@ -26,6 +26,31 @@ t20 = sp.sqrt(2*20/g);                 assert rnd(t20, 2) == 2.02
 assert rnd(12*t20) == 24.2
 assert rnd(g*t20) == 19.8
 assert rnd(sp.sqrt(12**2 + (g*t20)**2)) == 23.2
+# --- v195: velocity AT IMPACT, h = 1.8 m, vx = 2.5 m/s ----------------------
+# Her "Horizontal Projectile Motion" worksheet finishes item 1 by asking for
+# the resultant velocity just before landing, MAGNITUDE AND DIRECTION. The
+# magnitude idea was already on a card here; the direction was nowhere in the
+# unit, and no question had ever computed either. Fresh numbers throughout —
+# none of the sheet's own 1.0 m / 3 m / 9.4 m / 7.2 m figures is reused.
+tI  = sp.sqrt(2*sp.Rational(18,10)/g)
+vyI = g*tI
+resI = sp.sqrt(sp.Rational(25,10)**2 + vyI**2)
+angI = sp.deg(sp.atan(vyI/sp.Rational(25,10)))
+angF = sp.deg(sp.atan(vyI/5))                 # same drop, twice the roll speed
+# rnd() hands back a raw float, so 5.94 can arrive as 5.9399999999999995 —
+# round a second time at the same precision before comparing.
+def eq(x, n, want): return round(rnd(x, n), n) == want
+assert eq(tI, 2, 0.61)
+assert eq(vyI, 1, 5.9) and eq(vyI, 2, 5.94)
+assert eq(vyI**2, 2, 35.28)            # 2gh exactly, no rounding inside the square
+assert eq(resI, 2, 6.44)
+assert eq(angI, 1, 67.2)
+assert eq(90 - angI, 1, 22.8)          # the flipped-ratio answer, offered as a decoy
+assert eq(angF, 1, 49.9)               # faster roll => SHALLOWER impact angle
+assert float(angF) < float(angI)
+assert eq(sp.Rational(25,10) + vyI, 2, 8.44)      # adding components, the classic error
+assert float(resI) < float(sp.Rational(25,10) + vyI)   # hypotenuse < sum of legs
+
 # --- horizontal launch: h = 45 m, vx = 8 m/s --------------------------------
 t45 = sp.sqrt(2*45/g);                 assert rnd(t45, 2) == 3.03
 assert rnd(8*t45) == 24.2
@@ -152,6 +177,31 @@ card(C, 'Air resistance, set aside',
      '• For a golf ball, a spinning baseball or a frisbee it matters enormously — '
      'dimples and spin are engineered around it.',
      frm='added')
+
+# --- v195, from her Horizontal Projectile Motion worksheet ------------------
+# Appended rather than inserted: card() numbers by position, so adding these
+# in the middle would renumber every card after them and make the re-approval
+# queue show untouched cards as changed.
+card(C, 'Velocity at impact has two halves',
+     '**"Magnitude and direction" is two answers, and half of it is half the '
+     'marks.**\n'
+     '• Magnitude: combine the components with Pythagoras, √(vₓ² + vᵧ²).\n'
+     '• Direction: tan⁻¹(vᵧ ÷ vₓ), stated as an angle BELOW the horizontal, '
+     'because it is falling.',
+     hint='Two numbers and a named axis, or it is not finished.')
+card(C, 'Which axis the impact angle is measured from',
+     '**tan⁻¹(vᵧ ÷ vₓ) is measured below the HORIZONTAL; flip the ratio and you '
+     'get the angle from the VERTICAL instead.**\n'
+     '• Both are true of the same arrow, and they add to 90°.\n'
+     '• So a bare number is not yet a direction — say what it is measured from.',
+     hint='Vertical over horizontal gives the angle below the horizontal.')
+card(C, 'A horizontal launch lands FASTER than it left',
+     '**Rolling off a table is not the symmetric case.**\n'
+     '• It starts with vᵧ = 0 and gains vertical speed all the way down, so it '
+     'always lands faster than it rolled.\n'
+     '• "Lands at its launch speed" is only true for a projectile that returns '
+     'to its launch HEIGHT.',
+     hint='The symmetric arc comes back to where it started. A table does not.')
 
 # ---- questions -------------------------------------------------------------
 q(Q, 1, 'While a projectile is in the air, what is its horizontal acceleration?',
@@ -455,6 +505,105 @@ q(Q, 3, 'Order these moments in a projectile’s flight from FASTEST to SLOWEST 
   kind='order')
 
 # ---- assemble --------------------------------------------------------------
+# --- v195: the worksheet's item 1(c)-(e), on fresh numbers ------------------
+q(Q, 2, 'A ball rolls off a 1.8 m high counter at 2.5 m/s. What is its VERTICAL '
+        'velocity just before it hits the floor?',
+  ['5.94 m/s', '2.50 m/s', '6.44 m/s', '17.6 m/s'],
+  0,
+  'The vertical side of the problem never knew how fast it was rolling.',
+  ['Vertically it starts from rest and falls 1.8 m, so vᵧ² = 2gh.',
+   'vᵧ² = 2 × 9.80 × 1.8 = 35.28, so vᵧ = 5.94 m/s.',
+   'The 2.5 m/s belongs to the horizontal half and does not enter this.',
+   'The vertical velocity at impact is 5.94 m/s, downwards.'],
+  '**Use vᵧ² = 2gh: the drop alone fixes the vertical speed, whatever the roll '
+  'speed was.** 2.50 m/s is the horizontal part, 6.44 m/s is the two parts '
+  'combined, and 17.6 m/s is g × the HEIGHT — which multiplies an acceleration '
+  'by a distance and does not even have the units of a speed.',
+  'A dropped ball and a rolled ball arrive with the same vertical speed.')
+
+q(Q, 2, 'A ball rolls off a 1.8 m high counter at 2.5 m/s. What is its '
+        'HORIZONTAL velocity just before it hits the floor?',
+  ['2.50 m/s', '5.94 m/s', '6.44 m/s', 'Zero — it has stopped moving sideways'],
+  0,
+  'What would have to act on it to change this?',
+  ['Gravity pulls straight down, so it has no horizontal component.',
+   'Nothing else is pushing or dragging it sideways.',
+   'No horizontal force means no horizontal acceleration.',
+   'So it lands with exactly the 2.5 m/s it rolled off with.'],
+  '**The horizontal velocity is untouched for the whole flight, so it is still '
+  '2.50 m/s at the instant of impact.** This is the half of the answer students '
+  'most often leave out, precisely because nothing happens to it.',
+  'Unchanged is still an answer. Write it down.')
+
+q(Q, 3, 'A ball rolls off a 1.8 m high counter at 2.5 m/s, so it lands with '
+        'vₓ = 2.50 m/s and vᵧ = 5.94 m/s. What is the MAGNITUDE of its '
+        'resultant velocity at impact?',
+  ['6.44 m/s', '8.44 m/s', '5.94 m/s', '2.50 m/s'],
+  0,
+  'The two components are at right angles to each other.',
+  ['The components are perpendicular, so they combine by Pythagoras.',
+   'v² = 2.50² + 5.94² = 6.25 + 35.28 = 41.53.',
+   'v = √41.53 = 6.44 m/s.',
+   'The resultant speed at impact is 6.44 m/s.'],
+  '**Perpendicular components combine as √(vₓ² + vᵧ²) = 6.44 m/s, never by '
+  'adding.** 8.44 m/s is 2.50 + 5.94 — the commonest error on this item, and it '
+  'is always too big, because the hypotenuse of a right triangle is shorter '
+  'than the two legs put together.',
+  'If your resultant is bigger than the two parts added, you have gone wrong twice.')
+
+q(Q, 3, 'A ball lands with vₓ = 2.50 m/s and vᵧ = 5.94 m/s. In what DIRECTION '
+        'is it travelling at that instant?',
+  ['67.2° below the horizontal', '22.8° below the horizontal',
+   '67.2° above the horizontal', 'Horizontally — 0°, it never turned'],
+  0,
+  'Which component goes on the bottom of the ratio, and which way is it going?',
+  ['The angle from the horizontal has the vertical part over the horizontal part.',
+   'tan θ = 5.94 ÷ 2.50 = 2.376, so θ = tan⁻¹(2.376) = 67.2°.',
+   'It is falling, so that angle is measured BELOW the horizontal.',
+   'It is travelling 67.2° below the horizontal.'],
+  '**tan⁻¹(vᵧ ÷ vₓ) = 67.2°, below the horizontal because it is coming down.** '
+  '22.8° is the ratio flipped — a true angle for this arrow, but measured from '
+  'the vertical; above the horizontal would mean it was climbing; and 0° forgets '
+  'it picked up any vertical speed at all.',
+  'Steeper than 45° means the vertical part has overtaken the horizontal one.')
+
+q(Q, 3, 'A ball rolls off a table at 2.5 m/s. Does it reach the floor still '
+        'travelling at 2.5 m/s?',
+  ['No — faster, because it gains vertical speed as it falls',
+   'Yes — nothing pushes it sideways, so its speed cannot change',
+   'Yes — the arc is symmetric, so it lands at its launch speed',
+   'No — slower, because gravity pulls at right angles to its motion'],
+  0,
+  'Its horizontal speed is unchanged. Is that the same as its SPEED being unchanged?',
+  ['The horizontal component really is still 2.5 m/s at the floor.',
+   'But it left with no vertical speed and arrives with a large one.',
+   'Speed is the two components combined, so it has grown.',
+   'It lands faster than it rolled, always.'],
+  '**Unchanged horizontal component is not unchanged speed — the ball gains a '
+  'whole vertical component on the way down.** The symmetry rule is the other '
+  'trap here: it only returns a projectile to its launch SPEED when it returns '
+  'to its launch HEIGHT, and a table top is not the floor.',
+  'Two true cards, each right about its own case. Check which case you are in.')
+
+q(Q, 3, 'Two balls roll off one 1.8 m counter, the first at 2.5 m/s and the '
+        'second at 5.0 m/s. How do their impact ANGLES below the horizontal '
+        'compare?',
+  ['The faster ball lands at a shallower angle',
+   'They land at the same angle, having fallen the same height',
+   'The faster ball lands at a steeper angle',
+   'It cannot be compared without knowing the two masses'],
+  0,
+  'Which of the two components differs between them, and which does not?',
+  ['They fall the same height, so both arrive with vᵧ = 5.94 m/s.',
+   'The faster one arrives with double the horizontal component, 5.0 m/s.',
+   'tan θ = vᵧ ÷ vₓ, so a bigger vₓ under the same vᵧ gives a smaller angle.',
+   'The faster ball lands at 49.9°, the slower at 67.2° — shallower.'],
+  '**Same drop means the same vertical component, so the faster ball simply has '
+  'more horizontal velocity to combine with it, and its path at impact is '
+  'flatter.** Mass never enters a projectile calculation at all — it appears in '
+  'none of these equations.',
+  'Fall height sets the vertical part; roll speed sets the horizontal part. The angle is the argument between them.')
+
 build('ad-astra', C, Q, 'unit-phys-k2-projectiles',
       'Kinematics 2 · 2-2 Projectile Motion', 'physics',
       'Motion in two dimensions under gravity alone: why the horizontal and '
@@ -498,19 +647,30 @@ build('ad-astra', C, Q, 'unit-phys-k2-projectiles',
       'the assumption is visible rather than hidden. One caution for the real '
       'test: the symmetric doubling that gives hang time only holds when the '
       'projectile lands at its launch height, and every question here that '
-      'uses it says so in the stem.',
+      'uses it says so in the stem. Added since the first version, from her '
+      '"Horizontal Projectile Motion" worksheet: the velocity a projectile '
+      'lands WITH — magnitude and direction, which is how that sheet finishes '
+      'its first problem. The combining idea was already on a card, but '
+      'nothing in the unit had ever computed one, and the impact ANGLE was '
+      'absent entirely. The trap worth knowing about is that two correct '
+      'cards collide here: a projectile really does return to its launch '
+      'speed when it returns to its launch HEIGHT, and a ball rolling off a '
+      'table never does, so it always lands faster than it rolled. Three '
+      'cards and six questions cover it, on numbers that appear nowhere on '
+      'the sheet.',
       ('Do 2-1 first if you have not — every problem here opens by resolving a '
        'velocity. Then hold one sentence in your head: find the time from the '
        'vertical side, then use it on the horizontal side.', 25),
       'content/phys-k2-projectiles.json',
-      'Chapter 7.2, Projectile Motion, and the Kinematics 2 objective list',
-      'Textbook 2D Kinematics.pdf and Kinematics 2 Objectives.pdf (Drive, '
-      'Physics 8)',
+      'Chapter 7.2, the Kinematics 2 objective list, and the Horizontal '
+      'Projectile Motion worksheet',
+      'Textbook 2D Kinematics.pdf, Kinematics 2 Objectives.pdf and '
+      'Projectile Motion.pdf (Drive, Physics 8)',
       offset_hours=3, round_=9)
 
 p = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), 'content/phys-k2-projectiles.json')
 j = json.load(io.open(p, encoding='utf-8'))
-j['records']['unit-phys-k2-projectiles']['libv'] = 1
+j['records']['unit-phys-k2-projectiles']['libv'] = 2   # v195: impact velocity
 io.open(p, 'w', encoding='utf-8').write(json.dumps(j, ensure_ascii=False, indent=1))
-print('  + libv 1; all sympy assertions passed')
+print('  + libv 2; all sympy assertions passed')

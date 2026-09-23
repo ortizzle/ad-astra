@@ -982,6 +982,78 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The velocity it lands WITH (v195)
+
+Chris: *"Let's build and deploy physics updated file."* Her Physics 8 folder's
+**`Projectile Motion.pdf`** — a five-problem "Horizontal Projectile Motion"
+worksheet — finishes its first problem with *"What is the resultant velocity of
+the ball just before it hits the floor? (Magnitude and direction)"*. Items 2
+through 5 are time-of-fall and range questions `2-2` and `2-3` already teach;
+**1(e) is the one genuinely new skill on the sheet**, so `unit-phys-k2-projectiles`
+grows by three cards and six questions rather than a new unit being minted for
+one idea. 16 cards / 17 questions → **19 / 23**.
+
+**The gap was narrower than first flagged, and worth stating precisely.** The
+combining idea was already on a card (`Speed at any instant` — "combine the two
+components with Pythagoras"). What was missing: **no question anywhere had ever
+computed a resultant**, and the **direction was absent entirely** — no card, no
+question, no impact angle in the unit. The tell is in the builder itself:
+`build_kinematics2_b.py` has asserted `rnd(sp.sqrt(12**2 + (g*t20)**2)) == 23.2`
+since v181, so the landing speed was **computed, asserted, and then never
+written into anything**. A value the builder proves and discards is a gap with a
+receipt.
+
+- **Two correct cards collide here, and that collision is the content.** `The
+  arc is symmetric` says a projectile "arrives at exactly the speed it left
+  with" — true, and only for one that returns to its launch HEIGHT. A ball
+  rolling off a table never does, so it always lands faster than it rolled. A
+  student holding the first card and meeting the worksheet's table problem
+  reaches the wrong answer by correct reasoning from the wrong case. The new
+  card names the boundary and a question offers the symmetric rule as a real
+  wrong option rather than quietly dropping it.
+- **The impact angle's decoys had to be checked for meaning the same thing.**
+  `67.2° below the horizontal` is the answer; `22.8° below the horizontal` is
+  the ratio flipped. But "67.2° from the vertical" describes the *same arrow*
+  as 22.8° below the horizontal — two options, one direction, an ambiguous
+  item. It is not offered; the other two decoys are `above the horizontal`
+  (right size, wrong side — it is falling) and `0°` (forgetting it gained any
+  vertical speed). The test pins that no option restates another.
+- **Every number computed with sympy and asserted before reaching a question**,
+  and none of the sheet's own figures (1.0 m table, 3 m, 9.4 m roof, 7.2 m/s,
+  4.5 m/sec tiger, 1.6 m/sec diver) is reused — the standalone rule. `vᵧ² = 2gh`
+  lands on 35.28 exactly, so the square carries no rounding.
+- **The cards are APPENDED, not inserted.** `card()` numbers by position, so
+  adding them mid-list would renumber every later card and make `unitDelta`
+  show untouched cards as changed in the re-approval queue.
+- `libv` **2**, so the edit wins the approval race whether or not Chris already
+  approved v181's version; `source` and `srcName` now name the worksheet.
+  **It re-drafts once** and the queue labels it an update, not a stranger.
+
+> ⚠️ **`rnd()` in the builders returns a raw float, so `== 5.94` can be false.**
+> `rnd(vyI, 2)` came back `5.9399999999999995` and the assertion failed on a
+> number that was perfectly correct. The existing assertions in that file happen
+> to land on binary-exact values (2.02, 24.2) and never hit it. New assertions
+> go through `eq(x, n, want)`, which rounds the float a second time at the same
+> precision before comparing.
+
+> ⚠️ **`test_k2.js` pinned `16 cards, 17 questions` exactly, and this change
+> broke it on arrival — the third time this file has recorded that rot**
+> (`test_phases.js`'s exact-18, `test_cells.js`'s `libv === 1`). A unit must be
+> free to GROW when her work shows a gap; the count was standing in for the
+> four-unique-options invariant, which is what it asserts now, plus a minimum.
+
+> ⚠️ **Two of the nine new assertions failed first as MY bugs, both reading as
+> content failures.** A bare `9\.4 m` in the "none of the sheet's figures is
+> reused" sweep matched the pre-existing, unrelated distractor **`29.4 m`**
+> (9.80 × 3.0) — sweep for the sheet's distinctive *pairings*, never loose
+> numbers. And a regex against the card's quoted lead forgot that
+> `JSON.stringify` escapes those quotes, so `direction. is` could not match
+> `direction\" is`.
+
+The nine new assertions were **verified by stripping the three cards and six
+questions back out and watching all nine fail**, then restoring. `check_content.py`
+reports zero errors and zero warnings on the unit.
+
 ### English Test 1, seven parts from her own notes (v194, THIS APP ONLY)
 
 Chris: *"Let's update Sedona's English folder. Some new material there for her

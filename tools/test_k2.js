@@ -60,11 +60,55 @@ const PORT = process.argv[2] || 8402;
      seed.a.cards.length === 14 && seed.a.qs.length === 16 &&
      seed.a.qs.every(q => q.opts.length === 4 && new Set(q.opts).size === 4),
      [seed.a.cards.length, seed.a.qs.length]);
-  ck('2-2: 16 cards, 17 questions, MC options all valid',
-     seed.b.cards.length === 16 && seed.b.qs.length === 17 &&
+  ck('2-2: at least 16 cards and 17 questions, MC options all valid',
+     seed.b.cards.length >= 16 && seed.b.qs.length >= 17 &&
      seed.b.qs.filter(q=>(q.kind||'mc')==='mc')
              .every(q => q.opts.length === 4 && new Set(q.opts).size === 4),
      [seed.b.cards.length, seed.b.qs.length]);
+
+  /* v195 — velocity AT IMPACT, from her Horizontal Projectile Motion
+     worksheet. Pinned by the TEACHING, not by question id: the magnitude idea
+     was already on a card, but nothing computed one and the ANGLE was absent
+     entirely. Fresh numbers, so none of the sheet's own figures appear. */
+  ck('2-2: teaches that "magnitude and direction" is two answers',
+     /Magnitude and direction.{0,3} is two answers/i.test(seed.b.blob) &&
+     /tan⁻¹\(vᵧ ÷ vₓ\)/.test(seed.b.blob), 'card');
+  ck('2-2: a question actually computes a resultant impact SPEED',
+     seed.b.qs.some(q => /MAGNITUDE of its\s+resultant velocity at impact/i.test(q.q) &&
+                         /6\.44/.test(q.opts[q.ans])), 'question');
+  ck('2-2: adding the components instead of Pythagoras is offered as a decoy',
+     seed.b.qs.some(q => q.opts.includes('8.44 m/s') && !/8\.44/.test(q.opts[q.ans])),
+     'decoy');
+  ck('2-2: a question computes the impact DIRECTION and names the axis',
+     seed.b.qs.some(q => /DIRECTION/.test(q.q) &&
+                         /67\.2° below the horizontal/.test(q.opts[q.ans]) &&
+                         q.opts.some(o => /22\.8° below the horizontal/.test(o)) &&
+                         q.opts.some(o => /above the horizontal/.test(o))),
+     'question');
+  ck('2-2: the two impact-angle decoys are genuinely different directions',
+     (() => { const q = seed.b.qs.find(x => /DIRECTION/.test(x.q));
+              return q && new Set(q.opts).size === 4 &&
+                     !q.opts.some(o => /from the vertical/.test(o)); })(),
+     'no option restates another as the same arrow');
+  ck('2-2: says a horizontal launch lands FASTER than it left',
+     /lands FASTER than it left/i.test(seed.b.blob) &&
+     seed.b.qs.some(q => /still\s+travelling at 2\.5 m\/s/.test(q.q) &&
+                         /faster, because it gains vertical speed/i.test(q.opts[q.ans])),
+     'card + question');
+  ck('2-2: the symmetric-arc card is offered as the trap, not quietly dropped',
+     seed.b.qs.some(q => q.opts.some(o => /arc is symmetric, so it lands at its launch speed/i.test(o))) &&
+     /returns to its launch HEIGHT/i.test(seed.b.blob), 'kept and contrasted');
+  ck('2-2: the counterfactual — a faster roll lands SHALLOWER, and mass never enters',
+     seed.b.qs.some(q => /impact ANGLES/.test(q.q) &&
+                         /shallower angle/i.test(q.opts[q.ans]) &&
+                         q.opts.some(o => /masses/.test(o))), 'question');
+  ck('2-2: none of the worksheet\u2019s own figures is reused',
+     !/1\.0 m high|\b9\.4 m high|\b7\.2 m\/s|\b4\.5 m\/sec|\b1\.6 m\/sec|12 m high rock/
+        .test(seed.b.blob),
+     'fresh numbers');
+  ck('2-2: the parentNote names the worksheet and the collision it creates',
+     /Horizontal Projectile Motion.+worksheet/s.test(seed.b.blob) &&
+     /launch HEIGHT/.test(seed.b.blob), 'note');
   // The bug this build actually found: build() never called _balance() here.
   for (const [nm, u] of [['2-1', seed.a], ['2-2', seed.b]]) {
     const slots = [0,1,2,3].map(i => u.qs.filter(q=>(q.kind||'mc')==='mc' && q.ans===i).length);

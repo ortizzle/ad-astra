@@ -4,13 +4,13 @@
   "unit-phys-k2-projectiles": {
    "id": "unit-phys-k2-projectiles",
    "type": "unit",
-   "updatedAt": 1789083602858,
+   "updatedAt": 1790120874857,
    "classId": "physics",
    "quarter": 1,
    "status": "draft",
    "title": "Kinematics 2 · 2-2 Projectile Motion",
-   "srcName": "Chapter 7.2, Projectile Motion, and the Kinematics 2 objective list",
-   "source": "Textbook 2D Kinematics.pdf and Kinematics 2 Objectives.pdf (Drive, Physics 8)",
+   "srcName": "Chapter 7.2, the Kinematics 2 objective list, and the Horizontal Projectile Motion worksheet",
+   "source": "Textbook 2D Kinematics.pdf, Kinematics 2 Objectives.pdf and Projectile Motion.pdf (Drive, Physics 8)",
    "summary": {
     "text": "Motion in two dimensions under gravity alone: why the horizontal and vertical motions of a projectile are completely independent, how to split any projectile into a constant-velocity problem sideways and a free-fall problem vertically, how time links the two, and how to find hang time, maximum height, range and the speed at any instant — for both a horizontal launch and a launch at an angle.",
     "from": "source"
@@ -46,7 +46,7 @@
     }
    ],
    "parentNote": {
-    "text": "The second half of her teacher’s Kinematics 2 objective list, built from chapter 7.2. Every number was computed with sympy inside the builder and asserted before it could be written into a question, with g = 9.80 m/s² throughout — the same value the textbook and her existing Equations of Motion unit both use. None of the chapter’s own worked examples is reused as a question; they were read to calibrate difficulty only. Three errors get deliberate airtime because they are the ones that cost marks rather than the ones that look hard: using the time to the TOP of the arc where the full hang time is needed (which halves the range, and is offered as a wrong option on the range question); applying ½ a t² horizontally, where there is no acceleration to put in it; and reading \"vertical velocity is zero at the top\" as \"the projectile stops at the top\". The unit also states plainly that ignoring air resistance is a simplification rather than a fact — true enough for a dense compact object, wildly untrue for a golf ball — so the assumption is visible rather than hidden. One caution for the real test: the symmetric doubling that gives hang time only holds when the projectile lands at its launch height, and every question here that uses it says so in the stem.",
+    "text": "The second half of her teacher’s Kinematics 2 objective list, built from chapter 7.2. Every number was computed with sympy inside the builder and asserted before it could be written into a question, with g = 9.80 m/s² throughout — the same value the textbook and her existing Equations of Motion unit both use. None of the chapter’s own worked examples is reused as a question; they were read to calibrate difficulty only. Three errors get deliberate airtime because they are the ones that cost marks rather than the ones that look hard: using the time to the TOP of the arc where the full hang time is needed (which halves the range, and is offered as a wrong option on the range question); applying ½ a t² horizontally, where there is no acceleration to put in it; and reading \"vertical velocity is zero at the top\" as \"the projectile stops at the top\". The unit also states plainly that ignoring air resistance is a simplification rather than a fact — true enough for a dense compact object, wildly untrue for a golf ball — so the assumption is visible rather than hidden. One caution for the real test: the symmetric doubling that gives hang time only holds when the projectile lands at its launch height, and every question here that uses it says so in the stem. Added since the first version, from her \"Horizontal Projectile Motion\" worksheet: the velocity a projectile lands WITH — magnitude and direction, which is how that sheet finishes its first problem. The combining idea was already on a card, but nothing in the unit had ever computed one, and the impact ANGLE was absent entirely. The trap worth knowing about is that two correct cards collide here: a projectile really does return to its launch speed when it returns to its launch HEIGHT, and a ball rolling off a table never does, so it always lands faster than it rolled. Three cards and six questions cover it, on numbers that appear nowhere on the sheet.",
     "from": "added"
    },
    "nextUp": {
@@ -157,6 +157,27 @@
      "term": "Air resistance, set aside",
      "def": "**Every answer in this unit assumes no air resistance, which is a genuine simplification rather than a fact.**\n• For a dense, slow, compact object it barely matters.\n• For a golf ball, a spinning baseball or a frisbee it matters enormously — dimples and spin are engineered around it.",
      "from": "added"
+    },
+    {
+     "id": "c16",
+     "term": "Velocity at impact has two halves",
+     "def": "**\"Magnitude and direction\" is two answers, and half of it is half the marks.**\n• Magnitude: combine the components with Pythagoras, √(vₓ² + vᵧ²).\n• Direction: tan⁻¹(vᵧ ÷ vₓ), stated as an angle BELOW the horizontal, because it is falling.",
+     "hint": "Two numbers and a named axis, or it is not finished.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Which axis the impact angle is measured from",
+     "def": "**tan⁻¹(vᵧ ÷ vₓ) is measured below the HORIZONTAL; flip the ratio and you get the angle from the VERTICAL instead.**\n• Both are true of the same arrow, and they add to 90°.\n• So a bare number is not yet a direction — say what it is measured from.",
+     "hint": "Vertical over horizontal gives the angle below the horizontal.",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "A horizontal launch lands FASTER than it left",
+     "def": "**Rolling off a table is not the symmetric case.**\n• It starts with vᵧ = 0 and gains vertical speed all the way down, so it always lands faster than it rolled.\n• \"Lands at its launch speed\" is only true for a projectile that returns to its launch HEIGHT.",
+     "hint": "The symmetric arc comes back to where it started. A table does not.",
+     "from": "source"
     }
    ],
    "questions": [
@@ -584,10 +605,160 @@
       "main": "**Speed is slowest at the top of the arc and greatest at launch and landing, because only the vertical component changes.** The top is the minimum, not a stop: the ball still has its full horizontal speed there. This is the symmetry card and the speed card working together.",
       "tip": "Constant horizontal plus shrinking vertical means the total shrinks to the peak, then grows back."
      }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball rolls off a 1.8 m high counter at 2.5 m/s. What is its VERTICAL velocity just before it hits the floor?",
+     "opts": [
+      "5.94 m/s",
+      "2.50 m/s",
+      "6.44 m/s",
+      "17.6 m/s"
+     ],
+     "ans": 0,
+     "hint": "The vertical side of the problem never knew how fast it was rolling.",
+     "steps": [
+      "Vertically it starts from rest and falls 1.8 m, so vᵧ² = 2gh.",
+      "vᵧ² = 2 × 9.80 × 1.8 = 35.28, so vᵧ = 5.94 m/s.",
+      "The 2.5 m/s belongs to the horizontal half and does not enter this.",
+      "The vertical velocity at impact is 5.94 m/s, downwards."
+     ],
+     "ex": {
+      "main": "**Use vᵧ² = 2gh: the drop alone fixes the vertical speed, whatever the roll speed was.** 2.50 m/s is the horizontal part, 6.44 m/s is the two parts combined, and 17.6 m/s is g × the HEIGHT — which multiplies an acceleration by a distance and does not even have the units of a speed.",
+      "tip": "A dropped ball and a rolled ball arrive with the same vertical speed."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball rolls off a 1.8 m high counter at 2.5 m/s. What is its HORIZONTAL velocity just before it hits the floor?",
+     "opts": [
+      "5.94 m/s",
+      "2.50 m/s",
+      "6.44 m/s",
+      "Zero — it has stopped moving sideways"
+     ],
+     "ans": 1,
+     "hint": "What would have to act on it to change this?",
+     "steps": [
+      "Gravity pulls straight down, so it has no horizontal component.",
+      "Nothing else is pushing or dragging it sideways.",
+      "No horizontal force means no horizontal acceleration.",
+      "So it lands with exactly the 2.5 m/s it rolled off with."
+     ],
+     "ex": {
+      "main": "**The horizontal velocity is untouched for the whole flight, so it is still 2.50 m/s at the instant of impact.** This is the half of the answer students most often leave out, precisely because nothing happens to it.",
+      "tip": "Unchanged is still an answer. Write it down."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball rolls off a 1.8 m high counter at 2.5 m/s, so it lands with vₓ = 2.50 m/s and vᵧ = 5.94 m/s. What is the MAGNITUDE of its resultant velocity at impact?",
+     "opts": [
+      "5.94 m/s",
+      "8.44 m/s",
+      "6.44 m/s",
+      "2.50 m/s"
+     ],
+     "ans": 2,
+     "hint": "The two components are at right angles to each other.",
+     "steps": [
+      "The components are perpendicular, so they combine by Pythagoras.",
+      "v² = 2.50² + 5.94² = 6.25 + 35.28 = 41.53.",
+      "v = √41.53 = 6.44 m/s.",
+      "The resultant speed at impact is 6.44 m/s."
+     ],
+     "ex": {
+      "main": "**Perpendicular components combine as √(vₓ² + vᵧ²) = 6.44 m/s, never by adding.** 8.44 m/s is 2.50 + 5.94 — the commonest error on this item, and it is always too big, because the hypotenuse of a right triangle is shorter than the two legs put together.",
+      "tip": "If your resultant is bigger than the two parts added, you have gone wrong twice."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball lands with vₓ = 2.50 m/s and vᵧ = 5.94 m/s. In what DIRECTION is it travelling at that instant?",
+     "opts": [
+      "Horizontally — 0°, it never turned",
+      "22.8° below the horizontal",
+      "67.2° above the horizontal",
+      "67.2° below the horizontal"
+     ],
+     "ans": 3,
+     "hint": "Which component goes on the bottom of the ratio, and which way is it going?",
+     "steps": [
+      "The angle from the horizontal has the vertical part over the horizontal part.",
+      "tan θ = 5.94 ÷ 2.50 = 2.376, so θ = tan⁻¹(2.376) = 67.2°.",
+      "It is falling, so that angle is measured BELOW the horizontal.",
+      "It is travelling 67.2° below the horizontal."
+     ],
+     "ex": {
+      "main": "**tan⁻¹(vᵧ ÷ vₓ) = 67.2°, below the horizontal because it is coming down.** 22.8° is the ratio flipped — a true angle for this arrow, but measured from the vertical; above the horizontal would mean it was climbing; and 0° forgets it picked up any vertical speed at all.",
+      "tip": "Steeper than 45° means the vertical part has overtaken the horizontal one."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball rolls off a table at 2.5 m/s. Does it reach the floor still travelling at 2.5 m/s?",
+     "opts": [
+      "No — faster, because it gains vertical speed as it falls",
+      "Yes — nothing pushes it sideways, so its speed cannot change",
+      "Yes — the arc is symmetric, so it lands at its launch speed",
+      "No — slower, because gravity pulls at right angles to its motion"
+     ],
+     "ans": 0,
+     "hint": "Its horizontal speed is unchanged. Is that the same as its SPEED being unchanged?",
+     "steps": [
+      "The horizontal component really is still 2.5 m/s at the floor.",
+      "But it left with no vertical speed and arrives with a large one.",
+      "Speed is the two components combined, so it has grown.",
+      "It lands faster than it rolled, always."
+     ],
+     "ex": {
+      "main": "**Unchanged horizontal component is not unchanged speed — the ball gains a whole vertical component on the way down.** The symmetry rule is the other trap here: it only returns a projectile to its launch SPEED when it returns to its launch HEIGHT, and a table top is not the floor.",
+      "tip": "Two true cards, each right about its own case. Check which case you are in."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two balls roll off one 1.8 m counter, the first at 2.5 m/s and the second at 5.0 m/s. How do their impact ANGLES below the horizontal compare?",
+     "opts": [
+      "They land at the same angle, having fallen the same height",
+      "The faster ball lands at a shallower angle",
+      "The faster ball lands at a steeper angle",
+      "It cannot be compared without knowing the two masses"
+     ],
+     "ans": 1,
+     "hint": "Which of the two components differs between them, and which does not?",
+     "steps": [
+      "They fall the same height, so both arrive with vᵧ = 5.94 m/s.",
+      "The faster one arrives with double the horizontal component, 5.0 m/s.",
+      "tan θ = vᵧ ÷ vₓ, so a bigger vₓ under the same vᵧ gives a smaller angle.",
+      "The faster ball lands at 49.9°, the slower at 67.2° — shallower."
+     ],
+     "ex": {
+      "main": "**Same drop means the same vertical component, so the faster ball simply has more horizontal velocity to combine with it, and its path at impact is flatter.** Mass never enters a projectile calculation at all — it appears in none of these equations.",
+      "tip": "Fall height sets the vertical part; roll speed sets the horizontal part. The angle is the argument between them."
+     }
     }
    ],
    "round": 9,
-   "libv": 1
+   "libv": 2
   }
  }
 }
