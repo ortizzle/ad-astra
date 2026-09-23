@@ -1693,7 +1693,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v195 · velocity at impact';
+const APP_VERSION = 'v196 · every deck listed';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4298,51 +4298,74 @@ function openSheet(classId){
    Calculator/Sheet. Engine only here — Wayfinder's lat/long unit is the first
    content to use it. Content-shaped, like `sorts`/`bee` — a unit opts in by
    carrying the field, never inferred. */
-/* The word list — every word in the lesson on one screen, which is the one
-   thing a vocabulary deck could not do. The cards ALREADY are the complete
-   list (one card per word, in the book's own order); what was missing was a
-   place to see all fifteen at once, since the flashcard deck is shuffled and
-   shows one at a time by design. So this is derived from the cards and never
-   authored: it cannot drift from them, and it works on every vocabulary
-   lesson in the library the moment it exists — the same call Pair Up made.
+/* The word list — everything in the deck on one screen, which is the one
+   thing the flashcard screen cannot do: the deck is shuffled and shows one
+   card at a time by design. The cards ALREADY are the complete list, so
+   this is derived from them and never authored — it cannot drift from the
+   deck, and every lesson in both libraries had one the moment it existed,
+   the same call Pair Up made.
+
+   It shipped covering only the fourteen vocabulary lessons and now covers
+   every deck (Chris, 2026-09). What made the narrow gate necessary was the
+   LABEL, not the audience: "all 6 words" on an eighteen-card Biology deck
+   is false, and a partial list that says "all" is worse than no list. The
+   count and the noun are both read off what actually prints now, so the
+   label is true by construction and the audience can be everyone.
 
    ⚠️ It is a STUDY door and must never reach the quiz's tool row. `SHEETS`
    and `mapRef` both put a button in there, and that is right for them: a
    formula sheet or a map restates what the class hands out on paper, so the
-   skill under test is untouched. A vocabulary list WITH its meanings, open
-   during a vocabulary quiz, is the answer key. Same rule as the glossed
-   stem, one level up. */
+   skill under test is untouched. A term list WITH its meanings, open during
+   that lesson's own quiz, is the answer key — and widening this to every
+   subject widened that hazard too. Same rule as the glossed stem, one level
+   up. */
 function wordListCards(u){
-  /* skyCards already draws this exact line — single sayable words, no ponder
-     prompts — so the two surfaces can never disagree about what a word is. */
-  return skyCards(u);
+  /* Everything in the deck that has an answer to hide. A multi-word TERM
+     belongs here — that is the whole of the widening — but a ponder card is
+     a dinner-table prompt with no answer, so it has nothing to cover and
+     nothing to recall. skyCards draws a narrower line (single sayable words
+     only) because a microphone needs one; a printed list does not. */
+  return (u.cards || []).filter(c => !/^ponder/i.test(String(c.term || '')));
 }
-/* A lesson has a word list only when its deck IS one: every card a single
-   word, and at least six of them. The first cut gated on "six or more single
-   words", which caught the fourteen vocabulary lessons — and also put
-   "Word list — all 6 words" on an eighteen-card Biology deck, where the
-   label is simply false. A partial list is worse than none: she would
-   revise six terms believing she had seen the lot.
+/* "Word list" on a deck of multi-word terms is simply the wrong noun, and
+   the label has to be true by construction — getting that wrong is what
+   made the first gate ship a lie. A deck whose every entry is one word is a
+   word list; anything else is a term list. */
+function wordListNoun(u){
+  const cards = wordListCards(u);
+  return cards.length && cards.every(c => !/\s/.test(String(c.term).trim())) ? 'word' : 'term';
+}
+/* EVERY deck gets one (Chris, 2026-09: "can we do that for all sections of
+   flashcards?"). The list is a retrieval cue whatever the subject, and the
+   flashcard screen shows one card at a time by design, so seeing the whole
+   deck at once is the thing it cannot do. Two entries is not a list; three
+   is — and the one deck in either library under that floor is a two-card
+   quiz recap, where a door would be pure furniture.
 
-   Spelling Bee decks pass that test (thirteen single words each) and are
-   excluded anyway, because the Bee's founding rule is that the word is
-   ANNOUNCED and never shown until she has spelled it — printing all thirteen
-   on one screen hands over exactly what that unit refuses to give. */
+   The count now covers exactly what the list prints, so "all N terms"
+   cannot overstate itself the way "all 6 words" did on an eighteen-card
+   Biology deck.
+
+   A Spelling Bee deck is still excluded, and now that the gate is wide the
+   exclusion carries the whole weight: the Bee ANNOUNCES its word and
+   refuses to show it until she has spelled it, so printing all thirteen on
+   one screen hands over exactly what that unit withholds. */
 function hasWordList(u){
-  const cards = u.cards || [];
-  return !u.bee && cards.length >= 6 && wordListCards(u).length === cards.length;
+  return !u.bee && wordListCards(u).length >= 3;
 }
-/* The first LINE of a def is the bold lead plus its part-of-speech tag, which
-   is precisely one line per word. The bullets underneath are the supporting
-   detail and belong on the card, not in a list of fifteen. */
+/* The first LINE of a def is the bold lead — one short sentence that works
+   alone as the study answer, plus any part-of-speech tag. That is precisely
+   one line per entry. The bullets underneath are supporting detail and
+   belong on the card, not in a list of twenty. */
 function defLead(def){ return String(def || '').split('\n')[0].trim(); }
 
 function openWordList(u){
   const cards = wordListCards(u);
-  showModal({ title:'Word list', confirmText:'Close', cancelText:null,
+  const noun = wordListNoun(u);
+  showModal({ title: noun === 'word' ? 'Word list' : 'Term list', confirmText:'Close', cancelText:null,
     build:(box)=>{
       box.appendChild(el('p',null, u.title));
-      box.appendChild(el('p','wlnote', cards.length + ' words. Cover the meanings and say each one before you tap it — '
+      box.appendChild(el('p','wlnote', cards.length + ' ' + noun + 's. Cover the meanings and say each one before you tap it — '
         + 'saying it from memory is the practice; reading it is not.'));
 
       const rows = [];
@@ -5792,8 +5815,10 @@ function unitCard(u, c, label){
   if(hasWordList(u)){
     const wb = el('button','btn btn-secondary');
     const ws = el('span','btnstack');
-    ws.appendChild(el('span',null,'\ud83d\udcd6  Word list \u2014 all ' + wordListCards(u).length + ' words'));
-    ws.appendChild(el('small',null,'Every word in this lesson, meanings hidden until you tap'));
+    const wn = wordListNoun(u);
+    ws.appendChild(el('span',null,'\ud83d\udcd6  ' + (wn === 'word' ? 'Word' : 'Term') + ' list \u2014 all '
+      + wordListCards(u).length + ' ' + wn + 's'));
+    ws.appendChild(el('small',null,'Every ' + wn + ' in this lesson, meanings hidden until you tap'));
     wb.appendChild(ws);
     wb.addEventListener('click',()=>openWordList(u));
     card.appendChild(wb);

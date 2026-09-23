@@ -27,7 +27,11 @@ const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(
       }catch(e){}
     }
     saveLocal();
-    const u=Object.values(DATA.records).filter(r=>r.type==='unit'&&!r.deleted&&hasWordList(r))[0];
+    /* Every deck has a list since the widening, so pick one that actually
+       renders all three tokens — the say-as line only exists on a
+       vocabulary card, and measuring a deck without it reads as null. */
+    const live=Object.values(DATA.records).filter(r=>r.type==='unit'&&!r.deleted&&hasWordList(r));
+    const u=live.find(r=>wordListCards(r).every(c=>c.sp)) || live[0];
     if(!u) throw new Error('no unit with a word list');
     openWordList(u);
     document.querySelectorAll('.modal-box .wlrow')[0].click();   // one open, one shut
@@ -46,7 +50,8 @@ const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(
       return { box: cs(document.querySelector('.modal-box')).backgroundColor,
         onBg: cs(on).backgroundColor,  offBg: cs(off).backgroundColor,
         onW: cs(on.querySelector('.wlw')).color,   offW: cs(off.querySelector('.wlw')).color,
-        onSp: cs(on.querySelector('.wlsp')).color, offSp: cs(off.querySelector('.wlsp')).color,
+        onSp: on.querySelector('.wlsp') ? cs(on.querySelector('.wlsp')).color : null,
+        offSp: off.querySelector('.wlsp') ? cs(off.querySelector('.wlsp')).color : null,
         onD: cs(on.querySelector('.wld')).color,
         note: cs(document.querySelector('.wlnote')).color };
     },{theme,sky,acc});
@@ -54,7 +59,8 @@ const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(
     const onBg=over(parse(g.onBg),box), offBg=over(parse(g.offBg),box);
     const put=(what,fg,bg)=>rows.push({theme,sky,acc,what,ratio:+ratio(over(parse(fg),bg),bg).toFixed(2)});
     put('word (open)',g.onW,onBg);   put('word (shut)',g.offW,offBg);
-    put('say-as (open)',g.onSp,onBg); put('say-as (shut)',g.offSp,offBg);
+    if(g.onSp) put('say-as (open)',g.onSp,onBg);
+    if(g.offSp) put('say-as (shut)',g.offSp,offBg);
     put('meaning',g.onD,onBg);        put('the note',g.note,box);
   }
   rows.sort((a,b)=>a.ratio-b.ratio);

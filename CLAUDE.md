@@ -982,6 +982,77 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Every deck gets its list (v196 / Wayfinder v174, both apps)
+
+Chris: *"I like seeing the flashcard words listed out as an option. Can we do
+that for all sections of flashcards?"* The word list (v191) shipped on the
+fourteen vocabulary lessons; it now reaches **62 of 63 decks here and 54 of 58
+in Wayfinder**, and it needed no content authored for it, because the cards
+were always the list.
+
+**What made the narrow gate necessary was the LABEL, not the audience, and
+seeing that is what made the widening one small change rather than a rewrite.**
+v191's first cut gated on "six or more single-word cards" and put
+*"Word list — all 6 words"* on an eighteen-card Biology deck — false, and a
+partial list that says "all" is worse than none. The fix then was to shrink the
+audience until the label happened to be true. The fix now is to make the label
+read off what actually prints:
+
+- **`wordListCards()` returns every card that has an answer to hide** — a
+  multi-word TERM belongs in a list, which is the whole of the change. It no
+  longer borrows `skyCards()`, which draws a narrower line (single sayable
+  words) because a microphone needs one; a printed list does not. **Ponder
+  cards stay out**: a dinner-table prompt has no answer to cover and nothing
+  to recall.
+- **`wordListNoun()` picks the noun from the deck.** Every entry one word → a
+  *word* list; anything else → a *term* list, on the door, in the modal title
+  and in the note. "Word list" on a deck of multi-word terms is simply the
+  wrong word, and the count beside it is now the length of the printed list,
+  so both halves of the label are true by construction.
+- **The floor is three, not six.** Two entries is not a list; three is. Exactly
+  one deck in either library falls under it (Biology's two-card Unit 1 Quiz
+  Review), where a door would be pure furniture.
+
+> ⚠️ **Widening the gate widened the hazard, so the standing rule matters
+> MORE now, not less: it must never reach the quiz's tool row.** `SHEETS` and
+> `mapRef` belong there because they restate what the class hands out on paper.
+> A term list with its meanings, open during that lesson's own quiz, is the
+> glossary — the glossed-stem rule one level up. Four of `test_wordlist.js`'s
+> assertions exist only to pin this, and half of them are new: the rule was
+> only ever checked on a vocabulary deck before.
+
+> **A Spelling Bee deck passes the raw test and is still excluded** (`!u.bee`),
+> and that exclusion now carries the whole weight the gate used to: the Bee
+> ANNOUNCES its word and refuses to show it until she has spelled it, so
+> printing all thirteen on one screen hands over the one thing that unit
+> withholds.
+
+**Considered and left alone: the ASL Alphabet.** Its 27 rows would read
+"A → The ASL fingerspelling handshape for the letter A" — true, and useless,
+because the meaning of those cards is the picture. It gives nothing away and
+excluding it would need a rule that exists for one deck, so it renders like
+everything else.
+
+`tools/test_wordlist.js` (same file, both apps, 34 assertions) **discovers two
+units** rather than one — the first word-list deck and the first term-list
+deck — since the labels have to be right on both and only the first was ever
+covered. It pins the coverage claim itself (every subject with lessons has a
+list; nothing was authored), both doors word for word, the terms matching the
+deck exactly and in its order with phrases intact, nothing revealed before she
+asks, one row revealing only itself, the meaning being the card's own lead,
+both reveal-all states, 44px everywhere, six gate cases (a word deck, a mixed
+deck, three entries, a deck with ponder prompts left out of the count, a bee
+deck, a two-entry deck) and the quiet-quiz rule **on both kinds of deck**.
+Reverting `hasWordList()` to the narrow form fails it at discovery.
+`tools/contrast_wordlist.js` still measures nothing below 4.5:1 — worst
+**5.34:1** here across 288 samples, 5.38:1 in Wayfinder across 360.
+
+> ⚠️ **The probe had to pick its unit more carefully once every deck
+> qualified.** It took `[0]` of the qualifying units, which used to be a
+> vocabulary lesson and is now whatever sorts first — and a deck without `sp`
+> has no say-as line, so `getComputedStyle(null)` threw. It now prefers a deck
+> whose cards all carry `sp`, and null-guards the token anyway.
+
 ### The velocity it lands WITH (v195)
 
 Chris: *"Let's build and deploy physics updated file."* Her Physics 8 folder's
