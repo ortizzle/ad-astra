@@ -1,0 +1,548 @@
+{
+ "v": 4,
+ "records": {
+  "unit-eng-t1-context": {
+   "id": "unit-eng-t1-context",
+   "type": "unit",
+   "updatedAt": 1790113731851,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Test 1 · 2 Context Clues and Inferences",
+   "srcName": "English Test 1 notes (Drive, 2026-09-23)",
+   "source": "Test 1 notes · Context Clues and Inferences (student’s own notes)",
+   "summary": {
+    "text": "The three kinds of context clue (synonym and restatement, antonym and contrast, cause and effect), the five steps for using them, and what an inference is — evidence from the page plus background knowledge — with its own four steps.",
+    "from": "source"
+   },
+   "why": {
+    "text": "These two are the reading skills every other English question quietly sits on top of. A passage question you cannot answer is very often a word you decided to skip.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Name the three kinds of context clue and spot each one in a sentence",
+     "from": "source"
+    },
+    {
+     "text": "Work out an unfamiliar word from the sentence around it",
+     "from": "added"
+    },
+    {
+     "text": "Give the five steps for using context clues in order",
+     "from": "source"
+    },
+    {
+     "text": "Say what an inference requires, and give its four steps in order",
+     "from": "source"
+    },
+    {
+     "text": "Tell a real inference from a guess",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from Sedona’s own handwritten notes. One thing to flag: Drive’s scan of her handwriting returned the five context-clue steps in the WRONG order, and the pages had to be rendered and read as images to get them right. The order taught here — read the sentence, look for clues, make an educated guess, substitute and check, confirm — is what her page actually says. If her memory of the order disagrees, her page wins. The questions use fresh sentences throughout, so none of this can be answered from memory of the notes.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Two short passages in here ask you to infer something nobody says outright. Take those slowly.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Context clues",
+     "def": "**Hints inside a sentence or paragraph that help you work out an unfamiliar word.**\n• The sentence does the defining — you do not need the dictionary.",
+     "hint": "The neighbours of a word tell you about it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Synonym / restatement clue",
+     "def": "**The author provides a similar word or phrase that means the same thing.**\n• Often arrives after a comma, a dash, or the word “or”.",
+     "hint": "Said twice, second time easier.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Antonym / contrast clue",
+     "def": "**The author uses a word or phrase with the OPPOSITE meaning.**\n• Signposted by but, unlike, however, instead, while.\n• You learn the word by learning what it is NOT.",
+     "hint": "The clue is the opposite, so flip it.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Cause and effect clue",
+     "def": "**The author explains the reason FOR the word, or the RESULT of it.**\n• Signposted by because, so, therefore, as a result, which meant.",
+     "hint": "Why it happened, or what it caused.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The five steps, in order",
+     "def": "**Read the sentence → look for clues → make an educated guess → substitute and check → confirm.**\n• Reading the whole sentence first is a step, not a warm-up.",
+     "hint": "Read, look, guess, substitute, confirm.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Substitute and check",
+     "def": "**Put your guess in place of the word and re-read the sentence.**\n• If it stops making sense, the guess was wrong — and you have found that out for free.\n• This is the step people skip, and it is the one that catches mistakes.",
+     "hint": "Swap it in and listen.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Inference",
+     "def": "**Using textual evidence AND your background knowledge to understand something the author doesn’t state.**\n• Both halves are required — evidence alone is quoting, knowledge alone is guessing.",
+     "hint": "What the page shows plus what you already know.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Making an inference, in order",
+     "def": "**Find evidence → activate prior knowledge → put it together → articulate your thinking.**",
+     "hint": "Evidence, knowledge, combine, explain.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Find evidence",
+     "def": "**Point at the actual words on the page.**\n• If you cannot quote anything, you are not inferring yet.",
+     "hint": "Put your finger on the line.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Activate prior knowledge",
+     "def": "**Bring in what you already know about how the world works.**\n• This is the half that lets you get past what is literally printed.",
+     "hint": "What you brought with you.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Articulate your thinking",
+     "def": "**Say HOW you got there, not just what you concluded.**\n• An inference you cannot explain is a guess wearing a better coat.",
+     "hint": "Show the working.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Context clue vs. inference",
+     "def": "**A context clue works out a WORD. An inference works out an unstated IDEA.**\n• Both start from evidence in the text; they aim at different targets.\n• Only an inference brings in what you already know from outside the book.",
+     "hint": "One decodes a word, one decodes a meaning.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the sentence. “Most of the cast was gregarious, but Dev preferred to eat lunch alone in the costume room.” Which kind of context clue is at work?",
+     "opts": [
+      "Antonym and contrast",
+      "Synonym and restatement",
+      "Cause and effect",
+      "No clue is present in the sentence"
+     ],
+     "ans": 0,
+     "hint": "One small word in the middle is doing all the work.",
+     "steps": [
+      "Find the signpost word: “but”.",
+      "“But” sets what follows AGAINST what came before.",
+      "So eating alone is the opposite of gregarious, not a restatement of it.",
+      "A clue built on an opposite is an antonym and contrast clue."
+     ],
+     "ex": {
+      "main": "**Antonym and contrast.** The sentence never says what gregarious means — it shows you its opposite and lets you flip it. Gregarious turns out to mean sociable, fond of company.",
+      "tip": "But, unlike, however, instead, while — each of those is a contrast clue announcing itself."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the sentence. “Because the iron bridge had corroded through forty wet winters, the county closed it to lorries.” Which kind of context clue is at work?",
+     "opts": [
+      "Antonym and contrast",
+      "Cause and effect",
+      "Synonym and restatement",
+      "No clue is present in the sentence"
+     ],
+     "ans": 1,
+     "hint": "The sentence tells you what the word LED TO.",
+     "steps": [
+      "Find the signpost: the sentence opens with “because”.",
+      "That sets up a reason and a result.",
+      "Corroding is the reason; closing the bridge to lorries is the result.",
+      "A clue built from a reason or a result is a cause and effect clue."
+     ],
+     "ex": {
+      "main": "**Cause and effect.** You learn what corroded means from its consequence: whatever happened to that iron over forty wet winters made it unsafe to drive on. It means eaten away by rust.",
+      "tip": "Because, so, therefore, as a result, which meant — all of them announce a cause-and-effect clue."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the sentence. “The coach was adamant — completely unwilling to be talked round — that nobody would skip the warm-up.” Which kind of context clue is at work?",
+     "opts": [
+      "Antonym and contrast",
+      "Cause and effect",
+      "Synonym and restatement",
+      "No clue is present in the sentence"
+     ],
+     "ans": 2,
+     "hint": "Look at what sits between the two dashes.",
+     "steps": [
+      "The dashes hold a phrase that interrupts the sentence.",
+      "That phrase says the same thing again in easier words.",
+      "Saying it again in different words is restating it, not contrasting or explaining a result.",
+      "So this is a synonym and restatement clue."
+     ],
+     "ex": {
+      "main": "**Synonym and restatement.** The author defines adamant in place, inside a pair of dashes — it means immovable, refusing to change your mind.",
+      "tip": "A comma, a pair of dashes, or the word “or” often carries a restatement clue right behind it."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the sentence “The negotiator remained impassive while both sides shouted across the table,” what does IMPASSIVE most likely mean?",
+     "opts": [
+      "Unable to attend",
+      "Extremely loud",
+      "Easily offended",
+      "Showing no emotion"
+     ],
+     "ans": 3,
+     "hint": "Set the word against what everyone else in the sentence is doing.",
+     "steps": [
+      "Read the whole sentence before deciding anything.",
+      "The clue is the contrast: both sides are shouting, and the negotiator REMAINED something.",
+      "Remaining, while others shout, points at staying outwardly unmoved.",
+      "Substitute it in: the negotiator remained showing no emotion while both sides shouted. It holds."
+     ],
+     "ex": {
+      "main": "**Showing no emotion.** “While” sets the negotiator against the shouting, so the word has to mean something opposite to it — and substituting the guess back in keeps the sentence sensible.",
+      "tip": "Every option here is a real word about people, so you cannot eliminate on shape. You have to use the clue."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the five steps for using context clues, which step comes immediately AFTER making an educated guess?",
+     "opts": [
+      "Substitute and check",
+      "Read the sentence",
+      "Look for clues",
+      "Confirm"
+     ],
+     "ans": 0,
+     "hint": "A guess is not the end of the process.",
+     "steps": [
+      "The five steps run: read the sentence, look for clues, make an educated guess, then two more.",
+      "Reading and looking both come before the guess, so neither can follow it.",
+      "Confirming is the last step, so something sits between.",
+      "That something is substituting the guess in and checking it."
+     ],
+     "ex": {
+      "main": "**Substitute and check.** It is the step that turns a guess into an answer — and it is the one most often skipped, which is exactly why it catches so many wrong guesses.",
+      "tip": "Guess, swap it in, re-read. If the sentence goes strange, you have saved yourself a wrong answer."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is “substitute and check” worth doing even when you feel confident about your guess?",
+     "opts": [
+      "It is the only step in the list that requires you to read the sentence at all",
+      "It tests the guess against the whole sentence, which is where a wrong guess falls apart",
+      "It replaces the need to look for any clues in the sentence in the first place",
+      "It guarantees the word has only one possible meaning"
+     ],
+     "ans": 1,
+     "hint": "Think about what a wrong guess does to the sentence around it.",
+     "steps": [
+      "A guess is formed from a clue, which is usually part of the sentence.",
+      "Substituting puts that guess back against ALL of the sentence.",
+      "A guess that fits the clue but breaks the rest of the sentence is exposed by that.",
+      "So the step is a check on the guess, using the sentence as the judge."
+     ],
+     "ex": {
+      "main": "**It tests the guess against the whole sentence.** Confidence is not evidence. A wrong guess usually sounds fine on its own and only goes strange once it is back in place.",
+      "tip": "The step costs about four seconds and is the cheapest way to catch yourself being wrong."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "order",
+     "q": "Put the four steps of making an inference in order.",
+     "opts": [
+      "Find evidence",
+      "Activate prior knowledge",
+      "Put it together",
+      "Articulate your thinking"
+     ],
+     "ans": 0,
+     "hint": "You cannot combine two things before you have both of them.",
+     "steps": [
+      "An inference needs evidence from the page, so that is collected first.",
+      "Then you bring in what you already know from outside the book.",
+      "Only once you hold both can you put them together.",
+      "Explaining how you got there comes last — it is the step that proves it was not a guess."
+     ],
+     "ex": {
+      "main": "**Evidence, prior knowledge, put it together, articulate.** The order matters: the last step is what separates an inference from a hunch, and it only exists because the first three did.",
+      "tip": "If you ever cannot do step four, go back and check whether you really did step one."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the passage, then answer.",
+     "opts": [
+      "She dislikes the person she has arranged to meet here",
+      "She is waiting for a train that has not been announced yet",
+      "She has been waiting a long time and is trying not to show it",
+      "The café is about to close and she has been asked to leave"
+     ],
+     "ans": 2,
+     "hint": "Count the cups, then think about what three of them means.",
+     "steps": [
+      "Find the evidence: three empty cups, a phone face-down, a folded and refolded receipt.",
+      "Activate what you know: one person does not drink three coffees in five minutes.",
+      "Fiddling with a receipt over and over is what people do to occupy themselves while waiting.",
+      "Put it together: a long wait, being managed quietly."
+     ],
+     "ex": {
+      "main": "**She has been waiting a long time and is trying not to show it.** Nothing in the passage says “waiting” or “impatient” — the three cups measure the time and the refolded receipt shows the effort of sitting still.",
+      "tip": "A good inference can always be traced back to specific words. Point at the three cups."
+     },
+     "passage": "Three empty cups stood at her elbow. Her phone lay face-down beside them. She folded the receipt in half, then in half again, and smoothed it flat."
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A classmate says: “I think the narrator’s family is short of money.” Which response shows they have actually made an INFERENCE rather than a guess?",
+     "opts": [
+      "“My own family was short of money once, so I recognise it when I see it”",
+      "“It just feels like that sort of book, and I am usually right about these things”",
+      "“The back cover of the book says outright that the family is poor”",
+      "“The coat is his brother’s and nobody buys anything new — hand-me-downs usually mean money is tight”"
+     ],
+     "ans": 3,
+     "hint": "Look for BOTH halves: something quoted, and something known.",
+     "steps": [
+      "An inference needs textual evidence plus background knowledge.",
+      "A feeling about the sort of book has neither.",
+      "The back cover is not the text doing the work, it is being told outright.",
+      "Personal experience alone is prior knowledge with no evidence attached.",
+      "Only the coat answer points at the page AND brings in what hand-me-downs usually mean."
+     ],
+     "ex": {
+      "main": "**The coat answer.** It quotes the page and names the outside knowledge it is using, which is the whole definition. The others have one half, or neither.",
+      "tip": "The giveaway is the word “because”, spoken or implied. An inference can always finish that sentence."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the difference between using a context clue and making an inference?",
+     "opts": [
+      "A context clue works out an unfamiliar WORD; an inference works out an unstated idea",
+      "A context clue uses the text and an inference does not use the text at all",
+      "A context clue is only ever a guess, while an inference is a certainty",
+      "They are two different names for exactly the same reading process"
+     ],
+     "ans": 0,
+     "hint": "Ask what each one is aimed AT.",
+     "steps": [
+      "Both start from evidence in the text, so that cannot be the difference.",
+      "Neither is a certainty and neither is a pure guess, so that is not it either.",
+      "They are not the same process, or the notes would not separate them.",
+      "What differs is the target: one decodes a word, the other decodes an unstated idea."
+     ],
+     "ex": {
+      "main": "**One decodes a word, one decodes an unstated idea.** They share a method — start from what is on the page — but an inference also brings in what you already know from outside the book.",
+      "tip": "If the answer could go in a dictionary, it was a context clue. If it could not, it was an inference."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the sentence. “The soup was so insipid that three people at the table reached for the salt without saying anything.” What does INSIPID mean, and which clue tells you?",
+     "opts": [
+      "Extremely spicy — a contrast clue",
+      "Lacking flavour — a cause and effect clue",
+      "Served cold — a restatement clue",
+      "Very expensive — a cause and effect clue"
+     ],
+     "ans": 1,
+     "hint": "What did the soup CAUSE three people to do?",
+     "steps": [
+      "The sentence gives a result: everyone reaches for the salt.",
+      "Reaching for salt is what people do when food needs seasoning.",
+      "So insipid describes food that needs it — flavourless.",
+      "Because the meaning came from a RESULT, the clue is cause and effect."
+     ],
+     "ex": {
+      "main": "**Lacking flavour, from a cause and effect clue.** The word is never restated and never contrasted — you get it entirely from what it made three people do.",
+      "tip": "When a sentence shows you a consequence, read backwards from the consequence to the word."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pair of things does an inference require?",
+     "opts": [
+      "The author’s own explanation and a summary",
+      "A dictionary and a highlighter",
+      "Textual evidence and your background knowledge",
+      "Two different translations of the same passage"
+     ],
+     "ans": 2,
+     "hint": "Your notes name both halves in a single sentence.",
+     "steps": [
+      "An inference reaches something the author never states outright.",
+      "Evidence from the page alone only gets you what IS stated.",
+      "Knowledge alone, with nothing quoted, is not reading at all.",
+      "So it takes both together."
+     ],
+     "ex": {
+      "main": "**Textual evidence and background knowledge.** Drop the evidence and you are guessing; drop the knowledge and you are only repeating what is printed.",
+      "tip": "This is the definition most likely to appear as a fill-in-the-blank. Learn both halves."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence contains NO usable context clue for the unfamiliar word?",
+     "opts": [
+      "The room was so redolent that she could tell what had been cooked before she opened the door",
+      "The room was redolent — thick with the smell of bay and burnt sugar",
+      "The room was redolent, unlike the odourless corridor outside it",
+      "The room was redolent, and everyone agreed about it afterwards"
+     ],
+     "ans": 3,
+     "hint": "Three of these give you something to work from. One only reports that people agreed.",
+     "steps": [
+      "Check each sentence for a restatement, a contrast, or a cause and effect.",
+      "One restates redolent as thick with smell; one contrasts it with odourless; one gives a result.",
+      "The remaining sentence says only that everyone agreed, which tells you nothing about the word.",
+      "Agreement is not a clue — it does not point at a meaning."
+     ],
+     "ex": {
+      "main": "**“Everyone agreed about it afterwards.”** It sounds like it is telling you something, but you could swap almost any adjective into that sentence and it would read exactly the same.",
+      "tip": "A clue has to narrow the meaning. If the sentence works with the opposite word too, it is not a clue."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Read the passage, then answer.",
+     "opts": [
+      "The dog has been in this house a long time and knows its routines",
+      "The dog is unwell and has been waiting to be carried out",
+      "Somebody is about to arrive and the dog has heard them coming",
+      "The dog has only recently been adopted into this house"
+     ],
+     "ans": 0,
+     "hint": "The dog moves before the kettle does anything.",
+     "steps": [
+      "Find the evidence: the dog leaves the hall BEFORE the kettle clicks.",
+      "Activate what you know: an animal only anticipates a sound it has heard many times.",
+      "A newly arrived dog would have nothing to anticipate yet.",
+      "Put it together: this dog has learned the routine of the house, which takes time."
+     ],
+     "ex": {
+      "main": "**The dog has been there a long time and knows the routines.** The order of events is the whole inference — moving first means predicting, and predicting means having learned.",
+      "tip": "When a passage is careful about the ORDER things happen in, the order is usually the evidence."
+     },
+     "passage": "The kettle had not clicked yet when the old dog got up, stretched, and padded out of the hall towards the kitchen."
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "You meet an unfamiliar word in the middle of a long sentence. According to the five steps, what do you do FIRST?",
+     "opts": [
+      "Look for clues around the word",
+      "Read the whole sentence",
+      "Make an educated guess at the meaning",
+      "Substitute a likely word and check it"
+     ],
+     "ans": 1,
+     "hint": "The first step is the one that is easy to skip because it feels like not-yet-working.",
+     "steps": [
+      "All four of these are real steps, so the question is only about order.",
+      "You cannot look for clues without having read the sentence they are in.",
+      "Guessing and substituting both come later still.",
+      "So reading the whole sentence is first."
+     ],
+     "ex": {
+      "main": "**Read the whole sentence.** It counts as a step because the clue is often AFTER the word — stop at the hard word and you have skipped the part that explains it.",
+      "tip": "Most missed context clues are sitting in the second half of a sentence somebody abandoned halfway."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The last step of making an inference is to articulate your thinking. Why does that step exist?",
+     "opts": [
+      "Because saying it aloud makes it easier to memorise",
+      "Because teachers require every answer to be written in full sentences",
+      "Because an inference you cannot explain cannot be told apart from a guess",
+      "Because it is the step where you finally decide what you think"
+     ],
+     "ans": 2,
+     "hint": "Think about what the step lets somebody ELSE check.",
+     "steps": [
+      "The first three steps happen inside your head.",
+      "Nobody else — including you, later — can see whether they actually happened.",
+      "Articulating exposes the evidence and the reasoning to inspection.",
+      "That is what distinguishes an inference from a hunch that happened to be right."
+     ],
+     "ex": {
+      "main": "**An inference you cannot explain is indistinguishable from a guess.** Explaining is not a formality tacked on the end; it is the proof that the first three steps really happened.",
+      "tip": "This is also why a right answer with no reasoning often earns partial credit at best."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

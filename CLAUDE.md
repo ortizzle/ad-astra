@@ -982,6 +982,110 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### English Test 1, seven parts from her own notes (v194, THIS APP ONLY)
+
+Chris: *"Let's update Sedona's English folder. Some new material there for her
+test 1."* Her English Drive folder had **`English - Test 1.pdf`** — thirteen
+pages of her OWN handwritten unit notes, uploaded 2026-09-23. It splits cleanly
+into seven topics, so the shelf does too.
+
+| id | title | |
+|---|---|---|
+| `unit-eng-t1-plot` | `Test 1 · 1 Plot Diagram` | 14 cards / 16 q |
+| `unit-eng-t1-context` | `Test 1 · 2 Context Clues and Inferences` | 12 / 16 |
+| `unit-eng-t1-diction` | `Test 1 · 3 Diction` | 12 / 18 |
+| `unit-eng-t1-tone` | `Test 1 · 4 Tone and Mood` | 14 / 18 |
+| `unit-eng-t1-fig` | `Test 1 · 5 Figurative Language` | 22 / 22 |
+| `unit-eng-t1-sym` | `Test 1 · 6 Symbolism and Motifs` | 14 / 17 |
+| `unit-eng-t1-tkam` | `Test 1 · 7 To Kill a Mockingbird: Background` | 11 / 12 |
+
+- **All seven are `prep:true` and none sets `order`.** A study unit built for a
+  named test genuinely IS test prep, which is what the v139 flag means. The
+  numbering lives in the TITLE (`Test 1 · N `), so the shelf sorts 1 through 7
+  structurally rather than by luck — the v180 Biology lesson, applied before an
+  inversion could ship rather than fifty versions after one.
+- **The pages were RENDERED with `pypdfium2`, not read through Drive's OCR**, and
+  that decided two real things. Drive filed **"Style & voice" under "Tone is
+  NOT"**, where it belongs to *why use tone* — building from the text layer would
+  have taught the exact opposite of her page, on the one distinction this lesson
+  exists for. It also scrambled the five context-clue steps out of order. **The
+  rendered page is the source of truth for anything in a list.**
+- **Her notes' own examples live on the CARDS; every graded question uses a fresh
+  one.** The notes are her homework and this app is extra, so none of "I will get
+  to this issue right away", "Red is looking pretty sus", "I ate an apple" or the
+  soda/pop pair is answerable from memory of the page.
+- **Part 7 was scoped against `tkam-1.json` before a word was written** (the v142
+  discipline). That unit is the chapters 1–5 reading companion — plot, characters,
+  Boo Radley — and carries none of the biography, the 1960 publication or the
+  1933–1935 dating. Zero overlap, and the test sweeps for it. Nothing in part 7
+  reaches past chapter five, so it is safe to approve at whatever point she has
+  read to.
+- Every factual claim on her TKAM page was verified independently — author,
+  publication year, the lawyer father, the abandoned law degree, the airline job,
+  the friends who funded the writing year, the dating. All of it holds.
+
+**Two things on her pages are worth a grown-up's eye, and both are in
+`parentNote` rather than silently smoothed over.** Her concrete-diction line
+reads *"refer to things that appeal to the specific"* and trails off; the
+standard definition is **the SENSES**, and her own example ("I ate an apple")
+fits the sensory reading exactly, so it is almost certainly a dropped word. And
+her pun line — *"words that sound the same but have different meanings"* —
+describes one kind of pun; a pun can also turn on a single word carrying two
+meanings at once. The card teaches both. **These are her own notes, not a
+teacher's key**, which is what decides the posture: teach the standard version
+and flag it (the v161 rule), rather than matching a key (the v141 rule).
+
+> ⚠️ **Three question stems pointed a reader back at her own notes — "Her notes
+> give falling action TWO primary purposes…" — and that is two rules broken at
+> once.** The standalone rule says a question restates all the context it needs,
+> and the second-person rule says everything she sees says *your*, never *her*.
+> Four hints, steps and explanations said "Her notes" to her as well. **Third
+> person is correct in exactly two places, and a question stem is neither of
+> them.** Caught by the new test on its first run against real content, which is
+> the only reason it is not shipped — `check_content.py` cannot see this, because
+> the stems are perfectly well-formed and restate nothing they are missing.
+
+Four questions ran above the library's accepted length band and were fixed by
+**giving the distractors real substance rather than vaguing the answers** (v185).
+Three were the same shape: `Personification` (15 characters) against
+`Hyperbole`/`Oxymoron`/`Synecdoche`, and `Understatement` against `Litotes`. A
+device's name is not ours to pad, so the fix was better distractors —
+`Implied metaphor` and `Standard metaphor` are the genuine near-misses for
+personification and sit in its length band anyway — and, for the litotes item,
+naming what marks each option ("Understatement, with no denial" against
+"Litotes, built on a denial"), which evens the lengths *and* makes the item
+harder in the right way. `check_content.py` reports zero errors across all seven;
+worst remaining warning is 23%.
+
+`tools/test_eng_t1.js` (51 assertions) pins the shelf and then each part **by its
+teaching rather than by question id**, which would not survive a renumber: the
+classId (the v136 orphan trap), seven parts ascending 1–7 with the reading
+companion still on its own shelf and nothing loose, `prep`/`libv`/no-`order` on
+every one, answers spread across all four slots (the v181 `_balance` bug), no
+back-references and no positional references, **no stem pointing at her notes**,
+style-and-voice taught as something tone DOES, the three things tone is NOT, both
+determiner lists with diction named as the overlap, all eight kinds of diction and
+all seventeen figurative devices, litotes as a kind of understatement, repetition
+as what makes a motif, the traditional meanings named as a starting point rather
+than a key, part 7 not re-asking the companion, the gold prep band on all seven
+stops, a full quiz round on each, a passage rendering on its own plate, and the
+22-card deck walking to the end.
+
+> ⚠️ **Three of those 51 were MY bugs, not the app's, and all three read as
+> content failures.** An "everything is MC" assertion failed on the two parts
+> that ship a `kind:'order'` question (four options by contract, `ans:0` — assert
+> the contract per kind); a sweep for the reading companion's characters read the
+> whole record and caught the **parent note explaining the scoping**, where third
+> person is correct; and a regex written with `\u2019` could never match a card
+> written with a straight apostrophe. Also: **`go('quiz')` builds its own
+> `quizState`**, so one assembled beforehand is thrown away — navigate first,
+> then steer the round it built.
+
+> **Flagged to Chris: the test DATE is unknown.** There is no `english` entry in
+> `SUGGESTED_ASSESS` and her notes carry no date. It matters for the bulk-approve
+> pace — all seven today, or one a school day — so it is worth one question rather
+> than a guess.
+
 ### The note moves up (v193 / Wayfinder v173, both apps)
 
 Chris: *"Let's move the note to just below the daily 3 section."* It sat under

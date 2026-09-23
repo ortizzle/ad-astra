@@ -1,0 +1,766 @@
+{
+ "v": 4,
+ "records": {
+  "unit-eng-t1-fig": {
+   "id": "unit-eng-t1-fig",
+   "type": "unit",
+   "updatedAt": 1790113741095,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Test 1 · 5 Figurative Language",
+   "srcName": "English Test 1 notes (Drive, 2026-09-23)",
+   "source": "Test 1 notes · Figurative Language (student’s own notes)",
+   "summary": {
+    "text": "Seventeen devices: simile, the three metaphors, personification, imagery and its five senses, hyperbole, understatement, litotes, euphemism, synecdoche, oxymoron, pun, allusion, alliteration, anaphora and idiom.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the longest list on the test and the one most likely to be examined by handing you a sentence and asking what is happening in it — which is a different skill from reciting the definitions.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Name all seventeen devices from the lesson",
+     "from": "source"
+    },
+    {
+     "text": "Tell standard, implied and extended metaphor apart",
+     "from": "added"
+    },
+    {
+     "text": "Name all five kinds of imagery and the sense each one uses",
+     "from": "source"
+    },
+    {
+     "text": "Separate understatement from litotes, and alliteration from anaphora",
+     "from": "added"
+    },
+    {
+     "text": "Read a fresh sentence and name the device at work in it",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from Sedona’s own handwritten notes. One thing worth a word: her pun line reads \"words that sound the same but have different meanings\", which describes one kind of pun rather than all of them — a pun can also turn on a single word carrying two meanings at once, with no sound trick. The card here teaches both and the question uses the sound-alike kind, so nothing on the test can catch her out either way. Everything else on both pages checks out, including litotes, which is the term most often written down wrong. Every example in the questions is fresh, so none of them can be answered from memory of her page.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Seventeen devices is a lot to hold at once. The two pairs that actually cost marks are understatement against litotes, and alliteration against anaphora.",
+    "minutes": 18,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Simile",
+     "def": "**Directly compares two things using “like” or “as.”**\n• The word doing the comparing is right there on the page.\n• That is the whole difference between a simile and a metaphor.",
+     "hint": "Like or as — say it out loud and you will hear it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Standard metaphor",
+     "def": "**Implies a comparison between two unlike things, stated outright.**\n• Example: “This place is a zoo.”\n• It says one thing IS another, with no “like” anywhere.",
+     "hint": "It claims the two things are the same thing.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Implied metaphor",
+     "def": "**Compares two things without directly stating the comparison.**\n• Example: “Not knowing anyone, he felt awkward at the party, so he started orbiting around the snack table.”\n• Nobody is called a planet — “orbiting” does all the work.",
+     "hint": "The comparison is smuggled in by a verb.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Extended metaphor",
+     "def": "**Carried through multiple sentences, paragraphs, or whole works.**\n• One comparison, kept running.\n• Length is the test — a single striking line is not extended.",
+     "hint": "It keeps going after you notice it.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Which metaphor is which?",
+     "def": "**Stated outright is standard; hidden inside the wording is implied; kept running is extended.**\n• All three are metaphors, so “metaphor” alone never settles the question.\n• Ask: is it said, is it hinted, or does it continue?",
+     "hint": "Said, hinted, or sustained.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Personification",
+     "def": "**Giving human qualities to an animal, an object or an abstract idea.**\n• Example: “the city that never sleeps.”\n• The thing being given the quality cannot actually have it.",
+     "hint": "Only people can do it, but something else is doing it.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Imagery",
+     "def": "**Used to appeal to one of the five senses.**\n• It is also one of the four routes to an author's tone.\n• Naming a feeling is not imagery; making you sense something is.",
+     "hint": "It reaches you through a sense, not through a statement.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "The five kinds of imagery",
+     "def": "**Visual is sight, auditory is hearing, olfactory is smell, tactile is touch, gustatory is taste.**\n• Olfactory and gustatory are the two most often swapped.\n• Olfactory shares its root with “olfactory nerve” — the nose.",
+     "hint": "Gustatory shares a root with “gusto,” which is about eating.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Hyperbole",
+     "def": "**An exaggerated statement used to emphasize an idea or make a point.**\n• Nobody is meant to believe it literally.\n• It is the opposite move from understatement.",
+     "hint": "Too big on purpose.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Understatement",
+     "def": "**Describing something as having less of a quality than it actually has.**\n• The gap between what is said and what is true is the point.\n• Too small on purpose — the mirror image of hyperbole.",
+     "hint": "Too small on purpose.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Litotes",
+     "def": "**Phrases that express an affirmative by denying its opposite, through understatement.**\n• Example: “That wasn't half bad.”\n• Litotes is a KIND of understatement with a particular shape: a negative of the opposite.",
+     "hint": "Not un-good. Look for the double negative.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Understatement or litotes?",
+     "def": "**All litotes is understatement; not all understatement is litotes.**\n• Litotes needs the denial — “not unkind,” “no small feat,” “wasn't half bad.”\n• Plain understatement just shrinks the truth without any denying.",
+     "hint": "If there is no “not,” it is plain understatement.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Euphemism",
+     "def": "**A softer, more inoffensive word or phrase used as a substitute for a harsh comment.**\n• Example: “Robert was let go from his job.”\n• It protects the listener, or the speaker, from the blunt version.",
+     "hint": "The polite word standing in for the hard one.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Synecdoche",
+     "def": "**A figure of speech in which a part is used to represent a whole, and vice versa.**\n• “All hands on deck” means all people, not all hands.\n• It can run the other way too — “Washington decided” means a few officials there.",
+     "hint": "A piece standing in for the whole thing.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Oxymoron",
+     "def": "**Combines contradictory words with opposing meanings.**\n• Example: “The end of the movie was bittersweet.”\n• The contradiction sits inside one short phrase, side by side.",
+     "hint": "Two words that should not be able to share a phrase.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Pun",
+     "def": "**A play on words, usually on words that sound the same but mean different things.**\n• The joke lives in the sound, or in a word carrying two meanings at once.\n• Both kinds count as a pun.",
+     "hint": "One sound, two meanings, on purpose.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Allusion",
+     "def": "**A reference a writer makes to deepen the reader's understanding of their work.**\n• It borrows everything the reader already knows about the thing referred to.\n• It only works when the reader recognises it, which is a real risk.",
+     "hint": "It points outside the book to bring something in.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Alliteration",
+     "def": "**Repetition of the same sound at the beginning of adjacent or closely connected words.**\n• It is about SOUND, not spelling — “kind cat” alliterates.\n• Close together is part of the definition; scattered repeats do not count.",
+     "hint": "Same opening sound, words side by side.",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "Anaphora",
+     "def": "**Repetition of a word or phrase at the beginning of successive clauses.**\n• It is a favorite of speeches, where the build is the whole effect.\n• What repeats is a word or phrase, not a sound.",
+     "hint": "Each new clause starts the same way.",
+     "from": "source"
+    },
+    {
+     "id": "c19",
+     "term": "Alliteration or anaphora?",
+     "def": "**Alliteration repeats a SOUND across nearby words; anaphora repeats a WORD OR PHRASE across clauses.**\n• One works at the scale of a few syllables, the other at the scale of sentences.\n• Ask what is repeating, and how far apart.",
+     "hint": "A sound in a line, or a phrase across lines.",
+     "from": "source"
+    },
+    {
+     "id": "c20",
+     "term": "Idioms",
+     "def": "**An expression with a figurative or metaphorical meaning.**\n• Example: “Stop beating around the bush.”\n• The literal reading is nonsense, which is how you know it is an idiom.",
+     "hint": "It means something the words do not say.",
+     "from": "source"
+    },
+    {
+     "id": "c21",
+     "term": "Reading any of these",
+     "def": "**Name the device, then say what it is DOING in that sentence.**\n• A test question rarely stops at the label.\n• Every one of these is a choice, and every choice has an effect on tone or mood.",
+     "hint": "The label is half an answer.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device directly compares two things using “like” or “as”?",
+     "opts": [
+      "Simile",
+      "Standard metaphor",
+      "Personification",
+      "Allusion"
+     ],
+     "ans": 0,
+     "hint": "One of these announces the comparison with a word you can point to.",
+     "steps": [
+      "A standard metaphor claims one thing IS another, with no comparing word.",
+      "Personification gives a human quality to something that cannot have it.",
+      "An allusion points outside the work entirely.",
+      "Only one device uses “like” or “as” to compare directly."
+     ],
+     "ex": {
+      "main": "**A simile directly compares two things using “like” or “as.”** That comparing word is the one reliable difference between a simile and a metaphor.",
+      "tip": "If you can delete \"like\" and the sentence becomes a metaphor, it was a simile."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device gives human qualities to an animal, an object or an abstract idea?",
+     "opts": [
+      "Implied metaphor",
+      "Personification",
+      "Standard metaphor",
+      "Understatement"
+     ],
+     "ans": 1,
+     "hint": "Two of these are genuine near-misses. Ask what KIND of quality is being borrowed.",
+     "steps": [
+      "An implied metaphor compares without stating, but the quality borrowed need not be human.",
+      "A standard metaphor says one thing IS another, outright.",
+      "Understatement shrinks a quality rather than lending one.",
+      "Only one device specifically hands a HUMAN quality to something that is not a person."
+     ],
+     "ex": {
+      "main": "**Personification gives human qualities to an animal, an object or an abstract idea.** Abstract ideas count — \"justice demanded an answer\" is personification too.",
+      "tip": "Implied metaphor is the near-miss: it also hides its comparison, but the quality it lends need not be human."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which term names the repetition of a word or phrase at the beginning of successive clauses?",
+     "opts": [
+      "Litotes",
+      "Alliteration",
+      "Anaphora",
+      "Synecdoche"
+     ],
+     "ans": 2,
+     "hint": "One of these works at the scale of whole clauses.",
+     "steps": [
+      "Alliteration repeats a sound across nearby words, not a phrase across clauses.",
+      "Litotes denies an opposite to state something positively.",
+      "Synecdoche swaps a part for a whole.",
+      "Repetition at the start of successive clauses is anaphora."
+     ],
+     "ex": {
+      "main": "**Anaphora repeats a word or phrase at the beginning of successive clauses.** It is the device behind almost every famous speech, because the build IS the effect.",
+      "tip": "Alliteration is its nearest neighbour and repeats a sound rather than a phrase."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sense does olfactory imagery appeal to?",
+     "opts": [
+      "Hearing",
+      "Taste",
+      "Touch",
+      "Smell"
+     ],
+     "ans": 3,
+     "hint": "Think of the olfactory nerve.",
+     "steps": [
+      "Tactile is touch and auditory is hearing.",
+      "Gustatory is taste.",
+      "That leaves one sense unaccounted for.",
+      "Olfactory imagery appeals to smell."
+     ],
+     "ex": {
+      "main": "**Olfactory is smell.** It shares a root with the olfactory nerve, which is the one that carries smell to the brain.",
+      "tip": "Olfactory and gustatory are the pair most often swapped — smell and taste."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sense does gustatory imagery appeal to?",
+     "opts": [
+      "Taste",
+      "Smell",
+      "Touch",
+      "Sight"
+     ],
+     "ans": 0,
+     "hint": "Think of eating something with gusto.",
+     "steps": [
+      "Olfactory is smell and tactile is touch.",
+      "Visual is sight.",
+      "One sense is left over.",
+      "Gustatory imagery appeals to taste."
+     ],
+     "ex": {
+      "main": "**Gustatory is taste**, and it shares a root with \"gusto\" — enthusiasm, originally for food.",
+      "tip": "Visual, auditory, olfactory, tactile, gustatory: sight, hearing, smell, touch, taste."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which term names a figure of speech in which a part is used to represent a whole?",
+     "opts": [
+      "Euphemism",
+      "Synecdoche",
+      "Litotes",
+      "Idiom"
+     ],
+     "ans": 1,
+     "hint": "One of these is about scale — a piece standing in for the thing it belongs to.",
+     "steps": [
+      "A euphemism softens a harsh word.",
+      "Litotes states something positively by denying its opposite.",
+      "An idiom means something its words do not literally say.",
+      "A part standing for a whole is synecdoche."
+     ],
+     "ex": {
+      "main": "**Synecdoche uses a part to represent a whole, and can also run the other way.** \"All hands on deck\" means people; \"Washington announced\" means a few officials there.",
+      "tip": "It is worth learning to say as well as spell: suh-NEK-duh-kee."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which term names an expression whose meaning is figurative rather than literal?",
+     "opts": [
+      "Anaphora",
+      "Allusion",
+      "Idiom",
+      "Oxymoron"
+     ],
+     "ans": 2,
+     "hint": "Try reading each candidate device literally and see which one stops making sense.",
+     "steps": [
+      "An allusion is a reference to something outside the work.",
+      "Anaphora is repetition at the start of clauses.",
+      "An oxymoron joins two contradictory words.",
+      "An expression with a figurative or metaphorical meaning is an idiom."
+     ],
+     "ex": {
+      "main": "**An idiom means something its own words do not say.** \"Beating around the bush\" describes no bush and no beating, which is exactly the tell.",
+      "tip": "Idioms rarely survive translation, which is another way of noticing they are not literal."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “Her handwriting looked like a fence after a storm.”",
+     "opts": [
+      "Hyperbole",
+      "Standard metaphor",
+      "Personification",
+      "Simile"
+     ],
+     "ans": 3,
+     "hint": "Look for a comparing word.",
+     "steps": [
+      "Two unlike things are being compared — handwriting and a fence.",
+      "The comparison is made out loud rather than implied.",
+      "The word “like” is doing the comparing.",
+      "A direct comparison using “like” or “as” is a simile."
+     ],
+     "ex": {
+      "main": "**Simile.** The metaphor version would read \"her handwriting was a fence after a storm\" — same comparison, one word’s difference, different device.",
+      "tip": "Similes are easier to spot than any other device on this list, which makes them free marks."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “By seven o’clock the kitchen was a battlefield.”",
+     "opts": [
+      "Standard metaphor",
+      "Simile",
+      "Implied metaphor",
+      "Idiom"
+     ],
+     "ans": 0,
+     "hint": "The comparison is being made, but how?",
+     "steps": [
+      "A kitchen and a battlefield are genuinely unlike things.",
+      "There is no “like” or “as” anywhere, so it is not a simile.",
+      "The comparison is stated outright rather than hinted at.",
+      "An outright claim that one thing IS another is a standard metaphor."
+     ],
+     "ex": {
+      "main": "**Standard metaphor.** It implies a comparison between two unlike things and says it plainly — the kitchen is not called battlefield-ish, it is called a battlefield.",
+      "tip": "The implied version would never use the word \"battlefield\" at all."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “He bristled at the question, and nobody at the table risked a second one.”",
+     "opts": [
+      "Standard metaphor",
+      "Implied metaphor",
+      "Personification",
+      "Oxymoron"
+     ],
+     "ans": 1,
+     "hint": "Which word is describing him as something he is not?",
+     "steps": [
+      "“Bristled” is what an animal does when its hair stands up.",
+      "He is never actually called an animal anywhere in the sentence.",
+      "So a comparison is being made without being stated.",
+      "A comparison made without directly stating it is an implied metaphor."
+     ],
+     "ex": {
+      "main": "**Implied metaphor.** The whole comparison is carried by one verb, which is what makes implied metaphors easy to read past without noticing them.",
+      "tip": "Personification runs the other way — that would be giving a HUMAN quality to something non-human."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “The old radiator complained all night and finally gave up around four.”",
+     "opts": [
+      "Standard metaphor",
+      "Implied metaphor",
+      "Personification",
+      "Extended metaphor"
+     ],
+     "ans": 2,
+     "hint": "Complaining and giving up are things only one kind of thing can do.",
+     "steps": [
+      "A radiator cannot complain, and it cannot give up either.",
+      "Both are human behaviours being handed to an object.",
+      "No comparison to a second thing is ever made, so no metaphor is involved.",
+      "Giving human qualities to an object is personification."
+     ],
+     "ex": {
+      "main": "**Personification.** Notice it also does real work: two human verbs make the radiator sound tired and old, which no plain description would have done as fast.",
+      "tip": "The three metaphors are all wrong here for one reason: nothing is being compared to anything else."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “I have told you a thousand times to shut the gate.”",
+     "opts": [
+      "Euphemism",
+      "Understatement",
+      "Litotes",
+      "Hyperbole"
+     ],
+     "ans": 3,
+     "hint": "Is the number meant to be believed?",
+     "steps": [
+      "Nobody has literally said this a thousand times.",
+      "The exaggeration is deliberate, not a mistake.",
+      "It is there to emphasize how often the speaker has asked.",
+      "An exaggerated statement used to make a point is hyperbole."
+     ],
+     "ex": {
+      "main": "**Hyperbole.** It is an exaggerated statement used to emphasize an idea — and the exaggeration is the emphasis, which is why \"several times\" would land differently.",
+      "tip": "Understatement is the mirror image, and the two are worth learning as a pair."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? A company announces that forty employees are now “between opportunities.”",
+     "opts": [
+      "Euphemism",
+      "Litotes",
+      "Idiom",
+      "Allusion"
+     ],
+     "ans": 0,
+     "hint": "What is the blunt version of the sentence?",
+     "steps": [
+      "The blunt version is that forty people lost their jobs.",
+      "The phrase chosen is gentler than the blunt version.",
+      "It is standing in as a substitute for the harsh comment.",
+      "A softer word substituted for a harsh one is a euphemism."
+     ],
+     "ex": {
+      "main": "**Euphemism.** The point of one is to protect somebody — sometimes the listener, and quite often the speaker.",
+      "tip": "Euphemism is worth watching for in real writing, because noticing one usually tells you what is really being said."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “The room filled with a deafening silence.”",
+     "opts": [
+      "Pun",
+      "Oxymoron",
+      "Synecdoche",
+      "Anaphora"
+     ],
+     "ans": 1,
+     "hint": "Read the two key words next to each other and ask whether they can both be true.",
+     "steps": [
+      "Silence is the absence of sound.",
+      "Deafening describes an overwhelming amount of sound.",
+      "The two words contradict each other and sit side by side.",
+      "Contradictory words with opposing meanings in one phrase is an oxymoron."
+     ],
+     "ex": {
+      "main": "**Oxymoron.** The contradiction is the meaning — it describes a silence so total it is as hard to ignore as a noise would be.",
+      "tip": "Bittersweet, jumbo shrimp and deafening silence are the three you will meet most often."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work? “The baker finally quit, because he kneaded the dough far more than he needed the dough.”",
+     "opts": [
+      "Oxymoron",
+      "Idiom",
+      "Pun",
+      "Anaphora"
+     ],
+     "ans": 2,
+     "hint": "Say the sentence out loud.",
+     "steps": [
+      "“Kneaded” and “needed” sound identical.",
+      "They mean two completely different things.",
+      "The sentence uses both on purpose, in one breath.",
+      "Words that sound the same carrying different meanings is a pun."
+     ],
+     "ex": {
+      "main": "**Pun.** The joke lives in the sound — which is why a pun almost always has to be heard rather than only read.",
+      "tip": "A pun can also work on one word carrying two meanings at once, without any sound trick at all."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of imagery is at work? “The hallway smelled of wet wool and burnt coffee.”",
+     "opts": [
+      "Auditory",
+      "Gustatory",
+      "Tactile",
+      "Olfactory"
+     ],
+     "ans": 3,
+     "hint": "Which sense is the sentence reaching for?",
+     "steps": [
+      "Nothing here is being heard or touched.",
+      "Nothing is being eaten or tasted either.",
+      "The whole sentence is built on what the hallway smelled of.",
+      "Imagery appealing to smell is olfactory."
+     ],
+     "ex": {
+      "main": "**Olfactory.** Smell is the sense writers reach for least and the one that carries memory hardest, which is why a line like this does so much work.",
+      "tip": "Gustatory would be the near-miss: coffee can be tasted, but here it is only being smelled."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "After a kitchen fire destroyed half a house, the owner says, “We had a little trouble with the stove.” Which device is that?",
+     "opts": [
+      "Understatement, with no denial",
+      "Litotes, built on a denial",
+      "Euphemism, a softer substitute",
+      "Hyperbole, an exaggeration"
+     ],
+     "ans": 0,
+     "hint": "Is anything being denied, or softened, or exaggerated?",
+     "steps": [
+      "Nothing is being exaggerated, so it is not hyperbole.",
+      "No opposite is being denied — there is no “not” anywhere — so it is not litotes.",
+      "No harsh word has been replaced with a gentler one, so it is not a euphemism.",
+      "Describing something as having less of a quality than it has is understatement."
+     ],
+     "ex": {
+      "main": "**Understatement.** Litotes is the tempting wrong answer, but litotes needs the denial of an opposite — \"that was no small fire\" would have been litotes.",
+      "tip": "All litotes is understatement; not all understatement is litotes. That is the only bit worth memorising."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "What makes litotes a particular kind of understatement rather than understatement in general?",
+     "opts": [
+      "It exaggerates the quality it is describing",
+      "It states the affirmative by denying its opposite",
+      "It replaces a harsh word with a softer word",
+      "It repeats a sound at the start of two words"
+     ],
+     "ans": 1,
+     "hint": "Two of these describe completely different devices.",
+     "steps": [
+      "Exaggeration is hyperbole, which is understatement’s opposite.",
+      "Replacing a harsh word is euphemism.",
+      "Repeating an opening sound is alliteration.",
+      "Litotes has a specific shape: it affirms by denying the opposite."
+     ],
+     "ex": {
+      "main": "**Litotes expresses an affirmative by denying its opposite, through understatement.** \"Not unfamiliar,\" \"no small feat,\" \"wasn’t half bad\" — the denial is what makes it litotes.",
+      "tip": "Look for a \"not,\" a \"no,\" or an \"un-\" doing the work."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A speech opens three sentences in a row with the words “We will.” Which device is that?",
+     "opts": [
+      "Hyperbole",
+      "Alliteration",
+      "Anaphora",
+      "Allusion"
+     ],
+     "ans": 2,
+     "hint": "What exactly is repeating — a sound, or a phrase?",
+     "steps": [
+      "A whole phrase is repeating, not a single opening sound.",
+      "The repeats are at the start of successive clauses.",
+      "Alliteration would mean nearby words sharing an opening sound.",
+      "Repetition of a phrase at the start of successive clauses is anaphora."
+     ],
+     "ex": {
+      "main": "**Anaphora.** The reason speeches use it is that each repetition makes the next one land harder — the effect is cumulative and disappears if you use it once.",
+      "tip": "Alliteration is the near-miss: a sound in a line, against a phrase across lines."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which device is at work in this passage?",
+     "opts": [
+      "Personification",
+      "Standard metaphor",
+      "Simile",
+      "Extended metaphor"
+     ],
+     "ans": 3,
+     "hint": "Count how far the comparison runs.",
+     "steps": [
+      "The project is called a ship in the first sentence.",
+      "The next sentence keeps going with water and bailing.",
+      "The one after that adds a course and lifeboats.",
+      "One comparison carried through multiple sentences is an extended metaphor."
+     ],
+     "ex": {
+      "main": "**Extended metaphor.** A standard metaphor would have stopped after \"the project was a ship\"; what makes this extended is that every following sentence stays inside it.",
+      "tip": "Extended metaphors can run for a whole chapter, or a whole book."
+     },
+     "passage": "The project was a ship. For two months it took on water faster than anyone could bail, and by October the crew had stopped arguing about the course and started arguing about the lifeboats."
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A captain calls for “all hands on deck.” What is that phrase doing?",
+     "opts": [
+      "Naming a part to stand for whole people",
+      "Naming a whole to stand for one small part",
+      "Replacing a harsh phrase with a gentler one",
+      "Exaggerating how many people are needed"
+     ],
+     "ans": 0,
+     "hint": "Hands are not what the captain actually wants on the deck.",
+     "steps": [
+      "The captain needs whole sailors, not detached hands.",
+      "A hand is a part of a person.",
+      "The part is being used to mean the entire person.",
+      "A part standing for a whole is synecdoche."
+     ],
+     "ex": {
+      "main": "**Synecdoche, running from part to whole.** It can also run the other way — \"Washington decided\" uses a whole city to mean a handful of officials in it.",
+      "tip": "Hands for workers is the oldest example there is, and it survives in \"farmhand\" and \"ranch hand.\""
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A writer describes a character’s cluttered attic as “her own Pandora’s box.” What is that reference doing?",
+     "opts": [
+      "Comparing two things directly using “like” or “as”",
+      "Deepening understanding by pointing outside the work",
+      "Giving a human quality to something inanimate",
+      "Repeating an opening sound across nearby words"
+     ],
+     "ans": 1,
+     "hint": "The phrase borrows something the reader is assumed to already know.",
+     "steps": [
+      "There is no “like” or “as,” so it is not a simile.",
+      "The attic is not given any human quality.",
+      "No sound is being repeated.",
+      "A reference that borrows outside knowledge to deepen understanding is an allusion."
+     ],
+     "ex": {
+      "main": "**Allusion.** It imports a whole story in three words — a box that should not be opened, and everything that escaped when it was.",
+      "tip": "It only works if the reader knows the reference, which is the risk every allusion takes."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

@@ -61,7 +61,8 @@ def _balance(Q):
             x['ans'] = want
 
 def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, nextUp,
-          path, srcName, source, offset_hours=4, round_=None, order_=None):
+          path, srcName, source, offset_hours=4, round_=None, order_=None,
+          prep_=False, libv_=None):
     errs = []
     for c in C:
         if not c['def'].startswith('**'): errs.append('%s: def not bold-first' % c['id'])
@@ -117,6 +118,12 @@ def build(app, C, Q, uid, title, classId, summary, why, objectives, parentNote, 
     }
     if round_: unit['round'] = round_
     if order_: unit['order'] = order_
+    # prep is an EXPLICIT content flag and is never inferred from the calendar
+    # (v139) — the gold band says what a unit IS, not when it matters. libv
+    # ships at 1 on a first build so a later content fix has something to bump
+    # and can win the approval race (v88) without re-minting the file.
+    if prep_: unit['prep'] = True
+    if libv_: unit['libv'] = libv_
     # REPO is this repo's root; a sibling app is next to it. The old absolute
     # container path silently wrote nowhere useful on any other machine.
     root = REPO if os.path.basename(REPO) == app else os.path.join(os.path.dirname(REPO), app)

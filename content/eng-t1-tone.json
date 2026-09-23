@@ -1,0 +1,612 @@
+{
+ "v": 4,
+ "records": {
+  "unit-eng-t1-tone": {
+   "id": "unit-eng-t1-tone",
+   "type": "unit",
+   "updatedAt": 1790113115695,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Test 1 · 4 Tone and Mood",
+   "srcName": "English Test 1 notes (Drive, 2026-09-23)",
+   "source": "Test 1 notes · Tone and Mood (student’s own notes)",
+   "summary": {
+    "text": "Tone as the author’s attitude and mood as the reader’s emotion; the four routes to each; the three things tone is NOT (character, narrator, mood); the six things tone does; and both word banks.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Tone and mood are the two terms most often swapped for each other on a test, and the fix is one question you can ask every time: whose feeling is this?",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define tone and mood and tell them apart reliably",
+     "from": "source"
+    },
+    {
+     "text": "Name the four routes to tone and the four routes to mood",
+     "from": "source"
+    },
+    {
+     "text": "Say what tone is NOT, and why each one is on that list",
+     "from": "source"
+    },
+    {
+     "text": "Read a short passage and name its tone or its mood",
+     "from": "added"
+    },
+    {
+     "text": "Choose a word from the right bank for the right job",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from Sedona’s own handwritten notes, and the pages had to be rendered as images to get one detail right: Drive’s scan of her handwriting filed \"style and voice\" under \"Tone is NOT\", where it would have taught the exact opposite. Her page has it under \"why use tone\", which is correct, and a question here pins it. The three things tone is genuinely not — character, narrator, mood — are the whole difficulty of this lesson, and the last five questions are all built on them. Her word banks are reproduced exactly as she wrote them; every passage in the questions is original.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Three short passages in here. Name the feeling first, then work out which choices on the page built it.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Tone",
+     "def": "**The attitude the author is trying to convey to their audience.**\n• It belongs to the AUTHOR, not to anyone inside the story.\n• Every tone word names an attitude somebody is holding.",
+     "hint": "Tone is how the author feels about it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Determining tone",
+     "def": "**Four things: diction, imagery, details and syntax.**\n• Diction is the choice of words; imagery is words that appeal to the senses.\n• Details are the words the author chose to include; syntax impacts the pacing of a story.",
+     "hint": "What words, what senses, what was kept, what shape.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Why use tone",
+     "def": "**Six reasons: it creates atmosphere, develops character, develops plot, expresses theme, engages the reader, and establishes style and voice.**\n• Style and voice belongs HERE — it is something tone DOES.\n• It is not on the list of things tone is not.",
+     "hint": "Six jobs, and style is one of them.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Tone is not: character",
+     "def": "**Tone belongs to the author, never to a person inside the story.**\n• A cruel character can appear in a compassionate book.\n• The author's attitude toward that character is the tone.",
+     "hint": "The villain has a mood. The book has a tone.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Tone is not: narrator",
+     "def": "**A narrator is a voice inside the telling; the author stands behind it.**\n• A cheerful narrator can sit inside a grim book — often on purpose.\n• “Who is speaking” never answers “what does the author think.”",
+     "hint": "The narrator is a costume the author is wearing.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Tone is not: mood",
+     "def": "**Tone is what the author feels; mood is what the reader is made to feel.**\n• They often match, which is exactly why they blur.\n• They can also disagree, and a writer can do that deliberately.",
+     "hint": "Whose feeling is it? That settles it every time.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Positive tone words",
+     "def": "**Admiring, calm, candid, benevolent, inspirational, modest, respectful.**\n• Every one of these describes an attitude somebody is holding.\n• Candid is the useful one — it means honest, including about yourself.",
+     "hint": "These are attitudes, not atmospheres.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Negative tone words",
+     "def": "**Apathetic, confused, cruel, diabolical, foreboding, grim, pretentious, naive.**\n• Apathetic means not caring, which is itself an attitude.\n• Foreboding is an attitude that is warning you something is coming.",
+     "hint": "Naive is negative here because it means not seeing clearly.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Mood",
+     "def": "**The emotion the author is trying to evoke from the reader.**\n• Mood is more than just a statement of feeling.\n• A line that SAYS “she was sad” has stated a feeling, not built a mood.",
+     "hint": "Mood is how the page makes YOU feel.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Determining mood",
+     "def": "**Four things: setting, figurative language, diction, and genre and plot.**\n• Diction appears on BOTH lists — it shapes tone and mood at once.\n• Setting and genre are on the mood list only.",
+     "hint": "Where it happens, how it is said, what kind of story it is.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Positive mood words",
+     "def": "**Cheerful, romantic, idyllic, whimsical, lighthearted, centered, sentimental.**\n• Idyllic means peaceful and perfect, usually somewhere rural.\n• These describe the air in a room, not a person's opinion.",
+     "hint": "These are atmospheres, not attitudes.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Negative mood words",
+     "def": "**Gloomy, ominous, tense, lonely, pessimistic, panicked, uneasy.**\n• Ominous is mood's near-twin for foreboding on the tone list.\n• Uneasy is the quiet one — something is wrong and you cannot name it.",
+     "hint": "Ominous is what foreboding writing produces.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Tone and mood, side by side",
+     "def": "**Ask whose feeling it is: the author's is tone, the reader's is mood.**\n• One question separates them every time, and it is always the same question.\n• The two word banks barely overlap, which is a clue in itself.",
+     "hint": "Author = tone. Audience = mood.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Mood is not a statement of feeling",
+     "def": "**Naming an emotion is not the same as producing one.**\n• “The room was scary” states a feeling; a dark corridor and a door that should be locked produces one.\n• Which is why setting and figurative language are on the mood list.",
+     "hint": "Stating is telling. Mood is built.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Whose attitude does tone describe?",
+     "opts": [
+      "The author’s",
+      "The narrator’s",
+      "The reader’s",
+      "The main character’s"
+     ],
+     "ans": 0,
+     "hint": "Three of these are explicitly named as things tone is NOT.",
+     "steps": [
+      "The reader’s feeling has its own name — mood.",
+      "A character is inside the story; tone is not a character.",
+      "A narrator is a voice inside the telling, and tone is not the narrator either.",
+      "Tone is the attitude the author conveys to their audience."
+     ],
+     "ex": {
+      "main": "**Tone is the author’s attitude toward the audience and the subject.** Character, narrator and mood are the three things it is specifically not.",
+      "tip": "That short \"tone is not\" list is doing real work — those are the three answers people actually give."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Whose emotion does mood describe?",
+     "opts": [
+      "The author’s",
+      "The reader’s",
+      "The narrator’s",
+      "A minor character’s"
+     ],
+     "ans": 1,
+     "hint": "Mood is about what the writing does to somebody.",
+     "steps": [
+      "Mood refers to the emotion the author is trying to evoke.",
+      "Evoke from whom? From the person reading.",
+      "The author’s own attitude has a different name — tone.",
+      "So mood lives on the reader’s side of the page."
+     ],
+     "ex": {
+      "main": "**Mood is the emotion the author is trying to evoke from the reader.** Tone is what the author feels; mood is what you are made to feel.",
+      "tip": "Whose feeling is it — that one question settles nearly every tone-or-mood item."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which set of four is used to determine an author’s tone?",
+     "opts": [
+      "Exposition, rising action, climax, theme",
+      "Setting, figurative language, diction, genre",
+      "Diction, imagery, details, syntax",
+      "Rhythm, rhyme, meter, stanza"
+     ],
+     "ans": 2,
+     "hint": "One of the wrong sets is the MOOD list, which shares exactly one item with the right answer.",
+     "steps": [
+      "One set belongs to plot structure, not to tone.",
+      "One set belongs to poetry’s sound, not to tone.",
+      "One set is the list for determining mood, and it shares diction with the tone list.",
+      "The tone list is diction, imagery, details and syntax."
+     ],
+     "ex": {
+      "main": "**Diction is the choice of words, imagery appeals to the senses, details are what the author chose to include, and syntax affects the pacing.** All four are routes to the same thing.",
+      "tip": "Diction is on both lists — that overlap is the reason they get confused."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which set of four is used to determine a piece’s mood?",
+     "opts": [
+      "Grammar, spelling, punctuation, tense",
+      "Diction, imagery, details, and syntax",
+      "Exposition, climax, resolution, and theme",
+      "Setting, figurative language, diction, genre"
+     ],
+     "ans": 3,
+     "hint": "Two of the four routes to mood are about the world of the story rather than its words.",
+     "steps": [
+      "Mechanics like spelling do not build an emotion.",
+      "Plot stages describe structure, not atmosphere.",
+      "One wrong set is the tone list, which again shares diction.",
+      "Mood comes from setting, figurative language, diction, and genre and plot."
+     ],
+     "ex": {
+      "main": "**Setting and genre are on the mood list only** — where a scene happens and what kind of story it is do a great deal of the work of making you feel something.",
+      "tip": "A dark corridor in a horror novel and the same corridor in a comedy do not produce the same feeling."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is a negative MOOD word?",
+     "opts": [
+      "Ominous",
+      "Admiring",
+      "Candid",
+      "Idyllic"
+     ],
+     "ans": 0,
+     "hint": "Three of these name somebody’s attitude, or an atmosphere that is pleasant.",
+     "steps": [
+      "Admiring and candid both name attitudes a person holds — those are tone words.",
+      "Idyllic describes an atmosphere, so it is a mood word, but a positive one.",
+      "That leaves one word describing an atmosphere that is unpleasant.",
+      "Ominous is a negative mood word."
+     ],
+     "ex": {
+      "main": "**Ominous means the air feels like something bad is coming.** It is an atmosphere rather than an opinion, which is what makes it mood rather than tone.",
+      "tip": "Its tone counterpart is foreboding — an author writing foreboding prose produces an ominous mood."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is a positive TONE word?",
+     "opts": [
+      "Whimsical",
+      "Benevolent",
+      "Tense",
+      "Diabolical"
+     ],
+     "ans": 1,
+     "hint": "Two of these describe an atmosphere, not an attitude.",
+     "steps": [
+      "Whimsical and tense both describe how a scene feels to read — those are mood words.",
+      "Diabolical does name an attitude, so it is a tone word, but not a positive one.",
+      "That leaves a word naming a kindly attitude.",
+      "Benevolent is a positive tone word."
+     ],
+     "ex": {
+      "main": "**Benevolent means well-meaning toward somebody**, which is an attitude, so it belongs on the tone list rather than the mood list.",
+      "tip": "Sorting a word by asking \"is this an attitude or an atmosphere\" works better than memorising both banks."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What tone is this author taking toward the subject?",
+     "opts": [
+      "Diabolical",
+      "Apathetic",
+      "Admiring",
+      "Pretentious"
+     ],
+     "ans": 2,
+     "hint": "The author chose which details to include. What do those choices add up to?",
+     "steps": [
+      "The details kept are effort, skill and modesty.",
+      "Nothing is said outright about what the author thinks of her.",
+      "But no author includes those three details by accident.",
+      "The attitude they build is admiration."
+     ],
+     "ex": {
+      "main": "**Admiring.** This is the \"details\" route to tone at work — the author never states an opinion, but chooses only the facts that build one.",
+      "tip": "An apathetic author would have given the same events two flat lines and moved on."
+     },
+     "passage": "Every morning before dawn she was already at the bench, sleeves rolled, working on the engine nobody else had managed to fix. She never once mentioned it to anyone."
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What mood is this passage building?",
+     "opts": [
+      "Sentimental",
+      "Idyllic",
+      "Whimsical",
+      "Ominous"
+     ],
+     "ans": 3,
+     "hint": "Nothing bad has actually happened yet. What are you expecting anyway?",
+     "steps": [
+      "The setting is a dark corridor with failing lights.",
+      "A door that should have been locked opens on its own.",
+      "The passage then stops, giving you nothing to settle on.",
+      "That combination evokes a feeling that something bad is coming."
+     ],
+     "ex": {
+      "main": "**Ominous.** Notice how much of this comes from setting — one of the four routes to mood — rather than from any word naming an emotion.",
+      "tip": "The passage never says \"frightening.\" A mood that had to say so would not be much of a mood."
+     },
+     "passage": "The corridor lights flickered twice and went out. Somewhere below, a door that should have been locked swung slowly open, and then there was nothing at all."
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What tone is this writer taking?",
+     "opts": [
+      "Candid",
+      "Pretentious",
+      "Foreboding",
+      "Cruel"
+     ],
+     "ans": 0,
+     "hint": "The writer had the option of looking better than this. What did they do instead?",
+     "steps": [
+      "The report lists what failed alongside what worked.",
+      "It also admits to what the writer still does not understand.",
+      "No attempt is made to present the work as more finished than it is.",
+      "Honesty about your own limits is a candid tone."
+     ],
+     "ex": {
+      "main": "**Candid.** Candid is honest, including about yourself — which is exactly what a pretentious tone would have refused.",
+      "tip": "Pretentious is the near-miss here, and it is the opposite choice about the same material."
+     },
+     "passage": "The report lists what worked, what failed, and what the writer still does not understand. It makes no attempt to look better than it is."
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A narrator cheerfully describes a town where nobody locks a door, while a reader keeps noticing how many houses stand empty. Which term names the reader’s uneasy feeling?",
+     "opts": [
+      "Tone",
+      "Mood",
+      "Diction",
+      "Syntax"
+     ],
+     "ans": 1,
+     "hint": "Whose feeling is being described in the question?",
+     "steps": [
+      "The cheerfulness belongs to the narrator’s voice.",
+      "The unease belongs to the person reading.",
+      "A feeling evoked in the reader has one name.",
+      "That name is mood."
+     ],
+     "ex": {
+      "main": "**Mood, because it is the reader’s feeling.** This is also a clean example of tone and mood pulling apart on purpose — a cheerful surface producing an uneasy reader.",
+      "tip": "Writers do this deliberately, and spotting the gap is usually the whole point of the question."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An author writes about a family’s ordinary Sunday in a way that quietly warns you something is coming. Which tone word names that?",
+     "opts": [
+      "Apathetic",
+      "Benevolent",
+      "Foreboding",
+      "Modest"
+     ],
+     "ans": 2,
+     "hint": "The author is holding an attitude about what is ahead, not about the family.",
+     "steps": [
+      "Benevolent and modest are both warm attitudes, and nothing here is warm.",
+      "Apathetic would mean the author did not care, but this author is signalling hard.",
+      "The attitude on the page is a warning.",
+      "A tone that warns of something coming is foreboding."
+     ],
+     "ex": {
+      "main": "**Foreboding.** It sits on the negative tone list, and it is the attitude that produces an ominous mood in a reader.",
+      "tip": "Pairing foreboding with ominous is worth memorising — they are the tone and mood sides of one effect."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student writes “The passage made me feel sad,” and her teacher says that states a feeling rather than describing mood. What is missing?",
+     "opts": [
+      "A count of how many pages it covers",
+      "A quotation drawn from a later chapter",
+      "The name of the book’s actual narrator",
+      "How the writing produces that feeling"
+     ],
+     "ans": 3,
+     "hint": "Mood is described as being more than just a statement of feeling. More in what way?",
+     "steps": [
+      "Naming an emotion reports a result.",
+      "It says nothing about what caused the result.",
+      "Mood is built out of setting, figurative language, diction, and genre and plot.",
+      "So a description of mood has to point at what did the building."
+     ],
+     "ex": {
+      "main": "**Mood is more than just a statement of feeling.** \"It made me sad\" is a reaction; describing mood means showing which choices on the page produced it.",
+      "tip": "The same rule is why \"the tone is sad\" alone rarely earns full marks either."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A writer breaks a chase scene into a run of very short sentences. Which route to tone is she using?",
+     "opts": [
+      "Syntax",
+      "Imagery",
+      "Details",
+      "Diction"
+     ],
+     "ans": 0,
+     "hint": "She has changed the shape of the sentences, not the words in them.",
+     "steps": [
+      "Diction would mean choosing different words.",
+      "Imagery would mean words appealing to the senses.",
+      "Details would mean changing what is included.",
+      "Sentence shape and length affect the pacing, and that is syntax."
+     ],
+     "ex": {
+      "main": "**Syntax impacts the pacing of a story**, which is why it earns a place on the tone list beside diction, imagery and details.",
+      "tip": "Long, winding sentences do the opposite job — the same scene can be made to feel slow."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A boastful villain narrates a chapter, and the writing around him makes clear he is not to be admired. Where does the tone live?",
+     "opts": [
+      "In the villain’s own attitude toward himself",
+      "In the author’s attitude toward the villain",
+      "In the reader’s reaction to the whole chapter",
+      "In the narrator’s choice of boastful vocabulary"
+     ],
+     "ans": 1,
+     "hint": "Two of the wrong answers are named outright as things tone is not.",
+     "steps": [
+      "Tone is not a character, so the villain’s self-regard is not it.",
+      "Tone is not the narrator, so his vocabulary is not it either.",
+      "Tone is not mood, so the reader’s reaction is a different thing.",
+      "What is left is the author’s attitude, which is what tone means."
+     ],
+     "ex": {
+      "main": "**Tone is the author’s attitude, which can sit in direct opposition to the narrator’s.** A book can let a character praise himself while the writing around him disagrees.",
+      "tip": "This gap is how irony works, and it is why \"tone is not the narrator\" is on the list at all."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Diction appears on the tone list and on the mood list. What follows from that?",
+     "opts": [
+      "Mood cannot be judged without the tone",
+      "Tone and mood always turn out the same",
+      "One word choice can shape both at once",
+      "Diction matters more than any other route"
+     ],
+     "ans": 2,
+     "hint": "Sharing one route is not the same as being the same thing.",
+     "steps": [
+      "Tone has three routes that mood does not: imagery, details and syntax.",
+      "Mood has three routes that tone does not: setting, figurative language, and genre and plot.",
+      "So they overlap in one place and separate everywhere else.",
+      "A single word choice can move both, without making them identical."
+     ],
+     "ex": {
+      "main": "**Diction is the one shared route, which is why it is the most efficient thing to change** — and why tone and mood so often agree without being the same thing.",
+      "tip": "When they disagree, it is usually because the other six routes are pulling in different directions."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two readers agree a chapter feels tense but disagree about whether the author sounds sympathetic. Which question would settle the disagreement?",
+     "opts": [
+      "How many of the sentences run longer than a line?",
+      "What emotion did the chapter leave each of you with?",
+      "Which character does the most speaking in the scene?",
+      "What attitude do the author’s word choices carry?"
+     ],
+     "ans": 3,
+     "hint": "They already agree on one of the two things. Which one is still open?",
+     "steps": [
+      "\"Feels tense\" is a statement about mood, and they agree on it.",
+      "What is disputed is whether the author sounds sympathetic, which is tone.",
+      "Asking about the emotion again would only re-answer the settled half.",
+      "Tone is reached through diction, imagery, details and syntax."
+     ],
+     "ex": {
+      "main": "**The open question is about tone, so it has to be answered with tone’s own evidence.** Agreeing on mood tells you nothing about the author’s attitude.",
+      "tip": "Noticing which of the two is actually being argued about is half the work on questions like this."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "An author gives an ordinary farmhouse warm light, soft sounds and a slow pace. Which pairing describes what has been built?",
+     "opts": [
+      "An idyllic mood, from setting and diction",
+      "A grim tone, built from syntax and details",
+      "A naive tone, built from imagery and plot",
+      "A panicked mood, from genre and setting"
+     ],
+     "ans": 0,
+     "hint": "Name the feeling first, then check which routes produced it.",
+     "steps": [
+      "Warm light and soft sounds describe a place, which is setting.",
+      "\"Warm\" and \"soft\" are word choices, which is diction.",
+      "The feeling those produce in a reader is peaceful and a little perfect.",
+      "Idyllic is the mood word for that, and setting and diction are both on the mood list."
+     ],
+     "ex": {
+      "main": "**Idyllic, built from setting and diction — both genuine routes to mood.** The wrong pairings each name a feeling the description does not support, or a route from the wrong list.",
+      "tip": "Check both halves of an answer like this: the right feeling reached by the wrong route is still wrong."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Establishing style and voice is listed as one of the things tone DOES. What does that mean in practice?",
+     "opts": [
+      "A writer has to keep one single tone in every book",
+      "A consistent attitude is part of how a writer sounds",
+      "Style can stand in for describing a setting at all",
+      "Voice is decided by the narrator rather than by the author"
+     ],
+     "ans": 1,
+     "hint": "Think about what makes two books by the same author recognisable as hers.",
+     "steps": [
+      "Tone is the attitude an author conveys.",
+      "An author who takes similar attitudes across their work becomes recognisable for it.",
+      "That recognisability is what \"style and voice\" names.",
+      "So establishing style is something tone does, alongside atmosphere, character, plot, theme and engagement."
+     ],
+     "ex": {
+      "main": "**Style and voice is one of the six reasons to use tone** — not something tone is not. An author’s habitual attitude is a large part of what makes their writing sound like theirs.",
+      "tip": "It sits on the list beside creating atmosphere, developing character and plot, expressing theme, and engaging the reader."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

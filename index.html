@@ -1693,7 +1693,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v193 · the note moves';
+const APP_VERSION = 'v194 · English Test 1';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3420,7 +3420,10 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/bio-unit-3-cells.json',
   'content/bio-sg-test1.json', 'content/phys-ch3-describing-motion.json',
   'content/phys-k2-vectors.json', 'content/phys-k2-projectiles.json',
-  'content/phys-k2-quiz1-review.json', 'content/phys-k2-lab.json'];
+  'content/phys-k2-quiz1-review.json', 'content/phys-k2-lab.json',
+  'content/eng-t1-plot.json', 'content/eng-t1-context.json', 'content/eng-t1-diction.json',
+  'content/eng-t1-tone.json', 'content/eng-t1-fig.json', 'content/eng-t1-sym.json',
+  'content/eng-t1-tkam.json'];
 
 /* ---------- The unit library ----------
    Unit files I publish ship inside the app itself (content/ on the same

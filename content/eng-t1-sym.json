@@ -1,0 +1,584 @@
+{
+ "v": 4,
+ "records": {
+  "unit-eng-t1-sym": {
+   "id": "unit-eng-t1-sym",
+   "type": "unit",
+   "updatedAt": 1790113741097,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Test 1 · 6 Symbolism and Motifs",
+   "srcName": "English Test 1 notes (Drive, 2026-09-23)",
+   "source": "Test 1 notes · Symbolism and Motifs (student’s own notes)",
+   "summary": {
+    "text": "What a symbol is, the traditional meanings of numbers, nature and weather, symbols in life and in three books her class has read, what a motif is and how it differs from a symbol and from a theme, and why writers use both.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Symbol and motif are the two terms an essay question is most likely to ask her to USE rather than define, and the difference between them is one word: repetition.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define a symbol and a motif and tell them apart",
+     "from": "source"
+    },
+    {
+     "text": "Recall the traditional meanings for numbers, nature and weather",
+     "from": "source"
+    },
+    {
+     "text": "Say why writers use symbols and motifs",
+     "from": "source"
+    },
+    {
+     "text": "Read a scene and say what an object is carrying",
+     "from": "added"
+    },
+    {
+     "text": "Separate a motif from the theme it leads back to",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from Sedona’s own handwritten notes, and the pages check out throughout. One teaching choice worth naming: her notes give the traditional meanings as a list, and this unit adds a card and a question saying outright that the list is a starting point rather than a key — rain means despair by tradition and relief to a farmer in a drought. That is not a correction to anything on her page; it is the step between memorising the list and being able to use it on a book, which is what an essay question will actually ask for. Her class’s three literature examples (Flipped, the Frederick Douglass narrative, A Midsummer Night’s Dream) are on the cards exactly as she has them.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "The traditional meanings are quick to learn. Spend the time instead on symbol against motif, and motif against theme.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Symbol",
+     "def": "**Something used to represent an idea.**\n• The object stays itself and also stands for something larger.\n• A symbol can appear once and still be a symbol.",
+     "hint": "A thing, plus an idea riding on it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Intangible symbols: numbers",
+     "def": "**Zero is mystery or emptiness, thirteen is evil and misfortune, three signifies fulfillment.**\n• These are traditional associations, carried by centuries of use.\n• A writer can lean on them without explaining them.",
+     "hint": "Three is the number that completes something.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Nature symbols",
+     "def": "**Dawn is new beginnings, light is knowledge, truth and safety, darkness is evil and ignorance, flowers are beauty and youth.**\n• Seasons carry meaning too — spring for beginnings, winter for endings.\n• Light and darkness are the oldest paired opposites in literature.",
+     "hint": "Dawn is where the day begins, so it is where things begin.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Weather symbols",
+     "def": "**Fog and mist are isolation, rain is sadness or despair, wind and storms are violence, lightning is power and strength.**\n• Weather is the easiest symbol for a writer to put on a page unnoticed.\n• Which is exactly why it is worth noticing.",
+     "hint": "Fog cuts you off from everything. That is isolation.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Symbols in life",
+     "def": "**Signs and flags are symbols you already read fluently every day.**\n• A red octagon means stop before you have read the word.\n• Nobody thinks a flag is a country, and nobody is confused by that.",
+     "hint": "You have been reading symbols since long before English class.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Symbols in literature",
+     "def": "**In Flipped the eggs symbolize friendship; in the Narrative of the Life of Frederick Douglass the white-sailed ships represent freedom.**\n• A Midsummer Night's Dream uses the love potion for how arbitrary love can be.\n• Three books, three ordinary objects, three large ideas.",
+     "hint": "An egg, a sail and a potion.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Why use symbols",
+     "def": "**They help a reader visualize complex ideas and track the story's progress.**\n• An idea is hard to hold; an object is easy.\n• Watching an object change across a book is one way of watching the story move.",
+     "hint": "It gives an abstract idea something to sit on.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Motif",
+     "def": "**A concrete object or idea that repeats throughout the text.**\n• Motifs have deeper meanings that lead back to the theme.\n• Repetition is the definition, not a bonus feature.",
+     "hint": "If it only happens once, it is not a motif.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Motif examples",
+     "def": "**In To Kill a Mockingbird the mockingbird stands for innocent people; in A Midsummer Night's Dream the forest stands for chaos and confusion.**\n• Both return again and again rather than appearing once.\n• Both point at what their book is actually about.",
+     "hint": "A bird and a wood, each turning up over and over.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Why use motifs",
+     "def": "**They help the author and the reader organize the themes of the work.**\n• They weave the parts of a text together.\n• They remind a reader of the theme through vivid and memorable imagery.",
+     "hint": "A thread running through, holding the parts together.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Symbol or motif?",
+     "def": "**A symbol can appear once; a motif has to repeat.**\n• Every motif is doing symbolic work, so “symbol” is never the wrong word for one.\n• But only repetition earns the word motif.",
+     "hint": "Count the appearances. That settles it.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Motif or theme?",
+     "def": "**A motif is concrete and repeats; the theme is the idea it leads back to.**\n• The mockingbird is the motif; what a book says about harming the innocent is the theme.\n• You can point at a motif. You can only state a theme.",
+     "hint": "One you can draw. One you can only say.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "The list is a starting point",
+     "def": "**Traditional meanings tell you what to check, never what to conclude.**\n• Rain is despair in one book and relief after a drought in another.\n• The book you are actually reading always outranks the list.",
+     "hint": "Check the list, then check the book.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Reading a symbol well",
+     "def": "**Say what the object is, what idea it carries, and how you know.**\n• The “how you know” is the evidence, and it is where the marks are.\n• Without it, an interpretation is a guess with a confident voice.",
+     "hint": "Object, idea, evidence.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does a symbol do?",
+     "opts": [
+      "Represents an idea",
+      "Repeats through a whole text",
+      "Compares two unlike things",
+      "States the author’s attitude"
+     ],
+     "ans": 0,
+     "hint": "One of the wrong answers is the definition of a motif.",
+     "steps": [
+      "Repeating through a text is what makes something a motif.",
+      "Comparing two unlike things is a metaphor.",
+      "Stating the author’s attitude is tone.",
+      "A symbol is something used to represent an idea."
+     ],
+     "ex": {
+      "main": "**A symbol is something used to represent an idea.** It stays itself and carries something larger at the same time.",
+      "tip": "Motif is the closest neighbour, and repetition is the whole difference."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Traditionally, what does dawn symbolize?",
+     "opts": [
+      "Evil and ignorance",
+      "New beginnings",
+      "Sadness or despair",
+      "Beauty and youth"
+     ],
+     "ans": 1,
+     "hint": "Think about what part of the day it is.",
+     "steps": [
+      "Evil and ignorance are carried by darkness.",
+      "Sadness or despair is carried by rain.",
+      "Beauty and youth are carried by flowers.",
+      "Dawn is where a day begins, and it symbolizes new beginnings."
+     ],
+     "ex": {
+      "main": "**Dawn symbolizes new beginnings.** It sits on the nature list beside light, darkness, flowers and the seasons.",
+      "tip": "Ending a chapter at sunrise is a choice, and this is usually what the choice is doing."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Traditionally, what do fog and mist symbolize?",
+     "opts": [
+      "Power",
+      "Fulfillment",
+      "Isolation",
+      "Beauty"
+     ],
+     "ans": 2,
+     "hint": "What does fog actually do to somebody standing in it?",
+     "steps": [
+      "Fulfillment is carried by the number three.",
+      "Power and strength are carried by lightning.",
+      "Beauty and youth are carried by flowers.",
+      "Fog cuts a person off from everything around them, which is isolation."
+     ],
+     "ex": {
+      "main": "**Fog and mist symbolize isolation.** The physical effect and the symbolic meaning are the same thing, which is why it is easy to remember.",
+      "tip": "Weather is the easiest symbol to slip onto a page unnoticed, so it is worth noticing."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Traditionally, what does the number thirteen symbolize?",
+     "opts": [
+      "Knowledge and truth",
+      "Mystery or emptiness",
+      "Peace and fulfillment",
+      "Evil and misfortune"
+     ],
+     "ans": 3,
+     "hint": "Think about which floor some buildings skip.",
+     "steps": [
+      "Mystery or emptiness belongs to zero.",
+      "Fulfillment belongs to three.",
+      "Knowledge and truth belong to light.",
+      "Thirteen symbolizes evil and misfortune."
+     ],
+     "ex": {
+      "main": "**Thirteen symbolizes evil and misfortune** — an association strong enough that real buildings still skip the floor.",
+      "tip": "Zero, thirteen and three are the three numbers on her list, and each carries a different idea."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What makes something a motif rather than only a symbol?",
+     "opts": [
+      "It repeats throughout the text",
+      "It appears in the opening chapter",
+      "It is named in the book’s own title",
+      "It is described in great detail"
+     ],
+     "ans": 0,
+     "hint": "One word in the definition of a motif is doing all the work.",
+     "steps": [
+      "Where it first appears does not matter.",
+      "Plenty of motifs are never in a title.",
+      "A single vivid description is still a single appearance.",
+      "A motif is a concrete object or idea that repeats throughout the text."
+     ],
+     "ex": {
+      "main": "**Repetition is what earns the word motif.** A symbol can do its job in one appearance; a motif is defined by coming back.",
+      "tip": "Which is why counting appearances settles almost every symbol-or-motif question."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Traditionally, what does lightning symbolize?",
+     "opts": [
+      "Sadness and despair",
+      "Power and strength",
+      "Beauty and youth",
+      "Truth and safety"
+     ],
+     "ans": 1,
+     "hint": "Think about what lightning is, physically.",
+     "steps": [
+      "Sadness and despair belong to rain.",
+      "Beauty and youth belong to flowers.",
+      "Truth and safety belong to light.",
+      "Lightning symbolizes power and strength."
+     ],
+     "ex": {
+      "main": "**Lightning symbolizes power and strength.** It sits on the weather list with fog, rain, and wind and storms.",
+      "tip": "Wind and storms carry violence, which is close but not the same idea."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A novel opens on a grey morning with mist across the fields, and its main character has just moved to a town where she knows nobody. What is the mist most likely doing?",
+     "opts": [
+      "Warning of violence to come",
+      "Promising her a new beginning",
+      "Signalling how isolated she is",
+      "Marking her growing power"
+     ],
+     "ans": 2,
+     "hint": "Match the weather to what the sentence already tells you about her.",
+     "steps": [
+      "She has just arrived somewhere she knows nobody.",
+      "That is a description of being cut off from other people.",
+      "Fog and mist traditionally symbolize isolation.",
+      "The weather and her situation are saying the same thing."
+     ],
+     "ex": {
+      "main": "**Isolation.** The test is not whether the traditional meaning exists but whether it fits what is actually happening — and here the two line up exactly.",
+      "tip": "When the weather and the situation agree, the symbol is doing its job quietly and well."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A story ends at sunrise, with a character walking out of a house she has decided to leave for good. What does the timing most likely symbolize?",
+     "opts": [
+      "A return to childhood",
+      "An approaching danger",
+      "A loss of knowledge",
+      "A new beginning for her"
+     ],
+     "ans": 3,
+     "hint": "The author could have set this at any hour and chose one.",
+     "steps": [
+      "She has just made a decision to leave something behind.",
+      "Leaving one life behind means starting another.",
+      "Dawn traditionally symbolizes new beginnings.",
+      "Setting the scene at sunrise reinforces what the plot already did."
+     ],
+     "ex": {
+      "main": "**A new beginning.** This is symbolism at its most ordinary and most effective — the time of day agreeing with the decision, without a word of explanation.",
+      "tip": "Ask of any scene: why THIS time of day, this weather, this season? Usually there is an answer."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A play returns to a pair of broken spectacles in its first act, its fourth act and its closing line. What is that?",
+     "opts": [
+      "A motif",
+      "A setting",
+      "A theme",
+      "A narrator"
+     ],
+     "ans": 0,
+     "hint": "The question tells you how many times the object appears.",
+     "steps": [
+      "A setting is where a scene happens, not an object in it.",
+      "A theme is an idea, and spectacles are an object.",
+      "A narrator is a voice, not a prop.",
+      "A concrete object repeating throughout a text is a motif."
+     ],
+     "ex": {
+      "main": "**A motif.** Three appearances spread across the whole play is exactly the repetition the definition asks for.",
+      "tip": "The next question a test would ask is what the spectacles MEAN — motifs have deeper meanings that lead back to the theme."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why do authors use symbols?",
+     "opts": [
+      "To keep a plot from needing a real climax",
+      "To help a reader visualize complex ideas",
+      "To make every chapter the same length",
+      "To tell a reader exactly what to feel"
+     ],
+     "ans": 1,
+     "hint": "Symbols are doing a job an abstract idea cannot do by itself.",
+     "steps": [
+      "Ideas like freedom or grief are hard to hold in your head.",
+      "An object is easy to hold in your head.",
+      "A symbol gives the idea something concrete to sit on.",
+      "Symbols help a reader visualize complex ideas and track the story’s progress."
+     ],
+     "ex": {
+      "main": "**Symbols make an abstract idea visible, and let a reader track a story’s progress.** Watching an object change across a book is one way of watching the story itself move.",
+      "tip": "They also work without being explained, which a direct statement of the idea never does."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why do motifs help a reader hold on to a theme?",
+     "opts": [
+      "A motif can replace the need for a plot",
+      "Themes are always stated in chapter one",
+      "Vivid repeated imagery is memorable",
+      "Repetition makes a book shorter to read"
+     ],
+     "ans": 2,
+     "hint": "Think about what repetition does to a reader’s memory.",
+     "steps": [
+      "A theme is an idea, and ideas are easy to lose across three hundred pages.",
+      "A motif is concrete and turns up again and again.",
+      "Each reappearance reminds a reader of the idea it carries.",
+      "Motifs remind a reader of the theme through vivid and memorable imagery."
+     ],
+     "ex": {
+      "main": "**Motifs weave the parts of a text together and keep the theme in front of a reader.** That is the work they do for the author as well — organising the themes while writing.",
+      "tip": "It is also why a motif you notice early makes the rest of the book easier to read."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In To Kill a Mockingbird a mockingbird turns up again and again and stands for innocent people. Which term covers that?",
+     "opts": [
+      "Setting",
+      "Allusion",
+      "Euphemism",
+      "Motif"
+     ],
+     "ans": 3,
+     "hint": "Two facts are given: it repeats, and it stands for something.",
+     "steps": [
+      "An allusion points outside the work to something else.",
+      "A euphemism softens a harsh word.",
+      "A setting is where the story happens.",
+      "A concrete object that repeats and carries a deeper meaning is a motif."
+     ],
+     "ex": {
+      "main": "**A motif.** It is also fair to call it a symbol — every motif does symbolic work — but the repetition is what makes motif the more precise word.",
+      "tip": "And its deeper meaning leads straight back to the theme, which is what motifs are for."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "One novel uses rain for grief; another uses rain for relief after a long drought. What does that tell you about the traditional meanings?",
+     "opts": [
+      "They are starting points, not fixed rules",
+      "One of the two authors has used it wrongly",
+      "Rain cannot be a symbol in either novel",
+      "A symbol means whatever a reader decides"
+     ],
+     "ans": 0,
+     "hint": "Both books are using rain deliberately, and they disagree.",
+     "steps": [
+      "Neither author is making a mistake — both choices are deliberate.",
+      "Rain is clearly working as a symbol in both.",
+      "But it is not working as the same symbol.",
+      "So the traditional meaning is something to check against the book, not a key to it."
+     ],
+     "ex": {
+      "main": "**The list tells you what to check; the book tells you what to conclude.** Rain means sadness or despair by tradition, and a farmer watching a drought break would tell you otherwise.",
+      "tip": "The last wrong answer goes too far the other way — a reading still has to be supported by the text."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A character carries the same chipped pocket watch in every chapter, and each time it appears somebody is running out of time. What is the watch, and what does it lead to?",
+     "opts": [
+      "A theme, leading back to the plot",
+      "A motif, leading back to the theme",
+      "A setting, leading back to the mood",
+      "An allusion, leading back to history"
+     ],
+     "ans": 1,
+     "hint": "Two things have to be named: what the watch IS, and where it points.",
+     "steps": [
+      "It is a concrete object appearing in every chapter, so it is a motif.",
+      "A theme is an idea rather than an object, so the watch cannot be one.",
+      "Motifs have deeper meanings that lead back to the theme.",
+      "So the watch is the motif and the theme is what it keeps pointing at."
+     ],
+     "ex": {
+      "main": "**A motif, leading back to the theme.** The watch is what you can point at; what the book is saying about time running out is what you can only state.",
+      "tip": "A good answer on a test names both halves — the object and the idea it carries."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "What separates a motif from the theme it points at?",
+     "opts": [
+      "A motif appears in poetry but not prose",
+      "A motif is always shorter than a theme",
+      "A motif is concrete; a theme is an idea",
+      "A motif is stated while a theme is hidden"
+     ],
+     "ans": 2,
+     "hint": "One of these you could photograph.",
+     "steps": [
+      "A motif is a concrete object or idea that repeats.",
+      "A theme is what the book is saying, which has no physical form.",
+      "Motifs appear in every kind of writing, not only poetry.",
+      "And a theme is usually the thing NOT stated outright."
+     ],
+     "ex": {
+      "main": "**You can point at a motif; you can only state a theme.** The motif is the concrete thing that keeps returning, and the theme is the idea all that returning adds up to.",
+      "tip": "This is why \"the mockingbird\" is not a theme — it is the motif that leads to one."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A writer wants a reader to feel a character’s hope growing, without ever using the word. Which choice does that work?",
+     "opts": [
+      "Setting each new scene in heavier fog",
+      "Naming the feeling in every single chapter",
+      "Repeating the number thirteen throughout",
+      "Letting the light grow across the chapters"
+     ],
+     "ans": 3,
+     "hint": "Two of the wrong answers use symbols that carry the opposite idea.",
+     "steps": [
+      "Naming the feeling is exactly what the writer said she would not do.",
+      "Thirteen traditionally carries misfortune, not hope.",
+      "Fog carries isolation, which would work against hope.",
+      "Light traditionally carries knowledge, truth and safety, and growing light carries growing hope."
+     ],
+     "ex": {
+      "main": "**Light, growing across the book.** This is a motif doing what motifs do — repeating, changing a little each time, and letting a reader track the story’s progress without narration.",
+      "tip": "Notice both wrong symbols were real symbols, just ones carrying the wrong idea."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A flag and a wedding ring do the same job in real life that a symbol does in a novel. What job is that?",
+     "opts": [
+      "Standing for an idea bigger than itself",
+      "Repeating until a reader has to notice it",
+      "Replacing a harsh word with a gentler one",
+      "Exaggerating something to emphasize a point"
+     ],
+     "ans": 0,
+     "hint": "Nobody confuses a ring with a marriage, and nobody needs it explained.",
+     "steps": [
+      "A ring is a small circle of metal that stands for a promise.",
+      "A flag is a piece of cloth that stands for a country.",
+      "In both cases the object is ordinary and the idea is large.",
+      "Something used to represent an idea is a symbol."
+     ],
+     "ex": {
+      "main": "**Standing for an idea larger than itself.** Signs and flags are the everyday version, and nobody finds them confusing — which is worth remembering when a symbol in a novel feels hard.",
+      "tip": "Repetition, euphemism and exaggeration are three other devices, each doing a different job."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

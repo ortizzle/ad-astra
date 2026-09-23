@@ -1,0 +1,595 @@
+{
+ "v": 4,
+ "records": {
+  "unit-eng-t1-diction": {
+   "id": "unit-eng-t1-diction",
+   "type": "unit",
+   "updatedAt": 1790113115693,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Test 1 · 3 Diction",
+   "srcName": "English Test 1 notes (Drive, 2026-09-23)",
+   "source": "Test 1 notes · Diction (student’s own notes)",
+   "summary": {
+    "text": "The eight kinds of diction — formal, informal, pedantic, colloquial, slang, abstract, concrete and poetic — with what each one is for, and the two pairs that get confused: formal against pedantic, and colloquial against slang.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Diction is the first of the four routes to tone, so this lesson is doing double duty: naming a register on its own, and setting up every tone question that follows.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define diction and tell it apart from syntax, tone and mood",
+     "from": "source"
+    },
+    {
+     "text": "Name all eight kinds of diction and what each one is for",
+     "from": "source"
+    },
+    {
+     "text": "Read a sentence and say which kind of diction is at work",
+     "from": "added"
+    },
+    {
+     "text": "Separate formal from pedantic, and colloquial from slang",
+     "from": "added"
+    },
+    {
+     "text": "Say why word choice shapes an author’s tone",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from Sedona’s own handwritten notes. One thing to check with her: her concrete-diction line reads \"refer to things that appeal to the specific\", and the sentence trails off. The standard definition — and the one this lesson teaches — is that concrete diction appeals to the SENSES. Her example (\"I ate an apple\") fits the sensory reading exactly, so this is almost certainly a dropped word rather than a different definition, but it is worth a glance at her page. Everything else on both diction pages checks out. The questions all use fresh sentences, so none of them can be answered from memory of the examples on her page.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Eight kinds, and two pairs that blur. Get formal-against-pedantic straight first — that is where the marks go.",
+    "minutes": 14,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Diction",
+     "def": "**The linguistic choices a writer makes to convey an idea, a point of view or a story.**\n• The words the author uses to establish style and tone.\n• Everything else in this lesson is a KIND of diction.",
+     "hint": "Diction is which words. Syntax is what order.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Formal diction",
+     "def": "**Sophisticated language, without contractions or colloquialisms.**\n• Example: “I will get to this issue right away.”\n• Used where distance and correctness matter.",
+     "hint": "No contractions, no slang, no shortcuts.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Informal diction",
+     "def": "**More conversational, and often used in narrative literature.**\n• Example: “I've got this.”\n• A contraction is usually the fastest tell.",
+     "hint": "It sounds like a person talking.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Pedantic diction",
+     "def": "**Highly detailed or academic in writing.**\n• Example: “In examination of your stance, I have identified some critical errors that I will now expound on…”\n• Formal carried further than the occasion asked for.",
+     "hint": "Academic, and a little pleased with itself.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Formal or pedantic?",
+     "def": "**Formal fits the occasion; pedantic goes further than the occasion needs.**\n• Both avoid contractions, so that tell settles nothing here.\n• Ask whether the extra vocabulary is doing work or performing.",
+     "hint": "Correct, or showing off?",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Colloquial diction",
+     "def": "**Words or expressions that are informal in nature and generally represent a certain region or time.**\n• It adds color and realism to writing.\n• Example: most of the US says “soda”; the North and Midwest say “pop.”",
+     "hint": "It tells you WHERE, or WHEN.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Slang diction",
+     "def": "**Originated within a specific culture or subgroup, but gained traction.**\n• Example: “Red is looking pretty sus.”\n• It tells you which group, not which place.",
+     "hint": "It tells you WHO.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Colloquial or slang?",
+     "def": "**Colloquial marks a region or an era; slang marks a subgroup and then spreads out of it.**\n• Both are informal, so “informal” never decides between them.\n• Ask what the word marks: where you are from, or who you run with.",
+     "hint": "A place and a time, or a crowd.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Abstract diction",
+     "def": "**Uses words to express something intangible, like an idea or an emotion.**\n• Example: “Hank's love for science does not impair his spiritual beliefs.”\n• Nothing in it could be photographed.",
+     "hint": "You cannot point at it.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Concrete diction",
+     "def": "**Uses words for their literal meanings, and refers to things that appeal to the senses.**\n• Example: “I ate an apple.”\n• If you could photograph it, taste it or hear it, it is concrete.",
+     "hint": "You could put it in a photograph.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Poetic diction",
+     "def": "**Driven by lyrical words that relate to a specific theme reflected in a poem, a sound, and so on.**\n• Example: “What a foolish and ignorant thing you just said. Hear my rebuttal and your cheeks will burn red.”\n• Sound and rhythm are doing work the plain version would not.",
+     "hint": "It would survive being read aloud.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Why diction is on the tone list",
+     "def": "**Diction is the first of the four routes to an author's tone.**\n• Change the words and the attitude they carry changes with them.\n• Which is why a diction question and a tone question are often one question.",
+     "hint": "Words carry an attitude whether you meant them to or not.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the term diction name?",
+     "opts": [
+      "The linguistic choices a writer makes",
+      "The order words are arranged in a sentence",
+      "The emotion a reader is left holding at the end",
+      "The attitude an author takes toward a subject"
+     ],
+     "ans": 0,
+     "hint": "Three of these have their own names elsewhere in this unit.",
+     "steps": [
+      "Diction is about WHICH words get chosen.",
+      "Word order has its own name — syntax.",
+      "The emotion a reader feels is mood; the attitude an author holds is tone.",
+      "That leaves the writer’s linguistic choices."
+     ],
+     "ex": {
+      "main": "**Diction is which words a writer picks to convey an idea, a point of view or a story.** Syntax, mood and tone are three different things that sit right next to it.",
+      "tip": "Worth learning the neighbours too — the wrong ones here are the three terms most often swapped for diction."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction avoids contractions and colloquialisms?",
+     "opts": [
+      "Informal diction",
+      "Formal diction",
+      "Slang diction",
+      "Concrete diction"
+     ],
+     "ans": 1,
+     "hint": "Think about which one you would use writing to somebody you have never met.",
+     "steps": [
+      "Contractions are a mark of conversation.",
+      "Colloquialisms are regional expressions.",
+      "Stripping both out leaves language that keeps its distance.",
+      "That is formal diction."
+     ],
+     "ex": {
+      "main": "**Formal diction uses sophisticated language without contractions or colloquialisms.** It is the register of an essay, an application, or a letter to a stranger.",
+      "tip": "Informal and slang both keep contractions; concrete is about senses, not register."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is tied to a particular region or era?",
+     "opts": [
+      "Pedantic diction",
+      "Slang diction",
+      "Colloquial diction",
+      "Poetic diction"
+     ],
+     "ans": 2,
+     "hint": "One of these tells you where somebody grew up.",
+     "steps": [
+      "Slang belongs to a subgroup rather than a place.",
+      "Pedantic is about how academic the writing is.",
+      "Poetic is about lyrical sound and theme.",
+      "Only one is defined by region and time."
+     ],
+     "ex": {
+      "main": "**Colloquial diction is informal language that represents a certain region or time**, and it adds color and realism to writing.",
+      "tip": "Slang is its closest neighbour and the commonest wrong answer — slang marks a group, not a map."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pair names two kinds of diction that sit at opposite ends of one scale?",
+     "opts": [
+      "Poetic and lyrical",
+      "Formal and pedantic",
+      "Slang and informal",
+      "Abstract and concrete"
+     ],
+     "ans": 3,
+     "hint": "One pair genuinely opposes; the others overlap or repeat.",
+     "steps": [
+      "Pedantic is formal taken further, so they sit on the same end.",
+      "Slang is a kind of informal language, not its opposite.",
+      "“Lyrical” is part of the definition of poetic, so that pair says one thing twice.",
+      "Abstract is the intangible; concrete is the literal and the sensory."
+     ],
+     "ex": {
+      "main": "**Abstract and concrete are genuine opposites** — one reaches for ideas and emotions, the other for things you could photograph.",
+      "tip": "Watching for pairs that merely overlap is a useful habit on any matching question."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “The committee will review the proposal at its earliest convenience.”",
+     "opts": [
+      "Formal diction",
+      "Informal diction",
+      "Slang diction",
+      "Poetic diction"
+     ],
+     "ans": 0,
+     "hint": "Count the contractions.",
+     "steps": [
+      "There are no contractions anywhere in the sentence.",
+      "There is no regional expression and no subculture vocabulary.",
+      "Nothing here is lyrical or built for sound.",
+      "Sophisticated language with no contractions is formal diction."
+     ],
+     "ex": {
+      "main": "**Formal.** “At its earliest convenience” is the giveaway — it is a phrase that exists to keep a polite distance, and the sentence refuses every shortcut available to it.",
+      "tip": "Ask yourself what the informal version would be: “we’ll look at it soon.”"
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “Don’t worry about it — we’ll sort it out tomorrow.”",
+     "opts": [
+      "Formal diction",
+      "Informal diction",
+      "Pedantic diction",
+      "Abstract diction"
+     ],
+     "ans": 1,
+     "hint": "Two contractions in one short sentence.",
+     "steps": [
+      "“Don’t” and “we’ll” are both contractions.",
+      "The sentence is doing the work of speech, not of a document.",
+      "Nothing here is academic or especially detailed.",
+      "Conversational language like this is informal diction."
+     ],
+     "ex": {
+      "main": "**Informal.** It is more conversational, which is why it turns up constantly in narrative literature — dialogue that sounded formal would not sound like people.",
+      "tip": "Contractions are the quickest tell, though not the only one."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “Upon a rigorous parsing of your hypothesis, I have isolated three methodological deficiencies.”",
+     "opts": [
+      "Colloquial diction",
+      "Formal diction",
+      "Pedantic diction",
+      "Concrete diction"
+     ],
+     "ans": 2,
+     "hint": "Formal is the near-miss here. Ask whether the vocabulary is earning its keep.",
+     "steps": [
+      "There are no contractions, so it is certainly not informal.",
+      "Formal would be the answer if the vocabulary fit the occasion.",
+      "“Rigorous parsing” and “methodological deficiencies” are heavier than the point needs.",
+      "Highly detailed and academic in writing is pedantic diction."
+     ],
+     "ex": {
+      "main": "**Pedantic.** Every one of these words could be swapped for a plainer one without losing meaning, which is what separates pedantic from merely formal.",
+      "tip": "A plain version — “I found three problems with your method” — says the same thing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? In Pittsburgh a group of people is “yinz”; in Texas it is “y’all.”",
+     "opts": [
+      "Abstract diction",
+      "Slang diction",
+      "Pedantic diction",
+      "Colloquial diction"
+     ],
+     "ans": 3,
+     "hint": "What do these two words tell you about a speaker?",
+     "steps": [
+      "Both words mean exactly the same thing.",
+      "The difference between them is geography, not meaning.",
+      "Neither word originated inside a subculture and spread outward.",
+      "Language that represents a certain region is colloquial diction."
+     ],
+     "ex": {
+      "main": "**Colloquial.** These are regional expressions, and a writer who uses one is placing a character on a map — which is the “color and realism” colloquial diction adds.",
+      "tip": "A novel set in one place and written in another place’s expressions reads wrong, even when nobody can say why."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? A group of students calls a disappointing movie “mid,” a word that began inside online gaming communities.",
+     "opts": [
+      "Slang diction",
+      "Colloquial diction",
+      "Formal diction",
+      "Concrete diction"
+     ],
+     "ans": 0,
+     "hint": "The sentence tells you where the word came from.",
+     "steps": [
+      "The word did not come from a region — it came from a community.",
+      "It began inside a specific subgroup.",
+      "It then spread outward to people who were never part of that subgroup.",
+      "Originating in a subculture and gaining traction is slang diction."
+     ],
+     "ex": {
+      "main": "**Slang.** The definition is precise about this: it originates within a specific culture or subgroup and then gains traction more widely.",
+      "tip": "Slang also dates fast, which is why a novel that leans on it can age badly."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “Her ambition outlasted her patience, and her pride outlasted both.”",
+     "opts": [
+      "Concrete diction",
+      "Abstract diction",
+      "Colloquial diction",
+      "Informal diction"
+     ],
+     "ans": 1,
+     "hint": "Try to draw this sentence.",
+     "steps": [
+      "Ambition, patience and pride are the three nouns doing the work.",
+      "Not one of them can be seen, heard, touched or photographed.",
+      "A sentence built entirely out of intangibles is not appealing to the senses.",
+      "Expressing something intangible is abstract diction."
+     ],
+     "ex": {
+      "main": "**Abstract.** Every noun in it is an idea rather than a thing, which is what abstract diction means — words used to express something intangible.",
+      "tip": "Abstract writing is not weaker writing; it is just doing a different job."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “She set the chipped blue mug on the windowsill and wiped her hands on her jeans.”",
+     "opts": [
+      "Pedantic diction",
+      "Abstract diction",
+      "Concrete diction",
+      "Poetic diction"
+     ],
+     "ans": 2,
+     "hint": "How many of these details could a camera catch?",
+     "steps": [
+      "A chipped blue mug is something you could see and hold.",
+      "A windowsill and a pair of jeans are the same.",
+      "Every word is being used for its literal meaning.",
+      "Words for their literal meanings that appeal to the senses are concrete diction."
+     ],
+     "ex": {
+      "main": "**Concrete.** “Chipped” and “blue” are the tell — the sentence is not just naming a mug, it is giving you enough to see one.",
+      "tip": "The abstract version says “she was tired.” The concrete version shows you."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which kind of diction is at work? “The harbor held its breath beneath a bruised and lowering sky.”",
+     "opts": [
+      "Informal diction",
+      "Pedantic diction",
+      "Colloquial diction",
+      "Poetic diction"
+     ],
+     "ans": 3,
+     "hint": "Read it aloud and listen to what the words are doing besides describing.",
+     "steps": [
+      "A harbor cannot hold its breath and a sky cannot bruise.",
+      "The words are chosen for their sound and their weight as much as their meaning.",
+      "Nothing here is academic, regional or conversational.",
+      "Lyrical words serving a theme are poetic diction."
+     ],
+     "ex": {
+      "main": "**Poetic.** It is driven by lyrical word choice, and the theme it serves — something ominous coming — is carried by sound as much as by statement.",
+      "tip": "A poetic line usually survives being read aloud better than it survives being paraphrased."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A writer uses a run of very short sentences to make a scene feel fast. Which choice is she making?",
+     "opts": [
+      "Syntax, which is word order",
+      "Diction, which is word choice",
+      "Imagery, which appeals to senses",
+      "Details, which are what is kept"
+     ],
+     "ans": 0,
+     "hint": "Is she changing which words, or how they are arranged?",
+     "steps": [
+      "She has not said anything about which words she chose.",
+      "What changed is how those words are arranged and broken up.",
+      "Arrangement affects the pacing of a story.",
+      "Arrangement of words is syntax, not diction."
+     ],
+     "ex": {
+      "main": "**Syntax.** Diction and syntax sit next to each other on the tone list and get swapped constantly — diction is WHICH words, syntax is what ORDER and what shape.",
+      "tip": "Both change a reader’s experience; only one of them changes the vocabulary."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two sentences both avoid contractions and both use long words. What separates pedantic diction from merely formal diction?",
+     "opts": [
+      "Pedantic always appears in dialogue, not narration",
+      "Pedantic goes further than the occasion needs",
+      "Pedantic uses contractions where formal does not",
+      "Pedantic is spoken aloud where formal is written"
+     ],
+     "ans": 1,
+     "hint": "The tell you would normally use has been taken away. What is left?",
+     "steps": [
+      "Contractions cannot decide it — the question says neither has any.",
+      "Long words cannot decide it either, for the same reason.",
+      "What is left is whether the difficulty is earning anything.",
+      "Formal fits the occasion; pedantic overshoots it."
+     ],
+     "ex": {
+      "main": "**Pedantic diction is highly detailed or academic beyond what the moment asks for.** Formal and pedantic overlap almost entirely on the page — the difference is the fit, not the feature.",
+      "tip": "A useful test: rewrite the line plainly. If nothing is lost, the original was pedantic."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A writer wants to check whether a line is concrete rather than abstract. Which test actually settles it?",
+     "opts": [
+      "Ask whether the writer used any adjectives at all",
+      "Ask whether the sentence runs longer than a clause",
+      "Ask whether it could be photographed or tasted",
+      "Ask whether the line appears early in a paragraph"
+     ],
+     "ans": 2,
+     "hint": "Concrete diction is defined by what it appeals to.",
+     "steps": [
+      "Length has nothing to do with it — “I ate an apple” is short and concrete.",
+      "Adjectives appear in abstract writing just as often.",
+      "Position in the paragraph is irrelevant to word choice.",
+      "Concrete diction refers to things that appeal to the senses."
+     ],
+     "ex": {
+      "main": "**If a camera, a hand or an ear could catch it, it is concrete.** Abstract diction expresses something intangible — an idea or an emotion — and no sense can reach it.",
+      "tip": "Most real writing mixes the two; the question is which one a given line is doing."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student writes “The data was bad.” Her teacher asks for formal diction instead. Which revision does that?",
+     "opts": [
+      "The data betrayed us, cold and indifferent as stone",
+      "The data was, like, completely useless if we’re honest",
+      "The data stunk to high heaven, plain and simple",
+      "The data proved unreliable under repeated testing"
+     ],
+     "ans": 3,
+     "hint": "Three of these change the register in some direction. Only one raises it.",
+     "steps": [
+      "One revision adds filler words that belong to speech.",
+      "One reaches for a regional expression instead.",
+      "One goes lyrical, which is a different choice entirely.",
+      "Only one uses sophisticated language with no contractions and no colloquialisms."
+     ],
+     "ex": {
+      "main": "**Formal diction raises the register without reaching for extra difficulty.** “Proved unreliable under repeated testing” also says more than “bad” did, which is usually what the request is really after.",
+      "tip": "The other three are informal, colloquial and poetic — all real choices, just not the one asked for."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A novel set in rural Alabama in the 1930s gives a character “reckon” where another book would use “suppose.” What is that choice doing?",
+     "opts": [
+      "Placing the character in a region and a period",
+      "Marking the character as part of a subculture",
+      "Expressing an idea that has no physical form",
+      "Slowing the pacing of the scene through syntax"
+     ],
+     "ans": 0,
+     "hint": "Ask what the word would tell a reader who knew nothing else about the speaker.",
+     "steps": [
+      "“Reckon” is not a subculture word that spread outward — it is a regional one.",
+      "“Suppose” is not intangible; both words name the same ordinary act.",
+      "Swapping one word for another of the same length changes no pacing.",
+      "A word that represents a certain region and time is colloquial diction at work."
+     ],
+     "ex": {
+      "main": "**Colloquial diction is how a book puts a character somewhere.** It is the \"color and realism\" half of the definition doing its job — the word carries a place and an era with it.",
+      "tip": "This is also why changing one character’s vocabulary can quietly relocate a whole scene."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is a question about an author’s diction so often also a question about tone?",
+     "opts": [
+      "Tone is decided before any words are chosen",
+      "Word choice carries an attitude with it",
+      "Diction is the only route a reader can check",
+      "Every tone word is also a diction term"
+     ],
+     "ans": 1,
+     "hint": "Diction is the first of the four routes to tone. Why would that be?",
+     "steps": [
+      "Tone is the attitude an author conveys to an audience.",
+      "An audience can only meet that attitude through the words on the page.",
+      "Swap the words and the attitude they carry changes with them.",
+      "So diction is not merely one clue to tone — it is the main one."
+     ],
+     "ex": {
+      "main": "**Diction is the first of the four things used to determine tone**, alongside imagery, details and syntax. Words are how an attitude reaches a reader at all.",
+      "tip": "The reverse holds too: deciding on a tone is largely deciding which words are allowed."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}
