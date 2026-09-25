@@ -1,0 +1,605 @@
+#!/usr/bin/env python3
+"""Biology 8 · Unit 4-1: The Cell Cycle and Mitosis.
+
+Sources, both Drive, both uploaded 2026-09-25 into a new "Unit 4: Cell Cycle"
+folder:
+
+  * "G8_Cell Cycle and Mitosis_VA.pdf" — the teacher's own Unit 4 lecture
+    deck, 39 slides. Pages 1-35 have a clean text layer and read straight
+    through; 36-39 are image-only and were RENDERED with pypdfium2 and read
+    as images rather than assumed empty.
+  * "37 Mitosis Video Homework (2).pdf" — a directed-watching worksheet for
+    the colebiology video set, 11 questions graded on accuracy. Blank (the
+    assignment, not her answers), but it names exactly what the class is
+    graded on, which is why it is a source here and not just context.
+
+TWO THINGS THE SOURCES DISAGREE ABOUT, both handled deliberately:
+
+1. CHECKPOINTS ARE GRADED AND ARE NOT IN THE DECK. The worksheet asks how
+   many checkpoints there are (three) and what happens to a cell that cannot
+   repair itself past one (apoptosis). Measured rather than eyeballed:
+   "checkpoint" appears twice in the worksheet and ZERO times across all 39
+   slides, and "apoptosis" appears in neither — it is said aloud in the
+   video. So the deck alone would leave her short on two graded marks. Those
+   cards carry from='added' because the deck cannot source them.
+
+2. THE CYTOKINESIS SLIDE SAYS "(chromosome reduction)". Mitosis is not
+   reductional — that is meiosis, which is next unit — and the same slide
+   says three lines up that each new nucleus has an identical set of
+   chromosomes. The worksheet's own fruit-fly question (8 chromosomes in,
+   8 in each daughter cell) grades the opposite of the parenthetical. So
+   the unit teaches the correct thing and parentNote flags the slide, rather
+   than teaching a student into a wrong answer on her own homework.
+
+No images. The deck's phase photographs are textbook figures — page 39 is
+stamped "Copyright (c) 2008 Pearson Education" outright — so they are not
+ours to republish, the same call the Cells unit made about its slide art.
+Commons has public-domain mitosis diagrams, but v176's lesson is that a
+pattern-guessed filename is wrong about a third of the time and every one
+has to be verified by search first; that is a separate pass, and what each
+phase looks like down a microscope is taught in text here instead.
+"""
+import io, json, sys
+sys.path.insert(0, '/home/user/ad-astra/tools/builders')
+from unit_common import card, q, build
+
+C, Q = [], []
+
+# ------------------------------------------------------------------ cards
+
+card(C, 'Cell division',
+     "**One parent cell splits its material between two new daughter cells.**\n"
+     "• 1 parent → 2 daughters\n"
+     "• For a single-celled organism, dividing IS reproduction — one cell becomes two organisms\n"
+     "• For a multicellular organism it is growth, repair, and making gametes",
+     hint="One becomes two. What that MEANS depends on whether the cell is the whole organism.")
+
+card(C, 'Why organisms get bigger',
+     "**By making MORE cells, not bigger ones.**\n"
+     "• A cell is capped in size by its surface area-to-volume ratio — the same limit from Unit 3\n"
+     "• Growing by inflating existing cells would strand the inside too far from the membrane\n"
+     "• So growth, tissue repair and regeneration all run on division",
+     hint="The surface-area limit never went away. Division is how a body works around it.")
+
+card(C, 'Asexual reproduction',
+     "**One parent, and the offspring is genetically identical to it.**\n"
+     "• The parent passes ALL of its genes on — there is no second set to mix with\n"
+     "• In a multicellular organism it can mean growing an identical offspring from part of itself",
+     hint="One parent, all the genes, a copy rather than a blend.")
+
+card(C, 'Five ways living things do it',
+     "**Binary fission, multiple fission, budding, fragmentation and clonal colonies.**\n"
+     "• Binary fission — a prokaryote divides once, 1 organism becomes 2\n"
+     "• Multiple fission — some protists divide several times at once, many offspring from one parent\n"
+     "• Budding — a hydra or jellyfish grows a smaller identical copy that detaches\n"
+     "• Fragmentation — a lost piece of a planarian or jumping cholla regrows a whole body\n"
+     "• Clonal colonies — aspen and fungi spread as genetically identical stands",
+     hint="Split once, split many, bud off, regrow from a piece, or spread as a clone.")
+
+card(C, 'Genome',
+     "**All the genetic information an organism needs, packaged as DNA.**\n"
+     "• Every cell of an organism carries the SAME genome — a skin cell and a liver cell hold identical DNA\n"
+     "• Prokaryote: one circular chromosome\n"
+     "• Eukaryote: multiple linear chromosomes",
+     hint="Same library in every cell. What differs is which books get read.")
+
+card(C, 'Chromatin',
+     "**DNA wound together with proteins called histones — the loose, uncoiled form DNA takes when "
+     "the cell is not dividing.**\n"
+     "• The histones stop the chromosomes tangling and pack a great deal of DNA into a small space\n"
+     "• DNA plus histones forms a beadlike unit called a nucleosome\n"
+     "• Prokaryotic chromosomes have no histones",
+     hint="Thread loosely wound on spools. The spools are the histones.")
+
+card(C, 'Chromosome vs chromatid',
+     "**A chromatid is ONE strand; a chromosome is the whole structure, whether that is one strand "
+     "or two joined ones.**\n"
+     "• After DNA is copied, a chromosome is two identical sister chromatids joined at the centromere, in an X\n"
+     "• Before it is copied, the same chromosome is a single strand\n"
+     "• Think of the chromosome as one LETTER — an X is still one letter, even though you draw two lines",
+     hint="Count letters, not strokes.")
+
+card(C, 'Counting them',
+     "**Count centromeres for chromosomes; count strands for chromatids.**\n"
+     "• One single strand = 1 chromosome, 1 chromatid\n"
+     "• One X shape = 1 chromosome, 2 chromatids\n"
+     "• The X never counts as two chromosomes while the centromere still holds it together",
+     hint="The join is what makes it one. Break the join and you have two.")
+
+card(C, 'Somatic cells and diploid',
+     "**Body cells — everything that is not a sperm or an egg — and they carry two complete sets of "
+     "each chromosome.**\n"
+     "• Two sets is what diploid means\n"
+     "• A human somatic cell has 46 chromosomes\n"
+     "• Most of your cells are somatic",
+     hint="Di- for two sets. Body cells keep both.")
+
+card(C, 'Gametes and haploid',
+     "**Sperm and egg cells, carrying only ONE complete set of each chromosome.**\n"
+     "• One set is what haploid means\n"
+     "• A human gamete has 23 chromosomes\n"
+     "• Mitosis cannot make these — that is meiosis, and it is the next unit",
+     hint="Half the sets, so two can combine without doubling the count every generation.")
+
+card(C, 'The cell cycle',
+     "**The whole series of events a cell goes through as it grows and divides — division is only one "
+     "part of it.**\n"
+     "• The cell grows, receives a signal to divide, prepares (including copying all its DNA), then divides\n"
+     "• Two big stages: interphase, then the mitotic phase",
+     hint="Not just the splitting. The splitting is the short bit at the end.")
+
+card(C, 'Interphase — the triple double',
+     "**Growing and preparing: G1, then S, then G2. The cell spends at least 90% of its life here.**\n"
+     "• G1 — the cytoplasm doubles\n"
+     "• S — the DNA doubles\n"
+     "• G2 — double check\n"
+     "• Throughout all three the nucleus is intact, the nucleolus is visible, and the chromatin stays loose",
+     hint="Her teacher's own phrase: double the cytoplasm, double the DNA, double check.")
+
+card(C, 'G1 phase',
+     "**The first growth phase — the cell gets bigger and builds the proteins and organelles a new "
+     "cell needs.**\n"
+     "• It is also doing its ordinary job the whole time\n"
+     "• The most VARIABLE phase in length between cell types — skin cells divide often, so their G1 is short\n"
+     "• At the end of G1 the cell either carries on into S or steps out into G0",
+     hint="Grow, build, and then the decision point.")
+
+card(C, 'S phase',
+     "**Synthesis — the DNA is replicated, and every chromosome ends up as two sister chromatids joined "
+     "at the centromere.**\n"
+     "• The chromosomes stay in the loose chromatin state while this happens\n"
+     "• Once a cell enters S it almost always finishes the rest of the cycle\n"
+     "• A useful hook: S for Sister chromatids",
+     hint="This is the ONLY phase where the DNA is copied. Not mitosis.")
+
+card(C, 'G2 phase',
+     "**The second growth phase — the cell makes what mitosis will need and checks the copied DNA "
+     "for errors.**\n"
+     "• Begins once all the DNA has been replicated\n"
+     "• Produces the proteins that drive mitosis to completion\n"
+     "• When G2 finishes, the cell leaves interphase and enters the M phase",
+     hint="Double check. Proofreading before the copy gets handed out.")
+
+card(C, 'G0 — not in the cycle at all',
+     "**A resting state a cell drops into when it is not going to divide. It is NOT one of the cell "
+     "cycle's phases.**\n"
+     "• Most of your cells are in G0 right now, doing their job rather than reproducing\n"
+     "• Mature neurons and muscle cells are in G0 permanently — which is why damage to those organs lasts\n"
+     "• Liver cells sit in G0 but can be pulled back in when the organ is damaged\n"
+     "• Skin cells are never in G0; they divide constantly",
+     hint="Opting out. Some cells opt out for good, some can be called back.")
+
+card(C, 'The three checkpoints',
+     "**Three points where the cell stops and checks itself before it is allowed to carry on: near the "
+     "end of G1, near the end of G2, and partway through mitosis.**\n"
+     "• They check that the cell is big enough, that the DNA is undamaged, and that it was copied correctly\n"
+     "• Pass, and the cycle continues; fail, and the cell tries to repair the problem first",
+     hint="Three gates. Grow enough, copy it right, line it up right.",
+     frm='added')
+
+card(C, 'Apoptosis',
+     "**Programmed cell death — what happens to a cell that cannot repair itself enough to pass a "
+     "checkpoint.**\n"
+     "• It is the safe outcome, not a failure: a damaged cell dismantles itself on purpose\n"
+     "• A cell that ignores its checkpoints AND avoids apoptosis is how uncontrolled growth starts",
+     hint="The cell chooses to shut down rather than pass on a broken copy.",
+     frm='added')
+
+card(C, 'Mitosis — PMAT',
+     "**Division of the NUCLEUS, in four stages: prophase, metaphase, anaphase, telophase.**\n"
+     "• It produces two identical daughter nuclei\n"
+     "• Mitosis alone does not make two cells — that takes cytokinesis as well",
+     hint="Pro, Meta, Ana, Telo. The nucleus divides; the cell has not yet.")
+
+card(C, 'Prophase',
+     "**The chromosomes bundle up tight, the spindle forms, and the nuclear envelope starts to break "
+     "down.**\n"
+     "• Condensing is what makes the chromosomes visible under a microscope for the first time\n"
+     "• The spindle is part of the cytoskeleton; in animal cells the centrioles move apart as it forms\n"
+     "• Think of loose string being rolled into a ball",
+     hint="Bundle up, build the machinery, open the nucleus.")
+
+card(C, 'Metaphase',
+     "**The spindle lines every chromosome up across the middle of the cell, on the metaphase plate.**\n"
+     "• Middle — Metaphase. The M's line up too\n"
+     "• Nothing separates yet; this is the arranging step",
+     hint="A single row across the equator of the cell.")
+
+card(C, 'Anaphase',
+     "**The sister chromatids are pulled apart and dragged to opposite ends of the cell.**\n"
+     "• Away — Anaphase\n"
+     "• The moment they separate, each former chromatid counts as a chromosome of its own\n"
+     "• The spindle does the pulling",
+     hint="The X splits into two, and the two halves travel in opposite directions.")
+
+card(C, 'Telophase',
+     "**The chromosomes unbundle, the spindle breaks down, and two new nuclear envelopes form.**\n"
+     "• Two — Telophase: two nuclei now exist\n"
+     "• Cytokinesis usually happens at the same time",
+     hint="Undo prophase, twice over.")
+
+card(C, 'Cytokinesis',
+     "**Division of the CYTOPLASM — this is the step that actually produces two separate cells.**\n"
+     "• Animal cells pinch inward with a cleavage furrow, a contracting ring of microfilaments\n"
+     "• Plant cells build a cell plate across the middle, which becomes a new cell wall\n"
+     "• A plant cell cannot pinch — its cell wall is rigid, so it has to build a divider instead",
+     hint="Mitosis divides the nucleus. This divides everything else.")
+
+card(C, 'How long it all takes',
+     "**In an onion root tip the whole cycle takes about 24 hours, and roughly 23 of them are "
+     "interphase.**\n"
+     "• G1 about 5-6 hours, S about 10-12, G2 about 4-6, and M about 1\n"
+     "• Even in a cell that divides as fast as it can, dividing is the short part",
+     hint="A whole day of preparing for one hour of dividing.")
+
+card(C, 'Spotting the phases down a microscope',
+     "**In a stained root tip you tell the phase from what the dark material inside the cell is doing.**\n"
+     "• Interphase — one round, evenly dark nucleus, no separate threads\n"
+     "• Prophase — threads visible inside a nucleus that is losing its outline\n"
+     "• Metaphase — a tight dark line straight across the middle\n"
+     "• Anaphase — two clumps pulling apart, often V-shaped\n"
+     "• Telophase — two separate round clumps, a wall or furrow appearing between them",
+     hint="Look for where the dark stuff is: one blob, a line, two clumps moving, two blobs.",
+     frm='added')
+
+card(C, 'What mitosis is for',
+     "**Identical copies — for reproduction in single-celled eukaryotes, and for growth and repair in "
+     "multicellular ones.**\n"
+     "• The two new cells are exact duplicates, so they can do the same job the parent did\n"
+     "• Errors in division cause abnormal chromosome numbers, genetic disorders, and uncontrolled growth "
+     "such as cancer",
+     hint="Copies, so the replacement can do the original's job.")
+
+# -------------------------------------------------------------- questions
+
+q(Q, 1, "A cell is described as having a nucleus with a visible nucleolus, loose chromatin, and no "
+        "spindle. Which part of the cell cycle is it in?",
+  ["Interphase", "Prophase", "Anaphase", "Telophase"], 0,
+  "Loose chromatin and an intact nucleus mean nothing has started condensing yet.",
+  ["The nucleus is intact and the nucleolus is visible, so the nuclear envelope has not broken down.",
+   "The chromatin is loose, so the chromosomes have not condensed.",
+   "No spindle has formed, so prophase has not begun.",
+   "All three are the signature of interphase."],
+  "**Interphase.** An intact nucleus, a visible nucleolus and loose chromatin together mean the cell "
+  "is growing and working, not dividing — that is interphase, where cells spend at least 90% of their lives.",
+  "Condensed chromosomes are the first visible sign that mitosis has started.")
+
+q(Q, 1, "In which single phase of the cell cycle is DNA replicated?",
+  ["S phase", "G1 phase", "G2 phase", "Prophase"], 0,
+  "Its name is the clue, and so is the thing it produces.",
+  ["G1 is growth — the cytoplasm doubles, not the DNA.",
+   "S stands for synthesis, and it is where sister chromatids are produced.",
+   "G2 comes after replication and checks the copy.",
+   "So replication happens in S."],
+  "**S phase.** Synthesis is where the DNA is copied and each chromosome becomes two sister chromatids. "
+  "A common slip is to think the copying happens during mitosis — by the time mitosis starts, the copy "
+  "has already been made and checked.",
+  "S for Synthesis, and S for Sister chromatids.")
+
+q(Q, 1, "A structure is described as five separate pieces: four of them are X-shaped, and one is a "
+        "single strand. How many chromosomes and how many chromatids are there?",
+  ["5 chromosomes, 9 chromatids", "9 chromosomes, 9 chromatids",
+   "5 chromosomes, 5 chromatids", "4 chromosomes, 8 chromatids"], 0,
+  "Count the separate pieces for one number and the strands for the other.",
+  ["Each separate piece is one chromosome, whatever its shape — so five pieces means five chromosomes.",
+   "An X shape is two chromatids joined at a centromere: four X shapes give eight chromatids.",
+   "The single strand adds one more chromatid, making nine.",
+   "So 5 chromosomes and 9 chromatids."],
+  "**5 chromosomes, 9 chromatids.** A chromosome is the whole structure — think of it as one letter, "
+  "and an X is one letter even though you draw two strokes. A chromatid is one strand, so every X "
+  "contributes two and every single strand contributes one.",
+  "Count centromeres for chromosomes, strands for chromatids.")
+
+q(Q, 1, "Which phase is described by: the chromosomes condense, the spindle forms, and the nuclear "
+        "envelope begins to break down?",
+  ["Prophase", "Metaphase", "Anaphase", "Cytokinesis"], 0,
+  "This is the setting-up stage — nothing has moved to the middle or the ends yet.",
+  ["Condensing chromosomes is the first visible event of mitosis.",
+   "The spindle has to exist before it can line anything up or pull anything apart.",
+   "The nuclear envelope must open before the spindle can reach the chromosomes.",
+   "All three happen in prophase."],
+  "**Prophase.** It is the preparation stage: bundle the chromosomes up so they can be moved without "
+  "tearing, build the spindle that will move them, and open the nucleus so it can reach them.",
+  "Nothing is lined up and nothing is separating yet — that is what makes it prophase.")
+
+q(Q, 1, "What does a cell in G0 do?",
+  ["Its ordinary job, without preparing to divide",
+   "Copies its DNA more slowly than usual",
+   "Repairs damaged DNA before re-entering mitosis",
+   "Condenses its chromosomes and waits for a signal"], 0,
+  "The name means it has stepped out of the numbered phases entirely.",
+  ["G0 is not one of the cell cycle's phases — it is outside the cycle.",
+   "A cell there is not preparing to divide at all.",
+   "It carries on doing whatever that cell type does.",
+   "So it does its ordinary job without preparing to divide."],
+  "**Its ordinary job, without preparing to divide.** Most of your cells are in G0 right now. Mature "
+  "neurons and muscle cells are there permanently, which is a large part of why damage to those organs "
+  "is lasting; liver cells can be pulled back into the cycle when the organ is injured.",
+  "G0 is not a phase of the cycle. It is being out of the cycle.")
+
+q(Q, 1, "In an animal cell, what physically separates the two daughter cells at the end of division?",
+  ["A cleavage furrow pinching inward", "A cell plate built across the middle",
+   "The spindle pushing the two halves apart", "The nuclear envelope splitting in two"], 0,
+  "Think about whether an animal cell has anything rigid to build against.",
+  ["An animal cell has no cell wall, so it can deform.",
+   "A contracting ring of microfilaments squeezes the membrane inward.",
+   "That inward pinch is the cleavage furrow.",
+   "A cell plate is what a plant cell builds instead, because a rigid wall cannot pinch."],
+  "**A cleavage furrow pinching inward.** The membrane is pulled in by a contracting ring of "
+  "microfilaments until the cell is squeezed in two. A plant cell cannot do this — its wall is rigid — "
+  "so it builds a cell plate across the middle instead, which becomes a new cell wall.",
+  "Pinch if you are soft, build a wall if you are not.")
+
+q(Q, 1, "How many checkpoints does the cell cycle use to make sure the cell and its DNA are ready to "
+        "divide?",
+  ["Three", "One", "Two", "Five"], 0,
+  "There is one near the end of each of two interphase stages, and one during the division itself.",
+  ["One sits near the end of G1, checking the cell is big enough and its DNA is undamaged.",
+   "One sits near the end of G2, checking the DNA was copied correctly.",
+   "One sits partway through mitosis, checking the chromosomes are lined up properly.",
+   "That is three."],
+  "**Three.** Each one stops the cycle until a particular thing checks out — big enough, copied "
+  "correctly, lined up correctly. A cell that cannot repair a problem enough to pass undergoes apoptosis, "
+  "which is the safe outcome rather than a failure.",
+  "Grow enough, copy it right, line it up right.")
+
+q(Q, 2, "A cat's body cell contains 38 chromosomes. After that cell divides by mitosis, how many "
+        "chromosomes are in EACH daughter cell?",
+  ["38", "19", "76", "It depends on which daughter cell"], 0,
+  "Mitosis makes identical copies. What would 'identical' have to mean about the count?",
+  ["The DNA was replicated in S phase, so the cell entered mitosis with 38 chromosomes of two chromatids each.",
+   "In anaphase the sister chromatids separate, and each half goes to one end.",
+   "Each end therefore receives one full set of 38.",
+   "So each daughter cell has 38."],
+  "**38.** Mitosis produces two cells genetically identical to the parent, and identical includes the "
+  "chromosome count. Halving the number is meiosis, which makes gametes and is the next unit — that is "
+  "the single commonest mix-up between the two.",
+  "Replication happened first. That is what lets both daughters get a full set.")
+
+q(Q, 2, "Why does a growing animal make more cells rather than simply growing the cells it already has?",
+  # The first draft's distractors ran half the length of the answer (67%, above
+  # the library's band) and were thin besides. Each is now a real misconception
+  # at a comparable length — and the G0 one is a genuine near-miss, since she
+  # has just learned that cells do leave the cycle.
+  ["Volume grows faster than surface area, so a large cell cannot supply its own interior",
+   "Each cell holds only a fixed amount of DNA, which caps how large it can grow",
+   "Cells wear out after a set number of days and have to be replaced on a schedule",
+   "A cell that grows past a certain size is pushed out of the cell cycle into G0"], 0,
+  "The limit is about what has to cross the membrane, not about the membrane's strength.",
+  ["Everything a cell needs enters and leaves across its surface.",
+   "As a cell gets bigger, its volume grows faster than its surface area.",
+   "So a large cell has relatively less membrane serving relatively more interior.",
+   "Dividing keeps each cell small enough for its own surface to supply it."],
+  "**Volume grows faster than surface area, so a large cell cannot supply its own interior.** This is "
+  "the same surface area-to-volume limit from the cells unit, and it is why growth has to mean more "
+  "cells rather than bigger ones. Animal cells have no cell wall at all, so that is not the constraint.",
+  "The membrane is the loading dock. Doubling the warehouse does not double the dock.")
+
+q(Q, 2, "During which stage do the sister chromatids first become separate chromosomes?",
+  ["Anaphase", "Prophase", "Metaphase", "Telophase"], 0,
+  "The moment the centromere lets go is the moment the counting changes.",
+  ["In prophase and metaphase the sister chromatids are still joined at the centromere.",
+   "While they are joined, the pair counts as one chromosome.",
+   "In anaphase the spindle pulls them apart.",
+   "The instant they separate, each one counts as a chromosome in its own right."],
+  "**Anaphase.** A chromosome is defined by its centromere, so while two chromatids are joined they are "
+  "one chromosome. Separating them momentarily doubles the cell's chromosome count — and then the cell "
+  "divides, which brings each daughter back to the normal number.",
+  "Away — Anaphase. The count changes at the moment of separation.")
+
+q(Q, 2, "A cell is found with a tight dark line of chromosomes running straight across its middle, and "
+        "no nuclear envelope. Which stage is it in?",
+  ["Metaphase", "Interphase", "Anaphase", "Prophase"], 0,
+  "One row, across the centre, and nothing moving apart yet.",
+  ["The missing nuclear envelope rules out interphase — it broke down in prophase.",
+   "The chromosomes are in a single line rather than scattered, so prophase is finished.",
+   "Nothing has moved to the ends, so anaphase has not started.",
+   "A single row across the middle is the metaphase plate."],
+  "**Metaphase.** The spindle has lined every chromosome up on the metaphase plate across the centre of "
+  "the cell. It is the arranging step — nothing separates until anaphase.",
+  "Middle — Metaphase. Both start with M.")
+
+q(Q, 2, "Which pair of cells CANNOT be produced by mitosis?",
+  ["Sperm and egg cells", "Skin cells and liver cells",
+   "Muscle cells and nerve cells", "Root tip cells and leaf cells"], 0,
+  "Think about how many complete sets of chromosomes each kind of cell carries.",
+  ["Mitosis produces cells genetically identical to the parent, with the same chromosome count.",
+   "Body cells are diploid — two complete sets — and mitosis keeps them that way.",
+   "Sperm and egg cells are haploid: one complete set, half the number.",
+   "Producing them means halving the count, which mitosis cannot do."],
+  "**Sperm and egg cells.** Gametes are haploid, and mitosis always produces cells with the same "
+  "chromosome number as the parent. Making them requires meiosis, which is the next unit.",
+  "Mitosis copies. Only meiosis halves.")
+
+q(Q, 2, "In a root tip where the whole cell cycle takes 24 hours, roughly 23 of those hours are spent "
+        "in interphase. What does that predict about a photograph of many cells from that root tip?",
+  ["The large majority of cells will be in interphase",
+   "Cells will be spread evenly across all the phases",
+   "Most cells will be caught in metaphase, the longest mitotic stage",
+   "About half the cells will be dividing at any moment"], 0,
+  "In a random snapshot, how likely a cell is to be caught in a stage depends on how long it lasts.",
+  ["A snapshot catches each cell wherever it happens to be.",
+   "The longer a stage lasts, the more cells will be in it at any one moment.",
+   "Interphase takes about 23 of the 24 hours.",
+   "So the large majority of cells in the picture will be in interphase."],
+  "**The large majority of cells will be in interphase.** This is exactly why counting cells in each "
+  "stage on a slide tells you how long each stage takes — the proportion you see IS the proportion of "
+  "time spent there. Even in a cell dividing as fast as it can, dividing is the short part.",
+  "A snapshot is a sample of time, not a sample of stages.")
+
+q(Q, 2, "A cell reaches the end of G2 with DNA damage it has not been able to repair. What is the "
+        "normal outcome?",
+  ["It undergoes apoptosis rather than dividing",
+   "It divides anyway and the damage is repaired afterwards",
+   "It returns to G1 and repeats the whole cycle",
+   "It enters G0 permanently and keeps working"], 0,
+  "The point of a checkpoint is to stop something from being passed on.",
+  ["The G2 checkpoint exists to catch exactly this — DNA that was not copied correctly.",
+   "A cell that can repair the damage does so, then carries on.",
+   "A cell that cannot repair it must not hand a broken copy to two daughter cells.",
+   "So it undergoes apoptosis, programmed cell death."],
+  "**It undergoes apoptosis rather than dividing.** Apoptosis is the safe outcome, not a malfunction — "
+  "the cell dismantles itself on purpose so the damage goes no further. A cell that ignores its "
+  "checkpoints AND escapes apoptosis is how uncontrolled growth begins.",
+  "Better one cell lost than two cells wrong.")
+
+q(Q, 3, "Put these four events in order, from earliest to latest.",
+  ["The DNA is replicated",
+   "The chromosomes line up across the middle of the cell",
+   "The sister chromatids are pulled to opposite ends",
+   "A cleavage furrow pinches the cell in two"], 0,
+  "Copy it, arrange it, separate it, then split the cell itself.",
+  ["Replication comes first, in S phase, long before mitosis starts.",
+   "Lining up across the middle is metaphase.",
+   "Pulling the chromatids apart is anaphase, which follows metaphase.",
+   "The cleavage furrow is cytokinesis, which finishes the job."],
+  "**Replicate, line up, separate, pinch.** The order matters because each step depends on the one "
+  "before it: you cannot line up chromosomes you have not copied, cannot separate chromatids you have "
+  "not lined up, and cannot usefully split a cell whose nucleus has not divided.",
+  "S phase happens hours before mitosis begins — it is easy to forget it is part of the same cycle.",
+  kind='order')
+
+q(Q, 3, "A drug blocks the spindle from forming, but leaves everything else working. Where does the "
+        "cell get stuck, and why?",
+  ["At metaphase, because nothing can line the chromosomes up",
+   "At S phase, because the DNA cannot be copied without a spindle",
+   "At telophase, because the nuclear envelope cannot reform",
+   "At G1, because the cell cannot receive the signal to divide"], 0,
+  "Work out the first job in the sequence that the spindle is actually responsible for.",
+  ["The spindle is not involved in copying DNA, so S phase runs normally.",
+   "Prophase can begin — the chromosomes condense on their own.",
+   "But the spindle is what lines the chromosomes up on the metaphase plate.",
+   "With no spindle the cell cannot get past that arranging step, so it stalls at metaphase."],
+  "**At metaphase, because nothing can line the chromosomes up.** The spindle both arranges the "
+  "chromosomes and later pulls the chromatids apart, so removing it stops the process at the first of "
+  "those jobs. This is not hypothetical — several real cancer drugs work exactly this way, and the "
+  "mitotic checkpoint is what holds the cell there.",
+  "Trace the first step that actually needs the missing part.")
+
+q(Q, 3, "Two cells from the same organism are examined. One has 12 chromosomes, the other has 6. What "
+        "is the most likely explanation?",
+  ["The first is a body cell and the second is a gamete",
+   "The second cell is partway through anaphase",
+   "The first cell failed a checkpoint and doubled its DNA",
+   "The two cells came from different tissues with different genomes"], 0,
+  "Halving is a specific, normal thing that happens to one kind of cell.",
+  ["Every cell of an organism carries the same genome, so different tissues is not the explanation.",
+   "A body cell is diploid — two complete sets.",
+   "A gamete is haploid — one complete set, so half the number.",
+   "Six is half of twelve, which fits a gamete against a body cell exactly."],
+  "**The first is a body cell and the second is a gamete.** Diploid means two complete sets, haploid "
+  "means one. Anaphase would momentarily raise the count rather than halve it, and every cell of one "
+  "organism carries the same genome — what differs between tissues is which genes get used, not which "
+  "genes are present.",
+  "Half the chromosomes is the signature of a gamete, and only meiosis makes them.")
+
+q(Q, 3, "Why does a plant cell build a cell plate instead of pinching inward the way an animal cell does?",
+  ["Its rigid cell wall cannot be pulled inward",
+   "Its chloroplasts would be damaged by pinching",
+   "Plant cells divide too slowly for a furrow to form",
+   "Its central vacuole holds the membrane in place"], 0,
+  "Ask what an animal cell has that lets it deform, and whether a plant cell has it.",
+  ["A cleavage furrow works by contracting a ring of microfilaments that pulls the membrane inward.",
+   "That requires a flexible outer boundary.",
+   "A plant cell is enclosed in a rigid cell wall, which will not deform that way.",
+   "So it builds a divider across the middle instead, which becomes a new cell wall."],
+  "**Its rigid cell wall cannot be pulled inward.** The wall that gives a plant cell its shape is "
+  "exactly what stops it dividing the way an animal cell does — so instead of squeezing from the "
+  "outside in, it assembles a cell plate from the inside out.",
+  "Same goal, opposite direction, because of one structure the two cells do not share.")
+
+q(Q, 3, "A cell type is described as being in G0 permanently. What does that predict about the tissue "
+        "it belongs to?",
+  ["Damage to that tissue will not be repaired by replacing the cells",
+   "That tissue will grow faster than tissues whose cells divide",
+   "That tissue is the most likely place for cancer to start",
+   "That tissue will replace its cells more often than most"], 0,
+  "If a cell never re-enters the cycle, what can the tissue no longer do?",
+  ["Replacing a lost cell requires a cell that divides.",
+   "A cell permanently in G0 has left the cycle and will not divide again.",
+   "So there is nothing to produce replacements.",
+   "Damage to that tissue therefore is not repaired by replacing the cells."],
+  "**Damage to that tissue will not be repaired by replacing the cells.** Mature neurons and muscle "
+  "cells are the standard examples, and it is a large part of why nerve and heart damage is lasting. "
+  "It also makes cancer LESS likely there, not more — uncontrolled growth requires cells that divide.",
+  "No division means no replacement, and also no runaway division.")
+
+q(Q, 3, "Mitosis and cytokinesis are described as two separate processes. What would a cell look like "
+        "if mitosis completed normally but cytokinesis failed?",
+  ["One cell containing two complete nuclei",
+   "Two cells, each with no nucleus",
+   "One cell with a single nucleus holding twice the DNA",
+   "Two cells joined by a permanent cleavage furrow"], 0,
+  "Name exactly what each of the two processes divides, then remove one of them.",
+  ["Mitosis divides the nucleus, producing two identical daughter nuclei.",
+   "Cytokinesis divides the cytoplasm, producing two separate cells.",
+   "If mitosis finishes, two complete nuclei exist.",
+   "If cytokinesis fails, they are never separated — so both sit in one cell."],
+  "**One cell containing two complete nuclei.** This is the cleanest way to see that the two processes "
+  "are genuinely separate: mitosis is nuclear division and cytokinesis is cytoplasmic division. "
+  "Multinucleate cells are real — human skeletal muscle fibres are a normal example.",
+  "Mitosis divides the nucleus. It does not, by itself, make two cells.")
+
+build('ad-astra', C, Q, 'unit-bio-u4',
+      'Biology 8 · Unit 4-1: The Cell Cycle and Mitosis', 'bio',
+
+      "Her teacher's Unit 4 deck on the cell cycle and mitosis, plus the graded Mitosis Videos "
+      "worksheet: why cells divide at all, the five kinds of asexual reproduction, chromatin and "
+      "histones, the chromosome-versus-chromatid distinction and how to count both, diploid body "
+      "cells against haploid gametes, the whole cycle through G1, S, G2 and G0, the three "
+      "checkpoints, mitosis stage by stage through PMAT, and cytokinesis in an animal cell against "
+      "a plant one.",
+
+      "Everything in genetics sits on this. Meiosis is the next unit and is taught almost entirely "
+      "by contrast with mitosis, so a shaky grip here costs twice — and the chromosome-versus-"
+      "chromatid counting turns up again in every inheritance problem she will meet this year.",
+
+      [("Say what happens in each of G1, S, G2 and the mitotic phase, and why G0 is not one of them.",
+        'source'),
+       ("Count chromosomes and chromatids in a described set of structures, and explain why an X "
+        "shape is one chromosome.", 'source'),
+       ("Put the stages of mitosis in order and name what happens to the chromosomes in each.", 'source'),
+       ("Tell diploid from haploid, and say why mitosis cannot produce a gamete.", 'source'),
+       ("Say how many checkpoints the cycle has, what each one checks, and what happens to a cell "
+        "that fails one.", 'added'),
+       ("Explain why an animal cell pinches and a plant cell builds, and predict what a failure of "
+        "cytokinesis alone would produce.", 'added')],
+
+      "Built from two sources in her new Unit 4 folder: the teacher's own lecture deck "
+      "(G8_Cell Cycle and Mitosis_VA.pdf, 39 slides) and the graded Mitosis Videos worksheet.\n\n"
+      "TWO THINGS ARE WORTH YOUR EYE, and both came out of reading the two sources against each "
+      "other rather than either one alone.\n\n"
+      "FIRST — the graded worksheet asks about something the slides never cover. Question 5 of "
+      "Video 1 asks how many checkpoints the cell cycle has, and question 6 asks what happens to a "
+      "cell that cannot repair itself enough to pass one. The word 'checkpoint' appears twice on "
+      "that worksheet and zero times across all 39 slides, and 'apoptosis' appears in neither — it "
+      "is said aloud in the video. So the answers are only available to her if she actually watched "
+      "the videos. Two cards here cover both (three checkpoints; apoptosis), and they are tagged as "
+      "our addition rather than from her class material, because the deck cannot source them.\n\n"
+      "SECOND — one slide looks like a slip, and it contradicts her own homework. The cytokinesis "
+      "slide reads 'Cell completely divides in two (chromosome reduction)'. Mitosis is not "
+      "reductional; that is meiosis, which her class does next unit. The same slide says three lines "
+      "above that each new nucleus has an identical set of chromosomes, and the worksheet's own "
+      "fruit-fly question grades the opposite of the parenthetical — 8 chromosomes in, 8 in each "
+      "daughter cell. This unit teaches the correct version (daughter cells keep the parent's "
+      "chromosome number) and one question targets exactly that, since teaching her the slide's "
+      "wording would cost her the mark on her own homework. Worth a quick check with her teacher if "
+      "it comes up, in case it means something more specific in class.\n\n"
+      "No diagrams in this one, deliberately. The deck's phase photographs are textbook figures — "
+      "one page is stamped Pearson copyright outright — so they are not ours to republish, the same "
+      "call the Cells unit made. Public-domain mitosis diagrams do exist and could be added later, "
+      "but every filename has to be verified before it ships rather than guessed. In the meantime "
+      "one card describes what each phase actually looks like in a stained root tip, which is the "
+      "skill the slides' photographs were there to teach.",
+
+      ("Start with the cards — the chromosome-versus-chromatid one and the counting one are the two "
+       "her class drills hardest, and the rest of the unit leans on them.", 25),
+      'content/bio-unit-4-mitosis.json',
+      'G8_Cell Cycle and Mitosis_VA.pdf and the Mitosis Videos worksheet (Biology 8 · Unit 4, Drive)',
+      'source', offset_hours=3)
+
+p = '/home/user/ad-astra/content/bio-unit-4-mitosis.json'
+d = json.load(io.open(p, encoding='utf-8'))
+d['records']['unit-bio-u4']['libv'] = 1
+io.open(p, 'w', encoding='utf-8').write(json.dumps(d, ensure_ascii=False, indent=1))
+print('libv set to 1')

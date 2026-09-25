@@ -982,6 +982,95 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Unit 4 · The Cell Cycle and Mitosis (v197, THIS APP ONLY)
+
+Chris: *"folders are updated, can we have some updated documentation?"* — and
+one folder was Sedona's new **Biology 8 · Unit 4**, which answers a question
+she had asked directly a few days earlier (*"do I have a unit in mitosis?"*,
+then: no, and no source material for one). `bio-unit-4-mitosis.json`
+(`unit-bio-u4`) is 27 cards and 20 questions, shelving onto the Biology 8
+spine as **`Unit 4-1`**, the numbered form v180 put on every other lesson.
+
+**It is built from TWO sources read against each other, and that is where both
+of its interesting findings came from** — the teacher's own 39-slide lecture
+deck (`G8_Cell Cycle and Mitosis_VA.pdf`) and the graded **Mitosis Videos**
+worksheet. Either one alone would have shipped a unit with a hole in it.
+
+- **The worksheet grades two things the deck never says.** Its Video 1
+  questions 5 and 6 ask how many checkpoints the cell cycle has and what
+  happens to a cell that fails one. Measured rather than assumed: the word
+  **"checkpoint" appears twice on that worksheet and zero times across all 39
+  slides**, and **"apoptosis" appears in neither** — it is said aloud in the
+  video. So a student revising from the deck alone cannot answer two graded
+  questions. Both get cards, and both are tagged **`from:'added'`**, because
+  the deck cannot source them and marking them `source` would put the school's
+  name on something its own material never said.
+- **One slide looks like a slip, and it contradicts her own homework.** The
+  cytokinesis slide reads *"Cell completely divides in two (chromosome
+  reduction)"*. Mitosis is not reductional — that is meiosis, which her class
+  does next unit — and the same slide says three lines above that each new
+  nucleus gets an **identical** set. The worksheet settles it: its fruit-fly
+  question grades 8 chromosomes in → 8 in each daughter cell. The unit teaches
+  the correct version and one question targets exactly that, with the
+  `parentNote` flagging the slide rather than smoothing it over. **Teaching
+  her the slide's parenthetical would have cost her the mark on her own
+  homework**, which is the same reasoning the v141 study-guide corrections
+  turned on: what the marks say decides the posture, so find out which source
+  is being marked.
+- **The teacher's own mnemonic is kept** — interphase as the "triple double"
+  (double in size, double the organelles, double the DNA) — because a hook the
+  class already shares is worth more than a better one they do not.
+- **The below-the-surface asymmetry gets its own cards**, the way the Enzymes
+  unit's did: G1/S/G2 are where the work happens, **G0 is not a failure
+  state**, and a cell resting in G0 is the strongest distractor on the
+  why-cells-divide question rather than a throwaway.
+
+> ⚠️ **No diagrams, deliberately, and the reason is the v176 call repeated.**
+> The deck's phase photographs are textbook figures — one page is stamped
+> *"Copyright © 2008 Pearson Education"* outright — so they are not ours to
+> republish from a public repo, exactly as the Cells unit decided. Commons
+> public-domain mitosis diagrams do exist and could be added later, but **every
+> filename has to be verified before it ships rather than pattern-guessed**:
+> three of the Cells unit's seven punctuate differently, so a guess is wrong
+> about a third of the time. In the meantime one card describes what each phase
+> looks like in a stained root tip, which is the skill the photographs were
+> there to teach.
+
+> ⚠️ **A Drive full-text search for "mitosis" matched the Cells deck, and it
+> was matching "mitochondria".** Rendering and extracting all 39 pages of
+> `G8_Cells_VA.pdf` proved the word appears in it **zero** times — which is the
+> only reason Sedona was not told her existing Biology shelf already covered
+> this. A search hit is not evidence of coverage any more than an empty search
+> is evidence of absence (v142, v185).
+
+> ⚠️ **`check_content.py` flagged q8 at 67%, above the library's band, and the
+> fix made the item better.** Its distractors ran half the length of the answer
+> and were thin besides. Each is now a real misconception at a comparable
+> length — and one of them, *"a cell that grows past a certain size is pushed
+> into G0"*, is a genuine near-miss rather than filler. Worst remaining warning
+> is 25% ("Three" against "Five"), a short-word artifact of the same class the
+> Cells unit's six are.
+
+`tools/test_bio_mitosis.js` (25 assertions) seeds the **whole Biology shelf**,
+so "it shelves as Unit 4-1" is a claim about coexistence rather than about an
+empty subject screen, and pins each finding **by its teaching rather than by
+question id**, which would not survive a renumber: the classId (the v136 orphan
+trap), the shelf ascending by unit then part with the numbered form on every
+lesson, answers spread across all four slots, no back-references and no
+positional references, the checkpoints and apoptosis gap present and flagged
+`added`, the chromosome number preserved through division, the counting rule,
+no card or question pointing at an image, the `kind:'order'` phase sequence
+really stored in order, a full quiz round, and the 27-card deck walking to the
+end. **Verified by stripping the checkpoint and apoptosis cards and flipping
+the chromosome-number answer, and watching exactly the three expected
+assertions fail.**
+
+> ⚠️ **One of the 25 failed first as MY bug and read as a content failure.**
+> The S-phase assertion swept a blob built from `term + def`, and that teaching
+> lives in the card's **hint** — which she reads, so it counts as taught. Same
+> family as the v194 wrong-field regexes: the content was correct and present,
+> one field over.
+
 ### Every deck gets its list (v196 / Wayfinder v174, both apps)
 
 Chris: *"I like seeing the flashcard words listed out as an option. Can we do
