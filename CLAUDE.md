@@ -233,6 +233,29 @@ convention, not a mechanic.
   Lesson 1-1 vocab key had two).
 - **Video-based material:** transcripts are usually unfetchable; build from the
   sheets and say so in `parentNote` — never invent video specifics.
+- **A sheet she has already done is a source of QUESTIONS, not something to
+  grade.** Chris, 2026-09-27, on an uploaded lesson check: *"This was included
+  for the questions. Not corrections or scoring. I'll enter scores manually
+  unless explicitly stated."* So when her completed work arrives in Drive, read
+  it for **what it asks** — the ideas, the shapes, the traps — and build coverage
+  of those. Do not tally her marks, do not summarise how she did, and do not put
+  a score, a grade or an "she aced it" anywhere: not in `parentNote`, not in a
+  builder comment, and not in these files, all of which are public. **Both
+  CLAUDE.md files are as public as the code**, so the rule binds the write-up as
+  hard as it binds the content.
+  - **Correction-driven content needs the ask, every time.** Several units
+    (Wayfinder v161, v165, Ad Astra v141) were built AROUND her wrong answers,
+    which was right — he had asked for the material to be reviewed against her
+    paper. That is the explicit case this rule names. Absent it, an upload is
+    material, not a marking job.
+  - **Scores reach the app one way: he types them in the parent view**, where
+    they live as `assess` records in the private Gist and feed
+    `gradesBySubject`, the study plan and the runway. That path already exists
+    and is the private one; a score in a content file would be a second, public
+    copy of something the app already handles correctly.
+  - `tools/test_density.js` pins this on the first unit built under it — a
+    regex sweep of the whole shipped record for a mark, a fraction or "she got",
+    **verified by prepending "She got 20 out of 20" and watching it fail**.
 - **Encouragement, not scorekeeping.** Answer feedback comes from `CHEER_RIGHT` /
   `CHEER_WRONG` — varied, warm, growth-mindset, no exclamation-mark cheerleading.
 - Every unit ships as `status:'draft'` for the review queue. No exceptions.
@@ -1313,10 +1336,14 @@ stops, a full quiz round on each, a passage rendering on its own plate, and the
 > `quizState`**, so one assembled beforehand is thrown away — navigate first,
 > then steer the round it built.
 
-> **Flagged to Chris: the test DATE is unknown.** There is no `english` entry in
-> `SUGGESTED_ASSESS` and her notes carry no date. It matters for the bulk-approve
-> pace — all seven today, or one a school day — so it is worth one question rather
-> than a guess.
+> **Answered, 2026-09-27.** The test date was flagged as unknown — no `english`
+> entry in `SUGGESTED_ASSESS`, no date on her notes — because it decides the
+> bulk-approve pace. Chris: *"Should go all at once regardless."* So all seven
+> release together whenever he approves them, and the date does not need
+> settling first. The pace picker's default (all today) is the right one here;
+> nothing in code changes, and **nothing was guessed** — the `english`
+> suggestion still does not exist, and a date should only go in
+> `SUGGESTED_ASSESS` when a newsletter or a teacher's note supplies one.
 
 ### The note moves up (v193 / Wayfinder v173, both apps)
 
