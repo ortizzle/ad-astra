@@ -1,0 +1,564 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u2p2": {
+   "id": "unit-hist-u2p2",
+   "type": "unit",
+   "updatedAt": 1790628311035,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 2 · 2 The Road to Revolution",
+   "srcName": "US History Unit 2 test topics, section 2.2",
+   "source": "History 8, Unit 2 test-topics list (teacher's, Drive)",
+   "summary": {
+    "text": "Section 2.2 of the teacher's Unit 2 test-topics list: salutary neglect, the Sugar, Stamp and Tea Acts, the Boston Massacre and Tea Party, Lexington and Concord, the Enlightenment thinkers, inalienable rights and Common Sense.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the chain of cause and effect that takes the colonies from loyal subjects to open war — the most-tested part of the unit.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain salutary neglect and why it ended",
+     "from": "source"
+    },
+    {
+     "text": "Describe the Sugar, Stamp and Tea Acts and the colonial response to each",
+     "from": "source"
+    },
+    {
+     "text": "Explain the Boston Massacre, the Boston Tea Party and Lexington and Concord",
+     "from": "source"
+    },
+    {
+     "text": "Connect Enlightenment ideas and inalienable rights to the Revolution",
+     "from": "source"
+    },
+    {
+     "text": "Explain the argument of Common Sense",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the teacher's Unit 2 test-topics list, which names what is tested but says nothing about it; her class notes and textbook pages for this unit are not in Drive, so the facts are standard US history and every card and question is marked as our addition. Three short primary-source passages are quoted exactly — two lines of the Declaration of Independence and one of Common Sense — since her syllabus says exams include primary sources. Two traps are built in on purpose. The Tea Act made tea CHEAPER, not dearer; the anger was about accepting the tax, and one question offers the \"doubled the price\" answer as a real wrong option. And Locke versus Montesquieu: natural rights against separation of powers, asked both ways round. Her list writes \"inalienable\"; the Declaration writes \"unalienable\" — the card says they are the same word.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Say the chain out loud: debt, taxes, protest, war.",
+    "minutes": 18,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Salutary neglect",
+     "def": "**Britain's old habit of NOT strictly enforcing its laws on the colonies.**\n• For decades, trade laws went mostly unenforced and the colonies governed themselves.\n• It ended after the French and Indian War, when Britain needed money.",
+     "hint": "\"Salutary\" means healthy — the neglect was good for the colonies.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "The Sugar Act (1764)",
+     "def": "**A tax on sugar and molasses brought into the colonies — and, this time, actually enforced.**\n• It came with new rules for catching smugglers.",
+     "hint": "The first of the new taxes after the war.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "The Stamp Act (1765)",
+     "def": "**A direct tax on printed paper: newspapers, legal documents, even playing cards.**\n• Everyone who read or signed anything paid it.\n• Protest was so fierce that Parliament repealed it in 1766.",
+     "hint": "Paper needed a paid-for stamp.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "\"No taxation without representation\"",
+     "def": "**The colonists' argument that only their own elected assemblies could tax them.**\n• The colonies had no members in Parliament.\n• So, they argued, Parliament had no right to tax them.",
+     "hint": "No vote in Parliament → no tax from Parliament.",
+     "from": "added"
+    },
+    {
+     "id": "c4",
+     "term": "The Boston Massacre (1770)",
+     "def": "**British soldiers fired into a crowd in Boston, killing five colonists.**\n• Crispus Attucks, a man of African and Native descent, was among those killed.\n• Paul Revere's engraving of it spread anger through the colonies.",
+     "hint": "Five dead, and a picture that went everywhere.",
+     "from": "added"
+    },
+    {
+     "id": "c5",
+     "term": "The Tea Act (1773)",
+     "def": "**A law giving the British East India Company control of the tea trade in the colonies.**\n• It made tea cheaper — but kept the tax on it.\n• Colonists saw it as a trick to make them accept Parliament's right to tax.",
+     "hint": "Cheaper tea, same principle.",
+     "from": "added"
+    },
+    {
+     "id": "c6",
+     "term": "The Boston Tea Party (1773)",
+     "def": "**Colonists dumped over 300 chests of East India Company tea into Boston Harbor.**\n• It was a protest against the Tea Act and the tax on tea.\n• Britain answered with harsh laws that closed Boston's port.",
+     "hint": "Tea in the harbour, and Britain cracked down.",
+     "from": "added"
+    },
+    {
+     "id": "c7",
+     "term": "Lexington and Concord (April 1775)",
+     "def": "**The first battles of the American Revolution, outside Boston.**\n• British soldiers marched to seize colonial weapons at Concord.\n• Colonial militia met them — \"the shot heard round the world\".",
+     "hint": "Where the shooting war began.",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "The Enlightenment",
+     "def": "**A movement of thinkers who believed reason could improve government and society.**\n• Their ideas gave the colonists arguments for self-government.",
+     "hint": "Reason, not tradition, should decide how people are ruled.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "John Locke",
+     "def": "**An English thinker who said people are born with natural rights: life, liberty and property.**\n• Government gets its power from the consent of the governed.\n• If a government breaks that trust, the people may replace it.",
+     "hint": "Life, liberty, property — and the right to change a bad government.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Montesquieu",
+     "def": "**A French thinker who argued that power should be split between separate branches of government.**\n• Separation of powers keeps any one part from becoming too strong.",
+     "hint": "Split the power so no one holds it all.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Inalienable rights",
+     "def": "**Rights so basic that no government can take them away.**\n• The Declaration of Independence names life, liberty and the pursuit of happiness.\n• \"Inalienable\" and \"unalienable\" mean the same thing.",
+     "hint": "In-alien-able: they can never be made someone else's.",
+     "from": "added"
+    },
+    {
+     "id": "c12",
+     "term": "Common Sense (1776)",
+     "def": "**A pamphlet by Thomas Paine arguing, in plain words, that the colonies should declare independence.**\n• It was one of the best-selling publications of its time.\n• It turned many colonists from protesting taxes toward wanting independence.",
+     "hint": "Paine wrote for ordinary readers, not scholars.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What was salutary neglect?",
+     "opts": [
+      "Britain's habit of not strictly enforcing its laws on the colonies",
+      "Britain's habit of taxing the colonies without asking them first",
+      "The colonists' habit of ignoring the Native nations to their west",
+      "The colonists' habit of refusing to buy any British goods at all"
+     ],
+     "ans": 0,
+     "hint": "\"Neglect\" means leaving something alone.",
+     "steps": [
+      "For decades Britain did not enforce its trade laws strictly.",
+      "The colonies largely ran their own affairs.",
+      "That hands-off policy is salutary neglect."
+     ],
+     "ex": {
+      "main": "**Britain's habit of not strictly enforcing its laws on the colonies.** It ended after 1763.",
+      "tip": "Its END is what makes it a test topic: the new taxes only feel new because enforcement had been so loose."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why did salutary neglect come to an end?",
+     "opts": [
+      "The colonists asked Britain to govern them more closely",
+      "Britain needed money after the French and Indian War",
+      "France took over enforcing the laws in North America",
+      "Parliament gave the colonies seats and votes of their own"
+     ],
+     "ans": 1,
+     "hint": "What did the French and Indian War leave Britain with?",
+     "steps": [
+      "The war left Britain deeply in debt.",
+      "To raise money it began enforcing old laws and adding new taxes.",
+      "That ended the hands-off era."
+     ],
+     "ex": {
+      "main": "**Britain needed money after the war.** The debt turned neglect into enforcement.",
+      "tip": "Cause from 2.1, effect in 2.2 — the two sections connect here."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What did the Stamp Act tax?",
+     "opts": [
+      "Sugar and molasses brought in from the Caribbean",
+      "Tea brought into the colonies from India and China",
+      "Printed paper, such as newspapers and legal documents",
+      "Land that colonists settled west of the mountains"
+     ],
+     "ans": 2,
+     "hint": "The \"stamp\" was put on something.",
+     "steps": [
+      "The Stamp Act of 1765 required a paid-for stamp on printed paper.",
+      "Newspapers, legal documents and even playing cards were taxed.",
+      "Almost every colonist paid it."
+     ],
+     "ex": {
+      "main": "**Printed paper.** It touched nearly everyone, which is why the protest was so widespread.",
+      "tip": "Sugar and molasses are the Sugar Act; tea is the Tea Act."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What did colonists mean by \"no taxation without representation\"?",
+     "opts": [
+      "Taxes should be paid only by people who own land",
+      "They should never have to pay any taxes to anyone",
+      "Britain should send more soldiers to protect them",
+      "Only an assembly they elected should be able to tax them"
+     ],
+     "ans": 3,
+     "hint": "Did the colonies have members in Parliament?",
+     "steps": [
+      "The colonies elected no members to Parliament.",
+      "So Parliament did not represent them.",
+      "They argued only their own elected assemblies could tax them."
+     ],
+     "ex": {
+      "main": "**Only an assembly they elected should tax them.** The objection was about who taxed them, not taxes as such.",
+      "tip": "This is the key idea of the whole section — most protests trace back to it."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What happened at the Boston Massacre in 1770?",
+     "opts": [
+      "British soldiers fired into a crowd and killed five colonists",
+      "Colonists dumped chests of British tea into Boston Harbor",
+      "Colonial militia fought British troops at Lexington",
+      "Colonists burned the homes of British tax collectors"
+     ],
+     "ans": 0,
+     "hint": "It involved soldiers and a crowd.",
+     "steps": [
+      "In March 1770 a crowd in Boston confronted British soldiers.",
+      "The soldiers fired.",
+      "Five colonists were killed, including Crispus Attucks."
+     ],
+     "ex": {
+      "main": "**British soldiers fired into a crowd and killed five colonists.**",
+      "tip": "The tea goes in the harbour three years later, in 1773."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Paul Revere's famous engraving of the Boston Massacre shows soldiers firing in a neat line at calm, unarmed townspeople. Why do historians call it propaganda?",
+     "opts": [
+      "It was drawn many years later by someone who never visited Boston",
+      "It showed the event in a one-sided way to make colonists angry at Britain",
+      "It was published by the British government to frighten the colonists",
+      "It accurately showed every detail, so it could be used as evidence"
+     ],
+     "ans": 1,
+     "hint": "Was the scene really that orderly and one-sided?",
+     "steps": [
+      "The real event was a chaotic street confrontation.",
+      "The engraving shows orderly soldiers firing on peaceful people.",
+      "That picture was designed to stir anger, not to record what happened."
+     ],
+     "ex": {
+      "main": "**It showed the event one-sidedly to make colonists angry.** A primary source can be real AND biased.",
+      "tip": "Asking \"who made this, and why?\" is the first move with any primary source."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What did the Tea Act of 1773 actually do?",
+     "opts": [
+      "It doubled the price of tea to pay for the French and Indian War",
+      "It banned the colonists from drinking any tea that was not grown in Britain",
+      "It gave the East India Company control of the tea trade and kept the tax on tea",
+      "It removed every tax on tea to win the colonists back"
+     ],
+     "ans": 2,
+     "hint": "Tea actually got cheaper. So why were colonists angry?",
+     "steps": [
+      "The Tea Act let the East India Company sell tea directly to the colonies.",
+      "That made tea cheaper, but the tax on it stayed.",
+      "Buying it meant accepting Parliament's right to tax."
+     ],
+     "ex": {
+      "main": "**It gave the East India Company control of the tea trade and kept the tax.** Cheaper tea was a trap of principle.",
+      "tip": "Many students assume the Tea Act made tea more expensive. It did the opposite."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What was the Boston Tea Party?",
+     "opts": [
+      "Colonial leaders met in Boston to plan a boycott of British goods",
+      "Colonists held a celebration in Boston when the Stamp Act was repealed",
+      "British soldiers seized tea from Boston merchants who were smuggling",
+      "Colonists dumped East India Company tea into Boston Harbor in protest"
+     ],
+     "ans": 3,
+     "hint": "It was a protest, not a party.",
+     "steps": [
+      "In December 1773, colonists boarded ships in Boston Harbor.",
+      "They dumped over 300 chests of tea into the water.",
+      "It was a protest against the Tea Act."
+     ],
+     "ex": {
+      "main": "**Colonists dumped East India Company tea into Boston Harbor.**",
+      "tip": "Britain's answer — closing Boston's port — pushed the colonies closer together."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why are the battles of Lexington and Concord important?",
+     "opts": [
+      "They were the first battles of the American Revolution",
+      "They were the last battles of the French and Indian War",
+      "They were the battles that ended the American Revolution",
+      "They were the battles where the French joined the colonists"
+     ],
+     "ans": 0,
+     "hint": "Think \"the shot heard round the world\".",
+     "steps": [
+      "In April 1775 British troops marched to seize weapons at Concord.",
+      "Colonial militia met them at Lexington and Concord.",
+      "The fighting that day began the Revolutionary War."
+     ],
+     "ex": {
+      "main": "**They were the first battles of the Revolution.**",
+      "tip": "The end of the war is Yorktown, in topic 2.3."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which idea is John Locke best known for?",
+     "opts": [
+      "Government power should be split into separate branches",
+      "People have natural rights to life, liberty and property",
+      "A king rules because God chose him to rule",
+      "The strongest nation should rule over the weaker ones"
+     ],
+     "ans": 1,
+     "hint": "He gave the colonists their argument about rights.",
+     "steps": [
+      "Locke argued people are born with natural rights.",
+      "He named them life, liberty and property.",
+      "A government that breaks them can be replaced."
+     ],
+     "ex": {
+      "main": "**Natural rights to life, liberty and property.** The Declaration echoes him.",
+      "tip": "Separation of powers is Montesquieu. Keep the two apart."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which Enlightenment thinker argued that government power should be split into separate branches?",
+     "opts": [
+      "Thomas Paine",
+      "John Locke",
+      "Montesquieu",
+      "George Washington"
+     ],
+     "ans": 2,
+     "hint": "Separation of powers.",
+     "steps": [
+      "Montesquieu argued no single part of government should hold all the power.",
+      "He wanted power split among separate branches.",
+      "The US Constitution later uses exactly that idea."
+     ],
+     "ex": {
+      "main": "**Montesquieu.** Separation of powers is his idea.",
+      "tip": "Locke = natural rights. Montesquieu = separation of powers."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "In this passage, what does the word \"unalienable\" mean?",
+     "opts": [
+      "Rights that apply only to people who own land",
+      "Rights that only citizens born in America have",
+      "Rights that the king may grant or take back",
+      "Rights that cannot be taken away or given up"
+     ],
+     "ans": 3,
+     "hint": "Look at the word: un-alien-able.",
+     "steps": [
+      "\"Alienable\" means able to be given or taken away.",
+      "\"Un-\" reverses it.",
+      "So unalienable rights can never be taken away."
+     ],
+     "ex": {
+      "main": "**Rights that cannot be taken away.** \"Unalienable\" and \"inalienable\" are the same word.",
+      "tip": "You will also see it written \"inalienable\" — the Declaration itself says \"unalienable\"."
+     },
+     "passage": "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness."
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which Enlightenment thinker's ideas does this passage most clearly echo?",
+     "opts": [
+      "John Locke, who wrote about natural rights to life and liberty",
+      "Montesquieu, who wrote about separating the powers of government",
+      "Thomas Paine, who wrote Common Sense in plain language",
+      "George Washington, who led the army at Lexington and Concord"
+     ],
+     "ans": 0,
+     "hint": "Which thinker listed life and liberty as natural rights?",
+     "steps": [
+      "The passage names rights to life and liberty.",
+      "Locke wrote that people are born with rights to life, liberty and property.",
+      "Jefferson swapped \"property\" for \"the pursuit of Happiness\"."
+     ],
+     "ex": {
+      "main": "**John Locke.** Life and liberty come straight from Locke's natural rights.",
+      "tip": "Washington did not fight at Lexington — he took command later that summer."
+     },
+     "passage": "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness."
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What was the main argument of Thomas Paine's Common Sense?",
+     "opts": [
+      "The colonies should pay Britain's war debt to show their loyalty",
+      "The colonies should break away from Britain and become independent",
+      "The colonies should ask the king for seats in Parliament",
+      "The colonies should join France against the British army"
+     ],
+     "ans": 1,
+     "hint": "What did it turn protesters into?",
+     "steps": [
+      "Common Sense was published in January 1776.",
+      "It argued plainly that independence was the only sensible choice.",
+      "It persuaded many colonists who had only wanted fairer taxes."
+     ],
+     "ex": {
+      "main": "**The colonies should become independent.** It moved the argument from taxes to independence.",
+      "tip": "Seats in Parliament is what some colonists wanted before 1776 — Paine argued against it."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "What is Thomas Paine arguing in this passage?",
+     "opts": [
+      "Britain is too far away to trade with the colonies",
+      "The colonies should take over the island of Britain by force",
+      "It makes no sense for a small island to rule a whole continent",
+      "Every continent should have its own king"
+     ],
+     "ans": 2,
+     "hint": "What is the \"continent\", and what is the \"island\"?",
+     "steps": [
+      "The continent is North America; the island is Britain.",
+      "Paine calls it absurd for the island to govern the continent forever.",
+      "So independence is just common sense."
+     ],
+     "ex": {
+      "main": "**It makes no sense for an island to rule a continent.** The size comparison is his whole point.",
+      "tip": "Plain comparisons like this are why ordinary colonists found Paine convincing."
+     },
+     "passage": "There is something very absurd, in supposing a continent to be perpetually governed by an island."
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "added",
+     "kind": "order",
+     "q": "Put these events in order, earliest first.",
+     "opts": [
+      "The Sugar Act",
+      "The Stamp Act",
+      "The Boston Massacre",
+      "The Boston Tea Party"
+     ],
+     "ans": 0,
+     "hint": "Two acts, then two events in Boston.",
+     "steps": [
+      "1764: the Sugar Act.",
+      "1765: the Stamp Act.",
+      "1770: the Boston Massacre.",
+      "1773: the Boston Tea Party."
+     ],
+     "ex": {
+      "main": "**Sugar Act → Stamp Act → Boston Massacre → Boston Tea Party.** 1764, 1765, 1770, 1773.",
+      "tip": "The two acts come first — the protests in Boston grow out of them."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why did the Stamp Act anger colonists more than the Sugar Act?",
+     "opts": [
+      "It was passed by the colonial assemblies instead of Parliament",
+      "It was the first tax Britain had ever placed on any colony",
+      "It raised far more money than every other tax put together",
+      "It was a direct tax that almost everyone paid, not just merchants"
+     ],
+     "ans": 3,
+     "hint": "Who paid each one?",
+     "steps": [
+      "The Sugar Act mostly hit merchants who imported molasses.",
+      "The Stamp Act taxed newspapers, documents and more.",
+      "Almost every colonist paid it directly, so almost everyone was angry."
+     ],
+     "ex": {
+      "main": "**It was a direct tax that almost everyone paid.** Protest spread because the cost did.",
+      "tip": "That breadth is also why it was repealed within a year."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

@@ -1,0 +1,423 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u2p1": {
+   "id": "unit-hist-u2p1",
+   "type": "unit",
+   "updatedAt": 1790628311034,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 2 · 1 The French and Indian War",
+   "srcName": "US History Unit 2 test topics, section 2.1",
+   "source": "History 8, Unit 2 test-topics list (teacher's, Drive)",
+   "summary": {
+    "text": "Section 2.1 of the teacher's Unit 2 test-topics list: the causes of the French and Indian War, George Washington's part in it, Native Americans, the Treaty of Paris of 1763, the war's effects and the Proclamation of 1763.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Every tax and protest in the next section grows out of how this war ended — so this part is the \"why\" behind the whole unit.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain the causes of the French and Indian War",
+     "from": "source"
+    },
+    {
+     "text": "Describe George Washington's role and the part Native Americans played",
+     "from": "source"
+    },
+    {
+     "text": "Explain what the Treaty of Paris of 1763 decided",
+     "from": "source"
+    },
+    {
+     "text": "Explain the effects of the war, including the Proclamation of 1763",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the teacher's Unit 2 TEST-TOPICS list, which names what is tested but says nothing about it — her class notes and textbook pages for this unit are not in Drive. So the facts here are standard US history, and every card and question is marked as our addition rather than as class material. Worth checking one or two against her own notes. The one trap to point out: \"Treaty of Paris\" appears in BOTH section 2.1 and section 2.3 of her list, and they are two different treaties — 1763 ends this war, 1783 ends the Revolution. The syllabus says exams include fill-in-the-blank and short answer, which multiple choice cannot practise, so saying each card aloud before flipping is the best use of the deck.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Say each card out loud before you flip it — the test has fill-in-the-blanks.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "The French and Indian War (1754–1763)",
+     "def": "**A war between Britain and France for control of North America, fought in the colonies.**\n• The name comes from who the British colonists fought: the French and their Native allies.\n• It was part of a larger world war that Europe calls the Seven Years' War.",
+     "hint": "Named for the enemy, not for who fought on your side.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "Cause: the Ohio River Valley",
+     "def": "**Britain and France both claimed the land around the Ohio River.**\n• French forts and fur-trading posts stood in the way of colonists moving west.\n• Whoever held the valley controlled the trade and the route inland.",
+     "hint": "Two empires, one river valley.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "Cause: land and the fur trade",
+     "def": "**The war was over who would profit from the land west of the colonies.**\n• France wanted furs and trade with Native nations.\n• British colonists wanted farmland to settle.",
+     "hint": "France wanted trade; the colonists wanted farms.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "George Washington in 1754",
+     "def": "**A young Virginia militia officer whose clash with the French helped start the war.**\n• He built Fort Necessity and was forced to surrender it in 1754.\n• The experience made him one of the few colonists with real military command.",
+     "hint": "His first fight was a loss — and it started a war.",
+     "from": "added"
+    },
+    {
+     "id": "c4",
+     "term": "Native Americans in the war",
+     "def": "**Most Native nations sided with the French, who traded rather than settled.**\n• The Iroquois Confederacy leaned toward the British.\n• Native nations fought to protect their own lands, not for either empire.",
+     "hint": "Traders were safer neighbours than settlers.",
+     "from": "added"
+    },
+    {
+     "id": "c5",
+     "term": "The Treaty of Paris of 1763",
+     "def": "**The treaty that ENDED the French and Indian War, with Britain the winner.**\n• France gave up Canada and its land east of the Mississippi River to Britain.\n• France nearly vanished from the North American map.",
+     "hint": "1763 — the FIRST Treaty of Paris. There is another one in 1783.",
+     "from": "added"
+    },
+    {
+     "id": "c6",
+     "term": "Effect: a huge war debt",
+     "def": "**Britain won, but the war left it deeply in debt.**\n• Parliament decided the colonies should help pay for their own defence.\n• That decision leads straight to the new taxes of the 1760s.",
+     "hint": "Winning cost money — and the bill went to the colonies.",
+     "from": "added"
+    },
+    {
+     "id": "c7",
+     "term": "Effect: the end of being left alone",
+     "def": "**After the war Britain began enforcing its rules on the colonies much more strictly.**\n• Before 1763 it had mostly let the colonies run themselves.\n• Tighter control is what the colonists started to push back against.",
+     "hint": "The war changed how Britain treated the colonies.",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Pontiac's Rebellion (1763)",
+     "def": "**An uprising by Native nations, led by the Ottawa leader Pontiac, against British forts in the west.**\n• With France gone, Native nations lost the ally that had balanced British settlers.\n• The fighting convinced Britain to try to separate settlers from Native lands.",
+     "hint": "It is the reason for the Proclamation.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "The Proclamation of 1763",
+     "def": "**A British order banning colonists from settling west of the Appalachian Mountains.**\n• Its aim was to prevent more war with Native nations.\n• Colonists who had fought for that land were furious, and many ignored it.",
+     "hint": "A line on the map along the mountains: no settling past here.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Why colonists hated the Proclamation",
+     "def": "**They felt they had won the western land in the war and were now banned from it.**\n• Land speculators, including Washington, had money riding on the west.\n• It was the first sign that Britain would decide things over their heads.",
+     "hint": "Fought for it, then told to stay out.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What were Britain and France mainly competing for in the French and Indian War?",
+     "opts": [
+      "Control of land and trade in the Ohio River Valley",
+      "Control of the sugar islands in the Caribbean Sea",
+      "The right to tax the thirteen colonies directly",
+      "Control of the Atlantic fishing grounds off Maine"
+     ],
+     "ans": 0,
+     "hint": "Think about where the fighting started.",
+     "steps": [
+      "Both empires claimed the land around the Ohio River.",
+      "France wanted the fur trade there; British colonists wanted farmland.",
+      "That rivalry is the cause of the war."
+     ],
+     "ex": {
+      "main": "**Control of land and trade in the Ohio River Valley.** Whoever held the valley controlled the fur trade and the route west.",
+      "tip": "Taxing the colonies comes AFTER the war, as one of its effects."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why is it called the French and Indian War?",
+     "opts": [
+      "The French and the Native nations fought against each other in it",
+      "British colonists fought against the French and their Native allies",
+      "It was fought only in French Canada and on Native lands in the far west",
+      "The French and Native nations signed the treaty that started it"
+     ],
+     "ans": 1,
+     "hint": "The name says who the colonists were fighting.",
+     "steps": [
+      "The war is named from the British colonists' point of view.",
+      "Their enemies were the French and the Native nations allied with France.",
+      "So it is called the French and Indian War."
+     ],
+     "ex": {
+      "main": "**The colonists fought the French and their Native allies.** The name names the enemy.",
+      "tip": "Europe calls the wider conflict the Seven Years' War."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What role did George Washington play at the start of the French and Indian War?",
+     "opts": [
+      "As a delegate, he signed the Treaty of Paris that ended the war",
+      "As a British general, he captured Quebec and won the war for Britain",
+      "As a young Virginia officer, he clashed with the French and surrendered Fort Necessity",
+      "As a governor, he wrote the Proclamation of 1763 for Parliament"
+     ],
+     "ans": 2,
+     "hint": "He was young, and it did not go well for him.",
+     "steps": [
+      "In 1754 Washington led Virginia militia into the Ohio Valley.",
+      "After a clash with the French he built Fort Necessity.",
+      "He was forced to surrender it — and the fighting grew into a war."
+     ],
+     "ex": {
+      "main": "**He clashed with the French and surrendered Fort Necessity.** His early defeat helped start the war.",
+      "tip": "The same man will command the Continental Army twenty years later."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why did most Native nations side with the French rather than the British?",
+     "opts": [
+      "The French army was larger than the British army in North America",
+      "The French promised to give every Native nation its own colony",
+      "The British had already signed treaties giving the land to France",
+      "The French mostly traded with them, while British colonists wanted their land"
+     ],
+     "ans": 3,
+     "hint": "What did each side want from the land?",
+     "steps": [
+      "French settlers were few and came mainly to trade furs.",
+      "British colonists came in large numbers and wanted farms.",
+      "Farms meant taking Native land, so the French were the lesser threat."
+     ],
+     "ex": {
+      "main": "**The French traded; the British settled.** Traders needed Native partners, settlers needed Native land.",
+      "tip": "The Iroquois Confederacy was the main exception and leaned British."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What did the Treaty of Paris of 1763 do?",
+     "opts": [
+      "Ended the French and Indian War and gave Britain France's land east of the Mississippi",
+      "Ended the American Revolution and recognised the United States as independent",
+      "Started the French and Indian War by splitting the Ohio Valley in two",
+      "Banned colonists from settling west of the Appalachian Mountains"
+     ],
+     "ans": 0,
+     "hint": "Which war was over in 1763?",
+     "steps": [
+      "1763 is the end of the French and Indian War.",
+      "Britain won.",
+      "France gave up Canada and its lands east of the Mississippi to Britain."
+     ],
+     "ex": {
+      "main": "**It ended the French and Indian War, with Britain taking France's eastern lands.**",
+      "tip": "The 1783 Treaty of Paris ends a DIFFERENT war — the Revolution. Same name, twenty years apart."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which was an effect of the French and Indian War on Britain?",
+     "opts": [
+      "A new alliance between Britain and France against Spain",
+      "A huge war debt that Britain wanted the colonies to help pay",
+      "The loss of all its colonies along the Atlantic coast",
+      "A decision to let the colonies govern themselves completely"
+     ],
+     "ans": 1,
+     "hint": "Wars are expensive. Who paid?",
+     "steps": [
+      "Britain won the war but spent enormous sums on it.",
+      "Parliament decided the colonists should share the cost.",
+      "That led to new taxes on the colonies."
+     ],
+     "ex": {
+      "main": "**A huge war debt.** Paying it off is why Britain began taxing the colonies.",
+      "tip": "This effect is the bridge from topic 2.1 to topic 2.2."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What was the main purpose of the Proclamation of 1763?",
+     "opts": [
+      "To give the Ohio River Valley back to France as part of the peace",
+      "To raise money for Britain by taxing every printed paper in the colonies",
+      "To prevent more war with Native nations by keeping settlers east of the Appalachians",
+      "To reward colonial soldiers with free farmland west of the mountains"
+     ],
+     "ans": 2,
+     "hint": "What had just happened in the west in 1763?",
+     "steps": [
+      "Pontiac's Rebellion showed Native nations would fight for their lands.",
+      "Britain did not want to pay for another war.",
+      "So it banned settlement west of the Appalachian Mountains."
+     ],
+     "ex": {
+      "main": "**To prevent more war with Native nations.** The line along the Appalachians kept settlers and Native lands apart.",
+      "tip": "Rewarding soldiers with western land is exactly what colonists EXPECTED — and did not get."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why were many colonists angry about the Proclamation of 1763?",
+     "opts": [
+      "It gave the western land to France even though Britain had won",
+      "It raised the price of tea that they bought from the East India Company",
+      "It forced them to house British soldiers inside their own homes",
+      "They believed they had won the western land in the war and were now banned from it"
+     ],
+     "ans": 3,
+     "hint": "What did colonists think they had been fighting for?",
+     "steps": [
+      "Colonists had fought to open the Ohio Valley to settlement.",
+      "The Proclamation closed it.",
+      "It felt like Britain was deciding their future for them."
+     ],
+     "ex": {
+      "main": "**They had fought for that land and were now banned from it.** Many simply ignored the line.",
+      "tip": "Tea and housing soldiers are later complaints, from topic 2.2."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What was Pontiac's Rebellion?",
+     "opts": [
+      "A Native uprising against British forts after France left North America",
+      "A colonial protest in Boston against the Stamp Act",
+      "A French attempt to win back Canada after the Treaty of Paris",
+      "A slave revolt in Virginia during the French and Indian War"
+     ],
+     "ans": 0,
+     "hint": "Who was Pontiac?",
+     "steps": [
+      "Pontiac was an Ottawa leader.",
+      "With France gone, Native nations faced British settlers with no ally.",
+      "In 1763 they attacked British forts in the west."
+     ],
+     "ex": {
+      "main": "**A Native uprising against British forts.** It is the reason Britain issued the Proclamation of 1763.",
+      "tip": "Cause and effect: Pontiac's Rebellion → Proclamation of 1763."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "How did the French and Indian War help lead to the American Revolution?",
+     "opts": [
+      "It left the colonies under French rule, which they then rebelled against",
+      "Its debt led Britain to tax the colonies, and its end removed France as a threat",
+      "It taught colonists that Britain would always protect them for free",
+      "It made Native nations the colonists' main enemy for the next century"
+     ],
+     "ans": 1,
+     "hint": "Think about money, and about who the colonists no longer needed protecting from.",
+     "steps": [
+      "Britain's war debt led to new taxes on the colonies.",
+      "With France gone, colonists needed British soldiers less.",
+      "Taxes plus less need for protection made them more willing to resist."
+     ],
+     "ex": {
+      "main": "**The debt brought taxes, and the win removed France as a threat.** Colonists were asked to pay more just as they needed Britain less.",
+      "tip": "That two-part answer is exactly the shape a short-answer question will want."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "added",
+     "kind": "order",
+     "q": "Put these events in order, earliest first.",
+     "opts": [
+      "Washington surrenders Fort Necessity",
+      "The Treaty of Paris ends the French and Indian War",
+      "Pontiac's Rebellion begins",
+      "Britain issues the Proclamation of 1763"
+     ],
+     "ans": 0,
+     "hint": "Start with how the war began and end with Britain's response in the west.",
+     "steps": [
+      "1754: Washington surrenders Fort Necessity.",
+      "February 1763: the Treaty of Paris.",
+      "Spring 1763: Pontiac's Rebellion.",
+      "October 1763: the Proclamation."
+     ],
+     "ex": {
+      "main": "**Fort Necessity → Treaty of Paris → Pontiac → Proclamation.** Three of the four happen in 1763, which is why the order within that year matters.",
+      "tip": "The Proclamation is Britain's answer to Pontiac, so it has to come after."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Before 1763, Britain mostly let the colonies run themselves. What changed after the war?",
+     "opts": [
+      "Britain stopped trading with the colonies altogether after the war",
+      "Britain gave the colonies their independence as a reward for fighting",
+      "Britain began enforcing its rules and taxes on the colonies much more strictly",
+      "Britain let France govern the colonies to save itself money"
+     ],
+     "ans": 2,
+     "hint": "Think about the war debt.",
+     "steps": [
+      "Britain needed money after the war.",
+      "It began enforcing trade laws it had ignored.",
+      "It also passed new taxes on the colonies."
+     ],
+     "ex": {
+      "main": "**Britain began enforcing its rules and taxes much more strictly.** The easy-going era was over.",
+      "tip": "That easy-going era has a name — salutary neglect — and it is a topic in 2.2."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

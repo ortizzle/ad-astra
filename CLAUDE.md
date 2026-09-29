@@ -1005,6 +1005,82 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### US History Unit 2, from a topic list (v199, THIS APP ONLY)
+
+Chris: *"I've updated the girls folders. If we can build new materials."* Her US
+History folder gained **`8US2.1-2.3TESTTOPICS.odt`** — the teacher's own list of
+what the Unit 2 test (*Revolution and Independence, 1754–1783*) covers, in three
+sections. Three parts ship, one per section, shelving as `Unit 2` beside Unit 1:
+
+| id | title | |
+|---|---|---|
+| `unit-hist-u2p1` | `Unit 2 · 1 The French and Indian War` | 11 cards / 12 q |
+| `unit-hist-u2p2` | `Unit 2 · 2 The Road to Revolution` | 13 / 17 |
+| `unit-hist-u2p3` | `Unit 2 · 3 The War for Independence` | 11 / 14 |
+
+**A topic list NAMES what is tested and says nothing about it**, and her class
+slides and textbook pages for Unit 2 are not in Drive — searched by folder and
+by full text for three of the topics, and only the list came back. So the
+substance is standard US history, and **every card and question is flagged
+`from:'added'`**; the objectives are `source`, because the list really does say
+what is on the test. Marking the facts `source` would put her school's name on
+things its own material never stated — the v197 checkpoints rule. Each
+`parentNote` says so on its own, since the review queue shows one unit at a time.
+
+- **`prep:true` on all three, no `order`** — a unit built for a named test IS
+  test prep (v139, v194). The numbering lives in the title, so the shelf sorts
+  1 → 3 structurally.
+- **Built through `unit_common.build()`, not `hist_common.py`.** Unit 1's helper
+  hard-codes Unit 1's `srcName` and a container path, and never calls
+  `_balance()` — the v181 all-answer-A bug, still live in it. It was left alone
+  rather than patched, since nothing else calls it now.
+- **Two traps the LIST itself sets, each taught deliberately.** *"Treaty of
+  Paris"* appears under **both** 2.1 and 2.3, because there are two: 1763 ends
+  the French and Indian War, 1783 ends the Revolution. Each treaty question
+  offers the other treaty as a real wrong option, and one question asks why
+  there are two. And the list spells **"Phyllis Wheatley"**; she signed herself
+  **Phillis**, after the ship that brought her from Africa, so the card teaches
+  Phillis and names the other spelling as a variant — worth Chris knowing which
+  one her teacher will accept on a fill-in-the-blank.
+- **Her syllabus says exams are multiple choice, primary sources,
+  fill-in-the-blank and short answer.** So two Declaration of Independence lines
+  and one Common Sense line are quoted **exactly** as `passage` plates (all under
+  45 words); the Boston Massacre engraving is asked about as propaganda — *a
+  source can be real and biased*; and every `nextUp` tells her to say each card
+  aloud before flipping, the recall-first reasoning `bio-sg-test1` used.
+- **The advantages-and-disadvantages questions use the OTHER side's traits as
+  wrong options**, since sorting traits by side is the likeliest test format.
+  The Tea Act question offers "doubled the price" as a real wrong option: it made
+  tea cheaper, and the anger was about accepting the tax.
+- Elizabeth Freeman's case quotes the Massachusetts constitution's own words —
+  *"all men are born free and equal"* — rather than paraphrasing them into
+  something gentler than what she actually took to court.
+
+`tools/test_hist_u2.js` (37 assertions) seeds Unit 1 alongside, and pins the
+shelf, `prep`/`libv`/no-`order`, **every card and question flagged `added` and
+the objectives `source`**, each `parentNote` standing alone, answers across all
+four slots, a chronology question per part stored in order, no stem pointing at
+her list, both treaties taught and each offered as the other's wrong option,
+Phillis on everything she sees, each trap by its teaching, the Declaration
+quoted exactly, a privacy sweep for names and marks, the gold prep band, a full
+round on each part, a passage plate rendering, and a deck walking to the end.
+**Verified by flipping one card to `source` and softening the Tea Act
+distractor, and watching exactly those two fail.**
+
+> ⚠️ **The standalone-note assertion failed on the first run, and it was right.**
+> Parts 2 and 3 opened *"The same caveat as part 1…"* — a back-reference, in a
+> note Chris reads one unit at a time. The rule that binds question stems binds
+> a `parentNote` too. And one assertion was MY bug: a sweep for "Phyllis
+> Wheatley" read the whole record and caught the parent note explaining the
+> spelling, where naming it is the point — the v194 lesson, sweep only what she
+> sees.
+
+**Not built, deliberately:** `Mid-Tri 1 Progress Report.pdf` landed in her
+folder the same day. It is grades, and grades reach the app one way — Chris
+types them in the parent view (the standing rule under **Content rules**) — so
+it was not opened. Sedona's Paw Print of 9/25 is still the documented
+image-only dead end (Wayfinder v177).
+
 ### Unit 4 · The Cell Cycle and Mitosis (v197, THIS APP ONLY)
 
 Chris: *"folders are updated, can we have some updated documentation?"* — and

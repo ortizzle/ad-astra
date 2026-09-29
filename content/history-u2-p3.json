@@ -1,0 +1,471 @@
+{
+ "v": 4,
+ "records": {
+  "unit-hist-u2p3": {
+   "id": "unit-hist-u2p3",
+   "type": "unit",
+   "updatedAt": 1790628311037,
+   "classId": "history",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Unit 2 · 3 The War for Independence",
+   "srcName": "US History Unit 2 test topics, section 2.3",
+   "source": "History 8, Unit 2 test-topics list (teacher's, Drive)",
+   "summary": {
+    "text": "Section 2.3 of the teacher's Unit 2 test-topics list: British and colonial advantages and disadvantages, Saratoga, Valley Forge, Yorktown, Phillis Wheatley, Elizabeth Freeman and the Treaty of Paris of 1783.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is how a colony with no navy beat the most powerful empire in the world — and who was left out of the freedom it won.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Compare British and colonial advantages and disadvantages",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Saratoga, Valley Forge and Yorktown matter",
+     "from": "source"
+    },
+    {
+     "text": "Describe Phillis Wheatley and Elizabeth Freeman",
+     "from": "source"
+    },
+    {
+     "text": "Explain what the Treaty of Paris of 1783 decided",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the teacher's Unit 2 test-topics list, which names what is tested but says nothing about it; her class notes and textbook pages for this unit are not in Drive, so the facts are standard US history and every card and question is marked as our addition. Two things to know. Her list spells \"Phyllis Wheatley\"; she spelled her own name Phillis, after the ship that brought her from Africa, so the card teaches Phillis and says so — worth knowing which one her teacher expects on a fill-in-the-blank. And \"Treaty of Paris\" is listed under both 2.1 and 2.3 because there really are two; one question asks her to explain exactly that. The advantages-and-disadvantages questions are built so each wrong option is a real trait of the OTHER side, since sorting them by side is the likeliest question format.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Sort every fact by side: Britain or the colonists?",
+    "minutes": 16,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "British advantages",
+     "def": "**Britain had the world's strongest navy, a trained professional army, and far more money.**\n• It also had Loyalists and many Native nations on its side.",
+     "hint": "Navy, army, money.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "British disadvantages",
+     "def": "**Britain was fighting 3,000 miles from home, on land it did not know.**\n• Every soldier and supply had to cross the Atlantic.\n• The war was not popular with everyone in Britain.\n• It hired German soldiers (Hessians), who had little reason to fight hard.",
+     "hint": "Distance was Britain's biggest enemy.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "Colonial advantages",
+     "def": "**The colonists fought on home ground, for a cause they believed in, with strong leaders.**\n• George Washington kept the army together.\n• After 1778, France sent money, soldiers and ships.",
+     "hint": "Home ground, a cause, and later, France.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "Colonial disadvantages",
+     "def": "**The colonists started with no navy, untrained soldiers, little money and constant shortages.**\n• Many colonists were Loyalists or did not take sides.",
+     "hint": "Short of almost everything except determination.",
+     "from": "added"
+    },
+    {
+     "id": "c4",
+     "term": "The Battle of Saratoga (1777)",
+     "def": "**The turning point of the war: a whole British army surrendered in New York.**\n• The victory convinced France that the Americans could win.\n• France then joined the war as an ally in 1778.",
+     "hint": "Saratoga won France.",
+     "from": "added"
+    },
+    {
+     "id": "c5",
+     "term": "Valley Forge (winter 1777–78)",
+     "def": "**The Continental Army's brutal winter camp in Pennsylvania.**\n• Soldiers lacked food, shoes and blankets; many died of disease.\n• Baron von Steuben drilled them into a disciplined army by spring.",
+     "hint": "The army nearly broke — and came out tougher.",
+     "from": "added"
+    },
+    {
+     "id": "c6",
+     "term": "The Battle of Yorktown (1781)",
+     "def": "**The last major battle: the British general Cornwallis surrendered in Virginia.**\n• American and French troops surrounded him on land.\n• The French navy blocked him from escaping by sea.",
+     "hint": "Trapped between an army and a navy.",
+     "from": "added"
+    },
+    {
+     "id": "c7",
+     "term": "The Treaty of Paris of 1783",
+     "def": "**The treaty that ENDED the American Revolution.**\n• Britain recognised the United States as independent.\n• The new country's western border reached the Mississippi River.",
+     "hint": "1783 — the SECOND Treaty of Paris. The first, in 1763, ended the French and Indian War.",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Two treaties of Paris",
+     "def": "**1763 ended the French and Indian War; 1783 ended the American Revolution.**\n• Same city, same name, two different wars, twenty years apart.",
+     "hint": "1763 beat France. 1783 freed the colonies.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Phillis Wheatley",
+     "def": "**An enslaved African woman in Boston who became the first African American woman to publish a book of poetry (1773).**\n• She was named after the ship that brought her from Africa, the Phillis.\n• She wrote a poem to George Washington, and he invited her to meet him.\n• You may see it spelled \"Phyllis\" — she spelled it Phillis.",
+     "hint": "Named for a ship; famous for a book.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Elizabeth Freeman",
+     "def": "**An enslaved woman in Massachusetts who sued for her freedom in 1781 and won.**\n• She argued that the state's new constitution said \"all men are born free and equal\".\n• Her case helped end slavery in Massachusetts.",
+     "hint": "She used the Revolution's own words to free herself.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which was a British advantage in the Revolutionary War?",
+     "opts": [
+      "The world's strongest navy and a trained professional army",
+      "Fighting on home ground that its soldiers knew well",
+      "A population that was united in wanting the war",
+      "Short supply lines running straight from Britain"
+     ],
+     "ans": 0,
+     "hint": "Think about what Britain already had before the war began.",
+     "steps": [
+      "Britain had the most powerful navy in the world.",
+      "Its army was trained and professional.",
+      "It also had far more money than the colonies."
+     ],
+     "ex": {
+      "main": "**The world's strongest navy and a trained army.**",
+      "tip": "Home ground and short supply lines were the colonists' advantages — and Britain's problems."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which was the biggest DISADVANTAGE for Britain?",
+     "opts": [
+      "It had no navy at all, so it could not reach the colonies",
+      "It was fighting 3,000 miles from home, so every supply crossed an ocean",
+      "It had no trained soldiers and relied only on local militia",
+      "It had no money to pay for the war after the French left"
+     ],
+     "ans": 1,
+     "hint": "Where was the war being fought, compared with where Britain is?",
+     "steps": [
+      "The war was fought in North America.",
+      "Britain is across the Atlantic Ocean.",
+      "Every soldier, gun and meal had to be shipped over."
+     ],
+     "ex": {
+      "main": "**It was fighting 3,000 miles from home.** Distance made everything slow and expensive.",
+      "tip": "The other three options describe the COLONISTS, not Britain."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which was a colonial DISADVANTAGE at the start of the war?",
+     "opts": [
+      "Soldiers who were hired from Germany and did not care",
+      "Fighting far from home on land they did not know",
+      "No navy, untrained soldiers and very little money",
+      "A war that was unpopular with people back in Britain"
+     ],
+     "ans": 2,
+     "hint": "What did the colonists NOT have?",
+     "steps": [
+      "The colonies had no navy at first.",
+      "Many soldiers were untrained militia.",
+      "They had little money and constant shortages."
+     ],
+     "ex": {
+      "main": "**No navy, untrained soldiers and little money.**",
+      "tip": "The other three are British disadvantages. Sorting them by side is a likely test question."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why was the Battle of Saratoga a turning point?",
+     "opts": [
+      "The British captured Washington there and nearly won the war",
+      "It was the first battle of the war, so it started the Revolution",
+      "It was the last battle of the war, so it ended the Revolution",
+      "The American victory convinced France to join the war as an ally"
+     ],
+     "ans": 3,
+     "hint": "What did the rest of the world think after Saratoga?",
+     "steps": [
+      "In 1777 an entire British army surrendered at Saratoga.",
+      "France saw that the Americans could actually win.",
+      "In 1778 France became an ally, sending money, troops and ships."
+     ],
+     "ex": {
+      "main": "**It convinced France to join the war.** French help is what made victory possible.",
+      "tip": "First battle = Lexington and Concord. Last major battle = Yorktown."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "What happened at Valley Forge?",
+     "opts": [
+      "The Continental Army suffered a brutal winter but came out better trained",
+      "The Continental Army won its most important battle of the war there",
+      "The British army surrendered there and the war came to an end",
+      "The colonies signed the Declaration of Independence there"
+     ],
+     "ans": 0,
+     "hint": "It was a camp, not a battle.",
+     "steps": [
+      "In the winter of 1777–78 the army camped at Valley Forge, Pennsylvania.",
+      "Soldiers lacked food, shoes and blankets, and many died of disease.",
+      "Baron von Steuben drilled them into a disciplined force."
+     ],
+     "ex": {
+      "main": "**The army suffered a brutal winter but came out better trained.**",
+      "tip": "Valley Forge is about survival and training, not a battle — a common mix-up."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What happened at the Battle of Yorktown in 1781?",
+     "opts": [
+      "The colonists fired the first shots of the Revolutionary War",
+      "The British general Cornwallis surrendered, effectively ending the war",
+      "France agreed to join the war on the American side",
+      "Washington's army spent a hard winter camped in the snow"
+     ],
+     "ans": 1,
+     "hint": "It is the last big battle.",
+     "steps": [
+      "American and French troops surrounded Cornwallis in Virginia.",
+      "The French navy stopped him escaping by sea.",
+      "He surrendered, and the fighting was effectively over."
+     ],
+     "ex": {
+      "main": "**Cornwallis surrendered, effectively ending the war.**",
+      "tip": "France joining is Saratoga; the hard winter is Valley Forge; the first shots are Lexington."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why did the French navy matter so much at Yorktown?",
+     "opts": [
+      "It captured London while the British army was in Virginia",
+      "It carried Washington's whole army across the Atlantic",
+      "It blocked Cornwallis from escaping or being rescued by sea",
+      "It supplied the British army with food during the siege"
+     ],
+     "ans": 2,
+     "hint": "Cornwallis was on the coast. How would he normally get out?",
+     "steps": [
+      "Cornwallis was trapped against the coast in Virginia.",
+      "He expected the British navy to rescue him.",
+      "The French fleet blocked the British ships, so no rescue came."
+     ],
+     "ex": {
+      "main": "**It blocked Cornwallis's escape by sea.** Surrounded on land and sea, he had to surrender.",
+      "tip": "This is why Saratoga matters twice: it won France, and France won Yorktown."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "What did the Treaty of Paris of 1783 do?",
+     "opts": [
+      "Banned colonists from settling west of the mountains",
+      "Ended the French and Indian War and gave Canada to Britain",
+      "Made France and the colonies allies against Britain",
+      "Ended the Revolution and recognised the United States as independent"
+     ],
+     "ans": 3,
+     "hint": "Which war ended in 1783?",
+     "steps": [
+      "1783 is the end of the American Revolution.",
+      "Britain recognised the United States as independent.",
+      "The new western border reached the Mississippi River."
+     ],
+     "ex": {
+      "main": "**It ended the Revolution and recognised American independence.**",
+      "tip": "The 1763 treaty of the same name ended the French and Indian War."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "History books mention a Treaty of Paris in 1763 AND in 1783. Why?",
+     "opts": [
+      "There were two treaties: 1763 ended the French and Indian War, 1783 ended the Revolution",
+      "It is one treaty, first signed in 1763 and then signed again in 1783 by the same kings",
+      "It is one treaty that ended both the French and Indian War and the Revolution in 1783",
+      "The 1763 date is a misprint — there was only ever one treaty, signed in Paris in 1783"
+     ],
+     "ans": 0,
+     "hint": "Which war ended in 1763, and which in 1783?",
+     "steps": [
+      "In 1763 a Treaty of Paris ended the French and Indian War.",
+      "In 1783 another Treaty of Paris ended the American Revolution.",
+      "Same city and name — two different treaties, twenty years apart."
+     ],
+     "ex": {
+      "main": "**There were two treaties: 1763 and 1783.** Check the date, and you know which war.",
+      "tip": "On the test, the date or the context will tell you which one is meant."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "added",
+     "kind": "mc",
+     "q": "Who was Phillis Wheatley?",
+     "opts": [
+      "An enslaved woman who sued Massachusetts for her freedom",
+      "The first African American woman to publish a book of poetry",
+      "A Loyalist who spied for the British army in New York",
+      "A nurse who cared for soldiers at Valley Forge"
+     ],
+     "ans": 1,
+     "hint": "She is famous for writing.",
+     "steps": [
+      "Phillis Wheatley was brought from Africa and enslaved in Boston.",
+      "She learned to read and write, and wrote poetry.",
+      "In 1773 she became the first African American woman to publish a book of poems."
+     ],
+     "ex": {
+      "main": "**The first African American woman to publish a book of poetry.**",
+      "tip": "Suing for freedom is Elizabeth Freeman — the other woman on your list."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Who was Elizabeth Freeman?",
+     "opts": [
+      "A woman who disguised herself as a man to fight in the army",
+      "The first African American woman to publish a book of poetry",
+      "An enslaved woman who sued for her freedom in Massachusetts and won",
+      "The wife of a general who ran his farm during the war"
+     ],
+     "ans": 2,
+     "hint": "She went to court.",
+     "steps": [
+      "Elizabeth Freeman was enslaved in Massachusetts.",
+      "In 1781 she sued for her freedom.",
+      "She argued the new state constitution — \"all men are born free and equal\" — included her, and won."
+     ],
+     "ex": {
+      "main": "**An enslaved woman who sued for her freedom and won.** Her case helped end slavery in Massachusetts.",
+      "tip": "Poetry is Phillis Wheatley. Keep the two women on your list apart by what each DID."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why is Elizabeth Freeman's case connected to the ideas of the Revolution?",
+     "opts": [
+      "She showed that the Enlightenment thinkers supported slavery",
+      "She argued that enslaved people should be taxed like everyone else",
+      "She used the Treaty of Paris of 1783 to prove she was a British subject",
+      "She used the promise that all people are born free and equal to win her own freedom"
+     ],
+     "ans": 3,
+     "hint": "What words did she take to court?",
+     "steps": [
+      "Massachusetts' new constitution said \"all men are born free and equal\".",
+      "Freeman argued that those words applied to her.",
+      "The court agreed — the Revolution's ideals, applied to someone they had left out."
+     ],
+     "ex": {
+      "main": "**She used the promise of freedom and equality to win her own freedom.**",
+      "tip": "This is a strong short-answer example of the gap between the Revolution's words and its reality."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 3,
+     "from": "added",
+     "kind": "order",
+     "q": "Put these events in order, earliest first.",
+     "opts": [
+      "The Battle of Saratoga",
+      "The winter at Valley Forge",
+      "The Battle of Yorktown",
+      "The Treaty of Paris"
+     ],
+     "ans": 0,
+     "hint": "Turning point, hard winter, final battle, peace.",
+     "steps": [
+      "October 1777: Saratoga.",
+      "Winter 1777–78: Valley Forge.",
+      "1781: Yorktown.",
+      "1783: the Treaty of Paris."
+     ],
+     "ex": {
+      "main": "**Saratoga → Valley Forge → Yorktown → Treaty of Paris.**",
+      "tip": "Saratoga and Valley Forge are only weeks apart — the win came just before the hardest winter."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which pair correctly matches each side with one of its advantages?",
+     "opts": [
+      "Britain: a powerful navy. Colonists: fighting on home ground",
+      "Britain: fighting on home ground. Colonists: a powerful navy",
+      "Britain: a small army. Colonists: plenty of money",
+      "Britain: short supply lines. Colonists: professional soldiers"
+     ],
+     "ans": 0,
+     "hint": "Who had ships? Who knew the land?",
+     "steps": [
+      "Britain had the strongest navy in the world.",
+      "The colonists fought on land they knew.",
+      "So navy → Britain, home ground → colonists."
+     ],
+     "ex": {
+      "main": "**Britain: a powerful navy. Colonists: fighting on home ground.**",
+      "tip": "Short supply lines and professional soldiers were the colonists' problems, reversed."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}
