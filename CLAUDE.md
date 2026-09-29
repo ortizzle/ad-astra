@@ -1336,14 +1336,23 @@ stops, a full quiz round on each, a passage rendering on its own plate, and the
 > `quizState`**, so one assembled beforehand is thrown away — navigate first,
 > then steer the round it built.
 
-> **Answered, 2026-09-27.** The test date was flagged as unknown — no `english`
-> entry in `SUGGESTED_ASSESS`, no date on her notes — because it decides the
-> bulk-approve pace. Chris: *"Should go all at once regardless."* So all seven
-> release together whenever he approves them, and the date does not need
-> settling first. The pace picker's default (all today) is the right one here;
-> nothing in code changes, and **nothing was guessed** — the `english`
-> suggestion still does not exist, and a date should only go in
-> `SUGGESTED_ASSESS` when a newsletter or a teacher's note supplies one.
+> **Answered, 2026-09-27.** The only thing the test date decided was the
+> **bulk-approve pace** — release all seven at once, or one a school day.
+> Chris: *"Should go all at once regardless."* So all seven release together
+> whenever he approves them, the pace picker's default (all today) is the right
+> one, and nothing in code changes.
+>
+> ⚠️ **The question was asked badly, and that is worth recording.** It was put
+> as "no `english` entry in `SUGGESTED_ASSESS`, no date on her notes", which
+> dragged an ASSESSMENT-entry mechanism into a question about when STUDY
+> MATERIAL goes live — two unrelated things — and Chris read it, reasonably, as
+> being asked about his grading workflow: *"I'm confused about 3, because I
+> enter grades manually."* He does, and that has never been in doubt.
+> `SUGGESTED_ASSESS` is only a one-tap shortcut for a date a **newsletter or a
+> teacher's note** supplies, and nothing about it changes who enters a score:
+> tests and grades reach the app one way, by him typing them into the parent
+> view. A release-pace question is about the study material and should say only
+> that.
 
 ### The note moves up (v193 / Wayfinder v173, both apps)
 
