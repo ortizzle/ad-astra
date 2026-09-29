@@ -1005,6 +1005,106 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Biology Test 2 Study Guide, Units 3 and 4 (v200, THIS APP ONLY)
+
+Chris: *"Just added a biology study guide in unit 4. Please update Sedona's app
+with study material."* The file is **`unit 3 and 4 Study Guide.pdf`** in the
+Biology Unit 4 folder, which is the teacher's own *"Test 2 (Wednesday 9/30) Study
+Guide"*. It covers **both** units. `bio-sg-test2.json` (`unit-bio-sgt2`) has 49
+cards and 42 questions, including six `kind:'spell'` questions. It is shelved as
+`Biology 8 · Test 2 Study Guide` with `prep:true`, `book:true` and `order:1`,
+beside the Test 1 guide, and it is built the same way as that guide.
+
+> ⚠️ **The folder listing's first page returned only the two files v197 was
+> built from.** The guide was on the next page of the same query. Paginate
+> until the token runs out before saying what a folder holds (v142, v185, v178).
+
+**It is a scan with no text layer, and the Drive copy is her filled-in one.** All
+six pages were rendered with `pypdfium2` and read as images. Under the v198 rule
+the guide was read for **what it asks**. Every blank, all nineteen chart rows and
+every prompt has a card. Her answers were not tallied or summarised and were not
+used to shape the content. The `parentNote` says so, and the test sweeps the
+whole shipped record for a mark.
+
+**Checked against the teacher's Unit 3 deck before writing**, and three things
+came out of it:
+
+- **The fourth eukaryotic kingdom is taught both ways.** The guide's blank is
+  followed by *"(single cellular)"*. The class's own slides list eukaryotic cells
+  as *"animal, plant, algae, and fungal"*. The standard kingdom name is
+  **protists**, with algae as its best-known members. Both words are on the card,
+  and the note suggests asking the teacher which one the key wants. Picking one
+  would have been a guess about somebody else's key.
+- **The cytoskeleton card does not pick a side on prokaryotes.** The chart asks
+  about it, and this level teaches it both ways. Every other row's presence
+  answer is settled by the deck, so this is the only row left open.
+- **Viruses, the two prokaryotic domains, cyanobacteria and the microscope are
+  not in the deck.** The guide states most of that material in its own
+  sentences, and those sentences are the source. Three things the guide only
+  asks about are tagged `from:'added'`:
+  - why viruses are not alive
+  - the downside of reproducing by mitosis
+  - why only the fine knob is used at high power
+
+The test is fill-in-the-blank on the guide's pattern, so the unit is recall-first.
+`nextUp` tells her to say each answer out loud before flipping the card. Six
+spelling questions practise the words a blank will ask for: somatic, haploid,
+gametes, histones, cytokinesis and archaea.
+
+The teacher's note on the microscope says a test item may show a student making a
+mistake. Two questions do that:
+
+- coarse knob on the blue lens
+- trying to find the cell at high power
+
+A `kind:'order'` question covers the first four steps. Every number was computed
+and asserted in the builder:
+
+- SA:V for 3 µm and 2-vs-5 µm cubes
+- 3 X's + 2 singles = 5 chromosomes / 8 chromatids
+- a 5-chromosome cell: 10 chromatids at metaphase, 10 chromosomes in anaphase
+
+None of them reuses the guide's own pictures.
+
+Drawing tasks stay on paper:
+
+- the virus
+- the five-chromosome mitosis series
+- the cell plate
+- the chart's drawing column
+
+The cards give the counts and features to check a drawing against.
+
+`tools/test_biosg2.js` has 32 assertions. It seeds the whole Biology shelf and
+pins:
+
+- the classId
+- prep, book and order; no paper-entry `guide` flag, because the real test is
+  not multiple choice
+- the stop's position after every numbered lesson, the gold ring and the band
+- no Beat the clock
+- `_balance`, four unique options, no back-references and no positional
+  references
+- **every section of the guide by its teaching**, including presence on eighteen
+  chart rows
+- both slide-forced calls
+- the three `added` tags
+- the recomputed numbers
+- the order question stored in order
+- a spelling question typed in capitals and accepted
+- the v198 mark sweep
+- a full round and the deck
+
+**Verified by deleting the endosymbiont card, flipping the anaphase answer and
+prepending a made-up score line, and watching exactly those three assertions
+fail.**
+
+> ⚠️ **Two assertions failed first as MY bugs.** The mark sweep's
+> `\d+/\d+` matched the test's own date, *9/30*, so it strips the date first.
+> The "nothing loose" check tripped on a pre-existing loose `unit-c`
+> (`Unit 1: Key Terms`) that has nothing to do with this unit. It now asserts
+> only that this unit is not loose. Pin the rule, not the neighbourhood.
+
 ### US History Unit 2, from a topic list (v199, THIS APP ONLY)
 
 Chris: *"I've updated the girls folders. If we can build new materials."* Her US

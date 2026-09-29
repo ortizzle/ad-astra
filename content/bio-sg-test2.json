@@ -1,0 +1,1439 @@
+{
+ "v": 4,
+ "records": {
+  "unit-bio-sgt2": {
+   "id": "unit-bio-sgt2",
+   "type": "unit",
+   "updatedAt": 1790637585915,
+   "classId": "bio",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Biology 8 · Test 2 Study Guide",
+   "srcName": "Test 2 (Wednesday 9/30) Study Guide — Units 3 and 4 (Drive)",
+   "source": "Biology 8, the teacher's own Test 2 study guide, covering Units 3 and 4",
+   "summary": {
+    "text": "The teacher's study guide for Wednesday's Test 2 covers Units 3 and 4. Unit 3: the cell theory and the six characteristics of living things, viruses and the lytic and lysogenic cycles, the two prokaryotic domains, the four eukaryotic kingdoms, a nineteen-row chart of cell structures — what each does and whether prokaryotes and eukaryotes have it — the protein pathway out of the cell, which organelles different cells need, endosymbiont theory, the respiration and photosynthesis equations, and using a light microscope. Unit 4: surface area-to-volume ratio, the cell cycle and G0, chromatin, histones and nucleosomes, counting chromosomes and chromatids, mitosis in a five-chromosome cell, and what mitosis is for.",
+    "from": "source"
+   },
+   "why": {
+    "text": "The test follows the guide, and the guide is fill-in-the-blank — which means pulling the word out of your own head, not spotting it in a list. So the cards come first, answered out loud before you flip. The quiz then asks the same ideas from fresh angles, plus six words to spell, because a blank marks the spelling as well as the idea.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "State the three parts of the cell theory and the six characteristics of living things",
+     "from": "source"
+    },
+    {
+     "text": "Explain why viruses are not alive, and tell the lytic cycle from the lysogenic cycle",
+     "from": "source"
+    },
+    {
+     "text": "Fill in the cell-structure chart: each structure's job, and whether prokaryotes and eukaryotes have it",
+     "from": "source"
+    },
+    {
+     "text": "Use a light microscope in the right order, and spot a student's mistake in using one",
+     "from": "source"
+    },
+    {
+     "text": "Work a cube's surface area-to-volume ratio and count chromosomes and chromatids",
+     "from": "source"
+    },
+    {
+     "text": "Name each phase of the cell cycle, and which cells sit in G0",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the teacher's own Test 2 study guide (Wednesday 9/30), which covers Units 3 and 4. The copy in Drive is the filled-in one; it was read for what the guide ASKS, and every blank, chart row and prompt on it has a card here. Nothing on it was marked or recorded.\n\nThe guide is a scan, so its pages were rendered and read as images. It was checked against the Unit 3 slide deck in the same Biology folders before anything was written, and four things came out of that worth knowing.\n\nFIRST — viruses, the two prokaryotic domains, cyanobacteria and the microscope are not in the Unit 3 deck. The guide states most of that in its own sentences, and those are what the cards use. Where the guide only asks (why viruses are not alive, the downside of reproducing by mitosis, why only the fine knob at high power), the answer is standard biology and is marked as a study suggestion rather than class material.\n\nSECOND — the fourth eukaryotic kingdom. The guide's blank is followed by '(single cellular)'. The class's own slides list eukaryotic cells as 'animal, plant, algae and fungal', while the standard name for that kingdom is protists, with algae as its best-known members. The card teaches both words; it is worth one question to the teacher about which one the key wants.\n\nTHIRD — the chart's cytoskeleton row asks whether prokaryotes have one. That is taught both ways at this level (prokaryotes have related protein fibres), so the card gives only the eukaryote half and does not pick. Every other row is settled by the deck.\n\nFOURTH — the drawing tasks (a virus, the five-chromosome mitosis series, a cell plate, the chart's drawing column) are paper-only; the cards give the counts and features to check a drawing against. The teacher's note says the microscope may come up as a student making a mistake, so two questions do exactly that. The lens colours are the guide's own sequence.\n\nThe test is Wednesday, so this is best approved straight away.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Flashcards first, twice through, saying each answer OUT LOUD before you flip — the test is fill-in-the-blank. Then quiz rounds, including the spelling ones, until the Growth Zone is quiet.",
+    "minutes": 35,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "The cell theory",
+     "def": "**All living things are made of one or more cells; the cell is the basic unit of all living things; and all cells come from existing cells.**\n• Three statements — the test asks for all three\n• 'Existing' is the load-bearing word: a cell never forms from non-living material",
+     "hint": "Made of → unit of → comes from: what life is built from, how small it goes, where cells come from.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The six characteristics of living things",
+     "def": "**Made of one or more cells · obtain and use energy · grow and develop · reproduce · sense and respond · have DNA as their hereditary material.**\n• Your class's slides add two riders: living things maintain homeostasis, and populations adapt and evolve\n• Something must show ALL six to count as alive",
+     "hint": "Cells, energy, growth, offspring, reaction, instructions — one idea each.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Why viruses are not alive",
+     "def": "**They fail most of the six characteristics: not made of cells, cannot obtain or use energy, do not grow, and cannot reproduce on their own.**\n• A virus can only be copied by taking over a living host cell's machinery\n• The one characteristic it DOES have is genetic material — DNA or RNA\n• Outside a host it is an inert particle that does nothing at all",
+     "hint": "Name the one characteristic a virus has. Every other one is missing.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "The parts of a virus",
+     "def": "**Genetic material — DNA or RNA — packed inside a protein coat.**\n• The protein coat is called the capsid; some viruses also wrap it in an outer envelope\n• No cytoplasm, no ribosomes, no membrane of its own — which is why it cannot run itself",
+     "hint": "A set of instructions in a protein box. That is the whole virus.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The lytic cycle",
+     "def": "**The virus IMMEDIATELY uses the host cell to make new virus particles.**\n• Examples: flu, chicken pox, COVID-19\n• The host usually gets sick within a few days, because the copies are made straight away",
+     "hint": "Lytic → lyse → burst. Fast, and you notice it within days.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "The lysogenic cycle",
+     "def": "**The virus inserts its genes into the host cell, but they are NOT copied into new viruses right away.**\n• The viral genes can stay in the host cell for a long time, until conditions are right\n• Examples: shingles, HIV — illness can appear years after the infection",
+     "hint": "Lysogenic lies low: in first, trouble later.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The two prokaryotic domains",
+     "def": "**Archaea and bacteria.**\n• Archaea live only in extreme places — extreme heat, no oxygen, or very high salt — and some make methane\n• Bacteria live almost everywhere: in and on your body, in soil, in water, on most surfaces",
+     "hint": "Archaea sounds ancient — and they live in the harsh conditions early Earth had.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Cyanobacteria are autotrophs",
+     "def": "**An autotroph makes its own food — cyanobacteria do it by photosynthesis.**\n• Auto = self, troph = feeding: a self-feeder\n• Cyanobacteria make a large share of the world's oxygen\n• The opposite is a heterotroph, which has to eat other living things",
+     "hint": "Auto-matic food: made in-house from sunlight.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "The four eukaryotic kingdoms",
+     "def": "**Animals, plants, fungi, and the mostly single-celled group — protists, with algae as the best-known members.**\n• Your class's slides list eukaryotic cells as animal, plant, algae and fungal\n• The standard name for that fourth kingdom is protists — check which word your teacher wants in the blank\n• All four are eukaryotes: every one of their cells has a nucleus",
+     "hint": "Animals, plants, fungi — and the pond-scum group Leeuwenhoek found.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Cell membrane",
+     "def": "**Controls what enters and leaves the cell.**\n• A phospholipid bilayer — selectively permeable\n• Prokaryotes: yes · Eukaryotes: yes — every cell has one",
+     "hint": "The border guard. Every cell has one, no exceptions.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Cell wall",
+     "def": "**Protects the cell and holds its shape, from outside the membrane.**\n• Prokaryotes: almost always · Eukaryotes: only some — plants, algae and fungi, never animals\n• A eukaryote's wall is made of different material from a prokaryote's",
+     "hint": "Outside the membrane — and missing from every animal cell.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Capsule",
+     "def": "**A sticky outer layer of sugars and proteins that protects the cell and lets it stick to surfaces.**\n• Sits OUTSIDE the cell wall\n• Prokaryotes: some · Eukaryotes: no — it is one of the extras only some prokaryotes carry",
+     "hint": "The sticky coat that lets bacteria cling to your teeth as plaque.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Nucleus",
+     "def": "**Stores the DNA and controls the cell's activities.**\n• Wrapped in a nuclear membrane with pores\n• Prokaryotes: no — having one is what MAKES a cell a eukaryote · Eukaryotes: yes",
+     "hint": "The control centre — and the dividing line between the two kinds of cell.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Nucleoid region",
+     "def": "**The area of a prokaryote where its single circular chromosome sits, with no membrane around it.**\n• A region, not a compartment — nothing walls it off\n• Prokaryotes: yes · Eukaryotes: no — they have a true nucleus instead\n• Not the nucleolus, which is the part of a eukaryote's nucleus that makes ribosomes",
+     "hint": "Nucle-OID means nucleus-LIKE: where the DNA is, minus the wrapping.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Ribosome",
+     "def": "**Makes (assembles) proteins for the cell.**\n• Tiny and has no membrane — which is how prokaryotes can have them\n• Prokaryotes: yes · Eukaryotes: yes",
+     "hint": "The protein factory found in every cell there is.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Plasmid",
+     "def": "**A small ring of DNA separate from the main chromosome, often carrying extra genes.**\n• Separate is the key word — it is not wrapped round or attached to the chromosome\n• Prokaryotes: some · Eukaryotes: no, for this course",
+     "hint": "A bonus ring of DNA, off to one side.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Chromosome",
+     "def": "**A package of DNA carrying the cell's genetic information.**\n• Prokaryotes: yes — usually ONE, circular, in the nucleoid region\n• Eukaryotes: yes — usually MANY, linear, in the nucleus",
+     "hint": "Both kinds have them. One ring versus many strands.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Cytoplasm",
+     "def": "**The fluid inside the membrane and everything suspended in it, except the nucleus.**\n• The liquid part alone is the cytosol, and most of the cell's chemistry happens here\n• Prokaryotes: yes · Eukaryotes: yes",
+     "hint": "The inside of every cell — jelly plus contents.",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "Rough endoplasmic reticulum",
+     "def": "**Folds and moves the proteins being made by the ribosomes stuck to its surface.**\n• The ribosomes are what make it look rough\n• Prokaryotes: no · Eukaryotes: yes",
+     "hint": "Rough = ribosomes on it = proteins.",
+     "from": "source"
+    },
+    {
+     "id": "c19",
+     "term": "Smooth endoplasmic reticulum",
+     "def": "**Makes lipids and breaks down toxins.**\n• The same kind of membrane sacs, with no ribosomes\n• Prokaryotes: no · Eukaryotes: yes",
+     "hint": "Smooth = no ribosomes = not proteins. Fats and poisons instead.",
+     "from": "source"
+    },
+    {
+     "id": "c20",
+     "term": "Vesicles",
+     "def": "**Small membrane sacs that move material around inside the cell, or store it.**\n• The cell's shipping boxes between compartments\n• Eukaryotes: yes · Prokaryotes: the teacher's own note on the guide says technically yes, but you do not need to know that for comps",
+     "hint": "Parcels with a membrane for a skin.",
+     "from": "source"
+    },
+    {
+     "id": "c21",
+     "term": "Vacuoles",
+     "def": "**Store water, salts, proteins and carbohydrates — and sometimes waste.**\n• Small and temporary in animal cells; one large permanent central vacuole in a plant cell\n• Prokaryotes: no · Eukaryotes: yes",
+     "hint": "The storage tank — biggest in plants, where its water holds the cell up.",
+     "from": "source"
+    },
+    {
+     "id": "c22",
+     "term": "Golgi apparatus",
+     "def": "**Finishes, sorts, labels and ships proteins.**\n• Receives them from the rough ER and sends them on in vesicles\n• Prokaryotes: no · Eukaryotes: yes",
+     "hint": "The shipping department — the cell's UPS headquarters.",
+     "from": "source"
+    },
+    {
+     "id": "c23",
+     "term": "Cytoskeleton",
+     "def": "**A network of protein fibres that gives the cell its shape and support, and lets it move.**\n• Anchors the organelles and builds cilia and flagella\n• Eukaryotes: yes",
+     "hint": "Scaffolding inside the cell — a skeleton by name, but made of protein.",
+     "from": "source"
+    },
+    {
+     "id": "c24",
+     "term": "Lysosomes",
+     "def": "**Digest food, recycle worn-out cell parts, and destroy pathogens.**\n• Membrane sacs of digestive enzymes, made by the Golgi apparatus\n• Prokaryotes: no — a lysosome is membrane-bound, and no prokaryote has those · Eukaryotes: some — animal cells; in some plant cells the vacuole does the job",
+     "hint": "Membrane-bound means eukaryote-only. The clean-up crew.",
+     "from": "source"
+    },
+    {
+     "id": "c25",
+     "term": "Centrosomes and centrioles",
+     "def": "**Organise cell division in animal cells.**\n• A centrosome is made of two centrioles — one pair per cell\n• Prokaryotes: no · Eukaryotes: some — animal cells\n• Not the centromere, which is the pinched middle of a chromosome",
+     "hint": "Centro-SOME organises division; centro-MERE is the middle of a chromosome.",
+     "from": "source"
+    },
+    {
+     "id": "c26",
+     "term": "Mitochondria",
+     "def": "**Carry out cellular respiration, releasing the energy stored in sugar as ATP.**\n• The powerhouse of the cell\n• Prokaryotes: no · Eukaryotes: yes — nearly all of them, plants included",
+     "hint": "Plants have them too: photosynthesis makes the sugar, mitochondria spend it.",
+     "from": "source"
+    },
+    {
+     "id": "c27",
+     "term": "Chloroplasts",
+     "def": "**Carry out photosynthesis, capturing sunlight to build sugar.**\n• Contain the green pigment chlorophyll\n• Prokaryotes: no · Eukaryotes: some — plants and algae, never animals",
+     "hint": "Green = chlorophyll = only where sunlight gets captured.",
+     "from": "source"
+    },
+    {
+     "id": "c28",
+     "term": "The pathway out of the cell",
+     "def": "**Ribosome → rough ER → vesicle → Golgi apparatus → vesicle → cell membrane.**\n• The six stops of a protein that is going to be excreted from the cell\n• Vesicle appears twice: one carries it INTO the Golgi, one carries it OUT",
+     "hint": "Make, fold, box, finish, box, out.",
+     "from": "source"
+    },
+    {
+     "id": "c29",
+     "term": "Form fits function",
+     "def": "**A cell's job predicts which organelle it is stocked with.**\n• Muscle → many mitochondria · Red blood cell → NO mitochondria (oxygen moves by diffusion, no energy input)\n• Macrophage → many lysosomes · Liver → a very large smooth ER · Gland → a very large Golgi apparatus",
+     "hint": "Ask what the cell spends its day doing, then find the organelle that does that job.",
+     "from": "source"
+    },
+    {
+     "id": "c30",
+     "term": "Endosymbiont theory",
+     "def": "**An early ancestor of eukaryotic cells engulfed an oxygen-using prokaryote, which lived on inside it and became an organelle.**\n• Applies to two organelles: mitochondria and chloroplasts\n• Evidence: both have their own DNA and their own ribosomes — plus double membranes, and they reproduce on their own schedule",
+     "hint": "Swallowed but never digested — and it still carries its own DNA as proof.",
+     "from": "source"
+    },
+    {
+     "id": "c31",
+     "term": "Cellular respiration",
+     "def": "**Glucose plus oxygen gives carbon dioxide plus water, and releases energy as ATP.**\n• Happens in the mitochondria\n• It is photosynthesis run backwards",
+     "eq": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP",
+     "hint": "Sugar and oxygen in; the two gases you breathe out come out.",
+     "from": "source"
+    },
+    {
+     "id": "c32",
+     "term": "Photosynthesis",
+     "def": "**Carbon dioxide plus water, powered by sunlight, gives glucose plus oxygen.**\n• Happens in the chloroplasts\n• Every number is a 6 except the sugar's own formula",
+     "eq": "6CO₂ + 6H₂O + sunlight → C₆H₁₂O₆ + 6O₂",
+     "hint": "Six of each gas, one sugar — the respiration equation read right to left.",
+     "from": "source"
+    },
+    {
+     "id": "c33",
+     "term": "Light vs electron microscope",
+     "def": "**A light microscope lets you see living things; an electron microscope cannot.**\n• The electron microscope uses a beam of ELECTRONS, which bounce off cell surfaces\n• It magnifies far more, but the specimen cannot be alive",
+     "hint": "The electron microscope's clue is in its name: electrons, not light.",
+     "from": "source"
+    },
+    {
+     "id": "c34",
+     "term": "Using a light microscope",
+     "def": "**Light on, lowest-power lens first, find the cell with the stage, focus with the coarse knob, then step up one lens at a time.**\n• Plug in → light → red lens → move the stage until you find the cell → coarse knob until clear\n• Yellow lens → make it clear → blue lens → ONLY the fine (small) knob from here → gray lens if you need more\n• The teacher's note: a test question may show a student making a mistake and ask for their next step",
+     "hint": "Low to high, coarse to fine — and never the coarse knob once the blue lens is in.",
+     "from": "source"
+    },
+    {
+     "id": "c35",
+     "term": "Why only the fine knob at high power",
+     "def": "**At high power the lens sits very close to the slide, so the coarse knob can crash the lens into it.**\n• The coarse knob moves the stage a long way per turn; the fine knob moves it a tiny amount\n• The lowest-power lens gives the widest view, which is why you FIND things there first",
+     "hint": "Big knob, big moves — dangerous when the lens is almost touching the glass.",
+     "from": "added"
+    },
+    {
+     "id": "c36",
+     "term": "Surface area-to-volume ratio",
+     "def": "**Cells need a HIGH surface area to a LOW volume.**\n• For a cube with side s: surface area = 6s², volume = s³\n• Side 2: 24 ÷ 8 = 3. Side 4: 96 ÷ 64 = 1.5 — double the side, half the ratio",
+     "eq": "SA : V = 6s² : s³",
+     "hint": "Small cube, big ratio. The ratio shrinks as the cell grows.",
+     "from": "source"
+    },
+    {
+     "id": "c37",
+     "term": "The cell cycle chart",
+     "def": "**Interphase — G1, then S, then G2 — followed by the M phase: mitosis (prophase, metaphase, anaphase, telophase) and cytokinesis.**\n• G0 branches off from G1: a cell that is not going to divide leaves the cycle there\n• Abbreviating the mitosis phases on the chart is fine: P, M, A, T",
+     "hint": "Grow, Synthesise, Grow again, then PMAT and split. G0 is the side exit off G1.",
+     "from": "source"
+    },
+    {
+     "id": "c38",
+     "term": "S phase",
+     "def": "**The DNA is replicated.**\n• S stands for synthesis\n• Afterwards every chromosome is two sister chromatids joined at the centromere",
+     "hint": "S for synthesis — the copying happens here and nowhere else.",
+     "from": "source"
+    },
+    {
+     "id": "c39",
+     "term": "How the 24 hours split",
+     "def": "**In a fast-growing area like an onion root tip, a 24-hour cycle is about 23 hours of interphase and about 1 hour of mitosis.**\n• So in any picture of a root tip, most cells are in interphase",
+     "hint": "23 + 1. The dividing is the short part.",
+     "from": "source"
+    },
+    {
+     "id": "c40",
+     "term": "Which cells sit in G0",
+     "def": "**Red blood cells, mature neurons and the outer layer of skin cells — they do not need to divide.**\n• The lower layer of skin is NEVER in G0: it is always dividing, to replace the outer layer as it wears away",
+     "hint": "The outside skin is finished; the layer underneath never stops making more.",
+     "from": "source"
+    },
+    {
+     "id": "c41",
+     "term": "G1 and G2",
+     "def": "**In G1 the cell does its normal job while building new proteins and organelles for the daughter cells; in G2 it makes the molecules and organelles mitosis itself needs.**\n• A cell that reaches G2 usually goes on to mitosis — unless there is a replication error\n• Uncorrected replication errors can lead to cancer",
+     "hint": "G1 grows for the daughters; G2 gets ready for the division.",
+     "from": "source"
+    },
+    {
+     "id": "c42",
+     "term": "Chromatin, histones and nucleosomes",
+     "def": "**Chromatin is DNA wound around proteins called histones; one bead of DNA wrapped round histones is a nucleosome.**\n• Chromatin is the loose, uncoiled form of DNA when the cell is not dividing; the histones stop chromosomes tangling when it does divide\n• Prokaryotic chromosomes have NO histones",
+     "hint": "Thread (DNA) wound on spools (histones) makes beads (nucleosomes); the whole string is chromatin.",
+     "from": "source"
+    },
+    {
+     "id": "c43",
+     "term": "Counting chromosomes and chromatids",
+     "def": "**Count centromeres for chromosomes; count strands for chromatids.**\n• One X = 1 chromosome, 2 chromatids · One single strand = 1 chromosome, 1 chromatid\n• Two X's and two single strands = 4 chromosomes, 6 chromatids",
+     "hint": "Every pinch point is one chromosome. Every arm-pair strand is one chromatid.",
+     "from": "source"
+    },
+    {
+     "id": "c44",
+     "term": "Drawing mitosis with 5 chromosomes",
+     "def": "**5 chromosomes as 10 chromatids through prophase and metaphase; 10 separate chromosomes moving apart in anaphase; 5 in each new cell.**\n• Prophase: condensed chromosomes, nuclear envelope breaking down, centrosomes moving apart\n• Metaphase: all 5 on the metaphase plate · Telophase/cytokinesis: two nuclear envelopes, a furrow pinched in by the contractile ring",
+     "hint": "Double, line up, split, then two cells with the number you started with.",
+     "from": "source"
+    },
+    {
+     "id": "c45",
+     "term": "The cell plate",
+     "def": "**A plant cell ends mitosis by building a new wall down its middle — the cell plate — instead of pinching in.**\n• Its rigid cell wall cannot be pulled inward\n• An animal cell pinches in with a furrow made by a contractile ring",
+     "hint": "Plants build a wall across the middle; animals pinch in at the waist.",
+     "from": "source"
+    },
+    {
+     "id": "c46",
+     "term": "What mitosis is for",
+     "def": "**Growth, development, and asexual reproduction — making genetically identical copies.**\n• In a multicellular organism, also repair: replacing worn-out or damaged cells",
+     "hint": "Grow, develop, copy. Identical every time.",
+     "from": "source"
+    },
+    {
+     "id": "c47",
+     "term": "The downside of reproducing by mitosis",
+     "def": "**Every offspring is genetically identical, so there is no variation — one disease or change in conditions that harms one can harm them all.**\n• No genes mixed from two parents means no new combinations\n• A population of clones cannot adapt as well when its environment changes",
+     "hint": "Clones share every weakness.",
+     "from": "added"
+    },
+    {
+     "id": "c48",
+     "term": "Somatic cells and gametes",
+     "def": "**Mitosis happens in somatic (body) cells, which are diploid. It does not happen in gametes — sperm and eggs — which are haploid.**\n• Diploid = two sets of chromosomes; haploid = one set\n• Gametes are made by meiosis, which is next unit",
+     "hint": "DI = two sets, in the body. HAP = half, in the gametes.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which structure do BOTH prokaryotic and eukaryotic cells have?",
+     "opts": [
+      "Ribosomes",
+      "A nucleus",
+      "A Golgi apparatus",
+      "Lysosomes"
+     ],
+     "ans": 0,
+     "hint": "One of these has no membrane at all — that is how a prokaryote can have it.",
+     "steps": [
+      "Prokaryotes have no nucleus and no membrane-bound organelles.",
+      "A nucleus, a Golgi apparatus and lysosomes are all membrane-bound, so they are eukaryote-only.",
+      "Ribosomes have no membrane, and every cell needs them to make proteins.",
+      "Ribosomes."
+     ],
+     "ex": {
+      "main": "**Ribosomes.** They are not membrane-bound, so prokaryotes have them too — every cell needs them to make proteins.",
+      "tip": "Membrane-bound is the test: if it has a membrane, a prokaryote cannot have it."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the nucleoid region?",
+     "opts": [
+      "The part of a eukaryote's nucleus that builds ribosomes for the cell",
+      "The area where a prokaryote's chromosome sits, with no membrane around it",
+      "A membrane sac of enzymes that digests the cell's worn-out parts",
+      "The pinched middle where two sister chromatids are held together"
+     ],
+     "ans": 1,
+     "hint": "The -oid ending means 'like'. Nucleus-like — in a cell that has no nucleus.",
+     "steps": [
+      "Nucleoid means nucleus-like, so it belongs to a cell WITHOUT a true nucleus: a prokaryote.",
+      "The part of a nucleus that builds ribosomes is the nucleolus, a different word.",
+      "The pinched middle of a chromosome is the centromere; the digestive sac is a lysosome.",
+      "The nucleoid region is where a prokaryote's chromosome sits, unwrapped."
+     ],
+     "ex": {
+      "main": "**It is where a prokaryote keeps its single circular chromosome, with no membrane around it.** The nucleolus — one letter-group different — makes ribosomes inside a eukaryote's nucleus.",
+      "tip": "Nucleoid, nucleolus, nucleus, nucleosome: four look-alikes. The ending tells you which."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What do centrosomes do in an animal cell?",
+     "opts": [
+      "Digest the pathogens the cell engulfs",
+      "Hold two sister chromatids together",
+      "Organise cell division",
+      "Finish, sort and ship proteins"
+     ],
+     "ans": 2,
+     "hint": "Centrosome and centromere are one syllable apart. Which one is an organiser?",
+     "steps": [
+      "The centromere, not the centrosome, is where sister chromatids are joined.",
+      "Digesting pathogens is the lysosome's job; shipping proteins is the Golgi's.",
+      "A centrosome is a pair of centrioles, and its job is to organise cell division.",
+      "Organise cell division."
+     ],
+     "ex": {
+      "main": "**They organise cell division.** A centrosome is two centrioles; the centromere is the pinched middle of a chromosome.",
+      "tip": "SOME organises, MERE is the middle."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Someone catches a virus and is sick within a few days, because the virus made new virus particles straight away. Which cycle is this?",
+     "opts": [
+      "Endosymbiosis",
+      "The lysogenic cycle",
+      "The cell cycle",
+      "The lytic cycle"
+     ],
+     "ans": 3,
+     "hint": "Straight away is the clue. One of the virus cycles waits; this one did not.",
+     "steps": [
+      "The virus made new particles immediately.",
+      "The lysogenic cycle is the one that waits, with its genes hidden in the host cell.",
+      "Making new virus particles straight away, with illness in days, is the lytic cycle.",
+      "The lytic cycle."
+     ],
+     "ex": {
+      "main": "**The lytic cycle.** It makes new virus particles immediately, which is why flu, chicken pox and COVID-19 make you sick within days.",
+      "tip": "Lytic is fast; lysogenic lies low."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which characteristic of living things does a virus actually have?",
+     "opts": [
+      "Genetic material — DNA or RNA",
+      "Being made of one or more cells",
+      "Obtaining and using its own energy",
+      "Growing and developing over time"
+     ],
+     "ans": 0,
+     "hint": "Think about what is packed inside the protein coat.",
+     "steps": [
+      "A virus is a protein coat with something inside it.",
+      "It is not a cell, it uses no energy of its own, and it does not grow.",
+      "What is inside the coat is genetic material — DNA or RNA.",
+      "Genetic material."
+     ],
+     "ex": {
+      "main": "**Genetic material.** It is the one characteristic a virus has — and it still needs a host cell to do anything with it.",
+      "tip": "When asked why a virus is not alive, list the ones it is missing."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Cyanobacteria are described as autotrophs. What does that tell you about them?",
+     "opts": [
+      "They live only in extreme heat",
+      "They make their own food",
+      "They must eat other living things",
+      "They need a host cell to copy them"
+     ],
+     "ans": 1,
+     "hint": "Auto means self. Troph means feeding.",
+     "steps": [
+      "Auto = self, troph = feeding: a self-feeder.",
+      "A self-feeder makes its own food — cyanobacteria do it by photosynthesis.",
+      "Eating other living things is the opposite, a heterotroph.",
+      "They make their own food."
+     ],
+     "ex": {
+      "main": "**They make their own food**, by photosynthesis — which is how they come to make so much of the world's oxygen.",
+      "tip": "Autotroph = makes food. Heterotroph = eats food."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "On the cell cycle chart, from which phase can a cell leave the cycle to enter G0?",
+     "opts": [
+      "G2",
+      "S",
+      "G1",
+      "Metaphase"
+     ],
+     "ans": 2,
+     "hint": "A cell decides whether to divide before it copies its DNA.",
+     "steps": [
+      "G0 is where a cell goes when it is not going to divide.",
+      "Copying the DNA in S would be wasted work for a cell that never divides.",
+      "So the exit comes before S — from G1.",
+      "G1."
+     ],
+     "ex": {
+      "main": "**G1.** The side branch to G0 leaves before DNA is copied, which is why the chart draws the G0 arrow off G1.",
+      "tip": "Draw the G0 loop coming off G1 on the chart."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a fast-growing onion root tip where one full cell cycle takes 24 hours, about how long does mitosis take?",
+     "opts": [
+      "About 23 hours",
+      "About 6 hours",
+      "About 12 hours",
+      "About 1 hour"
+     ],
+     "ans": 3,
+     "hint": "Most of the cycle is spent getting ready.",
+     "steps": [
+      "The cycle is 24 hours in total.",
+      "About 23 of those hours are interphase — growing and copying DNA.",
+      "That leaves about 1 hour for mitosis.",
+      "About 1 hour."
+     ],
+     "ex": {
+      "main": "**About 1 hour.** Interphase takes about 23 of the 24 — and 23 is the distractor waiting for anyone who swaps the two.",
+      "tip": "23 + 1: interphase is the long part."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What are histones?",
+     "opts": [
+      "Proteins that DNA winds around",
+      "Small rings of DNA outside the chromosome",
+      "The loose form DNA takes between divisions",
+      "The points where sister chromatids join"
+     ],
+     "ans": 0,
+     "hint": "Picture thread wound on spools. Which part is the spool?",
+     "steps": [
+      "DNA wraps around something to stay organised — those are the spools.",
+      "The rings of DNA outside the chromosome are plasmids; the loose form is chromatin.",
+      "The spools are proteins, and they are called histones.",
+      "Proteins that DNA winds around."
+     ],
+     "ex": {
+      "main": "**Proteins that DNA winds around.** DNA plus histones is chromatin, and each wrapped bead is a nucleosome.",
+      "tip": "Prokaryotic chromosomes have no histones — a likely test question."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "DNA wrapped around a cluster of histone proteins forms one bead-like unit. What is that unit called?",
+     "opts": [
+      "A nucleolus",
+      "A nucleosome",
+      "A nucleoid",
+      "A centromere"
+     ],
+     "ans": 1,
+     "hint": "It is a body — a 'some' — built at the level of the nucleus's DNA.",
+     "steps": [
+      "The bead is one piece of DNA wrapped around histones.",
+      "A nucleolus makes ribosomes; a nucleoid is a prokaryote's DNA region.",
+      "The DNA-and-histone bead is a nucleosome.",
+      "A nucleosome."
+     ],
+     "ex": {
+      "main": "**A nucleosome.** Beads of DNA on histone spools; the whole string of beads is chromatin.",
+      "tip": "Nucleo-SOME: a small body on the DNA string."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which cell is most likely resting in G0?",
+     "opts": [
+      "A cell in the lowest layer of the skin",
+      "A cell in an onion root tip",
+      "A mature neuron",
+      "A cell in a healing cut"
+     ],
+     "ans": 2,
+     "hint": "Which of these cells is finished growing and never needs to be replaced by division?",
+     "steps": [
+      "A root tip, the lowest skin layer and a healing cut are all places where cells keep dividing.",
+      "A mature neuron does its job without dividing.",
+      "Cells that do not need to divide sit in G0.",
+      "A mature neuron."
+     ],
+     "ex": {
+      "main": "**A mature neuron.** Along with red blood cells and the outer layer of skin, it sits in G0 because it does not need to divide.",
+      "tip": "G0 = the job without the dividing."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which structure is found in SOME eukaryotic cells and in no prokaryotic cells?",
+     "opts": [
+      "A nucleoid region",
+      "Ribosomes",
+      "A cell membrane",
+      "Chloroplasts"
+     ],
+     "ans": 3,
+     "hint": "Some eukaryotes means plants yes, animals no.",
+     "steps": [
+      "Ribosomes and a cell membrane are in every cell.",
+      "A nucleoid region is prokaryote-only.",
+      "Chloroplasts are in plant and algae cells but never animal cells, and never prokaryotes.",
+      "Chloroplasts."
+     ],
+     "ex": {
+      "main": "**Chloroplasts** — in plants and algae, never in animals and never in a prokaryote.",
+      "tip": "Chart answers come in four kinds: both, prokaryote only, all eukaryotes, some eukaryotes."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which pair of structures is found ONLY in some prokaryotes?",
+     "opts": [
+      "A capsule and plasmids",
+      "Lysosomes and centrioles",
+      "A nucleus and a nucleolus",
+      "Chloroplasts and a large vacuole"
+     ],
+     "ans": 0,
+     "hint": "Two of the extras a bacterium might carry — one sticky coat, one bonus ring of DNA.",
+     "steps": [
+      "Lysosomes, centrioles, a nucleus, chloroplasts and a large vacuole are all eukaryote structures.",
+      "Some prokaryotes carry extras: a capsule, plasmids and flagella.",
+      "A capsule and plasmids are both in that list.",
+      "A capsule and plasmids."
+     ],
+     "ex": {
+      "main": "**A capsule and plasmids.** Both are extras only some prokaryotes carry; eukaryotes have neither.",
+      "tip": "Some prokaryotes, no eukaryotes: capsule, plasmid."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which statement about lysosomes is correct?",
+     "opts": [
+      "They are in prokaryotic cells, and never in eukaryotic cells",
+      "They are in eukaryotic cells such as animal cells, and never in prokaryotes",
+      "They are in every cell there is, prokaryote or eukaryote",
+      "They are only in plant cells, inside the central vacuole"
+     ],
+     "ans": 1,
+     "hint": "A lysosome is a membrane sac. What does that rule out?",
+     "steps": [
+      "A lysosome is a membrane-bound sac of digestive enzymes.",
+      "Prokaryotes have no membrane-bound organelles, so they have no lysosomes.",
+      "Animal cells have them; in some plant cells the vacuole does their job instead.",
+      "They are in eukaryotes such as animal cells, never prokaryotes."
+     ],
+     "ex": {
+      "main": "**Eukaryotic cells such as animal cells, never prokaryotes.** Membrane-bound means eukaryote-only.",
+      "tip": "Any membrane-bound organelle is a 'no' in the prokaryote column."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cell's whole job is breaking down poisons in the blood. Which organelle should it have an unusually large amount of?",
+     "opts": [
+      "Chloroplasts",
+      "Golgi apparatus",
+      "Smooth ER",
+      "Centrioles"
+     ],
+     "ans": 2,
+     "hint": "Which organelle breaks down toxins?",
+     "steps": [
+      "Breaking down poisons is detoxification.",
+      "The smooth ER makes lipids and breaks down toxins.",
+      "A cell that spends its day on toxins needs a very large smooth ER — which is what liver cells have.",
+      "Smooth ER."
+     ],
+     "ex": {
+      "main": "**Smooth ER** — it breaks down toxins, which is why liver cells have a very large one.",
+      "tip": "Job first, then the organelle that does the job."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Red blood cells carry oxygen by diffusion. Which organelle do they lack, and why?",
+     "opts": [
+      "A cell membrane, because oxygen must pass freely",
+      "Ribosomes, because red cells never need any proteins",
+      "Lysosomes, because red cells never engulf anything",
+      "Mitochondria, because diffusion needs no energy input"
+     ],
+     "ans": 3,
+     "hint": "Diffusion moves things without the cell spending energy. Which organelle supplies energy?",
+     "steps": [
+      "Diffusion is movement from high to low concentration — it takes no energy input.",
+      "Mitochondria are the organelles that supply energy.",
+      "A cell whose job needs no energy input has no mitochondria.",
+      "Mitochondria."
+     ],
+     "ex": {
+      "main": "**Mitochondria.** Carrying oxygen by diffusion takes no energy input, so red blood cells have none. Every cell keeps its membrane.",
+      "tip": "Muscle is the opposite case: constant energy, many mitochondria."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A protein on its way out of a gland cell has just left the rough ER. Where does it go next?",
+     "opts": [
+      "In a vesicle to the Golgi apparatus",
+      "Straight to the cell membrane",
+      "Back to a ribosome to be finished",
+      "Into a lysosome to be digested"
+     ],
+     "ans": 0,
+     "hint": "Make, fold, box, finish, box, out.",
+     "steps": [
+      "The route is ribosome → rough ER → vesicle → Golgi → vesicle → cell membrane.",
+      "After the rough ER comes a vesicle carrying it to the Golgi.",
+      "It only reaches the membrane after the Golgi has finished and shipped it.",
+      "In a vesicle to the Golgi apparatus."
+     ],
+     "ex": {
+      "main": "**In a vesicle to the Golgi apparatus**, which finishes and ships it in a second vesicle to the cell membrane.",
+      "tip": "Vesicle appears twice in the pathway — once before the Golgi, once after."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student has the blue lens in place and turns the coarse knob to sharpen the image. What should they do instead?",
+     "opts": [
+      "Switch to the gray lens first",
+      "Use only the fine knob",
+      "Turn the light off and start again",
+      "Move the slide to the edge of the stage"
+     ],
+     "ans": 1,
+     "hint": "At high power the lens is almost touching the slide.",
+     "steps": [
+      "The blue lens is high power, sitting very close to the slide.",
+      "The coarse knob moves the stage a long way and can crash the lens into it.",
+      "From the blue lens on, only the fine (small) knob is used.",
+      "Use only the fine knob."
+     ],
+     "ex": {
+      "main": "**Use only the fine knob.** At high power the coarse knob can drive the slide into the lens.",
+      "tip": "Coarse on low power, fine on high power."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student turns on the light, puts the blue lens in place, and cannot find the cell anywhere on the slide. What is the best next step?",
+     "opts": [
+      "Turn the light up as far as it will go",
+      "Turn the coarse knob until it appears",
+      "Go back to the red lens and find it there",
+      "Switch to the gray lens for more power"
+     ],
+     "ans": 2,
+     "hint": "Which lens gives the widest view?",
+     "steps": [
+      "The student skipped the lowest-power lens.",
+      "High power shows a tiny area, so finding anything there is hard — and the coarse knob is off-limits now.",
+      "The red lens gives the widest view, which is where you find the cell first.",
+      "Go back to the red lens and find it there."
+     ],
+     "ex": {
+      "main": "**Go back to the red lens.** Find the cell at low power, then step up — red, yellow, blue.",
+      "tip": "Always start with the lowest-power lens."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these steps for using a light microscope in order, from first to last.",
+     "opts": [
+      "Turn on the light",
+      "Find the cell with the red lens",
+      "Focus with the coarse knob",
+      "Switch to the yellow lens"
+     ],
+     "ans": 0,
+     "hint": "Low power before high; coarse before fine.",
+     "steps": [
+      "Nothing can be seen until the light is on.",
+      "Start on the lowest-power lens, the red one, and move the stage to find the cell.",
+      "Focus it with the coarse knob while still on low power.",
+      "Only then step up to the yellow lens."
+     ],
+     "ex": {
+      "main": "**Light → find it on red → coarse focus → yellow.** Then blue, fine knob only, then gray if needed.",
+      "tip": "The order is the same every time; practise it until it is automatic."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A single-celled organism with no nucleus is found in a boiling, salty hot spring, giving off methane. Which group does it most likely belong to?",
+     "opts": [
+      "Fungi",
+      "Bacteria",
+      "Algae",
+      "Archaea"
+     ],
+     "ans": 3,
+     "hint": "No nucleus narrows it to two. Where it lives decides between them.",
+     "steps": [
+      "No nucleus means a prokaryote, which rules out algae and fungi.",
+      "The two prokaryotic domains are archaea and bacteria.",
+      "Extreme heat, high salt and making methane are the marks of archaea.",
+      "Archaea."
+     ],
+     "ex": {
+      "main": "**Archaea.** Both prokaryotic domains lack a nucleus; archaea are the ones that live in extreme heat or salt and can make methane.",
+      "tip": "Bacteria are everywhere; archaea are in the extremes."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is a virus not considered alive?",
+     "opts": [
+      "It is not made of cells and cannot reproduce on its own",
+      "It has no genetic material of any kind at all",
+      "It is too small to see without an electron microscope",
+      "Its genetic material is RNA rather than DNA"
+     ],
+     "ans": 0,
+     "hint": "Run down the six characteristics. How many does it pass?",
+     "steps": [
+      "A virus does have genetic material — DNA or RNA — so that is not the reason.",
+      "Size has nothing to do with being alive; plenty of bacteria are tiny.",
+      "It is not a cell, uses no energy of its own, does not grow, and can only be copied inside a host.",
+      "Not made of cells, and cannot reproduce on its own."
+     ],
+     "ex": {
+      "main": "**It is not made of cells and cannot reproduce on its own** — it fails most of the six characteristics.",
+      "tip": "On a fill-in question, name the characteristics it is missing."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Someone had chicken pox as a child and, decades later, develops shingles from the same virus. Which cycle explains the long delay?",
+     "opts": [
+      "Lytic — it made new virus particles straight away",
+      "Lysogenic — its genes stayed in host cells until conditions were right",
+      "Mitosis — the virus divided along with the host's cells",
+      "Endosymbiosis — the virus became part of the cell for good"
+     ],
+     "ans": 1,
+     "hint": "Which cycle waits?",
+     "steps": [
+      "A delay of decades means the virus did not make new particles straight away.",
+      "In the lysogenic cycle the viral genes go into the host cell and wait.",
+      "They can stay there a long time, until conditions are right — which is how shingles appears later.",
+      "Lysogenic."
+     ],
+     "ex": {
+      "main": "**Lysogenic.** The viral genes sit in host cells for a long time before they are copied — shingles and HIV are the guide's examples.",
+      "tip": "Lysogenic lies low."
+     }
+    },
+    {
+     "id": "q23",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student wants to watch a living single-celled organism swim across a slide. Which microscope should they use?",
+     "opts": [
+      "An electron microscope, because electrons bounce off cells",
+      "An electron microscope, because it magnifies much more",
+      "A light microscope, because it can show living specimens",
+      "Either one, because both can show living specimens"
+     ],
+     "ans": 2,
+     "hint": "Only one of the two can show something that is still alive.",
+     "steps": [
+      "The organism has to be alive to swim.",
+      "An electron microscope uses a beam of electrons and cannot observe living organisms.",
+      "A light microscope can.",
+      "A light microscope."
+     ],
+     "ex": {
+      "main": "**A light microscope.** The electron microscope magnifies more, but its specimen cannot be alive.",
+      "tip": "Electron = more magnification, never living."
+     }
+    },
+    {
+     "id": "q24",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cube-shaped cell has sides of 3 µm. What is its surface area-to-volume ratio?",
+     "opts": [
+      "6 to 1",
+      "1 to 2",
+      "3 to 1",
+      "2 to 1"
+     ],
+     "ans": 3,
+     "hint": "Surface area is 6 faces of s × s. Volume is s × s × s.",
+     "steps": [
+      "Surface area = 6 × 3 × 3 = 54 µm².",
+      "Volume = 3 × 3 × 3 = 27 µm³.",
+      "54 ÷ 27 = 2.",
+      "2 to 1."
+     ],
+     "ex": {
+      "main": "**2 to 1.** 54 µm² of surface for 27 µm³ of volume. 1 to 2 is the same numbers flipped; 6 to 1 forgets to divide by the side.",
+      "tip": "For any cube the ratio is 6 ÷ side: 6 ÷ 3 = 2."
+     }
+    },
+    {
+     "id": "q25",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cell contains three X-shaped chromosomes and two single strands. How many chromosomes and chromatids does it have?",
+     "opts": [
+      "5 chromosomes, 8 chromatids",
+      "5 chromosomes, 10 chromatids",
+      "3 chromosomes, 8 chromatids",
+      "8 chromosomes, 5 chromatids"
+     ],
+     "ans": 0,
+     "hint": "Chromosomes: count centromeres. Chromatids: count strands.",
+     "steps": [
+      "Each X is one chromosome with two chromatids: 3 chromosomes, 6 chromatids.",
+      "Each single strand is one chromosome with one chromatid: 2 chromosomes, 2 chromatids.",
+      "Add them: 3 + 2 = 5 chromosomes, and 6 + 2 = 8 chromatids.",
+      "5 chromosomes, 8 chromatids."
+     ],
+     "ex": {
+      "main": "**5 chromosomes, 8 chromatids.** 10 would count every chromosome as an X; the single strands have one chromatid each.",
+      "tip": "Centromeres for chromosomes, strands for chromatids."
+     }
+    },
+    {
+     "id": "q26",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An animal cell that started with 5 chromosomes reaches metaphase. How many chromatids line up on the metaphase plate?",
+     "opts": [
+      "5",
+      "10",
+      "20",
+      "0"
+     ],
+     "ans": 1,
+     "hint": "What happened to the DNA in S phase?",
+     "steps": [
+      "In S phase every chromosome was copied into two sister chromatids.",
+      "5 chromosomes × 2 chromatids each = 10 chromatids.",
+      "At metaphase they are still joined, lined up across the middle.",
+      "10."
+     ],
+     "ex": {
+      "main": "**10.** Five chromosomes, each two sister chromatids, lined up on the metaphase plate. They only split in anaphase.",
+      "tip": "Metaphase: 5 chromosomes, 10 chromatids. Anaphase: 10 chromosomes."
+     }
+    },
+    {
+     "id": "q27",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cell's DNA has already been copied, and it is now making the molecules and organelles it will need for mitosis. Which phase is it in?",
+     "opts": [
+      "S",
+      "G1",
+      "G2",
+      "G0"
+     ],
+     "ans": 2,
+     "hint": "The DNA is copied, so it is past S.",
+     "steps": [
+      "DNA copying happens in S, so the cell is past S.",
+      "G1 builds for the daughter cells, before the DNA is copied.",
+      "Getting ready for mitosis itself, after S, is G2.",
+      "G2."
+     ],
+     "ex": {
+      "main": "**G2** — after S, preparing the molecules and organelles mitosis needs.",
+      "tip": "G1 → S → G2: grow, copy, get ready."
+     }
+    },
+    {
+     "id": "q28",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which is true of a prokaryote's chromosome?",
+     "opts": [
+      "It is many circular strands wound on histones",
+      "It is wound on histones inside a nucleus",
+      "It is many linear strands in the nucleoid",
+      "It is a single circular strand with no histones"
+     ],
+     "ans": 3,
+     "hint": "No nucleus, no histones, and only one of them.",
+     "steps": [
+      "Prokaryotes have no nucleus, so the chromosome sits in the nucleoid region.",
+      "Prokaryotic chromosomes have no histones.",
+      "There is usually one, and it is circular.",
+      "A single circular strand with no histones."
+     ],
+     "ex": {
+      "main": "**A single circular strand with no histones**, in the nucleoid region. Many linear strands on histones is the eukaryote pattern.",
+      "tip": "One ring (prokaryote) vs many strands on spools (eukaryote)."
+     }
+    },
+    {
+     "id": "q29",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A student says a new cell can form from non-living material if conditions are right. Which part of the cell theory does this contradict?",
+     "opts": [
+      "All cells come from existing cells",
+      "All living things are made of one or more cells",
+      "The cell is the basic unit of all living things",
+      "All living things obtain and use energy"
+     ],
+     "ans": 0,
+     "hint": "The claim is about where cells come FROM.",
+     "steps": [
+      "The claim is about the origin of a new cell.",
+      "Only one statement of the cell theory is about where cells come from.",
+      "It says all cells come from existing cells — never from non-living material.",
+      "All cells come from existing cells."
+     ],
+     "ex": {
+      "main": "**All cells come from existing cells.** Obtaining energy is one of the six characteristics of life, not part of the cell theory.",
+      "tip": "Cell theory: made of, unit of, comes from."
+     }
+    },
+    {
+     "id": "q30",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Cell A is a cube with sides of 2 µm; cell B is a cube with sides of 5 µm. Which is better at moving materials in and out, and why?",
+     "opts": [
+      "B, because it has more total surface area than A",
+      "A, because its ratio is 3 to 1 against B's 1.2 to 1",
+      "B, because its larger volume can store more material",
+      "Neither, because both cubes have the same shape"
+     ],
+     "ans": 1,
+     "hint": "Work out 6 ÷ side for each.",
+     "steps": [
+      "For a cube, SA : V = 6 ÷ side.",
+      "Cell A: 6 ÷ 2 = 3. Cell B: 6 ÷ 5 = 1.2.",
+      "More membrane per unit of volume means faster exchange for the inside.",
+      "A, because its ratio is higher."
+     ],
+     "ex": {
+      "main": "**Cell A.** B has more surface in total, but far less per unit of volume — 1.2 against 3 — so its middle is badly supplied.",
+      "tip": "Total surface area is the trap. The RATIO is what matters."
+     }
+    },
+    {
+     "id": "q31",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "An animal cell begins mitosis with 5 chromosomes. During anaphase, how many chromosomes are moving apart in total?",
+     "opts": [
+      "20 chromosomes",
+      "5 chromosomes",
+      "10 chromosomes",
+      "15 chromosomes"
+     ],
+     "ans": 2,
+     "hint": "When sister chromatids separate, what does each one count as?",
+     "steps": [
+      "Before anaphase there are 5 chromosomes, each two sister chromatids — 10 chromatids.",
+      "In anaphase the sisters are pulled apart.",
+      "The moment they separate, each chromatid counts as a chromosome of its own.",
+      "10 chromosomes."
+     ],
+     "ex": {
+      "main": "**10 chromosomes** — 5 heading to each pole, so each new cell ends with the 5 it started with.",
+      "tip": "The chromosome count doubles in anaphase and halves again at cytokinesis."
+     }
+    },
+    {
+     "id": "q32",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can a DNA copying error that slips past every check lead to cancer?",
+     "opts": [
+      "The error shuts down the cell's mitochondria for good",
+      "The error forces the cell into G0 for the rest of its life",
+      "The error stops the cell from making any proteins at all",
+      "The cell keeps dividing and passes the error to every copy"
+     ],
+     "ans": 3,
+     "hint": "What does a cell do after G2 if nothing stops it?",
+     "steps": [
+      "A cell that reaches G2 usually goes on to mitosis.",
+      "Mitosis makes identical copies — including any uncorrected error.",
+      "If the error affects how division is controlled, the copies keep dividing too.",
+      "Uncontrolled division carrying the error is cancer."
+     ],
+     "ex": {
+      "main": "**The cell keeps dividing and copies the error into every daughter cell.** An error in the genes that control division is how growth becomes uncontrolled.",
+      "tip": "Uncorrected replication errors → cancer. That blank is on the guide."
+     }
+    },
+    {
+     "id": "q33",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "A field of banana plants is grown entirely from cuttings, so every plant is genetically identical. A fungus arrives that kills one of them. What is the biggest risk?",
+     "opts": [
+      "It can kill them all, since none of them differ in a way that could resist it",
+      "Only the one plant is at risk, since each plant grows separately",
+      "The others will quickly develop resistance on their own",
+      "The fungus cannot spread between plants grown from cuttings"
+     ],
+     "ans": 0,
+     "hint": "Clones share every weakness.",
+     "steps": [
+      "Cuttings grow by mitosis, so every plant is a genetic copy.",
+      "Identical plants have identical defences — and identical weaknesses.",
+      "If the fungus can kill one, nothing about the others is different enough to stop it.",
+      "It can kill them all."
+     ],
+     "ex": {
+      "main": "**It can kill them all.** No genetic variation means no plant carries a difference that might resist the disease — the main downside of reproducing by mitosis.",
+      "tip": "Asexual reproduction: fast and identical. The price is no variation."
+     }
+    },
+    {
+     "id": "q34",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which observation fits the idea that mitochondria were once free-living prokaryotes?",
+     "opts": [
+      "They are found in almost every eukaryotic cell there is",
+      "They carry their own DNA and ribosomes, like a prokaryote does",
+      "They release the energy stored in sugar as ATP",
+      "They are made by the Golgi apparatus and shipped in vesicles"
+     ],
+     "ans": 1,
+     "hint": "What would a cell that used to live on its own still be carrying?",
+     "steps": [
+      "A free-living cell needs its own genetic instructions and its own protein factories.",
+      "Mitochondria still have both: their own DNA and their own ribosomes.",
+      "Being common, or doing respiration, says nothing about where they came from.",
+      "Their own DNA and ribosomes."
+     ],
+     "ex": {
+      "main": "**Their own DNA and ribosomes** — the leftovers of a cell that once lived independently. Chloroplasts carry the same evidence.",
+      "tip": "Endosymbiont theory: mitochondria and chloroplasts; evidence DNA and ribosomes."
+     }
+    },
+    {
+     "id": "q35",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cell has a cell wall, ribosomes and a cell membrane, but no nucleus and no lysosomes. Which one statement must be true?",
+     "opts": [
+      "It is an animal cell",
+      "It is a plant cell",
+      "It is a prokaryote",
+      "It is a fungal cell"
+     ],
+     "ans": 2,
+     "hint": "Which single missing structure decides it?",
+     "steps": [
+      "A cell wall, ribosomes and a membrane are all found in prokaryotes and in some eukaryotes.",
+      "But every eukaryote — plant, animal, fungus — has a nucleus.",
+      "No nucleus means a prokaryote.",
+      "It is a prokaryote."
+     ],
+     "ex": {
+      "main": "**It is a prokaryote.** The missing nucleus decides it; a cell wall alone could be a plant, a fungus or a bacterium.",
+      "tip": "Look for the structure that only one side of the chart has."
+     }
+    },
+    {
+     "id": "q36",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the word for body cells — every cell except sperm and eggs.",
+     "opts": [
+      "somatic"
+     ],
+     "ans": 0,
+     "hint": "Soma means body. Three syllables: so · MA · tic.",
+     "steps": [
+      "Soma is Greek for body.",
+      "Add -tic: so · ma · tic.",
+      "somatic."
+     ],
+     "ex": {
+      "main": "**somatic.** Somatic cells are diploid and divide by mitosis.",
+      "tip": "One m, one t."
+     }
+    },
+    {
+     "id": "q37",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the word for a cell with only ONE set of chromosomes.",
+     "opts": [
+      "haploid"
+     ],
+     "ans": 0,
+     "hint": "Hap- as in half, then the same ending as diploid.",
+     "steps": [
+      "It starts hap-, as in half.",
+      "It ends -loid, like diploid.",
+      "haploid."
+     ],
+     "ex": {
+      "main": "**haploid.** Gametes are haploid; somatic cells are diploid.",
+      "tip": "h-a-p-l-o-i-d: hap + loid."
+     }
+    },
+    {
+     "id": "q38",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the word for sex cells — sperm and eggs.",
+     "opts": [
+      "gametes"
+     ],
+     "ans": 0,
+     "hint": "Two syllables: GAM · eets.",
+     "steps": [
+      "Say it: GAM-eets.",
+      "Spell the sound 'eets' as -etes.",
+      "gametes."
+     ],
+     "ex": {
+      "main": "**gametes.** Gametes are made by meiosis, not mitosis.",
+      "tip": "It is game + tes."
+     }
+    },
+    {
+     "id": "q39",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the name of the proteins that DNA winds around in a eukaryote's chromosomes.",
+     "opts": [
+      "histones"
+     ],
+     "ans": 0,
+     "hint": "His · tones — the word 'tones' is inside it.",
+     "steps": [
+      "Start with his-.",
+      "Then the word tones.",
+      "histones."
+     ],
+     "ex": {
+      "main": "**histones.** DNA on histones is chromatin; each wrapped bead is a nucleosome.",
+      "tip": "his + tones."
+     }
+    },
+    {
+     "id": "q40",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the name of the step that divides the cytoplasm to make two separate cells.",
+     "opts": [
+      "cytokinesis"
+     ],
+     "ans": 0,
+     "hint": "Cyto (cell) + kinesis (movement).",
+     "steps": [
+      "Cyto- means cell, as in cytoplasm.",
+      "Kinesis means movement: ki · NEE · sis.",
+      "cytokinesis."
+     ],
+     "ex": {
+      "main": "**cytokinesis.** Mitosis divides the nucleus; cytokinesis divides the cytoplasm.",
+      "tip": "Cyto + kinesis, no letters dropped."
+     }
+    },
+    {
+     "id": "q41",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Spell the name of the prokaryotic domain that lives in extreme heat, high salt or no oxygen.",
+     "opts": [
+      "archaea"
+     ],
+     "ans": 0,
+     "hint": "It starts like archaeology — ancient — and ends with -aea.",
+     "steps": [
+      "It starts arch-, like archaeology.",
+      "It ends -aea: ar · KEE · uh.",
+      "archaea."
+     ],
+     "ex": {
+      "main": "**archaea.** The other prokaryotic domain is bacteria.",
+      "tip": "Two a's around the e at the end: -aea."
+     }
+    }
+   ],
+   "order": 1,
+   "prep": true,
+   "libv": 1,
+   "book": true
+  }
+ }
+}
