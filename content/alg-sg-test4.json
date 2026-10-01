@@ -1,0 +1,1145 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-sgt4": {
+   "id": "unit-alg-sgt4",
+   "type": "unit",
+   "updatedAt": 1790803117509,
+   "classId": "algeo",
+   "quarter": 1,
+   "status": "draft",
+   "book": true,
+   "order": 1,
+   "guide": true,
+   "libv": 1,
+   "title": "Topic 3 · Test 4 Study Guide, Part 1",
+   "srcName": "math study guide.test 4 — Alg 2 SG T6 P1 (Drive)",
+   "source": "The class study guide for Test 4, Part 1, imported as issued",
+   "summary": {
+    "text": "The class study guide for Test 4, Part 1, question for question — quadratics (vertex and axis of symmetry, maximum or minimum and range, vertex form, factoring), complex solutions and simplifying with i, synthetic division and the Remainder Theorem, real and complex roots of cubics, zeros and multiplicity, counting roots, and a point in a system of inequalities. Work the printout first, then enter your answers here. Question numbers match the paper.",
+    "from": "source"
+   },
+   "why": {
+    "text": "The test is on paper, so the guide on paper is the real rehearsal. Entering your answers here afterwards grades it on the spot, walks you through each one you missed, and files those into the Growth Zone — so the exact skills you dropped come back before Test 4.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Find a parabola's vertex, axis of symmetry, maximum or minimum, and range.",
+     "from": "source"
+    },
+    {
+     "text": "Rewrite a quadratic in vertex form and factor quadratic expressions.",
+     "from": "source"
+    },
+    {
+     "text": "Simplify square roots of negative numbers and find complex solutions.",
+     "from": "source"
+    },
+    {
+     "text": "Use synthetic division and the Remainder Theorem to evaluate a polynomial.",
+     "from": "source"
+    },
+    {
+     "text": "Find the real and complex roots, zeros and multiplicities of a polynomial.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the class study guide in her Algebra & Geometry II folder — the file is named \"math study guide.test 4\" and the paper's own header reads \"Alg 2 SG T6 P1\", the ExamView file name (the same mismatch Test 2's guide had). \"P1\" suggests a Part 2 exists; it was not in the folder. Same approach as the two earlier algebra guides: paper first, then the app grades it, walks through each miss and sends them to the Growth Zone. The copy in Drive was read for its questions only; nothing on it was marked or recorded.\n\nONE PAGE IS MISSING. The upload's second and third pages are two photos of the same page, so the paper's page 2 — questions 9 to 19 — never arrived. Nothing was invented for them. The entry grid shows the paper's own numbers (1–8, 20–30, 32–34), so her letters still line up with the printout. If page 2 is uploaded, those eleven questions can be added to this same unit.\n\nQUESTION 31 HAS TWO RIGHT ANSWERS ON THE PAPER. Options b and c both list the zeros −3, 3 and 4 and show the same graph, so either letter is correct. A one-letter grid would mark one of them wrong, so #31 is taught on a card instead of graded. Worth a word to her so she does not second-guess it on the test.\n\nThere was no answer key in the upload, so every answer was worked out independently and checked, and every one of the 22 graded questions has a verified \"try it again\" version with new numbers for the rescue round. #24 is fill-in on paper and #27 and #30 offer graphs as choices, so those three are adapted and their letters do not match the paper; the first card tells her to leave them blank on the grid or answer them under Work it here.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Work the paper guide fully first, then come back and enter what you WROTE, by question number. The misses are the valuable part.",
+    "minutes": 40,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "How to use this unit",
+     "def": "**Paper first. Then enter what you actually wrote, by the paper's own question numbers.**\n• The grid here skips 9–19 and 31 — 9–19 are not uploaded yet, and 31 has two right answers on the paper\n• #24, #27 and #30 are adapted, so their choices are not the paper's letters — answer those under Work it here, or leave them blank on the grid",
+     "hint": "Blanks are never marked wrong. Skip any you did not do.",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "Vertex and axis of symmetry",
+     "def": "**x = −b ÷ 2a gives the axis; substitute it back for the vertex's y.**\n• The axis is a vertical line: always written x = …\n• y = −2x² + 8x − 20 → x = 2, y = −12, vertex (2, −12)",
+     "eq": "x = −b / 2a",
+     "hint": "Axis first, then plug in.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "Maximum, minimum and range",
+     "def": "**a > 0 opens up (a minimum); a < 0 opens down (a maximum). The value is the vertex's y.**\n• Minimum k → range y ≥ k; maximum k → range y ≤ k\n• The x-coordinate is WHERE it happens, never the value itself",
+     "hint": "Smile has a bottom, frown has a top.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "Vertex form by completing the square",
+     "def": "**Halve the x-coefficient, square it, add and subtract it: x² − 2x + 8 = (x − 1)² + 7.**\n• y = a(x − h)² + k has vertex (h, k)\n• The sign inside the bracket matches half the x-coefficient",
+     "eq": "y = a(x − h)² + k",
+     "hint": "Check: the vertex's y equals the original at x = h.",
+     "from": "added"
+    },
+    {
+     "id": "c4",
+     "term": "Factoring a trinomial",
+     "def": "**Find two numbers that multiply to c and add to b; take out any common factor first.**\n• + constant, + middle → both plus; + constant, − middle → both minus\n• 2x² + 16x + 30 = 2(x² + 8x + 15) = 2(x + 3)(x + 5)",
+     "hint": "Read the two signs before you hunt for numbers.",
+     "from": "added"
+    },
+    {
+     "id": "c5",
+     "term": "Square roots of negatives",
+     "def": "**√−n = i√n, then take out the largest perfect square: √−360 = i√(36·10) = 6i√10.**\n• Simplified means no negative and no perfect square left under the root\n• √9 i and 3i are the same number — the paper may write either",
+     "hint": "Pull out −1 as i first, then simplify as usual.",
+     "from": "added"
+    },
+    {
+     "id": "c6",
+     "term": "Complex solutions from the quadratic formula",
+     "def": "**A negative discriminant gives a ± pair with i: ½x² − x + 5 = 0 → 1 ± 3i.**\n• Clear any fraction first by multiplying every term\n• Real part = −b ÷ 2a; imaginary part = √|b² − 4ac| ÷ 2a",
+     "eq": "x = (−b ± √(b² − 4ac)) / 2a",
+     "hint": "Discriminant negative → no real solutions, two complex ones.",
+     "from": "added"
+    },
+    {
+     "id": "c7",
+     "term": "Synthetic division and the Remainder Theorem",
+     "def": "**Dividing P(x) by (x − k) leaves a remainder equal to P(k).**\n• Write a 0 for every missing power — x⁴ + 9x³ − 9x + 2 is 1, 9, 0, −9, 2\n• Divide by x − 2 → use k = +2; to find P(−2), use k = −2",
+     "hint": "The sign of k is the opposite of the sign in (x − k).",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Cubes: one real root and a complex pair",
+     "def": "**x³ − a³ = (x − a)(x² + ax + a²): the real root is a, the quadratic gives a complex pair.**\n• x³ − 8 → 2, −1 ± i√3 · x³ = 216 → 6, −3 ± 3i√3\n• A cubic always has three solutions in total",
+     "eq": "a³ − b³ = (a − b)(a² + ab + b²)",
+     "hint": "Spot the perfect cube, then the quadratic does the rest.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "Zeros and multiplicity",
+     "def": "**Factor completely; each factor's exponent is its zero's multiplicity.**\n• x⁴ − 4x³ + 3x² = x²(x − 1)(x − 3): 0 (multiplicity 2), 1 and 3 (multiplicity 1)\n• A factor (x − 4) gives the zero +4 — the sign flips; a bare x gives the zero 0",
+     "hint": "Multiplicities always add up to the degree.",
+     "from": "added"
+    },
+    {
+     "id": "c10",
+     "term": "Question 31 — two right answers",
+     "def": "**y = (x + 3)(x − 3)(x − 4) has zeros −3, 3 and 4.**\n• On the paper, options b and c both list those three zeros and show the same graph, so either letter is right\n• That is why #31 is not on the grid here — the grid can only accept one letter",
+     "hint": "Set each bracket to zero: −3, 3, 4.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "How many roots",
+     "def": "**A polynomial equation has as many roots as its degree, counting complex roots and repeats.**\n• −12x² − 25x + 5 + x³ = 0 is degree 3 → 3 roots, even written out of order\n• 2x⁴ − x³ − 12x² − 25x + 5 = 0 is degree 4 → 4 roots",
+     "hint": "Find the biggest exponent, wherever it sits.",
+     "from": "added"
+    },
+    {
+     "id": "c12",
+     "term": "A point in a system of inequalities",
+     "def": "**A point is in the solution set only if it satisfies EVERY inequality.**\n• (5, 4) in 3x + 3y ≤ 45, 2x + y ≤ 20: 27 ≤ 45 and 14 ≤ 20 ✓\n• (12, 1) passes the first but fails 2x + y ≤ 20 — one failure is enough",
+     "hint": "Test them all; stop at the first one that fails.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q1",
+     "paperNo": 1,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #1 — What are the vertex and the axis of symmetry of y = −2x² + 8x − 20?",
+     "opts": [
+      "vertex: (−2, 12); axis of symmetry: y = −2",
+      "vertex: (2, −12); axis of symmetry: x = 2",
+      "vertex: (−2, −12); axis of symmetry: x = −2",
+      "vertex: (2, −12); axis of symmetry: x = −12"
+     ],
+     "ans": 1,
+     "hint": "Find the axis first: x = −b ÷ 2a. Then substitute it back in for the y-coordinate.",
+     "steps": [
+      "a = −2 and b = 8, so x = −8 ÷ (2 × −2) = −8 ÷ −4 = 2.",
+      "Substitute x = 2: y = −2(4) + 8(2) − 20 = −8 + 16 − 20 = −12.",
+      "The axis of symmetry is the vertical line through the vertex, x = 2 — always 'x =', never 'y ='.",
+      "Vertex (2, −12), axis x = 2."
+     ],
+     "ex": {
+      "main": "**Vertex (2, −12), axis of symmetry x = 2.** The axis is a vertical line through the vertex, so it is always written x = (the vertex's x-coordinate).",
+      "tip": "Two traps on one item: an axis written 'y =', and an axis using the vertex's y-value."
+     },
+     "variant": {
+      "q": "What are the vertex and the axis of symmetry of y = −3x² + 12x − 7?",
+      "opts": [
+       "vertex: (2, 5); axis of symmetry: x = 2",
+       "vertex: (−2, 5); axis of symmetry: x = −2",
+       "vertex: (2, 5); axis of symmetry: y = 2",
+       "vertex: (2, −5); axis of symmetry: x = 5"
+      ],
+      "ans": 0,
+      "hint": "Find the axis first: x = −b ÷ 2a. Then substitute it back in for the y-coordinate.",
+      "steps": [
+       "x = −12 ÷ (2 × −3) = 2.",
+       "y = −3(4) + 24 − 7 = 5.",
+       "Vertex (2, 5), axis x = 2."
+      ],
+      "ex": {
+       "main": "**Vertex (2, 5), axis x = 2.**"
+      }
+     }
+    },
+    {
+     "id": "q2",
+     "paperNo": 2,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #2 — What are the vertex and the axis of symmetry of y = 2x² + 24x − 16?",
+     "opts": [
+      "vertex: (−6, −88); axis of symmetry: x = −6",
+      "vertex: (−6, 88); axis of symmetry: y = −6",
+      "vertex: (6, −88); axis of symmetry: x = −88",
+      "vertex: (−6, −88); axis of symmetry: x = −88"
+     ],
+     "ans": 0,
+     "hint": "Find the axis first: x = −b ÷ 2a. Then substitute it back in for the y-coordinate.",
+     "steps": [
+      "x = −24 ÷ (2 × 2) = −6.",
+      "y = 2(36) + 24(−6) − 16 = 72 − 144 − 16 = −88.",
+      "The axis passes through the vertex's x-coordinate: x = −6.",
+      "Vertex (−6, −88), axis x = −6."
+     ],
+     "ex": {
+      "main": "**Vertex (−6, −88), axis of symmetry x = −6.** Two options share the right vertex; only one pairs it with the right axis.",
+      "tip": "Once you have the vertex, the axis is free — x equals its first coordinate."
+     },
+     "variant": {
+      "q": "What are the vertex and the axis of symmetry of y = 3x² + 18x − 4?",
+      "opts": [
+       "vertex: (−3, −31); axis of symmetry: x = −3",
+       "vertex: (3, −31); axis of symmetry: x = 3",
+       "vertex: (−3, 31); axis of symmetry: y = −3",
+       "vertex: (−3, −31); axis of symmetry: x = −31"
+      ],
+      "ans": 0,
+      "hint": "Find the axis first: x = −b ÷ 2a. Then substitute it back in for the y-coordinate.",
+      "steps": [
+       "x = −18 ÷ 6 = −3.",
+       "y = 27 − 54 − 4 = −31.",
+       "Vertex (−3, −31), axis x = −3."
+      ],
+      "ex": {
+       "main": "**Vertex (−3, −31), axis x = −3.**"
+      }
+     }
+    },
+    {
+     "id": "q3",
+     "paperNo": 3,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #3 — What is the maximum or minimum value of y = 2x² + 28x − 8, and what is the range?",
+     "opts": [
+      "minimum value: 7; range: y ≥ 7",
+      "minimum value: −7; range: y ≥ −7",
+      "minimum value: −106; range: y ≥ −106",
+      "minimum value: −106; range: y ≥ −7"
+     ],
+     "ans": 2,
+     "hint": "The sign of a decides it: a > 0 opens up (a minimum), a < 0 opens down (a maximum). The value is the vertex's y.",
+     "steps": [
+      "a = 2 > 0, so the parabola opens up and has a minimum.",
+      "Vertex x = −28 ÷ 4 = −7; y = 2(49) + 28(−7) − 8 = 98 − 196 − 8 = −106.",
+      "The minimum VALUE is the y-coordinate, −106 — not the x-coordinate, −7.",
+      "Range: every y from −106 up, so y ≥ −106."
+     ],
+     "ex": {
+      "main": "**Minimum −106, range y ≥ −106.** The minimum is a y-value, and the range starts at that same y-value.",
+      "tip": "−7 is where the minimum happens, not what it is."
+     },
+     "variant": {
+      "q": "What is the maximum or minimum value of y = 2x² + 20x + 3, and what is the range?",
+      "opts": [
+       "minimum value: −47; range: y ≥ −47",
+       "minimum value: 3; range: y ≥ 3",
+       "minimum value: 47; range: y ≥ 47",
+       "minimum value: −47; range: y ≥ 3"
+      ],
+      "ans": 0,
+      "hint": "The sign of a decides it: a > 0 opens up (a minimum), a < 0 opens down (a maximum). The value is the vertex's y.",
+      "steps": [
+       "a = 2 > 0: a minimum.",
+       "x = −20 ÷ 4 = −5; y = 50 − 100 + 3 = −47.",
+       "Minimum −47, range y ≥ −47."
+      ],
+      "ex": {
+       "main": "**Minimum −47, range y ≥ −47.**"
+      }
+     }
+    },
+    {
+     "id": "q4",
+     "paperNo": 4,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #4 — What is the maximum or minimum value of y = −2x² + 28x − 10, and what is the range?",
+     "opts": [
+      "minimum: −88; range: y ≥ −88",
+      "minimum: 88; range: y ≥ 88",
+      "maximum: 88; range: y ≤ 88",
+      "maximum: −88; range: y ≤ −88"
+     ],
+     "ans": 2,
+     "hint": "The sign of a decides it: a > 0 opens up (a minimum), a < 0 opens down (a maximum). The value is the vertex's y.",
+     "steps": [
+      "a = −2 < 0, so the parabola opens down and has a maximum.",
+      "Vertex x = −28 ÷ (2 × −2) = 7; y = −2(49) + 28(7) − 10 = −98 + 196 − 10 = 88.",
+      "A maximum caps the range from above: y ≤ 88.",
+      "Maximum 88, range y ≤ 88."
+     ],
+     "ex": {
+      "main": "**Maximum 88, range y ≤ 88.** A negative a means the vertex is the highest point, so the range runs downward from it.",
+      "tip": "Decide max or min from the sign of a before doing any arithmetic."
+     },
+     "variant": {
+      "q": "What is the maximum or minimum value of y = −3x² + 24x − 5, and what is the range?",
+      "opts": [
+       "maximum: 43; range: y ≤ 43",
+       "minimum: 43; range: y ≥ 43",
+       "maximum: −43; range: y ≤ −43",
+       "minimum: −43; range: y ≥ −43"
+      ],
+      "ans": 0,
+      "hint": "The sign of a decides it: a > 0 opens up (a minimum), a < 0 opens down (a maximum). The value is the vertex's y.",
+      "steps": [
+       "a = −3 < 0: a maximum.",
+       "x = −24 ÷ (−6) = 4; y = −48 + 96 − 5 = 43.",
+       "Maximum 43, range y ≤ 43."
+      ],
+      "ex": {
+       "main": "**Maximum 43, range y ≤ 43.**"
+      }
+     }
+    },
+    {
+     "id": "q5",
+     "paperNo": 5,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #5 — What is the vertex form of y = x² − 2x + 8?",
+     "opts": [
+      "y = (x + 1)² + 7",
+      "y = (x + 1)² − 7",
+      "y = (x − 1)² + 7",
+      "y = (x − 1)² − 7"
+     ],
+     "ans": 2,
+     "hint": "Halve the x-coefficient and square it to complete the square; whatever you add, you also subtract.",
+     "steps": [
+      "Half of −2 is −1, and (−1)² = 1.",
+      "y = (x² − 2x + 1) + 8 − 1.",
+      "y = (x − 1)² + 7.",
+      "Check: the vertex is (1, 7), and 1 − 2 + 8 = 7. ✓"
+     ],
+     "ex": {
+      "main": "**y = (x − 1)² + 7.** The sign inside the bracket is the sign of half the x-coefficient: −2x gives (x − 1).",
+      "tip": "Check vertex form by plugging the vertex's x into the original: 1 − 2 + 8 = 7."
+     },
+     "variant": {
+      "q": "What is the vertex form of y = x² − 6x + 11?",
+      "opts": [
+       "y = (x − 3)² + 2",
+       "y = (x + 3)² + 2",
+       "y = (x − 3)² − 2",
+       "y = (x + 3)² − 2"
+      ],
+      "ans": 0,
+      "hint": "Halve the x-coefficient and square it to complete the square; whatever you add, you also subtract.",
+      "steps": [
+       "Half of −6 is −3; (−3)² = 9.",
+       "y = (x² − 6x + 9) + 11 − 9.",
+       "y = (x − 3)² + 2."
+      ],
+      "ex": {
+       "main": "**y = (x − 3)² + 2.**"
+      }
+     }
+    },
+    {
+     "id": "q6",
+     "paperNo": 6,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #6 — What is x² + 14x + 48 in factored form?",
+     "opts": [
+      "(x + 6)(x − 8)",
+      "(x + 8)(x − 6)",
+      "(x − 8)(x − 6)",
+      "(x + 6)(x + 8)"
+     ],
+     "ans": 3,
+     "hint": "Find two numbers that MULTIPLY to the constant and ADD to the x-coefficient.",
+     "steps": [
+      "We need two numbers with product 48 and sum 14.",
+      "Both are positive, since the product and the sum are both positive.",
+      "6 × 8 = 48 and 6 + 8 = 14.",
+      "(x + 6)(x + 8)."
+     ],
+     "ex": {
+      "main": "**(x + 6)(x + 8).** A positive constant and a positive middle term means both numbers are positive.",
+      "tip": "Expand your answer to check: x² + 8x + 6x + 48."
+     },
+     "variant": {
+      "q": "What is x² + 11x + 24 in factored form?",
+      "opts": [
+       "(x + 3)(x + 8)",
+       "(x − 3)(x + 8)",
+       "(x + 3)(x − 8)",
+       "(x − 3)(x − 8)"
+      ],
+      "ans": 0,
+      "hint": "Find two numbers that MULTIPLY to the constant and ADD to the x-coefficient.",
+      "steps": [
+       "Product 24, sum 11.",
+       "3 × 8 = 24 and 3 + 8 = 11.",
+       "(x + 3)(x + 8)."
+      ],
+      "ex": {
+       "main": "**(x + 3)(x + 8).**"
+      }
+     }
+    },
+    {
+     "id": "q7",
+     "paperNo": 7,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #7 — What is x² − 6x + 8 in factored form?",
+     "opts": [
+      "(x + 4)(x + 2)",
+      "(x − 2)(x − 4)",
+      "(x − 4)(x + 2)",
+      "(x − 2)(x + 4)"
+     ],
+     "ans": 1,
+     "hint": "Find two numbers that MULTIPLY to the constant and ADD to the x-coefficient.",
+     "steps": [
+      "We need product +8 and sum −6.",
+      "A positive product with a negative sum means BOTH numbers are negative.",
+      "(−2)(−4) = 8 and −2 + (−4) = −6.",
+      "(x − 2)(x − 4)."
+     ],
+     "ex": {
+      "main": "**(x − 2)(x − 4).** Positive constant, negative middle term: both signs are minus.",
+      "tip": "Read the two signs first; they narrow four options to one before any arithmetic."
+     },
+     "variant": {
+      "q": "What is x² − 9x + 14 in factored form?",
+      "opts": [
+       "(x − 2)(x − 7)",
+       "(x + 2)(x + 7)",
+       "(x − 2)(x + 7)",
+       "(x + 2)(x − 7)"
+      ],
+      "ans": 0,
+      "hint": "Find two numbers that MULTIPLY to the constant and ADD to the x-coefficient.",
+      "steps": [
+       "Product +14, sum −9: both negative.",
+       "(−2)(−7) = 14, −2 − 7 = −9.",
+       "(x − 2)(x − 7)."
+      ],
+      "ex": {
+       "main": "**(x − 2)(x − 7).**"
+      }
+     }
+    },
+    {
+     "id": "q8",
+     "paperNo": 8,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #8 — What is 2x² + 16x + 30 in factored form?",
+     "opts": [
+      "2(x − 3)(x − 5)",
+      "2(x − 3)(x + 5)",
+      "2(x + 3)(x − 5)",
+      "2(x + 3)(x + 5)"
+     ],
+     "ans": 3,
+     "hint": "Take out the common factor first, then factor what is left.",
+     "steps": [
+      "Every term is even, so factor out 2: 2(x² + 8x + 15).",
+      "Inside: product 15, sum 8 — both positive.",
+      "3 × 5 = 15 and 3 + 5 = 8.",
+      "2(x + 3)(x + 5)."
+     ],
+     "ex": {
+      "main": "**2(x + 3)(x + 5).** Pull out the GCF first; the trinomial left inside is an ordinary one.",
+      "tip": "Forgetting the 2 changes the polynomial — keep it out front."
+     },
+     "variant": {
+      "q": "What is 3x² + 21x + 30 in factored form?",
+      "opts": [
+       "3(x + 2)(x + 5)",
+       "3(x − 2)(x − 5)",
+       "3(x + 2)(x − 5)",
+       "3(x − 2)(x + 5)"
+      ],
+      "ans": 0,
+      "hint": "Take out the common factor first.",
+      "steps": [
+       "Factor out 3: 3(x² + 7x + 10).",
+       "2 × 5 = 10 and 2 + 5 = 7.",
+       "3(x + 2)(x + 5)."
+      ],
+      "ex": {
+       "main": "**3(x + 2)(x + 5).**"
+      }
+     }
+    },
+    {
+     "id": "q20",
+     "paperNo": 20,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #20 — Find the solutions of the equation ½x² − x + 5 = 0.",
+     "opts": [
+      "1 ± √9 i",
+      "−1 ± √9 i",
+      "1 ± √11 i",
+      "−1 ± √11 i"
+     ],
+     "ans": 0,
+     "hint": "Clear the fraction first (multiply through), then use the quadratic formula. A negative discriminant gives ± something times i.",
+     "steps": [
+      "Multiply every term by 2: x² − 2x + 10 = 0.",
+      "Discriminant: b² − 4ac = 4 − 40 = −36.",
+      "x = (2 ± √−36) ÷ 2 = (2 ± 6i) ÷ 2 = 1 ± 3i.",
+      "3i is √9 i, which is how the paper writes it: 1 ± √9 i."
+     ],
+     "ex": {
+      "main": "**1 ± √9 i** — that is 1 ± 3i. The paper leaves √9 unsimplified, so recognise 3i in either form.",
+      "tip": "The real part is −b ÷ 2a = 2 ÷ 2 = 1, which rules out the two options starting −1."
+     },
+     "variant": {
+      "q": "Find the solutions of the equation ½x² + 2x + 10 = 0.",
+      "opts": [
+       "−2 ± 4i",
+       "2 ± 4i",
+       "−2 ± 2i",
+       "−4 ± 2i"
+      ],
+      "ans": 0,
+      "hint": "Clear the fraction first (multiply through), then use the quadratic formula. A negative discriminant gives ± something times i.",
+      "steps": [
+       "Multiply by 2: x² + 4x + 20 = 0.",
+       "Discriminant: 16 − 80 = −64.",
+       "x = (−4 ± 8i) ÷ 2 = −2 ± 4i."
+      ],
+      "ex": {
+       "main": "**−2 ± 4i.**"
+      }
+     }
+    },
+    {
+     "id": "q21",
+     "paperNo": 21,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #21 — Simplify √−144 using the imaginary unit i.",
+     "opts": [
+      "12",
+      "−12",
+      "12i",
+      "144i"
+     ],
+     "ans": 2,
+     "hint": "Split off −1 as i, then take out the largest perfect square.",
+     "steps": [
+      "√−144 = √144 × √−1.",
+      "√144 = 12 and √−1 = i.",
+      "12i."
+     ],
+     "ex": {
+      "main": "**12i.** The square root of a negative number is never a real number, so 12 and −12 are out.",
+      "tip": "√−n = i√n for any positive n."
+     },
+     "variant": {
+      "q": "Simplify √−81 using the imaginary unit i.",
+      "opts": [
+       "9i",
+       "9",
+       "−9",
+       "81i"
+      ],
+      "ans": 0,
+      "hint": "Split off −1 as i, then take out the largest perfect square.",
+      "steps": [
+       "√−81 = √81 × √−1.",
+       "√81 = 9, √−1 = i.",
+       "9i."
+      ],
+      "ex": {
+       "main": "**9i.**"
+      }
+     }
+    },
+    {
+     "id": "q22",
+     "paperNo": 22,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #22 — Simplify √−360 using the imaginary unit i.",
+     "opts": [
+      "6√−10",
+      "6i√10",
+      "i√360",
+      "−6√10"
+     ],
+     "ans": 1,
+     "hint": "Split off −1 as i, then take out the largest perfect square.",
+     "steps": [
+      "√−360 = i√360.",
+      "360 = 36 × 10, and 36 is the largest perfect square in it.",
+      "i√360 = i × 6 × √10 = 6i√10.",
+      "Simplified form puts i outside and leaves no perfect square under the root: 6i√10."
+     ],
+     "ex": {
+      "main": "**6i√10.** Two other options are EQUAL to it but not simplified: 6√−10 still has a negative under the root, and i√360 still holds a perfect square.",
+      "tip": "\"Simplify\" means no negative and no perfect-square factor left inside the radical."
+     },
+     "variant": {
+      "q": "Simplify √−200 using the imaginary unit i.",
+      "opts": [
+       "10i√2",
+       "−10√2",
+       "2i√10",
+       "20i√5"
+      ],
+      "ans": 0,
+      "hint": "Split off −1 as i, then take out the largest perfect square.",
+      "steps": [
+       "√−200 = i√200.",
+       "200 = 100 × 2.",
+       "10i√2."
+      ],
+      "ex": {
+       "main": "**10i√2.**"
+      }
+     }
+    },
+    {
+     "id": "q23",
+     "paperNo": 23,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #23 — Use synthetic division to find P(−2) for P(x) = x⁴ + 9x³ − 9x + 2.",
+     "opts": [
+      "−2",
+      "0",
+      "−36",
+      "68"
+     ],
+     "ans": 2,
+     "hint": "The remainder from synthetic division by (x − k) equals P(k). Remember a 0 for any missing power.",
+     "steps": [
+      "P has no x² term, so the coefficients are 1, 9, 0, −9, 2 — the 0 is essential.",
+      "Divide by −2: bring down 1; 1 × −2 = −2, 9 − 2 = 7; 7 × −2 = −14, 0 − 14 = −14; −14 × −2 = 28, −9 + 28 = 19; 19 × −2 = −38, 2 − 38 = −36.",
+      "The remainder is −36, so P(−2) = −36.",
+      "Check directly: 16 − 72 + 18 + 2 = −36. ✓"
+     ],
+     "ex": {
+      "main": "**−36.** The missing x² term needs a 0 placeholder, or every number after it shifts.",
+      "tip": "Plugging in directly is a fast check on synthetic division."
+     },
+     "variant": {
+      "q": "Use synthetic division to find P(−1) for P(x) = x⁴ + 5x³ − 3x + 4.",
+      "opts": [
+       "3",
+       "7",
+       "13",
+       "−3"
+      ],
+      "ans": 0,
+      "hint": "The remainder from synthetic division by (x − k) equals P(k). Remember a 0 for any missing power.",
+      "steps": [
+       "Coefficients 1, 5, 0, −3, 4 (0 for the missing x²).",
+       "Divide by −1: 1, 4, −4, 1, 3.",
+       "P(−1) = 3."
+      ],
+      "ex": {
+       "main": "**3.**"
+      }
+     }
+    },
+    {
+     "id": "q24",
+     "paperNo": 24,
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "SG #24 — (adapted — the paper has three blanks to fill in) By the Remainder Theorem, when P(x) = x³ + x² − 4x − 5 is divided by x − 2, the remainder is P(2). What is that remainder?",
+     "opts": [
+      "1",
+      "−1",
+      "−9",
+      "−5"
+     ],
+     "ans": 1,
+     "hint": "Dividing by x − 2 means evaluating at x = +2.",
+     "steps": [
+      "Dividing by x − 2 means k = 2.",
+      "P(2) = 8 + 4 − 8 − 5 = −1.",
+      "Synthetic division with 1, 1, −4, −5 by 2 gives 1, 3, 2 and a remainder of −1.",
+      "Both give −1, so the remainder is −1, P(2) = −1, and yes, the theorem is verified."
+     ],
+     "ex": {
+      "main": "**−1.** The division and the substitution land on the same number, which is exactly what the Remainder Theorem promises.",
+      "tip": "On the paper: remainder −1, P(2) = −1, and \"yes\"."
+     },
+     "variant": {
+      "q": "By the Remainder Theorem, what is the remainder when P(x) = x³ − 2x² + 3x − 4 is divided by x − 3?",
+      "opts": [
+       "14",
+       "−14",
+       "−58",
+       "4"
+      ],
+      "ans": 0,
+      "hint": "Dividing by x − 3 means evaluating at x = 3.",
+      "steps": [
+       "k = 3.",
+       "P(3) = 27 − 18 + 9 − 4 = 14.",
+       "The remainder is 14."
+      ],
+      "ex": {
+       "main": "**14.**"
+      }
+     }
+    },
+    {
+     "id": "q25",
+     "paperNo": 25,
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #25 — What are all the real and complex solutions of x³ − 8 = 0?",
+     "opts": [
+      "1 + i√3 and 1 − i√3",
+      "2, −1 + i√3, and −1 − i√3",
+      "2, 1 + 2i√3, and 1 − 2i√3",
+      "2, 2 + 2i√3, and 2 − 2i√3"
+     ],
+     "ans": 1,
+     "hint": "Factor the cubic: one real root, then the quadratic formula on the leftover quadratic for the complex pair.",
+     "steps": [
+      "2³ = 8, so x = 2 is a root and (x − 2) is a factor.",
+      "x³ − 8 = (x − 2)(x² + 2x + 4).",
+      "x² + 2x + 4 = 0: x = (−2 ± √(4 − 16)) ÷ 2 = (−2 ± 2i√3) ÷ 2 = −1 ± i√3.",
+      "All three: 2, −1 + i√3, −1 − i√3."
+     ],
+     "ex": {
+      "main": "**2, −1 + i√3, and −1 − i√3.** A cubic has three solutions; the option with only two is missing the real one.",
+      "tip": "Difference of cubes: a³ − b³ = (a − b)(a² + ab + b²)."
+     },
+     "variant": {
+      "q": "What are all the real and complex solutions of x³ − 27 = 0?",
+      "opts": [
+       "3, −3/2 + (3√3/2)i, and −3/2 − (3√3/2)i",
+       "3, 3/2 + (3√3/2)i, and 3/2 − (3√3/2)i",
+       "−3, 3/2 + (3√3/2)i, and 3/2 − (3√3/2)i",
+       "3, −3 + 3i√3, and −3 − 3i√3"
+      ],
+      "ans": 0,
+      "hint": "Factor the cubic: one real root, then the quadratic formula on the leftover quadratic for the complex pair.",
+      "steps": [
+       "x = 3 is a root; x³ − 27 = (x − 3)(x² + 3x + 9).",
+       "x = (−3 ± √(9 − 36)) ÷ 2 = (−3 ± 3i√3) ÷ 2.",
+       "3, −3/2 ± (3√3/2)i."
+      ],
+      "ex": {
+       "main": "**3, −3/2 + (3√3/2)i, −3/2 − (3√3/2)i.**"
+      }
+     }
+    },
+    {
+     "id": "q26",
+     "paperNo": 26,
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #26 — What are all the real and complex solutions of x³ = 216?",
+     "opts": [
+      "−6, 3 + 3i√7, and 3 − 3i√7",
+      "−6, 3 + 3i√3, and 3 − 3i√3",
+      "6, 3 + 3i√7, and 3 − 3i√7",
+      "6, −3 + 3i√3, and −3 − 3i√3"
+     ],
+     "ans": 3,
+     "hint": "Factor the cubic: one real root, then the quadratic formula on the leftover quadratic for the complex pair.",
+     "steps": [
+      "6³ = 216, so x = 6 (positive — the cube root of a positive number is positive).",
+      "x³ − 216 = (x − 6)(x² + 6x + 36).",
+      "x = (−6 ± √(36 − 144)) ÷ 2 = (−6 ± √−108) ÷ 2 = (−6 ± 6i√3) ÷ 2 = −3 ± 3i√3.",
+      "6, −3 + 3i√3, −3 − 3i√3."
+     ],
+     "ex": {
+      "main": "**6, −3 + 3i√3, and −3 − 3i√3.** √108 = √36 × √3 = 6√3, and the real part of the pair is −b ÷ 2a = −3.",
+      "tip": "The complex pair's real part is negative here because the quadratic's middle term is +6x."
+     },
+     "variant": {
+      "q": "What are all the real and complex solutions of x³ = 64?",
+      "opts": [
+       "4, −2 + 2i√3, and −2 − 2i√3",
+       "−4, 2 + 2i√3, and 2 − 2i√3",
+       "4, 2 + 2i√3, and 2 − 2i√3",
+       "4, −2 + 2i√7, and −2 − 2i√7"
+      ],
+      "ans": 0,
+      "hint": "Factor the cubic: one real root, then the quadratic formula on the leftover quadratic for the complex pair.",
+      "steps": [
+       "x = 4; x³ − 64 = (x − 4)(x² + 4x + 16).",
+       "x = (−4 ± √−48) ÷ 2 = (−4 ± 4i√3) ÷ 2.",
+       "4, −2 ± 2i√3."
+      ],
+      "ex": {
+       "main": "**4, −2 + 2i√3, −2 − 2i√3.**"
+      }
+     }
+    },
+    {
+     "id": "q27",
+     "paperNo": 27,
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "SG #27 — (adapted — the paper's options are four graphs, each labelled with its answer) Find the real solutions of x² + 2x + 2 = 0 by graphing.",
+     "opts": [
+      "no solution (graph a)",
+      "x = 4 (graph b)",
+      "x = 0 (graph c)",
+      "x = 2 (graph d)"
+     ],
+     "ans": 0,
+     "hint": "Real solutions are where the graph crosses or touches the x-axis. Find the vertex: is it above or below?",
+     "steps": [
+      "The parabola opens up (a = 1 > 0).",
+      "Its vertex is at x = −2 ÷ 2 = −1, y = 1 − 2 + 2 = 1 — ABOVE the x-axis.",
+      "An upward parabola whose lowest point is above the axis never reaches it.",
+      "No real solution (the discriminant, 4 − 8 = −4, agrees)."
+     ],
+     "ex": {
+      "main": "**No solution.** The vertex (−1, 1) sits above the x-axis and the parabola opens up, so it never touches the axis.",
+      "tip": "The discriminant is the no-graph check: negative means no real solutions."
+     },
+     "variant": {
+      "q": "The graph of y = x² − 4x + 5 has its vertex at (2, 1). What are the real solutions of x² − 4x + 5 = 0?",
+      "opts": [
+       "No real solution",
+       "x = 2",
+       "x = 1",
+       "x = 2 and x = 1"
+      ],
+      "ans": 0,
+      "hint": "Is the vertex above or below the x-axis, and which way does it open?",
+      "steps": [
+       "Opens up, lowest point (2, 1) above the axis.",
+       "It never reaches the x-axis.",
+       "No real solution."
+      ],
+      "ex": {
+       "main": "**No real solution.**"
+      }
+     }
+    },
+    {
+     "id": "q28",
+     "paperNo": 28,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #28 — What are the zeros of f(x) = 4x³ − 12x² − 16x, and what are their multiplicities?",
+     "opts": [
+      "the numbers 1, −4, and 0 are zeros of multiplicity 2",
+      "the numbers −1, 4, and 0 are zeros of multiplicity 2",
+      "the numbers −1, 4, and 0 are zeros of multiplicity 1",
+      "the numbers 1, −4, and 0 are zeros of multiplicity 1"
+     ],
+     "ans": 2,
+     "hint": "Factor out the GCF, then factor the rest. The power on each factor is that zero's multiplicity.",
+     "steps": [
+      "Factor out 4x: 4x(x² − 3x − 4).",
+      "x² − 3x − 4 = (x − 4)(x + 1).",
+      "f(x) = 4x(x − 4)(x + 1): zeros 0, 4, −1, each factor to the first power.",
+      "−1, 4 and 0, each of multiplicity 1."
+     ],
+     "ex": {
+      "main": "**−1, 4 and 0, each of multiplicity 1.** A factor (x − 4) gives the zero +4 — the sign flips.",
+      "tip": "A degree-3 polynomial's multiplicities add to 3; three zeros of multiplicity 2 would make degree 6."
+     },
+     "variant": {
+      "q": "What are the zeros of f(x) = 3x³ + 3x² − 18x, and what are their multiplicities?",
+      "opts": [
+       "0, −3 and 2, each of multiplicity 1",
+       "0, 3 and −2, each of multiplicity 1",
+       "0, −3 and 2, each of multiplicity 2",
+       "−3 and 2 of multiplicity 1; 0 of multiplicity 3"
+      ],
+      "ans": 0,
+      "hint": "Factor out the GCF, then factor the rest. The power on each factor is that zero's multiplicity.",
+      "steps": [
+       "3x(x² + x − 6).",
+       "= 3x(x + 3)(x − 2).",
+       "0, −3, 2, each multiplicity 1."
+      ],
+      "ex": {
+       "main": "**0, −3 and 2, each of multiplicity 1.**"
+      }
+     }
+    },
+    {
+     "id": "q29",
+     "paperNo": 29,
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #29 — What are the zeros of f(x) = x⁴ − 4x³ + 3x², and what are their multiplicities?",
+     "opts": [
+      "the numbers −1 and −3 are zeros of multiplicity 2; the number 0 is a zero of multiplicity 1",
+      "the number 0 is a zero of multiplicity 2; the numbers 1 and 3 are zeros of multiplicity 1",
+      "the numbers 0 and 1 are zeros of multiplicity 2; the number 3 is a zero of multiplicity 1",
+      "the number 0 is a zero of multiplicity 2; the numbers −1 and −3 are zeros of multiplicity 1"
+     ],
+     "ans": 1,
+     "hint": "Factor out the GCF, then factor the rest. The power on each factor is that zero's multiplicity.",
+     "steps": [
+      "Factor out x²: x²(x² − 4x + 3).",
+      "x² − 4x + 3 = (x − 1)(x − 3).",
+      "f(x) = x²(x − 1)(x − 3): x² gives 0 with multiplicity 2.",
+      "0 (multiplicity 2); 1 and 3 (multiplicity 1)."
+     ],
+     "ex": {
+      "main": "**0 of multiplicity 2; 1 and 3 of multiplicity 1.** The x² factored out is where the multiplicity 2 comes from.",
+      "tip": "Multiplicities 2 + 1 + 1 = 4, matching the degree."
+     },
+     "variant": {
+      "q": "What are the zeros of f(x) = x⁴ + 2x³ − 8x², and what are their multiplicities?",
+      "opts": [
+       "0 of multiplicity 2; −4 and 2 of multiplicity 1",
+       "0 of multiplicity 2; 4 and −2 of multiplicity 1",
+       "0 of multiplicity 1; −4 and 2 of multiplicity 2",
+       "−4, 0 and 2, each of multiplicity 1"
+      ],
+      "ans": 0,
+      "hint": "Factor out the GCF, then factor the rest. The power on each factor is that zero's multiplicity.",
+      "steps": [
+       "x²(x² + 2x − 8).",
+       "= x²(x + 4)(x − 2).",
+       "0 (mult. 2); −4 and 2 (mult. 1)."
+      ],
+      "ex": {
+       "main": "**0 of multiplicity 2; −4 and 2 of multiplicity 1.**"
+      }
+     }
+    },
+    {
+     "id": "q30",
+     "paperNo": 30,
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "SG #30 — (adapted — the paper's options are four graphs, each labelled with its zeros) What are the zeros of y = x(x − 2)(x + 5)?",
+     "opts": [
+      "2, −5 (graph a)",
+      "0, −2, 5 (graph b)",
+      "0, 2, −5 (graph c)",
+      "2, −5, −2 (graph d)"
+     ],
+     "ans": 2,
+     "hint": "Set each factor equal to zero — including the lone x.",
+     "steps": [
+      "x = 0 from the factor x.",
+      "x − 2 = 0 gives 2; x + 5 = 0 gives −5.",
+      "Three factors, three zeros: 0, 2, −5.",
+      "On the graph, the curve crosses the x-axis at −5, 0 and 2."
+     ],
+     "ex": {
+      "main": "**0, 2, −5.** The bare x is a factor too, so 0 is a zero; dropping it leaves only two.",
+      "tip": "Each zero is the OPPOSITE sign of the number in its bracket."
+     },
+     "variant": {
+      "q": "What are the zeros of y = x(x + 3)(x − 4)?",
+      "opts": [
+       "0, −3, 4",
+       "0, 3, −4",
+       "−3, 4",
+       "0, −3, −4"
+      ],
+      "ans": 0,
+      "hint": "Set each factor equal to zero.",
+      "steps": [
+       "x = 0.",
+       "x + 3 = 0 → −3; x − 4 = 0 → 4.",
+       "0, −3, 4."
+      ],
+      "ex": {
+       "main": "**0, −3, 4.**"
+      }
+     }
+    },
+    {
+     "id": "q32",
+     "paperNo": 32,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #32 — How many roots does −12x² − 25x + 5 + x³ = 0 have?",
+     "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "ans": 1,
+     "hint": "By the Fundamental Theorem of Algebra, a polynomial equation has as many roots as its degree (counting multiplicity and complex roots).",
+     "steps": [
+      "The terms are out of order; the highest power present is x³.",
+      "So the degree is 3.",
+      "A degree-3 equation has 3 roots."
+     ],
+     "ex": {
+      "main": "**3.** The degree is the highest exponent wherever it sits, not the first term's.",
+      "tip": "Scan for the biggest exponent before anything else."
+     },
+     "variant": {
+      "q": "How many roots does x⁴ − 3x² + 7 − 2x⁵ = 0 have?",
+      "opts": [
+       "5",
+       "3",
+       "4",
+       "7"
+      ],
+      "ans": 0,
+      "hint": "By the Fundamental Theorem of Algebra, a polynomial equation has as many roots as its degree (counting multiplicity and complex roots).",
+      "steps": [
+       "The highest power is x⁵ (at the end).",
+       "Degree 5.",
+       "5 roots."
+      ],
+      "ex": {
+       "main": "**5.**"
+      }
+     }
+    },
+    {
+     "id": "q33",
+     "paperNo": 33,
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #33 — How many roots does 2x⁴ − x³ − 12x² − 25x + 5 = 0 have?",
+     "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "ans": 2,
+     "hint": "By the Fundamental Theorem of Algebra, a polynomial equation has as many roots as its degree (counting multiplicity and complex roots).",
+     "steps": [
+      "The highest power is x⁴.",
+      "Degree 4.",
+      "4 roots."
+     ],
+     "ex": {
+      "main": "**4.** Degree four, four roots — some may be complex.",
+      "tip": "The count includes complex roots, not just where the graph crosses."
+     },
+     "variant": {
+      "q": "How many roots does 6 − x² + 4x³ = 0 have?",
+      "opts": [
+       "3",
+       "2",
+       "4",
+       "6"
+      ],
+      "ans": 0,
+      "hint": "By the Fundamental Theorem of Algebra, a polynomial equation has as many roots as its degree (counting multiplicity and complex roots).",
+      "steps": [
+       "The highest power is x³.",
+       "Degree 3.",
+       "3 roots."
+      ],
+      "ex": {
+       "main": "**3.**"
+      }
+     }
+    },
+    {
+     "id": "q34",
+     "paperNo": 34,
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "SG #34 — Which point is in the solution set of the system 3x + 3y ≤ 45, 2x + y ≤ 20, x ≥ 0, y ≥ 0?",
+     "opts": [
+      "(12, 1)",
+      "(5, 4)",
+      "(2, 15)",
+      "(10, 4)"
+     ],
+     "ans": 1,
+     "hint": "Test each point in EVERY inequality. One failure rules it out.",
+     "steps": [
+      "(12, 1): 3(13) = 39 ≤ 45 ✓, but 2(12) + 1 = 25 > 20 ✗.",
+      "(5, 4): 3(9) = 27 ≤ 45 ✓, 10 + 4 = 14 ≤ 20 ✓, both coordinates ≥ 0 ✓.",
+      "(2, 15): 3(17) = 51 > 45 ✗. (10, 4): 2(10) + 4 = 24 > 20 ✗.",
+      "Only (5, 4) satisfies all four."
+     ],
+     "ex": {
+      "main": "**(5, 4).** Every other point passes the first inequality and fails the second, or fails the first outright.",
+      "tip": "Points that pass one inequality can still fail another — check them all."
+     },
+     "variant": {
+      "q": "Which point is in the solution set of the system x + y ≤ 10, 3x + y ≤ 18, x ≥ 0, y ≥ 0?",
+      "opts": [
+       "(4, 5)",
+       "(6, 2)",
+       "(1, 10)",
+       "(5, 5)"
+      ],
+      "ans": 0,
+      "hint": "Test each point in EVERY inequality. One failure rules it out.",
+      "steps": [
+       "(4, 5): 9 ≤ 10 ✓, 17 ≤ 18 ✓.",
+       "(6, 2): 20 > 18 ✗; (1, 10): 11 > 10 ✗; (5, 5): 20 > 18 ✗.",
+       "(4, 5)."
+      ],
+      "ex": {
+       "main": "**(4, 5).**"
+      }
+     }
+    }
+   ]
+  }
+ }
+}

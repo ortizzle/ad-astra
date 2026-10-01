@@ -1693,7 +1693,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v200 · Biology Test 2 guide';
+const APP_VERSION = 'v201 · Algebra Test 4 guide';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3418,7 +3418,7 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/alg-topic3-01.json', 'content/alg-topic3-02.json', 'content/alg-topic3-03.json',
   'content/alg-topic3-04.json', 'content/alg-topic3-05.json', 'content/alg-topic3-06.json',
   'content/alg-topic3-07.json',
-  'content/sg-test2.json', 'content/phys-kinematics-equations.json',
+  'content/sg-test2.json', 'content/alg-sg-test4.json', 'content/phys-kinematics-equations.json',
   'content/phys-ramp-lab.json', 'content/bio-quiz1-review.json', 'content/bio-unit-2b-enzymes.json',
   'content/bio-unit-3-cells.json', 'content/bio-unit-4-mitosis.json',
   'content/bio-sg-test1.json', 'content/bio-sg-test2.json',
@@ -7439,7 +7439,11 @@ SCREENS.guideentry = function(root){
   const card = el('div','card');
   u.questions.forEach((q,i)=>{
     const row = el('div','grow');
-    row.appendChild(el('span','gn', String(i+1)));
+    /* paperNo: the question's number on the printout, when the unit does not
+       carry every question in order (a page missing from the scan, an item
+       left out). Without it the grid would renumber and she would enter #20's
+       letter on row 9. Absent means the unit IS the paper, numbered 1..n. */
+    row.appendChild(el('span','gn', String(q.paperNo || i+1)));
     const box = el('div','gopt');
     q.opts.forEach((_,k)=>{
       const b = el('button','' + (ans[q.id]===k ? 'on' : ''),

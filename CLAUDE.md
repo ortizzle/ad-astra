@@ -1005,6 +1005,89 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Algebra Test 4 Study Guide, Part 1 — with a page missing (v201, THIS APP ONLY)
+
+Chris: *"Can we check Sedona's drive for a math study guide and follow our study
+guide logic and deploy for her?"* The file is **`math study guide.test 4.pdf`**,
+uploaded on 9/30 to the Algebra & Geometry II folder. Its header reads
+**"Alg 2 SG T6 P1"**: that is the ExamView file name, the same mismatch Test 2's
+guide had. It is a scan with no text layer, so all six pages were rendered and
+read as images. `alg-sg-test4.json` (`unit-alg-sgt4`) is built **exactly like
+`unit-sgt1` / `unit-sgt2`**:
+
+- `guide:true` gives it the paper-entry grid, instant grading, the walkthrough
+  and the rescue round
+- `book:true`
+- `order:1`, shelving as `Topic 3 · Test 4 Study Guide, Part 1` after the seven
+  Topic 3 lessons
+
+It also covers Topic 2 material (quadratics, complex numbers). It shelves on
+Topic 3 because that is the newest topic it covers and the test is named for it.
+
+> ⚠️ **The upload is missing the paper's page 2.** Scan pages 2 and 3 are two
+> photos of the same page, so **questions 9–19 never arrived**. Nothing was
+> invented for them. Building the unit at all exposed an engine gap: the entry
+> grid labelled rows `String(i+1)`, so a unit that does not carry every question
+> in order **renumbers**. Row "9" would have held paper #20, and every letter
+> she entered from #9 on would have landed on the wrong question.
+>
+> Questions may now carry **`paperNo`**, and the grid prints
+> `q.paperNo || i+1`. The change is additive: every earlier guide omits it and
+> renders exactly as before. When page 2 arrives, its eleven questions slot in
+> by `paperNo` and `libv` is bumped.
+
+> ⚠️ **Question 31 has two right answers on the paper.** Options b
+> (*−3, 3, 4*) and c (*3, −3, 4*) list the same zeros. Rendered at 3× and
+> zoomed, they show the same graph. A one-letter grid would mark one of two
+> correct letters wrong. So #31 is **not graded**; a card teaches its zeros
+> and says either letter is right.
+
+**There is no answer key in the upload**, so every answer was derived
+independently with sympy and asserted in the builder. The same was done for
+each of the 22 rescue variants, all with fresh numbers.
+
+**Option order is the paper's, letter for letter.** That is why the builder
+writes the unit itself rather than going through `unit_common.build()`.
+`build()` calls `_balance()`, which would reorder the options and make the
+app's C stop being the paper's C.
+
+Three items are adapted, the same "(adapted — …)" convention Test 2 used:
+
+- **#24** is fill-in on paper. Its three blanks are asked as one
+  remainder question.
+- **#27** and **#30** offer graphs as choices. Their options here are the labels
+  printed under each graph.
+
+All three are tagged `added`. Their letters cannot match the paper, so the first
+card tells her to leave them blank on the grid. Blanks are never marked wrong.
+
+The copy in Drive was read for its questions only, under the v198 rule.
+
+`tools/test_alg_sgt4.js` (19 assertions) pins the following:
+
+- the classId and flags
+- the paper numbers on the records **and on the rendered grid rows**
+- a tap on the row labelled "20" landing on #20
+- option order identical to the shipped file
+- **the answer letters, both re-derived in the test and against the key**
+- no question numbered 9–19
+- #31 ungraded, with its card
+- the note naming both problems
+- the three adapted items flagged
+- a four-miss paper pass grading 18 of 22, the misses on the right questions,
+  and four fresh rescue variants
+- the Topic 3 shelf position, the gold ring and the band
+- the privacy sweep
+
+**Verified by rendering the grid without `paperNo` and flipping #23's answer.
+Exactly four assertions failed: both answer-key checks and both grid checks.**
+
+> ⚠️ **Again, the privacy sweep's first failure was my regex.**
+> `marked (right|wrong)` caught the card's own *"Blanks are never marked
+> wrong"*. That alternative is now `she was marked`. This is the 9/30-date trap
+> from v200 one release later. **Sweep for the claim, never for a word the
+> app's own reassurance uses.**
+
 ### Biology Test 2 Study Guide, Units 3 and 4 (v200, THIS APP ONLY)
 
 Chris: *"Just added a biology study guide in unit 4. Please update Sedona's app
