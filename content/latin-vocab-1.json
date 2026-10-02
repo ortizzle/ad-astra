@@ -1,0 +1,873 @@
+{
+ "v": 4,
+ "records": {
+  "unit-latin-vocab1": {
+   "id": "unit-latin-vocab1",
+   "type": "unit",
+   "updatedAt": 1790938831422,
+   "classId": "latin",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Latin I · Vocabulary Quiz 1",
+   "srcName": "quiz - Oct 2 (Latin vocabulary list, Drive)",
+   "source": "Latin I vocabulary list (Drive folder)",
+   "summary": {
+    "text": "The fifteen-word vocabulary list for the Latin quiz on Friday, October 2: four nouns, four verbs with their principal parts, two adjectives, and the small words *sed*, *non* and the question suffix -ne.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A vocabulary list is where the language becomes usable: these fifteen words are enough to build real sentences, and every one of them returns in later units. Learning each dictionary entry whole, with its genitive and gender, saves you from guessing later.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Give the English meaning of each word on the list",
+     "from": "source"
+    },
+    {
+     "text": "Give the Latin word for each English meaning, spelled correctly",
+     "from": "source"
+    },
+    {
+     "text": "Read a dictionary entry: genitive, gender and principal parts",
+     "from": "added"
+    },
+    {
+     "text": "Use -ne, non and sed in a short sentence",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Latin vocabulary list uploaded on 10/2 (\"quiz - Oct 2\"), read for what it asks only. Its two handwritten notes, amica beside amicus and \"big\" beside magnus, are on the cards. The quiz itself is dated today, so this unit is mostly for keeping the words fresh; all fifteen will come back in later units. Two things to know: agricola is masculine even though it ends in -a, which is the most common trap with this list, and the derivative hooks (agriculture, magnify, data and so on) are study aids we added, not part of the list. Every respelling follows the pronunciation unit's conventions.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Say each word out loud before you flip the card, then try a round.",
+    "minutes": 12,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "agricola",
+     "def": "**farmer** — *agricola, agricolae*, m.\n• First declension like *puella*, but MASCULINE, because a farmer in Rome was a man.\n• So an adjective with it takes the masculine form: *agricola magnus*.",
+     "hint": "agri- is a field, as in AGRIculture.",
+     "from": "source",
+     "sp": "ah-GREE-koh-lah"
+    },
+    {
+     "id": "c1",
+     "term": "amicus",
+     "def": "**friend** — *amicus, amici*, m.\n• Second declension.\n• A female friend is *amica, amicae*, f.",
+     "hint": "An AMICable person is friendly.",
+     "from": "source",
+     "sp": "ah-MEE-koos"
+    },
+    {
+     "id": "c2",
+     "term": "amo",
+     "def": "**to love** — *amo, amare, amavi, amatus*\n• *amo* on its own means I love; *amare* is to love.\n• First conjugation: the infinitive ends in -are.",
+     "hint": "An AMATeur does it for love, not for pay.",
+     "from": "source",
+     "sp": "AH-moh"
+    },
+    {
+     "id": "c3",
+     "term": "audio",
+     "def": "**to hear** — *audio, audire, audivi, auditus*\n• Fourth conjugation: the infinitive ends in -ire.\n• *audis* you hear · *audit* he or she hears.",
+     "hint": "AUDIO is what you hear; an AUDIence listens.",
+     "from": "source",
+     "sp": "OW-dee-oh"
+    },
+    {
+     "id": "c4",
+     "term": "deus",
+     "def": "**god** — *deus, dei*, m.\n• Second declension.",
+     "hint": "A DEIty is a god.",
+     "from": "source",
+     "sp": "DAY-oos"
+    },
+    {
+     "id": "c5",
+     "term": "donum",
+     "def": "**gift** — *donum, doni*, n.\n• Second declension, NEUTER: that is what the n. means.\n• Plural *dona*, gifts.",
+     "hint": "When you DONate, you give a gift.",
+     "from": "source",
+     "sp": "DOH-noom"
+    },
+    {
+     "id": "c6",
+     "term": "do",
+     "def": "**to give** — *do, dare, dedi, datus*\n• *do* is I give; *dare* is to give.\n• The third part, *dedi* (I gave), does not follow the pattern, so it has to be learned.",
+     "hint": "DATA are things that are \"given\".",
+     "from": "source",
+     "sp": "doh"
+    },
+    {
+     "id": "c7",
+     "term": "magnus",
+     "def": "**great, big** — *magnus, magna, magnum*\n• An adjective: the three forms are masculine, feminine and neuter.\n• *magnum donum* — a big gift.",
+     "hint": "MAGNIFY makes something look bigger.",
+     "from": "source",
+     "sp": "MAHG-noos"
+    },
+    {
+     "id": "c8",
+     "term": "multus",
+     "def": "**many** — *multus, multa, multum*\n• Many in the plural: *multi pueri*, many boys. In the singular it means much.\n• *multa dona* — many gifts.",
+     "hint": "MULTIply makes many of something.",
+     "from": "source",
+     "sp": "MOOL-toos"
+    },
+    {
+     "id": "c9",
+     "term": "-ne (question suffix)",
+     "def": "**A suffix added to the first word of a sentence that turns it into a yes/no question.**\n• *Videt.* He sees. → *Videtne?* Does he see?\n• It is not a separate word, so it has no meaning of its own.",
+     "hint": "Think of it as a spoken question mark, attached to the front.",
+     "from": "source",
+     "sp": "nay"
+    },
+    {
+     "id": "c10",
+     "term": "sed",
+     "def": "**but**\n• *Puella videt, sed non audit.* The girl sees, but she does not hear.",
+     "hint": "It joins two ideas that pull in different directions.",
+     "from": "source",
+     "sp": "sed"
+    },
+    {
+     "id": "c11",
+     "term": "puella",
+     "def": "**girl** — *puella, puellae*, f.\n• First declension, the model word for it.",
+     "hint": "Two l-sounds in the middle, both said.",
+     "from": "source",
+     "sp": "poo-EL-lah"
+    },
+    {
+     "id": "c12",
+     "term": "puer",
+     "def": "**boy** — *puer, pueri*, m.\n• Second declension. The e stays in every form: *pueri*, not *puri*.",
+     "hint": "Watch for puer next to puella: boy and girl.",
+     "from": "source",
+     "sp": "POO-er"
+    },
+    {
+     "id": "c13",
+     "term": "non",
+     "def": "**not**\n• It goes just before the word it makes negative, usually the verb: *Puer non audit.* The boy does not hear.",
+     "hint": "NON-fiction is NOT made up.",
+     "from": "source",
+     "sp": "nohn"
+    },
+    {
+     "id": "c14",
+     "term": "video",
+     "def": "**to see** — *video, videre, vidi, visus*\n• Second conjugation: the infinitive ends in -ere, with a long e.\n• *videt* he or she sees.",
+     "hint": "A VIDEO is something you see; VISion comes from visus.",
+     "from": "source",
+     "sp": "WEE-deh-oh"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *audio* mean?",
+     "opts": [
+      "to hear",
+      "to see",
+      "to give",
+      "to love"
+     ],
+     "ans": 0,
+     "hint": "Think of something you put in your ears.",
+     "steps": [
+      "*audio* is a verb, so the answer is a verb.",
+      "English kept the word: an audio track is something you listen to.",
+      "So *audio* means to hear."
+     ],
+     "ex": {
+      "main": "***audio* means to hear.** It is a fourth-conjugation verb: *audio, audire, audivi, auditus*.",
+      "tip": "audio, audience, audible — all about hearing."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *donum* mean?",
+     "opts": [
+      "god",
+      "gift",
+      "friend",
+      "farmer"
+     ],
+     "ans": 1,
+     "hint": "What do you hand over when you donate?",
+     "steps": [
+      "*donum* is a noun, so look for a thing or person.",
+      "The English word donate keeps its root.",
+      "A donation is a gift, so *donum* means gift."
+     ],
+     "ex": {
+      "main": "***donum* means gift.** It is neuter: *donum, doni*, n.",
+      "tip": "Do not mix it up with *deus*, god — both start with d."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *puer* mean?",
+     "opts": [
+      "friend",
+      "girl",
+      "boy",
+      "god"
+     ],
+     "ans": 2,
+     "hint": "It is the masculine partner of *puella*.",
+     "steps": [
+      "*puella* is the girl.",
+      "*puer* is the word that sits beside it on the list.",
+      "So *puer* means boy."
+     ],
+     "ex": {
+      "main": "***puer* means boy.** *puer, pueri*, m. — second declension.",
+      "tip": "puer and puella: boy and girl."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *sed* mean?",
+     "opts": [
+      "or",
+      "not",
+      "and",
+      "but"
+     ],
+     "ans": 3,
+     "hint": "It sits between two ideas that pull in different directions.",
+     "steps": [
+      "*non* is the word for not, so *sed* is not that.",
+      "In *Videt, sed non audit*, the two halves disagree.",
+      "The word that links disagreeing ideas is but."
+     ],
+     "ex": {
+      "main": "***sed* means but.** It joins two clauses that contrast.",
+      "tip": "non = not; sed = but. Two short words, two different jobs."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which Latin word means \"many\"?",
+     "opts": [
+      "multus",
+      "magnus",
+      "amicus",
+      "deus"
+     ],
+     "ans": 0,
+     "hint": "Which one starts like multiply?",
+     "steps": [
+      "Two of the options are adjectives: *multus* and *magnus*.",
+      "*magnus* is big; MAGNIfy makes things bigger.",
+      "*multus* is many; MULTIply makes many."
+     ],
+     "ex": {
+      "main": "***multus* means many.** *magnus* is the trap: it means great or big.",
+      "tip": "multi- = many; magni- = big."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which Latin word means \"god\"?",
+     "opts": [
+      "donum",
+      "deus",
+      "do",
+      "audio"
+     ],
+     "ans": 1,
+     "hint": "Which one starts like deity?",
+     "steps": [
+      "*donum* is a gift and *do* is to give.",
+      "*audio* is to hear.",
+      "*deus* is the one left, and deity comes from it."
+     ],
+     "ex": {
+      "main": "***deus* means god.** *deus, dei*, m.",
+      "tip": "deus and donum both start with d — the deity is the god."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which Latin word means \"I love\"?",
+     "opts": [
+      "audio",
+      "amicus",
+      "amo",
+      "do"
+     ],
+     "ans": 2,
+     "hint": "One of these looks like it shares a root with it, but is a noun.",
+     "steps": [
+      "*amicus* comes from the same root but is a noun: friend.",
+      "*audio* and *do* are verbs, but they mean hear and give.",
+      "*amo* is the verb, and on its own it means I love."
+     ],
+     "ex": {
+      "main": "***amo* means I love.** The first dictionary form of a verb is the I form.",
+      "tip": "A friend (amicus) is someone you love (amo)."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"farmer\" (its dictionary form).",
+     "opts": [
+      "agricola"
+     ],
+     "ans": 0,
+     "hint": "Say it out loud first, then spell each sound.",
+     "steps": [
+      "Find the English word on your list.",
+      "The first form in the dictionary entry is the one to type.",
+      "Spell it: agricola."
+     ],
+     "ex": {
+      "main": "**agricola means farmer.**",
+      "tip": "Spelling counts on a vocabulary quiz, so type it the way the list prints it."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"girl\" (its dictionary form).",
+     "opts": [
+      "puella"
+     ],
+     "ans": 0,
+     "hint": "Say it out loud first, then spell each sound.",
+     "steps": [
+      "Find the English word on your list.",
+      "The first form in the dictionary entry is the one to type.",
+      "Spell it: puella."
+     ],
+     "ex": {
+      "main": "**puella means girl.**",
+      "tip": "Spelling counts on a vocabulary quiz, so type it the way the list prints it."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"gift\" (its dictionary form).",
+     "opts": [
+      "donum"
+     ],
+     "ans": 0,
+     "hint": "Say it out loud first, then spell each sound.",
+     "steps": [
+      "Find the English word on your list.",
+      "The first form in the dictionary entry is the one to type.",
+      "Spell it: donum."
+     ],
+     "ex": {
+      "main": "**donum means gift.**",
+      "tip": "Spelling counts on a vocabulary quiz, so type it the way the list prints it."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 1,
+     "from": "source",
+     "kind": "spell",
+     "q": "Type the Latin word for \"boy\" (its dictionary form).",
+     "opts": [
+      "puer"
+     ],
+     "ans": 0,
+     "hint": "Say it out loud first, then spell each sound.",
+     "steps": [
+      "Find the English word on your list.",
+      "The first form in the dictionary entry is the one to type.",
+      "Spell it: puer."
+     ],
+     "ex": {
+      "main": "**puer means boy.**",
+      "tip": "Spelling counts on a vocabulary quiz, so type it the way the list prints it."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which phrase means \"the great farmer\"?",
+     "opts": [
+      "agricolus magnus",
+      "agricola magna",
+      "agricola magnum",
+      "agricola magnus"
+     ],
+     "ans": 3,
+     "hint": "Check the gender of farmer in the dictionary entry, not its ending.",
+     "steps": [
+      "The entry is *agricola, -ae*, m.",
+      "m. means masculine, even though the word ends in -a.",
+      "An adjective matches the GENDER of its noun.",
+      "The masculine form of the adjective is *magnus*."
+     ],
+     "ex": {
+      "main": "***agricola magnus*.** Agricola looks feminine, but it is masculine, so the adjective is masculine too.",
+      "tip": "Agreement is about gender, not about matching endings."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A dictionary prints *donum, -i, n.* What does the n. tell you?",
+     "opts": [
+      "The noun is neuter",
+      "The word is a noun",
+      "The word is plural",
+      "The word is said with an n-sound"
+     ],
+     "ans": 0,
+     "hint": "Dictionary entries list a gender letter after the genitive.",
+     "steps": [
+      "*agricola* has m. and *puella* has f.",
+      "Those letters are genders: masculine and feminine.",
+      "The third gender is neuter, marked n."
+     ],
+     "ex": {
+      "main": "**The noun is neuter.** m., f. and n. are the three genders.",
+      "tip": "Neuter means neither masculine nor feminine."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "*amicus* is a male friend. Which word names a female friend?",
+     "opts": [
+      "amici",
+      "amica",
+      "amicae",
+      "amicum"
+     ],
+     "ans": 1,
+     "hint": "Swap the masculine ending for the first-declension one.",
+     "steps": [
+      "*amicus* is second declension, masculine.",
+      "The feminine version moves to the first declension, like *puella*.",
+      "The first-declension nominative ends in -a.",
+      "So a female friend is *amica*."
+     ],
+     "ex": {
+      "main": "***amica*** — a female friend. *amici* is friends (plural) and *amicae* is female friends (plural).",
+      "tip": "amicus / amica, just like the -us / -a of an adjective."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which sentence asks \"Does the girl see the farmer?\"",
+     "opts": [
+      "Puella agricolam non videt.",
+      "Puella agricolam videt.",
+      "Videtne puella agricolam?",
+      "Videtne agricola puellam?"
+     ],
+     "ans": 2,
+     "hint": "Look for the question marker, then check who is the subject.",
+     "steps": [
+      "A yes/no question needs -ne on the first word.",
+      "Two options have it: *Videtne puella agricolam?* and *Videtne agricola puellam?*",
+      "The girl is doing the seeing, so she must be the subject: *puella*.",
+      "The farmer is being seen, so he is *agricolam*."
+     ],
+     "ex": {
+      "main": "***Videtne puella agricolam?*** -ne makes it a question, and *puella* is the subject.",
+      "tip": "Check both: the question marker AND who is doing what."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Translate: *Puer non audit.*",
+     "opts": [
+      "The girl does not hear.",
+      "The boy hears.",
+      "The boy does not see.",
+      "The boy does not hear."
+     ],
+     "ans": 3,
+     "hint": "Find the subject, the verb, and the little word in front of the verb.",
+     "steps": [
+      "*puer* is boy.",
+      "*audit* is he hears.",
+      "*non* in front of the verb makes it negative.",
+      "The boy does not hear."
+     ],
+     "ex": {
+      "main": "**The boy does not hear.** *non* sits just before the verb it negates.",
+      "tip": "non = not, placed right before the verb."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Translate: *Puella videt, sed non audit.*",
+     "opts": [
+      "The girl sees, but she does not hear.",
+      "The girl sees and hears.",
+      "The girl does not see, but she hears.",
+      "The girl hears, but she does not see."
+     ],
+     "ans": 0,
+     "hint": "Two verbs, one *sed*, one *non*. Which verb does the *non* touch?",
+     "steps": [
+      "*videt* is she sees.",
+      "*sed* is but.",
+      "*non audit* is she does not hear.",
+      "Put it together: the girl sees, but she does not hear."
+     ],
+     "ex": {
+      "main": "**The girl sees, but she does not hear.** *non* belongs to *audit*, the verb right after it.",
+      "tip": "non only reaches the word it sits in front of."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "In *do, dare, dedi, datus*, which form means \"to give\"?",
+     "opts": [
+      "do",
+      "dare",
+      "dedi",
+      "datus"
+     ],
+     "ans": 1,
+     "hint": "The second dictionary form is always the infinitive.",
+     "steps": [
+      "*do* is I give.",
+      "*dare* is the infinitive, the to- form.",
+      "*dedi* is I gave.",
+      "So to give is *dare*."
+     ],
+     "ex": {
+      "main": "***dare* means to give.** The second principal part of a verb is its infinitive.",
+      "tip": "amo / amare, video / videre, do / dare: the second form is the \"to\" form."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *multi pueri* mean?",
+     "opts": [
+      "the boy's friends",
+      "great boys",
+      "many boys",
+      "big boy"
+     ],
+     "ans": 2,
+     "hint": "multi is the plural of multus.",
+     "steps": [
+      "*pueri* here is plural: boys.",
+      "*multi* is the matching plural of *multus*.",
+      "In the plural, *multus* means many.",
+      "So: many boys."
+     ],
+     "ex": {
+      "main": "**many boys.** *multus* means many in the plural.",
+      "tip": "magnus would make it great boys, not many boys."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Which English word comes from *magnus*?",
+     "opts": [
+      "donate",
+      "multiply",
+      "amicable",
+      "magnify"
+     ],
+     "ans": 3,
+     "hint": "Find the word that is about making something bigger.",
+     "steps": [
+      "*magnus* means great or big.",
+      "multiply comes from *multus*, amicable from *amicus*, donate from *donum*.",
+      "To magnify is to make something look bigger."
+     ],
+     "ex": {
+      "main": "**magnify** — to make bigger, from *magnus*.",
+      "tip": "Matching a derivative to its root is a fast way to remember a meaning."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "An audience is named for what it does. Which Latin verb is inside the word?",
+     "opts": [
+      "audio",
+      "video",
+      "amo",
+      "do"
+     ],
+     "ans": 0,
+     "hint": "What does an audience do during a concert?",
+     "steps": [
+      "An audience listens.",
+      "Listening is hearing.",
+      "The verb for to hear is *audio*."
+     ],
+     "ex": {
+      "main": "***audio***, to hear. An audience is a group of hearers.",
+      "tip": "audio, audible, auditorium — all hearing words."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "The English word \"data\" comes from *datus*. Which verb is *datus* a form of?",
+     "opts": [
+      "video — to see",
+      "do — to give",
+      "audio — to hear",
+      "amo — to love"
+     ],
+     "ans": 1,
+     "hint": "Look for the dictionary entry that ends in *datus*.",
+     "steps": [
+      "Each verb on the list has four forms.",
+      "*do, dare, dedi, datus* ends in *datus*.",
+      "So data are literally things given."
+     ],
+     "ex": {
+      "main": "***do*, to give.** *datus* is its fourth principal part, and data are facts \"given\".",
+      "tip": "Four principal parts: memorize all four, not just the first."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "*Videt* means \"he sees\". Which verb on your list is it a form of?",
+     "opts": [
+      "do",
+      "audio",
+      "video",
+      "amo"
+     ],
+     "ans": 2,
+     "hint": "Strip the ending and compare the stem with each dictionary entry.",
+     "steps": [
+      "*videt* = the stem *vid-* + the ending -t, he or she.",
+      "The entry with the stem *vid-* is *video, videre, vidi, visus*.",
+      "That verb means to see, which matches."
+     ],
+     "ex": {
+      "main": "***video***, to see. *videt* is its he-or-she form.",
+      "tip": "The ending names the subject; the stem names the verb."
+     }
+    },
+    {
+     "id": "q23",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does *Audisne?* ask?",
+     "opts": [
+      "Who hears?",
+      "You hear.",
+      "You do not hear.",
+      "Do you hear?"
+     ],
+     "ans": 3,
+     "hint": "Split off the suffix first, then read what is left.",
+     "steps": [
+      "*Audisne* is *audis* + -ne.",
+      "*audis* means you hear.",
+      "-ne turns a statement into a yes/no question.",
+      "So it asks: Do you hear?"
+     ],
+     "ex": {
+      "main": "**Do you hear?** -ne turns *audis*, you hear, into a yes/no question.",
+      "tip": "A yes/no question asks for yes or no; \"Who hears?\" asks for a name."
+     }
+    },
+    {
+     "id": "q24",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "*agricola* ends in -a like *puella*. What makes it different?",
+     "opts": [
+      "It is masculine, even though it is first declension",
+      "It is second declension, so it takes -us adjectives",
+      "It is neuter, so it is neither masculine nor feminine",
+      "It is plural, so on its own it means farmers"
+     ],
+     "ans": 0,
+     "hint": "Compare the genitive and the gender letter in both entries.",
+     "steps": [
+      "*puella, -ae*, f. and *agricola, -ae*, m.",
+      "Both have -ae, so both are first declension.",
+      "The difference is the gender letter: f. against m.",
+      "*agricola* is masculine."
+     ],
+     "ex": {
+      "main": "**It is masculine, even though it is first declension.** Ending and gender do not always line up.",
+      "tip": "Always read the gender letter, never guess it from the ending."
+     }
+    },
+    {
+     "id": "q25",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Why does the dictionary entry say *puer, pueri* instead of just *puer*?",
+     "opts": [
+      "The second form is the feminine, used when the child is a girl",
+      "The second form is the genitive, which tells you the declension",
+      "The second form is the plural, used only when there are two boys",
+      "The second form shows how to say the word aloud, syllable by syllable"
+     ],
+     "ans": 1,
+     "hint": "What does the second form tell you on every noun entry?",
+     "steps": [
+      "On every noun entry, the second form is the genitive singular.",
+      "*pueri* ends in -i, which marks the second declension.",
+      "It also shows the e stays: *pueri*, not *puri*."
+     ],
+     "ex": {
+      "main": "**The second form is the genitive, which tells you the declension.** -i means second declension.",
+      "tip": "The girl is *puella*, a different word, not a form of *puer*."
+     }
+    },
+    {
+     "id": "q26",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Translate: *Agricola puellae donum dat.*",
+     "opts": [
+      "The farmer sees a gift and a girl.",
+      "The girl gives a gift to the farmer.",
+      "The farmer gives a gift to the girl.",
+      "The farmer loves the girl's gift."
+     ],
+     "ans": 2,
+     "hint": "Find the verb first, then decide who is giving and who is receiving.",
+     "steps": [
+      "*dat* is from *do*: he gives.",
+      "*agricola* is the subject: the farmer gives.",
+      "*donum* is what is given: a gift.",
+      "*puellae* is the one receiving it: to the girl."
+     ],
+     "ex": {
+      "main": "**The farmer gives a gift to the girl.** *puellae* is the dative, the receiver.",
+      "tip": "Verb first, then subject, then object."
+     }
+    },
+    {
+     "id": "q27",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "*Puerum puella videt.* Who sees whom?",
+     "opts": [
+      "The girl sees the boys.",
+      "The boy sees the girl.",
+      "The boy and the girl see.",
+      "The girl sees the boy."
+     ],
+     "ans": 3,
+     "hint": "Word order does not decide it; the endings do.",
+     "steps": [
+      "*puerum* ends in -um: the accusative, the one being seen.",
+      "*puella* ends in -a: the nominative, the one seeing.",
+      "*videt* means sees.",
+      "The girl sees the boy."
+     ],
+     "ex": {
+      "main": "**The girl sees the boy.** In Latin, the endings show who does what, not the word order.",
+      "tip": "Coming first in the sentence does not make a word the subject."
+     }
+    },
+    {
+     "id": "q28",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "How do *magnum donum* and *multa dona* differ?",
+     "opts": [
+      "One big gift, then many gifts",
+      "Many gifts, then one big gift",
+      "A god's gift, then a friend's gift",
+      "Both mean many gifts"
+     ],
+     "ans": 0,
+     "hint": "One phrase is singular and one is plural. Which adjective is which?",
+     "steps": [
+      "*donum* is one gift; *dona* is gifts.",
+      "*magnum* means big.",
+      "*multa* means many.",
+      "So: a big gift, then many gifts."
+     ],
+     "ex": {
+      "main": "**One big gift, then many gifts.** *magnus* is about size, *multus* about number.",
+      "tip": "magnus: how big. multus: how many."
+     }
+    }
+   ],
+   "prep": true,
+   "libv": 1
+  }
+ }
+}

@@ -1005,6 +1005,70 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Latin I · Vocabulary Quiz 1 (v202, THIS APP ONLY)
+
+Chris: *"I added a Latin quiz vocab list for Sedona."* The file is
+**`quiz - Oct 2.pdf`** in her Latin folder: one page, fifteen typed
+dictionary entries, and two handwritten notes beside them. It is a photo
+with no text layer, so it was rendered with `pypdfium2` and read as an image.
+`latin-vocab-1.json` (`unit-latin-vocab1`) has 15 cards and 29 questions,
+four of them `kind:'spell'`. It shelves on `Latin I` after the two existing
+parts, flagged `prep:true` because it was built for a named quiz.
+
+- **One card per word, and each card leads with the meaning the list gives.**
+  The full dictionary entry (genitive, gender, principal parts) follows in
+  italics, because reading an entry is half of what a vocabulary quiz tests.
+- **Her two margin notes are on the cards.** *amica* sits under *amicus*,
+  and "big" joins "great" for *magnus*. They are notes, not marks, so the
+  v198 rule has nothing to keep out. The test sweeps the record for her name
+  and for any score anyway.
+- **Every card carries a hand-authored `sp`**, in the pronunciation unit's
+  convention: CAPS for the stressed syllable, v = w, c and g hard. Each one
+  was worked out syllable by syllable. *agricola* is ah-GREE-koh-lah because
+  its second-to-last syllable is short and open; *audio* and *video* stress
+  their first syllable for the same reason.
+- **The list sets one trap, and the unit names it.** *agricola* ends in -a
+  like *puella* but is **masculine**, so "the great farmer" is
+  *agricola magnus*. It has its own card line, two questions and a line in
+  `parentNote`.
+- **`-ne` is carded as `-ne (question suffix)`.** The space in the term keeps
+  it out of Star sky: it is not a word to say into a microphone.
+- **Spelling questions use only the plain-letter words** (agricola, puella,
+  donum, puer). The spell check is an exact match, and *vidēre*'s macron is
+  not something to make her type.
+- **What the list does not print is flagged `from:'added'`**: the derivative
+  hooks (agriculture, magnify, data…), the infinitive-is-the-second-form
+  rule, and the two case questions that lean on Unit 1.
+
+> ⚠️ **The quiz is dated the day it was uploaded**, so the note says this
+> unit is mainly for keeping the words fresh. All fifteen come back in later
+> units, so it was still worth building.
+
+> ⚠️ **The coverage test found a real gap on its first run.** *video* had a
+> card, and appeared as a wrong option twice, but no question had it as the
+> answer. A word that is only ever a distractor is never practised. One
+> question (*videt* → *video*) closed it. The check reads each question's
+> stem plus its CORRECT option, never the whole option list.
+
+`tools/test_latin_vocab1.js` (20 assertions) seeds the whole Latin shelf and
+checks:
+
+- all fifteen words: a card, a bold lead with the list's meaning, a
+  respelling, and a question that asks about it
+- the agricola trap, the two margin notes, and the derivative questions
+  flagged `added`
+- plain-letter spelling answers, and a spelling question typed in capitals
+  being accepted
+- answers in all four slots, four unique options, no back-references or
+  positional references
+- the shelf, the gold ring and the prep band
+- a full round that logs, the deck with its respellings, and the privacy
+  sweep
+
+**Verified by deleting the *multus* card, flipping the agricola answer to
+*magna*, and prepending a made-up score.** Seven assertions failed, all from
+those three causes.
+
 ### Algebra Test 4 Study Guide, Part 1 — with a page missing (v201, THIS APP ONLY)
 
 Chris: *"Can we check Sedona's drive for a math study guide and follow our study
