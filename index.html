@@ -1301,6 +1301,43 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:color-mix(in sr
 .frow{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
 .frow .fn{font-size:12.5px;color:var(--faint)}
 .frow .eq{margin-top:0}
+/* A sheet row with a guide entry behind it is a button (v203). It keeps the
+   .frow look, so the sheet still reads as the paper she holds; the chevron is
+   the only new mark, and it is the affordance rather than decoration. */
+button.frow.tap{width:100%;min-height:var(--tap);text-align:left;background:none;border:0;
+  border-bottom:1px solid var(--line-soft);border-radius:0;font:inherit;color:inherit;
+  padding:8px 26px 8px 0;position:relative;cursor:pointer}
+button.frow.tap::after{content:'›';position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-size:20px;color:var(--muted)}
+/* The guide entry itself. Equations take the same serif italic as a card's eq
+   field; everything else is ordinary reading text at the modal's own sizes. */
+.fguide .fg-eq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:19px;
+  padding:10px 12px;margin:6px 0 12px;border:1px solid var(--line);border-radius:10px;
+  background-color:var(--raised);overflow-wrap:anywhere}
+.fguide .eyebrow{margin-top:14px}
+.fguide .fg-nm{font-size:17px;font-weight:700;margin:2px 0 0}
+.fguide p{margin:4px 0 0}
+.fg-sym{display:grid;grid-template-columns:minmax(52px,auto) 1fr auto;gap:2px 10px;
+  padding:6px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
+.fg-sym .s{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:15px}
+.fg-sym .u{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.fg-line{padding:6px 0;border-bottom:1px solid var(--line-soft)}
+.fg-line .w{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:15px;overflow-wrap:anywhere}
+.fg-line .why{display:block;color:var(--muted);font-size:12.5px}
+.fg-watch{font-size:13.5px;padding:3px 0 3px 14px;position:relative;color:var(--text)}
+.fg-watch::before{content:'•';position:absolute;left:2px}
+.fg-note{margin-top:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--warm);
+  background-color:var(--raised);font-size:13.5px}
+.fg-note .eyebrow{margin-top:0;color:var(--warm)}
+.fg-src{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.fg-back{margin:0 0 6px}
+/* The finder's results. */
+.fgres{display:block;width:100%;text-align:left;min-height:var(--tap);padding:10px 12px;margin-top:var(--gap-row);
+  border:1px solid var(--line);border-radius:12px;background-color:var(--raised);color:var(--text);font:inherit;cursor:pointer}
+.fgres .k{display:block;font-size:12.5px;color:var(--muted);font-weight:600}
+.fgres .e{display:block;font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:16px;margin-top:2px;overflow-wrap:anywhere}
+.fgres .need{display:block;font-size:12.5px;color:var(--muted);margin-top:3px}
+.fg-grp{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:12px}
 /* Illustrated empty states. */
 .empty .scene{margin-bottom:6px}
 /* The Today strip: three numbers that are doors, not a scoreboard. */
@@ -1693,7 +1730,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v202 · Latin vocab quiz';
+const APP_VERSION = 'v203 · Physics formula guide';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -4176,7 +4213,7 @@ const SHEETS = {
         ['Distributive','a(b + c) = ab + ac']]}
     ]},
   physics: { nm:'Formulas & conversions', ic:'📐',
-    note:'Your teacher\'s own equation sheet, transcribed exactly as issued — the whole year, so scroll to the unit you are in. Underneath it: two reference blocks from the textbook (marked as such) and the class Unusual Conversion Factors table. Nobody memorizes 18 228 — that is what a sheet is for. The method is yours; the facts live here.',
+    note:'Your teacher\'s own equation sheet, transcribed exactly as issued — the whole year, so scroll to the unit you are in. Tap any of her formulas (the ones with ›) for what it calculates, what every letter means, and the mistakes to watch for. Underneath: two reference blocks from the textbook (marked as such) and the class Unusual Conversion Factors table. Nobody memorizes 18 228 — that is what a sheet is for. The method is yours; the facts live here.',
     sections:[
       /* The teacher's Equations.docx, section for section, in her own notation
          (Δx, v_i, v_f — not the textbook's d − d₀, v₀, v). The kinematics rows
@@ -4185,33 +4222,33 @@ const SHEETS = {
          the equation missing that letter. The labels are ours; every equation
          is hers. */
       {h:'General', rows:[
-        ['Quadratic formula · solved for t','t = (−b ± √(b² − 4ac)) / 2a'],
-        ['Percent error','%Error = (|b| / y_max) · 100']]},
+        ['Quadratic formula · solved for t','t = (−b ± √(b² − 4ac)) / 2a',1],
+        ['Percent error','%Error = (|b| / y_max) · 100',2]]},
       {h:'Kinematics', rows:[
-        ['Missing Δx','a = (v_f − v_i) / t'],
-        ['Missing a','Δx = v_i t + ½t(v_f − v_i)'],
-        ['Missing a · the same one, tidied','Δx = ((v_i + v_f) / 2) t'],
-        ['Missing v_f','Δx = v_i t + ½at²'],
-        ['Missing t','Δx = (v_f² − v_i²) / 2a']]},
+        ['Missing Δx','a = (v_f − v_i) / t',3],
+        ['Missing a','Δx = v_i t + ½t(v_f − v_i)',4],
+        ['Missing a · the same one, tidied','Δx = ((v_i + v_f) / 2) t',5],
+        ['Missing v_f','Δx = v_i t + ½at²',6],
+        ['Missing t','Δx = (v_f² − v_i²) / 2a',7]]},
       {h:'Newton\'s Laws', rows:[
-        ['Second law','F_net = ma'],
-        ['Kinetic friction','F_fk = μ_k F_N'],
-        ['Static friction · the most it can be','F_fs ≤ μ_s F_N'],
-        ['Spring force','F = −kx'],
-        ['Gravitation','F_G = −G m₁m₂ / r²']]},
+        ['Second law · and in a circle','F_net = ma = mv² / r',8],
+        ['Kinetic friction','F_fk = μ_k F_N',9],
+        ['Static friction · the most it can be','F_fs ≤ μ_s F_N',10],
+        ['Spring force','F = −kx',11],
+        ['Gravitation','F_G = −G m₁m₂ / r²',12]]},
       {h:'Work and Energy', rows:[
-        ['Work','W = FΔx cos θ'],
-        ['Kinetic energy','KE = ½mv²'],
-        ['Gravitational potential energy','PE = mgh'],
-        ['Power','P = W / t = Fv'],
-        ['Elastic potential energy','PE = ½kx²'],
-        ['Work–energy theorem','FΔx cos θ = (KE_f + PE_f) − (KE_o + PE_o)']]},
+        ['Work','W = FΔx cos θ',13],
+        ['Kinetic energy','KE = ½mv²',14],
+        ['Gravitational potential energy','PE = mgh',15],
+        ['Power','P = W / t = Fv',16],
+        ['Elastic potential energy','PE = ½kx²',17],
+        ['Work–energy theorem','FΔx cos θ = [KE_f + PE_f] − [KE_o + PE_o]',18]]},
       {h:'Impulse and Momentum', rows:[
-        ['Impulse','J = Ft = Δp'],
-        ['In a collision · one object\'s Δp is minus the other\'s','Δp = −Δp'],
-        ['Momentum','p = mv'],
-        ['The same thing, written out','m₂Δv₂ = −m₁Δv₁'],
-        ['Conservation of momentum','m₁v₁_i + m₂v₂_i = m₁v₁_f + m₂v₂_f']]},
+        ['Impulse','J = Ft = Δp',19],
+        ['In a collision · one object\'s Δp is minus the other\'s','Δp = −Δp',20],
+        ['Momentum','p = mv',21],
+        ['The same thing, written out','m₂Δv₂ = −m₁Δv₁',22],
+        ['Conservation of momentum','m₁v₁_i + m₂v₂_i = m₁v₁_f + m₂v₂_f',23]]},
       {h:'Waves and Light', rows:[
         ['Wave speed · f is frequency here','v = fλ'],
         ['Index of refraction','n = c_v / c_m = λ_v / λ_m'],
@@ -4224,11 +4261,11 @@ const SHEETS = {
         ['Resistors in series','R_T = R₁ + R₂ + . . .'],
         ['Resistors in parallel','1 / R_eq = 1 / R₁ + 1 / R₂ + . . .']]},
       {h:'Physical Constants', rows:[
-        ['Acceleration due to gravity','g = −9.8 m/s² ≈ −10 m/s²'],
-        ['Speed of light in a vacuum','c_v = 3 × 10⁸ m/s'],
-        ['Sine','sin θ = opp / hyp'],
-        ['Cosine','cos θ = adj / hyp'],
-        ['Gravitational constant','G = 6.67 × 10⁻¹¹ N·m² / kg²']]},
+        ['Acceleration due to gravity','g = −9.8 m/s² ≈ −10 m/s²',24],
+        ['Speed of light in a vacuum','c_v = 3 × 10⁸ m/s',25],
+        ['Sine','sin θ = opp / hyp',26],
+        ['Cosine','cos θ = adj / hyp',27],
+        ['Gravitational constant','G = 6.67 × 10⁻¹¹ N·m² / kg²',28]]},
       /* Ours, not the sheet's — three notations are in play at once (her
          worksheets, this sheet, the textbook) and the sign of g genuinely
          differs between two of them, which is the kind of thing that costs
@@ -4269,33 +4306,162 @@ const SHEETS = {
         ['Nautical','knot (kn/kt) · league (nl)']]}
     ]}
 };
-function openSheet(classId){
+/* FORMULA_GUIDE:BEGIN — generated by tools/builders/build_formula_guide.py */
+const FORMULA_GUIDE = [{"n": 1,"sec": "General","nm": "Quadratic formula","eq": "t = (−b ± √(b² − 4ac)) / 2a","does": "It solves a quadratic equation (one with a squared term, a plain term and a constant) for the unknown. The ± means there are usually two answers: one using +, one using −.","sym": [["t","The unknown being solved for (seconds, if it is a time)","s"],["a","Coefficient of t² (not acceleration here)","varies"],["b","Coefficient of t","varies"],["c","The constant term, the number with no t","varies"],["±","Do the calculation twice, once with +, once with −",""],["√","Square root of everything under the bar, b² − 4ac",""]],"when": "When the unknown appears both squared and unsquared. Rearrange so one side is zero, then read off a, b and c. You need all three, and a ≠ 0.","ex": {"q": "A ball is thrown straight up at 20 m/s. When is it 15 m above its starting point? Take up as positive and g ≈ −10 m/s². Formula 6 gives 15 = 20t − 5t², so 5t² − 20t + 15 = 0: a = 5, b = −20, c = 15.","lines": [["t = (−(−20) ± √((−20)² − 4(5)(15))) / 2(5)","substitute"],["= (20 ± √(400 − 300)) / 10","simplify"],["= (20 ± 10) / 10","√100 = 10"],["t = 3 s or t = 1 s","one with +, one with −"]],"end": "Both make sense: the ball passes 15 m at 1 s on the way up and at 3 s on the way down."},"watch": ["−b means the opposite of b. Here b = −20, so −b = +20.","The whole top line is divided by 2a, not just the square root.","The equation must equal zero before you read off a, b and c.","If b² − 4ac is negative there is no real solution. Reject answers (like a negative time) that do not fit."],"note": "The sheet does not say which equation this solves or what a, b and c are. a and b are used elsewhere on the sheet for other things, so here they are read as the coefficients of a quadratic."},{"n": 2,"sec": "General","nm": "Percent error","eq": "%Error = (|b| / y_max) · 100","does": "It divides the size of b by y_max and multiplies by 100, to express the ratio as a percent.","sym": [["%Error","The result: the name of the quantity, not % times Error","%"],["|b|","The size of b, with any minus sign dropped (|−3| = 3)","same as y_max"],["y_max","The value |b| is compared against","same as b"],["· 100","Turns a fraction into a percent",""]],"when": "To say how large one quantity is compared with another, as a percent. b and y_max must be in the same units, so they cancel.","ex": {"q": "The numbers only show the arithmetic: b = −3.0 cm and y_max = 50.0 cm.","lines": [["%Error = (|−3.0| / 50.0) · 100","substitute"],["= (3.0 / 50.0) · 100","|−3.0| = 3.0"],["= 0.060 · 100","divide"],["= 6.0 %","multiply"]],"end": ""},"watch": ["Forgetting the · 100 leaves 0.060 instead of 6.0 %.","Keep |b| positive: the bars remove the sign.","b and y_max in the same units (do not mix mm and m).","Divide by y_max, not the other way round."],"note": "The sheet does not say what b or y_max are in an experiment. Ask exactly what to use for each in your lab."},{"n": 3,"sec": "Kinematics","nm": "Acceleration from a change in velocity","eq": "a = (v_f − v_i) / t","does": "Acceleration: how quickly velocity changes. The change in velocity divided by the time the change takes.","sym": [["a","Acceleration (constant, or the average over the interval)","m/s²"],["v_f","Final velocity, at the end of the interval","m/s"],["v_i","Initial velocity, at the start of the interval","m/s"],["t","Time between the initial and final moments","s"]],"when": "When you know the starting velocity, the ending velocity and how long it took, and you want the acceleration. In a straight line, give velocities a sign.","ex": {"q": "A car speeds up from 5.0 m/s to 17.0 m/s in 4.0 s. Find its acceleration.","lines": [["a = (17.0 − 5.0) / 4.0","substitute"],["= 12.0 / 4.0","subtract"],["= 3.0 m/s²","divide"]],"end": "Each second the car gains 3.0 m/s."},"watch": ["Subtract in the right order: final minus initial.","It gives the average acceleration; that equals the constant acceleration only if it does not change.","A negative a does not always mean slowing down: it means the acceleration points the negative way.","t is the elapsed time, not a clock reading."],"v": [["a","vf","vi","t"]]},{"n": 4,"sec": "Kinematics","nm": "Displacement from v_i, v_f and t","eq": "Δx = v_i t + ½t(v_f − v_i)","does": "The displacement (change in position) over a time interval, when you know the starting velocity, the ending velocity and the time.","sym": [["Δx","Displacement: change in position, with direction","m"],["v_i","Initial velocity","m/s"],["v_f","Final velocity","m/s"],["t","Elapsed time","s"]],"when": "When you know v_i, v_f and t and need Δx. Straight-line motion with constant acceleration — the acceleration itself is not needed.","ex": {"q": "A cyclist speeds up steadily from 2.0 m/s to 10.0 m/s in 5.0 s. How far does she travel?","lines": [["Δx = (2.0)(5.0) + ½(5.0)(10.0 − 2.0)","substitute"],["= 10.0 + ½(5.0)(8.0)","parentheses first"],["= 10.0 + 20.0","½(5.0)(8.0) = 20.0"],["= 30.0 m","add"]],"end": ""},"watch": ["Work out (v_f − v_i) first, then multiply by ½t.","Only valid when acceleration is constant.","Use consistent units: convert km/h to m/s first.","The result is displacement, which can differ from distance if the object turns round."],"v": [["dx","vi","vf","t"]]},{"n": 5,"sec": "Kinematics","nm": "Displacement from average velocity","eq": "Δx = ((v_i + v_f) / 2) t","does": "Displacement equals the average of the initial and final velocities, multiplied by the time.","sym": [["Δx","Displacement","m"],["v_i, v_f","Initial and final velocity","m/s"],["(v_i + v_f) / 2","The average of the two velocities","m/s"],["t","Elapsed time","s"]],"when": "When you know both velocities and the time, and the acceleration is constant. Often the quickest way to Δx.","ex": {"q": "A train goes from 4.0 m/s to 12.0 m/s in 3.0 s at constant acceleration. Find Δx.","lines": [["Δx = ((4.0 + 12.0) / 2)(3.0)","substitute"],["= (16.0 / 2)(3.0)","add"],["= (8.0)(3.0)","divide"],["= 24.0 m","multiply"]],"end": ""},"watch": ["Averaging the two velocities only gives the true average velocity when acceleration is constant.","Add first, then divide by 2, then multiply by t.","Do not forget the t at the end."],"v": [["dx","vi","vf","t"]]},{"n": 6,"sec": "Kinematics","nm": "Displacement from v_i, a and t","eq": "Δx = v_i t + ½at²","does": "Displacement when you know the starting velocity, the constant acceleration and the time, but not the final velocity.","sym": [["Δx","Displacement","m"],["v_i","Initial velocity","m/s"],["a","Constant acceleration","m/s²"],["t","Elapsed time — only t is squared","s"]],"when": "When you know v_i, a and t. Constant acceleration in a straight line.","ex": {"q": "A skater moving at 3.0 m/s accelerates at 2.0 m/s² for 4.0 s. How far does she go?","lines": [["Δx = (3.0)(4.0) + ½(2.0)(4.0)²","substitute"],["= 12.0 + ½(2.0)(16.0)","4.0² = 16.0"],["= 12.0 + 16.0","½(2.0)(16.0) = 16.0"],["= 28.0 m","add"]],"end": ""},"watch": ["at² means a · (t²), not (at)².","Do not forget the ½.","Keep the sign of a: slowing down in the positive direction means a < 0.","Constant acceleration only."],"v": [["dx","vi","a","t"]]},{"n": 7,"sec": "Kinematics","nm": "Displacement without time","eq": "Δx = (v_f² − v_i²) / 2a","does": "Displacement when you know the starting and ending velocities and the acceleration, but not the time.","sym": [["Δx","Displacement","m"],["v_f²","The final velocity, squared","m²/s²"],["v_i²","The initial velocity, squared","m²/s²"],["a","Constant acceleration (must not be zero)","m/s²"]],"when": "When time is neither given nor asked for. You need v_i, v_f and a.","ex": {"q": "A car moving at 20.0 m/s brakes uniformly at −5.0 m/s² until it stops (v_f = 0). How far does it travel?","lines": [["Δx = ((0)² − (20.0)²) / 2(−5.0)","substitute"],["= (0 − 400) / −10.0","square, multiply"],["= 40 m","negative ÷ negative"]],"end": ""},"watch": ["Square each velocity first, then subtract: v_f² − v_i² is not (v_f − v_i)².","The bottom is 2a, twice the acceleration.","Keep the sign of a; two negatives give a positive Δx here.","a cannot be 0. If a = 0, use formula 5."],"v": [["dx","vf","vi","a"]]},{"n": 8,"sec": "Newton's Laws","nm": "Net force and circular motion","eq": "F_net = ma = mv² / r","does": "The net force on an object. F_net = ma is Newton's second law. The second part, ma = mv²/r, gives the same net force for an object moving at constant speed on a circle.","sym": [["F_net","Net force: the vector sum of all forces on the object","N"],["m","Mass of the object","kg"],["a","Acceleration of the object","m/s²"],["v","Speed of the object","m/s"],["r","Radius of the circular path","m"]],"when": "F_net = ma any time you know two of net force, mass and acceleration. mv²/r when the object goes round a circle at constant speed and you know m, v and r.","ex": {"q": "(a) A 1500 kg car accelerates at 2.0 m/s². (b) A 1000 kg car goes round a curve of radius 50 m at 10 m/s.","lines": [["(a) F_net = (1500)(2.0) = 3000 N","straight line"],["(b) F_net = (1000)(10)² / 50","substitute"],["= (1000)(100) / 50","v² = 100"],["= 2000 N, toward the centre","divide"]],"end": ""},"watch": ["F_net is the total force, not any single force. Add forces as vectors.","Square only v in mv²/r, and divide by r (the radius, not the diameter).","Mass in kilograms.","ma = mv²/r holds only for motion in a circle at constant speed."],"note": "The sheet puts both on one line without saying the second (= mv²/r) applies only to circular motion at constant speed. The first is general; the second is a special case.","v": [["F","m","a"],["F","m","v","r"]]},{"n": 9,"sec": "Newton's Laws","nm": "Kinetic friction","eq": "F_fk = μ_k F_N","does": "The friction force on an object that is sliding across a surface.","sym": [["F_fk","Friction force; k marks it as kinetic (sliding)","N"],["μ_k","Coefficient of kinetic friction: how grippy the surfaces are when sliding","none"],["F_N","Normal force: the surface pushing back, perpendicular to it","N"]],"when": "When an object is sliding. You need μ_k for the two surfaces and the normal force.","ex": {"q": "A 5.0 kg box slides on a level floor with μ_k = 0.30. On a level floor with nothing else pushing up or down, the normal force equals the weight. Use |g| = 9.8 m/s².","lines": [["F_N = mg = (5.0)(9.8) = 49 N","normal force"],["F_fk = (0.30)(49 N)","substitute"],["= 14.7 N ≈ 15 N","opposite to the motion"]],"end": ""},"watch": ["F_N is not always mg: on a slope, or with an extra push up or down, find it from the forces perpendicular to the surface.","Do not mix up μ_k (sliding) and μ_s (not yet sliding, formula 10).","Kinetic friction does not depend on speed or contact area.","It points opposite to the sliding."],"v": [["Ff","mu","FN"]]},{"n": 10,"sec": "Newton's Laws","nm": "Static friction (the most it can be)","eq": "F_fs ≤ μ_s F_N","does": "The largest friction force that can hold an object still. The ≤ says the actual static friction can be anything up to μ_s F_N.","sym": [["F_fs","Static friction; s means static (not sliding)","N"],["≤","Less than or equal to",""],["μ_s","Coefficient of static friction","none"],["F_N","Normal force","N"]],"when": "To find out whether something will start to slide: compare the push with the most static friction can give, μ_s F_N.","ex": {"q": "The same 5.0 kg box sits still with μ_s = 0.50 and F_N = 49 N. Will it slide if pushed with 20 N? With 30 N?","lines": [["max F_fs = (0.50)(49 N) = 24.5 N","substitute, multiply"],["20 N ≤ 24.5 N","friction matches the push; it stays put"],["30 N > 24.5 N","friction cannot hold it; it slides"]],"end": "Once it slides, kinetic friction (formula 9) takes over."},"watch": ["Do not treat ≤ as =: static friction only equals μ_s F_N at the point of sliding.","Use it only for objects that are not sliding.","Usually μ_s is larger than μ_k for the same surfaces."],"v": [["Ff","mu","FN"]]},{"n": 11,"sec": "Newton's Laws","nm": "Spring force (Hooke's law)","eq": "F = −kx","does": "The force a spring exerts when stretched or squashed. The minus sign shows it always pulls or pushes back toward its relaxed length.","sym": [["F","Force exerted by the spring","N"],["k","Spring constant: how stiff the spring is","N/m"],["x","Stretch or squash from the relaxed length","m"],["−","The force is opposite to x",""]],"when": "When you know how stiff a spring is and how far it is stretched or squashed, and want the force.","ex": {"q": "A spring with k = 200 N/m is stretched 0.15 m in the positive direction.","lines": [["F = −(200)(0.15)","substitute"],["= −30 N","multiply"]],"end": "The spring pulls back with 30 N, the negative way."},"watch": ["x is the stretch or squash, not the spring's total length.","Convert centimeters to meters.","Keep the minus sign: it carries the direction.","Only for a spring not stretched too far."],"v": [["F","k","x"]]},{"n": 12,"sec": "Newton's Laws","nm": "Gravitation between two masses","eq": "F_G = −G m₁m₂ / r²","does": "The gravitational pull between two objects. It grows with both masses and weakens with the square of the distance between them.","sym": [["F_G","Gravitational force between the two objects","N"],["G","Gravitational constant (formula 28)","N·m²/kg²"],["m₁, m₂","The two masses","kg"],["r","Distance between their centres","m"]],"when": "To find the pull between two masses — a planet and a person, two spacecraft. You need both masses and r.","ex": {"q": "A 70 kg person on Earth's surface: Earth's mass is 5.97 × 10²⁴ kg and r = 6.37 × 10⁶ m.","lines": [["F_G = −(6.67 × 10⁻¹¹)(70)(5.97 × 10²⁴) / (6.37 × 10⁶)²","substitute"],["= −(2.787 × 10¹⁶) / (4.058 × 10¹³)","top, then r²"],["= −687 N","divide"]],"end": "About 687 N — almost exactly the person's weight, (70)(9.8) = 686 N."},"watch": ["r is centre to centre, and it is squared.","Convert kilometers to meters.","Big G (formula 28) is not little g (formula 24).","The pull is mutual: each object pulls the other just as hard."],"note": "The sheet has a minus sign in front but does not say which direction is positive. The size of the force is G m₁m₂ / r². Ask whether the minus sign is expected in your answers.","v": [["F","m","r"]]},{"n": 13,"sec": "Work and Energy","nm": "Work","eq": "W = FΔx cos θ","does": "The work done by a constant force: the energy it transfers by moving an object. Only the part of the force along the motion counts.","sym": [["W","Work done by the force","J"],["F","Size of the force","N"],["Δx","Size of the displacement","m"],["θ","Angle between the force and the motion","°"],["cos θ","Cosine of that angle","none"]],"when": "When a known constant force acts while the object moves. You need F, Δx and θ.","ex": {"q": "Someone pulls a suitcase with 40 N at 30° above the horizontal while it moves 5.0 m along the floor.","lines": [["W = (40)(5.0) cos 30°","substitute"],["= (200)(0.866)","cos 30° = 0.866"],["= 173 J","multiply"]],"end": ""},"watch": ["θ is between the force and the displacement, not from the vertical.","Calculator in degrees mode.","A force at 90° to the motion does no work: cos 90° = 0.","A force against the motion (180°) does negative work: cos 180° = −1."],"v": [["W","F","dx","th"]]},{"n": 14,"sec": "Work and Energy","nm": "Kinetic energy","eq": "KE = ½mv²","does": "The energy an object has because it is moving.","sym": [["KE","Kinetic energy","J"],["m","Mass","kg"],["v","Speed","m/s"]],"when": "When you know an object's mass and speed. It is what changes when net work is done on an object.","ex": {"q": "A 2.0 kg cart moves at 3.0 m/s.","lines": [["KE = ½(2.0)(3.0)²","substitute"],["= ½(2.0)(9.0)","3.0² = 9.0"],["= 9.0 J","multiply"]],"end": ""},"watch": ["Square only v, not mv: ½mv² is not ½(mv)².","Doubling the speed makes KE four times bigger.","KE is never negative."],"v": [["KE","m","v"]]},{"n": 15,"sec": "Work and Energy","nm": "Gravitational potential energy","eq": "PE = mgh","does": "The energy stored because of an object's height.","sym": [["PE","Gravitational potential energy","J"],["m","Mass","kg"],["g","Acceleration due to gravity (formula 24)","m/s²"],["h","Height above the level you chose as zero","m"]],"when": "Near Earth's surface when something is raised or lowered. Choose your zero height first; only changes in PE matter.","ex": {"q": "A 3.0 kg box sits 4.0 m above the floor (the floor is zero). Use the size of g, 9.8 m/s².","lines": [["PE = (3.0)(9.8)(4.0)","substitute"],["= 117.6 J ≈ 118 J","multiply"]],"end": ""},"watch": ["h is measured from your chosen zero.","Stay consistent with the sign you give g.","Not the same as a spring's PE (formula 17): same name, different formula."],"note": "The sheet lists g = −9.8 m/s². Put that into PE = mgh with a positive height and you get a negative PE, while PE above the zero level is normally positive. The example uses 9.8; ask how your class handles the sign here.","v": [["PE","m","h"]]},{"n": 16,"sec": "Work and Energy","nm": "Power","eq": "P = W / t = Fv","does": "How fast work is done. The first form divides work by time; the second multiplies force by speed.","sym": [["P","Power","W (watt)"],["W (italic)","Work done","J"],["t","Time taken","s"],["F","Force","N"],["v","Speed","m/s"]],"when": "W / t when you know the work and how long it took. Fv when a force acts along the motion and you know the force and speed.","ex": {"q": "(a) A motor does 600 J of work in 12 s. (b) A 20 N force moves an object at a steady 3.0 m/s along the force.","lines": [["(a) P = 600 / 12 = 50 W","work ÷ time"],["(b) P = (20)(3.0) = 60 W","force × speed"]],"end": ""},"watch": ["Italic W is work; upright W is the watt. Do not mix them up.","Convert minutes to seconds.","Fv assumes the force points along the motion."],"v": [["P","W","t"],["P","F","v"]]},{"n": 17,"sec": "Work and Energy","nm": "Elastic potential energy of a spring","eq": "PE = ½kx²","does": "The energy stored in a stretched or squashed spring.","sym": [["PE","Energy stored in the spring","J"],["k","Spring constant","N/m"],["x","Stretch or squash from the relaxed length","m"]],"when": "When you know the spring constant and how far it is stretched or squashed. Same k and x as formula 11.","ex": {"q": "A spring with k = 200 N/m is squashed 0.10 m.","lines": [["PE = ½(200)(0.10)²","substitute"],["= ½(200)(0.010)","0.10² = 0.010"],["= 1.0 J","multiply"]],"end": ""},"watch": ["Square only x: 0.10² = 0.010, not 0.20.","Stretching and squashing by the same amount store the same energy.","Formula 15 uses the same symbol PE for gravity."],"v": [["PE","k","x"]]},{"n": 18,"sec": "Work and Energy","nm": "Work and the change in energy","eq": "FΔx cos θ = [KE_f + PE_f] − [KE_o + PE_o]","does": "The work done by a force equals the change in the object's total energy (kinetic plus potential): the end minus the start.","sym": [["FΔx cos θ","Work done by the force (formula 13)","J"],["KE_f, PE_f","Kinetic and potential energy at the end","J"],["KE_o, PE_o","Kinetic and potential energy at the start","J"],["[ ]","Add each total before subtracting",""]],"when": "When a push, a pull or friction does work and you want how the speed or height changed. Use formulas 14, 15 and 17 for each KE and PE.","ex": {"q": "A 2.0 kg block at rest on a frictionless, level floor is pushed with 10 N (θ = 0°) for 3.0 m. Find its final speed. The floor is level, so PE is 0 at the start and end.","lines": [["Left: (10)(3.0) cos 0° = 30 J","work"],["Right: [½(2.0)v_f² + 0] − [0 + 0] = 1.0 v_f²","energy change"],["30 = 1.0 v_f²","set them equal"],["v_f = √30 ≈ 5.5 m/s","square root"]],"end": ""},"watch": ["Always final minus initial on the right.","Do not count the same effect twice: if gravity is already in a PE term, do not also count its work on the left.","Friction opposes the motion (θ = 180°), so its work is negative."],"note": "The sheet uses o for the starting values here but i everywhere else, and does not define o. It most likely means original. It also does not say which forces F means.","v": [["F","dx","th","KE","PE"]]},{"n": 19,"sec": "Impulse and Momentum","nm": "Impulse","eq": "J = Ft = Δp","does": "Impulse: the effect of a force acting over a time. It equals force times time, and also the change in momentum.","sym": [["J","Impulse","N·s"],["F","Force (or the average force)","N"],["t","How long the force acts","s"],["Δp","Change in momentum, final minus initial","kg·m/s"]],"when": "Collisions, kicks and impacts — whenever a force acts for a short time and you want the change in momentum, or the reverse. You need two of F, t and Δp.","ex": {"q": "A 20 N force acts on a 0.50 kg ball, at rest, for 0.10 s. Find the impulse and the final speed.","lines": [["J = (20)(0.10) = 2.0 N·s","force × time"],["Δp = J = 2.0 kg·m/s","it started at rest"],["2.0 = (0.50)v, so v = 4.0 m/s","p = mv (formula 21)"]],"end": ""},"watch": ["t is only the time the force actually acts (the contact time).","If the force changes, use the average force.","Δp has a direction (a sign).","Convert milliseconds to seconds."],"v": [["J","F","t"],["J","dp"],["dp","F","t"]]},{"n": 20,"sec": "Impulse and Momentum","nm": "Change in momentum","eq": "Δp = −Δp","does": "Read literally, it says a change in momentum equals its own negative. No other quantity appears in it.","sym": [["Δp","Change in momentum","kg·m/s"],["−","The opposite of what follows",""]],"when": "As written there is nothing to calculate. Formulas 22 and 23, which follow it, are the ones you solve problems with.","ex": {"q": "What it says, taken literally:","lines": [["Δp = −Δp",""],["2Δp = 0","add Δp to both sides"],["Δp = 0","divide by 2"]],"end": "So as written it is only true when Δp = 0."},"watch": ["Do not put two different numbers into the two Δp symbols unless your class labels them (say, as two objects).","Do not use it to find an unknown: it has no other variable."],"note": "Both symbols are identical with no labels, so as written it means Δp = 0. It is probably meant to say that when two objects interact, one's change in momentum is minus the other's — which would need labels 1 and 2. Ask what it is meant to say."},{"n": 21,"sec": "Impulse and Momentum","nm": "Momentum","eq": "p = mv","does": "Momentum: how hard a moving object is to stop, depending on both how heavy and how fast it is.","sym": [["p","Momentum (it has a direction)","kg·m/s"],["m","Mass","kg"],["v","Velocity, with its sign","m/s"]],"when": "To compare moving objects, to find momentum before and after a collision, or to switch between momentum and velocity.","ex": {"q": "A 1200 kg car travels at 15 m/s east (east is positive).","lines": [["p = (1200)(15)","substitute"],["= 18 000 kg·m/s east","multiply"]],"end": ""},"watch": ["Momentum is mv, not mv² (that is mixing it up with kinetic energy).","Motion the negative way gives negative momentum.","Add momenta with their signs, not just their sizes."],"v": [["p","m","v"]]},{"n": 22,"sec": "Impulse and Momentum","nm": "Momentum changes of two interacting objects","eq": "m₂Δv₂ = −m₁Δv₁","does": "How the velocity changes of two objects that push on each other are related: object 2's change in momentum is the same size as object 1's and opposite in direction.","sym": [["m₁, m₂","Masses of objects 1 and 2","kg"],["Δv₁, Δv₂","Change in each one's velocity, final minus initial","m/s"],["−","The changes point opposite ways",""]],"when": "When two objects interact only with each other (a collision, an explosion, a push-off), you know both masses and one velocity change, and want the other. No outside force on the pair.","ex": {"q": "Two carts at rest push apart. Cart 1 (2.0 kg) ends up with Δv₁ = +6.0 m/s. Cart 2 is 3.0 kg. Find Δv₂.","lines": [["(3.0)Δv₂ = −(2.0)(+6.0)","substitute"],["(3.0)Δv₂ = −12.0","multiply"],["Δv₂ = −4.0 m/s","divide by m₂"]],"end": "Cart 2 moves off at 4.0 m/s the other way."},"watch": ["Keep the minus sign.","Δv is a change, not a final velocity.","m₂ goes with Δv₂ — do not swap the subscripts.","Only when no outside force acts (friction or an outside push breaks it)."],"v": [["m","dv"]]},{"n": 23,"sec": "Impulse and Momentum","nm": "Conservation of momentum for two objects","eq": "m₁v₁_i + m₂v₂_i = m₁v₁_f + m₂v₂_f","does": "The total momentum of two objects before they interact equals their total momentum afterwards.","sym": [["m₁, m₂","Masses of objects 1 and 2","kg"],["v₁_i, v₂_i","Their velocities before","m/s"],["v₁_f, v₂_f","Their velocities after","m/s"]],"when": "Collisions and explosions of two objects with no outside force. You need the masses and enough velocities to leave one unknown.","ex": {"q": "A 1.0 kg cart at 4.0 m/s hits a 3.0 kg cart at rest and they stick together. Find their common speed v.","lines": [["(1.0)(4.0) + (3.0)(0) = (1.0)v + (3.0)v","substitute"],["4.0 = 4.0v","simplify"],["v = 1.0 m/s","divide"]],"end": ""},"watch": ["Give velocities signs: an object moving the other way has a negative velocity.","Momentum is conserved with no outside force; kinetic energy is not always.","An object at rest has v = 0, so its term is 0."],"v": [["m","vi","vf"]]},{"n": 24,"sec": "Physical Constants","nm": "Acceleration due to gravity","eq": "g = −9.8 m/s² ≈ −10 m/s²","does": "The standard value of gravity's acceleration near Earth's surface — a precise value and a rounded one for quick estimates.","sym": [["g","Acceleration due to gravity near Earth","m/s²"],["−9.8","The minus sign means downward, with up positive","m/s²"],["≈ −10","A rounded value for quick estimates","m/s²"]],"when": "Free fall, projectiles and weight near Earth, ignoring air resistance. Your teacher will say whether to use −9.8 or −10.","ex": {"q": "A ball is dropped from rest and falls for 2.0 s. From formula 3 with a = g: v_f = v_i + gt.","lines": [["v_f = 0 + (−9.8)(2.0) = −19.6 m/s","using −9.8"],["v_f ≈ 0 + (−10)(2.0) = −20 m/s","using −10"]],"end": "The two differ by only about 2%."},"watch": ["With up positive, falling things have negative acceleration.","Use the same value all the way through one problem.","Little g is not big G (formula 28).","See formula 15 about the sign of g in PE = mgh."]},{"n": 25,"sec": "Physical Constants","nm": "Speed of light","eq": "c_v = 3 × 10⁸ m/s","does": "A constant of 3 × 10⁸ meters per second. The sheet writes it 3x10⁸, using the letter x as a times sign.","sym": [["c_v","The constant (the sheet does not name it)","m/s"],["3 × 10⁸","300 000 000",""]],"when": "Whenever a problem needs it — light travel times and the like.","ex": {"q": "How long does light take to travel the 1.5 × 10¹¹ m from the Sun to Earth? At constant speed, Δx = c_v t, so t = Δx / c_v.","lines": [["t = (1.5 × 10¹¹) / (3 × 10⁸)","substitute"],["= 500 s","divide"],["≈ 8.3 minutes","500 ÷ 60"]],"end": ""},"watch": ["3x10⁸ means 3 × 10⁸, not 3 times x times 10⁸.","Use meters, not kilometers.","It is rounded, so answers are approximate."],"note": "The sheet calls it c_v without saying what it is. Its value and units match the speed of light in a vacuum, usually written c. Ask what the v means."},{"n": 26,"sec": "Physical Constants","nm": "Sine (right triangle)","eq": "sin θ = opp / hyp","does": "The sine of an angle in a right triangle: the side opposite the angle divided by the hypotenuse.","sym": [["θ","An angle of the triangle (not the right angle)","°"],["opp","Side opposite θ","any length"],["hyp","Hypotenuse: the longest side, across from the right angle","same as opp"]],"when": "To find a side or an angle in a right triangle — like splitting a force or velocity into parts. You need two of θ, opp and hyp.","ex": {"q": "A ramp is 3.0 m high (opposite) and 5.0 m long (hypotenuse). Find the angle.","lines": [["sin θ = 3.0 / 5.0 = 0.60","substitute"],["θ = sin⁻¹(0.60) ≈ 36.9°","inverse sine key"]],"end": "The other way round: if θ = 30° and hyp = 10 m, opp = (10) sin 30° = 5.0 m."},"watch": ["Right triangles only.","Opposite means across from θ — it changes if you pick the other angle.","sin θ is never more than 1.","Calculator in degrees mode."],"v": [["th","opp","hyp"]]},{"n": 27,"sec": "Physical Constants","nm": "Cosine (right triangle)","eq": "cos θ = adj / hyp","does": "The cosine of an angle in a right triangle: the side next to the angle divided by the hypotenuse.","sym": [["θ","An angle of the triangle (not the right angle)","°"],["adj","Side next to θ (not the hypotenuse)","any length"],["hyp","Hypotenuse","same as adj"]],"when": "To find a side or an angle in a right triangle, or the part of a vector along a direction. It is the cos θ in the work formula.","ex": {"q": "A right triangle has an adjacent side of 4.0 m and a hypotenuse of 5.0 m. Find θ.","lines": [["cos θ = 4.0 / 5.0 = 0.80","substitute"],["θ = cos⁻¹(0.80) ≈ 36.9°","inverse cosine"]],"end": "The other way round: if θ = 30° and hyp = 10 m, adj = (10) cos 30° = 8.66 m."},"watch": ["Right triangles only.","Adjacent is the leg touching θ, not the hypotenuse.","Do not swap sine and cosine: cosine uses the adjacent side.","Calculator in degrees mode."],"v": [["th","adj","hyp"]]},{"n": 28,"sec": "Physical Constants","nm": "Gravitational constant","eq": "G = 6.67 × 10⁻¹¹ N·m² / kg²","does": "The value of the constant G in the law of gravitation (formula 12). It is the same everywhere in the universe.","sym": [["G","Gravitational constant","N·m²/kg²"],["6.67 × 10⁻¹¹","0.0000000000667 — extremely small",""]],"when": "Whenever you work out the pull between masses with formula 12.","ex": {"q": "The pull between two 1.0 kg masses 1.0 m apart, centre to centre.","lines": [["|F_G| = (6.67 × 10⁻¹¹)(1.0)(1.0) / (1.0)²","substitute"],["= 6.67 × 10⁻¹¹ N","bottom is 1.0"]],"end": "Tiny — which is why you never notice gravity between everyday objects."},"watch": ["Big G is not little g (formula 24).","Keep the minus sign in the exponent.","Use kilograms and meters so the answer comes out in newtons."]}];
+/* FORMULA_GUIDE:END */
+/* The physics formula guide (v203). One entry per formula on her teacher's
+   equation sheet, in the sheet's own order — what it calculates, what every
+   symbol means and is measured in, when to use it, a worked example with each
+   step shown, the mistakes to watch for, and where the sheet itself is unclear,
+   what to ask. Written at home to go with the sheet and transcribed nearly as
+   written; every worked example was re-checked by the builder.
+
+   A sheet row carries the guide number as its third element, so the row IS the
+   door: tap the formula, read about that formula, come back to the same place
+   on the sheet. Nothing new to find, and the sheet still reads like the paper.
+
+   ⚠️ Inside a quiz the worked example is withheld. SHEETS reach the quiz's tool
+   row because they restate what the class hands out on paper — the standing
+   rule is "reference, not answers: no worked examples or solution steps in a
+   sheet". The meaning of each letter and the mistakes to avoid are reference;
+   a worked example is a solution, and one open during a quiz is a template to
+   copy. Off the quiz (the subject screen, the finder) it shows in full. */
+function guideEntry(n){ return (typeof FORMULA_GUIDE !== 'undefined' ? FORMULA_GUIDE : []).find(e=>e.n===n) || null; }
+function guideEntryNode(n, opt){
+  opt = opt || {};
+  const e = guideEntry(n), d = el('div','fguide');
+  if(!e) return d;
+  d.appendChild(el('div','eyebrow', `Formula ${e.n} · ${e.sec}`));
+  d.appendChild(el('div','fg-nm', e.nm));
+  d.appendChild(el('div','fg-eq', e.eq));
+  d.appendChild(el('div','eyebrow','What it calculates'));
+  d.appendChild(el('p',null, e.does));
+  d.appendChild(el('div','eyebrow','What each symbol means'));
+  e.sym.forEach(([sy, mean, unit])=>{
+    const r = el('div','fg-sym');
+    r.appendChild(el('span','s', sy)); r.appendChild(el('span',null, mean)); r.appendChild(el('span','u', unit||''));
+    d.appendChild(r);
+  });
+  d.appendChild(el('div','eyebrow','When to use it'));
+  d.appendChild(el('p',null, e.when));
+  d.appendChild(el('div','eyebrow','Worked example'));
+  if(opt.quiz){
+    d.appendChild(el('p','fg-quiet','The worked example stays out of the quiz. It is in the guide on the Physics page.'));
+  } else {
+    if(e.ex.q) d.appendChild(el('p',null, e.ex.q));
+    e.ex.lines.forEach(([w, why])=>{
+      const l = el('div','fg-line');
+      l.appendChild(el('span','w', w));
+      if(why) l.appendChild(el('span','why', why));
+      d.appendChild(l);
+    });
+    if(e.ex.end) d.appendChild(el('p',null, e.ex.end));
+  }
+  d.appendChild(el('div','eyebrow','Watch for'));
+  e.watch.forEach(w=> d.appendChild(el('div','fg-watch', w)));
+  if(e.note){
+    const nb = el('div','fg-note');
+    nb.appendChild(el('div','eyebrow','Worth asking your teacher'));
+    nb.appendChild(el('p',null, e.note));
+    d.appendChild(nb);
+  }
+  d.appendChild(el('p','fg-src','From the guide written at home to go with your teacher\'s sheet. The formula is hers; the explanation is the guide\'s.'));
+  return d;
+}
+function openGuideEntry(n, opt){
+  const e = guideEntry(n);
+  if(!e) return;
+  showModal({ title: e.nm, confirmText:'Close', cancelText:null,
+    build:(box)=>{ const g = guideEntryNode(n, opt); g.querySelector('.fg-nm').remove(); box.appendChild(g); }});
+}
+function openSheet(classId, opt){
+  opt = opt || {};
   const sh = SHEETS[classId];
   if(!sh) return;
   showModal({ title: sh.nm, confirmText:'Close', cancelText:null,
     build:(box)=>{
-      box.appendChild(el('p',null, sh.note));
-      /* A rubric renders as criterion → bands, from the same data the
-         self-check walks. Extra sections follow underneath. */
-      if(sh.rubric) sh.rubric.rows.forEach(row=>{
-        box.appendChild(el('div','eyebrow', row.nm + '  (/' + row.max + ')'));
-        row.bands.forEach(b=>{
-          const r = el('div','frow');
-          r.appendChild(el('span','fn', b.nm + ' (' + b.lo + '–' + b.hi + ')'));
-          r.appendChild(el('span','eq', b.d));
-          box.appendChild(r);
+      /* One modal, two views: the sheet, and one formula's entry. The view is
+         swapped inside `wrap` rather than stacking a second modal, so Close
+         always means "done with the sheet", and Back lands on the row she
+         tapped (the box is what scrolls). */
+      const wrap = el('div');
+      box.appendChild(wrap);
+      let keep = 0;
+      const showSheet = ()=>{
+        wrap.replaceChildren();
+        wrap.appendChild(el('p',null, sh.note));
+        /* A rubric renders as criterion → bands, from the same data the
+           self-check walks. Extra sections follow underneath. */
+        if(sh.rubric) sh.rubric.rows.forEach(row=>{
+          wrap.appendChild(el('div','eyebrow', row.nm + '  (/' + row.max + ')'));
+          row.bands.forEach(b=>{
+            const r = el('div','frow');
+            r.appendChild(el('span','fn', b.nm + ' (' + b.lo + '–' + b.hi + ')'));
+            r.appendChild(el('span','eq', b.d));
+            wrap.appendChild(r);
+          });
         });
-      });
-      (sh.sections||[]).forEach(sec=>{
-        box.appendChild(el('div','eyebrow',sec.h));
-        sec.rows.forEach(([nm,eq])=>{
-          const r = el('div','frow');
-          r.appendChild(el('span','fn',nm));
-          r.appendChild(el('span','eq',eq));
-          box.appendChild(r);
+        (sh.sections||[]).forEach(sec=>{
+          wrap.appendChild(el('div','eyebrow',sec.h));
+          sec.rows.forEach(([nm,eq,gn])=>{
+            const has = gn && guideEntry(gn);
+            const r = el(has ? 'button' : 'div', has ? 'frow tap' : 'frow');
+            r.appendChild(el('span','fn',nm));
+            r.appendChild(el('span','eq',eq));
+            if(has){
+              r.dataset.g = gn;
+              r.setAttribute('aria-label', nm + ': ' + eq + ' — open its guide');
+              r.addEventListener('click',()=>{ keep = box.scrollTop; showEntry(gn); });
+            }
+            wrap.appendChild(r);
+          });
         });
-      });
+        box.scrollTop = keep;
+      };
+      const showEntry = (gn)=>{
+        wrap.replaceChildren();
+        const back = el('button','btn btn-ghost fg-back','‹ Back to the sheet');
+        back.addEventListener('click', showSheet);
+        wrap.appendChild(back);
+        wrap.appendChild(guideEntryNode(gn, opt));
+        box.scrollTop = 0;
+      };
+      showSheet();
+      if(opt.entry) showEntry(opt.entry);
     }});
+}
+/* Which formula? (v203, physics). She picks the quantity she is after, then
+   what she already knows, and the guide's formulas sort themselves: the ones
+   that use ONLY what she has, then the ones a single quantity short (saying
+   which). It is the guide's own "when to use it", made answerable.
+
+   ⚠️ A STUDY door, never in the quiz's tool row. Choosing the equation missing
+   the one quantity a problem never mentions is the very skill the Equations of
+   Motion unit tests, so a finder open during that quiz does the choosing for
+   her — the same rule the word list follows. */
+const FG_VARS = [
+  {g:'Motion', items:[['dx','Δx','displacement'],['vi','v_i','starting velocity'],['vf','v_f','final velocity'],['v','v','speed'],['a','a','acceleration'],['t','t','time']]},
+  {g:'Forces', items:[['F','F','force'],['m','m','mass'],['r','r','radius or distance'],['FN','F_N','normal force'],['mu','μ','friction coefficient'],['Ff','F_f','friction force'],['k','k','spring constant'],['x','x','spring stretch']]},
+  {g:'Energy', items:[['W','W','work'],['KE','KE','kinetic energy'],['PE','PE','potential energy'],['h','h','height'],['P','P','power']]},
+  {g:'Momentum', items:[['p','p','momentum'],['dp','Δp','change in momentum'],['J','J','impulse'],['dv','Δv','change in velocity']]},
+  {g:'Angles', items:[['th','θ','angle'],['opp','opp','opposite side'],['adj','adj','adjacent side'],['hyp','hyp','hypotenuse']]}
+];
+const FG_LABEL = Object.fromEntries(FG_VARS.flatMap(g=>g.items.map(([k,s,w])=>[k,s+' · '+w])));
+/* Each formula is scored by its best variable set: 0 = fits (everything but the
+   wanted quantity is known), 1 = one short, more = not offered. */
+function formulaFinder(want, known){
+  const out = [];
+  if(!want) return out;
+  (typeof FORMULA_GUIDE !== 'undefined' ? FORMULA_GUIDE : []).forEach(e=>{
+    let best = null;
+    (e.v||[]).forEach(set=>{
+      if(!set.includes(want)) return;
+      const missing = set.filter(x=> x!==want && !known.has(x));
+      if(!best || missing.length < best.length) best = missing;
+    });
+    if(best) out.push({n:e.n, missing:best});
+  });
+  return out.sort((a,b)=> a.missing.length - b.missing.length || a.n - b.n);
 }
 /* A unit may carry `mapRef` — a graph spec, opened as an on-demand reference
    from its card and again from inside its own quiz's tool row, exactly like
@@ -4775,6 +4941,78 @@ function goBack(){
 }
 
 const SCREENS = {};
+/* Which formula? — see FG_VARS / formulaFinder above for the rules. It sits
+   here, not beside them, because assigning onto SCREENS above this line is a
+   temporal-dead-zone ReferenceError at boot (the Wayfinder v114 trap). */
+SCREENS.formulas = function(root){
+  if(!ctx._fk) ctx._fk = new Set();
+  root.appendChild(headline('Which formula?',
+    'Pick what you are trying to find, then tick everything the problem gives you. g, G and the speed of light are on your sheet, so they always count as known.'));
+  const chips = (title, pick, isOn, onTap, skip)=>{
+    const c = el('div','card');
+    c.appendChild(el('div','eyebrow', title));
+    FG_VARS.forEach(g=>{
+      c.appendChild(el('span','fg-grp', g.g));
+      const row = el('div','gz-chips');
+      g.items.forEach(([k,sy,w])=>{
+        if(skip && skip(k)) return;
+        const b = el('button','gz-chip'+(isOn(k)?' on':''), sy+' · '+w);
+        b.dataset.k = k; b.dataset.pick = pick;
+        b.setAttribute('aria-pressed', isOn(k) ? 'true' : 'false');
+        b.addEventListener('click',()=>{ onTap(k); render(); });
+        row.appendChild(b);
+      });
+      c.appendChild(row);
+    });
+    return c;
+  };
+  root.appendChild(chips('1 · What are you trying to find?', 'want', k=> ctx._fw===k,
+    k=>{ ctx._fw = (ctx._fw===k ? null : k); ctx._fk.delete(k); }));
+  if(ctx._fw){
+    root.appendChild(chips('2 · What does the problem give you?', 'known', k=> ctx._fk.has(k),
+      k=>{ ctx._fk.has(k) ? ctx._fk.delete(k) : ctx._fk.add(k); }, k=> k===ctx._fw));
+    const res = formulaFinder(ctx._fw, ctx._fk);
+    const fits = res.filter(r=>!r.missing.length), near = res.filter(r=>r.missing.length===1);
+    const rc = el('div','card ac');
+    rc.id = 'fgresults';
+    const want = FG_LABEL[ctx._fw];
+    if(!ctx._fk.size){
+      rc.appendChild(el('div','eyebrow', `Formulas with ${want}`));
+      rc.appendChild(el('p',null,'Tick what the problem gives you and these sort themselves.'));
+    } else {
+      rc.appendChild(el('div','eyebrow', fits.length ? `${fits.length === 1 ? 'This one uses' : 'These use'} only what you have` : 'Nothing fits yet'));
+      if(!fits.length) rc.appendChild(el('p',null, near.length
+        ? 'Every formula here needs one more quantity. If the problem really does not give it, can you work it out first with another formula?'
+        : 'Nothing on your sheet links those. Check you have ticked everything the problem gives you.'));
+    }
+    const card = (r)=>{
+      const e = guideEntry(r.n);
+      const b = el('button','fgres');
+      b.dataset.n = r.n;
+      b.appendChild(el('span','k', `Formula ${e.n} · ${e.nm}`));
+      b.appendChild(el('span','e', e.eq));
+      if(ctx._fk.size && r.missing.length) b.appendChild(el('span','need','One short — also needs ' + r.missing.map(x=>FG_LABEL[x]).join(', ')));
+      b.addEventListener('click',()=> openGuideEntry(r.n));
+      rc.appendChild(b);
+    };
+    if(!ctx._fk.size) res.forEach(card);
+    else {
+      fits.forEach(card);
+      /* The near misses get their own heading: under "these use only what you
+         have" they would read as fits. One short is still worth showing — it
+         is often a two-step problem, and the missing quantity says which step
+         comes first. */
+      if(near.length){
+        if(fits.length) rc.appendChild(el('div','eyebrow grp', 'One quantity short'));
+        near.forEach(card);
+      }
+    }
+    root.appendChild(rc);
+  }
+  const sb = el('button','btn btn-secondary', SHEETS.physics.ic+'  Open the whole sheet');
+  sb.addEventListener('click',()=>openSheet('physics'));
+  root.appendChild(sb);
+};
 /* Screens compose in when she NAVIGATES to them. Tick-driven re-renders (the
    focus timer every second, Today every minute) must not replay the entrance,
    or the screen strobes. Set by go()/goBack(), consumed by render(). */
@@ -5663,6 +5901,13 @@ SCREENS.unit = function(root){
   if(SHEETS[c.id]){
     const fsb = el('button','btn btn-secondary', SHEETS[c.id].ic+'  '+SHEETS[c.id].nm);
     fsb.addEventListener('click',()=>openSheet(c.id)); root.appendChild(fsb);
+    /* The finder is a study door, so it lives here and never in the quiz's
+       tool row (see SCREENS.formulas). */
+    if(c.id === 'physics' && typeof FORMULA_GUIDE !== 'undefined'){
+      const ffb = el('button','btn btn-secondary','🧭  Which formula? Find it from what you know');
+      ffb.addEventListener('click',()=>go('formulas',{classId:c.id}));
+      root.appendChild(ffb);
+    }
     /* A rubric can be walked, not just read. */
     if(SHEETS[c.id].rubric){
       const scb = el('button','btn btn-secondary','✓  Check my work against it');
@@ -9263,7 +9508,7 @@ SCREENS.quiz = function(root){
   if(CALC_CLASSES.has(ctx.classId)) tool('🧮','Calculator',openCalc);
   /* Just "Sheet" in the row — a sheet's full name ("DBQ essay rubric") does not
      fit a quarter of the width, and the subject screen still names it in full. */
-  if(SHEETS[ctx.classId]) tool(SHEETS[ctx.classId].ic, 'Sheet', ()=>openSheet(ctx.classId));
+  if(SHEETS[ctx.classId]) tool(SHEETS[ctx.classId].ic, 'Sheet', ()=>openSheet(ctx.classId, {quiz:true}));
   /* A unit's own reference map, if it carries one — see openMapRef. Reads
      off the real source unit via `_srcUnit` (same resolution `answer()`
      already uses for qstats/misses), not the synthetic review/shuffle/ladder

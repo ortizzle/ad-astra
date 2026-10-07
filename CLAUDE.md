@@ -1005,6 +1005,151 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### The formula guide, behind every formula on the sheet (v203, THIS APP ONLY)
+
+Chris: *"My wife added a guide sheet for physics and I think we can use it as a
+tool in the physics section almost as is. Can we add it as a clever resource
+tool?"* Three files landed in her Physics 8 folder on 10/5–10/6:
+
+- **`Equation_Sheet_Student_Guide.pdf`**, 31 pages. This is the guide. It was
+  written at home and follows her teacher's sheet in order: one entry per
+  formula, 28 in all. Each entry gives what the formula calculates, every
+  symbol with its unit, when to use it, a worked example with each step shown,
+  the common mistakes, and a yellow note wherever the sheet itself is unclear.
+- **`Physics_Formula_Guide.pdf`**, 10 pages, an earlier and shorter draft of
+  the same guide. It was read but not used, because the later one supersedes
+  it.
+- **`Equation sheet.pdf`**, a one-page photo of the printed sheet she holds,
+  read as an image.
+
+**The guide's formulas ARE the physics Sheet's**, the transcription
+`SHEETS.physics` has carried since v143. So nothing new was bolted on.
+
+- **`FORMULA_GUIDE`** holds the 28 entries. They are generated into
+  `index.html` between `FORMULA_GUIDE:BEGIN/END` markers by
+  `tools/builders/build_formula_guide.py`, so a rerun replaces the block.
+- **Each of the teacher's 28 sheet rows carries its guide number as a third
+  element, and that makes the row a 44px door.** Tapping a formula swaps the
+  modal to that formula's entry. "‹ Back to the sheet" returns to the row she
+  tapped, because the box is what scrolls and its position is kept.
+- **One modal, two views, rather than a second modal on top.** Close always
+  means done with the sheet.
+- **Rows the guide does not cover get no door.** That is waves and light,
+  circuits, the notation and textbook blocks, and the conversions. The `›`
+  appears only where there is something behind it.
+
+> ⚠️ **Inside a quiz, the worked example is withheld.** `SHEETS` reach the
+> quiz's tool row because they restate what the class hands out on paper. The
+> standing Reference-sheets rule is *"reference, not answers: don't put worked
+> examples or solution steps in a sheet."* The symbols and the mistakes to watch
+> for are reference. A worked example is a solution, and one open during a quiz
+> is a template to copy. `openSheet(cid, {quiz:true})`, the tool row's call,
+> renders the entry without it and says so: *"The worked example stays out of
+> the quiz. It is in the guide on the Physics page."* Off the quiz, it shows in
+> full.
+
+**The clever part: "🧭 Which formula?"** (`SCREENS.formulas`, a door on the
+physics subject screen). She picks the quantity she is trying to find, then
+ticks what the problem gives her.
+
+- The guide's formulas sort themselves: the ones that use ONLY what she has
+  come first, then, under their own heading, the ones a single quantity short.
+  Each of those names the missing quantity, which is usually the first step of
+  a two-step problem.
+- It is the guide's own "when to use it", made answerable. Each entry's `v` is
+  the list of variable sets it can be solved from: `F_net = ma = mv²/r` is
+  `[[F,m,a],[F,m,v,r]]`, and impulse has three.
+- g, G and c are on the sheet, so they always count as known and appear in no
+  set.
+- Six entries answer no "I know these, I want that" question, so the finder
+  never offers them: the quadratic, percent error, Δp = −Δp and the three
+  constants.
+- **F from m, v and r offers gravitation alongside the circle on purpose.**
+  With masses and a distance it really does fit. The finder narrows the
+  choice; the entry's "when to use it" is where she picks.
+
+> ⚠️ **The finder is a STUDY door and must never reach the quiz's tool row.**
+> Choosing "the equation missing the one quantity a problem never mentions" is
+> the exact skill `phys-kinematics-equations.json` tests, so a finder open
+> during that quiz does the choosing for her. It is the word-list rule (v191)
+> again.
+
+**A real transcription gap, closed by the photo.** The printed sheet reads
+`F_net = ma = mv² / r`. The app's row said only `F_net = ma`, which dropped the
+circular-motion half. It now matches the paper, and the row is relabelled
+"Second law · and in a circle". Two smaller fixes:
+
+- The work–energy row takes the printed sheet's square brackets.
+- The sheet's `note` tells her the `›` rows open.
+
+Two things the photo does NOT have are kept. The waves and circuits sections
+come from `Equations.docx` (v143), and the photo may simply be one page of the
+handout.
+
+**Transcribed nearly as written, and checked.**
+
+- **Every worked example's arithmetic is re-derived in the builder** before
+  anything is written: all 28, including the 687 N person-on-Earth figure and
+  the √30 ≈ 5.5 m/s work–energy answer. They all held.
+- **The guide's eight notes to ask the teacher are kept as "Worth asking your
+  teacher" boxes** rather than smoothed over. They cover:
+  - what the quadratic's a, b and c are
+  - what b and y_max are in percent error
+  - mv²/r sharing a line with the general law
+  - the minus sign on gravitation
+  - g = −9.8 inside PE = mgh
+  - the undefined subscript o
+  - Δp = −Δp as literally written
+  - what c_v's v means
+
+  These are the same ambiguities v143 recorded about the sheet.
+- **Provenance is on every entry**: *"From the guide written at home to go with
+  your teacher's sheet. The formula is hers; the explanation is the guide's."*
+  This keeps the school's authority off text the school did not write, the same
+  reason the textbook blocks are labelled as the textbook's. Nobody is named,
+  since the repo is public.
+
+`tools/test_formula_guide.js` (24 assertions) pins:
+
+- the 28 entries and the 28 rows in sheet order
+- **each guided row's formula equal, character for character, to its entry's**,
+  so an explanation can never drift onto a different formula from the one she
+  tapped
+- no door on uncovered rows
+- the printed sheet's mv²/r
+- the eight notes and the six finder-less entries
+- 44px doors, the right entry opening at the top, and Back restoring the row
+- **the real quiz tool row withholding the example while keeping the symbols
+  and the mistakes**
+- no finder in the quiz
+- the finder's answers on five cases, including the one-short list naming v_f
+- the results screen's order and headings, and a result opening its full entry
+- 4.5:1 on every new reading surface in both themes (worst 5.47:1)
+
+**Verified by stripping one row's guide number, letting the example through in
+quiz mode, and putting the finder in the quiz tool row.** Five assertions
+failed, all from those three causes.
+
+> **Two older tests broke on this run, and neither was a regression.**
+>
+> - **`test_phys_ch3.js` pinned `'F_net = ma'`, which was the transcription
+>   gap itself.** The test asserted the cut-short string the printed sheet
+>   proves wrong. It now pins `F_net = ma = mv² / r`.
+> - **`test_ledger.js` failed identically on the v202 build, which is how it
+>   was ruled out.** It rendered "this week", and this week is Fall Break
+>   (10/5–10/9). With no school days there are no study rows, so it measured
+>   nothing and reported null. It now walks forward to the first day whose
+>   week has study rows and points `AZ.today` there. Pin the rule, never the
+>   almanac. **Wayfinder's copy of the same file has the same rot and was not
+>   touched here.**
+
+> ⚠️ **The first placement of `SCREENS.formulas` was above `const SCREENS = {}`**
+> and would have been a temporal-dead-zone ReferenceError at boot. This is the
+> Wayfinder v114 trap, caught by grepping for the declaration before the first
+> run. The screen lives just below that line now, with a comment saying why.
+> The rest of the guide code sits beside `openSheet`, because plain functions
+> and constants have no ordering constraint.
+
 ### Latin I · Vocabulary Quiz 1 (v202, THIS APP ONLY)
 
 Chris: *"I added a Latin quiz vocab list for Sedona."* The file is

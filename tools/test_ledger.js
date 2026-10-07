@@ -5,7 +5,8 @@
    color:#fff. On the light card the subject name rendered white on near-white:
    invisible. Dark mode masked it completely, which is why it lived for fifty
    versions. The modifier is `ofsubj` now; this test measures the light-mode
-   row rather than reading the stylesheet. Same file in both repos. */
+   row rather than reading the stylesheet. Same file in both repos (Ad Astra's
+   copy gained the walk-forward below in v203; Wayfinder's has not yet). */
 const { chromium } = require('playwright');
 const [PORT] = process.argv.slice(2);
 const lum = c => { const m = c.match(/[\d.]+/g).map(Number); const f = v => { v/=255; return v<=.03928 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); }; return .2126*f(m[0])+.7152*f(m[1])+.0722*f(m[2]); };
@@ -19,8 +20,21 @@ const ratio = (a,b) => { const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p); return (x
   const out=[]; const ck=(n,ok,got)=>out.push({n,ok:!!ok,got});
   const r = await p.evaluate(async ()=>{
     put({...(DATA.records.prefs||{id:'prefs',type:'prefs'}), theme:'light'}); applyTheme();
-    go('today'); await new Promise(r=>setTimeout(r,400));
-    const rows=[...document.querySelectorAll('.ledger-row')].filter(x=>x.classList.contains('ofsubj'));
+    /* Walk forward to the first day whose week actually has study rows and
+       point the clock there. Rendering "this week" as found failed every
+       Fall Break (2026-10-05..09: no school days, so no study rows) — the
+       test measured nothing and reported null. Pin the rule, never the
+       almanac. */
+    const realToday = AZ.today;
+    let rows = [];
+    for(let i = 0; i < 70 && !rows.length; i++){
+      const d = AZ.shift(realToday(), i);
+      AZ.today = () => d;
+      go('today'); await new Promise(r=>setTimeout(r,60));
+      rows=[...document.querySelectorAll('.ledger-row')].filter(x=>x.classList.contains('ofsubj'));
+    }
+    await new Promise(r=>setTimeout(r,340));
+    rows=[...document.querySelectorAll('.ledger-row')].filter(x=>x.classList.contains('ofsubj'));
     const plain = rows.find(x=>!x.classList.contains('now')) || rows[0];
     if(!plain) return null;
     const card = plain.closest('.card');

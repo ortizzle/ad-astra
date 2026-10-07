@@ -34,7 +34,9 @@ const PORT = process.argv[2] || 8142;
        .every(e => sheet.eqs.includes(e)),
      sheet.eqs.slice(0, 10));
   ck('the later units are there too, not just kinematics',
-     ['F_net = ma', 'KE = \u00bdmv\u00b2', 'p = mv', 'v = f\u03bb', '\u0394V = IR']
+     /* v203: the printed sheet reads ma = mv\u00b2 / r; the old pin held the
+        transcription's cut-short 'F_net = ma'. */
+     ['F_net = ma = mv\u00b2 / r', 'KE = \u00bdmv\u00b2', 'p = mv', 'v = f\u03bb', '\u0394V = IR']
        .every(e => sheet.eqs.includes(e)),
      sheet.eqs.length);
   ck('it still carries the conversion factors it had before',
