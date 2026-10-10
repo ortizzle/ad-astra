@@ -4,7 +4,7 @@
 /* The page asks the waiting worker to take over when she taps Refresh —
    never automatically, so a mid-round quiz is never yanked. */
 self.addEventListener('message', e => { if(e.data === 'skip') self.skipWaiting(); });
-const CACHE_VERSION = 'ad-astra-v205';
+const CACHE_VERSION = 'ad-astra-v206';
 const SHELL = [
   './',
   './index.html',
@@ -13,7 +13,8 @@ const SHELL = [
   './fonts/fraunces.woff2',
   './fonts/fraunces-italic.woff2',
   './fonts/jakarta.woff2',
-  './fonts/caveat.woff2'
+  './fonts/caveat.woff2',
+  './fonts/fredoka.woff2'
 ];
 /* prototype.html is a design comparison page, deliberately not cached. */
 

@@ -39,7 +39,7 @@ const REPO = process.argv[3] || '.';
     const ci = kids.indexOf(card);
     const brief = document.querySelector('.card.brief');
     const prev = card && card.previousElementSibling;
-    const jar = document.querySelector('a.wn-jar');
+    const jar = document.querySelector('a.wjar');
     return {
       card: !!card,
       paras: card ? [...card.querySelectorAll('p.brief-prose')].map(x => x.textContent) : [],
@@ -50,7 +50,10 @@ const REPO = process.argv[3] || '.';
       underDivider: !!(prev && prev.classList.contains('divider') && /your week/i.test(prev.textContent)),
       beforeBrief: !!(brief && card && (card.compareDocumentPosition(brief) & Node.DOCUMENT_POSITION_FOLLOWING)),
       jar: jar ? {href: jar.href, target: jar.target, rel: jar.rel, h: jar.getBoundingClientRect().height,
-                  text: jar.textContent} : null,
+                  text: jar.textContent, svg: !!jar.querySelector('svg.wjsvg'),
+                  flies: jar.querySelectorAll('.wjff').length,
+                  font: getComputedStyle(jar.querySelector('.wjt')).fontFamily,
+                  bg: getComputedStyle(jar).backgroundImage} : null,
       stored: Store.get(WEEK_NOTE_KEY, null),
     };
   });
@@ -63,6 +66,15 @@ const REPO = process.argv[3] || '.';
      s.jar && s.jar.href === 'https://ortizzle.github.io/wonder-jar/' && s.jar.target === '_blank'
        && /noopener/.test(s.jar.rel), s.jar);
   ck('the jar door is a 44px target', s.jar && s.jar.h >= 44, s.jar && s.jar.h);
+  ck('the door looks like the jar: its jar drawing with three fireflies, its Fredoka title',
+     s.jar && s.jar.svg && s.jar.flies === 3 && /Fredoka/.test(s.jar.font)
+       && await p.evaluate(async () => { await document.fonts.ready;
+         return [...document.fonts].some(f => f.family.replace(/["']/g,'') === 'Fredoka' && f.status === 'loaded'); }), s.jar);
+  /* Theme-independent, like the post-it: the jar's night sky in BOTH themes. */
+  const jarBg = async t => { await p.evaluate(t => { document.documentElement.dataset.theme = t; }, t);
+    return p.evaluate(() => getComputedStyle(document.querySelector('a.wjar')).backgroundImage); };
+  const bgL = await jarBg('light'), bgD = await jarBg('dark');
+  ck('the jar door keeps its night sky in light AND dark', bgL === bgD && /43, 42, 107/.test(bgL), {bgL, bgD});
 
   /* 2. A note for THIS week. */
   const good = {v:1, week: wk, written: wk,

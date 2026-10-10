@@ -1061,8 +1061,27 @@ and not in the record store, and both choices are deliberate:
   stays his alone.
 
 **The Wonder Jar door** (`wonderJarDoor()`) sits directly under the note from
-home, because both are purely hers and nothing there is counted. It is one
-quiet 44px row opening `https://ortizzle.github.io/wonder-jar/` in a new tab.
+home, because both are purely hers and nothing there is counted. It opens
+`https://ortizzle.github.io/wonder-jar/` in a new tab.
+
+**It looks like the jar, not like this app (v206 / Wayfinder v181, both apps).** Chris:
+*"Can we make the wonder jar option look like the wonder jar?"* So the door
+wears Wonder Jar's own identity, lifted from that repo rather than imitated:
+
+- **The jar is Wonder Jar's own icon**, the same lid, band, glass path and three
+  firefly glows from its `icon.svg`, built with `createElementNS` and cropped to
+  the jar (`wonderJarSVG()`). The fireflies pulse and the stars twinkle only
+  under `prefers-reduced-motion: no-preference`.
+- **Its palette and font:** the night gradient (`#2b2a6b → #1a1b4b → #0b0c2a`),
+  the gold-to-pink title gradient, and **Fredoka** 600 for "Wonder Jar".
+  Fredoka is self-hosted (`fonts/fredoka.woff2`, a 16KB latin subset, OFL)
+  and in the SW shell, for the v93 reason: an identity font from a CDN is the
+  one that fails on a captive portal. It is used for this title only.
+- **Theme-independent on purpose**, like the post-it and the atlas page: it is
+  the front door of another place, not app chrome, so it is the jar's night in
+  light mode too. Subtitle `#c9c6ec` measures over 7:1 on the lightest stop.
+- The line is the jar's own verb, *"Whisper a happy thought"*, kept short
+  enough to sit on one line at 390px.
 
 - **No per-girl link is needed, and that is what kept names out of both
   repos.** Wonder Jar remembers whose phone it is on (`phone_owner`, set once
