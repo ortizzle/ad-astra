@@ -1073,8 +1073,12 @@ quiet 44px row opening `https://ortizzle.github.io/wonder-jar/` in a new tab.
   Wonder Jar's storage. Its entries are hers and its streaks are its own.
 
 **The Sunday session** is a Routine on Chris's account, "Weekly notes for the
-girls", firing Sundays at 2:52 pm Arizona time into a fresh session with Drive
-and Calendar. Its prompt carries what this public file cannot: the girls'
+girls", firing Sundays at 2:52 pm Arizona time into a fresh session.
+**Its Drive and Calendar connectors have to be attached from the claude.ai
+Routines page**: a routine created from a session cannot pass them through.
+Without them, it falls back to the repos' own calendar data and says so in its
+report. **It never overwrites a note already written for its week**, so a
+hand-written note wins, and a rerun is harmless. Its prompt carries what this public file cannot: the girls'
 calendar ids and the Drive folder ids. It reads:
 
 - the week's newsletters
