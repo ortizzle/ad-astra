@@ -1005,6 +1005,111 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### A note on your week, and the Wonder Jar (v204 / Wayfinder v179, both apps)
+
+Chris: *"Can we create a space for you to give a qualitative message to the
+girls that summarizes what they have coming up and what they might wish to do
+based on upcoming schedule?"* He chose to have it written by Claude in a
+scheduled session each Sunday, and to let that session **deploy on its own**.
+In the same message: *"Can we include a link to the girls' Wonder Jars as
+well."*
+
+**The brief already wrote two sentences, and that is why this is a second
+voice rather than a rewrite of the first.** `weekBrief()` assembles its prose
+from the app's own numbers: tests entered, lessons open, review due. It cannot
+see the newsletter, the calendar, a study guide that landed in Drive on
+Friday, or a Tuesday where tutoring runs into practice. The note is the read
+on the week; the brief stays the numbers under it. The note renders under the
+**Your week** divider, above the brief card, as a plain `card weeknote`.
+
+**It lives in `week-note.json` at the repo root.** It is not in `index.html`
+and not in the record store, and both choices are deliberate:
+
+- **An unattended deploy must never touch code.** The Sunday session edits
+  this one file and nothing else, so a bad week can cost a note, never the
+  app.
+- **No `CACHE_VERSION` bump is needed for a note-only deploy, and this is the
+  one exception to that rule.** The service worker is network-first for
+  same-origin files, and `week-note.json` is not in `SHELL`.
+- **It is identical on every device, like `CAL.events`**, so it ships by
+  deploy rather than by sync. It is also as public as the code, which sets
+  the hard rule for its content: **it may say what is coming; it may never say
+  how she is doing.** No marks, no Growth Zone counts, no answers of hers, no
+  names, no teachers, nothing from the calendar beyond what this repo already
+  carries (school events, tests, tutoring, clubs).
+
+```json
+{"v":1, "week":"2026-10-11", "written":"2026-10-11",
+ "text":"First paragraph, with **bold** allowed.\n\nSecond paragraph."}
+```
+
+- **`week` is the SUNDAY that starts the week** (`AZ.weekStart`), and the note
+  renders only during that week. A missed Sunday costs one empty week, never
+  a stale note that talks about last Thursday as though it were coming.
+- **`validWeekNote()` rejects anything else:** a non-Sunday week, empty text,
+  over 1,500 characters, a missing week, or HTML. Offline with nothing cached,
+  the service worker falls back to `index.html`, so `r.json()` throws, and the
+  copy already on the device is kept.
+- **Cached device-locally** (`Store` key `weeknote`, not a record) so it shows
+  offline. Fetched at boot, and again when the app comes back to the
+  foreground at most once an hour, because a PWA can sit open for days.
+- **Rendered through `richify()`**: blank lines split paragraphs and `**bold**`
+  renders bold. It never uses innerHTML, so markup in the text stays text.
+- **Provenance on screen:** *"Written by Claude on Oct 11, from your school's
+  newsletters and your calendar."* That is the source-contract rule. The note
+  must never borrow the school's voice or a parent's, and the note from home
+  stays his alone.
+
+**The Wonder Jar door** (`wonderJarDoor()`) sits directly under the note from
+home, because both are purely hers and nothing there is counted. It is one
+quiet 44px row opening `https://ortizzle.github.io/wonder-jar/` in a new tab.
+
+- **No per-girl link is needed, and that is what kept names out of both
+  repos.** Wonder Jar remembers whose phone it is on (`phone_owner`, set once
+  at first launch), so the plain URL opens her own jar with no code.
+- **It shows all day, every day.** The jar has its own after-4pm reminder, so
+  this is a door, never a second nag.
+- The two apps share an origin (`ortizzle.github.io`), but nothing here reads
+  Wonder Jar's storage. Its entries are hers and its streaks are its own.
+
+**The Sunday session** is a Routine on Chris's account, "Weekly notes for the
+girls", firing Sundays at 2:52 pm Arizona time into a fresh session with Drive
+and Calendar. Its prompt carries what this public file cannot: the girls'
+calendar ids and the Drive folder ids. It reads:
+
+- the week's newsletters
+- both girls' calendars and the family calendar
+- each repo's `CAL.events`, `SUGGESTED_ASSESS`, `TUTORING`, `CLUBS` and
+  `content/`
+
+It then writes both notes in each app's own voice (dry here, plainer and
+warmer in Wayfinder), validates them, and pushes `week-note.json` straight to
+`main` in each repo. **Anything a newsletter adds that the app lacks**, such as
+a new test date or a changed early release, **is reported back to Chris rather
+than edited in**, because that would be touching code unattended.
+
+`tools/test_weeknote.js` (same file, both apps, 13 assertions) pins:
+
+- no file → no card and no error
+- the jar door's URL, new tab, `noopener` and 44px
+- a current note under the divider and above the brief
+- paragraphs and bold rendering, with an `<img onerror>` staying text
+- the provenance line
+- last week's note stored but not shown
+- five malformed files all rejected, with the good copy kept
+- the note surviving offline
+- the note never entering the record store
+- a privacy sweep of the shipped file: no mark, score, address or link, no
+  "she/her", and no exclamation marks
+
+**Verified by removing the week check and the Sunday check, and watching
+exactly the three expected assertions fail.**
+
+> **Each repo ships `week-note.json` from day one, as a placeholder dated
+> to a past Sunday.** Without the file, every launch before the first Sunday
+> logged a 404 in the console. The placeholder passes `validWeekNote()` and
+> never renders, because its week has already gone.
+
 ### The formula guide, behind every formula on the sheet (v203, THIS APP ONLY)
 
 Chris: *"My wife added a guide sheet for physics and I think we can use it as a
