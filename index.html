@@ -1732,7 +1732,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v204 · A note on your week';
+const APP_VERSION = 'v205 · A note every day';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -13057,14 +13057,24 @@ const WEEK_NOTE_FILE = 'week-note.json';
 /* Wonder Jar remembers whose phone it is on (phone_owner), so the plain link
    opens her own jar with no code — nothing identifying needs to live here. */
 const WONDER_JAR_URL = 'https://ortizzle.github.io/wonder-jar/';
+/* Daily since v205 / Wayfinder v180 (Chris: "Can we make the notes
+   daily?"). A note carries EITHER `day` — the one date it is for, shown on
+   that date only — or the original `week` (a Sunday), shown all that week.
+   The scheduled session writes a `day` note every morning; `week` stays
+   valid so a note written by hand for a whole week still works. Whichever
+   it is, a note never outlives its date: a missed morning costs that day's
+   note, never yesterday's note talking about "today". */
+const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;
 function validWeekNote(n){
-  return !!(n && typeof n === 'object'
-    && /^\d{4}-\d{2}-\d{2}$/.test(n.week || '') && AZ.weekday(n.week) === 0
-    && typeof n.text === 'string' && n.text.trim().length > 0 && n.text.length <= 1500);
+  if(!(n && typeof n === 'object' && typeof n.text === 'string'
+    && n.text.trim().length > 0 && n.text.length <= 1500)) return false;
+  if(n.day !== undefined) return ISO_DAY.test(n.day) && n.week === undefined;
+  return ISO_DAY.test(n.week || '') && AZ.weekday(n.week) === 0;
 }
 function weekNoteFor(date){
   const n = Store.get(WEEK_NOTE_KEY, null);
-  return validWeekNote(n) && n.week === AZ.weekStart(date) ? n : null;
+  if(!validWeekNote(n)) return null;
+  return (n.day ? n.day === date : n.week === AZ.weekStart(date)) ? n : null;
 }
 let weekNoteChecked = 0;
 async function fetchWeekNote(){
@@ -13077,13 +13087,15 @@ async function fetchWeekNote(){
     const n = await r.json();
     if(!validWeekNote(n)) return;
     const old = Store.get(WEEK_NOTE_KEY, null);
-    if(old && old.week === n.week && old.text === n.text) return;
+    if(old && JSON.stringify(old) === JSON.stringify(n)) return;
     Store.set(WEEK_NOTE_KEY, n);
     if(view === 'today') render();
   }catch(e){}
 }
-/* A PWA can sit open for days, so a Sunday note must not wait for a cold
-   start. Coming back to the app checks again, at most once an hour. */
+/* A PWA can sit open for days, so a fresh note must not wait for a cold
+   start. Coming back to the app checks again, at most once an hour — which
+   also picks up the morning's note when the app was last opened before the
+   session wrote it. */
 document.addEventListener('visibilitychange', ()=>{
   if(!document.hidden && Date.now() - weekNoteChecked > 3600000) fetchWeekNote();
 });
@@ -13091,11 +13103,11 @@ function weekNoteCard(date){
   const n = weekNoteFor(date);
   if(!n) return null;
   const c = el('div','card weeknote');
-  c.appendChild(el('div','eyebrow','A note on your week'));
+  c.appendChild(el('div','eyebrow', n.day ? 'A note for today' : 'A note on your week'));
   n.text.trim().split(/\n\s*\n/).forEach(p => c.appendChild(richify(el('p','brief-prose'), p.trim())));
   /* Provenance on screen, the source contract's rule: say who wrote it and
      from what, so it never borrows the school's voice or a parent's. */
-  c.appendChild(el('p','wn-src', 'Written by Claude on ' + AZ.short(n.written || n.week) +
+  c.appendChild(el('p','wn-src', 'Written by Claude on ' + AZ.short(n.written || n.day || n.week) +
     ', from your school’s newsletters and your calendar.'));
   return c;
 }

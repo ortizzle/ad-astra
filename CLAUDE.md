@@ -1072,8 +1072,9 @@ quiet 44px row opening `https://ortizzle.github.io/wonder-jar/` in a new tab.
 - The two apps share an origin (`ortizzle.github.io`), but nothing here reads
   Wonder Jar's storage. Its entries are hers and its streaks are its own.
 
-**The Sunday session** is a Routine on Chris's account, "Weekly notes for the
-girls", firing Sundays at 2:52 pm Arizona time into a fresh session.
+**The session** is a Routine on Chris's account, "Daily notes for the
+girls", firing **every morning at 5:53 am** Arizona time into a fresh session
+(it began weekly; see *Daily, not weekly* below).
 **Its Drive and Calendar connectors have to be attached from the claude.ai
 Routines page**: a routine created from a session cannot pass them through.
 Without them, it falls back to the repos' own calendar data and says so in its
@@ -1108,6 +1109,37 @@ than edited in**, because that would be touching code unattended.
 
 **Verified by removing the week check and the Sunday check, and watching
 exactly the three expected assertions fail.**
+
+**Daily, not weekly (v205 / Wayfinder v180).** Chris, a day after it shipped: *"Can we
+make the notes daily?"* Engine and routine both changed; nothing else did.
+
+- **A note now carries `day` OR `week`, never both.** `day` is the one date it
+  is for and it renders on that date only, eyebrowed *"A note for today"*.
+  `week` (a Sunday) still works and still renders all week, so a note written
+  by hand for a whole week remains possible. `validWeekNote()` rejects a note
+  claiming both, and a `day` that is not an ISO date.
+- **Yesterday's note never lingers into this morning.** Before the morning
+  run lands, she sees no note rather than one that calls yesterday "today".
+  The hourly foreground re-check is what picks the fresh one up when the app
+  was opened before 6 am.
+- **The file keeps its name, `week-note.json`,** even though it usually holds
+  a day now. Renaming it would have cost a second fetch path for no visible
+  gain; this paragraph is the price instead.
+- **The run is at 5:53 am**, so the note is live before drop-off and says
+  what today holds: the shape of the school day, what comes after it, and one
+  suggestion for tonight given what is ahead. Sunday's run reads the week
+  ahead, which is what the weekly note used to do.
+- **It still skips a day that already has a note**, matched on `day` only, so
+  a hand-written day note wins and a rerun is harmless. A `week` note does
+  NOT block the daily run.
+- The first note under the new shape is the hand-written week-of-10/11 note,
+  re-dated as a `day` note for Sunday 10/11 so the first morning run (that
+  Sunday) leaves it in place.
+
+`tools/test_weeknote.js` gained the day cases: today's day note renders and
+says "today", yesterday's is stored but not shown, and the two new malformed
+shapes are rejected. **Verified by disabling the date check and watching both
+the stale-week and the stale-day assertions fail.**
 
 > **Each repo ships `week-note.json` from day one, as a placeholder dated
 > to a past Sunday.** Without the file, every launch before the first Sunday

@@ -81,6 +81,18 @@ const REPO = process.argv[3] || '.';
   s = await state();
   ck('a note for LAST week is stored but not shown', !s.card && s.stored && s.stored.week === lastWk, s.stored);
 
+  /* 3b. Daily notes (v205 / Wayfinder v180): a `day` note shows on that date
+     only, says "today", and yesterday's never lingers into this morning. */
+  const today = await p.evaluate(() => AZ.today());
+  const yday = await p.evaluate(t => AZ.shift(t, -1), today);
+  serve = {v:1, day: today, written: today, text: 'Today has **one** thing in it.'}; await refetch();
+  s = await state();
+  ck('a day note for TODAY renders, labelled as today', s.card && /for today/i.test(s.eyebrow) && s.bold[0] === 'one',
+     {eyebrow: s.eyebrow, bold: s.bold});
+  serve = {v:1, day: yday, written: yday, text: 'Yesterday.'}; await refetch();
+  s = await state();
+  ck('a day note for YESTERDAY is stored but not shown', !s.card && s.stored && s.stored.day === yday, s.stored);
+
   /* 4. Malformed files cost a note, never the app — and never the copy already held. */
   serve = good; await refetch();
   for(const bad of [
@@ -88,12 +100,14 @@ const REPO = process.argv[3] || '.';
     {v:1, week: wk, text:'   '},
     {v:1, week: wk, text: 'x'.repeat(1600)},
     {v:1, text:'No week.'},
+    {v:1, day:'10/10/2026', text:'Not an ISO day.'},
+    {v:1, day: today, week: wk, text:'Both a day and a week.'},
     '<!doctype html><title>offline fallback</title>',
   ]){
     serve = bad; await refetch();
   }
   s = await state();
-  ck('a non-Sunday week, empty text, an oversized note, a missing week and an HTML fallback are all ignored',
+  ck('a non-Sunday week, empty text, an oversized note, no date, a malformed day, a note claiming both, and an HTML fallback are all ignored',
      s.card && s.stored && s.stored.text === good.text && errs.length === 0, {stored: s.stored && s.stored.text, errs});
 
   /* 5. Offline: the device keeps the last good note. */
