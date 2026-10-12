@@ -1711,6 +1711,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ac)}
 <nav><div class="nav-inner" id="nav"></div></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
+<script src="ortiz-drive.js"></script>
 <script>
 /* ==========================================================================
    AD ASTRA — a single-student learning lab
@@ -1760,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v206 · The jar door';
+const APP_VERSION = 'v207 · Drive copy';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3458,14 +3459,20 @@ const Sync = {
       method:'PATCH', headers:{...this.headers(),'Content-Type':'application/json'},
       body: JSON.stringify({files:{[this.filename]:{content:JSON.stringify(merged,null,2)}}}) });
     if(!res.ok) throw new Error('Gist save failed: '+res.status);
-    DATA = merged; saveLocal(); Store.set('last_sync', Date.now()); return merged;
+    DATA = merged; saveLocal(); Store.set('last_sync', Date.now()); driveCheck(); return merged;
   },
   async load(){
     if(sandboxOn() || !this.configured()) return DATA;
-    try{ DATA = this.merge(DATA, await this.pullRemote()); saveLocal(); Store.set('last_sync',Date.now()); }catch(e){}
+    try{ DATA = this.merge(DATA, await this.pullRemote()); saveLocal(); Store.set('last_sync',Date.now()); driveCheck(); }catch(e){}
     return DATA;
   }
 };
+/* The Drive copy (ortiz-drive.js) runs ONLY on a grown-up's own device: the
+   passcode set AND "stop asking on this device" ticked. Her phone never has
+   that flag, so she never sees the block or the bar and Google sign-in never
+   loads there. Sandbox pauses it — its in-memory data is meant to be thrown away. */
+function driveAllowed(){ return !!(Store.get('parent_hash','') && Store.get('parent_trust',false)) && !sandboxOn(); }
+function driveCheck(){ if(window.OrtizDrive) OrtizDrive.check(); }
 const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/physics-conversions.json', 'content/sg-test1.json', 'content/alg-topic1-05.json', 'content/alg-topic1-06.json', 'content/latin-pronunciation.json',
   'content/alg-topic1-01.json', 'content/alg-topic1-02.json',
   'content/alg-topic1-03.json', 'content/alg-topic1-04.json',
@@ -10892,6 +10899,9 @@ SCREENS.parent = function(root){
       : `Not synced since ${AZ.shortDate(new Date(ls).toISOString().slice(0,10))} — check the token in Setup.`));
   }
 
+  const driveBar = el('div'); driveBar.id = 'driveBar'; root.appendChild(driveBar);
+  if(window.OrtizDrive) OrtizDrive.mountBar(driveBar);
+
   /* Anything waiting on you comes first — it is the only thing here that blocks her.
      ONE card, not two. This was a "N units are waiting for you" card followed
      immediately by a "New lessons" card repeating the same count and pointing at
@@ -11241,10 +11251,10 @@ SCREENS.parent = function(root){
   sk.addEventListener('click',()=>{ Store.set('anthropic_key', key.value.trim()); toast('Saved'); });
   ac2.appendChild(sk); root.appendChild(ac2);
 
-  /* Backup to Drive. A web page cannot write to Drive without a Google OAuth
-     client and a backend, which this app deliberately does not have — so hand
-     the file to Android's share sheet, where "Save to Drive" is one tap.
-     Desktop falls back to a normal download. */
+  /* Two ways into Drive. "Back up" hands one file to Android's share sheet
+     (desktop: a download). The Drive copy below writes straight to Drive from
+     a tap — a drive.file token, no backend — and only on a trusted grown-up
+     device (driveAllowed). */
   root.appendChild(divider('Backup'));
   const bc2 = el('div','card');
   const brow = el('div','btn-row');
@@ -11287,6 +11297,12 @@ SCREENS.parent = function(root){
   dl.target = '_blank'; dl.rel = 'noopener';
   dl.style.color='var(--ac)'; dl.style.display='inline-block'; dl.style.marginTop='8px';
   bc2.appendChild(dl);
+  if(window.OrtizDrive){
+    if(driveAllowed()) bc2.appendChild(OrtizDrive.settingsBlock({ labelTag:'label', labelClass:'drive-label', buttonClass:'btn btn-secondary', hintClass:'hintline' }));
+    else bc2.appendChild(el('div','hintline', sandboxOn()
+      ? 'Automatic Google Drive copies pause while sandbox is on.'
+      : 'Automatic Google Drive copies run only on a grown-up’s own phone — open this view there and tick “Stop asking on this device”.'));
+  }
   root.appendChild(bc2);
 
   /* Testing & reset — sandbox is per-device; Fresh start is a synced wipe of
@@ -13184,6 +13200,9 @@ applyTheme();
 const brandEl = document.getElementById('brand');
 brandEl.addEventListener('click',()=>go('today'));
 brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go('today'); } });
+if(window.OrtizDrive) OrtizDrive.init({ app:'Ad Astra', prefix:'ad-astra',
+  getData: ()=>JSON.parse(JSON.stringify(DATA)), toast, allowed: driveAllowed,
+  onChange: ()=>{ const b = document.getElementById('driveBar'); if(b) OrtizDrive.mountBar(b); } });
 render();
 fetchWeekNote();
 /* Home-screen shortcuts (manifest.json) land here with a hash; consume it so

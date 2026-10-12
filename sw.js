@@ -4,12 +4,13 @@
 /* The page asks the waiting worker to take over when she taps Refresh —
    never automatically, so a mid-round quiz is never yanked. */
 self.addEventListener('message', e => { if(e.data === 'skip') self.skipWaiting(); });
-const CACHE_VERSION = 'ad-astra-v206';
+const CACHE_VERSION = 'ad-astra-v207';
 const SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg',
+  './ortiz-drive.js',
   './fonts/fraunces.woff2',
   './fonts/fraunces-italic.woff2',
   './fonts/jakarta.woff2',
@@ -41,8 +42,10 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // Never cache API traffic — Anthropic and GitHub must always hit the network.
-  if (url.hostname === 'api.anthropic.com' || url.hostname === 'api.github.com') return;
+  // Never cache API traffic — Anthropic, GitHub and Google (Drive, sign-in) must
+  // always hit the network; a cached Drive folder lookup would go stale silently.
+  if (url.hostname === 'api.anthropic.com' || url.hostname === 'api.github.com' ||
+      url.hostname === 'www.googleapis.com' || url.hostname === 'accounts.google.com') return;
   if (e.request.method !== 'GET') return;
 
   // Network-first for the app shell so a deploy lands on next load;
