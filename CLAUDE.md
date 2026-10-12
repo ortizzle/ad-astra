@@ -5763,9 +5763,31 @@ refuse. All of it holds the existing contrast bar.
 
 The in-app "Back up" button uses the **Web Share API** (`navigator.share` with a
 file), which on her Pixel opens the Android share sheet so Drive is one tap away.
-Desktop falls back to a plain download. There is deliberately **no Google OAuth**
-— writing to Drive directly would need a client ID and a backend, which breaks
-the no-backend rule for a once-a-week action.
+Desktop falls back to a plain download.
+
+### The Drive copy (v207 / Wayfinder v182, both apps)
+
+Beside that button, `ortiz-drive.js` (the shared Ortiz-apps module — copied
+**unchanged** into each repo; fix it at the source, never here) saves a dated
+copy of `DATA` — exactly what syncs to the Gist, so no tokens, Gist ID, API key
+or passcode hash — to `My Drive › Ortiz App Backups › Ad Astra ›
+ad-astra-YYYY-MM-DD.json` whenever it changed. No backend: a `drive.file` token
+from Google sign-in, which needs a tap, so with an expired token it raises a
+one-tap bar instead. The old "no Google OAuth" rule is lifted for this, on
+Chris's instruction.
+
+- **Grown-up devices only.** `driveAllowed()` = passcode set AND "stop asking
+  on this device" ticked (`parent_trust`) AND sandbox off. On her phone it is
+  false, so the Settings block renders empty, the bar never mounts, no check
+  runs and Google's script never loads. Do not loosen this to "in the parent
+  view": a parent opening the view once on her phone must not leave Drive
+  sign-in behind on it.
+- The block sits in the parent view's Backup card; the bar (`#driveBar`) at the
+  top of the parent view. `OrtizDrive.check()` runs after every successful
+  `Sync.load`/`Sync.save`, plus the module's own boot and visibility checks.
+- The saved file is accepted as-is by ⬆ Restore.
+- `sw.js` precaches `ortiz-drive.js` and never caches `www.googleapis.com` or
+  `accounts.google.com` — a cached Drive folder lookup would go stale silently.
 
 The Drive folder is **Ad Astra Backups**, inside her 8th Grade folder:
 `<in the private notes>`. The Setup screen links straight to it.
