@@ -66,7 +66,8 @@ records — they must never enter the shared Gist.
 
 **Deletes are tombstones.** `softDelete(id)` writes `{deleted:true, updatedAt}`;
 it never removes the key. Without this, deleting a unit on one device and syncing
-from another resurrects it. Tombstones older than 60 days are purged during merge.
+from another resurrects it. Tombstones older than 60 days are purged during merge —
+**except a unit's, which is kept forever** (v209; see *A discard that holds*).
 
 **Merging** is per-record, newest `updatedAt` wins (`Sync.merge`). Saving always
 fetches remote first, merges, then writes — never a blind overwrite.
@@ -1004,6 +1005,49 @@ dates strictly ascending and never on a weekend or a day off, a held unit
 absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
+
+### A discard that holds (v209 / Wayfinder v184, both apps)
+
+Chris: *"fix the tombstone resurrection bug."* Found in v208 while chasing a
+calendar-rotted test: `Sync.merge` purged every tombstone older than 60 days,
+and **units are the one record the app re-ships**. `fetchLibrary()` merges
+every `CONTENT_LIBRARY` file on each "Check the library", so once a discarded
+unit's tombstone aged out, nothing remembered the discard. The first library
+check after the purge erased the tombstone; the NEXT one put the unit back in
+the review queue as a draft. It never reached her unread — drafts gate it —
+but a discard that silently stops holding is a bug in the one screen meant to
+catch mistakes.
+
+- **Unit tombstones are never purged.** `keep(id, rec)` exempts `type:'unit'`
+  and, for tombstones written before `softDelete` kept `type`, any `unit-` id.
+  A unit tombstone is ~80 bytes; the store does not notice. Every other
+  record type still ages out at 60 days, which the test pins too, so the
+  store still does not grow forever.
+- **The deliberate re-ship still works and is unchanged:** a shipped copy
+  stamped past the discard wins the merge, exactly as `libv` and this file
+  already describe.
+- **Not recoverable: tombstones already purged.** Any unit discarded before
+  mid-August and synced since early October has already lost its tombstone,
+  so it may already be back in the review queue. Discarding it again now
+  holds for good.
+- Older clients still purge, but a merge is a union: a device on the new code
+  keeps its own copy of the tombstone and writes it back on its next save.
+
+`tools/test_tomb_purge.js` (same file, both apps) discovers a unit from
+`CONTENT_LIBRARY` rather than naming one, seeds a 70-day-old tombstone, serves
+the shipped file stamped BEFORE the discard (a real discard always comes after
+the file it discards — a copy stamped after it is the deliberate re-ship), and
+runs the library check **twice**, since the old code needed two checks to put
+the unit back in the queue. It also pins the type-less legacy tombstone, an
+old log tombstone still being purged, a recent one kept, and the re-ship
+still working. **Verified by reverting the fix and watching four assertions
+fail, including the unit back in the queue.**
+
+> ⚠️ **The first version of the test proved nothing about the real bug.** It
+> dated the tombstone 70 days back but served the library file at its real,
+> newer date — so the library read it as a deliberate re-ship and resurrected
+> the unit with the fix in place. Pin the scenario as it happens: the discard
+> comes after the file.
 
 ### Dynamics 1 and Topic 4 — Rational Functions (v208, THIS APP ONLY)
 

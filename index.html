@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v208 · Forces and fractions';
+const APP_VERSION = 'v209 · A discard that holds';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3439,8 +3439,16 @@ const Sync = {
       const r = out.records[id];
       if(!r || (rec.updatedAt||0) > (r.updatedAt||0)) out.records[id] = rec;
     }
+    /* Old tombstones are purged so the store does not grow forever — but never
+       a UNIT's. Units are the one record the app re-ships: fetchLibrary merges
+       every CONTENT_LIBRARY file on each "Check the library", so a purged unit
+       tombstone left nothing remembering the discard and the unit came back as
+       a draft in the review queue. A unit tombstone is ~80 bytes; keeping them
+       costs nothing. Older tombstones may lack `type`, so the id counts too. */
     const cutoff = Date.now() - 60*86400000;
-    for(const [id,rec] of Object.entries(out.records)) if(rec.deleted && rec.updatedAt < cutoff) delete out.records[id];
+    const keep = (id, rec) => rec.type === 'unit' || /^unit-/.test(id);
+    for(const [id,rec] of Object.entries(out.records))
+      if(rec.deleted && rec.updatedAt < cutoff && !keep(id, rec)) delete out.records[id];
     return out;
   },
   async save(){
