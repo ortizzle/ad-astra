@@ -1,0 +1,4234 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t4-05": {
+   "id": "unit-alg-t4-05",
+   "type": "unit",
+   "updatedAt": 1791931034425,
+   "classId": "algeo",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Topic 4 · 4-5 Solving Rational Equations",
+   "srcName": "enVision Algebra 2, Lesson 4-5 presentation slides (Drive)",
+   "source": "enVision Algebra 2 Lesson 4-5: Solving Rational Equations (lesson slides; no textbook pages were provided)",
+   "summary": {
+    "text": "Lesson 4-5 solves rational equations by multiplying by a common denominator, identifies extraneous solutions that fall outside the original domain, and uses rational equations to solve work-rate and river-current problems.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Rational equations are where the domain stops being a formality: a correct-looking answer can be wrong because it breaks the original equation. Work-rate and current problems show up again in physics and on standardised tests.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Solve a rational equation by clearing the denominators with the LCD",
+     "from": "source"
+    },
+    {
+     "text": "Identify and reject extraneous solutions, including when there is no solution",
+     "from": "source"
+    },
+    {
+     "text": "Set up and solve work-rate problems by adding rates",
+     "from": "source"
+    },
+    {
+     "text": "Set up and solve current and travel problems, rejecting answers the situation does not allow",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the 4-5 lesson SLIDES only — there were no 4-5 textbook pages in the Topic 4 folder. The slides carry the whole lesson (vocabulary, five worked examples, the concept summary and practice prompts), so nothing here goes beyond them, but every number is fresh. Two things worth knowing: the slides call a negative current speed \"extraneous\", when strictly it is a valid solution of the equation that the situation rejects — the unit teaches both ideas and says the slides use one word for them. And one slide graph labels its intersection (−1, 0.063); both sides actually equal 1/12 ≈ 0.083 there. The biggest single trap is \"twice as fast\", which means half the time, not double it.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the extraneous-solution cards — they are the heart of the lesson.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Rational equation",
+     "def": "**An equation that contains at least one rational expression.**\n• 5/(x + 1) = 2 and x/(x − 3) + 1/x = 4 are both rational equations.\n• Solving one usually means clearing the denominators first.",
+     "hint": "A variable somewhere in a denominator.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The method",
+     "def": "**State the excluded values, multiply every term on both sides by the LCD, solve the equation that is left, then throw out any solution that was excluded.**\n• Multiplying by the LCD clears every fraction in one step.\n• Every term means every term — including the ones with no fraction.",
+     "hint": "Domain first, clear, solve, then check against the domain.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Extraneous solution",
+     "def": "**A value that solves the cleared equation but not the original, because it makes an original denominator zero.**\n• It appears honestly from the algebra — and must still be rejected.\n• (x² + 3)/(x − 1) = 4/(x − 1) clears to x² + 3 = 4, so x = ±1; but x = 1 is excluded, leaving only x = −1.",
+     "hint": "Solved the new equation, broke the old one.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Why extraneous solutions appear",
+     "def": "**Multiplying both sides by an expression that can equal zero lets in values the original equation forbids.**\n• At those values you multiplied by 0, and 0 = 0 balances anything.\n• That is why the check is against the ORIGINAL equation.",
+     "hint": "Multiplying by zero makes every equation true.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Check in the original, not a middle step",
+     "def": "**Test each solution in the equation as first written; a later step has already lost the denominators that would reject it.**\n• An extraneous value satisfies every line after the fractions were cleared.\n• Comparing it with the excluded values is the fastest check.",
+     "hint": "Only the original still has the denominators that matter.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "When there is no solution",
+     "def": "**If every value the algebra produces is excluded, the equation has no solution.**\n• 2x/(x − 4) = 3 + 8/(x − 4) clears to 2x = 3x − 4, so x = 4 — which is excluded.\n• \"No solution\" is a complete, correct answer.",
+     "hint": "An empty answer is still an answer.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The graphical view",
+     "def": "**Solving f(x) = g(x) means finding where the two graphs meet; an extraneous value is an x where at least one graph does not exist.**\n• Shown: y = 4/(x − 2) and y = 2 meet once, at x = 4.\n• An excluded value sits on an asymptote or a hole, so no intersection can be there.",
+     "hint": "No point on the graph, no intersection.",
+     "from": "source",
+     "graph": {
+      "w": [
+       -4,
+       8,
+       -5,
+       6
+      ],
+      "gx": 1,
+      "gy": 1,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          -4.0,
+          -0.6667
+         ],
+         [
+          -3.95,
+          -0.6723
+         ],
+         [
+          -3.9,
+          -0.678
+         ],
+         [
+          -3.85,
+          -0.6838
+         ],
+         [
+          -3.8,
+          -0.6897
+         ],
+         [
+          -3.75,
+          -0.6957
+         ],
+         [
+          -3.7,
+          -0.7018
+         ],
+         [
+          -3.65,
+          -0.708
+         ],
+         [
+          -3.6,
+          -0.7143
+         ],
+         [
+          -3.55,
+          -0.7207
+         ],
+         [
+          -3.5,
+          -0.7273
+         ],
+         [
+          -3.45,
+          -0.7339
+         ],
+         [
+          -3.4,
+          -0.7407
+         ],
+         [
+          -3.35,
+          -0.7477
+         ],
+         [
+          -3.3,
+          -0.7547
+         ],
+         [
+          -3.25,
+          -0.7619
+         ],
+         [
+          -3.2,
+          -0.7692
+         ],
+         [
+          -3.15,
+          -0.7767
+         ],
+         [
+          -3.1,
+          -0.7843
+         ],
+         [
+          -3.05,
+          -0.7921
+         ],
+         [
+          -3.0,
+          -0.8
+         ],
+         [
+          -2.95,
+          -0.8081
+         ],
+         [
+          -2.9,
+          -0.8163
+         ],
+         [
+          -2.85,
+          -0.8247
+         ],
+         [
+          -2.8,
+          -0.8333
+         ],
+         [
+          -2.75,
+          -0.8421
+         ],
+         [
+          -2.7,
+          -0.8511
+         ],
+         [
+          -2.65,
+          -0.8602
+         ],
+         [
+          -2.6,
+          -0.8696
+         ],
+         [
+          -2.55,
+          -0.8791
+         ],
+         [
+          -2.5,
+          -0.8889
+         ],
+         [
+          -2.45,
+          -0.8989
+         ],
+         [
+          -2.4,
+          -0.9091
+         ],
+         [
+          -2.35,
+          -0.9195
+         ],
+         [
+          -2.3,
+          -0.9302
+         ],
+         [
+          -2.25,
+          -0.9412
+         ],
+         [
+          -2.2,
+          -0.9524
+         ],
+         [
+          -2.15,
+          -0.9639
+         ],
+         [
+          -2.1,
+          -0.9756
+         ],
+         [
+          -2.05,
+          -0.9877
+         ],
+         [
+          -2.0,
+          -1.0
+         ],
+         [
+          -1.95,
+          -1.0127
+         ],
+         [
+          -1.9,
+          -1.0256
+         ],
+         [
+          -1.85,
+          -1.039
+         ],
+         [
+          -1.8,
+          -1.0526
+         ],
+         [
+          -1.75,
+          -1.0667
+         ],
+         [
+          -1.7,
+          -1.0811
+         ],
+         [
+          -1.65,
+          -1.0959
+         ],
+         [
+          -1.6,
+          -1.1111
+         ],
+         [
+          -1.55,
+          -1.1268
+         ],
+         [
+          -1.5,
+          -1.1429
+         ],
+         [
+          -1.45,
+          -1.1594
+         ],
+         [
+          -1.4,
+          -1.1765
+         ],
+         [
+          -1.35,
+          -1.194
+         ],
+         [
+          -1.3,
+          -1.2121
+         ],
+         [
+          -1.25,
+          -1.2308
+         ],
+         [
+          -1.2,
+          -1.25
+         ],
+         [
+          -1.15,
+          -1.2698
+         ],
+         [
+          -1.1,
+          -1.2903
+         ],
+         [
+          -1.05,
+          -1.3115
+         ],
+         [
+          -1.0,
+          -1.3333
+         ],
+         [
+          -0.95,
+          -1.3559
+         ],
+         [
+          -0.9,
+          -1.3793
+         ],
+         [
+          -0.85,
+          -1.4035
+         ],
+         [
+          -0.8,
+          -1.4286
+         ],
+         [
+          -0.75,
+          -1.4545
+         ],
+         [
+          -0.7,
+          -1.4815
+         ],
+         [
+          -0.65,
+          -1.5094
+         ],
+         [
+          -0.6,
+          -1.5385
+         ],
+         [
+          -0.55,
+          -1.5686
+         ],
+         [
+          -0.5,
+          -1.6
+         ],
+         [
+          -0.45,
+          -1.6327
+         ],
+         [
+          -0.4,
+          -1.6667
+         ],
+         [
+          -0.35,
+          -1.7021
+         ],
+         [
+          -0.3,
+          -1.7391
+         ],
+         [
+          -0.25,
+          -1.7778
+         ],
+         [
+          -0.2,
+          -1.8182
+         ],
+         [
+          -0.15,
+          -1.8605
+         ],
+         [
+          -0.1,
+          -1.9048
+         ],
+         [
+          -0.05,
+          -1.9512
+         ],
+         [
+          0.0,
+          -2.0
+         ],
+         [
+          0.05,
+          -2.0513
+         ],
+         [
+          0.1,
+          -2.1053
+         ],
+         [
+          0.15,
+          -2.1622
+         ],
+         [
+          0.2,
+          -2.2222
+         ],
+         [
+          0.25,
+          -2.2857
+         ],
+         [
+          0.3,
+          -2.3529
+         ],
+         [
+          0.35,
+          -2.4242
+         ],
+         [
+          0.4,
+          -2.5
+         ],
+         [
+          0.45,
+          -2.5806
+         ],
+         [
+          0.5,
+          -2.6667
+         ],
+         [
+          0.55,
+          -2.7586
+         ],
+         [
+          0.6,
+          -2.8571
+         ],
+         [
+          0.65,
+          -2.963
+         ],
+         [
+          0.7,
+          -3.0769
+         ],
+         [
+          0.75,
+          -3.2
+         ],
+         [
+          0.8,
+          -3.3333
+         ],
+         [
+          0.85,
+          -3.4783
+         ],
+         [
+          0.9,
+          -3.6364
+         ],
+         [
+          0.95,
+          -3.8095
+         ],
+         [
+          1.0,
+          -4.0
+         ],
+         [
+          1.05,
+          -4.2105
+         ],
+         [
+          1.1,
+          -4.4444
+         ],
+         [
+          1.15,
+          -4.7059
+         ],
+         [
+          1.2,
+          -5.0
+         ],
+         [
+          1.25,
+          116
+         ],
+         [
+          2.7,
+          5.7143
+         ],
+         [
+          2.75,
+          5.3333
+         ],
+         [
+          2.8,
+          5.0
+         ],
+         [
+          2.85,
+          4.7059
+         ],
+         [
+          2.9,
+          4.4444
+         ],
+         [
+          2.95,
+          4.2105
+         ],
+         [
+          3.0,
+          4.0
+         ],
+         [
+          3.05,
+          3.8095
+         ],
+         [
+          3.1,
+          3.6364
+         ],
+         [
+          3.15,
+          3.4783
+         ],
+         [
+          3.2,
+          3.3333
+         ],
+         [
+          3.25,
+          3.2
+         ],
+         [
+          3.3,
+          3.0769
+         ],
+         [
+          3.35,
+          2.963
+         ],
+         [
+          3.4,
+          2.8571
+         ],
+         [
+          3.45,
+          2.7586
+         ],
+         [
+          3.5,
+          2.6667
+         ],
+         [
+          3.55,
+          2.5806
+         ],
+         [
+          3.6,
+          2.5
+         ],
+         [
+          3.65,
+          2.4242
+         ],
+         [
+          3.7,
+          2.3529
+         ],
+         [
+          3.75,
+          2.2857
+         ],
+         [
+          3.8,
+          2.2222
+         ],
+         [
+          3.85,
+          2.1622
+         ],
+         [
+          3.9,
+          2.1053
+         ],
+         [
+          3.95,
+          2.0513
+         ],
+         [
+          4.0,
+          2.0
+         ],
+         [
+          4.05,
+          1.9512
+         ],
+         [
+          4.1,
+          1.9048
+         ],
+         [
+          4.15,
+          1.8605
+         ],
+         [
+          4.2,
+          1.8182
+         ],
+         [
+          4.25,
+          1.7778
+         ],
+         [
+          4.3,
+          1.7391
+         ],
+         [
+          4.35,
+          1.7021
+         ],
+         [
+          4.4,
+          1.6667
+         ],
+         [
+          4.45,
+          1.6327
+         ],
+         [
+          4.5,
+          1.6
+         ],
+         [
+          4.55,
+          1.5686
+         ],
+         [
+          4.6,
+          1.5385
+         ],
+         [
+          4.65,
+          1.5094
+         ],
+         [
+          4.7,
+          1.4815
+         ],
+         [
+          4.75,
+          1.4545
+         ],
+         [
+          4.8,
+          1.4286
+         ],
+         [
+          4.85,
+          1.4035
+         ],
+         [
+          4.9,
+          1.3793
+         ],
+         [
+          4.95,
+          1.3559
+         ],
+         [
+          5.0,
+          1.3333
+         ],
+         [
+          5.05,
+          1.3115
+         ],
+         [
+          5.1,
+          1.2903
+         ],
+         [
+          5.15,
+          1.2698
+         ],
+         [
+          5.2,
+          1.25
+         ],
+         [
+          5.25,
+          1.2308
+         ],
+         [
+          5.3,
+          1.2121
+         ],
+         [
+          5.35,
+          1.194
+         ],
+         [
+          5.4,
+          1.1765
+         ],
+         [
+          5.45,
+          1.1594
+         ],
+         [
+          5.5,
+          1.1429
+         ],
+         [
+          5.55,
+          1.1268
+         ],
+         [
+          5.6,
+          1.1111
+         ],
+         [
+          5.65,
+          1.0959
+         ],
+         [
+          5.7,
+          1.0811
+         ],
+         [
+          5.75,
+          1.0667
+         ],
+         [
+          5.8,
+          1.0526
+         ],
+         [
+          5.85,
+          1.039
+         ],
+         [
+          5.9,
+          1.0256
+         ],
+         [
+          5.95,
+          1.0127
+         ],
+         [
+          6.0,
+          1.0
+         ],
+         [
+          6.05,
+          0.9877
+         ],
+         [
+          6.1,
+          0.9756
+         ],
+         [
+          6.15,
+          0.9639
+         ],
+         [
+          6.2,
+          0.9524
+         ],
+         [
+          6.25,
+          0.9412
+         ],
+         [
+          6.3,
+          0.9302
+         ],
+         [
+          6.35,
+          0.9195
+         ],
+         [
+          6.4,
+          0.9091
+         ],
+         [
+          6.45,
+          0.8989
+         ],
+         [
+          6.5,
+          0.8889
+         ],
+         [
+          6.55,
+          0.8791
+         ],
+         [
+          6.6,
+          0.8696
+         ],
+         [
+          6.65,
+          0.8602
+         ],
+         [
+          6.7,
+          0.8511
+         ],
+         [
+          6.75,
+          0.8421
+         ],
+         [
+          6.8,
+          0.8333
+         ],
+         [
+          6.85,
+          0.8247
+         ],
+         [
+          6.9,
+          0.8163
+         ],
+         [
+          6.95,
+          0.8081
+         ],
+         [
+          7.0,
+          0.8
+         ],
+         [
+          7.05,
+          0.7921
+         ],
+         [
+          7.1,
+          0.7843
+         ],
+         [
+          7.15,
+          0.7767
+         ],
+         [
+          7.2,
+          0.7692
+         ],
+         [
+          7.25,
+          0.7619
+         ],
+         [
+          7.3,
+          0.7547
+         ],
+         [
+          7.35,
+          0.7477
+         ],
+         [
+          7.4,
+          0.7407
+         ],
+         [
+          7.45,
+          0.7339
+         ],
+         [
+          7.5,
+          0.7273
+         ],
+         [
+          7.55,
+          0.7207
+         ],
+         [
+          7.6,
+          0.7143
+         ],
+         [
+          7.65,
+          0.708
+         ],
+         [
+          7.7,
+          0.7018
+         ],
+         [
+          7.75,
+          0.6957
+         ],
+         [
+          7.8,
+          0.6897
+         ],
+         [
+          7.85,
+          0.6838
+         ],
+         [
+          7.9,
+          0.678
+         ],
+         [
+          7.95,
+          0.6723
+         ],
+         [
+          8.0,
+          0.6667
+         ]
+        ]
+       },
+       {
+        "type": "pts",
+        "pts": [
+         [
+          -4.0,
+          2
+         ],
+         [
+          -3.95,
+          2
+         ],
+         [
+          -3.9,
+          2
+         ],
+         [
+          -3.85,
+          2
+         ],
+         [
+          -3.8,
+          2
+         ],
+         [
+          -3.75,
+          2
+         ],
+         [
+          -3.7,
+          2
+         ],
+         [
+          -3.65,
+          2
+         ],
+         [
+          -3.6,
+          2
+         ],
+         [
+          -3.55,
+          2
+         ],
+         [
+          -3.5,
+          2
+         ],
+         [
+          -3.45,
+          2
+         ],
+         [
+          -3.4,
+          2
+         ],
+         [
+          -3.35,
+          2
+         ],
+         [
+          -3.3,
+          2
+         ],
+         [
+          -3.25,
+          2
+         ],
+         [
+          -3.2,
+          2
+         ],
+         [
+          -3.15,
+          2
+         ],
+         [
+          -3.1,
+          2
+         ],
+         [
+          -3.05,
+          2
+         ],
+         [
+          -3.0,
+          2
+         ],
+         [
+          -2.95,
+          2
+         ],
+         [
+          -2.9,
+          2
+         ],
+         [
+          -2.85,
+          2
+         ],
+         [
+          -2.8,
+          2
+         ],
+         [
+          -2.75,
+          2
+         ],
+         [
+          -2.7,
+          2
+         ],
+         [
+          -2.65,
+          2
+         ],
+         [
+          -2.6,
+          2
+         ],
+         [
+          -2.55,
+          2
+         ],
+         [
+          -2.5,
+          2
+         ],
+         [
+          -2.45,
+          2
+         ],
+         [
+          -2.4,
+          2
+         ],
+         [
+          -2.35,
+          2
+         ],
+         [
+          -2.3,
+          2
+         ],
+         [
+          -2.25,
+          2
+         ],
+         [
+          -2.2,
+          2
+         ],
+         [
+          -2.15,
+          2
+         ],
+         [
+          -2.1,
+          2
+         ],
+         [
+          -2.05,
+          2
+         ],
+         [
+          -2.0,
+          2
+         ],
+         [
+          -1.95,
+          2
+         ],
+         [
+          -1.9,
+          2
+         ],
+         [
+          -1.85,
+          2
+         ],
+         [
+          -1.8,
+          2
+         ],
+         [
+          -1.75,
+          2
+         ],
+         [
+          -1.7,
+          2
+         ],
+         [
+          -1.65,
+          2
+         ],
+         [
+          -1.6,
+          2
+         ],
+         [
+          -1.55,
+          2
+         ],
+         [
+          -1.5,
+          2
+         ],
+         [
+          -1.45,
+          2
+         ],
+         [
+          -1.4,
+          2
+         ],
+         [
+          -1.35,
+          2
+         ],
+         [
+          -1.3,
+          2
+         ],
+         [
+          -1.25,
+          2
+         ],
+         [
+          -1.2,
+          2
+         ],
+         [
+          -1.15,
+          2
+         ],
+         [
+          -1.1,
+          2
+         ],
+         [
+          -1.05,
+          2
+         ],
+         [
+          -1.0,
+          2
+         ],
+         [
+          -0.95,
+          2
+         ],
+         [
+          -0.9,
+          2
+         ],
+         [
+          -0.85,
+          2
+         ],
+         [
+          -0.8,
+          2
+         ],
+         [
+          -0.75,
+          2
+         ],
+         [
+          -0.7,
+          2
+         ],
+         [
+          -0.65,
+          2
+         ],
+         [
+          -0.6,
+          2
+         ],
+         [
+          -0.55,
+          2
+         ],
+         [
+          -0.5,
+          2
+         ],
+         [
+          -0.45,
+          2
+         ],
+         [
+          -0.4,
+          2
+         ],
+         [
+          -0.35,
+          2
+         ],
+         [
+          -0.3,
+          2
+         ],
+         [
+          -0.25,
+          2
+         ],
+         [
+          -0.2,
+          2
+         ],
+         [
+          -0.15,
+          2
+         ],
+         [
+          -0.1,
+          2
+         ],
+         [
+          -0.05,
+          2
+         ],
+         [
+          0.0,
+          2
+         ],
+         [
+          0.05,
+          2
+         ],
+         [
+          0.1,
+          2
+         ],
+         [
+          0.15,
+          2
+         ],
+         [
+          0.2,
+          2
+         ],
+         [
+          0.25,
+          2
+         ],
+         [
+          0.3,
+          2
+         ],
+         [
+          0.35,
+          2
+         ],
+         [
+          0.4,
+          2
+         ],
+         [
+          0.45,
+          2
+         ],
+         [
+          0.5,
+          2
+         ],
+         [
+          0.55,
+          2
+         ],
+         [
+          0.6,
+          2
+         ],
+         [
+          0.65,
+          2
+         ],
+         [
+          0.7,
+          2
+         ],
+         [
+          0.75,
+          2
+         ],
+         [
+          0.8,
+          2
+         ],
+         [
+          0.85,
+          2
+         ],
+         [
+          0.9,
+          2
+         ],
+         [
+          0.95,
+          2
+         ],
+         [
+          1.0,
+          2
+         ],
+         [
+          1.05,
+          2
+         ],
+         [
+          1.1,
+          2
+         ],
+         [
+          1.15,
+          2
+         ],
+         [
+          1.2,
+          2
+         ],
+         [
+          1.25,
+          2
+         ],
+         [
+          1.3,
+          2
+         ],
+         [
+          1.35,
+          2
+         ],
+         [
+          1.4,
+          2
+         ],
+         [
+          1.45,
+          2
+         ],
+         [
+          1.5,
+          2
+         ],
+         [
+          1.55,
+          2
+         ],
+         [
+          1.6,
+          2
+         ],
+         [
+          1.65,
+          2
+         ],
+         [
+          1.7,
+          2
+         ],
+         [
+          1.75,
+          2
+         ],
+         [
+          1.8,
+          2
+         ],
+         [
+          1.85,
+          2
+         ],
+         [
+          1.9,
+          2
+         ],
+         [
+          1.95,
+          2
+         ],
+         [
+          2.0,
+          2
+         ],
+         [
+          2.05,
+          2
+         ],
+         [
+          2.1,
+          2
+         ],
+         [
+          2.15,
+          2
+         ],
+         [
+          2.2,
+          2
+         ],
+         [
+          2.25,
+          2
+         ],
+         [
+          2.3,
+          2
+         ],
+         [
+          2.35,
+          2
+         ],
+         [
+          2.4,
+          2
+         ],
+         [
+          2.45,
+          2
+         ],
+         [
+          2.5,
+          2
+         ],
+         [
+          2.55,
+          2
+         ],
+         [
+          2.6,
+          2
+         ],
+         [
+          2.65,
+          2
+         ],
+         [
+          2.7,
+          2
+         ],
+         [
+          2.75,
+          2
+         ],
+         [
+          2.8,
+          2
+         ],
+         [
+          2.85,
+          2
+         ],
+         [
+          2.9,
+          2
+         ],
+         [
+          2.95,
+          2
+         ],
+         [
+          3.0,
+          2
+         ],
+         [
+          3.05,
+          2
+         ],
+         [
+          3.1,
+          2
+         ],
+         [
+          3.15,
+          2
+         ],
+         [
+          3.2,
+          2
+         ],
+         [
+          3.25,
+          2
+         ],
+         [
+          3.3,
+          2
+         ],
+         [
+          3.35,
+          2
+         ],
+         [
+          3.4,
+          2
+         ],
+         [
+          3.45,
+          2
+         ],
+         [
+          3.5,
+          2
+         ],
+         [
+          3.55,
+          2
+         ],
+         [
+          3.6,
+          2
+         ],
+         [
+          3.65,
+          2
+         ],
+         [
+          3.7,
+          2
+         ],
+         [
+          3.75,
+          2
+         ],
+         [
+          3.8,
+          2
+         ],
+         [
+          3.85,
+          2
+         ],
+         [
+          3.9,
+          2
+         ],
+         [
+          3.95,
+          2
+         ],
+         [
+          4.0,
+          2
+         ],
+         [
+          4.05,
+          2
+         ],
+         [
+          4.1,
+          2
+         ],
+         [
+          4.15,
+          2
+         ],
+         [
+          4.2,
+          2
+         ],
+         [
+          4.25,
+          2
+         ],
+         [
+          4.3,
+          2
+         ],
+         [
+          4.35,
+          2
+         ],
+         [
+          4.4,
+          2
+         ],
+         [
+          4.45,
+          2
+         ],
+         [
+          4.5,
+          2
+         ],
+         [
+          4.55,
+          2
+         ],
+         [
+          4.6,
+          2
+         ],
+         [
+          4.65,
+          2
+         ],
+         [
+          4.7,
+          2
+         ],
+         [
+          4.75,
+          2
+         ],
+         [
+          4.8,
+          2
+         ],
+         [
+          4.85,
+          2
+         ],
+         [
+          4.9,
+          2
+         ],
+         [
+          4.95,
+          2
+         ],
+         [
+          5.0,
+          2
+         ],
+         [
+          5.05,
+          2
+         ],
+         [
+          5.1,
+          2
+         ],
+         [
+          5.15,
+          2
+         ],
+         [
+          5.2,
+          2
+         ],
+         [
+          5.25,
+          2
+         ],
+         [
+          5.3,
+          2
+         ],
+         [
+          5.35,
+          2
+         ],
+         [
+          5.4,
+          2
+         ],
+         [
+          5.45,
+          2
+         ],
+         [
+          5.5,
+          2
+         ],
+         [
+          5.55,
+          2
+         ],
+         [
+          5.6,
+          2
+         ],
+         [
+          5.65,
+          2
+         ],
+         [
+          5.7,
+          2
+         ],
+         [
+          5.75,
+          2
+         ],
+         [
+          5.8,
+          2
+         ],
+         [
+          5.85,
+          2
+         ],
+         [
+          5.9,
+          2
+         ],
+         [
+          5.95,
+          2
+         ],
+         [
+          6.0,
+          2
+         ],
+         [
+          6.05,
+          2
+         ],
+         [
+          6.1,
+          2
+         ],
+         [
+          6.15,
+          2
+         ],
+         [
+          6.2,
+          2
+         ],
+         [
+          6.25,
+          2
+         ],
+         [
+          6.3,
+          2
+         ],
+         [
+          6.35,
+          2
+         ],
+         [
+          6.4,
+          2
+         ],
+         [
+          6.45,
+          2
+         ],
+         [
+          6.5,
+          2
+         ],
+         [
+          6.55,
+          2
+         ],
+         [
+          6.6,
+          2
+         ],
+         [
+          6.65,
+          2
+         ],
+         [
+          6.7,
+          2
+         ],
+         [
+          6.75,
+          2
+         ],
+         [
+          6.8,
+          2
+         ],
+         [
+          6.85,
+          2
+         ],
+         [
+          6.9,
+          2
+         ],
+         [
+          6.95,
+          2
+         ],
+         [
+          7.0,
+          2
+         ],
+         [
+          7.05,
+          2
+         ],
+         [
+          7.1,
+          2
+         ],
+         [
+          7.15,
+          2
+         ],
+         [
+          7.2,
+          2
+         ],
+         [
+          7.25,
+          2
+         ],
+         [
+          7.3,
+          2
+         ],
+         [
+          7.35,
+          2
+         ],
+         [
+          7.4,
+          2
+         ],
+         [
+          7.45,
+          2
+         ],
+         [
+          7.5,
+          2
+         ],
+         [
+          7.55,
+          2
+         ],
+         [
+          7.6,
+          2
+         ],
+         [
+          7.65,
+          2
+         ],
+         [
+          7.7,
+          2
+         ],
+         [
+          7.75,
+          2
+         ],
+         [
+          7.8,
+          2
+         ],
+         [
+          7.85,
+          2
+         ],
+         [
+          7.9,
+          2
+         ],
+         [
+          7.95,
+          2
+         ],
+         [
+          8.0,
+          2
+         ]
+        ]
+       },
+       {
+        "type": "pts",
+        "pts": [
+         [
+          2.0,
+          -5
+         ],
+         [
+          2.0,
+          6
+         ]
+        ]
+       }
+      ],
+      "xl": "x",
+      "yl": "y",
+      "pts": [
+       {
+        "x": 4,
+        "y": 2,
+        "label": "(4, 2)"
+       }
+      ]
+     }
+    },
+    {
+     "id": "c7",
+     "term": "Work rate",
+     "def": "**If a job takes t hours alone, the rate is 1/t of the job per hour, and people working together ADD their rates.**\n• 1/a + 1/b = 1/T, where T is the time together.\n• A painter who takes 6 hours does 1/6 of the room each hour.",
+     "eq": "1/a + 1/b = 1/T",
+     "hint": "Add rates, never times.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "\"Twice as fast\" means half the time",
+     "def": "**If one worker is twice as fast as another who takes x hours, the faster one takes x/2 hours — a rate of 2/x, not 1/(2x).**\n• Doubling the speed doubles the RATE and halves the TIME.\n• Writing 2x for the faster worker's time is the commonest set-up error.",
+     "hint": "Faster → less time.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Current problems",
+     "def": "**With the current your speed is b + c; against it, b − c, where b is your speed in still water and c the current's.**\n• Each leg's time is distance ÷ that leg's speed.\n• Write the equation from what the problem says about the TIMES — equal, or one an hour longer.",
+     "eq": "t = d/(b + c),  t = d/(b − c)",
+     "hint": "The current adds one way and subtracts the other.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Rejected by the situation",
+     "def": "**A solution can satisfy the equation and still be impossible in context — a negative speed, time or length — and is rejected for that reason.**\n• This is different from an extraneous solution, which fails the equation's own domain.\n• Your slides call both kinds \"extraneous\"; either way, it is not the answer.",
+     "hint": "Ask whether the number could actually happen.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Proportions",
+     "def": "**When each side is a single fraction, a/b = c/d, multiplying both sides by bd gives ad = bc — cross-multiplication is the LCD method in one step.**\n• With number-only denominators, multiply by their LCM to clear decimals and fractions.\n• The excluded values still apply.",
+     "hint": "Cross-multiplying is just clearing the denominators.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve 3/(x − 2) = 6.",
+     "opts": [
+      "x = 5/2",
+      "x = 5/6",
+      "x = 4",
+      "x = 3/2"
+     ],
+     "ans": 0,
+     "hint": "Multiply both sides by x − 2.",
+     "steps": [
+      "x ≠ 2.",
+      "Multiply by x − 2: 3 = 6(x − 2) = 6x − 12.",
+      "6x = 15, so x = 15/6 = 5/2.",
+      "x = 5/2 is not excluded, so it is the solution."
+     ],
+     "ex": {
+      "main": "**x = 5/2.** Check: 3/(5/2 − 2) = 3/(1/2) = 6. x = 5/6 comes from writing 6x − 2 without distributing the 6 over the −2; x = 4 flips the fraction to x − 2 = 6/3.",
+      "tip": "Distribute across the whole bracket after clearing."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is an extraneous solution of a rational equation?",
+     "opts": [
+      "Any solution of the equation that turns out to be a negative number",
+      "A value the algebra produces that makes an original denominator zero",
+      "A solution that is a fraction instead of a whole-number answer",
+      "The second solution of an equation that has two solutions"
+     ],
+     "ans": 1,
+     "hint": "It comes out of the algebra but fails the original.",
+     "steps": [
+      "Clearing the denominators can produce new values.",
+      "Some of them make an original denominator zero.",
+      "Those are not in the domain, so they cannot solve the original.",
+      "They are extraneous."
+     ],
+     "ex": {
+      "main": "**A value the algebra produces that makes an original denominator zero.** Negative and fractional solutions are perfectly fine when they are in the domain. The test is the excluded values, not the size or sign of the number.",
+      "tip": "Extraneous is about the domain, nothing else."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "You want to solve 5/(x + 1) + 2/x = 3. What is the most efficient first step after noting x ≠ −1 and x ≠ 0?",
+     "opts": [
+      "Add the two numerators to get 7/(2x + 1)",
+      "Subtract 3 from both sides, then cross-multiply",
+      "Multiply every term on both sides by x(x + 1)",
+      "Multiply only the two fractions by x(x + 1)"
+     ],
+     "ans": 2,
+     "hint": "One multiplier can clear every denominator at once.",
+     "steps": [
+      "The LCD of x + 1 and x is x(x + 1).",
+      "Multiply EVERY term by it — the 3 as well.",
+      "That leaves 5x + 2(x + 1) = 3x(x + 1), with no fractions.",
+      "Then solve and check."
+     ],
+     "ex": {
+      "main": "**Multiply every term on both sides by x(x + 1).** Multiplying only the fractions breaks the equation, because the 3 has to be scaled too. 7/(2x + 1) adds tops and bottoms separately, which is never valid.",
+      "tip": "Every term, both sides — including the plain numbers."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which values can never be solutions of 2/(x + 1) + x/(x − 6) = 3?",
+     "opts": [
+      "x = 3 only",
+      "x = 1 and x = −6",
+      "x = 0 only",
+      "x = −1 and x = 6"
+     ],
+     "ans": 3,
+     "hint": "Which inputs make a denominator zero?",
+     "steps": [
+      "x + 1 = 0 at x = −1.",
+      "x − 6 = 0 at x = 6.",
+      "At those values the original equation is undefined.",
+      "x = −1 and x = 6 can never be solutions."
+     ],
+     "ex": {
+      "main": "**x = −1 and x = 6.** Write them down before solving, so that an extraneous value is spotted the moment it appears. x = 1 and x = −6 read the signs out of the brackets without solving.",
+      "tip": "List the excluded values first — it makes the final check instant."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve 1/x + 3/x = 1/5.",
+     "opts": [
+      "x = 20",
+      "x = 4/5",
+      "x = 15",
+      "x = 1/20"
+     ],
+     "ans": 0,
+     "hint": "Combine the left side first: same denominator.",
+     "steps": [
+      "1/x + 3/x = 4/x.",
+      "4/x = 1/5.",
+      "Multiply both sides by 5x: 20 = x.",
+      "x = 20, which is not excluded."
+     ],
+     "ex": {
+      "main": "**x = 20.** Check: 1/20 + 3/20 = 4/20 = 1/5. x = 1/20 stops one step short, at 1/x; x = 4/5 multiplies 4 by 1/5 as if x were in the numerator.",
+      "tip": "When the unknown is in the denominator, the answer often comes out larger than the numbers you see."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A painter can paint a room alone in 8 hours. What fraction of the room does the painter finish in one hour?",
+     "opts": [
+      "8",
+      "1/8",
+      "7/8",
+      "1/16"
+     ],
+     "ans": 1,
+     "hint": "Rate = one job ÷ time for the job.",
+     "steps": [
+      "The whole job is 1 room.",
+      "It takes 8 hours.",
+      "Rate = 1 room ÷ 8 hours.",
+      "1/8 of the room each hour."
+     ],
+     "ex": {
+      "main": "**1/8.** In 8 hours at 1/8 per hour, the painter finishes 8 × 1/8 = 1 room. 7/8 is what is LEFT after the first hour, not what is done.",
+      "tip": "Rates are what add when people work together."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "You graph y = f(x) and y = g(x). What do the solutions of f(x) = g(x) correspond to?",
+     "opts": [
+      "The vertical asymptotes of the two graphs taken together",
+      "The x-intercepts of either of the two graphs separately",
+      "The x-coordinates of the points where the two graphs meet",
+      "The y-coordinates of the points where the two graphs meet"
+     ],
+     "ans": 2,
+     "hint": "At a solution, both sides give the same output for the same input.",
+     "steps": [
+      "A solution is an x for which f(x) and g(x) are equal.",
+      "Equal outputs at the same input means a shared point on the two graphs.",
+      "The solution is that point's x-coordinate.",
+      "Solutions are the x-coordinates of the intersections."
+     ],
+     "ex": {
+      "main": "**The x-coordinates of the intersections.** The y-coordinate is the value both sides share there, not the solution itself. A vertical asymptote is the one place a solution can NEVER be, because at least one graph does not exist there.",
+      "tip": "An extraneous value always sits where a graph is missing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve (x² + 5)/(x − 2) = 9/(x − 2).",
+     "opts": [
+      "No solution",
+      "x = 2 and x = −2",
+      "x = 2",
+      "x = −2"
+     ],
+     "ans": 3,
+     "hint": "Note the excluded value before you clear the denominators.",
+     "steps": [
+      "x ≠ 2.",
+      "Multiply both sides by x − 2: x² + 5 = 9.",
+      "x² = 4, so x = 2 or x = −2.",
+      "x = 2 is excluded, so the only solution is x = −2."
+     ],
+     "ex": {
+      "main": "**x = −2.** Both ±2 solve x² = 4, but x = 2 makes the original denominators zero, so it is extraneous. Answering both forgets the check; answering \"no solution\" throws out the good one with the bad.",
+      "tip": "Check each candidate on its own."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve 3x/(x + 2) = 1 + 6/(x + 2).",
+     "opts": [
+      "x = 4",
+      "x = 7/3",
+      "x = −2",
+      "No solution"
+     ],
+     "ans": 0,
+     "hint": "Multiply EVERY term by x + 2, the 1 included.",
+     "steps": [
+      "x ≠ −2.",
+      "Multiply every term by x + 2: 3x = (x + 2) + 6.",
+      "3x = x + 8, so 2x = 8 and x = 4.",
+      "x = 4 is allowed, so it is the solution."
+     ],
+     "ex": {
+      "main": "**x = 4.** Check: 12/6 = 2 and 1 + 6/6 = 2. x = 7/3 comes from forgetting to multiply the 1 by x + 2 (3x = 1 + 6). x = −2 is the excluded value, so it could never be the answer.",
+      "tip": "The plain number is the term people forget to multiply."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve 2/(x − 4) + x/(x − 1) = 6/((x − 4)(x − 1)).",
+     "opts": [
+      "x = 4 and x = −2",
+      "x = −2",
+      "x = 4",
+      "x = 2 and x = −4"
+     ],
+     "ans": 1,
+     "hint": "The LCD is already on the right: (x − 4)(x − 1).",
+     "steps": [
+      "x ≠ 4 and x ≠ 1.",
+      "Multiply every term by (x − 4)(x − 1): 2(x − 1) + x(x − 4) = 6.",
+      "x² − 2x − 8 = 0, so (x − 4)(x + 2) = 0.",
+      "x = 4 is excluded; the solution is x = −2."
+     ],
+     "ex": {
+      "main": "**x = −2.** The quadratic gives 4 and −2, and 4 makes two of the original denominators zero. x = 2 and x = −4 come from a sign slip in the factoring.",
+      "tip": "Excluded values listed at the start make this check a glance."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Pipe A fills a tank in 6 hours and pipe B fills it in 3 hours. How long do they take together?",
+     "opts": [
+      "9 hours",
+      "4.5 hours",
+      "2 hours",
+      "1/2 hour"
+     ],
+     "ans": 2,
+     "hint": "Add the rates, then flip the total rate into a time.",
+     "steps": [
+      "Rates: A does 1/6 of the tank per hour, B does 1/3.",
+      "Together: 1/6 + 1/3 = 1/6 + 2/6 = 1/2 of the tank per hour.",
+      "Half a tank per hour means the whole tank takes 2 hours.",
+      "Together: 2 hours."
+     ],
+     "ex": {
+      "main": "**2 hours.** Together they must be faster than the faster pipe alone, so any answer over 3 hours is impossible: 4.5 averages the times and 9 adds them. 1/2 hour stops at the combined RATE without turning it back into a time.",
+      "tip": "Sanity check: together is always quicker than the quicker one alone."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two printers together finish a job in 10 minutes. One prints twice as fast as the other. How long would the slower printer take on its own?",
+     "opts": [
+      "5 minutes",
+      "15 minutes",
+      "20 minutes",
+      "30 minutes"
+     ],
+     "ans": 3,
+     "hint": "If the slower one takes x minutes, its rate is 1/x. Twice as fast is a rate of 2/x.",
+     "steps": [
+      "Slower rate: 1/x. Faster rate: 2/x (it takes x/2 minutes).",
+      "Together: 1/x + 2/x = 1/10.",
+      "3/x = 1/10, so x = 30.",
+      "The slower printer takes 30 minutes; the faster takes 15."
+     ],
+     "ex": {
+      "main": "**30 minutes.** 15 minutes is the FASTER printer's time — and it is also what you get by writing the faster printer's time as 2x, which makes it slower instead of faster. Twice as fast means half the time.",
+      "tip": "Write rates, not times, and \"twice as fast\" can only mean 2/x."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A boat travels 10 km downstream in the same time it takes to travel 6 km upstream. The current flows at 2 km/h. What is the boat's speed in still water?",
+     "opts": [
+      "8 km/h",
+      "4 km/h",
+      "16 km/h",
+      "6 km/h"
+     ],
+     "ans": 0,
+     "hint": "Equal times: set distance ÷ speed equal for the two legs.",
+     "steps": [
+      "Downstream speed b + 2; upstream speed b − 2.",
+      "Equal times: 10/(b + 2) = 6/(b − 2).",
+      "Cross-multiply: 10(b − 2) = 6(b + 2), so 10b − 20 = 6b + 12.",
+      "4b = 32, so b = 8 km/h."
+     ],
+     "ex": {
+      "main": "**8 km/h.** Check: 10/10 = 1 hour and 6/6 = 1 hour. 16 km/h comes from 10b − 20 = 6b − 12 (a sign slip on the right), and 4 km/h divides 32 by 8 instead of by 4.",
+      "tip": "Check both legs give the same time — it takes seconds."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown plots y = 6/x and y = x − 1. What are the solutions of 6/x = x − 1?",
+     "opts": [
+      "x = 2 and x = −3",
+      "x = 3 and x = −2",
+      "x = 0 and x = 1",
+      "x = 3 only"
+     ],
+     "ans": 1,
+     "hint": "Read the x-coordinates of the crossing points.",
+     "steps": [
+      "The curve and the line cross twice.",
+      "One crossing is at (3, 2); the other at (−2, −3).",
+      "The solutions are the x-coordinates.",
+      "x = 3 and x = −2. Algebra agrees: x² − x − 6 = 0, so (x − 3)(x + 2) = 0."
+     ],
+     "ex": {
+      "main": "**x = 3 and x = −2.** 2 and −3 are the y-coordinates of the crossings, not the solutions. x = 0 is the curve's vertical asymptote and x = 1 is where the line crosses the x-axis; neither is a meeting point.",
+      "tip": "Two crossing points, two solutions — the graph shows how many to expect."
+     },
+     "graph": {
+      "w": [
+       -6,
+       6,
+       -6,
+       6
+      ],
+      "gx": 1,
+      "gy": 2,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          -6.0,
+          -1.0
+         ],
+         [
+          -5.95,
+          -1.0084
+         ],
+         [
+          -5.9,
+          -1.0169
+         ],
+         [
+          -5.85,
+          -1.0256
+         ],
+         [
+          -5.8,
+          -1.0345
+         ],
+         [
+          -5.75,
+          -1.0435
+         ],
+         [
+          -5.7,
+          -1.0526
+         ],
+         [
+          -5.65,
+          -1.0619
+         ],
+         [
+          -5.6,
+          -1.0714
+         ],
+         [
+          -5.55,
+          -1.0811
+         ],
+         [
+          -5.5,
+          -1.0909
+         ],
+         [
+          -5.45,
+          -1.1009
+         ],
+         [
+          -5.4,
+          -1.1111
+         ],
+         [
+          -5.35,
+          -1.1215
+         ],
+         [
+          -5.3,
+          -1.1321
+         ],
+         [
+          -5.25,
+          -1.1429
+         ],
+         [
+          -5.2,
+          -1.1538
+         ],
+         [
+          -5.15,
+          -1.165
+         ],
+         [
+          -5.1,
+          -1.1765
+         ],
+         [
+          -5.05,
+          -1.1881
+         ],
+         [
+          -5.0,
+          -1.2
+         ],
+         [
+          -4.95,
+          -1.2121
+         ],
+         [
+          -4.9,
+          -1.2245
+         ],
+         [
+          -4.85,
+          -1.2371
+         ],
+         [
+          -4.8,
+          -1.25
+         ],
+         [
+          -4.75,
+          -1.2632
+         ],
+         [
+          -4.7,
+          -1.2766
+         ],
+         [
+          -4.65,
+          -1.2903
+         ],
+         [
+          -4.6,
+          -1.3043
+         ],
+         [
+          -4.55,
+          -1.3187
+         ],
+         [
+          -4.5,
+          -1.3333
+         ],
+         [
+          -4.45,
+          -1.3483
+         ],
+         [
+          -4.4,
+          -1.3636
+         ],
+         [
+          -4.35,
+          -1.3793
+         ],
+         [
+          -4.3,
+          -1.3953
+         ],
+         [
+          -4.25,
+          -1.4118
+         ],
+         [
+          -4.2,
+          -1.4286
+         ],
+         [
+          -4.15,
+          -1.4458
+         ],
+         [
+          -4.1,
+          -1.4634
+         ],
+         [
+          -4.05,
+          -1.4815
+         ],
+         [
+          -4.0,
+          -1.5
+         ],
+         [
+          -3.95,
+          -1.519
+         ],
+         [
+          -3.9,
+          -1.5385
+         ],
+         [
+          -3.85,
+          -1.5584
+         ],
+         [
+          -3.8,
+          -1.5789
+         ],
+         [
+          -3.75,
+          -1.6
+         ],
+         [
+          -3.7,
+          -1.6216
+         ],
+         [
+          -3.65,
+          -1.6438
+         ],
+         [
+          -3.6,
+          -1.6667
+         ],
+         [
+          -3.55,
+          -1.6901
+         ],
+         [
+          -3.5,
+          -1.7143
+         ],
+         [
+          -3.45,
+          -1.7391
+         ],
+         [
+          -3.4,
+          -1.7647
+         ],
+         [
+          -3.35,
+          -1.791
+         ],
+         [
+          -3.3,
+          -1.8182
+         ],
+         [
+          -3.25,
+          -1.8462
+         ],
+         [
+          -3.2,
+          -1.875
+         ],
+         [
+          -3.15,
+          -1.9048
+         ],
+         [
+          -3.1,
+          -1.9355
+         ],
+         [
+          -3.05,
+          -1.9672
+         ],
+         [
+          -3.0,
+          -2.0
+         ],
+         [
+          -2.95,
+          -2.0339
+         ],
+         [
+          -2.9,
+          -2.069
+         ],
+         [
+          -2.85,
+          -2.1053
+         ],
+         [
+          -2.8,
+          -2.1429
+         ],
+         [
+          -2.75,
+          -2.1818
+         ],
+         [
+          -2.7,
+          -2.2222
+         ],
+         [
+          -2.65,
+          -2.2642
+         ],
+         [
+          -2.6,
+          -2.3077
+         ],
+         [
+          -2.55,
+          -2.3529
+         ],
+         [
+          -2.5,
+          -2.4
+         ],
+         [
+          -2.45,
+          -2.449
+         ],
+         [
+          -2.4,
+          -2.5
+         ],
+         [
+          -2.35,
+          -2.5532
+         ],
+         [
+          -2.3,
+          -2.6087
+         ],
+         [
+          -2.25,
+          -2.6667
+         ],
+         [
+          -2.2,
+          -2.7273
+         ],
+         [
+          -2.15,
+          -2.7907
+         ],
+         [
+          -2.1,
+          -2.8571
+         ],
+         [
+          -2.05,
+          -2.9268
+         ],
+         [
+          -2.0,
+          -3.0
+         ],
+         [
+          -1.95,
+          -3.0769
+         ],
+         [
+          -1.9,
+          -3.1579
+         ],
+         [
+          -1.85,
+          -3.2432
+         ],
+         [
+          -1.8,
+          -3.3333
+         ],
+         [
+          -1.75,
+          -3.4286
+         ],
+         [
+          -1.7,
+          -3.5294
+         ],
+         [
+          -1.65,
+          -3.6364
+         ],
+         [
+          -1.6,
+          -3.75
+         ],
+         [
+          -1.55,
+          -3.871
+         ],
+         [
+          -1.5,
+          -4.0
+         ],
+         [
+          -1.45,
+          -4.1379
+         ],
+         [
+          -1.4,
+          -4.2857
+         ],
+         [
+          -1.35,
+          -4.4444
+         ],
+         [
+          -1.3,
+          -4.6154
+         ],
+         [
+          -1.25,
+          -4.8
+         ],
+         [
+          -1.2,
+          -5.0
+         ],
+         [
+          -1.15,
+          -5.2174
+         ],
+         [
+          -1.1,
+          -5.4545
+         ],
+         [
+          -1.05,
+          -5.7143
+         ],
+         [
+          -1.0,
+          -6.0
+         ],
+         [
+          -0.95,
+          126
+         ],
+         [
+          1.0,
+          6.0
+         ],
+         [
+          1.05,
+          5.7143
+         ],
+         [
+          1.1,
+          5.4545
+         ],
+         [
+          1.15,
+          5.2174
+         ],
+         [
+          1.2,
+          5.0
+         ],
+         [
+          1.25,
+          4.8
+         ],
+         [
+          1.3,
+          4.6154
+         ],
+         [
+          1.35,
+          4.4444
+         ],
+         [
+          1.4,
+          4.2857
+         ],
+         [
+          1.45,
+          4.1379
+         ],
+         [
+          1.5,
+          4.0
+         ],
+         [
+          1.55,
+          3.871
+         ],
+         [
+          1.6,
+          3.75
+         ],
+         [
+          1.65,
+          3.6364
+         ],
+         [
+          1.7,
+          3.5294
+         ],
+         [
+          1.75,
+          3.4286
+         ],
+         [
+          1.8,
+          3.3333
+         ],
+         [
+          1.85,
+          3.2432
+         ],
+         [
+          1.9,
+          3.1579
+         ],
+         [
+          1.95,
+          3.0769
+         ],
+         [
+          2.0,
+          3.0
+         ],
+         [
+          2.05,
+          2.9268
+         ],
+         [
+          2.1,
+          2.8571
+         ],
+         [
+          2.15,
+          2.7907
+         ],
+         [
+          2.2,
+          2.7273
+         ],
+         [
+          2.25,
+          2.6667
+         ],
+         [
+          2.3,
+          2.6087
+         ],
+         [
+          2.35,
+          2.5532
+         ],
+         [
+          2.4,
+          2.5
+         ],
+         [
+          2.45,
+          2.449
+         ],
+         [
+          2.5,
+          2.4
+         ],
+         [
+          2.55,
+          2.3529
+         ],
+         [
+          2.6,
+          2.3077
+         ],
+         [
+          2.65,
+          2.2642
+         ],
+         [
+          2.7,
+          2.2222
+         ],
+         [
+          2.75,
+          2.1818
+         ],
+         [
+          2.8,
+          2.1429
+         ],
+         [
+          2.85,
+          2.1053
+         ],
+         [
+          2.9,
+          2.069
+         ],
+         [
+          2.95,
+          2.0339
+         ],
+         [
+          3.0,
+          2.0
+         ],
+         [
+          3.05,
+          1.9672
+         ],
+         [
+          3.1,
+          1.9355
+         ],
+         [
+          3.15,
+          1.9048
+         ],
+         [
+          3.2,
+          1.875
+         ],
+         [
+          3.25,
+          1.8462
+         ],
+         [
+          3.3,
+          1.8182
+         ],
+         [
+          3.35,
+          1.791
+         ],
+         [
+          3.4,
+          1.7647
+         ],
+         [
+          3.45,
+          1.7391
+         ],
+         [
+          3.5,
+          1.7143
+         ],
+         [
+          3.55,
+          1.6901
+         ],
+         [
+          3.6,
+          1.6667
+         ],
+         [
+          3.65,
+          1.6438
+         ],
+         [
+          3.7,
+          1.6216
+         ],
+         [
+          3.75,
+          1.6
+         ],
+         [
+          3.8,
+          1.5789
+         ],
+         [
+          3.85,
+          1.5584
+         ],
+         [
+          3.9,
+          1.5385
+         ],
+         [
+          3.95,
+          1.519
+         ],
+         [
+          4.0,
+          1.5
+         ],
+         [
+          4.05,
+          1.4815
+         ],
+         [
+          4.1,
+          1.4634
+         ],
+         [
+          4.15,
+          1.4458
+         ],
+         [
+          4.2,
+          1.4286
+         ],
+         [
+          4.25,
+          1.4118
+         ],
+         [
+          4.3,
+          1.3953
+         ],
+         [
+          4.35,
+          1.3793
+         ],
+         [
+          4.4,
+          1.3636
+         ],
+         [
+          4.45,
+          1.3483
+         ],
+         [
+          4.5,
+          1.3333
+         ],
+         [
+          4.55,
+          1.3187
+         ],
+         [
+          4.6,
+          1.3043
+         ],
+         [
+          4.65,
+          1.2903
+         ],
+         [
+          4.7,
+          1.2766
+         ],
+         [
+          4.75,
+          1.2632
+         ],
+         [
+          4.8,
+          1.25
+         ],
+         [
+          4.85,
+          1.2371
+         ],
+         [
+          4.9,
+          1.2245
+         ],
+         [
+          4.95,
+          1.2121
+         ],
+         [
+          5.0,
+          1.2
+         ],
+         [
+          5.05,
+          1.1881
+         ],
+         [
+          5.1,
+          1.1765
+         ],
+         [
+          5.15,
+          1.165
+         ],
+         [
+          5.2,
+          1.1538
+         ],
+         [
+          5.25,
+          1.1429
+         ],
+         [
+          5.3,
+          1.1321
+         ],
+         [
+          5.35,
+          1.1215
+         ],
+         [
+          5.4,
+          1.1111
+         ],
+         [
+          5.45,
+          1.1009
+         ],
+         [
+          5.5,
+          1.0909
+         ],
+         [
+          5.55,
+          1.0811
+         ],
+         [
+          5.6,
+          1.0714
+         ],
+         [
+          5.65,
+          1.0619
+         ],
+         [
+          5.7,
+          1.0526
+         ],
+         [
+          5.75,
+          1.0435
+         ],
+         [
+          5.8,
+          1.0345
+         ],
+         [
+          5.85,
+          1.0256
+         ],
+         [
+          5.9,
+          1.0169
+         ],
+         [
+          5.95,
+          1.0084
+         ],
+         [
+          6.0,
+          1.0
+         ]
+        ]
+       },
+       {
+        "type": "pts",
+        "pts": [
+         [
+          -5.0,
+          -6.0
+         ],
+         [
+          -4.95,
+          -5.95
+         ],
+         [
+          -4.9,
+          -5.9
+         ],
+         [
+          -4.85,
+          -5.85
+         ],
+         [
+          -4.8,
+          -5.8
+         ],
+         [
+          -4.75,
+          -5.75
+         ],
+         [
+          -4.7,
+          -5.7
+         ],
+         [
+          -4.65,
+          -5.65
+         ],
+         [
+          -4.6,
+          -5.6
+         ],
+         [
+          -4.55,
+          -5.55
+         ],
+         [
+          -4.5,
+          -5.5
+         ],
+         [
+          -4.45,
+          -5.45
+         ],
+         [
+          -4.4,
+          -5.4
+         ],
+         [
+          -4.35,
+          -5.35
+         ],
+         [
+          -4.3,
+          -5.3
+         ],
+         [
+          -4.25,
+          -5.25
+         ],
+         [
+          -4.2,
+          -5.2
+         ],
+         [
+          -4.15,
+          -5.15
+         ],
+         [
+          -4.1,
+          -5.1
+         ],
+         [
+          -4.05,
+          -5.05
+         ],
+         [
+          -4.0,
+          -5.0
+         ],
+         [
+          -3.95,
+          -4.95
+         ],
+         [
+          -3.9,
+          -4.9
+         ],
+         [
+          -3.85,
+          -4.85
+         ],
+         [
+          -3.8,
+          -4.8
+         ],
+         [
+          -3.75,
+          -4.75
+         ],
+         [
+          -3.7,
+          -4.7
+         ],
+         [
+          -3.65,
+          -4.65
+         ],
+         [
+          -3.6,
+          -4.6
+         ],
+         [
+          -3.55,
+          -4.55
+         ],
+         [
+          -3.5,
+          -4.5
+         ],
+         [
+          -3.45,
+          -4.45
+         ],
+         [
+          -3.4,
+          -4.4
+         ],
+         [
+          -3.35,
+          -4.35
+         ],
+         [
+          -3.3,
+          -4.3
+         ],
+         [
+          -3.25,
+          -4.25
+         ],
+         [
+          -3.2,
+          -4.2
+         ],
+         [
+          -3.15,
+          -4.15
+         ],
+         [
+          -3.1,
+          -4.1
+         ],
+         [
+          -3.05,
+          -4.05
+         ],
+         [
+          -3.0,
+          -4.0
+         ],
+         [
+          -2.95,
+          -3.95
+         ],
+         [
+          -2.9,
+          -3.9
+         ],
+         [
+          -2.85,
+          -3.85
+         ],
+         [
+          -2.8,
+          -3.8
+         ],
+         [
+          -2.75,
+          -3.75
+         ],
+         [
+          -2.7,
+          -3.7
+         ],
+         [
+          -2.65,
+          -3.65
+         ],
+         [
+          -2.6,
+          -3.6
+         ],
+         [
+          -2.55,
+          -3.55
+         ],
+         [
+          -2.5,
+          -3.5
+         ],
+         [
+          -2.45,
+          -3.45
+         ],
+         [
+          -2.4,
+          -3.4
+         ],
+         [
+          -2.35,
+          -3.35
+         ],
+         [
+          -2.3,
+          -3.3
+         ],
+         [
+          -2.25,
+          -3.25
+         ],
+         [
+          -2.2,
+          -3.2
+         ],
+         [
+          -2.15,
+          -3.15
+         ],
+         [
+          -2.1,
+          -3.1
+         ],
+         [
+          -2.05,
+          -3.05
+         ],
+         [
+          -2.0,
+          -3.0
+         ],
+         [
+          -1.95,
+          -2.95
+         ],
+         [
+          -1.9,
+          -2.9
+         ],
+         [
+          -1.85,
+          -2.85
+         ],
+         [
+          -1.8,
+          -2.8
+         ],
+         [
+          -1.75,
+          -2.75
+         ],
+         [
+          -1.7,
+          -2.7
+         ],
+         [
+          -1.65,
+          -2.65
+         ],
+         [
+          -1.6,
+          -2.6
+         ],
+         [
+          -1.55,
+          -2.55
+         ],
+         [
+          -1.5,
+          -2.5
+         ],
+         [
+          -1.45,
+          -2.45
+         ],
+         [
+          -1.4,
+          -2.4
+         ],
+         [
+          -1.35,
+          -2.35
+         ],
+         [
+          -1.3,
+          -2.3
+         ],
+         [
+          -1.25,
+          -2.25
+         ],
+         [
+          -1.2,
+          -2.2
+         ],
+         [
+          -1.15,
+          -2.15
+         ],
+         [
+          -1.1,
+          -2.1
+         ],
+         [
+          -1.05,
+          -2.05
+         ],
+         [
+          -1.0,
+          -2.0
+         ],
+         [
+          -0.95,
+          -1.95
+         ],
+         [
+          -0.9,
+          -1.9
+         ],
+         [
+          -0.85,
+          -1.85
+         ],
+         [
+          -0.8,
+          -1.8
+         ],
+         [
+          -0.75,
+          -1.75
+         ],
+         [
+          -0.7,
+          -1.7
+         ],
+         [
+          -0.65,
+          -1.65
+         ],
+         [
+          -0.6,
+          -1.6
+         ],
+         [
+          -0.55,
+          -1.55
+         ],
+         [
+          -0.5,
+          -1.5
+         ],
+         [
+          -0.45,
+          -1.45
+         ],
+         [
+          -0.4,
+          -1.4
+         ],
+         [
+          -0.35,
+          -1.35
+         ],
+         [
+          -0.3,
+          -1.3
+         ],
+         [
+          -0.25,
+          -1.25
+         ],
+         [
+          -0.2,
+          -1.2
+         ],
+         [
+          -0.15,
+          -1.15
+         ],
+         [
+          -0.1,
+          -1.1
+         ],
+         [
+          -0.05,
+          -1.05
+         ],
+         [
+          0.0,
+          -1.0
+         ],
+         [
+          0.05,
+          -0.95
+         ],
+         [
+          0.1,
+          -0.9
+         ],
+         [
+          0.15,
+          -0.85
+         ],
+         [
+          0.2,
+          -0.8
+         ],
+         [
+          0.25,
+          -0.75
+         ],
+         [
+          0.3,
+          -0.7
+         ],
+         [
+          0.35,
+          -0.65
+         ],
+         [
+          0.4,
+          -0.6
+         ],
+         [
+          0.45,
+          -0.55
+         ],
+         [
+          0.5,
+          -0.5
+         ],
+         [
+          0.55,
+          -0.45
+         ],
+         [
+          0.6,
+          -0.4
+         ],
+         [
+          0.65,
+          -0.35
+         ],
+         [
+          0.7,
+          -0.3
+         ],
+         [
+          0.75,
+          -0.25
+         ],
+         [
+          0.8,
+          -0.2
+         ],
+         [
+          0.85,
+          -0.15
+         ],
+         [
+          0.9,
+          -0.1
+         ],
+         [
+          0.95,
+          -0.05
+         ],
+         [
+          1.0,
+          0.0
+         ],
+         [
+          1.05,
+          0.05
+         ],
+         [
+          1.1,
+          0.1
+         ],
+         [
+          1.15,
+          0.15
+         ],
+         [
+          1.2,
+          0.2
+         ],
+         [
+          1.25,
+          0.25
+         ],
+         [
+          1.3,
+          0.3
+         ],
+         [
+          1.35,
+          0.35
+         ],
+         [
+          1.4,
+          0.4
+         ],
+         [
+          1.45,
+          0.45
+         ],
+         [
+          1.5,
+          0.5
+         ],
+         [
+          1.55,
+          0.55
+         ],
+         [
+          1.6,
+          0.6
+         ],
+         [
+          1.65,
+          0.65
+         ],
+         [
+          1.7,
+          0.7
+         ],
+         [
+          1.75,
+          0.75
+         ],
+         [
+          1.8,
+          0.8
+         ],
+         [
+          1.85,
+          0.85
+         ],
+         [
+          1.9,
+          0.9
+         ],
+         [
+          1.95,
+          0.95
+         ],
+         [
+          2.0,
+          1.0
+         ],
+         [
+          2.05,
+          1.05
+         ],
+         [
+          2.1,
+          1.1
+         ],
+         [
+          2.15,
+          1.15
+         ],
+         [
+          2.2,
+          1.2
+         ],
+         [
+          2.25,
+          1.25
+         ],
+         [
+          2.3,
+          1.3
+         ],
+         [
+          2.35,
+          1.35
+         ],
+         [
+          2.4,
+          1.4
+         ],
+         [
+          2.45,
+          1.45
+         ],
+         [
+          2.5,
+          1.5
+         ],
+         [
+          2.55,
+          1.55
+         ],
+         [
+          2.6,
+          1.6
+         ],
+         [
+          2.65,
+          1.65
+         ],
+         [
+          2.7,
+          1.7
+         ],
+         [
+          2.75,
+          1.75
+         ],
+         [
+          2.8,
+          1.8
+         ],
+         [
+          2.85,
+          1.85
+         ],
+         [
+          2.9,
+          1.9
+         ],
+         [
+          2.95,
+          1.95
+         ],
+         [
+          3.0,
+          2.0
+         ],
+         [
+          3.05,
+          2.05
+         ],
+         [
+          3.1,
+          2.1
+         ],
+         [
+          3.15,
+          2.15
+         ],
+         [
+          3.2,
+          2.2
+         ],
+         [
+          3.25,
+          2.25
+         ],
+         [
+          3.3,
+          2.3
+         ],
+         [
+          3.35,
+          2.35
+         ],
+         [
+          3.4,
+          2.4
+         ],
+         [
+          3.45,
+          2.45
+         ],
+         [
+          3.5,
+          2.5
+         ],
+         [
+          3.55,
+          2.55
+         ],
+         [
+          3.6,
+          2.6
+         ],
+         [
+          3.65,
+          2.65
+         ],
+         [
+          3.7,
+          2.7
+         ],
+         [
+          3.75,
+          2.75
+         ],
+         [
+          3.8,
+          2.8
+         ],
+         [
+          3.85,
+          2.85
+         ],
+         [
+          3.9,
+          2.9
+         ],
+         [
+          3.95,
+          2.95
+         ],
+         [
+          4.0,
+          3.0
+         ],
+         [
+          4.05,
+          3.05
+         ],
+         [
+          4.1,
+          3.1
+         ],
+         [
+          4.15,
+          3.15
+         ],
+         [
+          4.2,
+          3.2
+         ],
+         [
+          4.25,
+          3.25
+         ],
+         [
+          4.3,
+          3.3
+         ],
+         [
+          4.35,
+          3.35
+         ],
+         [
+          4.4,
+          3.4
+         ],
+         [
+          4.45,
+          3.45
+         ],
+         [
+          4.5,
+          3.5
+         ],
+         [
+          4.55,
+          3.55
+         ],
+         [
+          4.6,
+          3.6
+         ],
+         [
+          4.65,
+          3.65
+         ],
+         [
+          4.7,
+          3.7
+         ],
+         [
+          4.75,
+          3.75
+         ],
+         [
+          4.8,
+          3.8
+         ],
+         [
+          4.85,
+          3.85
+         ],
+         [
+          4.9,
+          3.9
+         ],
+         [
+          4.95,
+          3.95
+         ],
+         [
+          5.0,
+          4.0
+         ],
+         [
+          5.05,
+          4.05
+         ],
+         [
+          5.1,
+          4.1
+         ],
+         [
+          5.15,
+          4.15
+         ],
+         [
+          5.2,
+          4.2
+         ],
+         [
+          5.25,
+          4.25
+         ],
+         [
+          5.3,
+          4.3
+         ],
+         [
+          5.35,
+          4.35
+         ],
+         [
+          5.4,
+          4.4
+         ],
+         [
+          5.45,
+          4.45
+         ],
+         [
+          5.5,
+          4.5
+         ],
+         [
+          5.55,
+          4.55
+         ],
+         [
+          5.6,
+          4.6
+         ],
+         [
+          5.65,
+          4.65
+         ],
+         [
+          5.7,
+          4.7
+         ],
+         [
+          5.75,
+          4.75
+         ],
+         [
+          5.8,
+          4.8
+         ],
+         [
+          5.85,
+          4.85
+         ],
+         [
+          5.9,
+          4.9
+         ],
+         [
+          5.95,
+          4.95
+         ],
+         [
+          6.0,
+          5.0
+         ]
+        ]
+       }
+      ],
+      "xl": "x",
+      "yl": "y",
+      "pts": [
+       {
+        "x": 3,
+        "y": 2,
+        "label": "(3, 2)"
+       },
+       {
+        "x": -2,
+        "y": -3,
+        "label": "(−2, −3)"
+       }
+      ]
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A classmate solves (x² + 1)/(x + 4) = 17/(x + 4), gets x² = 16, checks x = −4 in x² = 16, and says both x = 4 and x = −4 are solutions. What went wrong?",
+     "opts": [
+      "x = 4 is the extraneous one, because it is the positive root",
+      "Nothing is wrong: both 4 and −4 square to 16, so both are solutions",
+      "x = −4 was checked in a later step; in the original it makes the denominators 0",
+      "The equation should have been cross-multiplied, giving x² + 1 = 17(x + 4)"
+     ],
+     "ans": 2,
+     "hint": "Where should a candidate be checked?",
+     "steps": [
+      "Clearing the denominators gives x² + 1 = 17, so x² = 16 and x = ±4.",
+      "x² = 16 no longer has the denominators that forbid x = −4.",
+      "In the original, x = −4 makes x + 4 = 0, so it is excluded.",
+      "Only x = 4 is a solution."
+     ],
+     "ex": {
+      "main": "**x = −4 was checked in the wrong place.** After clearing, the equation has lost the denominators that rule −4 out, so every line from there on will happily accept it. Check in the original, or simply against the excluded values listed at the start.",
+      "tip": "A check is only as good as the equation you check it in."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "For 2/(x − 4) + x/(x − 1) = 6/((x − 4)(x − 1)), the algebra produces x = 4 and x = −2. Why do the graphs of the two sides not meet at x = 4?",
+     "opts": [
+      "At x = 4 the left side is 0 while the right side is undefined",
+      "The two graphs do meet at x = 4, but only at a single point",
+      "They meet at x = 4, but the point lies too far up to show",
+      "Neither side has a value at x = 4, so there is no point there to share"
+     ],
+     "ans": 3,
+     "hint": "What happens to each side's denominators at x = 4?",
+     "steps": [
+      "On the left, 2/(x − 4) is undefined at x = 4.",
+      "On the right, (x − 4)(x − 1) is 0 at x = 4.",
+      "Neither graph has any point above x = 4 — both have an asymptote there.",
+      "With no points, there is nothing to intersect, so x = 4 is extraneous."
+     ],
+     "ex": {
+      "main": "**Neither side has a value at x = 4.** That is exactly what an extraneous solution looks like on a graph: a vertical line where at least one graph is missing. The graphs meet only once, at x = −2.",
+      "tip": "Extraneous values hide on asymptotes and holes."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Ana can weed a garden alone in 30 minutes and Ben in 60 minutes. With Cara helping, the three finish in 15 minutes. How long would Cara take alone?",
+     "opts": [
+      "60 minutes",
+      "15 minutes",
+      "45 minutes",
+      "20 minutes"
+     ],
+     "ans": 0,
+     "hint": "Add all three rates and set them equal to the rate together.",
+     "steps": [
+      "Rates: Ana 1/30, Ben 1/60, Cara 1/c, together 1/15 of the garden per minute.",
+      "1/30 + 1/60 + 1/c = 1/15.",
+      "2/60 + 1/60 + 1/c = 4/60, so 1/c = 1/60.",
+      "Cara would take 60 minutes alone."
+     ],
+     "ex": {
+      "main": "**60 minutes.** Ana and Ben together already do 3/60 per minute; the team needs 4/60, so Cara supplies 1/60. 45 minutes subtracts the times (60 − 15) as if times added; 20 minutes is Ana and Ben's combined time, not Cara's.",
+      "tip": "Times never add or subtract in a work problem — rates do."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why can multiplying both sides of a rational equation by the LCD create an extraneous solution?",
+     "opts": [
+      "Every rational equation has exactly two solutions, and one is always false",
+      "The LCD can equal 0, and multiplying by 0 makes both sides balance at that value",
+      "Multiplying by the LCD changes the signs of some of the solutions",
+      "Multiplying by the LCD rounds some of the solutions to whole numbers"
+     ],
+     "ans": 1,
+     "hint": "What is special about multiplying both sides by zero?",
+     "steps": [
+      "At an excluded value, the LCD equals 0.",
+      "Multiplying both sides by 0 gives 0 = 0, which is true.",
+      "So the cleared equation can accept a value the original forbids.",
+      "That value is extraneous, and only a check against the original catches it."
+     ],
+     "ex": {
+      "main": "**Because the LCD can equal 0.** Multiplying by an expression is only reversible where it is nonzero. Where the LCD is zero, the new equation can be satisfied even though the original is undefined there. Plenty of rational equations have one solution, or none.",
+      "tip": "This is why the excluded values are worth writing first."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Solve x/(x + 2) + 2/(x − 2) = 8/(x² − 4).",
+     "opts": [
+      "x = 2",
+      "x = 2 and x = −2",
+      "No solution",
+      "x = 4"
+     ],
+     "ans": 2,
+     "hint": "x² − 4 = (x + 2)(x − 2) is the LCD.",
+     "steps": [
+      "Excluded: x ≠ 2 and x ≠ −2.",
+      "Multiply every term by (x + 2)(x − 2): x(x − 2) + 2(x + 2) = 8.",
+      "x² − 2x + 2x + 4 = 8, so x² = 4 and x = ±2.",
+      "Both are excluded, so there is no solution."
+     ],
+     "ex": {
+      "main": "**No solution.** Both candidates make a denominator zero. Answering with them is the check left undone; x = 4 stops at x² = 4 and reads off the 4.",
+      "tip": "When every candidate is excluded, \"no solution\" is the full answer."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "You drive 90 miles to a game and 90 miles home, driving 15 miles per hour faster on the way home. The round trip takes 5 hours of driving. How fast did you drive on the way there?",
+     "opts": [
+      "36 mph",
+      "30 mph or −9 mph",
+      "45 mph",
+      "30 mph"
+     ],
+     "ans": 3,
+     "hint": "Time out + time back = 5, with time = distance ÷ speed.",
+     "steps": [
+      "Let r be the speed there: 90/r + 90/(r + 15) = 5.",
+      "Multiply by r(r + 15): 90(r + 15) + 90r = 5r(r + 15).",
+      "5r² − 105r − 1,350 = 0, so r² − 21r − 270 = 0, so (r − 30)(r + 9) = 0.",
+      "r = −9 is impossible for a speed, so r = 30 mph."
+     ],
+     "ex": {
+      "main": "**30 mph.** Check: 3 hours there and 90/45 = 2 hours back. −9 does solve the equation, but a speed cannot be negative, so the situation rejects it. 36 mph is 180 ÷ 5, the average speed for the whole trip, which is not the speed on either leg.",
+      "tip": "After the algebra, ask whether each answer could actually happen."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

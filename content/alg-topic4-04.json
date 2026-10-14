@@ -1,0 +1,641 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t4-04": {
+   "id": "unit-alg-t4-04",
+   "type": "unit",
+   "updatedAt": 1791931034175,
+   "classId": "algeo",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Topic 4 · 4-4 Adding and Subtracting Rational Expressions",
+   "srcName": "enVision Algebra 2, Lesson 4-4 (Drive)",
+   "source": "enVision Algebra 2 Lesson 4-4: Adding and Subtracting Rational Expressions",
+   "summary": {
+    "text": "Lesson 4-4 adds and subtracts rational expressions: with like denominators, finding the least common multiple of polynomials, rewriting over the least common denominator, subtracting with the minus distributed, simplifying compound fractions, and writing travel-time expressions as sums.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Adding rational expressions is fraction arithmetic with polynomials in place of numbers, and it is the step every rational equation in 4-5 depends on. Travel, work and lens problems all reduce to adding terms of the form d/r.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Find the least common multiple of two or more polynomials",
+     "from": "source"
+    },
+    {
+     "text": "Add and subtract rational expressions with like and unlike denominators, and state the domain",
+     "from": "source"
+    },
+    {
+     "text": "Simplify a compound fraction",
+     "from": "source"
+    },
+    {
+     "text": "Write and evaluate a sum of rational expressions for a travel-time situation",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "Three slips account for most lost marks. Adding the denominators (1/a + 1/b written as 2/(a + b)) — every such question here offers it, and a two-number check exposes it. Losing the minus sign on the second numerator when subtracting. And stating the domain from the simplified answer instead of the original denominators. The average-speed question is our addition: it is the classic real-world version of the same idea, and the answer is deliberately not the midpoint of the two speeds.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the LCM cards — the rest of the lesson is built on them.",
+    "minutes": 22,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Like denominators",
+     "def": "**When the denominators match, add or subtract the numerators and keep the denominator.**\n• 3x/(x + 2) + 6/(x + 2) = (3x + 6)/(x + 2) = 3(x + 2)/(x + 2) = 3, for x ≠ −2.\n• Never add the denominators: 1/5 + 3/5 is 4/5, not 4/10.",
+     "hint": "Same bottom: work on the top only.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "LCM of polynomials",
+     "def": "**Factor each polynomial, then take every factor the greatest number of times it appears in any ONE of them.**\n• (x + 3)² and x² + x − 6 = (x + 3)(x − 2) have LCM (x + 3)²(x − 2).\n• A factor shared by two of them is used once, not twice — just as the LCM of 6 and 15 is 30, not 90.",
+     "hint": "Most copies in any single one — not the total across all of them.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Why the LEAST common denominator",
+     "def": "**Any common denominator gives a correct answer, but the least one keeps the numerator small, so there is far less to multiply out, factor and cancel.**\n• Multiplying all the denominators together always works — and usually buries a common factor you then have to dig back out.\n• The L is about saving work, not about getting a different answer.",
+     "hint": "Bigger common denominators are right, just expensive.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "Unlike denominators",
+     "def": "**Factor each denominator, find the LCD, multiply each fraction by the form of 1 that supplies its missing factors, then combine the numerators.**\n• x/(x − 3) + 2/(x + 1): the LCD is (x − 3)(x + 1), and x(x + 1) + 2(x − 3) = x² + 3x − 6 goes on top.\n• Then factor the new numerator and cancel anything it shares with the LCD.",
+     "hint": "Missing factors in, top and bottom, then add tops.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Subtracting: distribute the minus",
+     "def": "**When you subtract a fraction, the minus sign applies to its WHOLE numerator, so put that numerator in brackets first.**\n• (4x + 1)/(x + 5) − (x − 3)/(x + 5) = (4x + 1 − x + 3)/(x + 5) = (3x + 4)/(x + 5).\n• Writing − x − 3 instead of − x + 3 is the commonest slip in this lesson.",
+     "hint": "Brackets around the second numerator, every time.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Finish by simplifying",
+     "def": "**After combining, factor the numerator — it often shares a factor with the LCD that can be divided out.**\n• 4/(x² − 4) + 1/(x + 2) = (x + 2)/((x − 2)(x + 2)) = 1/(x − 2).\n• The cancelled factor still leaves its restriction behind: here x ≠ −2 as well as x ≠ 2.",
+     "hint": "Factor the new top before you call it finished.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The domain of a sum",
+     "def": "**A sum or difference is undefined wherever ANY of the original fractions is, even if that factor cancels later.**\n• So read the restrictions off the original denominators, not the final answer.\n• A simplified answer with too few restrictions is a different expression.",
+     "hint": "Restrictions come from before, not after.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "1/a + 1/b is not 1/(a + b)",
+     "def": "**Adding fractions never means adding numerators and denominators separately: 1/a + 1/b = (a + b)/(ab).**\n• 1/2 + 1/3 = 5/6, not 2/5.\n• Testing with small numbers catches this every time.",
+     "hint": "Try it with 2 and 3 before trusting it with x and y.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Compound fraction",
+     "def": "**A fraction with a rational expression in its numerator, its denominator, or both.**\n• (1/x + 1/y)/(2/x) is one.\n• Some books call it a complex fraction.",
+     "hint": "Fractions stacked inside a fraction.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Simplifying a compound fraction",
+     "def": "**Multiply the top and the bottom by the LCM of every small denominator; the small fractions clear in one step.**\n• (1/x + 1/y)/(2/x): multiply top and bottom by xy to get (y + x)/(2y).\n• Alternatively, combine the top into one fraction, the bottom into one, and divide.",
+     "hint": "One well-chosen multiplier clears every little fraction at once.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Travel-time expressions",
+     "def": "**Time = distance ÷ rate, so a trip in two legs takes d₁/r₁ + d₂/r₂ — a sum of rational expressions.**\n• 12 miles at r mph and 12 miles back at r + 4 mph: 12/r + 12/(r + 4) = (24r + 48)/(r(r + 4)).\n• Put the information in a distance–rate–time table first.",
+     "eq": "t = d/r",
+     "hint": "Add the TIMES, never the speeds.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Average speed is not the average of the speeds",
+     "def": "**Average speed = total distance ÷ total time, and the slower leg lasts longer, so it pulls the average down.**\n• 60 miles at 40 mph then 60 miles at 60 mph: 120 miles in 2.5 hours = 48 mph, not 50.\n• That is a sum of two rational expressions in disguise.",
+     "hint": "Total distance over total time — never the midpoint of the speeds.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Add and simplify: 3x/(x + 2) + 6/(x + 2).",
+     "opts": [
+      "3, for x ≠ −2",
+      "(3x + 6)/(2x + 4)",
+      "3x + 6",
+      "(3x + 6)/(x + 2)²"
+     ],
+     "ans": 0,
+     "hint": "Same denominators: add the tops only.",
+     "steps": [
+      "Keep the denominator x + 2 and add the numerators: (3x + 6)/(x + 2).",
+      "Factor the top: 3(x + 2).",
+      "3(x + 2)/(x + 2) = 3.",
+      "The sum is 3, for x ≠ −2."
+     ],
+     "ex": {
+      "main": "**3, for x ≠ −2.** After adding the numerators, the top factors as 3(x + 2) and cancels with the bottom. (3x + 6)/(2x + 4) adds the denominators too, which halves the value, and (x + 2)² multiplies them.",
+      "tip": "With like denominators, the denominator just comes along for the ride."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the LCM of x² − 4 and x² + 4x + 4?",
+     "opts": [
+      "(x − 2)(x + 2)",
+      "(x − 2)(x + 2)²",
+      "(x − 2)(x + 2)³",
+      "(x + 2)²"
+     ],
+     "ans": 1,
+     "hint": "Factor both, then take each factor the most times it appears in either one.",
+     "steps": [
+      "x² − 4 = (x − 2)(x + 2).",
+      "x² + 4x + 4 = (x + 2)².",
+      "x − 2 appears at most once; x + 2 appears at most twice (in the second).",
+      "LCM = (x − 2)(x + 2)²."
+     ],
+     "ex": {
+      "main": "**(x − 2)(x + 2)².** Each factor appears as many times as it does in the polynomial that has the most of it. (x − 2)(x + 2)³ is the plain product, which counts the shared x + 2 three times; (x − 2)(x + 2) is not divisible by (x + 2)².",
+      "tip": "The plain product is always a common multiple — just rarely the least."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the LCM of 6x²y and 9xy³?",
+     "opts": [
+      "18x³y⁴",
+      "54x³y⁴",
+      "18x²y³",
+      "3xy"
+     ],
+     "ans": 2,
+     "hint": "Numbers first, then the highest power of each variable.",
+     "steps": [
+      "LCM of 6 and 9 is 18.",
+      "The highest power of x is x².",
+      "The highest power of y is y³.",
+      "The LCM is 18x²y³."
+     ],
+     "ex": {
+      "main": "**18x²y³.** Take the least common multiple of the numbers and the HIGHEST power of each variable. 54x³y⁴ is the plain product; 18x³y⁴ gets the number right but ADDS the exponents instead of taking the larger; 3xy is the greatest common FACTOR, the opposite idea.",
+      "tip": "LCM takes the highest powers; GCF takes the lowest."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is 2/x + 3/y?",
+     "opts": [
+      "6/(xy)",
+      "5/(x + y)",
+      "5/(xy)",
+      "(2y + 3x)/(xy)"
+     ],
+     "ans": 3,
+     "hint": "The common denominator is xy. What does each fraction need?",
+     "steps": [
+      "The LCD is xy.",
+      "2/x = 2y/(xy) and 3/y = 3x/(xy).",
+      "Add the numerators.",
+      "(2y + 3x)/(xy)."
+     ],
+     "ex": {
+      "main": "**(2y + 3x)/(xy).** 5/(x + y) adds tops and bottoms separately, which fails even for numbers: 2/1 + 3/1 = 5, but 5/(1 + 1) = 2.5. 5/(xy) uses the right denominator but forgets to scale the numerators.",
+      "tip": "Check any fraction rule with small numbers before using it."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is a compound fraction?",
+     "opts": [
+      "(1/x − 2)/(x + 4)",
+      "(x − 2)/(x + 4)",
+      "x² − 2x + 4",
+      "(x − 2)(x + 4)"
+     ],
+     "ans": 0,
+     "hint": "Look for a fraction INSIDE a fraction.",
+     "steps": [
+      "A compound fraction has a rational expression in its numerator, denominator, or both.",
+      "(1/x − 2)/(x + 4) has 1/x inside its numerator.",
+      "(x − 2)/(x + 4) is an ordinary rational expression; the others are polynomials.",
+      "(1/x − 2)/(x + 4) is the compound fraction."
+     ],
+     "ex": {
+      "main": "**(1/x − 2)/(x + 4).** The 1/x sitting inside the numerator makes it compound. (x − 2)/(x + 4) is a single, ordinary rational expression — a fraction, but not one with a fraction inside it.",
+      "tip": "Simplify a compound fraction by multiplying top and bottom by every small denominator."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Subtract and simplify: (5x + 1)/(x − 3) − (2x + 10)/(x − 3).",
+     "opts": [
+      "(3x + 11)/(x − 3)",
+      "3, for x ≠ 3",
+      "(7x + 11)/(x − 3)",
+      "(3x − 11)/(x − 3)"
+     ],
+     "ans": 1,
+     "hint": "Put brackets round the second numerator before you subtract.",
+     "steps": [
+      "Same denominator, so subtract the numerators: (5x + 1) − (2x + 10).",
+      "Distribute the minus: 5x + 1 − 2x − 10 = 3x − 9.",
+      "3x − 9 = 3(x − 3), which cancels with the denominator.",
+      "The difference is 3, for x ≠ 3."
+     ],
+     "ex": {
+      "main": "**3, for x ≠ 3.** The minus applies to all of 2x + 10, giving 3x − 9 = 3(x − 3). (3x + 11) subtracts only the 2x and adds the 10, the classic missing-bracket slip; (7x + 11) adds instead of subtracting.",
+      "tip": "Bracket the second numerator and the sign takes care of itself."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "For which values of x is 1/(x − 4) + 2/(x + 1) undefined?",
+     "opts": [
+      "x = −4 and x = 1",
+      "x = 4 only",
+      "x = 4 and x = −1",
+      "It is defined for every x"
+     ],
+     "ans": 2,
+     "hint": "Either fraction being undefined is enough.",
+     "steps": [
+      "1/(x − 4) is undefined at x = 4.",
+      "2/(x + 1) is undefined at x = −1.",
+      "The sum needs BOTH fractions to exist.",
+      "It is undefined at x = 4 and x = −1."
+     ],
+     "ex": {
+      "main": "**x = 4 and x = −1.** Each fraction contributes its own restriction. x = −4 and x = 1 read the signs straight out of the brackets without solving.",
+      "tip": "Restrictions from every original denominator carry into the sum."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Add and simplify: 2/(x² − 1) + 1/(x + 1).",
+     "opts": [
+      "1/(x + 1)",
+      "(x + 3)/(x² − 1)",
+      "3/(x² + x)",
+      "1/(x − 1)"
+     ],
+     "ans": 3,
+     "hint": "x² − 1 already contains x + 1. Use it as the LCD.",
+     "steps": [
+      "x² − 1 = (x − 1)(x + 1), which is the LCD.",
+      "1/(x + 1) = (x − 1)/((x − 1)(x + 1)).",
+      "Add the tops: 2 + x − 1 = x + 1.",
+      "(x + 1)/((x − 1)(x + 1)) = 1/(x − 1), for x ≠ 1, −1."
+     ],
+     "ex": {
+      "main": "**1/(x − 1).** After adding, the numerator x + 1 cancels with the LCD. (x + 3)/(x² − 1) multiplies the 1 by x + 1 instead of x − 1 — the factor it already had — and 3/(x² + x) adds tops and bottoms separately.",
+      "tip": "Always factor the new numerator; here it is the whole simplification."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Subtract: x/(x − 2) − 3/(x + 1).",
+     "opts": [
+      "(x² − 2x + 6)/((x − 2)(x + 1))",
+      "(x² − 2x − 6)/((x − 2)(x + 1))",
+      "(x² + 4x − 6)/((x − 2)(x + 1))",
+      "(x − 3)/(2x − 1)"
+     ],
+     "ans": 0,
+     "hint": "LCD (x − 2)(x + 1). Bracket the second numerator once it is scaled.",
+     "steps": [
+      "x/(x − 2) = x(x + 1)/((x − 2)(x + 1)) = (x² + x)/LCD.",
+      "3/(x + 1) = 3(x − 2)/LCD = (3x − 6)/LCD.",
+      "Subtract: x² + x − (3x − 6) = x² − 2x + 6.",
+      "(x² − 2x + 6)/((x − 2)(x + 1))."
+     ],
+     "ex": {
+      "main": "**(x² − 2x + 6)/((x − 2)(x + 1)).** Subtracting 3x − 6 turns the −6 into +6. Writing −6 is the missing-bracket slip; x² + 4x − 6 adds the 3x instead of subtracting; (x − 3)/(2x − 1) subtracts tops and bottoms separately.",
+      "tip": "A − (B − C) = A − B + C. The second minus is the one people lose."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "You bike 18 miles out at r miles per hour and the same 18 miles back at r − 3 miles per hour. Which expression gives your total time in hours?",
+     "opts": [
+      "36/(2r − 3)",
+      "(36r − 54)/(r(r − 3))",
+      "(36r − 54)/(2r − 3)",
+      "36/(r(r − 3))"
+     ],
+     "ans": 1,
+     "hint": "Time = distance ÷ rate for each leg, then add the two times.",
+     "steps": [
+      "Out: 18/r hours. Back: 18/(r − 3) hours.",
+      "LCD: r(r − 3).",
+      "18(r − 3) + 18r = 36r − 54 on top.",
+      "Total time: (36r − 54)/(r(r − 3))."
+     ],
+     "ex": {
+      "main": "**(36r − 54)/(r(r − 3)).** Each leg's time is its own distance over its own rate, and the two times add. 36/(2r − 3) adds the distances and adds the rates, which is the averaging-speeds mistake in algebraic form.",
+      "tip": "Add times, never rates."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "You bike 18 miles out at 12 miles per hour and 18 miles back at 9 miles per hour. How long does the round trip take?",
+     "opts": [
+      "4 hours",
+      "3 hours",
+      "3.5 hours",
+      "About 1.7 hours"
+     ],
+     "ans": 2,
+     "hint": "Find each leg's time separately.",
+     "steps": [
+      "Out: 18 ÷ 12 = 1.5 hours.",
+      "Back: 18 ÷ 9 = 2 hours.",
+      "Total: 1.5 + 2.",
+      "3.5 hours."
+     ],
+     "ex": {
+      "main": "**3.5 hours.** The slower leg takes longer, so it dominates. 3 hours uses the same 12 mph both ways, 4 hours uses 9 mph both ways, and 1.7 hours is 36 ÷ 21 — adding the speeds together as if they were one speed.",
+      "tip": "Plug the speed into each leg, not into a blend of the two."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify the compound fraction whose numerator is 2/x − 3/y and whose denominator is 1/(xy).",
+     "opts": [
+      "−1/(xy)",
+      "2x − 3y",
+      "(2y − 3x)/(x²y²)",
+      "2y − 3x"
+     ],
+     "ans": 3,
+     "hint": "Multiply the top and the bottom by xy.",
+     "steps": [
+      "The LCM of x, y and xy is xy.",
+      "Top: xy(2/x − 3/y) = 2y − 3x.",
+      "Bottom: xy · 1/(xy) = 1.",
+      "The compound fraction is 2y − 3x."
+     ],
+     "ex": {
+      "main": "**2y − 3x.** Multiplying by xy clears all three small denominators at once: each fraction keeps the OTHER variable. 2x − 3y keeps the wrong variable on each term, and (2y − 3x)/(x²y²) multiplies by the bottom fraction instead of dividing.",
+      "tip": "Each term loses its own denominator and gains the one it was missing."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the LCM of x² − 3x − 10, x² − 25 and 2x + 4?",
+     "opts": [
+      "2(x − 5)(x + 2)(x + 5)",
+      "(x − 5)(x + 2)(x + 5)",
+      "2(x − 5)(x + 2)",
+      "2(x − 5)²(x + 2)²(x + 5)"
+     ],
+     "ans": 0,
+     "hint": "Factor all three; then each distinct factor appears once here.",
+     "steps": [
+      "x² − 3x − 10 = (x − 5)(x + 2).",
+      "x² − 25 = (x − 5)(x + 5).",
+      "2x + 4 = 2(x + 2).",
+      "Distinct factors 2, x − 5, x + 2, x + 5, each once: 2(x − 5)(x + 2)(x + 5)."
+     ],
+     "ex": {
+      "main": "**2(x − 5)(x + 2)(x + 5).** x − 5 and x + 2 each appear in two of the polynomials, but never twice in the SAME one, so each is used once. Forgetting the constant 2 from 2x + 4 is the easy slip; doubling the shared factors is the over-careful one.",
+      "tip": "Constants are factors too."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rectangle has length 3/x and width 2/(x + 1). What is its perimeter?",
+     "opts": [
+      "10/(2x + 1)",
+      "(10x + 6)/(x(x + 1))",
+      "(5x + 3)/(x(x + 1))",
+      "(10x + 6)/(2x + 1)"
+     ],
+     "ans": 1,
+     "hint": "Perimeter = 2(length + width). Add the two fractions first.",
+     "steps": [
+      "length + width = 3/x + 2/(x + 1).",
+      "LCD x(x + 1): 3(x + 1) + 2x = 5x + 3 on top.",
+      "Double it for the perimeter: 2(5x + 3) = 10x + 6.",
+      "Perimeter = (10x + 6)/(x(x + 1))."
+     ],
+     "ex": {
+      "main": "**(10x + 6)/(x(x + 1)).** (5x + 3)/(x(x + 1)) is length + width — only half the perimeter. The options over 2x + 1 add the denominators together, which no common denominator ever does.",
+      "tip": "Perimeter goes round all four sides: two lengths and two widths."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "For a camera lens, 1/f = 1/dᵢ + 1/dₒ. An object 30 cm from the lens is in focus when the film is 15 cm behind it. What is the focal length f?",
+     "opts": [
+      "22.5 cm",
+      "45 cm",
+      "10 cm",
+      "0.1 cm"
+     ],
+     "ans": 2,
+     "hint": "Add the two fractions, then flip.",
+     "steps": [
+      "1/f = 1/15 + 1/30.",
+      "LCD 30: 2/30 + 1/30 = 3/30 = 1/10.",
+      "If 1/f = 1/10, then f = 10.",
+      "The focal length is 10 cm."
+     ],
+     "ex": {
+      "main": "**10 cm.** The equation gives 1/f, so the last step is to take the reciprocal. 0.1 cm stops at 1/f; 45 cm adds the distances; 22.5 cm averages them.",
+      "tip": "When the unknown sits in a denominator, finish by flipping."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A classmate writes 1/(x + 3) + 6/(x² − 9) = 1/(x − 3), for x ≠ 3. What, if anything, is wrong?",
+     "opts": [
+      "The answer should be 1/(x + 3), since the x − 3 factor cancels",
+      "Nothing: restrictions come from the simplified answer, which only needs x ≠ 3",
+      "The sum is really 7/(x² − 9), found by adding the two numerators",
+      "The restriction x ≠ −3 is missing; the original sum is undefined there"
+     ],
+     "ans": 3,
+     "hint": "Check the original denominators, not the final one.",
+     "steps": [
+      "LCD (x + 3)(x − 3): (x − 3) + 6 = x + 3 on top.",
+      "(x + 3)/((x + 3)(x − 3)) = 1/(x − 3), so the expression is right.",
+      "But at x = −3 the original 1/(x + 3) is undefined.",
+      "The answer needs x ≠ 3 AND x ≠ −3."
+     ],
+     "ex": {
+      "main": "**The restriction x ≠ −3 is missing.** The simplification is correct, but the factor x + 3 cancelled away a value where the original sum does not exist. 7/(x² − 9) adds numerators without matching the denominators first.",
+      "tip": "Read restrictions off the problem, never off the answer."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In still water you paddle at r miles per hour. A river's current is 2 miles per hour. You paddle 6 miles downstream and 6 miles back upstream. Which expression is your total time?",
+     "opts": [
+      "12r/(r² − 4)",
+      "6/r",
+      "12/(r² − 4)",
+      "12r/(r² + 4)"
+     ],
+     "ans": 0,
+     "hint": "Downstream the current helps; upstream it fights you.",
+     "steps": [
+      "Downstream speed r + 2, so time 6/(r + 2).",
+      "Upstream speed r − 2, so time 6/(r − 2).",
+      "LCD (r + 2)(r − 2): 6(r − 2) + 6(r + 2) = 12r.",
+      "Total time 12r/(r² − 4)."
+     ],
+     "ex": {
+      "main": "**12r/(r² − 4).** The ±2 cancel in the numerator but NOT in the denominator, which is why the round trip always takes longer than in still water. 6/r is the trap: it assumes the current helps on the way down exactly as much as it hurts on the way back.",
+      "tip": "A current costs more time upstream than it saves downstream."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is it worth finding the LEAST common denominator rather than just multiplying all the denominators together?",
+     "opts": [
+      "Only the LCD gives a correct answer; any other gives a wrong sum",
+      "Both work, but the LCD keeps the numerator smaller and easier to simplify",
+      "The product of the denominators is never a common denominator at all",
+      "The LCD gives fewer domain restrictions, so the answer is more general"
+     ],
+     "ans": 1,
+     "hint": "Try 1/6 + 1/15 both ways.",
+     "steps": [
+      "With 90 (6 × 15): 15/90 + 6/90 = 21/90, which reduces to 7/30.",
+      "With 30 (the LCD): 5/30 + 2/30 = 7/30 directly.",
+      "Same answer either way, but more simplifying with the bigger denominator.",
+      "The L saves work; it does not change the result."
+     ],
+     "ex": {
+      "main": "**Both work, but the LCD keeps the numbers smaller.** The plain product is always a common denominator and always gives a correct (if unsimplified) answer. And the restrictions come from the original fractions, so the choice of denominator cannot change them.",
+      "tip": "With polynomials, the saving is bigger still: less to expand, less to factor."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify the compound fraction whose numerator is x/(x − 2) − 1 and whose denominator is 4/(x² − 4).",
+     "opts": [
+      "2(x + 2)",
+      "(x − 2)/2",
+      "(x + 2)/2",
+      "8/((x − 2)²(x + 2))"
+     ],
+     "ans": 2,
+     "hint": "Combine the top into one fraction first, then divide.",
+     "steps": [
+      "Top: x/(x − 2) − (x − 2)/(x − 2) = 2/(x − 2).",
+      "Divide: 2/(x − 2) ÷ 4/((x − 2)(x + 2)).",
+      "Flip and multiply: 2/(x − 2) · (x − 2)(x + 2)/4.",
+      "Cancel: (x + 2)/2, for x ≠ 2, −2."
+     ],
+     "ex": {
+      "main": "**(x + 2)/2.** The top collapses to 2/(x − 2), because x − (x − 2) = 2 — the bracket matters again. 8/((x − 2)²(x + 2)) multiplies by the bottom fraction instead of dividing; 2(x + 2) inverts the 2 and the 4.",
+      "tip": "Write 1 as (x − 2)/(x − 2) before subtracting it."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "You drive 60 miles at 40 miles per hour and then another 60 miles at 60 miles per hour. What is your average speed for the whole 120 miles?",
+     "opts": [
+      "52 mph",
+      "50 mph",
+      "45 mph",
+      "48 mph"
+     ],
+     "ans": 3,
+     "hint": "Average speed = total distance ÷ total time.",
+     "steps": [
+      "First leg: 60 ÷ 40 = 1.5 hours.",
+      "Second leg: 60 ÷ 60 = 1 hour.",
+      "Total: 120 miles in 2.5 hours.",
+      "120 ÷ 2.5 = 48 mph."
+     ],
+     "ex": {
+      "main": "**48 mph.** 50 mph averages the two speeds, but you spend LONGER at 40 mph than at 60, so the slow leg counts for more. The times are rational expressions in the speeds, which is why the true average is not the midpoint.",
+      "tip": "Equal distances do not mean equal times."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

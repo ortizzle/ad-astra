@@ -1,0 +1,647 @@
+{
+ "v": 4,
+ "records": {
+  "unit-alg-t4-03": {
+   "id": "unit-alg-t4-03",
+   "type": "unit",
+   "updatedAt": 1791931046617,
+   "classId": "algeo",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Topic 4 · 4-3 Multiplying and Dividing Rational Expressions",
+   "srcName": "enVision Algebra 2, Lesson 4-3 (Drive)",
+   "source": "enVision Algebra 2 Lesson 4-3: Multiplying and Dividing Rational Expressions",
+   "summary": {
+    "text": "Lesson 4-3 simplifies, multiplies and divides rational expressions: factoring and dividing out common factors, opposite factors that leave −1, writing equivalent expressions over a stated domain, multiplying by a polynomial, dividing by multiplying by the reciprocal, and simplifying ratios such as surface area to volume.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Every later rational skill — adding, solving equations, graphing — starts with factoring and cancelling correctly. The domain restriction that travels with each answer is what makes the algebra honest about the holes in the graph.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Simplify a rational expression and state the values excluded from its domain",
+     "from": "source"
+    },
+    {
+     "text": "Multiply rational expressions, including by a polynomial",
+     "from": "source"
+    },
+    {
+     "text": "Divide rational expressions by multiplying by the reciprocal of the divisor",
+     "from": "source"
+    },
+    {
+     "text": "Explain why only common factors, never terms, can be divided out",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "The single most common error is cancelling TERMS instead of factors — crossing out the x² in (x² + 6x)/(x² + 3x) — and several questions are built to catch it, along with a one-number check that exposes it. The second is the domain: restrictions come from the ORIGINAL denominators, and when dividing, from the divisor's numerator as well. Many answers here are marked wrong in class for a missing restriction rather than a wrong expression.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the \"factors, not terms\" cards — every question here depends on them.",
+    "minutes": 20,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Simplified form",
+     "def": "**A rational expression is simplified when its numerator and denominator share no common factor other than 1.**\n• (x + 6)/(x + 3) is simplified; x(x + 6)/(x(x + 3)) is not.\n• Simplifying never changes the values — only the domain statement has to travel with it.",
+     "hint": "No shared FACTOR left, top and bottom.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "How to simplify",
+     "def": "**Factor the numerator and the denominator completely, then divide out the factors they share.**\n• (x² − 25)/(x² + 2x − 15) = (x − 5)(x + 5)/((x + 5)(x − 3)) = (x − 5)/(x − 3).\n• If you cannot see a common factor, you have not finished factoring.",
+     "hint": "Factor everything before you cancel anything.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Factors cancel, terms do not",
+     "def": "**Only a factor of the WHOLE numerator and the WHOLE denominator can be divided out.**\n• (x + 6)/x is not 6: the x on top is a term added to 6, not a factor of the top.\n• Test it: at x = 2, (2 + 6)/2 = 4, not 6.",
+     "hint": "If it is joined by + or −, it is a term — hands off.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Opposite factors",
+     "def": "**a − b and b − a are opposites, so (a − b)/(b − a) = −1.**\n• 4 − x = −(x − 4), so (4 − x)/(x − 4) simplifies to −1, not 1.\n• Pull out the −1 first, then cancel.",
+     "hint": "Same numbers, reversed order: that is a factor of −1.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The domain travels with the answer",
+     "def": "**Values that made ANY original denominator zero stay excluded, even after their factor has cancelled.**\n• (x² − 25)/(x² + 2x − 15) equals (x − 5)/(x − 3) only for x ≠ −5 and x ≠ 3.\n• An identity between two expressions holds only where both are defined.",
+     "hint": "Read the restrictions off the ORIGINAL, before cancelling.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Writing an equivalent expression",
+     "def": "**Multiply top and bottom by the same nonzero expression — a form of 1 — and add its zeros to the domain restrictions.**\n• (x + 1)/(x − 4) · (x + 2)/(x + 2) = (x² + 3x + 2)/(x² − 2x − 8), for x ≠ 4, −2.\n• The new expression agrees with the old one everywhere both are defined.",
+     "hint": "A form of 1 changes the look, never the value.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Multiplying rational expressions",
+     "def": "**Factor every numerator and denominator, multiply straight across, and divide out the common factors.**\n• Cancelling before you multiply out saves a lot of work.\n• State the domain from every denominator that appeared.",
+     "hint": "Factor, then cancel, then multiply — in that order.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Multiplying by a polynomial",
+     "def": "**Write the polynomial over 1, then multiply as usual.**\n• (x + 3)/(x² − 25) · (x² − 5x) = (x + 3)/((x − 5)(x + 5)) · x(x − 5)/1 = x(x + 3)/(x + 5).\n• Restrictions: x ≠ 5 and x ≠ −5.",
+     "hint": "Every polynomial is secretly over 1.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Dividing rational expressions",
+     "def": "**Multiply by the reciprocal of the divisor, then simplify as for multiplication.**\n• A/B ÷ C/D = A/B · D/C.\n• The divisor's NUMERATOR moves to the bottom, so its zeros join the restrictions too.",
+     "hint": "Keep, change, flip — then watch the new denominator.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Restrictions when dividing",
+     "def": "**For A/B ÷ C/D, exclude the zeros of B, of D, AND of C.**\n• B and D are denominators from the start.\n• C becomes a denominator once you flip the divisor — and you cannot divide by zero anyway.",
+     "hint": "Three places to look, not two.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Complex fractions",
+     "def": "**A fraction whose numerator or denominator contains a fraction is a division problem in disguise.**\n• (A/B) over (C/D) means A/B ÷ C/D.\n• Rewrite it as a division, then multiply by the reciprocal.",
+     "hint": "The long fraction bar is a ÷ sign.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Monomials",
+     "def": "**Multiply coefficients, then combine powers of each variable by subtracting exponents across the fraction bar.**\n• (4x³y)/(6xy²) = 2x²/(3y), for x ≠ 0, y ≠ 0.\n• Every variable that ever sat in a denominator is restricted from being 0.",
+     "hint": "Numbers with numbers, x with x, y with y.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Ratio of surface area to volume",
+     "def": "**SA/V compares packaging used to space held; for similar shapes it simplifies to a number over the length, so the shape with the smaller number is more efficient for every size.**\n• A cube of edge 2x: SA = 24x², V = 8x³, so SA/V = 3/x.\n• Simplifying the ratio is just dividing rational expressions.",
+     "hint": "Smaller SA/V: less wrapping per unit of space.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "When is a rational expression in simplified form?",
+     "opts": [
+      "When its numerator and denominator share no common factor other than 1",
+      "When no variable appears anywhere in its denominator at all",
+      "When the degree of its numerator is less than its denominator's",
+      "When every term appearing on both top and bottom has been crossed out"
+     ],
+     "ans": 0,
+     "hint": "Simplifying is about factors.",
+     "steps": [
+      "Simplifying means dividing out common factors.",
+      "You stop when there are none left except 1.",
+      "Variables in the denominator are fine, and degrees can be anything.",
+      "Simplified form: no common factor other than 1."
+     ],
+     "ex": {
+      "main": "**When the numerator and denominator share no common factor other than 1.** Crossing out matching TERMS is the classic mistake, and it changes the value. A simplified expression can easily have a variable underneath or a top-heavy degree.",
+      "tip": "Factors, not terms. Always."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (x² − 49)/(x² + 4x − 21).",
+     "opts": [
+      "(x + 7)/(x + 3)",
+      "(x − 7)/(x − 3)",
+      "(x + 7)/(x − 3)",
+      "7/3"
+     ],
+     "ans": 1,
+     "hint": "Factor top and bottom, then look for the shared factor.",
+     "steps": [
+      "x² − 49 = (x − 7)(x + 7).",
+      "x² + 4x − 21 = (x + 7)(x − 3).",
+      "Divide out the common factor x + 7.",
+      "(x − 7)/(x − 3), for x ≠ −7, 3."
+     ],
+     "ex": {
+      "main": "**(x − 7)/(x − 3).** The factor x + 7 is shared, so it divides out, leaving the other two. (x + 7)/(x − 3) keeps the factor that cancelled; 7/3 cancels the x² terms as if they were factors.",
+      "tip": "Factored form makes the shared factor impossible to miss."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which values of x must be excluded from (x + 2)/(x² − 9x)?",
+     "opts": [
+      "−2 only",
+      "9 only",
+      "0 and 9",
+      "0, 9 and −2"
+     ],
+     "ans": 2,
+     "hint": "Exclusions come from the denominator only.",
+     "steps": [
+      "Factor the denominator: x² − 9x = x(x − 9).",
+      "It is zero when x = 0 or x = 9.",
+      "The numerator's zero, x = −2, just makes the expression 0, which is allowed.",
+      "Exclude x = 0 and x = 9."
+     ],
+     "ex": {
+      "main": "**0 and 9.** x(x − 9) = 0 at both. Forgetting the factor x gives \"9 only\", and −2 makes the whole expression 0 — a perfectly good value.",
+      "tip": "Factor the denominator fully; a common factor of x is easy to miss."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (5 − x)/(x − 5), for x ≠ 5.",
+     "opts": [
+      "x − 5",
+      "1",
+      "0",
+      "−1"
+     ],
+     "ans": 3,
+     "hint": "Write 5 − x as −1 times something.",
+     "steps": [
+      "5 − x = −(x − 5).",
+      "So the expression is −(x − 5)/(x − 5).",
+      "The x − 5 divides out, leaving the −1.",
+      "It simplifies to −1."
+     ],
+     "ex": {
+      "main": "**−1.** The top and bottom are opposites, not equals. Try x = 7: (5 − 7)/(7 − 5) = −2/2 = −1. Answering 1 misses the sign that reversing the subtraction brings in.",
+      "tip": "Reversed subtraction hides a factor of −1."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the first move when you divide one rational expression by another?",
+     "opts": [
+      "Multiply the first by the reciprocal of the second",
+      "Divide the numerators, then divide the denominators",
+      "Cross-multiply so that both fraction bars disappear",
+      "Flip the first expression, then multiply by the second"
+     ],
+     "ans": 0,
+     "hint": "It works exactly like dividing ordinary fractions.",
+     "steps": [
+      "A/B ÷ C/D is the same as A/B · D/C.",
+      "The first expression stays as it is.",
+      "Only the divisor — the second expression — is flipped.",
+      "Then multiply and simplify."
+     ],
+     "ex": {
+      "main": "**Multiply by the reciprocal of the divisor.** It is the fraction rule you already know. Flipping the FIRST expression instead gives the reciprocal of the right answer, and cross-multiplying is for solving equations, not simplifying.",
+      "tip": "Keep the first, flip the second."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (6x²y)/(5z) · (10z²)/(3xy³).",
+     "opts": [
+      "4xz/y",
+      "4xz/y²",
+      "4x²z/y²",
+      "2xz/y²"
+     ],
+     "ans": 1,
+     "hint": "Numbers with numbers, then each variable on its own.",
+     "steps": [
+      "Numbers: (6 × 10)/(5 × 3) = 60/15 = 4.",
+      "x: x²/x = x.   z: z²/z = z.",
+      "y: y/y³ = 1/y².",
+      "4xz/y², for x, y, z ≠ 0."
+     ],
+     "ex": {
+      "main": "**4xz/y².** Each variable is handled on its own: two x's on top against one below leaves x; one y on top against three below leaves y² underneath. 4xz/y cancels only one y; 4x²z/y² forgets the x in the second denominator.",
+      "tip": "Count each variable top and bottom, then subtract."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is (x + 6)/x NOT equal to 6?",
+     "opts": [
+      "It does not equal 6 only when x is 0; everywhere else it does",
+      "It does equal 6, because the two x's divide out to leave just 6",
+      "x is a term of the top, not a factor of it, so it cannot cancel",
+      "Because the numerator has degree 1 and the denominator does too"
+     ],
+     "ans": 2,
+     "hint": "Try a value: x = 2.",
+     "steps": [
+      "At x = 2: (2 + 6)/2 = 8/2 = 4, not 6.",
+      "The top is x + 6, a SUM; x is one of its terms.",
+      "Only a factor of the whole numerator can be divided out.",
+      "(x + 6)/x is already simplified (it equals 1 + 6/x)."
+     ],
+     "ex": {
+      "main": "**Because x is a term of the numerator, not a factor.** A single number check settles it: x = 2 gives 4. The expression can be split as x/x + 6/x = 1 + 6/x, which shows exactly what cancelling really allows.",
+      "tip": "If one number breaks a \"simplification\", it was never true."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Multiply and simplify: (x² − 4)/(x + 5) · (x² + 8x + 15)/(x² + x − 6). State the domain.",
+     "opts": [
+      "(x + 2)(x + 3), for x ≠ −5, 2",
+      "x + 2, for every real number x",
+      "x + 2, for x ≠ −5 only",
+      "x + 2, for x ≠ −5, −3, 2"
+     ],
+     "ans": 3,
+     "hint": "Factor all four polynomials; collect restrictions from both denominators BEFORE cancelling.",
+     "steps": [
+      "x² − 4 = (x − 2)(x + 2) and x² + 8x + 15 = (x + 3)(x + 5).",
+      "x² + x − 6 = (x + 3)(x − 2).",
+      "Denominators: (x + 5) and (x + 3)(x − 2), so x ≠ −5, −3, 2.",
+      "Cancel x + 5, x + 3 and x − 2: the product is x + 2, for x ≠ −5, −3, 2."
+     ],
+     "ex": {
+      "main": "**x + 2, for x ≠ −5, −3, 2.** Every factor except x + 2 cancels, but each one that came from a denominator leaves its restriction behind. \"Every real number\" is the graph of y = x + 2 with no holes, which is not this expression.",
+      "tip": "Write the restrictions down before you cross anything out."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide and simplify: (x² − 16)/(3x) ÷ (x + 4)/(6x²).",
+     "opts": [
+      "2x(x − 4)",
+      "(x − 4)/(2x)",
+      "2x(x + 4)",
+      "(x − 4)(x + 4)²/(18x³)"
+     ],
+     "ans": 0,
+     "hint": "Multiply by the reciprocal of (x + 4)/(6x²).",
+     "steps": [
+      "Rewrite: (x² − 16)/(3x) · 6x²/(x + 4).",
+      "Factor: (x − 4)(x + 4)/(3x) · 6x²/(x + 4).",
+      "Cancel x + 4, and 6x²/(3x) = 2x.",
+      "2x(x − 4), for x ≠ 0, −4."
+     ],
+     "ex": {
+      "main": "**2x(x − 4).** After flipping, x + 4 and 3x both cancel. (x − 4)/(2x) flips the wrong expression, and (x − 4)(x + 4)²/(18x³) is what you get by multiplying without flipping at all.",
+      "tip": "Flip the divisor, then it is an ordinary product."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the domain of (x + 1)/(x − 2) ÷ (x − 3)/(x + 5)?",
+     "opts": [
+      "x ≠ 2 and −5",
+      "x ≠ 2, −5 and 3",
+      "x ≠ 2 and 3",
+      "x ≠ −1, 2 and −5"
+     ],
+     "ans": 1,
+     "hint": "Check both original denominators — and the divisor's numerator.",
+     "steps": [
+      "The original denominators are x − 2 and x + 5, so x ≠ 2 and x ≠ −5.",
+      "Dividing by (x − 3)/(x + 5) means multiplying by (x + 5)/(x − 3).",
+      "Now x − 3 is a denominator too, so x ≠ 3 — and at x = 3 you would be dividing by 0.",
+      "The domain excludes 2, −5 and 3."
+     ],
+     "ex": {
+      "main": "**x ≠ 2, −5 and 3.** The trap is the divisor's numerator: when the divisor is 0 the whole division is undefined, and flipping it puts x − 3 underneath. −1 only makes the first fraction 0, which is allowed.",
+      "tip": "Dividing: three places to look for restrictions, not two."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Multiply and simplify: (x + 3)/(x² − 25) · (x² − 5x).",
+     "opts": [
+      "x(x + 3)/(x − 5)",
+      "(x + 3)/(x + 5)",
+      "x(x + 3)/(x + 5)",
+      "(x + 3)/(x(x − 5)(x + 5)²)"
+     ],
+     "ans": 2,
+     "hint": "Write x² − 5x over 1 and factor everything.",
+     "steps": [
+      "x² − 5x = x(x − 5), written as x(x − 5)/1.",
+      "x² − 25 = (x − 5)(x + 5).",
+      "The factor x − 5 divides out.",
+      "x(x + 3)/(x + 5), for x ≠ 5, −5."
+     ],
+     "ex": {
+      "main": "**x(x + 3)/(x + 5).** The x − 5 cancels but the x stays. (x + 3)/(x + 5) loses that x, x(x + 3)/(x − 5) cancels the wrong factor, and putting x² − 5x underneath treats the multiplication as a division.",
+      "tip": "A polynomial multiplies the TOP; write it over 1 so it lands there."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which expression is equivalent to (x + 1)/(x − 4) over the domain x ≠ 4, −2?",
+     "opts": [
+      "(x² + x)/(x² − 4x)",
+      "(x² + 3x + 2)/(x² + 2x − 8)",
+      "(x + 3)/(x − 2)",
+      "(x² + 3x + 2)/(x² − 2x − 8)"
+     ],
+     "ans": 3,
+     "hint": "Which form of 1 brings in the restriction x ≠ −2?",
+     "steps": [
+      "To exclude x = −2, multiply top and bottom by (x + 2)/(x + 2).",
+      "Top: (x + 1)(x + 2) = x² + 3x + 2.",
+      "Bottom: (x − 4)(x + 2) = x² − 2x − 8.",
+      "(x² + 3x + 2)/(x² − 2x − 8), valid for x ≠ 4, −2."
+     ],
+     "ex": {
+      "main": "**(x² + 3x + 2)/(x² − 2x − 8).** (x² + x)/(x² − 4x) also has the same values, but it was made with x/x, so its domain is x ≠ 4, 0 — the wrong domain. Adding 2 to top and bottom, as in (x + 3)/(x − 2), changes the value completely.",
+      "tip": "Equivalent expressions are only equivalent on a stated domain."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify (x³ − 4x)/(x² + 4x + 4).",
+     "opts": [
+      "x(x − 2)/(x + 2)",
+      "x(x − 2)",
+      "(x − 2)/(x + 2)",
+      "x/(x + 2)"
+     ],
+     "ans": 0,
+     "hint": "Factor out x first on top, then spot the perfect square underneath.",
+     "steps": [
+      "x³ − 4x = x(x² − 4) = x(x − 2)(x + 2).",
+      "x² + 4x + 4 = (x + 2)².",
+      "One factor of x + 2 divides out; one stays underneath.",
+      "x(x − 2)/(x + 2), for x ≠ −2."
+     ],
+     "ex": {
+      "main": "**x(x − 2)/(x + 2).** The bottom is (x + 2) TWICE, so only one copy cancels. x(x − 2) cancels both; (x − 2)/(x + 2) drops the common factor x that was pulled out first.",
+      "tip": "A squared factor cancels once per matching factor, no more."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Simplify the complex fraction whose numerator is (x + 1)/x and whose denominator is (x² − 1)/x².",
+     "opts": [
+      "(x − 1)/x",
+      "x/(x − 1)",
+      "1/(x(x − 1))",
+      "(x + 1)²(x − 1)/x³"
+     ],
+     "ans": 1,
+     "hint": "Rewrite the big fraction bar as ÷.",
+     "steps": [
+      "(x + 1)/x ÷ (x² − 1)/x² = (x + 1)/x · x²/(x² − 1).",
+      "x² − 1 = (x − 1)(x + 1).",
+      "Cancel x + 1, and x²/x = x.",
+      "x/(x − 1), for x ≠ 0, 1, −1."
+     ],
+     "ex": {
+      "main": "**x/(x − 1).** Once it is a division, flip the bottom fraction and cancel. (x − 1)/x is the reciprocal of the answer — what you get by flipping the top instead — and (x + 1)²(x − 1)/x³ multiplies without flipping.",
+      "tip": "A complex fraction is just A ÷ B written vertically."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Box A is a cube with edge 2x. Box B has a square base x by x and height 4x. The more efficient box has the smaller ratio of surface area to volume. Which is it?",
+     "opts": [
+      "Neither: both boxes simplify to the same ratio, 3/x",
+      "Box B: its ratio is 9/(2x), which is less than 3/x",
+      "Box A: its ratio is 3/x, against 9/(2x) for Box B",
+      "It depends on x, so neither box is better at every size"
+     ],
+     "ans": 2,
+     "hint": "Find SA and V for each box, then simplify SA/V.",
+     "steps": [
+      "Box A: SA = 6(2x)² = 24x², V = (2x)³ = 8x³, so SA/V = 3/x.",
+      "Box B: SA = 2x² + 4(x · 4x) = 18x², V = 4x³, so SA/V = 9/(2x).",
+      "9/(2x) = 4.5/x, which is bigger than 3/x for every positive x.",
+      "Box A, the cube, is more efficient."
+     ],
+     "ex": {
+      "main": "**Box A.** Both ratios have the form (number)/x, so comparing the numbers 3 and 4.5 decides it once and for all — \"it depends on x\" is exactly what the simplification rules out. The cube wins, as compact shapes always do.",
+      "tip": "When two ratios share the same x-part, only the coefficients need comparing."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A classmate simplifies (x² + 6x)/(x² + 3x) by crossing out the x² terms and gets 6x/3x = 2. What is the correct result?",
+     "opts": [
+      "6/3, which equals 2",
+      "2, for every x except 0",
+      "(x + 6)/(x + 3), for x ≠ −3 only",
+      "(x + 6)/(x + 3), for x ≠ 0, −3"
+     ],
+     "ans": 3,
+     "hint": "Factor x out of the top and the bottom.",
+     "steps": [
+      "Top: x² + 6x = x(x + 6). Bottom: x² + 3x = x(x + 3).",
+      "The common FACTOR is x.",
+      "Dividing it out leaves (x + 6)/(x + 3).",
+      "Both 0 and −3 made the original bottom zero, so x ≠ 0, −3."
+     ],
+     "ex": {
+      "main": "**(x + 6)/(x + 3), for x ≠ 0, −3.** The x² terms are terms, not factors, so they cannot be crossed out. A quick check: at x = 1 the original is 7/4, not 2. Dropping the restriction x ≠ 0 is the subtler error — the x cancelled, but x = 0 still breaks the original.",
+      "tip": "One numerical check would have caught the classmate's answer."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Is (3x + 8)/(2x + 8) = 3/2 always, sometimes, or never true?",
+     "opts": [
+      "Never",
+      "Always",
+      "Only when x = 0",
+      "Only when x = 8"
+     ],
+     "ans": 0,
+     "hint": "Solve the equation rather than cancelling the 8s.",
+     "steps": [
+      "Multiply both sides by 2(2x + 8): 2(3x + 8) = 3(2x + 8).",
+      "That is 6x + 16 = 6x + 24.",
+      "Subtract 6x: 16 = 24, which is false.",
+      "No value of x works, so it is never true."
+     ],
+     "ex": {
+      "main": "**Never.** \"Cancelling the 8s\" suggests always, but 8 is a term, not a factor. At x = 0 the left side is 8/8 = 1, and at x = 8 it is 32/24 = 4/3 — neither is 3/2, and the algebra shows no x ever will be.",
+      "tip": "A false statement like 16 = 24 at the end means no solution at all."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "How does the graph of f(x) = (x² − 9)/(x − 3) compare with the graph of g(x) = x + 3?",
+     "opts": [
+      "They are identical at every single point",
+      "The same line, except f has a hole at (3, 6)",
+      "f has a vertical asymptote at x = 3, and g does not",
+      "The same line, except f has a hole at (−3, 0)"
+     ],
+     "ans": 1,
+     "hint": "Simplify f, then ask which x it cannot accept.",
+     "steps": [
+      "x² − 9 = (x − 3)(x + 3), so f simplifies to x + 3.",
+      "But f is undefined at x = 3, where its original denominator is 0.",
+      "The factor x − 3 cancelled, so x = 3 is a hole, not an asymptote.",
+      "The hole is at (3, 3 + 3) = (3, 6)."
+     ],
+     "ex": {
+      "main": "**The same line, except f has a hole at (3, 6).** The simplification is valid everywhere except x = 3, so the graphs agree at every other point. A cancelled factor gives a hole, never an asymptote, and (−3, 0) is just where the line crosses the x-axis.",
+      "tip": "This is why the domain has to travel with a simplified answer."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Divide and simplify: (2x² − 7x − 4)/(x² − 9) ÷ (2x + 1)/(x + 3). State the domain.",
+     "opts": [
+      "(x + 4)/(x − 3), for x ≠ 3, −3, −½",
+      "(x − 4)/(x − 3), for x ≠ 3, −3",
+      "(x − 4)/(x − 3), for x ≠ 3, −3, −½",
+      "(x − 4)/(x − 3), for x ≠ 3 only"
+     ],
+     "ans": 2,
+     "hint": "Factor 2x² − 7x − 4, flip the divisor, and collect restrictions from all three places.",
+     "steps": [
+      "2x² − 7x − 4 = (2x + 1)(x − 4), and x² − 9 = (x − 3)(x + 3).",
+      "Flip and multiply: (2x + 1)(x − 4)/((x − 3)(x + 3)) · (x + 3)/(2x + 1).",
+      "Cancel 2x + 1 and x + 3: (x − 4)/(x − 3).",
+      "Restrictions: x ≠ 3, −3 from x² − 9, and x ≠ −½ from the divisor's numerator."
+     ],
+     "ex": {
+      "main": "**(x − 4)/(x − 3), for x ≠ 3, −3, −½.** Two options have the right expression with too few restrictions: −3 comes from the original denominators, and −½ from the divisor's numerator 2x + 1. (x + 4) is a factoring sign error.",
+      "tip": "The answer and the domain are both part of \"simplify\"."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rectangle has area (x² + 7x + 10)/(x − 1) square units and width (x + 2)/(x² − 1) units. What is its length?",
+     "opts": [
+      "(x + 2)²(x + 5)/((x − 1)²(x + 1))",
+      "(x + 5)/(x + 1)",
+      "(x + 5)(x − 1)",
+      "(x + 5)(x + 1)"
+     ],
+     "ans": 3,
+     "hint": "Length = area ÷ width.",
+     "steps": [
+      "Divide: (x² + 7x + 10)/(x − 1) ÷ (x + 2)/(x² − 1).",
+      "Flip and factor: (x + 2)(x + 5)/(x − 1) · (x − 1)(x + 1)/(x + 2).",
+      "Cancel x + 2 and x − 1.",
+      "The length is (x + 5)(x + 1)."
+     ],
+     "ex": {
+      "main": "**(x + 5)(x + 1).** Area ÷ width, with the width flipped. (x + 2)²(x + 5)/((x − 1)²(x + 1)) multiplies the area by the width instead of dividing; (x + 5)/(x + 1) flips the area instead of the width.",
+      "tip": "Check the units: square units ÷ units = units, which only division gives."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}
