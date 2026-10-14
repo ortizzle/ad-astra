@@ -4,7 +4,7 @@
   "unit-alg-t4-04": {
    "id": "unit-alg-t4-04",
    "type": "unit",
-   "updatedAt": 1791931034175,
+   "updatedAt": 1791931148489,
    "classId": "algeo",
    "quarter": 2,
    "status": "draft",
@@ -216,21 +216,21 @@
      "kind": "mc",
      "q": "What is 2/x + 3/y?",
      "opts": [
-      "6/(xy)",
-      "5/(x + y)",
-      "5/(xy)",
+      "(2 + 3)/(xy)",
+      "(2x + 3y)/(xy)",
+      "(2 + 3)/(x + y)",
       "(2y + 3x)/(xy)"
      ],
      "ans": 3,
-     "hint": "The common denominator is xy. What does each fraction need?",
+     "hint": "The common denominator is xy. What does each fraction need to be multiplied by?",
      "steps": [
       "The LCD is xy.",
-      "2/x = 2y/(xy) and 3/y = 3x/(xy).",
+      "2/x needs a factor of y: 2y/(xy). 3/y needs a factor of x: 3x/(xy).",
       "Add the numerators.",
       "(2y + 3x)/(xy)."
      ],
      "ex": {
-      "main": "**(2y + 3x)/(xy).** 5/(x + y) adds tops and bottoms separately, which fails even for numbers: 2/1 + 3/1 = 5, but 5/(1 + 1) = 2.5. 5/(xy) uses the right denominator but forgets to scale the numerators.",
+      "main": "**(2y + 3x)/(xy).** Each numerator is multiplied by the factor its OWN denominator was missing, so the 2 picks up y and the 3 picks up x — (2x + 3y)/(xy) swaps them. (2 + 3)/(x + y) adds tops and bottoms separately, which fails even for numbers: 2/1 + 3/1 = 5, but 5/(1 + 1) = 2.5. (2 + 3)/(xy) uses the right denominator but never scales the numerators.",
       "tip": "Check any fraction rule with small numbers before using it."
      }
     },

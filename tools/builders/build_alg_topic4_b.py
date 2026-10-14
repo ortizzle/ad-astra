@@ -846,7 +846,10 @@ card(C, 'The graphical view',
      hint='No point on the graph, no intersection.')
 _g1 = 4 / (x - 2)
 assert sp.solve(sp.Eq(_g1, 2), x) == [4]
-C[-1]['graph'] = rgraph([_g1, sp.Integer(2) + 0 * x], [-4, 8, -5, 6], vas=[2],
+# No asymptote lines here: with two curves, a third series would cycle back to the
+# curve's own colour and the asymptote x = 2 would read as part of the curve. The gap
+# between the branches shows it on its own.
+C[-1]['graph'] = rgraph([_g1, sp.Integer(2) + 0 * x], [-4, 8, -5, 6],
                         pts=[{'x': 4, 'y': 2, 'label': '(4, 2)'}])
 
 card(C, 'Work rate',

@@ -9,7 +9,11 @@ const PORT = process.argv[2] || 8098;
     // she discarded it AFTER the file was stamped — a newer libv must NOT resurrect it
     const d=await (await fetch('./content/sg-test1.json',{cache:'no-store'})).json();
     const lib=d.records['unit-sgt1'];
-    DATA.records['unit-sgt1']={...lib, deleted:true, updatedAt: lib.updatedAt + 3600e3};
+    /* Stamped NOW, the way a real discard is. It used to be lib.updatedAt + 1h,
+       which rotted by the calendar: once the shipped file was 60 days old the
+       tombstone was too, Sync.merge purged it as stale, and the test reported
+       a resurrection that a real discard (stamped when tapped) never sees. */
+    DATA.records['unit-sgt1']={...lib, deleted:true, updatedAt: Date.now() - 60e3};
     delete DATA.records['unit-sgt1'].libv;
     saveLocal();
     const btn=document.createElement('button'); btn.textContent='x';

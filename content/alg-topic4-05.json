@@ -4,7 +4,7 @@
   "unit-alg-t4-05": {
    "id": "unit-alg-t4-05",
    "type": "unit",
-   "updatedAt": 1791931034425,
+   "updatedAt": 1791931148752,
    "classId": "algeo",
    "quarter": 2,
    "status": "draft",
@@ -1928,19 +1928,6 @@
          [
           8.0,
           2
-         ]
-        ]
-       },
-       {
-        "type": "pts",
-        "pts": [
-         [
-          2.0,
-          -5
-         ],
-         [
-          2.0,
-          6
          ]
         ]
        }

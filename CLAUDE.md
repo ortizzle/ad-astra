@@ -1005,6 +1005,105 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Dynamics 1 and Topic 4 — Rational Functions (v207, THIS APP ONLY)
+
+Chris: *"Let's review the girls folders, i've updated content."* Two new Drive
+folders for Sedona, both created 10/14: **`Dynamics 1`** in Physics 8 and
+**`Topic 4`** in Algebra & Geometry II. Every folder was listed to the end of
+its page token, and the five days before the sweep window were checked for
+anything the v203 pass had missed (only the formula guide's earlier draft and
+a file shared with Chris that was nobody's coursework). Built by three
+parallel agents, one per bundle, which wrote content, builders and tests only;
+`CONTENT_LIBRARY`, versions and this file were integrated afterwards so no two
+agents ever edited the same file.
+
+**Dynamics 1** — a new shelf, four numbered parts, from textbook chapters 6
+(`06_Forces.pdf`) and 7 (`07_2D+Forces_Kinematics.pdf`). No objective sheet
+was in the folder, so the objectives are the chapters' own.
+
+| id | title | |
+|---|---|---|
+| `unit-phys-dyn1-newton` | `Dynamics 1 · 1-1 Forces and Newton's Laws` | 20 cards / 19 q, a balanced-or-unbalanced sort |
+| `unit-phys-dyn1-weight` | `Dynamics 1 · 1-2 Weight, Friction and Apparent Weight` | 19 / 20, a mass-or-weight sort |
+| `unit-phys-dyn1-incline` | `Dynamics 1 · 1-3 Equilibrium and Inclined Planes` | 15 / 16 |
+| `unit-phys-dyn1-circle` | `Dynamics 1 · 1-4 Circular Motion and Torque` | 16 / 16 |
+
+- **Section 7.2, projectile motion, was deliberately NOT built.** Kinematics 2
+  · 2-2 was built from this same chapter in v181 and already teaches every
+  7.2 topic card for card. Compared before writing, the v142 / v189
+  discipline, and `test_dyn1.js` asserts no Dynamics 1 card re-teaches it.
+- **1-4 may belong to a later unit.** It is built because her sheet carries
+  `F_net = ma = mv² / r`, but nothing says her class covers 7.3 now; its
+  `parentNote` suggests holding it with a later `releaseOn` if so.
+- **No free-body diagrams are drawn**, and that is the v142 motion-diagram
+  call again: `renderGraph` draws axed graph paper with plain polylines and no
+  arrowheads, so a force arrow would be a line on a grid. Forces are described
+  in words and every note says so. Arrows would be an engine change, not made.
+- **Her sheet's g = −9.8 and the units never fight**: weights use the size,
+  direction is said in words, and one card says the minus IS the direction.
+- The traps each carry a real wrong option: the pull that "must win" on a
+  crate at constant speed, "equal and opposite" offered as a third-law pair
+  for a book on a table, the full weight as the normal force on a slope or
+  under an extra push, one engine force in place of the net force, static
+  friction's ≤ read as =, 900 N as a tug-of-war tension, and centrifugal
+  answers in 1-4.
+- Every number through sympy and `eq()`, with `distinct()` asserting no
+  distractor equals the answer — it caught a 5.67-vs-5.68 s pendulum slip.
+  The pendulum and torque formulas are not on her sheet, and the cards say so.
+
+**Topic 4 · Rational Functions** — five lessons on a new `Topic 4` shelf,
+shaped exactly like Topic 3 (v185): `Topic 4 · 4-N Title`, 12–13 cards and 20
+questions each (7/7/6), no `order`, titles taken from the student-edition
+headers and slide title pages.
+
+| id | title |
+|---|---|
+| `unit-alg-t4-01` | `Topic 4 · 4-1 Inverse Variation and the Reciprocal Function` |
+| `unit-alg-t4-02` | `Topic 4 · 4-2 Graphing Rational Functions` |
+| `unit-alg-t4-03` | `Topic 4 · 4-3 Multiplying and Dividing Rational Expressions` |
+| `unit-alg-t4-04` | `Topic 4 · 4-4 Adding and Subtracting Rational Expressions` |
+| `unit-alg-t4-05` | `Topic 4 · 4-5 Solving Rational Equations` |
+
+- **4-5 is built from the lesson SLIDES alone** (`…_0405_lps.pptx`); there is
+  no `0405_se.pdf`. Every equation on those slides is an image, so the .pptx
+  was unzipped and the slide images read. Its `parentNote` and `srcName` say
+  so, and it should be checked against the textbook pages if they arrive.
+- **Rational graphs need no engine change.** There is no rational series type,
+  so each curve is a `pts` series sampled in the builder, densely near every
+  pole, with an off-window point between branches so `renderGraph` starts a
+  new polyline rather than joining them across the asymptote. The test pins
+  two polylines per reciprocal graph.
+- **Three source problems, flagged rather than copied:** a 4-5 slide labels
+  an intersection (−1, 0.063) where both sides equal 1/12 ≈ 0.083; the slides
+  call a negative current speed "extraneous" when it is a valid root the
+  situation rejects (both ideas are taught and named); and the textbook models
+  "gas left in a tank varies inversely with miles driven", which is a falling
+  line, not inverse variation — taught as the counter-example, with a line in
+  the 4-1 `parentNote` in case her class marks it the book's way.
+- **Every displayed option is parsed back into sympy** (`topic4_common.py`:
+  `same()` asserts the answer, `differs()` asserts no distractor is also
+  correct). That caught an "unsimplified" 4-3 distractor that was in fact
+  equal to the answer. `sol()` multiplies by the least common denominator,
+  not the product of denominators, which had invented a spurious excluded
+  root on the slides' own example.
+- Traps with airtime: three-of-four products agreeing in an inverse-variation
+  table, a falling table that is not inverse, `x + 3` moving the graph LEFT, a
+  cancelled factor being a hole, a graph crossing its horizontal asymptote,
+  cancelling terms instead of factors, the divisor's numerator joining the
+  excluded values, restrictions read from the ORIGINAL denominators, an
+  average speed of 48 not the midpoint 50, and "twice as fast" meaning half
+  the time. The 4-1 "falling is not enough" card and the 4-4 average-speed
+  card are tagged `from:'added'`.
+
+`tools/test_dyn1.js` (49 assertions) and `tools/test_alg_topic4.js` both seed
+their neighbours alongside (Kinematics 1 and 2; Topics 1–3), so each "its own
+shelf" is a claim about coexistence, and pin every trap by its teaching rather
+than by question id. `test_dyn1.js` was verified by deleting the
+moving-needs-no-net-force card and swapping one distractor, and watching
+exactly those two fail. Both builders' first regex failures were the known
+family: `\b75 kg` matching "0.75 kg" (now anchored `(?<![\d.])`), and "mph"
+against a stem that says "miles per hour".
+
 ### A note on your week, and the Wonder Jar (v204 / Wayfinder v179, both apps)
 
 Chris: *"Can we create a space for you to give a qualitative message to the
