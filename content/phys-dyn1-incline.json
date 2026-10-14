@@ -1,0 +1,545 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn1-incline": {
+   "id": "unit-phys-dyn1-incline",
+   "type": "unit",
+   "updatedAt": 1791934396326,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Dynamics 1 · 1-3 Equilibrium and Inclined Planes",
+   "srcName": "Chapter 7, Forces and Motion in Two Dimensions (7.1 Forces in Two Dimensions)",
+   "source": "07_2D+Forces_Kinematics.pdf (Drive, Physics 8 › Dynamics 1)",
+   "summary": {
+    "text": "Forces that act at angles other than 90°: finding the net force and the equilibrant when three or more forces act, the tension in two ropes holding a weight, and the inclined plane — tilting the axes, splitting the weight into a down-slope part and an into-slope part, and finding the acceleration with and without friction.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Real forces rarely line up neatly. Ramps, ropes at angles and hanging signs all come down to one method — resolve, then apply Newton’s laws in each direction — and the slope is the case every physics test reaches for, because it uses everything in 1-1 and 1-2 at once.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Determine the force that produces equilibrium when three forces act on an object.",
+     "from": "source"
+    },
+    {
+     "text": "Analyse the motion of an object on an inclined plane with and without friction.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "From chapter 7.1 (Forces in Two Dimensions). Section 7.2, projectile motion, is deliberately not built here: Kinematics 2 · 2-2 already teaches it from the same chapter. Every number was computed with sympy and checked; none of the chapter’s own (the 168 N sign, the 562 N trunk, the 62 kg skier) is reused. The trap with the most airtime is that the normal force on a slope is F_g cos θ, NOT the weight — a card, a question offering the full weight as the wrong answer, and a ranking of the same box on four slopes. Others: which of sine and cosine runs down the slope (a card teaches checking at 0° and 90°, which catches a swap without a calculator); \"constant velocity means no friction\" (offered as a wrong answer — it means friction is exactly big enough); and friction always using the normal force, never the full weight. No free-body diagrams are drawn in the app: its graph engine draws gridded plots with plain lines and no arrowheads, so an \"arrow\" would really be a line on graph paper and could mislead more than help. Every force is described in words instead, and the chapter asks her to draw these diagrams by hand, which is the better practice anyway.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do 1-1 and 1-2 first if you have not. Here, for every slope problem, write F_g sin θ and F_g cos θ before anything else.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Forces at an angle: split them",
+     "def": "**Resolve every force into x and y components and solve the two directions separately.**\n• F_net,x = ma_x and F_net,y = ma_y are two separate equations.\n• This is the component method from Kinematics 2, used on forces instead of velocities.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Equilibrium with several forces",
+     "def": "**An object is in equilibrium when the forces on it add to zero — drawn head to tail, the arrows close into a loop that ends where it began.**\n• In components: the x-parts add to zero AND the y-parts add to zero.\n• Three, four or ten forces: the rule is the same.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Resultant",
+     "def": "**The resultant is the single force that has the same effect as all the forces on an object put together.**\n• It is the vector sum — the net force.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Equilibrant",
+     "def": "**The equilibrant is the one extra force that would put an object in equilibrium: the same size as the resultant, pointing the opposite way.**\n• Find the resultant of the forces you have, then turn it round by 180°.\n• The resultant and the equilibrant together add to zero.",
+     "hint": "Same size, opposite direction. Equal-and-opposite to the resultant.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Two ropes holding a sign",
+     "def": "**When two ropes hold a weight, only their vertical components hold it up.**\n• For two ropes at the same angle θ above the horizontal: 2T sin θ = F_g.\n• The horizontal components pull against each other and cancel.",
+     "eq": "2T sin θ = F_g",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Why shallow ropes snap",
+     "def": "**The flatter a rope is, the bigger the tension it needs to hold the same weight.**\n• A nearly horizontal rope has a tiny vertical component, so the tension must be huge to make up the weight.\n• That is why a picture should hang from steep wires, and why pushing sideways on the middle of a taut rope tied to a stuck car pulls the car with a big force.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Tilt the axes on a slope",
+     "def": "**On a slope, put the x-axis along the slope and the y-axis perpendicular to it.**\n• The motion, the friction and the normal force then all lie along an axis.\n• Only the weight is at an angle — so it is the one force you have to resolve.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Weight’s two parts on a slope",
+     "def": "**On a slope at angle θ, weight splits into F_g sin θ pulling down the slope and F_g cos θ pressing into the slope.**\n• The down-slope part is what makes things slide.\n• The into-slope part is what the normal force has to balance.",
+     "eq": "down the slope: F_g sin θ     into the slope: F_g cos θ",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Which one is sine? Check the extremes",
+     "def": "**Test the formula at 0° and 90° and the sine and cosine can never swap by accident.**\n• At 0°, flat ground, nothing pulls an object along: sin 0° = 0. ✓\n• At 90°, a vertical wall, all the weight pulls along it: sin 90° = 1. ✓",
+     "hint": "Flat ground has no slope pull. That rules out cosine.",
+     "from": "added"
+    },
+    {
+     "id": "c9",
+     "term": "The normal force on a slope is LESS than the weight",
+     "def": "**On a slope, F_N = F_g cos θ, which is smaller than the weight.**\n• The surface only has to balance the part of the weight pressing into it.\n• Steeper slope, smaller normal force, and so less friction too.",
+     "eq": "F_N = F_g cos θ",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Sliding down a frictionless slope",
+     "def": "**With no friction, the acceleration down a slope is g sin θ — and the mass cancels.**\n• A heavy crate and a light box slide down the same smooth ramp with the same acceleration.",
+     "eq": "a = g sin θ",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Sliding down with friction",
+     "def": "**Friction acts up the slope against a sliding object, so the acceleration is g(sin θ − μ_k cos θ).**\n• The friction uses the normal force, F_g cos θ — never the full weight.\n• The mass still cancels.",
+     "eq": "a = g(sin θ − μ_k cos θ)",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Sliding at constant velocity",
+     "def": "**An object slides down a slope at constant velocity when μ_k = tan θ.**\n• Then friction exactly balances the down-slope pull, and the net force is zero.\n• Constant velocity does not mean \"no friction\" — it means friction is exactly big enough.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Will it stay put?",
+     "def": "**An object rests on a slope without slipping as long as tan θ is no bigger than μ_s.**\n• Tilt a board slowly: the object starts to slide at the angle where tan θ = μ_s.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Which way friction points on a slope",
+     "def": "**Friction always opposes the sliding: up the slope when the object slides down, and down the slope when it slides up.**\n• A skier coasting UP a slope has friction and the weight’s down-slope part both pulling back, so she slows quickly.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the equilibrant of a set of forces?",
+     "opts": [
+      "The single force that would cancel them: as big as their resultant, but opposite",
+      "The single force with the same effect as all of them put together",
+      "The biggest single force in the set, which the others must balance",
+      "The force left over after the forces in the set cancel in pairs"
+     ],
+     "ans": 0,
+     "hint": "It is the force that PRODUCES equilibrium.",
+     "steps": [
+      "Add the forces to get their resultant.",
+      "To make the total zero, the extra force must undo the resultant exactly.",
+      "So it has the same size as the resultant and the opposite direction.",
+      "That force is the equilibrant."
+     ],
+     "ex": {
+      "main": "**The equilibrant is equal in size and opposite in direction to the resultant, so adding it makes the net force zero.** The single force with the same effect as all of them is the resultant itself — the equilibrant’s mirror image.",
+      "tip": "Resultant: same effect. Equilibrant: cancels the effect."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two forces act on a ring: 30 N east and 40 N north. What third force would put the ring in equilibrium?",
+     "opts": [
+      "50 N, 53.1° north of east",
+      "50 N, 53.1° south of west",
+      "70 N, 53.1° south of west",
+      "50 N, 36.9° south of west"
+     ],
+     "ans": 1,
+     "hint": "Find the resultant, then turn it round.",
+     "steps": [
+      "Resultant size: √(30² + 40²) = 50 N.",
+      "Direction: tan⁻¹(40 ÷ 30) = 53.1° north of east.",
+      "The equilibrant is the same size, pointing the opposite way.",
+      "It is 50 N, 53.1° south of west."
+     ],
+     "ex": {
+      "main": "**The resultant is 50 N at 53.1° north of east, so the equilibrant is 50 N at 53.1° south of west.** 53.1° north of east is the resultant itself, 70 N adds forces at right angles as if they were in a line, and 36.9° swaps which component is on the bottom of the ratio.",
+      "tip": "Turn the resultant round 180°: north of east becomes south of west."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Drawn head to tail, the forces on an object in equilibrium…",
+     "opts": [
+      "form an open chain, with a gap the size of the weight",
+      "form a straight line pointing the way the object moves",
+      "form a closed loop, ending exactly where they began",
+      "form a loop that closes only if the object is at rest"
+     ],
+     "ans": 2,
+     "hint": "In equilibrium the forces add to zero.",
+     "steps": [
+      "Adding vectors head to tail, the sum runs from the first tail to the last head.",
+      "In equilibrium the sum is zero.",
+      "A sum of zero means the last head lands back on the first tail.",
+      "So the arrows close into a loop."
+     ],
+     "ex": {
+      "main": "**A zero sum means the chain of arrows closes up on itself.** That is just as true for an object moving at constant velocity as for one at rest — equilibrium is about the net force, not about standing still.",
+      "tip": "Closed loop, zero net force."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 240 N sign hangs still from two ropes, each making 30° with the horizontal. What is the tension in each rope?",
+     "opts": [
+      "480 N",
+      "120 N",
+      "138.6 N",
+      "240 N"
+     ],
+     "ans": 3,
+     "hint": "Only the vertical components hold the sign up.",
+     "steps": [
+      "The horizontal components cancel each other.",
+      "The two vertical components hold up the weight: 2T sin 30° = 240 N.",
+      "sin 30° = 0.5, so 2T × 0.5 = 240 N, which gives T = 240 N.",
+      "Each rope has a tension of 240 N."
+     ],
+     "ex": {
+      "main": "**2T sin 30° = 240 N, so each rope pulls with 240 N — as much as the whole sign weighs.** 120 N splits the weight in half as if the ropes were vertical; 138.6 N uses cosine, which is the horizontal component.",
+      "tip": "Angled ropes always pull harder than half the weight."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A painting hangs from two wires. If the wires are changed so they are closer to horizontal, what happens to the tension in them?",
+     "opts": [
+      "It increases, because each wire’s vertical part shrinks",
+      "It decreases, because the wires now share the load better",
+      "It stays the same, because the painting weighs the same",
+      "It increases, because the painting gets heavier"
+     ],
+     "ans": 0,
+     "hint": "Which part of each wire’s pull is holding the painting up?",
+     "steps": [
+      "Only the vertical components hold up the weight: 2T sin θ = F_g.",
+      "A flatter wire has a smaller angle θ, so a smaller sin θ.",
+      "To make up the same weight, T must get bigger.",
+      "The tension increases — which is why flat wires snap."
+     ],
+     "ex": {
+      "main": "**T = F_g ÷ (2 sin θ), so a smaller angle means a bigger tension.** The weight is unchanged; it is the geometry that makes the wires work harder. Hang a painting from steep wires and they barely notice it.",
+      "tip": "Flatter rope, bigger tension."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 400 N crate rests on a ramp inclined at 25°. What is the part of its weight that pulls it DOWN the ramp?",
+     "opts": [
+      "363 N",
+      "169 N",
+      "400 N",
+      "187 N"
+     ],
+     "ans": 1,
+     "hint": "Down the slope is the sine part.",
+     "steps": [
+      "Down the slope: F_g sin θ.",
+      "F_g sin 25° = 400 × 0.4226.",
+      "That is 169 N.",
+      "The down-slope part of the weight is 169 N."
+     ],
+     "ex": {
+      "main": "**Down the slope is F_g sin θ = 400 sin 25° = 169 N.** 363 N is the cosine part, which presses INTO the ramp; 400 N is the whole weight; and 187 N uses tangent. Check it at 0°: flat ground has no down-slope pull, and sin 0° = 0.",
+      "tip": "Sine runs down the slope. Test it at 0° if in doubt."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 400 N crate rests on a ramp inclined at 25°. What is the normal force from the ramp?",
+     "opts": [
+      "169 N",
+      "400 N",
+      "363 N",
+      "437 N"
+     ],
+     "ans": 2,
+     "hint": "The ramp only has to balance the part of the weight pressing into it.",
+     "steps": [
+      "Perpendicular to the ramp, nothing accelerates.",
+      "So the normal force balances the into-the-ramp part of the weight, F_g cos θ.",
+      "F_N = 400 × cos 25° = 400 × 0.9063.",
+      "The normal force is 363 N."
+     ],
+     "ex": {
+      "main": "**On a slope F_N = F_g cos θ = 363 N — less than the full 400 N weight.** Writing F_N = mg out of habit is the trap: that is only true on level ground with nothing else pushing. 437 N would need something pressing the crate harder into the ramp.",
+      "tip": "Normal force equals weight only on flat ground, with no extra push."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box slides down a frictionless ramp inclined at 20°. What is its acceleration?",
+     "opts": [
+      "3.57 m/s²",
+      "9.21 m/s²",
+      "9.8 m/s²",
+      "3.35 m/s²"
+     ],
+     "ans": 3,
+     "hint": "Only the down-slope part of gravity accelerates it.",
+     "steps": [
+      "Along the ramp, the only force is F_g sin θ = mg sin θ.",
+      "a = F_net ÷ m = g sin θ, and the mass cancels.",
+      "a = 9.8 × sin 20° = 9.8 × 0.342.",
+      "a = 3.35 m/s², down the ramp."
+     ],
+     "ex": {
+      "main": "**a = g sin θ = 9.8 sin 20° = 3.35 m/s².** 9.21 m/s² uses cosine, 9.8 m/s² treats the ramp like a vertical drop, and 3.57 m/s² uses tangent.",
+      "tip": "On a smooth slope, a = g sin θ — whatever the mass."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A heavy crate and a light box slide down the same frictionless ramp. How do their accelerations compare?",
+     "opts": [
+      "They are equal, because the mass cancels",
+      "The crate’s is bigger, because it is pulled harder",
+      "The box’s is bigger, because it has less inertia",
+      "The crate’s is bigger, because it presses harder"
+     ],
+     "ans": 0,
+     "hint": "Write out a = F_net ÷ m for each.",
+     "steps": [
+      "The down-slope force is mg sin θ.",
+      "The acceleration is (mg sin θ) ÷ m.",
+      "The m cancels, leaving g sin θ for both.",
+      "The accelerations are equal."
+     ],
+     "ex": {
+      "main": "**a = g sin θ has no mass in it: the bigger pull on the crate is exactly matched by its bigger inertia.** It is the slope version of a heavy and a light ball falling together — which is exactly what Galileo was using ramps to study.",
+      "tip": "Bigger pull, bigger mass, same acceleration."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sled slides down a 35° snow slope with μ_k = 0.10. What is its acceleration?",
+     "opts": [
+      "5.62 m/s²",
+      "4.82 m/s²",
+      "6.42 m/s²",
+      "5.06 m/s²"
+     ],
+     "ans": 1,
+     "hint": "Friction uses the NORMAL force, and it points up the slope.",
+     "steps": [
+      "Down the slope: g sin 35° = 5.62 m/s² worth of pull per kilogram.",
+      "Friction per kilogram: μ_k g cos 35° = 0.10 × 9.8 × 0.819 = 0.80 m/s², up the slope.",
+      "a = g(sin θ − μ_k cos θ) = 5.62 − 0.80.",
+      "a = 4.82 m/s², down the slope."
+     ],
+     "ex": {
+      "main": "**a = g(sin θ − μ_k cos θ) = 4.82 m/s².** 5.62 m/s² leaves friction out, 6.42 m/s² adds it as if it helped, and 5.06 m/s² works out the friction from the sine part instead of the normal force.",
+      "tip": "Friction always uses F_N, and on a slope F_N uses cosine."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sled starts from rest and accelerates down a slope at 4.82 m/s². How fast is it moving after 3.0 s?",
+     "opts": [
+      "1.6 m/s",
+      "21.7 m/s",
+      "14.5 m/s",
+      "4.8 m/s"
+     ],
+     "ans": 2,
+     "hint": "Once you have a, the rest is kinematics.",
+     "steps": [
+      "Starting from rest, v_i = 0.",
+      "v_f = v_i + at.",
+      "v_f = 0 + 4.82 × 3.0.",
+      "v_f = 14.5 m/s."
+     ],
+     "ex": {
+      "main": "**v_f = v_i + at = 4.82 × 3.0 = 14.5 m/s.** 21.7 is ½at², which is the DISTANCE in metres, not a speed; 1.6 divides by the time; and 4.8 m/s is the acceleration with the wrong unit.",
+      "tip": "Forces give you a. Kinematics does the rest."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box slides down a 16° ramp at a constant velocity. What is the coefficient of kinetic friction?",
+     "opts": [
+      "Zero — no friction is needed",
+      "0.96",
+      "3.49",
+      "0.29"
+     ],
+     "ans": 3,
+     "hint": "Constant velocity means the forces along the ramp balance.",
+     "steps": [
+      "Along the ramp, friction must equal the down-slope pull: μ_k mg cos θ = mg sin θ.",
+      "Cancel mg: μ_k = sin θ ÷ cos θ = tan θ.",
+      "μ_k = tan 16°.",
+      "μ_k = 0.29."
+     ],
+     "ex": {
+      "main": "**At constant velocity friction exactly balances the slope’s pull, so μ_k = tan θ = 0.29.** \"Zero\" is the moving-needs-a-force trap in reverse: without friction the box would speed up, not hold steady. 0.96 is cos 16° and 3.49 is the ratio upside down.",
+      "tip": "Constant velocity on a slope: μ_k = tan θ."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A block rests on a board tilted at 22°. The coefficient of static friction is 0.45. What happens?",
+     "opts": [
+      "It stays put: tan 22° = 0.40 is less than 0.45",
+      "It slides: the angle is steeper than 0.45 radians",
+      "It slides: any tilt at all makes a block slip",
+      "It stays put only if the block is heavy enough"
+     ],
+     "ans": 0,
+     "hint": "Compare tan θ with μ_s.",
+     "steps": [
+      "The block slips once the down-slope pull beats the most static friction can give.",
+      "mg sin θ ≤ μ_s mg cos θ cancels down to tan θ ≤ μ_s.",
+      "tan 22° = 0.40, which is less than 0.45.",
+      "So static friction can hold it, and it stays put."
+     ],
+     "ex": {
+      "main": "**tan 22° = 0.40 is below μ_s = 0.45, so static friction is enough.** The mass cancels, so a heavier block slips at exactly the same angle — tilt the board to tan⁻¹ 0.45 = 24° and both go together.",
+      "tip": "Holding still on a slope: tan θ ≤ μ_s. No mass in it."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A skier finishes a run and coasts UP a short rise. Which way does friction on her point?",
+     "opts": [
+      "Up the slope, the way it always points on hills",
+      "Down the slope, opposing her sliding up",
+      "Straight down, the same as gravity",
+      "Perpendicular to the slope, like the normal force"
+     ],
+     "ans": 1,
+     "hint": "Friction opposes the sliding, whatever the hill does.",
+     "steps": [
+      "Friction acts along the surface, against the direction of sliding.",
+      "She is sliding up the slope.",
+      "So friction points down the slope.",
+      "Along with the down-slope part of her weight, it slows her quickly."
+     ],
+     "ex": {
+      "main": "**Friction opposes the sliding, so for a skier sliding up it points down the slope.** It only points up the slope when she is sliding down. Here friction and gravity’s down-slope part both pull back, so she slows faster than she sped up.",
+      "tip": "Find the sliding direction first. Friction is the other way."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "One box is placed on ramps of different steepness. Rank them from the LARGEST normal force to the SMALLEST.",
+     "opts": [
+      "On level ground",
+      "On a 20° ramp",
+      "On a 40° ramp",
+      "On a 60° ramp"
+     ],
+     "ans": 0,
+     "hint": "F_N = F_g cos θ. How does cos θ change as θ grows?",
+     "steps": [
+      "On a slope the normal force is F_g cos θ.",
+      "cos 0° = 1, cos 20° = 0.94, cos 40° = 0.77, cos 60° = 0.50.",
+      "cos θ gets smaller as the slope gets steeper.",
+      "So level ground first, then 20°, 40° and 60°."
+     ],
+     "ex": {
+      "main": "**F_N = F_g cos θ, which shrinks as the slope steepens — only on level ground does it equal the full weight.** At 60° the ramp holds up just half the box’s weight, which is also why friction is weaker on a steep slope.",
+      "tip": "Steeper slope, smaller normal force."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car is stuck in mud. A rope is tied tight between the car and a tree, and someone pushes sideways on the middle of the rope. Why can a modest push pull the car with a large force?",
+     "opts": [
+      "The tree pulls on the car as well, doubling whatever the person pushes",
+      "Pushing sideways adds the push to the rope’s tension along its length",
+      "The rope is nearly straight, so a huge tension is needed to balance the push",
+      "Sideways pushes are always stronger than pulls made along a rope"
+     ],
+     "ans": 2,
+     "hint": "This is the shallow-rope sign problem turned on its side.",
+     "steps": [
+      "At the middle of the rope, the push is balanced by the two halves of the rope.",
+      "The rope is almost straight, so each half has only a tiny component against the push.",
+      "Tiny components must come from an enormous tension to balance the push.",
+      "The enormous tension pulls along the rope, on the car."
+     ],
+     "ex": {
+      "main": "**With the rope nearly straight, only a sliver of its tension opposes the push, so the tension has to be many times bigger than the push.** It is the two-rope sign in disguise: the flatter the rope, the bigger the tension.",
+      "tip": "Nearly straight rope, enormous tension."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

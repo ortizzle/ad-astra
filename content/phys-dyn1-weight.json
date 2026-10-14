@@ -1,0 +1,748 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn1-weight": {
+   "id": "unit-phys-dyn1-weight",
+   "type": "unit",
+   "updatedAt": 1791934396239,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Dynamics 1 · 1-2 Weight, Friction and Apparent Weight",
+   "srcName": "Chapter 6, Forces (6.2 Using Newton’s Laws)",
+   "source": "06_Forces.pdf (Drive, Physics 8 › Dynamics 1)",
+   "summary": {
+    "text": "Newton’s laws put to work on the forces you meet every day: mass and weight and how F_g = mg connects them, what a scale really measures and why you feel heavier or lighter in an elevator, the normal force, static and kinetic friction with your sheet’s F_fs ≤ μ_s F_N and F_fk = μ_k F_N, air drag and terminal velocity, and the back-and-forth of springs and pendulums.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Friction and the normal force are in nearly every force problem from here on, and the difference between mass and weight is the single idea most often mixed up on a physics test. Getting them straight now makes slopes and circles in 1-3 and 1-4 a matter of geometry.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Describe how the weight and the mass of an object are related.",
+     "from": "source"
+    },
+    {
+     "text": "Differentiate between the gravitational force weight and what is experienced as apparent weight.",
+     "from": "source"
+    },
+    {
+     "text": "Define the friction force and distinguish between static and kinetic friction.",
+     "from": "source"
+    },
+    {
+     "text": "Describe simple harmonic motion and explain how the acceleration due to gravity influences such motion.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "From chapter 6.2 (Using Newton’s Laws). Every number was computed with sympy and checked before it was written; none of the chapter’s own numbers is reused. Weights use the SIZE of g, 9.8 m/s², with the direction given in words — her sheet writes g = −9.8 m/s², and one card says outright that the minus is the direction, so the two never fight. The traps that get deliberate airtime: mass versus weight (a sort set drills it twelve ways, and the Moon questions offer the kilogram-for-newton swap as a wrong answer); the normal force is NOT automatically the weight (pressing down on a box raises it); apparent weight follows the acceleration, not the direction of travel (the elevator ranking puts \"slowing down while going up\" below the true weight); and the ≤ in F_fs ≤ μ_s F_N, which students read as = and then answer that static friction is always at its maximum. The pendulum-period formula is from the textbook and is not on her sheet; the card says so. No free-body diagrams are drawn in the app: its graph engine draws gridded plots with plain lines and no arrowheads, so an \"arrow\" would really be a line on graph paper and could mislead more than help. Every force is described in words instead, and the chapter asks her to draw these diagrams by hand, which is the better practice anyway.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Do the mass-or-weight sort first — it takes two minutes and every later question leans on it. Then the quiz, writing F_N down before you touch friction every time.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Mass",
+     "def": "**Mass is the amount of matter in an object, measured in kilograms, and it is the same everywhere.**\n• It is also a measure of inertia: more mass, harder to speed up or slow down.\n• It has no direction — mass is a scalar.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Weight",
+     "def": "**Weight is the force of gravity on an object, F_g = mg, measured in newtons and pointing toward the centre of Earth.**\n• It changes from planet to planet because g does; the mass does not.\n• On the Moon, where g is about 1.6 m/s², you weigh about a sixth of your Earth weight.",
+     "eq": "F_g = mg",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Weight uses the SIZE of g",
+     "def": "**Your sheet writes g = −9.8 m/s²; the minus sign is the direction (down), so the size of a weight is m × 9.8.**\n• A 50 kg student weighs 50 × 9.8 = 490 N, pointing down.\n• In a force problem, give the size from 9.8 and say \"down\" in words, or keep the minus all the way through with up as positive — just never mix the two in one problem.",
+     "from": "added"
+    },
+    {
+     "id": "c3",
+     "term": "Everything falls with the same acceleration",
+     "def": "**Ignoring air, a heavy object and a light one fall with the same acceleration, g.**\n• The heavy one does feel a bigger pull — but it also has more mass to move, and the two cancel exactly in a = F_net / m.\n• A feather really does fall slower in air. That is air drag, not gravity.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "What a scale measures",
+     "def": "**A bathroom scale measures the force it pushes up on you, not your mass.**\n• Standing still, that push equals your weight, so the scale reads your weight.\n• Take the same scale to the Moon and it reads less, though your mass has not changed.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Normal force",
+     "def": "**The normal force is the push a surface exerts on an object, perpendicular to the surface and away from it.**\n• It is as big as it needs to be to stop the object sinking in — no more.\n• It is NOT automatically equal to the weight.",
+     "hint": "\"Normal\" here means perpendicular, as in geometry.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Normal force with an extra push",
+     "def": "**Press down on a box and the floor must push up harder; lift up on it and the floor pushes up less.**\n• Push down with P: F_N = mg + P.\n• Lift up with P: F_N = mg − P.\n• And on a slope it is less than mg again — that is in 1-3.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Apparent weight",
+     "def": "**Your apparent weight is the force a scale or floor actually exerts on you, and it changes when you accelerate up or down.**\n• Accelerating upward: the floor must push harder, F = m(g + a). You feel heavier.\n• Accelerating downward: F = m(g − a). You feel lighter.",
+     "eq": "F_scale = m(g + a)  (a positive upward)",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "It is the acceleration, not the direction of travel",
+     "def": "**An elevator moving at constant speed — up or down — reads your true weight.**\n• Speeding up while going up, or slowing down while going down, both mean an UPWARD acceleration, so both read heavy.\n• Slowing down while going up reads light.",
+     "hint": "Ask which way the velocity is CHANGING, not which way it points.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Weightlessness",
+     "def": "**Weightlessness means your apparent weight is zero, not that your weight is zero.**\n• In free fall, you and the scale fall together, so the scale has nothing to push on and reads zero.\n• Gravity is still pulling you with your full weight the whole time.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Friction",
+     "def": "**Friction is the contact force that opposes sliding between two surfaces, acting parallel to the surface.**\n• It points opposite to the sliding, or opposite to the way the object would slide.\n• It comes from the microscopic bumps of the two surfaces briefly bonding.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Static friction",
+     "def": "**Static friction holds a still object in place, and it grows to match whatever push it is resisting — up to a limit.**\n• Push with 20 N and it pushes back 20 N; push with 30 N and it gives 30 N.\n• The most it can give is μ_s F_N. Push harder than that and the object starts to slide.",
+     "eq": "F_fs ≤ μ_s F_N",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Kinetic friction",
+     "def": "**Once an object is sliding, kinetic friction acts on it with a fixed size, μ_k F_N.**\n• μ_k is usually smaller than μ_s, which is why it is harder to start a heavy box moving than to keep it moving.",
+     "eq": "F_fk = μ_k F_N",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "The coefficient of friction",
+     "def": "**μ is a number with no units that says how grippy two surfaces are together.**\n• It depends on BOTH surfaces: rubber on dry concrete grips far better than steel on oiled steel.\n• It is usually below 1, but it does not have to be — drag-racing tyres reach about 5.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Friction ignores area and speed",
+     "def": "**In the model you use, friction depends on the surfaces and the normal force — not on how much area is touching, and not on how fast it slides.**\n• A brick slid on its wide face or its narrow edge feels the same friction.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Air drag and terminal velocity",
+     "def": "**Air drag grows as an object speeds up, until it equals the weight; then the net force is zero and the speed stops changing.**\n• That steady speed is the terminal velocity.\n• A sky diver changes hers by changing shape: spread out is slower, tucked in is faster, and a parachute makes it slow enough to land.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Simple harmonic motion",
+     "def": "**When the force pulling an object back to its resting position grows in proportion to how far it is pulled away, it moves back and forth in simple harmonic motion.**\n• Period: the time for one complete cycle. Amplitude: the biggest distance from rest.\n• A spring is the classic case: F = −kx, where the minus means the pull is always back toward rest.",
+     "eq": "F = −kx",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "A pendulum’s period",
+     "def": "**For small swings, a pendulum’s period depends only on its length and on g — not on the mass of the bob, and not on how far it swings.**\n• Longer string, longer period. Four times the length, twice the period.\n• This formula is from the textbook; it is not on your sheet.",
+     "eq": "T = 2π √(l / g)",
+     "from": "source"
+    },
+    {
+     "id": "c18",
+     "term": "Resonance",
+     "def": "**Small pushes timed to match an object’s own period build up a large swing — that is mechanical resonance.**\n• Pumping a playground swing, rocking a stuck car free, bouncing on a diving board.\n• It can also do damage: a crowd jumping in time with a balcony’s natural period can shake it apart.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An astronaut has a mass of 54 kg on Earth. What is her mass on the Moon, where g is about 1.6 m/s²?",
+     "opts": [
+      "54 kg",
+      "9.0 kg",
+      "86 kg",
+      "0 kg"
+     ],
+     "ans": 0,
+     "hint": "Does the amount of matter in her change on the trip?",
+     "steps": [
+      "Mass is the amount of matter in an object.",
+      "Travelling to the Moon does not add or remove any matter.",
+      "Only weight depends on g; mass does not.",
+      "Her mass is still 54 kg."
+     ],
+     "ex": {
+      "main": "**Mass does not change from place to place: still 54 kg.** 9.0 kg divides by six, which is what happens to her WEIGHT, and 86 kg confuses the kilograms with her Moon weight in newtons.",
+      "tip": "Mass is how much of you there is. Weight is how hard a planet pulls."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An astronaut has a mass of 54 kg. What is her weight on the Moon, where g is about 1.6 m/s²?",
+     "opts": [
+      "529 N",
+      "86 N",
+      "54 N",
+      "9.0 N"
+     ],
+     "ans": 1,
+     "hint": "Weight is F_g = mg — with which g?",
+     "steps": [
+      "Weight is F_g = mg.",
+      "On the Moon, use the Moon’s g, 1.6 m/s².",
+      "F_g = 54 × 1.6 = 86.4 N.",
+      "Her Moon weight is 86 N."
+     ],
+     "ex": {
+      "main": "**F_g = mg = 54 × 1.6 = 86 N.** 529 N is her Earth weight, 54 N writes her mass with the wrong unit, and 9.0 N divides her mass by six instead of multiplying by the Moon’s g.",
+      "tip": "Kilograms and newtons measure different things. The unit tells you which."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is the weight of a 7.5 kg bag of rice near Earth’s surface?",
+     "opts": [
+      "0.77 N",
+      "7.5 N",
+      "73.5 N",
+      "17.3 N"
+     ],
+     "ans": 2,
+     "hint": "F_g = mg, using the size of g.",
+     "steps": [
+      "Weight is F_g = mg.",
+      "Use the size of g, 9.8 m/s².",
+      "F_g = 7.5 × 9.8 = 73.5 N.",
+      "The bag weighs 73.5 N, pointing down."
+     ],
+     "ex": {
+      "main": "**F_g = mg = 7.5 × 9.8 = 73.5 N.** 7.5 N treats the mass as if it were a weight, 0.77 N divides instead of multiplying, and 17.3 N adds the two.",
+      "tip": "Kilograms times 9.8 gives newtons."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A bathroom scale on Earth reads 637 N when a student stands still on it. What is the student’s mass?",
+     "opts": [
+      "6.5 kg",
+      "637 kg",
+      "6243 kg",
+      "65 kg"
+     ],
+     "ans": 3,
+     "hint": "Run F_g = mg backwards.",
+     "steps": [
+      "Standing still, the scale reads the student’s weight, 637 N.",
+      "m = F_g ÷ g.",
+      "m = 637 ÷ 9.8 = 65 kg.",
+      "The student’s mass is 65 kg."
+     ],
+     "ex": {
+      "main": "**m = F_g ÷ g = 637 ÷ 9.8 = 65 kg.** 637 kg reads the newtons as kilograms, and 6243 kg multiplies by g instead of dividing.",
+      "tip": "Newtons divided by 9.8 gives kilograms."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 48 kg student stands on a scale in an elevator that is speeding up as it rises, accelerating at 1.5 m/s². What does the scale read?",
+     "opts": [
+      "542 N",
+      "470 N",
+      "398 N",
+      "72 N"
+     ],
+     "ans": 0,
+     "hint": "The net force must point the same way as the acceleration.",
+     "steps": [
+      "Up is positive. The forces are the scale’s push up and her weight down.",
+      "F_net = F_scale − mg = ma, so F_scale = m(g + a).",
+      "F_scale = 48 × (9.8 + 1.5) = 48 × 11.3.",
+      "The scale reads 542 N."
+     ],
+     "ex": {
+      "main": "**Accelerating upward, the scale must push up MORE than her weight: m(g + a) = 542 N.** 470 N is her true weight, 398 N uses g − a (the reading for a DOWNWARD acceleration), and 72 N is only the net force, ma.",
+      "tip": "Feel heavier when the acceleration points up."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 48 kg student stands on a scale in an elevator moving DOWN at a constant 3 m/s. What does the scale read?",
+     "opts": [
+      "Less than 470 N, since it is going down",
+      "470 N, the student’s true weight",
+      "More than 470 N, to slow the drop",
+      "Zero, because the student is moving down"
+     ],
+     "ans": 1,
+     "hint": "Is the elevator accelerating?",
+     "steps": [
+      "Constant speed in a straight line means zero acceleration.",
+      "Zero acceleration means zero net force.",
+      "So the scale’s push exactly equals the weight, 48 × 9.8.",
+      "The scale reads 470 N."
+     ],
+     "ex": {
+      "main": "**Constant velocity, so zero net force, so the scale reads the true weight, 470 N — whichever way the elevator is moving.** The reading only changes while the elevator speeds up or slows down.",
+      "tip": "Direction of travel does not matter. Acceleration does."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "A student rides an elevator standing on a scale. Rank these moments from the HIGHEST scale reading to the LOWEST.",
+     "opts": [
+      "Speeding up while going up",
+      "Moving up at a constant speed",
+      "Slowing down while going up",
+      "Falling freely after the cable snaps"
+     ],
+     "ans": 0,
+     "hint": "For each moment, which way does the ACCELERATION point?",
+     "steps": [
+      "Speeding up while rising: acceleration up, so the reading is m(g + a), above the true weight.",
+      "Constant speed: no acceleration, so the reading is the true weight.",
+      "Slowing while rising: acceleration down, so m(g − a), below the true weight.",
+      "Free fall: a = g downward, so m(g − g) = 0. The scale reads nothing."
+     ],
+     "ex": {
+      "main": "**Highest when accelerating upward, then true weight at constant speed, then light when accelerating downward, and zero in free fall.** The trap is slowing down while going up: the elevator is still rising, but its acceleration points down, so it reads light.",
+      "tip": "Apparent weight follows the acceleration, never the velocity."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An astronaut floating in an orbiting space station is called \"weightless\". What is actually true?",
+     "opts": [
+      "Her mass has dropped to zero, so gravity has nothing to pull",
+      "She has no weight at all, because there is no gravity up there",
+      "Her apparent weight is zero, but gravity still pulls on her",
+      "Gravity and her inertia are cancelling, so the net force is zero"
+     ],
+     "ans": 2,
+     "hint": "Weightless describes what a scale would read.",
+     "steps": [
+      "She and the station are both falling freely around Earth together.",
+      "Nothing pushes up on her, so a scale under her would read zero.",
+      "Gravity is still pulling her — it is what keeps the station in orbit.",
+      "So her apparent weight is zero; her real weight is not."
+     ],
+     "ex": {
+      "main": "**Weightlessness is zero APPARENT weight: nothing pushes up on her because she is in free fall.** Gravity at the station’s height is still about nine-tenths of its strength at the ground. Her mass is unchanged, and inertia is not a force, so it cannot cancel anything.",
+      "tip": "Weightless means \"no scale can feel you\", not \"no gravity\"."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An 18 kg box sits on a floor with μ_s = 0.45. You push it horizontally with 60 N and it does not move. What is the static friction force?",
+     "opts": [
+      "19.4 N",
+      "79.4 N",
+      "0 N",
+      "60 N"
+     ],
+     "ans": 3,
+     "hint": "Static friction is an \"up to\" force, not a fixed one.",
+     "steps": [
+      "The most static friction could give is μ_s F_N = 0.45 × 18 × 9.8 = 79.4 N.",
+      "Your 60 N push is less than that, so the box stays put.",
+      "The box is not accelerating, so friction must exactly balance your push.",
+      "Static friction is 60 N."
+     ],
+     "ex": {
+      "main": "**Static friction matches the push, 60 N — it only reaches its maximum, 79.4 N, at the moment the box is about to slide.** Reading the ≤ on your sheet as = is the error here; 19.4 N is the leftover capacity, not a force acting.",
+      "tip": "F_fs ≤ μ_s F_N. The \"≤\" is the whole point."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An 18 kg box sits on a floor with μ_s = 0.45. Will it start to slide if you push it horizontally with 90 N?",
+     "opts": [
+      "Yes — 90 N is more than the 79.4 N limit",
+      "No — friction always grows to match a push",
+      "No — 90 N is less than its 176 N weight",
+      "Yes — any push at all moves a box on a floor"
+     ],
+     "ans": 0,
+     "hint": "Compare the push with the most static friction can give.",
+     "steps": [
+      "F_N = mg = 18 × 9.8 = 176.4 N on a level floor with no extra push.",
+      "Maximum static friction = μ_s F_N = 0.45 × 176.4 = 79.4 N.",
+      "90 N is more than 79.4 N.",
+      "Friction cannot hold it, so it slides."
+     ],
+     "ex": {
+      "main": "**Static friction can only grow to μ_s F_N = 79.4 N, and 90 N beats it, so the box slides.** Comparing the push with the WEIGHT mixes a horizontal force with a vertical one; the weight matters only through the normal force.",
+      "tip": "Find the limit first, then compare."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 32 kg crate slides across a floor at constant speed. μ_k = 0.25. How hard must it be pushed horizontally?",
+     "opts": [
+      "313.6 N",
+      "78.4 N",
+      "8.0 N",
+      "0 N"
+     ],
+     "ans": 1,
+     "hint": "Constant speed means the push balances the friction.",
+     "steps": [
+      "On a level floor with no extra push, F_N = mg = 32 × 9.8 = 313.6 N.",
+      "F_fk = μ_k F_N = 0.25 × 313.6 = 78.4 N.",
+      "Constant speed means zero net force, so the push equals the friction.",
+      "The push is 78.4 N."
+     ],
+     "ex": {
+      "main": "**At constant speed the push equals kinetic friction, μ_k F_N = 78.4 N.** 313.6 N is the weight, 8.0 N forgets to multiply by g, and 0 N is the \"moving things need no force\" idea applied where there IS friction to balance.",
+      "tip": "Constant speed with friction means the push equals the friction."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 32 kg crate on a floor with μ_k = 0.25 is pushed horizontally with 150 N while it slides. What is its acceleration?",
+     "opts": [
+      "7.14 m/s²",
+      "4.69 m/s²",
+      "2.24 m/s²",
+      "−5.11 m/s²"
+     ],
+     "ans": 2,
+     "hint": "Find the net force first.",
+     "steps": [
+      "F_fk = μ_k mg = 0.25 × 32 × 9.8 = 78.4 N, opposing the push.",
+      "F_net = 150 − 78.4 = 71.6 N.",
+      "a = F_net ÷ m = 71.6 ÷ 32.",
+      "a = 2.24 m/s², in the direction of the push."
+     ],
+     "ex": {
+      "main": "**a = (150 − 78.4) ÷ 32 = 2.24 m/s².** 4.69 m/s² ignores friction — the single-force trap again — 7.14 m/s² adds friction as if it helped, and −5.11 m/s² subtracts the whole weight instead of the friction.",
+      "tip": "Friction joins the net force. It does not replace it."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sled with a weight of 44 N is pulled across packed snow at constant speed by a horizontal force of 11 N. What is the coefficient of kinetic friction?",
+     "opts": [
+      "0.20",
+      "4.0",
+      "11",
+      "0.25"
+     ],
+     "ans": 3,
+     "hint": "At constant speed, the pull IS the friction.",
+     "steps": [
+      "Constant speed means the 11 N pull equals the friction.",
+      "On level snow with no extra push, F_N equals the weight, 44 N.",
+      "μ_k = F_fk ÷ F_N = 11 ÷ 44.",
+      "μ_k = 0.25."
+     ],
+     "ex": {
+      "main": "**μ_k = F_fk ÷ F_N = 11 ÷ 44 = 0.25.** 4.0 divides the wrong way round — a coefficient bigger than 1 is possible but would be very grippy snow — and 11 is the friction force itself, which has units.",
+      "tip": "μ has no units. If your answer has newtons, you have not divided."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 12 kg box sits on a level floor and you press straight down on its lid with 30 N. What is the normal force from the floor?",
+     "opts": [
+      "147.6 N",
+      "117.6 N",
+      "87.6 N",
+      "30 N"
+     ],
+     "ans": 0,
+     "hint": "The floor must hold up everything pressing down on it.",
+     "steps": [
+      "Two forces push the box down: its weight, 12 × 9.8 = 117.6 N, and your 30 N.",
+      "The box is not accelerating, so the floor’s push up must balance both.",
+      "F_N = 117.6 + 30.",
+      "The normal force is 147.6 N."
+     ],
+     "ex": {
+      "main": "**The floor pushes up with the weight PLUS your push: 147.6 N.** Assuming the normal force always equals mg (117.6 N) is the trap — the floor pushes back with whatever it takes. 87.6 N is what it would be if you LIFTED with 30 N.",
+      "tip": "The normal force is whatever it needs to be. Add up what it is fighting."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A brick slides across a floor, first on its wide face and then on its narrow edge. How does the kinetic friction compare?",
+     "opts": [
+      "It is bigger on the wide face, where more of it is touching",
+      "It is the same, since area does not enter F_fk = μ_k F_N",
+      "It is bigger on the narrow edge, where the weight is concentrated",
+      "It depends on which way up it was moving the fastest"
+     ],
+     "ans": 1,
+     "hint": "Look for area in your sheet’s friction formula.",
+     "steps": [
+      "Kinetic friction is F_fk = μ_k F_N.",
+      "The surfaces are the same, so μ_k is the same.",
+      "The weight is the same, so F_N is the same.",
+      "Contact area appears nowhere, so the friction is the same."
+     ],
+     "ex": {
+      "main": "**Friction depends on the surfaces and the normal force, and neither changes when the brick is turned over.** More area touching spreads the same weight more thinly, and the two effects cancel in this model. Speed does not enter either.",
+      "tip": "If a quantity is not in the formula, it cannot change the answer."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sky diver reaches terminal velocity. What is the net force on her at that point?",
+     "opts": [
+      "Upward, because the air is slowing her",
+      "Downward, equal to her full weight",
+      "Zero — air drag has grown to equal her weight",
+      "Zero, because gravity stops at high speed"
+     ],
+     "ans": 2,
+     "hint": "Terminal velocity is a CONSTANT velocity.",
+     "steps": [
+      "At terminal velocity her speed is no longer changing.",
+      "No acceleration means zero net force.",
+      "Gravity has not changed, so the drag must have grown to match it.",
+      "The net force is zero."
+     ],
+     "ex": {
+      "main": "**Constant velocity, so zero net force: drag up exactly equals weight down.** Gravity never switches off. If the net force pointed up she would be slowing down, which only happens for a moment after the parachute opens.",
+      "tip": "Steady speed always means balanced forces, falling or not."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which change would make a pendulum’s period longer?",
+     "opts": [
+      "Giving it a push instead of letting go",
+      "Using a heavier bob on it",
+      "Pulling it back slightly further",
+      "Making the string longer"
+     ],
+     "ans": 3,
+     "hint": "Look at what appears in T = 2π √(l / g).",
+     "steps": [
+      "The period depends only on the length l and on g.",
+      "The mass of the bob is not in the formula.",
+      "For small swings, the amplitude is not in it either.",
+      "So only a longer string gives a longer period."
+     ],
+     "ex": {
+      "main": "**Only length and g set a pendulum’s period; a longer string swings more slowly.** A heavier bob, a slightly bigger swing or a starting push all change how big the swing is, not how long each one takes.",
+      "tip": "Length and g. Nothing else."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A pendulum’s string is made four times as long. What happens to its period?",
+     "opts": [
+      "It doubles",
+      "It becomes four times as long",
+      "It stays exactly the same",
+      "It halves"
+     ],
+     "ans": 0,
+     "hint": "The length is under a square root.",
+     "steps": [
+      "T = 2π √(l / g).",
+      "Multiplying l by 4 multiplies √l by √4 = 2.",
+      "Nothing else in the formula changes.",
+      "The period doubles."
+     ],
+     "ex": {
+      "main": "**The length sits under a square root, so four times the length gives √4 = 2 times the period.** A 2.0 m pendulum, for instance, has a period of 2.84 s; an 8.0 m one, 5.68 s. Four times is what you get if you forget the root.",
+      "tip": "Square root: four times in, two times out."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A spring with k = 250 N/m is stretched 0.12 m from its resting length. What force does it exert on whatever is stretching it?",
+     "opts": [
+      "30 N, further in the stretch direction",
+      "30 N, back toward its resting length",
+      "2083 N, back toward its resting length",
+      "0.00048 N, back toward its resting length"
+     ],
+     "ans": 1,
+     "hint": "F = −kx. What does the minus sign tell you?",
+     "steps": [
+      "The size is kx = 250 × 0.12.",
+      "That is 30 N.",
+      "The minus sign in F = −kx means the force is opposite to the stretch.",
+      "So 30 N, pulling back toward the resting length."
+     ],
+     "ex": {
+      "main": "**kx = 250 × 0.12 = 30 N, and the minus sign makes it a restoring force, back toward rest.** That restoring direction is what makes a mass on a spring bounce in simple harmonic motion. 2083 N divides k by x.",
+      "tip": "A spring always pulls or pushes back toward where it rests."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Ignoring air, a 5 kg ball and a 1 kg ball are dropped together from the same height. Which lands first?",
+     "opts": [
+      "The 1 kg ball, being easier to move",
+      "The 5 kg ball, being heavier",
+      "They land at the same time",
+      "It depends on how high they start"
+     ],
+     "ans": 2,
+     "hint": "The heavier ball is pulled harder — but what else is bigger?",
+     "steps": [
+      "The 5 kg ball has five times the weight.",
+      "It also has five times the mass to accelerate.",
+      "a = F_net / m = 5mg ÷ 5m = g, the same for both.",
+      "Same acceleration from the same height, so they land together."
+     ],
+     "ex": {
+      "main": "**Ignoring air, every object falls with the same acceleration, g, so they land together.** The bigger pull on the heavier ball is exactly cancelled by its bigger mass. In real air, a very light or spread-out object does fall behind — that is drag, not gravity.",
+      "tip": "More weight, more mass, same g."
+     }
+    }
+   ],
+   "libv": 1,
+   "sorts": [
+    {
+     "id": "s-mw",
+     "title": "Mass or weight?",
+     "a": "Mass",
+     "b": "Weight",
+     "items": [
+      {
+       "t": "Measured in kilograms",
+       "k": "a",
+       "why": "The kilogram is the unit of mass. Forces are measured in newtons."
+      },
+      {
+       "t": "Exactly the same on the Moon as on Earth",
+       "k": "a",
+       "why": "The amount of matter does not change with location."
+      },
+      {
+       "t": "Has no direction at all",
+       "k": "a",
+       "why": "Mass is a scalar. A force always points somewhere."
+      },
+      {
+       "t": "Why a loaded shopping cart is harder to get rolling than an empty one",
+       "k": "a",
+       "why": "Resisting a change in velocity is inertia, and mass is the measure of inertia."
+      },
+      {
+       "t": "How much matter an object contains",
+       "k": "a",
+       "why": "That is the definition of mass."
+      },
+      {
+       "t": "Would be unchanged for a rock floating far out in deep space",
+       "k": "a",
+       "why": "Far from any planet the pull of gravity is tiny, but the rock’s matter is all still there."
+      },
+      {
+       "t": "Measured in newtons",
+       "k": "b",
+       "why": "The pull of gravity is a force, and forces are measured in newtons."
+      },
+      {
+       "t": "Drops to about a sixth on the Moon",
+       "k": "b",
+       "why": "F_g = mg, and the Moon’s g is about a sixth of Earth’s."
+      },
+      {
+       "t": "Points straight down toward the centre of Earth",
+       "k": "b",
+       "why": "It is a force, so it has a direction."
+      },
+      {
+       "t": "What the spring in a bathroom scale is pushed by when you stand still",
+       "k": "b",
+       "why": "A spring scale responds to force, so standing still it reads the pull of gravity on you."
+      },
+      {
+       "t": "Found by multiplying by 9.8 near Earth’s surface",
+       "k": "b",
+       "why": "F_g = mg turns kilograms into newtons."
+      },
+      {
+       "t": "The pull Earth exerts on you",
+       "k": "b",
+       "why": "That pull is the force of gravity on you, which is what the word means."
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,558 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn1-circle": {
+   "id": "unit-phys-dyn1-circle",
+   "type": "unit",
+   "updatedAt": 1791934396331,
+   "classId": "physics",
+   "quarter": 1,
+   "status": "draft",
+   "title": "Dynamics 1 · 1-4 Circular Motion and Torque",
+   "srcName": "Chapter 7, Forces and Motion in Two Dimensions (7.3 Circular Motion)",
+   "source": "07_2D+Forces_Kinematics.pdf (Drive, Physics 8 › Dynamics 1)",
+   "summary": {
+    "text": "Motion in a circle at constant speed: why it is still acceleration, why that acceleration points to the centre with size v² ÷ r, what real force supplies it in each situation, why there is no outward \"centrifugal\" force, and what happens when the inward force lets go. Then the first idea of rotation: lever arms, torque, and how a seesaw balances.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Bends in roads, spinning rides, orbiting planets and thrown hammers are all the same problem, and it is the one place where constant speed and constant velocity part company for good. It is also on your sheet — the \"= mv² / r\" at the end of the Newton’s-laws row is this lesson.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain the acceleration of an object moving in a circle at constant speed.",
+     "from": "source"
+    },
+    {
+     "text": "Describe how centripetal acceleration depends upon the object’s speed and the radius of the circle.",
+     "from": "source"
+    },
+    {
+     "text": "Recognise the direction of the force that causes centripetal acceleration.",
+     "from": "source"
+    },
+    {
+     "text": "Explain how the rate of circular motion is changed by exerting torque on it.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "From chapter 7.3 (Circular Motion). Built because her own equation sheet carries F_net = ma = mv² / r, but with one caution: no objective list was in the Dynamics 1 folder, so whether her class covers 7.3 in this unit or a later one is not known — approve it, or hold it with a later release date, whichever fits. Every number was computed with sympy and checked; none of the chapter’s own (the 13 g stopper, the 8.8 m/s runner, the 32 m/s car) is reused. The trap with the most airtime is centrifugal force: two cards and two questions say plainly that the outward push you feel on a turn has no agent and does not exist, and that a released object flies off along the tangent, not outward. Torque is a short final section, and its formula (like the seesaw balance) is from the textbook and is not on her sheet; the cards say so. No free-body diagrams are drawn in the app: its graph engine draws gridded plots with plain lines and no arrowheads, so an \"arrow\" would really be a line on graph paper and could mislead more than help. Every force is described in words instead, and the chapter asks her to draw these diagrams by hand, which is the better practice anyway.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Learn the two directions first — velocity along the tangent, acceleration to the centre — then the quiz. For every question, name what is supplying the inward force.",
+    "minutes": 20,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Uniform circular motion",
+     "def": "**Uniform circular motion is movement around a circle of fixed radius at constant speed.**\n• A rider on a merry-go-round, a sock in a spinning drum, a car on a steady roundabout.\n• Constant speed — but not constant velocity.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Constant speed, still accelerating",
+     "def": "**An object moving in a circle at constant speed IS accelerating, because its direction keeps changing.**\n• Velocity is a vector; change its direction and you have changed the velocity.\n• So circular motion is never equilibrium, and there must be a net force.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Velocity points along the tangent",
+     "def": "**At every instant, the velocity of an object moving in a circle points along the tangent — at right angles to the radius.**\n• Its length (the speed) stays the same; its direction turns.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Centripetal acceleration",
+     "def": "**The acceleration of an object in uniform circular motion always points toward the centre of the circle, and its size is v² ÷ r.**\n• \"Centripetal\" means centre-seeking.",
+     "eq": "a_c = v² / r",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Using the period",
+     "def": "**The period T is the time for one full trip around the circle; the speed is the circumference divided by it.**\n• v = 2πr ÷ T, so a_c = 4π²r ÷ T².",
+     "eq": "v = 2πr / T     a_c = 4π²r / T²",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "A net force toward the centre",
+     "def": "**To move in a circle, an object needs a net force pointing toward the centre, of size mv² ÷ r.**\n• This is the \"= mv² / r\" end of your sheet’s F_net = ma = mv² / r.\n• That end applies only to motion in a circle at constant speed.",
+     "eq": "F_net = mv² / r",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Name the agent of the inward force",
+     "def": "**Something real must supply the inward pull: tension, friction, gravity or a normal force.**\n• A stone whirled on a string: the string’s tension.\n• A car on a flat bend: the road’s friction on the tyres.\n• Earth around the Sun: the Sun’s gravity. Clothes in a spin cycle: the drum wall pushing inward.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "\"Centripetal force\" is not an extra force",
+     "def": "**Centripetal force is the name for whichever real force points toward the centre — never an additional force to draw on the diagram.**\n• On a free-body diagram, draw tension, friction or gravity, labelled by its agent. Never a separate arrow called \"centripetal\".",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Let go and it flies off along the tangent",
+     "def": "**Release an object moving in a circle and it travels in a straight line along the tangent — the way it was moving at that instant.**\n• Not outward from the centre, and not on around the curve.\n• A hammer thrower releases at the moment the tangent points down the field.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "There is no centrifugal force",
+     "def": "**The outward \"centrifugal force\" you seem to feel on a turn does not exist.**\n• When a car turns left, you keep going straight, by the first law, until the door pushes you inward.\n• The force you actually feel is the door pushing you toward the centre of the turn.",
+     "hint": "No agent, no force. Nothing out there is pushing you outward.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Speed counts twice",
+     "def": "**The centripetal acceleration depends on the SQUARE of the speed: double the speed and it quadruples.**\n• That is why taking a bend at twice the speed needs four times the grip.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "A wider circle is gentler",
+     "def": "**At the same speed, a bigger radius means a smaller centripetal acceleration: double the radius and it halves.**\n• Tight bends are the dangerous ones.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Rigid rotating objects",
+     "def": "**A rigid rotating object spins about its own axis — a door on its hinges, a merry-go-round, a wheel.**\n• What changes how it rotates is not just a force, but where and in which direction the force is applied.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Lever arm",
+     "def": "**The lever arm is the perpendicular distance from the axis of rotation to the line along which a force acts.**\n• Push far from the hinge and at right angles to the door: long lever arm.\n• Push toward the hinge: the line of the force runs through the axis, so the lever arm is zero.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Torque",
+     "def": "**Torque is force times lever arm, and it does for rotation what force does for straight-line motion.**\n• More torque, bigger change in rotation. Measured in N·m.\n• This formula is from the textbook; it is not on your sheet.",
+     "eq": "τ = F × lever arm",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Balancing a seesaw",
+     "def": "**A seesaw balances when the two torques are equal: weight × distance on one side equals weight × distance on the other.**\n• The heavier person sits closer to the pivot.\n• A triple-beam balance works on exactly this idea.",
+     "eq": "m_A g d_A = m_B g d_B",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "An object moves around a circle at a steady speed. Which way does its acceleration point?",
+     "opts": [
+      "Toward the centre of the circle",
+      "Along the tangent, the way it moves",
+      "Outward, away from the centre",
+      "Nowhere — a steady speed means no acceleration"
+     ],
+     "ans": 0,
+     "hint": "What is changing about its velocity?",
+     "steps": [
+      "The speed is not changing, but the direction is.",
+      "The change in velocity between two nearby moments points toward the centre.",
+      "Acceleration points the same way as the change in velocity.",
+      "So the acceleration points toward the centre."
+     ],
+     "ex": {
+      "main": "**Toward the centre — centripetal means centre-seeking.** A steady speed is not a steady velocity, because the direction is changing all the time. Along the tangent is the direction of the VELOCITY, and outward is the direction of a force that does not exist.",
+      "tip": "Velocity along the tangent; acceleration toward the centre."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rider goes round on a merry-go-round at a constant speed. Is she in equilibrium?",
+     "opts": [
+      "Yes — her speed is constant, so nothing is changing",
+      "No — her direction is changing, so she is accelerating",
+      "Yes — the forces on her balance out at every moment",
+      "No — her speed rises and falls as she goes round"
+     ],
+     "ans": 1,
+     "hint": "Equilibrium needs constant VELOCITY.",
+     "steps": [
+      "Equilibrium means zero net force, which means constant velocity.",
+      "Her speed is constant, but her direction keeps changing.",
+      "A changing direction is a changing velocity, which is an acceleration.",
+      "So she is not in equilibrium; a net force points to the centre."
+     ],
+     "ex": {
+      "main": "**Not in equilibrium: constant speed in a circle is still an acceleration, so there must be a net force toward the centre.** Speed and velocity are different things, and circular motion is exactly where the difference matters.",
+      "tip": "Turning counts as accelerating."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cyclist rides around a curve of radius 18 m at a steady 6.0 m/s. What is her centripetal acceleration?",
+     "opts": [
+      "648 m/s²",
+      "0.33 m/s²",
+      "2.0 m/s²",
+      "3.0 m/s²"
+     ],
+     "ans": 2,
+     "hint": "a_c = v² / r.",
+     "steps": [
+      "a_c = v² ÷ r.",
+      "v² = 6.0² = 36.",
+      "a_c = 36 ÷ 18.",
+      "a_c = 2.0 m/s², toward the centre of the curve."
+     ],
+     "ex": {
+      "main": "**a_c = v² ÷ r = 36 ÷ 18 = 2.0 m/s².** 0.33 m/s² forgets to square the speed, 648 m/s² multiplies by the radius, and 3.0 m/s² divides the radius by the speed.",
+      "tip": "Square the speed, then divide by the radius."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 950 kg car rounds a flat curve of radius 45 m at a steady 15 m/s. What size of net force acts on it?",
+     "opts": [
+      "213 750 N",
+      "317 N",
+      "9310 N",
+      "4750 N"
+     ],
+     "ans": 3,
+     "hint": "Your sheet: F_net = mv² / r.",
+     "steps": [
+      "F_net = mv² ÷ r.",
+      "F_net = 950 × 15² ÷ 45.",
+      "F_net = 950 × 225 ÷ 45.",
+      "F_net = 4750 N, toward the centre of the curve."
+     ],
+     "ex": {
+      "main": "**F_net = mv² ÷ r = 950 × 225 ÷ 45 = 4750 N, pointing toward the centre.** 317 N forgets to square v, 9310 N is the car’s weight, and 213 750 N forgets to divide by the radius.",
+      "tip": "mv² over r. Square only the v."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car rounds a flat, unbanked curve at a steady speed. What supplies the force that keeps it on the curve?",
+     "opts": [
+      "Friction from the road on the tyres, pointing to the centre",
+      "An outward centrifugal force balancing the turn",
+      "The car’s weight, pulling it around the bend",
+      "The engine, pushing the car into the turn"
+     ],
+     "ans": 0,
+     "hint": "Name a real force with an agent that points toward the centre.",
+     "steps": [
+      "The inward force must come from something touching the car or from gravity.",
+      "Weight points straight down, not toward the centre of the curve.",
+      "The road touches the tyres, and its sideways friction can point inward.",
+      "So road friction supplies the inward force."
+     ],
+     "ex": {
+      "main": "**The road’s friction on the tyres points toward the centre and keeps the car turning.** Weight is vertical, and centrifugal force has no agent, so it is not a real force. On ice there is no grip, and the car carries straight on.",
+      "tip": "Name the agent. On a flat road it is friction."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.050 kg stopper on a 0.80 m string is whirled in a horizontal circle, making one revolution every 0.90 s. What is the tension in the string?",
+     "opts": [
+      "0.49 N",
+      "1.95 N",
+      "0.35 N",
+      "39.0 N"
+     ],
+     "ans": 1,
+     "hint": "Find the speed from the period, then use F_net = mv² / r.",
+     "steps": [
+      "v = 2πr ÷ T = 2π × 0.80 ÷ 0.90 = 5.59 m/s.",
+      "a_c = 4π²r ÷ T² = 4π² × 0.80 ÷ 0.90² = 39.0 m/s².",
+      "The tension is the inward force: F_T = m a_c = 0.050 × 39.0.",
+      "F_T = 1.95 N."
+     ],
+     "ex": {
+      "main": "**v = 2πr ÷ T = 5.59 m/s, so F_T = mv² ÷ r = 1.95 N.** 0.49 N is the stopper’s weight, 0.35 N forgets to square the speed, and 39.0 is the acceleration, which still has to be multiplied by the mass.",
+      "tip": "Period → speed → acceleration → force. One step at a time."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car rounds a curve, then rounds it again at twice the speed. How does the net force needed to keep it on the curve change?",
+     "opts": [
+      "It stays the same",
+      "It becomes twice as big",
+      "It becomes four times as big",
+      "It becomes half as big"
+     ],
+     "ans": 2,
+     "hint": "How does v appear in mv² / r?",
+     "steps": [
+      "F_net = mv² ÷ r.",
+      "Doubling v multiplies v² by 2² = 4.",
+      "The mass and radius are unchanged.",
+      "So the force needed is four times as big."
+     ],
+     "ex": {
+      "main": "**Speed is squared in mv² ÷ r, so twice the speed needs four times the force.** That is why a bend you can take comfortably at 30 km/h can throw a car off the road at 60.",
+      "tip": "Speed counts twice."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A runner keeps the same speed but switches to a track with twice the radius. How does her centripetal acceleration change?",
+     "opts": [
+      "It becomes a quarter",
+      "It doubles",
+      "It stays the same",
+      "It halves"
+     ],
+     "ans": 3,
+     "hint": "Where is r in a_c = v² / r?",
+     "steps": [
+      "a_c = v² ÷ r.",
+      "v is unchanged; r is doubled.",
+      "Doubling the bottom of the fraction halves its value.",
+      "The centripetal acceleration halves."
+     ],
+     "ex": {
+      "main": "**r is on the bottom of v² ÷ r, so twice the radius halves the acceleration.** A quarter is what squaring would give, but the radius is not squared — only the speed is.",
+      "tip": "Wider circle, gentler turn."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A ball whirled on a string in a horizontal circle is suddenly released. Seen from above, in what direction does it fly off?",
+     "opts": [
+      "Straight along the tangent, the way it was moving",
+      "Straight outward, away from the centre of the circle",
+      "Along a curve that carries on around the circle",
+      "Straight inward, toward the centre of the circle"
+     ],
+     "ans": 0,
+     "hint": "What force acts sideways on it once the string lets go?",
+     "steps": [
+      "Just before release, its velocity points along the tangent.",
+      "Once released, the string’s inward pull is gone.",
+      "With no sideways force, by the first law it keeps its velocity.",
+      "So it moves straight along the tangent (while gravity pulls it down)."
+     ],
+     "ex": {
+      "main": "**Released, it keeps the velocity it had — along the tangent — and moves in a straight line.** It only curved because the string kept pulling it in. \"Straight outward\" is the centrifugal-force picture, and there is no force to cause it.",
+      "tip": "Let go, and it goes the way it was already going."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car turns sharply to the left and you slide toward the right-hand door. What is really happening?",
+     "opts": [
+      "An outward centrifugal force throws you to the right as the car turns left",
+      "You keep moving straight while the car turns, until the door pushes you inward",
+      "The car’s friction pushes you to the right, away from the turn",
+      "Your inertia is a force, and it pushes you outward on every turn"
+     ],
+     "ans": 1,
+     "hint": "Name the agent of each force offered.",
+     "steps": [
+      "Before the turn, you are moving straight ahead with the car.",
+      "The car turns left; nothing has yet pushed you left, so you keep going straight, by the first law.",
+      "Relative to the turning car, that looks like sliding right.",
+      "When you reach the door, it pushes you left — toward the centre of the turn."
+     ],
+     "ex": {
+      "main": "**Nothing pushes you outward: you keep going straight, and the car turns under you until the door pushes you inward.** Centrifugal force has no agent, and inertia is a property, not a force. The only real sideways force here points toward the centre.",
+      "tip": "If you cannot name the agent, the force is not there."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car takes a flat curve of radius 30 m at 12 m/s. What is the smallest coefficient of static friction that keeps it from skidding?",
+     "opts": [
+      "0.041",
+      "4.8",
+      "0.49",
+      "2.04"
+     ],
+     "ans": 2,
+     "hint": "Friction must supply mv² / r, and it can give at most μ_s mg.",
+     "steps": [
+      "The inward force needed is mv² ÷ r; friction must supply it.",
+      "The most friction can give is μ_s F_N = μ_s mg on a flat road.",
+      "μ_s mg = mv² ÷ r, so μ_s = v² ÷ (rg) = 144 ÷ (30 × 9.8).",
+      "μ_s must be at least 0.49."
+     ],
+     "ex": {
+      "main": "**Friction must supply mv² ÷ r, so μ_s ≥ v² ÷ (rg) = 0.49.** The mass cancels, so a truck and a car need the same grip on the same curve at the same speed. 4.8 is the acceleration, not the coefficient, and 0.041 forgets to square the speed.",
+      "tip": "Grip needed = v² / (rg). No mass."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Rank these objects in circular motion from the GREATEST centripetal acceleration to the LEAST.",
+     "opts": [
+      "A: 10 m/s around a 4.0 m radius",
+      "B: 14 m/s around a 10 m radius",
+      "C: 6.0 m/s around a 3.0 m radius",
+      "D: 20 m/s around a 50 m radius"
+     ],
+     "ans": 0,
+     "hint": "Work out v² / r for each — the fastest is not automatically first.",
+     "steps": [
+      "A: 10² ÷ 4.0 = 25 m/s².",
+      "B: 14² ÷ 10 = 19.6 m/s².",
+      "C: 6.0² ÷ 3.0 = 12 m/s². D: 20² ÷ 50 = 8.0 m/s².",
+      "So A, then B, then C, then D."
+     ],
+     "ex": {
+      "main": "**A (25), B (19.6), C (12), D (8.0) m/s².** D is the fastest object here but has the smallest acceleration, because its circle is so wide. Speed alone does not decide it; v² and r both do.",
+      "tip": "Compute v² / r. Never rank by speed alone."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is torque?",
+     "opts": [
+      "A force that acts straight through the axis",
+      "The force that pulls an object toward the centre",
+      "The speed at which an object spins about its axis",
+      "A force multiplied by its lever arm about an axis"
+     ],
+     "ans": 3,
+     "hint": "It is what changes rotation.",
+     "steps": [
+      "To turn something about an axis, both the force and where it acts matter.",
+      "The lever arm is the perpendicular distance from the axis to the force’s line.",
+      "Torque combines the two: force times lever arm.",
+      "Torque is force × lever arm."
+     ],
+     "ex": {
+      "main": "**Torque is force times lever arm, and it plays the role for rotation that force plays for straight-line motion.** A force through the axis has zero lever arm, so it produces no torque at all.",
+      "tip": "Same force, longer lever arm, more torque."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is a door handle put on the edge farthest from the hinges?",
+     "opts": [
+      "A longer lever arm gives more torque for the same push",
+      "The door is lighter there, so it is easier to move",
+      "Pushing near the hinges would bend the door",
+      "The hinges only allow forces at the far edge"
+     ],
+     "ans": 0,
+     "hint": "Torque = force × lever arm.",
+     "steps": [
+      "The hinges are the axis of rotation.",
+      "Pushing at the far edge gives the longest possible lever arm.",
+      "Torque is force × lever arm, so the same push gives the most torque there.",
+      "More torque means the door swings open more easily."
+     ],
+     "ex": {
+      "main": "**The far edge gives the longest lever arm, so the same push gives the most torque.** Push right next to the hinges and even a hard shove barely turns the door; push toward the hinges and it does not turn at all.",
+      "tip": "Push far from the axis, at right angles."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.25 m wrench is pushed with 80 N at right angles to the handle, at its end. What torque does it apply to the nut?",
+     "opts": [
+      "320 N·m",
+      "20 N·m",
+      "80 N·m",
+      "0.0031 N·m"
+     ],
+     "ans": 1,
+     "hint": "Torque = force × lever arm.",
+     "steps": [
+      "The force is at right angles, so the lever arm is the full 0.25 m.",
+      "τ = F × lever arm.",
+      "τ = 80 × 0.25.",
+      "τ = 20 N·m."
+     ],
+     "ex": {
+      "main": "**τ = 80 N × 0.25 m = 20 N·m.** 320 N·m divides the force by the length, 80 N·m forgets the lever arm altogether, and 0.0031 N·m divides the length by the force. A longer wrench, same push, more torque — which is why stuck nuts get a pipe slipped over the handle.",
+      "tip": "Force times distance from the axis."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 30 kg child sits 2.0 m from the pivot of a seesaw. Where must a 45 kg child sit, on the other side, to balance it?",
+     "opts": [
+      "2.0 m from the pivot",
+      "3.0 m from the pivot",
+      "1.3 m from the pivot",
+      "1.0 m from the pivot"
+     ],
+     "ans": 2,
+     "hint": "Balanced means equal torques on each side.",
+     "steps": [
+      "Balance: m_A g d_A = m_B g d_B, and g cancels.",
+      "30 × 2.0 = 45 × d.",
+      "d = 60 ÷ 45.",
+      "d = 1.3 m from the pivot."
+     ],
+     "ex": {
+      "main": "**Equal torques: 30 × 2.0 = 45 × d, so d = 1.3 m — the heavier child sits closer in.** 3.0 m runs the ratio backwards, putting the heavier child farther out; 2.0 m assumes equal distances balance unequal weights.",
+      "tip": "Heavier person, shorter lever arm."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}
