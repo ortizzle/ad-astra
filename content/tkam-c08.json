@@ -1,0 +1,372 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c08": {
+   "id": "unit-tkam-c08",
+   "type": "unit",
+   "updatedAt": 1792020295521,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 8: Snow, Fire and a Blanket",
+   "srcName": "To Kill a Mockingbird, chapter 8",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 8",
+   "summary": {
+    "text": "Chapter 8 of To Kill a Mockingbird: a rare snow closes school, and Mr. Avery blames it on badly behaved children. Jem builds a mud-and-snow snowman that looks like Mr. Avery until Atticus has him disguise it. That night Miss Maudie's house burns down. While the neighbors fight the fire, someone puts a blanket around Scout without her noticing; Atticus works out it was Boo Radley, and Jem tells him everything about the pants and the knothole. The next day Miss Maudie is cheerful about her loss.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Boo steps out among the whole town and does something kind, and nobody sees him. That is the strongest evidence so far that the legend is wrong.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Retell the snow day, the snowman and the fire in order.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Atticus calls the snowman a near libel.",
+     "from": "source"
+    },
+    {
+     "text": "Explain what the blanket reveals about Boo, and why Jem tells Atticus everything.",
+     "from": "source"
+    },
+    {
+     "text": "Describe how Miss Maudie responds to losing her house, and what that shows.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This quiz covers chapter 8 only and stops at the end of that chapter, the day after Miss Maudie's fire. There is a house fire, though nobody is hurt; it is not graphic. The thing most likely to trip her up is the blanket: she needs to see why Atticus concludes it was Boo, and why Jem suddenly tells him everything. The ponder card about being quietly looked after is a good one for dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 8, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Snow in Maycomb",
+     "def": "**A rare snow falls on Maycomb and school is closed for the day.**\n• Scout has never seen snow and first thinks the world is ending.\n• Mr. Avery blames the change in the weather on children who misbehave.",
+     "hint": "To a Southern town, snow is close to a miracle; to Mr. Avery, it is a punishment.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The snowman",
+     "def": "**There isn't enough snow for a real snowman, so Jem builds one from mud and covers it with snow — and it looks just like Mr. Avery.**\n• Jem is proud of his engineering.\n• The likeness to a real neighbor is the problem.",
+     "hint": "Mud underneath, snow on top: Jem solves the shortage like a builder.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Libel",
+     "def": "**A false or damaging portrayal of a real person that hurts his reputation.**\n• Atticus calls the snowman a near libel: it mocks Mr. Avery for all to see.\n• He has Jem disguise it, and Jem adds Miss Maudie's sun hat and hedge clippers.",
+     "hint": "Libel is damage done to a name, in words or pictures.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Miss Maudie's fire",
+     "def": "**On the coldest night, Miss Maudie's house catches fire and burns down.**\n• The neighbors carry her furniture out into the street.\n• Atticus sends Jem and Scout to stand by the Radley gate, out of the way.",
+     "hint": "The whole street turns out for one neighbor.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The blanket",
+     "def": "**While Scout watches the fire, someone puts a blanket around her shoulders — and she never notices.**\n• Back home, Atticus asks where the blanket came from.\n• He works out that it must have been Boo Radley.",
+     "hint": "Scout was standing right in front of the Radley house.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Jem's confession",
+     "def": "**Afraid Boo will get in trouble, Jem tells Atticus everything: the pants, the knothole gifts, the cement.**\n• It all comes out at once.\n• Jem is now defending Boo, not hunting him.",
+     "hint": "Jem stops keeping secrets from Atticus once Boo needs protecting.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Miss Maudie, the next day",
+     "def": "**Miss Maudie is cheerful: she always wanted a smaller house, and now she'll have more room for her azaleas.**\n• She has lost almost everything and refuses to mourn it.\n• Her attitude surprises Scout more than the fire did.",
+     "hint": "Ask what Miss Maudie cares about more than her house.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Unfathomable",
+     "def": "**Too deep or strange to understand.**\n• The chapter opens by calling the cold snap unfathomable, even to the town's most experienced weather prophets.\n• A fathom is a measure of water depth, so unfathomable means too deep to measure.",
+     "hint": "If you cannot measure how deep it goes, you cannot get to the bottom of it.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: being looked after",
+     "def": "**Would you want to know if someone had been quietly looking out for you without your noticing?**\n• Think about how Scout feels when she learns about the blanket.\n• There is no single right answer to this one.",
+     "hint": "A dinner-table question: gratitude, or a shiver, or both?",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "How does Jem build a snowman when there isn't enough snow?",
+     "opts": [
+      "He shapes a figure out of mud and covers it with snow",
+      "He carves a figure out of ice from the town icehouse",
+      "He waits two days for more snow to fall before building",
+      "He makes a much smaller one with the snow there is"
+     ],
+     "ans": 0,
+     "hint": "He uses what Maycomb has plenty of.",
+     "steps": [
+      "There is not enough snow for a whole snowman.",
+      "Jem has dirt and mud to work with instead.",
+      "He builds the body from mud.",
+      "Then he covers the mud figure with snow."
+     ],
+     "ex": {
+      "main": "**He shapes it from mud and covers it with snow.** It is clever, and it is also why the snowman can be shaped so precisely into a real person.",
+      "tip": "When a character solves a problem cleverly, look for the trouble the solution causes next."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Whose house burns down in chapter 8?",
+     "opts": [
+      "Miss Stephanie Crawford's",
+      "Miss Maudie Atkinson's",
+      "Miss Rachel Haverford's",
+      "Mr. Avery's boarding house"
+     ],
+     "ans": 1,
+     "hint": "She loves her garden more than her house.",
+     "steps": [
+      "The fire breaks out on the coldest night of the winter.",
+      "The neighbors carry furniture out of a house on the Finches' street.",
+      "It is the house of the neighbor the children like best.",
+      "It is Miss Maudie Atkinson's house."
+     ],
+     "ex": {
+      "main": "**Miss Maudie Atkinson's.** The fire tests her, and the next morning shows what she is made of.",
+      "tip": "Recall questions are easier when you tie each event to the character it changes."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Who does Atticus conclude put the blanket around Scout's shoulders?",
+     "opts": [
+      "Mr. Avery",
+      "Mr. Nathan Radley",
+      "Boo Radley",
+      "Miss Stephanie"
+     ],
+     "ans": 2,
+     "hint": "Where was Scout standing?",
+     "steps": [
+      "Scout was standing in front of the Radley house.",
+      "She never saw who covered her.",
+      "Everyone else Atticus could think of was busy with the fire.",
+      "Atticus concludes it was Boo Radley."
+     ],
+     "ex": {
+      "main": "**Boo Radley.** He came out among the whole town during the fire, and nobody saw him.",
+      "tip": "Use where a character was standing as evidence; setting is often a clue."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus calls Jem's snowman \"a near libel\" and has him disguise it. Why?",
+     "opts": [
+      "It might frighten the younger children on the street",
+      "It is built on land that belongs to Miss Maudie",
+      "It uses mud, which Atticus thinks is too messy",
+      "It mocks a real neighbor in a way anyone could recognise"
+     ],
+     "ans": 3,
+     "hint": "Who does the snowman look like?",
+     "steps": [
+      "Libel means damaging a real person's reputation.",
+      "The snowman is shaped to look like Mr. Avery.",
+      "Anyone walking by would recognise who it mocks.",
+      "So Atticus has Jem disguise it, to spare a real neighbor."
+     ],
+     "ex": {
+      "main": "**It mocks a real neighbor in a way anyone could recognise.** Atticus treats even a joke about Mr. Avery as something that can hurt a person's name.",
+      "tip": "When a character uses a legal word for an everyday situation, ask what serious principle he is pointing to."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 8 events in the order they happen.",
+     "opts": [
+      "Snow falls on Maycomb and school is closed",
+      "Jem builds a snowman that looks like Mr. Avery",
+      "Miss Maudie's house catches fire in the night",
+      "Miss Maudie says she always wanted a smaller house"
+     ],
+     "ans": 0,
+     "hint": "Snow, snowman, fire, morning after.",
+     "steps": [
+      "The chapter opens with the cold and the snow.",
+      "Jem builds the snowman during the snow day.",
+      "The fire comes that night, the coldest of the winter.",
+      "Miss Maudie's cheerful answer comes the next day."
+     ],
+     "ex": {
+      "main": "**Snow → snowman → fire → Miss Maudie's answer.** A strange, playful day turns into a frightening night, and ends on a lesson in resilience.",
+      "tip": "Use time markers — day, night, next morning — to sort the events of a chapter."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "After the fire, Jem suddenly tells Atticus all about the pants and the knothole. What makes him do it?",
+     "opts": [
+      "He is afraid Boo will get in trouble for the blanket",
+      "He wants Atticus to punish Mr. Nathan for the cement",
+      "He thinks Atticus already knows everything anyway",
+      "He wants to boast about how brave the raid had been"
+     ],
+     "ans": 0,
+     "hint": "Who does Jem want to protect now?",
+     "steps": [
+      "Atticus has just worked out that Boo put the blanket on Scout.",
+      "Jem fears Boo could be blamed for coming out.",
+      "To show Boo means no harm, he explains everything Boo has done.",
+      "So he tells all because he is afraid Boo will get in trouble."
+     ],
+     "ex": {
+      "main": "**He is afraid Boo will get in trouble.** Jem has moved from daring Boo to defending him.",
+      "tip": "When a character changes sides, mark the moment; it is usually what the chapter is about."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The chapter calls the cold weather \"unfathomable\" to the town's weather prophets. What does unfathomable mean?",
+     "opts": [
+      "Easy to see coming from far away",
+      "Too deep or strange to understand",
+      "Dangerous to anyone left outside",
+      "Expected at that time every year"
+     ],
+     "ans": 1,
+     "hint": "A fathom measures how deep water is.",
+     "steps": [
+      "A fathom is a unit for measuring water depth.",
+      "Un- means not, and -able means can be.",
+      "So unfathomable means something whose depth cannot be measured.",
+      "In other words: too deep or strange to understand."
+     ],
+     "ex": {
+      "main": "**Too deep or strange to understand.** Even the people who claim to predict the weather cannot explain this winter.",
+      "tip": "Break a long word into prefix, root and suffix before guessing."
+     },
+     "passage": "For reasons unfathomable to the most experienced prophets in Maycomb County, autumn turned to winter that year."
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Boo walks among the whole town during the fire and puts a blanket on Scout, and nobody sees him. What does that suggest?",
+     "opts": [
+      "Scout was so cold that she fell asleep standing up",
+      "Boo has secretly been leaving his house every single night",
+      "People see what they expect, and no one expects a kind Boo",
+      "The town has decided to stop gossiping about the Radleys"
+     ],
+     "ans": 2,
+     "hint": "Everyone is looking for a monster.",
+     "steps": [
+      "The whole street is out, and Boo walks right through it.",
+      "He does something gentle and practical: he keeps a child warm.",
+      "No one notices, because no one imagines Boo doing that.",
+      "So people see what they expect, and nobody expects a kind Boo."
+     ],
+     "ex": {
+      "main": "**People see what they expect.** The town's legend is so strong that Boo can be kind in plain view without anyone noticing.",
+      "tip": "When a character goes unseen in a crowd, ask what the crowd was looking for instead."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Miss Maudie loses her house and says she always wanted a smaller one, with more room for her azaleas. What does this show about her?",
+     "opts": [
+      "She does not yet understand how much she has lost",
+      "She is hiding how angry she is at the fire department",
+      "She never liked her neighbors and wants to move away",
+      "She values her garden and her spirit over her belongings"
+     ],
+     "ans": 3,
+     "hint": "What does she still have?",
+     "steps": [
+      "Her house and most of her things are gone.",
+      "She talks about her flowers and the space she has now.",
+      "She chooses to look at what is left, not at what burned.",
+      "She values her garden and her spirit over her belongings."
+     ],
+     "ex": {
+      "main": "**She values her garden and her spirit over her belongings.** Her cheerfulness is a choice, and it teaches Scout more than any lecture could.",
+      "tip": "When a character reacts to disaster in an unexpected way, the reaction is the clue to her character."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Mr. Avery blames the snow on children who misbehave. How does the chapter treat that idea?",
+     "opts": [
+      "As a superstition that the story gently pokes fun at",
+      "As the real cause, since the snow follows the raid",
+      "As Atticus's own belief, which he teaches the children",
+      "As a warning that the children take very seriously"
+     ],
+     "ans": 0,
+     "hint": "Who in this book tends to be right about the world?",
+     "steps": [
+      "Mr. Avery claims children's bad behavior changes the seasons.",
+      "The narrator reports it the way she reports other Maycomb superstitions.",
+      "Atticus, the book's steady voice, never backs it.",
+      "So the chapter treats it as a superstition to smile at."
+     ],
+     "ex": {
+      "main": "**As a superstition the story gently pokes fun at.** It is another example of Maycomb explaining what it does not understand with a story that sounds certain.",
+      "tip": "Notice whose explanations the narrator trusts; the others are often there to be questioned."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

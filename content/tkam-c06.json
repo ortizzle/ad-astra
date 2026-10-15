@@ -1,0 +1,370 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c06": {
+   "id": "unit-tkam-c06",
+   "type": "unit",
+   "updatedAt": 1792020295516,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 6: The Raid on the Radley Place",
+   "srcName": "To Kill a Mockingbird, chapter 6",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 6",
+   "summary": {
+    "text": "Chapter 6 of To Kill a Mockingbird: on Dill's last night in Maycomb, Jem, Dill and Scout creep onto the Radley back porch to peek in a window. A man's shadow crosses the porch, a shotgun goes off as they run, and Jem loses his pants on the fence. Mr. Nathan Radley tells the neighbors he fired at an intruder in his collard patch, Dill covers with a strip-poker story, and Jem goes back alone in the night for his pants.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the boldest raid yet, and the first time Jem's choices are his own rather than a dare. The gap between what happened and what the town is told is the book's favorite pattern.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Retell the raid and its aftermath in order, from the plan to Jem's night trip.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Dill invents the strip-poker story and what it protects.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Jem goes back for his pants, and what that shows about how he is changing.",
+     "from": "added"
+    },
+    {
+     "text": "Compare what the children know about the night with the version the town hears.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This quiz covers chapter 6 only and stops at the end of that chapter, with Jem back from the fence. There is a gunshot, though nobody is hurt, and a strip-poker cover story that the grown-ups find shocking; neither is graphic. The thing most likely to trip her up is keeping the town's version of the night (an intruder in the collard patch) separate from what the reader saw. The ponder card about Jem going back is worth a minute at dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 6, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Dill's last night",
+     "def": "**Dill's last night in Maycomb before he goes home, and he wants one more try at the Radley Place.**\n• Jem and Dill plan to peek in a Radley window through a loose shutter.\n• Scout objects, gets told she is turning into a girl, and goes along anyway.",
+     "hint": "A last night is when a summer of dares runs out of time and gets bold.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The raid on the back porch",
+     "def": "**The three creep through the back of the Radley lot and up onto the back porch to look inside.**\n• It is the furthest any of them has ever gone onto the Radley Place.\n• In chapter 1, touching the side of the house was the whole dare.",
+     "hint": "Measure the raid against chapter 1: a touch on the wall, then the porch itself.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "The shadow in the hat",
+     "def": "**A man's shadow, wearing a hat, crosses the porch toward Jem — then turns and goes back the way it came.**\n• Nobody sees a face; the children see only the shadow.\n• It does nothing to them. They run anyway.",
+     "hint": "Note what the shadow DOES, not what the children fear it will do.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "The shotgun and the lost pants",
+     "def": "**As they run, a shotgun goes off, and Jem's pants catch on the wire fence, so he wriggles out and leaves them.**\n• They reach the street with Jem in his shorts.\n• The pants are evidence, hanging on the Radley fence.",
+     "hint": "The pants are the loose end the whole rest of the chapter has to deal with.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Mr. Nathan Radley",
+     "def": "**Boo's older brother, who now runs the Radley house — he tells the neighbors he fired at an intruder in his collard patch.**\n• Neighbors gather in the street; Miss Stephanie Crawford spreads the story fast.\n• His version is the one the town hears.",
+     "hint": "Two stories of one night: what happened, and what Mr. Nathan says happened.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Dill's cover story",
+     "def": "**Dill explains Jem's missing pants by saying he won them from Jem in a game of strip poker.**\n• Strip poker: a card game where the loser of a hand takes off a piece of clothing.\n• It shocks the grown-ups, but it keeps the Radley yard out of the conversation.",
+     "hint": "Dill would rather they be in trouble for cards than for the Radley Place.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Collard patch",
+     "def": "**A garden bed of collard greens — a leafy vegetable common in Southern kitchens.**\n• Mr. Nathan's story puts the intruder there, at the back of the lot.\n• That small detail is what makes the shooting sound like protecting a garden.",
+     "hint": "Collards are greens; a patch is a bed of them.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Theme: what Jem will risk",
+     "def": "**Jem goes back alone, in the middle of the night, for his pants — because keeping Atticus's trust matters more to him than being afraid.**\n• Atticus has never whipped him, and Jem wants to keep it that way.\n• Scout begs him not to go; for the first time, she cannot follow his reasons.",
+     "hint": "Jem's fear of the Radley Place loses to his fear of letting Atticus down.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: brave or foolish?",
+     "def": "**Was Jem brave or foolish to go back for his pants — and can it be both?**\n• Think about what he was really protecting.\n• There is no single right answer to this one.",
+     "hint": "A dinner-table question: argue it from both sides.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why do Jem and Dill choose this particular night to try the Radley Place again?",
+     "opts": [
+      "It is Dill's last night in Maycomb before going home",
+      "Atticus is away from home until late that evening",
+      "The Radleys have gone out of town for the weekend",
+      "Miss Stephanie dared them to do it over supper"
+     ],
+     "ans": 0,
+     "hint": "Whose summer is about to end?",
+     "steps": [
+      "Look at the opening of the chapter: what is special about this evening?",
+      "Dill only stays in Maycomb for the summer.",
+      "He goes home the next day, so this is the last chance.",
+      "It is Dill's last night in Maycomb."
+     ],
+     "ex": {
+      "main": "**It is Dill's last night.** The summer of dares is out of time, which is why this attempt is the boldest yet.",
+      "tip": "When characters take a bigger risk than usual, look for a deadline in the setup."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What do the children see when they reach the Radley back porch?",
+     "opts": [
+      "Boo Radley's face pressed against the window glass",
+      "The shadow of a man in a hat crossing the porch",
+      "A lamp being carried from room to room inside",
+      "Mr. Nathan Radley sitting alone on the back steps"
+     ],
+     "ans": 1,
+     "hint": "They never see a face.",
+     "steps": [
+      "Recall what Scout describes from the porch.",
+      "She sees a shape, not a person she can identify.",
+      "The shape is a shadow, and it is wearing a hat.",
+      "They see the shadow of a man in a hat crossing the porch."
+     ],
+     "ex": {
+      "main": "**The shadow of a man in a hat.** No face, no name — the children fill in the rest themselves, which is how the Boo legend always works.",
+      "tip": "Separate what a narrator saw from what she assumed about it."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does Mr. Nathan Radley tell the gathered neighbors about the gunshot?",
+     "opts": [
+      "He shot at a snake under the back porch",
+      "He scared off a stray dog digging in his yard",
+      "He fired at an intruder in his collard patch",
+      "He heard thieves trying the front door lock"
+     ],
+     "ans": 2,
+     "hint": "Where does his story place the trouble?",
+     "steps": [
+      "The neighbors gather in the street after the shot.",
+      "Mr. Nathan explains it in terms of his garden.",
+      "He says someone was in his collard patch and he fired at them.",
+      "His story: he fired at an intruder in his collard patch."
+     ],
+     "ex": {
+      "main": "**He fired at an intruder in his collard patch.** It is the version the town hears, and the children know it is not the whole story.",
+      "tip": "Every public explanation in this book is worth checking against what the reader saw happen."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Jem turns up among the neighbors in his shorts. Why does Dill say he won Jem's pants playing strip poker?",
+     "opts": [
+      "He hopes the shock will make Miss Rachel laugh",
+      "He wants Jem punished for being the one who ran",
+      "He truly believes the game is what everyone was doing",
+      "It gives the grown-ups a story with no Radleys in it"
+     ],
+     "ans": 3,
+     "hint": "Which trouble is smaller: cards, or the Radley yard?",
+     "steps": [
+      "The missing pants need an explanation on the spot.",
+      "The true one — they were caught on the Radley fence — would connect the children to the gunshot.",
+      "A card game is bad, but it happened nowhere near the Radley Place.",
+      "So Dill offers strip poker: a story with no Radleys in it."
+     ],
+     "ex": {
+      "main": "**It gives the grown-ups a story with no Radleys in it.** Dill trades a scolding about cards for the far bigger trouble of the truth.",
+      "tip": "When a character lies, ask what the lie is protecting, not just what it says."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 6 events in the order they happen.",
+     "opts": [
+      "Jem and Dill plan to peek in a Radley window on Dill's last night",
+      "A shadow in a hat crosses the back porch toward Jem",
+      "Dill tells the neighbors he won Jem's pants at strip poker",
+      "Jem slips out in the middle of the night to get his pants back"
+     ],
+     "ans": 0,
+     "hint": "Plan, porch, cover story, then the night trip.",
+     "steps": [
+      "The plan comes first, at the start of the evening.",
+      "On the back porch, the shadow appears and the children run.",
+      "Out in the street, Dill covers for the missing pants.",
+      "Only later that night does Jem go back alone."
+     ],
+     "ex": {
+      "main": "**Plan → shadow → cover story → Jem goes back.** The chapter closes on the riskiest move of all, made alone.",
+      "tip": "In an order question, look for cause and effect: each event creates the problem the next one solves."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout begs Jem not to go back to the Radley fence that night. What reason does he give for going anyway?",
+     "opts": [
+      "Atticus has never whipped him, and he means to keep it so",
+      "He wants one more chance to see Boo up close at night",
+      "Dill made him promise to finish the raid before he left",
+      "He wants to prove to Scout that he is not afraid at all"
+     ],
+     "ans": 0,
+     "hint": "Who would find out if the pants stayed on the fence?",
+     "steps": [
+      "Left on the fence, the pants would be found in the morning.",
+      "That would tell Atticus where the children really were.",
+      "Jem says Atticus has never whipped him, and he means to keep it that way.",
+      "So he goes back for Atticus's sake, not for Boo's."
+     ],
+     "ex": {
+      "main": "**Atticus has never whipped him, and he wants to keep it that way.** It is less about punishment than about not losing his father's trust.",
+      "tip": "A character's stated reason is a clue to what he values most."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Mr. Nathan Radley says he fired at someone in his collard patch. What is a collard patch?",
+     "opts": [
+      "A fenced pen where chickens are kept",
+      "A garden bed of leafy collard greens",
+      "A strip of grass along the back fence",
+      "A woodpile stacked behind the house"
+     ],
+     "ans": 1,
+     "hint": "Collards are something you would cook.",
+     "steps": [
+      "\"Patch\" usually means a small planted area, like a pumpkin patch.",
+      "Collards are a leafy green vegetable common in the South.",
+      "So a collard patch is a garden bed of collard greens."
+     ],
+     "ex": {
+      "main": "**A garden bed of collard greens.** Placing the intruder in the garden makes the shot sound like a man protecting his vegetables.",
+      "tip": "For an unfamiliar compound word, define each half and then put them back together."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The children know they were on the back porch. Mr. Nathan tells the town about an intruder in his collard patch. What does that gap show?",
+     "opts": [
+      "The children have mixed up which house they were at",
+      "Mr. Nathan never actually heard anyone on his property",
+      "What Maycomb hears about the Radleys isn't the whole truth",
+      "Miss Stephanie invented the gunshot to spread gossip"
+     ],
+     "ans": 2,
+     "hint": "Two versions of one night — who knows both?",
+     "steps": [
+      "The reader and the children know where they really were.",
+      "The neighbors only get Mr. Nathan's account, retold by Miss Stephanie.",
+      "His version may be honest about the shot but leaves the real story out.",
+      "So the public version of the Radleys keeps drifting from what really happens."
+     ],
+     "ex": {
+      "main": "**What Maycomb hears isn't the whole truth.** It is the same pattern as the Boo legend: a confident public story, built without the facts.",
+      "tip": "When the reader knows more than the town, the book is usually teaching you to distrust the town's version."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Earlier in the book Jem acts mostly on dares and Dill's ideas. What does going back alone for his pants show about him?",
+     "opts": [
+      "He no longer cares what Scout thinks of his choices",
+      "He has stopped believing Boo Radley is real at all",
+      "He wants to take over the Radley games from Dill",
+      "He now weighs his father's trust above his own fear"
+     ],
+     "ans": 3,
+     "hint": "Whose opinion is he protecting?",
+     "steps": [
+      "Before, Jem took risks to impress Dill or win a dare.",
+      "This time nobody is watching, and there is nothing to win.",
+      "The risk is to keep Atticus's trust intact.",
+      "So Jem is putting his father's opinion of him ahead of his fear."
+     ],
+     "ex": {
+      "main": "**He now weighs his father's trust above his own fear.** A dare is for an audience; this risk is taken alone, for a reason of his own.",
+      "tip": "Track whether a character acts for an audience or for himself. The change is often the point."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The Maycomb legend says Boo Radley is a dangerous monster. On the porch, the shadow comes toward Jem, then turns and goes back. What is a careful reading?",
+     "opts": [
+      "It did nothing — once again the evidence does not fit the monster story",
+      "The shadow proves the legend right — Boo really does hunt at night",
+      "The shadow means Jem imagined the whole thing out of pure fright",
+      "The shadow shows that Mr. Nathan is the real danger in that house"
+     ],
+     "ans": 0,
+     "hint": "Stick to what the shadow actually did.",
+     "steps": [
+      "The legend predicts a monster who attacks.",
+      "The shadow approaches, then withdraws without touching anyone.",
+      "Nothing in the scene proves who it was, or that it meant harm.",
+      "So, once again, the evidence does not fit the monster story."
+     ],
+     "ex": {
+      "main": "**The shadow did nothing.** It is the same gap the book keeps showing you: frightening rumor on one side, a quiet and harmless fact on the other.",
+      "tip": "In a mystery, judge characters by what they do on the page, not by what others say they would do."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

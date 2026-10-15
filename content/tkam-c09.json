@@ -1,0 +1,371 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c09": {
+   "id": "unit-tkam-c09",
+   "type": "unit",
+   "updatedAt": 1792020295523,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 9: Licked a Hundred Years",
+   "srcName": "To Kill a Mockingbird, chapter 9",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 9",
+   "summary": {
+    "text": "Chapter 9 of To Kill a Mockingbird: Cecil Jacobs taunts Scout because Atticus is defending Tom Robinson, and she walks away from the fight. Atticus explains why he has to take the case, though he does not expect to win. At Christmas, Uncle Jack visits; at Finch's Landing, cousin Francis insults Atticus and Scout fights him. Uncle Jack punishes her without hearing her side and later admits he should have listened. Scout overhears Atticus hope that his children will get through what is coming without catching Maycomb's usual disease.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is where the trial enters the story and starts to change the children's lives. Atticus explains his conscience and his idea of courage, and Scout learns that the town's anger will reach her too.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain why Atticus takes the case and what he means about being licked before you start.",
+     "from": "source"
+    },
+    {
+     "text": "Compare Scout's choice with Cecil to her fight with Francis.",
+     "from": "added"
+    },
+    {
+     "text": "Explain what Uncle Jack learns from Scout about fairness.",
+     "from": "source"
+    },
+    {
+     "text": "Explain what Atticus means by Maycomb's usual disease.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "This quiz covers chapter 9 only and stops at the end of that chapter, after Christmas. Sensitive: Cecil and Francis both use a racial slur about Atticus and the man he is defending. The quiz never prints it; it says 'a racial slur' instead. The details of the case are not given in this chapter and do not appear here. The thing most likely to trip her up is why Atticus takes a case he expects to lose. The ponder card about when to fight is a good one for dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 9, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Cecil Jacobs",
+     "def": "**A schoolmate who announces that Scout's father defends a Black man, using a racial slur to say it.**\n• She has to come home and ask Atticus what Cecil meant.\n• Atticus had asked her not to fight, so she walks away — the first fight she has ever walked away from.",
+     "hint": "For Scout, walking away takes more nerve than swinging.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Tom Robinson",
+     "def": "**The man Atticus is defending in court.**\n• The town is angry that Atticus means to defend him properly.\n• In chapter 9 the details of the case are not explained.",
+     "hint": "Watch how people talk about Atticus once they know he has taken the case.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Why Atticus takes the case",
+     "def": "**Atticus says that if he didn't, he couldn't hold up his head in town, couldn't represent the county in the legislature, and couldn't tell his children not to do something again.**\n• It is a matter of his own conscience.\n• He also tells Scout he does not expect to win.",
+     "hint": "Atticus's reason is about who he would become if he said no.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Licked before you start",
+     "def": "**Atticus says that being beaten long before you start is no reason not to try to win.**\n• He means a fight can be worth fighting even when the odds are hopeless.\n• It reframes winning as doing the right thing, not getting the result.",
+     "hint": "Courage is trying anyway.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Uncle Jack",
+     "def": "**Atticus's younger brother, a doctor, who visits the Finches every Christmas.**\n• Scout adores him.\n• At Christmas he punishes her for a fight without hearing her side, then later admits he should have listened.",
+     "hint": "Uncle Jack is kind, but new to children; he learns from Scout.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Francis and Finch's Landing",
+     "def": "**At the family Christmas at Finch's Landing, cousin Francis calls Atticus an ugly name, and Scout fights him.**\n• Francis runs to the grown-ups, and Scout is punished before anyone asks why.\n• Scout asks Uncle Jack not to tell Atticus what the fight was about.",
+     "hint": "Scout broke her promise not to fight, and it was over Atticus.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Maycomb's usual disease",
+     "def": "**Atticus's name for the town's prejudice: he hopes to get his children through what is coming without catching it.**\n• Scout overhears him say this to Uncle Jack.\n• She later realises Atticus knew she was listening and wanted her to hear.",
+     "hint": "A disease you can catch from the people around you.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "A ray of sunshine",
+     "def": "**Aunt Alexandra tells Scout she should be a ray of sunshine in her father's lonely life — meaning a proper little lady in a dress.**\n• Scout says you could be a ray of sunshine in pants just as well.\n• Atticus says there are already enough sunbeams in the family, and he doesn't mind her the way she is.",
+     "hint": "Two grown-ups, one girl: one wants her changed, one does not.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: when not to fight",
+     "def": "**Scout walks away from Cecil but fights Francis. Was one choice right and the other wrong?**\n• Think about what each boy said, and what Atticus asked of her.\n• There is no single right answer to this one.",
+     "hint": "A dinner-table question: is walking away ever the harder thing?",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does Cecil Jacobs announce about Atticus in the schoolyard?",
+     "opts": [
+      "That her father is defending a Black man in court",
+      "That her father is running for the state legislature",
+      "That her father has been asked to leave his law office",
+      "That her father is moving the family out of Maycomb"
+     ],
+     "ans": 0,
+     "hint": "It is about a case Atticus has taken.",
+     "steps": [
+      "Cecil says something about Atticus in front of the schoolyard.",
+      "He uses a racial slur to say it.",
+      "His news is that Atticus is defending a Black man.",
+      "That is the news Scout brings home to Atticus."
+     ],
+     "ex": {
+      "main": "**That her father is defending a Black man.** Cecil says it as an insult, which tells Scout how the town sees the case before she understands it.",
+      "tip": "Notice how a character first learns key news; it often sets the tone for everything after."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does Uncle Jack do for a living?",
+     "opts": [
+      "He is a lawyer",
+      "He is a doctor",
+      "He is a teacher",
+      "He is a judge"
+     ],
+     "ans": 1,
+     "hint": "He works with patients.",
+     "steps": [
+      "Uncle Jack is Atticus's younger brother.",
+      "He visits every Christmas.",
+      "He works in medicine.",
+      "He is a doctor."
+     ],
+     "ex": {
+      "main": "**He is a doctor.** He is good with patients, but he still has to learn how to listen to children.",
+      "tip": "Tie each minor character to one concrete fact; it makes them easy to keep apart."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Where does the Finch family spend Christmas Day in chapter 9?",
+     "opts": [
+      "At Miss Maudie's",
+      "At the courthouse",
+      "At Finch's Landing",
+      "At the Radley Place"
+     ],
+     "ans": 2,
+     "hint": "It is the family home, outside town.",
+     "steps": [
+      "The Finches leave town for Christmas Day.",
+      "They visit the old family home.",
+      "It is called Finch's Landing."
+     ],
+     "ex": {
+      "main": "**At Finch's Landing.** The old family place is where Scout meets the fight she cannot walk away from.",
+      "tip": "Settings can be named after families; that usually means the family has deep roots there."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does Atticus say he must take Tom Robinson's case?",
+     "opts": [
+      "Nobody else in Maycomb knows enough law to try it",
+      "The judge offered him a large fee to take the case at all",
+      "He is sure he can win it if he works hard enough",
+      "Without it he could not hold up his head or guide his children"
+     ],
+     "ans": 3,
+     "hint": "It is about his conscience, not money or odds.",
+     "steps": [
+      "Scout asks him why he is defending Tom.",
+      "Atticus answers in terms of who he could be afterwards.",
+      "If he refused, he could not hold up his head or tell his children what to do.",
+      "So he takes it to keep his self-respect and his standing as their father."
+     ],
+     "ex": {
+      "main": "**Without it he could not hold up his head or guide his children.** Atticus's reason is about integrity, not about winning.",
+      "tip": "When a character explains a hard choice, sort his reasons into \"what I gain\" and \"who I would be\". Atticus's are all the second kind."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 9 events in the order they happen.",
+     "opts": [
+      "Cecil Jacobs taunts Scout about Atticus at school",
+      "Uncle Jack arrives to spend Christmas with the Finches",
+      "Scout fights her cousin Francis at Finch's Landing",
+      "Scout overhears Atticus talking with Uncle Jack"
+     ],
+     "ans": 0,
+     "hint": "School, visitor, fight, overheard talk.",
+     "steps": [
+      "The chapter opens at school with Cecil.",
+      "Then Christmas comes, and Uncle Jack arrives.",
+      "On Christmas Day, Scout fights Francis at Finch's Landing.",
+      "Afterwards, Scout overhears Atticus and Uncle Jack talking."
+     ],
+     "ex": {
+      "main": "**Cecil → Uncle Jack → the fight with Francis → the overheard talk.** The chapter moves from one walked-away fight to one she could not walk away from.",
+      "tip": "Holidays are useful anchors in an order question: the events before Christmas come first."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Uncle Jack punishes Scout for fighting Francis. What does she later tell him he did wrong?",
+     "opts": [
+      "He never let her tell her side of the story",
+      "He punished her harder than Francis deserved",
+      "He told Atticus about the fight right away",
+      "He took Francis's side because he is older"
+     ],
+     "ans": 0,
+     "hint": "What did he skip before he punished her?",
+     "steps": [
+      "Francis tells the grown-ups that Scout hit him.",
+      "Uncle Jack punishes her straight away.",
+      "He never asks why she did it.",
+      "Scout tells him he never let her tell her side."
+     ],
+     "ex": {
+      "main": "**He never let her tell her side.** Uncle Jack admits she is right, which tells you how seriously the Finches take fairness.",
+      "tip": "Fairness in this book means hearing both sides; watch for who does and who does not."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Aunt Alexandra tells Scout she should be a ray of sunshine in her father's lonely life, which means wearing dresses and acting like a lady. What does Atticus say when Scout asks him about it?",
+     "opts": [
+      "Her aunt is right, and she should start wearing her dresses",
+      "There are enough sunbeams in the family; she can stay as she is",
+      "She should humor her aunt at Christmas and forget it after",
+      "Ladies are made at school, so it is her teacher's job now"
+     ],
+     "ans": 1,
+     "hint": "Atticus rarely asks his children to be someone else.",
+     "steps": [
+      "Aunt Alexandra wants Scout to change how she dresses and behaves.",
+      "Scout argues she could be a ray of sunshine in pants.",
+      "Atticus answers with a joke about the family having enough sunbeams.",
+      "He does not mind her the way she is."
+     ],
+     "ex": {
+      "main": "**There are enough sunbeams in the family already.** Atticus turns the phrase into a joke, and underneath the joke he tells Scout she does not need fixing.",
+      "tip": "When two adults give a child opposite messages, ask which one the narrator lets have the last word."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus tells Scout he does not expect to win, then adds this. What is he teaching her?",
+     "opts": [
+      "Winning is the only reason to take on a difficult case",
+      "Anyone who has lost before should simply stop trying",
+      "A fight can be worth making even when you expect to lose",
+      "History has already decided how the case must end"
+     ],
+     "ans": 2,
+     "hint": "He has just said he won't win. So why fight?",
+     "steps": [
+      "Atticus admits he is not going to win the case.",
+      "He says being beaten long before you start is no reason not to try.",
+      "The worth of the fight does not depend on the result.",
+      "So a fight can be worth making even when you expect to lose."
+     ],
+     "ex": {
+      "main": "**A fight can be worth making even when you expect to lose.** For Atticus, doing the right thing is the point, not the scoreboard.",
+      "tip": "When a character admits defeat and keeps going anyway, the book is defining courage."
+     },
+     "passage": "“Simply because we were licked a hundred years before we started is no reason for us not to try to win.”"
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout walks away from Cecil but fights Francis. Why is the second fight harder for her to avoid?",
+     "opts": [
+      "Atticus told her that fighting relatives does not count",
+      "Francis is much bigger, so walking away would look cowardly",
+      "Cecil apologises to her before the fight can even start",
+      "Francis is family, and he insults Atticus at a family Christmas"
+     ],
+     "ans": 3,
+     "hint": "Think about who Francis is, and where they are.",
+     "steps": [
+      "With Cecil, Scout remembers Atticus's request and walks away.",
+      "Francis is her own cousin, at a family Christmas.",
+      "He insults Atticus personally, among the family.",
+      "Coming from family, the insult is harder to walk away from."
+     ],
+     "ex": {
+      "main": "**Francis is family, and he insults Atticus at a family Christmas.** An insult from a schoolmate stings; the same insult from inside the family feels like betrayal.",
+      "tip": "Compare two similar scenes and ask what is different. The difference is usually the point."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus tells Uncle Jack he hopes to get his children through this without catching \"Maycomb's usual disease.\" Why does it matter that he knows Scout is listening?",
+     "opts": [
+      "He wants her to hear his reasons, not just the town's version",
+      "He is testing whether she will admit to listening at doors",
+      "He hopes she will repeat it to Cecil and Francis at school",
+      "He wants her to feel guilty about her fight with Francis"
+     ],
+     "ans": 0,
+     "hint": "Whose explanation does Atticus want her to trust?",
+     "steps": [
+      "Atticus says he hopes his children will come to him for answers, not to the town.",
+      "He calls the town's prejudice a disease they could catch.",
+      "He knew Scout was listening the whole time.",
+      "So he is making sure she hears his reasons, not just the town's version."
+     ],
+     "ex": {
+      "main": "**He wants her to hear his reasons, not just the town's version.** Talking where she can hear is Atticus's way of teaching her without a lecture.",
+      "tip": "When a narrator says a character meant to be overheard, reread the speech as a message to her."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

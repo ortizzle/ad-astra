@@ -1,0 +1,371 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c07": {
+   "id": "unit-tkam-c07",
+   "type": "unit",
+   "updatedAt": 1792020295519,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 7: The Knothole Closes",
+   "srcName": "To Kill a Mockingbird, chapter 7",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 7",
+   "summary": {
+    "text": "Chapter 7 of To Kill a Mockingbird: Jem tells Scout his pants were waiting for him, folded over the fence and sewn up crooked. The knothole in the oak tree keeps giving: gray twine, two soap figures that look like Jem and Scout, a pack of gum, a faded spelling medal, and a pocket watch with an aluminum knife. The children write a thank-you note, but the hole is filled with cement. Mr. Nathan Radley says the tree is dying; Atticus says it looks healthy, and Jem is left crying on the porch.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the chapter where the Boo legend and the evidence part ways for good. Every gift points to a gentle, lonely giver, and the cement shows someone deliberately cutting him off.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "List the knothole gifts and explain what they suggest about the giver.",
+     "from": "source"
+    },
+    {
+     "text": "Explain what the mended pants tell Jem about who has been watching.",
+     "from": "source"
+    },
+    {
+     "text": "Compare Mr. Nathan's reason for the cement with what Atticus says about the tree.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Jem cries at the end of the chapter.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This quiz covers chapter 7 only and stops at the end of that chapter, with Jem on the porch after the knothole has been sealed. Nothing here is sensitive. The thing most likely to trip her up is Jem's tears: the book never says why he cries, and she has to work it out from the healthy tree and the cement. The ponder card about Mr. Nathan's motive is a good one for dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 7, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "The pants, waiting",
+     "def": "**When Jem went back that night, his pants were folded over the fence — and sewn up, crooked, like something he'd try to do himself.**\n• Jem keeps this to himself for about a week, moody and silent.\n• Scout tries Atticus's advice and climbs into Jem's skin to understand him.",
+     "hint": "Folded and mended: somebody knew he would come back.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The knothole gifts",
+     "def": "**More small presents turn up in the oak tree's knothole: gray twine, a whole pack of gum, a faded spelling medal, and a pocket watch on a chain with an aluminum knife.**\n• At first the children are not sure the twine is meant for them.\n• By the watch, there is no doubt left: someone is giving them things.",
+     "hint": "Each gift is a little more personal than the one before.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Two figures in soap",
+     "def": "**Someone carves two small soap figures, a boy and a girl, that look just like Jem and Scout.**\n• Jem recognises them at once: they are the two of them.\n• To carve them, the giver must have watched the children closely.",
+     "hint": "Gifts from a stranger are generous; portraits from a stranger mean he has been watching.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "The thank-you note",
+     "def": "**Jem and Scout write a note to thank whoever has been leaving the gifts.**\n• It is the first time they try to reply.\n• On the way to leave it, they find the knothole filled with cement.",
+     "hint": "The conversation was about to go both ways.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Cement in the knothole",
+     "def": "**Mr. Nathan Radley says he filled the hole because the tree is dying — but Atticus says the tree looks perfectly healthy.**\n• Jem asks Mr. Nathan directly, and gets the dying-tree answer.\n• That evening Atticus points to the green, full leaves.",
+     "hint": "Two grown-ups, two answers. Only one of them is about the tree.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Jem's tears",
+     "def": "**That night Jem stands alone on the porch, and Scout sees that he has been crying.**\n• He understands what the cement really means before she does.\n• The narrator does not explain it; she lets you work it out.",
+     "hint": "Ask what Jem has just lost.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Crude",
+     "def": "**Rough and simply made, without fine detail.**\n• One soap figure wears a crude dress: carved in a few rough strokes, not finely shaped.\n• Crude can also mean rude, but here it describes how something was made.",
+     "hint": "A crude carving is a sketch in soap, not a finished statue.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Theme: a conversation shut down",
+     "def": "**The knothole is the only way Boo and the children have of reaching each other, and the cement closes it.**\n• The gifts were one side of a friendship; the note would have been the other.\n• Mr. Nathan, not Boo, is the one who seals it.",
+     "hint": "A hole in a tree, a door between two worlds — then it is shut.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: who shut the door?",
+     "def": "**Why would Mr. Nathan fill the knothole and give a reason that isn't true?**\n• Think about what he might want to keep his brother away from.\n• There is no single right answer to this one.",
+     "hint": "A dinner-table question: there are several fair guesses.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "When Jem went back for his pants, how did he find them?",
+     "opts": [
+      "Folded over the fence and sewn up crooked",
+      "Torn to pieces and left in the collard patch",
+      "Hanging on the fence exactly as he left them",
+      "Folded neatly on the Radley front porch steps"
+     ],
+     "ans": 0,
+     "hint": "Someone had done something to them.",
+     "steps": [
+      "Recall what Jem finally tells Scout at the start of the chapter.",
+      "The pants were not where he expected, or how he expected.",
+      "They were folded over the fence and roughly mended.",
+      "He found them folded over the fence and sewn up crooked."
+     ],
+     "ex": {
+      "main": "**Folded over the fence and sewn up crooked.** Somebody mended them knowing he would come back, and did it the way a man, not a seamstress, would.",
+      "tip": "A small physical detail in a novel is often a clue about who is behind it."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What do the two soap figures in the knothole look like?",
+     "opts": [
+      "A man and a woman who look like Atticus and Calpurnia",
+      "A boy and a girl who look like Jem and Scout",
+      "Two small dogs that look like the Finches' neighbors' pets",
+      "A boy and a man who look like Jem and Atticus"
+     ],
+     "ans": 1,
+     "hint": "Jem knows who they are the moment he sees them.",
+     "steps": [
+      "There are two figures, carved in soap.",
+      "One is a boy and one is a girl in a dress.",
+      "Jem recognises them as the two of them.",
+      "They look like Jem and Scout."
+     ],
+     "ex": {
+      "main": "**A boy and a girl who look like Jem and Scout.** The giver has been watching them closely enough to carve them.",
+      "tip": "Notice when a gift is personal; it tells you how well the giver knows the person receiving it."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Jem asks Mr. Nathan Radley why he filled the knothole with cement. What does he say?",
+     "opts": [
+      "The hole had become a nest for wasps and bees",
+      "Children were stealing things out of the tree",
+      "The tree is dying, and sick trees get cement",
+      "He was told to by the people at the courthouse"
+     ],
+     "ans": 2,
+     "hint": "He gives a reason about the tree itself.",
+     "steps": [
+      "Jem asks Mr. Nathan directly.",
+      "Mr. Nathan answers in terms of the tree's health.",
+      "He says the tree is dying and you plug sick trees with cement."
+     ],
+     "ex": {
+      "main": "**The tree is dying.** It is a plausible-sounding reason — until Atticus looks at the same tree.",
+      "tip": "Keep a note of every explanation a character gives, so you can test it when another character weighs in."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The mended pants are sewn up crooked, \"like somethin' I'd try to do,\" Jem says. What does that suggest?",
+     "opts": [
+      "Atticus quietly repaired them after the children slept",
+      "Miss Maudie fixed them while the neighbors were outside",
+      "Jem tore them worse than he first thought he had",
+      "Someone unskilled mended them knowing he would return"
+     ],
+     "ans": 3,
+     "hint": "Who would sew the way Jem would?",
+     "steps": [
+      "A practised sewer would make neat stitches.",
+      "These stitches are rough, like a beginner's.",
+      "And the pants were folded, waiting, as if someone expected Jem back.",
+      "So someone unskilled mended them, knowing he would return."
+     ],
+     "ex": {
+      "main": "**Someone unskilled mended them, knowing he would return.** The repair is clumsy and kind at once, and it came from the Radley side of the fence.",
+      "tip": "When a clue is described by how it was done, ask what kind of person would do it that way."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 7 events in the order they happen.",
+     "opts": [
+      "Jem tells Scout his pants were folded and mended on the fence",
+      "Two soap figures that look like Jem and Scout appear in the knothole",
+      "Jem and Scout write a note to thank whoever is leaving gifts",
+      "Mr. Nathan Radley says he filled the hole because the tree is dying"
+     ],
+     "ans": 0,
+     "hint": "Secret, gifts, thanks, then the hole is shut.",
+     "steps": [
+      "The chapter opens with Jem finally telling Scout about the pants.",
+      "The knothole gifts follow, including the soap figures.",
+      "Eventually the children write a thank-you note.",
+      "Then the hole is cemented, and Mr. Nathan explains why."
+     ],
+     "ex": {
+      "main": "**Pants → soap figures → thank-you note → cement.** The chapter builds a friendship and then closes it off in its last pages.",
+      "tip": "When a chapter builds something up slowly, expect the ending to change it."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "One soap figure wears a \"crude dress.\" What does crude mean here?",
+     "opts": [
+      "Roughly made, without fine detail",
+      "Rude and likely to offend people",
+      "Old, faded and badly worn out",
+      "Brightly painted in loud colors"
+     ],
+     "ans": 0,
+     "hint": "Think about carving a dress out of a bar of soap.",
+     "steps": [
+      "The figure is carved from soap.",
+      "You cannot carve fine lace into soap with a knife.",
+      "So the dress is shaped in a few rough strokes.",
+      "Crude here means roughly made, without fine detail."
+     ],
+     "ex": {
+      "main": "**Roughly made, without fine detail.** Crude can mean rude, but the sentence is about how the figure was carved, not about manners.",
+      "tip": "When a word has two meanings, test both against what the sentence is describing."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Mr. Nathan says the tree is dying. What does Atticus say when Jem asks him about it?",
+     "opts": [
+      "The tree has been sick for years already",
+      "The tree looks perfectly healthy to him",
+      "Trees really should be filled with cement",
+      "He has never looked at that tree closely"
+     ],
+     "ans": 1,
+     "hint": "Atticus points at the leaves.",
+     "steps": [
+      "Jem asks Atticus the same question that evening.",
+      "Atticus looks at the tree's leaves: green and full.",
+      "He sees no sign that it is sick.",
+      "So Atticus says the tree looks perfectly healthy."
+     ],
+     "ex": {
+      "main": "**The tree looks perfectly healthy.** That quietly tells Jem that Mr. Nathan's reason was not the real one.",
+      "tip": "When two characters describe the same thing differently, one of them usually has a reason to."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout sees that Jem has been crying after he hears Atticus say the tree is healthy. What has Jem understood?",
+     "opts": [
+      "That the gifts were left by Mr. Nathan all along",
+      "That Atticus is upset with him about the Radley raid",
+      "That the cement was put there to cut Boo off from them",
+      "That the tree will have to be cut down this winter"
+     ],
+     "ans": 2,
+     "hint": "If the tree is healthy, why is there cement?",
+     "steps": [
+      "Mr. Nathan said the tree was dying.",
+      "Atticus says it is healthy, so that reason is false.",
+      "The real effect of the cement is to close the knothole.",
+      "The knothole was the only way Boo could reach the children.",
+      "Jem understands the cement was meant to cut Boo off from them."
+     ],
+     "ex": {
+      "main": "**The cement was there to cut Boo off from them.** Jem sees a friendship ended on purpose, and the narrator lets his tears say it.",
+      "tip": "When a narrator shows an emotion without explaining it, work backward from what the character just learned."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The children were going to answer the gifts with a thank-you note. Why does it matter that the hole is sealed just then?",
+     "opts": [
+      "It means the note was too rude to send to anyone",
+      "It shows the children never really wanted the gifts",
+      "It proves the gifts had been meant for someone else",
+      "It stops the gift-giving just as it could become two-way"
+     ],
+     "ans": 3,
+     "hint": "Until the note, who was doing all the giving?",
+     "steps": [
+      "So far, every gift has gone one way: from the tree to the children.",
+      "The note would have been the first reply.",
+      "The hole is sealed right before that answer arrives.",
+      "So it stops the gift-giving just as it could become two-way."
+     ],
+     "ex": {
+      "main": "**It stops the exchange just as it could become two-way.** The timing turns a run of small gifts into a real loss.",
+      "tip": "Timing in a plot is rarely random; ask what an event prevents as well as what it causes."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Across chapters 4 to 7, the knothole holds gum, coins, twine, soap figures, a medal and a watch. What do the gifts suggest about the giver?",
+     "opts": [
+      "He is lonely and gentle, reaching out the only way he can",
+      "He is playing a trick to lure the children onto his lot",
+      "He is a thief, returning things he took from the town",
+      "He wants payment and expects the children to give back"
+     ],
+     "ans": 0,
+     "hint": "Ask what kind of person gives small things in secret.",
+     "steps": [
+      "The gifts are small and kind, and they get more personal.",
+      "The giver never asks for anything in return.",
+      "He gives in secret, through a tree, instead of face to face.",
+      "That fits someone lonely and gentle, reaching out the only way he can."
+     ],
+     "ex": {
+      "main": "**He is lonely and gentle, reaching out the only way he can.** The gifts are the strongest evidence yet against the monster story.",
+      "tip": "Judge a hidden character by the pattern of what he does, not by one single act."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}
