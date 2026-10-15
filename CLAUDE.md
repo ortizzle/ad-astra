@@ -6592,6 +6592,13 @@ the kids. One app means one deploy and one Gist — better for maintenance.
 ## Deploy
 
 Live on GitHub Pages under the `ortizzle` account; deploy is a `git push` to the
-Pages branch via `gh`. **Bump `CACHE_VERSION` in `sw.js` on every deploy** —
+Pages branch via `gh`.
+
+**Deploy at the end of every build, without asking (Chris, 2026-10-15):**
+*"Always deploy since I still approve each lesson before it's published."* Every
+unit ships as `status:'draft'`, so pushing to `main` puts nothing in front of
+either girl; his review queue is the gate, and asking first only adds a round
+trip. Run the tests, commit to the working branch, push it to `main`, confirm
+the Pages build succeeded, and then tell him what landed and what to approve. **Bump `CACHE_VERSION` in `sw.js` on every deploy** —
 mobile Chrome caches hard, and a stale service worker will serve the old app
 indefinitely. Hard-refresh or append `?v=N` when verifying.
