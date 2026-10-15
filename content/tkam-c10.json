@@ -1,0 +1,373 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c10": {
+   "id": "unit-tkam-c10",
+   "type": "unit",
+   "updatedAt": 1792020318817,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 10: Mockingbirds and a Mad Dog",
+   "srcName": "To Kill a Mockingbird, chapter 10",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 10",
+   "summary": {
+    "text": "Chapter 10 of To Kill a Mockingbird: Scout and Jem decide their father is feeble, Atticus gives them air rifles with one rule about mockingbirds, and a mad dog named Tim Johnson comes down the street. Sheriff Heck Tate hands Atticus the rifle, and the children learn that their quiet father was once the deadest shot in Maycomb County.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the chapter that gives the book its title, and it sets up the novel's idea of strength: the kind you hold back. What the children think a father should be, and what Atticus actually is, will matter for the rest of the book.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain why it is a sin to kill a mockingbird, in Atticus's and Miss Maudie's words.",
+     "from": "source"
+    },
+    {
+     "text": "Describe how the mad dog changes Scout and Jem's view of their father.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Atticus gave up shooting and why Jem won't let Scout brag.",
+     "from": "source"
+    },
+    {
+     "text": "Start tracking which characters seem to fit the mockingbird rule.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This covers chapter 10 only and stops at the end of it: the air rifles, the mockingbird rule, the mad dog and Miss Maudie's reveal. Nothing here reaches past the chapter. A sick dog is shot in the street; it is handled briefly and without detail. The thing most likely to trip her up is reading the mockingbird line as a rule about birds only. The theme card nudges her to keep a list of who else fits it, without naming anyone. The ponder card is a good one for dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 10, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Atticus, as his children see him",
+     "def": "**To Scout and Jem he seems feeble: nearly fifty, in glasses, and he never does anything.**\n• He works in an office. He doesn't hunt, fish, play poker, drink or smoke.\n• Asked to play in the town's football game, he says he is too old for that.",
+     "hint": "Keep their list of complaints in mind. The chapter answers every one of them.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "A sin to kill a mockingbird",
+     "def": "**A mockingbird does no harm and only makes music, so killing one is a sin.**\n• Atticus gives the children air rifles but won't teach them to shoot; he says shoot all the bluejays they want, if they can hit them.\n• It is the only time Scout hears him call anything a sin. Miss Maudie explains: mockingbirds don't eat gardens or nest in corncribs, they just sing.",
+     "hint": "This is the book's title. Start a quiet list of people in Maycomb who seem to fit the rule.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Tim Johnson",
+     "def": "**A liver-colored bird dog, the pet of Maycomb, who comes down the street sick with rabies.**\n• \"Mad\" here means rabid, not angry: a bite could spread a deadly disease.\n• Jem spots him moving slowly and strangely and fetches Calpurnia.",
+     "hint": "A mad dog in a quiet street: the whole neighborhood goes indoors and watches.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Calpurnia in an emergency",
+     "def": "**She phones the warning to Atticus and the neighbors, then runs to the Radleys' front door herself.**\n• She asks the telephone operator to spread the word along the street.\n• Nobody in Maycomb uses the Radleys' front door. She pounds on it anyway.",
+     "hint": "Notice whose house she makes sure to warn in person.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The one shot",
+     "def": "**Sheriff Heck Tate hands Atticus the rifle, and Atticus drops the dog with a single shot.**\n• Heck says he can't shoot that well, and a miss would go straight into the Radley house.\n• Atticus pushes his glasses up, they fall into the street, and he fires anyway.",
+     "hint": "The man with the badge hands the gun to the man in the office. That says everything.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Ol' One-Shot",
+     "def": "**Miss Maudie tells the children that Atticus was the deadest shot in Maycomb County.**\n• He put his gun down because the gift gave him an unfair advantage over most living things.\n• Her rule on bragging: people in their right minds never take pride in their talents.",
+     "hint": "He didn't lose the skill. He chose not to use it.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "feeble",
+     "def": "**Weak and without much strength — Scout's word for her father as the chapter opens.**\n• She means too old and too quiet to do anything worth boasting about.\n• The rest of the chapter proves the word wrong.",
+     "hint": "The chapter opens on this word and spends every page taking it back.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Strength you don't show off",
+     "def": "**Atticus's ability was there all along; he simply never paraded it.**\n• Jem won't let Scout brag at school. Atticus is a gentleman, he says, just like him.\n• The children measured their father by what he displayed. The chapter measures him by what he holds back.",
+     "hint": "Ask of any character: what can they do that they never mention?",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: why didn't he ever tell them?",
+     "def": "**Atticus never once mentioned that he could shoot.**\n• Was that modesty, or did he think the skill was nothing to be proud of?\n• If you had a talent like that, would you have told your children? Worth a minute at dinner.",
+     "hint": "There is no wrong answer. Be ready to say why.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "At the start of chapter 10, why do Scout and Jem think their father is feeble?",
+     "opts": [
+      "He's nearly fifty and never does anything exciting",
+      "He is often sick and has to stay home from work",
+      "He loses every argument he has with Miss Maudie",
+      "He won't let them play outside after it gets dark"
+     ],
+     "ans": 0,
+     "hint": "Count his years, then list what other fathers in town do that he doesn't.",
+     "steps": [
+      "Go to Scout's complaints at the very start of the chapter.",
+      "Atticus is nearly fifty, wears glasses and works in an office.",
+      "He doesn't hunt, fish, play poker or join the town football game.",
+      "So to them he seems feeble: he's nearly fifty and never does anything exciting."
+     ],
+     "ex": {
+      "main": "**He's nearly fifty and never does anything exciting.** Scout measures her father against the other fathers in town, the ones who hunt and play football, and he loses on every count she can see. The chapter exists to show her what she couldn't see.",
+      "tip": "When a chapter opens on a list of complaints, expect its ending to test them."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus tells Jem this about the air rifles. Why is a mockingbird different from a bluejay, according to Miss Maudie?",
+     "opts": [
+      "It is rare in Alabama and protected by the law",
+      "It does no harm and only makes music for people",
+      "It is too small and quick for a child to hit",
+      "It eats the insects that ruin people's gardens"
+     ],
+     "ans": 1,
+     "hint": "Ask Miss Maudie's question: what does a mockingbird take from anyone?",
+     "steps": [
+      "Atticus sets the rule; Miss Maudie gives the reason when Scout asks her.",
+      "Mockingbirds don't eat up people's gardens or nest in corncribs.",
+      "All they do is sing their hearts out for people.",
+      "So a mockingbird is different because it does no harm and only makes music."
+     ],
+     "ex": {
+      "main": "**It does no harm and only makes music.** Bluejays are pests; a mockingbird takes nothing and gives song. Killing one hurts something that never hurt anyone, which is why Atticus, who almost never calls anything a sin, calls this one.",
+      "tip": "When a book's title turns up in a character's mouth, slow down. The author is handing you a key."
+     },
+     "passage": "“Shoot all the bluejays you want, if you can hit 'em, but remember it's a sin to kill a mockingbird.”"
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Who is Tim Johnson?",
+     "opts": [
+      "A neighbor's hound who has been chasing cars",
+      "A bird dog Atticus used to hunt with as a boy",
+      "A liver-colored dog who is sick with rabies",
+      "A guard dog the Radleys keep in their yard"
+     ],
+     "ans": 2,
+     "hint": "Jem sees him first, at the far end of the street.",
+     "steps": [
+      "Find the moment Jem notices a dog at the end of the street.",
+      "The dog is the pet of Maycomb, but today he moves slowly and strangely.",
+      "Calpurnia looks and knows what it means: a mad dog.",
+      "So Tim Johnson is a liver-colored dog who is sick with rabies."
+     ],
+     "ex": {
+      "main": "**A liver-colored dog who is sick with rabies.** \"Mad\" in Maycomb's mouth means rabid. Everyone's pet has become the most dangerous thing on the street, which is why the whole neighborhood shuts its doors.",
+      "tip": "Old-fashioned words often mean something sharper than they do today. Check the context before you trust the modern meaning."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "When the mad dog comes down the street, Calpurnia phones a warning and then runs to the Radley house to pound on the front door. What does that run show about her?",
+     "opts": [
+      "She wants Mr. Radley to come and shoot the dog",
+      "She hopes to see Boo Radley up close at last",
+      "She believes the dog came out of the Radley yard",
+      "She warns everyone, even the family nobody visits"
+     ],
+     "ans": 3,
+     "hint": "Which house in Maycomb does everyone else avoid?",
+     "steps": [
+      "Calpurnia's first move is the telephone: Atticus, then the neighbors.",
+      "Then she runs out into the street, toward the danger.",
+      "She goes to the Radley Place, the one house the whole town keeps away from, and uses the front door nobody uses.",
+      "So the run shows she warns everyone, even the family nobody visits."
+     ],
+     "ex": {
+      "main": "**She warns everyone, even the family nobody visits.** The children have spent years treating the Radley house as a haunted place. Calpurnia treats it as a home with people inside who need to be told.",
+      "tip": "Watch what characters do in an emergency. Panic strips away manners and shows what they really believe."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Sheriff Heck Tate arrives with a rifle but hands it to Atticus instead of shooting the mad dog himself. What reason does Heck give?",
+     "opts": [
+      "He can't shoot well enough to risk a miss",
+      "His own rifle had jammed on the way over",
+      "The dog is on Atticus's side of the street",
+      "He thinks Atticus should guard his own house"
+     ],
+     "ans": 0,
+     "hint": "Look at where the dog is standing when the shot has to be taken.",
+     "steps": [
+      "The dog is in the street in front of the Radley Place.",
+      "A missed shot there would go straight into the Radley house.",
+      "Heck says outright that he can't shoot that well.",
+      "So he hands the rifle over: he can't shoot well enough to risk a miss."
+     ],
+     "ex": {
+      "main": "**He can't shoot well enough to risk a miss.** The sheriff, the man with the badge, defers to the father the children call feeble. It is the first hint, before Miss Maudie says a word, that they have Atticus wrong.",
+      "tip": "When one character hands a job to another, ask what the first one knows that the reader doesn't yet."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 10 events in the order they happen.",
+     "opts": [
+      "Atticus gives the children air rifles but won't teach them to shoot",
+      "Jem notices Tim Johnson moving strangely at the end of the street",
+      "Atticus drops the dog with a single shot",
+      "Miss Maudie tells the children Atticus was the deadest shot in the county"
+     ],
+     "ans": 0,
+     "hint": "The rifles come before the dog; the explanation comes after the shot.",
+     "steps": [
+      "The air rifles and the mockingbird rule come early in the chapter.",
+      "Then, one February day, Jem spots Tim Johnson coming down the street.",
+      "Heck Tate arrives, hands Atticus the rifle, and one shot drops the dog.",
+      "Only afterwards does Miss Maudie explain what the children just saw: he was the deadest shot in Maycomb County."
+     ],
+     "ex": {
+      "main": "**Air rifles → Tim Johnson → the shot → Miss Maudie's explanation.** The chapter sets up a father who won't teach them to shoot, then shows why.",
+      "tip": "In an order question, look for the setup and the payoff. The setup always comes first."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Miss Maudie says Atticus gave up shooting because he felt it gave him an unfair advantage over most living things. What does that choice say about him?",
+     "opts": [
+      "He had lost his nerve after a bad hunting accident",
+      "He thinks a gift should be held back, not shown off",
+      "He wanted his children to become the better shots",
+      "He believed hunting was against the law in Maycomb"
+     ],
+     "ans": 1,
+     "hint": "He still has the skill. The shot proves it. So what did he give up?",
+     "steps": [
+      "Start from Miss Maudie's explanation: the skill gave him an unfair advantage.",
+      "He didn't lose it; the mad dog proves he still has it.",
+      "He chose not to use it unless he had to, and he never bragged about it.",
+      "So the choice says he thinks a gift should be held back, not shown off."
+     ],
+     "ex": {
+      "main": "**He thinks a gift should be held back, not shown off.** Atticus treats his talent as something that calls for restraint. He uses it once, because the street needs him, then hands the gun back. Miss Maudie puts it as a rule: people in their right minds never take pride in their talents.",
+      "tip": "A character's refusals tell you as much as their actions. Ask what they could do and choose not to."
+     },
+     "passage": "“People in their right minds never take pride in their talents.”"
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout wants to tell everyone at school that her father is the best shot in the county. Jem tells her not to say a word. Why?",
+     "opts": [
+      "Atticus made them promise to keep it a secret",
+      "Nobody at school would ever believe a word of it",
+      "If Atticus were proud of it, he'd have told them",
+      "He doesn't want Scout to get credit for finding out"
+     ],
+     "ans": 2,
+     "hint": "Atticus kept this quiet for years. What does that tell Jem?",
+     "steps": [
+      "Jem has just watched his father do something nobody expected.",
+      "He reasons: Atticus never mentioned it, so he isn't proud of it.",
+      "Bragging would do exactly what Atticus chose not to do.",
+      "So Jem keeps quiet: if Atticus were proud of it, he'd have told them."
+     ],
+     "ex": {
+      "main": "**If Atticus were proud of it, he'd have told them.** Jem copies his father's restraint on purpose. Atticus is a gentleman, he says, just like him. The boy who was embarrassed by a feeble father ends the chapter trying to be that father.",
+      "tip": "When a character starts quoting or copying another, the book is showing you who they are becoming."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout says her father was feeble. In that sentence, what does feeble mean?",
+     "opts": [
+      "Busy and away from home a lot",
+      "Strict and quick to punish",
+      "Quiet and hard to understand",
+      "Weak and without much strength"
+     ],
+     "ans": 3,
+     "hint": "She is comparing him to fathers who hunt and play football.",
+     "steps": [
+      "Look at what Scout lists next: his age, his glasses, the things he doesn't do.",
+      "All of them are about strength and ability, not about strictness or time.",
+      "Feeble is the word for someone without much strength.",
+      "So feeble means weak and without much strength."
+     ],
+     "ex": {
+      "main": "**Weak and without much strength.** Scout means Atticus is too old and too quiet to impress anyone. The chapter is built to take the word back.",
+      "tip": "Use the sentences around an unfamiliar word. Here, the list that follows is the definition."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "By the end of chapter 10, which statement best describes how Scout and Jem's view of Atticus has changed?",
+     "opts": [
+      "His strength was there all along; he just never showed it off",
+      "He is braver than they thought, but too old to be any use",
+      "He is a fine shot, which makes him the best father in town",
+      "He was hiding his past because he was ashamed of it"
+     ],
+     "ans": 0,
+     "hint": "Compare their list at the start with what Miss Maudie says at the end.",
+     "steps": [
+      "At the start they list what he can't do: hunt, play football, show off.",
+      "The mad dog shows a skill nobody suspected, and even the sheriff defers to him.",
+      "Miss Maudie explains he gave it up on purpose, not out of weakness.",
+      "So the change is this: his strength was there all along; he just never showed it off."
+     ],
+     "ex": {
+      "main": "**His strength was there all along; he just never showed it off.** The chapter doesn't make Atticus a different man. It makes his children see the man who was always there.",
+      "tip": "When a character seems to change, ask whether the character changed or the narrator's view of them did."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

@@ -19,7 +19,7 @@ const LATER = {
   12: ['streak','gentle breeding','feminine influence','fine folks'],
   13: [],
 };
-const ALWAYS = ['verdict','guilty','lynch','jailhouse','the mob','mr. underwood','under scout','under her bed'];
+const ALWAYS = ['verdict','found guilty','not guilty','lynch','jailhouse','the mob','mr. underwood','under scout','under her bed'];
 (async () => {
   const b = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium'});
   const p = await b.newPage({viewport:{width:390,height:844}});

@@ -1,0 +1,373 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c11": {
+   "id": "unit-tkam-c11",
+   "type": "unit",
+   "updatedAt": 1792020318821,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 11: Mrs. Dubose",
+   "srcName": "To Kill a Mockingbird, chapter 11",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 11",
+   "summary": {
+    "text": "Chapter 11 of To Kill a Mockingbird: Mrs. Dubose's insults, Jem's twelfth birthday and the wrecked camellias, a month of afternoons reading aloud to her, Atticus on conscience and majority rule, and what Atticus tells the children after she dies: about the morphine, the white camellia she left Jem, and what real courage is.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Chapter 10 showed one kind of bravery, a man with a gun. Chapter 11 sets out the book's other kind, and Atticus says outright that it is the real one. His line about conscience and majority rule is the clearest statement of why he does what he does.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain Jem's punishment and what the alarm clock turned out to measure.",
+     "from": "source"
+    },
+    {
+     "text": "Put Atticus's definition of courage into your own words and test it on an example.",
+     "from": "source"
+    },
+    {
+     "text": "Explain what Atticus means when he says conscience doesn't follow majority rule.",
+     "from": "source"
+    },
+    {
+     "text": "Weigh two readings of the white camellia and say which you find stronger.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This covers chapter 11 only and stops at the end of it, with the white camellia and Atticus's talk about courage. Nothing here reaches past the chapter. Two things to know: Mrs. Dubose insults the family with a racial slur, and the app always writes 'a racial slur' and never prints it; and morphine addiction and withdrawal are explained plainly, the way Atticus explains them to the children. The thing most likely to trip her up is the courage line. It is easy to admire as a sentence and harder to apply, so one question asks her to test it against examples. The ponder card is a good dinner question.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 11, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Mrs. Henry Lafayette Dubose",
+     "def": "**An old, sick, sharp-tongued neighbor who insults the children every time they pass.**\n• She lives two doors up the street, with a servant, Jessie, close at hand.\n• Atticus greets her with courtesy anyway, every single time.",
+     "hint": "Watch how Atticus treats her, then watch how Jem does.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The camellias",
+     "def": "**On Jem's twelfth birthday, after Mrs. Dubose insults Atticus, Jem cuts the tops off her camellia bushes.**\n• He uses the baton he bought Scout with his birthday money, then snaps it.\n• The insult used a racial slur and called Atticus no better than the people he works for.",
+     "hint": "The calmest boy on the street finally loses his temper. Note what does it.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "The punishment",
+     "def": "**Atticus sends Jem back, and Mrs. Dubose asks him to read aloud to her every afternoon for a month.**\n• Scout goes with him every day.\n• An alarm clock ends each reading, and each day it rings a little later.",
+     "hint": "Atticus could have punished Jem himself. He sends him to the person he wronged.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Atticus and his conscience",
+     "def": "**Most of the town thinks Atticus is wrong to defend Tom Robinson; he says conscience doesn't follow majority rule.**\n• Before he can live with other folks, he has to live with himself.\n• He tells Scout the name Mrs. Dubose called him is meant as an insult, but it only shows how poor the person using it is.",
+     "hint": "Majority rule works for votes. Atticus says it doesn't work for right and wrong.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Morphine",
+     "def": "**Mrs. Dubose had taken morphine for her pain for years, and she broke herself of it before she died.**\n• Her frightening fits during the readings were her body fighting the drug.\n• Her mind was fixed on the alarm clock; Atticus says the reading may have been some distraction.",
+     "hint": "Reread the fits once you know what they were. Nothing about them changes except what they mean.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "The white camellia",
+     "def": "**After she dies, Mrs. Dubose leaves Jem a candy box with one perfect white camellia inside.**\n• It is a Snow-on-the-Mountain, the kind he cut down.\n• Jem is furious, then sits turning the flower over long after Scout goes to bed.",
+     "hint": "A gift from the very bushes he wrecked. Is it a jab, or a pardon?",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Real courage",
+     "def": "**Courage is knowing you're beaten before you start, starting anyway, and seeing it through.**\n• Atticus wanted Jem to see it, instead of thinking courage is a man with a gun in his hand.\n• By her own measure Mrs. Dubose won. Atticus calls her the bravest person he ever knew.",
+     "hint": "Set this beside the mad dog in chapter 10: two kinds of brave, one chapter apart.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "beholden",
+     "def": "**Owing something to someone; in their debt.**\n• Mrs. Dubose meant to leave the world beholden to nothing and nobody, not even a drug.\n• Atticus admires that, even though her views were very different from his.",
+     "hint": "Be-HOLD-en: something still has a hold on you.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: cruel and brave at once?",
+     "def": "**Mrs. Dubose insulted the Finches for months, and Atticus calls her the bravest person he ever knew.**\n• Does one cancel the other, or can both be true of one person?\n• Can you think of anyone you'd describe that way?",
+     "hint": "There is no wrong answer. Be ready to say why.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "On Jem's twelfth birthday, Mrs. Dubose insults Atticus. What does Jem do next?",
+     "opts": [
+      "Cuts the tops off her camellia bushes",
+      "Throws rocks at the windows of her house",
+      "Shouts the insult back at her from the street",
+      "Tears the screen door off her front porch"
+     ],
+     "ans": 0,
+     "hint": "He is carrying the baton he just bought for Scout.",
+     "steps": [
+      "It's Jem's twelfth birthday, and he has bought Scout a baton.",
+      "Mrs. Dubose says Atticus is no better than the people he works for, using a racial slur.",
+      "Jem snaps: he takes the baton into her yard.",
+      "He cuts the tops off her camellia bushes."
+     ],
+     "ex": {
+      "main": "**He cuts the tops off her camellia bushes.** Jem has taken months of her insults about himself. It is the insult to Atticus that breaks him, which tells you whose dignity he cares about most.",
+      "tip": "Notice which insult finally makes a patient character act. That is what they care about most."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is Jem's punishment for wrecking Mrs. Dubose's camellias?",
+     "opts": [
+      "Working in her yard every Saturday until spring",
+      "Reading aloud to her every afternoon for a month",
+      "Paying for new bushes out of his birthday money",
+      "Writing her a letter of apology every week"
+     ],
+     "ans": 1,
+     "hint": "Atticus sends him back to her, and she names the price.",
+     "steps": [
+      "Atticus doesn't punish Jem himself; he sends him to talk to Mrs. Dubose.",
+      "She asks for something that costs Jem his afternoons.",
+      "He must come every afternoon after school, and Scout goes with him.",
+      "So the punishment is reading aloud to her every afternoon for a month."
+     ],
+     "ex": {
+      "main": "**Reading aloud to her every afternoon for a month.** It looks like a simple punishment. By the end of the chapter it turns out to have been part of something much bigger in her life.",
+      "tip": "When a punishment seems oddly specific, keep it in mind. The book may explain it later."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout tells Atticus that most folks seem to think he's wrong to defend Tom Robinson. What is Atticus's answer, in plain words?",
+     "opts": [
+      "He would drop the case if his own family asked him to",
+      "The town will change its mind once it hears the facts",
+      "What the town thinks can't settle what he knows is right",
+      "Most of the town is right, but he must finish the job"
+     ],
+     "ans": 2,
+     "hint": "He says conscience is the one thing that doesn't do something.",
+     "steps": [
+      "Scout's argument is a vote: most folks think he's wrong.",
+      "Atticus grants that people are entitled to their opinions.",
+      "But before he can live with other folks, he has to live with himself.",
+      "Conscience doesn't follow majority rule, so the town's view can't settle what he knows is right."
+     ],
+     "ex": {
+      "main": "**What the town thinks can't settle what he knows is right.** Atticus respects the town's right to disagree, but he won't let a head count decide his conscience. That is the whole argument in a line.",
+      "tip": "When a character answers an argument, check whether they dispute the facts or the method. Atticus disputes the method."
+     },
+     "passage": "“… before I can live with other folks I've got to live with myself. The one thing that doesn't abide by majority rule is a person's conscience.”"
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "During the readings, an alarm clock ends each afternoon, and it rings a little later every day. Why?",
+     "opts": [
+      "Jessie kept forgetting to wind the clock on time",
+      "She was falling asleep later in the afternoon",
+      "She wanted to punish Jem a little more each day",
+      "She was holding out longer between doses of morphine"
+     ],
+     "ans": 3,
+     "hint": "Atticus explains the clock after she dies.",
+     "steps": [
+      "Atticus tells the children Mrs. Dubose was a morphine addict.",
+      "She had decided to break herself of the drug before she died.",
+      "Her mind was fixed on the clock: each day she lasted a little longer.",
+      "So the clock rang later because she was holding out longer between doses of morphine."
+     ],
+     "ex": {
+      "main": "**She was holding out longer between doses of morphine.** The readings that felt like a punishment to Jem were happening alongside a much harder fight. Atticus says the reading may have been some distraction for her.",
+      "tip": "When a detail repeats with a small change each time, the change is the clue."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 11 events in the order they happen.",
+     "opts": [
+      "Mrs. Dubose insults Atticus on Jem's twelfth birthday",
+      "Jem cuts the tops off her camellias",
+      "Jem reads aloud to her every afternoon",
+      "A candy box with a white camellia arrives for Jem"
+     ],
+     "ans": 0,
+     "hint": "Insult, damage, punishment, and then a gift.",
+     "steps": [
+      "The insult comes first, on Jem's twelfth birthday.",
+      "Jem's temper breaks, and the camellias come down.",
+      "Atticus sends him back, and the month of readings begins.",
+      "After she dies, Jessie brings Jem the candy box with one white camellia."
+     ],
+     "ex": {
+      "main": "**Insult → camellias → readings → the white camellia.** The chapter ends where it started: with a camellia, now given rather than destroyed.",
+      "tip": "Look for objects that come back at the end of a chapter. The repeat is usually the point."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus says Mrs. Dubose could have stayed on morphine and died with less pain. Why didn't she?",
+     "opts": [
+      "She meant to die owing nothing to anyone or anything",
+      "Her doctor refused to give her any more of the drug",
+      "She could no longer afford to pay for the medicine",
+      "She wanted the children to stop coming to visit her"
+     ],
+     "ans": 0,
+     "hint": "The chapter's vocabulary word is the answer's key.",
+     "steps": [
+      "Atticus says she took morphine as a pain-killer for years.",
+      "He says she could have stayed on it.",
+      "But she said she would leave this world beholden to nothing and nobody.",
+      "So she quit because she meant to die owing nothing to anyone or anything."
+     ],
+     "ex": {
+      "main": "**She meant to die owing nothing to anyone or anything.** Atticus says it would have been all right for someone that sick to take anything that made it easier, but it wasn't all right for her. The choice was hers, and she saw it through.",
+      "tip": "A character's stated reason is worth more than a guessed one. Find the line where they say it."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus describes real courage this way. Which situation fits his definition?",
+     "opts": [
+      "Winning a fight because you were the better shot",
+      "Starting a fight you expect to lose, and finishing it",
+      "Refusing a fight because you can't be sure to win",
+      "Starting a fight only once you know you will win"
+     ],
+     "ans": 1,
+     "hint": "His definition has three parts. Find the option that has all three.",
+     "steps": [
+      "Break the line into three parts: you know you're licked, you begin anyway, you see it through.",
+      "Being the better shot isn't it: Atticus says courage is not a man with a gun in his hand.",
+      "Waiting for a sure win, or refusing to start, drops the part about beginning anyway.",
+      "Only starting a fight you expect to lose, and finishing it, fits all three parts."
+     ],
+     "ex": {
+      "main": "**Starting a fight you expect to lose, and finishing it.** Atticus wants Jem to stop thinking of courage as the mad dog in the street. Mrs. Dubose was licked before she began, began anyway, and saw it through.",
+      "tip": "When a definition has several parts, test each option against every part. Most wrong answers match only one."
+     },
+     "passage": "“It's when you know you're licked before you begin but you begin anyway and you see it through no matter what.”"
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Mrs. Dubose leaves Jem a candy box holding a single white camellia. What makes the gift hard to read?",
+     "opts": [
+      "It proves she had forgiven him from the very start",
+      "It shows she had forgotten all about the bushes",
+      "It could be a last jab, or a sign of respect",
+      "It means she wanted Jem to plant her a new garden"
+     ],
+     "ans": 2,
+     "hint": "It comes from the very bushes he cut down.",
+     "steps": [
+      "The flower is a Snow-on-the-Mountain, the kind Jem wrecked.",
+      "That could be a reminder of what he did.",
+      "But she chose a perfect one and chose to send it to him at all.",
+      "So it is hard to read: it could be a last jab, or a sign of respect."
+     ],
+     "ex": {
+      "main": "**It could be a last jab, or a sign of respect.** Jem is furious at first, then sits turning the flower over. The book gives you both readings and lets you weigh them, which is exactly what Jem is doing.",
+      "tip": "When a gift could mean two things, the book often wants you to hold both."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Mrs. Dubose wanted to leave the world 'beholden to nothing and nobody.' What does beholden mean?",
+     "opts": [
+      "Angry at someone or something",
+      "Afraid of someone or something",
+      "Forgotten by someone or something",
+      "In debt to someone or something"
+     ],
+     "ans": 3,
+     "hint": "What did she refuse to keep depending on?",
+     "steps": [
+      "Find what she was giving up: the morphine she had taken for years.",
+      "She did not want to leave the world still depending on it.",
+      "Depending on something means you owe it something.",
+      "So beholden means in debt to someone or something."
+     ],
+     "ex": {
+      "main": "**In debt to someone or something.** She refused to owe her last days to a drug. The word explains the whole fight Jem and Scout were watching without knowing it.",
+      "tip": "If a word is new, find what the character is trying to get free of. The word often names it."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus keeps greeting Mrs. Dubose politely even though she insults his family. What is he showing the children?",
+     "opts": [
+      "You can stay courteous to someone who isn't",
+      "Old people should be obeyed whatever they say",
+      "Insults stop if you pretend not to hear them",
+      "Neighbors must agree with each other in public"
+     ],
+     "ans": 0,
+     "hint": "Her manners don't change his.",
+     "steps": [
+      "Mrs. Dubose is rude to the whole family, every time.",
+      "Atticus answers with courtesy, every time.",
+      "He isn't agreeing with her or obeying her; he is choosing how he behaves.",
+      "So he is showing that you can stay courteous to someone who isn't."
+     ],
+     "ex": {
+      "main": "**You can stay courteous to someone who isn't.** Atticus never lets someone else's rudeness decide his own manners. Jem, who loses his temper this chapter, is learning it the hard way.",
+      "tip": "Compare how two characters react to the same person. The difference is usually the lesson."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

@@ -1,0 +1,371 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c12": {
+   "id": "unit-tkam-c12",
+   "type": "unit",
+   "updatedAt": 1792020318823,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 12: First Purchase",
+   "srcName": "To Kill a Mockingbird, chapter 12",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 12",
+   "summary": {
+    "text": "Chapter 12 of To Kill a Mockingbird: Jem turns twelve and pulls away from Scout, Dill writes that he isn't coming, and Atticus leaves for an emergency session of the legislature. Calpurnia takes the children to her church, First Purchase, where they meet Lula, Zeebo and Reverend Sykes, see the collection for Helen Robinson, and learn about Calpurnia's life away from the Finches. They come home to find Aunt Alexandra on the porch.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This is the first time Scout and Jem see Maycomb from the other side of its color line, and the first time Scout sees Calpurnia as a person with a life of her own. It is the empathy lesson from chapter 3, put to work.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain why the children go to First Purchase and what Lula objects to.",
+     "from": "source"
+    },
+    {
+     "text": "Describe what lining a hymn and the collection show about the congregation.",
+     "from": "source"
+    },
+    {
+     "text": "Explain Calpurnia's reason for talking two different ways.",
+     "from": "source"
+    },
+    {
+     "text": "Say what the visit lets Scout see about Maycomb and about Calpurnia.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This covers chapter 12 only and stops at the end of it, as the children find Aunt Alexandra on the porch. Nothing here reaches past the chapter. One thing to know: chapter 12 states the charge against Tom Robinson, that he is accused of raping Bob Ewell's daughter. The unit states it once, briefly, on one card, and asks nothing about it. The chapter also deals directly with segregation in Maycomb's churches, through Lula's objection. The thing most likely to trip her up is reading Calpurnia's two ways of talking as hiding or lying; her own reason is about manners, and a question asks for it.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 12, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Jem at twelve",
+     "def": "**Jem is moody and distant, and he tells Scout to stop pestering him.**\n• Calpurnia starts calling him Mister Jem.\n• Scout feels him growing up and away from her, and she can't follow yet.",
+     "hint": "\"Mister Jem\": Calpurnia notices the change before Scout accepts it.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "No Dill this summer",
+     "def": "**Dill writes that he isn't coming to Maycomb this summer.**\n• He has a new father, and the two of them are building a fishing boat in Meridian.\n• Scout takes it hard. For her, summer was Dill.",
+     "hint": "The summer without Dill is the summer Scout has to find new company.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Atticus away",
+     "def": "**Atticus is called away for two weeks to an emergency session of the state legislature.**\n• That leaves Calpurnia in charge of the children.\n• It is how Scout and Jem end up at Calpurnia's church on Sunday.",
+     "hint": "With Atticus gone, Calpurnia's world opens up to them.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "First Purchase African M.E. Church",
+     "def": "**Calpurnia's church, paid for with the first earnings of freed slaves.**\n• Black families worship there on Sundays; on weekdays white men gamble in it.\n• It has no hymnbooks, and few in the congregation can read.",
+     "hint": "The name tells you its history. Freedom paid for this building.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Lula and Zeebo",
+     "def": "**Lula objects to Calpurnia bringing white children to a Black church; the rest of the congregation makes them welcome.**\n• Zeebo, Calpurnia's son and Maycomb's garbage collector, greets them.\n• For one Sunday morning, Scout and Jem are the outsiders.",
+     "hint": "One person turns them away; a whole room takes them in. Notice which the book lingers on.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "lining a hymn",
+     "def": "**Reading out a line of a hymn so the congregation can sing it back.**\n• Zeebo does it at First Purchase, because there are no hymnbooks and few people can read.\n• The song moves one line at a time: spoken, then sung.",
+     "hint": "A hymn passed along a line at a time, like a rope hand over hand.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "The collection for Helen Robinson",
+     "def": "**Reverend Sykes keeps the church doors shut until the collection for Helen Robinson reaches ten dollars.**\n• Helen is the wife of Tom Robinson, who has been accused of raping Bob Ewell's daughter.\n• Since then, people won't give Helen work, so the congregation gives what little it has.",
+     "hint": "Ten dollars, from people who have very little: count it as a measure of the room.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Calpurnia's two ways of talking",
+     "def": "**At church Calpurnia talks the way her congregation talks; at the Finches' she talks the way the Finches do.**\n• Talking the other way at church would look like putting on airs.\n• She says folks don't like having somebody around who knows more than they do.\n• Scout is amazed. Calpurnia has a whole life Scout never thought about.",
+     "hint": "Think of how you talk to friends and how you talk to a teacher. Calpurnia is doing the same.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: being the outsider",
+     "def": "**For one Sunday, Scout and Jem are the ones who don't belong, and most of the room makes space for them anyway.**\n• Why might Lula have felt the way she did?\n• Where in Maycomb are those roles reversed every day of the week?",
+     "hint": "There is no wrong answer. Be ready to say why.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why isn't Dill coming to Maycomb this summer?",
+     "opts": [
+      "He has a new father and is staying in Meridian",
+      "He is sick and has to stay in bed all summer",
+      "His aunt Rachel has moved away from Maycomb",
+      "He has been sent to a summer school for boys"
+     ],
+     "ans": 0,
+     "hint": "His letter is about a boat.",
+     "steps": [
+      "Scout gets a letter from Dill.",
+      "He writes that he has a new father.",
+      "The two of them are building a fishing boat in Meridian.",
+      "So he isn't coming because he has a new father and is staying in Meridian."
+     ],
+     "ex": {
+      "main": "**He has a new father and is staying in Meridian.** After years of Dill's stories about fathers, this one seems real. Scout's summer, though, loses its center.",
+      "tip": "When a regular character drops out, ask whose story the space opens up for."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Who looks after Scout and Jem while Atticus is away at the legislature?",
+     "opts": [
+      "Miss Maudie",
+      "Calpurnia",
+      "Aunt Alexandra",
+      "Miss Stephanie"
+     ],
+     "ans": 1,
+     "hint": "She takes them to her own church on Sunday.",
+     "steps": [
+      "Atticus is called away for two weeks.",
+      "The person already running the household stays in charge.",
+      "She is the one who takes them to church that Sunday.",
+      "So it is Calpurnia."
+     ],
+     "ex": {
+      "main": "**Calpurnia.** With Atticus gone, the children spend a Sunday in her world instead of theirs, and they see a side of her they never knew.",
+      "tip": "When a parent leaves a story for a while, watch who steps forward. The book is about to show you that character up close."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Lula meets Calpurnia at the church and objects to the children. What is her complaint?",
+     "opts": [
+      "Calpurnia didn't ask Reverend Sykes first",
+      "The children arrived too late for the service",
+      "White children don't belong in a Black church",
+      "The children were dressed too plainly for it"
+     ],
+     "ans": 2,
+     "hint": "Lula says the white people have their church and this one is theirs.",
+     "steps": [
+      "Lula steps up as Calpurnia and the children arrive.",
+      "She says Calpurnia has no business bringing white children there.",
+      "Her point: the white people have their own church, and this one is theirs.",
+      "So her complaint is that white children don't belong in a Black church."
+     ],
+     "ex": {
+      "main": "**White children don't belong in a Black church.** Lula turns Maycomb's usual rule around for one morning. The rest of the congregation answers her by making room.",
+      "tip": "When a minor character objects, ask what rule they are pointing to. It is often the town's rule seen from the other side."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Zeebo 'lines' the hymns at First Purchase. Why does the church sing this way?",
+     "opts": [
+      "It is the oldest custom in the Methodist church",
+      "Reverend Sykes forbids musical instruments",
+      "The congregation prefers to sing very slowly",
+      "There are no hymnbooks, and few can read"
+     ],
+     "ans": 3,
+     "hint": "Look at what the church doesn't have, and what most of the congregation can't do.",
+     "steps": [
+      "Scout notices there are no hymnbooks in the church.",
+      "She also learns that few of the congregation can read.",
+      "So Zeebo reads each line aloud and everyone sings it back.",
+      "The church lines its hymns because there are no hymnbooks, and few can read."
+     ],
+     "ex": {
+      "main": "**There are no hymnbooks, and few can read.** The custom grows out of what the church has been denied. It also shows Scout that being able to read, which she takes for granted, is not something everyone gets.",
+      "tip": "When a custom seems odd, look for the practical problem it solves."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 12 events in the order they happen.",
+     "opts": [
+      "Calpurnia takes Scout and Jem to First Purchase",
+      "Lula objects to the children at the church",
+      "Reverend Sykes collects ten dollars for Helen Robinson",
+      "Aunt Alexandra is waiting on the Finches' porch"
+     ],
+     "ans": 0,
+     "hint": "Arrive, objection, service, home.",
+     "steps": [
+      "Calpurnia scrubs the children and walks them to her church.",
+      "Lula objects as they arrive, and the congregation makes them welcome.",
+      "During the service, Reverend Sykes keeps the doors shut until the collection reaches ten dollars.",
+      "They walk home and find Aunt Alexandra sitting on the porch."
+     ],
+     "ex": {
+      "main": "**First Purchase → Lula → the collection → Aunt Alexandra.** The chapter opens a door into Calpurnia's world and closes on a new arrival in the Finches' own.",
+      "tip": "Order questions often hinge on the chapter's last line. Find where the chapter ends and work back."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Reverend Sykes keeps the church doors closed until the collection for Helen Robinson reaches ten dollars. What does that show about the congregation?",
+     "opts": [
+      "They give what little they have to help a neighbor",
+      "They are mostly wealthy and can easily spare it",
+      "They are angry that Helen has asked for charity",
+      "They hope the money will impress their white guests"
+     ],
+     "ans": 0,
+     "hint": "Remember who sits in that church and what they can afford.",
+     "steps": [
+      "The congregation is poor: no hymnbooks, few who can read.",
+      "Helen can't get work, so she can't feed her family.",
+      "The church doesn't let anyone leave until ten dollars has been given.",
+      "So the collection shows they give what little they have to help a neighbor."
+     ],
+     "ex": {
+      "main": "**They give what little they have to help a neighbor.** Ten dollars is a lot for that room. The church closes ranks around Helen when much of Maycomb has turned its back on her family.",
+      "tip": "Weigh a gift against what the giver has, not against what it would cost you."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "At church Calpurnia talks the way her congregation talks. What reason does she give for not talking the way she does at the Finches'?",
+     "opts": [
+      "Her church friends asked her to speak more like them",
+      "Talking the other way would seem like putting on airs",
+      "She doesn't want Atticus to hear about her church",
+      "She is worried the children will copy her at home"
+     ],
+     "ans": 1,
+     "hint": "She asks Scout and Jem to imagine talking her way at home.",
+     "steps": [
+      "Calpurnia asks the children how it would sound if they talked her church's way at home.",
+      "It would be out of place.",
+      "The same is true for her at church: her neighbors would think she was showing off.",
+      "So her reason is that talking the other way would seem like putting on airs."
+     ],
+     "ex": {
+      "main": "**Talking the other way would seem like putting on airs.** Calpurnia fits her speech to the people she is with. It isn't hiding; it's good manners in two worlds.",
+      "tip": "When a character explains a habit, look for the comparison they use. Calpurnia makes the children imagine themselves in her place."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Calpurnia speaks one way at the Finches' and another at First Purchase, and Scout is amazed. What does Scout's surprise reveal?",
+     "opts": [
+      "She thinks Calpurnia has been lying to the family",
+      "She is upset that Calpurnia hid her church from them",
+      "She never imagined Calpurnia had a life apart from them",
+      "She is jealous that Jem knew about it all along"
+     ],
+     "ans": 2,
+     "hint": "Ask what Scout had assumed about Calpurnia until that Sunday.",
+     "steps": [
+      "Scout has known Calpurnia her whole life, but only in the Finch house.",
+      "At church she meets a Calpurnia with friends, a son and a way of speaking of her own.",
+      "Scout had never thought about any of that before.",
+      "So her surprise reveals she never imagined Calpurnia had a life apart from them."
+     ],
+     "ex": {
+      "main": "**She never imagined Calpurnia had a life apart from them.** It is the book's empathy lesson again, in a new setting: climbing into someone's skin starts with noticing they have a life you can't see from your own kitchen.",
+      "tip": "A narrator's surprise often tells you what they had taken for granted."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout and Jem spend a Sunday as the only white people at First Purchase. What does the visit let them see that they couldn't see from home?",
+     "opts": [
+      "That Calpurnia plans to stop working for Atticus",
+      "That Calpurnia's church is richer than their own",
+      "That most of the church agrees with Lula's view",
+      "How Maycomb looks to the people it shuts out"
+     ],
+     "ans": 3,
+     "hint": "Think about Lula, the hymnbooks and the collection together.",
+     "steps": [
+      "Lula's objection shows the town's color line from the other side.",
+      "The missing hymnbooks and the readers who can't read show what the church has been denied.",
+      "The collection shows a neighbor shut out of work being helped by those with little.",
+      "Together they let the children see how Maycomb looks to the people it shuts out."
+     ],
+     "ex": {
+      "main": "**How Maycomb looks to the people it shuts out.** The children have lived in Maycomb all their lives. This chapter is the first time they stand on the other side of it.",
+      "tip": "When characters visit somewhere new, ask what the visit lets them see about home."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why is Calpurnia's church called First Purchase?",
+     "opts": [
+      "It was paid for with freed slaves' first earnings",
+      "It was the first building bought in Maycomb County",
+      "It was bought from the Finch family long ago",
+      "It was the first church to buy its own hymnbooks"
+     ],
+     "ans": 0,
+     "hint": "The name is about who paid for it, and when.",
+     "steps": [
+      "The church's name comes from how it was paid for.",
+      "The money came from people who had just been freed from slavery.",
+      "It was among the first things they bought with their own earnings.",
+      "So it is called First Purchase because it was paid for with freed slaves' first earnings."
+     ],
+     "ex": {
+      "main": "**It was paid for with freed slaves' first earnings.** The building is a record of what freedom first bought. That history sits under everything that happens there in this chapter.",
+      "tip": "Names of places in this book often carry history. Stop and ask where a name came from."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}

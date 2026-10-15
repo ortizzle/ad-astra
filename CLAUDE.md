@@ -1006,6 +1006,56 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### To Kill a Mockingbird, one quiz per chapter, 6–13 (v210, THIS APP ONLY)
+
+Chris: *"I need tkmb chapter quizzes for 6-13."* Eight units, one per chapter,
+shelving on the existing `To Kill a Mockingbird` spine behind the Ch. 1–5
+companion (`unit-tkam1`), in chapter order on plain numeric title sort — no
+`order` field.
+
+| id | title |
+|---|---|
+| `unit-tkam-c06` | `To Kill a Mockingbird · Ch. 6: The Raid on the Radley Place` |
+| `unit-tkam-c07` | `… Ch. 7: The Knothole Closes` |
+| `unit-tkam-c08` | `… Ch. 8: Snow, Fire and a Blanket` |
+| `unit-tkam-c09` | `… Ch. 9: Licked a Hundred Years` |
+| `unit-tkam-c10` | `… Ch. 10: Mockingbirds and a Mad Dog` |
+| `unit-tkam-c11` | `… Ch. 11: Mrs. Dubose` |
+| `unit-tkam-c12` | `… Ch. 12: First Purchase` |
+| `unit-tkam-c13` | `… Ch. 13: Aunt Alexandra` |
+
+- **Nine cards and ten questions each** (3 recall / 4 apply / 3 analyze), one
+  `kind:'order'` question per chapter, one ungraded Ponder card, `book:true`
+  (no Beat the clock) and **`round` set to the whole chapter**, so each quiz is
+  one sitting — a chapter quiz, not a sample of one.
+- **There is no class material for these chapters in Drive** (her English
+  folder was listed to the end), so like Ch. 1–5 they are built from the novel
+  itself. Six passages are quoted, and **only lines whose exact wording was
+  certain** — the licked-a-hundred-years line, the mockingbird line, Miss
+  Maudie on talents, the conscience line, the courage line, and the opening
+  "unfathomable" sentence of chapter 8. Everything else is paraphrased in the
+  stem. A quote whose chapter could not be confirmed ("pink cotton
+  penitentiary") was cut from chapter 9 rather than risked; a misplaced quote
+  is worse than none.
+- **Spoiler-bounded per chapter, enforced twice.** `tools/builders/tkam_common.py`
+  wraps `unit_common.build()`, adds the book fields and passages after
+  `_balance()`, and refuses to write a file containing a later chapter's tells.
+  `tools/test_tkam_chapters.js` carries its OWN independent list per chapter,
+  so a builder that forgets a word is still caught. **Verified by planting
+  "Tom Robinson" in chapter 7 and watching exactly that assertion fail.**
+- **The slur is never printed** ("a racial slur", "an ugly name for Atticus");
+  the test sweeps for it. The charge against Tom Robinson is stated once,
+  plainly and briefly, on a chapter 12 card and asked about nowhere; that
+  unit's `parentNote` says so, and chapter 11's names the morphine addiction.
+- **Release them as she reads.** Each unit spoils nothing past its own chapter,
+  and the bulk-approve pace "one a school day" (v182) is the natural way to
+  approve all eight in one sitting without putting chapter 13 in front of her
+  on the day she starts chapter 6.
+
+> ⚠️ **The first sweep word list had `guilty` in it, and it flagged a wrong
+> option reading "He wants her to feel guilty".** The v185 over-blunt-regex
+> lesson again: the trial tell is `found guilty` / `not guilty`, not the word.
+
 ### A discard that holds (v209 / Wayfinder v184, both apps)
 
 Chris: *"fix the tombstone resurrection bug."* Found in v208 while chasing a

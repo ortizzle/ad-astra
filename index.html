@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v209 · A discard that holds';
+const APP_VERSION = 'v210 · Chapters 6 to 13';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -3481,7 +3481,7 @@ const Sync = {
    loads there. Sandbox pauses it — its in-memory data is meant to be thrown away. */
 function driveAllowed(){ return !!(Store.get('parent_hash','') && Store.get('parent_trust',false)) && !sandboxOn(); }
 function driveCheck(){ if(window.OrtizDrive) OrtizDrive.check(); }
-const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/physics-conversions.json', 'content/sg-test1.json', 'content/alg-topic1-05.json', 'content/alg-topic1-06.json', 'content/latin-pronunciation.json',
+const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json', 'content/tkam-c06.json', 'content/tkam-c07.json', 'content/tkam-c08.json', 'content/tkam-c09.json', 'content/tkam-c10.json', 'content/tkam-c11.json', 'content/tkam-c12.json', 'content/tkam-c13.json', 'content/physics-conversions.json', 'content/sg-test1.json', 'content/alg-topic1-05.json', 'content/alg-topic1-06.json', 'content/latin-pronunciation.json',
   'content/alg-topic1-01.json', 'content/alg-topic1-02.json',
   'content/alg-topic1-03.json', 'content/alg-topic1-04.json',
   'content/history-u1-p1.json', 'content/history-u1-p2.json', 'content/history-u1-p3.json',

@@ -1,0 +1,371 @@
+{
+ "v": 4,
+ "records": {
+  "unit-tkam-c13": {
+   "id": "unit-tkam-c13",
+   "type": "unit",
+   "updatedAt": 1792020318826,
+   "classId": "english",
+   "quarter": 1,
+   "status": "draft",
+   "title": "To Kill a Mockingbird · Ch. 13: Aunt Alexandra",
+   "srcName": "To Kill a Mockingbird, chapter 13",
+   "source": "To Kill a Mockingbird (Harper Lee), chapter quiz — chapter 13",
+   "summary": {
+    "text": "Chapter 13 of To Kill a Mockingbird: Aunt Alexandra moves in, saying the children need a feminine influence, and fits into Maycomb at once. Her ideas about family, heredity, streaks and Fine Folks fill the house, Finch's Landing and the family's history come up, and at her urging Atticus tells the children to live up to their gentle breeding, until Scout cries and he tells them to forget it.",
+    "from": "source"
+   },
+   "why": {
+    "text": "This chapter puts two ways of judging people under one roof: by family, or by conduct. Aunt Alexandra's arrival tests everything Atticus has taught so far, and his taking the speech back tells you which side he is on.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Explain why Aunt Alexandra comes and how Maycomb receives her.",
+     "from": "source"
+    },
+    {
+     "text": "Compare Scout's and Aunt Alexandra's definitions of Fine Folks.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why Atticus takes back his speech about gentle breeding.",
+     "from": "source"
+    },
+    {
+     "text": "Connect Aunt Alexandra's way of judging people to Atticus's earlier lessons.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "This covers chapter 13 only and stops at the end of it, after Atticus tells the children to forget his speech about their family. Nothing here reaches past the chapter. There is nothing sensitive in this one. The thing most likely to trip her up is the word gentle in 'gentle breeding', which means well-born rather than kind; a card and a question cover it. The ponder card, about whether family decides who you are, is a good one for dinner.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Finish chapter 13, then run the cards and the quiz.",
+    "minutes": 10,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Aunt Alexandra moves in",
+     "def": "**Atticus's sister comes to stay, saying the children need a feminine influence.**\n• Her first words are to have her bag put in the front bedroom.\n• Atticus says she is doing him a favor: he can't be home all day, and the summer will be a hot one.",
+     "hint": "She arrives as if she had always lived there. That is the whole point of her.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Aunt Alexandra and Maycomb",
+     "def": "**She fits into Maycomb at once, as if she had always lived there.**\n• The town's ladies call on her, and she serves them refreshments.\n• Maycomb's way of doing things is her way of doing things.",
+     "hint": "Scout struggles with Maycomb's rules; her aunt was made for them.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Streaks",
+     "def": "**Aunt Alexandra judges people by their families: to her, every Maycomb family has a streak.**\n• A drinking streak, a gambling streak, a mean streak, a funny streak.\n• Know someone's family, she believes, and you know what to expect of them.",
+     "hint": "A streak is a family label pinned on a person before they have done anything.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Fine Folks",
+     "def": "**Scout thought Fine Folks meant people who do the best they can with the sense they have; Aunt Alexandra means old families.**\n• To her, the longer a family has sat on one patch of land, the finer it is.\n• The two definitions measure completely different things: conduct, and ancestry.",
+     "hint": "Hold the two definitions side by side. The chapter is an argument between them.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Finch's Landing",
+     "def": "**The family homestead Simon Finch founded, and the root of Aunt Alexandra's pride.**\n• She lives there with her husband, Uncle Jimmy.\n• To her, the Landing is proof that the Finches are somebody.",
+     "hint": "Simon Finch from chapter 1 is where her family pride begins.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "gentle breeding",
+     "def": "**Coming from a long line of well-born, well-mannered people.**\n• At Aunt Alexandra's urging, Atticus tells the children to live up to it.\n• \"Gentle\" here means well-born, as in gentleman, not soft or kind.",
+     "hint": "Gentle, as in gentleman: it's about the family, not the temper.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Atticus takes it back",
+     "def": "**When Scout cries, Atticus drops the speech and tells them to forget it.**\n• He had been saying his sister's words, not his own.\n• The children can hear the difference.",
+     "hint": "When a character sounds unlike himself, ask whose words he is using.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Family pride versus how you act",
+     "def": "**Aunt Alexandra values who your people were; Atticus values what you do.**\n• The chapter puts the two views under one roof.\n• Look back: everything Atticus has taught his children so far has been about conduct, not ancestry.",
+     "hint": "Sort each lesson Atticus has given so far: is it about conduct, or about family?",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Ponder: does family decide who you are?",
+     "def": "**Aunt Alexandra thinks a person's family tells you most of what you need to know about them.**\n• What would Atticus say? What would you?\n• Think of someone the book has already shown to be more than their family's reputation.",
+     "hint": "There is no wrong answer. Be ready to say why.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does Aunt Alexandra say she has come to live with the Finches?",
+     "opts": [
+      "The children need a feminine influence at home",
+      "She has fallen out with Uncle Jimmy at the Landing",
+      "Calpurnia is leaving to look after her own family",
+      "Finch's Landing has become too lonely for her"
+     ],
+     "ans": 0,
+     "hint": "She thinks something is missing from the way Scout is being raised.",
+     "steps": [
+      "Aunt Alexandra arrives at the end of chapter 12 and settles in at the start of chapter 13.",
+      "She and Atticus decided it would be best for the children.",
+      "Her reason: Scout, especially, needs a woman's example at home.",
+      "So she says the children need a feminine influence at home."
+     ],
+     "ex": {
+      "main": "**The children need a feminine influence at home.** Her reason is mostly about Scout, who still prefers overalls to dresses. Atticus adds a practical one: he can't be home all day in a hot summer.",
+      "tip": "When a character gives a reason for arriving, ask who the reason is really aimed at."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "How does Maycomb respond to Aunt Alexandra's arrival?",
+     "opts": [
+      "It ignores her, since she comes from out at the Landing",
+      "It takes her in at once, as if she had always been there",
+      "It keeps away from her because Atticus is so disliked",
+      "It mocks her stiff, old-fashioned manners in secret"
+     ],
+     "ans": 1,
+     "hint": "Think about who comes to call, and how quickly.",
+     "steps": [
+      "The town's ladies start calling on her almost at once.",
+      "She serves refreshments and joins in Maycomb's social life.",
+      "Her ideas about family and manners are the town's ideas.",
+      "So Maycomb takes her in at once, as if she had always been there."
+     ],
+     "ex": {
+      "main": "**It takes her in at once, as if she had always been there.** Scout spends the book chafing against Maycomb's rules. Her aunt fits them perfectly, which tells you how much of Maycomb she brings into the Finch house.",
+      "tip": "When a newcomer fits in instantly, ask what that says about the place, not just the person."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Aunt Alexandra says every family in Maycomb has a 'streak' — a drinking streak, a gambling streak, a mean streak. What does this show about how she judges people?",
+     "opts": [
+      "She judges a person by how well they did in school",
+      "She judges a person by how much money they have",
+      "She judges a person by the family behind them",
+      "She judges a person by how often they go to church"
+     ],
+     "ans": 2,
+     "hint": "A streak runs through a family, not through one person.",
+     "steps": [
+      "A streak is something a whole family supposedly shares.",
+      "So the label lands on a person because of their relatives.",
+      "It is decided before the person does anything at all.",
+      "So she judges a person by the family behind them."
+     ],
+     "ex": {
+      "main": "**She judges a person by the family behind them.** It is the opposite of Atticus's method from chapter 3: climbing into someone's skin means looking at the one person in front of you, not their family label.",
+      "tip": "Ask of any judgment in this book: is it about what someone did, or about where they came from?"
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout thought 'Fine Folks' meant people who do the best they can with the sense they have. What does Aunt Alexandra mean by it?",
+     "opts": [
+      "Families who have sent their children to college",
+      "Families who give the most money to their church",
+      "Families who have the best manners at the table",
+      "Families who have lived on the same land the longest"
+     ],
+     "ans": 3,
+     "hint": "She thinks time on one patch of land is what counts.",
+     "steps": [
+      "Scout's definition is about how people act.",
+      "Aunt Alexandra's is about something a person can't choose.",
+      "To her, the longer a family has stayed on one patch of land, the finer it is.",
+      "So she means families who have lived on the same land the longest."
+     ],
+     "ex": {
+      "main": "**Families who have lived on the same land the longest.** Scout's definition rewards effort; her aunt's rewards staying put. Two people use the same phrase and mean opposite things.",
+      "tip": "When two characters use the same phrase, check whether they mean the same thing by it."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put these chapter 13 events in the order they happen.",
+     "opts": [
+      "Aunt Alexandra asks for her bag to go in the front bedroom",
+      "Aunt Alexandra settles into Maycomb's social life",
+      "Atticus tells the children to live up to their gentle breeding",
+      "Atticus tells Scout to forget what he just said"
+     ],
+     "ans": 0,
+     "hint": "Arrival, settling in, a speech, and taking it back.",
+     "steps": [
+      "The chapter opens with Aunt Alexandra arriving and taking the front bedroom.",
+      "Over the following weeks Maycomb's ladies call on her and she fits right in.",
+      "At her urging, Atticus gives the children a speech about their family.",
+      "Scout cries, and Atticus tells her to forget it."
+     ],
+     "ex": {
+      "main": "**Front bedroom → Maycomb's welcome → the speech → forget it.** The chapter builds Aunt Alexandra's influence step by step, then shows its limit: Atticus can't keep saying words that aren't his.",
+      "tip": "Find the turn in a chapter: the moment the direction changes. Here it is Scout's tears."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout cries after Atticus's speech about living up to their family name. What does Atticus do?",
+     "opts": [
+      "Tells them to forget everything he just said",
+      "Sends Scout to her room until she calms down",
+      "Asks Aunt Alexandra to explain it to her instead",
+      "Promises to buy her a new dress for Sunday"
+     ],
+     "ans": 0,
+     "hint": "He takes the speech back.",
+     "steps": [
+      "Atticus gives the speech because his sister asked him to.",
+      "Scout starts crying.",
+      "Atticus drops the subject entirely.",
+      "He tells them to forget everything he just said."
+     ],
+     "ex": {
+      "main": "**He tells them to forget everything he just said.** He can't keep up a speech he doesn't believe once he sees what it does to his daughter.",
+      "tip": "Watch what a character does when their words hurt someone. That is often truer than the words."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus gives the children a speech about their gentle breeding and then takes it back. What does that reveal?",
+     "opts": [
+      "He thinks the children are too young for manners",
+      "The words were his sister's ideas, not his own",
+      "He is afraid Aunt Alexandra will move back out",
+      "He believes the Finches are better than other people"
+     ],
+     "ans": 1,
+     "hint": "Whose idea was the speech in the first place?",
+     "steps": [
+      "The speech was given at Aunt Alexandra's urging.",
+      "It is about family and ancestry, which Atticus has never taught before.",
+      "When it upsets Scout, he drops it at once.",
+      "So it reveals the words were his sister's ideas, not his own."
+     ],
+     "ex": {
+      "main": "**The words were his sister's ideas, not his own.** Everything Atticus has taught so far is about how you treat people. The speech sounds wrong in his mouth because it is about who your people were.",
+      "tip": "When a character sounds unlike himself, ask whose words he is borrowing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Aunt Alexandra judges people by their families. Which earlier choice of Atticus's shows he judges people by what they do instead?",
+     "opts": [
+      "Asking his sister to teach them their family's history",
+      "Telling the children to be proud of Finch's Landing",
+      "Calling Mrs. Dubose brave for how she faced her pain",
+      "Making the children call him Father instead of Atticus"
+     ],
+     "ans": 2,
+     "hint": "Look for a judgment that was about how someone acted.",
+     "steps": [
+      "Aunt Alexandra's measure is family and land.",
+      "Look back for a time Atticus praised someone for an action.",
+      "In chapter 11, he calls Mrs. Dubose the bravest person he ever knew for breaking her morphine habit.",
+      "So the choice that shows his method is calling Mrs. Dubose brave for how she faced her pain."
+     ],
+     "ex": {
+      "main": "**Calling Mrs. Dubose brave for how she faced her pain.** He disagreed with nearly everything she said, but he judged her by what she did. That is the opposite of a family streak.",
+      "tip": "To compare two characters' values, find a judgment each one makes and ask what it measures."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Atticus tells the children to live up to their 'gentle breeding.' In that phrase, what does gentle mean?",
+     "opts": [
+      "Weak and easily hurt by others",
+      "Soft-spoken and kind to small animals",
+      "Calm and slow to lose your temper",
+      "Well-born, from a respected old family"
+     ],
+     "ans": 3,
+     "hint": "Think of the word gentleman.",
+     "steps": [
+      "Breeding here means your family line.",
+      "Gentle goes with it in an older sense, the one in gentleman.",
+      "That sense is about birth and rank, not temper.",
+      "So gentle means well-born, from a respected old family."
+     ],
+     "ex": {
+      "main": "**Well-born, from a respected old family.** Aunt Alexandra means rank and ancestry. The everyday meaning of gentle, soft or kind, is a trap here.",
+      "tip": "When an everyday word sits in an old-fashioned phrase, check for an older meaning."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Scout thought Fine Folks were people who do the best they can with the sense they have. Whose way of judging people is that definition closer to?",
+     "opts": [
+      "Atticus's, because it is about how people act",
+      "Aunt Alexandra's, because it is about old families",
+      "Calpurnia's, because it is about going to church",
+      "Miss Stephanie's, because it is about town gossip"
+     ],
+     "ans": 0,
+     "hint": "Does Scout's definition measure conduct or ancestry?",
+     "steps": [
+      "Scout's definition is about effort: doing your best with what you have.",
+      "That measures how a person acts, not who their family was.",
+      "Atticus has judged people by their conduct all through the book.",
+      "So Scout's definition is closer to Atticus's, because it is about how people act."
+     ],
+     "ex": {
+      "main": "**Atticus's, because it is about how people act.** Scout picked up her father's way of judging people without being told. Her aunt's arrival is the first time she hears the other way said out loud.",
+      "tip": "When a child's idea matches a parent's, the book is often showing you what has been taught without words."
+     }
+    }
+   ],
+   "round": 10,
+   "libv": 1,
+   "book": true
+  }
+ }
+}
