@@ -1329,6 +1329,20 @@ wears Wonder Jar's own identity, lifted from that repo rather than imitated:
 **The session** is a Routine on Chris's account, "Daily notes for the
 girls", firing **every morning at 5:53 am** Arizona time into a fresh session
 (it began weekly; see *Daily, not weekly* below).
+
+> ⚠️ **From 10/11 to 10/17 no note shipped, while every run reported
+> success.** A fresh routine session had no Google Calendar or Drive tools,
+> and its only GitHub tool was `add_repo`. With nobody watching it could not
+> attach the repos, so each run gave up within a minute and still counted as
+> done. On 10/17 the routine moved: it now fires into the long-running
+> development session, which already has both repos with push access and both
+> Google connectors. It writes from a detached worktree of `origin/main`, so
+> the development branch is never touched. The old routine is paused, not
+> deleted. **A routine's "succeeded" means the run ended, not that the work
+> landed.** Check `git log -- week-note.json` on main.
+> Because notes now land on `main` daily, **merge `origin/main` into the
+> development branch before every code deploy**, or the push to main is
+> rejected.
 **Its Drive and Calendar connectors have to be attached from the claude.ai
 Routines page**: a routine created from a session cannot pass them through.
 Without them, it falls back to the repos' own calendar data and says so in its
