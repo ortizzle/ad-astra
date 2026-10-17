@@ -1006,6 +1006,48 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Saturday looks ahead (v211 / Wayfinder v188, both apps)
+
+Chris, sending a screenshot of a Saturday Today: *"Sedona's page seems to be
+missing some stuff."* Nothing was broken. Three things were empty at once:
+
+- **The daily note had not been written since 10/11.**
+- **There was nothing in Coming up**, because Ad Astra's calendar is empty
+  until 12/7.
+- **The brief was hidden on purpose.** `weekBrief()` returned `null` on a
+  Saturday ("Monday is far enough away").
+
+Only the brief was a design choice, and Chris reversed it: *"Show next week's
+brief on Saturdays too."*
+
+- **On a Saturday the brief plans the coming Monday to Friday**, the same week
+  Sunday already plans (`monday` is the date + 2). No day is marked today or
+  past, so every evening is a study evening and the CTA falls forward to the
+  first workable day, as it already did on a Sunday.
+- **The copy says "next week", never "this week".** Two days before the week
+  starts, "this week" would mean the one that just ended. `wkWord` carries
+  it into the three lead sentences, and the card's eyebrow reads *"Next week ·
+  in short"* (`wk.ahead`). The divider stays **Your week**, because today's
+  note sits under it too.
+- **`covers()` and `ledgerTestIds` follow the new range for free**, so a test
+  next week is not printed twice: the runway yields and Coming up skips it,
+  as on any other day.
+
+`tools/test_satbrief.js` (same file, both apps, 10 assertions) finds its
+Saturday rather than naming one, seeds a test the following Wednesday and
+real approved units, and pins:
+
+- the brief exists
+- its Monday equals Sunday's, and `ahead` is set on Saturday only
+- five future rows
+- "next week" in the lead
+- study evenings before the test
+- `covers()`
+- the card under Your week with its eyebrow
+- a weekday still planning its own week
+
+**Verified against the previous build: 8 of 10 fail.**
+
 ### To Kill a Mockingbird, one quiz per chapter, 6–13 (v210, THIS APP ONLY)
 
 Chris: *"I need tkmb chapter quizzes for 6-13."* Eight units, one per chapter,

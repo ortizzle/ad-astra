@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v210 · Chapters 6 to 13';
+const APP_VERSION = 'v211 · Saturday looks ahead';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2890,9 +2890,13 @@ const DAYNAME = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Sa
 
 function weekBrief(date){
   const wd = AZ.weekday(date);
-  if(wd === 6) return null;                       // Saturday: Monday is far enough away
+  /* Saturday shows the COMING week (Chris, 10/17): the school week just ended
+     has nothing left to plan, and a blank Saturday read as a page missing
+     its content. Sunday already looked ahead the same way. */
+  const ahead = wd === 6;
+  const wkWord = ahead ? 'next week' : 'this week';
   if(date < CAL.firstDay || date > CAL.lastDay) return null;
-  const monday = AZ.shift(date, wd === 0 ? 1 : 1 - wd);
+  const monday = AZ.shift(date, wd === 0 ? 1 : ahead ? 2 : 1 - wd);
   const days = [];
   for(let i = 0; i < 5; i++){
     const d = AZ.shift(monday, i);
@@ -3022,7 +3026,7 @@ function weekBrief(date){
     : d.date === AZ.shift(date, 1) ? 'tomorrow' : 'on ' + d.name;
   let lead1;
   if(!tests.length){
-    lead1 = 'Nothing is scheduled this week — which makes it a good week to get ahead.';
+    lead1 = 'Nothing is scheduled ' + wkWord + ' — which makes it a good week to get ahead.';
   } else if(!aheadTests.length){
     /* There WERE tests, and they are done — after 3pm on test day the app must
        not keep promoting a test she already sat. */
@@ -3036,12 +3040,12 @@ function weekBrief(date){
          that makes generated prose sound generated. */
       ? when + ' is the busy one — ' + joinList(d.tests.map(phrase))
         + ', ' + (d.tests.length === 2 ? 'both' : 'all') + ' on the same day.'
-      : (d.today ? 'Today: ' : d.date === AZ.shift(date, 1) ? 'Tomorrow: ' : 'One thing this week: ')
+      : (d.today ? 'Today: ' : d.date === AZ.shift(date, 1) ? 'Tomorrow: ' : 'One thing ' + wkWord + ': ')
         + joinList(d.tests.filter(stillAhead).map(phrase))
         + (d.today || d.date === AZ.shift(date, 1) ? '.' : ' on ' + d.name + '.');
   } else {
     lead1 = 'Two things to get ready for'.replace('Two', aheadTests.length === 2 ? 'Two' : String(aheadTests.length))
-      + ' this week: ' + joinList(byDay.map(d =>
+      + ' ' + wkWord + ': ' + joinList(byDay.map(d =>
           joinList(d.tests.filter(stillAhead).map(phrase)) + ' ' + dayWord(d))) + '.';
   }
 
@@ -3088,6 +3092,7 @@ function weekBrief(date){
               otherwise print twice, one screen apart. */
            ledgerTestIds: new Set(aheadTests.map(t => t.id)),
            namedCids: new Set(queue.map(L => L.cid)),
+           ahead,
            namesDue: queue.some(L => L.due > 0),
            covers: d => d >= monday && d <= friday };
 }
@@ -5226,7 +5231,8 @@ SCREENS.today = function(root){
   if(wk){
     const c = el('div','card ac brief');
     c.appendChild(el('div','eyebrow',
-      (wk.days.find(d=>d.today) ? DAYNAME[AZ.weekday(date)] : 'The week') + ' · the week in short'));
+      wk.ahead ? 'Next week · in short'
+        : (wk.days.find(d=>d.today) ? DAYNAME[AZ.weekday(date)] : 'The week') + ' · the week in short'));
     /* Two sentences, written from the same numbers the ledger below shows.
        richify() so a **bold** run in a generated sentence renders — never
        innerHTML with interpolated data. */
