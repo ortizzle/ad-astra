@@ -1006,6 +1006,75 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Unit 5 · Meiosis, the Pre-Comp days, and a concert (v212–v213, THIS APP ONLY)
+
+Chris: *"Add the Strings concert to Sedona's calendar. And then let's run through
+the folder for updates and run the proper associated tasks."* The concert was
+already on her Google Calendar (she had added it herself), so v212 put it in
+`CAL.events`: Wednesday 10/21, 6:00–8:00 PM, `kind:'community'`.
+
+**Biology 8 · Unit 5-1: Meiosis** (`bio-unit-5-meiosis.json`, `unit-bio-u5`),
+26 cards and 22 questions, from her new Biology `Unit 5: Meiosis` folder. It
+was built by a subagent that wrote only the content, the builder
+(`tools/builders/build_bio_meiosis.py`) and the test, then integrated here.
+Same shape as the Mitosis unit (v197):
+
+- **The deck could not be downloaded.** The 6.8 MB `.pptx` crashed the Drive
+  connector, so it was read through `read_file_content`'s text version. The
+  slide pictures were never seen, and the `parentNote` says so. The note
+  outline was rendered with `pypdfium2`. The directed-reading sheet is a
+  generic article-summary form with no meiosis content.
+- **Two places the sources disagree, both taught the correct way and flagged:**
+  - The outline says meiosis starts "from diploid somatic cells". Its own
+    definition of a somatic cell rules that out, and the deck names germline
+    cells. The unit teaches germline cells.
+  - One slide reads as if the cell turns haploid only at the end of meiosis
+    II. The outline ("two 1N cells" after telophase I) and the deck's own
+    knowledge check (30 → 15 after meiosis I) say meiosis I. A graded
+    question offers the slide's reading as a wrong option.
+- **Every chromosome and chromatid count comes from a `stage(2N)` function,**
+  checked first against the deck's own example. Graded stems use fresh
+  diploid numbers, and a guard refuses the deck's 30, 60, 46 and 2²³.
+- **What the material asks but never answers is tagged `added`**, five cards:
+  - why body cells hold an even number of chromosomes
+  - what meiosis and mitosis share
+  - asexual vs sexual reproduction
+  - the anaphase II count
+  - why gametes must be haploid
+- No images (textbook art, the v176 call).
+
+`tools/test_bio_meiosis.js` (33 assertions) seeds the whole Biology shelf and
+pins:
+
+- the shelf: Unit 5-1 straight after Unit 4-1, every lesson numbered
+- every count, re-derived in the test
+- both slips, taught correctly
+- the deck's numbers absent from graded stems
+- the order question
+- the v198 mark sweep
+- a full round and the deck
+
+**Verified by flipping one answer, reintroducing "somatic" and planting a
+score, and watching exactly those three fail.**
+
+**The Pre-Comp notice of 10/16** (`Upcoming Pre-Comps in December`, uploaded
+to the school misc folder) turned the one two-day `Pre-Comp Exams` event into
+two one-day events:
+
+| Day | Subjects | Pick-up |
+|---|---|---|
+| Tue 12/15 | Math and English | 12:00 PM at the back of the school |
+| Wed 12/16 | History, Biology and Physics | 12:30 PM at the back of the school |
+
+- **Both are `early:true` with their own `dismiss`**, so the day card prints
+  the real pick-up time rather than "not published yet".
+- **The 12/7–12/14 review event now names Review Week**: no new material, and
+  every class reviews.
+- **Day 1's note carries the notice's own advice**: very little review on test
+  days, rest and breakfast instead.
+- **Not carried:** the percentage of the semester grade, which is a grade fact
+  and not a calendar one, and the attendance warning.
+
 ### Saturday looks ahead (v211 / Wayfinder v188, both apps)
 
 Chris, sending a screenshot of a Saturday Today: *"Sedona's page seems to be
