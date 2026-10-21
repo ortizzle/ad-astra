@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v211 · Saturday looks ahead';
+const APP_VERSION = 'v212 · Strings concert';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2152,6 +2152,7 @@ const CAL = {
     {start:'2026-09-03', name:'Early release — Professional Development', icon:'🕑', kind:'early', early:true},
     {start:'2026-09-15', name:'History test corrections', icon:'✍️', kind:'note', classId:'history',
      note:'Student hours, 3:40–4:30. Bring your Unit 1 exam and work the corrections with your teacher.'},
+    {start:'2026-10-21', name:'Strings concert', icon:'🎻', kind:'community', note:'6:00–8:00 PM.'},
     {start:'2026-12-07', end:'2026-12-14', name:'Pre-Comp review', icon:'📚', kind:'note',
      note:'The school sets aside eight days for this. Spreading it over them beats one long night.'},
     {start:'2026-12-15', end:'2026-12-16', name:'Pre-Comp Exams', icon:'✍️', kind:'exam',
