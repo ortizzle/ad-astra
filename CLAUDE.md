@@ -1006,6 +1006,43 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Unit 6 · DNA (v214, THIS APP ONLY)
+
+Chris: *"let's also revisit the folders, there are other updates as well."*
+Her Biology folder gained `Unit 6: DNA`: the class deck and a DNA Structure
+and Replication homework. Built by a subagent that wrote only the content,
+the builder (`tools/builders/build_bio_dna.py`) and the test, then
+integrated here, the same split as Meiosis.
+
+**Biology 8 · Unit 6-1: DNA** (`bio-unit-6-dna.json`, `unit-bio-u6`,
+quarter 2): 24 cards and 22 questions, with one `kind:'order'` for the four
+replication steps (unzip, prime, build, proofread).
+
+- **The deck was read as text.** At 10.7 MB it is over the download cap, so
+  its slide pictures were not seen, and the `parentNote` says so.
+- **The Drive copy of the homework is blank**, so it was read for its
+  questions only.
+- **No outright source errors.** Three wordings are taught more carefully and
+  flagged in `parentNote`:
+  - a *nucleotide* has the three parts
+  - Chargaff's rule holds only for double-stranded DNA
+  - purine–pyrimidine pairing keeps the rungs an even width, rather than
+    "causing" the helix
+- **Every number is computed and asserted in the builder**, with fresh numbers
+  (never the deck's GATTACATACG or 30% adenine): complementary strands,
+  Chargaff percentages, base counts and hydrogen-bond totals.
+- Three cards are tagged `added`:
+  - why the backbone is covalent and the rungs are hydrogen bonds (the deck
+    asks "Why?" twice)
+  - where Chargaff's rule stops
+  - why the lagging strand is built in pieces
+
+`tools/test_bio_dna.js` (33 assertions) re-derives every answer from its stem
+and pins the shelf (Unit 6-1 straight after Unit 5-1), the careful wordings,
+the order question, a full round, the deck and a mark sweep. **Verified by
+flipping one answer and planting a score, and watching exactly those two
+assertions fail.**
+
 ### Unit 5 · Meiosis, the Pre-Comp days, and a concert (v212–v213, THIS APP ONLY)
 
 Chris: *"Add the Strings concert to Sedona's calendar. And then let's run through
