@@ -4,7 +4,7 @@
   "unit-phys-dyn1-incline": {
    "id": "unit-phys-dyn1-incline",
    "type": "unit",
-   "updatedAt": 1791934396326,
+   "updatedAt": 1793059181727,
    "classId": "physics",
    "quarter": 1,
    "status": "draft",
@@ -30,7 +30,7 @@
     }
    ],
    "parentNote": {
-    "text": "From chapter 7.1 (Forces in Two Dimensions). Section 7.2, projectile motion, is deliberately not built here: Kinematics 2 · 2-2 already teaches it from the same chapter. Every number was computed with sympy and checked; none of the chapter’s own (the 168 N sign, the 562 N trunk, the 62 kg skier) is reused. The trap with the most airtime is that the normal force on a slope is F_g cos θ, NOT the weight — a card, a question offering the full weight as the wrong answer, and a ranking of the same box on four slopes. Others: which of sine and cosine runs down the slope (a card teaches checking at 0° and 90°, which catches a swap without a calculator); \"constant velocity means no friction\" (offered as a wrong answer — it means friction is exactly big enough); and friction always using the normal force, never the full weight. No free-body diagrams are drawn in the app: its graph engine draws gridded plots with plain lines and no arrowheads, so an \"arrow\" would really be a line on graph paper and could mislead more than help. Every force is described in words instead, and the chapter asks her to draw these diagrams by hand, which is the better practice anyway.",
+    "text": "From chapter 7.1 (Forces in Two Dimensions). Section 7.2, projectile motion, is deliberately not built here: Kinematics 2 · 2-2 already teaches it from the same chapter. Every number was computed with sympy and checked; none of the chapter’s own (the 168 N sign, the 562 N trunk, the 62 kg skier) is reused. The trap with the most airtime is that the normal force on a slope is F_g cos θ, NOT the weight — a card, a question offering the full weight as the wrong answer, and a ranking of the same box on four slopes. Others: which of sine and cosine runs down the slope (a card teaches checking at 0° and 90°, which catches a swap without a calculator); \"constant velocity means no friction\" (offered as a wrong answer — it means friction is exactly big enough); and friction always using the normal force, never the full weight. It has since gained the N1L assignment’s two ideas the shelf lacked — a pull angled up a level floor (with the angle read from the vertical as well as the horizontal) shrinking the normal force and friction, and two forces that are not at right angles added by components, with the ground’s equilibrant. No free-body diagrams are drawn in the app: its graph engine draws gridded plots with plain lines and no arrowheads, so an \"arrow\" would really be a line on graph paper and could mislead more than help. Every force is described in words instead, and the chapter asks her to draw these diagrams by hand, which is the better practice anyway.",
     "from": "added"
    },
    "nextUp": {
@@ -134,6 +134,27 @@
      "id": "c14",
      "term": "Which way friction points on a slope",
      "def": "**Friction always opposes the sliding: up the slope when the object slides down, and down the slope when it slides up.**\n• A skier coasting UP a slope has friction and the weight’s down-slope part both pulling back, so she slows quickly.",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "A pull at an angle lifts as well as drags",
+     "def": "**Pull a box along a level floor with the rope angled upward, and the rope’s upward part takes some of the weight, so the normal force — and the friction — get smaller.**\n• Angle θ above the horizontal: F_N = mg − F sin θ.\n• At constant velocity the forward part of the pull equals the friction: F cos θ = μ_k F_N.\n• Pushing DOWN at an angle does the opposite and adds to the normal force.",
+     "eq": "F_N = mg − F sin θ   (θ above the horizontal)",
+     "hint": "An upward pull lightens the load on the floor.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Read where the angle is measured from",
+     "def": "**An angle measured from the VERTICAL swaps sine and cosine: the horizontal part becomes F sin θ and the vertical part F cos θ.**\n• From the horizontal: horizontal F cos θ, vertical F sin θ.\n• From the vertical: horizontal F sin θ, vertical F cos θ.\n• Check it at 0°: a pull at 0° to the vertical goes straight up, so its horizontal part must be zero — and sin 0° = 0.",
+     "hint": "Cosine sits next to the angle; the angle sits next to its reference line.",
+     "from": "added"
+    },
+    {
+     "id": "c17",
+     "term": "Adding forces that are not at right angles",
+     "def": "**Split each force into components along one axis, add the x-parts and the y-parts, then recombine with Pythagoras.**\n• Lay the x-axis along one force: it is all x; the other has F cos θ along it and F sin θ across it.\n• The resultant is bigger than either force but smaller than their sum — the sum only happens when they point the same way.\n• The equilibrant (the ground holding a post still, say) is the same size as the resultant, pointing the opposite way.",
      "from": "source"
     }
    ],
@@ -537,9 +558,159 @@
       "main": "**With the rope nearly straight, only a sliver of its tension opposes the push, so the tension has to be many times bigger than the push.** It is the two-rope sign in disguise: the flatter the rope, the bigger the tension.",
       "tip": "Nearly straight rope, enormous tension."
      }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 20 kg crate is pulled across a level floor by a rope angled 30° above the horizontal, with a tension of 80 N. What is the normal force from the floor?",
+     "opts": [
+      "127 N",
+      "196 N",
+      "236 N",
+      "156 N"
+     ],
+     "ans": 3,
+     "hint": "The rope’s upward part holds up some of the crate.",
+     "steps": [
+      "Weight: 20 × 9.8 = 196 N, down.",
+      "The rope’s vertical part: 80 sin 30° = 40 N, up.",
+      "Vertically nothing accelerates: F_N + 40 = 196.",
+      "F_N = 156 N."
+     ],
+     "ex": {
+      "main": "**The rope lifts with 80 sin 30° = 40 N, so the floor only has to supply 196 − 40 = 156 N.** 196 N is the full weight, which is only right for a horizontal pull; 236 N adds the lift as if the rope pushed down; and 127 N uses cosine, which is the rope’s FORWARD part.",
+      "tip": "Upward pull, smaller normal force."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 28 kg sled is pulled at constant velocity across level snow by a rope angled 35° above the horizontal. μ_k = 0.20. What is the tension in the rope?",
+     "opts": [
+      "58.8 N",
+      "54.9 N",
+      "67.0 N",
+      "77.9 N"
+     ],
+     "ans": 0,
+     "hint": "The normal force is NOT the weight: the rope lifts.",
+     "steps": [
+      "Constant velocity: forward part = friction, so T cos 35° = μ_k F_N.",
+      "Vertically: F_N = mg − T sin 35° = 274.4 − T sin 35°.",
+      "So T cos 35° = 0.20(274.4 − T sin 35°), which gives T(cos 35° + 0.20 sin 35°) = 54.88.",
+      "T = 54.88 ÷ 0.934 = 58.8 N."
+     ],
+     "ex": {
+      "main": "**T = μ_k mg ÷ (cos θ + μ_k sin θ) = 58.8 N.** 54.9 N treats the rope as horizontal, 67.0 N splits the pull correctly but keeps the full weight as the normal force, and 77.9 N counts the rope’s lift as a push down.",
+      "tip": "Write both directions before solving: the lift changes the friction."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box is pulled with 60 N by a rope at 40° to the VERTICAL. What is the horizontal part of the pull?",
+     "opts": [
+      "46.0 N",
+      "38.6 N",
+      "60.0 N",
+      "50.3 N"
+     ],
+     "ans": 1,
+     "hint": "From the vertical, the horizontal part is the sine part.",
+     "steps": [
+      "The angle is measured from the vertical.",
+      "The side opposite that angle is the horizontal part.",
+      "Horizontal part = 60 sin 40° = 60 × 0.643.",
+      "It is 38.6 N."
+     ],
+     "ex": {
+      "main": "**Measured from the vertical, the horizontal part is F sin θ = 60 sin 40° = 38.6 N.** 46.0 N uses cosine, as if the 40° were above the horizontal; 60.0 N is the whole pull; and 50.3 N uses tangent. Check at 0°: a rope at 0° to the vertical pulls straight up and has no horizontal part.",
+      "tip": "Find the reference line first, then pick sine or cosine."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box slides along a level floor at constant velocity, pulled by a force at 60° to the VERTICAL. Kinetic friction on the box is 24 N. How big is the pull?",
+     "opts": [
+      "24.0 N",
+      "48.0 N",
+      "27.7 N",
+      "20.8 N"
+     ],
+     "ans": 2,
+     "hint": "Constant velocity: the horizontal part of the pull equals the friction.",
+     "steps": [
+      "Horizontally nothing accelerates, so the pull’s horizontal part = 24 N.",
+      "From the vertical, the horizontal part is F sin 60°.",
+      "F sin 60° = 24, so F = 24 ÷ 0.866.",
+      "F = 27.7 N."
+     ],
+     "ex": {
+      "main": "**F sin 60° = 24 N, so F = 27.7 N.** 48.0 N reads the angle from the horizontal and divides by cos 60°; 24.0 N forgets the pull is at an angle; and 20.8 N multiplies by sin 60° instead of dividing.",
+      "tip": "From the vertical: horizontal = F sin θ."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two ropes tied to a fence post pull on it with 300 N and 150 N, with 40° between the ropes. What is the size of the resultant force on the post?",
+     "opts": [
+      "150 N",
+      "450 N",
+      "335 N",
+      "426 N"
+     ],
+     "ans": 3,
+     "hint": "Lay the x-axis along the 300 N rope and split the other one.",
+     "steps": [
+      "Along the 300 N rope: 300 + 150 cos 40° = 300 + 114.9 = 414.9 N.",
+      "Across it: 150 sin 40° = 96.4 N.",
+      "Resultant: √(414.9² + 96.4²).",
+      "It is 426 N, 13.1° from the 300 N rope."
+     ],
+     "ex": {
+      "main": "**By components, 414.9 N along and 96.4 N across combine to 426 N.** 450 N adds them as if they pulled the same way, 335 N uses Pythagoras as if they were at 90°, and 150 N subtracts them as if they pulled against each other. With 40° between them the answer has to lie between 300 N and 450 N.",
+      "tip": "Not at 90°? Components first, then Pythagoras."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two ropes tied to a fence post pull on it with 300 N and 150 N, with 40° between the ropes, and the post does not move. What force does the ground exert on the post?",
+     "opts": [
+      "426 N, opposite the ropes’ resultant",
+      "426 N, along the ropes’ resultant",
+      "450 N, opposite the ropes’ resultant",
+      "335 N, opposite the ropes’ resultant"
+     ],
+     "ans": 0,
+     "hint": "The ground supplies the equilibrant.",
+     "steps": [
+      "The two ropes have a resultant of 426 N (by components).",
+      "The post stays still, so the net force on it is zero.",
+      "The ground must supply the equilibrant: equal and opposite to the resultant.",
+      "It pushes with 426 N, opposite the ropes’ resultant."
+     ],
+     "ex": {
+      "main": "**The ground’s force is the equilibrant: the same 426 N as the ropes’ resultant, pointing the opposite way.** A force along the resultant would double it instead of cancelling it, and 450 N and 335 N come from adding the ropes as if in a line or at right angles.",
+      "tip": "Holding still: the ground cancels the resultant exactly."
+     }
     }
    ],
-   "libv": 1
+   "libv": 2
   }
  }
 }

@@ -1236,6 +1236,69 @@ card(C, 'Which way friction points on a slope',
      '• A skier coasting UP a slope has friction and the weight’s down-slope '
      'part both pulling back, so she slows quickly.')
 
+# --- v2 (2026-10-27): the N1L assignment's two ideas the shelf lacked ------
+# "Forces in N1L and N3L" (Drive, Dynamics 1) asks for a pull at an angle on a
+# level floor (its normal force and its friction) with the angle given from the
+# VERTICAL, and for two forces 30° apart added into a resultant and an
+# equilibrant. Nothing on the shelf taught either: 1-2's only normal-force
+# change is a straight-down press, and every resultant here was at 90°.
+# Appended at the END of both lists so every existing id keeps its meaning.
+# Fresh numbers throughout (never 7900 N / 1100 kg, 15 kg / 53° / 35 N,
+# 400 N and 200 N at 30°, 70 kg / 650 N, 10 N / 8 N).
+FN_ang = 20 * g - 80 * S(30);             assert FN_ang == 156
+assert eq(20 * g - 80 * Co(30), 0, 127) and 20 * g + 80 * S(30) == 236
+distinct(FN_ang, 20 * g, 20 * g + 80 * S(30), 20 * g - 80 * Co(30))
+mu_p, m_p = sp.Rational(1, 5), 28
+F_p = mu_p * m_p * g / (Co(35) + mu_p * S(35))
+assert eq(F_p, 1, 58.8)
+assert sp.simplify(F_p * Co(35) - mu_p * (m_p * g - F_p * S(35))) == 0   # constant velocity
+assert eq(mu_p * m_p * g, 1, 54.9)                                        # pull as if horizontal
+assert eq(mu_p * m_p * g / Co(35), 1, 67.0)                               # full weight as F_N
+assert eq(mu_p * m_p * g / (Co(35) - mu_p * S(35)), 1, 77.9)              # lift counted as a press
+distinct(F_p, mu_p * m_p * g, mu_p * m_p * g / Co(35), mu_p * m_p * g / (Co(35) - mu_p * S(35)))
+hx_v = 60 * S(40);                        assert eq(hx_v, 1, 38.6)
+assert eq(60 * Co(40), 1, 46.0) and eq(60 * T(40), 1, 50.3)
+distinct(hx_v, 60 * Co(40), 60, 60 * T(40))
+F_v = 24 / S(60);                         assert eq(F_v, 1, 27.7)
+assert 24 / Co(60) == 48 and eq(24 * S(60), 1, 20.8)
+distinct(F_v, 48, 24, 24 * S(60))
+Rx2 = 300 + 150 * Co(40); Ry2 = 150 * S(40)
+R2 = sp.sqrt(Rx2**2 + Ry2**2);            assert eq(R2, 0, 426)
+assert sp.simplify(R2**2 - (300**2 + 150**2 + 2 * 300 * 150 * Co(40))) == 0
+assert eq(deg(sp.atan(Ry2 / Rx2)), 1, 13.1)
+assert eq(sp.sqrt(300**2 + 150**2), 0, 335)                               # as if at 90°
+distinct(R2, 450, sp.sqrt(300**2 + 150**2), 150)
+assert R2 < 450 and R2 > 300                                              # between max and sum
+
+card(C, 'A pull at an angle lifts as well as drags',
+     '**Pull a box along a level floor with the rope angled upward, and the '
+     'rope’s upward part takes some of the weight, so the normal force — and '
+     'the friction — get smaller.**\n'
+     '• Angle θ above the horizontal: F_N = mg − F sin θ.\n'
+     '• At constant velocity the forward part of the pull equals the '
+     'friction: F cos θ = μ_k F_N.\n'
+     '• Pushing DOWN at an angle does the opposite and adds to the normal '
+     'force.',
+     eq='F_N = mg − F sin θ   (θ above the horizontal)',
+     hint='An upward pull lightens the load on the floor.')
+card(C, 'Read where the angle is measured from',
+     '**An angle measured from the VERTICAL swaps sine and cosine: the '
+     'horizontal part becomes F sin θ and the vertical part F cos θ.**\n'
+     '• From the horizontal: horizontal F cos θ, vertical F sin θ.\n'
+     '• From the vertical: horizontal F sin θ, vertical F cos θ.\n'
+     '• Check it at 0°: a pull at 0° to the vertical goes straight up, so its '
+     'horizontal part must be zero — and sin 0° = 0.',
+     frm='added', hint='Cosine sits next to the angle; the angle sits next to its reference line.')
+card(C, 'Adding forces that are not at right angles',
+     '**Split each force into components along one axis, add the x-parts and '
+     'the y-parts, then recombine with Pythagoras.**\n'
+     '• Lay the x-axis along one force: it is all x; the other has '
+     'F cos θ along it and F sin θ across it.\n'
+     '• The resultant is bigger than either force but smaller than their '
+     'sum — the sum only happens when they point the same way.\n'
+     '• The equilibrant (the ground holding a post still, say) is the same '
+     'size as the resultant, pointing the opposite way.')
+
 q(Q, 1, 'What is the equilibrant of a set of forces?',
   ['The single force that would cancel them: as big as their resultant, but opposite',
    'The single force with the same effect as all of them put together',
@@ -1473,6 +1536,96 @@ q(Q, 3, 'A car is stuck in mud. A rope is tied tight between the car and a '
   'tension.',
   'Nearly straight rope, enormous tension.')
 
+q(Q, 2, 'A 20 kg crate is pulled across a level floor by a rope angled 30° '
+        'above the horizontal, with a tension of 80 N. What is the normal force '
+        'from the floor?',
+  ['156 N', '196 N', '236 N', '127 N'],
+  0, 'The rope’s upward part holds up some of the crate.',
+  ['Weight: 20 × 9.8 = 196 N, down.',
+   'The rope’s vertical part: 80 sin 30° = 40 N, up.',
+   'Vertically nothing accelerates: F_N + 40 = 196.',
+   'F_N = 156 N.'],
+  '**The rope lifts with 80 sin 30° = 40 N, so the floor only has to supply '
+  '196 − 40 = 156 N.** 196 N is the full weight, which is only right for a '
+  'horizontal pull; 236 N adds the lift as if the rope pushed down; and 127 N '
+  'uses cosine, which is the rope’s FORWARD part.',
+  'Upward pull, smaller normal force.')
+
+q(Q, 3, 'A 28 kg sled is pulled at constant velocity across level snow by a '
+        'rope angled 35° above the horizontal. μ_k = 0.20. What is the tension '
+        'in the rope?',
+  ['58.8 N', '54.9 N', '67.0 N', '77.9 N'],
+  0, 'The normal force is NOT the weight: the rope lifts.',
+  ['Constant velocity: forward part = friction, so T cos 35° = μ_k F_N.',
+   'Vertically: F_N = mg − T sin 35° = 274.4 − T sin 35°.',
+   'So T cos 35° = 0.20(274.4 − T sin 35°), which gives T(cos 35° + 0.20 sin 35°) = 54.88.',
+   'T = 54.88 ÷ 0.934 = 58.8 N.'],
+  '**T = μ_k mg ÷ (cos θ + μ_k sin θ) = 58.8 N.** 54.9 N treats the rope as '
+  'horizontal, 67.0 N splits the pull correctly but keeps the full weight as '
+  'the normal force, and 77.9 N counts the rope’s lift as a push down.',
+  'Write both directions before solving: the lift changes the friction.')
+
+q(Q, 2, 'A box is pulled with 60 N by a rope at 40° to the VERTICAL. What is '
+        'the horizontal part of the pull?',
+  ['38.6 N', '46.0 N', '60.0 N', '50.3 N'],
+  0, 'From the vertical, the horizontal part is the sine part.',
+  ['The angle is measured from the vertical.',
+   'The side opposite that angle is the horizontal part.',
+   'Horizontal part = 60 sin 40° = 60 × 0.643.',
+   'It is 38.6 N.'],
+  '**Measured from the vertical, the horizontal part is F sin θ = 60 sin 40° = '
+  '38.6 N.** 46.0 N uses cosine, as if the 40° were above the horizontal; '
+  '60.0 N is the whole pull; and 50.3 N uses tangent. Check at 0°: a rope at '
+  '0° to the vertical pulls straight up and has no horizontal part.',
+  'Find the reference line first, then pick sine or cosine.')
+
+q(Q, 3, 'A box slides along a level floor at constant velocity, pulled by a '
+        'force at 60° to the VERTICAL. Kinetic friction on the box is 24 N. '
+        'How big is the pull?',
+  ['27.7 N', '48.0 N', '24.0 N', '20.8 N'],
+  0, 'Constant velocity: the horizontal part of the pull equals the friction.',
+  ['Horizontally nothing accelerates, so the pull’s horizontal part = 24 N.',
+   'From the vertical, the horizontal part is F sin 60°.',
+   'F sin 60° = 24, so F = 24 ÷ 0.866.',
+   'F = 27.7 N.'],
+  '**F sin 60° = 24 N, so F = 27.7 N.** 48.0 N reads the angle from the '
+  'horizontal and divides by cos 60°; 24.0 N forgets the pull is at an angle; '
+  'and 20.8 N multiplies by sin 60° instead of dividing.',
+  'From the vertical: horizontal = F sin θ.')
+
+q(Q, 3, 'Two ropes tied to a fence post pull on it with 300 N and 150 N, with '
+        '40° between the ropes. What is the size of the resultant force on '
+        'the post?',
+  ['426 N', '450 N', '335 N', '150 N'],
+  0, 'Lay the x-axis along the 300 N rope and split the other one.',
+  ['Along the 300 N rope: 300 + 150 cos 40° = 300 + 114.9 = 414.9 N.',
+   'Across it: 150 sin 40° = 96.4 N.',
+   'Resultant: √(414.9² + 96.4²).',
+   'It is 426 N, 13.1° from the 300 N rope.'],
+  '**By components, 414.9 N along and 96.4 N across combine to 426 N.** 450 N '
+  'adds them as if they pulled the same way, 335 N uses Pythagoras as if they '
+  'were at 90°, and 150 N subtracts them as if they pulled against each other. '
+  'With 40° between them the answer has to lie between 300 N and 450 N.',
+  'Not at 90°? Components first, then Pythagoras.')
+
+q(Q, 2, 'Two ropes tied to a fence post pull on it with 300 N and 150 N, with '
+        '40° between the ropes, and the post does not move. What force does the '
+        'ground exert on the post?',
+  ['426 N, opposite the ropes’ resultant',
+   '426 N, along the ropes’ resultant',
+   '450 N, opposite the ropes’ resultant',
+   '335 N, opposite the ropes’ resultant'],
+  0, 'The ground supplies the equilibrant.',
+  ['The two ropes have a resultant of 426 N (by components).',
+   'The post stays still, so the net force on it is zero.',
+   'The ground must supply the equilibrant: equal and opposite to the resultant.',
+   'It pushes with 426 N, opposite the ropes’ resultant.'],
+  '**The ground’s force is the equilibrant: the same 426 N as the ropes’ '
+  'resultant, pointing the opposite way.** A force along the resultant would '
+  'double it instead of cancelling it, and 450 N and 335 N come from adding '
+  'the ropes as if in a line or at right angles.',
+  'Holding still: the ground cancels the resultant exactly.')
+
 build('ad-astra', C, Q, 'unit-phys-dyn1-incline',
       'Dynamics 1 · 1-3 Equilibrium and Inclined Planes', 'physics',
       'Forces that act at angles other than 90°: finding the net force and the '
@@ -1500,12 +1653,17 @@ build('ad-astra', C, Q, 'unit-phys-dyn1-incline',
       'swap without a calculator); "constant velocity means no friction" '
       '(offered as a wrong answer — it means friction is exactly big enough); '
       'and friction always using the normal force, never the full weight. '
+      'It has since gained the N1L assignment’s two ideas the shelf lacked — a pull '
+      'angled up a level floor (with the angle read from the vertical as well as '
+      'the horizontal) shrinking the normal force and friction, and two forces '
+      'that are not at right angles added by components, with the ground’s '
+      'equilibrant. '
       + NOFBD,
       ('Do 1-1 and 1-2 first if you have not. Here, for every slope problem, '
        'write F_g sin θ and F_g cos θ before anything else.', 25),
       'content/phys-dyn1-incline.json',
       'Chapter 7, Forces and Motion in Two Dimensions (7.1 Forces in Two Dimensions)',
-      SRC7, offset_hours=3, libv_=1)
+      SRC7, offset_hours=3, libv_=2)
 
 # =============================================================================
 # 1-4 CIRCULAR MOTION AND TORQUE  (chapter 7.3)
