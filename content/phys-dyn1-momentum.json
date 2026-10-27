@@ -1,0 +1,811 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn1-momentum": {
+   "id": "unit-phys-dyn1-momentum",
+   "type": "unit",
+   "updatedAt": 1793059244453,
+   "classId": "physics",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Dynamics 1 · 1-7 Conservation of Momentum",
+   "srcName": "Chapter 9, Momentum and Its Conservation (9.2 The Conservation of Momentum)",
+   "source": "09_Momentum.pdf (Drive, Physics 8 › Dynamics 1); Conservation+of+Momentum+HW.pdf (Drive, Physics 8 › Dynamics 1); Conservation_of_Momentum_Lab.pdf (Drive, Physics 8 › Dynamics 1)",
+   "summary": {
+    "text": "Why the total momentum of a closed, isolated system never changes — Newton’s third law gives colliding objects equal and opposite impulses — and how to use it: carts that stick together, carts that bounce apart, explosions and recoil from rest, rockets, and collisions at right angles. Elastic collisions keep kinetic energy as well; inelastic ones lose some of it to heating, denting and sound. It finishes with the reasoning behind the spring-cart explosion lab.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Conservation of momentum lets you link before and after without knowing anything about the forces in between — which is why it works for car crashes, explosions and rockets, where those forces are far too fast and messy to measure.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Relate Newton’s third law of motion to conservation of momentum in collisions and explosions.",
+     "from": "source"
+    },
+    {
+     "text": "Recognize the conditions under which the momentum of a system is conserved.",
+     "from": "source"
+    },
+    {
+     "text": "Apply conservation of momentum to explain the propulsion of rockets.",
+     "from": "source"
+    },
+    {
+     "text": "Distinguish momentum conservation from kinetic energy conservation in elastic and inelastic collisions.",
+     "from": "source"
+    },
+    {
+     "text": "Solve conservation of momentum problems in two dimensions by using vector analysis.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why the mass ratio should equal the distance ratio in the spring-cart explosion lab, and why kinetic energy is not conserved there.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "From chapter 9.2 (The Conservation of Momentum) of 09_Momentum.pdf, the Conservation of Momentum homework, and the explosion lab, all in the Dynamics 1 folder. The homework and the lab were read for what they ask; nothing of hers was marked or recorded. The lab has no data yet, so it is taught as reasoning only — why m₁/m₂ should equal Δx₂/Δx₁ (zero total momentum, plus equal travel times making distance stand in for speed), why the spring is an internal force, and why kinetic energy was not conserved (it came from the spring); none of her results are invented. The chapter does not cover elastic and inelastic collisions; those cards follow the homework’s own framing. Every number was computed with sympy and checked, and none of the textbook’s or the homework’s numbers is reused. Traps with deliberate airtime: dropping the sign in a head-on collision, dividing by only one mass when carts stick, giving recoiling objects equal speeds, assuming kinetic energy is conserved in a sticky collision, adding kinetic energies as if they could cancel, and adding momenta at right angles as if in a line. Things in the sources worth knowing: her sheet prints “Δp = −Δp” with no labels, which taken literally only says Δp = 0 — it means one object’s Δp is minus the other’s (m₂Δv₂ = −m₁Δv₁ on the next line). On the homework, item 32 works out to 0 J of kinetic energy lost and item 33 to 8.0 m/s, and neither answer is among the four choices; items 26, 30 and 33 also end with MORE kinetic energy than they started with, which an ordinary collision cannot do — the momentum arithmetic is fine, the situations are not physical. The homework says to use g = 10 m/s², though no item needs g. The lab compares distances, which only works because the carts travel for equal times, and friction slows them a little, so the two ratios should agree closely rather than exactly.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards up to the explosion lab, then take the quiz. Before every calculation, say which way is positive and add up the momentum before the event.",
+    "minutes": 30,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "A system",
+     "def": "**A system is the set of objects you choose to study together.**\n• The momentum of the system is the sum of the momenta of everything in it, signs included.\n• Choosing the system is the first step of every momentum problem.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Closed system",
+     "def": "**A closed system neither gains nor loses mass.**\n• No objects join it and none leave it during the event.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Internal and external forces",
+     "def": "**An internal force acts between two objects inside the system; an external force comes from something outside it.**\n• Two carts pushing on each other: internal.\n• Friction from the track, or a hand pushing one cart: external.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Isolated system",
+     "def": "**An isolated system is a closed system with no net external force on it.**\n• Nothing on Earth is perfectly isolated, but small outside forces can often be ignored.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The law of conservation of momentum",
+     "def": "**The total momentum of a closed, isolated system does not change.**\n• Total momentum before = total momentum after.\n• The objects’ momenta can each change; their total cannot.",
+     "eq": "m₁v₁_i + m₂v₂_i = m₁v₁_f + m₂v₂_f",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Why: Newton’s third law",
+     "def": "**Colliding objects push on each other with equal and opposite forces for the same time, so they get equal and opposite impulses.**\n• So whatever momentum one gains, the other loses: Δp₁ = −Δp₂.\n• Your sheet prints this as Δp = −Δp; the two Δp’s belong to the two different objects.",
+     "eq": "m₂Δv₂ = −m₁Δv₁",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Choosing the system decides what is conserved",
+     "def": "**Momentum is conserved only for a system that includes every object pushing on every other.**\n• A falling ball alone gains momentum, because Earth pulls it from outside.\n• Ball and Earth together form an isolated system: the ball’s downward momentum is matched by Earth’s tiny upward momentum.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Short collisions",
+     "def": "**In a very short collision, outside forces such as friction or gravity have too little time to give much impulse, so momentum is very nearly conserved.**\n• The collision forces are huge but brief; the outside forces are small, and Ft for them is tiny.\n• That is why a crash on an ordinary road can be treated as isolated for the instant of the crash.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Stick together: perfectly inelastic",
+     "def": "**When colliding objects stick together, the collision is perfectly inelastic, and they share one final velocity.**\n• Total momentum before = (m₁ + m₂) × v_f.\n• So v_f = total momentum ÷ total mass.",
+     "eq": "m₁v₁_i + m₂v₂_i = (m₁ + m₂)v_f",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Elastic collisions",
+     "def": "**In a perfectly elastic collision, both the total momentum AND the total kinetic energy are conserved.**\n• Objects bounce apart with no energy lost to heat, sound or denting.\n• When a moving ball hits an identical ball at rest head-on and elastically, the first stops and the second moves off at the first one’s speed.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Inelastic collisions lose kinetic energy",
+     "def": "**In an inelastic collision, momentum is still conserved but some kinetic energy is not.**\n• The lost kinetic energy becomes internal energy (heating), the energy of bending and denting, and sound.\n• It is not destroyed, and it never becomes extra momentum.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Momentum always, kinetic energy sometimes",
+     "def": "**Total momentum is conserved in every collision of an isolated system; total kinetic energy only in an elastic one.**\n• So never solve a sticky collision by assuming kinetic energy stays the same.\n• To decide whether a collision was elastic, compare the total ½mv² before and after.",
+     "hint": "Momentum: always. Kinetic energy: only if nothing dents.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Explosions and recoil from rest",
+     "def": "**When a system at rest pushes itself apart, its total momentum stays zero, so the pieces leave with equal and opposite momenta.**\n• The backward motion is called recoil.\n• The lighter piece moves faster, by exactly the ratio of the masses.",
+     "eq": "m_A v_A = −m_B v_B",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Rockets",
+     "def": "**A rocket moves forward because the gas it throws backward carries momentum backward.**\n• Rocket and gas form an isolated system with a fixed total, so the rocket gains forward momentum.\n• It does not push on the air or on space: it works best in a vacuum.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Equal momenta, different masses",
+     "def": "**Two objects with momenta of the same size have speeds in the opposite ratio to their masses — and the lighter one has more kinetic energy.**\n• Twice the mass means half the speed.\n• Kinetic energy can be written p² ÷ 2m, so for the same p the smaller mass has the larger KE.",
+     "eq": "KE = p² / 2m",
+     "from": "added"
+    },
+    {
+     "id": "c15",
+     "term": "Two dimensions",
+     "def": "**In two dimensions, momentum is conserved separately along each direction.**\n• Add the x-momenta, add the y-momenta, then combine them with Pythagoras.\n• Never add momenta at right angles as if they were in a line.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "The explosion lab: why the ratios should match",
+     "def": "**The total momentum starts at zero, so m₁v₁ = m₂v₂ in size, which makes m₁ ÷ m₂ = v₂ ÷ v₁.**\n• The carts reach the ends at the same time, so the distance each covers is in proportion to its speed.\n• So the speed ratio can be replaced by the distance ratio: m₁ ÷ m₂ = Δx₂ ÷ Δx₁. The heavier cart covers the shorter distance.",
+     "eq": "m₁ / m₂ = Δx₂ / Δx₁",
+     "from": "added"
+    },
+    {
+     "id": "c17",
+     "term": "Why the times have to be equal",
+     "def": "**Only when both carts travel for the same time is distance a fair stand-in for speed.**\n• That is why the lab has you move the start point until the carts hit the ends together.\n• Friction slows both carts a little, so expect the two ratios to agree closely, not perfectly.",
+     "from": "added"
+    },
+    {
+     "id": "c18",
+     "term": "The spring is an internal force",
+     "def": "**The spring is part of the cart system: it pushes on both carts at once, equally and in opposite directions.**\n• Internal forces cannot change the total momentum.\n• That is exactly why the carts’ momenta come out equal and opposite.",
+     "from": "added"
+    },
+    {
+     "id": "c19",
+     "term": "Kinetic energy in the explosion",
+     "def": "**Kinetic energy was NOT conserved in the explosion lab: it was zero before the release and more than zero after.**\n• It came from the elastic potential energy stored in the compressed spring (PE = ½kx² on your sheet).\n• Kinetic energy has no direction, so the two carts’ amounts add — they cannot cancel the way momenta do.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the law of conservation of momentum say?",
+     "opts": [
+      "In a closed, isolated system, the total momentum stays the same",
+      "In any collision, each object keeps the momentum it started with",
+      "In any collision, the total kinetic energy stays the same",
+      "Total momentum stays the same whatever outside forces act"
+     ],
+     "ans": 0,
+     "hint": "Is it about each object, or about the total?",
+     "steps": [
+      "The law is about a closed, isolated system.",
+      "Inside it, objects can trade momentum with each other.",
+      "What cannot change is the total.",
+      "Total momentum before equals total momentum after."
+     ],
+     "ex": {
+      "main": "**The TOTAL momentum of a closed, isolated system is constant.** Each object’s own momentum can change completely — that is the collision. Kinetic energy is conserved only in elastic collisions, and an outside force can change the total.",
+      "tip": "Conserved means the total, not each piece."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which describes an isolated system?",
+     "opts": [
+      "No forces of any kind act between the objects that are inside it",
+      "No mass enters or leaves it, and the net external force on it is zero",
+      "All of its objects start at rest and stay at rest throughout",
+      "It is far enough from Earth that gravity cannot reach any of it"
+     ],
+     "ans": 1,
+     "hint": "Closed, plus one more condition.",
+     "steps": [
+      "A closed system gains and loses no mass.",
+      "An isolated system is closed AND has no net external force.",
+      "Forces inside the system are allowed — that is what a collision is.",
+      "So: no mass in or out, and zero net external force."
+     ],
+     "ex": {
+      "main": "**Closed (no mass in or out) and no net external force.** Internal forces can be as big as you like; it is outside forces that would change the total momentum.",
+      "tip": "Inside forces are fine. Outside forces are the problem."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In a perfectly elastic collision of an isolated system, what is conserved?",
+     "opts": [
+      "The total kinetic energy, but not the total momentum",
+      "The total momentum, but not the total kinetic energy",
+      "Both the total momentum and the total kinetic energy",
+      "The velocity of each object, before and after"
+     ],
+     "ans": 2,
+     "hint": "“Elastic” adds something to what is always conserved.",
+     "steps": [
+      "Total momentum is conserved in every collision of an isolated system.",
+      "An elastic collision also loses no kinetic energy.",
+      "Each object’s velocity still changes.",
+      "Both total momentum and total kinetic energy are conserved."
+     ],
+     "ex": {
+      "main": "**Momentum is conserved in every collision; elastic means kinetic energy is conserved too.** Momentum without kinetic energy describes an inelastic collision. Kinetic energy without momentum never happens in an isolated system.",
+      "tip": "Elastic = momentum AND kinetic energy."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 1.2 kg cart moving east at 5.0 m/s hits a 1.8 kg cart at rest, and they stick together. What is their velocity afterward?",
+     "opts": [
+      "2.5 m/s east",
+      "3.3 m/s east",
+      "5.0 m/s east",
+      "2.0 m/s east"
+     ],
+     "ans": 3,
+     "hint": "Total momentum before = (total mass) × shared velocity.",
+     "steps": [
+      "Momentum before: 1.2 × 5.0 + 1.8 × 0 = 6.0 kg·m/s.",
+      "After, the carts move together with mass 1.2 + 1.8 = 3.0 kg.",
+      "v_f = 6.0 ÷ 3.0 = 2.0 m/s.",
+      "They move off at 2.0 m/s east."
+     ],
+     "ex": {
+      "main": "**6.0 kg·m/s shared by 3.0 kg gives 2.0 m/s east.** 3.3 m/s divides by the second cart’s mass alone; 5.0 m/s forgets the extra mass has to be carried; 2.5 m/s averages the two velocities, which only works for equal masses.",
+      "tip": "Stuck together: divide by BOTH masses."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 0.90 kg cart moving east at 6.0 m/s meets a 1.5 kg cart moving west at 2.0 m/s head-on, and they stick. What is their velocity afterward?",
+     "opts": [
+      "1.0 m/s east",
+      "3.5 m/s east",
+      "1.0 m/s west",
+      "2.0 m/s east"
+     ],
+     "ans": 0,
+     "hint": "The westward cart’s momentum is negative.",
+     "steps": [
+      "East cart: 0.90 × (+6.0) = +5.4 kg·m/s.",
+      "West cart: 1.5 × (−2.0) = −3.0 kg·m/s.",
+      "Total: +2.4 kg·m/s, shared by 0.90 + 1.5 = 2.4 kg.",
+      "v_f = 2.4 ÷ 2.4 = +1.0 m/s, so 1.0 m/s east."
+     ],
+     "ex": {
+      "main": "**(+5.4) + (−3.0) = +2.4 kg·m/s over 2.4 kg: 1.0 m/s east.** 3.5 m/s adds the two momenta as if both carts were going east — the sign that marks head-on was dropped. 2.0 m/s averages the velocities; west has the wrong direction for a positive total.",
+      "tip": "Head-on means opposite signs. Write them before adding."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 2.4 kg cart moving east at 4.0 m/s hits a 1.6 kg cart at rest. Afterward the 2.4 kg cart moves east at 1.0 m/s. What is the 1.6 kg cart’s velocity?",
+     "opts": [
+      "3.0 m/s east",
+      "4.5 m/s east",
+      "6.0 m/s east",
+      "7.5 m/s east"
+     ],
+     "ans": 1,
+     "hint": "Total momentum before = total momentum after, with both carts moving after.",
+     "steps": [
+      "Before: 2.4 × 4.0 + 1.6 × 0 = 9.6 kg·m/s.",
+      "After: 2.4 × 1.0 + 1.6 v = 2.4 + 1.6 v.",
+      "9.6 = 2.4 + 1.6 v, so 1.6 v = 7.2.",
+      "v = 4.5 m/s east."
+     ],
+     "ex": {
+      "main": "**9.6 = 2.4 + 1.6v gives v = 4.5 m/s east.** 3.0 m/s passes the first cart’s lost SPEED across, ignoring the different masses; 6.0 m/s forgets the first cart still has momentum; 7.5 m/s adds that momentum instead of taking it away.",
+      "tip": "Momentum moves between objects; speed does not."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 48 kg skater stands still on smooth ice and throws a 2.4 kg ball east at 12 m/s. What is the skater’s velocity just afterward?",
+     "opts": [
+      "12 m/s west",
+      "0.60 m/s east",
+      "0.60 m/s west",
+      "240 m/s west"
+     ],
+     "ans": 2,
+     "hint": "They start at rest, so the total momentum stays zero.",
+     "steps": [
+      "Total momentum before: 0.",
+      "Ball after: 2.4 × (+12) = +28.8 kg·m/s.",
+      "The skater must carry −28.8 kg·m/s, so v = −28.8 ÷ 48.",
+      "v = −0.60 m/s, so 0.60 m/s west."
+     ],
+     "ex": {
+      "main": "**The skater’s momentum must cancel the ball’s: −28.8 ÷ 48 = −0.60 m/s, 0.60 m/s west.** East is the ball’s direction, not the recoil’s; 12 m/s gives the skater the ball’s speed instead of its momentum; 240 m/s puts the masses upside down.",
+      "tip": "From rest: equal and opposite momenta, never equal speeds."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 1.5 kg object at rest bursts into two pieces. The 0.60 kg piece flies east at 9.0 m/s. What is the 0.90 kg piece’s velocity?",
+     "opts": [
+      "6.0 m/s east",
+      "9.0 m/s west",
+      "13.5 m/s west",
+      "6.0 m/s west"
+     ],
+     "ans": 3,
+     "hint": "From rest, the two momenta must add to zero.",
+     "steps": [
+      "Total before: 0.",
+      "Light piece: 0.60 × (+9.0) = +5.4 kg·m/s.",
+      "Heavy piece needs −5.4 kg·m/s: v = −5.4 ÷ 0.90.",
+      "v = −6.0 m/s, so 6.0 m/s west."
+     ],
+     "ex": {
+      "main": "**0.60 × 9.0 = 5.4 kg·m/s, so the 0.90 kg piece carries 5.4 west: 6.0 m/s west.** 9.0 m/s gives both pieces the same speed; 13.5 m/s inverts the mass ratio, making the heavier piece faster; east ignores the cancelling.",
+      "tip": "The heavier piece is the slower one. Check your answer obeys that."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 3.0 kg object moving east at 2.0 m/s splits into two pieces. The 1.0 kg piece flies east at 9.0 m/s. What is the 2.0 kg piece’s velocity?",
+     "opts": [
+      "1.5 m/s west",
+      "1.5 m/s east",
+      "4.5 m/s west",
+      "7.5 m/s east"
+     ],
+     "ans": 0,
+     "hint": "The total is not zero this time: it started moving.",
+     "steps": [
+      "Total before: 3.0 × (+2.0) = +6.0 kg·m/s.",
+      "After: 1.0 × 9.0 + 2.0 v = 9.0 + 2.0 v.",
+      "6.0 = 9.0 + 2.0 v, so 2.0 v = −3.0.",
+      "v = −1.5 m/s, so 1.5 m/s west."
+     ],
+     "ex": {
+      "main": "**6.0 = 9.0 + 2.0v gives v = −1.5 m/s: 1.5 m/s west.** The fast piece carries more momentum than the whole object had, so the other piece must go backward. 4.5 m/s west treats it as if it started at rest; 7.5 m/s east adds the fast piece’s momentum instead of subtracting it.",
+      "tip": "Before an explosion is not always zero. Check what it started with."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two identical gliders sit on a frictionless air track. One moves at 0.80 m/s into the other, which is at rest, in a head-on, perfectly elastic collision. The first glider stops. How fast does the second move off?",
+     "opts": [
+      "0.40 m/s",
+      "0.80 m/s",
+      "1.6 m/s",
+      "0 m/s"
+     ],
+     "ans": 1,
+     "hint": "Equal masses, one stops: where did its momentum go?",
+     "steps": [
+      "Before, the total momentum is m × 0.80.",
+      "After, the first glider has none, so the second has all of it.",
+      "Same mass, same momentum: same speed.",
+      "The second glider moves at 0.80 m/s."
+     ],
+     "ex": {
+      "main": "**All of the momentum passes to an identical glider, so it leaves at 0.80 m/s** — and its kinetic energy matches too, as an elastic collision needs. 0.40 m/s is what they would share if they stuck together; 1.6 m/s creates momentum; 0 m/s destroys it.",
+      "tip": "Identical, elastic, head-on: they swap velocities."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.80 kg cart moving at 6.0 m/s hits a 1.6 kg cart at rest, and they stick together. How much kinetic energy is lost in the collision?",
+     "opts": [
+      "14.4 J",
+      "0 J",
+      "9.6 J",
+      "4.8 J"
+     ],
+     "ans": 2,
+     "hint": "Use momentum to find the speed after, then compare ½mv² before and after.",
+     "steps": [
+      "Momentum: 0.80 × 6.0 = 4.8 kg·m/s, so v_f = 4.8 ÷ 2.4 = 2.0 m/s.",
+      "KE before: ½ × 0.80 × 6.0² = 14.4 J.",
+      "KE after: ½ × 2.4 × 2.0² = 4.8 J.",
+      "Lost: 14.4 − 4.8 = 9.6 J."
+     ],
+     "ex": {
+      "main": "**14.4 J before, 4.8 J after: 9.6 J lost.** 0 J assumes kinetic energy is conserved, which never happens when objects stick. 14.4 J says all of it went, but the carts are still moving; 4.8 J is what is LEFT, not what was lost.",
+      "tip": "Momentum gives you v_f. Kinetic energy is a separate check."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A lump of putty hits a cart and sticks to it. Momentum is conserved, but some kinetic energy disappears. Where does it go?",
+     "opts": [
+      "Into gravitational potential energy stored up in the cart",
+      "Into extra momentum that the putty and the cart carry away",
+      "Nowhere: it is destroyed at the very instant the two touch",
+      "Into heating, the putty’s squashing, and the sound of the hit"
+     ],
+     "ans": 3,
+     "hint": "Energy is never destroyed. What happens to the putty?",
+     "steps": [
+      "Energy is never destroyed, only changed into other forms.",
+      "The putty deforms and warms up, and the hit makes a sound.",
+      "Momentum and energy are different quantities: one cannot become the other.",
+      "The lost kinetic energy becomes internal energy, deformation and sound."
+     ],
+     "ex": {
+      "main": "**It becomes internal (thermal) energy, the energy of squashing the putty, and sound.** Energy cannot turn into momentum — they are different quantities, measured in different units — and nothing about a level cart stores gravitational energy.",
+      "tip": "Lost kinetic energy is changed, not destroyed."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A rocket in deep space, far from any planet, fires its engine and speeds up. What explains its forward motion?",
+     "opts": [
+      "The exhaust gas carries momentum backward, so the rocket gains it forward",
+      "The exhaust gas pushes against the empty space behind the rocket",
+      "The engine creates new momentum, since nothing is out there to push on",
+      "Newton’s third law does not apply in space, so the engine just pushes"
+     ],
+     "ans": 0,
+     "hint": "Rocket and gas together are an isolated system.",
+     "steps": [
+      "Treat the rocket and its fuel as one isolated system.",
+      "The engine pushes gas backward; the gas pushes the rocket forward.",
+      "The total momentum stays the same.",
+      "So the gas’s backward momentum is matched by the rocket’s forward gain."
+     ],
+     "ex": {
+      "main": "**The gas and the rocket push on each other: backward momentum for the gas, forward momentum for the rocket, total unchanged.** There is nothing in space to push against, and nothing needs to be. Momentum is never created, and the third law holds everywhere.",
+      "tip": "A rocket pushes on its own exhaust, not on anything outside."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two cars collide on a dry road, where friction acts on their tires. Why can conservation of momentum still be used for the instant of the crash?",
+     "opts": [
+      "Friction stops acting on the tires during the instant of a crash",
+      "The crash is so brief that friction’s impulse is tiny next to the crash’s",
+      "Internal forces are always bigger than every external force there is",
+      "Momentum is conserved in every system, whatever acts on it from outside"
+     ],
+     "ans": 1,
+     "hint": "Impulse is force times time. How much time does friction get?",
+     "steps": [
+      "Friction is an external force, so it does change the total momentum.",
+      "But impulse is Ft, and the crash lasts only a fraction of a second.",
+      "The crash forces are enormous; friction is small and gets very little time.",
+      "So friction’s impulse is negligible during the crash itself."
+     ],
+     "ex": {
+      "main": "**Friction is still there, but in so short a time its impulse is tiny beside the huge crash forces**, so momentum is very nearly conserved just before and just after. Over a longer time — the skid afterward — friction does bring the wreck to a stop.",
+      "tip": "Short collision: outside impulses are negligible, not absent."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 36 kg skater and a 54 kg skater stand still on smooth ice and push off from each other. Which is true just afterward?",
+     "opts": [
+      "The 54 kg skater has more momentum, because it has the more mass",
+      "They move apart at equal speeds, heading in opposite directions",
+      "Their momenta are equal in size; the 36 kg skater is 1.5 times as fast",
+      "The 36 kg skater pushed harder, so it is the one moving faster"
+     ],
+     "ans": 2,
+     "hint": "Total momentum before the push was zero.",
+     "steps": [
+      "The total starts at zero, so it stays zero.",
+      "So their momenta are equal in size and opposite in direction.",
+      "Equal mv with masses 36 and 54 means speeds in the ratio 54 ÷ 36.",
+      "54 ÷ 36 = 1.5: the lighter skater is 1.5 times as fast."
+     ],
+     "ex": {
+      "main": "**Equal and opposite momenta, so the 36 kg skater moves 54 ÷ 36 = 1.5 times as fast.** By the third law each pushed the other equally hard; the lighter one is faster only because the same momentum needs more speed on less mass.",
+      "tip": "Same momentum: speeds go the opposite way to masses."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Object X has three times the mass of object Y, and their momenta are the same size. How do their kinetic energies compare?",
+     "opts": [
+      "X has nine times the kinetic energy of Y",
+      "X has three times the kinetic energy of Y",
+      "X and Y have the same kinetic energy",
+      "X has one-third the kinetic energy of Y"
+     ],
+     "ans": 3,
+     "hint": "Same momentum, three times the mass: what is X’s speed?",
+     "steps": [
+      "Same momentum with three times the mass means X has one-third the speed.",
+      "KE = ½mv²: X has 3 times the mass but (⅓)² = ⅑ of the v².",
+      "3 × ⅑ = ⅓.",
+      "X has one-third the kinetic energy of Y."
+     ],
+     "ex": {
+      "main": "**X: 3 × the mass, ⅓ of the speed, so 3 × ⅑ = ⅓ of the kinetic energy.** Writing KE = p² ÷ 2m shows it directly: the same p over three times the mass. Equal momenta do not mean equal energies.",
+      "tip": "For the same momentum, the lighter object carries more energy."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east and north as positive: a 1.2 kg puck slides east at 5.0 m/s and a 1.6 kg puck slides north at 5.0 m/s. They collide and stick. How fast is the pair moving afterward?",
+     "opts": [
+      "3.6 m/s",
+      "5.0 m/s",
+      "0.71 m/s",
+      "10 m/s"
+     ],
+     "ans": 0,
+     "hint": "Keep the east and north momenta separate, then combine.",
+     "steps": [
+      "East momentum: 1.2 × 5.0 = 6.0 kg·m/s. North momentum: 1.6 × 5.0 = 8.0 kg·m/s.",
+      "Total momentum: √(6.0² + 8.0²) = 10 kg·m/s.",
+      "Shared by 1.2 + 1.6 = 2.8 kg.",
+      "v = 10 ÷ 2.8 ≈ 3.6 m/s."
+     ],
+     "ex": {
+      "main": "**√(6.0² + 8.0²) = 10 kg·m/s, shared by 2.8 kg: about 3.6 m/s.** 5.0 m/s adds momenta at right angles as if they were in a line; 0.71 m/s subtracts them; 10 m/s forgets to divide the momentum by the mass.",
+      "tip": "Right angles: Pythagoras on the momenta, then divide by the mass."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "In a spring-cart explosion lab, two carts at rest are pushed apart by a spring and reach the two ends of the track at the same moment. Why should m₁ ÷ m₂ equal Δx₂ ÷ Δx₁?",
+     "opts": [
+      "The spring pushes the heavier cart harder, so it covers the longer distance",
+      "Total momentum stays zero, so m₁v₁ = m₂v₂; equal times make distance track speed",
+      "Kinetic energy is conserved, so the two carts must leave at equal speeds",
+      "The spring gives both carts the same speed, so their distances match"
+     ],
+     "ans": 1,
+     "hint": "What starts at zero, and how are distance and speed linked here?",
+     "steps": [
+      "Before release, the total momentum is zero, so it stays zero.",
+      "So the two momenta are equal in size: m₁v₁ = m₂v₂, giving m₁ ÷ m₂ = v₂ ÷ v₁.",
+      "Both carts travel for the same time, so each distance is in proportion to its speed.",
+      "So m₁ ÷ m₂ = Δx₂ ÷ Δx₁."
+     ],
+     "ex": {
+      "main": "**Zero total momentum makes m₁v₁ = m₂v₂, and equal travel times let distance stand in for speed.** The spring pushes both carts equally hard (third law), kinetic energy is NOT conserved here, and equal speeds would only happen with equal masses.",
+      "tip": "This is why the lab makes you adjust the start until the carts arrive together."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "In a spring-cart explosion, a 0.75 kg cart and a 0.50 kg cart start at rest and reach the track’s ends at the same moment. The 0.75 kg cart travels 0.40 m. How far does the 0.50 kg cart travel?",
+     "opts": [
+      "0.40 m",
+      "0.27 m",
+      "0.60 m",
+      "0.90 m"
+     ],
+     "ans": 2,
+     "hint": "m₁ ÷ m₂ = Δx₂ ÷ Δx₁. The lighter cart goes farther.",
+     "steps": [
+      "m₁ ÷ m₂ = 0.75 ÷ 0.50 = 1.5.",
+      "So Δx₂ ÷ Δx₁ = 1.5.",
+      "Δx₂ = 1.5 × 0.40 m = 0.60 m.",
+      "The 0.50 kg cart travels 0.60 m."
+     ],
+     "ex": {
+      "main": "**The mass ratio 1.5 becomes the distance ratio: 1.5 × 0.40 = 0.60 m.** 0.27 m inverts the ratio, sending the lighter cart a shorter way; 0.40 m assumes equal speeds; 0.90 m squares the ratio, which is what equal kinetic energies would give.",
+      "tip": "Lighter cart, longer trip — by the mass ratio, not its square."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "In a spring-cart explosion lab, why is the spring NOT counted as an external force?",
+     "opts": [
+      "It pushes on only one of the carts, so it does not count",
+      "It is too weak to count as a force compared with the carts’ weight",
+      "It acts for too short a time to give either cart an impulse",
+      "It is part of the cart system, pushing both carts equally and oppositely"
+     ],
+     "ans": 3,
+     "hint": "External means from outside the system. Where is the spring?",
+     "steps": [
+      "The system is the two carts together, spring included.",
+      "The spring pushes on both carts at the same time.",
+      "By the third law, those pushes are equal and opposite.",
+      "So it is an internal force and cannot change the total momentum."
+     ],
+     "ex": {
+      "main": "**The spring is inside the system and pushes both carts at once, equally and oppositely — an internal force.** It is far from too weak: it is what sets the carts moving. It gives each cart a real impulse; the two impulses just cancel in the total.",
+      "tip": "Internal forces move the pieces but never the total."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "In a spring-cart explosion, momentum is conserved. Is kinetic energy conserved too?",
+     "opts": [
+      "No: it was zero before release and is not zero after; the spring supplied it",
+      "Yes: momentum was conserved, so kinetic energy must be conserved as well",
+      "Yes: the total is still zero, because the carts move in opposite directions",
+      "No: some of it was lost to friction, so the total went down"
+     ],
+     "ans": 0,
+     "hint": "Can kinetic energy be negative?",
+     "steps": [
+      "Before release, neither cart moves, so the total kinetic energy is zero.",
+      "After release, both carts move, and each ½mv² is positive.",
+      "Kinetic energy has no direction, so the two amounts add rather than cancel.",
+      "So it was not conserved: it came from the energy stored in the squeezed spring."
+     ],
+     "ex": {
+      "main": "**Kinetic energy went from zero to something, so it was not conserved; it came from the spring’s stored elastic energy.** “The total is still zero” is the trap: momenta cancel because they have directions, but kinetic energy never does. Friction did take a little afterward, but the total went UP at release, not down.",
+      "tip": "Momentum can cancel. Kinetic energy only ever adds."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Each collision ends with the two carts stuck together. Rank them from FASTEST to SLOWEST final speed.",
+     "opts": [
+      "A: 1.0 kg cart at 9.0 m/s hits a 2.0 kg cart at rest",
+      "B: 3.0 kg cart at 5.0 m/s hits a 3.0 kg cart at rest",
+      "C: 2.5 kg cart at 6.0 m/s hits a 2.5 kg cart coming toward it at 2.0 m/s",
+      "D: 4.0 kg cart at 2.0 m/s hits a 1.0 kg cart at rest"
+     ],
+     "ans": 0,
+     "hint": "Total momentum ÷ total mass, with signs for the head-on one.",
+     "steps": [
+      "A: 9.0 ÷ 3.0 = 3.0 m/s.",
+      "B: 15 ÷ 6.0 = 2.5 m/s.",
+      "C: (15 − 5.0) ÷ 5.0 = 2.0 m/s, because the carts move toward each other.",
+      "D: 8.0 ÷ 5.0 = 1.6 m/s. So A, B, C, D."
+     ],
+     "ex": {
+      "main": "**A (3.0), B (2.5), C (2.0), D (1.6) m/s.** C is the trap: forgetting that the second cart is coming the other way gives (15 + 5.0) ÷ 5.0 = 4.0 m/s and puts it first.",
+      "tip": "Head-on collisions subtract momenta."
+     }
+    }
+   ],
+   "libv": 1,
+   "sorts": [
+    {
+     "id": "s-ke",
+     "title": "Kinetic energy kept, or some lost?",
+     "a": "Elastic",
+     "b": "Inelastic",
+     "items": [
+      {
+       "t": "Two steel ball bearings click together and bounce apart",
+       "k": "a",
+       "why": "Hard steel barely dents, so almost no kinetic energy turns into heat or sound."
+      },
+      {
+       "t": "Gas molecules bouncing off each other inside a sealed jar",
+       "k": "a",
+       "why": "Molecule collisions lose no kinetic energy overall — the gas would cool down if they did."
+      },
+      {
+       "t": "Two air-track gliders with magnets that repel before they touch",
+       "k": "a",
+       "why": "The magnets push them apart without contact, so nothing deforms and the kinetic energy comes back."
+      },
+      {
+       "t": "A moving billiard ball stops dead and the ball it hit rolls off at its speed",
+       "k": "a",
+       "why": "Equal masses swapping velocities keeps both momentum and kinetic energy."
+      },
+      {
+       "t": "Two gliders with springy bumpers bounce apart on an air track",
+       "k": "a",
+       "why": "The bumpers squeeze and spring back, returning the energy."
+      },
+      {
+       "t": "A superball dropped on a hard floor rebounds almost to the height it fell from",
+       "k": "a",
+       "why": "Almost all of its kinetic energy comes back, so it is very nearly perfectly springy."
+      },
+      {
+       "t": "A lump of clay hits a cart and sticks to it",
+       "k": "b",
+       "why": "Objects that stick always lose kinetic energy, here to squashing the clay and heating it."
+      },
+      {
+       "t": "Two carts with Velcro ends collide and move off together",
+       "k": "b",
+       "why": "Sticking together is the perfectly inelastic case: the most kinetic energy that momentum allows is lost."
+      },
+      {
+       "t": "A car crumples its bumper in a crash",
+       "k": "b",
+       "why": "Bending metal and the bang of the crash take kinetic energy away."
+      },
+      {
+       "t": "A dart thuds into a foam target and stays there",
+       "k": "b",
+       "why": "It sticks, so it and the target share one velocity and kinetic energy is lost."
+      },
+      {
+       "t": "A football player tackles another and they fall together",
+       "k": "b",
+       "why": "They move off as one, so kinetic energy is lost to their bodies and the ground."
+      },
+      {
+       "t": "An egg dropped on the floor splatters",
+       "k": "b",
+       "why": "None of it bounces back; the kinetic energy goes into breaking and splashing."
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

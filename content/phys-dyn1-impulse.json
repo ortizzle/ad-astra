@@ -1,0 +1,847 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn1-impulse": {
+   "id": "unit-phys-dyn1-impulse",
+   "type": "unit",
+   "updatedAt": 1793059244442,
+   "classId": "physics",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Dynamics 1 · 1-6 Impulse and Momentum",
+   "srcName": "Chapter 9, Momentum and Its Conservation (9.1 Impulse and Momentum)",
+   "source": "09_Momentum.pdf (Drive, Physics 8 › Dynamics 1); questions shaped by Conservation+of+Momentum+HW.pdf (Drive, Physics 8 › Dynamics 1)",
+   "summary": {
+    "text": "Momentum as mass times velocity — a vector with a sign — and impulse as force times the time it acts. The impulse–momentum theorem ties them together: the impulse on an object equals its change in momentum. From there: why a bounce changes momentum more than a stop, why a longer stopping time means a smaller force (air bags, bent knees, soft hands), how follow-through adds momentum, and how to read an impulse off a force–time graph as an area.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Forces in a crash, a kick or a catch change too fast to follow with F = ma moment by moment. Impulse skips the moment-by-moment detail and compares before with after — and it is the step that leads straight into conservation of momentum in 1-7.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define the momentum of an object.",
+     "from": "source"
+    },
+    {
+     "text": "Determine the impulse given to an object.",
+     "from": "source"
+    },
+    {
+     "text": "Recognize that impulse equals the change in momentum of an object.",
+     "from": "source"
+    },
+    {
+     "text": "Compare the system before and after an event in momentum problems.",
+     "from": "source"
+    },
+    {
+     "text": "Explain how stretching the stopping time reduces the force, using air bags and catching as examples.",
+     "from": "added"
+    },
+    {
+     "text": "Find an impulse as the area under a force–time graph.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "From chapter 9.1 (Impulse and Momentum) of 09_Momentum.pdf in the Dynamics 1 folder, with the momentum homework and the explosion lab read for what they ask; nothing of hers was marked or recorded. Every number was computed with sympy in the builder and checked before it was written, and none of the textbook’s or the homework’s own numbers is reused in a graded question. The traps with deliberate airtime: the sign that says which way (dropped signs are offered as wrong answers), a bounce counting as “no change” because the speed is the same (it is double the momentum, and the rebound question offers the subtracted speeds), an impulse passed off as a force (forgetting to divide by the time), milliseconds left unconverted on a force–time graph, area below the axis being subtracted, and the air bag “making the change in momentum smaller” (it changes only the time). Two notation points are worth knowing: her sheet writes J = Ft = Δp with i and f for before and after, while the textbook writes Ft = p₂ − p₁ — the same thing; and two cards are flagged as study suggestions rather than class material (follow-through, and momentum versus kinetic energy, which the sheet’s own guide warns about).",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards on impulse and the bounce until you can explain why a bounce doubles the change, then take the quiz. On every question, write the positive direction down before you touch a number.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Momentum",
+     "def": "**Momentum is an object’s mass multiplied by its velocity.**\n• Its unit is kg·m/s.\n• Newton called it the “quantity of motion”: how hard a moving thing is to stop depends on both how heavy and how fast it is.",
+     "eq": "p = mv",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Momentum has a direction",
+     "def": "**Momentum is a vector: it points the same way as the velocity.**\n• Pick a positive direction first. Anything moving the other way has a negative velocity, so a negative momentum.\n• A car going north and the same car going south at the same speed have momenta of the same size and opposite signs, so they are different momenta.",
+     "hint": "A minus sign is a direction, never “less”.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Heavy and slow, or light and fast",
+     "def": "**A light, fast object can have exactly the same momentum as a heavy, slow one.**\n• A bullet and a slowly rolling truck can carry equal momentum: the bullet’s speed makes up for its tiny mass.\n• To compare momenta, multiply; never compare masses or speeds alone.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Impulse",
+     "def": "**Impulse is a force multiplied by the time it acts.**\n• Its unit is the newton-second, N·s, which is the same as kg·m/s.\n• It is a vector pointing the way the force points.\n• t is only the time the force actually acts — the contact time.",
+     "eq": "J = Ft",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "The impulse–momentum theorem",
+     "def": "**The impulse on an object equals its change in momentum.**\n• It comes straight from F = ma with a = Δv / t: multiply both sides by t and Ft = mΔv.\n• So a final momentum is the starting momentum plus the impulse.",
+     "eq": "J = Ft = Δp     Δp = p_f − p_i",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Change means final minus initial",
+     "def": "**Δp is the final momentum minus the initial momentum, signs included.**\n• Write each momentum with its sign before you subtract.\n• Getting the subtraction backwards gives the right size and the wrong direction.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "A bounce changes momentum more than a stop",
+     "def": "**An object that bounces back has a bigger change in momentum than one that simply stops.**\n• Stopping takes the momentum to zero. Bouncing takes it to zero and then out the other way.\n• A ball that bounces back at the speed it arrived has Δp of twice its momentum — so the wall gives it twice the impulse.\n• The speed being the same does NOT make Δp zero: the direction changed.",
+     "hint": "Same speed back is not “no change”. It is double.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Longer time, smaller force",
+     "def": "**The same change in momentum can come from a big force for a short time or a small force for a long time.**\n• Ft is fixed by the change in momentum, so stretching t shrinks F.\n• Bending your knees when you land, padded dashboards, crumple zones and bumpers that push in all work this way.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "How an air bag helps",
+     "def": "**An air bag makes the driver’s stop take longer, so the force on the driver is smaller.**\n• The driver’s change in momentum is the same with or without it: the same mass goes from the same speed to zero.\n• Only the time changes, and a longer time means a smaller average force.",
+     "hint": "The air bag changes t, not Δp.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Catching with soft hands",
+     "def": "**To catch something with less sting, let your hands move back with it.**\n• Moving with the ball stretches the time it takes to stop, so the same impulse needs less force.\n• Meeting it with stiff, still hands stops it fast, with a big force.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Follow-through",
+     "def": "**Following through keeps the bat, racket or foot in contact longer, so the ball gets a bigger impulse and leaves with more momentum.**\n• With the same force, a longer contact time means a bigger Ft.\n• This is the other side of the air bag: there the change was fixed and time shrank the force; here the force is fixed and time grows the change.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Impulse is the area under a force–time graph",
+     "def": "**The impulse is the area between a force–time graph and the time axis.**\n• A constant force gives a rectangle: force × time.\n• A force that rises and falls gives another shape, such as a triangle (½ × base × height).\n• Read the time axis’s unit: milliseconds must become seconds.",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       3,
+       0,
+       50
+      ],
+      "gx": 0.5,
+      "gy": 10,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          40
+         ],
+         [
+          2,
+          40
+         ],
+         [
+          2,
+          0
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "t (s)",
+      "yl": "F (N)"
+     }
+    },
+    {
+     "id": "c12",
+     "term": "Area below the axis counts as negative",
+     "def": "**Force below the time axis is pushing the negative way, so its area is subtracted.**\n• Add the area above the axis, subtract the area below: that total is the impulse.\n• A push forward followed by a push back can leave a small net impulse, or none at all.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Average force",
+     "def": "**When the force changes during a hit, use the average force: the change in momentum divided by the time.**\n• Real collisions start small, peak and fall away. The impulse is the same as a steady average force acting for the whole time.",
+     "eq": "F = Δp / t",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Momentum is not kinetic energy",
+     "def": "**Momentum is mv; kinetic energy is ½mv². They are different quantities.**\n• Momentum has a direction; kinetic energy never does.\n• Double the speed and the momentum doubles, but the kinetic energy becomes four times as big.",
+     "eq": "p = mv     KE = ½mv²",
+     "hint": "Squared speed means energy. Plain speed means momentum.",
+     "from": "added"
+    },
+    {
+     "id": "c15",
+     "term": "Newton’s second law, in momentum form",
+     "def": "**The net force on an object equals the rate its momentum changes.**\n• F = Δp / t is the same law as F = ma, written the way Newton first wrote it.\n• No net force means no change in momentum.",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Your sheet’s notation",
+     "def": "**Your sheet writes impulse as J = Ft = Δp, and uses i and f for before and after.**\n• The textbook writes the same thing with 1 and 2: Ft = p₂ − p₁.\n• Both mean final minus initial.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is an object’s momentum?",
+     "opts": [
+      "Its mass times its velocity, pointing the way it moves",
+      "Half its mass times its speed squared, with no direction",
+      "The force on it times the time that force acts",
+      "Its mass times its acceleration, pointing the way it speeds up"
+     ],
+     "ans": 0,
+     "hint": "Which quantity depends on mass and plain velocity?",
+     "steps": [
+      "Momentum is defined as p = mv.",
+      "Velocity has a direction, so momentum does too.",
+      "½mv² is kinetic energy, Ft is impulse and ma is the net force.",
+      "Momentum is mass times velocity."
+     ],
+     "ex": {
+      "main": "**Momentum is p = mv, a vector in the direction of the velocity.** The other three are real quantities with other names: kinetic energy, impulse and the net force.",
+      "tip": "p = mv — no squares, no time."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which unit measures impulse?",
+     "opts": [
+      "N·m, which is the same as a joule",
+      "N·s, which is the same as kg·m/s",
+      "N/s, which is the same as kg·m/s³",
+      "kg·m/s², which is the same as a newton"
+     ],
+     "ans": 1,
+     "hint": "Impulse is force multiplied by time.",
+     "steps": [
+      "Impulse is J = Ft.",
+      "So its unit is a newton times a second, N·s.",
+      "A newton is kg·m/s², and multiplying by s gives kg·m/s — the unit of momentum.",
+      "The unit is N·s, which equals kg·m/s."
+     ],
+     "ex": {
+      "main": "**Force × time gives newton-seconds, and N·s = kg·m/s**, the same unit as momentum — which is exactly why impulse can equal a change in momentum. N·m is the unit of work and energy; kg·m/s² is a force.",
+      "tip": "Matching units is a quick check that J = Δp makes sense."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "By the impulse–momentum theorem, the impulse on an object is equal to…",
+     "opts": [
+      "its change in kinetic energy",
+      "its final momentum",
+      "its change in momentum",
+      "the force needed to keep it moving"
+     ],
+     "ans": 2,
+     "hint": "Ft = mΔv.",
+     "steps": [
+      "Start from F = ma and write a as Δv / t.",
+      "Multiply both sides by t: Ft = mΔv.",
+      "mΔv is the change in momentum.",
+      "Impulse equals the change in momentum."
+     ],
+     "ex": {
+      "main": "**Impulse equals the CHANGE in momentum, Ft = Δp.** It equals the final momentum only when the object starts at rest. Changing energy is the job of work, and no force is needed just to keep something moving.",
+      "tip": "Impulse changes momentum. It does not set it from nothing."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A car drives north at 20 m/s. Later, the same car drives south at 20 m/s. Are its two momenta the same?",
+     "opts": [
+      "Yes: momentum has a size but no direction, like speed",
+      "Yes: the same mass at the same speed gives the same momentum",
+      "No: going south it has less momentum, because south is negative",
+      "No: they are the same size but point in opposite directions"
+     ],
+     "ans": 3,
+     "hint": "Is momentum a vector?",
+     "steps": [
+      "Momentum is mass times velocity, and velocity has a direction.",
+      "North and south are opposite directions.",
+      "So the two momenta have equal sizes and opposite directions.",
+      "They are different momenta."
+     ],
+     "ex": {
+      "main": "**Same size, opposite directions — so not the same momentum.** A negative sign only says which way; it is not “less” momentum. And momentum is a vector, unlike speed.",
+      "tip": "Two vectors are equal only if size AND direction match."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.45 kg ball rolls west at 14 m/s. Taking east as positive, what is its momentum?",
+     "opts": [
+      "−6.3 kg·m/s",
+      "+6.3 kg·m/s",
+      "−31 kg·m/s",
+      "−88 kg·m/s"
+     ],
+     "ans": 0,
+     "hint": "p = mv, and the velocity carries a sign.",
+     "steps": [
+      "East is positive, so a westward velocity is −14 m/s.",
+      "p = mv = (0.45 kg)(−14 m/s).",
+      "p = −6.3 kg·m/s.",
+      "The momentum is −6.3 kg·m/s, that is 6.3 kg·m/s west."
+     ],
+     "ex": {
+      "main": "**p = (0.45)(−14) = −6.3 kg·m/s.** +6.3 drops the sign that says it is moving west; −31 divides the speed by the mass; −88 squares the speed, which mixes momentum up with kinetic energy.",
+      "tip": "Write the sign into the velocity before you multiply."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 1600 kg car rolls at 4.5 m/s. How fast would a 180 kg motorbike and rider have to go to have the same momentum?",
+     "opts": [
+      "0.51 m/s",
+      "40 m/s",
+      "4.5 m/s",
+      "13 m/s"
+     ],
+     "ans": 1,
+     "hint": "Find the car’s momentum, then divide by the bike’s mass.",
+     "steps": [
+      "The car’s momentum: p = (1600)(4.5) = 7200 kg·m/s.",
+      "The bike needs the same p, so v = p / m.",
+      "v = 7200 ÷ 180 = 40 m/s.",
+      "The bike would need 40 m/s."
+     ],
+     "ex": {
+      "main": "**p = 1600 × 4.5 = 7200 kg·m/s, and 7200 ÷ 180 = 40 m/s.** 0.51 m/s puts the masses the wrong way up; 4.5 m/s forgets that a lighter object needs more speed; 13 m/s is the speed for equal kinetic energy, not equal momentum.",
+      "tip": "A lighter object needs more speed — by exactly the mass ratio."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A hockey stick pushes a puck with an average force of 48 N for 0.025 s. What impulse does the stick give the puck?",
+     "opts": [
+      "0.60 N·s",
+      "1920 N·s",
+      "1.2 N·s",
+      "48 N·s"
+     ],
+     "ans": 2,
+     "hint": "J = Ft.",
+     "steps": [
+      "Impulse is force times the time it acts.",
+      "J = (48 N)(0.025 s).",
+      "J = 1.2 N·s.",
+      "The impulse is 1.2 N·s, in the direction of the push."
+     ],
+     "ex": {
+      "main": "**J = Ft = 48 × 0.025 = 1.2 N·s.** 1920 divides the force by the time; 0.60 halves it for no reason (a ½ belongs to a triangle on a graph, not to an average force); 48 leaves out the time altogether.",
+      "tip": "Impulse multiplies. Force divided by time is not anything useful."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.36 kg ball at rest is kicked, receiving an impulse of 5.4 N·s toward the east. What is its velocity just after the kick?",
+     "opts": [
+      "5.4 m/s east",
+      "1.9 m/s east",
+      "0.067 m/s east",
+      "15 m/s east"
+     ],
+     "ans": 3,
+     "hint": "The impulse equals its change in momentum, and it started with none.",
+     "steps": [
+      "It starts at rest, so its starting momentum is 0.",
+      "Δp = J, so its final momentum is 5.4 kg·m/s east.",
+      "v = p / m = 5.4 ÷ 0.36 = 15 m/s.",
+      "The ball leaves at 15 m/s east."
+     ],
+     "ex": {
+      "main": "**From rest, p_f = J = 5.4 kg·m/s, so v = 5.4 ÷ 0.36 = 15 m/s east.** 1.9 multiplies by the mass instead of dividing; 0.067 divides the wrong way round; 5.4 treats an impulse as if it were a speed.",
+      "tip": "Impulse gives momentum. Divide by mass to get velocity."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.14 kg ball moving at 25 m/s is caught and brought to rest in 0.010 s. What is the size of the average force on the ball?",
+     "opts": [
+      "350 N",
+      "3.5 N",
+      "0.035 N",
+      "2500 N"
+     ],
+     "ans": 0,
+     "hint": "Find the change in momentum, then divide by the time.",
+     "steps": [
+      "Change in momentum: 0.14 × (0 − 25) = −3.5 kg·m/s.",
+      "F = Δp / t = 3.5 ÷ 0.010 in size.",
+      "F = 350 N.",
+      "The average force is 350 N, against the ball’s motion."
+     ],
+     "ex": {
+      "main": "**Δp = 3.5 kg·m/s in size, and 3.5 ÷ 0.010 = 350 N.** 3.5 N is the impulse passed off as a force; 0.035 N multiplies by the time; 2500 N leaves out the mass.",
+      "tip": "Units guard this one: kg·m/s ÷ s = N."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 0.40 kg ball moving east at 7.5 m/s hits a wall and bounces back west at 5.0 m/s. What is its change in momentum?",
+     "opts": [
+      "−1.0 kg·m/s",
+      "−5.0 kg·m/s",
+      "+5.0 kg·m/s",
+      "−2.0 kg·m/s"
+     ],
+     "ans": 1,
+     "hint": "Final minus initial, with both signs written in.",
+     "steps": [
+      "Initial momentum: 0.40 × (+7.5) = +3.0 kg·m/s.",
+      "Final momentum: 0.40 × (−5.0) = −2.0 kg·m/s.",
+      "Δp = p_f − p_i = −2.0 − (+3.0) = −5.0 kg·m/s.",
+      "The change is −5.0 kg·m/s, that is 5.0 kg·m/s toward the west."
+     ],
+     "ex": {
+      "main": "**Δp = (−2.0) − (+3.0) = −5.0 kg·m/s.** −1.0 subtracts the speeds as if the ball had only slowed down — it reversed, so the two parts ADD. +5.0 subtracts the wrong way round; −2.0 is just the final momentum.",
+      "tip": "A bounce: the sizes add, because the direction flipped."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A tennis ball hits the floor moving down at 6 m/s and leaves moving up at 6 m/s. What is true about its change in momentum?",
+     "opts": [
+      "It is not zero: it points down, the way the ball was moving at first",
+      "It is zero, because the ball’s speed is the same before and after",
+      "It is not zero: it points up and is twice its momentum just before landing",
+      "It is not zero: it points up and equals its momentum just before landing"
+     ],
+     "ans": 2,
+     "hint": "Same speed is not the same velocity.",
+     "steps": [
+      "Take up as positive. Just before landing, p = −6m.",
+      "Just after, p = +6m.",
+      "Δp = (+6m) − (−6m) = +12m.",
+      "So Δp points up and is twice the landing momentum."
+     ],
+     "ex": {
+      "main": "**Δp = (+6m) − (−6m) = +12m: upward, and twice the size of either momentum.** The floor had to stop the ball AND send it back up. The change points the way the floor pushes, up.",
+      "tip": "Speed unchanged, direction reversed: Δp doubled."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two balls of equal mass hit a hanging board at the same speed. One is made of clay and sticks; the other is rubber and bounces straight back. Which gives the board the bigger impulse?",
+     "opts": [
+      "The clay ball: it stays touching the board, so it pushes longer",
+      "The clay ball: it hands over all its momentum and keeps none",
+      "Neither: equal masses at equal speeds give equal impulses",
+      "The rubber ball: its momentum is reversed, not just stopped"
+     ],
+     "ans": 3,
+     "hint": "The board’s impulse on each ball equals that ball’s change in momentum.",
+     "steps": [
+      "The clay ball goes from p to 0: a change of size p.",
+      "The rubber ball goes from p to −p: a change of size 2p.",
+      "By the third law, the board gets an equal and opposite impulse to each.",
+      "The rubber ball gives the bigger impulse."
+     ],
+     "ex": {
+      "main": "**The rubber ball’s momentum changes by 2p, the clay’s by p — and the board receives the same size of impulse it gives.** Equal start conditions do not mean equal changes. Keeping its momentum is exactly what the bouncing ball does NOT do: it leaves with momentum the other way.",
+      "tip": "Bouncing beats sticking for knocking a target back."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why does an air bag reduce injuries in a crash?",
+     "opts": [
+      "It makes the stop take longer, so the same change in momentum needs less force",
+      "It makes the driver’s change in momentum smaller, so the impulse is smaller",
+      "It makes the stop take less time, so the driver stops before hitting anything",
+      "It pushes the driver back with a force larger than the force of the crash"
+     ],
+     "ans": 0,
+     "hint": "What does the air bag change: Δp, or t?",
+     "steps": [
+      "The driver goes from the car’s speed to zero either way.",
+      "So the change in momentum, and the impulse, are the same.",
+      "The air bag stretches out the time of the stop.",
+      "With Ft fixed, a longer t means a smaller average F."
+     ],
+     "ex": {
+      "main": "**The change in momentum is fixed by the crash; the air bag only makes the time longer, so the average force is smaller.** “A smaller change in momentum” is the tempting answer, but nothing about the bag changes the driver’s mass or how fast the driver was going.",
+      "tip": "Air bags, bent knees and crumple zones all change t, never Δp."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 55 kg stunt performer lands at 8.0 m/s. On a thin mat she stops in 0.040 s; on a thick crash pad she stops in 0.50 s. How do the two stops compare?",
+     "opts": [
+      "The pad’s average force and impulse are both 12.5 times smaller",
+      "Same impulse; the pad’s average force is 12.5 times smaller",
+      "Same average force; the pad only spreads it across a larger area",
+      "Same impulse; the pad’s average force is 12.5 times larger"
+     ],
+     "ans": 1,
+     "hint": "Her change in momentum is the same on both.",
+     "steps": [
+      "Her change in momentum is 55 × 8.0 = 440 kg·m/s either way, so the impulse is the same.",
+      "On the mat: F = 440 ÷ 0.040 = 11 000 N.",
+      "On the pad: F = 440 ÷ 0.50 = 880 N.",
+      "11 000 ÷ 880 = 12.5, so the pad’s force is 12.5 times smaller."
+     ],
+     "ex": {
+      "main": "**The impulse is 440 N·s both times; dividing by 0.50 s instead of 0.040 s makes the force 12.5 times smaller.** The impulse cannot shrink, because she still goes from 8.0 m/s to rest. A longer time means a SMALLER force, never a larger one.",
+      "tip": "Same Δp, ratio of times = ratio of forces, upside down."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "To catch a fast ball barehanded with the least sting, you should…",
+     "opts": [
+      "push your hands forward to meet the ball early",
+      "hold your hands perfectly still so the ball stops at once",
+      "let your hands move back with the ball as it arrives",
+      "close your hands quickly so the ball stops sooner"
+     ],
+     "ans": 2,
+     "hint": "Which choice makes the stop take the longest?",
+     "steps": [
+      "The ball’s change in momentum is the same however you catch it.",
+      "Moving your hands back with it makes the stop take longer.",
+      "A longer stopping time means a smaller average force.",
+      "So let your hands move back with the ball."
+     ],
+     "ex": {
+      "main": "**Giving with the ball stretches the stopping time, so the same impulse needs a smaller force on your hands.** Stiff hands, meeting it early or snapping shut all make the stop quicker — and quicker means harder.",
+      "tip": "Soft hands are long t."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "A batter learns to follow through, keeping the bat on the ball longer with the same average force. What changes?",
+     "opts": [
+      "The ball leaves slower, because the force is spread out in time",
+      "Nothing: the impulse stays the same, so the ball’s speed does too",
+      "The force on the ball grows, while the impulse stays the same",
+      "The impulse grows, so the ball leaves with more momentum"
+     ],
+     "ans": 3,
+     "hint": "Impulse is Ft. Which part changed?",
+     "steps": [
+      "The average force stays the same.",
+      "The contact time gets longer.",
+      "So Ft, the impulse, gets bigger.",
+      "A bigger impulse means a bigger change in momentum: the ball leaves faster."
+     ],
+     "ex": {
+      "main": "**Same force, longer time: a bigger Ft, so more momentum for the ball.** This is the air bag run in reverse. There the change in momentum was fixed and a longer time shrank the force; here the force is fixed and a longer time grows the change.",
+      "tip": "Ask which of F, t and Δp is fixed, then read off the other two."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown is the force of a racket on a ball during one hit: it rises from 0 to 900 N at 3 ms and falls back to 0 at 6 ms. What impulse does the racket give the ball?",
+     "opts": [
+      "2.7 N·s",
+      "5.4 N·s",
+      "2700 N·s",
+      "150 N·s"
+     ],
+     "ans": 0,
+     "hint": "The impulse is the area of the triangle. Watch the time unit.",
+     "steps": [
+      "The area under the graph is a triangle with base 6 ms and height 900 N.",
+      "6 ms = 0.006 s.",
+      "Area = ½ × 0.006 × 900 = 2.7.",
+      "The impulse is 2.7 N·s."
+     ],
+     "ex": {
+      "main": "**Impulse = area = ½ × 0.006 s × 900 N = 2.7 N·s.** 5.4 forgets the ½ of a triangle; 2700 leaves the time in milliseconds; 150 divides the force by the time.",
+      "tip": "Triangle: ½ × base × height, with the base in seconds."
+     },
+     "graph": {
+      "w": [
+       0,
+       8,
+       0,
+       1000
+      ],
+      "gx": 1,
+      "gy": 100,
+      "ly": 200,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          3,
+          900
+         ],
+         [
+          6,
+          0
+         ],
+         [
+          8,
+          0
+         ]
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": 3,
+        "y": 900,
+        "label": "900 N"
+       }
+      ],
+      "xl": "t (ms)",
+      "yl": "F (N)"
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown is the force on a cart: +6 N for the first 2 s, then −4 N for the next 1 s. What is the total impulse on the cart?",
+     "opts": [
+      "16 N·s",
+      "8 N·s",
+      "12 N·s",
+      "2 N·s"
+     ],
+     "ans": 1,
+     "hint": "Area above the axis counts plus; area below counts minus.",
+     "steps": [
+      "First part: 6 N × 2 s = +12 N·s.",
+      "Second part: −4 N × 1 s = −4 N·s.",
+      "Total = 12 − 4 = 8 N·s.",
+      "The total impulse is 8 N·s in the positive direction."
+     ],
+     "ex": {
+      "main": "**(+6)(2) + (−4)(1) = 12 − 4 = 8 N·s.** 16 counts the backward push as if it were forward; 12 ignores it altogether; 2 subtracts the forces and forgets the times.",
+      "tip": "Below the axis is a push the other way: subtract it."
+     },
+     "graph": {
+      "w": [
+       0,
+       4,
+       -6,
+       8
+      ],
+      "gx": 0.5,
+      "gy": 2,
+      "lx": 1,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          6
+         ],
+         [
+          2,
+          6
+         ],
+         [
+          2,
+          -4
+         ],
+         [
+          3,
+          -4
+         ],
+         [
+          3,
+          0
+         ],
+         [
+          4,
+          0
+         ]
+        ]
+       }
+      ],
+      "xl": "t (s)",
+      "yl": "F (N)"
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Taking east as positive: a 2.5 kg cart moves east at 3.0 m/s. A constant 5.0 N force pointing WEST acts on it for 2.0 s. What is its velocity afterward?",
+     "opts": [
+      "1.0 m/s east",
+      "7.0 m/s east",
+      "1.0 m/s west",
+      "4.0 m/s west"
+     ],
+     "ans": 2,
+     "hint": "Final momentum = starting momentum + impulse, with signs.",
+     "steps": [
+      "Starting momentum: 2.5 × (+3.0) = +7.5 kg·m/s.",
+      "Impulse: (−5.0 N)(2.0 s) = −10 N·s.",
+      "Final momentum: 7.5 + (−10) = −2.5 kg·m/s.",
+      "v = −2.5 ÷ 2.5 = −1.0 m/s, so 1.0 m/s west."
+     ],
+     "ex": {
+      "main": "**p_f = 7.5 − 10 = −2.5 kg·m/s, so v = −1.0 m/s: 1.0 m/s west.** The westward push first stopped the cart, then started it the other way. 7.0 m/s east adds the impulse with the wrong sign; 1.0 m/s east loses the sign of the answer; 4.0 m/s west forgets the cart was already moving.",
+      "tip": "Start with what it had, then add the impulse."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A tugboat must change a barge’s momentum by 36 000 kg·m/s. Its engine pushes with an average force of 1500 N. How long must it push?",
+     "opts": [
+      "2.4 s",
+      "0.042 s",
+      "5.4 × 10⁷ s",
+      "24 s"
+     ],
+     "ans": 3,
+     "hint": "Ft = Δp, so t = Δp / F.",
+     "steps": [
+      "Impulse needed: 36 000 N·s.",
+      "t = Δp / F = 36 000 ÷ 1500.",
+      "t = 24 s.",
+      "It must push for 24 s."
+     ],
+     "ex": {
+      "main": "**t = 36 000 ÷ 1500 = 24 s.** 0.042 s divides the wrong way round; 5.4 × 10⁷ s multiplies; 2.4 s slips a decimal place.",
+      "tip": "A small force can do the same job given enough time."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 2,
+     "from": "added",
+     "kind": "mc",
+     "q": "Doubling a car’s speed does what to its momentum and its kinetic energy?",
+     "opts": [
+      "Its momentum doubles; its kinetic energy becomes four times as big",
+      "Its momentum doubles; its kinetic energy doubles too",
+      "Its momentum becomes four times as big; its kinetic energy doubles",
+      "Its momentum becomes four times as big; so does its kinetic energy"
+     ],
+     "ans": 0,
+     "hint": "p = mv but KE = ½mv².",
+     "steps": [
+      "Momentum is proportional to v, so doubling v doubles p.",
+      "Kinetic energy is proportional to v².",
+      "2² = 4, so the kinetic energy is four times as big.",
+      "Momentum ×2, kinetic energy ×4."
+     ],
+     "ex": {
+      "main": "**p = mv grows with v; KE = ½mv² grows with v².** So twice the speed is twice the momentum but four times the kinetic energy — which is why the two can never be swapped for each other.",
+      "tip": "Squared speed belongs to energy."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Rank these carts from GREATEST to LEAST change in momentum (size only).",
+     "opts": [
+      "A: 2.5 kg cart hits a wall at 2.4 m/s and bounces back at 2.4 m/s",
+      "B: 3.0 kg cart at 3.0 m/s stops dead against a wall",
+      "C: 0.75 kg cart hits a wall at 8.0 m/s and bounces back at 2.0 m/s",
+      "D: 4.0 kg cart speeds up in a straight line from 2.0 m/s to 3.5 m/s"
+     ],
+     "ans": 0,
+     "hint": "For a bounce, the speeds add.",
+     "steps": [
+      "A: 2.5 × (2.4 + 2.4) = 12 kg·m/s.",
+      "B: 3.0 × 3.0 = 9 kg·m/s.",
+      "C: 0.75 × (8.0 + 2.0) = 7.5 kg·m/s.",
+      "D: 4.0 × (3.5 − 2.0) = 6 kg·m/s. So A, B, C, D."
+     ],
+     "ex": {
+      "main": "**A (12), B (9), C (7.5), D (6) kg·m/s.** Cart A is the trap: it bounces back at the same speed, and calling that “no change” puts it last instead of first. Cart C’s reversal adds its two speeds too.",
+      "tip": "Reversing direction always adds the two sizes."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

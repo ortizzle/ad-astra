@@ -1006,6 +1006,84 @@ absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
 
+### Dynamics 1 · 1-5 to 1-7: springs and momentum, and the N1L gaps in 1-3 (v215, THIS APP ONLY)
+
+Chris: *"Let's review sedona's physics."* Five files landed in her Physics 8
+`Dynamics 1` folder on 10/26:
+
+- textbook chapter 9 (`09_Momentum.pdf`)
+- a Conservation of Momentum homework (40 multiple-choice items)
+- a spring-cart explosion lab
+- a Hooke's Law lab
+- an "N1L and N3L" forces assignment
+
+`Dynamics 2` is still empty. Built by two parallel agents that wrote only
+content, builders and tests, then integrated here (the v208 split).
+
+| id | title | |
+|---|---|---|
+| `unit-phys-dyn1-hooke` | `Dynamics 1 · 1-5 Hooke’s Law and the Spring Lab` | 18 cards / 20 q, a Moon sort |
+| `unit-phys-dyn1-impulse` | `Dynamics 1 · 1-6 Impulse and Momentum` | 17 / 22 |
+| `unit-phys-dyn1-momentum` | `Dynamics 1 · 1-7 Conservation of Momentum` | 20 / 22, an elastic-or-inelastic sort |
+
+- **Shelved in Dynamics 1 because that is the folder they are in**, numbered
+  after 1-4. `quarter:2`, no `prep`: they are the lessons.
+- **Both labs have no data yet, so they are taught as reasoning** (the Ramp
+  Lab and Kinematics 2 · 2-3 call). The homework and the labs were read for
+  what they ask; no marks are recorded anywhere.
+- **Every number is computed and asserted in the builders**
+  (`build_dyn1_hooke.py`, `build_dyn1_momentum.py`), including that no
+  distractor is also correct. The builders refuse the sources' own numbers.
+- The traps, each a real wrong option:
+  - stretch read as length
+  - the hanger left out
+  - grams or kilograms used as newtons
+  - inches used as metres
+  - a slope that "changes on the Moon" (it does not; k belongs to the spring)
+  - a dropped sign on a rebound
+  - an impulse passed off as a force
+  - kinetic energy assumed conserved when carts stick
+  - recoil speeds made equal
+  - "the total KE is still zero" after an explosion
+- **1-3 gained what the N1L assignment asks and the shelf never taught**
+  (`c15`–`c17`, `q16`–`q21`, appended so every old id keeps its meaning;
+  `libv` 2):
+  - an upward pull at an angle lightens the normal force, and so the friction
+  - an angle read from the vertical swaps sine and cosine
+  - two forces that are not at right angles are added by components
+  The other three Dynamics 1 files were rebuilt, found to change only in
+  `updatedAt`, and restored, so only 1-3 re-drafts.
+
+**Flagged in the parentNotes, not smoothed over:**
+
+- **Hooke's lab**
+  - It never says which axis force goes on. The unit puts force on the
+    vertical axis, so the slope is k.
+  - It asks for a stretch in inches.
+  - Her sheet's %Error = |b| / y_max · 100 leaves b and y_max undefined. The
+    unit reads them as the y-intercept and the largest force, flagged `added`.
+- **Momentum homework**
+  - Her sheet prints `Δp = −Δp` with no labels.
+  - Items 32 and 33 work out to answers that are not among their choices.
+  - Items 26, 30 and 33 end with more kinetic energy than they started with:
+    not physical, though the momentum arithmetic holds.
+- **N1L assignment:** problem 2 says 53° "to the vertical" but draws its
+  reference line horizontal.
+
+`tools/test_dyn1_hooke.js` (51 assertions) and `tools/test_dyn1_momentum.js`
+(54) seed the whole Dynamics 1 shelf. They pin:
+
+- the order 1-1 to 1-7
+- every numeric answer, re-derived from its own stem
+- each trap by its teaching
+- the order questions stored in order
+- 1-3's old question ids unchanged
+- a round and the deck on every part
+- a mark sweep
+
+**Mutation-checked:** a flipped answer (and, for momentum, a planted score)
+failed exactly the expected assertions. `test_dyn1.js` passes unchanged.
+
 ### Unit 6 · DNA (v214, THIS APP ONLY)
 
 Chris: *"let's also revisit the folders, there are other updates as well."*
