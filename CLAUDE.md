@@ -69,6 +69,22 @@ it never removes the key. Without this, deleting a unit on one device and syncin
 from another resurrects it. Tombstones older than 60 days are purged during merge —
 **except a unit's, which is kept forever** (v209; see *A discard that holds*).
 
+**Where DATA is stored: IndexedDB, not localStorage (v216 / Wayfinder v196, both apps).**
+Every app at `ortizzle.github.io` shares ONE ~5 MB localStorage allowance, and
+this engine's content library alone grew to about half of it (Ad Astra 2.5 MB,
+Wayfinder 1.8 MB in Oct 2026) — the phone filled up and every family app,
+including the Reading Room, started failing to save. `DATA` now lives in
+IndexedDB (`<ns>db`, object store `kv`, key `data`) through `DataDB`; secrets
+and small per-device switches (`Store`) stay in localStorage. `loadLocal()` is
+**async** and the boot block runs inside `booted = loadLocal().then(…)`;
+`saveLocal()` hands off to `writeData()`, which coalesces bursts of writes.
+On first launch the old `<ns>data` localStorage copy is merged in by
+`Sync.merge` and removed once IndexedDB holds it. If IndexedDB can't open, it
+falls back to localStorage exactly as before. Do not move `DATA` back into
+localStorage, and do not add other large values there — the space is shared.
+`tools/test_idb_storage.js` covers the move, reloads, a leftover old-tab copy,
+sandbox, and a library bigger than localStorage's share.
+
 **Merging** is per-record, newest `updatedAt` wins (`Sync.merge`). Saving always
 fetches remote first, merges, then writes — never a blind overwrite.
 

@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v215 · Springs and momentum';
+const APP_VERSION = 'v216 · Room to grow';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2463,10 +2463,91 @@ function migrate(d){
   d.v = SCHEMA_VERSION;
   return d;
 }
-function loadLocal(){
-  const d = Store.get('data', null);
-  DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
-  saveLocal();
+/* ---------- Where DATA lives: IndexedDB ---------- */
+/* DATA used to sit in localStorage under <ns>data. Every app at
+   ortizzle.github.io shares ONE ~5 MB localStorage allowance, and this app's
+   content library (every unit, card and question) grew to half of it on its
+   own — the phone filled up and every family app started failing to save.
+   IndexedDB has its own, far larger quota, so DATA lives there now. Secrets and
+   small per-device switches stay in localStorage via Store; only DATA moved.
+   If IndexedDB can't open (very old browser, some private modes), everything
+   falls back to localStorage exactly as before. */
+const DataDB = {
+  name: Store.ns+'db', os:'kv', db:null, ok:false,
+  open(){
+    if(this.ok) return Promise.resolve(true);
+    return new Promise(res=>{
+      try{
+        const r = indexedDB.open(this.name, 1);
+        r.onupgradeneeded = ()=>r.result.createObjectStore(this.os);
+        r.onsuccess = ()=>{ this.db = r.result; this.ok = true; res(true); };
+        r.onerror = r.onblocked = ()=>res(false);
+      }catch(e){ res(false); }
+    });
+  },
+  get(k){
+    return new Promise(res=>{
+      try{ const q = this.db.transaction(this.os).objectStore(this.os).get(k);
+        q.onsuccess = ()=>res(q.result===undefined ? null : q.result); q.onerror = ()=>res(null); }
+      catch(e){ res(null); }
+    });
+  },
+  /* put() clones the value when it's called, so later edits to DATA can't
+     leak into a write that's still committing. */
+  put(k,v){
+    return new Promise(res=>{
+      try{ const tx = this.db.transaction(this.os,'readwrite'); tx.objectStore(this.os).put(v,k);
+        tx.oncomplete = ()=>res(true); tx.onerror = tx.onabort = ()=>res(false); }
+      catch(e){ res(false); }
+    });
+  }
+};
+/* One write at a time; edits made while one is committing are folded into the
+   next, so a burst of put()s costs two writes, not twenty. */
+let dataWriting = false, dataDirty = false;
+async function writeData(){
+  if(dataWriting){ dataDirty = true; return; }
+  dataWriting = true;
+  try{
+    do{
+      dataDirty = false;
+      if(!(await DataDB.put('data', DATA))){ toast('Couldn’t save — export a backup'); break; }
+    }while(dataDirty);
+  }finally{ dataWriting = false; }
+}
+/* Anything put() before the first load finishes (a tap in the first few
+   milliseconds, a test seeding the store) is kept: it waits in memory and is
+   merged into what loads, rather than being replaced by it. Only the FIRST
+   load merges — leaving sandbox reloads from storage precisely to discard
+   what's in memory. */
+let dataReady = false, earlySave = false;
+async function loadLocal(){
+  // Read only once the load has landed: changes keep arriving while it's in flight.
+  const earlyNow = () => !dataReady && DATA && DATA.records && Object.keys(DATA.records).length ? DATA : null;
+  let d = null;
+  if(await DataDB.open()){
+    d = await DataDB.get('data');
+    /* The one-time move. A copy still in localStorage (the first launch after
+       this change, or an old tab that kept writing) is merged in by the same
+       per-record rules as sync, and removed only once IndexedDB holds it. */
+    const legacy = Store.get('data', null);
+    if(legacy && legacy.records){
+      d = (d && d.records) ? Sync.merge(migrate(d), migrate(legacy)) : legacy;
+    }
+    const early = earlyNow();
+    DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
+    if(early) DATA = Sync.merge(DATA, early);
+    dataReady = true;
+    if(!sandboxOn() && await DataDB.put('data', DATA) && legacy) Store.remove('data');
+  }else{
+    d = Store.get('data', null);
+    const early = earlyNow();
+    DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
+    if(early) DATA = Sync.merge(DATA, early);
+    dataReady = true;
+    saveLocal();
+  }
+  if(earlySave){ earlySave = false; saveLocal(); }
 }
 /* Sandbox: a per-device switch (localStorage, never a record, never syncs) so a
    grown-up can try quizzes, the tutor and the timer without touching real data.
@@ -2475,11 +2556,15 @@ function loadLocal(){
 const sandboxOn = () => Store.get('sandbox', false);
 function setSandbox(on){
   Store.set('sandbox', !!on);
-  if(on){ toast('Sandbox on — nothing will be saved'); }
-  else { loadLocal(); applyTheme(); toast('Sandbox off — test activity discarded'); }
-  render();
+  if(on){ toast('Sandbox on — nothing will be saved'); render(); return; }
+  toast('Sandbox off — test activity discarded');
+  loadLocal().then(()=>{ applyTheme(); render(); });
 }
-const saveLocal = () => { if(sandboxOn()) return; Store.set('data', DATA); };
+const saveLocal = () => {
+  if(sandboxOn()) return;
+  if(!dataReady){ earlySave = true; return; }   // written once the first load lands
+  if(DataDB.ok) writeData(); else Store.set('data', DATA);
+};
 function put(rec){ rec.updatedAt = Date.now(); DATA.records[rec.id] = rec; saveLocal(); return rec; }
 function softDelete(id){ const r = DATA.records[id]; if(!r) return;
   DATA.records[id] = { id, type:r.type, deleted:true, updatedAt:Date.now() }; saveLocal(); }
@@ -13222,28 +13307,31 @@ function wonderJarDoor(){
 }
 
 /* ---------- Boot ---------- */
-loadLocal();
-applyTheme();
-/* The brand is the way home — there are no back buttons anywhere. */
-const brandEl = document.getElementById('brand');
-brandEl.addEventListener('click',()=>go('today'));
-brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go('today'); } });
-if(window.OrtizDrive) OrtizDrive.init({ app:'Ad Astra', prefix:'ad-astra',
-  getData: ()=>JSON.parse(JSON.stringify(DATA)), toast, allowed: driveAllowed,
-  onChange: ()=>{ const b = document.getElementById('driveBar'); if(b) OrtizDrive.mountBar(b); } });
-render();
-fetchWeekNote();
-/* Home-screen shortcuts (manifest.json) land here with a hash; consume it so
-   a plain reload doesn't repeat the jump. */
-const bootHash = location.hash.replace('#','');
-if(bootHash){
-  history.replaceState(null, '', location.pathname);
-  if(bootHash==='growth') go('growth');
-  else if(bootHash==='focus') go('focus',{});
-  else if(bootHash==='reading') go('reading');
-  else if(bootHash==='thread'){ const t = threadTarget(AZ.today()); if(t) t.go(); }
-}
-if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
+/* DATA loads from IndexedDB, which is asynchronous, so everything that reads it
+   waits for the load. A blink: IndexedDB answers in milliseconds. */
+const booted = loadLocal().then(()=>{
+  applyTheme();
+  /* The brand is the way home — there are no back buttons anywhere. */
+  const brandEl = document.getElementById('brand');
+  brandEl.addEventListener('click',()=>go('today'));
+  brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go('today'); } });
+  if(window.OrtizDrive) OrtizDrive.init({ app:'Ad Astra', prefix:'ad-astra',
+    getData: ()=>JSON.parse(JSON.stringify(DATA)), toast, allowed: driveAllowed,
+    onChange: ()=>{ const b = document.getElementById('driveBar'); if(b) OrtizDrive.mountBar(b); } });
+  render();
+  fetchWeekNote();
+  /* Home-screen shortcuts (manifest.json) land here with a hash; consume it so
+     a plain reload doesn't repeat the jump. */
+  const bootHash = location.hash.replace('#','');
+  if(bootHash){
+    history.replaceState(null, '', location.pathname);
+    if(bootHash==='growth') go('growth');
+    else if(bootHash==='focus') go('focus',{});
+    else if(bootHash==='reading') go('reading');
+    else if(bootHash==='thread'){ const t = threadTarget(AZ.today()); if(t) t.go(); }
+  }
+  if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
+});
 /* Mobile Chrome caches hard — that is why every deploy bumps CACHE_VERSION.
    The worker already knows when a newer build is installed and waiting; this
    just says so, once, in a bar she can act on or dismiss. Dismissing costs
