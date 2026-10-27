@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v216 · Room to grow';
+const APP_VERSION = 'v217 · Kept safe';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2502,6 +2502,17 @@ const DataDB = {
     });
   }
 };
+/* Ask Chrome to keep this site's storage when the phone runs low on space —
+   without it, IndexedDB and localStorage are both "best effort" and can be
+   cleared automatically. Chrome decides on its own (installed apps are usually
+   granted) and never prompts; if it says no, nothing changes. The grant covers
+   the whole of ortizzle.github.io, so every family app benefits. */
+function askPersist(){
+  try{
+    if(navigator.storage && navigator.storage.persist)
+      navigator.storage.persisted().then(p => p || navigator.storage.persist()).catch(()=>{});
+  }catch(e){}
+}
 /* One write at a time; edits made while one is committing are folded into the
    next, so a burst of put()s costs two writes, not twenty. */
 let dataWriting = false, dataDirty = false;
@@ -13310,6 +13321,7 @@ function wonderJarDoor(){
 /* DATA loads from IndexedDB, which is asynchronous, so everything that reads it
    waits for the load. A blink: IndexedDB answers in milliseconds. */
 const booted = loadLocal().then(()=>{
+  askPersist();
   applyTheme();
   /* The brand is the way home — there are no back buttons anywhere. */
   const brandEl = document.getElementById('brand');

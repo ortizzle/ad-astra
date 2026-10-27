@@ -10,7 +10,8 @@
    3. a copy left in localStorage by an old tab is merged in, not dropped;
    4. sandbox writes nothing;
    5. a large library fits even when localStorage is nearly full;
-   6. a change made while the first load is still in flight survives it. */
+   6. a change made while the first load is still in flight survives it;
+   7. the app asks Chrome once to keep its storage persistent (v217 / Wayfinder v197). */
 const { chromium } = require('playwright');
 const PORT = process.argv[2] || 8201;
 (async () => {
@@ -86,6 +87,21 @@ const PORT = process.argv[2] || 8201;
   });
   ck('6 a change made during the first load survives it', r.kept && r.old, r);
   ck('6 …and is written once the load lands', r.stored, r);
+
+  // 7. Persistent storage is requested once, and not again when it's already granted.
+  const asks = async granted => {
+    const c = await b.newContext({serviceWorkers:'block'});
+    await c.addInitScript(g => { window.__persistCalls = 0;
+      Object.defineProperty(navigator, 'storage', { configurable:true, value: {
+        persisted: () => Promise.resolve(g), persist: () => { window.__persistCalls++; return Promise.resolve(true); },
+        estimate: () => Promise.resolve({}) } }); }, granted);
+    const q = await c.newPage(); await q.goto(url, {waitUntil:'networkidle'});
+    await q.waitForFunction(() => typeof booted !== 'undefined').then(() => q.evaluate(() => booted));
+    await q.waitForTimeout(100);
+    const n = await q.evaluate(() => window.__persistCalls); await c.close(); return n;
+  };
+  ck('7 asks for persistent storage when it isn\'t granted yet', (await asks(false)) === 1);
+  ck('7 …and doesn\'t ask again once it is', (await asks(true)) === 0);
 
   ck('no page errors', errs.length === 0, errs);
   const bad = out.filter(x => !x.ok);

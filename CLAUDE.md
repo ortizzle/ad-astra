@@ -84,6 +84,9 @@ falls back to localStorage exactly as before. Do not move `DATA` back into
 localStorage, and do not add other large values there — the space is shared.
 `tools/test_idb_storage.js` covers the move, reloads, a leftover old-tab copy,
 sandbox, and a library bigger than localStorage's share.
+Since v217 (Wayfinder v197) boot also calls `askPersist()`, which asks Chrome
+(`navigator.storage.persist()`, once, silently) not to clear the site's storage
+under disk pressure. The grant covers all of ortizzle.github.io.
 
 **Merging** is per-record, newest `updatedAt` wins (`Sync.merge`). Saving always
 fetches remote first, merges, then writes — never a blind overwrite.
