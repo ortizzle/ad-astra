@@ -1,0 +1,632 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-10": {
+   "id": "unit-ww9-10",
+   "type": "unit",
+   "updatedAt": 1793152667359,
+   "classId": "english",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 10",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 10 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 10 of Wordly Wise 3000 Book 9: fifteen words about giving, getting and paying (beneficiary, boon, gratis, remunerate, solicit, garner, magnanimous), ability and inability (aptitude, incapacitate, practicable), beginnings and amounts (inception, myriad), sympathy (commiserate), surgery (amputate), and worn-out language (trite).",
+    "from": "source"
+   },
+   "why": {
+    "text": "Four near-misses in this lesson cost marks: beneficiary against benefactor, aptitude against attitude, practicable against practical, and gratis against gratitude. Each gets a question built around the wrong half of the pair.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 10 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Tell a beneficiary from a benefactor, and practicable from practical",
+     "from": "added"
+    },
+    {
+     "text": "Recognize myriad used as a noun and as an adjective",
+     "from": "source"
+    },
+    {
+     "text": "Name the person-to-action and \"lacks\" analogy relationships",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 10 word list (the two word-list pages only; no exercise pages were in the upload, so every question uses a fresh scenario). Respellings follow the book's pronunciation guide. The real content is four near-miss pairs, three of them with a word that is not on the list: benefactor, attitude and practical. Each is offered as the wrong answer on the question that tests its partner. TRITE : ORIGINALITY reaches back to callow from Lesson 5 on purpose.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Write beneficiary and benefactor side by side once, with who gives and who gets.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "amputate",
+     "def": "**To cut off a body part, especially by surgery.** (verb)\n• Surgeons amputated the frostbitten fingers to save the hand.\n• Used loosely, it can mean cutting off any part that has to go.",
+     "hint": "Am- (around) + putare (to prune): the way a gardener prunes a limb.",
+     "from": "source",
+     "sp": "AM-pyoo-tayt"
+    },
+    {
+     "id": "c1",
+     "term": "aptitude",
+     "def": "**A natural talent or ability.** (noun)\n• He has an aptitude for languages and picked up Italian in a summer.\n• Not attitude, which is how you feel about something.",
+     "hint": "Apt means fitting: an aptitude is a skill that fits you.",
+     "from": "source",
+     "sp": "AP-tih-tood"
+    },
+    {
+     "id": "c2",
+     "term": "beneficiary",
+     "def": "**A person or group who gains or benefits from something.** (noun)\n• The library was the main beneficiary of the bake sale.\n• The one who GIVES is the benefactor; the one who receives is the beneficiary.",
+     "hint": "Bene- means good: the beneficiary is where the good thing lands.",
+     "from": "source",
+     "sp": "ben-uh-FISH-ee-air-ee"
+    },
+    {
+     "id": "c3",
+     "term": "boon",
+     "def": "**A welcome gift or blessing.** (noun)\n• A free bus pass was a boon to students who live far away.\n• A boon arrives when it is most needed.",
+     "hint": "Think \"bonus\": a boon is a bonus you were hoping for.",
+     "from": "source",
+     "sp": "boon"
+    },
+    {
+     "id": "c4",
+     "term": "commiserate",
+     "def": "**To feel or express sympathy for someone's trouble.** (verb)\n• After the loss, the teammates commiserated over dinner.\n• You commiserate with someone, sharing their misery.",
+     "hint": "Com- (with) + miser (wretched): being miserable together.",
+     "from": "source",
+     "sp": "kuh-MIZ-uh-rayt"
+    },
+    {
+     "id": "c5",
+     "term": "garner",
+     "def": "**To gather, collect or acquire.** (verb)\n• The film garnered three awards and a lot of praise.\n• Often used for votes, support, praise or attention.",
+     "hint": "A garner was once a granary, where gathered grain was stored.",
+     "from": "source",
+     "sp": "GAR-nur"
+    },
+    {
+     "id": "c6",
+     "term": "gratis",
+     "def": "**Free of charge; without payment.** (adjective or adverb)\n• Refills are gratis on Tuesdays.\n• It has nothing to do with gratitude, even though they share a root.",
+     "hint": "Latin gratis, \"as a favor\": no money changes hands.",
+     "from": "source",
+     "sp": "GRAT-us"
+    },
+    {
+     "id": "c7",
+     "term": "incapacitate",
+     "def": "**To make helpless or unable to act.** (verb)\n• A broken ankle incapacitated the runner for a month.\n• incapacity (noun): the state of being unable.",
+     "hint": "In- (not) + capacity: it takes your capacity away.",
+     "from": "source",
+     "sp": "in-kuh-PAS-uh-tayt"
+    },
+    {
+     "id": "c8",
+     "term": "inception",
+     "def": "**The beginning of an action or process.** (noun)\n• From its inception, the club welcomed beginners.\n• A formal word for the starting point.",
+     "hint": "Inception and incept share a root with \"begin to take\": the moment something is taken up.",
+     "from": "source",
+     "sp": "in-SEP-shun"
+    },
+    {
+     "id": "c9",
+     "term": "magnanimous",
+     "def": "**Generous, unselfish and forgiving.** (adjective)\n• A magnanimous winner thanks the people she beat.\n• magnanimity (noun): generosity of spirit.",
+     "hint": "Magna (great) + animus (spirit): a great-spirited person.",
+     "from": "source",
+     "sp": "mag-NAN-uh-mus"
+    },
+    {
+     "id": "c10",
+     "term": "myriad",
+     "def": "**A very large number.** (noun); also **countless, very many** (adjective)\n• \"A myriad of stars\" and \"myriad stars\" are both correct.\n• Originally the Greek word for ten thousand.",
+     "hint": "Ten thousand to the Greeks; too many to count to everyone else.",
+     "from": "source",
+     "sp": "MEER-ee-ud"
+    },
+    {
+     "id": "c11",
+     "term": "practicable",
+     "def": "**Able to be done; feasible. Also usable.** (adjective)\n• A bridge across the river is expensive but practicable.\n• Practical means sensible; practicable means possible to carry out.",
+     "hint": "Practic-ABLE: is it able to be put into practice?",
+     "from": "source",
+     "sp": "PRAK-tih-kuh-bul"
+    },
+    {
+     "id": "c12",
+     "term": "remunerate",
+     "def": "**To pay or reward someone for work or a service.** (verb)\n• The volunteers were not remunerated, but they were thanked.\n• remuneration (noun): payment.",
+     "hint": "Re- + munus (gift): a gift given back for your work.",
+     "from": "source",
+     "sp": "rih-MYOO-nuh-rayt"
+    },
+    {
+     "id": "c13",
+     "term": "solicit",
+     "def": "**To ask for something in a formal way.** (verb)\n• The charity solicits donations each December.\n• solicitation (noun): a formal request.",
+     "hint": "A solicitor asks on someone's behalf.",
+     "from": "source",
+     "sp": "suh-LIS-it"
+    },
+    {
+     "id": "c14",
+     "term": "trite",
+     "def": "**Overused, so that it is no longer fresh or original.** (adjective)\n• \"It was a dark and stormy night\" is a trite opening line.\n• Trite phrases are clichés.",
+     "hint": "Latin tritus, \"worn down by rubbing\": a phrase worn smooth with use.",
+     "from": "source",
+     "sp": "tryt"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To save her life, doctors had to amputate the hiker's badly frostbitten foot. They:",
+     "opts": [
+      "Cut it off",
+      "Put it in a cast",
+      "Warmed it slowly",
+      "Wrapped it tightly"
+     ],
+     "ans": 0,
+     "hint": "What do surgeons do when a body part cannot be saved?",
+     "steps": [
+      "To amputate is to cut off a body part, usually in surgery.",
+      "A cast, warming or wrapping all try to save the foot.",
+      "Amputating means cutting it off."
+     ],
+     "ex": {
+      "main": "**Cut it off.** Amputation is a last resort, done when keeping the limb would endanger the patient.",
+      "tip": "Amputate comes from a word for pruning a tree."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Lena solves logic puzzles faster than anyone in her class, even ones she has never seen. She clearly has an ___ for logic.",
+     "opts": [
+      "Attitude",
+      "Aptitude",
+      "Inception",
+      "Allergy"
+     ],
+     "ans": 1,
+     "hint": "Two of these words differ by one letter. Which one means talent?",
+     "steps": [
+      "The sentence describes a talent for logic.",
+      "Attitude is how you feel about something; aptitude is talent.",
+      "So Lena has an aptitude for logic."
+     ],
+     "ex": {
+      "main": "**Aptitude.** It means a natural talent. Attitude is the classic slip: it describes a mood or opinion, not an ability.",
+      "tip": "Apt means suited: an aptitude is a skill you are suited to."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A wealthy woman leaves her fortune to a children's hospital. Who is the beneficiary?",
+     "opts": [
+      "Her lawyer",
+      "The woman",
+      "The hospital",
+      "Her bank"
+     ],
+     "ans": 2,
+     "hint": "Who receives the benefit?",
+     "steps": [
+      "A beneficiary is the one who gains from something.",
+      "The woman is the giver, which makes her the benefactor.",
+      "The hospital receives the fortune, so it is the beneficiary."
+     ],
+     "ex": {
+      "main": "**The hospital.** The beneficiary receives; the giver is the benefactor. Mixing the two up reverses the whole sentence.",
+      "tip": "Beneficiary ends with the one who receives; benefactor names the one who acts."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "For the drought-stricken town, the new well was a:",
+     "opts": [
+      "Inception",
+      "Myriad",
+      "Remuneration",
+      "Boon"
+     ],
+     "ans": 3,
+     "hint": "What is a drought-stricken town hoping for?",
+     "steps": [
+      "The well arrives exactly when the town needs it most.",
+      "A myriad is a huge number, remuneration is payment, and an inception is a beginning.",
+      "A welcome blessing is a boon."
+     ],
+     "ex": {
+      "main": "**Boon.** A boon is a welcome gift or blessing, and fresh water in a drought is about as welcome as it gets.",
+      "tip": "A boon is a bonus you needed."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "When Max's team lost the final, his friends ___ with him over pizza.",
+     "opts": [
+      "Commiserated",
+      "Solicited",
+      "Remunerated",
+      "Garnered"
+     ],
+     "ans": 0,
+     "hint": "His friends are sharing his disappointment.",
+     "steps": [
+      "The friends are keeping Max company in his disappointment.",
+      "Solicited means asked for formally, remunerated means paid, and garnered means gathered.",
+      "To express sympathy for someone's trouble is to commiserate."
+     ],
+     "ex": {
+      "main": "**Commiserated.** To commiserate is to share in someone's sorrow, being miserable together.",
+      "tip": "You commiserate WITH someone. The word needs a companion."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The petition ___ ten thousand signatures in its first week.",
+     "opts": [
+      "Amputated",
+      "Garnered",
+      "Commiserated",
+      "Incapacitated"
+     ],
+     "ans": 1,
+     "hint": "A petition is gathering something.",
+     "steps": [
+      "The petition collected signatures.",
+      "The other verbs mean to cut off, to sympathize, and to make helpless.",
+      "To gather or acquire is to garner."
+     ],
+     "ex": {
+      "main": "**Garnered.** It means gathered or acquired, and it is often used for support, votes, praise or signatures.",
+      "tip": "Garner was once a word for a granary: gathering in the harvest."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A poster says the concert in the park is gratis. That means you:",
+     "opts": [
+      "Need a special invitation",
+      "Must thank the performers",
+      "Pay nothing to attend",
+      "Pay a fee at the gate"
+     ],
+     "ans": 2,
+     "hint": "It shares a root with gratitude, but does it mean the same thing?",
+     "steps": [
+      "Gratis means free of charge.",
+      "It shares a Latin root with gratitude, but it says nothing about thanking anyone.",
+      "So attending costs nothing."
+     ],
+     "ex": {
+      "main": "**Pay nothing to attend.** Gratis means free. \"Must thank the performers\" is the trap set by the word's family resemblance to gratitude.",
+      "tip": "Gratis comes from Latin for \"as a favor\": a favor costs nothing."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A sprained wrist ___ the pitcher for the rest of the season.",
+     "opts": [
+      "Garnered",
+      "Remunerated",
+      "Solicited",
+      "Incapacitated"
+     ],
+     "ans": 3,
+     "hint": "The pitcher cannot do the job.",
+     "steps": [
+      "The injury leaves the pitcher unable to pitch.",
+      "Remunerated means paid, solicited means asked for, and garnered means gathered.",
+      "To make someone unable to act is to incapacitate them."
+     ],
+     "ex": {
+      "main": "**Incapacitated.** It means made helpless or unable to act. The noun is incapacity.",
+      "tip": "In- + capacity: the injury took the capacity away."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Since its inception in 1998, the chess club has met every Tuesday. Inception refers to the club's:",
+     "opts": [
+      "Beginning",
+      "Closing",
+      "Best year",
+      "Rule book"
+     ],
+     "ans": 0,
+     "hint": "\"Since\" points back to a starting point.",
+     "steps": [
+      "\"Since its inception\" counts from a starting moment.",
+      "Closing would be its end, and a best year or a rule book is not a moment in time.",
+      "Inception is the beginning."
+     ],
+     "ex": {
+      "main": "**Beginning.** Inception means the start of an action or process, a more formal word for when something began.",
+      "tip": "Inception is formal. In everyday talk you would say \"since it started\"."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "After winning, the champion praised her opponent's skill and gave half the prize to a charity they both supported. That was ___ of her.",
+     "opts": [
+      "Trite",
+      "Magnanimous",
+      "Practicable",
+      "Gratis"
+     ],
+     "ans": 1,
+     "hint": "What kind of spirit does this winner show?",
+     "steps": [
+      "The champion is generous and gracious towards the person she beat.",
+      "Trite means overused, practicable means feasible, and gratis means free.",
+      "Generous, unselfish and forgiving is magnanimous."
+     ],
+     "ex": {
+      "main": "**Magnanimous.** It means great-spirited: generous, unselfish and forgiving. Praising a beaten opponent is a classic example.",
+      "tip": "Magna (great) + animus (spirit). The opposite is petty."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Myriad stars filled the desert sky. Here, myriad means:",
+     "opts": [
+      "Distant",
+      "Faint",
+      "Countless",
+      "Falling"
+     ],
+     "ans": 2,
+     "hint": "Picture a desert sky with no city lights.",
+     "steps": [
+      "Myriad can be a noun (a very large number) or an adjective (very many).",
+      "Here it describes the stars, so it is the adjective.",
+      "As an adjective, myriad means countless."
+     ],
+     "ex": {
+      "main": "**Countless.** As an adjective, myriad means very many. \"A myriad of stars\" and \"myriad stars\" both work.",
+      "tip": "To the ancient Greeks a myriad was exactly ten thousand. Now it just means too many to count."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A city planner calls a plan to turn an empty lot into a garden \"practicable\". She means the plan:",
+     "opts": [
+      "Must be done this year",
+      "Is fun to carry out",
+      "Has been tried before",
+      "Can actually be done"
+     ],
+     "ans": 3,
+     "hint": "Practic-ABLE: is it able to be put into practice?",
+     "steps": [
+      "Practicable means capable of being done: feasible.",
+      "It says nothing about whether the plan is fun, old or urgent.",
+      "So the plan can actually be carried out."
+     ],
+     "ex": {
+      "main": "**Can actually be done.** Practicable means feasible. Practical is the near-miss: a practical plan is sensible, while a practicable one is possible.",
+      "tip": "Possible, not necessarily sensible. A plan can be practicable and still a bad idea."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The museum remunerates its tour guides for every tour they lead. The guides are:",
+     "opts": [
+      "Paid",
+      "Trained",
+      "Scheduled",
+      "Replaced"
+     ],
+     "ans": 0,
+     "hint": "What do guides receive for each tour?",
+     "steps": [
+      "To remunerate is to pay or reward someone for work.",
+      "Training, scheduling and replacing are other things a museum does with guides.",
+      "So the guides are paid."
+     ],
+     "ex": {
+      "main": "**Paid.** Remunerate means to pay for work or a service. The noun is remuneration.",
+      "tip": "Remuneration is the formal word for wages, salary or a fee."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Volunteers went door to door to ___ donations for the food bank.",
+     "opts": [
+      "Remunerate",
+      "Solicit",
+      "Amputate",
+      "Commiserate"
+     ],
+     "ans": 1,
+     "hint": "They are asking people for something.",
+     "steps": [
+      "The volunteers are formally asking for donations.",
+      "Remunerate means pay, amputate means cut off, and commiserate means sympathize.",
+      "To ask for in a formal way is to solicit."
+     ],
+     "ex": {
+      "main": "**Solicit.** It means to ask for something formally, such as donations, votes or opinions. The noun is solicitation.",
+      "tip": "\"No soliciting\" signs ask people not to come asking for money."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A teacher writes \"trite\" next to the phrase \"at the end of the day\" in an essay. She means the phrase is:",
+     "opts": [
+      "Too long for the sentence",
+      "Grammatically wrong",
+      "Overused and stale",
+      "Hard to understand"
+     ],
+     "ans": 2,
+     "hint": "Have you heard \"at the end of the day\" before?",
+     "steps": [
+      "Trite means used so often that it is no longer fresh.",
+      "\"At the end of the day\" is grammatical, short and clear; it is just worn out.",
+      "So the teacher means it is overused."
+     ],
+     "ex": {
+      "main": "**Overused and stale.** A trite phrase is a cliché. Nothing is wrong with it except that everyone has heard it a thousand times.",
+      "tip": "Trite comes from Latin for \"worn down by rubbing\"."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "MAGNANIMOUS : PETTY",
+     "opts": [
+      "praise : extol",
+      "gratis : free",
+      "pilot : fly",
+      "trite : fresh"
+     ],
+     "ans": 3,
+     "hint": "Is a great-spirited person also petty?",
+     "steps": [
+      "Magnanimous and petty are opposites.",
+      "Trite means stale and overused; fresh is its opposite. Match.",
+      "Gratis means free (synonyms), a pilot flies (person to action), and extol is stronger praise (degree)."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Magnanimous reverses petty, and trite reverses fresh.",
+      "tip": "Praise : extol is a degree pair: the same idea, turned up. Extol is from Lesson 1."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "SURGEON : AMPUTATE",
+     "opts": [
+      "fundraiser : solicit",
+      "gratis : free",
+      "inception : conclusion",
+      "drizzle : downpour"
+     ],
+     "ans": 0,
+     "hint": "What does a surgeon do?",
+     "steps": [
+      "A surgeon is a person, and amputating is one thing a surgeon does.",
+      "A fundraiser solicits donations: a person and what that person does. Match.",
+      "Gratis and free are synonyms, inception and conclusion are antonyms, and a downpour is a heavier drizzle (degree)."
+     ],
+     "ex": {
+      "main": "**Both pairs are PERSON TO ACTION.** A surgeon amputates; a fundraiser solicits.",
+      "tip": "If the first word is a person, look for an option where the first word is also a person."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "GRATIS : FREE",
+     "opts": [
+      "magnanimous : petty",
+      "myriad : countless",
+      "drizzle : downpour",
+      "pilot : fly"
+     ],
+     "ans": 1,
+     "hint": "Do these two words mean the same thing?",
+     "steps": [
+      "Gratis means free of charge, so the stem pair are synonyms.",
+      "Myriad (as an adjective) means countless. Match.",
+      "Magnanimous and petty are antonyms, a downpour is a heavier drizzle, and a pilot flies."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Gratis means free; myriad means countless.",
+      "tip": "Degree pairs look like synonyms at a glance. Ask whether the two words are equally strong."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "TRITE : ORIGINALITY",
+     "opts": [
+      "magnanimous : petty",
+      "gratis : free",
+      "callow : experience",
+      "fundraiser : solicit"
+     ],
+     "ans": 2,
+     "hint": "What is a trite phrase missing?",
+     "steps": [
+      "A trite phrase lacks originality.",
+      "A callow person lacks experience (Lesson 5). Match.",
+      "Gratis and free are synonyms, magnanimous and petty are antonyms, and a fundraiser solicits."
+     ],
+     "ex": {
+      "main": "**Both pairs are \"LACKS\".** Trite lacks originality; callow lacks experience.",
+      "tip": "An antonym pair puts two opposite qualities side by side. A \"lacks\" pair names a quality and the thing it is missing."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

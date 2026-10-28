@@ -1,0 +1,632 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-08": {
+   "id": "unit-ww9-08",
+   "type": "unit",
+   "updatedAt": 1793152667349,
+   "classId": "english",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 8",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 8 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 8 of Wordly Wise 3000 Book 9: fifteen words about people and how they stand with others (adroit, erudite, militant, pariah, prodigy, protégé), how they behave (demeanor, raucous, tacit, affront), causes and settled answers (crusade, definitive), and admission, hobbies and slips (induct, avocation, lapse).",
+    "from": "source"
+   },
+   "why": {
+    "text": "Three pairs in this lesson are built to be confused: prodigy and protégé, avocation and vocation, militant and military. Getting each one straight once is most of the lesson.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 8 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Tell a prodigy from a protégé, and an avocation from a vocation",
+     "from": "added"
+    },
+    {
+     "text": "Choose the right sense of lapse from the sentence around it",
+     "from": "source"
+    },
+    {
+     "text": "Name four analogy relationships, including \"lacks\" against \"has\"",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 8 word list (the two word-list pages only; the exercise pages were not in the upload, so every question is ours, with fresh scenarios rather than the book's sentences). Respellings are taken from the book's pronunciation guide. The real traps are prodigy versus protégé (early talent against a mentored career) and avocation versus vocation (hobby against job), and each gets its own question. PARIAH : ACCEPTANCE offers prodigy : talent as a deliberate wrong option, because \"has\" against \"lacks\" is the analogy mistake most worth catching.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Say prodigy and protégé aloud and give each one a person you know of.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "adroit",
+     "def": "**Clever at dealing with difficult situations; skillful.** (adjective)\n• An adroit host can rescue a party that is going badly.\n• Same idea as adept: quick, sure-handed, hard to rattle.",
+     "hint": "From French à droit, \"to the right\" — the hand most people are deft with.",
+     "from": "source",
+     "sp": "uh-DROYT"
+    },
+    {
+     "id": "c1",
+     "term": "affront",
+     "def": "**To insult or offend on purpose.** (verb; also a noun, a deliberate insult)\n• Ignoring someone's outstretched hand is an affront.\n• The key word is deliberate: an accident is not an affront.",
+     "hint": "Something thrown right in your front — in your face.",
+     "from": "source",
+     "sp": "uh-FRUNT"
+    },
+    {
+     "id": "c2",
+     "term": "avocation",
+     "def": "**An activity pursued for pleasure; a hobby.** (noun)\n• Her vocation is law; her avocation is building model ships.\n• Do not confuse it with vocation, which is the job itself.",
+     "hint": "The a- pulls it away from your vocation: what you do when work is done.",
+     "from": "source",
+     "sp": "av-uh-KAY-shun"
+    },
+    {
+     "id": "c3",
+     "term": "crusade",
+     "def": "**A long, impassioned struggle for a cause believed to be just.** (noun; also a verb)\n• The campaign against child labor was a decades-long crusade.\n• A crusade is long and fervent, not a passing complaint.",
+     "hint": "Medieval crusaders marched under the cross (Latin crux) — years of marching for a cause.",
+     "from": "source",
+     "sp": "kroo-SAYD"
+    },
+    {
+     "id": "c4",
+     "term": "definitive",
+     "def": "**Supplying a final answer; conclusive.** (adjective)\n• A DNA match is definitive evidence; a rumor is not.\n• A definitive biography is the one that settles the subject.",
+     "hint": "It defines the matter once and for all — nothing left to argue.",
+     "from": "source",
+     "sp": "duh-FIN-uh-tiv"
+    },
+    {
+     "id": "c5",
+     "term": "demeanor",
+     "def": "**The way a person behaves and carries themselves; bearing.** (noun)\n• Her calm demeanor kept the frightened passengers calm too.\n• You read a demeanor from the outside: face, posture, voice.",
+     "hint": "Think of your de-MEAN-or as the \"mean\" or manner you show the world.",
+     "from": "source",
+     "sp": "duh-MEE-nur"
+    },
+    {
+     "id": "c6",
+     "term": "erudite",
+     "def": "**Having or showing extensive knowledge; learned.** (adjective)\n• An erudite guide can explain every carving in the cathedral.\n• erudition (noun): deep learning. \"Her erudition covered six languages.\"",
+     "hint": "Latin e- + rudis, \"out of the rough\": schooled out of rawness.",
+     "from": "source",
+     "sp": "AIR-yoo-dyt"
+    },
+    {
+     "id": "c7",
+     "term": "induct",
+     "def": "**To install in office, or to admit to a society or the military, often with a ceremony.** (verb)\n• The club inducts new members every spring.\n• induction (noun): the ceremony of being admitted.",
+     "hint": "In + duct, \"to lead in\" — the new member is led in through the door.",
+     "from": "source",
+     "sp": "in-DUKT"
+    },
+    {
+     "id": "c8",
+     "term": "lapse",
+     "def": "**To slip from a standard; also, to come to an end or expire.** (verb; also a noun, a minor slip or a pause)\n• A lapse of memory is a small slip, not a disaster.\n• A subscription that lapses has run out.",
+     "hint": "Latin lapsus, \"a slip\" — the same root as collapse.",
+     "from": "source",
+     "sp": "laps"
+    },
+    {
+     "id": "c9",
+     "term": "militant",
+     "def": "**Ready to fight, especially for a cause.** (adjective; also a noun, such a person)\n• Militant supporters marched every weekend for the new park.\n• Militant is about a fighting spirit, not about being in the army.",
+     "hint": "Shares a root with military, but you can be militant with only a placard.",
+     "from": "source",
+     "sp": "MIL-ih-tunt"
+    },
+    {
+     "id": "c10",
+     "term": "pariah",
+     "def": "**A social outcast.** (noun)\n• After the scandal he became a pariah in the town he once ran.\n• A pariah is pushed out by others, not someone who chooses to be alone.",
+     "hint": "Pair it with \"pushed away\": no one will stand near a pariah.",
+     "from": "source",
+     "sp": "puh-RY-uh"
+    },
+    {
+     "id": "c11",
+     "term": "prodigy",
+     "def": "**A person with remarkable talent at an early age.** (noun; also an amazing thing or event)\n• A prodigy might play concertos at seven.\n• The talent shows up early and seemingly on its own.",
+     "hint": "Prodigy and precocious both start with pr-: talent that arrives early.",
+     "from": "source",
+     "sp": "PRAH-duh-jee"
+    },
+    {
+     "id": "c12",
+     "term": "protégé",
+     "def": "**A person whose training or career is helped along by someone more experienced.** (noun; protégée for a woman)\n• The famous chef took the young cook on as her protégé.\n• A protégé always has a mentor; a prodigy does not need one.",
+     "hint": "French for \"protected\": someone a mentor protects and promotes.",
+     "from": "source",
+     "sp": "PROH-tuh-zhay"
+    },
+    {
+     "id": "c13",
+     "term": "raucous",
+     "def": "**Rough and harsh to the ear; also boisterous and disorderly.** (adjective)\n• Raucous crows woke the whole campsite at dawn.\n• A raucous party is both loud and out of hand.",
+     "hint": "Say it out loud: RAW-kus sounds as rough as it means.",
+     "from": "source",
+     "sp": "RAW-kus"
+    },
+    {
+     "id": "c14",
+     "term": "tacit",
+     "def": "**Understood or implied without being put into words.** (adjective)\n• Nobody said so, but there was a tacit rule about who sat where.\n• The opposite is explicit: stated outright.",
+     "hint": "Same root as taciturn — a person of few words. Tacit means no words at all.",
+     "from": "source",
+     "sp": "TAS-it"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A negotiator calms two angry sides and gets them to sign a deal by sundown. Her handling of the talks was:",
+     "opts": [
+      "Adroit",
+      "Raucous",
+      "Tacit",
+      "Militant"
+     ],
+     "ans": 0,
+     "hint": "Which adjective praises how she handled a hard situation?",
+     "steps": [
+      "The stem describes someone dealing skillfully with a difficult situation.",
+      "Raucous describes noise, tacit describes something unspoken, and militant describes readiness to fight.",
+      "Only adroit means clever at handling difficulty."
+     ],
+     "ex": {
+      "main": "**Adroit.** It means clever and skillful in a tricky situation, which is exactly what turning two angry sides into a signed deal takes.",
+      "tip": "Adroit and adept are near-twins. If adept fits a sentence, adroit usually does too."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Someone writes that the stranger's comment was an affront. The comment was:",
+     "opts": [
+      "An honest mistake",
+      "A deliberate insult",
+      "A friendly warning",
+      "A clever joke"
+     ],
+     "ans": 1,
+     "hint": "Was it accidental or on purpose?",
+     "steps": [
+      "An affront is an insult or offensive act.",
+      "The insult is deliberate, so an honest mistake does not qualify.",
+      "A warning or a joke is not meant to offend."
+     ],
+     "ex": {
+      "main": "**A deliberate insult.** An affront is offence given on purpose; that intent is what separates it from a slip.",
+      "tip": "If someone apologizes and says they did not mean it, it was a blunder, not an affront."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Dana is a surgeon, and on weekends she restores old radios just for the joy of it. Restoring radios is her:",
+     "opts": [
+      "Crusade",
+      "Vocation",
+      "Avocation",
+      "Demeanor"
+     ],
+     "ans": 2,
+     "hint": "Which one is the hobby rather than the job?",
+     "steps": [
+      "Surgery is Dana's profession, which is her vocation.",
+      "Restoring radios is something she does for pleasure in her free time.",
+      "An activity pursued for pleasure is an avocation."
+     ],
+     "ex": {
+      "main": "**Avocation.** An avocation is a hobby. Her vocation, the job, is surgery. The two words differ by one letter and mean opposite halves of a week.",
+      "tip": "Vocation pays the bills; avocation is what the a- takes you away to."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is best described as a crusade?",
+     "opts": [
+      "A single letter sent to complain once",
+      "A short argument over a parking space",
+      "A weekend spent collecting old stamps",
+      "A decades-long campaign to end child labor"
+     ],
+     "ans": 3,
+     "hint": "A crusade is long, passionate, and for a cause.",
+     "steps": [
+      "A crusade needs three things: it lasts, it is impassioned, and it serves a cause seen as just.",
+      "A parking argument is short and personal; stamp collecting is a hobby; one letter is not a sustained struggle.",
+      "Only the decades-long campaign against child labor has all three."
+     ],
+     "ex": {
+      "main": "**A decades-long campaign to end child labor.** A crusade is a prolonged, impassioned struggle for a just cause, and the other options are each missing at least one part of that.",
+      "tip": "Check length, passion and cause. A crusade has all three."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A lab finds a paint that was first made in 1950 on a canvas supposedly painted in 1820. The test is ___ proof that the painting is a fake.",
+     "opts": [
+      "Definitive",
+      "Tacit",
+      "Erudite",
+      "Raucous"
+     ],
+     "ans": 0,
+     "hint": "The paint could not exist in 1820. How much room does that leave for doubt?",
+     "steps": [
+      "A paint invented in 1950 cannot appear on a real painting from 1820.",
+      "So the test settles the question with no room for argument.",
+      "Evidence that supplies a final answer is definitive."
+     ],
+     "ex": {
+      "main": "**Definitive.** It means conclusive: supplying a final answer. A paint that did not exist yet cannot be on a genuine 1820 canvas, so nothing is left to debate.",
+      "tip": "Definitive is stronger than definite. A definite answer is clear; a definitive one ends the matter."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "After losing the championship, the captain shook every hand with a steady smile. Reporters praised her:",
+     "opts": [
+      "Erudition",
+      "Demeanor",
+      "Avocation",
+      "Crusade"
+     ],
+     "ans": 1,
+     "hint": "What did the reporters actually see?",
+     "steps": [
+      "The reporters could see how the captain carried herself after a hard loss.",
+      "Erudition is learning, an avocation is a hobby, and a crusade is a long struggle.",
+      "Outward behavior and bearing is a demeanor."
+     ],
+     "ex": {
+      "main": "**Demeanor.** It means behavior and bearing, the way a person carries themselves, which is what a steady smile and a handshake show.",
+      "tip": "You can see a demeanor from across a room. Erudition only shows when someone talks."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A person who is erudite has:",
+     "opts": [
+      "A harsh voice",
+      "Unusual strength",
+      "Extensive learning",
+      "Many enemies"
+     ],
+     "ans": 2,
+     "hint": "Think about what sets an erudite tour guide apart.",
+     "steps": [
+      "Erudite describes someone with deep, wide knowledge.",
+      "Strength, voice and enemies have nothing to do with it.",
+      "Erudite means learned, so the answer is extensive learning."
+     ],
+     "ex": {
+      "main": "**Extensive learning.** Erudite means learned. The noun, erudition, is that learning itself.",
+      "tip": "Erudite comes from Latin for \"out of the rough\": schooled until the rough edges are gone."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A retired pitcher is inducted into a hall of fame. He is:",
+     "opts": [
+      "Asked to design it",
+      "Removed from its records",
+      "Paid to tour it",
+      "Formally admitted to it"
+     ],
+     "ans": 3,
+     "hint": "In + duct: \"led in\".",
+     "steps": [
+      "To induct is to admit someone to a society or office, often with a ceremony.",
+      "Being removed, paid or asked to design it are different things.",
+      "So the pitcher is formally admitted."
+     ],
+     "ex": {
+      "main": "**Formally admitted to it.** To induct is to admit to an office or a society, usually with a ceremony. The ceremony itself is the induction.",
+      "tip": "Induct (lead in) and deduct (take away) differ by a prefix. The meanings follow it."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Rosa forgot to renew her library card, and it lapsed over the summer. Here, lapsed means the card:",
+     "opts": [
+      "Expired",
+      "Got lost",
+      "Was copied",
+      "Was upgraded"
+     ],
+     "ans": 0,
+     "hint": "What happens to a card nobody renews?",
+     "steps": [
+      "Lapse has several senses: to slip from a standard, to expire, a small slip, or a pause.",
+      "A card that is not renewed does not vanish or improve. It simply runs out.",
+      "In this sentence lapsed means expired."
+     ],
+     "ex": {
+      "main": "**Expired.** Here lapse means to come to an end, the way a subscription or a deadline lapses when nobody renews it.",
+      "tip": "Lapse has four senses. Let the sentence pick the one."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A newspaper calls a group of parents \"militant\" about school lunches. What does that tell you about them?",
+     "opts": [
+      "They have all served in the armed forces",
+      "They are fiercely ready to fight for it",
+      "They quietly disagree with each other",
+      "They refuse to discuss school lunches"
+     ],
+     "ans": 1,
+     "hint": "Militant shares a root with military, but does it require a uniform?",
+     "steps": [
+      "Militant means ready to fight, especially for a cause.",
+      "It shares a root with military, but it describes a fighting spirit, not army service.",
+      "So the parents are fiercely ready to fight for better lunches."
+     ],
+     "ex": {
+      "main": "**They are fiercely ready to fight for it.** Militant describes combative zeal for a cause. Parents can be militant about lunches without ever going near a barracks.",
+      "tip": "Military is about soldiers. Militant is about attitude."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "After he was caught cheating at the chess club, no one would sit with him or speak to him. He had become a:",
+     "opts": [
+      "Protégé",
+      "Prodigy",
+      "Pariah",
+      "Militant"
+     ],
+     "ans": 2,
+     "hint": "Everyone is keeping their distance from him.",
+     "steps": [
+      "The story is about a person whom everyone shuns.",
+      "A prodigy is talented young, a protégé is mentored, and a militant is ready to fight.",
+      "A social outcast is a pariah."
+     ],
+     "ex": {
+      "main": "**Pariah.** It means a social outcast, someone the group pushes out, which is what happened at the chess club.",
+      "tip": "A pariah does not choose to be alone. The others make it so."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "At age seven, Mei was already performing piano concertos with a full orchestra. Mei was a:",
+     "opts": [
+      "Militant",
+      "Protégé",
+      "Pariah",
+      "Prodigy"
+     ],
+     "ans": 3,
+     "hint": "What is remarkable here is how early it happened.",
+     "steps": [
+      "The stem stresses extraordinary talent at a very young age.",
+      "Nothing says a mentor is guiding Mei's career, which is what protégé would need.",
+      "Remarkable talent at an early age makes Mei a prodigy."
+     ],
+     "ex": {
+      "main": "**Prodigy.** A prodigy shows remarkable talent early in life. Protégé is the trap: it needs a mentor, and the sentence names none.",
+      "tip": "Prodigy is about age; protégé is about a mentor. Ask which one the sentence gives you."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A young chef trained for years under a famous restaurant owner, who later helped her open her own kitchen. The chef was the owner's:",
+     "opts": [
+      "Protégé",
+      "Prodigy",
+      "Pariah",
+      "Avocation"
+     ],
+     "ans": 0,
+     "hint": "Someone more experienced is helping her career along.",
+     "steps": [
+      "The owner trained the chef and then helped launch her career.",
+      "A person whose career is helped along by someone more experienced is a protégé.",
+      "Nothing in the story says her talent appeared unusually early, so prodigy does not fit."
+     ],
+     "ex": {
+      "main": "**Protégé.** A protégé is someone a mentor trains and promotes. The famous owner is the mentor; the young chef is the protégé.",
+      "tip": "Protégé is French for \"protected\". Look for the person doing the protecting."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The fans in the bleachers grew so raucous that the umpire paused the game. The fans were:",
+     "opts": [
+      "Silent and tense",
+      "Loud and disorderly",
+      "Few and scattered",
+      "Calm and patient"
+     ],
+     "ans": 1,
+     "hint": "Why would an umpire need to stop the game?",
+     "steps": [
+      "An umpire pauses a game when the crowd gets out of hand.",
+      "Raucous means harsh to the ear, and also boisterous and disorderly.",
+      "So the fans were loud and disorderly."
+     ],
+     "ex": {
+      "main": "**Loud and disorderly.** Raucous covers both senses at once here: harsh noise and rowdy behavior.",
+      "tip": "Say RAW-kus aloud. It sounds like the noise it describes."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Nobody ever said it aloud, but everyone in the family knew the front seat belonged to Grandpa. That was a ___ rule.",
+     "opts": [
+      "Raucous",
+      "Definitive",
+      "Tacit",
+      "Erudite"
+     ],
+     "ans": 2,
+     "hint": "How did the family learn the rule?",
+     "steps": [
+      "The rule was understood even though no one ever stated it.",
+      "Something understood without being put into words is tacit.",
+      "Definitive means conclusive, raucous means loud, and erudite means learned."
+     ],
+     "ex": {
+      "main": "**Tacit.** It means implied or understood without words. Unspoken family rules are a textbook case.",
+      "tip": "Tacit is the opposite of explicit. If someone says it outright, it is no longer tacit."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "ADROIT : SKILLFUL",
+     "opts": [
+      "dislike : loathe",
+      "tacit : explicit",
+      "militant : fight",
+      "erudite : learned"
+     ],
+     "ans": 3,
+     "hint": "Do the two stem words mean the same thing or different things?",
+     "steps": [
+      "Adroit means skillful, so the stem pair are synonyms.",
+      "Erudite means learned: synonyms. Match.",
+      "Tacit and explicit are opposites, a militant is ready to fight (person to action), and loathe is a stronger dislike (degree)."
+     ],
+     "ex": {
+      "main": "**Both pairs are SYNONYMS.** Adroit means skillful just as erudite means learned.",
+      "tip": "Name the relationship before you read the options. \"Means the same as\" picks out one answer here."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "TACIT : EXPLICIT",
+     "opts": [
+      "raucous : quiet",
+      "adroit : skillful",
+      "militant : fight",
+      "ingrate : gratitude"
+     ],
+     "ans": 0,
+     "hint": "Is an unspoken rule the same as a stated one?",
+     "steps": [
+      "Tacit means unspoken; explicit means stated outright. They are opposites.",
+      "Raucous means loud and rough; quiet is its opposite. Match.",
+      "Adroit and skillful are synonyms, a militant is ready to fight, and an ingrate lacks gratitude."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Tacit reverses explicit, and raucous reverses quiet.",
+      "tip": "An antonym reverses the word. A \"lacks\" pair, such as ingrate : gratitude, names what is missing. Those are different relationships."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "PARIAH : ACCEPTANCE",
+     "opts": [
+      "prodigy : talent",
+      "novice : experience",
+      "erudite : ignorant",
+      "crusade : struggle"
+     ],
+     "ans": 1,
+     "hint": "What does a pariah not have?",
+     "steps": [
+      "A pariah is an outcast, so a pariah lacks acceptance.",
+      "A novice is a beginner, so a novice lacks experience. Match.",
+      "A prodigy HAS talent, which is the reverse of lacking it. Erudite and ignorant are antonyms, and a crusade is a kind of struggle."
+     ],
+     "ex": {
+      "main": "**Both pairs are \"LACKS\".** A pariah lacks acceptance; a novice lacks experience.",
+      "tip": "Prodigy : talent is the trap: it is \"has\", not \"lacks\". Read which way the relationship runs."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "PROTÉGÉ : MENTOR",
+     "opts": [
+      "pariah : outcast",
+      "prodigy : talent",
+      "apprentice : master",
+      "militant : peaceful"
+     ],
+     "ans": 2,
+     "hint": "Who helps whom?",
+     "steps": [
+      "A protégé is guided and promoted by a mentor.",
+      "An apprentice is trained by a master: the one guided, then the one who guides. Match.",
+      "A prodigy has talent, a pariah is an outcast (synonyms), and militant and peaceful are antonyms."
+     ],
+     "ex": {
+      "main": "**Both pairs are THE ONE GUIDED : THE ONE WHO GUIDES.** A mentor shapes a protégé the way a master trains an apprentice.",
+      "tip": "When both words are people, ask what one does for the other."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

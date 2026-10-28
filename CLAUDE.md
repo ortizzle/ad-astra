@@ -87,6 +87,11 @@ sandbox, and a library bigger than localStorage's share.
 Since v217 (Wayfinder v197) boot also calls `askPersist()`, which asks Chrome
 (`navigator.storage.persist()`, once, silently) not to clear the site's storage
 under disk pressure. The grant covers all of ortizzle.github.io.
+**Boot never waits on IndexedDB for more than `DB_WAIT` (3 s), since v218 /
+Wayfinder v198.** If `open()` or the first read does not answer by then, the
+app boots from localStorage and leaves IndexedDB alone for the rest of the
+session, so the session's partial copy can never overwrite the full one. See
+*The app always comes up* below.
 
 **Merging** is per-record, newest `updatedAt` wins (`Sync.merge`). Saving always
 fetches remote first, merges, then writes — never a blind overwrite.
@@ -1024,6 +1029,109 @@ dates strictly ascending and never on a weekend or a day off, a held unit
 absent from the shelf / `units()` / a shuffle round, "Release it now" and
 "Release all now", the parent line, the default pace writing no hold at all,
 and a single-unit approve clearing an inherited one.
+
+### The app always comes up (v218 / Wayfinder v198, both apps)
+
+Chris, the morning after v216 moved `DATA` into IndexedDB: *"Sedona's app
+won't restart."* The phone was not available to inspect, so the failure was
+reproduced rather than read off a screen. The v217 build was booted headless
+under every storage state the move could leave behind: a fresh install, her
+real 3.7 MB library sitting in the old localStorage key, the relaunch after
+the move, and localStorage filled to the brim. It came up every time, and
+`test_swflow.js` and `test_idb_storage.js` both passed against it. What it
+could not survive was IndexedDB not answering.
+
+**Since v216, nothing draws until `loadLocal()` resolves, and IndexedDB on
+Android can hang**: `open()` or a read that never fires success or error.
+v215 drew synchronously from localStorage and had no such dependency. On the
+v217 build a hung `open()` leaves `#screen` empty after nine seconds and
+forever after: an app that "won't restart". Three fixes, all engine:
+
+- **`DB_WAIT` (3 s) on `open()` and on `get()`.** Past it, `DataDB.giveUp()`
+  sets `gaveUp`, the boot falls back to the localStorage branch, and a late
+  answer is closed and ignored. Ignoring it is the point: the fallback session
+  may be holding less than IndexedDB does (the legacy copy was cleared by the
+  move), and a late `ok` would let `writeData()` overwrite the full copy with
+  the partial one. Writes in the fallback session go to localStorage, and the
+  next healthy launch merges them back through the same one-time-move path,
+  by `Sync.merge`'s rules.
+- **A start-up that throws shows a card**, "The app didn't start properly", with
+  a 44px Reload button and the error's message in small print, instead of a
+  blank screen. `booted.catch` only; nothing on that path touches stored data.
+- **Refresh on the update bar asks the worker that is waiting at the moment of
+  the tap** (`reg.waiting || w`), and reloads anyway after four seconds if no
+  takeover arrives. v216 and v217 deployed 23 minutes apart. A bar built for
+  the first worker posts to a worker that the second has made redundant, and
+  the button sits on "…" forever. A reload is always safe, because
+  `index.html` is fetched network-first.
+
+> **Not confirmed on her phone.** This is the failure that fits the timing
+> and the symptom, and the one the v217 build demonstrably cannot survive.
+> If she still sees a blank screen after this lands, the card will now say
+> why, and that message is the next thing to read.
+
+`tools/test_boot_resilience.js` (same file, both apps, 10 assertions) pins:
+
+- a hung `open()` drawing the screen in under seven seconds from the
+  localStorage copy
+- a change made in that session reaching localStorage, and then IndexedDB on
+  the next healthy launch
+- a hung read doing the same without losing a single record
+- a planted start-up error showing the card and its Reload button at 44px
+- Refresh posting to the replacement worker, not the replaced one
+
+**Run against the v217 build, all ten fail**, the hung `open()` with an empty
+screen after nine seconds.
+
+### Wordly Wise Book 9 · Lessons 8, 9 and 10 (v218, THIS APP ONLY)
+
+Chris: *"Let's update Sedona's vocab lessons with new words."* Three PDFs
+landed in her English Wordly Wise folder on 10/27: `Lesson 8.pdf`,
+`Lesson 9.pdf` and `Lesson 10.pdf`. Each is the two word-list pages only,
+with no exercises. So every question is ours, with fresh scenarios rather
+than the book's sentences, and every `sp` respelling was read off the book's
+pronunciation guide by rendering the pages, since Drive's OCR mangles the
+diacritics.
+
+| id | words | |
+|---|---|---|
+| `unit-ww9-08` | adroit … tacit | 15 cards / 19 q |
+| `unit-ww9-09` | allure … transmute | 15 / 21 |
+| `unit-ww9-10` | amputate … trite | 15 / 19 |
+
+- **Built by `tools/builders/build_ww9_08_10.py`** through `unit_common.build()`,
+  so `_balance()` spreads the answers. It asserts every word is the subject
+  or answer of a question. `quarter:2`, `libv:1`, drafts.
+- **Four analogies per lesson, four different named relationships**, per the
+  v73 rule. Each lesson adds one relationship Book 9 had not used:
+  - Lesson 8: the one guided : the one who guides
+  - Lesson 9: part to whole, and "cannot be"
+  - Lesson 10: person to action
+- **Each lesson is built around its near-miss pairs**, with the wrong half of
+  each pair offered as a real option:
+  - Lesson 8: prodigy and protégé; avocation and vocation; militant and
+    military; and "lacks" against "has" in PARIAH : ACCEPTANCE
+  - Lesson 9: cleave's two opposite senses, one question each
+  - Lesson 10: beneficiary and benefactor, aptitude and attitude,
+    practicable and practical, gratis and gratitude
+
+  Benefactor, attitude, practical, apprise and appreciate are not on the
+  lists. They are named on cards and in explanations, never as answers.
+- **The glossed-stem rule is pinned, not trusted**: no stem contains its own
+  correct answer.
+
+`tools/test_ww9_08_10.js` (41 assertions) seeds Lessons 1–10 and pins:
+
+- the shelf running 1 to 10
+- per lesson: the fifteen list words, bold leads with respellings and hooks,
+  every word asked about, four distinct relationships, the `WORD : WORD`
+  shape, no self-answering stem, all four answer slots, a round that logs,
+  and the deck
+- each named trap by its teaching
+- a privacy sweep
+
+**Verified by flipping the prodigy answer to protégé and planting the answer
+in the gratis stem**, and watching exactly those assertions fail.
 
 ### Dynamics 1 · 1-5 to 1-7: springs and momentum, and the N1L gaps in 1-3 (v215, THIS APP ONLY)
 

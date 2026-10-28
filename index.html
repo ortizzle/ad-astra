@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v217 · Kept safe';
+const APP_VERSION = 'v218 · Always starts';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2472,24 +2472,40 @@ function migrate(d){
    small per-device switches stay in localStorage via Store; only DATA moved.
    If IndexedDB can't open (very old browser, some private modes), everything
    falls back to localStorage exactly as before. */
+const DB_WAIT = 3000;
 const DataDB = {
-  name: Store.ns+'db', os:'kv', db:null, ok:false,
+  name: Store.ns+'db', os:'kv', db:null, ok:false, gaveUp:false,
+  /* IndexedDB on Android can occasionally hang: open() or a read never
+     answers, neither success nor error. Boot waits on both, so a hang was an
+     app that never came up. After DB_WAIT the app boots from localStorage
+     instead, and IndexedDB is left alone for the rest of the session — a late
+     answer must not let this session's partial copy overwrite the full one
+     stored there. The next launch tries IndexedDB again and merges in anything
+     written to localStorage meanwhile, by the same rules as sync. */
+  giveUp(){ this.gaveUp = true; this.ok = false;
+    if(this.db){ try{ this.db.close(); }catch(e){} this.db = null; } },
   open(){
     if(this.ok) return Promise.resolve(true);
+    if(this.gaveUp) return Promise.resolve(false);
     return new Promise(res=>{
+      const t = setTimeout(()=>{ this.giveUp(); res(false); }, DB_WAIT);
       try{
         const r = indexedDB.open(this.name, 1);
         r.onupgradeneeded = ()=>r.result.createObjectStore(this.os);
-        r.onsuccess = ()=>{ this.db = r.result; this.ok = true; res(true); };
-        r.onerror = r.onblocked = ()=>res(false);
-      }catch(e){ res(false); }
+        r.onsuccess = ()=>{ clearTimeout(t);
+          if(this.gaveUp){ try{ r.result.close(); }catch(e){} return; }
+          this.db = r.result; this.ok = true; res(true); };
+        r.onerror = r.onblocked = ()=>{ clearTimeout(t); res(false); };
+      }catch(e){ clearTimeout(t); res(false); }
     });
   },
   get(k){
     return new Promise(res=>{
+      const t = setTimeout(()=>{ this.giveUp(); res(null); }, DB_WAIT);
       try{ const q = this.db.transaction(this.os).objectStore(this.os).get(k);
-        q.onsuccess = ()=>res(q.result===undefined ? null : q.result); q.onerror = ()=>res(null); }
-      catch(e){ res(null); }
+        q.onsuccess = ()=>{ clearTimeout(t); res(q.result===undefined ? null : q.result); };
+        q.onerror = ()=>{ clearTimeout(t); res(null); }; }
+      catch(e){ clearTimeout(t); res(null); }
     });
   },
   /* put() clones the value when it's called, so later edits to DATA can't
@@ -2536,8 +2552,7 @@ async function loadLocal(){
   // Read only once the load has landed: changes keep arriving while it's in flight.
   const earlyNow = () => !dataReady && DATA && DATA.records && Object.keys(DATA.records).length ? DATA : null;
   let d = null;
-  if(await DataDB.open()){
-    d = await DataDB.get('data');
+  if(await DataDB.open() && (d = await DataDB.get('data'), DataDB.ok)){
     /* The one-time move. A copy still in localStorage (the first launch after
        this change, or an old tab that kept writing) is merged in by the same
        per-record rules as sync, and removed only once IndexedDB holds it. */
@@ -3599,6 +3614,7 @@ const CONTENT_LIBRARY = ['content/algebra2-readiness.json', 'content/tkam-1.json
   'content/history-u2-p1.json', 'content/history-u2-p2.json', 'content/history-u2-p3.json',
   'content/ww9-lesson-01.json', 'content/ww9-lesson-02.json', 'content/ww9-lesson-03.json', 'content/ww9-lesson-04.json',
   'content/ww9-lesson-05.json', 'content/ww9-lesson-06.json', 'content/ww9-lesson-07.json',
+  'content/ww9-lesson-08.json', 'content/ww9-lesson-09.json', 'content/ww9-lesson-10.json',
   'content/bio-unit-1.json', 'content/latin-unit-1.json', 'content/latin-vocab-1.json', 'content/bio-unit-2.json',
   'content/phys-kinematics-graphs.json', 'content/bio-unit-1b.json', 'content/asl-1.json',
   'content/asl-alphabet.json',
@@ -13344,6 +13360,22 @@ const booted = loadLocal().then(()=>{
   }
   if(Sync.configured()) Sync.load().then(()=>{ applyTheme(); render(); });
 });
+/* If anything in that start-up throws, say so and offer a reload, rather than
+   leaving a blank screen that looks like the app is gone. Nothing here touches
+   stored data, so a reload is always safe. */
+booted.catch(e=>{
+  try{ console.error(e); }catch(_){}
+  const s = document.getElementById('screen'); if(!s) return;
+  s.textContent = '';
+  const c = el('div','card');
+  c.appendChild(el('h2',null,'The app didn’t start properly'));
+  c.appendChild(el('p',null,'Nothing you’ve done has been deleted. Reloading usually fixes this.'));
+  const b = el('button','btn','Reload');
+  b.addEventListener('click',()=>location.reload());
+  c.appendChild(b);
+  c.appendChild(el('p','hintline',String(e && e.message || e).slice(0,200)));
+  s.appendChild(c);
+});
 /* Mobile Chrome caches hard — that is why every deploy bumps CACHE_VERSION.
    The worker already knows when a newer build is installed and waiting; this
    just says so, once, in a bar she can act on or dismiss. Dismissing costs
@@ -13357,7 +13389,14 @@ function offerUpdate(reg){
   const bar = el('div','swbar');
   bar.appendChild(el('span',null,'A new version is ready.'));
   const b = el('button',null,'Refresh');
-  b.addEventListener('click',()=>{ swAccepted = true; b.textContent = '…'; w.postMessage('skip'); });
+  /* Ask whichever worker is waiting NOW: when two deploys land close together,
+     the one this bar was built for is replaced by the next and ignores the
+     message, which left the button stuck on "…". And if no takeover arrives,
+     reload anyway — index.html is fetched network-first, so a reload always
+     brings the newest app. */
+  b.addEventListener('click',()=>{ swAccepted = true; b.textContent = '…';
+    const cur = reg.waiting || w; try{ cur.postMessage('skip'); }catch(e){}
+    setTimeout(()=>location.reload(), 4000); });
   bar.appendChild(b);
   const x = el('button','x','✕');
   x.setAttribute('aria-label','Not now');

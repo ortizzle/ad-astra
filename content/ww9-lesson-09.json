@@ -1,0 +1,680 @@
+{
+ "v": 4,
+ "records": {
+  "unit-ww9-09": {
+   "id": "unit-ww9-09",
+   "type": "unit",
+   "updatedAt": 1793152667355,
+   "classId": "english",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Wordly Wise Book 9 · Lesson 9",
+   "srcName": "Wordly Wise 3000 Book 9, Lesson 9 (Drive)",
+   "source": "English 8 — Wordly Wise (Drive folder)",
+   "summary": {
+    "text": "Lesson 9 of Wordly Wise 3000 Book 9: fifteen words about value and age (appraise, depreciate, antiquity, facsimile), how things look and attract (allure, facet, nondescript, scintillate), close examination and change (scrutinize, transmute, synthetic), and a few with two senses worth knowing (cleave, impervious, repose, quandary).",
+    "from": "source"
+   },
+   "why": {
+    "text": "Cleave is the star of this lesson: one word that means both cling together and split apart. Learning to let the sentence choose the sense is a skill every later lesson will use.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Define and use all fifteen Lesson 9 words correctly",
+     "from": "source"
+    },
+    {
+     "text": "Read both opposite senses of cleave from the sentence around it",
+     "from": "source"
+    },
+    {
+     "text": "Tell appraise from apprise, and depreciate from appreciate",
+     "from": "added"
+    },
+    {
+     "text": "Name the part-to-whole, degree and \"cannot be\" analogy relationships",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from the Lesson 9 word list (the two word-list pages only; no exercise pages were in the upload, so every question uses a fresh scenario). Respellings follow the book's pronunciation guide. Cleave gets two questions, one for each of its opposite senses, because it is the word in this lesson most likely to be tested. Two near-misses that are not on the list are named on the cards rather than tested: apprise (to inform) against appraise, and appreciate against depreciate.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Cards, then the quiz. Write two sentences with cleave tonight, one for each meaning.",
+    "minutes": 15,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "allure",
+     "def": "**The power to attract or charm.** (noun)\n• The allure of the open road is hard to resist in spring.\n• Allure pulls you in; it is about attraction, not beauty alone.",
+     "hint": "A lure is bait. Allure is what makes you take it.",
+     "from": "source",
+     "sp": "uh-LOOR"
+    },
+    {
+     "id": "c1",
+     "term": "antiquity",
+     "def": "**The ancient world, especially before the Middle Ages; also great age.** (noun)\n• Rome and Athens are cities of antiquity.\n• antiquities (plural): valuable objects from ancient times.",
+     "hint": "Same root as antique: very old, and usually valuable.",
+     "from": "source",
+     "sp": "an-TIK-wuh-tee"
+    },
+    {
+     "id": "c2",
+     "term": "appraise",
+     "def": "**To estimate the value of; to judge or evaluate.** (verb)\n• An expert appraised the old violin at twice what they paid.\n• Not the same as apprise, which means to inform.",
+     "hint": "Appraise contains \"praise\" and price: you are setting a price on it.",
+     "from": "source",
+     "sp": "uh-PRAYZ"
+    },
+    {
+     "id": "c3",
+     "term": "cleave",
+     "def": "**To cling to and stay faithful to; also, to split with force.** (verb)\n• She cleaved to her friends through the hard year.\n• A butcher's cleaver cleaves bone in one stroke.",
+     "hint": "A word that is its own opposite: it can mean hold together or split apart.",
+     "from": "source",
+     "sp": "kleev"
+    },
+    {
+     "id": "c4",
+     "term": "depreciate",
+     "def": "**To lose value, or make something lose value; also, to belittle.** (verb)\n• Most cars depreciate the moment they leave the lot.\n• The opposite is appreciate, to rise in value.",
+     "hint": "De- means down: the price is going down.",
+     "from": "source",
+     "sp": "duh-PREE-shee-ayt"
+    },
+    {
+     "id": "c5",
+     "term": "facet",
+     "def": "**One of the small flat surfaces cut on a gem; also, one side or aspect of something.** (noun)\n• A diamond's facets catch the light.\n• Every facet of the plan was discussed before the vote.",
+     "hint": "Facet is a little face: each one shows a different side.",
+     "from": "source",
+     "sp": "FAS-ut"
+    },
+    {
+     "id": "c6",
+     "term": "facsimile",
+     "def": "**An exact copy.** (noun)\n• The museum sells a facsimile of the original map.\n• The short form fax comes from this word: a copy sent down a phone line.",
+     "hint": "Latin fac simile, \"make it similar\".",
+     "from": "source",
+     "sp": "fak-SIM-uh-lee"
+    },
+    {
+     "id": "c7",
+     "term": "impervious",
+     "def": "**Not able to be penetrated; also, not affected or disturbed by something.** (adjective)\n• A good raincoat is impervious to water.\n• She stayed impervious to the crowd's teasing.",
+     "hint": "Im- (not) + pervious (letting things through): nothing gets in.",
+     "from": "source",
+     "sp": "im-PUR-vee-us"
+    },
+    {
+     "id": "c8",
+     "term": "nondescript",
+     "def": "**Hard to describe because it has nothing distinctive about it.** (adjective)\n• The spies met in a nondescript office building.\n• Plain, ordinary, easy to forget.",
+     "hint": "Non + describe: there is nothing to describe.",
+     "from": "source",
+     "sp": "NAHN-dih-skript"
+    },
+    {
+     "id": "c9",
+     "term": "quandary",
+     "def": "**A state of doubt about what to do.** (noun)\n• With two invitations for the same night, he was in a quandary.\n• A quandary is a dilemma you are stuck inside.",
+     "hint": "Hear \"wander-y\": your mind wanders between choices.",
+     "from": "source",
+     "sp": "KWAHN-duh-ree"
+    },
+    {
+     "id": "c10",
+     "term": "repose",
+     "def": "**To lie at rest; also, to place trust or power in someone.** (verb; also a noun, a state of rest)\n• The cat reposed in a patch of sun.\n• Voters repose their trust in the people they elect.",
+     "hint": "Re + pose: you hold a resting pose.",
+     "from": "source",
+     "sp": "rih-POHZ"
+    },
+    {
+     "id": "c11",
+     "term": "scintillate",
+     "def": "**To sparkle or flash.** (verb); scintillating (adjective) also means **lively and witty**\n• Frost scintillated on the windows at dawn.\n• A scintillating talk keeps the room laughing and thinking.",
+     "hint": "A scintilla is a spark. Scintillating talk throws sparks.",
+     "from": "source",
+     "sp": "SIN-tl-ayt"
+    },
+    {
+     "id": "c12",
+     "term": "scrutinize",
+     "def": "**To examine with great care.** (verb)\n• The judge scrutinized every photograph in the file.\n• scrutiny (noun): close examination.",
+     "hint": "Scrutinize is looking hard, not just looking.",
+     "from": "source",
+     "sp": "SKROOT-n-yz"
+    },
+    {
+     "id": "c13",
+     "term": "synthetic",
+     "def": "**Made by an artificial process, not produced naturally.** (adjective)\n• Nylon and polyester are synthetic fibers; wool is natural.\n• Synthetic does not mean fake or bad, only factory-made.",
+     "hint": "Synthesis means putting parts together. People assembled it; nature did not.",
+     "from": "source",
+     "sp": "sin-THET-ik"
+    },
+    {
+     "id": "c14",
+     "term": "transmute",
+     "def": "**To change the form or appearance of something.** (verb)\n• Old alchemists dreamed of transmuting lead into gold.\n• A transmuted thing has become something else entirely.",
+     "hint": "Trans- (across) + mute (change), as in mutation.",
+     "from": "source",
+     "sp": "trans-MYOOT"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Every winter, the ___ of the mountain village, with its crisp air, quiet trails and glowing lanterns, drew the same visitors back.",
+     "opts": [
+      "Allure",
+      "Facet",
+      "Quandary",
+      "Facsimile"
+     ],
+     "ans": 0,
+     "hint": "What is pulling the visitors back?",
+     "steps": [
+      "The village draws people back year after year.",
+      "A facet is one side of something, a quandary is a state of doubt, and a facsimile is a copy.",
+      "The power to attract is allure."
+     ],
+     "ex": {
+      "main": "**Allure.** It means the power to attract or charm, which is exactly what keeps visitors returning.",
+      "tip": "Allure has \"lure\" inside it, and a lure is bait. Allure is the pull."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A museum's hall of antiquities is full of:",
+     "opts": [
+      "Copies made for the gift shop",
+      "Valuable objects from ancient times",
+      "Problems no one has solved yet",
+      "Surfaces cut on precious stones"
+     ],
+     "ans": 1,
+     "hint": "Think of the word antique.",
+     "steps": [
+      "Antiquity is the ancient world; antiquities are objects from it.",
+      "Copies would be facsimiles, and the surfaces of a gem are facets.",
+      "So the hall holds valuable objects from ancient times."
+     ],
+     "ex": {
+      "main": "**Valuable objects from ancient times.** The plural, antiquities, names the things that survive from antiquity, such as vases, coins and statues.",
+      "tip": "Antiquity (singular) is the age. Antiquities (plural) are the objects from it."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Before insuring her grandmother's ring, Mia took it to a jeweler to have it:",
+     "opts": [
+      "Depreciated",
+      "Transmuted",
+      "Appraised",
+      "Scrutinized"
+     ],
+     "ans": 2,
+     "hint": "An insurance company needs to know how much it is worth.",
+     "steps": [
+      "Insurance depends on knowing what the ring is worth.",
+      "Scrutinize means to look at closely, but the purpose here is setting a value.",
+      "To estimate the value of something is to appraise it."
+     ],
+     "ex": {
+      "main": "**Appraised.** To appraise is to estimate value. A jeweler might scrutinize the ring while doing it, but what Mia needs is a price.",
+      "tip": "Appraise contains \"praise\" and sounds like price. Apprise, with one p fewer and an i, means to inform."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The butcher cleaved the bone with a single stroke. Here, cleaved means:",
+     "opts": [
+      "Weighed",
+      "Clung to",
+      "Polished",
+      "Split"
+     ],
+     "ans": 3,
+     "hint": "What does a butcher do to a bone with a single stroke?",
+     "steps": [
+      "Cleave has two opposite senses: to cling to, and to split with force.",
+      "A single stroke from a butcher splits the bone in two.",
+      "Here cleaved means split."
+     ],
+     "ex": {
+      "main": "**Split.** A butcher's tool is even called a cleaver. In this sentence cleave means to split with force.",
+      "tip": "Cleave is its own opposite. The sentence always tells you which half you have."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Through every hardship, she cleaved to her family's traditions. Here, cleaved means she:",
+     "opts": [
+      "Held on to them faithfully",
+      "Broke away from them sharply",
+      "Made fun of them openly",
+      "Wrote them down carefully"
+     ],
+     "ans": 0,
+     "hint": "This is the other half of a word that means two opposite things.",
+     "steps": [
+      "Cleave can mean to split, but \"cleaved to\" signals the other sense.",
+      "To cleave to something is to cling to it and stay faithful.",
+      "So she held on to her family's traditions."
+     ],
+     "ex": {
+      "main": "**Held on to them faithfully.** Cleave to means cling to. It is the exact reverse of cleaving a bone in two, and the small word \"to\" gives it away.",
+      "tip": "\"Cleave to\" means cling; \"cleave\" with an object and no \"to\" means split."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A new car loses a large share of its value the moment it is driven off the lot. The car:",
+     "opts": [
+      "Appraises",
+      "Depreciates",
+      "Transmutes",
+      "Reposes"
+     ],
+     "ans": 1,
+     "hint": "Its value is going down.",
+     "steps": [
+      "The car's value drops.",
+      "Appraise means to estimate a value, transmute means to change form, and repose means to rest.",
+      "To become less in value is to depreciate."
+     ],
+     "ex": {
+      "main": "**Depreciates.** It means to lose value. The opposite, appreciate, is what an investment does when its value rises.",
+      "tip": "De- means down: depreciating value goes down."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A critic who depreciates modern art:",
+     "opts": [
+      "Examines every piece with great care",
+      "Raises its price at auction",
+      "Speaks of it as having little value",
+      "Makes exact copies of famous works"
+     ],
+     "ans": 2,
+     "hint": "This is the second sense of depreciate, applied to opinions.",
+     "steps": [
+      "Depreciate also means to represent something as having little value: to belittle it.",
+      "Examining with care would be scrutinizing, and exact copies would be facsimiles.",
+      "So the critic speaks of modern art as worth little."
+     ],
+     "ex": {
+      "main": "**Speaks of it as having little value.** Depreciate's second sense is to belittle. The critic is driving the art's worth down in words rather than in dollars.",
+      "tip": "Depreciate and belittle (Lesson 7) overlap in this sense. Linking them helps you remember both."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Before choosing a summer camp, Leo looked at every ___ of each one: cost, distance, activities and food.",
+     "opts": [
+      "Quandary",
+      "Facsimile",
+      "Allure",
+      "Facet"
+     ],
+     "ans": 3,
+     "hint": "Cost, distance, activities and food are separate sides of one choice.",
+     "steps": [
+      "The list names several separate aspects of each camp.",
+      "One side or aspect of something is a facet.",
+      "A facsimile is a copy, allure is attraction, and a quandary is the state of being unsure."
+     ],
+     "ex": {
+      "main": "**Facet.** One aspect of something, the way one cut face of a gem shows one view of it.",
+      "tip": "Facet is a little face. Turn the problem and look at each face."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A facsimile of the Declaration of Independence is:",
+     "opts": [
+      "An exact copy of it",
+      "A summary of what it says",
+      "A speech praising it",
+      "A rough first draft"
+     ],
+     "ans": 0,
+     "hint": "The short form of this word is fax.",
+     "steps": [
+      "A facsimile is an exact copy.",
+      "A summary shortens, a speech praises, and a draft comes before the final version.",
+      "Only an exact copy is a facsimile."
+     ],
+     "ex": {
+      "main": "**An exact copy of it.** Facsimile comes from Latin for \"make similar\", and a fax machine sends one.",
+      "tip": "If it looks identical but is not the original, it is a facsimile."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "The goalkeeper stayed impervious to the crowd's jeers. She was:",
+     "opts": [
+      "Hurt by them",
+      "Unaffected by them",
+      "Joining in with them",
+      "Startled by them"
+     ],
+     "ans": 1,
+     "hint": "Did the jeers get through to her?",
+     "steps": [
+      "Impervious means unable to be penetrated, or not affected by something.",
+      "The jeers did not get through: she was not hurt or startled, and she did not join in.",
+      "So she was unaffected by them."
+     ],
+     "ex": {
+      "main": "**Unaffected by them.** Impervious works for feelings as well as raincoats: nothing the crowd shouted got through.",
+      "tip": "Picture an umbrella. Impervious things let nothing through."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The spy chose a ___ gray coat so that no one would remember seeing him.",
+     "opts": [
+      "Impervious",
+      "Scintillating",
+      "Nondescript",
+      "Synthetic"
+     ],
+     "ans": 2,
+     "hint": "He wants a coat that no one will notice.",
+     "steps": [
+      "The point of the coat is to be forgettable.",
+      "A scintillating coat would sparkle, and impervious or synthetic says what it is made of, not whether people notice it.",
+      "Something with no distinctive features is nondescript."
+     ],
+     "ex": {
+      "main": "**Nondescript.** It means hard to describe because there is nothing distinctive about it, which is ideal for a spy.",
+      "tip": "Non + describe: nothing worth describing."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "To be in a quandary is to be:",
+     "opts": [
+      "Angry with a friend",
+      "Sure of the answer",
+      "Too tired to go on",
+      "Unsure what to do"
+     ],
+     "ans": 3,
+     "hint": "Think of being stuck between two choices.",
+     "steps": [
+      "A quandary is a state of doubt about what to do.",
+      "Being sure of the answer is the opposite.",
+      "Tiredness and anger are different states altogether."
+     ],
+     "ex": {
+      "main": "**Unsure what to do.** A quandary is a dilemma: you can see the choices but cannot decide between them.",
+      "tip": "Quandary and dilemma are close cousins. Either fits \"caught between two choices\"."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "After the long hike, the family reposed by the lake until dinner. They:",
+     "opts": [
+      "Rested",
+      "Swam",
+      "Argued",
+      "Cooked"
+     ],
+     "ans": 0,
+     "hint": "Re + pose: hold a pose.",
+     "steps": [
+      "To repose is to lie at rest.",
+      "Swimming, arguing and cooking are all activity.",
+      "So the family rested."
+     ],
+     "ex": {
+      "main": "**Rested.** Repose means to lie at rest. As a noun, repose is a state of rest or relaxation.",
+      "tip": "Repose also has a second sense: to place trust in someone, as in \"the nation reposes its trust in its courts\"."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Her scintillating speech had the whole hall laughing one minute and thinking hard the next. The speech was:",
+     "opts": [
+      "Long and dull",
+      "Lively and witty",
+      "Quiet and sad",
+      "Rude and loud"
+     ],
+     "ans": 1,
+     "hint": "Laughing and thinking: what kind of speech does both?",
+     "steps": [
+      "Scintillate means to sparkle; scintillating also means lively and witty.",
+      "A speech that makes people laugh and think is sparkling with wit.",
+      "So it was lively and witty."
+     ],
+     "ex": {
+      "main": "**Lively and witty.** Scintillating talk sparkles the way frost or a mirror ball does, with flashes of wit instead of light.",
+      "tip": "A scintilla is a spark. Scintillating conversation throws sparks."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Before signing the lease, the tenant ___ every clause, reading each line twice.",
+     "opts": [
+      "Transmuted",
+      "Depreciated",
+      "Scrutinized",
+      "Reposed"
+     ],
+     "ans": 2,
+     "hint": "Reading each line twice is careful examination.",
+     "steps": [
+      "The tenant examined the lease with great care.",
+      "Depreciated means lost value, transmuted means changed form, and reposed means rested.",
+      "To examine with great care is to scrutinize."
+     ],
+     "ex": {
+      "main": "**Scrutinized.** It means examined with great care, the kind of reading a contract deserves. The noun is scrutiny.",
+      "tip": "Glancing is quick; scrutinizing is slow and thorough."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is synthetic?",
+     "opts": [
+      "Silk spun by silkworms",
+      "Wool sheared from a sheep",
+      "Cotton picked from a field",
+      "Nylon made in a factory"
+     ],
+     "ans": 3,
+     "hint": "Which one did nature not make?",
+     "steps": [
+      "Synthetic means made by an artificial process.",
+      "Wool, cotton and silk all come from animals or plants.",
+      "Nylon is made in a factory, so it is synthetic."
+     ],
+     "ex": {
+      "main": "**Nylon made in a factory.** Synthetic means produced artificially rather than naturally. The other three fibers grow.",
+      "tip": "Synthetic does not mean worse, only made by people."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the old legend, the alchemist claimed he could ___ lead into gold.",
+     "opts": [
+      "Transmute",
+      "Appraise",
+      "Scrutinize",
+      "Depreciate"
+     ],
+     "ans": 0,
+     "hint": "Lead becoming gold is a change of what something is.",
+     "steps": [
+      "The alchemist claims he can turn one substance into another.",
+      "Appraise means to value, scrutinize means to examine, and depreciate means to lose value.",
+      "To change the form of something is to transmute it."
+     ],
+     "ex": {
+      "main": "**Transmute.** It means to change the form or appearance of something. Turning lead into gold is the classic example.",
+      "tip": "Trans- (across) + mute (change), as in mutation."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "SYNTHETIC : NATURAL",
+     "opts": [
+      "facsimile : reproduction",
+      "nondescript : distinctive",
+      "glance : scrutinize",
+      "facet : gemstone"
+     ],
+     "ans": 1,
+     "hint": "Is factory-made the same as grown?",
+     "steps": [
+      "Synthetic and natural are opposites.",
+      "Nondescript means having nothing distinctive, so nondescript and distinctive are opposites. Match.",
+      "A facsimile IS a reproduction (synonyms), scrutinizing is a far closer look than a glance (degree), and a facet is part of a gemstone."
+     ],
+     "ex": {
+      "main": "**Both pairs are ANTONYMS.** Synthetic reverses natural; nondescript reverses distinctive.",
+      "tip": "Three relationships are on show besides the answer. Naming them is how you rule them out."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "added",
+     "kind": "analogy",
+     "q": "FACET : GEM",
+     "opts": [
+      "synthetic : natural",
+      "facsimile : copy",
+      "chapter : book",
+      "look : scrutinize"
+     ],
+     "ans": 2,
+     "hint": "Is a facet the whole gem or one part of it?",
+     "steps": [
+      "A facet is one cut surface of a gem: a part of the whole.",
+      "A chapter is one part of a book. Match.",
+      "Facsimile and copy are synonyms, synthetic and natural are antonyms, and scrutinize is a more intense look."
+     ],
+     "ex": {
+      "main": "**Both pairs are PART TO WHOLE.** A facet is part of a gem the way a chapter is part of a book.",
+      "tip": "If the first word fits inside the second, you have part to whole."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "LOOK : SCRUTINIZE",
+     "opts": [
+      "synthetic : natural",
+      "cleave : split",
+      "facet : gem",
+      "want : crave"
+     ],
+     "ans": 3,
+     "hint": "Is scrutinizing just looking, or looking harder?",
+     "steps": [
+      "To scrutinize is to look with great care: the same action, much more intense.",
+      "To crave is to want intensely. Match.",
+      "Cleave (in one sense) and split are synonyms, a facet is part of a gem, and synthetic and natural are antonyms."
+     ],
+     "ex": {
+      "main": "**Both pairs are DEGREE.** Scrutinizing is intense looking, and craving is intense wanting.",
+      "tip": "A degree pair is the same idea, turned up. The synonym option is the trap, because the two words are not equally strong."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "added",
+     "kind": "analogy",
+     "q": "IMPERVIOUS : PENETRATE",
+     "opts": [
+      "inaudible : hear",
+      "transmute : change",
+      "facet : gem",
+      "depreciate : appreciate"
+     ],
+     "ans": 0,
+     "hint": "What can you not do to something impervious?",
+     "steps": [
+      "Impervious means unable to be penetrated.",
+      "Inaudible means unable to be heard. Match.",
+      "Transmute means change (synonyms), a facet is part of a gem, and depreciate and appreciate are antonyms."
+     ],
+     "ex": {
+      "main": "**Both pairs are \"CANNOT BE\".** Something impervious cannot be penetrated; something inaudible cannot be heard.",
+      "tip": "The prefixes im- and in- often signal this relationship. Check that the second word is the action that cannot happen."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}
