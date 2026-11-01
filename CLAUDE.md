@@ -1133,6 +1133,70 @@ diacritics.
 **Verified by flipping the prodigy answer to protégé and planting the answer
 in the gratis stem**, and watching exactly those assertions fail.
 
+### Dynamics 1 · Test Study Guide, and the Biology review presentation (v219, THIS APP ONLY)
+
+Chris: *"I've updated content in the girls folders."* Three files landed in
+her Physics 8 `Dynamics 1` folder on 11/1:
+
+- **`N1L_N3L_COM Study Guide.pdf`**, the teacher's list of mandatory
+  objectives for the test on Newton's First and Third Laws and conservation
+  of momentum. This is the source.
+- **A 30-item "Newton's First and Third Laws" multiple-choice assessment**
+  with no key. It has Name/Period/Date lines and may not have been sat yet,
+  so it was read only to calibrate style and difficulty, and none of it is
+  transcribed.
+- **`0631_001.pdf`**, the 40-item momentum practice 1-7 was built from, now
+  with a key and handwritten working. Read for what it asks only.
+
+`phys-dyn1-sg.json` (`unit-phys-dyn1-sg`), titled
+`Dynamics 1 · Test Study Guide: Newton’s Laws and Momentum`: 26 cards and 34
+questions (two `kind:'order'`, one with a force–extension graph in
+centimetres). `prep:true` and `order:1`, so it trails 1-1 to 1-7 in gold;
+`round:12`. Built by a subagent that wrote only the content,
+`tools/builders/build_dyn1_sg.py` and the test, then integrated here.
+
+- **One card per cluster of objectives**, 33 clusters in all, from SI base
+  units through predicting motion after a collision. Four cards the guide
+  names but never explains are tagged `added`: the SI base-unit list, the
+  free-body diagram steps, static vs dynamic equilibrium, and the
+  weight/normal-force non-pair.
+- **The third law's four characteristics are taught outright** (equal,
+  opposite, simultaneous, on different objects), and weight with the normal
+  force on a book is offered as the tempting non-pair.
+- **Every number computed and asserted**, with every wrong option a named
+  slip: mass used as weight, an upward pull added instead of subtracted,
+  sine and cosine swapped, centimetres left unconverted, a momentum sign
+  dropped, Δp done backwards, recoil speeds made equal. `fresh()` refuses
+  the quiz's and the practice's numbers; it caught one clash (a 140 N banner,
+  now 210 N).
+- **g is 9.8 m/s²**, as the quiz says; the practice says 10. Both are named.
+- **The `parentNote` offers to make the 30-item quiz a paper-entry guide**
+  if Chris confirms it is practice.
+
+**The Biology review presentation** (`Student-led review project`, Biology 8
+folder, 11/1). Each pair teaches one unit's terms to the class for about 15
+minutes, as Pre-Comp review. Hers is **Unit 3, organelles, on 11/18**, with
+slides and five practice questions due the day before. Both dates are in
+`CAL.events` with `classId:'bio'`, with no names. **No new unit was needed**:
+`unit-bio-u3c` already carries every one of her 16 required terms. The
+rubric's full topic list (Units 1 to 7, including genetics) is the class's
+Pre-Comp vocabulary and is worth checking against the shelf before Review
+Week.
+
+`tools/test_dyn1_sg.js` (37 assertions) seeds all eight Dynamics 1 parts and
+pins:
+
+- the shelf order, and the gold ring and prep band
+- 20 numeric answers re-derived from their own stems
+- option shape and answer spread
+- every objective cluster, by its teaching
+- no reused quiz or practice numbers
+- a full round, the graph and the deck
+- a mark sweep
+
+**Verified by flipping one answer and planting a score**: exactly the three
+expected assertions failed.
+
 ### Dynamics 1 · 1-5 to 1-7: springs and momentum, and the N1L gaps in 1-3 (v215, THIS APP ONLY)
 
 Chris: *"Let's review sedona's physics."* Five files landed in her Physics 8
