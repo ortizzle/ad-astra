@@ -1133,6 +1133,73 @@ diacritics.
 **Verified by flipping the prodigy answer to protégé and planting the answer
 in the gratis stem**, and watching exactly those assertions fail.
 
+### Unit 7 · Genetics, and Dynamics 2 (v221, THIS APP ONLY)
+
+Chris: *"I added River's progress report to Drive. and updated some more items
+for Sedona too."* Two new folders of hers on 11/16: Biology `Unit 7` (the
+genetics lecture deck, in two copies, the second a superset) and Physics
+`Dynamics 2` (an N2L worksheet, a friction worksheet and a mass-and-acceleration
+lab). Both were built by subagents that wrote only content, builders and tests,
+then integrated here (the v208 split).
+
+**Biology 8 · Unit 7-1: Genetics** (`bio-unit-7-genetics.json`, `unit-bio-u7`):
+29 cards and 24 questions. Built by `tools/builders/build_bio_genetics.py`. The
+deck was read as text, so its pictures were not seen.
+
+- **Every Punnett percentage and ratio is computed by crossing the alleles** in
+  the builder, which first checks its method against the deck's own crosses.
+  The test re-derives each one from its stem. Graded crosses are fresh: none of
+  the deck's widow's peak, bears, IᴬI × IᴮI, colorblind, dog-ear or hemophilia
+  crosses appears in a graded stem.
+- **Four careful calls, all in `parentNote`:**
+  - The deck's knowledge check prints "All of the above" for what is true of
+    a dominant allele. It is not: dominant is not "better" or "more common"
+    (polydactyly). The unit teaches "it can hide the recessive".
+  - "Use Mendelian genetics every time unless told not to" is framed as the
+    class's default (assume complete dominance), not as biology.
+  - Incomplete dominance is named and never defined in the deck, so a card adds
+    it (pink snapdragons) against codominance (AB blood, roan). The deck's dog
+    ears read as incomplete dominance though the deck says codominant, so that
+    problem is graded nowhere.
+  - Extra sex chromosomes come from nondisjunction in meiosis, so they are in
+    every cell. Flagged `added`, and linked back to Unit 5-1.
+- The four sex-chromosome conditions appear as names and karyotypes only.
+- `tools/test_bio_genetics.js` (32 assertions). **Mutation-checked** by flipping
+  one cross and planting a score.
+
+**Dynamics 2**, a new shelf of three parts (`tools/builders/build_dynamics2.py`):
+
+| id | title | |
+|---|---|---|
+| `unit-phys-dyn2-n2l` | `Dynamics 2 · 2-1 Applying Newton’s Second Law` | 18 cards / 20 q, an a–F graph |
+| `unit-phys-dyn2-friction` | `Dynamics 2 · 2-2 Friction and the Coefficient` | 16 / 19 |
+| `unit-phys-dyn2-lab` | `Dynamics 2 · 2-3 The Newton’s Second Law Lab: Mass and Acceleration` | 14 / 17 |
+
+- **Dynamics 1 teaches the ideas, and Dynamics 2 is the multi-step layer.** It
+  covers:
+  - system acceleration and then tension from one block's own diagram
+  - scale readings and working back from a reading
+  - an angled pull lightening the normal force
+  - μ at constant velocity
+  - friction in an accelerating elevator
+  - a block sliding up a rough slope, its stopping distance, and the slower
+    trip back down
+- **Every number is computed and asserted, every wrong option is a named slip**
+  (mass as weight, the vertical pull not subtracted, sine and cosine swapped,
+  one block's mass only, the g+a sign flipped, friction pointing the wrong way
+  on the way up, tension equal to the pull), and no slip may round to the
+  answer. `fresh()` refuses every number on the sheets; it caught one clash.
+- **The lab has no data yet, so it is taught as reasoning**: why the hanging
+  mass counts in the total, plotting a against 1/M (slope = hanging weight), the
+  Moon (every acceleration one-sixth), and friction making the force come out low.
+- **Flagged in the notes:**
+  - The N2L sheet's FRQ 3 skips part (d).
+  - The friction sheet's problem 2 depends on a picture that was not seen.
+  - The lab asks for a percent DIFFERENCE but prints the percent-error formula.
+- `tools/test_dyn2.js` (60 assertions) re-derives all 31 numeric answers from
+  their stems. **Mutation-checked** by flipping a tension answer and planting a
+  score.
+
 ### Rising 9th Grade Night (v220, THIS APP ONLY)
 
 The 8th-grade post of 11/13 (`Rising 9th Grade Night.pdf`): a high school
