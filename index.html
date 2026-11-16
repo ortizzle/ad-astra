@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v219 · Forces study guide';
+const APP_VERSION = 'v220 · 9th Grade Night';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2159,6 +2159,9 @@ const CAL = {
      note:'Upload the slides by midnight, and hand in your five practice questions with answers for approval.'},
     {start:'2026-11-18', name:'Your Biology review presentation · organelles', icon:'🧬', kind:'note', classId:'bio',
      note:'About 15 minutes, first presentation of the period. Every required term covered, a picture for each, five questions at the end, and one new memory trick. Bring the rubric.'},
+    /* 8th-grade post of 11/13: a high school information night for students and families. */
+    {start:'2026-12-02', name:'Rising 9th Grade Night', icon:'🎓', kind:'community',
+     note:'6:00–7:00 PM at school, for you and your family. Administrators, current high school students and the college counselors talk about high school and its curriculum maps.'},
     {start:'2026-12-07', end:'2026-12-14', name:'Pre-Comp review', icon:'📚', kind:'note',
      note:'Review Week: no new material, every class reviewing for the exams. Spreading it over these days beats one long night.'},
     /* The two exam days, from the school's Pre-Comp notice of 10/16: subjects

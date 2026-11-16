@@ -1133,6 +1133,22 @@ diacritics.
 **Verified by flipping the prodigy answer to protégé and planting the answer
 in the gratis stem**, and watching exactly those assertions fail.
 
+### Rising 9th Grade Night (v220, THIS APP ONLY)
+
+The 8th-grade post of 11/13 (`Rising 9th Grade Night.pdf`): a high school
+information night for 8th graders and their families. The time is only on the
+flyer image, so page 2 was rendered and read: **Wednesday 12/2, 6:00–7:00 PM**,
+at school, with administrators, current high school students and the college
+counselors. It is one `CAL.events` row, `kind:'community'`, and carries no
+names, email or address.
+
+`tools/test_rising9.js` (8 assertions) pins:
+
+- the date, and that 12/2 is a Wednesday
+- the flyer's time, the community kind and the single day
+- the row reaching Coming up from Monday 11/30
+- a privacy sweep
+
 ### Dynamics 1 · Test Study Guide, and the Biology review presentation (v219, THIS APP ONLY)
 
 Chris: *"I've updated content in the girls folders."* Three files landed in
