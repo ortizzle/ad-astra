@@ -1,0 +1,864 @@
+{
+ "v": 4,
+ "records": {
+  "unit-bio-u7": {
+   "id": "unit-bio-u7",
+   "type": "unit",
+   "updatedAt": 1794857659806,
+   "classId": "bio",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Biology 8 · Unit 7-1: Genetics",
+   "srcName": "Unit 7 Genetics lecture deck (Biology 8 · Unit 7, Drive)",
+   "source": "source",
+   "summary": {
+    "text": "Your class's Unit 7 deck on genetics: genes, alleles, genotype and phenotype, dominant and recessive, Mendel and his three laws, Punnett squares, codominance and blood type, polygenic traits, sex-linked traits, karyotypes and the sex-chromosome conditions.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Genetics explains why you look like your family and yet not exactly like anyone in it. A Punnett square turns that into numbers: the chance that a child shows a trait, carries it, or does neither. It builds directly on DNA (Unit 6-1) and meiosis (Unit 5-1).",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Use the vocabulary: gene, allele, genotype, phenotype, dominant, recessive, heterozygous, homozygous.",
+     "from": "source"
+    },
+    {
+     "text": "State Mendel's laws of dominance, segregation and independent assortment.",
+     "from": "source"
+    },
+    {
+     "text": "Use a Punnett square to find the percentage of offspring with each genotype and phenotype.",
+     "from": "source"
+    },
+    {
+     "text": "Work out blood-type and sex-linked crosses.",
+     "from": "source"
+    },
+    {
+     "text": "Tell codominance from incomplete dominance, and explain why males show X-linked recessive traits more often.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "Built from her Biology Unit 7 folder: the class's Genetics lecture deck. Two copies are in Drive and the second is a superset of the first, so the second was used. It was read through Drive's text version, so the slide pictures were not seen: if a slide carries a fact only in a picture (a Punnett square drawn out, a karyotype image), it is not in this unit.\n\nFour places are taught more carefully than the deck words them. FIRST, knowledge-check question 2 prints 'All of the above' as option D, and that is not correct: a dominant allele is not 'better to have' and not necessarily 'more common' (polydactyly, extra fingers or toes, is dominant and rare). The unit teaches option C, that a dominant allele can hide the recessive trait, and says the other two are false. If her class's answer key gives D, that is worth a word with her teacher. SECOND, question 1's 'every time unless told not to' is a classroom convention, not biology; the unit frames it as the class's default: assume complete dominance unless a problem names another pattern. THIRD, the deck names incomplete dominance but never defines it, so a card adds it (red × white snapdragon gives pink) and contrasts it with codominance, where both show in full (type AB blood, roan cattle). The deck's dog-ears problem calls floppy and pointed codominant, but semi-floppy as an in-between reads more like incomplete dominance; that problem is kept off every quiz question. FOURTH, the deck asks how extra sex chromosomes get there and which cells they are in; a card adds the answer, nondisjunction during meiosis, so the extra chromosome is in every cell, and links it back to Unit 5-1.\n\nOther cards are our additions, tagged as study suggestions: the worked answers to the widow's-peak and bear prompts, the six blood genotypes and four blood types, two heterozygous parents, why males show X-linked recessive traits more often, and Y-linked traits. The four sex-chromosome conditions are given only as names and karyotypes.\n\nEvery percentage and ratio is computed by crossing the alleles in the builder. Quiz questions use fresh crosses (peas, guinea pigs, cattle, snapdragons, fruit flies, fresh blood crosses); the deck's widow's peak, bears, Iᴬi × Iᴮi, colorblindness, dog-ears and hemophilia problems appear on cards or not at all.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Start with the vocabulary cards, then draw a Punnett square on paper for each cross question before you choose. Say each answer out loud before you flip.",
+    "minutes": 30,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Gene",
+     "def": "**The basic unit of heredity: a stretch of DNA that codes for one characteristic.**\n• Genes sit on chromosomes, and you inherit them from your parents",
+     "hint": "Gene → genetics → generations: the thing handed down.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Chromosome",
+     "def": "**A package of DNA wrapped around proteins, carrying the genetic information.**\n• Each gene sits at its own spot on one chromosome\n• Humans have 46 in each body cell, in 23 pairs",
+     "hint": "Chroma = color: they were named for how they take up stain under the microscope.",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Trait",
+     "def": "**One version of a characteristic, such as brown eyes or a flat hairline.**\n• Eye color is the characteristic; brown is the trait",
+     "hint": "The characteristic is the question; the trait is the answer.",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Allele",
+     "def": "**One of two or more versions of the same gene.**\n• You carry two alleles for each gene, one from each parent\n• Written as letters: a capital for dominant, lowercase for recessive",
+     "hint": "Alleles are alternatives: different versions of one gene.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Genotype",
+     "def": "**The two alleles an organism has for a gene, written as letters, such as Bb.**\n• It is the code, not the look",
+     "hint": "GENotype is the GENes.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Phenotype",
+     "def": "**The trait you can actually observe, such as green pods or type O blood.**\n• Two different genotypes can give the same phenotype (BB and Bb)",
+     "hint": "Phenotype is the physical look; pheno- sounds like 'show'.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Dominant allele",
+     "def": "**An allele that shows its trait with only one copy.**\n• Written with a capital letter, such as B\n• In a heterozygote (Bb) it hides the recessive allele's trait",
+     "hint": "One capital letter is enough for it to show.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Recessive allele",
+     "def": "**An allele whose trait shows only when there are two copies.**\n• Written lowercase, such as b; only bb shows the recessive trait",
+     "hint": "It recedes into the background unless it has company.",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Heterozygous",
+     "def": "**Having two different alleles for a gene, such as Bb.**\n• Also called a hybrid\n• For a recessive trait, a heterozygote is a carrier: it carries the allele without showing it",
+     "hint": "Hetero = different, as in heterogeneous.",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Homozygous",
+     "def": "**Having two identical alleles for a gene: BB (homozygous dominant) or bb (homozygous recessive).**\n• Also called true-breeding: crossed with its own kind, it always gives the same trait",
+     "hint": "Homo = same.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Dominant is not \"better\" or \"more common\"",
+     "def": "**Dominant only means one copy is enough to show; it says nothing about how good or how common an allele is.**\n• Polydactyly (extra fingers or toes) is caused by a dominant allele and is rare\n• What a dominant allele always CAN do is hide the recessive trait in a heterozygote",
+     "hint": "Dominant describes who shows up in Bb, not who wins in nature.",
+     "from": "added"
+    },
+    {
+     "id": "c11",
+     "term": "Law of dominance",
+     "def": "**In a heterozygote, the dominant allele's trait is the one that shows.**\n• Gregor Mendel worked out his laws of heredity by breeding pea plants\n• Following these laws is called Mendelian genetics, or simple (complete) dominance",
+     "hint": "Mendel's peas: one capital letter is enough.",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Law of segregation",
+     "def": "**Each parent passes on only one of its two alleles for a gene to each offspring.**\n• The two alleles separate when gametes form, so every egg or sperm carries one",
+     "hint": "Segregate = separate. The pair splits into the gametes.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Law of independent assortment",
+     "def": "**Which allele you inherit for one gene does not affect which you inherit for another.**\n• The exception: genes close together on the same chromosome tend to be inherited together",
+     "hint": "Independent: like flipping two separate coins — unless they are glued together.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Complete dominance is the default",
+     "def": "**Unless a problem says otherwise, your class assumes complete dominance: the dominant allele hides the recessive one.**\n• This is a convention for problems, not a rule of nature\n• If a problem names codominance, a blend or a sex chromosome, use that instead",
+     "hint": "No other pattern named? Treat the capital letter as the one that shows.",
+     "from": "added"
+    },
+    {
+     "id": "c15",
+     "term": "Worked examples: widow's peak and the bears",
+     "def": "**With R for widow's peak and r for a flat hairline, R is dominant: RR and Rr show a widow's peak, and rr is flat.**\n• A polar bear crossed with a black bear gives all-black cubs, so black is dominant\n• Written out: black parent BB × polar parent bb, and every cub Bb",
+     "hint": "If every offspring shows one parent's trait, that trait is dominant.",
+     "from": "added"
+    },
+    {
+     "id": "c16",
+     "term": "Punnett square",
+     "def": "**A grid that shows every way two parents' alleles can combine, giving the chance of each offspring genotype.**\n• 1 Write both parents' genotypes. 2 Split each parent's two alleles along its own side (top or left): these are the gametes\n• 3 Fill each box with the allele from its row and its column: these are the zygotes. 4 Count how often each genotype appears",
+     "hint": "Gametes on the edges, zygotes in the boxes.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Two heterozygous parents",
+     "def": "**Bb × Bb gives 1 BB : 2 Bb : 1 bb, so 75% show the dominant trait and 25% the recessive one.**\n• Each box is one chance in four, or 25%\n• Two parents can both hide a recessive trait and still have a child who shows it",
+     "hint": "Three boxes have a capital, one box does not.",
+     "from": "added"
+    },
+    {
+     "id": "c18",
+     "term": "Codominance",
+     "def": "**Both alleles show in full in a heterozygote, side by side.**\n• Blood type AB: the A and B antigens are both made\n• Roan cattle: a red allele and a white allele give a coat of red hairs AND white hairs",
+     "hint": "Co- = together. Both show, neither hides.",
+     "from": "source"
+    },
+    {
+     "id": "c19",
+     "term": "Incomplete dominance",
+     "def": "**Neither allele fully hides the other, so the heterozygote is a blend in between.**\n• Red snapdragon × white snapdragon gives pink flowers\n• Compare codominance: there both show in full (red and white hairs), not a mixed color",
+     "hint": "Incomplete: the dominant allele only gets partway, so you see a blend.",
+     "from": "added"
+    },
+    {
+     "id": "c20",
+     "term": "Blood type alleles",
+     "def": "**The blood-type gene has three alleles, Iᴬ, Iᴮ and i, but each person carries only two.**\n• Iᴬ makes the A antigen and Iᴮ the B antigen; both are dominant to i, which makes nothing\n• Iᴬ and Iᴮ are codominant, so IᴬIᴮ is type AB",
+     "hint": "Three alleles in the population, two in any one person.",
+     "from": "source"
+    },
+    {
+     "id": "c21",
+     "term": "Six blood genotypes, four blood types",
+     "def": "**IᴬIᴬ and Iᴬi are type A; IᴮIᴮ and Iᴮi are type B; IᴬIᴮ is type AB; ii is type O.**\n• So types A and B can each hide an i, and type O needs two\n• The class cross Iᴬi × Iᴮi gives all four types, 25% each",
+     "hint": "Only O needs both alleles to be i.",
+     "from": "added"
+    },
+    {
+     "id": "c22",
+     "term": "Polygenic trait",
+     "def": "**A trait controlled by many genes, so it varies smoothly in a bell-shaped curve.**\n• Eye color is controlled by about 16 genes; height by hundreds\n• Skin and hair color: a few genes with big effects and many with small ones",
+     "hint": "Poly = many. Many genes, each adding a little, makes a smooth range.",
+     "from": "source"
+    },
+    {
+     "id": "c23",
+     "term": "Sex chromosomes and autosomes",
+     "def": "**In humans, females have two X chromosomes (XX) and males have an X and a Y (XY).**\n• Every other chromosome is an autosome\n• A picture of all of an organism's chromosomes, in pairs, is a karyotype",
+     "hint": "Auto- = self: the 'ordinary' chromosomes everyone has in matching pairs.",
+     "from": "source"
+    },
+    {
+     "id": "c24",
+     "term": "Sex-linked trait",
+     "def": "**A trait whose gene is on a sex chromosome, usually the X.**\n• Red-green colorblindness is recessive and on the X\n• The class cross Xᴿ Xʳ × Xᴿ Y gives 25% colorblind children: 50% of the sons and none of the daughters",
+     "hint": "Write the allele as a superscript on the X, and give the Y nothing.",
+     "from": "source"
+    },
+    {
+     "id": "c25",
+     "term": "Why males show X-linked recessive traits more",
+     "def": "**A male has only one X, so a single recessive allele on it shows: there is no second X to mask it.**\n• A female needs the allele on BOTH X chromosomes to show the trait\n• A son gets his X from his mother and his Y from his father",
+     "hint": "One X, no backup.",
+     "from": "added"
+    },
+    {
+     "id": "c26",
+     "term": "Y-linked trait",
+     "def": "**A trait whose gene is on the Y chromosome passes from a father to every son and to no daughter.**\n• Only males have a Y, and every son gets his father's Y\n• The class example is webbed toes",
+     "hint": "Father to son, every time, and never to a daughter.",
+     "from": "added"
+    },
+    {
+     "id": "c27",
+     "term": "Sex-chromosome conditions",
+     "def": "**Rarely, a person has a different number of sex chromosomes, and each pattern has a name.**\n• Klinefelter syndrome: XXY. Trisomy X: XXX\n• Turner syndrome: a single X. XYY syndrome: XYY",
+     "hint": "Read the letters: the name tells you which sex chromosomes are there.",
+     "from": "source"
+    },
+    {
+     "id": "c28",
+     "term": "Where an extra sex chromosome comes from",
+     "def": "**From nondisjunction: during meiosis a chromosome pair fails to separate, so an egg or sperm gets one too many or too few.**\n• That gamete forms the first cell of the new person\n• So the difference is in every cell with a nucleus, not just a few (see Unit 5-1, meiosis)",
+     "hint": "Non-disjunction: the pair did not dis-join.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What is one of two or more versions of the same gene called?",
+     "opts": [
+      "An allele",
+      "A genotype",
+      "A phenotype",
+      "A chromosome"
+     ],
+     "ans": 0,
+     "hint": "Think of the word for 'alternative versions'.",
+     "steps": [
+      "A gene is the unit of heredity for one characteristic.",
+      "A gene can come in different versions, such as B and b.",
+      "A genotype is the PAIR of letters, and a phenotype is the look.",
+      "Each single version is an allele."
+     ],
+     "ex": {
+      "main": "**An allele.** B and b are two alleles of one gene. The genotype is the pair you carry (Bb), the phenotype is the trait you see, and a chromosome is the package that holds the gene.",
+      "tip": "Allele = one version; genotype = the pair."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of these is a phenotype?",
+     "opts": [
+      "Gg",
+      "Green pods",
+      "Homozygous dominant",
+      "G"
+     ],
+     "ans": 1,
+     "hint": "Which one could you see if you looked at the plant?",
+     "steps": [
+      "A phenotype is a trait you can observe.",
+      "Gg is a genotype, written in letters.",
+      "G on its own is a single allele, and 'homozygous dominant' describes a genotype.",
+      "Green pods can be seen, so that is the phenotype."
+     ],
+     "ex": {
+      "main": "**Green pods.** A phenotype is what you can observe. Letters (Gg, G) and words about the letters (homozygous dominant) all describe the genotype or an allele.",
+      "tip": "If you could photograph it, it is a phenotype."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In pea plants, stem height is controlled by one gene with the alleles T and t. Which of these is a dominant allele?",
+     "opts": [
+      "Tt",
+      "t",
+      "T",
+      "Tall stems"
+     ],
+     "ans": 2,
+     "hint": "How are dominant alleles written?",
+     "steps": [
+      "A dominant allele is written with a capital letter.",
+      "Tt is two alleles together, so it is a genotype.",
+      "Tall stems is a trait you can see, so it is a phenotype.",
+      "The single capital letter, T, is the dominant allele."
+     ],
+     "ex": {
+      "main": "**T.** An allele is ONE letter, and the capital is the dominant one. Tt is a genotype (two alleles) and tall stems is a phenotype.",
+      "tip": "One letter = an allele; a capital = dominant."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "For a recessive trait, which term describes a carrier?",
+     "opts": [
+      "True-breeding",
+      "Homozygous recessive",
+      "Homozygous dominant",
+      "Heterozygous"
+     ],
+     "ans": 3,
+     "hint": "A carrier has the allele but does not show it. What genotype does that take?",
+     "steps": [
+      "A carrier holds the recessive allele without showing the trait.",
+      "Two recessive alleles (bb) would SHOW the trait, so that is not a carrier.",
+      "Two dominant alleles (BB) carry no recessive allele at all.",
+      "One of each (Bb) carries it and hides it: heterozygous."
+     ],
+     "ex": {
+      "main": "**Heterozygous.** A carrier has one recessive allele hidden behind a dominant one, as in Bb. Homozygous recessive (bb) shows the trait, and homozygous dominant (BB) does not carry it; true-breeding means homozygous, so it is wrong too.",
+      "tip": "Carrier = Bb."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which of Mendel's laws says that each parent passes on only one of its two alleles for a gene to each offspring?",
+     "opts": [
+      "The law of segregation",
+      "The law of dominance",
+      "The law of independent assortment",
+      "The rule of complementary base pairing"
+     ],
+     "ans": 0,
+     "hint": "Which law is about the pair of alleles splitting up?",
+     "steps": [
+      "Each parent has two alleles for each gene.",
+      "When eggs or sperm form, the two alleles separate.",
+      "So each gamete, and so each offspring, gets just one from that parent.",
+      "Separating is segregation: the law of segregation."
+     ],
+     "ex": {
+      "main": "**The law of segregation.** Segregate means separate: the two alleles split into different gametes. The law of dominance is about which allele shows, independent assortment is about two DIFFERENT genes, and base pairing belongs to DNA, not to Mendel.",
+      "tip": "Segregation = the pair separates."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A person has the blood genotype IᴬIᴮ. What is their blood type?",
+     "opts": [
+      "Type A",
+      "Type AB",
+      "Type B",
+      "Type O"
+     ],
+     "ans": 1,
+     "hint": "Iᴬ and Iᴮ are codominant. What happens when both are present?",
+     "steps": [
+      "Iᴬ makes the A antigen and Iᴮ makes the B antigen.",
+      "They are codominant, so neither hides the other.",
+      "Both antigens are made.",
+      "That is type AB."
+     ],
+     "ex": {
+      "main": "**Type AB.** In codominance both alleles show in full, so both antigens are made. Neither Iᴬ nor Iᴮ hides the other, which is why this is not type A or type B; type O needs ii.",
+      "tip": "Codominant: both show."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A karyotype shows 45 chromosomes, with one X and no second sex chromosome. Which condition is this?",
+     "opts": [
+      "Trisomy X",
+      "Klinefelter syndrome",
+      "Turner syndrome",
+      "XYY syndrome"
+     ],
+     "ans": 2,
+     "hint": "Which condition is the one with a single sex chromosome?",
+     "steps": [
+      "The usual count is 46, with two sex chromosomes.",
+      "Here there is only one sex chromosome, an X.",
+      "Klinefelter is XXY, trisomy X is XXX and XYY syndrome is XYY: all have extra.",
+      "A single X is Turner syndrome."
+     ],
+     "ex": {
+      "main": "**Turner syndrome.** It is the one pattern with a missing sex chromosome (X). The other three each have an EXTRA one: XXY (Klinefelter), XXX (trisomy X) and XYY.",
+      "tip": "Turner is the only one with fewer, not more."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In pea plants, green pods (G) are dominant over yellow pods (g). Two plants with the genotypes Gg × gg are crossed. What percentage of the offspring are expected to have yellow pods?",
+     "opts": [
+      "0%",
+      "25%",
+      "75%",
+      "50%"
+     ],
+     "ans": 3,
+     "hint": "Put Gg on one side and gg on the other, then count the boxes with no capital G.",
+     "steps": [
+      "Gametes: G and g from one parent, g and g from the other.",
+      "The four boxes are Gg, Gg, gg, gg.",
+      "Yellow pods need gg: two boxes out of four.",
+      "Two in four is 50%."
+     ],
+     "ex": {
+      "main": "**50%.** Half the boxes are Gg (green, because one G is enough) and half are gg, the only genotype that shows yellow. Crossing with a homozygous recessive parent always splits a heterozygote's alleles half and half.",
+      "tip": "Hybrid × recessive: half and half."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In guinea pigs, black fur (B) is dominant over white fur (b). Two guinea pigs with the genotypes Bb × Bb are crossed. What percentage of the offspring are expected to have white fur?",
+     "opts": [
+      "25%",
+      "0%",
+      "50%",
+      "75%"
+     ],
+     "ans": 0,
+     "hint": "Two carriers: how many of the four boxes get b from both parents?",
+     "steps": [
+      "Each parent's gametes are B and b.",
+      "The four boxes are BB, Bb, Bb, bb.",
+      "Only bb shows white fur, and it fills one box.",
+      "One in four is 25%."
+     ],
+     "ex": {
+      "main": "**25%.** Both parents are carriers, so white fur appears only where both pass on b: one box in four. The other three boxes hold at least one B, so they show black. 75% would be the black guinea pigs, not the white ones.",
+      "tip": "Bb × Bb: 3 dominant to 1 recessive."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In pea plants, purple flowers (P) are dominant over white flowers (p). Two plants with the genotypes Pp × Pp are crossed. Which genotype ratio is expected among the offspring?",
+     "opts": [
+      "3 PP : 1 pp",
+      "1 PP : 2 Pp : 1 pp",
+      "1 PP : 1 pp",
+      "2 PP : 1 Pp : 1 pp"
+     ],
+     "ans": 1,
+     "hint": "The question asks for GENOTYPES, not colors. Count each pair of letters.",
+     "steps": [
+      "Each parent's gametes are P and p.",
+      "The boxes are PP, Pp, pP and pp.",
+      "Pp and pP are the same genotype, so there are two of them.",
+      "So the ratio is 1 PP : 2 Pp : 1 pp."
+     ],
+     "ex": {
+      "main": "**1 PP : 2 Pp : 1 pp.** Each box is one genotype, and two boxes hold Pp. '3 PP : 1 pp' mixes up the 3 : 1 PHENOTYPE ratio (purple : white) with the genotype ratio.",
+      "tip": "Genotypes 1 : 2 : 1; phenotypes 3 : 1."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two parents with the blood genotypes IᴬIᴮ × ii have children. What percentage of their children are expected to have type A blood?",
+     "opts": [
+      "0%",
+      "25%",
+      "50%",
+      "75%"
+     ],
+     "ans": 2,
+     "hint": "One parent can only give i. What can the other give?",
+     "steps": [
+      "The IᴬIᴮ parent passes on either Iᴬ or Iᴮ.",
+      "The ii parent always passes on i.",
+      "So the boxes are Iᴬi, Iᴬi, Iᴮi and Iᴮi.",
+      "Iᴬi is type A: two boxes of four, so 50%."
+     ],
+     "ex": {
+      "main": "**50%.** Half the children get Iᴬ and are Iᴬi, type A; the other half get Iᴮ and are Iᴮi, type B. No child can be AB or O: AB needs both from different parents, and O needs i from both.",
+      "tip": "A type-AB parent never has a type-AB child with a type-O parent."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two parents with the blood genotypes IᴬIᴬ × Iᴮi have children. Which blood types can their children have, and in what ratio?",
+     "opts": [
+      "1 type AB : 1 type O",
+      "1 type A : 1 type B",
+      "3 type A : 1 type AB",
+      "1 type A : 1 type AB"
+     ],
+     "ans": 3,
+     "hint": "One parent can only give Iᴬ. Pair it with each of the other parent's alleles.",
+     "steps": [
+      "The IᴬIᴬ parent always passes on Iᴬ.",
+      "The Iᴮi parent passes on Iᴮ or i.",
+      "Iᴬ with Iᴮ makes IᴬIᴮ, type AB; Iᴬ with i makes Iᴬi, type A.",
+      "Two boxes of each: 1 type A : 1 type AB."
+     ],
+     "ex": {
+      "main": "**1 type A : 1 type AB.** Every child gets Iᴬ, so none can be type B or type O. Whether the second allele is Iᴮ or i decides AB or A, and the two are equally likely.",
+      "tip": "List the gametes first, then the types."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In cattle, red coat and white coat are codominant, and an animal with one of each allele is roan, with a mix of red and white hairs. Two cattle with the genotypes CᴿCᵂ × CᴿCᵂ are mated. What percentage of their calves are expected to be roan?",
+     "opts": [
+      "50%",
+      "25%",
+      "0%",
+      "75%"
+     ],
+     "ans": 0,
+     "hint": "Roan is the heterozygote. How many boxes have one of each allele?",
+     "steps": [
+      "Each parent's gametes are Cᴿ and Cᵂ.",
+      "The boxes are CᴿCᴿ, CᴿCᵂ, CᵂCᴿ and CᵂCᵂ.",
+      "CᴿCᴿ is red, CᵂCᵂ is white, and the two mixed boxes are roan.",
+      "Two in four is 50%."
+     ],
+     "ex": {
+      "main": "**50%.** With codominance the heterozygote has its own look, so the ratio is 1 red : 2 roan : 1 white instead of 3 : 1. 75% would be what you get if you wrongly treated red as dominant and counted every calf with a red allele.",
+      "tip": "No allele hides here, so 1 : 2 : 1 is also the look."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In snapdragons, a red-flowered plant crossed with a white-flowered plant gives pink flowers. Two snapdragons with the genotypes CᴿCᵂ × CᵂCᵂ are crossed. What percentage of the offspring are expected to be pink?",
+     "opts": [
+      "0%",
+      "50%",
+      "25%",
+      "75%"
+     ],
+     "ans": 1,
+     "hint": "Pink is the in-between, one red allele and one white. Count those boxes.",
+     "steps": [
+      "The pink parent's gametes are Cᴿ and Cᵂ; the white parent's are Cᵂ and Cᵂ.",
+      "The boxes are CᴿCᵂ, CᴿCᵂ, CᵂCᵂ and CᵂCᵂ.",
+      "CᴿCᵂ is pink and CᵂCᵂ is white.",
+      "Two in four are pink: 50%."
+     ],
+     "ex": {
+      "main": "**50%.** Half the offspring get the red allele from the pink parent and are pink; the other half get white from both and are white. No offspring can be red, because the white parent never passes on Cᴿ.",
+      "tip": "A blend in the middle: count the mixed boxes."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which statement is true of every dominant allele?",
+     "opts": [
+      "It gives the organism a better chance of surviving",
+      "It is more common in a population than the recessive allele",
+      "It can hide a recessive allele's trait in a heterozygote",
+      "It is passed on to children more often than a recessive one"
+     ],
+     "ans": 2,
+     "hint": "Dominant describes what happens inside one heterozygote. Does it say anything about a whole population?",
+     "steps": [
+      "Dominant means one copy is enough for the trait to show.",
+      "So in a heterozygote it hides the recessive trait.",
+      "It says nothing about how common or useful the allele is: polydactyly is dominant and rare.",
+      "And each allele has the same 50% chance of being passed on.",
+      "The one true statement is that it can hide the recessive trait."
+     ],
+     "ex": {
+      "main": "**It can hide a recessive allele's trait in a heterozygote.** That is what dominant means. A dominant allele can be rare (polydactyly, extra fingers or toes) or harmful, and the law of segregation gives either allele of a pair an equal chance of being passed on.",
+      "tip": "Dominant ≠ common, and dominant ≠ better."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Human height shows a smooth range from short to tall, with most people near the middle. What best explains that pattern?",
+     "opts": [
+      "A gene that is carried on the Y chromosome",
+      "One gene with a dominant allele for tall",
+      "Two codominant alleles of a single gene",
+      "Hundreds of genes each add a little to it"
+     ],
+     "ans": 3,
+     "hint": "How many different heights could ONE gene with two alleles give?",
+     "steps": [
+      "One gene with complete dominance gives only two phenotypes.",
+      "Two codominant alleles give only three.",
+      "A smooth bell curve needs many small steps between short and tall.",
+      "Many genes, each adding a little, make that curve."
+     ],
+     "ex": {
+      "main": "**Hundreds of genes each add a little to it.** Height is polygenic. A single gene gives a few separate types, never a smooth range, and a Y-linked gene would affect only males.",
+      "tip": "Smooth bell curve → many genes."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "In fruit flies, the eye-color gene is on the X chromosome, and red eyes (Xᵂ) are dominant over white eyes (Xʷ). A female and a male with the genotypes XᵂXʷ × XʷY are mated. What percentage of their sons are expected to have white eyes?",
+     "opts": [
+      "50%",
+      "25%",
+      "0%",
+      "75%"
+     ],
+     "ans": 0,
+     "hint": "Sons get their X from their mother. Which X can she give?",
+     "steps": [
+      "Every son gets the father's Y, so his eye color depends only on the mother's X.",
+      "The mother is XᵂXʷ, so she gives Xᵂ or Xʷ equally often.",
+      "Sons are XᵂY (red) or XʷY (white).",
+      "Half the sons have white eyes: 50%."
+     ],
+     "ex": {
+      "main": "**50%.** A son's single X comes from his mother, and she has one of each. The father's Xʷ goes only to daughters, so it does not change the sons at all.",
+      "tip": "For sons, look only at the mother."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 3,
+     "from": "source",
+     "kind": "order",
+     "q": "Put the steps for using a Punnett square in order, from first to last.",
+     "opts": [
+      "Write down the genotypes of both parents",
+      "Split each parent's two alleles along its own side of the square",
+      "Fill each box with the allele from its row and the allele from its column",
+      "Count how often each genotype appears in the boxes"
+     ],
+     "ans": 0,
+     "hint": "You cannot split alleles you have not written down yet.",
+     "steps": [
+      "Start with what you know: both parents' genotypes.",
+      "Separate each parent's alleles onto the edges: these are the gametes.",
+      "Combine one from each edge in every box: these are the zygotes.",
+      "Finally count each genotype to get the proportions."
+     ],
+     "ex": {
+      "main": "**Genotypes, split, fill, count.** Each step needs the one before it: the edges come from the genotypes, the boxes come from the edges, and the proportions come from the boxes.",
+      "tip": "Parents → gametes → zygotes → proportions."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Red-green colorblindness is caused by a recessive allele on the X chromosome. Why do far more males than females have it?",
+     "opts": [
+      "The allele for it is carried on the Y chromosome",
+      "A male has one X, so no second X can mask the allele",
+      "A male inherits his X chromosome from his father",
+      "The allele is dominant in males and recessive in females"
+     ],
+     "ans": 1,
+     "hint": "How many X chromosomes does a male have, and where does he get it?",
+     "steps": [
+      "A female is XX, so she needs the recessive allele on both X chromosomes to show it.",
+      "A male is XY, and the Y carries no copy of this gene.",
+      "So one recessive allele on his only X is enough.",
+      "With no second X to hide it, males show it far more often."
+     ],
+     "ex": {
+      "main": "**A male has one X, so no second X can mask the allele.** The gene is on the X, not the Y, and a son's X comes from his MOTHER. An allele is not dominant in one sex and recessive in the other; males simply have no backup copy.",
+      "tip": "One X, no backup."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A gene found only on the Y chromosome causes a trait. A father who shows the trait has children with a mother. Which of their children are expected to show it?",
+     "opts": [
+      "Half the sons and half the daughters",
+      "Every daughter, and no son",
+      "Every son, and no daughter",
+      "No child, since it skips a generation"
+     ],
+     "ans": 2,
+     "hint": "Which children get their father's Y chromosome?",
+     "steps": [
+      "The mother has no Y, so she cannot pass the trait on.",
+      "Every son gets his father's Y, and with it the gene.",
+      "Every daughter gets the father's X instead, which does not carry the gene.",
+      "So every son shows it and no daughter does."
+     ],
+     "ex": {
+      "main": "**Every son, and no daughter.** A Y-linked gene goes wherever the father's Y goes, and that is into every son and never into a daughter. There is no second allele to hide it and nothing to skip a generation.",
+      "tip": "Y-linked: father to every son."
+     }
+    },
+    {
+     "id": "q20",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In fruit flies, the eye-color gene is on the X chromosome, and red eyes (Xᵂ) are dominant over white eyes (Xʷ). A female and a male with the genotypes XʷXʷ × XᵂY are mated. Which describes their offspring?",
+     "opts": [
+      "No white-eyed offspring of either sex at all",
+      "Every daughter white-eyed; every son red-eyed",
+      "Half of the sons and half of the daughters white",
+      "Every son white-eyed; every daughter red-eyed"
+     ],
+     "ans": 3,
+     "hint": "Sons take their X from the mother, daughters take one X from each parent.",
+     "steps": [
+      "The mother is XʷXʷ, so every child gets Xʷ from her.",
+      "Sons get the father's Y, so they are XʷY: white eyes.",
+      "Daughters get the father's Xᵂ, so they are XᵂXʷ: red eyes, but carriers.",
+      "So every son is white-eyed and every daughter red-eyed."
+     ],
+     "ex": {
+      "main": "**Every son white-eyed; every daughter red-eyed.** The father's dominant Xᵂ goes only to daughters and hides their Xʷ. Sons get nothing from him on the X, so their mother's Xʷ shows. This criss-cross pattern is a sign of an X-linked trait.",
+      "tip": "Mother's X → son; father's X → daughter."
+     }
+    },
+    {
+     "id": "q21",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A person's karyotype shows the sex chromosomes XXY. Where in their body is the extra X found, and why?",
+     "opts": [
+      "In every cell with a nucleus, as it was in the egg or sperm that made the first cell",
+      "Only in the egg or sperm cells, as those are the only cells made by meiosis",
+      "Only in cells made after birth, as an error in mitosis added it to them later",
+      "Only in the reproductive organs, as those are the only places X genes are used"
+     ],
+     "ans": 0,
+     "hint": "When did the extra chromosome arrive: in the first cell, or later?",
+     "steps": [
+      "During meiosis, a chromosome pair can fail to separate: nondisjunction.",
+      "That leaves an egg or sperm with an extra sex chromosome.",
+      "That gamete joins another to make the first cell, which already has XXY.",
+      "Every later cell is copied from that one by mitosis, so the extra X is in every cell with a nucleus."
+     ],
+     "ex": {
+      "main": "**In every cell with a nucleus, as it was in the egg or sperm that made the first cell.** Nondisjunction in meiosis puts the extra X into a gamete, and every body cell descends from the zygote that gamete made. X genes are used all over the body, not only in reproductive organs.",
+      "tip": "Error in the gamete → in every cell."
+     }
+    },
+    {
+     "id": "q22",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "Crossing a red camellia with a white one gives flowers with red patches and white patches. Which pattern of inheritance is this, and why?",
+     "opts": [
+      "Incomplete dominance, since the colors mix",
+      "Codominance, since both colors show in full",
+      "Complete dominance, since red hides white",
+      "Polygenic, since many genes add up color"
+     ],
+     "ans": 1,
+     "hint": "Did the colors blend into a new color, or did each show up as it is?",
+     "steps": [
+      "The offspring show red AND white, each in full, in separate patches.",
+      "Incomplete dominance would give a blend in between, such as pink.",
+      "Complete dominance would give all-red flowers.",
+      "Both alleles showing side by side is codominance."
+     ],
+     "ex": {
+      "main": "**Codominance, since both colors show in full.** Red and white patches mean both alleles are expressed, like roan cattle or blood type AB. A blend such as pink would be incomplete dominance, and all-red flowers would be complete dominance.",
+      "tip": "Patches = codominance; a blend = incomplete dominance."
+     }
+    },
+    {
+     "id": "q23",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A true-breeding plant with smooth seeds is crossed with a true-breeding plant with ridged seeds, and every offspring has smooth seeds. Which conclusion follows?",
+     "opts": [
+      "Smooth is dominant, and every offspring is homozygous",
+      "Ridged is dominant, and every offspring is heterozygous",
+      "Smooth is dominant, and every offspring is heterozygous",
+      "The two alleles are codominant in these seeds"
+     ],
+     "ans": 2,
+     "hint": "True-breeding means homozygous. What genotype must every offspring have?",
+     "steps": [
+      "True-breeding parents are homozygous: SS for smooth and ss for ridged.",
+      "Every offspring gets S from one parent and s from the other: Ss.",
+      "Every offspring is smooth even though it carries s.",
+      "So smooth is dominant, and every offspring is heterozygous."
+     ],
+     "ex": {
+      "main": "**Smooth is dominant, and every offspring is heterozygous.** Each offspring has one allele from each true-breeding parent, so all are Ss, and since they all look smooth, smooth must be the allele that hides the other. Codominance would show both traits at once.",
+      "tip": "One parent's trait in every offspring → that trait is dominant."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

@@ -1,0 +1,658 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn2-lab": {
+   "id": "unit-phys-dyn2-lab",
+   "type": "unit",
+   "updatedAt": 1794857723945,
+   "classId": "physics",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Dynamics 2 · 2-3 The Newton’s Second Law Lab: Mass and Acceleration",
+   "srcName": "Newton’s Second Law Lab",
+   "source": "Newtons_Law_Lab.pdf (Drive, Physics 8 › Dynamics 2)",
+   "summary": {
+    "text": "The reasoning behind the cart-and-hanging-mass lab: the hanging weight is the force, the total mass includes everything that moves (the hanging mass too), each run’s acceleration comes from a = 2Δx / t², and plotting a against 1 ÷ total mass gives a straight line whose slope is the force. Then comparing that force with the hanging weight, the Moon, and which way friction pushes the result.",
+    "from": "source"
+   },
+   "why": {
+    "text": "A lab is only as good as the reasoning around it. Knowing what the slope should be before you measure it is what lets you tell a good run from a bad one.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Determine the weight of the hanging mass.",
+     "from": "source"
+    },
+    {
+     "text": "Find the total system mass, including the hanging mass.",
+     "from": "source"
+    },
+    {
+     "text": "Use a kinematic equation to find each run’s acceleration from distance and time.",
+     "from": "source"
+    },
+    {
+     "text": "Linearize the data and interpret the slope.",
+     "from": "source"
+    },
+    {
+     "text": "Compare the average force with the hanging weight as a percent.",
+     "from": "source"
+    },
+    {
+     "text": "Predict how the data would change on the Moon.",
+     "from": "source"
+    },
+    {
+     "text": "Name one source of error and the direction it pushes the result.",
+     "from": "source"
+    }
+   ],
+   "parentNote": {
+    "text": "From Newtons_Law_Lab.pdf in the Dynamics 2 folder: a cart on a table pulled by a hanging mass over the edge, with the total system mass changed run by run. The sheet was read for what it asks; the setup picture on it was not seen. The lab has no data yet, so this unit teaches the reasoning only — why the hanging mass counts in the total, getting a from Δx and t with a = 2Δx / t², the linearization (a against 1/M, slope = the hanging weight), the average force, the Moon question (every acceleration one-sixth, not “nothing changes”), and one source of error with its direction (friction makes a low, so the force comes out low). None of her results are invented, and none of the numbers in the questions are hers. Worth knowing: the sheet asks for a percent DIFFERENCE but prints the percent-error formula, |experimental − actual| ÷ actual × 100 (the formula text came through garbled when the PDF was read, so this is our reading of it). Since the hanging weight is an accepted value, percent error is the right comparison; a card explains both, and the quiz uses the printed formula. The sheet also says not to graph distance against time, which the cards repeat.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards before lab day, then take the quiz. Say out loud what the slope of your graph should be before you draw it.",
+    "minutes": 25,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "What the lab is testing",
+     "def": "**How the acceleration of a system depends on its total mass, when the pulling force stays the same.**\n• The force is held constant; the total mass is changed run by run.\n• Newton’s second law predicts a = F / M.",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "The pulling force is the hanging weight",
+     "def": "**The force that speeds the system up is the weight of the hanging mass: F = m_hanging × g.**\n• Convert grams to kilograms before multiplying by 9.8.\n• A mass in kilograms is not a weight in newtons.",
+     "eq": "F = m_h g",
+     "from": "source"
+    },
+    {
+     "id": "c2",
+     "term": "Total system mass",
+     "def": "**Everything that moves counts: the cart, the mass on the cart and the hanging mass.**\n• Your sheet writes it as Total System Mass = Mass on Cart + Mass of Cart + Mass Hanging.",
+     "eq": "M = m_on cart + m_cart + m_hanging",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Why the hanging mass counts",
+     "def": "**The hanging mass speeds up too, so its weight has to accelerate it as well as the cart.**\n• The string makes the cart and the hanging mass one system with one acceleration.\n• Leaving it out makes M too small, so the force you work out from Ma comes out too small.",
+     "hint": "If it moves, it is in M.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Keep the force fixed",
+     "def": "**Change only the mass ON the cart, so the hanging weight — the force — stays the same every run.**\n• Changing the hanging mass would change the force and the total mass at once, and you could not tell which caused what.",
+     "from": "added"
+    },
+    {
+     "id": "c5",
+     "term": "Acceleration from distance and time",
+     "def": "**The cart starts from rest, so Δx = ½at², which rearranges to a = 2Δx / t².**\n• Starting from rest is what removes the v₀t term.\n• Square the time; keep the 2. Δx / t is an average speed, not an acceleration.",
+     "eq": "a = 2Δx / t²",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Do not graph distance against time",
+     "def": "**Your sheet says not to graph distance and time: each run gives ONE acceleration, and the graph is acceleration against mass.**\n• The distance and time are only the route to each run’s a.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Acceleration against mass is a curve",
+     "def": "**Plotted against the total mass, the acceleration falls along a curve, not a straight line.**\n• Double the mass and a halves; it never quite reaches zero.\n• That inverse shape is hard to read a constant from.",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       1.6,
+       0,
+       2.4
+      ],
+      "gx": 0.2,
+      "gy": 0.4,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0.4,
+          2.4
+         ],
+         [
+          0.5,
+          1.92
+         ],
+         [
+          0.6,
+          1.6
+         ],
+         [
+          0.7,
+          1.371
+         ],
+         [
+          0.8,
+          1.2
+         ],
+         [
+          1.0,
+          0.96
+         ],
+         [
+          1.2,
+          0.8
+         ],
+         [
+          1.4,
+          0.686
+         ],
+         [
+          1.6,
+          0.6
+         ]
+        ]
+       }
+      ],
+      "xl": "total mass M (kg)",
+      "yl": "a (m/s²)"
+     }
+    },
+    {
+     "id": "c8",
+     "term": "Linearize: plot a against 1/M",
+     "def": "**Plot acceleration against 1 ÷ total mass and the points fall on a straight line through the origin.**\n• a = F × (1/M) has the shape y = mx.\n• Make a second data table with a 1/M column before you graph.",
+     "eq": "a = F (1 / M)",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       2.5,
+       0,
+       2.4
+      ],
+      "gx": 0.5,
+      "gy": 0.4,
+      "series": [
+       {
+        "type": "line",
+        "m": 0.96,
+        "b": 0
+       }
+      ],
+      "xl": "1 / M (1/kg)",
+      "yl": "a (m/s²)"
+     }
+    },
+    {
+     "id": "c9",
+     "term": "The slope is the force",
+     "def": "**The slope of a against 1/M is the pulling force — the hanging weight — in newtons.**\n• Units: (m/s²) ÷ (1/kg) = kg·m/s² = N.\n• Divide the slope by g to get the hanging mass back.",
+     "eq": "slope = F = m_h g",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "The average force",
+     "def": "**Multiply each run’s total mass by its acceleration to get a force, then average those forces.**\n• If the law holds, every run gives about the same F.\n• The average should come close to the hanging weight.",
+     "eq": "F = Ma",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "Percent error and percent difference",
+     "def": "**Percent error compares a measurement with an accepted value; percent difference compares two measurements with each other.**\n• Percent error: |experimental − actual| ÷ actual × 100.\n• Percent difference: |A − B| ÷ the average of A and B × 100.\n• The hanging weight is the accepted value here, so the formula your sheet prints is the percent-error one.",
+     "from": "added"
+    },
+    {
+     "id": "c12",
+     "term": "On the Moon",
+     "def": "**On the Moon the hanging weight is one-sixth as big, so every acceleration is one-sixth as big — the masses do not change.**\n• The line on the a-against-1/M graph is one-sixth as steep.\n• Saying “nothing changes because mass is the same everywhere” misses that the FORCE is a weight.",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Friction as a source of error",
+     "def": "**Friction in the wheels and pulley makes the measured acceleration too low, so the force worked out from Ma comes out lower than the hanging weight.**\n• Lessen it: a smooth track, free-spinning wheels and pulley, or tilt the track just enough that the cart rolls at a steady speed with no hanging mass.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What relationship does a cart-and-hanging-mass lab investigate when the mass on the cart is changed run by run?",
+     "opts": [
+      "How the system’s acceleration depends on its total mass, with the force kept the same",
+      "How the hanging weight depends on the speed the cart reaches at the edge",
+      "How the distance the cart travels depends on the length of the table",
+      "How the friction on the cart depends on the size of the hanging weight"
+     ],
+     "ans": 0,
+     "hint": "What is changed, and what is kept the same?",
+     "steps": [
+      "The hanging mass stays the same, so the pulling force stays the same.",
+      "The mass on the cart changes, so the total mass changes.",
+      "Each run measures the acceleration.",
+      "So the lab tests how acceleration depends on total mass."
+     ],
+     "ex": {
+      "main": "**Fixed force, changing total mass, measured acceleration.** The law it tests is a = F / M.",
+      "tip": "Fixed F, change M, measure a."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 120 g mass hangs from the string over the edge of the table. What force does it pull with?",
+     "opts": [
+      "1176 N",
+      "1.2 N",
+      "0.12 N",
+      "0.012 N"
+     ],
+     "ans": 1,
+     "hint": "Weight = mass in kilograms × g.",
+     "steps": [
+      "120 g = 0.120 kg.",
+      "F = mg = 0.120 × 9.8.",
+      "F = 1.176 N.",
+      "About 1.2 N."
+     ],
+     "ex": {
+      "main": "**F = 0.120 kg × 9.8 ≈ 1.2 N.** 1176 N leaves the mass in grams; 0.12 N uses the mass as if it were a weight; 0.012 N divides by g.",
+      "tip": "Grams to kilograms, then × 9.8."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 0.50 kg cart carries 0.25 kg of extra mass and is pulled by a 0.050 kg hanging mass. What total mass is being accelerated?",
+     "opts": [
+      "0.55 kg",
+      "0.75 kg",
+      "0.80 kg",
+      "0.70 kg"
+     ],
+     "ans": 2,
+     "hint": "Count everything that moves.",
+     "steps": [
+      "The cart moves: 0.50 kg.",
+      "The mass on the cart moves with it: 0.25 kg.",
+      "The hanging mass moves too: 0.050 kg.",
+      "M = 0.50 + 0.25 + 0.050 = 0.80 kg."
+     ],
+     "ex": {
+      "main": "**M = 0.80 kg.** 0.75 kg leaves out the hanging mass, which accelerates with the cart; 0.55 kg forgets the mass on the cart; 0.70 kg subtracts the hanging mass as if it pulled against the system.",
+      "tip": "If it moves, it is in M."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Starting from rest, a cart travels 0.72 m in 1.2 s at a steady acceleration. What is its acceleration?",
+     "opts": [
+      "1.2 m/s²",
+      "0.50 m/s²",
+      "0.60 m/s²",
+      "1.0 m/s²"
+     ],
+     "ans": 3,
+     "hint": "From rest: Δx = ½at².",
+     "steps": [
+      "From rest, Δx = ½at², so a = 2Δx / t².",
+      "a = 2 × 0.72 ÷ 1.2².",
+      "a = 1.44 ÷ 1.44.",
+      "a = 1.0 m/s²."
+     ],
+     "ex": {
+      "main": "**a = 2 × 0.72 ÷ 1.44 = 1.0 m/s².** 0.50 drops the 2; 0.60 is Δx / t, an average speed; 1.2 forgets to square the time.",
+      "tip": "Square the time, keep the 2."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cart starts from rest and you measure the distance Δx it travels in a time t. Which equation gives its acceleration?",
+     "opts": [
+      "a = 2Δx ÷ t²",
+      "a = Δx ÷ t²",
+      "a = Δx ÷ t",
+      "a = 2Δx ÷ t"
+     ],
+     "ans": 0,
+     "hint": "Start from Δx = v₀t + ½at² with v₀ = 0.",
+     "steps": [
+      "Δx = v₀t + ½at².",
+      "From rest, v₀ = 0, so Δx = ½at².",
+      "Multiply by 2 and divide by t².",
+      "a = 2Δx / t²."
+     ],
+     "ex": {
+      "main": "**From rest, Δx = ½at², so a = 2Δx / t².** Δx ÷ t is an average speed, and dropping the 2 halves every acceleration.",
+      "tip": "From rest, the ½ becomes a 2."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Why must the hanging mass be included in the total mass of the system?",
+     "opts": [
+      "Its weight pushes the cart down onto the table and adds to the friction",
+      "It accelerates along with the cart, so the force has to speed it up too",
+      "It is the force, and forces are always added to the mass in this lab",
+      "It hangs below the table, so it is the heaviest part of the system"
+     ],
+     "ans": 1,
+     "hint": "Does the hanging mass speed up?",
+     "steps": [
+      "The string joins the cart and the hanging mass.",
+      "They move together with one acceleration.",
+      "The hanging weight must accelerate everything that moves.",
+      "So the hanging mass belongs in the total mass."
+     ],
+     "ex": {
+      "main": "**The hanging mass speeds up with the cart, so it is part of what the force must accelerate.** It does not press on the cart, and a force is never added to a mass.",
+      "tip": "If it moves, it is in M."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "With the hanging mass kept the same, a graph of acceleration against total system mass would look like…",
+     "opts": [
+      "a straight line falling steadily until it reaches zero",
+      "a straight line rising from the origin as the mass grows",
+      "a curve that falls more and more slowly as the mass grows",
+      "a flat line, because the pulling force never changes"
+     ],
+     "ans": 2,
+     "hint": "a = F / M with F fixed.",
+     "steps": [
+      "F is fixed, so a = F / M.",
+      "Doubling M halves a; tripling M thirds it.",
+      "That is an inverse relationship.",
+      "It is a falling curve that never reaches zero."
+     ],
+     "ex": {
+      "main": "**a = F / M is an inverse relationship: a falling curve, not a line.** It never reaches zero, and a fixed force does not mean a fixed acceleration.",
+      "tip": "Inverse: a curve, not a line."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "To turn the lab’s data into a straight-line graph, what should you plot?",
+     "opts": [
+      "Total mass against the hanging weight",
+      "Acceleration against total mass squared",
+      "Distance against time for each run",
+      "Acceleration against 1 ÷ total mass"
+     ],
+     "ans": 3,
+     "hint": "Make a = F / M look like y = mx.",
+     "steps": [
+      "a = F / M = F × (1/M).",
+      "With y = a and x = 1/M, that is y = mx.",
+      "So a against 1/M is a straight line through the origin.",
+      "Plot acceleration against 1 ÷ total mass."
+     ],
+     "ex": {
+      "main": "**a against 1/M is a straight line**, because a = F × (1/M). Distance against time is what your sheet tells you NOT to graph.",
+      "tip": "Linearize by flipping the mass."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "In the lab, acceleration is plotted against 1 ÷ total mass and the points fall on a straight line. What does the slope of that line stand for?",
+     "opts": [
+      "The hanging weight — the force pulling the system",
+      "The total mass of the cart and everything on it",
+      "The acceleration of the cart on every run",
+      "One divided by the hanging weight"
+     ],
+     "ans": 0,
+     "hint": "a = F × (1/M). What multiplies 1/M?",
+     "steps": [
+      "The line is a = (slope) × (1/M).",
+      "Newton’s second law gives a = F × (1/M).",
+      "So the slope is F.",
+      "F is the hanging weight."
+     ],
+     "ex": {
+      "main": "**The slope is the pulling force — the hanging weight — in newtons.** Units: (m/s²) ÷ (1/kg) = N. It is a force, not a mass or an acceleration.",
+      "tip": "Slope of a against 1/M = F."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A line of acceleration against 1 ÷ total mass passes through the origin, (0.80 kg⁻¹, 0.64 m/s²) and (2.0 kg⁻¹, 1.6 m/s²). What force pulled the system?",
+     "opts": [
+      "1.25 N",
+      "0.80 N",
+      "0.082 N",
+      "7.8 N"
+     ],
+     "ans": 1,
+     "hint": "The slope is the force.",
+     "steps": [
+      "Slope = rise ÷ run.",
+      "= (1.6 − 0.64) ÷ (2.0 − 0.80) = 0.96 ÷ 1.2.",
+      "= 0.80 N.",
+      "The force is 0.80 N."
+     ],
+     "ex": {
+      "main": "**Slope = 0.96 ÷ 1.2 = 0.80 N.** 1.25 N is run over rise, upside down; 0.082 N divides by g (that is the hanging mass, in kg); 7.8 N multiplies by g, which was already inside the weight.",
+      "tip": "Rise over run, then read it as newtons."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Three lab runs gave a total mass of 0.50 kg at 1.86 m/s², 0.75 kg at 1.28 m/s², and 1.00 kg at 0.99 m/s². What is the average force?",
+     "opts": [
+      "1.4 N",
+      "2.9 N",
+      "0.96 N",
+      "2.1 N"
+     ],
+     "ans": 2,
+     "hint": "F = Ma for each run, then average.",
+     "steps": [
+      "Run forces: 0.50 × 1.86 = 0.93 N, 0.75 × 1.28 = 0.96 N, 1.00 × 0.99 = 0.99 N.",
+      "Add them: 2.88 N.",
+      "Divide by 3.",
+      "The average force is 0.96 N."
+     ],
+     "ex": {
+      "main": "**(0.93 + 0.96 + 0.99) ÷ 3 = 0.96 N.** 2.9 N adds without dividing; 1.4 N averages the accelerations and leaves the masses out; 2.1 N divides a by M instead of multiplying.",
+      "tip": "One force per run, then the mean."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A lab’s average force is 0.90 N and the hanging weight is 0.98 N. Using |experimental − actual| ÷ actual × 100, what is the result, in percent?",
+     "opts": [
+      "92",
+      "8.9",
+      "0.082",
+      "8.2"
+     ],
+     "ans": 3,
+     "hint": "The hanging weight is the actual value.",
+     "steps": [
+      "|0.90 − 0.98| = 0.08 N.",
+      "Divide by the actual value: 0.08 ÷ 0.98 = 0.0816.",
+      "Multiply by 100.",
+      "About 8.2."
+     ],
+     "ex": {
+      "main": "**0.08 ÷ 0.98 × 100 ≈ 8.2 percent.** 8.9 divides by the experimental value; 0.082 forgets the × 100; 92 is the ratio of the two, not their difference.",
+      "tip": "Divide by the accepted value."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Which comparison calls for a percent DIFFERENCE rather than a percent error?",
+     "opts": [
+      "Two measured values, with no accepted value to compare against",
+      "A measured value against a value printed in the textbook",
+      "A measured acceleration against the accepted value of g",
+      "A measured force against a weight worked out from a known mass"
+     ],
+     "ans": 0,
+     "hint": "Percent error needs an accepted value.",
+     "steps": [
+      "Percent error compares a measurement with an accepted value.",
+      "Percent difference compares two measurements with each other.",
+      "Every other choice has an accepted value to compare with.",
+      "Two measured values call for a percent difference."
+     ],
+     "ex": {
+      "main": "**Percent difference is for two measurements with no accepted value.** A textbook value, g, or a weight from a known mass is an accepted value — that is a percent error.",
+      "tip": "Accepted value: error. Two measurements: difference."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "If the cart-and-hanging-mass lab were done on the Moon, where g is one-sixth of Earth’s, how would the measured accelerations change?",
+     "opts": [
+      "Nothing would change, because the masses are the same on the Moon",
+      "Each would be one-sixth as big, because the hanging weight is one-sixth as big",
+      "Each would be six times as big, because the cart weighs less on the Moon",
+      "The cart would not move, because the hanging mass would weigh nothing"
+     ],
+     "ans": 1,
+     "hint": "What is the force, and what is the mass?",
+     "steps": [
+      "The force is the hanging WEIGHT, m_h g, which is one-sixth as big.",
+      "The total mass is unchanged.",
+      "a = F / M, so every a is one-sixth as big.",
+      "The accelerations are each one-sixth as big."
+     ],
+     "ex": {
+      "main": "**The pulling force is a weight, so it drops to one-sixth, and so does every acceleration.** The masses do not change — which is exactly why the answer is not “nothing changes”. Weight on the Moon is smaller, not zero.",
+      "tip": "The force is a weight; weights shrink on the Moon."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Friction in the cart’s wheels and the pulley is not accounted for in the lab. How does it affect the force worked out from Ma?",
+     "opts": [
+      "It has no effect, because friction acts on the cart only",
+      "It makes the force come out higher than the hanging weight",
+      "It makes the force come out lower than the hanging weight",
+      "It has no effect, because it cancels out over several runs"
+     ],
+     "ans": 2,
+     "hint": "Friction slows the cart. What does that do to a?",
+     "steps": [
+      "Friction opposes the motion, so the measured acceleration is lower.",
+      "F = Ma uses that lower acceleration.",
+      "So the worked-out force is lower than the true pull.",
+      "The force comes out low."
+     ],
+     "ex": {
+      "main": "**Friction lowers the measured a, so Ma comes out below the hanging weight.** It acts on every run in the same direction, so averaging does not cancel it. A smoother track or a slightly tilted one reduces it.",
+      "tip": "Name the error AND its direction."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cart lab keeps its hanging weight fixed and doubles the total system mass. What happens to the acceleration?",
+     "opts": [
+      "It falls to a quarter",
+      "It doubles",
+      "It stays the same",
+      "It halves"
+     ],
+     "ans": 3,
+     "hint": "a = F / M.",
+     "steps": [
+      "F stays the same.",
+      "M doubles.",
+      "a = F / M, so a is divided by 2.",
+      "The acceleration halves."
+     ],
+     "ex": {
+      "main": "**a = F / M: double M and a halves.** It would fall to a quarter only if a depended on M squared, which it does not.",
+      "tip": "Inverse: double one, halve the other."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put the steps of the Newton’s second law lab in order.",
+     "opts": [
+      "Find the weight of the hanging mass in newtons",
+      "Release the cart from rest and time it over a measured distance",
+      "Work out each run’s acceleration with a = 2Δx ÷ t²",
+      "Plot acceleration against 1 ÷ total mass and find the slope"
+     ],
+     "ans": 0,
+     "hint": "You need the data before the graph.",
+     "steps": [
+      "First, know the pulling force.",
+      "Then collect a distance and a time for each run.",
+      "Turn each into an acceleration.",
+      "Then graph and find the slope."
+     ],
+     "ex": {
+      "main": "**Force, runs, accelerations, then the linearized graph.** The slope is then compared with the hanging weight from the first step.",
+      "tip": "Measure, compute, then graph."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

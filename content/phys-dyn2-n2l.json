@@ -1,0 +1,854 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn2-n2l": {
+   "id": "unit-phys-dyn2-n2l",
+   "type": "unit",
+   "updatedAt": 1794857723916,
+   "classId": "physics",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Dynamics 2 · 2-1 Applying Newton’s Second Law",
+   "srcName": "Newton’s Second Law (worksheet)",
+   "source": "N2L_Worksheet.pdf (Drive, Physics 8 › Dynamics 2)",
+   "summary": {
+    "text": "Newton’s second law put to work on problems with more than one step: two blocks joined by a string (the system’s acceleration first, then the tension from one block), scale readings in an elevator and working back from a reading, a pull at an angle, friction worked out from a measured slide down a ramp, and reading a force–acceleration graph whose slope is 1 ÷ the mass.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Real problems rarely hand you the net force. Breaking one into a system step and an object step, or into a vertical and a horizontal step, is the move every later unit — friction, circular motion, energy — builds on.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Use a free-body diagram and ΣF = ma to find an acceleration.",
+     "from": "source"
+    },
+    {
+     "text": "Find the acceleration of connected objects and the tension between them.",
+     "from": "source"
+    },
+    {
+     "text": "Find a scale reading in an accelerating elevator, and the acceleration from a reading.",
+     "from": "source"
+    },
+    {
+     "text": "Find the normal force and acceleration for a pull at an angle.",
+     "from": "source"
+    },
+    {
+     "text": "Interpret the slope of an acceleration–force graph as 1 ÷ mass.",
+     "from": "source"
+    },
+    {
+     "text": "Follow a fixed order of steps for multi-object problems.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "From N2L_Worksheet.pdf in the new Dynamics 2 folder. The sheet was read for what it asks — connected blocks and tension, elevator scale readings, an angled pull with friction, a block on a ramp, and a force–acceleration data table — and nothing of hers was marked or recorded. Dynamics 1 already teaches the second law, tension, apparent weight and slopes in words, so this unit is the multi-step layer: the system’s acceleration first, then the tension from one block; a scale reading forward and backward; the normal force before anything that depends on it. Every number was computed with sympy and checked, every wrong option is a named slip (one block’s mass only, tension equal to the pull, the sign of a flipped, a speed used as an acceleration, sine and cosine swapped, friction added), and none of the sheet’s numbers is reused. This unit uses g = 9.8 m/s²; her sheets may write it as −9.8 or 10, and a card says so. One thing on the sheet: free-response problem 3 skips part (d), going straight from (c) to (e).",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards, then take the quiz. Before every calculation, draw the arrows and say which way is positive.",
+    "minutes": 30,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "Solving a second-law problem",
+     "def": "**Draw the forces, pick a positive direction, add the forces along it, and set the total equal to ma.**\n• One free-body diagram per object, with every force on THAT object.\n• Forces along your positive direction are +, against it are −.\n• Only then put numbers in. Most wrong answers start as a missing or backwards arrow.",
+     "eq": "ΣF = ma",
+     "from": "added"
+    },
+    {
+     "id": "c1",
+     "term": "Your sheet’s g",
+     "def": "**This unit uses g = 9.8 m/s² as a size, and says “down” in words.**\n• Your sheets may write g = −9.8 m/s², or round it to 10. The minus is only the direction: down.\n• A weight is mg using the size of g. If your class uses 10, your answers will be about 2 percent bigger than these, and both are right for their g.",
+     "hint": "The minus sign on g means “down”, nothing more.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "Connected objects share one acceleration",
+     "def": "**Two objects joined by a taut string move together, so they have the same acceleration.**\n• If one sped up more, the string would go slack or snap.\n• So treat them as ONE system first: the outside force over the total mass.",
+     "eq": "a = F_net / (m₁ + m₂)",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "The string is internal to the system",
+     "def": "**When both blocks are one system, the string’s pulls cancel and drop out.**\n• The string pulls the front block back and the back block forward by the same amount.\n• That is why the system equation has no T in it — and why you need a second step to find T.",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Then the tension from one block",
+     "def": "**To find the tension, write ΣF = ma for ONE block, using only the forces on it.**\n• The easiest block is the one the string pulls and nothing else does: T = m_that block × a.\n• You already know a from the system step.",
+     "eq": "T = m_back × a",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "The tension is less than the pull",
+     "def": "**The pull speeds up both blocks; the string only has to speed up the one behind it, so the tension is smaller than the pull.**\n• Setting the tension equal to the applied force is the commonest slip.\n• The tension is the pull’s share for the trailing block: T = F × m_back / (m₁ + m₂).",
+     "hint": "The string only drags what is behind it.",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Pull the other block instead",
+     "def": "**Pull the other block with the same force and the acceleration stays the same, but the tension changes.**\n• The total mass is unchanged, so a is unchanged.\n• Now the string drags the OTHER block, so T = that block’s mass × a. Pulling the lighter block gives the bigger tension.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "Scale reading: speeding up going up",
+     "def": "**When the acceleration points up, the scale reads more than your weight: N = m(g + a).**\n• The floor has to hold you up AND push you faster.\n• Speeding up on the way up and slowing down on the way down both have an upward acceleration.",
+     "eq": "N = m(g + a)",
+     "from": "source"
+    },
+    {
+     "id": "c8",
+     "term": "Scale reading: acceleration down",
+     "def": "**When the acceleration points down, the scale reads less: N = m(g − a).**\n• Slowing down on the way UP is an acceleration down — the reading drops even though you are rising.\n• Flipping the sign of a is the slip to watch for: decide the direction of the acceleration, not the direction of travel.",
+     "eq": "N = m(g − a)",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "Scale reading at constant velocity",
+     "def": "**At constant velocity the scale reads exactly your weight, however fast the elevator moves.**\n• Constant velocity means a = 0, so N = mg.\n• A speed is not an acceleration: 4 m/s up adds nothing to the reading.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "From a scale reading back to the acceleration",
+     "def": "**Divide the reading by the mass and subtract g; what is left is the acceleration.**\n• A positive answer points up, a negative one points down.\n• Forgetting to subtract g gives an absurd acceleration — a quick check that something went wrong.",
+     "eq": "a = N / m − g",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "An angled pull lifts as well as drags",
+     "def": "**The vertical part of an upward pull, F sin θ, takes some of the weight, so the normal force shrinks.**\n• N = mg − F sin θ on a level floor.\n• Only the horizontal part, F cos θ, speeds the object along the floor.\n• Less normal force means less friction, which is the next unit’s story.",
+     "eq": "N = mg − F sin θ",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Tilting the pull up further",
+     "def": "**On a frictionless floor, a steeper pull always gives a smaller acceleration, because cos θ shrinks.**\n• On a rough floor it is a trade: less horizontal drive, but less friction too. Tilting a little can help; tilting a lot never does.",
+     "from": "added"
+    },
+    {
+     "id": "c13",
+     "term": "Working back to friction on a slope",
+     "def": "**If you measure how fast something slides down a slope, the shortfall from g sin θ is friction’s doing.**\n• Down the slope: mg sin θ − f = ma, so f = mg sin θ − ma.\n• On a frictionless slope a would be g sin θ; anything less is friction.",
+     "eq": "f = mg sin θ − ma",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Acceleration against force: a straight line",
+     "def": "**For one cart of fixed mass, acceleration is proportional to the net force, so a graph of a against F is a straight line through the origin.**\n• Double the force, double the acceleration.",
+     "from": "source",
+     "graph": {
+      "w": [
+       0,
+       2.5,
+       0,
+       2
+      ],
+      "gx": 0.5,
+      "gy": 0.4,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          0.5,
+          0.4
+         ],
+         [
+          1.0,
+          0.8
+         ],
+         [
+          1.5,
+          1.2
+         ],
+         [
+          2.0,
+          1.6
+         ]
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": 0.5,
+        "y": 0.4
+       },
+       {
+        "x": 1.0,
+        "y": 0.8
+       },
+       {
+        "x": 1.5,
+        "y": 1.2
+       },
+       {
+        "x": 2.0,
+        "y": 1.6
+       }
+      ],
+      "xl": "net force F (N)",
+      "yl": "a (m/s²)"
+     }
+    },
+    {
+     "id": "c15",
+     "term": "The slope is 1 / mass",
+     "def": "**The slope of a against F is 1 ÷ the mass, in (m/s²) per newton, which is 1/kg.**\n• a = (1/m) F has the same shape as y = mx.\n• So the mass is 1 ÷ slope: a steeper line means a lighter cart.",
+     "eq": "slope = Δa / ΔF = 1 / m",
+     "from": "source"
+    },
+    {
+     "id": "c16",
+     "term": "Which variable goes on which axis",
+     "def": "**The one you choose goes across the bottom; the one you measure goes up the side.**\n• Choosing the force and measuring the acceleration makes force the independent variable and acceleration the dependent one.",
+     "from": "source"
+    },
+    {
+     "id": "c17",
+     "term": "Acceleration follows the net force, not the motion",
+     "def": "**The acceleration always points the way the net force points — even when the object is moving the other way.**\n• A box sliding left while slowing down has a net force to the right.\n• Velocity tells you where it is going; acceleration tells you how that is changing.",
+     "from": "source"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two blocks on a frictionless table are joined by a taut string, and one block is pulled so both speed up. How do their accelerations compare?",
+     "opts": [
+      "They are equal, because the taut string makes them move together",
+      "The pulled block’s is bigger, because the force acts on it directly",
+      "The heavier block’s is smaller, because it has more inertia to overcome",
+      "The block behind has none until the string stretches tight enough"
+     ],
+     "ans": 0,
+     "hint": "What would happen to the string if one went faster?",
+     "steps": [
+      "The string is taut and does not stretch.",
+      "If one block sped up more, the gap would change and the string would go slack.",
+      "So they keep the same velocity at every moment.",
+      "Same velocity at every moment means the same acceleration."
+     ],
+     "ex": {
+      "main": "**A taut string forces the two blocks to share one acceleration.** The pulled block feels a bigger net force, but it is not ahead: the string holds the gap fixed. That is what makes the one-system step work.",
+      "tip": "Joined and taut means one acceleration."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 3.0 kg block and a 5.0 kg block sit on a frictionless table, joined by a light string. A 40 N horizontal pull acts on the 5.0 kg block. What is the acceleration of the blocks?",
+     "opts": [
+      "8.0 m/s²",
+      "5.0 m/s²",
+      "13 m/s²",
+      "20 m/s²"
+     ],
+     "ans": 1,
+     "hint": "Both blocks move, so both masses count.",
+     "steps": [
+      "The string makes the blocks one system.",
+      "Total mass: 3.0 kg + 5.0 kg = 8.0 kg.",
+      "a = F / m = 40 N ÷ 8.0 kg.",
+      "a = 5.0 m/s²."
+     ],
+     "ex": {
+      "main": "**a = 40 N ÷ (3.0 + 5.0) kg = 5.0 m/s².** 8.0 m/s² uses only the pulled block’s mass, 13 m/s² only the other block’s, and 20 m/s² subtracts the masses — but the pull has to speed up everything joined to it.",
+      "tip": "System first: outside force over total mass."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 3.0 kg block and a 5.0 kg block sit on a frictionless table, joined by a light string. A 40 N horizontal pull acts on the 5.0 kg block, so both accelerate at 5.0 m/s². What is the tension in the string?",
+     "opts": [
+      "25 N",
+      "40 N",
+      "15 N",
+      "20 N"
+     ],
+     "ans": 2,
+     "hint": "Which block does the string pull, and nothing else?",
+     "steps": [
+      "The string is the only horizontal force on the 3.0 kg block.",
+      "For that block: T = ma.",
+      "T = 3.0 kg × 5.0 m/s².",
+      "T = 15 N."
+     ],
+     "ex": {
+      "main": "**T = 3.0 kg × 5.0 m/s² = 15 N.** 40 N sets the tension equal to the pull; 25 N uses the pulled block’s mass, which the string does not drag; 20 N splits the pull evenly, as if the blocks had equal masses.",
+      "tip": "Find T from the block the string drags."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 3.0 kg block and a 5.0 kg block sit on a frictionless table, joined by a light string. A 40 N horizontal pull now acts on the 3.0 kg block instead, pulling the other way. What are the acceleration and the tension?",
+     "opts": [
+      "13 m/s² and 25 N",
+      "5.0 m/s² and 15 N",
+      "5.0 m/s² and 40 N",
+      "5.0 m/s² and 25 N"
+     ],
+     "ans": 3,
+     "hint": "The total mass has not changed. The block being dragged has.",
+     "steps": [
+      "The system is still 8.0 kg, so a = 40 N ÷ 8.0 kg = 5.0 m/s².",
+      "Now the string drags the 5.0 kg block.",
+      "T = 5.0 kg × 5.0 m/s² = 25 N.",
+      "The answer is 5.0 m/s² and 25 N."
+     ],
+     "ex": {
+      "main": "**Same acceleration, 5.0 m/s², but the tension rises to 25 N.** The string now drags the heavier block. Carrying 15 N over ignores which block is behind; 40 N sets the tension equal to the pull; 13 m/s² counts only the pulled block’s mass.",
+      "tip": "Pull the lighter block and the string works harder."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two crates joined by a rope are pulled across smooth ice by a second rope on the front crate. Why is the tension in the joining rope less than the pull on the front rope?",
+     "opts": [
+      "The joining rope only speeds up the back crate; the pull speeds up both",
+      "Some of the pull is used up stretching the joining rope as they move",
+      "Tension always shrinks along a rope, so the far end pulls less hard",
+      "The back crate pushes forward on the front crate and cancels some pull"
+     ],
+     "ans": 0,
+     "hint": "How much mass does each rope have to accelerate?",
+     "steps": [
+      "Both crates share the same acceleration.",
+      "The front rope must give that acceleration to both crates.",
+      "The joining rope must give it only to the back crate.",
+      "Less mass at the same acceleration needs less force, so the tension is smaller."
+     ],
+     "ex": {
+      "main": "**The front rope accelerates both crates; the joining rope accelerates only the back one**, so it needs less force. A light rope passes its tension along unchanged, and the back crate pulls back on the front one rather than pushing it forward.",
+      "tip": "Tension = the share of the pull for whatever is behind."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 56 kg student stands on a scale in an elevator that is speeding up as it rises, at 1.2 m/s². What does the scale read?",
+     "opts": [
+      "482 N",
+      "616 N",
+      "549 N",
+      "67 N"
+     ],
+     "ans": 1,
+     "hint": "The acceleration points up, so the floor pushes harder than her weight.",
+     "steps": [
+      "Upward is positive: N − mg = ma.",
+      "N = m(g + a) = 56 kg × (9.8 + 1.2) m/s².",
+      "N = 56 × 11.0 = 616 N.",
+      "The scale reads 616 N."
+     ],
+     "ex": {
+      "main": "**N = 56 × (9.8 + 1.2) = 616 N.** 482 N flips the sign of a; 549 N is her weight, ignoring the acceleration; 67 N is only ma, forgetting that the floor holds her up as well.",
+      "tip": "Upward acceleration: g + a."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 70 kg passenger stands on a scale in an elevator that is moving UP but slowing down at 2.5 m/s². What does the scale read?",
+     "opts": [
+      "686 N",
+      "861 N",
+      "511 N",
+      "175 N"
+     ],
+     "ans": 2,
+     "hint": "Slowing while rising: which way does the acceleration point?",
+     "steps": [
+      "Moving up and slowing down means the acceleration points down.",
+      "With up as positive, a = −2.5 m/s², so N = m(g − 2.5).",
+      "N = 70 × 7.3 = 511 N.",
+      "The scale reads 511 N."
+     ],
+     "ex": {
+      "main": "**The acceleration points down, so N = 70 × (9.8 − 2.5) = 511 N.** 861 N uses g + a because the elevator is rising — the slip of reading the direction of travel instead of the acceleration. 686 N ignores the acceleration; 175 N is only ma.",
+      "tip": "Slowing on the way up feels light."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 58 kg student stands on a scale in an elevator rising at a steady 4.0 m/s. What does the scale read?",
+     "opts": [
+      "58 N",
+      "800 N",
+      "336 N",
+      "568 N"
+     ],
+     "ans": 3,
+     "hint": "What is the acceleration at a steady speed?",
+     "steps": [
+      "A steady speed in a straight line means a = 0.",
+      "So N = mg.",
+      "N = 58 × 9.8 = 568 N.",
+      "The scale reads 568 N."
+     ],
+     "ex": {
+      "main": "**Constant velocity means no acceleration, so N = mg = 568 N.** 800 N and 336 N treat the speed 4.0 m/s as if it were an acceleration; 58 N uses the mass as if it were a weight.",
+      "tip": "A speed is not an acceleration."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 45 kg student stands on a scale in a moving elevator, and the scale reads 504 N. What is the elevator’s acceleration?",
+     "opts": [
+      "1.4 m/s² upward",
+      "1.4 m/s² downward",
+      "11.2 m/s² upward",
+      "21.0 m/s² upward"
+     ],
+     "ans": 0,
+     "hint": "Divide by the mass, then take g away.",
+     "steps": [
+      "Upward is positive: N − mg = ma, so a = N / m − g.",
+      "N / m = 504 ÷ 45 = 11.2 m/s².",
+      "a = 11.2 − 9.8 = +1.4 m/s².",
+      "The acceleration is 1.4 m/s² upward."
+     ],
+     "ex": {
+      "main": "**a = 504 ÷ 45 − 9.8 = +1.4 m/s², upward** — the reading is above her weight (441 N), so the floor pushes her up harder than gravity pulls down. “Downward” flips the sign; 11.2 forgets to subtract g; 21.0 adds it.",
+      "tip": "Reading above the weight means acceleration up."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A scale in an elevator reads LESS than the weight of the person standing on it. Which could the elevator be doing?",
+     "opts": [
+      "Moving up at a steady speed",
+      "Moving up and slowing down",
+      "Moving up and speeding up",
+      "Moving down and slowing down"
+     ],
+     "ans": 1,
+     "hint": "A low reading needs a downward acceleration.",
+     "steps": [
+      "N < mg means the net force on the person points down.",
+      "So the acceleration points down.",
+      "Rising while slowing is an acceleration down; so is falling while speeding up.",
+      "Of the choices, only moving up and slowing down fits."
+     ],
+     "ex": {
+      "main": "**A low reading means the acceleration points down, and rising-but-slowing is exactly that.** A steady speed reads the weight; speeding up on the way up and slowing down on the way down both read MORE than the weight.",
+      "tip": "Ask which way the speed is changing, not which way it moves."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 15 kg crate on a level floor is pulled with 80 N by a rope angled 25° above the horizontal. What is the normal force from the floor?",
+     "opts": [
+      "181 N",
+      "147 N",
+      "113 N",
+      "74 N"
+     ],
+     "ans": 2,
+     "hint": "The rope lifts a little as well as dragging.",
+     "steps": [
+      "Weight: 15 × 9.8 = 147 N, down.",
+      "The rope’s vertical part: 80 sin 25° = 33.8 N, up.",
+      "Vertically nothing accelerates: N + 33.8 = 147.",
+      "N = 147 − 33.8 ≈ 113 N."
+     ],
+     "ex": {
+      "main": "**N = mg − F sin θ = 147 − 33.8 ≈ 113 N.** 147 N leaves the rope’s lift out; 181 N adds it as if the rope pressed down; 74 N subtracts F cos θ — sine and cosine swapped.",
+      "tip": "Vertical part: sine, when the angle is from the horizontal."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 15 kg crate on a level floor is pulled with 80 N by a rope angled 25° above the horizontal, and kinetic friction on it is 40 N. What is its acceleration along the floor?",
+     "opts": [
+      "4.8 m/s²",
+      "2.7 m/s²",
+      "7.5 m/s²",
+      "2.2 m/s²"
+     ],
+     "ans": 3,
+     "hint": "Only the horizontal part of the pull drives it along.",
+     "steps": [
+      "Horizontal part of the pull: 80 cos 25° = 72.5 N.",
+      "Friction points backward: net force = 72.5 − 40 = 32.5 N.",
+      "a = 32.5 N ÷ 15 kg.",
+      "a ≈ 2.2 m/s²."
+     ],
+     "ex": {
+      "main": "**a = (80 cos 25° − 40) ÷ 15 ≈ 2.2 m/s².** 2.7 uses the whole 80 N as if the rope were level; 7.5 adds friction instead of subtracting it; 4.8 leaves friction out.",
+      "tip": "Horizontal part forward, friction back."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cart on a frictionless floor is pulled by a rope with a force of fixed size. If the rope is tilted further above the horizontal, what happens to the cart’s acceleration?",
+     "opts": [
+      "It decreases, because the horizontal part F cos θ gets smaller",
+      "It increases, because the normal force gets smaller",
+      "It stays the same, because the size of the pull has not changed",
+      "It increases, because the rope now lifts part of the cart’s weight"
+     ],
+     "ans": 0,
+     "hint": "With no friction, only one part of the pull matters.",
+     "steps": [
+      "Only the horizontal part, F cos θ, accelerates the cart along the floor.",
+      "As θ grows, cos θ shrinks.",
+      "There is no friction for a smaller normal force to reduce.",
+      "So the acceleration decreases."
+     ],
+     "ex": {
+      "main": "**On a frictionless floor the acceleration falls as the rope tilts up**, because F cos θ shrinks. A smaller normal force only helps when there is friction to reduce; here there is none.",
+      "tip": "No friction: steeper pull, less acceleration."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 4.5 kg block slides down a 40° ramp, and its acceleration is measured as 4.1 m/s². How big is the friction on it?",
+     "opts": [
+      "47 N",
+      "9.9 N",
+      "15 N",
+      "28 N"
+     ],
+     "ans": 1,
+     "hint": "Gravity’s part down the slope, minus what the acceleration needs.",
+     "steps": [
+      "Down the slope: mg sin θ − f = ma.",
+      "mg sin 40° = 4.5 × 9.8 × 0.643 ≈ 28.3 N.",
+      "ma = 4.5 × 4.1 = 18.45 N.",
+      "f = 28.3 − 18.45 ≈ 9.9 N."
+     ],
+     "ex": {
+      "main": "**f = mg sin θ − ma ≈ 28.3 − 18.5 = 9.9 N.** 47 N adds ma instead of subtracting it; 15 N uses cos 40° for the down-slope part, swapping sine and cosine; 28 N is gravity’s part alone, ignoring the acceleration.",
+      "tip": "Friction is the shortfall from g sin θ."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown plots a cart’s acceleration against the net force on it, with the cart’s mass kept the same. What does the slope of the line stand for?",
+     "opts": [
+      "The cart’s weight",
+      "The cart’s mass",
+      "1 ÷ the cart’s mass",
+      "The net force on the cart"
+     ],
+     "ans": 2,
+     "hint": "Compare a = (1/m)F with y = mx.",
+     "steps": [
+      "The line has the form a = (something) × F.",
+      "Newton’s second law gives a = F / m = (1/m) F.",
+      "So the slope is the number multiplying F.",
+      "The slope is 1 ÷ the mass."
+     ],
+     "ex": {
+      "main": "**The slope of a against F is 1/m.** Plotting F against a instead would make the slope the mass — which axis holds which quantity decides it.",
+      "tip": "Rise over run: (m/s²) per N is 1/kg."
+     },
+     "graph": {
+      "w": [
+       0,
+       2.5,
+       0,
+       2
+      ],
+      "gx": 0.5,
+      "gy": 0.4,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          0.5,
+          0.4
+         ],
+         [
+          1.0,
+          0.8
+         ],
+         [
+          1.5,
+          1.2
+         ],
+         [
+          2.0,
+          1.6
+         ]
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": 0.5,
+        "y": 0.4
+       },
+       {
+        "x": 1.0,
+        "y": 0.8
+       },
+       {
+        "x": 1.5,
+        "y": 1.2
+       },
+       {
+        "x": 2.0,
+        "y": 1.6
+       }
+      ],
+      "xl": "net force F (N)",
+      "yl": "a (m/s²)"
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "The graph shown plots a cart’s acceleration against the net force on it, with the cart’s mass kept the same. What is the cart’s mass?",
+     "opts": [
+      "1.6 kg",
+      "0.80 kg",
+      "2.0 kg",
+      "1.25 kg"
+     ],
+     "ans": 3,
+     "hint": "Find the slope, then turn it upside down.",
+     "steps": [
+      "Slope = Δa / ΔF = (1.60 − 0.40) ÷ (2.0 − 0.5) = 0.80 (m/s²)/N.",
+      "The slope is 1/m.",
+      "m = 1 ÷ 0.80 = 1.25 kg.",
+      "The cart’s mass is 1.25 kg."
+     ],
+     "ex": {
+      "main": "**Slope 0.80 = 1/m, so m = 1.25 kg.** 0.80 kg reads the slope itself as the mass; 2.0 kg and 1.6 kg are just the largest force and the largest acceleration on the graph.",
+      "tip": "Steeper line, lighter cart."
+     },
+     "graph": {
+      "w": [
+       0,
+       2.5,
+       0,
+       2
+      ],
+      "gx": 0.5,
+      "gy": 0.4,
+      "series": [
+       {
+        "type": "pts",
+        "pts": [
+         [
+          0,
+          0
+         ],
+         [
+          0.5,
+          0.4
+         ],
+         [
+          1.0,
+          0.8
+         ],
+         [
+          1.5,
+          1.2
+         ],
+         [
+          2.0,
+          1.6
+         ]
+        ]
+       }
+      ],
+      "pts": [
+       {
+        "x": 0.5,
+        "y": 0.4
+       },
+       {
+        "x": 1.0,
+        "y": 0.8
+       },
+       {
+        "x": 1.5,
+        "y": 1.2
+       },
+       {
+        "x": 2.0,
+        "y": 1.6
+       }
+      ],
+      "xl": "net force F (N)",
+      "yl": "a (m/s²)"
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A cart of fixed mass speeds up at 0.80 m/s² for every newton of net force, along a straight line through the origin. What acceleration would a 3.5 N net force give it?",
+     "opts": [
+      "2.8 m/s²",
+      "4.4 m/s²",
+      "3.5 m/s²",
+      "1.6 m/s²"
+     ],
+     "ans": 0,
+     "hint": "Multiply the force by the slope.",
+     "steps": [
+      "a = slope × F.",
+      "a = 0.80 (m/s²)/N × 3.5 N.",
+      "a = 2.8 m/s².",
+      "It would accelerate at 2.8 m/s²."
+     ],
+     "ex": {
+      "main": "**a = 0.80 × 3.5 = 2.8 m/s².** 4.4 divides by the slope instead of multiplying; 3.5 assumes a equals F; 1.6 assumes the line stops rising once the data run out.",
+      "tip": "A straight line through the origin keeps going."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "In an experiment, you choose the net force on a cart and measure the acceleration it gets. Which is the independent variable?",
+     "opts": [
+      "The acceleration",
+      "The net force",
+      "The cart’s mass",
+      "The time taken"
+     ],
+     "ans": 1,
+     "hint": "Which one do you set yourself?",
+     "steps": [
+      "The independent variable is the one you choose and change.",
+      "The dependent variable is the one you measure.",
+      "Here you choose the force and measure the acceleration.",
+      "The net force is independent."
+     ],
+     "ex": {
+      "main": "**You set the net force, so it is the independent variable**, and it goes across the horizontal axis. The acceleration is what you measure; the mass is held constant, a controlled variable.",
+      "tip": "Choose it: independent. Measure it: dependent."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box slides to the left across a floor and is slowing down. Which way does the net force on it point?",
+     "opts": [
+      "Straight down",
+      "To the left",
+      "To the right",
+      "There is none"
+     ],
+     "ans": 2,
+     "hint": "Slowing down means the acceleration opposes the velocity.",
+     "steps": [
+      "It moves left.",
+      "It is slowing, so its acceleration points opposite to its velocity: right.",
+      "The net force points the same way as the acceleration.",
+      "The net force points right."
+     ],
+     "ex": {
+      "main": "**Right — the net force points along the acceleration, not along the motion.** Something moving left with a leftward net force would be speeding up, and zero net force would keep its speed constant.",
+      "tip": "Net force follows the acceleration."
+     }
+    },
+    {
+     "id": "q19",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put the steps for finding the tension between two connected blocks in order.",
+     "opts": [
+      "Draw a free-body diagram for each block and pick a positive direction",
+      "Treat both blocks as one system and find a = F_net ÷ (m₁ + m₂)",
+      "Choose one block and write ΣF = ma using only the forces on it",
+      "Solve that one block’s equation for the tension T"
+     ],
+     "ans": 0,
+     "hint": "You need the acceleration before the tension.",
+     "steps": [
+      "Start with the forces: one diagram per block.",
+      "The system step gives a, because T cancels inside the system.",
+      "Then one block’s own equation contains T.",
+      "Solve it for T."
+     ],
+     "ex": {
+      "main": "**Diagrams, then the system’s acceleration, then one block’s equation, then T.** Trying to find T first fails: each block’s equation has two unknowns, T and a, until the system step supplies a.",
+      "tip": "System for a, one block for T."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}

@@ -1,0 +1,646 @@
+{
+ "v": 4,
+ "records": {
+  "unit-phys-dyn2-friction": {
+   "id": "unit-phys-dyn2-friction",
+   "type": "unit",
+   "updatedAt": 1794857723941,
+   "classId": "physics",
+   "quarter": 2,
+   "status": "draft",
+   "title": "Dynamics 2 · 2-2 Friction and the Coefficient",
+   "srcName": "Friction and the Coefficient (worksheet)",
+   "source": "Friction_and_the_Coefficient.pdf (Drive, Physics 8 › Dynamics 2)",
+   "summary": {
+    "text": "Friction problems with more than one step: μ from a constant-velocity pull, two connected blocks each with its own friction, friction in an accelerating elevator where the floor presses harder, an angled pull that lifts some weight off the floor, and a block sliding up a rough ramp — how far it goes, and how it comes back down slower.",
+    "from": "source"
+   },
+   "why": {
+    "text": "Friction is where the normal force stops being “just mg”. Getting N right first is what makes every one of these problems come out.",
+    "from": "added"
+   },
+   "objectives": [
+    {
+     "text": "Find the coefficient of friction from a constant-velocity pull.",
+     "from": "source"
+    },
+    {
+     "text": "Find the friction on each of two connected blocks, their acceleration and the tension.",
+     "from": "source"
+    },
+    {
+     "text": "Find the normal force and friction in an accelerating elevator.",
+     "from": "source"
+    },
+    {
+     "text": "Find the acceleration and stopping distance of a block sliding up a rough ramp.",
+     "from": "source"
+    },
+    {
+     "text": "Explain why a block comes back down a rough ramp slower than it went up.",
+     "from": "source"
+    },
+    {
+     "text": "Find the normal force before finding any friction.",
+     "from": "added"
+    }
+   ],
+   "parentNote": {
+    "text": "From Friction_and_the_Coefficient.pdf in the Dynamics 2 folder. The sheet was read for what it asks — μ from a constant-velocity pull, two blocks with friction on each, friction in an accelerating elevator, a block sliding up a rough ramp and back, and a puck stopped on an elevator floor — and nothing of hers was marked or recorded. Dynamics 1 · 1-2 already teaches μ, static and kinetic friction, so this unit is the applied layer: the normal force first (it is not always mg), then friction, then the motion. Every number was computed with sympy and checked; every wrong option is a named slip (mass used as weight, the angled pull’s lift not subtracted, friction added, friction left pointing up the slope on the way up, g + a flipped, the 2 or the square dropped in v² = 2aΔx), and none of the sheet’s numbers is reused. One card notes that with equal μ the tension between two blocks does not depend on friction; it is ours, flagged as a study suggestion. Things on the sheet worth knowing: problem 2 says the blocks are “as shown to the right”, and that picture was not seen, so their masses are unknown here; problem 4(f), the speed back at the bottom, is extra credit. This unit uses g = 9.8 m/s²; her sheets may write −9.8 or 10.",
+    "from": "added"
+   },
+   "nextUp": {
+    "text": "Read the cards, then take the quiz. For every problem, find the normal force before you touch μ.",
+    "minutes": 30,
+    "from": "added"
+   },
+   "cards": [
+    {
+     "id": "c0",
+     "term": "The coefficient of friction",
+     "def": "**μ is the friction force divided by the normal force. It has no units.**\n• Both are forces in newtons, so the units cancel.\n• It describes the two surfaces, not the object’s size or weight.",
+     "eq": "μ = f / N",
+     "from": "source"
+    },
+    {
+     "id": "c1",
+     "term": "Find N first",
+     "def": "**Friction depends on the normal force, so find N before you find friction.**\n• N equals mg only on a level surface, at rest or at constant velocity, with nothing else pushing up or down.\n• An angled pull, a slope, a push from above or an accelerating elevator all change N.",
+     "hint": "No N, no friction.",
+     "from": "added"
+    },
+    {
+     "id": "c2",
+     "term": "Constant velocity gives μ directly",
+     "def": "**Pulled level at constant velocity, the friction exactly balances the pull, so μ = pull ÷ mg.**\n• Constant velocity means zero net force — not zero friction.\n• This is how a coefficient is measured in a lab.",
+     "eq": "μ_k = F_pull / mg",
+     "from": "source"
+    },
+    {
+     "id": "c3",
+     "term": "Kinetic friction",
+     "def": "**Once a surface slides, kinetic friction is μ_k N and points against the sliding.**\n• It does not change with speed.\n• It always opposes the motion relative to the surface — never “the direction it is pulled from”.",
+     "eq": "f_k = μ_k N",
+     "from": "source"
+    },
+    {
+     "id": "c4",
+     "term": "Two blocks: each has its own friction",
+     "def": "**On a rough floor every block has its own friction, μ × its own normal force.**\n• The heavier block has the bigger friction.\n• The system’s total friction is the sum of the two.",
+     "from": "source"
+    },
+    {
+     "id": "c5",
+     "term": "Two blocks: the system acceleration",
+     "def": "**Subtract BOTH blocks’ friction from the pull, then divide by the total mass.**\n• a = (F − f₁ − f₂) ÷ (m₁ + m₂).\n• Adding friction instead of subtracting it is the slip to watch for.",
+     "eq": "a = (F − f₁ − f₂) / (m₁ + m₂)",
+     "from": "source"
+    },
+    {
+     "id": "c6",
+     "term": "Two blocks: the tension",
+     "def": "**For the block behind, the string pulls forward and friction pulls back: T − f = m a.**\n• So T = m(a + μg) for that block.\n• Leaving friction out of that block’s equation makes the tension too small.",
+     "from": "source"
+    },
+    {
+     "id": "c7",
+     "term": "A surprise in the tension",
+     "def": "**When both blocks have the same μ, the tension is the same share of the pull it would be with no friction at all: T = F × m_back / (m₁ + m₂).**\n• Friction slows both blocks in proportion to their masses, so the string has no extra work to do.\n• This only holds while both blocks are sliding.",
+     "from": "added"
+    },
+    {
+     "id": "c8",
+     "term": "Friction in an accelerating elevator",
+     "def": "**In an elevator accelerating up, the floor pushes harder, N = m(g + a), so friction grows too.**\n• Accelerating down, N = m(g − a) and friction shrinks.\n• In free fall the normal force — and the friction — would be zero.",
+     "eq": "f = μ m(g + a)",
+     "from": "source"
+    },
+    {
+     "id": "c9",
+     "term": "An angled pull and friction",
+     "def": "**Pulling up at an angle lowers the normal force, so it lowers the friction as well.**\n• N = mg − F sin θ, then f = μN.\n• The same pull held level presses nothing off the floor, so it meets more friction.",
+     "from": "source"
+    },
+    {
+     "id": "c10",
+     "term": "Sliding UP a rough slope",
+     "def": "**On the way up, gravity’s down-slope part and friction BOTH point down the slope.**\n• Friction opposes the sliding, which is up the slope.\n• So the deceleration is g(sin θ + μ cos θ).",
+     "eq": "a = −g(sin θ + μ cos θ)",
+     "hint": "Going up, both arrows point down.",
+     "from": "source"
+    },
+    {
+     "id": "c11",
+     "term": "How far up before it stops",
+     "def": "**Use v² = v₀² + 2aΔx with v = 0: the distance is v₀² ÷ 2|a|.**\n• Square the starting speed; keep the 2.\n• The bigger the deceleration, the shorter the slide.",
+     "eq": "v² = v₀² + 2aΔx",
+     "from": "source"
+    },
+    {
+     "id": "c12",
+     "term": "Coming back down",
+     "def": "**On the way down, friction flips to point UP the slope, so the acceleration is smaller: g(sin θ − μ cos θ).**\n• It only slides back if the slope is steep enough to beat static friction.\n• Friction always opposes the sliding, so it reverses when the motion does.",
+     "eq": "a = g(sin θ − μ cos θ)",
+     "from": "source"
+    },
+    {
+     "id": "c13",
+     "term": "Slower at the bottom",
+     "def": "**A block that slides up a rough slope and back comes down slower than it went up.**\n• Friction took energy on the way up AND on the way down.\n• Only on a frictionless slope would it return at its starting speed.",
+     "from": "source"
+    },
+    {
+     "id": "c14",
+     "term": "Stopping on an elevator floor",
+     "def": "**A puck sliding to a stop on an accelerating elevator floor decelerates at μ(g + a), because the floor presses harder.**\n• Find the deceleration from v₀² ÷ 2Δx, then divide by (g + a) to get μ.\n• Using g alone overestimates μ.",
+     "eq": "μ = v₀² / [2Δx (g + a)]",
+     "from": "source"
+    },
+    {
+     "id": "c15",
+     "term": "Your sheet’s g",
+     "def": "**This unit uses g = 9.8 m/s² as a size and says “down” in words.**\n• Your sheets may write −9.8 or 10; the minus is only the direction.\n• With g = 10 your answers come out a little different, and both are right for their g.",
+     "from": "added"
+    }
+   ],
+   "questions": [
+    {
+     "id": "q0",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "What does the coefficient of friction μ compare?",
+     "opts": [
+      "The friction force with the normal force pressing the surfaces together",
+      "The friction force with the object’s mass in kilograms",
+      "The pulling force with the object’s weight when it speeds up",
+      "The friction force with the speed the object slides at"
+     ],
+     "ans": 0,
+     "hint": "μ = f / N.",
+     "steps": [
+      "μ is defined as friction divided by normal force.",
+      "Both are forces, so μ has no units.",
+      "It describes how grippy the two surfaces are.",
+      "It compares friction with the normal force."
+     ],
+     "ex": {
+      "main": "**μ = f ÷ N, two forces, so it has no units.** Dividing by a mass would give units of m/s², and kinetic friction does not depend on speed.",
+      "tip": "Friction per newton of squeeze."
+     }
+    },
+    {
+     "id": "q1",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An 85 N horizontal force pulls a 40 kg box across a level floor at constant velocity. What is the coefficient of kinetic friction?",
+     "opts": [
+      "2.1",
+      "0.22",
+      "4.6",
+      "0.00"
+     ],
+     "ans": 1,
+     "hint": "At constant velocity, friction equals the pull.",
+     "steps": [
+      "Constant velocity: net force zero, so friction = 85 N.",
+      "Level floor, level pull: N = mg = 40 × 9.8 = 392 N.",
+      "μ = f / N = 85 ÷ 392.",
+      "μ ≈ 0.22."
+     ],
+     "ex": {
+      "main": "**μ = 85 ÷ 392 ≈ 0.22.** 2.1 divides by the mass instead of the weight; 4.6 divides the wrong way up; 0.00 mistakes “zero net force” for “zero friction”.",
+      "tip": "Constant velocity: friction = pull."
+     }
+    },
+    {
+     "id": "q2",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 2.0 kg block and a 3.0 kg block, joined by a string, slide across a rough floor. μ_k = 0.35 between each block and the floor. How big is the friction on the 3.0 kg block?",
+     "opts": [
+      "1.05 N",
+      "17 N",
+      "10 N",
+      "6.9 N"
+     ],
+     "ans": 2,
+     "hint": "Each block has its own normal force.",
+     "steps": [
+      "On a level floor, the 3.0 kg block’s N = 3.0 × 9.8 = 29.4 N.",
+      "f = μN = 0.35 × 29.4.",
+      "f = 10.3 N.",
+      "About 10 N."
+     ],
+     "ex": {
+      "main": "**f = 0.35 × 3.0 × 9.8 ≈ 10 N.** 17 N is the friction on both blocks together; 1.05 N uses the mass as if it were a weight; 6.9 N is the 2.0 kg block’s friction.",
+      "tip": "Each block: μ × its own N."
+     }
+    },
+    {
+     "id": "q3",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 2.0 kg block and a 3.0 kg block, joined by a string, are pulled across a rough floor by a 45 N horizontal force on the 3.0 kg block. μ_k = 0.35 between each block and the floor. What is their acceleration?",
+     "opts": [
+      "6.9 m/s²",
+      "9.0 m/s²",
+      "12 m/s²",
+      "5.6 m/s²"
+     ],
+     "ans": 3,
+     "hint": "Subtract both frictions, divide by both masses.",
+     "steps": [
+      "Frictions: 0.35 × 2.0 × 9.8 = 6.86 N and 0.35 × 3.0 × 9.8 = 10.29 N.",
+      "Net force on the system: 45 − 6.86 − 10.29 = 27.85 N.",
+      "a = 27.85 ÷ 5.0 kg.",
+      "a ≈ 5.6 m/s²."
+     ],
+     "ex": {
+      "main": "**a = (45 − 17.15) ÷ 5.0 ≈ 5.6 m/s².** 9.0 leaves friction out; 12 adds friction instead of subtracting it; 6.9 subtracts only the pulled block’s friction.",
+      "tip": "Every sliding block brings its own friction."
+     }
+    },
+    {
+     "id": "q4",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 2.0 kg block and a 3.0 kg block, joined by a string, are pulled across a rough floor by a 45 N horizontal force on the 3.0 kg block, so both accelerate at about 5.57 m/s². μ_k = 0.35 between each block and the floor. What is the tension in the string?",
+     "opts": [
+      "18 N",
+      "45 N",
+      "27 N",
+      "11 N"
+     ],
+     "ans": 0,
+     "hint": "Use the 2.0 kg block: the string pulls it forward, friction pulls it back.",
+     "steps": [
+      "For the 2.0 kg block: T − f = ma.",
+      "f = 0.35 × 2.0 × 9.8 = 6.86 N; ma = 2.0 × 5.57 = 11.14 N.",
+      "T = 11.14 + 6.86 = 18.0 N.",
+      "The tension is 18 N."
+     ],
+     "ex": {
+      "main": "**T = ma + f = 11.1 + 6.9 = 18 N** — exactly 45 × 2.0 ÷ 5.0, the same share as with no friction. 45 N sets the tension equal to the pull; 27 N works from the pulled block as if the string dragged it; 11 N leaves friction out of the back block’s equation.",
+      "tip": "The back block needs force for its acceleration AND its friction."
+     }
+    },
+    {
+     "id": "q5",
+     "lv": 3,
+     "from": "added",
+     "kind": "mc",
+     "q": "Two blocks joined by a string are pulled across a rough floor by a steady horizontal force, and the same μ_k applies to both. If the floor were made rougher for both blocks, with both still sliding, what would happen to the tension in the string?",
+     "opts": [
+      "It would grow, because the back block has more friction to overcome",
+      "It would stay the same",
+      "It would shrink, because the blocks accelerate less",
+      "It would become equal to the pull, because nothing accelerates"
+     ],
+     "ans": 1,
+     "hint": "T = m_back(a + μg), and a = F/M − μg.",
+     "steps": [
+      "System: a = F / (m₁ + m₂) − μg.",
+      "Back block: T = m_back(a + μg).",
+      "Substituting, the μg terms cancel: T = F × m_back / (m₁ + m₂).",
+      "μ is gone, so the tension stays the same."
+     ],
+     "ex": {
+      "main": "**It stays the same.** More friction does take away acceleration, but it also adds the same μg per kilogram to what the string must supply, and the two cancel exactly. It holds while both blocks still slide.",
+      "tip": "Equal μ: friction drops out of the tension."
+     }
+    },
+    {
+     "id": "q6",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 2.5 kg block rests on a table inside an elevator that is accelerating upward at 1.8 m/s². What is the normal force on the block?",
+     "opts": [
+      "20 N",
+      "25 N",
+      "29 N",
+      "4.5 N"
+     ],
+     "ans": 2,
+     "hint": "The table must also push it faster.",
+     "steps": [
+      "Upward positive: N − mg = ma.",
+      "N = m(g + a) = 2.5 × (9.8 + 1.8).",
+      "N = 2.5 × 11.6 = 29 N.",
+      "The normal force is 29 N."
+     ],
+     "ex": {
+      "main": "**N = 2.5 × 11.6 = 29 N.** 25 N ignores the elevator; 20 N flips the sign of a; 4.5 N is only ma.",
+      "tip": "Elevator up: g + a."
+     }
+    },
+    {
+     "id": "q7",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A 2.5 kg block on a table inside an elevator accelerating upward at 1.8 m/s² is pushed sideways with 18 N. μ_k = 0.40 between block and table. What is its horizontal acceleration?",
+     "opts": [
+      "7.2 m/s²",
+      "3.3 m/s²",
+      "4.0 m/s²",
+      "2.6 m/s²"
+     ],
+     "ans": 3,
+     "hint": "The normal force is m(g + a), not mg.",
+     "steps": [
+      "N = 2.5 × (9.8 + 1.8) = 29 N.",
+      "f = 0.40 × 29 = 11.6 N.",
+      "Horizontally: a = (18 − 11.6) ÷ 2.5.",
+      "a ≈ 2.6 m/s²."
+     ],
+     "ex": {
+      "main": "**a = (18 − 0.40 × 29) ÷ 2.5 ≈ 2.6 m/s².** 3.3 uses N = mg, ignoring the elevator; 4.0 flips the sign to g − a; 7.2 leaves friction out.",
+      "tip": "Elevator going up: more friction."
+     }
+    },
+    {
+     "id": "q8",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box slides across the floor of an elevator that is accelerating DOWNWARD. Compared with the same slide in an elevator at rest, the friction on the box is…",
+     "opts": [
+      "smaller, because the floor presses up on the box less hard",
+      "larger, because the box presses down harder while it falls",
+      "the same, because μ only depends on the two surfaces",
+      "zero, because the box is falling with the elevator"
+     ],
+     "ans": 0,
+     "hint": "f = μN. What happens to N?",
+     "steps": [
+      "Accelerating down: N = m(g − a).",
+      "That is less than mg.",
+      "Friction is μN, so it is smaller too.",
+      "Friction is smaller."
+     ],
+     "ex": {
+      "main": "**N = m(g − a) is smaller, so friction is smaller.** μ is unchanged — it is N that changes. Friction would only vanish in free fall, where a = g.",
+      "tip": "Friction rides on the normal force."
+     }
+    },
+    {
+     "id": "q9",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "An 18 kg box is pulled across a level floor by a rope at 20° above the horizontal with a 95 N force. μ_k = 0.40. How big is the friction?",
+     "opts": [
+      "71 N",
+      "58 N",
+      "84 N",
+      "35 N"
+     ],
+     "ans": 1,
+     "hint": "Find N first: the rope lifts a little.",
+     "steps": [
+      "Weight: 18 × 9.8 = 176.4 N.",
+      "Rope’s vertical part: 95 sin 20° = 32.5 N, so N = 176.4 − 32.5 = 143.9 N.",
+      "f = 0.40 × 143.9.",
+      "f ≈ 58 N."
+     ],
+     "ex": {
+      "main": "**f = 0.40 × (176.4 − 32.5) ≈ 58 N.** 71 N forgets to subtract the rope’s lift; 84 N adds it; 35 N subtracts 95 cos 20°, sine and cosine swapped.",
+      "tip": "Normal force first, then friction."
+     }
+    },
+    {
+     "id": "q10",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "An 18 kg box is pulled across a level floor by a rope at 20° above the horizontal with a 95 N force. μ_k = 0.40, and the friction on it is about 58 N. What is its acceleration?",
+     "opts": [
+      "2.1 m/s²",
+      "1.04 m/s²",
+      "1.8 m/s²",
+      "8.2 m/s²"
+     ],
+     "ans": 2,
+     "hint": "Horizontal part of the pull, minus friction, over the mass.",
+     "steps": [
+      "Horizontal part: 95 cos 20° = 89.3 N.",
+      "Net force: 89.3 − 57.6 = 31.7 N.",
+      "a = 31.7 ÷ 18.",
+      "a ≈ 1.8 m/s²."
+     ],
+     "ex": {
+      "main": "**a = (89.3 − 57.6) ÷ 18 ≈ 1.8 m/s².** 1.04 uses the friction you would get with N = mg; 2.1 uses the whole 95 N as if the rope were level; 8.2 adds friction.",
+      "tip": "Forward part minus friction."
+     }
+    },
+    {
+     "id": "q11",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "Two equal boxes are dragged across the same rough floor with pulls of equal size: one pulled level, one pulled upward at an angle. Which box meets less friction?",
+     "opts": [
+      "Neither, because both pulls are the same size",
+      "The one pulled level, because all of its pull is horizontal",
+      "Neither, because both boxes have the same weight",
+      "The one pulled upward, because its normal force is smaller"
+     ],
+     "ans": 3,
+     "hint": "Friction = μN. Which normal force is smaller?",
+     "steps": [
+      "The angled pull has an upward part, F sin θ.",
+      "That takes some weight off the floor: N = mg − F sin θ.",
+      "Smaller N means smaller μN.",
+      "The box pulled upward meets less friction."
+     ],
+     "ex": {
+      "main": "**The angled pull lifts a little, so N and friction both shrink.** Same weight is not the same normal force once something else pushes up.",
+      "tip": "Lift a little, drag less."
+     }
+    },
+    {
+     "id": "q12",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A block slides UP a 25° ramp, starting at 6.0 m/s. μ_k = 0.15. What is its acceleration while it slides up?",
+     "opts": [
+      "5.5 m/s² down the slope",
+      "2.8 m/s² down the slope",
+      "9.5 m/s² down the slope",
+      "4.1 m/s² down the slope"
+     ],
+     "ans": 0,
+     "hint": "Going up, which way do gravity’s part and friction point?",
+     "steps": [
+      "Friction opposes the sliding, so it points DOWN the slope.",
+      "Gravity’s part also points down the slope.",
+      "a = g(sin 25° + 0.15 cos 25°) = 9.8 × (0.423 + 0.136).",
+      "a ≈ 5.5 m/s² down the slope."
+     ],
+     "ex": {
+      "main": "**a = g(sin θ + μ cos θ) ≈ 5.5 m/s² down the slope.** 2.8 leaves friction pointing up the slope, as if it were coming down; 9.5 swaps sine and cosine; 4.1 forgets friction.",
+      "tip": "Up the slope: both arrows point down."
+     }
+    },
+    {
+     "id": "q13",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A block slides UP a 25° ramp, starting at 6.0 m/s. μ_k = 0.15. How far up the ramp does it slide before it stops?",
+     "opts": [
+      "6.4 m",
+      "3.3 m",
+      "6.6 m",
+      "0.55 m"
+     ],
+     "ans": 1,
+     "hint": "Find the deceleration, then use v² = v₀² + 2aΔx with v = 0.",
+     "steps": [
+      "Deceleration: g(sin 25° + 0.15 cos 25°) ≈ 5.47 m/s².",
+      "0 = 6.0² − 2 × 5.47 × Δx.",
+      "Δx = 36 ÷ 10.95.",
+      "Δx ≈ 3.3 m."
+     ],
+     "ex": {
+      "main": "**Δx = 6.0² ÷ (2 × 5.47) ≈ 3.3 m.** 6.4 m uses friction pointing up the slope; 6.6 m drops the 2; 0.55 m forgets to square the speed.",
+      "tip": "Square the speed, keep the 2."
+     }
+    },
+    {
+     "id": "q14",
+     "lv": 2,
+     "from": "source",
+     "kind": "mc",
+     "q": "A block that slid up a 25° ramp stops and then slides back down. μ_k = 0.15. What is its acceleration on the way down?",
+     "opts": [
+      "4.1 m/s² down the slope",
+      "5.5 m/s² down the slope",
+      "2.8 m/s² down the slope",
+      "8.3 m/s² down the slope"
+     ],
+     "ans": 2,
+     "hint": "Friction opposes the sliding — which way is that now?",
+     "steps": [
+      "It now slides down, so friction points UP the slope.",
+      "Gravity’s part still points down.",
+      "a = g(sin 25° − 0.15 cos 25°) = 9.8 × (0.423 − 0.136).",
+      "a ≈ 2.8 m/s² down the slope."
+     ],
+     "ex": {
+      "main": "**a = g(sin θ − μ cos θ) ≈ 2.8 m/s²** — smaller than on the way up, because friction flipped. 5.5 leaves friction pointing down the slope; 4.1 forgets friction; 8.3 swaps sine and cosine.",
+      "tip": "Friction turns round when the motion does."
+     }
+    },
+    {
+     "id": "q15",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A block slides UP a 25° ramp starting at 6.0 m/s, stops about 3.3 m up, and slides back down. μ_k = 0.15. How fast is it moving when it reaches the bottom?",
+     "opts": [
+      "5.2 m/s",
+      "6.0 m/s",
+      "18 m/s",
+      "4.3 m/s"
+     ],
+     "ans": 3,
+     "hint": "Use the down-slope acceleration over the same distance.",
+     "steps": [
+      "On the way down, a = g(sin 25° − 0.15 cos 25°) ≈ 2.81 m/s².",
+      "It slides Δx ≈ 3.29 m from rest.",
+      "v² = 2 × 2.81 × 3.29 ≈ 18.5.",
+      "v ≈ 4.3 m/s."
+     ],
+     "ex": {
+      "main": "**v = √(2 × 2.81 × 3.29) ≈ 4.3 m/s**, slower than the 6.0 m/s it started with, because friction took energy both ways. 6.0 m/s is what a frictionless ramp would give; 18 forgets the square root; 5.2 forgets friction on the way down.",
+      "tip": "Rough slope: it comes back slower."
+     }
+    },
+    {
+     "id": "q16",
+     "lv": 3,
+     "from": "source",
+     "kind": "mc",
+     "q": "A puck slides across the floor of an elevator that is accelerating upward at 1.2 m/s². It starts at 3.5 m/s and stops in 1.75 m. What is the coefficient of kinetic friction?",
+     "opts": [
+      "0.32",
+      "0.36",
+      "0.41",
+      "0.64"
+     ],
+     "ans": 0,
+     "hint": "Deceleration from the stop; then μ = deceleration ÷ (g + a).",
+     "steps": [
+      "Deceleration: v₀² ÷ 2Δx = 3.5² ÷ (2 × 1.75) = 3.5 m/s².",
+      "Friction supplies it: μ m(g + a) = m × 3.5.",
+      "μ = 3.5 ÷ (9.8 + 1.2) = 3.5 ÷ 11.0.",
+      "μ ≈ 0.32."
+     ],
+     "ex": {
+      "main": "**μ = 3.5 ÷ 11.0 ≈ 0.32.** 0.36 ignores the elevator; 0.41 flips its sign to g − a; 0.64 drops the 2 in v² = 2aΔx.",
+      "tip": "The elevator presses the puck harder."
+     }
+    },
+    {
+     "id": "q17",
+     "lv": 1,
+     "from": "source",
+     "kind": "mc",
+     "q": "A box sits on a level floor with nothing else pushing or pulling it up or down. When is its normal force equal to mg?",
+     "opts": [
+      "In an elevator speeding up on the way up",
+      "In an elevator moving up at a steady speed",
+      "When it is pulled by a rope angled upward",
+      "When someone presses down on its lid"
+     ],
+     "ans": 1,
+     "hint": "N = mg needs zero vertical acceleration and no other vertical force.",
+     "steps": [
+      "A steady speed means no vertical acceleration.",
+      "Speeding up adds ma to N.",
+      "An upward rope or a push from above changes N too.",
+      "Only the steady elevator gives N = mg."
+     ],
+     "ex": {
+      "main": "**At a steady speed there is no acceleration, so N = mg.** Speeding up gives m(g + a); an upward rope takes F sin θ off; a press from above adds to it.",
+      "tip": "Check every vertical force before writing N = mg."
+     }
+    },
+    {
+     "id": "q18",
+     "lv": 2,
+     "from": "source",
+     "kind": "order",
+     "q": "Put the steps for finding how far a block slides UP a rough ramp in order.",
+     "opts": [
+      "Draw the forces: gravity’s part and friction both down the slope",
+      "Find the normal force, N = mg cos θ, and then friction, f = μN",
+      "Find the deceleration, a = (mg sin θ + f) ÷ m",
+      "Use v² = v₀² + 2aΔx with v = 0 to solve for Δx"
+     ],
+     "ans": 0,
+     "hint": "Forces, then N, then a, then distance.",
+     "steps": [
+      "Start with the free-body diagram.",
+      "Friction needs the normal force.",
+      "The net force gives the deceleration.",
+      "The kinematic equation gives the distance."
+     ],
+     "ex": {
+      "main": "**Diagram, normal force and friction, deceleration, then distance.** Each step needs the one before: friction needs N, the deceleration needs friction, and the distance needs the deceleration.",
+      "tip": "Forces before motion."
+     }
+    }
+   ],
+   "libv": 1
+  }
+ }
+}
