@@ -73,6 +73,56 @@ const HANG_GET = `(() => { IDBObjectStore.prototype.get = function(){ return {};
   ck('2 …the next launch still has every record, old and new', s4.ok && s4.recs >= 32 && has, [s4.recs, has]);
   await p.close();
 
+  /* 5–6. The case that actually happened (v222 / Wayfinder v204). After the
+     v216 move localStorage is EMPTY, so the fallback has nothing in it. A read
+     that is merely slow used to start the app empty and throw the late answer
+     away; a read that errored was treated as an empty store and written over
+     the real one. Both are pinned here with nothing in localStorage at all. */
+  const SLOW_GET = `(() => { const real = IDBObjectStore.prototype.get;
+    IDBObjectStore.prototype.get = function(k){ const req = real.call(this, k); const fake = {};
+      req.onsuccess = () => setTimeout(() => { fake.result = req.result; fake.onsuccess && fake.onsuccess(); }, 5000);
+      req.onerror = () => fake.onerror && fake.onerror(); return fake; }; })();`;
+  const ERR_GET = `(() => { IDBObjectStore.prototype.get = function(){ const f = {};
+    setTimeout(() => f.onerror && f.onerror(), 50); return f; }; })();`;
+  const ctx2 = await b.newContext({viewport:{width:390,height:844}});
+  p = await ctx2.newPage(); watch(p);
+  await p.goto(base + '/index.html', {waitUntil:'networkidle'});
+  await p.evaluate(() => { for (let i = 0; i < 40; i++) put({id:'log_s' + i, type:'log', mode:'cards', classId:'english',
+    date:'2026-11-01', correct:0, total:0, seconds:60, xp:5}); });
+  await p.waitForTimeout(600);
+  const seeded = await p.evaluate(k => ({ok: DataDB.ok, ls: localStorage.getItem(k), n: Object.keys(DATA.records).length}), ns + 'data');
+  ck('5 setup: the records live in IndexedDB only, localStorage holds nothing', seeded.ok && seeded.ls === null && seeded.n >= 40, seeded);
+  await p.close();
+
+  p = await ctx2.newPage(); watch(p); await p.addInitScript(SLOW_GET);
+  await p.goto(base + '/index.html');
+  await p.waitForFunction(() => document.querySelector('#screen') && document.querySelector('#screen').innerText.length > 50, null, {timeout: 9000}).catch(() => {});
+  const early5 = await state(p);
+  ck('5 a SLOW read (5 s): the app draws first, from the empty fallback', early5.screen.length > 50 && early5.gaveUp && !early5.ok, early5);
+  await p.evaluate(() => put({id:'log_gap', type:'log', mode:'cards', classId:'english', date:'2026-11-17', correct:0, total:0, seconds:30, xp:5}));
+  await p.waitForFunction(() => DataDB.ok && DATA.records.log_s39, null, {timeout: 9000}).catch(() => {});
+  const late5 = await p.evaluate(k => ({ok: DataDB.ok, all: !!DATA.records.log_s0 && !!DATA.records.log_s39,
+    gap: !!DATA.records.log_gap, ls: localStorage.getItem(k)}), ns + 'data');
+  ck('5 …and when the read lands, every stored record is merged in, not thrown away', late5.ok && late5.all, late5);
+  ck('5 …keeping the change made while it was loading', late5.gap, late5);
+  ck('5 …and the fallback copy in localStorage is cleared once IndexedDB has it', late5.ls === null, !!late5.ls);
+  await p.close();
+  p = await ctx2.newPage(); watch(p);
+  await p.goto(base + '/index.html', {waitUntil:'networkidle'}); await p.waitForTimeout(500);
+  const next5 = await p.evaluate(() => ({ok: DataDB.ok, all: !!DATA.records.log_s39 && !!DATA.records.log_gap}));
+  ck('5 …and the next launch has all of it', next5.ok && next5.all, next5);
+  await p.close();
+
+  p = await ctx2.newPage(); watch(p); await p.addInitScript(ERR_GET);
+  await p.goto(base + '/index.html');
+  await p.waitForFunction(() => document.querySelector('#screen') && document.querySelector('#screen').innerText.length > 50, null, {timeout: 9000}).catch(() => {});
+  await p.waitForTimeout(800); await p.close();
+  p = await ctx2.newPage(); watch(p);
+  await p.goto(base + '/index.html', {waitUntil:'networkidle'}); await p.waitForTimeout(500);
+  const next6 = await p.evaluate(() => ({ok: DataDB.ok, n: Object.keys(DATA.records).length, all: !!DATA.records.log_s39}));
+  ck('6 a read that ERRORS is never written back as an empty store: the next launch has every record', next6.ok && next6.all, next6);
+  await p.close(); await ctx2.close();
+
   // 3. Start-up throws: a card says so and offers Reload.
   p = await ctx.newPage();
   await p.addInitScript(() => { Object.defineProperty(window, 'OrtizDrive', {get(){ throw new Error('planted boot failure'); }}); });

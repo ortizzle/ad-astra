@@ -1761,7 +1761,7 @@ const Store = {
 const STUDENT = { grade:8 };
 /* Shown in Settings. Bump on every deploy, in step with sw.js CACHE_VERSION,
    as 'vNN · one-to-three words on what shipped'. */
-const APP_VERSION = 'v221 · Genetics, Dynamics 2';
+const APP_VERSION = 'v222 · Slow start fix';
 const DEFAULT_ROSTER = { studentName:'', school:'', teachers:{}, backupUrl:'' };
 function roster(){ return { ...DEFAULT_ROSTER, ...(DATA.records['roster']||{}) }; }
 
@@ -2483,40 +2483,45 @@ function migrate(d){
    falls back to localStorage exactly as before. */
 const DB_WAIT = 3000;
 const DataDB = {
-  name: Store.ns+'db', os:'kv', db:null, ok:false, gaveUp:false,
-  /* IndexedDB on Android can occasionally hang: open() or a read never
-     answers, neither success nor error. Boot waits on both, so a hang was an
-     app that never came up. After DB_WAIT the app boots from localStorage
-     instead, and IndexedDB is left alone for the rest of the session — a late
-     answer must not let this session's partial copy overwrite the full one
-     stored there. The next launch tries IndexedDB again and merges in anything
-     written to localStorage meanwhile, by the same rules as sync. */
-  giveUp(){ this.gaveUp = true; this.ok = false;
-    if(this.db){ try{ this.db.close(); }catch(e){} this.db = null; } },
+  name: Store.ns+'db', os:'kv', db:null, ok:false, gaveUp:false, _openP:null,
+  /* IndexedDB on Android can be SLOW (a cold phone reading a 4 MB library) and
+     can occasionally hang outright. Boot waits DB_WAIT for it and then draws
+     from localStorage, but the read is never abandoned: if it answers late,
+     adoptLate() MERGES what it holds into the session, by sync's per-record
+     rules, and switches writes back to IndexedDB. Since v222 / Wayfinder v204.
+
+     The v218 version gave up for good on a timeout and ignored the late
+     answer. After the v216 move, localStorage is empty, so a read that merely
+     took four seconds started the app with nothing in it: no lessons, no
+     progress, every unit back in the review queue after a library check.
+
+     A read that ERRORS is a failure, never "no data". Before v222 an error
+     resolved like an empty store, and the boot then wrote that empty store
+     over the real one. read() now resolves {v} only on success, null on any
+     failure, and only success is ever written back. */
+  giveUp(){ this.gaveUp = true; this.ok = false; },
   open(){
-    if(this.ok) return Promise.resolve(true);
-    if(this.gaveUp) return Promise.resolve(false);
-    return new Promise(res=>{
-      const t = setTimeout(()=>{ this.giveUp(); res(false); }, DB_WAIT);
+    if(this._openP) return this._openP;
+    this._openP = new Promise(res=>{
       try{
         const r = indexedDB.open(this.name, 1);
         r.onupgradeneeded = ()=>r.result.createObjectStore(this.os);
-        r.onsuccess = ()=>{ clearTimeout(t);
-          if(this.gaveUp){ try{ r.result.close(); }catch(e){} return; }
-          this.db = r.result; this.ok = true; res(true); };
-        r.onerror = r.onblocked = ()=>{ clearTimeout(t); res(false); };
-      }catch(e){ clearTimeout(t); res(false); }
+        r.onsuccess = ()=>{ this.db = r.result; res(true); };
+        r.onerror = ()=>{ this._openP = null; res(false); };
+      }catch(e){ this._openP = null; res(false); }
     });
+    return this._openP;
   },
   get(k){
     return new Promise(res=>{
-      const t = setTimeout(()=>{ this.giveUp(); res(null); }, DB_WAIT);
       try{ const q = this.db.transaction(this.os).objectStore(this.os).get(k);
-        q.onsuccess = ()=>{ clearTimeout(t); res(q.result===undefined ? null : q.result); };
-        q.onerror = ()=>{ clearTimeout(t); res(null); }; }
-      catch(e){ clearTimeout(t); res(null); }
+        q.onsuccess = ()=>res({ v: q.result===undefined ? null : q.result });
+        q.onerror = ()=>res(null); }
+      catch(e){ res(null); }
     });
   },
+  /* {v} on success (v is null for a store with nothing in it yet), null on failure. */
+  read(k){ return this.open().then(ok => ok ? this.get(k) : null); },
   /* put() clones the value when it's called, so later edits to DATA can't
      leak into a write that's still committing. */
   put(k,v){
@@ -2556,33 +2561,55 @@ async function writeData(){
    merged into what loads, rather than being replaced by it. Only the FIRST
    load merges — leaving sandbox reloads from storage precisely to discard
    what's in memory. */
-let dataReady = false, earlySave = false;
+let dataReady = false, earlySave = false, lateRead = null;
+/* What IndexedDB held, plus the one-time move: a copy still in localStorage
+   (the first launch after v216, a fallback session, an old tab) is merged in
+   by the same per-record rules as sync. */
+function withLegacy(d){
+  const legacy = Store.get('data', null);
+  if(legacy && legacy.records) d = (d && d.records) ? Sync.merge(migrate(d), migrate(legacy)) : legacy;
+  return { d, legacy };
+}
 async function loadLocal(){
   // Read only once the load has landed: changes keep arriving while it's in flight.
   const earlyNow = () => !dataReady && DATA && DATA.records && Object.keys(DATA.records).length ? DATA : null;
-  let d = null;
-  if(await DataDB.open() && (d = await DataDB.get('data'), DataDB.ok)){
-    /* The one-time move. A copy still in localStorage (the first launch after
-       this change, or an old tab that kept writing) is merged in by the same
-       per-record rules as sync, and removed only once IndexedDB holds it. */
-    const legacy = Store.get('data', null);
-    if(legacy && legacy.records){
-      d = (d && d.records) ? Sync.merge(migrate(d), migrate(legacy)) : legacy;
-    }
+  const read = DataDB.read('data');
+  const first = await Promise.race([read, new Promise(res=>setTimeout(()=>res('wait'), DB_WAIT))]);
+  if(first && first !== 'wait'){
+    DataDB.ok = true; DataDB.gaveUp = false;
+    const { d, legacy } = withLegacy(first.v);
     const early = earlyNow();
     DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
     if(early) DATA = Sync.merge(DATA, early);
     dataReady = true;
     if(!sandboxOn() && await DataDB.put('data', DATA) && legacy) Store.remove('data');
   }else{
-    d = Store.get('data', null);
+    /* Too slow, or failed: draw from localStorage now. The IndexedDB copy is
+       never written to from here, so whatever it holds is safe; a late answer
+       is merged in by adoptLate(). */
+    DataDB.ok = false;
+    const d = Store.get('data', null);
     const early = earlyNow();
     DATA = (d && d.records) ? migrate(d) : { v:SCHEMA_VERSION, records:{} };
     if(early) DATA = Sync.merge(DATA, early);
     dataReady = true;
     saveLocal();
+    if(first === 'wait'){ DataDB.giveUp(); lateRead = read.then(r => { if(r) adoptLate(r.v); }); }
   }
   if(earlySave){ earlySave = false; saveLocal(); }
+}
+/* The read finished after the app had started without it. Fold it in rather
+   than drop it: IndexedDB's copy and everything done this session, merged per
+   record, newest wins. Then writes go back to IndexedDB, and the fallback copy
+   in localStorage is cleared once IndexedDB holds the merge. */
+function adoptLate(v){
+  if(DataDB.ok) return;
+  const { d } = withLegacy(v);
+  /* In place, not reassigned: anything already holding DATA keeps seeing it. */
+  if(d && d.records){ const m = Sync.merge(DATA, migrate(d)); DATA.v = m.v; DATA.records = m.records; }
+  DataDB.ok = true; DataDB.gaveUp = false;
+  if(!sandboxOn()) DataDB.put('data', DATA).then(ok => { if(ok) Store.remove('data'); });
+  try{ applyTheme(); render(); }catch(e){}
 }
 /* Sandbox: a per-device switch (localStorage, never a record, never syncs) so a
    grown-up can try quizzes, the tutor and the timer without touching real data.
@@ -3594,16 +3621,17 @@ const Sync = {
        erase whatever the other device had written since. A failed save is
        harmless — syncSoon retries on the next write, and the manual Push
        says "Sync failed" — while a blind overwrite is silent data loss. */
-    const merged = this.merge(DATA, await this.pullRemote());
+    const remote = await this.pullRemote();   // read DATA only after the await: it may have been replaced meanwhile
+    const merged = this.merge(DATA, remote);
     const res = await fetch(`https://api.github.com/gists/${this.gistId}`,{
       method:'PATCH', headers:{...this.headers(),'Content-Type':'application/json'},
       body: JSON.stringify({files:{[this.filename]:{content:JSON.stringify(merged,null,2)}}}) });
     if(!res.ok) throw new Error('Gist save failed: '+res.status);
-    DATA = merged; saveLocal(); Store.set('last_sync', Date.now()); driveCheck(); return merged;
+    DATA = this.merge(DATA, merged); saveLocal(); Store.set('last_sync', Date.now());   // keep anything written while the PATCH was in flight driveCheck(); return merged;
   },
   async load(){
     if(sandboxOn() || !this.configured()) return DATA;
-    try{ DATA = this.merge(DATA, await this.pullRemote()); saveLocal(); Store.set('last_sync',Date.now()); driveCheck(); }catch(e){}
+    try{ const remote = await this.pullRemote(); DATA = this.merge(DATA, remote); saveLocal(); Store.set('last_sync',Date.now()); driveCheck(); }catch(e){}
     return DATA;
   }
 };

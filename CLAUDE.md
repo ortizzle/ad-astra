@@ -88,10 +88,11 @@ Since v217 (Wayfinder v197) boot also calls `askPersist()`, which asks Chrome
 (`navigator.storage.persist()`, once, silently) not to clear the site's storage
 under disk pressure. The grant covers all of ortizzle.github.io.
 **Boot never waits on IndexedDB for more than `DB_WAIT` (3 s), since v218 /
-Wayfinder v198.** If `open()` or the first read does not answer by then, the
-app boots from localStorage and leaves IndexedDB alone for the rest of the
-session, so the session's partial copy can never overwrite the full one. See
-*The app always comes up* below.
+Wayfinder v198.** If the read has not answered by then, the app draws from
+localStorage. **Since v222 / Wayfinder v204 the read is never abandoned**: a
+late answer is MERGED into the session (`adoptLate()`), and a read that errors
+is a failure, never an empty store. See *A slow start is not an empty app*
+below.
 
 **Merging** is per-record, newest `updatedAt` wins (`Sync.merge`). Saving always
 fetches remote first, merges, then writes — never a blind overwrite.
@@ -1132,6 +1133,54 @@ diacritics.
 
 **Verified by flipping the prodigy answer to protégé and planting the answer
 in the gratis stem**, and watching exactly those assertions fail.
+
+### A slow start is not an empty app (v222 / Wayfinder v204, both apps)
+
+Chris, the morning after v221: *"Sedona's app was empty. I logged in as a
+parent and activated her units. They were all there. But why did that happen?
+It reset everything it seems."* The phone was not available, so the failure
+was reproduced rather than read off a screen. Two engine bugs from v216–v218,
+both now pinned by `tools/test_boot_resilience.js`:
+
+- **A slow read started the app empty.** v218 gave IndexedDB three seconds
+  and then booted from localStorage, ignoring the late answer for the rest of
+  the session. But the v216 move had emptied localStorage, so a read that
+  merely took four seconds (a cold phone reading a 4 MB library) drew an app
+  with nothing in it. A library check then put every unit back in the review
+  queue as a draft, which is what Chris saw. The data in IndexedDB was never
+  touched; the app just never looked at it.
+- **A read that ERRORED was treated as an empty store, and written back.**
+  `get()`'s `onerror` resolved like "nothing stored", the boot took the success
+  branch and saved an empty `DATA` over the real one. That one destroys the
+  phone's copy, and only the Gist can restore it.
+
+The fix, identical in both apps:
+
+- **`DataDB.read()` resolves `{v}` on success and `null` on any failure.**
+  Only a success is ever written back. `get()` itself now returns `{v}`.
+- **A timeout no longer abandons the read.** The app still draws from
+  localStorage at `DB_WAIT`, but the pending read is kept, and when it answers
+  `adoptLate()` merges it into the session by `Sync.merge`'s per-record rules,
+  in place, then switches writes back to IndexedDB and clears the fallback copy.
+- **`Sync.load()` and `Sync.save()` read `DATA` after awaiting the Gist**, not
+  before. Both used to capture `DATA` as an argument ahead of the network call,
+  so anything that replaced it meanwhile (the late adoption, a restore) was
+  overwritten when the pull came back. `save()` also merges into the current
+  `DATA` at the end rather than replacing it, so a write made during the PATCH
+  survives.
+
+> ⚠️ **The v218 test passed while the bug was live, because it seeded
+> localStorage.** Every hang case started with a legacy copy in localStorage,
+> which is exactly the state the v216 move removes. Cases 5 and 6 now seed
+> IndexedDB only. **Run against the v221 build, the slow read leaves one record
+> of forty and the errored read leaves zero.** Pin the state the phone is
+> actually in.
+
+**Her data was not lost.** The Drive backup of 10/27 holds 143 of her study
+sessions, her Growth Zone and 90 approved units, so her phone syncs, and the
+Gist has everything. The empty session's approvals are newer than the Gist's
+copies and win the merge, which is harmless. `test_idb_storage.js` was updated
+for `get()`'s new shape.
 
 ### Unit 7 · Genetics, and Dynamics 2 (v221, THIS APP ONLY)
 

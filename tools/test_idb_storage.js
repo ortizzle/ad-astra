@@ -23,7 +23,7 @@ const PORT = process.argv[2] || 8201;
   const url = `http://localhost:${PORT}/index.html`;
   const ready = () => p.waitForFunction(() => typeof booted !== 'undefined' && DataDB.ok !== undefined)
     .then(() => p.evaluate(() => booted));
-  const idbData = () => p.evaluate(() => DataDB.get('data'));
+  const idbData = () => p.evaluate(() => DataDB.get('data').then(x => x && x.v));   // get() resolves {v} since v222 / Wayfinder v204
   const settle = () => p.waitForFunction(() => !dataWriting);
 
   // Start clean: no IndexedDB, no localStorage.
@@ -83,7 +83,7 @@ const PORT = process.argv[2] || 8201;
     put({ id:'log-early', type:'log', mode:'quiz', date:'2026-10-05', correct:2, total:2 });  // arrives mid-load
     await pending;
     await new Promise(res => { const t = () => dataWriting ? setTimeout(t, 20) : res(); t(); });
-    return { kept: !!DATA.records['log-early'], old: !!DATA.records['log-new'], stored: !!(await DataDB.get('data')).records['log-early'] };
+    return { kept: !!DATA.records['log-early'], old: !!DATA.records['log-new'], stored: !!(await DataDB.get('data')).v.records['log-early'] };
   });
   ck('6 a change made during the first load survives it', r.kept && r.old, r);
   ck('6 …and is written once the load lands', r.stored, r);
